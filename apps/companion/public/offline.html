@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#091227">
+<title>Offline</title>
+<!-- Served by sw.js with no network, so it carries its own look: tokens.css and desk.css's panel and plate, copied. -->
+<style>
+  :root {
+    --bg: oklch(0.190 0.045 265);
+    --surface: oklch(0.245 0.012 80);
+    --ink: oklch(0.97 0.008 80);
+    --face: oklch(0.72 0.02 265);
+    --light: color-mix(in oklch, var(--face), white 55%);
+    --dark: color-mix(in oklch, var(--face), black 55%);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 24rem;
+    box-sizing: border-box;
+    padding: 2.5rem 1.5rem;
+    background: var(--surface);
+    border: 2px solid var(--dark);
+    text-align: center;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: calc(1.75 / 1.5);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    box-sizing: border-box;
+    padding: 0.625rem 1.5rem;
+    background: var(--face);
+    color: var(--bg);
+    border: 2px solid;
+    border-color: var(--light) var(--dark) var(--dark) var(--light);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>No connection</h1>
+<a href="">Retry</a>
+</main>
+</body>
+</html>

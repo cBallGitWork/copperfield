@@ -1,0 +1,58 @@
+name: Predicted XI
+
+# The predicted elevens into `data/intel/xi/26-27.json`: RotoWire's lineups page since 9 Oct 2026, Scout's
+# team news for any club RotoWire cannot fill. `npm run rotowire-xi` writes only when an eleven or an
+# absence changed, so most runs commit nothing. A commit that lands does not redeploy: the deploy rule
+# (scripts/ci/ignore-build.sh) skips `data/intel/xi`, and the club page reads the file at run time (#536).
+# The file keeps its name so the watchdog and the alert issue keep theirs.
+
+on:
+  schedule:
+    # Hourly from Thursday morning to Saturday's lock, while pressers and team news move the elevens
+    # and each change refiles the Line-Ups (Craig, 9 Oct 2026); every two hours on Saturday after it;
+    # once a day otherwise (Craig, 7 Oct 2026: 84 runs a week had committed nothing in seven days).
+    - cron: "40 7-22 * * 4,5"
+    - cron: "40 7-12 * * 6"
+    - cron: "40 13-21/2 * * 6"
+    - cron: "40 6 * * 0,1,2,3"
+  workflow_dispatch: {}
+
+# Its own group, on `editions.yml`'s reasoning: a shared group lets one workflow cancel
+# another's queued run. Rebasing before the push keeps them apart.
+concurrency:
+  group: scout-xi
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # The branch's tip when the job starts, not the commit the schedule fired on: a queued run
+          # otherwise starts behind the other writers' pushes and rebases over them.
+          ref: ${{ github.ref }}
+          persist-credentials: false
+      - uses: ./.github/actions/node
+
+      - name: Read the elevens
+        run: npm run rotowire-xi
+
+      - name: Commit them, if they changed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add data/intel/xi
+          scripts/ci/push.sh "data: the predicted elevens, $(date -u +%Y-%m-%dT%H:%MZ)" "The elevens have not changed."
+
+      # A red or timed-out run opens or updates the issue "alert: scout-xi"; the next green one closes it.
+      - uses: ./.github/actions/alert
+        if: ${{ always() }}
+        with:
+          source: scout-xi
+          status: ${{ job.status }}

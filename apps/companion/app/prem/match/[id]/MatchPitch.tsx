@@ -1,0 +1,172 @@
+import { pitchName } from "@epl/core";
+import type {
+  Club,
+  Opposition,
+  PlManMatch,
+  PlSquadMan,
+  PlTeamSheet,
+  SquadPlayerDetail,
+} from "@epl/core";
+import PitchMarker from "../../../components/league/PitchMarker";
+import BenchStrip from "../../../components/league/BenchStrip";
+import PitchRows, { widestLine } from "../../../components/league/PitchRows";
+import { PANEL_FLUSH, phoneShows } from "@/app/desk";
+import { MaybeCard } from "./PlayerCardButton";
+import type { Match } from "./match";
+import { forCode } from "./sheetJoin";
+import SideBySide from "./SideBySide";
+import SubMarker from "../../../components/football/SubMarker";
+
+// Both elevens in the shape their managers drew (`sheet.shape`), each man's face (Craig, 1 Oct 2026).
+
+export default function MatchPitch({
+  match,
+  sheets,
+  events,
+  cards,
+  phoneSide,
+}: {
+  match: Match;
+  sheets: { home: PlTeamSheet; away: PlTeamSheet };
+  events: Map<number, PlManMatch>;
+  /** Each man's card, which his tile opens. */
+  cards: ReadonlyMap<number, SquadPlayerDetail>;
+  /** The one club a phone shows; a desk shows both. */
+  phoneSide: "home" | "away";
+}) {
+  // One card size across both pitches, so the two elevens stand at one scale.
+  const widest = Math.max(
+    widestLine((sheets.home.shape ?? []).map((players) => ({ players }))),
+    widestLine((sheets.away.shape ?? []).map((players) => ({ players }))),
+  );
+  const side = (
+    key: "home" | "away",
+    club: Club | undefined,
+    other: Club | undefined,
+    sheet: PlTeamSheet,
+  ) => (
+    <Side
+      match={match}
+      club={club}
+      against={
+        other === undefined
+          ? undefined
+          : [
+              {
+                club: other,
+                home: key === "home",
+                difficulty: null,
+                fixture: match.fixture,
+              },
+            ]
+      }
+      sheet={sheet}
+      events={events}
+      widest={widest}
+      cards={cards}
+      phonePicked={key === phoneSide}
+    />
+  );
+
+  return (
+    <SideBySide>
+      {side("home", match.home, match.away, sheets.home)}
+      {side("away", match.away, match.home, sheets.away)}
+    </SideBySide>
+  );
+}
+
+function Side({
+  match,
+  club,
+  against,
+  sheet,
+  events,
+  widest,
+  cards,
+  phonePicked,
+}: {
+  match: Match;
+  cards: ReadonlyMap<number, SquadPlayerDetail>;
+  phonePicked: boolean;
+  club: Club | undefined;
+  against: Opposition[] | undefined;
+  sheet: PlTeamSheet;
+  events: Map<number, PlManMatch>;
+  widest: number;
+}) {
+  if (sheet.shape === null) return null;
+  const keeper = sheet.shape[0]?.[0];
+  const cameOn = sheet.substitutes.filter(
+    (man) => did(man, events)?.onAt != null,
+  );
+  const keyOf = (man: PlSquadMan) => String(man.code ?? man.name);
+  const marker = (man: PlSquadMan) => (
+    <MaybeCard
+      player={forCode(cards, man.code)}
+      className="block w-full text-left"
+    >
+      <PitchMarker
+        // Null so today's injury doubt stays off a match already played.
+        player={null}
+        label="?"
+        // FPL's shirt name where FPL has him, else the sheet's own spelling, both at a card's width.
+        name={pitchName(forCode(match.byCode, man.code) ?? { name: man.name })}
+        keeper={man === keeper}
+        club={club}
+        opposition={against}
+        // No figure under the name: FPL's own points read as the league's (Craig, 12 Oct 2026).
+        band=""
+        // His photograph; PlayerImage falls back to the club's kit where there is none.
+        face={man.code === null ? undefined : { code: man.code, name: man.name }}
+      />
+    </MaybeCard>
+  );
+
+  return (
+    // `pitch-match` budgets the grass so the used subs clear a phone's fold (Craig, 23 Sep 2026).
+    <section
+      className={`${PANEL_FLUSH} pitch-match min-w-0 ${phoneShows(phonePicked)}`}
+    >
+      {/* No formation line over the grass: the shape is the picture (Craig, 23 Sep 2026: *"ditch the formation line to save space"*). */}
+      <PitchRows
+        rows={sheet.shape.map((players, n) => ({
+          label: `Line ${n + 1}`,
+          players,
+        }))}
+        keyOf={keyOf}
+        widest={widest}
+        inColumn
+      >
+        {(man) => (
+          <SubMarker minute={did(man, events)?.offAt ?? null} off>
+            {marker(man)}
+          </SubMarker>
+        )}
+      </PitchRows>
+      {/* The men who came on, under the grass at the same card width and a smaller kit. */}
+      <BenchStrip
+        bench={cameOn}
+        keyOf={keyOf}
+        rows={sheet.shape.length}
+        widest={widest}
+        label="Substitutes used"
+        numbered={false}
+        inColumn
+      >
+        {(man) => (
+          <SubMarker minute={did(man, events)?.onAt ?? null} off={false}>
+            {marker(man)}
+          </SubMarker>
+        )}
+      </BenchStrip>
+    </section>
+  );
+}
+
+function did(
+  man: PlSquadMan,
+  events: Map<number, PlManMatch>,
+): PlManMatch | undefined {
+  return forCode(events, man.code);
+}

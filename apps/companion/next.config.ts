@@ -1,0 +1,115 @@
+import type { NextConfig } from "next";
+import {
+  CREST_BASE,
+  CREST_MAX_AGE_SECONDS,
+  FPL_SHIRT_BASE,
+  PL_PHOTO_BASE,
+  YOUTUBE_EMBED_BASE,
+  YOUTUBE_THUMB_BASE,
+} from "../../packages/core/src/config";
+
+/** Every image host the app draws from, as core's config names them. */
+const IMAGE_BASES = [PL_PHOTO_BASE, FPL_SHIRT_BASE, YOUTUBE_THUMB_BASE];
+
+function under(base: string) {
+  const url = new URL(base);
+  return { protocol: "https" as const, hostname: url.hostname, pathname: `${url.pathname}/**` };
+}
+
+const dev = process.env.NODE_ENV === "development";
+
+/** Vercel's preview toolbar, by directive, on preview deployments only. */
+const TOOLBAR: Record<string, string> =
+  process.env.VERCEL_ENV === "preview"
+    ? {
+        script: " https://vercel.live",
+        style: " https://vercel.live",
+        img: " https://vercel.live https://vercel.com",
+        font: " https://vercel.live https://assets.vercel.com",
+        connect: " https://vercel.live wss://ws-us3.pusher.com",
+        frame: " https://vercel.live",
+      }
+    : {};
+
+const IMAGE_ORIGINS = [...new Set(IMAGE_BASES.map((base) => new URL(base).origin))].join(" ");
+
+/** Next inlines its RSC payload as scripts, and a nonce would make every page dynamic,
+ *  so scripts keep 'unsafe-inline'. Every origin comes from core's config. */
+const CSP = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}${TOOLBAR.script ?? ""}`,
+  `style-src 'self' 'unsafe-inline'${TOOLBAR.style ?? ""}`,
+  `img-src 'self' data: blob: ${IMAGE_ORIGINS}${TOOLBAR.img ?? ""}`,
+  `font-src 'self'${TOOLBAR.font ?? ""}`,
+  `connect-src 'self'${dev ? " ws:" : ""}${TOOLBAR.connect ?? ""}`,
+  `frame-src ${new URL(YOUTUBE_EMBED_BASE).origin}${TOOLBAR.frame ?? ""}`,
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join("; ");
+
+const nextConfig: NextConfig = {
+  // `@epl/core` ships raw TypeScript (no build step), so Next has to compile it.
+  transpilePackages: ["@epl/core"],
+
+  // The dev overlay's badge sits on the foot row's first plate in every instrument's shot; errors still surface.
+  devIndicators: false,
+
+  poweredByHeader: false,
+
+  // Keep a visited page on the phone for 30s, the server's own revalidate, so switching back is instant; live pages refresh themselves.
+  experimental: {
+    staleTimes: { dynamic: 30 },
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Content-Security-Policy", value: CSP },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          // Not `no-referrer`: YouTube's embed refuses to play without the origin.
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        ],
+      },
+      {
+        source: `${CREST_BASE}/:path*`,
+        headers: [{ key: "Cache-Control", value: `public, max-age=${CREST_MAX_AGE_SECONDS}` }],
+      },
+    ];
+  },
+
+  // The old URLs have been shared in a sixteen-person group chat, so they keep
+  // working rather than 404ing on someone who scrolled back to find one.
+  async redirects() {
+    return [
+      { source: "/standings", destination: "/league", permanent: true },
+      { source: "/matchup", destination: "/league/matchups", permanent: true },
+      { source: "/team", destination: "/squad", permanent: true },
+      { source: "/team/:teamId", destination: "/squad/:teamId", permanent: true },
+      // A prefix is not a page: `/paper` is where the paper's articles live,
+      // and the paper's own front is `/`.
+      { source: "/paper", destination: "/", permanent: true },
+      // The section pages cut on 30 Sep 2026; not permanent, since the paper has reversed on pages before.
+      { source: "/paper/reports", destination: "/", permanent: false },
+      { source: "/paper/columns", destination: "/", permanent: false },
+      // Draft's Schedule and Results, and Prem's Results and Fixtures, became one Fixtures each, and Mail's Transfers
+      // moved to Draft, and Scoring to More (13 Oct 2026).
+      { source: "/league/schedule", destination: "/league/fixtures", permanent: false },
+      { source: "/league/results", destination: "/league/fixtures", permanent: false },
+      { source: "/news/transfers", destination: "/league/transfers", permanent: false },
+      { source: "/prem/results", destination: "/prem/fixtures", permanent: false },
+      { source: "/league/scoring", destination: "/scoring", permanent: false },
+    ];
+  },
+
+  images: {
+    // Portraits are ~330 KB at source and ~15 KB optimized, so never set `unoptimized` on them.
+    // Path-scoped: a prefix not in the config is a 400 from our own optimizer.
+    remotePatterns: IMAGE_BASES.map(under),
+  },
+};
+
+export default nextConfig;

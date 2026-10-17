@@ -1,0 +1,187 @@
+import {
+  type GameweekKickoff,
+  type InboxItem,
+  type LeaguePeriod,
+  type LeagueTeam,
+  openingGameweek,
+  periodFullTime,
+  periodGameweeks,
+  periodLock,
+  availabilityNews,
+  availability,
+  blockNews,
+  dealNews,
+  deals,
+  headToHeads,
+  inboxItems,
+  isResolved,
+  lastLockedPeriod,
+  minutesNews,
+  nextDeadline,
+  offerNews,
+  presserNews,
+  roundNews,
+} from "@epl/core";
+import { now } from "../clock";
+import { readBoard } from "../board";
+import { readDeals } from "../business";
+import { storyHref } from "../components/gazette/paperPages";
+import { intelMinuteMoves } from "../intel";
+import { filed } from "../paper";
+import { shortName } from "../teamNames";
+import { readProposals, readTradeBlocks } from "../market";
+import { seasonKickoffs } from "../football";
+import { readerTeamId, getLeagueSquads, readable } from "../squads";
+import { signedTeamId } from "../session";
+import { matchupHref } from "../league/routes";
+import { playerHref } from "../players/routes";
+import { MY_TEAM } from "../squad/routes";
+
+// What the manager's inbox is made of, from reads the paper and the head-to-head already cache.
+// The football and league layers meet here, at the app edge, because neither may import the other.
+
+export interface Inbox {
+  items: InboxItem[];
+  /** A team's name by id. */
+  names: Map<string, string>;
+  /** The reader's own team, or null signed out, when nothing goes red. */
+  mine: string | null;
+}
+
+/** Who he plays in the period the NEXT deadline locks, both in a double header: his doubts and theirs are the inbox's. */
+function nextOpponents(
+  matchups: Parameters<typeof headToHeads>[0],
+  teams: Parameters<typeof headToHeads>[1],
+  period: number | null,
+  mine: string | null,
+): string[] {
+  if (period === null || mine === null) return [];
+  return headToHeads(matchups, teams, period, mine).map((tie) => tie.opponent.teamId);
+}
+
+export async function readInbox(): Promise<Inbox> {
+  const [squads, feed, mine, kickoffs, blocks, proposals] = await Promise.all([
+    getLeagueSquads(),
+    readDeals(),
+    readerTeamId(),
+    seasonKickoffs(),
+    readTradeBlocks(),
+    readProposals(),
+  ]);
+
+  const drafted = readable(squads);
+  const names = new Map(
+    (drafted?.info?.teams ?? []).map((team) => [team.teamId, team.name] as const),
+  );
+  // The short name in every letter (Craig, 16 Oct 2026): some full names are long, some lower case.
+  const nameOf = (teamId: string) => {
+    const full = names.get(teamId);
+    return full === undefined ? null : shortName(teamId, full);
+  };
+  const holders = new Map(
+    (drafted?.period.teams ?? []).flatMap((team) => team.players.map((man) => [man.slot.fantraxId, team.teamId] as const)),
+  );
+  const gameweek = drafted?.snapshot.gameweek ?? null;
+
+  // Unsorted: `inboxItems` files every doubt by its `news_added` date.
+  const doubts = drafted ? availability(drafted.period.teams) : [];
+
+  const board = drafted === null ? null : await readBoard(drafted);
+  const period = drafted?.roundPeriod ?? null;
+
+  // The next lock says when the gameweek closes and which gameweek the doubts are about.
+  const next = drafted?.info == null ? null : lock(drafted.info.rosterPeriods, kickoffs);
+  const opponents =
+    drafted?.info == null
+      ? []
+      : nextOpponents(drafted.info.matchups, drafted.info.teams, next?.period ?? null, mine);
+
+  // His own ties only, two in a double header; the rest are on Results.
+  const yours =
+    board === null || drafted?.info == null || mine === null || period === null
+      ? []
+      : headToHeads(drafted.info.matchups, drafted.info.teams, period, mine).flatMap((tie) => finishedTie(board, tie, gameweek) ?? []);
+
+  // The scout's minutes: what each xMins export moved on his side and his next opponent's.
+  const sides = [mine, ...opponents].flatMap((teamId) => {
+    const team = drafted?.period.teams.find((each) => each.teamId === teamId);
+    if (team === undefined) return [];
+    const men = team.players.flatMap((man) => (isResolved(man) ? [{ code: man.player.code, name: man.player.name }] : []));
+    return [{ teamId: team.teamId, men }];
+  });
+  const scout = minutesNews(intelMinuteMoves, {
+    gameweek: next?.gameweek ?? null,
+    sides,
+    name: nameOf,
+    mine,
+  });
+
+  // A proposal is private to its two managers, so only a code reads one: never the lent demo team.
+  const signed = drafted === null ? null : await signedTeamId(drafted.period.teams);
+  const offers = offerNews(proposals, { name: nameOf, mine: signed, now: now().toISOString() });
+
+  return {
+    items: inboxItems(
+      offers,
+      scout,
+      // The Team Sheet's columns, each a letter that sends him to the paper.
+      presserNews(filed, storyHref),
+      // `deals()` pairs a claim with its drop and both halves of a trade.
+      dealNews(deals(feed.rows), nameOf, mine),
+      blockNews(blocks, { name: nameOf, mine, holder: (fantraxId) => holders.get(fantraxId) ?? null }),
+      roundNews({
+        gameweek,
+        // The paper's own `nextDeadline`, so the inbox and the paper print one time.
+        deadline: next,
+        yours,
+        finishedAt: periodFullTime(drafted?.info?.rosterPeriods.find((each) => each.number === period), kickoffs),
+        team: mine === null ? null : MY_TEAM,
+      }),
+      // The gameweek he can still pick for; never `?? gameweek`, which is the one already played.
+      availabilityNews(
+        doubts,
+        next?.gameweek ?? null,
+        { mine, opponents, name: nameOf, page: playerHref },
+        drafted?.info == null ? null : lastLock(drafted.info.rosterPeriods, kickoffs),
+      ),
+    ),
+    names,
+    mine,
+  };
+}
+
+/** The reader's own tie once both sides have none to play; `points` is a nought before kickoff, and a null `toPlay` is open. */
+function finishedTie(
+  board: NonNullable<Awaited<ReturnType<typeof readBoard>>>,
+  tie: { team: LeagueTeam; opponent: LeagueTeam },
+  gameweek: number | null,
+): { opponent: string; points: number | null; against: number | null; href: string } | null {
+  const mine = board.scores.get(tie.team.teamId);
+  const theirs = board.scores.get(tie.opponent.teamId);
+  if (mine?.toPlay !== 0 || theirs?.toPlay !== 0) return null;
+  return {
+    opponent: shortName(tie.opponent.teamId, tie.opponent.name),
+    points: mine.points ?? null,
+    against: theirs.points ?? null,
+    href: matchupHref(tie.team.teamId, gameweek ?? undefined, undefined, tie.opponent.teamId),
+  };
+}
+
+/** The next lock, its period and the gameweek it locks (not `snapshot.gameweek`, the one played); null if either is missing. */
+function lock(
+  periods: readonly LeaguePeriod[],
+  kickoffs: readonly GameweekKickoff[],
+): { period: number; gameweek: number; locksAt: string } | null {
+  const next = nextDeadline(periods, kickoffs, now().toISOString());
+  if (next === null) return null;
+  const gameweek = openingGameweek(periodGameweeks([...periods], [...kickoffs]), next.period);
+  return gameweek === undefined
+    ? null
+    : { period: next.period, gameweek, locksAt: next.locksAt };
+}
+
+/** The last lock passed, when the next gameweek became the next; null before the first. */
+function lastLock(periods: readonly LeaguePeriod[], kickoffs: readonly GameweekKickoff[]): string | null {
+  const period = lastLockedPeriod([...periods], kickoffs, now().toISOString());
+  return periodLock(periods.find((each) => each.number === period), kickoffs);
+}

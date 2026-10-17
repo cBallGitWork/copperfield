@@ -1,0 +1,193 @@
+/* The pitch and the screen budget the page gives it; imported after `tokens.css`, which it reads. */
+
+/* What a pitch's page spends on everything but grass; `.pitch-figure` caps a card against what is left.
+   The invariant is that the pitch clears the fold, not the page: `node tools/ui/pitchfit.mjs` checks it. */
+:root {
+  --pitch-page: 16rem;
+  /* The pitch's shape, read by `.pitch` and by a caller bounding its width by its height (`fpl/FplPitch`).
+     On `:root`, not `.pitch`: that wrapper cannot see a value set on the pitch inside it. */
+  --pitch-ratio: 0.62;
+  /* The screen a pitch budgets against, less the status bar the app pads the page by and the home bar the thumb
+     rail sits over; floored so a short phone (SE, landscape) scrolls rather than clips. */
+  --pitch-screen: max(calc(100svh - var(--safe-top) - var(--safe-bottom)), 44rem);
+  /* A reserve's kit as a share of a starter's (`BenchStrip`); the filled sheet below divides its height by it too. */
+  --pitch-bench-kit: 0.75;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --pitch-ratio: 0.95;
+    --pitch-screen: 100svh;
+  }
+}
+
+/* The FPL tab's budget: the chrome above and the bench strip under it, so the pitch reads in one look. */
+.pitch-fpl {
+  --pitch-page: 28rem;
+}
+
+/* A pitch with a bench under it budgets for the bench; set by `TeamSheet` and `LineupPitch`. */
+.pitch-with-bench {
+  --pitch-page: 26.5rem;
+}
+
+/* On a phone the grass and its bench FILL the screen under the page's chrome, so `--pitch-page` there is the chrome
+   alone: what stands above the sheet, plus `--page-foot` under it. The grass takes what the strip leaves. */
+@media (width < 64rem) {
+  .pitch-with-bench {
+    /* The head-to-head: the scoreline and its tabs. */
+    --pitch-page: 12.75rem;
+    container-type: size;
+    height: calc(var(--pitch-screen) - var(--pitch-page));
+  }
+
+  /* A double header's tie strip over the scoreline. */
+  .pitch-ties .pitch-with-bench {
+    --pitch-page: 16rem;
+  }
+
+  /* Your own planner: the week's bar, the pending figure, the toggle and the panel's edge. */
+  .pitch-with-bench.pitch-own {
+    --pitch-page: 16.125rem;
+  }
+
+  /* A rival's squad: its header, the toggle, the panel's edges and the caption over the grass. */
+  .pitch-squad .pitch-with-bench {
+    --pitch-page: 17.125rem;
+  }
+
+  .pitch-with-bench .pitch {
+    flex: 1 1 0;
+    min-height: 0;
+    aspect-ratio: auto;
+    max-height: none;
+  }
+
+  /* A strip is a fifth line of reserves, at `--pitch-bench-kit` the size. */
+  .pitch-with-bench:has(> .pitch-strip) {
+    --pitch-benched: 1;
+  }
+
+  /* Each card's share of the sheet (`100cqh`), once its fixed parts are paid for: the grass's padding (`CmGround`),
+     the strip's border, padding and number line (`BenchStrip`), each card's two bands and 4px of gaps (`PitchMarker`),
+     and one band spare for a name plate on two lines. Read by `.pitch-figure` below. */
+  .pitch-with-bench .pitch-figure {
+    --pitch-share: calc(
+      (
+          100cqh - 0.25rem - 7cqw - var(--pitch-benched, 0) * (1px + 0.875rem + 1rem) - var(--pitch-band) -
+            (var(--pitch-rows, 1) + var(--pitch-benched, 0)) * (2 * var(--pitch-band) + 4px)
+        ) /
+        (var(--pitch-kit, 1) * (var(--pitch-rows, 1) + var(--pitch-benched, 0) * var(--pitch-bench-kit)))
+    );
+  }
+
+  /* A line's cards stretch to its tallest, so a plate on two lines leaves its neighbours' plates level with it. */
+  .pitch-with-bench .pitch ul {
+    align-items: stretch;
+  }
+
+  /* The height the sheet spares lets a name with a break take a second line rather than be cut. */
+  .pitch-with-bench .pitch-name-breaks {
+    height: auto;
+    min-height: var(--pitch-band);
+    padding-block: 0.1875rem;
+  }
+
+  .pitch-with-bench .pitch-name-breaks > span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    line-height: 1.1;
+  }
+}
+
+/* The match line-up: the bar, the tabs and the shape above the grass, the used subs and the phone's nav below.
+   A phone also spends a row on picking the club and the view. */
+.pitch-match {
+  --pitch-page: 23rem;
+}
+
+@media (min-width: 64rem) {
+  .pitch-match {
+    --pitch-page: 19.5rem;
+  }
+}
+
+/* The head-to-head's two sheets side by side from `lg`. Score row, tabs, bench and foot come to 19rem, plus a
+   breath, and each sheet is only as wide as that height allows, so the grass keeps its shape. */
+@media (min-width: 64rem) {
+  .pitch-pair .pitch-with-bench {
+    --pitch-page: 20rem;
+    width: 100%;
+    max-width: calc((100svh - var(--pitch-page)) * var(--pitch-ratio));
+    margin-inline: auto;
+  }
+
+  /* Two sheets in one row stay inside their columns; bleeding out, they overlapped by 24px. */
+  .pitch-pair .bleed {
+    margin-inline: 0;
+  }
+
+  .pitch-pair .pitch.bleed {
+    width: 100%;
+  }
+}
+
+/* The box a ground is drawn in, its ratio and its ceiling; `CmGround` draws inside it. */
+.pitch,
+.pitch-strip {
+  /* A container, so a card can be bounded by the grass's width (`100cqw` below) as well as the screen. Never a
+     `cqw` height on this element: it feeds its own width back into its height. The bench strip is one
+     too, so a reserve is bounded like the man he would replace. */
+  container-type: inline-size;
+  /* How much of its card a kit or face takes on the grass; 1 off a pitch. */
+  --pitch-kit: 0.95;
+}
+
+.pitch {
+  position: relative;
+  overflow: hidden;
+  /* Portrait, and the rows are made to FIT it: 0.62 under a thumb (taller clipped a 1-3-4-3), 0.95 from `lg` beside the list. */
+  aspect-ratio: var(--pitch-ratio);
+  /* A ceiling, because a ratio alone grows the pitch with every width up to `lg` (1,239px tall at 768). */
+  max-height: calc(var(--pitch-screen) - var(--pitch-page));
+  /* A width of its own, or WebKit keeps the ratio under the ceiling by narrowing the pitch where Chrome squats it. */
+  width: 100%;
+}
+
+/* Bleeding, its width is the gutters' too. */
+.pitch.bleed {
+  width: calc(100% + 2 * var(--page-gutter));
+}
+
+/* The photograph on a player card. Width is the caller's (`PitchRows`); height is capped by one row's
+   share of the screen and the grass (`--pitch-rows`), as a wider card is a taller one. */
+.pitch-figure {
+  aspect-ratio: var(--pitch-figure, 1.32);
+  /* Named so `PlayerShirt` sizes the kit against it: the tighter of the screen's and the grass's ceilings, in one
+     `min` so they cannot change apart, floored at two bands, as a negative `max-height` deletes the picture.
+     `--pitch-card-scale` (the bench strip) shrinks the picture only; the name plate and fixture band keep theirs. */
+  --pitch-cap: calc(
+    var(--pitch-kit, 1) * var(--pitch-card-scale, 1) *
+      max(
+    calc(2 * var(--pitch-band)),
+    min(
+      var(
+        --pitch-share,
+        calc(
+          (var(--pitch-screen) - var(--pitch-page) - (var(--pitch-rows, 1) - 1) * 1rem) /
+            var(--pitch-rows, 1) - 2 * var(--pitch-band)
+        )
+      ),
+      calc(
+        (100cqw / var(--pitch-ratio) - (var(--pitch-rows, 1) - 1) * 1rem) /
+          var(--pitch-rows, 1) - 2 * var(--pitch-band)
+      )
+    )
+      )
+  );
+  max-height: var(--pitch-cap);
+  max-width: calc(var(--pitch-kit, 1) * 100%);
+  margin-inline: auto;
+}

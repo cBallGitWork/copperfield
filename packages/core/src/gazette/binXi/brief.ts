@@ -1,0 +1,128 @@
+import { capital, howMany, listed } from "../../format";
+import { storylinesBlock } from "../briefs/storylines";
+import { pts } from "../matchups/stories";
+import { numeral } from "../reports/minutes";
+import type { StoryThread } from "../ledger";
+import { binStar, type BinMan, type BinXi } from "./select";
+import { briefOf } from "../briefs/briefOf";
+import { aCount } from "../counted";
+
+// What the Bin XI's writer is told: the eleven grouped by club, each man's week in words, who had or
+// dropped him, and the standfirst it must not repeat. xG and xA stay out: the model copies a brief's
+// labels, and they print only as figures in the desk's box.
+
+/** One of his club's matches in the period, from his club's side. */
+export interface BinMatch {
+  opponent: string;
+  home: boolean;
+  scored: number;
+  conceded: number;
+}
+
+/** The desk's extras on a man the selection never reads. Null is a read that did not carry it. */
+export interface BinExtras {
+  cleanSheet: boolean;
+  saves: number | null;
+  tacklesWon: number | null;
+  interceptions: number | null;
+  clearances: number | null;
+}
+
+export interface BinBriefInput {
+  gameweek: number;
+  side: BinXi;
+  /** Each of the league's sides' points this period; null where Fantrax gave none. */
+  sides: readonly (number | null)[];
+  club: (clubId: number) => string;
+  matches: (clubId: number) => readonly BinMatch[];
+  extras: (man: BinMan) => BinExtras;
+  /** Positive facts about his place in the league, already worded: "dropped by X in gameweek 3". */
+  history: (man: BinMan) => readonly string[];
+  /** "injured", "suspended", "a doubt", or null for fit. */
+  status: (man: BinMan) => string | null;
+  /** FPL codes of last week's Bin XI. */
+  lastWeek: ReadonlySet<number>;
+  /** Clubs with no match in the period, so nobody reads an absence as a snub. */
+  blanked: readonly string[];
+  threads: readonly StoryThread[];
+}
+
+/** The desk's standfirst: the best man, and the total once with the one comparison, in the house's numerals. */
+export function binStandfirst(side: BinXi, sides: readonly (number | null)[]): string {
+  const { fewer, more, scored } = beaten(side.total, sides);
+  const against =
+    scored === 0 ? ""
+    : fewer === scored ? ", more than any side in the league"
+    : more === scored ? ", fewer than every side in the league"
+    : fewer === 0 ? ", level with the league's lowest side"
+    : `, more than ${numeral(fewer)} of the league's ${numeral(scored)} sides`;
+  const star = binStar(side);
+  return `${star.name}'s ${pts(star.points)} led a Bin XI that scored ${side.total}${against}.`;
+}
+
+/** How many of the sides Fantrax scored finished below the total, and how many above it. */
+function beaten(total: number, sides: readonly (number | null)[]): { fewer: number; more: number; scored: number } {
+  const scored = sides.filter((points): points is number => points !== null);
+  return { fewer: scored.filter((points) => points < total).length, more: scored.filter((points) => points > total).length, scored: scored.length };
+}
+
+export function buildBinBrief(input: BinBriefInput): string {
+  const { side } = input;
+  return briefOf([
+    `THE BIN XI, gameweek ${input.gameweek}, lining up ${side.shape}. The side, each man's points and the key stats are printed beside your column. You write the case for it.`,
+    `THE STANDFIRST, printed above your column and never repeated in it: ${binStandfirst(side, input.sides)}`,
+    ["THE ELEVEN, by club:", ...byClub(side.xi, input)].join("\n"),
+    input.blanked.length === 0 ? null : `NO MATCH THIS GAMEWEEK: ${input.blanked.join(", ")}.`,
+    storylinesBlock(input.threads),
+  ]);
+}
+
+function byClub(men: readonly BinMan[], input: BinBriefInput): string[] {
+  const clubs = [...new Set(men.map((man) => man.clubId))];
+  return clubs.flatMap((clubId) => [
+    `${input.club(clubId)} (${input.matches(clubId).map(result).join("; ") || "no match"}):`,
+    ...men.filter((man) => man.clubId === clubId).map((man) => `- ${line(man, input)}`),
+  ]);
+}
+
+function result(match: BinMatch): string {
+  const verb = match.scored > match.conceded ? "beat" : match.scored < match.conceded ? "lost to" : "drew with";
+  return `${verb} ${match.opponent} ${match.scored}-${match.conceded} ${match.home ? "at home" : "away"}`;
+}
+
+function line(man: BinMan, input: BinBriefInput): string {
+  const extras = input.extras(man);
+  const did = [
+    aCount(man.goals, "a goal", "goals"),
+    aCount(man.assists, "an assist", "assists"),
+    extras.cleanSheet ? "a clean sheet" : null,
+    aCount(extras.saves, "a save", "saves"),
+  ].filter((part): part is string => part !== null);
+  const play = [
+    shots(man),
+    aCount(man.chancesCreated, "a chance created", "chances created"),
+    aCount(extras.tacklesWon, "a tackle won", "tackles won"),
+    aCount(extras.interceptions, "an interception", "interceptions"),
+    aCount(extras.clearances, "a clearance", "clearances"),
+  ].filter((part): part is string => part !== null);
+  const status = input.status(man);
+  return [
+    `${man.name}, ${input.club(man.clubId)}, ${man.position}: ${pts(man.points)}. ${howMany(man.minutes, "minute")}${man.started ? "" : " off the bench"}.`,
+    did.length === 0 ? null : `${sentence(did)}.`,
+    play.length === 0 ? null : `${sentence(play)}.`,
+    ...input.history(man).map((fact) => `${fact}.`),
+    input.lastWeek.has(man.code) ? "In last week's Bin XI too." : null,
+    status === null ? null : `Now ${status}.`,
+  ]
+    .filter((part): part is string => part !== null)
+    .join(" ");
+}
+
+function shots(man: BinMan): string | null {
+  const taken = aCount(man.shots, "a shot", "shots");
+  return taken === null || !man.shotsOnTarget ? taken : `${taken}, ${man.shotsOnTarget} on target`;
+}
+
+function sentence(parts: readonly string[]): string {
+  return capital(listed(parts));
+}

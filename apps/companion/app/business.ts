@@ -1,0 +1,24 @@
+import {
+  FANTRAX_LEAGUE_ID,
+  type TransactionView,
+  fetchTransactions,
+  mapTransactions,
+} from "@epl/core";
+import { leagueCache } from "./leagueCache";
+import { refusedAs } from "./refusals";
+
+// The week's business: the transaction feed, read once and cached.
+
+/** The views that make up a week's business: trade rows carry no `transactionCode`, so a trade is its own read. */
+const DEAL_VIEWS: readonly TransactionView[] = ["CLAIM_DROP", "TRADE"];
+
+/** The transaction feed, cached; a view Fantrax refuses costs only that view, and `whole` says one was lost. */
+export const readDeals = leagueCache("gazette-deals",
+  async () => {
+    const feeds = await Promise.all(
+      DEAL_VIEWS.map((view) => refusedAs(fetchTransactions(FANTRAX_LEAGUE_ID, view), () => null, (raw) => mapTransactions(raw, view))),
+    );
+    return { rows: feeds.flatMap((feed) => feed ?? []), whole: feeds.every((feed) => feed !== null) };
+  },
+  () => ({ rows: [], whole: false }),
+);

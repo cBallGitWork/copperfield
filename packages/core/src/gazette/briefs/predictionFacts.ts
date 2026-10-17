@@ -1,0 +1,195 @@
+import { PREDICTIONS } from "../../config";
+import { howMany, listed, spelled } from "../../format";
+import { ordinal } from "../../league/ordinal";
+import { groupedBy } from "../../grouped";
+import type { PredictionCall } from "../predictions/pick";
+import type { PredictionSide, SquadMan } from "../predictions/sides";
+import { isBack } from "../sheets/sheet";
+
+// One tie's facts for Lawro, worded and ranked. Squad-level only, and no figure of ours: the
+// order of a side's men is our model's reading and is never printed.
+
+/** The tie's one story first, then a man for each side the story leaves out (the one with the easy
+ *  game when there is one), their form on the pitch and in the table, the men who share a club or
+ *  meet on the pitch, and one more: a signing or a doubt. Never a roll call. */
+export function tieFacts(index: number, home: PredictionSide, away: PredictionSide, call: PredictionCall): string[] {
+  const favourite = call.callsTeamId === home.teamId ? (call.instinct === null ? home : away) : call.instinct === null ? away : home;
+  const underdog = favourite === home ? away : home;
+  const sides = [
+    { tag: `T${index}H`, side: home },
+    { tag: `T${index}A`, side: away },
+  ];
+  const story = call.instinct === null ? storyOf([favourite, underdog]) : null;
+  // The sides the story or the gut reason already speaks for: a doubt is the favourite's alone.
+  const covered = new Set<PredictionSide>(story !== null ? [story.side] : call.instinct === "doubt" ? [favourite] : call.instinct === null ? [] : [home, away]);
+  const used = new Set(story === null ? [] : [story.man.name]);
+  // The doubt's gut reason names the favourite's best man: no later line names him again.
+  if (call.instinct === "doubt" && favourite.best !== null) used.add(favourite.best.name);
+  const fresh = (men: readonly (SquadMan | null)[]) => men.find((man): man is SquadMan => man !== null && !used.has(man.name)) ?? null;
+  const take = (man: SquadMan | null) => {
+    if (man !== null) used.add(man.name);
+    return man;
+  };
+  const facts = [
+    call.instinct === null ? null : `- T${index}-gut: ${gutFact(call.instinct, favourite, underdog)}`,
+    story === null ? null : `- T${index}-story: ${story.text}`,
+    ...sides.map(({ tag, side }) => {
+      if (covered.has(side)) return null;
+      const easy = side.kind !== null && side.keyMen.some((man) => man.name === side.kind?.name) && !used.has(side.kind.name);
+      const man = take(easy ? side.kind : fresh(side.keyMen));
+      if (man === null) return null;
+      const run = streak(man);
+      return `- ${tag}-man: ${described(man)}, for ${side.name}${easy ? ", an easy one" : ""}.${run === null ? "" : ` He ${run}.`}`;
+    }),
+    ...sides.map(({ tag, side }) => {
+      const man = take(fresh(side.keyMen.filter((each) => streak(each) !== null)));
+      return man === null ? null : `- ${tag}-run: ${side.name}'s ${man.name} (${man.club}) ${streak(man)}.`;
+    }),
+    // Before a game is played every side is level, and a rank would only be the table's sort order.
+    ...sides.map(({ tag, side }) => (played(side) ? `- ${tag}-form: ${form(side)}` : null)),
+    // On a gut call the reason is the story: only the men who meet on the pitch get another line.
+    ...(call.instinct === null ? together(index, home, away) : together(index, home, away).slice(-1)),
+    // Liverpool men are the whole story of a Liverpool call: nobody else gets a line.
+    call.instinct === "liverpool" ? null : extra(sides, fresh),
+  ];
+  return facts.filter((fact): fact is string => fact !== null).slice(0, PREDICTIONS.factsPerTie);
+}
+
+/** What the tie is about, favourite first: a main man with an easy game, else one in form, else one gone
+ *  quiet or back from a lay-off, else one with a difficult game, else one in doubt; null when none. */
+function storyOf(sides: readonly PredictionSide[]): { side: PredictionSide; man: SquadMan; text: string } | null {
+  const main = (side: PredictionSide, man: SquadMan | null | undefined) => (man != null && side.keyMen.some((each) => each.name === man.name) ? man : null);
+  const lead = (side: PredictionSide, who: string) => `${side.name}'s ${who}, one of their main men`;
+  const stories: [pick: (side: PredictionSide) => SquadMan | null, text: (side: PredictionSide, man: SquadMan) => string][] = [
+    [(side) => main(side, side.kind), (side, man) => `${lead(side, man.name)}, has an easy one: ${fixture(man)}.`],
+    [(side) => side.keyMen.find((each) => streak(each) !== null) ?? null, (side, man) => `${lead(side, `${man.name} (${man.club})`)}, ${streak(man)}.`],
+    [(side) => main(side, side.hard), (side, man) => `${lead(side, man.name)}, has a difficult one: ${fixture(man)}.`],
+    [(side) => main(side, side.doubts[0]), (side, man) => `${doubt(man, side.name)} One of their main men.`],
+  ];
+  for (const [pick, text] of stories) {
+    for (const side of sides) {
+      const man = pick(side);
+      if (man !== null) return { side, man, text: text(side, man) };
+    }
+  }
+  return null;
+}
+
+/** A man's last games in a sentence, when they say something: form, a quiet spell, or a return. */
+function streak(man: SquadMan): string | null {
+  const games = man.recent;
+  if (games.length < PREDICTIONS.recentGames) return null;
+  const last = games[games.length - 1];
+  const sum = (key: "goals" | "assists" | "cleanSheets" | "minutes") => games.reduce((total, game) => total + game[key], 0);
+  const played = games.every((game) => game.minutes >= PREDICTIONS.quietMinutes);
+  const span = `his last ${spelled(PREDICTIONS.recentGames)} games`;
+  if (games.every((game) => game.minutes === 0)) return man.availability.state === "fit" ? `is fit again after missing ${span}` : null;
+  if (last.minutes === 0 && man.availability.state === "fit") return "missed last week and is fit again";
+  if (games.every((game) => game.goals > 0)) return `scored in each of ${span}`;
+  const back = man.positions.some(isBack);
+  if (back && games.every((game) => game.cleanSheets > 0)) return `kept a clean sheet in each of ${span}`;
+  if (sum("goals") + sum("assists") >= PREDICTIONS.involvements) return `has ${count(sum("goals"), "goal")} and ${count(sum("assists"), "assist")} in ${span}`;
+  if (played && !back && sum("goals") + sum("assists") === 0) return `has gone quiet, no goal and no assist in ${span}`;
+  return null;
+}
+
+function count(figure: number, noun: string): string {
+  return figure === 0 ? `no ${noun}` : figure === 1 ? `one ${noun}` : `${figure} ${noun}s`;
+}
+
+/** The one line beyond the story and the men: a man brought in, else a doubt. */
+function extra(sides: readonly { tag: string; side: PredictionSide }[], fresh: (men: readonly (SquadMan | null)[]) => SquadMan | null): string | null {
+  for (const { tag, side } of sides) {
+    if (side.arrivals.length > 0) return `- ${tag}-in: ${side.name} brought in ${side.arrivals.join("; ")}, for this round.`;
+  }
+  for (const { tag, side } of sides) {
+    const man = fresh(side.doubts);
+    if (man !== null) return `- ${tag}-doubt: ${doubt(man, side.name)}`;
+  }
+  return null;
+}
+
+/** Men who share a club on one side, and a man on each side whose clubs meet this gameweek: the two
+ *  coincidences worth a line. Only among the men who matter most, so it is never a roll call. */
+function together(index: number, home: PredictionSide, away: PredictionSide): (string | null)[] {
+  const clubmates = [home, away].map((side) => {
+    const byClub = groupedBy(side.keyMen.filter((man) => man.club !== ""), (man) => man.club);
+    const shared = [...byClub].find(([, men]) => men.length > 1);
+    return shared === undefined ? null : `- T${index}-club: ${side.name}'s ${listed(shared[1].map((man) => man.name))} ${shared[1].length === 2 ? "both" : "all"} play for ${shared[0]}.`;
+  });
+  // A big game when each man's club is at an extreme in the other's view.
+  const meeting = home.keyMen.flatMap((ours) =>
+    away.keyMen.flatMap((theirs) => {
+      const there = ours.fixtures.find((each) => each.opponent === theirs.club);
+      if (there === undefined) return [];
+      const big = there.standing !== null && theirs.fixtures.some((each) => each.opponent === ours.club && each.standing !== null);
+      return [`${ours.name} (${home.name}, ${ours.club}) and ${theirs.name} (${away.name}, ${theirs.club}) play against each other this round${big ? ", in one of the big games of the weekend" : ""}.`];
+    }),
+  );
+  return [...clubmates, meeting.length === 0 ? null : `- T${index}-meet: ${meeting[0]}`];
+}
+
+/** The reason he goes against the favourite, in the brief's facts and nothing else. */
+function gutFact(instinct: NonNullable<PredictionCall["instinct"]>, favourite: PredictionSide, underdog: PredictionSide): string {
+  if (instinct === "doubt" && favourite.best !== null) return `${favourite.name}'s best man, ${described(favourite.best)}, ${state(favourite.best)}.`;
+  if (instinct === "liverpool") {
+    // With their fixtures, so he praises their football: given names alone, he gave their club as the reason.
+    const theirs = underdog.squad.filter((man) => man.liverpool).slice(0, PREDICTIONS.gutMen).map(described).join("; ");
+    return `Liverpool men in the squad: ${underdog.name} ${underdog.liverpool}, ${favourite.name} ${favourite.liverpool}. ${underdog.name}'s: ${theirs}. You back the side with more of them. Never admit a bias and never give their club as the reason: praise their football, as if it were obvious.`;
+  }
+  const line = (side: PredictionSide) => [...side.backLine].sort((a, b) => (a.ease ?? Infinity) - (b.ease ?? Infinity)).slice(0, PREDICTIONS.gutMen).map((man) => `${man.name} ${fixture(man)}`).join(", ");
+  return `${underdog.name}'s back line has the kinder round: ${line(underdog)}. ${favourite.name}'s: ${line(favourite)}.`;
+}
+
+/** A man as the brief names him: positions, club and this round's fixture. */
+function described(man: SquadMan): string {
+  return `${man.name} (${man.positions.join(",")}, ${man.club}, ${fixture(man)})`;
+}
+
+function fixture(man: SquadMan): string {
+  const one = (each: SquadMan["fixtures"][number]) =>
+    `${each.home ? `home to ${each.opponent}` : `away at ${each.opponent}`}${each.standing === null ? "" : `, ${each.standing}`}`;
+  if (man.fixtures.length === 0) return "no game this round";
+  if (man.fixtures.length === 1) return one(man.fixtures[0]);
+  return `two games, ${man.fixtures.map(one).join(" and ")}`;
+}
+
+/** Whose man he is, every time, or a doubt is read against the wrong side. */
+function doubt(man: SquadMan, side: string): string {
+  return `${side}'s ${man.name} (${man.club}) ${state(man)}.`;
+}
+
+/** How likely he is to play, in words and never FPL's figure, and what is wrong with him, from FPL's
+ *  note with its figure taken out. */
+function state(man: SquadMan): string {
+  const { availability } = man;
+  const note = availability.news.replace(/\s*-?\s*\d+\s*% chance of playing/giu, "").replace(/\s+-\s+/gu, ", ").trim();
+  return `${availabilityWord(availability)}${note === "" ? "" : `. FPL's note: ${note}`}`;
+}
+
+/** FPL publishes 0, 25, 50, 75 or 100; the brief says what those mean. */
+export function availabilityWord(availability: SquadMan["availability"]): string {
+  if (availability.state === "injured" || availability.state === "suspended" || availability.state === "unavailable") {
+    return `is ${availability.state}`;
+  }
+  if (availability.out) return "is out";
+  if (availability.chance === null || availability.chance === 50) return "is a doubt";
+  return availability.chance > 50 ? "is a slight doubt" : "is a big doubt";
+}
+
+/** Whether the side has a game behind it, which a table position needs. */
+export function played(side: PredictionSide): boolean {
+  return side.form !== null && side.form.won + side.form.drawn + side.form.lost > 0;
+}
+
+function form(side: PredictionSide): string {
+  const f = side.form as NonNullable<PredictionSide["form"]>;
+  const record = `${side.name} are ${ordinal(f.rank)}: won ${f.won}, drawn ${f.drawn}, lost ${f.lost}, ${howMany(f.points, "point")}.`;
+  const last =
+    f.last === null
+      ? ""
+      : ` Gameweek ${f.last.gameweek}: ${f.last.result === "W" ? "beat" : f.last.result === "L" ? "lost to" : "drew with"} ${f.last.opponent} ${f.last.pointsFor}-${f.last.pointsAgainst}.`;
+  return `${record}${last}${f.run === "" ? "" : ` Form, oldest first: ${f.run}.`}`;
+}
+
+

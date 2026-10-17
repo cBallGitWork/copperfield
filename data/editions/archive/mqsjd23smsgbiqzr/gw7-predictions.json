@@ -1,0 +1,110 @@
+{
+  "slug": "gw7-predictions",
+  "kind": "predictions",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 7,
+  "gameweek": 7,
+  "filedAt": "2026-10-15T19:11:12.772Z",
+  "expiresAt": null,
+  "edition": "The Form Guide",
+  "byline": "",
+  "reporter": "Mark Lawrenson",
+  "headline": "Lawro's Predictions: GW7",
+  "deck": "Lawro backs two outsiders this week, The Truffle Pigs against Bayern Bru and domeitalycoach against Hazza Maguazza's Redempshazza.",
+  "body": "Four from five last week, which worries me. One from two on the hunches. Twenty-two years marked in front of the nation, and now a league named after a coffee shop marks me.",
+  "subjects": [
+    "predictions:gw7"
+  ],
+  "image": null,
+  "face": null,
+  "ties": [
+    {
+      "homeTeamId": "syjkob6cmuobagfu",
+      "awayTeamId": "qgucu9dgmufwva1x",
+      "line": "GlengarryHearts have Anderson at home to Ipswich Town, who stop nothing that comes at them. Schade of Brentford has two assists for GlengarryHearts from his last two games, and not a goal.\n\nMcBurnie goes to Fulham with Hull City for its_ohi, and Fulham frighten nobody. He hasn't scored or set one up lately, and a lamp post moves more. Rayan of AFC Bournemouth is no better for its_ohi.\n\nGlengarryHearts, because a soft opponent beats two quiet men.",
+      "callsTeamId": "syjkob6cmuobagfu",
+      "score": {
+        "home": 30,
+        "away": 28
+      },
+      "face": {
+        "code": 215379,
+        "name": "Anderson",
+        "clubId": 15,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "aekx2715mtzgcl3f",
+      "awayTeamId": "kpj0z744muh1qwtd",
+      "line": "Thiago has a goal and an assist for The Truffle Pigs in a fortnight with Brentford. In the Steve Clarke Classic he meets Liverpool, and Jacquet and A.Becker, two more Truffle Pigs men. Fancy owning a man who plays against your own goalkeeper.\n\nBayern Bru beat GlengarryHearts and now think they're a side. Barcola belongs to Bayern Bru and plays for Liverpool against Thiago. Bayern Bru go in as favourites, and I'm not having it.\n\nThe Truffle Pigs, because Jacquet defends properly and A.Becker catches everything they hit at him.",
+      "callsTeamId": "aekx2715mtzgcl3f",
+      "instinct": "liverpool",
+      "score": {
+        "home": 35,
+        "away": 34
+      },
+      "face": {
+        "code": 502500,
+        "name": "Thiago",
+        "clubId": 4,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "7z8fy0pnmuogbtdw",
+      "awayTeamId": "uexqrijomu8l5asi",
+      "line": "I can't make Cowthenbeef out, and the Teachers' Classic won't help. Cherki gets Cowthenbeef a free hit, Ipswich Town at home. Cowthenbeef went to the waiver list for Gudmundsson of Leeds United, and if he were any good he'd have gone weeks ago.\n\nAtleticoTimHortons have Semenyo with two goals and an assist in his last couple for Manchester City. Runs like that end, usually the week I back them.\n\nAtleticoTimHortons, because goals in the boots trump a defender nobody else wanted.",
+      "callsTeamId": "uexqrijomu8l5asi",
+      "score": {
+        "home": 25,
+        "away": 31
+      },
+      "face": {
+        "code": 466052,
+        "name": "Cherki",
+        "clubId": 15,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "0g0j5mkomuqqwsbu",
+      "awayTeamId": "ipnp5y4mmu9j7kop",
+      "line": "Doubts first, because Arsenal men have gone quiet all over this league. domeitalycoach hold Havertz, with no goal and no assist from two games. Sitting through his matches these days has been a chore. They also hold Wirtz and Szoboszlai, who face Brentford with Liverpool and will enjoy themselves.\n\nHazza Maguazza's Redempshazza are bottom, and the redemption is taking its time. Saka has gone the same way, no goal and no assist.\n\nHazza Maguazza's Redempshazza are fancied and I'm not having it, because Wirtz and Szoboszlai are the best footballers here.",
+      "callsTeamId": "0g0j5mkomuqqwsbu",
+      "instinct": "liverpool",
+      "score": {
+        "home": 33,
+        "away": 32
+      },
+      "face": {
+        "code": 219847,
+        "name": "Havertz",
+        "clubId": 1,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "7to6xosimu8hyyw5",
+      "awayTeamId": "l5kunst8msgbirdf",
+      "line": "Haaland takes The Raccoons into the Big Man Bakar Derby with Ipswich Town at home. Champions waste a gift like that out of habit. Palmer of Chelsea has two assists for The Raccoons in his last pair, without scoring.\n\nIf anyone can, Bannan can. Can they? No. If anyone can, Bannan can have Rogers going to Everton with Chelsea and Gibbs-White of Nottingham Forest gone dry.\n\nThe Raccoons, since Ipswich Town at home is a gift even champions can't refuse.",
+      "callsTeamId": "l5kunst8msgbirdf",
+      "score": {
+        "home": 31,
+        "away": 33
+      },
+      "face": {
+        "code": 223094,
+        "name": "Haaland",
+        "clubId": 15,
+        "position": null
+      }
+    }
+  ],
+  "extras": {
+    "record": {
+      "right": 4,
+      "called": 5
+    }
+  }
+}

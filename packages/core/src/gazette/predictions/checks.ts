@@ -1,0 +1,299 @@
+import { BANNED, americanisms, banned, overused } from "../banned";
+import { LAWRO_LIMITS as LIMITS } from "../../config";
+import { mean } from "../../mean";
+import { escapeRegExp } from "../../regExp";
+import { strangers } from "../strangers";
+import { CORE_MARK, type PastLine } from "./past";
+import { fallEchoes } from "./opening";
+import type { PredictionCall } from "./pick";
+import { lengthOf, masked, mentionAt, ngrams, numbersIn, sentences, wordCount } from "./prose";
+import { COMFORTABLE, DESK_BANNED, LAWRO_BANNED, LAWRO_CAPPED, LAWRO_FAMOUS, LAWRO_NEVER, LINEUP_CLAIMS } from "./words";
+
+// The editor: every rule Lawro is given, checked after he files. A hard fault never prints; a
+// send-back goes back to him once, quoted; a warning is a line in the log.
+
+type Severity = "hard" | "send-back" | "warn";
+
+export interface Fault {
+  /** "intro", "deck", "column", or a tie's key. */
+  section: string;
+  check: string;
+  severity: Severity;
+  evidence: string;
+}
+
+/** What the model filed, keyed as the desk keys ties. */
+export interface LawroDraft {
+  deck: string;
+  intro: string;
+  ties: ReadonlyMap<string, { line: string; backs: string | null }>;
+}
+
+export const tieKey = (homeTeamId: string, awayTeamId: string) => `${homeTeamId}-${awayTeamId}`;
+
+export interface CheckContext {
+  calls: readonly PredictionCall[];
+  name: (teamId: string) => string;
+  /** The brief, his core and this week's lines: all a sentence may name or count. */
+  facts: string;
+  offered: readonly PastLine[];
+  /** Names blanked before the word lists run: the managers' sides and their men. */
+  names: readonly string[];
+  /** The prose of his earlier columns, newest first. */
+  past: readonly string[];
+  /** Who holds each man a tie may name, by tie key: his name to his side's. Absent skips the check. */
+  holders?: ReadonlyMap<string, ReadonlyMap<string, string>>;
+  /** Every name a tie's derby goes by, by tie key; a derby tie names one of them. */
+  derbies?: ReadonlyMap<string, readonly string[]>;
+}
+
+const CAREER_CLAIM = /\bI (?:played|scored|managed|won(?!['’]t)|signed|coached|captained|commentated|covered)\b|\bwhen I was at\b|\bin my day\b|\bmy (?:playing days|career|debut|caps|medals)\b/iu;
+const TICS: readonly (readonly [check: string, pattern: RegExp])[] = [
+  ["semicolon", /;/u],
+  ["colon", /:/u],
+  ["brackets", /[()[\]]/u],
+  ["trailing dots", /\.{2,}|…/u],
+  ["we, us, our", /\b(?:we|us|our|ours)\b/iu],
+  ["a league side at home", /\b(?:welcomes?|welcomed|visitors|home advantage)\b/iu],
+  ["a sentence opening on So", /(?:^|[.?]\s+)So\b/u],
+  ["not just X but Y", /(?:\bnot|n't) (?:just|only|merely|simply)\b|\b(?:it|that|this)(?:'s| is| was)(?: not|n't)\b[^.?]{1,50},\s*(?:it|that|this)(?:'s| is| was)\b/iu],
+  ["no X, no Y, no Z", /\b[Nn]o \p{L}+, no \p{L}+,? (?:and )?no \p{L}+/u],
+];
+/** What only a real club does: "Liverpool host City" is his to write, a league side hosting nobody's. */
+const AT_HOME = String.raw`\s+(?:hosts?|hosted|hosting|visits?|visited|visiting|travels?|travelled|travelling)\b`;
+const QUOTES = /["“”«»]|‘[^’]*’/u;
+const WIN = /\b(?:will|['’]ll|to|should|can|could|might|going to) (?:win|beat|edge|nick|take it|do it)\b/giu;
+const BACKING = /\b(?:I fancy|I['’]m backing|I['’]ll go with|I['’]m going with|I['’]ll have|backing)\b/iu;
+const NEGATION = /\b(?:not|never|no)\b|n['’]t/iu;
+const SCORELINE = /\b(?!50-50\b)\d{1,3}\s*[-–]\s*\d{1,3}\b/u;
+const ADMISSION = ["Liverpool man", "Liverpool men", "Liverpool player", "Liverpool players", "Liverpool lad", "Liverpool lads", "Anfield man", "in red"];
+/** His verdict is his: a tie with no "I", "me" or "my" in it is a list of facts, not an opinion. */
+const VERDICT = /\b(?:I|me|my)\b/iu;
+/** "Both of theirs": men he never names, which a reader without the brief cannot place. */
+const UNNAMED = /\btheirs\b/iu;
+/** A back line is four or five men: a sentence about one names at least one of them. */
+const BACK_LINE = /\bback (?:line|four|five)\b|\bdefenders\b/iu;
+/** The joke about sitting through it, which is a joke once a column and a tic after that. */
+const DULL = /\b(?:asleep|slog|dull|dreary|tedious|yawn|bor(?:e|ed|ing)|kip|nod(?:ding)? off|sit(?:ting)? through|enjoy watching)\b/iu;
+
+export function checkLawro(draft: LawroDraft, ctx: CheckContext): Fault[] {
+  const { faults, fault } = faultLog();
+  const sides = new Set(ctx.calls.flatMap((call) => [ctx.name(call.homeTeamId), ctx.name(call.awayTeamId)]));
+  const rules = lawroProse(ctx, sides, fault);
+
+  rules.deck(draft.deck);
+  const prose: [section: string, text: string][] = [["intro", draft.intro]];
+  for (const call of ctx.calls) {
+    const key = tieKey(call.homeTeamId, call.awayTeamId);
+    const entry = draft.ties.get(key);
+    if (entry === undefined || entry.line.trim() === "") {
+      fault(key, "missing", "hard", "no line for this tie");
+      continue;
+    }
+    if (entry.backs !== call.callsTeamId) fault(key, "backs another side", "hard", String(entry.backs));
+    prose.push([key, entry.line]);
+    tieRules(key, entry.line, call, ctx, sides, fault);
+  }
+
+  for (const [section, text] of prose) rules.section(section, text);
+  // British football English, every desk's list (`british.ts`).
+  for (const [section, text] of [["deck", draft.deck] as const, ...prose]) {
+    for (const word of americanisms(masked(text, ctx.names))) fault(section, "not British football English", "send-back", word);
+  }
+  columnRules(draft.intro, prose, ctx, fault);
+  frameRules(prose.slice(1), sides, fault);
+  return faults;
+}
+
+/** How many times a name stands whole in the text. */
+function mentionsOf(text: string, name: string): number {
+  let count = 0;
+  for (let rest = text, at = mentionAt(rest, name); at !== -1; at = mentionAt(rest, name)) {
+    count += 1;
+    rest = rest.slice(at + name.length);
+  }
+  return count;
+}
+
+/** Five ties in one shape read as a form filled in: the side and a verdict first, the side and a quip last, the dull
+ *  game every time. Each frame is allowed `sameFrame` ties, and the moan `dullMoan`. */
+function frameRules(ties: readonly [string, string][], sides: ReadonlySet<string>, fault: Report): void {
+  const side = [...sides].map(escapeRegExp).sort((a, b) => b.length - a.length).join("|");
+  if (side === "") return;
+  const opening = new RegExp(`^(?:The\\s+)?(?:${side})\\s+(?:are|is|sit|sits|have|has|look|looks)\\b[^.?]*,\\s*(?:and|but)\\b`, "iu");
+  const ending = new RegExp(`^(?:The\\s+)?(?:${side})\\b[^.?,]{0,30},\\s*(?:and|but)\\b`, "iu");
+  const frames: [check: string, max: number, hit: (text: string) => boolean][] = [
+    ["the same opening as another tie", LIMITS.sameFrame, (text) => opening.test(sentences(text)[0] ?? "")],
+    ["the same ending as another tie", LIMITS.sameFrame, (text) => ending.test(sentences(text).at(-1) ?? "")],
+    ["the dull-game moan twice", LIMITS.dullMoan, (text) => DULL.test(text)],
+  ];
+  for (const [check, max, hit] of frames) {
+    const hits = ties.filter(([, text]) => hit(text));
+    for (const [section, text] of hits.slice(max)) fault(section, check, "send-back", sentences(text).at(-1) ?? excerpt(text));
+  }
+}
+
+/** The rules every line of his answers to, wherever it prints: the deck's, and any section of his own prose. */
+export function lawroProse(ctx: CheckContext, sides: ReadonlySet<string>, fault: Report): { deck: (text: string) => void; section: (section: string, text: string) => void } {
+  const offered = ctx.offered.map((line) => line.line).join(" ").toLowerCase();
+  const exempt = (list: readonly string[]) => list.filter((phrase) => !offered.includes(phrase.toLowerCase()));
+  const never = LAWRO_NEVER.filter((word) => !ctx.facts.toLowerCase().includes(word.toLowerCase()));
+  const known = new Set(numbersIn(ctx.facts));
+
+  const everywhere = (section: string, text: string, words: readonly string[]) => {
+    for (const pattern of LINEUP_CLAIMS) faultOnMatch(fault, section, "line-up", "hard", text, pattern);
+    faultOnMatch(fault, section, "quotation marks", "hard", text, QUOTES);
+    faultOnMatch(fault, section, "a decimal", "hard", text, /\d+\.\d+/u);
+    for (const word of banned(text, never)) fault(section, "never", "hard", word);
+    // "I'll" is a capital that is nobody, and so is a word standing as its own sentence: "Lovely."
+    const alone = new Set(sentences(text).map((sentence) => sentence.replace(/[.?!]+$/u, "")));
+    for (const name of strangers(text, ctx.facts).filter((word) => !/^I['’]/u.test(word) && !alone.has(word))) fault(section, "a name not in the brief", "hard", name);
+    for (const figure of numbersIn(text)) if (!known.has(figure)) fault(section, "a figure not in the brief", "hard", String(figure));
+    const plain = masked(text, ctx.names);
+    for (const word of [...banned(plain, BANNED), ...banned(plain, words)]) fault(section, "banned", "send-back", word);
+  };
+
+  return {
+    deck: (text) => everywhere("deck", text, DESK_BANNED),
+    section: (section, text) => {
+      everywhere(section, text, exempt([...LAWRO_BANNED, ...LAWRO_FAMOUS]));
+      for (const [check, pattern] of TICS) faultOnMatch(fault, section, check, "send-back", text, pattern);
+      for (const side of sides) {
+        const hosting = text.match(new RegExp(`${escapeRegExp(side)}${AT_HOME}`, "iu"));
+        if (hosting !== null) fault(section, "a league side at home", "send-back", hosting[0]);
+      }
+      for (const sentence of sentences(text)) {
+        if (wordCount(sentence) > LIMITS.sentence) fault(section, "a sentence over 20 words", "send-back", sentence);
+        if (CAREER_CLAIM.test(sentence) && !CORE_MARK.test(sentence) && !ctx.offered.some((line) => line.mark.test(sentence))) {
+          fault(section, "a career claim nobody gave him", "hard", sentence);
+        }
+      }
+    },
+  };
+}
+
+/** Where a check files a fault: the section it is in, the rule, how hard, and the words that broke it. */
+export type Report = (section: string, check: string, severity: Severity, evidence: string) => void;
+
+/** Files a fault quoting the words `pattern` finds in `text`, when it finds any. */
+export function faultOnMatch(fault: Report, section: string, check: string, severity: Severity, text: string, pattern: RegExp): void {
+  const found = text.match(pattern);
+  if (found !== null) fault(section, check, severity, found[0]);
+}
+
+/** The opening of a section, quoted when no one sentence of it broke the rule. */
+function excerpt(text: string): string {
+  return text.slice(0, LIMITS.quote);
+}
+
+/** A fresh fault list and the `Report` that files into it. */
+export function faultLog(): { faults: Fault[]; fault: Report } {
+  const faults: Fault[] = [];
+  return { faults, fault: (section, check, severity, evidence) => { faults.push({ section, check, severity, evidence }); } };
+}
+
+function tieRules(key: string, line: string, call: PredictionCall, ctx: CheckContext, sides: ReadonlySet<string>, fault: Report): void {
+  const [least, most, words] = call.callsTeamId === null ? LIMITS.noCall : call.instinct === null ? LIMITS.tie : LIMITS.gut;
+  const count = sentences(line).length;
+  if (count < least || count > most || wordCount(line) > words) fault(key, "length", "send-back", lengthOf(line));
+  faultOnMatch(fault, key, "a score in the prose", "hard", line, SCORELINE);
+  if (!VERDICT.test(line)) fault(key, "no verdict of his own", "send-back", excerpt(line));
+  if (UNNAMED.test(line)) fault(key, "men he never names", "send-back", sentences(line).find((sentence) => UNNAMED.test(sentence)) ?? "theirs");
+  const derby = ctx.derbies?.get(key) ?? [];
+  if (derby.length > 0 && !derby.some((name) => mentionAt(line, name) !== -1)) fault(key, "the derby not named", "send-back", derby[0]);
+  if (call.callsTeamId !== null) shapeRules(key, line, sides, fault);
+  // Whose man he is, said where he is first named or in the sentence before it about his side alone.
+  const said = line.split(/\n\s*\n/u).flatMap((paragraph, at) => sentences(paragraph).map((sentence) => ({ sentence, at })));
+  const names = (sentence: string, side: string) => mentionAt(sentence, side) !== -1;
+  for (const [man, holder] of ctx.holders?.get(key) ?? []) {
+    const first = said.findIndex(({ sentence }) => mentionAt(sentence, man) !== -1);
+    if (first === -1) continue;
+    const before = said[first - 1];
+    const aboutHim = before !== undefined && before.at === said[first].at && names(before.sentence, holder) && ![...sides].some((side) => side !== holder && names(before.sentence, side));
+    if (!names(said[first].sentence, holder) && !aboutHim) fault(key, "a man without his side", "send-back", man);
+  }
+  for (const side of sides) {
+    // "AtleticoTimHortons's", "If anyone can, Bannan can's": such a side takes "for", or the sentence.
+    const awkward = /s$|['’,]/iu.test(side) ? line.match(new RegExp(`${escapeRegExp(side)}['’]s\\b`, "u")) : null;
+    if (awkward !== null) fault(key, "an apostrophe on a side's name", "send-back", awkward[0]);
+    if (mentionsOf(line, side) > LIMITS.sideNamed) fault(key, "a side's name over and over", "send-back", side);
+  }
+  // The names list blanks derbies too, and a derby is not a man.
+  const players = ctx.names.filter((name) => !sides.has(name) && !derby.includes(name));
+  const men = players.filter((name) => mentionAt(line, name) !== -1);
+  for (const sentence of sentences(line).filter((each) => BACK_LINE.test(each))) {
+    if (!players.some((name) => mentionAt(sentence, name) !== -1)) fault(key, "a back line with nobody in it", "send-back", sentence);
+  }
+  if (men.length > LIMITS.men) fault(key, "a roll call, more than four men", "send-back", men.join(", "));
+  // "Their Ballard" is not how anybody talks: Ballard, or test31's Ballard.
+  for (const name of men) {
+    const owned = line.match(new RegExp(`\\b(?:their|his|our) ${escapeRegExp(name)}\\b`, "iu"));
+    if (owned !== null) fault(key, "a possessive before a name", "send-back", owned[0]);
+  }
+  if (call.close) for (const word of banned(line, COMFORTABLE)) fault(key, "an easy win on a close tie", "send-back", word);
+  // He never admits the bias: on a Liverpool call, their club is not the reason.
+  if (call.instinct === "liverpool") for (const word of banned(line, ADMISSION)) fault(key, "gives Liverpool as the reason", "send-back", word);
+  if (call.callsTeamId === null) return;
+  const backed = ctx.name(call.callsTeamId);
+  const other = ctx.name(call.callsTeamId === call.homeTeamId ? call.awayTeamId : call.homeTeamId);
+  for (const sentence of sentences(line)) {
+    if (!sentence.includes(other) || NEGATION.test(sentence)) continue;
+    if (winsFor(sentence, other, backed) || new RegExp(`${BACKING.source}\\s+${escapeRegExp(other)}`, "iu").test(sentence)) {
+      fault(key, "argues for the other side", "hard", sentence);
+    }
+  }
+}
+
+/** Whether a win the sentence speaks of is `side`'s: the side named nearest before it, so "X to beat Y" is X's. */
+function winsFor(sentence: string, side: string, rival: string): boolean {
+  return [...sentence.matchAll(WIN)].some(({ index }) => sentence.lastIndexOf(side, index) > sentence.lastIndexOf(rival, index));
+}
+
+/** A called tie is one side, the other side, then the call: a sentence with its reason, never a name alone. */
+function shapeRules(key: string, line: string, sides: ReadonlySet<string>, fault: Report): void {
+  const paragraphs = line.split(/\n\s*\n/u).map((paragraph) => paragraph.trim()).filter((paragraph) => paragraph !== "");
+  if (paragraphs.length !== LIMITS.paragraphs) {
+    fault(key, "not one side, the other, then the call", "send-back", `${paragraphs.length} paragraphs`);
+    return;
+  }
+  const opensOn = (paragraph: string) =>
+    [...sides].map((side) => ({ side, at: mentionAt(paragraph, side) })).filter(({ at }) => at !== -1).sort((a, b) => a.at - b.at)[0]?.side ?? null;
+  const [first, second, verdict] = paragraphs;
+  if (opensOn(first) === null || opensOn(first) === opensOn(second)) fault(key, "the second paragraph not on the other side", "send-back", excerpt(second));
+  if (wordCount(verdict) < LIMITS.callWords) fault(key, "a call with no reason", "send-back", verdict);
+}
+
+/** `opening` names the section his opening is filed under: the predictions' intro, the rankings' opening. */
+export function columnRules(intro: string, prose: readonly [string, string][], ctx: CheckContext, fault: Report, opening = "intro"): void {
+  const [least, most, words] = LIMITS.intro;
+  const count = sentences(intro).length;
+  if (count < least || count > most || wordCount(intro) > words) fault(opening, "length", "send-back", lengthOf(intro));
+  for (const word of fallEchoes(intro, ctx.past.slice(0, LIMITS.recentColumns), ctx.facts)) fault(opening, "your fall told with a picture already printed", "send-back", word);
+  const all = prose.map(([, text]) => text).join(" ");
+  if (wordCount(all) > LIMITS.column) fault("column", "length", "send-back", `${wordCount(all)} words`);
+  if ((all.match(/\?/gu) ?? []).length > LIMITS.questions) fault("column", "more than two questions", "send-back", "?");
+  for (const over of overused(all, LAWRO_CAPPED)) fault("column", "a habit used too often", "send-back", over);
+  // Five ties in one column, and a reader hears the same words coming round.
+  const said = new Map<string, string>();
+  for (const [section, text] of prose) {
+    const echo = [...ngrams(text, LIMITS.echo, ctx.names)].find((gram) => said.has(gram) && said.get(gram) !== section);
+    if (echo !== undefined) fault(section, "the same phrase as another tie", "send-back", echo);
+    for (const gram of ngrams(text, LIMITS.echo, ctx.names)) if (!said.has(gram)) said.set(gram, section);
+  }
+  const before = new Set(ctx.past.slice(0, LIMITS.recentColumns).flatMap((text) => [...ngrams(text, LIMITS.repeat, ctx.names)]));
+  for (const [section, text] of prose) {
+    const repeated = [...ngrams(text, LIMITS.repeat, ctx.names)].find((gram) => before.has(gram));
+    if (repeated !== undefined) fault(section, "a phrase from a recent column", "send-back", repeated);
+  }
+  const average = mean(sentences(all).map(wordCount)) ?? 0;
+  if (average > LIMITS.averageWords) fault("column", "long sentences on average", "warn", `${average.toFixed(1)} words`);
+}
+
+/** The sub-editor's pencil: the trivial slips fixed rather than sent back. */
+export function pencil(text: string): string {
+  return text
+    .replace(/(\d)\s*[–—]\s*(\d)/gu, "$1-$2")
+    .replace(/\s+[—–]\s+|\s+--\s+|—/gu, ", ")
+    .replace(/!/gu, ".")
+    .replace(/(^|[.?]\s+)So,\s+(\p{Ll})/gu, (_, lead: string, next: string) => `${lead}${next.toUpperCase()}`);
+}

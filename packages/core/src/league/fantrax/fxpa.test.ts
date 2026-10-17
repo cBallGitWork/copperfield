@@ -1,0 +1,147 @@
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { htmlPage, serve, statusOnly } from "../../http/fakeFetch";
+import { FantraxError, errorEnvelope, pageErrorEnvelope, responseErrorEnvelope } from "./errors";
+import { fxpaRead, unwrapFxpa } from "./fxpa";
+import pageError from "./__fixtures__/fxpaPageError.json";
+
+afterEach(() => vi.useRealTimers());
+
+// The fxpa envelope, recorded by asking the real league for its commissioner hub without a session.
+
+describe("pageErrorEnvelope", () => {
+  it("reads a refusal Fantrax served with HTTP 200", () => {
+    const error = pageErrorEnvelope(pageError);
+    expect(error?.code).toBe("WARNING_NOT_LOGGED_IN");
+    expect(error?.message).toContain("logged in");
+  });
+
+  // Two surfaces, two shapes, two detectors: neither may start accepting the other's failures.
+  it("does NOT catch an fxea error, and fxea's does not catch this one", () => {
+    const fxea = { error: { code: "NO_TEAMS", message: "no teams" } };
+
+    expect(errorEnvelope(fxea)).not.toBeNull();
+    expect(pageErrorEnvelope(fxea)).toBeNull();
+
+    expect(pageErrorEnvelope(pageError)).not.toBeNull();
+    expect(errorEnvelope(pageError)).toBeNull();
+  });
+
+  // Reaching for fxea's `.message` would report every fxpa failure as "no message".
+  it("takes the human text from `text`, which is not what fxea calls it", () => {
+    expect(pageError).not.toHaveProperty("pageError.message");
+    expect(pageErrorEnvelope({ pageError: { code: "X", text: "the reason" } })?.message).toBe(
+      "the reason",
+    );
+  });
+
+  it("ignores a healthy body and anything that is not one", () => {
+    expect(pageErrorEnvelope({ responses: [{ data: {} }] })).toBeNull();
+    expect(pageErrorEnvelope(null)).toBeNull();
+    expect(pageErrorEnvelope("nope")).toBeNull();
+    expect(pageErrorEnvelope({ pageError: { text: "no code" } })).toBeNull();
+  });
+});
+
+describe("responseErrorEnvelope", () => {
+  it("reads a refusal aimed at one message in the batch", () => {
+    const error = responseErrorEnvelope({ errors: [{ code: "MISSING_PARAM", msg: "need one" }] });
+    expect(error).toEqual({ code: "MISSING_PARAM", message: "need one" });
+  });
+
+  it("is silent on a healthy response and an empty error list", () => {
+    expect(responseErrorEnvelope({ data: { table: {} } })).toBeNull();
+    expect(responseErrorEnvelope({ errors: [] })).toBeNull();
+  });
+});
+
+describe("unwrapFxpa", () => {
+  it("returns the payload", () => {
+    expect(unwrapFxpa("one", { responses: [{ data: { a: 1 } }] })).toEqual({ a: 1 });
+  });
+
+  it("throws the request-level refusal", () => {
+    expect(() => unwrapFxpa("getCommissionerHubInfo", pageError)).toThrow(FantraxError);
+    expect(() => unwrapFxpa("getCommissionerHubInfo", pageError)).toThrow(/WARNING_NOT_LOGGED_IN/);
+    expect(() => unwrapFxpa("getCommissionerHubInfo", pageError)).toThrow(expect.objectContaining({ kind: "refused" }));
+  });
+
+  // The envelope is fine and the message is not: checking only the top level reads a refusal as an empty result.
+  it("throws for a message that failed inside an otherwise healthy response", () => {
+    const body = { responses: [{ errors: [{ code: "MISSING_PARAM", msg: "no" }] }] };
+    expect(() => unwrapFxpa("read", body)).toThrow(/MISSING_PARAM/);
+  });
+
+  it("refuses a body with no responses rather than returning nothing", () => {
+    expect(() => unwrapFxpa("x", {})).toThrow(/NO_RESPONSES/);
+    expect(() => unwrapFxpa("x", null)).toThrow(/NO_RESPONSES/);
+    expect(() => unwrapFxpa("x", { responses: [] })).toThrow(/NO_RESPONSES/);
+    expect(() => unwrapFxpa("x", {})).toThrow(expect.objectContaining({ kind: "malformed" }));
+  });
+
+  // Handing back null here let a mapper find out, as a TypeError on its first field.
+  it("refuses a response with neither data nor errors", () => {
+    for (const response of [{}, { data: null }, null]) {
+      const read = () => unwrapFxpa("getStandings", { responses: [response] });
+      expect(read).toThrow(FantraxError);
+      expect(read).toThrow(expect.objectContaining({ code: "NO_DATA", kind: "malformed" }));
+    }
+  });
+
+  it("returns a payload that is present but empty", () => {
+    expect(unwrapFxpa("x", { responses: [{ data: {} }] })).toEqual({});
+  });
+});
+
+describe("fxpaRead", () => {
+  const LEAGUE = "league-under-test";
+
+  it("reads a web page in place of JSON as a FantraxError, not as a SyntaxError", async () => {
+    serve(htmlPage);
+    const error = await fxpaRead(LEAGUE, "getStandings").catch((e: unknown) => e);
+    expect(error).toBeInstanceOf(FantraxError);
+    expect(error).toMatchObject({
+      method: "getStandings",
+      code: "NOT_JSON",
+      message: expect.stringContaining("Fantrax getStandings: NOT_JSON — 200 text/html"),
+      kind: "malformed",
+    });
+  });
+
+  it("asks again when Fantrax is busy, since a read is safe to repeat", async () => {
+    vi.useFakeTimers();
+    const count = serve(statusOnly(503), () => Response.json({ responses: [{ data: { a: 1 } }] }));
+    const pending = fxpaRead(LEAGUE, "getStandings");
+    await vi.runAllTimersAsync();
+    expect(await pending).toEqual({ a: 1 });
+    expect(count.calls).toBe(2);
+  });
+
+  it("reads a 5xx that outlasts the retries as Fantrax unreachable", async () => {
+    vi.useFakeTimers();
+    serve(statusOnly(503));
+    const pending = fxpaRead(LEAGUE, "getStandings").catch((e: unknown) => e);
+    await vi.runAllTimersAsync();
+    expect(await pending).toMatchObject({ code: "503", kind: "unreachable" });
+  });
+
+  it("reads a 404 as a Fantrax refusal", async () => {
+    serve(statusOnly(404));
+    const error = await fxpaRead(LEAGUE, "getStandings").catch((e: unknown) => e);
+    expect(error).toBeInstanceOf(FantraxError);
+    expect(error).toMatchObject({ code: "404", kind: "refused" });
+  });
+});
+
+describe("fxpaRead with a session", () => {
+  it("sends a session call once, even when Fantrax is busy, since it may be a write", async () => {
+    vi.useFakeTimers();
+    const count = serve(statusOnly(503), () => Response.json({ responses: [{ data: { a: 1 } }] }));
+    const error = await fxpaRead("league-under-test", "confirmOrExecuteTeamRosterChanges", {}, "cookie").catch((e: unknown) => e);
+    expect(error).toMatchObject({ code: "503" });
+    expect(count.calls).toBe(1);
+  });
+
+  it("refuses any method off the allow-list before a request is made", async () => {
+    await expect(fxpaRead("league", "deleteLeague", {}, "cookie")).rejects.toMatchObject({ code: "NOT_ALLOWED" });
+  });
+});

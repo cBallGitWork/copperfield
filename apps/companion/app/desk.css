@@ -1,0 +1,671 @@
+/* Championship Manager's bevel and the plates cut from it; a bevel's colour is a chrome slot, never the accent.
+   No bevel on a repeating row, or on a `<th>`/`<td>`: collapsed borders eat its edges, so bevel a block inside.
+   A plate owns its ink: a `text-*` on one lands under the contrast floor. */
+
+/* A two-pixel bevel, light top-left and dark bottom-right; 55% because at 30% the light edge is 1.34:1 and vanishes. */
+.cm-bevel,
+.cm-bevel-pressed,
+.cm-tab,
+.cm-titlebar {
+  /* The chrome face goes on the plate, so a new bevelled thing is in it without anyone remembering. */
+  font-family: var(--font-chrome);
+  --cm-face: var(--color-face);
+  --cm-light: color-mix(in oklch, var(--cm-face), white 55%);
+  --cm-dark: color-mix(in oklch, var(--cm-face), black 55%);
+  background: var(--cm-face);
+  color: var(--color-bg);
+  border: 2px solid;
+  border-color: var(--cm-light) var(--cm-dark) var(--cm-dark) var(--cm-light);
+}
+
+/* Pressed: the light and dark edges swap corners; the sorted column head is drawn this way, and a pressed toggle. */
+.cm-bevel-pressed,
+.cm-bevel[aria-pressed="true"] {
+  border-color: var(--cm-dark) var(--cm-light) var(--cm-light) var(--cm-dark);
+}
+
+/* A dropdown is the plate with CM's ▼ in its ink; WebKit's own menulist ignores `min-height` and the bevel. */
+select.cm-bevel {
+  appearance: none;
+  padding-right: 1.75rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(-45deg, transparent 50%, currentColor 50%);
+  background-size: 0.3125rem 0.3125rem;
+  background-position:
+    right 0.8125rem center,
+    right 0.5rem center;
+  background-repeat: no-repeat;
+}
+
+/* The royal-blue plate: the title bar and the tab strip under it. */
+.cm-tab,
+.cm-titlebar {
+  --cm-face: var(--color-chrome);
+  color: var(--color-ink);
+}
+
+/* The one primary action on a screen (the planner's Save): the royal-blue plate with its word in the accent. */
+.cm-bevel.cm-primary {
+  --cm-face: var(--color-chrome);
+  color: var(--color-accent);
+}
+
+/* On the desk the title bar is the biggest thing on the screen, about three rows tall. */
+@media (min-width: 64rem) {
+  .cm-titlebar {
+    min-height: 6rem;
+  }
+}
+
+/* The title's soft shadow, on display type only and in `em` so it scales with the title. Never on `.paper`. */
+.cm-title {
+  text-shadow: 0.06em 0.06em 0.07em rgb(0 0 0 / 0.45);
+}
+
+/* A tab is 44px under a thumb; set on the plate so every strip's tabs agree. */
+.cm-tab {
+  min-height: 2.75rem;
+}
+
+@media (min-width: 64rem) {
+  /* On the desk a tab strip is chunky, about twice a row, not the tap floor. */
+  .cm-tab {
+    min-height: 3.5rem;
+  }
+}
+
+/* A second strip of tabs under a screen's own: 36px on the desk, so it does not compete with the first.
+   A class because a `min-h-*` utility cannot shrink a `.cm-tab`: same specificity, and this file loads last. */
+.cm-tab-quiet {
+  min-height: 2.75rem;
+}
+
+/* A view switch on the match screens: 36px at every width (PRODUCT's third tap exception). */
+.cm-tab-compact {
+  min-height: 2.25rem;
+}
+
+/* Under a thumb a tab paints a 36px plate inside its 44px target; the bevel and the current mark are redrawn inset. */
+@media (width < 64rem) {
+  .cm-tab:not(.cm-tab-compact, .cm-thumbrail > *) {
+    border-width: 0.25rem 0;
+    border-color: transparent;
+    background-clip: padding-box;
+    box-shadow: inset 2px 2px 0 var(--cm-light), inset -2px -2px 0 var(--cm-dark);
+  }
+  .cm-tab:is([aria-current="page"], [aria-pressed="true"]):not(.cm-tab-compact, .cm-thumbrail > *) {
+    border-color: transparent;
+    box-shadow: inset 0 0 0 2px var(--color-accent);
+  }
+}
+
+@media (min-width: 64rem) {
+  .cm-tab-quiet {
+    min-height: 2.25rem;
+  }
+}
+
+/* The tab you are on, or a toggle's pressed view: the accent on label and border; the plate keeps its colour. */
+.cm-tab:is([aria-current="page"], [aria-pressed="true"]) {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* A tapped plate whose page is still on its way (shell/Pending), held down until it lands: no route draws a
+   loading frame, so the old page stays up meanwhile. Pressed, as `.cm-bevel-pressed` swaps the edges. */
+.cm-tab:not([aria-current="page"]):has(> [data-pending]) {
+  border-color: var(--cm-dark) var(--cm-light) var(--cm-light) var(--cm-dark);
+}
+@media (width < 64rem) {
+  .cm-tab:not([aria-current="page"], .cm-tab-compact):has(> [data-pending]) {
+    box-shadow: inset 2px 2px 0 var(--cm-dark), inset -2px -2px 0 var(--cm-light);
+  }
+}
+
+/* The phone's thumb rail: CM's rail laid along the foot (DESIGN §2). Opaque navy lit one step at its
+   edge, the rail's boundary rule turned to the top, and the safe-area inset inside the same ground. */
+.cm-thumbrail {
+  font-family: var(--font-chrome);
+  color: var(--color-ink);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklch, var(--color-chrome), var(--color-bg) 62%),
+    var(--color-bg) 70%
+  );
+  box-shadow: inset 0 1px 0 var(--cm-rail-edge);
+}
+
+/* The rail's edge line along the bar's top. */
+:root {
+  --cm-rail-edge: color-mix(in oklch, var(--color-chrome), white 20%);
+}
+
+/* The tab you are on: glyph and word in the accent, and the rail's accent edge, 32px, on its top. A tapped tab
+   whose page is on its way (shell/Pending) is drawn so at once, and the tab being left lets go. */
+.cm-thumbrail > :is([aria-current="page"], :has(> [data-pending])) {
+  color: var(--color-accent);
+}
+.cm-thumbrail:has([data-pending]) > [aria-current="page"]:not(:has(> [data-pending])) {
+  color: inherit;
+}
+.cm-thumbrail:has([data-pending]) > [aria-current="page"]:not(:has(> [data-pending]))::before {
+  display: none;
+}
+.cm-thumbrail > :is([aria-current="page"], :has(> [data-pending]))::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50%;
+  width: 2rem;
+  height: 3px;
+  background: var(--color-accent);
+}
+
+/* Under the installed iPhone app's white clock, iOS 26's scroll-edge effect: a blur and a shade that fade to nothing,
+   so the ground runs on to the top and a page scrolled beneath goes soft under the clock. No background-color, which
+   would read as a bar. As tall as the status bar, which is nothing anywhere else. */
+.cm-statusbar {
+  position: fixed;
+  z-index: 60;
+  inset-inline: 0;
+  top: 0;
+  height: var(--safe-top);
+  pointer-events: none;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(var(--shade) / 0.5),
+    rgb(var(--shade) / 0.3) 55%,
+    transparent
+  );
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  mask-image: linear-gradient(to bottom, black 60%, transparent);
+}
+
+/* The shade's ink, as RGB channels: black over the photograph. */
+:root {
+  --shade: 0 0 0;
+}
+
+/* Pull to refresh (shell/PullToRefresh): a plate that comes down from the top with the finger, its arrow turning,
+   and turning on its own until the reloaded page replaces it. Over both registers, below the safe area. */
+.cm-pull {
+  position: fixed;
+  z-index: 60;
+  top: var(--safe-top);
+  left: 50%;
+  translate: -50% calc(var(--pull) - 100%);
+  pointer-events: none;
+}
+.cm-pull svg {
+  rotate: var(--turn);
+}
+.cm-pull[data-refreshing] svg {
+  animation: pull-turn 800ms linear infinite;
+}
+@keyframes pull-turn {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-pull[data-refreshing] svg {
+    animation: none;
+  }
+}
+
+
+/* A chosen index tile keeps its white word (the accent is 3.7:1 on the ramp's top) and gains an accent edge. */
+.cm-index[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px var(--color-accent);
+}
+
+/* Unread mail: a square cyan plate (the derived-reading slot) knocked out of the envelope's corner. */
+.cm-unread {
+  position: absolute;
+  left: 1rem;
+  top: -0.375rem;
+  min-width: 0.875rem;
+  height: 0.875rem;
+  padding-inline: 3px;
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  line-height: 0.875rem;
+  text-align: center;
+  color: var(--color-bg);
+  background: var(--color-info);
+  box-shadow: 0 0 0 2px var(--color-bg);
+}
+
+/* Three rings when mail arrives while the app is open, then still; never for a count already there. */
+.cm-unread-arriving {
+  animation: unread-arrive 0.8s ease-out 3;
+}
+@keyframes unread-arrive {
+  from { box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 2px var(--color-info); }
+  to { box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 10px transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-unread-arriving {
+    animation: none;
+  }
+}
+
+/* CM's index cell: the row's number in a blue block down a table's left, its blue one gradient down the whole page.
+   `background-attachment: fixed` gives each chip its slice of one viewport gradient; watch it for iOS Safari jank.
+   The ink must clear its floor at every point on the ramp, since a chip may land anywhere on it. */
+.cm-index {
+  /* A team's screens re-point `--cm-index` to the manager's colour; elsewhere it is the deep blue. */
+  --cm-index-face: var(--cm-index, var(--color-index));
+  /* Not the shorthand: `sweep.mjs` and `groundfit.mjs` read `background-color`, the fallback where `fixed` fails. */
+  background-color: var(--cm-index-face);
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, white 22%, var(--cm-index-face)),
+    var(--cm-index-face) 55%,
+    color-mix(in oklab, black 45%, var(--cm-index-face))
+  );
+  background-attachment: fixed;
+  color: var(--cm-index-ink, var(--color-ink));
+  box-shadow: inset -1px 0 0 var(--color-bg);
+  /* The block owns its text's weight and shadow, like a plate its ink; `layout.tsx` loads the 800 weight for it. */
+  font-weight: 800;
+  text-shadow: 0.04em 0.05em 0.05em rgb(0 0 0 / 0.55);
+}
+
+/* The size is layered so a `text-*` utility can override it (`news/page.tsx` does); the unlayered weight cannot be. */
+@layer components {
+  .cm-index {
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+  }
+
+  @media (min-width: 64rem) {
+    .cm-index {
+      font-size: var(--text-base);
+      line-height: var(--text-base--line-height);
+    }
+  }
+}
+
+:root {
+  /* The grey face's two bevel edges, for what cannot carry a plate's own `--cm-face`: the bar's parts and the gauge. */
+  --face-light: color-mix(in oklch, var(--color-face), white 55%);
+  --face-dark: color-mix(in oklch, var(--color-face), black 55%);
+}
+
+/* CM's scrollbar, saying a list runs past its box: a grey channel, a raised thumb and an arrow at each end.
+   `::-webkit-scrollbar` misses iOS, so a phone's sideways board draws its own (`.cm-board`). */
+.cm-scroll {
+  /* No `scrollbar-color` here: Chrome lets it override the `::-webkit-scrollbar` pseudo-elements below. */
+}
+
+/* The vertical bar's gutter, always reserved so the bar shows before anyone scrolls; sideways boards leave it off. */
+.cm-scroll-y {
+  scrollbar-gutter: stable;
+}
+
+
+/* `height` sizes the horizontal bar; without it a sideways board gets an overlay that fades. */
+.cm-scroll::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+}
+
+.cm-scroll::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  box-shadow: inset 1px 0 0 var(--face-dark);
+}
+
+.cm-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-face);
+  border: 2px solid;
+  border-color: var(--face-light)
+    var(--face-dark)
+    var(--face-dark)
+    var(--face-light);
+}
+
+/* One arrow at each end, as CM has, rather than a pair at the bottom. */
+.cm-scroll::-webkit-scrollbar-button:single-button {
+  background: var(--color-face);
+  border: 2px solid;
+  border-color: var(--face-light)
+    var(--face-dark)
+    var(--face-dark)
+    var(--face-light);
+  height: 1rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.5rem;
+}
+
+/* The fill is `--color-bg` written out: a data URI cannot read a custom property. Change with the token. */
+.cm-scroll::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path d='M4 1 L7 6 L1 6 Z' fill='%23091227'/></svg>");
+}
+
+.cm-scroll::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path d='M4 7 L1 2 L7 2 Z' fill='%23091227'/></svg>");
+}
+
+/* The same arrows on their side, or a sideways bar draws blank buttons. */
+.cm-scroll::-webkit-scrollbar-button:single-button:horizontal:decrement {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path d='M1 4 L6 1 L6 7 Z' fill='%23091227'/></svg>");
+}
+
+.cm-scroll::-webkit-scrollbar-button:single-button:horizontal:increment {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path d='M7 4 L2 7 L2 1 Z' fill='%23091227'/></svg>");
+}
+
+/* Firefox only: Chrome and Safari match the WebKit selector and skip this. */
+@supports not selector(::-webkit-scrollbar) {
+  .cm-scroll {
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-face) var(--color-bg);
+  }
+}
+
+/* A sideways board's own cues under a thumb, set by `ScrollBoard`: iOS draws no bar for `.cm-scroll`, so the
+   board draws CM's. Nothing shows until the board is known to overflow, so a board that fits never flashes one. */
+.cm-board-fade,
+.cm-board-gauge,
+.cm-board-head {
+  display: none;
+}
+
+@media (width < 64rem) {
+  /* More to the right: a fade over the last figures; taps pass through it to the figure underneath. */
+  .cm-board[data-more] .cm-board-fade {
+    display: block;
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    z-index: 20;
+    width: 1.5rem;
+    pointer-events: none;
+    background: linear-gradient(to left, var(--color-surface), transparent);
+  }
+
+  /* The gauge: CM's bar cut to its channel and bevelled thumb, docked above the rail while the board is on screen,
+     so a 100-row board shows where it sits sideways without scrolling to its foot. Read-only: the board scrolls. */
+  .cm-board[data-wide] .cm-board-gauge {
+    display: block;
+    position: sticky;
+    bottom: var(--thumbrail);
+    z-index: 20;
+    height: 0.375rem;
+    background: var(--color-bg);
+    pointer-events: none;
+  }
+
+  .cm-board[data-wide] .cm-board-gauge::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: var(--gauge-left);
+    width: var(--gauge-width);
+    background: var(--color-face);
+    box-shadow: inset 1px 1px 0 var(--face-light),
+      inset -1px -1px 0 var(--face-dark);
+  }
+
+  /* A long board's head, copied to the top of the screen once the real one has scrolled away (`stickyHead.ts`).
+     No height of its own, so pinning it moves nothing; the copy hangs below it on the board's ground. */
+  .cm-board[data-headless] .cm-board-head {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    height: 0;
+  }
+
+  .cm-board-head > div {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: 0 1px 0 var(--color-line);
+  }
+
+  /* The pinned lead casts CM's hard drop once the figures have slid under it. */
+  .cm-board[data-scrolled] .cm-lead {
+    box-shadow: 3px 0 0 rgb(0 0 0 / 0.4);
+  }
+
+  /* The gauge replaces the board's own bar at its foot, and only once it is drawn: before that the bar stays. */
+  .cm-board[data-wide] .cm-scroll {
+    scrollbar-width: none;
+  }
+
+  .cm-board[data-wide] .cm-scroll::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* CM's state box, the red `Inj` beside a name; never CM's yellow, which here means yours.
+   Filled when certain, outlined when a doubt: the shape carries it, not a second red. */
+.cm-state {
+  background: var(--color-bad);
+  color: var(--color-bg);
+}
+
+.cm-state-doubt {
+  background: none;
+  color: var(--color-bad);
+  box-shadow: inset 0 0 0 1px var(--color-bad);
+}
+
+/* On a selected row's league-red ground (the News list) the red box is 2.05:1, so ink draws it instead. */
+.cm-row[aria-current="true"] .cm-state {
+  background: var(--color-ink);
+  color: var(--color-league-deep);
+}
+
+.cm-row[aria-current="true"] .cm-state-doubt {
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-ink);
+}
+
+/* How likely a man is to miss, as a 16% wash of his doubt band over the row; a solid band would fail the row's ink. */
+.cm-doubt-out {
+  background-color: color-mix(in oklab, var(--color-doubt-out) 16%, var(--color-surface));
+}
+
+.cm-doubt-major {
+  background-color: color-mix(in oklab, var(--color-doubt-major) 16%, var(--color-surface));
+}
+
+.cm-doubt-slight {
+  background-color: color-mix(in oklab, var(--color-doubt-slight) 16%, var(--color-surface));
+}
+
+/* A greyed row on a wash greys to `--color-muted`: `--color-faint` reads 4.1:1 on any wash. */
+.cm-doubt-out.cm-out,
+.cm-doubt-out.cm-out *,
+.cm-doubt-major.cm-out,
+.cm-doubt-major.cm-out *,
+.cm-doubt-slight.cm-out,
+.cm-doubt-slight.cm-out * {
+  color: var(--color-muted);
+}
+
+/* The same step for a quiet figure or a loss on a wash: faint reads 3.73:1 and the red 3.60 on the slight band. */
+:is(.cm-doubt-out, .cm-doubt-major, .cm-doubt-slight) .text-faint {
+  color: var(--color-muted);
+}
+
+:is(.cm-doubt-out, .cm-doubt-major, .cm-doubt-slight) :is(.text-bad, .cm-lit-bad) {
+  color: var(--color-bad-wash);
+}
+
+/* The outlined state box takes the page ground on a wash, where its red is 3.6:1. */
+.cm-doubt-out .cm-state-doubt,
+.cm-doubt-major .cm-state-doubt,
+.cm-doubt-slight .cm-state-doubt {
+  background: var(--color-bg);
+}
+
+/* A pitch card in its doubt band, wash and name plate alike (`--doubt` set by `PitchMarker`); 75% so yellow
+   still reads yellow over the grass. Unlayered, so it beats `bg-bg/45` on the same element. */
+.cm-card-doubt {
+  background-color: color-mix(in oklab, var(--doubt) 75%, transparent);
+}
+
+.cm-card-doubt > .cm-bevel {
+  --cm-face: var(--doubt);
+}
+
+/* The state box keeps its own ink on a greyed row, which `.cm-out *` would otherwise reach. */
+.cm-out .cm-state {
+  color: var(--color-bg);
+}
+
+.cm-out .cm-state-doubt {
+  color: var(--color-bad);
+}
+
+/* A man who cannot be picked greys to `--color-faint`; not an opacity, which would sink his figures under the floor. */
+.cm-out,
+.cm-out * {
+  color: var(--color-faint);
+}
+
+/* A match board's standouts keep their ink in a greyed row (DESIGN §3, "Peak"). */
+.cm-out .cm-lit-best {
+  color: var(--color-peak);
+}
+
+.cm-out .cm-lit-good {
+  color: var(--color-accent);
+}
+
+.cm-out .cm-lit-bad {
+  color: var(--color-bad);
+}
+
+/* A greyed tab: `--color-faint` is 2.35:1 on `--color-chrome`. */
+.cm-tab.cm-out,
+.cm-tab.cm-out * {
+  color: var(--color-faint-plate);
+}
+
+/* A greyed index block (`--color-faint` is 2.97:1 there); its own rule because its blue differs from the tab's. */
+.cm-index.cm-out,
+.cm-out .cm-index,
+.cm-out .cm-index * {
+  color: var(--color-faint-plate);
+}
+
+/* A chip is a plate and does not dim with its row; its ink comes through a variable because its tones differ. */
+.cm-out .cm-chip,
+.cm-out .cm-chip * {
+  color: var(--cm-chip-ink, var(--color-ink));
+}
+
+/* CM's panel: the grey is the frame only; the fill is `--color-surface`, the ground every ink was measured on. */
+.cm-panel {
+  --cm-face: var(--color-face);
+  --cm-light: color-mix(in oklch, var(--cm-face), white 55%);
+  --cm-dark: color-mix(in oklch, var(--cm-face), black 55%);
+  /* Translucent so the photograph shows faintly through; at 88% the ink still reads as on `--color-surface`. */
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  /* No `color` here: this file loads after the utilities, so it would beat a `text-*` on the same element. */
+  border: 2px solid;
+  /* A flat dark edge, no bevel: CM bevels controls, not panels; the edge parts the plate from the photograph. */
+  border-color: var(--cm-dark);
+}
+
+/* A panel about a doubt, edged in the doubt's red; here, as `border-bad` loses to the edge above. */
+.cm-panel.cm-edge-bad {
+  border-color: var(--color-bad);
+}
+
+/* A list's rows are ruled in the dark step, the same rule tables use. */
+.cm-rows > * {
+  border-bottom: 1px solid var(--color-bg);
+}
+
+/* The index block on a club or manager colour: its ramp runs away from the ink `inkOn` chose against the flat face,
+   and it never greys, since `--color-faint-plate` is measured on our blue only.
+   A class, not a utility: `.cm-index` is unlayered and beats `@layer utilities`. */
+.cm-index-scoped .cm-index {
+  background-image: none;
+  /* White ink darkens the ramp and dark ink lightens it; the line above is the fallback without relative colour. */
+  background-image: linear-gradient(
+    180deg,
+    var(--cm-index-face),
+    color-mix(in oklab, oklch(from var(--cm-index-ink, var(--color-ink)) calc(1 - l) 0 0) 45%, var(--cm-index-face))
+  );
+}
+.cm-index-scoped .cm-out .cm-index,
+.cm-index-scoped .cm-out .cm-index *,
+.cm-index-scoped .cm-index.cm-out,
+.cm-index-scoped .cm-index.cm-out * {
+  color: var(--cm-index-ink, var(--color-ink));
+}
+
+/* Row height: a 44px tap target under a thumb, a 28px line on the desk; a control never relaxes.
+   `.cm-row` marks a LIST row only, never a control or a panel; unlayered, it beats `min-h-*` and `py-*` from `lg`.
+   The marks' sizes live here because an inline `style` has no breakpoint. */
+:root {
+  --row-badge: 1.625rem;
+  --row-portrait: 2rem;
+  /* A table row's measured height, so a panel can be sized in rows. `--table-chrome` is a table's cost before its
+     first row, and leaves empty ground under the last, since its readers measure different boxes. */
+  --table-row: 2.8125rem;
+  --table-chrome: 4.75rem;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --table-row: 1.8125rem;
+  }
+}
+
+/* The Draft tab's tables run 36px rows under a thumb (PRODUCT.md), so their panels reserve that. */
+.cm-tight {
+  --table-row: 2.3125rem;
+}
+
+@media (min-width: 64rem) {
+  .cm-tight {
+    --table-row: 1.8125rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  /* On `.cm-row`, not `:root`, so the smaller marks reach only what a row contains. */
+  .cm-row {
+    min-height: 1.75rem;
+    padding-block: 0.125rem;
+    --row-badge: 1.25rem;
+    --row-portrait: 1.375rem;
+  }
+}
+
+/* Under a thumb a grey control paints a 32px plate inside its 44px target, so `tapfit` still measures 44;
+   the bevel is redrawn inset, and a field beside a plate slims with it. */
+@media (width < 64rem) {
+  :is(.cm-bevel, .cm-bevel-pressed).min-h-11,
+  .cm-panel.min-h-11:has(+ :is(.cm-bevel, .cm-bevel-pressed)) {
+    border-width: 0.375rem 0;
+    border-color: transparent;
+    background-clip: padding-box;
+    padding-block: 0.25rem;
+    align-content: center;
+  }
+  .cm-bevel.min-h-11 {
+    box-shadow: inset 2px 2px 0 var(--cm-light), inset -2px -2px 0 var(--cm-dark);
+  }
+  .cm-bevel-pressed.min-h-11,
+  .cm-bevel[aria-pressed="true"].min-h-11 {
+    box-shadow: inset 2px 2px 0 var(--cm-dark), inset -2px -2px 0 var(--cm-light);
+  }
+  .cm-panel.min-h-11:has(+ :is(.cm-bevel, .cm-bevel-pressed)) {
+    box-shadow: inset 0 0 0 2px var(--cm-dark);
+  }
+}

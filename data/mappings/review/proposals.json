@@ -1,0 +1,45 @@
+[
+  {
+    "fantraxId": "078gh",
+    "fantraxName": "Fred Heath",
+    "clubCode": "MUN",
+    "positionHint": "G",
+    "candidates": [
+      {
+        "fplCode": 547676,
+        "name": "Tyler Fredricson",
+        "score": 55
+      },
+      {
+        "fplCode": 576620,
+        "name": "Bendito Mantato",
+        "score": 40
+      },
+      {
+        "fplCode": 596047,
+        "name": "Chido Obi",
+        "score": 21
+      }
+    ],
+    "reason": "below-threshold"
+  },
+  {
+    "fantraxId": "078rd",
+    "fantraxName": "Lucas Pitt",
+    "clubCode": "LIV",
+    "positionHint": "D",
+    "candidates": [
+      {
+        "fplCode": 519440,
+        "name": "Wellity Lucky",
+        "score": 52
+      },
+      {
+        "fplCode": 586268,
+        "name": "Armin Pecsi",
+        "score": 47
+      }
+    ],
+    "reason": "below-threshold"
+  }
+]

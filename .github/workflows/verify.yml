@@ -1,0 +1,131 @@
+name: Verify
+
+# CLAUDE.md's "all four green before every commit", moved from discipline into
+# machinery. Push and pull_request rather than schedule because — as the capture
+# cron taught us — schedule fires only from the default branch, and this must go
+# red on a feature branch before anything merges.
+#
+# One trap to know rather than fix: the daily capture pushes with GITHUB_TOKEN,
+# which by design does not trigger other workflows. Capture commits will arrive
+# on main without a Verify run beside them. They touch only data/snapshots, so
+# that is acceptable, not accidental.
+#
+# **Pull requests only** (26 Sep 2026, costing the Actions bill): push and
+# pull_request ran every PR commit twice and every merge a third time, 717 of
+# September's 1,066 Verify minutes. A superseded run is cancelled for the same reason.
+
+# **Ready PRs only** (16 Oct 2026, Actions minutes spent by 16 Oct): a PR opens as a draft and Verify waits for
+# `gh pr ready`; docs-only changes never run it.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore:
+      - "docs/**"
+      - ".claude/**"
+      - "**/*.md"
+  workflow_dispatch:
+
+concurrency:
+  group: verify-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/node
+
+      # Cheapest failure first. `next build` stopped running ESLint at Next 16,
+      # so lint is its own gate and build proves the production render — it
+      # prerenders against live FPL and Fantrax, which is the point: a provider
+      # shape change should redden CI before it reaches a phone.
+      - run: npm test
+
+      - run: npm run typecheck
+
+      - run: npm run lint
+
+      - run: npm run build
+
+      # ROADMAP §6. The four gates above never once ask what the app does when
+      # Fantrax says `NO_TEAMS` — which is what our real league says to almost
+      # everything until 10 Oct, and which those views had been walked by hand
+      # exactly twice. Every route is dynamic, so one build serves any league and
+      # the id is a runtime choice. The leagues walked are the ones the archive
+      # records (`data/leagues/recorded.json`); no league is named here.
+      #
+      # Drafted and undrafted both run, and a drafted one has caught a real bug:
+      # a drafted league rendering "nobody has drafted" is what `edition.ts` did
+      # in August, and a check that only asserted the empty states would have
+      # passed it happily.
+      #
+      # `kill "$pid"` and not `kill %1`: job control is off in a non-interactive
+      # shell and `%1` would fail the step on a line that is only tidying up.
+      #
+      # **Every walk runs even when one fails, and that is the whole point of
+      # there being several.** Under `set -e` a failing `npm run smoke` inside the
+      # function aborted the step, so the second walk never happened — the same
+      # shape as the documented `smoke && shape-diff && bridge:check` chain,
+      # where a red first gate hides every gate behind it. On this step's first
+      # ever execution the real-league walk failed and the rehearsal walk — the
+      # half whose comment says it has caught a real bug — did not run at all.
+      #
+      # The status has to be captured explicitly. `walk ... || failed=1` does not
+      # work: `||` suspends `set -e` inside the function, so `walk` runs on to
+      # `sleep 1` and returns ITS status, which is always 0.
+      - name: Every view, against every recorded league
+        run: |
+          set -euo pipefail
+          walk() {
+            export FANTRAX_LEAGUE_ID="$1"
+            npm run start &
+            pid=$!
+            npm run smoke:wait
+            status=0
+            npm run smoke || status=$?
+            # `next start` renames its process to "next-server (v16.2.7)", so the
+            # `pkill -f "next start"` this line used to be matched NOTHING, and
+            # `kill "$pid"` reaches only the npm wrapper. The server outlived the
+            # walk.
+            kill "$pid" 2>/dev/null || true
+            pkill -f "next-server" 2>/dev/null || true
+            # And a server that outlives its walk is worse than one that will not
+            # die: the next `next start` fails with EADDRINUSE, `smoke:wait` is
+            # answered by the OLD server, and the second walk reports "10/10
+            # clean" having asked the first walk's app about the second walk's
+            # league. Reproduced locally — it passes, and it proves nothing.
+            for _ in $(seq 1 20); do
+              curl -sf -o /dev/null http://localhost:3000/ || break
+              sleep 1
+            done
+            if curl -sf -o /dev/null http://localhost:3000/; then
+              echo "::error::a server is still answering on :3000; the next walk would test it"
+              return 1
+            fi
+            return "$status"
+          }
+          failed=0
+          for league in $(jq -r '.leagues[].leagueId' data/leagues/recorded.json); do
+            walk "$league" || failed=1
+          done
+          exit "$failed"
+
+      # ROADMAP §6's last one. `npm run bridge` reports totals — 688 players, 120
+      # with no FPL counterpart — and has never answered the question that
+      # matters: is anybody's actual squad missing a footballer? Each unresolved
+      # rostered player is a hole in a squad view, and 78% coverage says nothing
+      # about whether any of the missing 22% is on a team.
+      #
+      # It does not rewrite the mapping, so it is safe on every push. A person's
+      # confirmed absence passes; only a stale bridge or the matcher's own guess
+      # fails.
+      - run: npm run bridge:check

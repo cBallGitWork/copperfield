@@ -1,0 +1,339 @@
+{
+  "displayedSelections": {
+    "displayedPeriod": 6,
+    "displayedFantasyTeamId": "l5kunst8msgbirdf"
+  },
+  "miscData": {
+    "autoSubsOrderingType": "USER",
+    "autoSubOrderMap": {
+      "06do9": 2,
+      "067ys": 3,
+      "06fv8": 1
+    },
+    "autoSubOrderMax": 4,
+    "applyToFuturePeriods": true,
+    "statusTotals": [
+      {
+        "total": 11,
+        "max": 11,
+        "name": "Active",
+        "id": "1"
+      },
+      {
+        "total": 3,
+        "max": 3,
+        "name": "Reserve",
+        "id": "2"
+      }
+    ]
+  },
+  "tables": [
+    {
+      "header": {
+        "cells": [
+          {
+            "key": "opponent"
+          },
+          {
+            "key": "fpts"
+          }
+        ]
+      },
+      "rows": [
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "070hl",
+            "shortName": "S. Lammens",
+            "posShortNames": "G"
+          },
+          "cells": [
+            {
+              "content": "TOT 1<br/>@MUN 1 F"
+            },
+            {
+              "content": "14"
+            }
+          ]
+        },
+        {
+          "statusId": "2",
+          "cells": [
+            {
+              "content": ""
+            },
+            {
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "header": {
+        "cells": [
+          {
+            "key": "opponent"
+          },
+          {
+            "key": "fpts"
+          }
+        ]
+      },
+      "rows": [
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "05nil",
+            "shortName": "L. Davis",
+            "posShortNames": "D"
+          },
+          "cells": [
+            {
+              "content": "FUL 1<br/>@IPS 2 F"
+            },
+            {
+              "content": "26"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "078qg",
+            "shortName": "A. Khalaili",
+            "posShortNames": "D"
+          },
+          "cells": [
+            {
+              "content": "NOT 1<br/>@CRY 3"
+            },
+            {
+              "content": "22"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "063zi",
+            "shortName": "Matheus Nunes",
+            "posShortNames": "D"
+          },
+          "cells": [
+            {
+              "content": "@LIV<br/>Sun 11:30AM"
+            },
+            {
+              "content": "10"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "cells": [
+            {
+              "content": ""
+            },
+            {
+              "content": ""
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "cells": [
+            {
+              "content": ""
+            },
+            {
+              "content": ""
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "05gcc",
+            "shortName": "K. Dewsbury-Hall",
+            "posShortNames": "M"
+          },
+          "cells": [
+            {
+              "content": "EVE 1<br/>@HUL 1"
+            },
+            {
+              "content": "27"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "04spw",
+            "shortName": "J. Garner",
+            "posShortNames": "M"
+          },
+          "cells": [
+            {
+              "content": "EVE 1<br/>@HUL 1"
+            },
+            {
+              "content": "16"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "05748",
+            "shortName": "Ismaila Sarr",
+            "posShortNames": "M,F"
+          },
+          "cells": [
+            {
+              "content": "NOT 1<br/>@CRY 3"
+            },
+            {
+              "content": "1"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "05l8q",
+            "shortName": "C. Palmer",
+            "posShortNames": "M"
+          },
+          "cells": [
+            {
+              "content": "BOU 1<br/>@CHE 5 F"
+            },
+            {
+              "content": "35"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "07877",
+            "shortName": "M. Sangaré",
+            "posShortNames": "M"
+          },
+          "cells": [
+            {
+              "content": "BRF 2<br/>@AVL 2 F"
+            },
+            {
+              "content": "20"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "07898",
+            "shortName": "G. García",
+            "posShortNames": "F"
+          },
+          "cells": [
+            {
+              "content": "FUL 1<br/>@IPS 2 F"
+            },
+            {
+              "content": "17"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "scorer": {
+            "scorerId": "061vq",
+            "shortName": "E. Haaland",
+            "posShortNames": "F"
+          },
+          "cells": [
+            {
+              "content": "@LIV<br/>Sun 11:30AM"
+            },
+            {
+              "content": "31"
+            }
+          ]
+        },
+        {
+          "statusId": "1",
+          "cells": [
+            {
+              "content": ""
+            },
+            {
+              "content": ""
+            }
+          ]
+        },
+        {
+          "statusId": "2",
+          "scorer": {
+            "scorerId": "06do9",
+            "shortName": "M. Kerkez",
+            "posShortNames": "D"
+          },
+          "cells": [
+            {
+              "content": "MCI<br/>Sun 11:30AM"
+            },
+            {
+              "content": "15"
+            }
+          ]
+        },
+        {
+          "statusId": "2",
+          "scorer": {
+            "scorerId": "067ys",
+            "shortName": "J. Hinshelwood",
+            "posShortNames": "M"
+          },
+          "cells": [
+            {
+              "content": "BHA 2<br/>@SUN 0 F"
+            },
+            {
+              "content": "13"
+            }
+          ]
+        },
+        {
+          "statusId": "2",
+          "scorer": {
+            "scorerId": "06fv8",
+            "shortName": "M. Kudus",
+            "posShortNames": "M,F"
+          },
+          "cells": [
+            {
+              "content": "TOT 1<br/>@MUN 1 F"
+            },
+            {
+              "content": "10"
+            }
+          ]
+        },
+        {
+          "statusId": "2",
+          "cells": [
+            {
+              "content": ""
+            },
+            {
+              "content": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "slug": "gw7-presser-2026-10-16",
+  "kind": "presser",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 7,
+  "gameweek": 7,
+  "filedAt": "2026-10-16T16:06:35.749Z",
+  "expiresAt": "2026-10-17T11:15:00.000Z",
+  "edition": "The Team Sheet",
+  "byline": "The Team Sheet",
+  "headline": "Friday Pressers",
+  "deck": "Branthwaite a doubt for Everton with a dead leg",
+  "body": "Jarrad Branthwaite is a doubt for Everton with a dead leg. The problem came early in their last match and has been assessed through the week.",
+  "subjects": [
+    "presser:gw7:2026-10-16"
+  ],
+  "image": null,
+  "face": {
+    "code": 480455,
+    "name": "Jarrad Branthwaite",
+    "clubId": 9,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "teamNews": [
+      {
+        "club": "Everton",
+        "code": 11,
+        "men": [
+          {
+            "name": "Jarrad Branthwaite",
+            "owner": "Atletico",
+            "status": "Doubt",
+            "note": "dead leg; assessed through the week"
+          }
+        ],
+        "quote": {
+          "text": "Jarrad [Branthwaite] had a little problem really early in the game, so we’ve been having a look at that in the week a little bit.",
+          "said": "David Moyes"
+        },
+        "fixture": {
+          "opponent": "Chelsea",
+          "home": true,
+          "kickoff": "2026-10-17T11:30:00Z"
+        }
+      },
+      {
+        "club": "Manchester City",
+        "code": 43,
+        "line": "Phil Foden is available after the international break and his red card, and rest is being considered for Enzo among the most heavily used players.",
+        "men": [
+          {
+            "name": "Phil Foden",
+            "owner": "Atletico",
+            "status": "FIT",
+            "note": "back after the red card against United; training well"
+          },
+          {
+            "name": "Enzo",
+            "owner": "Hazza",
+            "status": "Doubt",
+            "note": "rest under consideration after heavy minutes"
+          }
+        ],
+        "quote": {
+          "text": "During the international break and since the red card against United has been quite long, but he’s training well, doing well since we started, very positive, very good.",
+          "said": "Enzo Maresca"
+        },
+        "fixture": {
+          "opponent": "Ipswich Town",
+          "home": true,
+          "kickoff": "2026-10-17T14:00:00Z"
+        }
+      },
+      {
+        "club": "Nottingham Forest",
+        "code": 17,
+        "line": "Nicolò Savona is ruled out with a knee injury and Igor Jesus with a calf problem, while Morgan Gibbs-White could rejoin training on Saturday.",
+        "men": [
+          {
+            "name": "Nicolò Savona",
+            "status": "OUT",
+            "note": "knee"
+          },
+          {
+            "name": "Igor Jesus",
+            "status": "OUT",
+            "note": "calf"
+          }
+        ],
+        "quote": {
+          "text": "Morgan Gibbs-White is a doubt. He couldn’t train the entire week with us. It looks like he can join tomorrow’s session.",
+          "said": "Oliver Glasner"
+        },
+        "fixture": {
+          "opponent": "Arsenal",
+          "home": true,
+          "kickoff": "2026-10-18T15:30:00Z"
+        }
+      },
+      {
+        "club": "Brentford",
+        "code": 94,
+        "line": "Two players returning from different injuries have trained on the grass, with their workload to be judged on Saturday.",
+        "quote": {
+          "text": "Jannik and Kev have been on the grass this week and we’ll see what tomorrow brings in terms of how much they can do.",
+          "said": "Keith Andrews"
+        },
+        "fixture": {
+          "opponent": "Liverpool",
+          "home": true,
+          "kickoff": "2026-10-17T14:00:00Z"
+        }
+      },
+      {
+        "club": "Arsenal",
+        "code": 3,
+        "line": "Mikel Merino returns to contention.",
+        "men": [
+          {
+            "name": "Mikel Merino",
+            "status": "FIT",
+            "note": ""
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Piero Hincapié"
+          },
+          {
+            "name": "Christos Tzolis"
+          },
+          {
+            "name": "William Saliba",
+            "owner": "Bannan"
+          }
+        ],
+        "quote": {
+          "text": "Piero is evolving really well. Knowing his character and the way he pushes, I’m sure it’s not going to take long. But he will need probably another week or two.",
+          "said": "Mikel Arteta"
+        },
+        "fixture": {
+          "opponent": "Nottingham Forest",
+          "home": false,
+          "kickoff": "2026-10-18T15:30:00Z"
+        }
+      },
+      {
+        "club": "Chelsea",
+        "code": 8,
+        "line": "Reece James is out for several weeks, with no return expected before Christmas.",
+        "stillOut": [
+          {
+            "name": "Gittens"
+          }
+        ],
+        "quote": {
+          "text": "We don’t set timelines but he will be out for several weeks. It won’t be short. We will see after Christmas, time will tell.",
+          "said": "Xabi Alonso"
+        },
+        "fixture": {
+          "opponent": "Everton",
+          "home": false,
+          "kickoff": "2026-10-17T11:30:00Z"
+        }
+      },
+      {
+        "club": "Manchester United",
+        "code": 1,
+        "stillOut": [
+          {
+            "name": "Noussair Mazraoui"
+          },
+          {
+            "name": "Patrick Dorgu"
+          },
+          {
+            "name": "Manuel Ugarte"
+          },
+          {
+            "name": "Benjamin Sesko",
+            "owner": "Hazza"
+          }
+        ],
+        "fixture": {
+          "opponent": "Leeds United",
+          "home": false,
+          "kickoff": "2026-10-18T13:00:00Z"
+        }
+      },
+      {
+        "club": "Brighton & Hove Albion",
+        "code": 36,
+        "line": "Pascal Stuijk is given another day of recovery, with a decision on him due on Saturday.",
+        "stillOut": [
+          {
+            "name": "Mats Wieffer"
+          },
+          {
+            "name": "Yankuba Minteh",
+            "owner": "Atletico"
+          },
+          {
+            "name": "Femi Azeez"
+          },
+          {
+            "name": "Zadok Yohanna"
+          },
+          {
+            "name": "Evan Ferguson"
+          },
+          {
+            "name": "Stefanos Tzimas"
+          }
+        ],
+        "quote": {
+          "text": "With Yankuba Minteh and Mats Wieffer we could see quite a quick return.",
+          "said": "Fabian Hurzeler"
+        },
+        "fixture": {
+          "opponent": "Crystal Palace",
+          "home": true,
+          "kickoff": "2026-10-18T13:00:00Z"
+        }
+      },
+      {
+        "club": "Aston Villa",
+        "code": 7,
+        "line": "Ross Barkley is a doubt.",
+        "men": [
+          {
+            "name": "Ross Barkley",
+            "status": "Doubt",
+            "note": ""
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Ian Maatsen"
+          },
+          {
+            "name": "Amadou Onana"
+          },
+          {
+            "name": "Matteo Ruggeri",
+            "owner": "Dome"
+          }
+        ],
+        "fixture": {
+          "opponent": "Newcastle United",
+          "home": false,
+          "kickoff": "2026-10-17T16:30:00Z"
+        }
+      },
+      {
+        "club": "Leeds United",
+        "code": 2,
+        "line": "Joe Rodon misses gameweek 7 but is edging closer to team training.",
+        "stillOut": [
+          {
+            "name": "Joe Rodon"
+          }
+        ],
+        "quote": {
+          "text": "Joe will still miss this game on week seven so edging closer, good progress. Won’t be too long until team training but not yet.",
+          "said": "Daniel Farke"
+        },
+        "fixture": {
+          "opponent": "Manchester United",
+          "home": true,
+          "kickoff": "2026-10-18T13:00:00Z"
+        }
+      },
+      {
+        "club": "Fulham",
+        "code": 54,
+        "line": "Hugo Larsson's groin was being checked on Friday ahead of Saturday, and Antonee Robinson is ruled out.",
+        "men": [
+          {
+            "name": "Hugo Larsson",
+            "status": "Doubt",
+            "note": "groin; unsure for Saturday"
+          },
+          {
+            "name": "Antonee Robinson",
+            "owner": "Bru",
+            "status": "OUT",
+            "note": ""
+          }
+        ],
+        "quote": {
+          "text": "We have a small problem with Hugo – his groin. We will check today, but I’m not sure if he will be okay for tomorrow.",
+          "said": "Alvaro Arbeloa"
+        },
+        "fixture": {
+          "opponent": "Hull City",
+          "home": true,
+          "kickoff": "2026-10-17T14:00:00Z"
+        }
+      },
+      {
+        "club": "AFC Bournemouth",
+        "code": 91,
+        "line": "An MRI on Alex Scott came back better than expected, and his rehab can now progress, though he is not ready for Sunderland.",
+        "stillOut": [
+          {
+            "name": "Alex Scott"
+          },
+          {
+            "name": "Veljko Milosavljevic"
+          },
+          {
+            "name": "Julián Araujo"
+          },
+          {
+            "name": "Junior Kroupi"
+          }
+        ],
+        "quote": {
+          "text": "We can bring him back on the pitch to start and see how he responds, and we are not talking about six to eight weeks anymore.",
+          "said": "Marco Rose"
+        },
+        "fixture": {
+          "opponent": "Sunderland",
+          "home": true,
+          "kickoff": "2026-10-18T13:00:00Z"
+        }
+      },
+      {
+        "club": "Ipswich Town",
+        "code": 40,
+        "line": "Abdul Fatawu is suspended.",
+        "men": [
+          {
+            "name": "Abdul Fatawu",
+            "status": "Suspended",
+            "note": ""
+          }
+        ],
+        "fixture": {
+          "opponent": "Manchester City",
+          "home": false,
+          "kickoff": "2026-10-17T14:00:00Z"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+import type { FootballPlayer } from "../../football/types";
+import { withoutAccents } from "../../format";
+import { byPositionDepth } from "../../join/lineup";
+import { isResolved, type RosteredTeam } from "../../join/roster";
+import { isActive } from "../../league/rosterStatus";
+
+// One manager's side as Fantrax holds it for a period: who starts in which slot, and who sits.
+
+export interface SheetMan {
+  fantraxId: string;
+  /** The roster slot he fills, which is what Fantrax scores; never his own position. */
+  slot: string;
+  player: FootballPlayer;
+}
+
+export interface Sheet {
+  teamId: string;
+  teamName: string;
+  starters: SheetMan[];
+  bench: SheetMan[];
+}
+
+/** A side back to front, as a team sheet reads; a slot Fantrax adds sorts last. */
+export function sheetOf(team: RosteredTeam): Sheet {
+  const men = team.players
+    .filter(isResolved)
+    .map((man) => ({ active: isActive(man.slot), man: { fantraxId: man.slot.fantraxId, slot: man.slot.position ?? "", player: man.player } }))
+    .sort((a, b) => byPositionDepth(a.man.slot, b.man.slot));
+  return {
+    teamId: team.teamId,
+    teamName: team.teamName,
+    starters: men.filter((each) => each.active).map((each) => each.man),
+    bench: men.filter((each) => !each.active).map((each) => each.man),
+  };
+}
+
+/** The name a reporter prints: the surname without FPL's initial, "Fernandes" for "B.Fernandes". */
+export function printName(player: FootballPlayer): string {
+  return player.name.replace(/^(?:\p{Lu}\.\s*)+/u, "") || player.name;
+}
+
+/** A name as UK papers spell it: the BBC, the Premier League and Fantasy Football Scout all print Groß as "Gross". */
+export const ukSpelling = (name: string) => name.replace(/ß/gu, "ss");
+
+/** The name a paper prints first: "Bruno Fernandes" for FPL's "B.Fernandes" and "Erling Haaland", but "Rodri" and
+ *  "Gabriel" as they are known, since their surname is not in their full name or is their first. */
+export function fullPrintName(player: FootballPlayer): string {
+  const known = printName(player);
+  const plain = (s: string) => withoutAccents(s).toLowerCase();
+  const words = player.fullName.split(/\s+/u).filter((w) => w !== "");
+  const last = plain(known.split(/\s+/u).at(-1) ?? known);
+  if (known === player.name && known.includes(" ")) return known;
+  if (words.length === 0 || plain(words[0]) === plain(known) || !words.some((w) => plain(w) === last)) return known;
+  return `${words[0]} ${known}`;
+}
+
+/** A keeper or defender's slot. */
+export const isBack = (slot: string) => slot === "G" || slot === "D";
+
+export function startsFor(sheet: Sheet, fantraxId: string): boolean {
+  return sheet.starters.some((man) => man.fantraxId === fantraxId);
+}
+

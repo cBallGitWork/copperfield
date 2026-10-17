@@ -1,0 +1,852 @@
+{
+ "manifest": {
+  "season": "26-27",
+  "gameweek": null,
+  "exportedAt": "2026-10-13T11:12:18.843960+00:00",
+  "rows": 20,
+  "sources": [
+   {
+    "path": "data/reference/set_piece_takers.json",
+    "mtime": "2026-10-08T15:49:42.679792+00:00"
+   }
+  ],
+  "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/"
+ },
+ "source": "fpl_scout",
+ "clubs": {
+  "ARS": {
+   "penalties": [
+    {
+     "code": 223340,
+     "share": 0.641
+    },
+    {
+     "code": 224117,
+     "share": 0.2564
+    },
+    {
+     "code": 184029,
+     "share": 0.1026
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 204480,
+     "share": 0.6158
+    },
+    {
+     "code": 184029,
+     "share": 0.2463
+    },
+    {
+     "code": 232413,
+     "share": 0.0985
+    },
+    {
+     "code": 223340,
+     "share": 0.0394
+    }
+   ],
+   "corners": [
+    {
+     "code": 204480,
+     "share": 0.6158
+    },
+    {
+     "code": 223340,
+     "share": 0.2463
+    },
+    {
+     "code": 439509,
+     "share": 0.0985
+    },
+    {
+     "code": 248857,
+     "share": 0.0394
+    }
+   ]
+  },
+  "AVL": {
+   "penalties": [
+    {
+     "code": 195546,
+     "share": 1.0
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 195546,
+     "share": 1.0
+    }
+   ],
+   "corners": [
+    {
+     "code": 122806,
+     "share": 0.641
+    },
+    {
+     "code": 195546,
+     "share": 0.2564
+    },
+    {
+     "code": 88894,
+     "share": 0.1026
+    }
+   ]
+  },
+  "BOU": {
+   "penalties": [
+    {
+     "code": 222683,
+     "share": 0.641
+    },
+    {
+     "code": 560262,
+     "share": 0.2564
+    },
+    {
+     "code": 201658,
+     "share": 0.1026
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 201658,
+     "share": 0.6158
+    },
+    {
+     "code": 503139,
+     "share": 0.2463
+    },
+    {
+     "code": 222683,
+     "share": 0.0985
+    },
+    {
+     "code": 111317,
+     "share": 0.0394
+    }
+   ],
+   "corners": [
+    {
+     "code": 201658,
+     "share": 0.6158
+    },
+    {
+     "code": 503139,
+     "share": 0.2463
+    },
+    {
+     "code": 494521,
+     "share": 0.0985
+    },
+    {
+     "code": 111317,
+     "share": 0.0394
+    }
+   ]
+  },
+  "BRE": {
+   "penalties": [
+    {
+     "code": 502500,
+     "share": 0.6158
+    },
+    {
+     "code": 513418,
+     "share": 0.2463
+    },
+    {
+     "code": 244858,
+     "share": 0.0985
+    },
+    {
+     "code": 207283,
+     "share": 0.0394
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 207283,
+     "share": 0.641
+    },
+    {
+     "code": 249231,
+     "share": 0.2564
+    },
+    {
+     "code": 440089,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 207283,
+     "share": 0.6158
+    },
+    {
+     "code": 440089,
+     "share": 0.2463
+    },
+    {
+     "code": 204580,
+     "share": 0.0985
+    },
+    {
+     "code": 249231,
+     "share": 0.0394
+    }
+   ]
+  },
+  "BHA": {
+   "penalties": [
+    {
+     "code": 60307,
+     "share": 0.7143
+    },
+    {
+     "code": 219249,
+     "share": 0.2857
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 465730,
+     "share": 0.641
+    },
+    {
+     "code": 83299,
+     "share": 0.2564
+    },
+    {
+     "code": 514254,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 60307,
+     "share": 0.641
+    },
+    {
+     "code": 465730,
+     "share": 0.2564
+    },
+    {
+     "code": 204120,
+     "share": 0.1026
+    }
+   ]
+  },
+  "CHE": {
+   "penalties": [
+    {
+     "code": 244851,
+     "share": 0.7143
+    },
+    {
+     "code": 624773,
+     "share": 0.2857
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 225796,
+     "share": 0.641
+    },
+    {
+     "code": 244850,
+     "share": 0.2564
+    },
+    {
+     "code": 244851,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 225796,
+     "share": 0.6025
+    },
+    {
+     "code": 247632,
+     "share": 0.241
+    },
+    {
+     "code": 56979,
+     "share": 0.0964
+    },
+    {
+     "code": 624773,
+     "share": 0.0386
+    },
+    {
+     "code": 244850,
+     "share": 0.0154
+    },
+    {
+     "code": 482609,
+     "share": 0.0062
+    }
+   ]
+  },
+  "COV": {
+   "penalties": [
+    {
+     "code": 176412,
+     "share": 0.6158
+    },
+    {
+     "code": 226965,
+     "share": 0.2463
+    },
+    {
+     "code": 230730,
+     "share": 0.0985
+    },
+    {
+     "code": 168144,
+     "share": 0.0394
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 226965,
+     "share": 0.641
+    },
+    {
+     "code": 230730,
+     "share": 0.2564
+    },
+    {
+     "code": 451284,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 480457,
+     "share": 0.6158
+    },
+    {
+     "code": 168144,
+     "share": 0.2463
+    },
+    {
+     "code": 469272,
+     "share": 0.0985
+    },
+    {
+     "code": 226965,
+     "share": 0.0394
+    }
+   ]
+  },
+  "CRY": {
+   "penalties": [
+    {
+     "code": 231747,
+     "share": 0.641
+    },
+    {
+     "code": 232185,
+     "share": 0.2564
+    },
+    {
+     "code": 247412,
+     "share": 0.1026
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 488024,
+     "share": 1.0
+    }
+   ],
+   "corners": [
+    {
+     "code": 488024,
+     "share": 0.641
+    },
+    {
+     "code": 496221,
+     "share": 0.2564
+    },
+    {
+     "code": 209400,
+     "share": 0.1026
+    }
+   ]
+  },
+  "EVE": {
+   "penalties": [
+    {
+     "code": 232928,
+     "share": 0.7143
+    },
+    {
+     "code": 586309,
+     "share": 0.2857
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 232928,
+     "share": 0.7143
+    },
+    {
+     "code": 215413,
+     "share": 0.2857
+    }
+   ],
+   "corners": [
+    {
+     "code": 232928,
+     "share": 0.641
+    },
+    {
+     "code": 215413,
+     "share": 0.2564
+    },
+    {
+     "code": 244860,
+     "share": 0.1026
+    }
+   ]
+  },
+  "FUL": {
+   "penalties": [
+    {
+     "code": 244042,
+     "share": 0.641
+    },
+    {
+     "code": 153133,
+     "share": 0.2564
+    },
+    {
+     "code": 169528,
+     "share": 0.1026
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 560552,
+     "share": 1.0
+    }
+   ],
+   "corners": [
+    {
+     "code": 153133,
+     "share": 0.6158
+    },
+    {
+     "code": 477555,
+     "share": 0.2463
+    },
+    {
+     "code": 560552,
+     "share": 0.0985
+    },
+    {
+     "code": 184349,
+     "share": 0.0394
+    }
+   ]
+  },
+  "HUL": {
+   "penalties": [
+    {
+     "code": 169432,
+     "share": 1.0
+    }
+   ],
+   "corners": [
+    {
+     "code": 540324,
+     "share": 0.641
+    },
+    {
+     "code": 232351,
+     "share": 0.2564
+    },
+    {
+     "code": 243413,
+     "share": 0.1026
+    }
+   ]
+  },
+  "IPS": {
+   "penalties": [
+    {
+     "code": 443261,
+     "share": 0.641
+    },
+    {
+     "code": 222625,
+     "share": 0.1026
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 501390,
+     "share": 1.0
+    }
+   ],
+   "corners": [
+    {
+     "code": 212314,
+     "share": 0.641
+    },
+    {
+     "code": 531442,
+     "share": 0.2564
+    }
+   ]
+  },
+  "LEE": {
+   "penalties": [
+    {
+     "code": 177815,
+     "share": 0.7143
+    },
+    {
+     "code": 174594,
+     "share": 0.2857
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 466525,
+     "share": 0.641
+    },
+    {
+     "code": 153682,
+     "share": 0.2564
+    },
+    {
+     "code": 180135,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 466525,
+     "share": 0.7143
+    },
+    {
+     "code": 153682,
+     "share": 0.2857
+    }
+   ]
+  },
+  "LIV": {
+   "penalties": [
+    {
+     "code": 424876,
+     "share": 0.6158
+    },
+    {
+     "code": 219168,
+     "share": 0.2463
+    },
+    {
+     "code": 243298,
+     "share": 0.0985
+    },
+    {
+     "code": 243016,
+     "share": 0.0394
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 424876,
+     "share": 0.7143
+    },
+    {
+     "code": 494595,
+     "share": 0.2857
+    }
+   ],
+   "corners": [
+    {
+     "code": 424876,
+     "share": 0.641
+    },
+    {
+     "code": 214285,
+     "share": 0.2564
+    },
+    {
+     "code": 243016,
+     "share": 0.1026
+    }
+   ]
+  },
+  "MCI": {
+   "penalties": [
+    {
+     "code": 223094,
+     "share": 0.641
+    },
+    {
+     "code": 248875,
+     "share": 0.2564
+    },
+    {
+     "code": 465351,
+     "share": 0.1026
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 448047,
+     "share": 0.641
+    },
+    {
+     "code": 466052,
+     "share": 0.2564
+    },
+    {
+     "code": 437730,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 448047,
+     "share": 0.6158
+    },
+    {
+     "code": 466052,
+     "share": 0.2463
+    },
+    {
+     "code": 215379,
+     "share": 0.0985
+    },
+    {
+     "code": 209244,
+     "share": 0.0394
+    }
+   ]
+  },
+  "MUN": {
+   "penalties": [
+    {
+     "code": 141746,
+     "share": 1.0
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 176297,
+     "share": 0.641
+    },
+    {
+     "code": 141746,
+     "share": 0.2564
+    },
+    {
+     "code": 446008,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 141746,
+     "share": 0.641
+    },
+    {
+     "code": 446008,
+     "share": 0.2564
+    },
+    {
+     "code": 106760,
+     "share": 0.1026
+    }
+   ]
+  },
+  "NEW": {
+   "penalties": [
+    {
+     "code": 216646,
+     "share": 1.0
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 538207,
+     "share": 0.6158
+    },
+    {
+     "code": 463726,
+     "share": 0.2463
+    },
+    {
+     "code": 487838,
+     "share": 0.0985
+    },
+    {
+     "code": 119471,
+     "share": 0.0394
+    }
+   ],
+   "corners": [
+    {
+     "code": 487838,
+     "share": 0.6158
+    },
+    {
+     "code": 201666,
+     "share": 0.0985
+    },
+    {
+     "code": 449434,
+     "share": 0.0394
+    }
+   ]
+  },
+  "NFO": {
+   "penalties": [
+    {
+     "code": 60689,
+     "share": 0.6158
+    },
+    {
+     "code": 222531,
+     "share": 0.2463
+    },
+    {
+     "code": 482973,
+     "share": 0.0985
+    },
+    {
+     "code": 432714,
+     "share": 0.0394
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 222531,
+     "share": 0.7143
+    },
+    {
+     "code": 575476,
+     "share": 0.2857
+    }
+   ],
+   "corners": [
+    {
+     "code": 432714,
+     "share": 0.641
+    },
+    {
+     "code": 215136,
+     "share": 0.2564
+    },
+    {
+     "code": 222531,
+     "share": 0.1026
+    }
+   ]
+  },
+  "TOT": {
+   "penalties": [
+    {
+     "code": 154566,
+     "share": 0.641
+    },
+    {
+     "code": 460842,
+     "share": 0.2564
+    },
+    {
+     "code": 493362,
+     "share": 0.1026
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 511499,
+     "share": 0.641
+    },
+    {
+     "code": 438234,
+     "share": 0.2564
+    },
+    {
+     "code": 172780,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 172780,
+     "share": 0.2402
+    },
+    {
+     "code": 441164,
+     "share": 0.0961
+    },
+    {
+     "code": 122798,
+     "share": 0.0384
+    },
+    {
+     "code": 438234,
+     "share": 0.0154
+    },
+    {
+     "code": 511499,
+     "share": 0.0061
+    },
+    {
+     "code": 460842,
+     "share": 0.0025
+    },
+    {
+     "code": 551226,
+     "share": 0.001
+    }
+   ]
+  },
+  "SUN": {
+   "penalties": [
+    {
+     "code": 484420,
+     "share": 0.7143
+    },
+    {
+     "code": 547027,
+     "share": 0.2857
+    }
+   ],
+   "freeKicks": [
+    {
+     "code": 84450,
+     "share": 0.2564
+    },
+    {
+     "code": 437505,
+     "share": 0.1026
+    }
+   ],
+   "corners": [
+    {
+     "code": 84450,
+     "share": 0.641
+    },
+    {
+     "code": 484420,
+     "share": 0.2564
+    },
+    {
+     "code": 487676,
+     "share": 0.1026
+    }
+   ]
+  }
+ }
+}

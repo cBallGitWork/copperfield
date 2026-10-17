@@ -1,0 +1,20 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets — never commit a session, cookie or API key.
+.env
+.env.*
+!.env.example
+captures/
+.vercel/
+
+.DS_Store
+*.log
+
+# Plans stay private: kept in the checkout, never published.
+docs/plans/

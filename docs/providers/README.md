@@ -1,0 +1,239 @@
+# The ingestion map
+
+**Contents:** The pipeline · Sources · Fantrax methods · Schedule · Cached reads · Glossary ·
+Reliability contract (target) · Add a source in five steps
+
+Every source this repo reads, who reads it, where the answer lands and what notices when it
+stops. Start here; the files beside this one go deep on one provider each
+([`premier-league-api.md`](premier-league-api.md), [`live-reporting.md`](live-reporting.md),
+[`intel-export.md`](intel-export.md)), and `.claude/rules/providers.md` holds the probed field
+counts.
+
+It describes the tree as it stands on 25 Sep 2026. The **Target** column says where the ingestion
+refactor (25 Sep to 7 Oct) moves each piece; that column is the only place a path may not exist
+yet. `scripts/ingestion-map.test.ts` fails when a path here is wrong, when a fetching file, a
+scheduled workflow or a cached read is missing, or when a cron line differs from its workflow.
+
+## The pipeline
+
+```
+provider   → core client   packages/core/src/<layer>/<provider>/client.ts, the only code that fetches
+client     → mapper        raw*.ts mirrors the answer; map.ts turns it into domain types, pure
+mapper     → caller        an app cached read (unstable_cache / leagueCache) or a script (npm run …)
+caller     → lands         the Next data cache, keyed, or a committed file under data/
+lands      → shown         a screen (cached read or static import) or the paper (scripts/write-edition.ts)
+```
+
+Two layers, never joined inside core: **football** (FPL, the Premier League, YouTube,
+Scout, the sister repo) and **league** (Fantrax). All HTTP goes through `politeFetch` in
+`packages/core/src/http/fetch.ts`: a browser User-Agent, a 15 s deadline per attempt, and two
+retries on 429 or any 5xx with the backoff in `packages/core/src/http/backoff.ts`.
+
+## Sources
+
+| Source | Layer | Client | Raw types | Mapper(s) | Called by | Cadence | Lands in | Failure today | Watcher | Target |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **FPL** bootstrap, fixtures, event live, element-summary, regions | football | `packages/core/src/football/fpl/client.ts` | `packages/core/src/football/fpl/raw.ts` | `packages/core/src/football/fpl/map.ts`, `packages/core/src/football/snapshot.ts` (`getFootballSnapshot`), `packages/core/src/football/matchSheet.ts`, `packages/core/src/football/gameLog.ts`, `packages/core/src/football/seasons.ts` | app: `apps/companion/app/football.ts`, `apps/companion/app/players/[fantraxId]/scouting.ts`, `apps/companion/app/players/[fantraxId]/grid.ts`. Scripts: `scripts/build-bridge.ts`, `scripts/period-alignment.ts`, `scripts/rotowire-xi.ts`, `scripts/intel-check.ts`, `scripts/intel-cups.ts`, `scripts/ingest-pressers.ts`, `scripts/write-edition.ts`, `scripts/edition/predictions.ts`, `scripts/smoke.ts` | request time on the football clock (`apps/companion/app/fplClock.ts`): in a match window 20 s (round), 300 s (bootstrap, season list), outside one a reading per hour, on demand; regions 6 h | cache only (see Cached reads); nothing persisted | non-2xx throws `Error`; a failed read throws inside its cache, which keeps serving the last good reading, and the endpoint is not asked again for 60 s in that process (`apps/companion/app/restAfterFailure.ts`); a round never read whole shows its fixtures with no lines, and one whose fixtures were never read shows the season list's; `offerLive` fails open | none; smoke in `.github/workflows/verify.yml` walks every route | `fetchJson`; app reads → `apps/companion/app/_reads/fpl.ts`, one element-summary cache |
+| **FPL** entry and picks | football | `packages/core/src/fpl-entry/client.ts` | `packages/core/src/fpl-entry/raw.ts` | `packages/core/src/fpl-entry/map.ts` | app: `apps/companion/app/fpl/entry.ts` | request time, 30 s, per entry id; event live per gameweek | caches `fpl-entry` and `fpl-score-lines` (event live, through football's `fetchLive`, mapped by `mapScoreLines`) | 404 → null (unknown id, no picks yet); anything else throws | none | `fetchJson`; `apps/companion/app/_reads/fpl.ts` |
+| **Premier League** API: round, fixture, textstream, match stats, a man's match | football | `packages/core/src/football/premierleague/client.ts` | `packages/core/src/football/premierleague/raw.ts`, `packages/core/src/football/premierleague/rawStats.ts` | `packages/core/src/football/premierleague/map.ts` and the files beside it | app: `apps/companion/app/plFeed.ts`, through `apps/companion/app/commentary.ts`, `apps/companion/app/matchFeed.ts`, `apps/companion/app/matchDetail.ts`; `apps/companion/app/matchParts.ts` for a player card. Scripts: `scripts/pl-bridge.ts`, `scripts/edition/matchday.ts` | request time: round 20 s, detail 30 s, textstream 300 s; pl-bridge by hand after a round | caches `pl-*`; `data/mappings/premierleague.json` | non-2xx throws `Error`; app callers catch it and drop the block | none | `fetchJson`; `apps/companion/app/_reads/premierleague.ts`; `scripts/ingest/pl-bridge.ts` |
+| **Premier League** crests (SVG) | football | none — `politeFetch` in `scripts/crests.ts` | none (SVG) | none; `sharp` rasterises each into a 96px row crest and a 384px watermark | `npm run crests` | by hand, when the division changes | `apps/companion/public/crests/`, served from our origin with a 30-day `max-age` | a non-2xx throws and writes nothing for that club or after it | `scripts/crests.test.ts` fails on a club in `CLUB_FPL_CODES` with no file | stays |
+| **YouTube** highlights playlist (RSS) | football | `packages/core/src/football/highlightsClient.ts` | none (XML text) | `packages/core/src/football/highlights.ts` | app: `apps/companion/app/plFeed.ts` | request time, 30 s | cache `youtube-highlights` | non-2xx throws; the caller shows no video | none | `packages/core/src/football/youtube/`; `apps/companion/app/_reads/youtube.ts` |
+| **RotoWire** lineups, the predicted elevens and each side's injured | football | none — `politeFetch` in `scripts/rotowire-xi.ts` | none (HTML) | `packages/core/src/football/intel/rotowire.ts` (`parseRotowireXi`, `joinRotowireSide`); `scripts/xi/clubs.ts` (`rotowireClubs`) joins each RotoWire id through Fantrax's `rotowireId` and the committed bridge, never a name | `scripts/rotowire-xi.ts` | hourly at :40 Thu and Fri 07–22 and Sat 07–12 UTC, every 2 h Sat afternoon, else daily 06:40 | `data/intel/xi/26-27.json`, rewritten only when an eleven or an absence changes; its commits do not rebuild production (`scripts/ci/ignore-build.sh`), so the club page reads it off the deployed branch's raw file on GitHub (`apps/companion/app/predictedXi.ts`, 600 s), the build's copy standing in for a failed, misshapen or older read | a fetch that fails, or a side short of eleven (an unjoined starter, a tie outside the gameweek), hands that club to Scout | `scripts/intel-check.ts`: an eleven for a round already played fails | `packages/core/src/football/rotowire/`; `scripts/ingest/xi.ts` |
+| **Scout** team news, the fallback eleven | football | none — `politeFetch` in `scripts/rotowire-xi.ts` | none (HTML) | `packages/core/src/football/intel/scout.ts` (`parseScoutXi`) | `scripts/rotowire-xi.ts`, only for clubs RotoWire did not fill | with RotoWire | `data/intel/xi/26-27.json`, `source` then `rotowire+ffscout` or `ffscout` | non-2xx throws; unless every club ends with a full eleven the run exits 1 and writes nothing | as RotoWire | `packages/core/src/football/scout/`; `scripts/ingest/xi.ts` |
+| **Fantrax fxea**: `getLeagueInfo`, `getTeamRosters`, `getStandings`, `getDraftResults`, `getPlayerIds` | league | `packages/core/src/league/fantrax/client.ts` (`fxeaGet`) | `packages/core/src/league/fantrax/raw.ts` | `packages/core/src/league/fantrax/map.ts`, `packages/core/src/league/fantrax/rosters.ts`, `packages/core/src/league/fantrax/draft.ts` | app: `apps/companion/app/round.ts`, `apps/companion/app/scoring.ts`, `apps/companion/app/squads.ts`, `apps/companion/app/players/pool.ts`, `apps/companion/app/league/schedule/schedule.ts`, `apps/companion/app/players/[fantraxId]/draft.ts`. Scripts: `scripts/capture-fantrax.ts`, `scripts/shape-diff.ts`, `scripts/bridge-check.ts`, `scripts/team-codes.ts`, `scripts/write-edition.ts`, `scripts/rotowire-xi.ts` (`getPlayerIds`, for the RotoWire join), `scripts/scoring.ts`, `scripts/edition/facts.ts`, `scripts/edition/predictions.ts`, `scripts/smoke.ts` | request time, 30 s (draft 24 h); capture daily 05:10 UTC | caches `league-info`, `league-scoring`, `league-squads`, `league-pool`, `schedule-info`, `draft-results`; `data/snapshots/fantrax/leagues/<key>/<date>/`, `data/snapshots/fantrax/pool/<date>/` | an error envelope or a modelled 4xx is a refused `FantraxError`, which the app's `orRefusal` caches as a refusal for the window; a 403, 429, 5xx, network error, HTML body or a body that is no object (a JSON `null`) is not, and throws through to `leagueCache` (last good answer when warm, the site's degrade when cold); capture records any `ProviderError` in the manifest, finishes every league and exits 1 once all is written | `scripts/capture-status.ts` daily; `scripts/shape-diff.ts` by hand before a push; `scripts/bridge-check.ts` in verify | `ProviderError`; `apps/companion/app/_reads/fantrax.ts`; `scripts/ingest/snapshots.ts` |
+| **Fantrax fxpa**: thirteen fetchers, see Fantrax methods | league | `packages/core/src/league/fantrax/fxpa.ts` (`fxpaRead`), called from `packages/core/src/league/fantrax/client.ts` (the league's reads), `packages/core/src/league/fantrax/playerClient.ts` (a player's) and `packages/core/src/league/fantrax/tradeClient.ts` (the trade block and proposals, with `FANTRAX_COOKIE`) | beside each mapper (see Fantrax methods) | the same files | app: `apps/companion/app/standings.ts`, `apps/companion/app/scoreboard.ts`, `apps/companion/app/business.ts`, `apps/companion/app/poolNews.ts`, `apps/companion/app/teamStats.ts`, `apps/companion/app/players/playerStats.ts`, `apps/companion/app/players/pool.ts`, `apps/companion/app/players/[fantraxId]/subject.ts`, `apps/companion/app/players/[fantraxId]/dossier.ts`, `apps/companion/app/league/schedule/schedule.ts`, `apps/companion/app/league/team-stats/seasonStats.ts`, `apps/companion/app/scoringDay.ts`, `apps/companion/app/market.ts`, `apps/companion/app/matchday/boards.ts`, `apps/companion/app/benchOrders.ts`. Scripts: `scripts/capture-fantrax.ts` (transactions), `scripts/shape-diff.ts`, `scripts/edition/facts.ts`, `scripts/edition/predictions.ts`, `scripts/edition/hereWeGo.ts` (the season's points, when a trade is assigned) | request time, 30 s (season code 6 h); capture daily | caches (see Cached reads); transaction logs in the league's snapshot day | as fxea, plus `pageError` and `responses[].errors`; `FANTRAX_LEAGUE_ID=demo` is answered from `packages/core/src/league/fantrax/demoPayloads.json` for both surfaces | `scripts/shape-diff.ts` covers four of the thirteen | `rawGrid.ts`, `grid.ts`, `statSheet.ts` in `packages/core/src/league/fantrax/`; `apps/companion/app/_reads/fantrax.ts` |
+| **Fantrax setup page** (commissioner HTML, cookie) | league | none — `politeFetch` with `FANTRAX_COOKIE` in `scripts/roster-limits.ts` | none (HTML) | a regex over `addPosition(…)` in the script | `scripts/roster-limits.ts`; the app reads its file in `apps/companion/app/rosterMinimums.ts` | by hand; again after the draft | `data/leagues/roster-limits.json` | non-2xx throws; a league with no position table is recorded `unreadable`; all unreadable throws (stale cookie) | none | `packages/core/src/league/fantrax/setupPage.ts`; `scripts/ingest/roster-limits.ts` |
+| **Sister repo** intel files, read from disk | football | none — static imports in `apps/companion/app/intel.ts`; `readIntel` in `scripts/intel.ts` | `packages/core/src/football/intel/types.ts` and beside each reader | readers in `packages/core/src/football/intel/` | app: `apps/companion/app/intel.ts` (16 files, and `history` loaded only when FPL will not answer). Scripts: `scripts/edition/xi.ts`, `scripts/edition/pressers.ts`, `scripts/edition/predictions.ts`, `scripts/rotowire-xi.ts` | `scripts/sync-intel.sh weekly` (launchd, Tue 08:00 London) runs the sister's export; `pressers` (Thu 16:00 and 17:15, Fri 12:30, 14:00, 15:45 and 17:45) re-takes squads, depth and projections (the xMins); `zones` (every :00 and :30) adds to shots and touches the finished matches the Mac's SofaScore pages hold, silent when none is new; weekly and pressers end in `scripts/xmins-moves.ts`, which records what its xMins export moved into `data/intel/xmins-moves/` for the scout's letter; careers by hand (25 Sep) | `data/intel/<kind>/26-27.json` | the app: a file that will not parse fails the build. Scripts: absent is null, unparseable throws | `scripts/intel-check.ts`: all 15 files, each against its kind's age limit (`INTEL_AGE_LIMIT_DAYS`, `core:football/intel/freshness.ts`) | `apps/companion/app/_reads/files.ts`; `stats.ts` joins the readers |
+| **Presser ingest**: the sister repo's Scout scrape plus FPL | football | none — reads `FFS_SCRAPE_DIR` from disk and FPL through `getFootballSnapshot` | none (HTML) | `scripts/ingest/presserArticle.ts`, `scripts/ingest/presserSignals.ts` | `scripts/ingest-pressers.ts <day>`, no npm script | `scripts/sync-intel.sh pressers` from launchd, Thu 16:00, Fri 12:30, 14:00 and 15:45 London, after the sister's Scout scrape | `data/intel/pressers/26-27.json` | throws when the day has no scrape; an unmatched name is printed, never guessed | none | `scripts/ingest/pressers.ts` |
+| **Sister repo team match log**: each club's cup and European ties | football | none — `scripts/intel-cups.ts` reads `~/ai-carling-premiership/data/match_logs/team_match_log/` (parquet, through `hyparquet`), the sister's team and match identity files and FotMob's raw `_meta.json` (`SISTER_REPO` overrides the path), and FPL's bootstrap through `fetchBootstrap`; read-only over the sister repo | `TmlRow` in `packages/core/src/football/intel/cups.ts` | `packages/core/src/football/intel/cups.ts` (`tmlCupTies`, `cupIntel`, `seasonRun`) | `npm run intel-cups`; app: `apps/companion/app/intel.ts`, drawn by `apps/companion/app/prem/club/[code]/fixtures/page.tsx` | `scripts/sync-intel.sh weekly` from launchd, Tue 08:00 London | `data/intel/cups/26-27.json`, keyed by FPL club code | no log, or a club the bridge cannot reach, throws and writes nothing; a status other than played or to come is left out and printed; a competition with no name is kept and printed, and the page prints a dash | `scripts/intel-check.ts`, 8 days | the sister's `make export-epl-draft`, when it writes `cups` |
+| **Sister repo identity store**: each man's club in every season it holds | football | none — `scripts/intel-careers.ts` reads `~/ai-carling-premiership/data/identity/persons/players/seasons/` and `~/ai-carling-premiership/data/identity/teams/seasons/` (`SISTER_REPO` overrides the path), and FPL's bootstrap through `fetchBootstrap` for id → code; read-only over the sister repo | `IntelCareers` in `packages/core/src/football/intel/careers.ts` | `packages/core/src/football/intel/careers.ts` (`careerIntel`) | `npm run intel-careers`; app: `apps/companion/app/intel.ts` | `scripts/sync-intel.sh weekly` from launchd, Tue 08:00 London | `data/intel/careers/26-27.json`, keyed by FPL code | no man with an FPL code throws and writes nothing; a man with no club in a season has no row for it | `scripts/intel-check.ts`, 8 days | the sister's export, when it writes `careers` |
+| **The paper's model calls** (Anthropic, OpenAI) | — | `scripts/edition/newsroom.ts`, `scripts/edition/image.ts` | — | — | `scripts/write-edition.ts` | each editions firing | `data/editions/`, `apps/companion/public/paper/` | out of scope for this map | — | untouched |
+
+## Fantrax methods
+
+fxea is `GET {FANTRAX_FXEA_BASE}/{method}`; fxpa is one `POST {FANTRAX_FXPA_BASE}` per question.
+Of the eighteen JSON reads only the trade block and the proposals need the commissioner's cookie; the setup page does too.
+
+| Our fetcher | Method | Params / view | Raw type | Recorded fixture | Anonymous? | Target |
+|---|---|---|---|---|---|---|
+| `fetchLeagueInfo` | fxea `getLeagueInfo` | `leagueId` | `RawLeagueInfo`, `packages/core/src/league/fantrax/raw.ts` | `packages/core/src/league/fantrax/__fixtures__/leagueInfo.json`, `packages/core/src/league/fantrax/__fixtures__/leagueInfoDrafted.json` | yes | stays |
+| `fetchTeamRosters` | fxea `getTeamRosters` | `leagueId`, optional `period` (selects, and is echoed) | `RawTeamRosters`, `packages/core/src/league/fantrax/raw.ts` | `packages/core/src/league/fantrax/__fixtures__/teamRosters.json` | yes | stays |
+| `fetchStandings` | fxea `getStandings` | `leagueId` | `RawStandings`, `packages/core/src/league/fantrax/raw.ts` | `packages/core/src/league/fantrax/__fixtures__/standings.json` | yes | snapshots and shape-diff only |
+| `fetchDraftResults` | fxea `getDraftResults` | `leagueId` | `RawDraftResults`, `packages/core/src/league/fantrax/raw.ts` | `packages/core/src/league/fantrax/__fixtures__/draftResults.json`, `packages/core/src/league/fantrax/__fixtures__/draftCompleted.json` | yes | `DraftPick` → `league/types.ts` |
+| `fetchPlayerPool` | fxea `getPlayerIds` | `sport=EPL`, no league | `RawPlayerPool`, `packages/core/src/league/fantrax/raw.ts` | `packages/core/src/league/fantrax/__fixtures__/playerPool.json` | yes | stays |
+| `fetchStandingsPage` | fxpa `getStandings` | no view (`REGULAR_SEASON`) | `RawStandingsPage`, `packages/core/src/league/fantrax/standingsPage.ts` | `packages/core/src/league/fantrax/__fixtures__/standingsPage.json` | yes | stays |
+| `fetchSeasonResults` | fxpa `getStandings` | `view: SCHEDULE` | `RawSchedulePage`, `packages/core/src/league/fantrax/results.ts` | `packages/core/src/league/fantrax/__fixtures__/seasonResults.json`, `packages/core/src/league/fantrax/__fixtures__/seasonResultsLive.json` | yes | `PeriodResult` → `league/types.ts` |
+| `fetchSeasonStats` | fxpa `getStandings` | `view: SEASON_STATS` | `RawSeasonStats`, `packages/core/src/league/fantrax/seasonStats.ts` | `packages/core/src/league/__fixtures__/seasonStats.json` | yes | `CategoryLine` → `league/types.ts` |
+| `fetchLiveScoring` | fxpa `getLiveScoringStats` | `period`, `playerViewType: "2"` (adds the bench) | `RawLiveScoring`, `packages/core/src/league/fantrax/livescoring.ts` | `packages/core/src/league/fantrax/__fixtures__/liveScoring.json`, `packages/core/src/league/fantrax/__fixtures__/liveScoringBench.json`, `packages/core/src/league/fantrax/__fixtures__/liveScoringPlayed.json`, `packages/core/src/league/fantrax/__fixtures__/liveScoringUnplayed.json` | yes | stays |
+| `fetchPoolStats` | fxpa `getPlayerStats` | `statusOrTeamFilter: ALL`, page size, optional `positionOrGroup` (turns raw stats on) and `seasonOrProjection` | `RawPoolStats`, `packages/core/src/league/fantrax/stats.ts`; read as `RawPlayerStats` (`packages/core/src/league/fantrax/playerStats.ts`) per position | `packages/core/src/league/fantrax/__fixtures__/poolStats.json` (no `positionOrGroup`) | yes | one raw type in `rawGrid.ts`; `statSheet.ts` |
+| `fetchTeamStats` | fxpa `getTeamRosterInfo` | `teamId`, `view: FPTS`, optional `seasonOrProjection` | `RawStatTables`, `packages/core/src/league/fantrax/stats.ts` | `packages/core/src/league/fantrax/__fixtures__/teamStats.json` | yes; refuses until a league has a team | `rawGrid.ts` |
+| `fetchPlayerProfile` | fxpa `getPlayerProfile` | `playerId` | `RawPlayerProfile`, `packages/core/src/league/fantrax/profile.ts` | `packages/core/src/league/fantrax/__fixtures__/playerProfile.json` | yes | stays |
+| `fetchPlayerStories` | fxpa `getPlayerProfile` | `playerId`, `tab: NEWS_NOTES` | `RawNewsSection`, `packages/core/src/league/fantrax/playerNews.ts` | none; inline in its test | yes | stays |
+| `fetchPoolNews` | fxpa `getPlayerNews` | `poolType: ALL` (required) | `RawPoolNews`, `packages/core/src/league/fantrax/playerNews.ts` | none; inline in its test | yes | stays |
+| `fetchTransactions` | fxpa `getTransactionDetailsHistory` | `view: CLAIM_DROP` / `TRADE` / `LINEUP_CHANGE`, `maxResultsPerPage`, `pageNumber` (every page, merged into one table) | `RawTransactionHistory`, `packages/core/src/league/fantrax/transactions.ts` | `packages/core/src/league/fantrax/__fixtures__/txClaimDrop.json`, `packages/core/src/league/fantrax/__fixtures__/txTrade.json`, `packages/core/src/league/fantrax/__fixtures__/txLineupChange.json` | yes | stays |
+| `fetchTradeBlocks` | fxpa `getTradeBlocks` | `leagueId`, commissioner cookie | `RawTradeBlocks`, `packages/core/src/league/fantrax/tradeBlock.ts` | `packages/core/src/league/fantrax/__fixtures__/tradeBlocks.json` | **no**: `WARNING_NOT_LOGGED_IN` | stays |
+| `fetchPendingTrades` | fxpa `getPendingTransactions` | `txType: TRADE`, commissioner cookie, once for each of the session's teams (`myTeamIds`); stamped in the session's zone, named, with no year | `RawPendingTrades`, `packages/core/src/league/fantrax/pendingTrades.ts` | `packages/core/src/league/fantrax/__fixtures__/pendingTrades.json`; inline in `packages/core/src/inbox/offers.test.ts` | **no**: it refuses without a session and answers only for the session's own teams | stays |
+| `fetchPositionRefs` | fxpa `getRefObject` | `type: Position` | `RawPositionRefs`, `packages/core/src/league/fantrax/tradeBlock.ts` | `packages/core/src/league/fantrax/__fixtures__/positionRefs.json` | yes | stays |
+| `scripts/roster-limits.ts` | `createLeague.go?goto=3` (HTML) | `leagueId`, commissioner cookie | none | none | **no** | `fetchSetupPage` + `setupPage.ts` |
+
+## Schedule
+
+Every workflow in `.github/workflows/`, crons in UTC as written. Writers commit through
+`scripts/ci/push.sh` (rebase, five tries); capture's and editions' commit steps run with `if: always()`, so a
+partial day or a killed firing is kept. Every scheduled job ends in `scripts/ci/alert.sh`: a red or timed-out run
+opens the issue `alert: <workflow>`, assigned to the owner, and the next green run closes it.
+
+| Workflow | Cron (UTC) | Runs | Commits, with prefix | Concurrency | Target |
+|---|---|---|---|---|---|
+| `.github/workflows/capture.yml` | `10 5 * * *`<br>`10 17 * * *` | `npm run capture`; at 17:10 with `--unless-captured`, a backup that stands down when the morning recorded every target | `data/snapshots`, "chore: capture Fantrax {date}" | `capture` | `ingest-snapshots.yml` |
+| `.github/workflows/ingest-stats.yml` | `40 5 * * *` | `npm run stats` | `data/intel/stats`, "data: the stats league's counts, {time}" | `ingest-stats` | stays |
+| `.github/workflows/intel-check.yml` | `55 5 * * *` | `npm run intel-check` | nothing | none | `check-intel.yml` |
+| `.github/workflows/health.yml` | `25 7,13,19 * * *` | asks production `GET /api/league`, then `npm run smoke` against the live app, one page every 2.5 s (`SMOKE_PACE_MS`): an error status, or a server error streamed into a 200, opens `alert: health` | nothing | none | stays |
+| `.github/workflows/capture-status.yml` | `25 14 * * *` | `npm run capture:status`; `scripts/watchdog.ts --watchdog`, which files `alert: watchdog` when the watchdog has not succeeded for 3h | nothing | none | `check-captures.yml` |
+| `.github/workflows/watchdog.yml` | `50 6-22/2 * * *` | `scripts/watchdog.ts`: every scheduled workflow owes a success within its cadence plus grace, and each Mac job an `alert.yml` report by its slot's deadline (`scripts/watchdog/decide.ts`) | nothing; files each finding as an `alert` issue | `watchdog` | stays |
+| `.github/workflows/scout-xi.yml` | `40 7-22 * * 4,5`<br>`40 7-12 * * 6`<br>`40 13-21/2 * * 6`<br>`40 6 * * 0,1,2,3` | `npm run rotowire-xi` (RotoWire, Scout for any club it cannot fill) | `data/intel/xi`, "data: the predicted elevens, {time}" | `scout-xi` | `ingest-xi.yml` |
+| `.github/workflows/ratings.yml` | `20 21,23 * * 5,6,0,1`<br>`20 7 * * *` | `npm run ratings`, priced by the league `recorded.json` names `scoring` | `data/ratings`, "data: ratings, {time}" | `ratings` | stays |
+| `.github/workflows/editions.yml` | `0 14-23 * * 5`<br>`0 10-23 * * 6`<br>`0 11-23 * * 0`<br>`0 17-23 * * 1,2`<br>`15 7 * * 0,1,2`<br>`0 17-23 * * 3`<br>`15 7 * * 4`<br>`0 17-23 * * 4`<br>`45 9-21/3 * * *` (news between the bands) | asks production `GET /api/league`, then `npm run edition` | `data/editions`, `apps/companion/public/paper`, "data: the paper for {date}" | `editions` | stays |
+| `.github/workflows/warm.yml` | by hand only | curls `/` and `/matchday` | nothing | `warm`, cancels in progress | stays |
+| `.github/workflows/bench-order.yml` | `23 7-19 * * *` | asks production `GET /api/league`, then `scripts/bench-order.ts --wait --within 150 --write`: a run with a lock inside 150 minutes sleeps to five minutes before it (`BENCH_ORDER_LEAD_MINUTES`) and sends `setAutoSubsOrder` (adminMode, the `FANTRAX_COOKIE` secret) for each bench with no number, ordered by total FPts off `getTeamRosterInfo`; any other run exits in a line | nothing in the repo; writes in Fantrax | `bench-order`, queues | stays |
+| `.github/workflows/verify.yml` | none: push, pull_request | the four gates, smoke per recorded league, `npm run bridge:check` | nothing | none | stays |
+| `.github/workflows/claude.yml` | none: PR and issue comments | the `@claude` review | nothing | per PR | stays |
+| `.github/workflows/alert.yml` | none: dispatched by `scripts/sync-intel.sh` | `scripts/ci/alert.sh`, run named `alert <source> <state>` | nothing; opens or closes an issue | per source | stays |
+
+
+On Craig's Mac (launchd, London time; `scripts/install-intel-jobs.sh` installs all three): `com.epl-draft.intel-weekly` Tue 08:00 runs
+`scripts/sync-intel.sh weekly`, `com.epl-draft.intel-pressers` Thu 16:00, Fri 12:30, 14:00 and 15:45 (the conferences) and Thu 17:15
+and Fri 17:45 (the sister's 16:30 sweeps) runs `pressers`. Each restores the GitHub sweep's data from R2 through `scripts/sister-export.py`,
+writes a `chore/intel-<mode>-<date>-<time>` PR that merges itself once `verify` passes, logs to
+`~/Library/Logs/epl-draft-intel.log`, and ends in an `alert.yml` dispatch, `intel-<mode> ok` or `fail`.
+`com.epl-draft.intel-zones` runs `zones` every :00 and :30, any day: the sister's `epl_draft_intel.py --zones-live` reads the
+SofaScore pages its `com.fpl-eleven.sofascore` agent fetched (every 30 min, due 2.5 h after kickoff) and adds the matches the
+committed `shots` and `touches` lack. No new match, or another run holding the lock, logs one line and stops: no PR, no alert.
+
+Slots shared today: none; warm runs by hand only since 17 Oct 2026. Editions'
+own lines no longer overlap; until 1 Oct 2026 24 of its firings a week ran twice.
+
+## Cached reads
+
+Every provider read the app makes at request time sits in one of these 46 caches, in 29 files (counted 11 Oct
+2026, `unstable_cache(` and `leagueCache(` call sites; the `leagueCache` row is the helper they share, and
+`readCalendar` and `getSchedule` compose cached reads outside any cache, so neither is one).
+`leagueCache` (`apps/companion/app/leagueCache.ts`) is `unstable_cache` keyed
+`[key, FANTRAX_LEAGUE_ID]` and tagged `key:leagueId`, 30 s unless given a window. A refusal Fantrax
+meant (`kind: "refused"`) is caught by `orRefusal` inside the cache and held for the window like an
+answer. Any other `ProviderError` passes through: a warm key serves its last good answer (Next keeps
+a stale entry whose refresh threw) and a cold one returns the call site's `degrade`, never stored.
+**Never nested**: a cache inside another skips its own and its degrade is stored by the outer entry,
+so `readCalendar` and `getSchedule` compose their cached reads outside any cache.
+All targets are `apps/companion/app/_reads/<provider>.ts`, one leaf read each.
+
+| Function | File | Key | Revalidate (s) | Provider read | Target |
+|---|---|---|---|---|---|
+| `leagueCache` (helper) | `apps/companion/app/leagueCache.ts` | `[key, league id]` | 30 default | — | `_reads/cache.ts` |
+| `onTheClock`, `hourly` (helpers) | `apps/companion/app/fplClock.ts` | `[name]` in a match window; `[name, "quiet", hour]` outside one | the read's own in a window; 3600 outside (`QUIET_REVALIDATE`) | none; a match window is `MATCH_WINDOW`, 15 min before a London day's first kickoff to 135 after its last, off the season list held this hour (`matchOn`); a refused quiet read serves the last live-clock reading | `_reads/fpl.ts` |
+| `footballBase` (`footballNow`, `footballLinesNow`) | `apps/companion/app/football.ts` | `football-base` | 300 in a match window, else hourly | FPL bootstrap, kept as clubs, players and the calendar | `_reads/fpl.ts` |
+| `roundFixtures` (`footballNow`, `footballLinesNow`, `gameweekSnapshot`, `gameweekSheets`, `seasonFixtures`) | `apps/companion/app/football.ts` | `fpl-round-fixtures` + gameweek | 20 in a match window, else hourly | FPL fixtures for one gameweek: every screen's reading of that round's scores; refused with nothing held, caught outside the cache, the round draws the season list's fixtures with no lines and a match no sheet | `_reads/fpl.ts` |
+| `roundLines` (`footballLinesNow`, `gameweekSnapshot`, `roundFigures`) | `apps/companion/app/football.ts` | `fpl-round-lines` + gameweek | 20 in a match window, else hourly | FPL event live for one gameweek, as each man's lines; read only by the squads (pending clean sheets, the paper's team of the week), Live's leaders, the gameweek page and the Prem match's stat columns | `_reads/fpl.ts` |
+| `seasonList` (`seasonFixtures`, with the round in focus laid over it from `roundFixtures`) | `apps/companion/app/football.ts` | `fpl-season-list`, stamped `fetchedAt` | 300 in a match window, else hourly (the hour's reading is the clock's too) | FPL fixtures, whole season | `_reads/fpl.ts` |
+| `readRaw` (`predictedElevens`) | `apps/companion/app/predictedXi.ts` | `predicted-xi` + URL | 600 | the predicted elevens' raw file on the deployed branch (GitHub), off Vercel never asked; `newerElevens` keeps the build's copy unless the read is shaped as the elevens and newer | rest 60 s after a failure, as FPL's |
+| `regions` | `apps/companion/app/football.ts` | `fpl-regions` | 21600 | FPL regions | `_reads/fpl.ts` |
+| `readEntry` | `apps/companion/app/fpl/entry.ts` | `fpl-entry` | 30 | FPL entry, then picks | `_reads/fpl.ts` |
+| `roundScoring` | `apps/companion/app/fpl/entry.ts` | `fpl-score-lines` | 30 in a match window, else hourly | FPL event live, the same URL as `roundLines`', kept as each man's scoring lines | `_reads/fpl.ts` |
+| `gameLog` | `apps/companion/app/players/[fantraxId]/scouting.ts` | `player-game-log` + code | 3600 | FPL element-summary | `_reads/fpl.ts`, one cache with `pastSeasons` |
+| `pastSeasons` | `apps/companion/app/players/[fantraxId]/grid.ts` | `past-seasons` + code | 86400 | FPL element-summary (same URL) | `_reads/fpl.ts` |
+| `plRound` | `apps/companion/app/plFeed.ts` | `pl-round` | 20 | PL fixtures by round | `_reads/premierleague.ts` |
+| `plMatch` | `apps/companion/app/plFeed.ts` | `pl-match-live` + id, status | 20 | PL fixture detail and textstream, fetched together, while their round says `L` | `_reads/premierleague.ts` |
+| `plMatch` | `apps/companion/app/plFeed.ts` | `pl-match` + id, status | 300 | the same pair before kick-off and after the whistle | `_reads/premierleague.ts` |
+| `plStats` | `apps/companion/app/plFeed.ts` | `pl-match-stats` | 30 | PL match stats | `_reads/premierleague.ts` |
+| `plPlayerMatch` | `apps/companion/app/matchParts.ts` | `pl-player-match` | 30 | PL player stats for one match, one man; a player card asks on open | `_reads/premierleague.ts` |
+| `plClubStats` | `apps/companion/app/players/teams/clubSeasons.ts` | `pl-club-stats` | 300 | PL teams, then every club's season stats | `_reads/premierleague.ts` |
+| `highlightsFeed` | `apps/companion/app/plFeed.ts` | `youtube-highlights` | 30 | YouTube RSS | `_reads/youtube.ts` |
+| `leagueInfo` | `apps/companion/app/round.ts` | `league-info` | 30 | fxea `getLeagueInfo` | `_reads/fantrax.ts` |
+| `leagueScoring` | `apps/companion/app/scoring.ts` | `league-scoring` | 30 | fxea `getLeagueInfo` of the league `recorded.json` names `scoring`, its scoring only | `_reads/fantrax.ts` |
+| `readCalendar` | `apps/companion/app/round.ts` | none | — | none of its own; composes `leagueInfo` and `seasonKickoffs` (over `seasonFixtures`) | composer, outside any cache |
+| `readRosters` | `apps/companion/app/squads.ts` | `league-squads` | 30 | fxea `getTeamRosters` for one period (null: the open one); nests nothing, and `getLeagueSquads` picks the period outside | `_reads/fantrax.ts` |
+| `read` | `apps/companion/app/standings.ts` | `standings-page` | 30 | fxpa `getStandings` | `_reads/fantrax.ts` |
+| `readScores` | `apps/companion/app/scoreboard.ts` | `live-scores` | 30 | fxpa `getLiveScoringStats` | `_reads/fantrax.ts` |
+| `readDeals` | `apps/companion/app/business.ts` | `gazette-deals` | 30 | fxpa `getTransactionDetailsHistory`, two views | `_reads/fantrax.ts` |
+| `readTradeBlocks` | `apps/companion/app/market.ts` | `trade-blocks` | 30 | fxpa `getTradeBlocks` (commissioner cookie) and `getRefObject` | `_reads/fantrax.ts` |
+| `readProposals` | `apps/companion/app/market.ts` | `trade-proposals` | 30 | fxpa `getPendingTransactions`, `TRADE`, once per team the commissioner owns (commissioner cookie) | `_reads/fantrax.ts` |
+| `readPoolNews` | `apps/companion/app/poolNews.ts` | `pool-news` | 30 | fxpa `getPlayerNews` | `_reads/fantrax.ts` |
+| `yearToDate` | `apps/companion/app/teamStats.ts` | `fantrax-season-code` | 21600 | fxpa `getPlayerStats`, one row | `_reads/fantrax.ts` |
+| `readTeamStats` | `apps/companion/app/teamStats.ts` | `fantrax-team-stats` | 30 | fxpa `getTeamRosterInfo` | `_reads/fantrax.ts` |
+| `lockedOrder` | `apps/companion/app/benchOrders.ts` | `bench-order` + team, period | 300 | fxpa `getTeamRosterInfo` for one locked period, kept as the bench's order (`mapBenchOrder`): one read per team per period for the match-up's and the squad sheet's bench | `_reads/fantrax.ts` |
+| `openOrder` | `apps/companion/app/benchOrders.ts` | `bench-order-open` + team, period | 30 | the same, for a period its manager may still change | `_reads/fantrax.ts` |
+| `getPlayerStats` | `apps/companion/app/players/playerStats.ts` | `player-stats` | 30 | fxpa `getPlayerStats`, outfield and keepers | `_reads/fantrax.ts` |
+| `statsLeagueSeason` | `apps/companion/app/statsLeague.ts` | `stats-league-season` + columns | 30 | fxpa `getPlayerStats` in the league `recorded.json` names `stats`, outfield and keepers | `_reads/fantrax.ts` |
+| `periodsOf` | `apps/companion/app/statsLeague.ts` | `league-periods` + league | 300 | fxea `getLeagueInfo`, its scoring periods | `_reads/fantrax.ts` |
+| `settledPeriod` | `apps/companion/app/statsLeague.ts` | `stats-league-period` + league, period, columns | 86400 | fxpa `getPlayerStats` in the stats league, outfield, one finished period | `_reads/fantrax.ts` |
+| `openPeriod` | `apps/companion/app/statsLeague.ts` | `stats-league-period-open` + league, period, columns | 30 | the same, for the period under way | `_reads/fantrax.ts` |
+| `kindsOf` | `apps/companion/app/assistKinds.ts` | `assist-kinds` + league, period | 300 | fxpa `getPlayerStats`, outfield, one period | `_reads/fantrax.ts` |
+| `poolPeriodPoints` | `apps/companion/app/matchday/boards.ts` | `pool-period-points` + period | 30 | fxpa `getPlayerStats` in the served league, one period (`BY_PERIOD`): Fantrax's points for every man, free agents included, for Live's Top stats | `_reads/fantrax.ts` |
+| `scoringDay` | `apps/companion/app/scoringDay.ts` | `scoring-day` + day | 300 | fxpa `getPlayerStats` of the league `recorded.json` names `scoring`: its `BY_DATE` code, then outfield and keepers for one London day, three reads in turn | `_reads/fantrax.ts` |
+| `readPool` | `apps/companion/app/players/pool.ts` | `league-pool` | 30 | fxea `getPlayerIds`, `getLeagueInfo`, `getTeamRosters` and fxpa `getPlayerStats`, four reads | `_reads/fantrax.ts` |
+| `heldDraft` | `apps/companion/app/players/[fantraxId]/draft.ts` | `draft-results` | 86400 | fxea `getDraftResults`; used only once it has picks, which `mapDraftPicks` gives only for a completed draft | `_reads/fantrax.ts`, window in config |
+| `runningDraft` | `apps/companion/app/players/[fantraxId]/draft.ts` | `draft-running` | 30 | fxea `getDraftResults`, asked while the held board is empty | `_reads/fantrax.ts` |
+| `readProfile` | `apps/companion/app/players/[fantraxId]/subject.ts` | `player-profile` | 30 | fxpa `getPlayerProfile` | `_reads/fantrax.ts` |
+| `playerStories` | `apps/companion/app/players/[fantraxId]/dossier.ts` | `player-stories` + fantraxId, **no league id** | 30 | fxpa `getPlayerProfile` `NEWS_NOTES`; filters on a `now` passed in | `leagueCache` in `_reads/fantrax.ts` |
+| `readInfo` | `apps/companion/app/league/schedule/schedule.ts` | `schedule-info` | 30 | fxea `getLeagueInfo`, or its refusal | `_reads/fantrax.ts` |
+| `getSchedule` | `apps/companion/app/league/schedule/schedule.ts` | none | — | none of its own; composes `readInfo`, `seasonFixtures` and `leagueTable` | composer, outside any cache |
+| `getSeasonResults` | `apps/companion/app/league/schedule/schedule.ts` | `schedule-results` | 30 | fxpa `getStandings` `SCHEDULE` | `_reads/fantrax.ts` |
+| `readSeasonStats` | `apps/companion/app/league/team-stats/seasonStats.ts` | `season-stats` | 30 | fxpa `getStandings` `SEASON_STATS` | `_reads/fantrax.ts` |
+
+## Glossary
+
+The settled vocabulary. New code uses these words; persisted names are frozen.
+
+| Term | Meaning |
+|---|---|
+| `code` | FPL's season-stable player code; the only player key we persist |
+| `fplCode` | an FPL code, used only on rows that also hold another provider's id |
+| `elementId` | FPL's per-season id; never persisted |
+| `fantraxId` | Fantrax's player id; `playerId` and `scorerId` appear only in `raw*.ts` and request params |
+| club / `clubId` | a real Premier League side |
+| team / `teamId` / `teamName` | a manager's fantasy team |
+| squad · lineup · team sheet | our players · the arrangement for one period · a PL club's eleven |
+| fixture · matchup | a PL match · a fantasy head-to-head |
+| table · standings | the PL table · the fantasy table |
+| `gameweek` · `period` · `Round` | FPL's 1–38 · a Fantrax scoring period · the `{gameweek, period}` pair; a bare number is never "round" |
+| `SEASON` · `INTEL_SEASON` · `seasonCode` · `compSeason` | "2026/27" · "26-27" · Fantrax's `SEASON_9xx_…` · the PL's 841 |
+| `fetchedAt` | when our code received an answer; persisted names are frozen |
+| fetch · parse · map · read | network, clients only · text → raw · raw → domain · disk or cache |
+| capture · ingest | verbatim → `data/snapshots/` · fetch and join → a derived committed file |
+| check · probe · write | read-only, with an exit code · one question → `data/probes/` · the paper |
+| npm names | will become `ingest:*`, `check:*`, `probe:*` |
+| exit codes | 0 ok, including unchanged · 1 a finding, or refused to write · 2 could not answer |
+
+## Reliability contract (target)
+
+Landed 1 Oct 2026: the three kinds on `ProviderError`, `orRefusal` catching `refused` only, and
+`leagueCache`'s degrade.
+
+- Each attempt has its own deadline.
+- Retry only idempotent requests, and only on 429, 502–504 and quick network errors; never a
+  timeout. `Retry-After` is honoured up to a cap.
+- A failure is a `ProviderError` of kind `refused` (an envelope, or a 4xx we model),
+  `unreachable` (network, timeout, 403, 429, 5xx) or `malformed` (a 2xx without the expected
+  shape). The app shows the modelled state for `refused`, cached as normal; the last good value
+  for the other two when the key is warm, and the Unavailable panel, never stored, when it is
+  cold. Anything else is our bug, for `error.tsx` or `global-error.tsx`.
+- One provider read per cached function; no clock inside a cache; the league id in every league
+  key.
+- Committed files are written atomically, a temp file then a rename. Only `ENOENT` means absent;
+  a corrupt file throws.
+- Cron commit steps run with `if: always()` behind their parse guards (capture and editions do
+  today); no two cron lines fire in the same slot.
+
+## Add a source in five steps
+
+1. **Client.** `packages/core/src/<layer>/<provider>/client.ts` is the only file that fetches,
+   through `politeFetch`; its URL goes in `packages/core/src/config.ts`. Record one real answer
+   in `__fixtures__/` beside it.
+2. **Raw and map.** `raw.ts` mirrors the answer with every field optional; `map.ts` is pure,
+   takes `fetchedAt` and `now`, and is tested against the fixture.
+3. **Caller.** At request time, one cached read with the league id in its key. On a schedule, a
+   script that writes into `data/` and exits 0, 1 or 2, and a workflow with its own concurrency
+   group, a free cron slot and `scripts/ci/push.sh`.
+4. **Watcher.** A check that exits 1 when the source goes stale, on a workflow of its own.
+5. **Map.** Its rows here, and in `data/README.md` if it lands in `data/`. The map test fails
+   until they exist.

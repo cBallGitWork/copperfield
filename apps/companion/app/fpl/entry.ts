@@ -1,0 +1,79 @@
+import { cookies } from "next/headers";
+import { unstable_cache } from "next/cache";
+import {
+  type FplEntry,
+  type FplSquad,
+  fetchEntry,
+  fetchPicks,
+  mapEntry,
+  mapScoreLines,
+  mapSquad,
+  playerById,
+} from "@epl/core";
+import { ENTRY_COOKIE, PAGE_REVALIDATE } from "../config";
+import { footballNow, fplLive, matchOn } from "../football";
+import { onTheClock } from "../fplClock";
+import { wholeNumber } from "../wholeNumber";
+
+// A manager's FPL side, from the public entry id in a plain unsigned cookie: claiming another's authorises nothing.
+
+export async function myEntryId(): Promise<number | null> {
+  return wholeNumber((await cookies()).get(ENTRY_COOKIE)?.value);
+}
+
+export interface FplSide {
+  entry: FplEntry;
+  /** Null until the round has been played — FPL answers 404 for picks that do
+   *  not exist yet, which is every gameweek before the season starts. */
+  squad: FplSquad | null;
+}
+
+/** One manager's entry and picks, cached per entry id and the round to fall back on. Nothing
+ *  from the snapshot goes into the key: it carries `fetchedAt`, so every read was a new entry. */
+const readEntry = unstable_cache(
+  async (entryId: number, fallback: number) => {
+    const raw = await fetchEntry(entryId);
+    if (raw === null) return null;
+    const entry = mapEntry(raw);
+    // FPL is authoritative about which round its own game is in.
+    const gameweek = entry.currentEvent ?? fallback;
+    return { entry, gameweek, picks: await fetchPicks(entryId, gameweek) };
+  },
+  ["fpl-entry"],
+  { revalidate: PAGE_REVALIDATE },
+);
+
+/** FPL's scoring lines for every man in a round, by element id: one read for the pitch and the card, on the football
+ *  clock like the round's own lines. */
+const roundScoring = onTheClock(
+  "fpl-score-lines",
+  async (gameweek: number) => mapScoreLines(await fplLive(gameweek)),
+  PAGE_REVALIDATE,
+  matchOn,
+);
+
+/** Whether FPL has a team with this id; the read fills the cache the page then renders from. */
+export async function knownEntry(entryId: number): Promise<boolean> {
+  return (await readEntry(entryId, (await footballNow()).gameweek)) !== null;
+}
+
+export async function mySide(): Promise<FplSide | null> {
+  const entryId = await myEntryId();
+  if (entryId === null) return null;
+  const snapshot = await footballNow();
+  const read = await readEntry(entryId, snapshot.gameweek);
+  if (read === null) return null;
+  if (read.picks === null) return { entry: read.entry, squad: null };
+
+  // Element ids are per-season, so this join lives inside one snapshot and is never persisted.
+  const byId = playerById(snapshot);
+  const lines = await roundScoring(read.gameweek);
+  return {
+    entry: read.entry,
+    squad: mapSquad(
+      read.picks,
+      (element) => byId.get(element)?.code ?? null,
+      (element) => lines[element] ?? [],
+    ),
+  };
+}

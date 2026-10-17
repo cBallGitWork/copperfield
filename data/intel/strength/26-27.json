@@ -1,0 +1,337 @@
+{
+ "manifest": {
+  "season": "26-27",
+  "gameweek": null,
+  "exportedAt": "2026-10-13T11:12:19.730537+00:00",
+  "rows": 20,
+  "sources": [
+   {
+    "path": "data/derived/team_strength/season=26-27/team_strength.parquet",
+    "mtime": "2026-10-13T11:12:06.464807+00:00"
+   }
+  ],
+  "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/"
+ },
+ "clubs": [
+  {
+   "code": 3,
+   "shortName": "ARS",
+   "attack": {
+    "home": 1.2776,
+    "away": 1.2705
+   },
+   "defence": {
+    "home": 1.735,
+    "away": 1.7244
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 7,
+   "shortName": "AVL",
+   "attack": {
+    "home": 0.9654,
+    "away": 0.9636
+   },
+   "defence": {
+    "home": 0.9258,
+    "away": 0.9222
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 36,
+   "shortName": "BHA",
+   "attack": {
+    "home": 1.232,
+    "away": 1.2241
+   },
+   "defence": {
+    "home": 1.0977,
+    "away": 1.0985
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 91,
+   "shortName": "BOU",
+   "attack": {
+    "home": 1.0716,
+    "away": 1.0678
+   },
+   "defence": {
+    "home": 0.9846,
+    "away": 0.9844
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 94,
+   "shortName": "BRE",
+   "attack": {
+    "home": 1.1428,
+    "away": 1.136
+   },
+   "defence": {
+    "home": 1.0577,
+    "away": 1.0463
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 8,
+   "shortName": "CHE",
+   "attack": {
+    "home": 1.2586,
+    "away": 1.252
+   },
+   "defence": {
+    "home": 1.0238,
+    "away": 1.02
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 9,
+   "shortName": "COV",
+   "attack": {
+    "home": 0.7048,
+    "away": 0.7052
+   },
+   "defence": {
+    "home": 0.7487,
+    "away": 0.7487
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 31,
+   "shortName": "CRY",
+   "attack": {
+    "home": 0.9798,
+    "away": 0.98
+   },
+   "defence": {
+    "home": 0.8688,
+    "away": 0.8705
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 11,
+   "shortName": "EVE",
+   "attack": {
+    "home": 0.9675,
+    "away": 0.9671
+   },
+   "defence": {
+    "home": 0.958,
+    "away": 0.9543
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 54,
+   "shortName": "FUL",
+   "attack": {
+    "home": 0.8884,
+    "away": 0.8825
+   },
+   "defence": {
+    "home": 0.8618,
+    "away": 0.863
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 88,
+   "shortName": "HUL",
+   "attack": {
+    "home": 0.6213,
+    "away": 0.6226
+   },
+   "defence": {
+    "home": 0.7178,
+    "away": 0.7212
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 40,
+   "shortName": "IPS",
+   "attack": {
+    "home": 0.7597,
+    "away": 0.7636
+   },
+   "defence": {
+    "home": 0.7966,
+    "away": 0.7918
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 2,
+   "shortName": "LEE",
+   "attack": {
+    "home": 1.0334,
+    "away": 1.0302
+   },
+   "defence": {
+    "home": 1.0424,
+    "away": 1.0391
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 14,
+   "shortName": "LIV",
+   "attack": {
+    "home": 1.1211,
+    "away": 1.1208
+   },
+   "defence": {
+    "home": 1.1058,
+    "away": 1.1084
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 43,
+   "shortName": "MCI",
+   "attack": {
+    "home": 1.328,
+    "away": 1.3228
+   },
+   "defence": {
+    "home": 1.0947,
+    "away": 1.1066
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 1,
+   "shortName": "MUN",
+   "attack": {
+    "home": 1.2461,
+    "away": 1.2375
+   },
+   "defence": {
+    "home": 1.1052,
+    "away": 1.108
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 4,
+   "shortName": "NEW",
+   "attack": {
+    "home": 0.9506,
+    "away": 0.9513
+   },
+   "defence": {
+    "home": 0.9697,
+    "away": 0.9718
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 17,
+   "shortName": "NFO",
+   "attack": {
+    "home": 0.8977,
+    "away": 0.9065
+   },
+   "defence": {
+    "home": 0.9473,
+    "away": 0.9428
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 56,
+   "shortName": "SUN",
+   "attack": {
+    "home": 0.8176,
+    "away": 0.8235
+   },
+   "defence": {
+    "home": 0.9245,
+    "away": 0.9206
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "code": 6,
+   "shortName": "TOT",
+   "attack": {
+    "home": 0.8381,
+    "away": 0.8395
+   },
+   "defence": {
+    "home": 1.001,
+    "away": 0.9977
+   },
+   "games": {
+    "home": 3,
+    "away": 3
+   }
+  }
+ ]
+}

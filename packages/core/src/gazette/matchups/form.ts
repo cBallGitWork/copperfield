@@ -1,0 +1,93 @@
+import { DRAFT_DESK } from "../../config";
+import type { FormGame, FormResult } from "../../league/form";
+import type { TableKind } from "./table";
+import { possessive } from "./words";
+
+// The gameweek in the season's terms, for the draft report's Football Manager register: streaks, runs ended, a return to
+// form, the season's records, a side's own high and low. Each fact carries its kind and states only what results show.
+
+type FormKind = "streak" | "streak-ended" | "return-to-form" | "record" | "season-high" | "season-low";
+
+interface FormFact {
+  teamId: string;
+  kind: FormKind;
+  text: string;
+}
+
+/** A form, a table or a meetings fact, as the brief carries any of them: its kind tells the writer which frame it takes. */
+export interface SeasonFact {
+  teamId: string;
+  kind: FormKind | TableKind | "meetings-won";
+  text: string;
+}
+
+/** One side's gameweek, at the end of it. */
+export interface SideResult {
+  teamId: string;
+  name: string;
+  opponent: string;
+  for: number;
+  against: number;
+}
+
+const resultOf = (s: SideResult): FormResult => (s.for > s.against ? "W" : s.for < s.against ? "L" : "D");
+
+/** How many results at the end of a run pass the test, counting back. */
+function trailing(run: readonly FormResult[], keep: (r: FormResult) => boolean): number {
+  let n = 0;
+  for (let i = run.length - 1; i >= 0 && keep(run[i]); i--) n++;
+  return n;
+}
+
+/** The run's current streak in words, or null: n wins or defeats in a row, or n unbeaten or without a win with a draw in it. */
+function streakOf(run: readonly FormResult[]): { what: string; n: number } | null {
+  const last = run.at(-1);
+  if (last === undefined) return null;
+  const same = trailing(run, (r) => r === last);
+  if (last !== "D" && same >= DRAFT_DESK.streak) return { what: last === "W" ? "wins" : "defeats", n: same };
+  const unbeaten = trailing(run, (r) => r !== "L");
+  if (last !== "L" && unbeaten >= DRAFT_DESK.unbeaten && run.slice(-unbeaten).includes("D")) return { what: "without defeat", n: unbeaten };
+  const winless = trailing(run, (r) => r !== "W");
+  if (last !== "W" && winless >= DRAFT_DESK.unbeaten && run.slice(-winless).includes("D")) return { what: "without a win", n: winless };
+  return null;
+}
+
+/** Each side's form facts for the gameweek just played. `runs` are the settled gameweeks before it, oldest first. */
+export function gameweekForm(sides: readonly SideResult[], runs: ReadonlyMap<string, readonly FormGame[]>): FormFact[] {
+  const facts: FormFact[] = [];
+  const earlier = [...runs.values()].flat();
+  const played = Math.max(0, ...[...runs.values()].map((run) => run.length));
+  // A record is the gameweek's best too: two sides past the old high cannot both hold it.
+  const topScore = Math.max(...sides.map((s) => s.for));
+  const topWin = Math.max(...sides.map((s) => s.for - s.against));
+  for (const side of sides) {
+    const before = (runs.get(side.teamId) ?? []).map((g) => g.result);
+    const after = [...before, resultOf(side)];
+    const push = (kind: FormKind, text: string) => facts.push({ teamId: side.teamId, kind, text });
+
+    const now = streakOf(after);
+    if (now !== null) push("streak", now.what === "wins" || now.what === "defeats" ? `${side.name} have ${now.what === "wins" ? "won" : "lost"} ${now.n} in a row` : `${side.name} are ${now.n} ${now.what}`);
+    const was = streakOf(before);
+    // A run ends when this gameweek's result is not the one the run was made of.
+    const broken = was !== null && (was.what === "wins" ? resultOf(side) !== "W" : was.what === "defeats" ? resultOf(side) !== "L" : was.what === "without defeat" ? resultOf(side) === "L" : resultOf(side) === "W");
+    const winless = trailing(before, (r) => r !== "W");
+    const returned = resultOf(side) === "W" && winless >= DRAFT_DESK.formReturn;
+    // A win ending a run without one is the return to form, told once.
+    if (was !== null && broken && !(returned && (was.what === "without a win" || was.what === "defeats"))) push("streak-ended", `${possessive(side.name)} run of ${was.n} ${was.what} ended against ${side.opponent}`);
+    if (returned) push("return-to-form", `${side.name} won for the first time in ${winless + 1} gameweeks`);
+
+    // Records need a season behind them: from the league's fourth gameweek on.
+    if (played + 1 < DRAFT_DESK.recordsFrom) continue;
+    const high = earlier.reduce<FormGame | null>((best, g) => (best === null || g.pointsFor > best.pointsFor ? g : best), null);
+    const record = high !== null && side.for > high.pointsFor && side.for === topScore;
+    if (record) push("record", `${side.for} is the season's highest score`);
+    const margin = side.for - side.against;
+    const widest = Math.max(0, ...earlier.map((g) => g.pointsFor - g.pointsAgainst));
+    if (margin > 0 && margin > widest && margin === topWin) push("record", `${possessive(side.name)} ${margin}-point win is the season's biggest`);
+    const own = runs.get(side.teamId) ?? [];
+    // The season's highest score is the side's own too: told once, as the record.
+    if (!record && own.length >= DRAFT_DESK.formReturn && side.for > Math.max(...own.map((g) => g.pointsFor))) push("season-high", `${side.for} is ${possessive(side.name)} highest score this season`);
+    if (own.length >= DRAFT_DESK.formReturn && side.for < Math.min(...own.map((g) => g.pointsFor))) push("season-low", `${side.for} is ${possessive(side.name)} lowest score this season`);
+  }
+  return facts;
+}

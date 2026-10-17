@@ -1,0 +1,94 @@
+import { describe, expect, it } from "vitest";
+import { binStandfirst, buildBinBrief, type BinBriefInput } from "./brief";
+import type { BinMan } from "./select";
+
+function man(name: string, clubId: number, position: string, points: number, more: Partial<BinMan> = {}): BinMan {
+  return {
+    fantraxId: name, code: clubId * 100 + points, name, clubId, position, points, minutes: 90, started: true, goals: 0, assists: 0,
+    expectedGoals: 0.84, expectedAssists: 0.3, shots: 0, shotsOnTarget: 0, chancesCreated: 0, ...more,
+  };
+}
+
+const daSilva = man("Jay da Silva", 1, "D", 12, { goals: 1, shots: 2, shotsOnTarget: 1 });
+const jackson = man("Nicolas Jackson", 2, "F", 5, { goals: 1, shots: 6, shotsOnTarget: 2 });
+
+const input: BinBriefInput = {
+  gameweek: 5,
+  side: { shape: "4-4-2", xi: [daSilva, jackson], total: 83 },
+  sides: [90, 70, 60, null, 84],
+  club: (id) => ["", "Coventry City", "Aston Villa", "Manchester United"][id],
+  matches: (id) => (id === 1 ? [{ opponent: "Newcastle United", home: true, scored: 2, conceded: 0 }] : id === 2 ? [{ opponent: "Everton", home: false, scored: 1, conceded: 1 }] : []),
+  extras: (each) => ({ cleanSheet: each === daSilva, saves: null, tacklesWon: 0, interceptions: each === daSilva ? 2 : null, clearances: null }),
+  history: (each) => (each === daSilva ? ["Dropped by Timbeibs in gameweek 3"] : []),
+  status: (each) => (each === jackson ? "injured" : null),
+  lastWeek: new Set([jackson.code]),
+  blanked: ["Fulham"],
+  threads: [],
+};
+
+describe("buildBinBrief", () => {
+  const brief = buildBinBrief(input);
+
+  it("opens on the side and its shape, and never states the premise", () => {
+    expect(brief.startsWith("THE BIN XI, gameweek 5, lining up 4-4-2.")).toBe(true);
+    expect(brief).not.toMatch(/nobody|no one|undrafted|bench,/iu);
+  });
+
+  it("gives the writer the standfirst, so the column never repeats it", () => {
+    expect(brief).toContain("THE STANDFIRST, printed above your column and never repeated in it: Jay da Silva's 12 points led a Bin XI that scored 83, more than two of the league's four sides.");
+  });
+
+  it("groups the men by club, with the club's result from its own side", () => {
+    expect(brief).toContain("Coventry City (beat Newcastle United 2-0 at home):");
+    expect(brief).toContain("Aston Villa (drew with Everton 1-1 away):");
+  });
+
+  it("writes a man's week out, and prints nothing at nought", () => {
+    expect(brief).toContain("- Jay da Silva, Coventry City, D: 12 points. 90 minutes. A goal and a clean sheet. 2 shots, 1 on target and 2 interceptions. Dropped by Timbeibs in gameweek 3.");
+    expect(brief).not.toMatch(/(?<![-\d])0 \p{L}/u);
+  });
+
+  it("says who returns and who is now unfit, and which clubs had no match", () => {
+    expect(brief).toContain("In last week's Bin XI too. Now injured.");
+    expect(brief).toContain("NO MATCH THIS GAMEWEEK: Fulham.");
+  });
+
+  it("prints no bench and no line on who went undrafted", () => {
+    expect(brief).not.toContain("THE BENCH");
+    expect(brief).not.toContain("UNDRAFTED");
+  });
+
+  it("never carries the desk's workings: they are figures in the box, never words in the column", () => {
+    expect(brief).not.toMatch(/xG|xA|expected/iu);
+  });
+});
+
+describe("binStandfirst", () => {
+  const side = (total: number) => ({ shape: "4-4-2", xi: [jackson, daSilva], total });
+
+  it("names the best man and carries the total once, against the league's sides, in the house's numerals", () => {
+    expect(binStandfirst(side(83), [90, 70, 60, null, 84])).toBe("Jay da Silva's 12 points led a Bin XI that scored 83, more than two of the league's four sides.");
+    expect(binStandfirst(side(95), [90, 70])).toBe("Jay da Silva's 12 points led a Bin XI that scored 95, more than any side in the league.");
+    expect(binStandfirst(side(50), [90, 70])).toBe("Jay da Silva's 12 points led a Bin XI that scored 50, fewer than every side in the league.");
+    expect(binStandfirst(side(50), [null])).toBe("Jay da Silva's 12 points led a Bin XI that scored 50.");
+  });
+
+  it("never calls a total level with the lowest side fewer than every side", () => {
+    expect(binStandfirst(side(50), [50, 60, 70])).toBe("Jay da Silva's 12 points led a Bin XI that scored 50, level with the league's lowest side.");
+  });
+
+  it("never states the premise", () => {
+    expect(binStandfirst(side(83), [90])).not.toMatch(/nobody/iu);
+  });
+});
+
+describe("buildBinBrief's counts", () => {
+  const one = man("Smith", 1, "F", 1, { minutes: 1, started: false });
+  const brief = buildBinBrief({ ...input, side: { shape: "4-4-2", xi: [one], total: 1 }, sides: [null, null] });
+
+  it("says 1 point and 1 minute, and no comparison when no side was scored", () => {
+    expect(brief).toContain("Smith, Coventry City, F: 1 point. 1 minute off the bench.");
+    expect(brief).toContain("never repeated in it: Smith's 1 point led a Bin XI that scored 1.\n");
+    expect(brief).not.toContain("of the league's 0 sides");
+  });
+});

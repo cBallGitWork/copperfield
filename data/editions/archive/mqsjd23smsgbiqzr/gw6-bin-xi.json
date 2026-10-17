@@ -1,0 +1,139 @@
+{
+  "slug": "gw6-bin-xi",
+  "kind": "bin-xi",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 6,
+  "gameweek": 6,
+  "filedAt": "2026-10-13T17:40:04.709Z",
+  "expiresAt": null,
+  "edition": "Bins Out",
+  "byline": "Top Bins",
+  "headline": "Henderson, second-hand and first rate",
+  "deck": "Jordan Henderson's 16 points led a Bin XI that scored 83, more than any side in the league.",
+  "body": "Jordan Henderson is the find. Two goals and an assist from midfield in Chelsea's 5-1 dismantling of AFC Bournemouth, with three clearances and an interception for those who like their midfielders honest. Nothing in the bins came near it.\n\nIpswich Town supply a defence that scores: Dara O'Shea and Abdoul Ouattara each found the net in the 2-1 win over Fulham, with Olivier Boscagli's clean sheet in Brighton & Hove Albion's 2-0 against Sunderland beside them and Konstantinos Tzolakis making four saves in Hull City's 2-2 with Everton. Crystal Palace give the middle its spine, Jefferson Lerma scoring and Quinten Timber providing in the 3-1 over Nottingham Forest, with Jack Rudoni scoring for Coventry City in the 4-1 against Newcastle United. Up front Joe Gelhardt scored and Sorba Thomas provided for Hull, and Jorgen Strand Larsen set one up for Palace.",
+  "subjects": [
+    "bin-xi:gw6"
+  ],
+  "image": null,
+  "face": {
+    "code": 56979,
+    "name": "Jordan Henderson",
+    "clubId": 6,
+    "position": "M"
+  },
+  "ties": [],
+  "extras": {
+    "bin": {
+      "shape": "3-4-3",
+      "total": 83,
+      "xi": [
+        {
+          "name": "Konstantinos Tzolakis",
+          "code": 473284,
+          "slot": "G",
+          "club": "HUL",
+          "points": 4,
+          "minutes": 90
+        },
+        {
+          "name": "Dara O'Shea",
+          "code": 216616,
+          "slot": "D",
+          "club": "IPS",
+          "points": 8,
+          "minutes": 90
+        },
+        {
+          "name": "Abdoul Ouattara",
+          "code": 572584,
+          "slot": "D",
+          "club": "IPS",
+          "points": 8,
+          "minutes": 90
+        },
+        {
+          "name": "Olivier Boscagli",
+          "code": 204120,
+          "slot": "D",
+          "club": "BHA",
+          "points": 5,
+          "minutes": 67
+        },
+        {
+          "name": "Jordan Henderson",
+          "code": 56979,
+          "slot": "M",
+          "club": "CHE",
+          "points": 16,
+          "minutes": 90
+        },
+        {
+          "name": "Jefferson Lerma",
+          "code": 152551,
+          "slot": "M",
+          "club": "CRY",
+          "points": 8,
+          "minutes": 71
+        },
+        {
+          "name": "Jack Rudoni",
+          "code": 480457,
+          "slot": "M",
+          "club": "COV",
+          "points": 7,
+          "minutes": 82
+        },
+        {
+          "name": "Quinten Timber",
+          "code": 450063,
+          "slot": "M",
+          "club": "CRY",
+          "points": 7,
+          "minutes": 90
+        },
+        {
+          "name": "Jorgen Strand Larsen",
+          "code": 247412,
+          "slot": "F",
+          "club": "CRY",
+          "points": 6,
+          "minutes": 82
+        },
+        {
+          "name": "Joe Gelhardt",
+          "code": 462635,
+          "slot": "F",
+          "club": "HUL",
+          "points": 7,
+          "minutes": 64
+        },
+        {
+          "name": "Sorba Thomas",
+          "code": 243951,
+          "slot": "F",
+          "club": "HUL",
+          "points": 7,
+          "minutes": 85
+        }
+      ],
+      "keyStats": [
+        {
+          "label": "Most shots",
+          "value": "Gelhardt 4 (4 on target)"
+        },
+        {
+          "label": "Chances created",
+          "value": "Thomas 4"
+        },
+        {
+          "label": "Top xG",
+          "value": "Larsen 0.98, Gelhardt 0.80, Rudoni 0.79"
+        },
+        {
+          "label": "Top xA",
+          "value": "Thomas 0.53, Larsen 0.33"
+        }
+      ]
+    }
+  }
+}

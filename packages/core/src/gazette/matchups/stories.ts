@@ -1,0 +1,105 @@
+import { CLEAN_SHEET_MINUTES, DRAFT_DESK, LATE_GOAL_MINUTE } from "../../config";
+import { ordinal } from "../../league/ordinal";
+import { groupedBy } from "../../grouped";
+import type { AutoSub } from "./autoSubs";
+import type { DraftMan, DraftSide, GoalTime, SlotWorth } from "./types";
+import { howMany, listed } from "../../format";
+import { aCount } from "../counted";
+import { priceOf } from "./worth";
+import { minutePhrases } from "../reports/minutes";
+
+// Each fact about a draft man in the game's own words, for the threads and the brief: a return is a goal, an assist or a
+// clean sheet, a blank is none, a haul is more than one. Pure.
+
+/** "1 point", "6 points". */
+export const pts = (n: number) => howMany(n, "point");
+/** His returns: goals, assists and clean sheets. */
+export const returnCount = (m: DraftMan) => m.goals + m.assists + m.cleanSheets;
+const done = (m: DraftMan) => m.left === 0 && m.minutes > 0;
+/** A goal from the late minute on. */
+export const isLate = (t: GoalTime) => t.minute >= LATE_GOAL_MINUTE;
+
+/** Goals in the order they went in: by their match's kickoff, then the clock. */
+export const byClock = (a: GoalTime, b: GoalTime) => a.kickoff.localeCompare(b.kickoff) || a.minute - b.minute || (a.added ?? 0) - (b.added ?? 0);
+
+/** "in added time (90+4)", "in the 88th minute". */
+export const whenScored = (t: GoalTime) => (t.added !== undefined ? `in added time (${t.minute}+${t.added})` : `in the ${ordinal(t.minute)} minute`);
+
+/** "a goal in the 89th minute and an assist": a late goal carries its time. A man's gameweek, or one day of it. */
+export function returnWords(m: Pick<DraftMan, "goals" | "assists" | "cleanSheets" | "scoredAt">): string {
+  const lateGoal = m.goals === 1 ? m.scoredAt.find(isLate) : undefined;
+  const goals = aCount(m.goals, `a goal${lateGoal === undefined ? "" : ` ${whenScored(lateGoal)}`}`, "goals");
+  const said = [goals, aCount(m.assists, "an assist", "assists"), aCount(m.cleanSheets, "a clean sheet", "clean sheets")];
+  return listed(said.filter((x): x is string => x !== null), "and");
+}
+
+/** "got 6: a clean sheet", "hauled 11: a goal, an assist and a clean sheet"; null for a blank. */
+function gotLine(m: DraftMan): string | null {
+  const returns = returnCount(m);
+  return returns === 0 ? null : `${returns > 1 ? "hauled" : "got"} ${m.points ?? 0}: ${returnWords(m)}`;
+}
+
+/** A keeper's big score is a haul whatever it is made of. */
+export const keeperHauled = (m: DraftMan, worth: SlotWorth) => worth.keeper !== null && m.slot === worth.keeper && (m.points ?? 0) >= DRAFT_DESK.keeperHaul;
+
+/** What he scored, a keeper's haul told as one; null for a blank. */
+export const scoredLine = (m: DraftMan, worth: SlotWorth) => (keeperHauled(m, worth) ? `hauled ${m.points} in goal${m.cleanSheets > 0 ? ", a clean sheet among it" : ""}` : gotLine(m));
+
+/** A clean sheet worth telling, lost to a late goal in a match he had an hour of: a man on for less never had one. */
+export function lostCleanLine(m: DraftMan, worth: SlotWorth): string | null {
+  const clean = priceOf(worth, m.slot, "clean sheet");
+  const lost = m.concededFirstAt[0];
+  const told = lost !== undefined && isLate(lost) && m.cleanSheets === 0 && m.minutes >= CLEAN_SHEET_MINUTES && clean >= DRAFT_DESK.cleanSheetStory;
+  return told ? `lost a clean sheet worth ${pts(clean)} to a goal ${whenScored(lost)}` : null;
+}
+
+/** His minutes when they are the story: off the bench for the lesser appearance point, or off before the hour; null
+ *  otherwise. */
+export function minutesLine(m: DraftMan): string | null {
+  const minutes = howMany(m.minutes, "minute");
+  if (m.started === false && m.minutes > 0) return `did not start and played ${minutes} off the bench${returnCount(m) === 0 ? `, ${pts(m.points ?? 0)} for the appearance` : ""}`;
+  if (m.minutes > 0 && m.minutes < DRAFT_DESK.earlyOff && m.left === 0) {
+    const clocked = m.offAt === null ? undefined : minutePhrases(m.offAt)[0];
+    return m.started !== true ? `played ${minutes}` : clocked === undefined ? `went off after ${minutes}` : `went off ${clocked}`;
+  }
+  return null;
+}
+
+/** A man new to the side is in its eleven for the first time too: the signing is the story. */
+export function newLine(m: DraftMan, side: DraftSide): string | null {
+  if (m.arrived !== null) return m.arrived === "trade" ? `joined ${side.name} in a trade this gameweek` : `was signed by ${side.name} this gameweek`;
+  return m.debut ? `was in ${side.name}'s eleven for the first time` : null;
+}
+
+/** Fantrax's word after his match. */
+export const fitnessLine = (m: DraftMan) => (m.fitness === null ? null : `${m.minutes === 0 ? "did not play; " : ""}since: ${m.fitness}`);
+
+/** A reserve with a man ahead still to play: whom he replaces is not yet known, and whether he comes on at all. */
+export const aheadWords = (s: AutoSub) => `comes on at the end of the gameweek for a man who did not play${s.provisional ? ", if he plays" : ""}`;
+
+/** A man in the eleven who did not play and no reserve can replace. */
+export const uncoveredLine = (m: DraftMan) => `${m.name} did not play and no reserve came on for him`;
+
+/** The reserves not coming on who scored benchScore or more, told whatever the margin and more so past the deficit of
+ *  the side behind; `margin` is this side's points less the other's. */
+export function benchLines(side: DraftSide, subs: readonly AutoSub[], margin: number): { man: DraftMan; line: string; pastMargin: boolean }[] {
+  return side.bench
+    .filter((x) => !subs.some((s) => s.in === x) && (x.points ?? 0) >= DRAFT_DESK.benchScore)
+    .map((m) => {
+      const pastMargin = margin < 0 && (m.points ?? 0) > -margin;
+      return { man: m, pastMargin, line: `${m.name} got ${pts(m.points ?? 0)} on the bench${pastMargin ? ", more than they lost by" : ""}` };
+    });
+}
+
+/** Men from one club in the eleven, their matches done, who all blanked, all kept clean sheets or all returned. */
+export function clubLines(side: DraftSide): { men: DraftMan[]; line: string }[] {
+  return [...groupedBy(side.eleven.filter(done), (m) => m.club)].flatMap(([club, men]) => {
+    if (men.length < 2) return [];
+    const every = men.length === 2 ? "both" : "all";
+    const who = `${men.length === 2 ? "two" : men.length} ${club} men, ${listed(men.map((m) => m.name), "and")},`;
+    if (men.every((m) => returnCount(m) === 0)) return [{ men, line: `${who} ${every} blanked` }];
+    if (men.every((m) => m.cleanSheets > 0)) return [{ men, line: `${who} ${every} kept clean sheets` }];
+    if (men.every((m) => returnCount(m) > 0)) return [{ men, line: `${who} ${every} returned` }];
+    return [];
+  });
+}

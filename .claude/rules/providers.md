@@ -1,0 +1,204 @@
+---
+paths:
+  - "packages/core/src/**"
+  - "scripts/**"
+  - "apps/companion/app/*.ts"
+---
+
+# Provider facts (loaded because you are in provider code or a script)
+
+**Contents:** FPL — public, no auth · Fantrax — two surfaces · Auth constraint — read before
+designing any login · Fantrax scores the roster slot, not the player · Identity
+
+Probed live from 3 Aug 2026 on, and counted rather than quoted: do not re-derive them, and re-count
+a population before building on it. Moved out of CLAUDE.md on 23 Sep 2026 so it loads where
+it is used.
+
+Who calls each source, when, and where it lands: `docs/providers/README.md`. This file holds fields.
+
+### FPL — public, no auth
+
+- `GET /api/bootstrap-static/` — 1.3 MB: 20 clubs, 38 events, and an element
+  count that moves with the transfer window (564 on 3 Aug, 600 on 22 Aug, **652 on
+  4 Sep** — read it, never assume it).
+  Player `code` is **season-stable** (portraits key off it); `id` is per-season and
+  **must not be persisted across seasons**. Carries `opta_code`, `news`,
+  `chance_of_playing_next_round`.
+  **109 keys per element; the mapper reads 31 and the domain carries 28.** Counted 4 Sep 2026, the ones a player
+  screen wants: `birth_date` 633/652 · `team_join_date` 633 · `known_name` 72 ·
+  `status` 652 (`a`490 `u`91 `i`55 `d`15 `s`1) · `influence`/`creativity`/`threat`
+  652 as decimal STRINGS · `penalties_order` 64, `direct_freekicks_order` 56,
+  `corners_and_indirect_freekicks_order` 79 · `scout_news_link` 43.
+  Counted and **refused**: the three `*_text` companions to the set-piece orders
+  are **0/652** — the order is the data, the prose is not; `scout_risks` is a key
+  on all 652 and a non-empty array on **7**, every entry `loan_ineligible`, which
+  is a footnote and never a tab; `region` (651/667 on 25 Sep 2026) is his COUNTRY,
+  an id into `/api/regions/` (255 rows, `id` = `code`), which names every one —
+  Haaland 161 Norway where Fantrax's birthplace says Leeds, England;
+  `teams[].strength_attack_*`/`strength_defence_*` are **0/20 non-zero**.
+  `squad_number` is present as a **key and never as a value** — null on all 622
+  elements, checked 29 Aug 2026. This entry used to list it among the fields
+  bootstrap carries, which is how a shirt-number fallback came to be designed on
+  top of it; a field that is always null is not a field. Count it before
+  building on it.
+- `GET /api/fixtures/?event={gw}` — fixtures with `started` / `finished` /
+  `finished_provisional` / `minutes` / scores.
+- `GET /api/element-summary/{id}/` — one player's own season, 13.7 KB. `history`
+  (per-GW, the only read that gives bps and expected goals PER FIXTURE),
+  `history_past` (completed seasons) and `fixtures` (his run, with FPL's own
+  difficulty). **`history_past` writes every key on every row back to 2014/15**,
+  so a statistic FPL did not collect that year is a nought and not an absence —
+  `starts`, the expected family, tackles and defensive contribution all read zero
+  for Maguire's 2021/22, a season in which he played **2,513 minutes**. Counted
+  4 Sep 2026 across eight long-career players; `fpl/raw.ts` carries the table.
+- `GET /api/event/{gw}/live/` — per-player stats. `{"elements": []}` before the
+  round's first kickoff is normal and not an error. **After it, there is a row
+  for every player in the league, not only those who played** — 600 elements,
+  600 with an `explain` block, 569 of them on zero minutes. So the presence of a
+  row says the round has started, never that the man appeared.
+- `GET /api/event-status/` — one row per match date, carrying `bonus_added` and
+  `points`. The live feed publishes *provisional* bonus long before that flag
+  turns, and provisional bonus is by construction the current BPS order — so
+  agreement with BPS is not evidence a bonus is final. Nothing reads this; the
+  `settled`/`dataChecked` ladder derives the same rungs from reads we already make.
+- Portraits: `…/premierleague25/photos/players/{size}/{code}.png` — **PNG only**
+  (and since 10 Sep 2026 **only one pitch reads them**: a pitch draws the club's kit,
+  because the fallback ladder below is what put three kinds of object in one line
+  of eleven. Faces survive where a page is about one man, and on the match Line
+  Ups pitch, by Craig's call on 23 Sep 2026, falling back to the kit. PLATFORM_NOTES carries
+  the counts, including the 40/40 on `shirt_{code}[_1]-220.png`.)
+  (webp/jpg 403), and note there is no `p` before the code and no 250x250 under
+  this prefix. **Two sizes worth asking for, not one** — counted across 120 random
+  players on 4 Sep 2026: `110x140` **105/120**, and it serves a real 220x280 PNG
+  despite the name; **`500x500` 104/120**, a real 500x500. `220x280` as a literal
+  path is **12/120** and mostly a genuine 404, so it is not a second name for the
+  small one — that claim came from probing a single player who happened to have
+  it, and is the reason this line carries a denominator. This file and
+  `portraits.ts` both said 110x140 was the only size published, and a soft lead
+  picture was blamed on a ceiling that sits more than twice as high. 15 of the
+  120 have no photograph at any size. `premierleague25` is the Premier League's own string, read out of
+  FPL's production bundle on 19 Aug 2026; it does **not** track the season (we
+  are in 26/27) and `premierleague26` answers 502, so it is a recorded fact and
+  never something to compute.
+  The old path `…/premierleague/photos/players/250x250/p{code}.png` still answers
+  **200 with the set as it stood in August 2024** — which is how a season of
+  stale portraits went unnoticed: nothing 404s, the players are simply in their
+  old shirts. It is deliberately **not** read as a fallback: a player with no
+  current photograph gets his club's crest instead, because a wrong photograph is
+  worse than none — only one of the two looks like an answer.
+  `next.config.ts` builds its image allow-list from the config bases, so a new prefix is a new
+  constant in `config.ts`.
+- Crests: `…/premierleague/badges/t{code}.svg` (also `/50/`, `/70/` PNG). Read once by `npm run crests`; the app draws our PNGs.
+
+### Fantrax — two surfaces
+
+**Public reads, no auth:** `GET https://www.fantrax.com/fxea/general/{method}?leagueId=…`
+— `getLeagueInfo`, `getTeamRosters` (takes an optional `period` and echoes it
+back), `getStandings`, `getDraftResults`, `getPlayerIds?sport=EPL` (671 entries on 22 Aug —
+611 players plus 60 synthetic per-club entities, 20 each of `Tm`/`TmG`/`TmOF`;
+it was 759/~699 on 3 Aug, so count it rather than quoting it; sport code is
+**`EPL`**, not `SOCCER`).
+
+**Field presence varies between leagues, not only between states.** On the same
+day the real league's `getLeagueInfo` carries `draftType` and `leagueHistoryId`
+and the rehearsal league's carries neither. Every field in `raw.ts` is optional
+for that reason.
+
+**Internal SPA API:** `POST https://www.fantrax.com/fxpa/req?leagueId=…` with
+`{"msgs":[{"method":…,"data":…}]}`. Cookie auth; returns the caller's `roles`.
+Some reads work unauthenticated (`getStandings`, `getPlayerProfile`); league data
+returns `WARNING_NOT_LOGGED_IN`.
+
+Methods that matter:
+
+- `confirmOrExecuteTeamRosterChanges` — **lineup writes**. Takes
+  `rosterLimitPeriod`, `fantasyTeamId`, `applyToFuturePeriods`, `adminMode`,
+  `confirm` (true is a dry run) and `fieldMap` (every man, `{posId, stId}`).
+  **It saves an illegal lineup** after a warning, so the caller must refuse one.
+- `setAutoSubsOrder({teamId, period, adminMode, autoSubOrderMap})` — the bench
+  order, `scorerId → rank`.
+- `getPendingTransactions` (`txType` `CLAIM`|`TRADE`; `teamId`, or `"ALL_TEAMS"`)
+  refuses without a cookie and answers for the caller's own team whatever `teamId`
+  says, unless `miscData.showAllTeamsChoice`, which is true only where one account
+  owns every team. So another team's pending claims are not readable. Claims arrive
+  in `tables[].txSets[]` (`tablesPerTeam` for all teams), trades in
+  `tradeInfoList[]`. PLATFORM_NOTES, 1 Oct 2026.
+- **Trade PROPOSALS**: `getTransactionDetailsHistory {view: "TRADE", executedOnly: false}` with the cookie adds the
+  closed ones (`resultCode` `TRADE_CANCELLED`, `TRADE_REJECTED`) but **never a pending one**. That is only in
+  `getPendingTransactions {txType: "TRADE"}`: `tradeInfoList[]` with `pending: true`, `creatorTeamId`, every move's
+  man and teams, and "Proposed: Oct 8, 11:53 AM BST" (the session's zone, no year), for the session's own teams one
+  at a time (`myTeamIds` names them). So only offers a commissioner's team is in are readable. PLATFORM_NOTES, 8 Oct 2026.
+- `getTradeBlocks` (plural, cookie) is the league's trade block: `tradeBlocks[]{teamId, lastUpdated.date (epoch
+  ms), comment.body, scorersOffered/Wanted.scorers{posId: [scorer]}, positionsOffered/Wanted.positions[posId]}`.
+  `getTradeBlock` (singular) is the caller's EDITOR, every man he could list. Position ids are named by the public
+  `getRefObject {type: "Position"}` (703 Defender, 704 Goalkeeper). PLATFORM_NOTES, 7 Oct 2026.
+- `getLeagueSetup {action: "schedules"}` reads the head-to-head schedule (commissioner cookie):
+  `matchupMap` is `[{key: period, value: ["awayId_homeId", …]}]`, beside `numMatchupsPerPeriod`, bye `"-1"`
+  and TBD `"-2"`. `saveLeagueSetup {action: "scheduleMatchups", matchups: ["<period>|<away>_<home>|…"],
+  matchupsEditedManually: true, matchupsReviewed: true}` replaces it whole; a period left out is cleared, and
+  one may hold a double header at `numMatchupsPerPeriod` 1. PLATFORM_NOTES, 2 Oct 2026.
+- `getCommissionerHubInfo` + `executeCommissionerHubAction({actionKey, …})` — the
+  commissioner console. The returned action list is server-driven; do not hardcode.
+- `getMatchups` — Fantrax computes live H2H points itself. Their live scores are
+  authoritative; our engine is a fallback proxy.
+- `getStandings` takes a **`view`**, and `displayedLists.tabs` names all three:
+  `REGULAR_SEASON` (the table), `SCHEDULE` (their "Results", 38 period tables)
+  and `SEASON_STATS` (29 tables of per-category team totals). We read the first
+  two. **Its stat tables repeat one header key eleven times**, so they must be
+  read positionally — the inverse of the read-by-key rule the league table needs
+  — and its "Games Played" counts player appearances, not rounds. PLATFORM_NOTES
+  carries the probe.
+- `getPlayerStats` narrows to one scoring period with `timeframeTypeCode: "BY_PERIOD"` and
+  **`transactionPeriod`** (off the page's own URL); `period` is silently ignored. Its columns
+  are the league's scoring list, so the typed fantasy assists (`APKG AOG AFKG AHW AR ABS ASOP
+  APL`, which sum to `AF`) and `FKG` appear only in a league that lists them: the stats league
+  (`"stats"` in `data/leagues/recorded.json`). The keepers' table carries none of them. PLATFORM_NOTES, 28 Sep.
+- It also answers a DATE RANGE: `timeframeTypeCode: "BY_DATE"` with `startDate`/`endDate`
+  (`YYYY-MM-DD`). A period's own days (`periodDays`) give Fantrax's points for that period, free
+  agents included: 132/133 and 123/124 against live scoring, each miss dual-eligible. `goBackDays`
+  does not take, nor `BY_PERIOD` without `transactionPeriod`. PLATFORM_NOTES, 30 Sep 2026.
+- `getScorerDetails`, `getPlayerProfile`, `getPlayerNews`, `setPlayerNews`,
+  `setPlayerNote`, `removePlayerNote` — per-player notes are writable and are the
+  native home for our player metadata.
+- `executeTrade`, `confirmOrExecutePlayerPickerChanges`, `findPlayers`.
+
+### Auth constraint — read before designing any login
+
+Fantrax login uses **reCAPTCHA v3 with a v2 image fallback**, plus 2FA and
+`ACCOUNT_LOCKED`. Server-side password login is not viable. Members must provide
+their own browser session cookie. We do not hold passwords.
+
+**And "via a browser extension" is not a plan.** Ten friends will not install
+one, and most of them read this on a phone, where Chrome has no extensions at all
+and Safari's are a per-user install nobody is doing. Any write surface has to
+work for a person holding a phone who has never heard of a cookie. The one route
+that does is the commissioner's own session plus `adminMode` — one cookie, kept
+by one person, writing on behalf of members our own team codes have already
+authenticated. **Probed 28 Sep 2026: it writes a team he does not own**, and
+without `adminMode` Fantrax refuses. PLATFORM_NOTES carries the bodies.
+
+### Fantrax scores the roster slot, not the player
+
+Their scoring is position-dependent (`G: {D:6, M:5, F:4}`, `CS: {D:4, M:1}`) and
+the position applied is **the slot his manager chose**, not any single position
+of his own. 48 of 607 players are eligible at two — `getLeagueInfo.playerInfo`
+carries `eligiblePos` like `"F,M"` — and `getPlayerIds`' one letter per man is the
+global pool's default, never the league's answer. Saka is `F,M`, filed at M:
+`getLiveScoringStats` pays him 8 at midfield rates while `getPlayerStats` pays him
+6 at forward rates. So the pool table's `FPts` is not what a player scored for his
+owner. **Read the roster slot, never a position off the player.**
+
+`getLiveScoringStats` names only `ACTIVE` unless asked with `playerViewType: "2"`,
+which adds a public `BENCH` section priced the same way. It counts in no total.
+
+### Identity
+
+Fantrax exposes `rotowireId` on about four players in five — 544 of 699 on 3 Aug,
+and the denominator has moved since (see the pool counts above), so count it
+rather than quoting it. **`sportRadarId` is not on this endpoint at all** — it is not a second identity space. The existing
+identity pipeline at `~/ai-carling-premiership/src/identity/` produces canonical
+`person_id`/`root_id` and bridges FPL/SofaScore/FotMob/Understat/Transfermarkt.
+It does not include the RotoWire ID space either, so that is not a shortcut. The
+Fantrax bridge is built once by matching normalized name + club + position,
+audited manually, and persisted in `data/mappings/fantrax.json`.
+Never name-match at runtime.

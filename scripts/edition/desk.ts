@@ -1,0 +1,64 @@
+import {
+  draftReportsDue,
+  tradeSlot,
+  openingGameweek,
+  periodLock,
+  reportDays,
+  type DeskState,
+  type FootballSnapshot,
+  type GameweekKickoff,
+  type LeagueInfo,
+  type PeriodGameweeks,
+  type PresserLine,
+} from "@epl/core";
+import { presserDays } from "./presserWeek";
+import type { DeskFacts } from "./facts";
+
+// What is true of the round right now, as one answer for the newsdesk.
+
+export function deskState(input: {
+  snapshot: FootballSnapshot;
+  facts: DeskFacts;
+  period: number;
+  finished: boolean;
+  lines: readonly PresserLine[];
+  /** The predicted elevens' covered-key and slug (`lineupsSlot`), or null when we do not hold the round ahead's. */
+  lineups: DeskState["lineups"];
+  ahead: DeskState["ahead"];
+  next: DeskState["next"];
+  season: DeskState["season"];
+  /** The season's periods and their gameweeks, which place a trade in the round it takes effect in. */
+  calendar: readonly PeriodGameweeks[];
+  now: string;
+}): DeskState {
+  const { snapshot, facts } = input;
+  return {
+    gameweek: snapshot.gameweek,
+    period: input.period,
+    finished: input.finished,
+    pressers: presserDays(input.lines),
+    lineups: input.lineups,
+    ahead: input.ahead,
+    next: input.next,
+    season: input.season,
+    reportDays: reportDays(snapshot.fixtures, snapshot.gameweek, input.now),
+    draftReports: draftReportsDue(snapshot.fixtures, snapshot.gameweek, input.now),
+    trades: facts.trades.map((trade) => {
+      const gameweek = trade.period === null ? undefined : openingGameweek(input.calendar, trade.period);
+      return { ...tradeSlot(trade), round: trade.period === null || gameweek === undefined ? null : { period: trade.period, gameweek } };
+    }),
+    ties: facts.pairings.map((pairing) => ({
+      homeTeamId: pairing.home.teamId,
+      awayTeamId: pairing.away.teamId,
+    })),
+  };
+}
+
+/** The season's first head-to-head period, its gameweek and its lock, once the draft is complete; null before. */
+export function seasonOpening(info: LeagueInfo, calendar: readonly PeriodGameweeks[], kickoffs: readonly GameweekKickoff[], drafted: boolean): DeskState["season"] {
+  if (!drafted || info.matchups.length === 0) return null;
+  const period = Math.min(...info.matchups.map((each) => each.period));
+  const lock = periodLock(info.rosterPeriods.find((each) => each.number === period), kickoffs);
+  const gameweek = openingGameweek(calendar, period);
+  return lock !== null && gameweek !== undefined ? { period, gameweek, locksAt: lock } : null;
+}

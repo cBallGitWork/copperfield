@@ -1,0 +1,420 @@
+{
+  "w05aib75mtj36y1g": {
+    "covered": [
+      "tie-report:p4:deo9ljvtmtj36y3gvhy0w28p5mtj36y3g",
+      "tie-report:p4:1b6gp5utmtj36y3gvy6viv6jfmtj36y3g",
+      "tie-report:p4:98yx3o50mtj36y3gvfq5omv5kmtj36y3g",
+      "tie-report:p4:g80h3bf5mtj36y3gvdpdkp2bbmtj36y3g",
+      "tie-report:p4:kg18w2cvmtj36y3gvpzmd243ymtj36y3g",
+      "eleven:gw4",
+      "power-ranking:gw4",
+      "dodgers:gw4",
+      "news:https://www.bbc.co.uk/sport/football/articles/cvrl64y9rdn9o",
+      "news:https://www.bbc.co.uk/sport/football/articles/cmly4gpnwk2go",
+      "wire:through-gw4",
+      "wire:through-gw5",
+      "news:https://www.bbc.co.uk/sport/football/articles/c679052dq30ro",
+      "news:https://www.bbc.co.uk/sport/football/articles/cm0qx3yv8z42o",
+      "fixture-preview:gw5:6v7",
+      "fixture-preview:gw5:4v88",
+      "fixture-preview:gw5:36v3",
+      "fixture-preview:gw5:11v40",
+      "fixture-preview:gw5:17v9",
+      "news:https://www.bbc.co.uk/sport/football/videos/cmwyzg4ep1wlo",
+      "news:https://www.bbc.co.uk/sport/football/articles/cmg490nn12pvo",
+      "news:https://www.bbc.co.uk/sport/football/videos/cmvgy397e5qzo",
+      "news:https://www.bbc.co.uk/sport/football/articles/cm0e35jrqyd7o",
+      "fixture-preview:gw5:43v56",
+      "fixture-preview:gw5:91v14",
+      "fixture-preview:gw5:54v1",
+      "fixture-preview:gw5:2v31",
+      "news:https://www.bbc.co.uk/sport/football/articles/c607l0xdm8xro",
+      "news:https://www.bbc.co.uk/sport/football/articles/cq1j478n0ll7o",
+      "tie-call:p5:deo9ljvtmtj36y3gv98yx3o50mtj36y3g",
+      "tie-call:p5:y6viv6jfmtj36y3gvg80h3bf5mtj36y3g",
+      "tie-call:p5:fq5omv5kmtj36y3gvkg18w2cvmtj36y3g",
+      "tie-call:p5:dpdkp2bbmtj36y3gvpzmd243ymtj36y3g",
+      "tie-report:p5:hy0w28p5mtj36y3gv1b6gp5utmtj36y3g",
+      "tie-report:p5:deo9ljvtmtj36y3gv98yx3o50mtj36y3g",
+      "tie-report:p5:y6viv6jfmtj36y3gvg80h3bf5mtj36y3g",
+      "tie-report:p5:fq5omv5kmtj36y3gvkg18w2cvmtj36y3g",
+      "tie-report:p5:dpdkp2bbmtj36y3gvpzmd243ymtj36y3g",
+      "eleven:gw5",
+      "power-ranking:gw5",
+      "dodgers:gw5",
+      "news:https://www.bbc.co.uk/sport/football/articles/cxddvp49gg1ro",
+      "news:https://www.bbc.co.uk/sport/football/videos/cqpve80lwem9o",
+      "news:https://www.bbc.co.uk/sport/football/videos/cmp3k277095do",
+      "news:https://www.bbc.co.uk/sport/football/articles/c6y8z29nxn4mo",
+      "news:https://www.bbc.co.uk/sport/football/articles/c617j2prweejo",
+      "news:https://www.bbc.co.uk/sport/football/articles/c3qjkpgengn7o",
+      "news:https://www.bbc.co.uk/sport/articles/cgjq1x0wj7qo",
+      "news:https://www.bbc.co.uk/sport/football/articles/cmrr48zqz1jno"
+    ],
+    "threads": [
+      {
+        "subject": "Ballard's international load, test31",
+        "beat": "Four Nations League games in a compressed window for test31's defender",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-22T22:11:13.737Z"
+      },
+      {
+        "subject": "Egan's return, test1",
+        "beat": "test1's centre-back framed as back in the Premier League with Hull, minutes unstated",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-22T08:32:15.993Z"
+      },
+      {
+        "subject": "Xhaka's off-field investigation, testf",
+        "beat": "testf's midfielder under investigation over a Covid-19 certificate; no availability line yet.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-21T17:10:18.731Z"
+      },
+      {
+        "subject": "Palmer's fitness, test1",
+        "beat": "The forward set to withdraw from England with a minor knock, extent unstated.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-21T08:35:46.744Z"
+      },
+      {
+        "subject": "Gabriel's future, test31121",
+        "beat": "Named again in Monday's gossip, next step still unresolved, still test31121's",
+        "status": "open",
+        "beats": 3,
+        "lastUsedAt": "2026-09-21T06:49:30.660Z"
+      },
+      {
+        "subject": "Gibbs-White's future, test3",
+        "beat": "Spurs said to be weighing a £125m move for test3's midfielder",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-21T06:49:30.660Z"
+      },
+      {
+        "subject": "Cunha and Isak, test2's front pair",
+        "beat": "Isak strikes the winner, a second forward return to sit beside Cunha's.",
+        "status": "open",
+        "beats": 5,
+        "lastUsedAt": "2026-09-20T19:07:42.141Z"
+      },
+      {
+        "subject": "Haaland's future, 123",
+        "beat": "Six for the forward as the Barcelona talk rumbles on unresolved",
+        "status": "open",
+        "beats": 2,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test31121's flat midfield",
+        "beat": "Berge, Ødegaard flat again at three and two, but the back line and Kostoulas covered it",
+        "status": "open",
+        "beats": 2,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test211's defenders doing the heavy lifting",
+        "beat": "Rushworth posts a keeper's haul in goal and still finds himself benched by test211.",
+        "status": "open",
+        "beats": 5,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "Managers benching their own hauls",
+        "beat": "The habit spreads: A.Becker, Gvardiol, Gomez, Rushworth and Branthwaite all returned from benches this week.",
+        "status": "open",
+        "beats": 2,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test1 out on their own",
+        "beat": "The win over test2 stretches the gap; 12 points and a league-high haul behind only testf.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "testf's ceiling versus their record",
+        "beat": "League-high 234 scored, second in the table, the numbers say they are the real threat to test1.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test1 v test2, the eight-nil tie",
+        "beat": "test1 take it 39-34, Semenyo's thirteen the decisive score",
+        "status": "retired",
+        "beats": 4,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test2's four-man front",
+        "beat": "Cunha, Isak, Havertz and the rest managed nineteen and still came up short",
+        "status": "retired",
+        "beats": 1,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test3 v test31121, deadlocked at nil",
+        "beat": "Broken at last, test31121 home 30-24 as Kostoulas and the defenders answered",
+        "status": "retired",
+        "beats": 3,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test211 v test3331, the 3-8 tie",
+        "beat": "Ajer and Thomas six apiece settle it 23-16 for test3331",
+        "status": "retired",
+        "beats": 5,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "Thomas on international duty, test3331",
+        "beat": "Back in the side and top-scoring alongside Ajer on six",
+        "status": "retired",
+        "beats": 4,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test31 chasing testf's lead",
+        "beat": "testf close it out 48-38, the one live man never enough.",
+        "status": "retired",
+        "beats": 4,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "Gvardiol's fitness, test31121",
+        "beat": "Back near his best and it showed, an assist across ninety, all of it from the bench.",
+        "status": "retired",
+        "beats": 2,
+        "lastUsedAt": "2026-09-20T17:34:26.203Z"
+      },
+      {
+        "subject": "test4 the only trader in the league",
+        "beat": "The lone dealer's traffic could not lift 25 within reach of 123's 36",
+        "status": "open",
+        "beats": 4,
+        "lastUsedAt": "2026-09-20T15:08:53.672Z"
+      },
+      {
+        "subject": "testf's defenders doing the scoring",
+        "beat": "Willock and Barnes take their turn up top, the lead pushed past two goals.",
+        "status": "retired",
+        "beats": 3,
+        "lastUsedAt": "2026-09-20T15:08:53.672Z"
+      },
+      {
+        "subject": "Wirtz's future, test1",
+        "beat": "Liverpool said to be holding firm, test1's man stays put for now",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-20T08:29:08.597Z"
+      },
+      {
+        "subject": "test4 v 123, the lopsided tie",
+        "beat": "Rodon and Justin stand against Stach, test4 twenty adrift",
+        "status": "open",
+        "beats": 6,
+        "lastUsedAt": "2026-09-20T06:35:10.670Z"
+      }
+    ]
+  },
+  "zbn1z3ukmsgb36sz": {
+    "covered": [
+      "tie-report:p5:pbxm9fgimshcpazfv8enbgqo5msgb375j",
+      "tie-report:p5:sezrgvl2mshcpazfvj9zadacnmshcpazf",
+      "eleven:gw5",
+      "power-ranking:gw5",
+      "dodgers:gw5",
+      "news:https://www.bbc.co.uk/sport/football/articles/cvde0jw2l6g4o",
+      "news:https://www.bbc.co.uk/sport/football/articles/c63d7ypd11ydo",
+      "predicted-xi:gw6",
+      "wire:through-gw5",
+      "news:https://www.bbc.co.uk/sport/football/articles/crq5x1n12xexo",
+      "news:https://www.bbc.co.uk/sport/football/articles/c6qjk1122e9jo",
+      "news:https://www.bbc.co.uk/sport/football/articles/cmwyzjedq51lo",
+      "news:https://www.bbc.co.uk/sport/football/articles/c6eq8eygy4e5o",
+      "news:https://www.bbc.co.uk/sport/football/articles/ckeq8vq7rwe7o",
+      "news:https://www.bbc.co.uk/sport/football/articles/cm74kp52d3xko",
+      "news:https://www.bbc.co.uk/sport/football/articles/cm0qxknzpn8jo",
+      "news:https://www.bbc.co.uk/sport/football/articles/cj62eyx9grzxo",
+      "news:https://www.bbc.co.uk/sport/football/articles/c6vgy934nvq4o",
+      "news:https://www.bbc.co.uk/sport/football/articles/cked73ppgql3o",
+      "news:https://www.bbc.co.uk/sport/football/articles/c68048pynj94o",
+      "match-report:gw5:2026-09-18",
+      "match-report:gw5:2026-09-19",
+      "match-report:gw5:2026-09-20",
+      "news:https://www.bbc.co.uk/sounds/play/p0pd5x19",
+      "news:https://www.bbc.co.uk/sport/football/articles/ckq5xp9p1v31o",
+      "news:https://www.bbc.co.uk/sport/football/articles/ckge43e8nqdwo",
+      "news:https://www.bbc.co.uk/sport/football/articles/cr1e5ep101wdo",
+      "news:https://www.bbc.co.uk/sport/football/articles/c3ew9vv7444xo",
+      "draft-report:gw5:saturday",
+      "draft-report:gw5:gameweek",
+      "news:https://www.bbc.co.uk/news/articles/cm89j90gv57vo",
+      "news:https://www.bbc.co.uk/sport/football/articles/c6kg0gkjngzmo"
+    ],
+    "threads": [
+      {
+        "subject": "test3331's O'Reilly fitness",
+        "beat": "Doubt becomes withdrawal; O'Reilly out of England's final two games, no timeline given.",
+        "status": "open",
+        "beats": 2,
+        "lastUsedAt": "2026-10-01T14:40:57.237Z"
+      },
+      {
+        "subject": "test3331's Thomas asset",
+        "beat": "Thomas in a crash near Hull's training ground, the club's second; no injury flagged.",
+        "status": "open",
+        "beats": 2,
+        "lastUsedAt": "2026-10-01T14:11:30.928Z"
+      },
+      {
+        "subject": "123's scoring ceiling",
+        "beat": "Haaland and Schade both named in Europe's summer interest, no move flagged",
+        "status": "open",
+        "beats": 4,
+        "lastUsedAt": "2026-09-30T20:22:17.275Z"
+      },
+      {
+        "subject": "test4's Foden asset",
+        "beat": "Foden drawing continental interest among City's departures-in-waiting",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-30T20:22:17.275Z"
+      },
+      {
+        "subject": "123's Haaland asset",
+        "beat": "City verdict lands, Norway report the striker unaffected and fit for Wales",
+        "status": "open",
+        "beats": 3,
+        "lastUsedAt": "2026-09-30T18:25:07.967Z"
+      },
+      {
+        "subject": "test1's Palmer under scrutiny",
+        "beat": "PFA chief brands Palmer a victim of a sick schedule; no absence yet.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-29T17:11:29.492Z"
+      },
+      {
+        "subject": "test3331's Scotland assets",
+        "beat": "Thomas and McBurnie both in the international frame around the same Tuesday fixture",
+        "status": "open",
+        "beats": 2,
+        "lastUsedAt": "2026-09-28T17:12:18.444Z"
+      },
+      {
+        "subject": "test211's Gakpo fitness",
+        "beat": "Gakpo hurt on international duty, involvement curtailed, no timeline given.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-28T08:42:27.494Z"
+      },
+      {
+        "subject": "test31121's Gabriel asset",
+        "beat": "Gabriel named among the academy players in the market the BBC is tracking.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-25T14:21:15.715Z"
+      },
+      {
+        "subject": "test3331's Scott under transfer interest",
+        "beat": "Chelsea reported to lead the race for the Bournemouth midfielder",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-24T20:38:51.610Z"
+      },
+      {
+        "subject": "test1's Wirtz asset",
+        "beat": "Liverpool block a departure; the player stays put for test1.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-23T21:38:17.080Z"
+      },
+      {
+        "subject": "test2's misfiring forwards",
+        "beat": "Havertz and Lukić both blank at two while Cunha and Isak underwhelm",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-23T17:18:14.294Z"
+      },
+      {
+        "subject": "test3's misfiring forwards",
+        "beat": "Emersonn and Gonzalo blanked in all but two apiece, and it cost him the tie.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-23T17:18:14.294Z"
+      },
+      {
+        "subject": "Six managers yet to register",
+        "beat": "Half the league on zero, unranked by result and ranked on faith.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-23T17:18:14.294Z"
+      },
+      {
+        "subject": "test1's Saka watch",
+        "beat": "Saka fit and speaking, no injury flagged.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-23T17:18:14.294Z"
+      },
+      {
+        "subject": "test3331's Thomas on Scotland duty",
+        "beat": "Thomas recalled for the Czech Republic play-offs after nearly a year away.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-23T17:18:14.294Z"
+      },
+      {
+        "subject": "A frozen waiver market",
+        "beat": "Gameweek 5 produced a single transaction across the whole league.",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-09-23T17:18:14.294Z"
+      }
+    ]
+  },
+  "mqsjd23smsgbiqzr": {
+    "covered": [
+      "season-predictions:gw6",
+      "season-rankings:gw6",
+      "presser:gw6:2026-10-08",
+      "predictions:gw6",
+      "presser:gw6:2026-10-09",
+      "predicted-xi:gw6:a2658381",
+      "predicted-xi:gw6:ce733cf2",
+      "predicted-xi:gw6:bda982d8",
+      "predicted-xi:gw6:f3d841c2",
+      "predicted-xi:gw6:5478a2ad",
+      "sheets:gw6",
+      "bin-xi:gw6",
+      "predictions:gw7",
+      "match-report:gw6:2026-10-10",
+      "match-report:gw6:2026-10-11",
+      "match-report:gw6:2026-10-12",
+      "presser:gw7:2026-10-15",
+      "draft-report:gw6:gameweek",
+      "presser:gw7:2026-10-16",
+      "trade:h1vfnrrfmva0wfw5",
+      "predicted-xi:gw7:3f8fb012",
+      "predicted-xi:gw7:09a7a53c",
+      "predicted-xi:gw7:2fc86af7",
+      "predicted-xi:gw7:b23649b0",
+      "predicted-xi:gw7:3dce4e29"
+    ],
+    "threads": [
+      {
+        "subject": "Isak's quad",
+        "beat": "Ruled out for Sunday, described as small and not long term",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-10-09T16:38:59.142Z"
+      }
+    ]
+  }
+}

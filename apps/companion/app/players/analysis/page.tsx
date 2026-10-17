@@ -1,0 +1,260 @@
+import { Suspense } from "react";
+import {
+  FANTRAX_LEAGUE_ID,
+  FANTRAX_PLAYER_BASE,
+  fixtureGameweeks,
+  gameweekSpan,
+  lastPlayed,
+  shirtName,
+  touchFixtures,
+  touchesOf,
+} from "@epl/core";
+import ScoutShell from "../Shell";
+import Nothing from "../../components/shell/Nothing";
+import FantraxSilent from "../../components/shell/FantraxSilent";
+import TabStrip from "../../components/shell/TabStrip";
+import OutLink from "../../components/shell/OutLink";
+import CompareBar from "./CompareBar";
+import CompareMap from "./CompareMap";
+import Figures from "./Figures";
+import Grids from "./Grids";
+import PickBar from "./PickBar";
+import PlayerMap from "./PlayerMap";
+import Points from "./Points";
+import type { Scored } from "./pointsLines";
+import { manOver } from "./overWindow";
+import { sides } from "./pick";
+import { windowWords } from "./window";
+import { Chip } from "../BoardControls";
+import { StackWaiting } from "../[fantraxId]/Waiting";
+import { subject } from "../[fantraxId]/subject";
+import { getLeaguePool } from "../pool";
+import { getPlayerStats } from "../playerStats";
+import { compareHref, lastValue } from "../routes";
+import { seasonFixtures } from "../../football";
+import { scoutTitle } from "../title";
+
+// Two players side by side (Craig, 6 Sep 2026). Two profile reads a view and never more; the search boxes read the
+// cached pool, so a keystroke is never a Fantrax call. The grids stream, each a percentile over every man of his role.
+
+export const revalidate = 30;
+
+/** One block at a time, at every width (Craig, 24 Sep 2026). */
+const VIEWS = [
+  { key: "figures", label: "Figures" },
+  { key: "shots", label: "Shots" },
+  { key: "passes", label: "Key passes" },
+  { key: "touches", label: "Touches" },
+  { key: "attributes", label: "Attributes" },
+] as const;
+type View = (typeof VIEWS)[number]["key"];
+
+/** "Last 6" is the last six gameweeks with a match played (Craig, 24 Sep 2026). */
+const RECENT = 6;
+
+export const metadata = scoutTitle("analysis");
+
+export default async function ComparePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const asked = await searchParams;
+  const { a, b, qa, qb } = sides({
+    a: lastValue(asked.a),
+    b: lastValue(asked.b),
+    qa: lastValue(asked.qa) ?? "",
+    qb: lastValue(asked.qb) ?? "",
+  });
+  const view: View = VIEWS.find((entry) => entry.key === lastValue(asked.view))?.key ?? "figures";
+  const recent = lastValue(asked.range) === String(RECENT);
+
+  const [pool, fixtures, lines] = await Promise.all([getLeaguePool(), seasonFixtures(), getPlayerStats()]);
+  const rows = "unavailable" in pool ? [] : pool.rows;
+  // As the board reads him: the pool row and the counts that say whether he has played.
+  const scored = (id: string | undefined): Scored => ({
+    row: rows.find((row) => row.entry.player.fantraxId === id),
+    stats: lines.find((line) => line.fantraxId === id)?.stats,
+  });
+
+  // Both men are read before anything draws: the boxes are named after whoever is chosen.
+  const [left, right] = await Promise.all([
+    a === undefined ? null : subject(a),
+    b === undefined ? null : subject(b),
+  ]);
+
+  const found = (side: Awaited<ReturnType<typeof subject>> | null) =>
+    side !== null && !("unavailable" in side) ? side : null;
+  const one_ = found(left);
+  const two = found(right);
+
+  // FPL's web name where we have it; Fantrax's full registration is too long for the bar.
+  const names = {
+    a: one_ ? (one_.football ? shirtName(one_.football.player.name) : one_.intel.name) : null,
+    b: two ? (two.football ? shirtName(two.football.player.name) : two.intel.name) : null,
+  };
+
+  const picker = (
+    <PickBar
+      rows={rows}
+      a={{ chosen: a, typed: qa, name: names.a }}
+      b={{ chosen: b, typed: qb, name: names.b }}
+    />
+  );
+
+  // A profile that refused is not a man not yet chosen, and the screen says which.
+  const refused = refusal(left) ?? refusal(right);
+  if (refused !== null) {
+    return (
+      <ScoutShell current="analysis">
+        {picker}
+        <FantraxSilent code={refused} />
+      </ScoutShell>
+    );
+  }
+
+  if (one_ === null || names.a === null) {
+    return (
+      <ScoutShell current="analysis">
+        {picker}
+        <Nothing title="A player, or two">Pick one or two players.</Nothing>
+      </ScoutShell>
+    );
+  }
+
+  const solo = two === null || names.b === null;
+  const played = lastPlayed(fixtures, Number.POSITIVE_INFINITY);
+  const window = recent ? lastPlayed(fixtures, RECENT) : played;
+  const span = gameweekSpan(window) || "no gameweeks yet";
+  const told = windowWords(recent, window);
+  const gameweekOf = fixtureGameweeks(fixtures);
+  const inWindow = new Set(window);
+
+  const men = await Promise.all(
+    [
+      { side: one_, name: names.a },
+      ...(solo || two === null || names.b === null ? [] : [{ side: two, name: names.b }]),
+    ].map(({ side, name }) => manOver(side, name, { recent, inWindow, gameweekOf })),
+  );
+  const [first, second] = [men[0], men[1] ?? null];
+
+  const href = (changes: { view?: View; range?: string }) => {
+    const nextView = changes.view ?? view;
+    return compareHref({
+      a,
+      b: solo ? undefined : b,
+      view: nextView === "figures" ? undefined : nextView,
+      range: "range" in changes ? changes.range : recent ? String(RECENT) : undefined,
+    });
+  };
+  const has = {
+    shots: men.some((each) => each.shots.length > 0),
+    passes: men.some((each) => each.keyPasses.length > 0),
+    touches: men.some((each) => each.touches !== undefined),
+  };
+  const dim = VIEWS.filter((entry) => entry.key in has && !has[entry.key as keyof typeof has]).map((entry) => entry.key);
+
+  return (
+    <ScoutShell current="analysis">
+      {picker}
+
+      <CompareBar
+        a={{ name: names.a, club: one_.football?.club, code: one_.football?.player.code ?? null }}
+        b={
+          second === null || two === null || names.b === null
+            ? null
+            : { name: names.b, club: two.football?.club, code: two.football?.player.code ?? null }
+        }
+      />
+
+      <Points
+        a={scored(a)}
+        b={solo ? null : scored(b)}
+        names={{ a: names.a, b: solo ? null : names.b }}
+        season={"unavailable" in pool ? null : pool.season}
+      />
+
+      {/* One category at a time at every width (Craig, 24 Sep 2026: "desktop like mobile"). */}
+      <TabStrip
+        label="Compare views"
+        tabs={VIEWS.map((entry) => ({ ...entry, href: href({ view: entry.key }) }))}
+        current={view}
+        dim={dim}
+        labels="word"
+      />
+
+      {/* The range governs the figures and every map; the attributes are a season's percentiles. */}
+      {view === "attributes" ? null : (
+        <div className="flex items-center gap-1.5">
+          <Chip on={!recent} href={href({ range: undefined })}>
+            Season
+          </Chip>
+          <Chip on={recent} href={href({ range: String(RECENT) })}>
+            Last {RECENT}
+          </Chip>
+          <span className="numeric px-1.5 text-sm text-muted">{span}</span>
+        </div>
+      )}
+
+      {view === "figures" ? (
+        <Figures
+          a={first.played}
+          b={second?.played ?? null}
+          names={{ a: names.a, b: second === null ? null : names.b }}
+          window={told}
+        />
+      ) : null}
+
+      {view === "shots" || view === "passes" ? (
+        <CompareMap
+          men={men.map((each) => ({
+            name: each.name,
+            club: each.club,
+            shots: view === "shots" ? each.shots : each.keyPasses,
+          }))}
+          passes={view === "passes"}
+          window={told}
+          className="mx-auto w-full lg:max-w-3xl"
+        />
+      ) : null}
+
+      {view === "touches" ? (
+        <div className="grid gap-2 lg:grid-cols-2">
+          {men.map((each, index) => (
+            <PlayerMap
+              key={index}
+              id={index === 0 ? "a" : "b"}
+              name={each.name}
+              club={each.club}
+              touches={touchesOf(each.touches, null)}
+              matches={touchFixtures(each.touches).length}
+            />
+          ))}
+        </div>
+      ) : null}
+
+      {/* Streamed: each grid is a percentile over every man of his role. */}
+      {view === "attributes" ? (
+        <Suspense fallback={<StackWaiting />}>
+          <Grids left={one_} right={second === null ? null : two} names={{ a: names.a, b: second === null ? null : names.b }} />
+        </Suspense>
+      ) : null}
+
+      <div className="flex flex-wrap gap-1.5">
+        {[
+          { id: a, name: names.a },
+          ...(second === null || names.b === null ? [] : [{ id: b, name: names.b }]),
+        ].map((each) => (
+          <OutLink key={each.id} href={`${FANTRAX_PLAYER_BASE}/${each.id}/${FANTRAX_LEAGUE_ID}`}>
+            {each.name} on Fantrax
+          </OutLink>
+        ))}
+      </div>
+    </ScoutShell>
+  );
+}
+
+/** The tell from a side that refused, or null. */
+function refusal(side: Awaited<ReturnType<typeof subject>> | null): string | null {
+  return side !== null && "unavailable" in side ? side.unavailable : null;
+}

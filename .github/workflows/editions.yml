@@ -1,0 +1,150 @@
+name: Editions
+
+# The paper's written columns.
+#
+# **Facts are live and prose is published.** Everything countable on the front
+# page updates on the app's own thirty-second poll; a column cannot, because one
+# rewritten every thirty seconds is not a column and a sentence about a score
+# that has since moved is worse than no sentence. So the writing happens here,
+# off the app entirely, and lands as data.
+#
+# The paper rolls: the newsdesk (`gazette/newsdesk.ts`) decides what is
+# newsworthy each firing — a round column, a match report as a fixture
+# finishes, a tie newly decided, tonight's preview — and the script files up to
+# GAZETTA_STORY_CAP of it. The crons are only when the desk LOOKS; the
+# newsdesk's triggers decide what files, so a rearranged calendar changes
+# data, not this file.
+#
+# **It fires far more often than it writes, and that is the design.** GitHub's
+# schedules are routinely late and sometimes skipped, and our lock is fifteen
+# minutes before the first kickoff — a window no cron can be trusted to hit. So
+# it runs on a wide net and the guards decide: nothing new exits 0 after one
+# snapshot read and a local ledger check. The common run costs a `npm ci` and
+# an HTTP request.
+#
+# Cost when it DOES write: at most GAZETTA_STORY_CAP (10, set below) stories
+# per firing, and one Anthropic call each. A desk that refuses spends nothing,
+# so a firing costs what it FILES rather than what it considers. The
+# Actions-minutes budget is still the real spend — 130 runs a
+# week at a minute or two each against the 2000 free monthly minutes shared
+# with capture and scout-xi — and this cron block is the data to trim if
+# that ever bites.
+#
+# Setup, once: CLAUDE_CODE_OAUTH_TOKEN as a repository secret, from `claude setup-token` on the Max subscription
+# (Craig, 14 Oct 2026: "we use max claude from now on"). It lives here and never on Vercel — the app reads the
+# committed paper and never writes one.
+# OPENAI_API_KEY is the second, and it is optional: without it every edition
+# files exactly as it does now, with a typographic band instead of a drawing.
+
+on:
+  schedule:
+    # The lock and the match windows, one line per day so no two lines fire in one slot (they did,
+    # 24 times a week, until 1 Oct 2026). Hourly, not half-hourly (16 Oct 2026, Actions minutes). Locks land Friday evening or Saturday lunchtime; match
+    # reports and tie calls file as games finish, Friday and Monday evenings included.
+    # **Every evening band reaches 23:00 UTC**: the draft report is due three hours after a gameweek's last kickoff,
+    # and a 20:00 London kickoff in winter is due at 23:00 UTC, on whichever day the gameweek ends.
+    #
+    # **Friday opens at 14:00 UTC**, early for the Team Sheet at 16:30 London and the Line-Ups at 17:00: 15:00 London is
+    # 14:00 UTC in summer and 15:00 in winter.
+    - cron: "0 14-23 * * 5"
+    - cron: "0 10-23 * * 6"
+    - cron: "0 11-23 * * 0"
+    - cron: "0 17-23 * * 1,2"
+    # The morning-after sweep: whatever the evening net missed — a late whistle,
+    # a skipped run — files with coffee rather than waiting for football.
+    - cron: "15 7 * * 0,1,2"
+    # Waiver business. Claims process Wednesday evening (Craig), and NO API read
+    # carries that schedule, so the Mercato Wire's trigger is DETECTION — a
+    # fresh claim batch in the transactions feed — and these crons are only when
+    # we look. The league clock is Europe/London and crons are UTC: 17-23 UTC is
+    # evening under both BST and GMT, which is why this mirrors the weekday band
+    # rather than picking an hour. Thursday morning catches a batch that landed
+    # after the last Wednesday firing.
+    - cron: "0 17-23 * * 3"
+    - cron: "15 7 * * 4"
+    # News between the bands: a trade can land any hour of any day, and no weekday band opened before 14:00 or 17:00 UTC
+    # (Craig, 16 Oct 2026: "there was a trade, didnt see a here we go"). At :45 it shares no slot with the lines here.
+    # Every three hours, and one morning sweep, not four (17 Oct 2026: the account's Actions minutes ran out).
+    - cron: "45 9-21/3 * * *"
+    # **Thursday evening**: the Team Sheet from 18:00 London and Lawro from 20:00 (17:00 and 19:00
+    # UTC in summer, 18:00 and 20:00 in winter), and on to 23:00 UTC for a midweek gameweek's draft report;
+    # Friday's band catches a skipped evening.
+    - cron: "0 17-23 * * 4"
+  workflow_dispatch: {}
+
+# Its own group, deliberately NOT shared with the capture or scout-xi jobs:
+# GitHub keeps only the latest PENDING run per group, so a shared group would let
+# one workflow silently cancel another's queued run. Rebasing before push is what
+# keeps them out of each other's way, not queueing.
+concurrency:
+  group: editions
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    # EDITION_BUDGET_MS (core config.ts) is half of this; move the two together.
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # The branch's tip when the job starts, not the commit the schedule fired on: a queued run
+          # otherwise starts behind the other writers' pushes and rebases over them.
+          ref: ${{ github.ref }}
+          persist-credentials: false
+      - uses: ./.github/actions/node
+      # The writer's every model call goes through Claude Code, pinned so a CLI release cannot change a filing unseen.
+      - run: npm install -g @anthropic-ai/claude-code@2.1.280
+
+      # Vercel's FANTRAX_LEAGUE_ID is the only place a league is set, so the column
+      # asks production which one it serves and can never file about another.
+      - name: Ask production which league it serves
+        id: league
+        uses: ./.github/actions/league
+        with:
+          base: ${{ vars.WARM_BASE_URL }}
+
+      - name: File the column, if one is due
+        env:
+          # Stories one firing may file. Ten, because the newsdesk offers a
+          # dozen assignments for a finished round and the cap used to stop at
+          # two — which, with two kinds that refused every time, filed nothing
+          # at all for a whole period. The ledger refuses an already-covered
+          # key, so no cap can file the same story twice, and match reports
+          # gate on each FIXTURE finishing, so a Saturday firing cannot spend a
+          # round whose Sunday and Monday games are still to come.
+          GAZETTA_STORY_CAP: "10"
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # The splash drawing. Optional by design: unset, it expands to "" and
+          # the writer files the paper without a picture rather than failing
+          # after the prose has been paid for.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FANTRAX_LEAGUE_ID: ${{ steps.league.outputs.id }}
+        run: npm run edition
+
+      - name: Commit the edition, if one was written
+        # Even after a failed or timed-out firing: the writer saves story by story, ledger last.
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # The drawings ride with the edition that references them: a story
+          # pointing at a file the same commit did not carry is a broken image.
+          git add data/editions apps/companion/public/paper
+          # The app imports these at build time, so a file that will not parse
+          # would fail every deploy after it. Refuse to commit one.
+          for f in data/editions/paper.json data/editions/ledger.json; do
+            node -e 'JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))' "$f"
+          done
+          scripts/ci/push.sh "data: the paper for $(date -u +%Y-%m-%d)" "No column due."
+
+      # A red or timed-out run opens or updates the issue "alert: editions"; the next green one closes it.
+      - uses: ./.github/actions/alert
+        if: ${{ always() }}
+        with:
+          source: editions
+          status: ${{ job.status }}

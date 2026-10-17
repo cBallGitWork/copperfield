@@ -1,0 +1,98 @@
+import { describe, expect, it } from "vitest";
+import {
+  PROJECTION_PARTS,
+  type IntelProjections,
+  type ProjectedPlayer,
+  nextGameweeks,
+  projectedPlace,
+  projectedTotal,
+  projectionIntel,
+} from "./projections";
+
+function week(gw: number, points: number | null) {
+  return { gw, points, low: null, high: null, minutes: 80, start: 0.9, fixtures: 1, parts: null };
+}
+
+const HAALAND: ProjectedPlayer = {
+  code: 223094,
+  club: "MCI",
+  role: "ST",
+  gameweeks: [week(6, 6.25), week(7, 7.51), week(9, 5.5)],
+};
+
+function file(players: unknown[]): IntelProjections {
+  return {
+    manifest: { season: "26-27", gameweek: 6, exportedAt: "2026-09-24T09:00:00Z", rows: players.length, sources: [] },
+    players: players as ProjectedPlayer[],
+  };
+}
+
+describe("projectionIntel", () => {
+  it("keys each player on his code", () => {
+    expect(projectionIntel(file([HAALAND])).get(223094)?.club).toBe("MCI");
+  });
+
+  it("drops a row with no code and a gameweek with no number, and reads a missing file as none", () => {
+    const broken = { ...HAALAND, gameweeks: [week(6, 6.25), { ...week(7, 1), gw: "7" }] };
+    const read = projectionIntel(file([{ ...HAALAND, code: "x" }, { ...broken, code: 1 }]));
+    expect([...read.keys()]).toEqual([1]);
+    expect(read.get(1)?.gameweeks.map((g) => g.gw)).toEqual([6]);
+    expect(projectionIntel(null).size).toBe(0);
+  });
+
+  it("keeps a points reading that is not a number as absent, never nought", () => {
+    const odd = { ...HAALAND, gameweeks: [{ ...week(6, 1), points: "high" }] };
+    expect(projectionIntel(file([odd])).get(223094)?.gameweeks[0].points).toBeNull();
+  });
+});
+
+describe("nextGameweeks", () => {
+  it("lays his projections on the window, leaving a round he has none for empty", () => {
+    expect(nextGameweeks(HAALAND, [7, 8, 9]).map((g) => g?.points ?? null)).toEqual([7.51, null, 5.5]);
+  });
+});
+
+describe("projectedTotal", () => {
+  it("adds the rounds he has a reading for", () => {
+    expect(projectedTotal(HAALAND, [6, 7, 8])).toBeCloseTo(13.76);
+  });
+
+  it("is absent when no round in the window has one", () => {
+    expect(projectedTotal(HAALAND, [10, 11])).toBeNull();
+  });
+});
+
+describe("a week's parts", () => {
+  it("keeps the categories it knows as readings and drops a figure that is not a number", () => {
+    const parted = { ...HAALAND, gameweeks: [{ ...week(6, 5), parts: { goals: 2.5, assists: "x", bonus: 0.5 } }] };
+    const read = projectionIntel(file([parted])).get(223094)?.gameweeks[0].parts;
+    expect(read?.goals).toBe(2.5);
+    expect(read?.assists).toBeNull();
+    expect(read?.saves).toBeNull();
+    expect(Object.keys(read ?? {})).toEqual([...PROJECTION_PARTS]);
+  });
+
+  it("is absent on an export that carries none", () => {
+    expect(projectionIntel(file([HAALAND])).get(223094)?.gameweeks[0].parts).toBeNull();
+  });
+});
+
+describe("projectedPlace", () => {
+  const man = (code: number, points: number | null): ProjectedPlayer => ({ ...HAALAND, code, gameweeks: [week(6, points)] });
+  const players = new Map([man(1, 6.2), man(2, 4.1), man(3, 6.2), man(4, null), man(5, 9)].map((p) => [p.code, p]));
+
+  it("ranks his week among the cohort's readings, ties sharing a place", () => {
+    expect(projectedPlace(3, [1, 2, 3, 4, 5], players, 6)).toEqual({ points: 6.2, rank: 2, of: 4 });
+    expect(projectedPlace(2, [1, 2, 3, 4, 5], players, 6)).toEqual({ points: 4.1, rank: 4, of: 4 });
+  });
+
+  it("counts only the cohort, and a man outside it is not ranked against", () => {
+    expect(projectedPlace(1, [1, 2], players, 6)).toEqual({ points: 6.2, rank: 1, of: 2 });
+  });
+
+  it("is absent when the model has no reading for him that week", () => {
+    expect(projectedPlace(4, [1, 2, 3, 4, 5], players, 6)).toBeNull();
+    expect(projectedPlace(1, [1, 2, 3, 4, 5], players, 7)).toBeNull();
+    expect(projectedPlace(99, [1, 99], players, 6)).toBeNull();
+  });
+});

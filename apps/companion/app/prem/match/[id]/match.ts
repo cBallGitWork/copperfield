@@ -1,0 +1,100 @@
+import { notFound } from "next/navigation";
+import type {
+  Club,
+  FootballPlayer,
+  HighlightVideo,
+  Fixture,
+  FootballSnapshot,
+  IntelMatch,
+  MatchSheet,
+  PlayerMatchStats,
+  PlayerOwner,
+} from "@epl/core";
+import { clubById, playerByCode, withPlState } from "@epl/core";
+import { footballNow, gameweekSheets, roundFigures, seasonFixtures, speaksForNow, takenLately } from "../../../football";
+import { ofFixture, plMatch } from "../../../plFeed";
+import { intelMatches } from "../../../intel";
+import { marks } from "../../../involvement";
+import { matchHighlight } from "../../../matchFeed";
+import { forCode } from "./sheetJoin";
+import { wholeNumber } from "../../../wholeNumber";
+
+// The one read every match tab makes, so none assembles it twice and they cannot disagree about a field.
+
+export interface Match {
+  fixture: Fixture;
+  home: Club | undefined;
+  away: Club | undefined;
+  snapshot: FootballSnapshot;
+  /** The WHOLE season, not `snapshot.fixtures` (one round) — a form guide off one round ranks on ten matches. */
+  season: readonly Fixture[];
+  /** This match's sheet, or null before its round's first kickoff. */
+  sheet: MatchSheet | null;
+  /** Minutes and FPL's per-fixture points, by FPL's per-season id. `figures`, because `live` means in play. */
+  figures: Map<number, PlayerMatchStats>;
+  /** Every footballer by FPL's season-stable `code` — the Premier League's feeds speak it, the app speaks `id`. */
+  byCode: Map<number, FootballPlayer>;
+  /** What the sister repo logged about this match; undefined for the matches it has not reached. */
+  logged: IntelMatch | undefined;
+  /** In play AND our copy recent enough to say so — `status` has no clock, so a cached one keeps ticking. */
+  live: boolean;
+  /** A result rather than a running total; not `homeScore !== null`, which FPL writes from the first goal. */
+  finished: boolean;
+}
+
+/** Everything about one fixture, or a 404; the score from the Premier League's reading, the sheet from FPL's. */
+export async function readMatch(id: string): Promise<Match> {
+  const wanted = wholeNumber(id);
+  if (wanted === null) notFound();
+
+  const [snapshot, fixtures] = await Promise.all([footballNow(), seasonFixtures()]);
+  const listed = fixtures.find((entry) => entry.id === wanted);
+  if (listed === undefined) notFound();
+
+  // A fixture with no round still renders, without either per-round read, because somebody followed a link to it.
+  const [sheets, figures, reading] = await Promise.all([
+    listed.gameweek === null ? [] : gameweekSheets(listed.gameweek),
+    listed.gameweek === null ? [] : roundFigures(listed.gameweek),
+    ofFixture(listed.gameweek, listed.code, null, (round) => plMatch(round.id, round.status)),
+  ]);
+  // Score, minute and state off the read the scoresheet and the report come from (`withPlState`); FPL's without it.
+  const fixture = withPlState(listed, reading?.fixture ?? null);
+  const recent = reading === null ? speaksForNow(snapshot) : takenLately(reading.fetchedAt);
+  const clubs = clubById(snapshot);
+
+  return {
+    fixture,
+    home: clubs.get(fixture.homeClubId),
+    away: clubs.get(fixture.awayClubId),
+    snapshot,
+    season: fixtures,
+    sheet: sheets.find((s) => s.fixtureId === fixture.id) ?? null,
+    figures: new Map(
+      figures.filter((row) => row.fixtureId === fixture.id).map((row) => [row.playerId, row]),
+    ),
+    byCode: playerByCode(snapshot),
+    logged: intelMatches.get(fixture.id),
+    live: fixture.status === "live" && recent,
+    finished: fixture.status === "finished",
+  };
+}
+
+/** Who in our league holds each man in this match; empty, not an error, when Fantrax will not say. */
+export async function matchOwners(fixture: Fixture): Promise<Map<number, PlayerOwner>> {
+  const { owners } = await marks([fixture]);
+  return owners ?? new Map();
+}
+
+/** Its highlights video, or null: what the Highlights tab plays, and why the strip greys it when there is none. */
+export async function matchVideo({ fixture, home, away }: Match): Promise<HighlightVideo | null> {
+  if (home === undefined || away === undefined) return null;
+  return matchHighlight({ home: home.name, away: away.name, homeScore: fixture.homeScore, awayScore: fixture.awayScore });
+}
+
+/** A named man's name: FPL's short form where the bridge reaches him, else the team sheet's. */
+export function sheetName(
+  man: { code: number | null; name: string },
+  byCode: Map<number, FootballPlayer>,
+): string {
+  return forCode(byCode, man.code)?.name ?? man.name;
+}

@@ -1,0 +1,131 @@
+@import "tailwindcss";
+/* The token layer: every colour, size and easing this app names. */
+@import "./tokens.css";
+/* The desk faces' metric-matched Arial, named in each face's stack by deskFonts.ts. */
+@import "./fonts/fallbacks.css";
+/* The paper's register, re-pointing those tokens at ink on stock; after `tokens.css`, which it answers. */
+@import "./paper.css";
+/* The desk's Championship Manager furniture, as named classes, since the desk has no scope of its own. */
+@import "./desk.css";
+/* The pitch and its screen budget. After `tokens.css`, which it reads. */
+@import "./pitch.css";
+
+:root {
+  color-scheme: dark;
+  /* The phone's safe-area insets, read once here; nought where there are none. `tools/ui` sets them to preview a notch. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+/* Landscape phones report side insets for the notch; the gutter clears them. */
+@media (min-width: 40rem) {
+  :root {
+    --page-gutter: max(1rem, var(--safe-left), var(--safe-right));
+  }
+}
+
+/* How wide the page may get; `<main>` reads it. */
+:root {
+  --page-frame: 72rem;
+}
+
+/* From `2xl` the frame grows to 96rem and no further; the type steps up at the same breakpoint in `tokens.css`. */
+@media (min-width: 96rem) {
+  :root {
+    --page-frame: 96rem;
+  }
+}
+
+/* The air above the page's first object; `<main>` sets it and `prem/match/[id]/Shell` subtracts it. */
+:root {
+  --page-top: 0.5rem;
+}
+
+/* The room `<main>` leaves under the page; the front page runs its stock out through it to the foot. */
+:root {
+  /* The thumb rail's 56px tab plus 1rem of air under the last panel, below `lg`. The rail's inset is inside
+     the fixed nav, and `body` pads the page by the same inset, so neither is added here. */
+  --page-foot: calc(3.5rem + 1rem);
+  /* What the fixed thumb rail covers at the foot of the screen, inset included: where anything docked above it sits. */
+  --thumbrail: calc(3.5rem + var(--safe-bottom));
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --page-foot: 2rem;
+  }
+}
+
+/* Out through the page's gutters, for the pitch and the bench strip under it. */
+.bleed {
+  margin-inline: calc(var(--page-gutter) * -1);
+}
+
+/* The ground on the root, which paints the whole screen, insets and overscroll included, and is the colour iOS 26
+   Safari tints its status area and bars with. `body` stays clear, or it would paint over the fixed photograph. */
+html {
+  background: var(--color-bg);
+}
+
+body {
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /* Keeps the foot of the page clear of the thumb rail's inset; the rail carries its own, being fixed. */
+  padding-bottom: var(--safe-bottom);
+  /* The installed iPhone app draws under the status bar (`black-translucent`); the page starts below it. Zero elsewhere. */
+  padding-top: var(--safe-top);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Scores, minutes, countdowns: tabular so digits don't jitter as they tick. */
+.numeric {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* The live dot, the one place motion carries meaning; always beside the word LIVE. */
+.live-dot {
+  position: relative;
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-live);
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: live-pulse 1.8s var(--ease-out-quart) infinite;
+}
+@keyframes live-pulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  70% { opacity: 0; transform: scale(2.6); }
+  100% { opacity: 0; transform: scale(2.6); }
+}
+
+/* Focus: one ring everywhere, never removed, in the accent, since where you are is what is selected. */
+:where(a, button, [role="button"], input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+/* Reduced motion: every animation gets an alternative; the live dot stays, static. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .live-dot::after {
+    display: none;
+  }
+}

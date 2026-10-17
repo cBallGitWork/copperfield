@@ -1,0 +1,5 @@
+/* A tapped list row whose page is still on its way (shell/Pending): sunk toward the ground until it lands, since no
+   route draws a loading frame. A shade, not a bevel: a repeating row takes none (desk.css). */
+.cm-row:has([data-pending]) {
+  box-shadow: inset 0 0 0 100vmax color-mix(in oklch, var(--color-bg) 45%, transparent);
+}

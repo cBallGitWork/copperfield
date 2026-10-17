@@ -1,0 +1,524 @@
+{
+  "slug": "gw6-prem-report-2026-10-12",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 6,
+  "gameweek": 6,
+  "filedAt": "2026-10-12T22:17:39.477Z",
+  "expiresAt": null,
+  "edition": "Monday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Lampard's sub plot thickens",
+  "deck": "Coventry City beat Newcastle United 4-1",
+  "body": "",
+  "subjects": [
+    "match-report:gw6:2026-10-12"
+  ],
+  "image": null,
+  "face": {
+    "code": 480457,
+    "name": "Rudoni",
+    "clubId": 7,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645248,
+        "kickoff": "2026-10-12T19:00:00Z",
+        "home": {
+          "code": 9,
+          "score": 4,
+          "goals": [
+            "Rudoni 06 pen",
+            "Cherif 48",
+            "Simms 81",
+            "Mfuni 86"
+          ],
+          "assists": [
+            "Thomas-Asante 81",
+            "Dasilva 86"
+          ],
+          "manager": "Frank Lampard",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Rushworth",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.1
+                }
+              ],
+              [
+                {
+                  "name": "van Ewijk",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.6
+                },
+                {
+                  "name": "Thomas",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.5
+                },
+                {
+                  "name": "Pinnock",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Dasilva",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.7
+                }
+              ],
+              [
+                {
+                  "name": "Yirenkyi",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Onyeka",
+                    "minute": "78",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 5.4
+                },
+                {
+                  "name": "Grimes",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Mfuni",
+                    "minute": "83",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Thomas-Asante",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.6
+                },
+                {
+                  "name": "Rudoni",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Torp",
+                    "minute": "83",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 6.9
+                },
+                {
+                  "name": "Mason-Clark",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Sakamoto",
+                    "minute": "61",
+                    "booked": false,
+                    "mark": 3.4
+                  },
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Cherif",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Simms",
+                    "minute": "78",
+                    "booked": false,
+                    "mark": 6
+                  },
+                  "mark": 8
+                }
+              ]
+            ],
+            "unused": [
+              "Bentley",
+              "Hamer",
+              "Latibeaudiere",
+              "Gboho"
+            ]
+          },
+          "next": "Tottenham Hotspur (a)"
+        },
+        "away": {
+          "code": 4,
+          "score": 1,
+          "goals": [
+            "Botman 70"
+          ],
+          "assists": [
+            "González 70"
+          ],
+          "manager": "Matthias Jaissle",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Hornícek",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 2.5
+                }
+              ],
+              [
+                {
+                  "name": "Miley",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Dedic",
+                    "minute": "59",
+                    "booked": false,
+                    "mark": 2.5
+                  },
+                  "mark": 3.5
+                },
+                {
+                  "name": "Thiaw",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 2.5
+                },
+                {
+                  "name": "Botman",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.7
+                },
+                {
+                  "name": "Hall",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.4
+                }
+              ],
+              [
+                {
+                  "name": "González",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.6
+                },
+                {
+                  "name": "Willock",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Joelinton",
+                    "minute": "59",
+                    "booked": true,
+                    "mark": 1.8
+                  },
+                  "mark": 3.4
+                }
+              ],
+              [
+                {
+                  "name": "Murphy",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Touré",
+                    "minute": "59",
+                    "booked": false,
+                    "mark": 3.5,
+                    "replacedBy": {
+                      "name": "Burn",
+                      "minute": "90+1",
+                      "booked": false,
+                      "mark": null
+                    }
+                  },
+                  "mark": 2.4
+                },
+                {
+                  "name": "Wissa",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Osula",
+                    "minute": "78",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 4.2
+                },
+                {
+                  "name": "Barnes",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Fernandez-Pardo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 2.3
+                }
+              ]
+            ],
+            "unused": [
+              "Schär",
+              "Bamba",
+              "Steur",
+              "Pope"
+            ]
+          },
+          "next": "Aston Villa (h)"
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 0
+        },
+        "venue": "Coventry Building Society Arena",
+        "attendance": 30811,
+        "referee": "John Brooks",
+        "standfirst": "Coventry City beat Newcastle United 4-1 for their first home win, climbing out of relegation places.",
+        "account": "Jack Rudoni put Coventry City ahead from the spot after six minutes, sending his kick low into the corner with his left. Just after half-time Sidiki Cherif doubled the lead, beating the goalkeeper with a low right-foot strike from outside the box.\nSven Botman pulled one back for Newcastle United 20 minutes from time, meeting a pass from Nico González with a shot from distance that flew into the top corner. Ellis Simms, a substitute for Cherif, answered after 81 minutes, turning in Brandon Thomas-Asante's pass from close range. Stephen Mfuni, on for Matt Grimes, made it 4-1 after 86 minutes, turning in a ball from Jay Dasilva inside the box for a second Coventry goal in five minutes. Bazoumana Touré went off injured for Newcastle one minute into stoppage time.",
+        "sections": [
+          {
+            "head": "Cherif strikes from range",
+            "pitch": "Sidiki Cherif shot three times for Coventry City, his goal among them, before the substitution that brought on Ellis Simms in his place.",
+            "stake": "A free agent, nine points; his first league start this season."
+          },
+          {
+            "head": "Rudoni converts",
+            "pitch": "Jack Rudoni took the kick that opened the scoring, and his conversion was the only goal between the sides at the interval.",
+            "stake": "A free agent, seven points."
+          },
+          {
+            "head": "Thomas-Asante sets up Simms",
+            "pitch": "Brandon Thomas-Asante laid on the third goal for Ellis Simms and was also credited with one action in defence for Coventry City.",
+            "stake": "A free agent, six points."
+          },
+          {
+            "head": "Botman's long-range reply",
+            "pitch": "Sven Botman's strike was the only goal Newcastle United managed, and it briefly brought them within one before Coventry pulled clear again.",
+            "stake": "A free agent, six points."
+          },
+          {
+            "head": "González creates six chances",
+            "pitch": "Nico González set up six openings for Newcastle United, the pass for Sven Botman's goal among them, and he contributed once in defence too.",
+            "stake": "A free agent, six points."
+          },
+          {
+            "head": "Dasilva tees up Mfuni",
+            "pitch": "Jay Dasilva supplied the final pass for Stephen Mfuni's goal, the fourth for Coventry City and the last of the match.",
+            "stake": "A free agent, five points."
+          },
+          {
+            "head": "Simms adds the third",
+            "pitch": "Ellis Simms took the place of Sidiki Cherif and his goal put two between the sides once more, before Stephen Mfuni added a fourth.",
+            "stake": "A free agent, five points."
+          },
+          {
+            "head": "van Ewijk",
+            "pitch": "Milan van Ewijk recorded two defensive actions in a Coventry City defence that gave up a single goal against Newcastle United.",
+            "stake": "A free agent, six points."
+          },
+          {
+            "head": "Yirenkyi helps the defence",
+            "pitch": "Caleb Yirenkyi was credited with two contributions without the ball, a figure matched by Milan van Ewijk and Bobby Thomas.",
+            "stake": "A free agent, four points."
+          },
+          {
+            "head": "Thomas busy in defence",
+            "pitch": "Bobby Thomas registered a pair of interventions at the back as Coventry City went on to a fourth goal against Newcastle United.",
+            "stake": "A free agent, four points."
+          },
+          {
+            "head": "Rushworth's four saves",
+            "pitch": "Carl Rushworth produced four saves for Coventry City, and Newcastle United found a way past him on a single occasion.",
+            "stake": "A free agent, three points."
+          }
+        ],
+        "keyStats": [
+          {
+            "label": "Points",
+            "value": "Cherif 9, Rudoni 7, Thomas-Asante 6, van Ewijk 6"
+          },
+          {
+            "label": "Shots",
+            "value": "9 (6 on target) v 19 (6)"
+          },
+          {
+            "label": "xG",
+            "value": "Coventry 1.48, Newcastle 1.85"
+          },
+          {
+            "label": "Saves",
+            "value": "Rushworth 4"
+          },
+          {
+            "label": "Defensive points",
+            "value": "Yirenkyi 2, Thomas 2, van Ewijk 2"
+          },
+          {
+            "label": "Off before the hour",
+            "value": "Miley 59, Willock 59, Murphy 59"
+          },
+          {
+            "label": "Most shots",
+            "value": "Willock 5 (0 on target)"
+          },
+          {
+            "label": "Chances created",
+            "value": "González 6 (1 assist)"
+          },
+          {
+            "label": "Top xG",
+            "value": "Rudoni 0.79, Fernandez-Pardo 0.49, Barnes 0.35"
+          }
+        ],
+        "star": {
+          "name": "Cherif",
+          "club": "Coventry",
+          "holder": null,
+          "mark": 8,
+          "did": "1 goal"
+        },
+        "rows": [
+          {
+            "minute": "06",
+            "kind": "Pen",
+            "side": "home",
+            "text": "Rudoni"
+          },
+          {
+            "minute": "48",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Cherif"
+          },
+          {
+            "minute": "59",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Dedic for Miley"
+          },
+          {
+            "minute": "59",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Touré for Murphy"
+          },
+          {
+            "minute": "59",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Joelinton for Willock"
+          },
+          {
+            "minute": "61",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Sakamoto for Mason-Clark"
+          },
+          {
+            "minute": "66",
+            "kind": "Booked",
+            "side": "home",
+            "text": "van Ewijk"
+          },
+          {
+            "minute": "70",
+            "kind": "Goal",
+            "side": "away",
+            "text": "Botman (González)"
+          },
+          {
+            "minute": "78",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Onyeka for Yirenkyi"
+          },
+          {
+            "minute": "78",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Simms for Cherif"
+          },
+          {
+            "minute": "78",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Osula for Wissa"
+          },
+          {
+            "minute": "81",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Simms (Thomas-Asante)"
+          },
+          {
+            "minute": "81",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Joelinton"
+          },
+          {
+            "minute": "83",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Torp for Rudoni"
+          },
+          {
+            "minute": "83",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Mfuni for Grimes"
+          },
+          {
+            "minute": "86",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Mfuni (Dasilva)"
+          },
+          {
+            "minute": "90+1",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Burn for Touré, injured"
+          }
+        ],
+        "video": "GNeCKBc3hts"
+      }
+    ]
+  }
+}

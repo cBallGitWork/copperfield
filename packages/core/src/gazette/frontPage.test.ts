@@ -1,0 +1,222 @@
+import { describe, expect, it } from "vitest";
+import { composePaper } from "./frontPage";
+import type { PublishedStory } from "./story";
+
+const NOW = "2026-08-31T12:00:00.000Z";
+
+// Its own factory: importing story.test.ts would register that file's tests a second time here.
+const story = (over: Partial<PublishedStory> = {}): PublishedStory => ({
+  slug: "gw3-match-report-2026-08-30",
+  kind: "match-report",
+  leagueId: "zbn1z3ukmsgb36sz",
+  period: 3,
+  gameweek: 3,
+  filedAt: "2026-08-31T09:00:00.000Z",
+  expiresAt: null,
+  edition: "The Monday Club",
+  byline: "The Back Page",
+  headline: "Something clever",
+  deck: "Something plain.",
+  body: "A paragraph.",
+  subjects: ["match-report:gw3:2026-08-30"],
+  image: null,
+  face: null,
+  ties: [],
+  ...over,
+});
+
+describe("composePaper", () => {
+  it("drops an expired story and keeps one with no expiry", () => {
+    // The elevens die at the round's first kickoff.
+    const paper = composePaper(
+      [
+        story({ slug: "dead", kind: "predicted-xi", expiresAt: "2026-08-31T11:00:00.000Z" }),
+        story({ slug: "alive" }),
+      ],
+      NOW,
+    );
+    expect(paper.map((s) => s.slug)).toEqual(["alive"]);
+  });
+
+  it("keeps a story whose expiry cannot be read", () => {
+    // An unreadable expiry keeps the story.
+    const paper = composePaper([story({ expiresAt: "not-a-date" })], NOW);
+    expect(paper).toHaveLength(1);
+  });
+
+  it("lets a fresher telling of the same subject replace the earlier one", () => {
+    // The second look at the same match supersedes the first.
+    const paper = composePaper(
+      [
+        story({ slug: "first", kind: "match-report", subjects: ["match:gw3:3v7"], filedAt: "2026-08-30T21:00:00.000Z" }),
+        story({ slug: "second", kind: "match-report", subjects: ["match:gw3:3v7"], filedAt: "2026-08-31T09:00:00.000Z" }),
+        story({ slug: "unrelated", kind: "match-report", subjects: ["match:gw3:1v2"], filedAt: "2026-08-30T21:00:00.000Z" }),
+      ],
+      NOW,
+    );
+    expect(paper.map((s) => s.slug)).toEqual(["second", "unrelated"]);
+  });
+
+  it("leads with the most recently filed, whatever its kind or period", () => {
+    const paper = composePaper(
+      [
+        story({ slug: "old-report", kind: "match-report", period: 2, gameweek: 2, subjects: ["match:gw2:1v2"], filedAt: "2026-08-24T09:00:00.000Z" }),
+        story({ slug: "column", kind: "bin-xi", period: 3, filedAt: "2026-08-31T10:00:00.000Z" }),
+        story({ slug: "match", kind: "match-report", period: 3, subjects: ["match:gw3:1v2"], filedAt: "2026-08-30T21:00:00.000Z" }),
+        story({ slug: "later-match", kind: "match-report", period: 3, subjects: ["match:gw3:3v7"], filedAt: "2026-08-31T09:00:00.000Z" }),
+      ],
+      NOW,
+    );
+    // Craig, 9 Oct 2026: "always lead with the most recent article".
+    expect(paper.map((s) => s.slug)).toEqual(["column", "later-match", "match", "old-report"]);
+  });
+
+  it("puts a fresh column above a heavier story filed yesterday", () => {
+    // `bin-xi` weighs 45 against `match-report`'s 96, but the day outranks the kind.
+    const paper = composePaper(
+      [
+        story({ slug: "sunday-report", kind: "match-report", period: 3, filedAt: "2026-08-30T18:00:00.000Z" }),
+        story({ slug: "tuesday-column", kind: "bin-xi", period: 3, filedAt: "2026-09-01T08:00:00.000Z" }),
+      ],
+      NOW,
+    );
+    expect(paper.map((s) => s.slug)).toEqual(["tuesday-column", "sunday-report"]);
+  });
+
+  it("leads with a column filed a minute after a report on the same day", () => {
+    const paper = composePaper(
+      [
+        story({ slug: "report", kind: "match-report", period: 3, filedAt: "2026-08-30T18:00:00.000Z" }),
+        story({ slug: "column", kind: "bin-xi", period: 3, filedAt: "2026-08-30T18:01:00.000Z" }),
+      ],
+      NOW,
+    );
+    expect(paper.map((s) => s.slug)).toEqual(["column", "report"]);
+  });
+});
+
+describe("composePaper — team news leads", () => {
+  const at = "2026-09-18T14:00:00.000Z";
+  const story = (kind: string, slug: string): PublishedStory =>
+    ({
+      slug, kind, leagueId: "L", period: 4, gameweek: 4,
+      filedAt: at, expiresAt: null, edition: "", byline: "",
+      headline: slug, deck: "", body: "", subjects: [],
+    }) as unknown as PublishedStory;
+
+  it("leads on the presser, above the line-ups filed the same day", () => {
+    const out = composePaper([story("predicted-xi", "line-ups"), story("presser", "team-news")], at);
+    expect(out[0].slug).toBe("team-news");
+  });
+
+  it("still ranks a report above the columns", () => {
+    const out = composePaper([story("predictions", "lawro"), story("match-report", "report")], at);
+    expect(out[0].slug).toBe("report");
+  });
+});
+
+describe("composePaper — one edition of a column at a time", () => {
+  const story = (kind: string, slug: string, period: number): PublishedStory =>
+    ({
+      slug, kind, leagueId: "L", period, gameweek: period,
+      filedAt: `2026-09-${10 + period}T12:00:00.000Z`, expiresAt: null,
+      edition: "", byline: "", headline: slug, deck: "", body: "", subjects: [],
+    }) as unknown as PublishedStory;
+
+  it("retires last round's predictions when this round's file", () => {
+    const out = composePaper([story("predictions", "gw4", 4), story("predictions", "gw5", 5)], "2026-09-21T12:00:00.000Z");
+    expect(out.map((s) => s.slug)).toEqual(["gw5"]);
+  });
+
+  it("retires last week's Bin XI when this week's files", () => {
+    const out = composePaper([story("bin-xi", "gw4", 4), story("bin-xi", "gw5", 5)], "2026-09-21T12:00:00.000Z");
+    expect(out.map((s) => s.slug)).toEqual(["gw5"]);
+  });
+
+  it("keeps Thursday's and Friday's pressers, which share a round", () => {
+    const out = composePaper([story("presser", "thu", 5), story("presser", "fri", 5)], "2026-09-21T12:00:00.000Z");
+    expect(out).toHaveLength(2);
+  });
+
+  it("retires last round's pressers when this round's first files", () => {
+    const out = composePaper([story("presser", "gw6-thu", 6), story("presser", "gw6-fri", 6), story("presser", "gw7-thu", 7)], "2026-09-21T12:00:00.000Z");
+    expect(out.map((s) => s.slug)).toEqual(["gw7-thu"]);
+  });
+
+  it("drops a presser at the lock it previewed", () => {
+    const thu = { ...story("presser", "gw7-thu", 7), expiresAt: "2026-10-17T11:15:00.000Z" };
+    expect(composePaper([thu], "2026-10-17T11:14:00.000Z")).toHaveLength(1);
+    expect(composePaper([thu], "2026-10-17T11:16:00.000Z")).toHaveLength(0);
+  });
+
+  it("leaves the per-subject kinds alone", () => {
+    const out = composePaper([story("match-report", "a", 4), story("match-report", "b", 5)], "2026-09-21T12:00:00.000Z");
+    expect(out).toHaveLength(2);
+  });
+});
+
+describe("composePaper — the most recent leads", () => {
+  const at = "2026-09-18T15:00:00.000Z";
+  const story = (slug: string): PublishedStory =>
+    ({
+      slug, kind: "presser", leagueId: "L", period: 5, gameweek: 5,
+      // One firing, one instant: both Team Sheets are filed the same second.
+      filedAt: at, expiresAt: null, edition: "", byline: "",
+      headline: slug, deck: "", body: "", subjects: [],
+    }) as unknown as PublishedStory;
+
+  it("leads on Friday's Team Sheet, not Thursday's", () => {
+    const out = composePaper([story("gw5-presser-2026-09-17"), story("gw5-presser-2026-09-18")], at);
+    expect(out[0].slug).toBe("gw5-presser-2026-09-18");
+  });
+
+  it("orders the same way whichever way round they arrive", () => {
+    const out = composePaper([story("gw5-presser-2026-09-18"), story("gw5-presser-2026-09-17")], at);
+    expect(out.map((s) => s.slug)).toEqual(["gw5-presser-2026-09-18", "gw5-presser-2026-09-17"]);
+  });
+});
+
+describe("the match report on the day it files", () => {
+  it("leads over that morning's pressers: it is the newer news", () => {
+    const paper = composePaper(
+      [
+        story({ slug: "presser", kind: "presser", subjects: ["presser:gw5:2026-09-19"], filedAt: "2026-09-19T08:00:00.000Z" }),
+        story({ slug: "report", kind: "match-report", subjects: ["match-report:gw5:2026-09-19"], filedAt: "2026-09-19T20:00:00.000Z" }),
+      ],
+      "2026-09-19T21:00:00.000Z",
+    );
+    expect(paper[0].slug).toBe("report");
+  });
+});
+
+// Craig, 9 Oct 2026: "Predicted line up becomes the headline article until deadline".
+describe("the Line-Ups until the lock", () => {
+  const LOCK = "2026-10-10T11:15:00.000Z";
+  const paper = (now: string, leadsUntil: string | null = LOCK) =>
+    composePaper(
+      [
+        story({
+          slug: "gw6-predicted-xi", kind: "predicted-xi", period: 6, gameweek: 6, subjects: ["predicted-xi:gw6"],
+          filedAt: "2026-10-09T17:25:00.000Z", expiresAt: "2026-10-10T11:30:00Z", ...(leadsUntil === null ? {} : { leadsUntil }),
+        }),
+        story({
+          slug: "gw6-presser-2026-10-10", kind: "presser", period: 6, gameweek: 6, subjects: ["presser:gw6:2026-10-10"],
+          filedAt: "2026-10-10T08:00:00.000Z",
+        }),
+      ],
+      now,
+    ).map((s) => s.slug);
+
+  it("lead above a Team Sheet filed after them, until the lock", () => {
+    expect(paper("2026-10-10T09:00:00.000Z")).toEqual(["gw6-predicted-xi", "gw6-presser-2026-10-10"]);
+  });
+
+  it("give the lead back to the newest filing at the lock", () => {
+    expect(paper(LOCK)).toEqual(["gw6-presser-2026-10-10", "gw6-predicted-xi"]);
+  });
+
+  it("order by filing when filed without a lead, or with one that cannot be read", () => {
+    expect(paper("2026-10-10T09:00:00.000Z", null)[0]).toBe("gw6-presser-2026-10-10");
+    expect(paper("2026-10-10T09:00:00.000Z", "not-a-date")[0]).toBe("gw6-presser-2026-10-10");
+  });
+});

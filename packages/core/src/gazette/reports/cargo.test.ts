@@ -1,0 +1,79 @@
+import { describe, expect, it } from "vitest";
+import { spursVillaDay } from "./__fixtures__/spursVilla";
+import { plainStandfirst, reportsCargo } from "./cargo";
+import { normalizeReports } from "./cargoRead";
+import { deskDay } from "./desk";
+import { deskOf } from "./__fixtures__/built";
+import { CHELSEA_BOURNEMOUTH } from "./__fixtures__/gw6";
+
+const desks = deskDay(spursVillaDay());
+const [report] = reportsCargo(desks, { headline: "h", headlines: [], matches: new Map() });
+
+describe("reportsCargo", () => {
+  it("names a man in the header as the club does: João Pedro, never Pedro", () => {
+    const [chelsea] = reportsCargo([deskOf(CHELSEA_BOURNEMOUTH)], { headline: "h", headlines: [], matches: new Map() });
+    expect(chelsea.home.goals).toEqual(["Henderson 2", "Rogers 3", "João Pedro 46", "João Pedro 67", "Henderson 70"]);
+    expect(chelsea.home.assists).toContain("Neto 46");
+  });
+
+  it("builds the header as BBC Sport sets it: goals and assists by side, half-time, venue and attendance", () => {
+    expect(report.home).toMatchObject({ code: 6, score: 2, goals: ["Gallagher 86", "van Hecke 90+8"], assists: ["Kudus 86", "Robertson 90+8"] });
+    expect(report.away.goals).toEqual(["Manzambi 45+4", "Jackson 67", "Buendía 79"]);
+    expect(report.away.assists).toEqual(["Kamara 45+4", "Manzambi 67", "McGinn 79"]);
+    expect([report.halfTime, report.venue, report.attendance]).toEqual([{ home: 0, away: 1 }, "Tottenham Hotspur Stadium", 60920]);
+  });
+
+  it("carries both line-ups and the key stats with figures", () => {
+    expect(report.home.lineup?.formation).toBe("4-2-3-1");
+    expect(report.keyStats.map((k) => k.label)).toEqual(expect.arrayContaining(["Shots", "Most shots", "Chances created"]));
+    expect(report.keyStats.find((k) => k.label === "Most shots")?.value).toBe("Jackson 6 (2 on target, 1 goal)");
+  });
+
+  it("prints the timeline in the paper's words, the injury marked on the change", () => {
+    expect(report.rows[0]).toEqual({ minute: "19", kind: "Sub", side: "home", text: "Gray for Porro, injured" });
+    expect(report.rows.find((r) => r.kind === "VAR")).toMatchObject({ minute: "60", text: "Kudus goal ruled out" });
+    expect(report.rows.find((r) => r.minute === "45+4")).toMatchObject({ kind: "Goal", text: "Manzambi (Kamara)" });
+  });
+
+  it("falls back to the desk's plain standfirst when a match's piece failed twice", () => {
+    expect(report.standfirst).toBe("Aston Villa won 3-2 at Tottenham Hotspur.");
+    expect(report.sections).toEqual([]);
+    expect(plainStandfirst(desks[0])).toBe(report.standfirst);
+  });
+});
+
+describe("normalizeReports", () => {
+  it("round-trips what the desk built", () => {
+    expect(normalizeReports(JSON.parse(JSON.stringify([report])))).toEqual([report]);
+  });
+
+  it("round-trips marks and the Star man, and reads a report filed before them without either", () => {
+    const rated = { ...report, star: { name: "Manzambi", club: "Villa", holder: null, mark: 8.9, did: "1 goal" } };
+    rated.home = { ...report.home, lineup: { ...report.home.lineup!, lines: [[{ ...report.home.lineup!.lines[0][0], mark: 5.2 }]] } };
+    expect(normalizeReports(JSON.parse(JSON.stringify([rated])))).toEqual([rated]);
+    const { star: _filedBefore, ...old } = report;
+    const read = normalizeReports(JSON.parse(JSON.stringify([old])))![0];
+    expect("star" in read).toBe(false);
+    expect("mark" in read.home.lineup!.lines[0][0]).toBe(false);
+  });
+
+  it("round-trips a substitute replaced in turn", () => {
+    const chained = { ...report };
+    const first = report.home.lineup!.lines[0][0];
+    chained.home = { ...report.home, lineup: { ...report.home.lineup!, lines: [[{ ...first, replacedBy: { name: "Gray", minute: "19", booked: false, replacedBy: { name: "Kudus", minute: "80", booked: true } } }]] } };
+    expect(normalizeReports(JSON.parse(JSON.stringify([chained])))).toEqual([chained]);
+  });
+
+  it("refuses a match with one side, and a row of a kind it does not know", () => {
+    expect(normalizeReports([{ ...report, away: null }])).toBeUndefined();
+    const odd = normalizeReports([{ ...report, rows: [{ minute: "9", kind: "Tackle", side: "home", text: "x" }], video: "not a video id!" }]);
+    expect(odd?.[0].rows).toEqual([]);
+    expect(odd?.[0].video).toBeNull();
+  });
+
+  it("drops the top league scorers and free agents a report filed before 11 Oct 2026 carried (Craig: remove them)", () => {
+    const old = { ...report, fantasy: { top: [{ name: "McGinn", club: "Villa", holder: "its_ohi", points: 7, did: "1 goal" }], wire: [] } };
+    expect(normalizeReports([old])?.[0]).not.toHaveProperty("fantasy");
+    expect(report).not.toHaveProperty("fantasy");
+  });
+});

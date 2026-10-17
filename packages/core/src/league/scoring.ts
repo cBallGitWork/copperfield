@@ -1,0 +1,111 @@
+import { ASSISTS_FANTASY, ASSISTS_OFFICIAL, ASSISTS_TOTAL, CLEAN_SHEETS, GOALS, KEEPER_WORK } from "./categoryNames";
+// What the commissioner set a category to be worth, read from `getLeagueInfo`: priced only where the app sums its own.
+
+/** What a scoring category is called, in the league's own words: read, never written down, since leagues differ. */
+export interface ScoringCategory {
+  /** Their short label: "G", "CS", "MP". */
+  code: string;
+  /** Their name for it: "Goals", "Clean Sheets On Field". */
+  name: string;
+  /** Their long code, "INDIVIDUAL_ASSISTS_TOTAL": what a category is, whatever a league calls it. Null when not sent. */
+  longCode: string | null;
+}
+
+/** Keepers score differently enough that Fantrax keeps two tables. */
+export interface ScoringRules {
+  goalie: CategoryTable;
+  outfield: CategoryTable;
+  /** The goalie table's position letter, from the payload's group short name; when null a keeper scores nothing. */
+  goaliePosition: string | null;
+}
+
+/** One band of a tiered price: `points` for a match's count from `from` to `to`, or for every `every` of it. */
+export interface Band {
+  from: number;
+  to: number;
+  points: number;
+  every: number | null;
+}
+
+/** A price in bands. Cumulative bands stack, so a count earns every band it reaches; otherwise only its own. */
+export interface Tiers {
+  bands: readonly Band[];
+  cumulative: boolean;
+}
+
+/** Points per unit, or bands. */
+export type Price = number | Tiers;
+
+/** Category short name → position letter → price, or null where the wire priced it with an expression we do not read.
+ *  An absent position falls through to `Default`; a null one must not. */
+export type CategoryTable = Record<string, Record<string, Price | null>>;
+
+/** The scoring the app prices its own points by: one league's rules and its names for them. */
+export interface LeagueScoring {
+  rules: ScoringRules;
+  categories: Record<string, ScoringCategory>;
+}
+
+/** The clean-sheet category's short name in Fantrax's own scoring table. */
+export const CLEAN_SHEET = CLEAN_SHEETS.short;
+
+/** The wire's fallback column, in its own spelling. */
+const DEFAULT_POSITION = "Default";
+
+/** What a slot earns for one match's count in one category: `count` at a flat price, or the bands it reaches.
+ *  Null when the rules do not cover it. The top band has no ceiling, as "60+" and "5+" have none. */
+export function pointsFor(rules: ScoringRules, category: string, position: string, count: number): number | null {
+  const price = priceOf(rules, category, position);
+  if (price === null) return null;
+  if (typeof price === "number") return count === 0 ? 0 : price * count;
+  const last = price.bands.length - 1;
+  return price.bands.reduce((sum, band, i) => {
+    const reached = i === last ? count : Math.min(count, band.to);
+    if (count < band.from || (!price.cumulative && reached < count)) return sum;
+    return sum + (band.every === null ? band.points : Math.floor((reached - band.from + 1) / band.every) * band.points);
+  }, 0);
+}
+
+/** One category's price at one position; null when the rules do not cover it. */
+export function priceOf(rules: ScoringRules, category: string, position: string): Price | null {
+  const goalie = rules.goaliePosition !== null && position === rules.goaliePosition;
+  const row = (goalie ? rules.goalie : rules.outfield)[category];
+  if (!row) return null;
+  // A listed position stops here even when unreadable: `Default` is somebody else's rule.
+  return position in row ? row[position] : (row[DEFAULT_POSITION] ?? null);
+}
+
+/** The fewest of a category's count in one match that a position is paid for; null when it is never paid. */
+export function firstPaid(rules: ScoringRules, category: string, position: string): number | null {
+  const price = priceOf(rules, category, position);
+  if (price === null) return null;
+  if (typeof price === "number") return price > 0 ? 1 : null;
+  const rungs = price.bands.filter((band) => band.points > 0).map((band) => (band.every === null ? band.from : band.from - 1 + band.every));
+  return rungs.length === 0 ? null : Math.min(...rungs);
+}
+
+/** The fewest keeper's actions the league pays for in a match, by whichever of its keeper categories it scores. */
+export function keeperRung(rules: ScoringRules): number | null {
+  const keeper = rules.goaliePosition;
+  return keeper === null ? null : (KEEPER_WORK.map((category) => firstPaid(rules, category.short, keeper)).find((n) => n !== null) ?? null);
+}
+
+/** What one unit of a category is worth to a player in one position, where the price is flat.
+ *  Null, never nought, for a banded price, an unread expression, an unscored category or an unnamed keeper position. */
+export function categoryPoints(rules: ScoringRules, category: string, position: string): number | null {
+  const price = priceOf(rules, category, position);
+  return typeof price === "number" ? price : null;
+}
+
+/** The categories a goal and an assist arrive under; a league prices only its own (`AT`, or `A` and `AF`). */
+const ATTACKING = [GOALS, ASSISTS_TOTAL, ASSISTS_OFFICIAL, ASSISTS_FANTASY].map((category) => category.short);
+
+/** What his goals and assists, and his clean sheet, were worth to him; a category the league does not price adds nothing. */
+export function returnPoints(
+  counts: Readonly<Record<string, number | null | undefined>>,
+  rules: ScoringRules,
+  position: string,
+): { attacking: number; cleanSheet: number } {
+  const worth = (category: string) => (counts[category] ?? 0) * (categoryPoints(rules, category, position) ?? 0);
+  return { attacking: ATTACKING.reduce((sum, c) => sum + worth(c), 0), cleanSheet: worth(CLEAN_SHEET) };
+}

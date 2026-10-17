@@ -1,0 +1,31 @@
+{
+  "slug": "here-we-go-h1vfnrrfmva0wfw5",
+  "kind": "trade",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 7,
+  "gameweek": 7,
+  "filedAt": "2026-10-16T16:06:35.749Z",
+  "expiresAt": null,
+  "edition": "The Mercato Wire",
+  "byline": "Here We Go",
+  "headline": "Here we go! Jeremy Doku to Dome",
+  "deck": "Dome get Jeremy Doku from Truffles for Eberechi Eze",
+  "body": "Dome land Jeremy Doku from Truffles, the Manchester City man good for nine points and a goal this season. Truffles take Eberechi Eze the other way, four points and no goals so far for the Arsenal midfielder. Straight swap, both sides moving on a man they drafted elsewhere.\n\nHere we go!",
+  "subjects": [
+    "trade:h1vfnrrfmva0wfw5"
+  ],
+  "image": null,
+  "face": {
+    "code": 248875,
+    "name": "Jeremy Doku",
+    "clubId": 15,
+    "position": "M"
+  },
+  "ties": [],
+  "extras": {
+    "transfer": {
+      "teamId": "0g0j5mkomuqqwsbu",
+      "team": "Dome"
+    }
+  }
+}

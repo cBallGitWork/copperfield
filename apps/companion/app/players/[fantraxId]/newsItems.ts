@@ -1,0 +1,55 @@
+import type { PlayerStory } from "@epl/core";
+
+// Everything Fantrax has written about him this football year, as an inbox; never FPL's availability line, which is a
+// state (Craig, 4 Sep 2026). Not `inbox.ts`: macOS would take it for `Inbox.tsx`.
+
+export interface NewsItem {
+  /** Fantrax's own id for the story, so two on one day stay distinct. */
+  id: string;
+  /** The line a reader scans. */
+  headline: string;
+  /** The whole of it. */
+  body: string;
+  /** The provider's reading of what it means for a manager. Often absent. */
+  analysis: string | null;
+  /** Epoch milliseconds, or null. Sorted on, so a dateless item sinks. */
+  at: number | null;
+}
+
+/** His items, newest first (Craig, 4 Sep 2026); a dateless item last, since it cannot be shown to be recent. */
+export function inbox(stories: readonly PlayerStory[]): NewsItem[] {
+  return stories
+    .map((story) => ({
+      id: story.id,
+      headline: whole(story.headline, story.content),
+      body: story.content,
+      analysis: story.analysis,
+      at: story.at,
+    }))
+    .sort((a, b) => (b.at ?? -Infinity) - (a.at ?? -Infinity));
+}
+
+/** The note after its headline, as paragraphs: the rest of the story, then the provider's analysis. */
+export function noteBody(item: NewsItem): string[] {
+  const rest = item.body.startsWith(item.headline) ? item.body.slice(item.headline.length).trim() : item.body;
+  return [rest, item.analysis].filter((part): part is string => part !== null && part.trim() !== "");
+}
+
+/** The whole story as paragraphs, said once: its text (after the headline where it does not open with it), then the analysis. */
+export function storyText(item: NewsItem): string[] {
+  const opening = item.body.startsWith(item.headline) ? [] : [item.headline];
+  return [...opening, item.body, item.analysis ?? ""].filter((part) => part.trim() !== "");
+}
+
+/** When it was filed, as an ISO string for the London formatters, or null for a dateless note. */
+export function filedAt(item: NewsItem): string | null {
+  return item.at === null ? null : new Date(item.at).toISOString();
+}
+
+/** Fantrax's headline, or the story's whole first sentence where they cut it at "...". */
+function whole(headline: string, content: string): string {
+  const cut = headline.trim().replace(/(\.\.\.|…)$/, "").trim();
+  if (cut === headline.trim() || !content.startsWith(cut)) return headline;
+  const end = content.indexOf(". ", cut.length);
+  return end === -1 ? content.trim() : content.slice(0, end + 1);
+}

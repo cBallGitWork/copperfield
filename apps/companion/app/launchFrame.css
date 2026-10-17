@@ -1,0 +1,86 @@
+/* The installed app's launch frame (`shell/LaunchFrame`): over everything, and never drawn in a browser tab. */
+.cm-launch {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  justify-content: center;
+  background: var(--color-bg);
+  font-family: var(--font-chrome);
+  font-weight: 700;
+  /* Down by CSS alone if the app never hydrates, so a script error never leaves the app behind it. */
+  animation: launch-stall var(--launch-fade) ease-out var(--launch-stall) forwards;
+}
+html[data-launch] .cm-launch {
+  display: flex;
+}
+@media (display-mode: standalone) {
+  .cm-launch {
+    display: flex;
+  }
+}
+.cm-launch[data-leaving] {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--launch-fade) ease-out;
+}
+@keyframes launch-stall {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.cm-launch-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.cm-launch-plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.cm-launch-crest {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cm-launch-crest svg {
+  width: 100%;
+  height: auto;
+}
+/* A sunken well, as `.cm-panel`'s edge, opaque: nothing shows through a loading bar. */
+.cm-launch-well {
+  display: flex;
+  width: 100%;
+  background: var(--color-surface);
+  border-style: solid;
+  border-color: color-mix(in oklch, var(--color-face), black 55%);
+}
+/* CM's bar runs on from where the iOS launch image left it, in steps; full as the frame leaves. */
+.cm-launch-fill {
+  height: 100%;
+  animation: launch-run var(--launch-run) steps(16, end) both;
+}
+@keyframes launch-run {
+  from {
+    width: var(--launch-loaded);
+  }
+  to {
+    width: 100%;
+  }
+}
+.cm-launch[data-leaving] .cm-launch-fill {
+  animation: none;
+  width: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-launch-fill {
+    animation: none;
+    width: var(--launch-loaded);
+  }
+}

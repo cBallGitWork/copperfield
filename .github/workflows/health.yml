@@ -1,0 +1,48 @@
+name: Health
+
+# Walks every route of the LIVE app with `npm run smoke`, as Verify walks a build. A page that answers an error, or
+# answers 200 with a server error streamed into it (every player page on 8 Oct 2026, when FPL refused Vercel with a
+# 403 and the season block had no fallback), fails the run, which opens the issue "alert: health"; the next green
+# run closes it. Plain requests, one page every 2.5s: never a browser crawl, which is what provoked FPL's 403s.
+
+on:
+  schedule:
+    # Three walks a day, clear of capture (05:10), intel-check (05:55) and the editions' :00/:45 (17 Oct 2026, Actions minutes).
+    - cron: "25 7,13,19 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/node
+
+      # Vercel's FANTRAX_LEAGUE_ID is the only place a league is set, so the walk asks production which one it serves.
+      - name: Ask production which league it serves
+        id: league
+        uses: ./.github/actions/league
+        with:
+          base: ${{ vars.WARM_BASE_URL }}
+
+      - name: Walk every route of the live app
+        env:
+          SMOKE_BASE: ${{ vars.WARM_BASE_URL }}
+          FANTRAX_LEAGUE_ID: ${{ steps.league.outputs.id }}
+          # A page every 2.5s, not 55 in a minute: the walk's bursts were FPL's biggest refusal bursts (11 Oct 2026).
+          SMOKE_PACE_MS: "2500"
+        run: npm run smoke
+
+      - uses: ./.github/actions/alert
+        if: ${{ always() }}
+        with:
+          source: health
+          status: ${{ job.status }}

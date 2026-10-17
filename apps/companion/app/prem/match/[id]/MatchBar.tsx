@@ -1,0 +1,100 @@
+import Image from "next/image";
+import Link from "@/app/components/shell/Link";
+import type { Club } from "@epl/core";
+import { clubColoursOf, crestUrl, inkOn, DASH } from "@epl/core";
+import { clubHref } from "../../routes";
+import { hasScore } from "../../score";
+import { BAR_TITLE } from "@/app/desk";
+import { versus } from "@/app/titles";
+
+// CM's match header (`cm9900/21.jpg`): both clubs at once in their own colours, each with its own score at its own
+// right edge — never mirrored, or the two boxes read as one shared scoreline — and one `v` between them before kick-off.
+
+export default function MatchBar({
+  home,
+  away,
+  homeScore,
+  awayScore,
+}: {
+  home: Club | undefined;
+  away: Club | undefined;
+  /** Null on both for a match with no score yet, which draws the single `v`. */
+  homeScore: number | null;
+  awayScore: number | null;
+}) {
+  const played = hasScore({ homeScore, awayScore });
+
+  return (
+    <header className="flex items-stretch">
+      {/* The bar is two links and two score boxes, so the page's h1 is said, not drawn: both clubs in full. */}
+      <h1 className="sr-only">{versus(home?.name ?? DASH, away?.name ?? DASH)}</h1>
+      <Side club={home} score={played ? homeScore : null} />
+      {played ? null : (
+        <span className="cm-bevel numeric flex min-h-16 w-8 shrink-0 items-center justify-center text-lg font-bold uppercase lg:min-h-24 lg:w-12 lg:text-3xl">
+          v
+        </span>
+      )}
+      <Side club={away} score={played ? awayScore : null} />
+    </header>
+  );
+}
+
+/** One club's half: crest, name and score. A club the snapshot lacks keeps its half, so the bar stays centred. */
+function Side({ club, score }: { club: Club | undefined; score: number | null }) {
+  const colours = clubColoursOf(club);
+  const ink = inkOn(colours);
+
+  return (
+    <div
+      className="flex min-h-16 min-w-0 flex-1 items-center lg:min-h-24"
+      style={{ background: colours.primary }}
+    >
+      {club === undefined ? (
+        <span className="min-w-0 flex-1 px-2 text-center text-sm font-bold" style={{ color: ink }}>
+          {DASH}
+        </span>
+      ) : (
+        // The whole coloured half is the target, not the 24px the words occupy.
+        <Link
+          href={clubHref(club.code)}
+          className="flex min-w-0 flex-1 items-center gap-2 self-stretch px-2"
+        >
+          <Image
+            src={crestUrl(club)}
+            alt=""
+            width={CREST_PX}
+            height={CREST_PX}
+            className="h-6 w-6 shrink-0 object-contain lg:h-9 lg:w-9"
+            aria-hidden
+            unoptimized
+          />
+          {/* The short form under a thumb: two names, two crests and two score
+              boxes do not fit 326px, which is the trade `prem/Match` makes one
+              row down. */}
+          <span
+            className={`${BAR_TITLE} text-lg lg:hidden`}
+            style={{ color: ink }}
+          >
+            {club.shortName}
+          </span>
+          <span
+            className={`${BAR_TITLE} hidden text-3xl lg:block`}
+            style={{ color: ink }}
+          >
+            {club.name}
+          </span>
+        </Link>
+      )}
+
+      {/* CM's score box at this club's own right edge, on the raised plate the tab strip and heads are cut from. */}
+      {score === null ? null : (
+        <span className="cm-bevel numeric flex min-h-16 w-10 shrink-0 items-center justify-center text-xl font-bold lg:min-h-24 lg:w-16 lg:text-4xl">
+          {score}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/** Fetched at the desk's size so the crest is not soft when it doubles. */
+const CREST_PX = 36;

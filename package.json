@@ -1,0 +1,50 @@
+{
+  "name": "epl-draft",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@epl/companion",
+    "build": "npm run build --workspace=@epl/companion",
+    "start": "npm run start --workspace=@epl/companion",
+    "lint": "npm run lint --workspace=@epl/companion",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit --noUnusedLocals --noUnusedParameters -p packages/core && tsc --noEmit --noUnusedLocals --noUnusedParameters -p scripts && npm run typecheck --workspace=@epl/companion",
+    "capture": "tsx scripts/capture-fantrax.ts",
+    "capture:status": "tsx scripts/capture-status.ts",
+    "periods": "tsx scripts/period-alignment.ts",
+    "shape-diff": "tsx scripts/shape-diff.ts",
+    "check:replay": "tsx scripts/check/replay.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "smoke:wait": "for i in $(seq 1 60); do curl -sf -o /dev/null \"${SMOKE_BASE:-http://localhost:3000}/\" && exit 0; sleep 1; done; echo 'app never came up'; exit 1",
+    "bridge": "tsx scripts/build-bridge.ts",
+    "roster-limits": "tsx --env-file=.env.local scripts/roster-limits.ts",
+    "bench-order": "tsx --env-file-if-exists=.env.local scripts/bench-order.ts",
+    "bridge:check": "tsx scripts/bridge-check.ts",
+    "team-codes": "tsx --env-file=apps/companion/.env.local scripts/team-codes.ts",
+    "edition": "tsx --env-file-if-exists=.env.local scripts/write-edition.ts",
+    "report:proof": "tsx --env-file-if-exists=.env.local scripts/report-proof.ts",
+    "intel-check": "tsx scripts/intel-check.ts",
+    "intel-cups": "tsx scripts/intel-cups.ts",
+    "intel-careers": "tsx scripts/intel-careers.ts",
+    "intel-history": "tsx scripts/intel-history.ts",
+    "rotowire-xi": "tsx scripts/rotowire-xi.ts",
+    "ratings": "tsx scripts/ratings.ts",
+    "draft-pack": "tsx scripts/draft-pack.ts",
+    "xmins-moves": "tsx scripts/xmins-moves.ts",
+    "stats": "tsx scripts/stats.ts",
+    "pl-bridge": "tsx scripts/pl-bridge.ts",
+    "crests": "tsx scripts/crests.ts",
+    "draft:proof": "tsx scripts/draft-report-proof.ts"
+  },
+  "devDependencies": {
+    "hyparquet": "^1.31.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}
