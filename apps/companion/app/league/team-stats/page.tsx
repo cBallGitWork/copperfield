@@ -25,7 +25,7 @@ import { squadColumnsIn } from "./squadColumns";
 import { intelStatsDay } from "../../intel";
 import { getSchedule } from "../schedule/schedule";
 import { readerTeamId } from "../../squads";
-import { yoursEdge, yoursInk } from "../../mine";
+import { yoursInk, yoursInset } from "../../mine";
 import { MINOR_LABEL, ROW_NAME } from "@/app/desk";
 import { teamHref } from "@/app/squad/routes";
 import FantraxSilent from "../../components/shell/FantraxSilent";
@@ -110,7 +110,7 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
               name: {
                 label: "Team",
                 // The edge on the pinned cell, not the row: a `<tr>` border never paints through a pinned cell's ground.
-                className: (row) => yoursEdge(row.teamId === mine),
+                className: (row) => yoursInset(row.teamId === mine),
                 of: (row) => (
                   <Link href={teamHref(row.teamId)} className={`${TIGHT_ROW} px-1.5 hover:underline ${yoursInk(row.teamId === mine)}`}>
                     <span className={`min-w-0 truncate ${ROW_NAME}`}>

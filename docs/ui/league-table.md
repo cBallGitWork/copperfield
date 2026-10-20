@@ -107,8 +107,9 @@ the desk, as the head-to-head's Stats docks its own (review M-LEAGUE-6, 20 Oct 2
 board, below the fold.
 
 **The reader's own row is marked as on `/league`**: the raised ground, his name in the accent, and the 4px accent
-edge on its pinned name cell (`yoursEdge`, transparent on the other rows so every name keeps one column; on the cell
-because a `<tr>` border never paints through a pinned cell's ground).
+edge on its pinned name cell (`yoursInset`, painted inside the cell as a background so it takes no width: a border,
+even a transparent one on the other rows, notched every row rule at the rank/name seam in the collapsed table; on the
+cell because a `<tr>` border never paints through a pinned cell's ground).
 
 **One grey toggle at the top, `FPts` · `Total`, and it governs every cell.** The
 same category is two numbers — what Fantrax paid for it and the raw figure behind
