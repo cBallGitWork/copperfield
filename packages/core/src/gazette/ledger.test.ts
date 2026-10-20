@@ -29,6 +29,14 @@ describe("recordCoverage", () => {
     expect(ledger[LEAGUE].covered[0]).toBe("news:item-5");
   });
 
+  it("never trims a trade key, which names no gameweek and is offered all season", () => {
+    const keys = Array.from({ length: MAX_COVERED + 5 }, (_, n) => `news:item-${n}`);
+    const ledger = recordCoverage({}, LEAGUE, ["trade:early", ...keys], [], FILED);
+    expect(isCovered(ledger, LEAGUE, "trade:early")).toBe(true);
+    expect(ledger[LEAGUE].covered).toHaveLength(MAX_COVERED);
+    expect(ledger[LEAGUE].covered.at(-1)).toBe(`news:item-${MAX_COVERED + 4}`);
+  });
+
   it("opens a thread at one beat and wears it on each advance", () => {
     const opened = recordCoverage({}, LEAGUE, [], [{ subject: "The No.2 overall", beat: "Blanked again." }], FILED);
     const advanced = recordCoverage(
