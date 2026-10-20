@@ -235,7 +235,10 @@ describe("keyMoments, against every recorded match", () => {
     const loud = /goal|card|substitution|penalty|^start$|^end \d+$/;
     for (const feed of feeds) {
       const lines = plCommentary(feed.events.content);
-      expect(keyMoments(lines)).toEqual(lines.filter((line) => loud.test(line.type) || KEPT_ELSE.has(line.type)));
+      const final = lines.find((line) => line.type === "end 14");
+      // The period's end at the final whistle's minute says what the whistle says (see the next test).
+      const echo = (line: (typeof lines)[number]) => line.type.startsWith("end ") && line !== final && line.minute === final?.minute;
+      expect(keyMoments(lines)).toEqual(lines.filter((line) => (loud.test(line.type) || KEPT_ELSE.has(line.type)) && !echo(line)));
     }
   });
 
@@ -244,6 +247,23 @@ describe("keyMoments, against every recorded match", () => {
     for (const type of ["miss", "attempt saved", "attempt blocked", "corner", "start delay", "end delay", "added time"]) {
       expect(kept.has(type)).toBe(false);
     }
+  });
+
+  // Review (21 Oct): a phone's Key moments opened on 'Match ends' and 'Second Half ends', both 90+7', both 1-0.
+  it("keeps one row for the final whistle, not the period's end under it too", () => {
+    for (const feed of feeds) {
+      const key = keyMoments(plCommentary(feed.events.content));
+      const final = key.find((line) => line.type === "end 14");
+      if (final === undefined) continue;
+      expect(key.filter((line) => line.type.startsWith("end ") && line.minute === final.minute)).toEqual([final]);
+    }
+  });
+
+  it("keeps a period's end that is not the final whistle", () => {
+    const half = { id: 1, type: "end 1", minute: "45+2", seconds: 2820, text: "First Half ends, A 0, B 0." };
+    const final = { id: 3, type: "end 14", minute: "90+4", seconds: 5640, text: "Match ends, A 0, B 0." };
+    const second = { id: 2, type: "end 2", minute: "90+4", seconds: 5640, text: "Second Half ends, A 0, B 0." };
+    expect(keyMoments([final, second, half])).toEqual([final, half]);
   });
 
   it("keeps a penalty missed, which Opta files as a plain miss", () => {

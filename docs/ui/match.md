@@ -629,7 +629,9 @@ phone; both views run the page's length. The desk keeps the one list without fou
 
 **The feed sorts by period, then the clock.** Opta's clock restarts at 45:00, so 45+4 (2,910s) outranked
 46' (2,700s), and it stamps `Match ends` at the first minute; `plCommentary` reads the period off the label and
-gives `Match ends` the clock of the last whistle under it (`90+7′`, not `1′`).
+gives `Match ends` the clock of the last whistle under it (`90+7′`, not `1′`). Key moments then keeps
+`Match ends` alone: `Second Half ends` at the same minute and score said it twice at the top of a phone's list
+(21 Oct); the full commentary keeps both.
 
 `Commentary.tsx` is the row both screens draw. Two callers rather than three, so
 CODE_RULES §1 would leave it duplicated — and would, if what was duplicated were
