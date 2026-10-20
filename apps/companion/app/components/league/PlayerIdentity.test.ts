@@ -66,4 +66,14 @@ describe("the player card's fixture line", () => {
   it("says FT once his match is over", () => {
     expect(citys([played("finished", true)])).toMatch(/MCI 2–1 IPS.*FT/);
   });
+
+  // 19 Oct 2026: Fantrax credits him while FPL still has his match upcoming (`underway`).
+  it("keeps the 'v' and the opponent, in plain ink and with no kickoff, when Fantrax has him on before FPL", () => {
+    const fixture = { id: 1, status: "upcoming", kickoff: "2026-10-10T14:00:00Z" };
+    const against = { club: { shortName: "LEE" }, home: false, difficulty: 5, fixture } as unknown as Opposition;
+    const html = renderToStaticMarkup(createElement(PlayerIdentity, { rostered, club: undefined, opposition: [against], started: true }));
+    expect(html).toMatch(/>v<.*LEE \(A\)/);
+    expect(html).not.toContain("--color-fdr");
+    expect(html).not.toContain("Kicks off");
+  });
 });
