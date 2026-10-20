@@ -3,6 +3,7 @@ import type { Club } from "@epl/core";
 import { clubColours } from "@epl/core";
 import PhotoGround from "../../../components/football/PhotoGround";
 import PlateShell from "../../../components/shell/PlateShell";
+import { FootFrame } from "../../../components/shell/FootFrame";
 import { PREM } from "../../routes";
 import ClubTabs from "./ClubTabs";
 import type { ClubTab } from "./ClubTabs";
@@ -13,14 +14,17 @@ export default function ClubShell({
   club,
   current,
   empty,
+  foot,
   children,
 }: {
   club: Club;
   current: ClubTab;
   empty?: readonly ClubTab[];
+  /** A tab's own sub-views, docked above the thumb rail (`FootFrame`). */
+  foot?: ReactNode;
   children: ReactNode;
 }) {
-  return (
+  const shell = (
     <PlateShell colours={clubColours(club.shortName)} title={club.name} back={PREM}
       tabs={<ClubTabs code={club.code} current={current} empty={empty} />}>
       {/* This club's own ground: the shell's photograph stands down here (`drawsOwnGround`).
@@ -29,4 +33,5 @@ export default function ClubShell({
       {children}
     </PlateShell>
   );
+  return foot === undefined ? shell : <FootFrame foot={foot}>{shell}</FootFrame>;
 }
