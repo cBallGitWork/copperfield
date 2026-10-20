@@ -1,4 +1,6 @@
 import type { LeagueTransaction, TransactionKind, TransactionView } from "../types";
+import type { RawScorer } from "./raw";
+import { scorerPlayer } from "./scorer";
 
 // `getTransactionDetailsHistory` → our transaction rows, typed and timed to the minute, with no cookie.
 // Cells bind by `key`, never heading (one heading is the raw "{0} on which…"). Cells span rows: a DROP row inherits
@@ -12,19 +14,9 @@ interface RawTxCell {
   rowspan?: number;
 }
 
-/** The player; `scorerId` is the roster and pool id, so it joins the bridge with no matching. */
-interface RawTxScorer {
-  scorerId?: string;
-  name?: string;
-  posShortNames?: string;
-  teamShortName?: string;
-  /** His club in full, "Sunderland". */
-  teamName?: string;
-}
-
 interface RawTxRow {
   cells?: RawTxCell[];
-  scorer?: RawTxScorer;
+  scorer?: RawScorer;
   /** `CLAIM` or `DROP` on the claim/drop view; absent on trades, where the view is the type. */
   transactionCode?: string;
   /** Groups both halves of a trade, or a claim with the drop that paid for it. */
@@ -121,18 +113,13 @@ export function mapTransactions(
     const cells = cellsFor(row, carried);
 
     const fantraxId = row.scorer?.scorerId;
-    if (!fantraxId) continue;
+    if (!row.scorer || !fantraxId) continue;
 
     const kind = kindOf(view, row.transactionCode);
     transactions.push({
       setId: row.txSetId ?? "",
       kind,
-      fantraxId,
-      playerName: row.scorer?.name ?? "",
-      // Their spelling, untouched: "D", or "F,M" for a man eligible at two.
-      position: row.scorer?.posShortNames ?? null,
-      club: row.scorer?.teamShortName ?? null,
-      clubName: row.scorer?.teamName ?? null,
+      ...scorerPlayer(fantraxId, row.scorer),
       via: VIA[row.claimType ?? ""] ?? null,
       ...movement(kind, cells),
       // Verbatim, e.g. "Wed Aug 12, 2026, 9:14AM": US Eastern, with no offset in it.

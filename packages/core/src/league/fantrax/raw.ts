@@ -150,3 +150,20 @@ export interface RawDraftPick {
   teamId?: string;
   playerId?: string;
 }
+
+/** A footballer as an fxpa row names him; every reader takes the fields it needs. `scorerId` is the pool id. */
+export interface RawScorer {
+  scorerId?: string;
+  name?: string;
+  shortName?: string;
+  /** The Premier League club, spelled out — "Arsenal". */
+  teamName?: string;
+  /** And abbreviated — "ARS". */
+  teamShortName?: string;
+  /** Fantrax's position letters, "D" or "F,M", in the order of `posIds`; the pool prices a dual man at the last. */
+  posShortNames?: string;
+  /** His positions as ids into `posOrGroupList`: `["702", "701"]`. */
+  posIds?: string[];
+  /** The position his points are priced at: "702". */
+  defaultPosId?: string;
+}
