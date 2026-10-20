@@ -43,11 +43,12 @@ export default function DraftMatchup({ matchup, n, saturday, clubs }: { matchup:
           {derby === null ? null : ` · ${derby.name}`}
         </p>
         <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
-          <span className="paper-display text-base leading-tight font-semibold text-ink sm:text-lg">{home.name}</span>
+          {/* A long name wraps in its own column rather than pushing a 320px page sideways. */}
+          <span className="paper-display min-w-0 wrap-anywhere text-base leading-tight font-semibold text-ink sm:text-lg">{home.name}</span>
           <span className="numeric paper-display text-4xl leading-none font-semibold text-ink">
             {home.score}-{away.score}
           </span>
-          <span className="paper-display text-right text-base leading-tight font-semibold text-ink sm:text-lg">{away.name}</span>
+          <span className="paper-display min-w-0 wrap-anywhere text-right text-base leading-tight font-semibold text-ink sm:text-lg">{away.name}</span>
         </div>
         {home.returns.goals.length + away.returns.goals.length === 0 ? null : (
           <div className="grid grid-cols-2 gap-4">
