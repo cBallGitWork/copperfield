@@ -1,4 +1,4 @@
-import { type PublishedStory, writerOf } from "@epl/core";
+import { type PublishedStory, londonDayAndDate, writerOf } from "@epl/core";
 import { QUIET_CAPS } from "./heads";
 import { filedWhen } from "./filedWhen";
 import { now } from "../../clock";
@@ -11,6 +11,7 @@ export default function Dateline({
   as = "p",
   turn = true,
   byline,
+  day = false,
   className = "",
 }: {
   story: PublishedStory;
@@ -20,9 +21,12 @@ export default function Dateline({
   turn?: boolean;
   /** Whether to credit the story's writer. False on the front's ranks and over a columnist's own byline. */
   byline: boolean;
+  /** The filing day alone, `Sun 11 Oct`, for a row with no room for the rest. */
+  day?: boolean;
   className?: string;
 }) {
   const Tag = as;
+  if (day) return <Tag className={`${QUIET_CAPS} ${className}`}>{londonDayAndDate(story.filedAt)}</Tag>;
   return (
     <Tag className={`${QUIET_CAPS} ${className}`}>
       {byline ? `by ${writerOf(story)} · ` : ""}

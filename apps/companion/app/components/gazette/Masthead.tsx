@@ -1,4 +1,4 @@
-import { LEAGUE_NAME, SEASON, londonDate } from "@epl/core";
+import { LEAGUE_NAME, SEASON, londonDate, londonDayAndTime } from "@epl/core";
 import { PAPER_NAME } from "../../config";
 import { STANDING_CAPS } from "./heads";
 
@@ -7,8 +7,11 @@ import { STANDING_CAPS } from "./heads";
 export default function Masthead({
   /** The snapshot's instant, not the reader's clock, so one cached edition carries one date; null when undated. */
   at,
+  lock,
 }: {
   at: string | null;
+  /** The next line-up lock and the gameweek it opens, where the calendar names one; null prints the season. */
+  lock: { gameweek: number | undefined; at: string } | null;
 }) {
   return (
     <header className="flex flex-col">
@@ -22,10 +25,19 @@ export default function Masthead({
       {/* Allowed to wrap rather than shrink. */}
       <h1 className="paper-masthead text-balance pt-0.5 text-center">{PAPER_NAME}</h1>
 
-      {/* The dateline, fenced: date at the left (an empty span holds the place when undated), season at the right. */}
+      {/* The dateline, fenced: date at the left (an empty span holds the place when undated), the next lock at the right. */}
       <div className={`${STANDING_CAPS} mt-2 flex items-baseline justify-between gap-3 border-y-2 py-1`} style={{ borderColor: "currentColor" }}>
         <span>{at === null ? null : londonDate(at)}</span>
-        <span className="numeric">{SEASON}</span>
+        <span className="numeric whitespace-nowrap">
+          {lock === null ? (
+            SEASON
+          ) : (
+            <>
+              {lock.gameweek === undefined ? null : <span className="max-[374px]:hidden">GW{lock.gameweek} </span>}
+              Locks {londonDayAndTime(lock.at)}
+            </>
+          )}
+        </span>
       </div>
     </header>
   );
