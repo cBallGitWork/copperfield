@@ -77,7 +77,9 @@ as the league counts no keeper DefCon), xG and xA, each man with whoever holds h
 defcon"*, then *"Just group defcon mid and forward together. Use the actual value, not the points."*
 The phone picks one list from a strip (`Points · DefCon D · DefCon M/F · xG · xA`, `&stat=`; DefCon is its one name on every screen, with the slots it counts, 16 Oct 2026, review N30), docked
 in the foot above the thumb rail (`FootFrame`, 20 Oct 2026: a sub-view switches from the foot, while
-`Scores · Top stats` stays the one strip on top); a desk shows all five, three across.
+`Scores · Top stats` stays the one strip on top). The frame is only as tall as its board, because the bar and
+`Matchups on Fantrax` sit outside it: under a short board the strip sits straight below the ten men with the exit
+under it and nothing scrolls, and it docks on the rail only when a list runs past the screen. A desk shows all five, three across.
 
 - **Each list is a `matchday/LeaderBoard`**, Prem › Data's own until that page went (19 Oct 2026): the
   same head, places shared by men level on the figure printed, crest, name linking to his page,

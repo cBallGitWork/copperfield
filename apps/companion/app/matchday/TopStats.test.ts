@@ -13,9 +13,10 @@ const boards: TopBoard[] = LISTS.slice(0, 2).map((list) => ({ key: list.key, tab
 const html = renderToStaticMarkup(createElement(TopStats, { boards, stat: undefined, teamNames: new Map(), reader: null }));
 
 describe("Live's Top stats", () => {
-  it("leaves the desk's frame free of the phone's height and the foot's gap", () => {
+  // The frame sits under the bar and the view strip, with the Fantrax exit after it: a viewport-high frame scrolls a short board.
+  it("keeps the frame to its own height at every width, and the desk's free of the foot's gap", () => {
     const frame = html.match(/^<div class="([^"]*)"/)?.[1] ?? "";
-    expect(frame.split(" ")).toEqual(expect.arrayContaining(["lg:min-h-0", "lg:gap-0"]));
+    expect(frame.split(" ")).toEqual(expect.arrayContaining(["min-h-0!", "lg:gap-0"]));
   });
 
   it("docks the leaders picker in the sticky foot, after the boards", () => {
