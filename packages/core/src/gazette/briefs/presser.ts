@@ -102,7 +102,7 @@ export function buildPresserBrief(brief: {
       'RETURN A ROW PER CLUB in "teamNews", in this shape:',
       '  { "club": the club name exactly as given,',
       '    "code": the number given on that line,',
-      '    "line": ONE sentence of reporting, in the manager\'s facts — what was decided, the timescale, the reason. Every club with a man in its list or a QUOTE WITH A FACT gets one. It may name the men the bullets name; it must not copy a note word for word. Only a club whose sole content is a STILL OUT list, with nothing said about anyone, or the lead\'s club where he is its only man, may leave "line" empty (""),',
+      '    "line": ONE sentence of reporting, in the manager\'s facts — what was decided, the timescale, the reason. Every club with a man in its list or a QUOTE WITH A FACT gets one. It may name the men the bullets name; it must not copy a note word for word. Only a club whose sole content is a STILL OUT list, with nothing said about anyone, the lead\'s club where he is its only man, or a club whose line would only say a bullet\'s status again ("Ross Barkley is a doubt." over his Doubt bullet: no timescale, reason, decision or man outside the bullets), may leave "line" empty (""),',
       '    "men": [ { "name": his name as given, "owner": our manager who holds him or omit it, "status": one of OUT | Doubt | Suspended | FIT, "note": the complaint AND what was said about him, in a few words — "thigh; small, not long term", "ankle; working on his own", "scan due"; where an absence has a KNOWN LENGTH, that length leads } ],',
       '    "quote": { "text": his words EXACTLY as given under the club, "said": who said them } — omit it only when the club has no QUOTE WITH A FACT }',
     ].join("\n"),

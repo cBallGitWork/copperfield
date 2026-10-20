@@ -3,6 +3,7 @@ import type { Club, Fixture, PresserLine, PresserQuote } from "@epl/core";
 import shortNames from "../../data/leagues/short-names.json";
 import { display, isNews, ownerShort, presserFixtures, tagOf, type PresserSquadMan } from "./pressers";
 import { presserDays, presserEdition, withStillOut } from "./presserWeek";
+import { withoutEchoes } from "./checks";
 
 // Every row is a real 26/27 player, read out of the FPL snapshot on 18 Sep 2026.
 // The column prints these names in prose, so a wrong one is a wrong fact.
@@ -230,5 +231,42 @@ describe("presserFixtures", () => {
     const one = presserFixtures(9, clubs, season.slice(1));
     expect(one.get(6)).toEqual({ opponent: "Arsenal", home: true, kickoff: "2026-10-24T14:00:00Z" });
     expect(one.has(8)).toBe(false);
+  });
+});
+
+// The gameweek 7 Team Sheet of 16 Oct 2026 as filed, its rows trimmed to line, men and stillOut.
+const GW7 = [
+  { club: "Manchester City", line: "Phil Foden is available after the international break and his red card, and rest is being considered for Enzo among the most heavily used players.", men: [{ name: "Phil Foden", status: "FIT" }, { name: "Enzo", status: "Doubt" }] },
+  { club: "Nottingham Forest", line: "Nicolò Savona is ruled out with a knee injury and Igor Jesus with a calf problem, while Morgan Gibbs-White could rejoin training on Saturday.", men: [{ name: "Nicolò Savona", status: "OUT" }, { name: "Igor Jesus", status: "OUT" }] },
+  { club: "Arsenal", line: "Mikel Merino returns to contention.", men: [{ name: "Mikel Merino", status: "FIT", note: "" }], stillOut: [{ name: "Piero Hincapié" }] },
+  { club: "Aston Villa", line: "Ross Barkley is a doubt.", men: [{ name: "Ross Barkley", status: "Doubt", note: "" }], stillOut: [{ name: "Ian Maatsen" }] },
+  { club: "Leeds United", line: "Joe Rodon misses gameweek 7 but is edging closer to team training.", stillOut: [{ name: "Joe Rodon" }] },
+  { club: "Fulham", line: "Hugo Larsson's groin was being checked on Friday ahead of Saturday, and Antonee Robinson is ruled out.", men: [{ name: "Hugo Larsson", status: "Doubt" }, { name: "Antonee Robinson", status: "OUT" }] },
+  { club: "AFC Bournemouth", line: "An MRI on Alex Scott came back better than expected, and his rehab can now progress, though he is not ready for Sunderland.", stillOut: [{ name: "Alex Scott" }] },
+  { club: "Ipswich Town", line: "Abdul Fatawu is suspended.", men: [{ name: "Abdul Fatawu", status: "Suspended", note: "" }] },
+];
+
+describe("withoutEchoes", () => {
+  const kept = (rows: unknown) => (withoutEchoes(rows) as { club: string; line: string }[]).filter((row) => row.line !== "").map((row) => row.club);
+
+  it("blanks the three gameweek 7 lines that only restate a man's status, and keeps every line with a fact", () => {
+    expect(kept(GW7)).toEqual(["Manchester City", "Nottingham Forest", "Leeds United", "Fulham", "AFC Bournemouth"]);
+  });
+
+  it("reads a still-out man, any case and spacing, and every status phrase", () => {
+    const row = (line: string) => [{ club: "X", line, men: [], stillOut: [{ name: "Joe Rodon" }] }];
+    for (const phrase of ["is a doubt", "is suspended", "is out", "returns to contention", "is available"]) {
+      expect(kept(row(`  joe  rodon ${phrase.toUpperCase()}. `))).toEqual([]);
+    }
+    expect(kept(row("Joe Rodon is out until December."))).toEqual(["X"]);
+  });
+
+  it("keeps a status line about a man the club's rows do not hold", () => {
+    expect(kept([{ club: "X", line: "Ross Barkley is a doubt.", men: [{ name: "Ian Maatsen", status: "Doubt" }] }])).toEqual(["X"]);
+  });
+
+  it("passes rows it cannot read through untouched", () => {
+    expect(withoutEchoes(undefined)).toBeUndefined();
+    expect(withoutEchoes([null, "row", { club: "X" }])).toEqual([null, "row", { club: "X" }]);
   });
 });

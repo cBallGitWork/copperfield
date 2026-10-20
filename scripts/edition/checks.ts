@@ -1,4 +1,4 @@
-import type { Assignment, PublishedStory } from "@epl/core";
+import { recordOrEmpty, type Assignment, type PublishedStory } from "@epl/core";
 
 // What a filed story is checked for before it is committed. `strangers` and `CARGO` warn and never refuse; the banned
 // list sends a column back once (`sendBack` in `voice/house.ts`).
@@ -47,5 +47,28 @@ function lines(rows: unknown): string[] {
     if (row === null || typeof row !== "object") return [];
     const line = (row as Record<string, unknown>).line;
     return typeof line === "string" ? [line] : [];
+  });
+}
+
+/** The status a Team Sheet bullet already prints; a club line that is only a man's name and one of these says nothing. */
+const ECHOES: readonly string[] = ["is a doubt", "is suspended", "is out", "returns to contention", "is available"];
+
+const plain = (words: string) => words.trim().replace(/\.$/u, "").replace(/\s+/gu, " ").toLowerCase();
+
+/** Whether a row's line is exactly one of its own men, bulleted or still out, plus a status phrase: Villa's "Ross
+ *  Barkley is a doubt." over DOUBT Ross Barkley (gameweek 7). An exact comparison, never a search of free text. */
+function echoes(row: Record<string, unknown>): boolean {
+  if (typeof row.line !== "string") return false;
+  const line = plain(row.line);
+  const men = [row.men, row.stillOut].flatMap((list) => (Array.isArray(list) ? list.map((man) => recordOrEmpty(man).name) : []));
+  return men.some((name) => typeof name === "string" && ECHOES.some((status) => line === `${plain(name)} ${status}`));
+}
+
+/** The Team Sheet's rows with every echoing line blanked, which the desk's `line` guard then leaves unprinted. */
+export function withoutEchoes(rows: unknown): unknown {
+  if (!Array.isArray(rows)) return rows;
+  return rows.map((row) => {
+    const record = recordOrEmpty(row);
+    return row !== null && typeof row === "object" && echoes(record) ? { ...record, line: "" } : row;
   });
 }

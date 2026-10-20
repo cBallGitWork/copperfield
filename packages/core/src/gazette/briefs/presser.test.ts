@@ -100,6 +100,11 @@ describe("buildPresserBrief", () => {
       expect(brief).not.toContain("its line is who is still out");
     });
 
+    // "Ross Barkley is a doubt." over DOUBT Ross Barkley, gameweek 7: the line said the bullet again.
+    it("asks for no line where it would only repeat a bullet's status", () => {
+      expect(brief).toContain("would only say a bullet's status again");
+    });
+
     it("never itself uses a phrase the send-back refuses", () => {
       expect(banned(brief, NEWS_GAPS)).toEqual([]);
     });
