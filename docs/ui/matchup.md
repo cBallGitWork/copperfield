@@ -26,8 +26,9 @@ draws none.
    is said out loud. Names at the outside edges, both numbers meeting in the
    middle either side of the `v`. A phone prints the league's short names (Truffles, Beef) at 14px, as the foot
    strip's Stats tabs and a round not kicked off's captions do: nine capitals fit a half at 390, where
-   "THE TRUF…" had (Craig, 11 Oct 2026). Each half is the control that opens that
-   side's team below; the open half is raised and carries a foot bar. Your own
+   "THE TRUF…" had (Craig, 11 Oct 2026). **The halves are a control on Line-ups only**: there each opens that
+   side's team below, the open half carrying a foot bar; on Stats, Fixtures and Table they are captions, with no bar
+   and no pressed state, so Stats has one side picker, its foot row (review M-LEAGUE-4, 20 Oct 2026). Your own
    name reads in accent, the standard "this is yours" mark. **One number per
    side and nothing beside it** — see the constraint below. A phone gets the
    `←` back plate at its left, as a match does; on a board opened cold it goes to that gameweek on Draft › Fixtures,
@@ -43,7 +44,7 @@ draws none.
 3. **Line-ups** — the open side's eleven on the grass and its bench in a strip
    under it (`TeamSheet`, `mode="pitch"`). Both sides at once above `lg`. On a phone the grass and bench fill
    the screen down to 16px above the rail (Craig, 11 Oct 2026; [squad.md](squad.md#the-pitch)).
-   **The one view that belongs to a side**, and the only reason the two halves of
+   **The one view that belongs to a side**, and the only view on which the two halves of
    the scoreline are a control rather than a caption.
 
    **The list went, and it was a whole tab** (Craig, 11 Sep 2026: *"pitch and

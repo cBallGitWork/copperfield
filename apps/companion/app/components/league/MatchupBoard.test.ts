@@ -57,3 +57,37 @@ describe("the line under each name", () => {
     expect(html).not.toMatch(/to play|played/);
   });
 });
+
+describe("the scoreline's halves", () => {
+  // Review M-LEAGUE-4: on Stats the halves claimed a side was open while the foot row named the other.
+  const tabs = [
+    { key: "lineups", label: "Lineups", href: "#" },
+    { key: "stats", label: "Stats", href: "#" },
+  ];
+  const on = (view: string) =>
+    renderToStaticMarkup(
+      createElement(MatchupBoard, {
+        team: side("aekx2715mtzgcl3f", "The Truffle Pigs", 15),
+        opponent: side("7z8fy0pnmuogbtdw", "Cowthenbeef", 12),
+        view,
+        tabs,
+        body: null,
+        back: "/league/fixtures?gw=6",
+      }),
+    );
+
+  it("open a side on Line-ups, the open one barred", () => {
+    const html = on("lineups");
+    expect(html.match(/<button type="button" aria-pressed/g)).toHaveLength(2);
+    expect(html).toContain('aria-pressed="true"');
+    expect(html).toContain("bg-accent");
+  });
+
+  it("are captions on every other view: no control, no pressed state, no bar", () => {
+    const html = on("stats");
+    expect(html).not.toContain('aria-label="Show');
+    expect(html).not.toContain("aria-pressed");
+    expect(html).not.toContain("bg-accent");
+    expect(html).toMatch(/Truffles[\s\S]*Beef/);
+  });
+});
