@@ -7,6 +7,7 @@ import { statsLeagueSeason } from "../../../statsLeague";
 import StatBoard from "./StatBoard";
 import { defconPricing } from "../../../defcon";
 import { STATS_LEAGUE_KEYS } from "./statViews";
+import { rosterOrder } from "./order";
 import { teamTitle } from "../title";
 
 // Every man this manager owns and what each has done: the served league's counts off the Player Stats board's warm
@@ -30,7 +31,10 @@ export default async function StatsPage({
   ]);
 
   // `team.teamId` and not the slug, which on the front door is the word `me`.
-  const his = all.filter((line) => line.ownerTeamId === team.teamId);
+  const his = rosterOrder(
+    all.filter((line) => line.ownerTeamId === team.teamId),
+    squad.players.map((rostered) => rostered.slot.fantraxId),
+  );
   const ids = new Set(his.map((line) => line.fantraxId));
 
   // The footballer behind each resolved slot, for his availability.
