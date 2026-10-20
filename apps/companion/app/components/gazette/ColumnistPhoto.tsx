@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Columnist } from "@/app/config";
+import { LG } from "../../breakpoints";
 
 // A columnist's photograph at each rank the paper prints a picture, through the sheet's ink the
 // way the drawing is (`.paper-photo`): a photograph, never a colour plate.
@@ -14,8 +15,8 @@ const FRAME: Record<Rank, string> = {
 
 /** What the optimizer may serve: a card is a column of the front page's grid, or half a phone. */
 const SIZES: Record<Rank, string> = {
-  splash: "(min-width: 64rem) 50vw, 100vw",
-  card: "(min-width: 64rem) 320px, 50vw",
+  splash: `${LG} 50vw, 100vw`,
+  card: `${LG} 320px, 50vw`,
   banner: "192px",
 };
 

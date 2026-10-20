@@ -103,6 +103,9 @@ export const PITCH_CAPTION = "text-center font-chrome text-2xs font-bold text-ac
 export const SECTION_BAR =
   "flex min-h-7 items-center justify-center bg-chrome px-3 font-chrome text-2xs font-bold uppercase text-ink lg:min-h-8 lg:text-xs";
 
+/** A section's head row: title left, aside right, ruled under. */
+export const SECTION_HEAD = "flex items-baseline justify-between gap-3 border-b border-line pb-1";
+
 /** A 24px caption plate, left: a block's or a card's strip. A table's column head is `TableHeads.PLATE`, 28. */
 export const HEAD_PLATE = "cm-bevel flex h-6 items-center px-1.5";
 /** The same plate centred, over a group of columns or a card's figure. */

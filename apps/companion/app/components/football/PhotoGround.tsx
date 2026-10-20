@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { clubGroundPhoto } from "@epl/core";
 import { drawsOwnGround, isPaperRoute } from "../shell/sections";
 import { DESK_GROUND, DESK_GROUND_BLUR } from "../../config";
+import { LG } from "../../breakpoints";
 
 // The darkened photograph behind every desk screen, and never behind the paper.
 
@@ -13,7 +14,7 @@ import { DESK_GROUND, DESK_GROUND_BLUR } from "../../config";
  *  `tools/ui/groundfit.mjs` checks that; `sweep` cannot, as a `fixed -z-10` layer is nobody's ancestor. */
 const SCRIM = 1;
 const DARKEN = 0.55;
-const GROUND_SIZES = "(min-width: 64rem) 75vw, 50vw";
+const GROUND_SIZES = `${LG} 75vw, 50vw`;
 
 export default function PhotoGround({
   faces = [],

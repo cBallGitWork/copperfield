@@ -1,4 +1,5 @@
 import Skeleton from "../../components/shell/Skeleton";
+import { SECTION_HEAD } from "@/app/desk";
 
 // The shapes the streamed blocks hold while their reads are in flight: a table, and a stack of rows.
 
@@ -6,7 +7,7 @@ import Skeleton from "../../components/shell/Skeleton";
 export function TableWaiting() {
   return (
     <section aria-busy className="flex flex-col gap-2">
-      <div className="flex items-baseline justify-between gap-3 border-b border-line pb-1">
+      <div className={SECTION_HEAD}>
         <Skeleton width="6rem" height="0.75rem" />
         <Skeleton width="4rem" height="0.75rem" />
       </div>
@@ -26,7 +27,7 @@ export function TableWaiting() {
 export function StackWaiting() {
   return (
     <section aria-busy className="flex flex-col gap-2">
-      <div className="flex items-baseline justify-between gap-3 border-b border-line pb-1">
+      <div className={SECTION_HEAD}>
         <Skeleton width="7rem" height="0.75rem" />
         <Skeleton width="4.5rem" height="0.875rem" />
       </div>
