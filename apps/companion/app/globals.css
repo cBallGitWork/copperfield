@@ -38,7 +38,7 @@
   }
 }
 
-/* The air above the page's first object; `<main>` sets it and `prem/match/[id]/Shell` subtracts it. */
+/* The air above the page's first object; `<main>` sets it, `prem/match/[id]/Shell` and the paper layout subtract it. */
 :root {
   --page-top: 0.5rem;
 }

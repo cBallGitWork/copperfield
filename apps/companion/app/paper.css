@@ -107,8 +107,14 @@
   column-gap: 1.75rem;
   column-rule: 1px solid var(--paper-rule);
 }
+/* A paragraph may break across columns, so two paragraphs fill three; a margin, not padding, drops at a column top. */
 .paper-columns > p {
-  break-inside: avoid;
+  orphans: 3;
+  widows: 3;
+}
+.paper-columns > p + p {
+  padding-top: 0;
+  margin-top: 0.625rem;
 }
 
 /* Every story picture on the front page: one fixed ratio, so a picture is cropped to its frame and

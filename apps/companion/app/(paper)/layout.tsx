@@ -14,9 +14,9 @@ export const viewport: Viewport = { themeColor: TOKEN_SRGB.paper };
 export default function PaperLayout({ children }: { children: ReactNode }) {
   return (
     // `paper-page` puts the stock on the root on a phone (paper.css). The serifs mount here only; `@container` sizes
-    // the page by its frame; `min-h-dvh` keeps stock to the foot.
+    // the page by its frame; pulled up by `<main>`'s own `--page-top`, `min-h-dvh` keeps stock to the foot.
     <div
-      className={`paper paper-page @container ${paperFontVariables} -mx-[var(--page-gutter)] -mb-[var(--page-foot)] -mt-3 flex min-h-dvh flex-col gap-5 px-[var(--page-gutter)] pb-[calc(2rem+var(--page-foot))] pt-4`}
+      className={`paper paper-page @container ${paperFontVariables} -mx-[var(--page-gutter)] -mb-[var(--page-foot)] -mt-[var(--page-top)] flex min-h-dvh flex-col gap-5 px-[var(--page-gutter)] pb-[calc(2rem+var(--page-foot))] pt-3`}
     >
       {children}
     </div>
