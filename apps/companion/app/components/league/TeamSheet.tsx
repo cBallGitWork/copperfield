@@ -2,8 +2,10 @@
 
 import { useState, type ReactNode } from "react";
 import type { BreakdownLine, PlayerStory, SquadDetailLine, SquadPlayerDetail } from "@epl/core";
-import { playerName } from "@epl/core";
+import { everyLine, isGoalkeeper, playerName } from "@epl/core";
 import BenchStrip from "./BenchStrip";
+import PitchMarker from "./PitchMarker";
+import { positionLabel } from "../../positions";
 import LivePlayerCard from "./LivePlayerCard";
 import PitchRows, { GROWS, widestLine } from "./PitchRows";
 import SquadMarker, { squadBench, squadKey } from "./SquadMarker";
@@ -77,6 +79,9 @@ export default function TeamSheet({
   // The bench counts as a line, so a reserve is drawn as wide as the man he would replace.
   const widest = agreed ?? widestLine([...rows, { players: bench }]);
 
+  // Every line on the grass, an empty one included.
+  const lines = everyLine(rows);
+
   // `projected` is always false here: these are the live scoreboard's figures, which never project.
   return (
     <div className="flex flex-col">
@@ -84,10 +89,14 @@ export default function TeamSheet({
         // `pitch-with-bench` sizes the grass and the strip under it (`pitch.css`); the player card stays outside it.
         <div className="pitch-with-bench flex flex-col">
           <PitchRows
-            rows={rows.map((line) => ({ label: line.position, players: line.players }))}
+            rows={lines.map((line) => ({ label: line.position, players: line.players }))}
             keyOf={squadKey}
             widest={widest}
             inColumn={inColumn}
+            // A line he left empty keeps its place and says so, or the rest slide off their markings.
+            empty={(position) => (
+              <PitchMarker player={null} label={positionLabel(position) ?? "?"} name="" keeper={isGoalkeeper(position)} club={undefined} band="" />
+            )}
           >
             {(player) => (
               <AutoSubChip title={subLine(player)}>
@@ -98,7 +107,7 @@ export default function TeamSheet({
             )}
           </PitchRows>
 
-          <BenchStrip {...squadBench} bench={bench} rows={rows.length} widest={widest} inColumn={inColumn} instead={offWord}>
+          <BenchStrip {...squadBench} bench={bench} rows={lines.length} widest={widest} inColumn={inColumn} instead={offWord}>
             {(player) => (
               <Marked mark={subs[player.rostered.slot.fantraxId]}>
                 <Cell player={player} onOpen={() => setOpen(player)} started={on(player)} />

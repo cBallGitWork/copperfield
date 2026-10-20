@@ -44,6 +44,14 @@ export function positionDepth(position: string): number {
 /** Position letters back to front, for `.sort`. */
 export const byPositionDepth = (a: string, b: string): number => positionDepth(a) - positionDepth(b);
 
+/** A pitch's lines with an empty one held for every position nobody fills, so the rest stand where they belong. */
+export function everyLine<T>(lines: readonly { position: string; players: T[] }[]): { position: string; players: T[] }[] {
+  const missing = PITCH_ORDER.filter((position) => !lines.some((line) => line.position === position));
+  return [...lines, ...missing.map((position) => ({ position, players: [] as T[] }))].sort((a, b) =>
+    byPositionDepth(a.position, b.position),
+  );
+}
+
 /** One row of the pitch with everybody in it, reserves included. */
 export interface SquadLine {
   position: string;
