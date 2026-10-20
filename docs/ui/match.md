@@ -472,6 +472,16 @@ that is about a player rather than about a tally.
 | Fantrax silent | `marks()` empty | the owner lines vanish; the football renders | same |
 | id is not an integer, or names no fixture | — | `notFound()` | `notFound()` |
 
+**An empty Stats, Action Zones or Highlights tab is a `TabEmpty`**, one muted line in a panel under the strip, as a
+club's or a team's tab is (review, 20 Oct 2026; it was `Nothing`'s crest and headline, with three phrases for one
+state). One line before kick-off on all three, and each tab's own after it:
+
+| Tab | `status === "upcoming"` | after kick-off |
+|---|---|---|
+| Stats (no team sheet, or no match stats) | Not kicked off | No team sheet yet · No stats yet |
+| Action Zones (no shots, no touches) | Not kicked off | No shot data yet |
+| Highlights (no video; `data-code` names the fixture) | Not kicked off | No highlights |
+
 **Full time is `FT`, whether or not FPL has settled its bonus** (Craig, 6 Oct
 2026: bonus is the FPL tab's alone, so nothing outside it waits on it). The sister repo's day-long lag is a
 different absence and belongs only to the tabs that do not exist yet.

@@ -121,7 +121,7 @@ No fluid clamps except inside the masthead.
 | `shell/StepHead` | A plate naming where you are in a run, CM's arrows either side under a thumb, an inert outline at either end. Two runs: `RoundHead`'s gameweeks, and Live's match days since 19 Oct 2026 (`h3` there, under the Premier League section's head). Each arrow replaces the page in history, so Back leaves the section. |
 | `shell/RoundHead` | The strip at the head of one round's block of matches — `Gameweek 7`, plus whatever that screen adds about it. Three copies, and the third had lost the gameweek: `prem/Rounds` and `league/results` wrote the plate byte for byte, while `league/schedule` wrote a fourth spelling that said DEADLINE and a date and never named the round (Craig, 7 Sep 2026: *"this doesnt actually show what gameweek it is"*). The gameweek is the component's, not a caller's string, so the one thing all three must say is the one thing a caller cannot get wrong. `text-ink` came off two of them on the way in — `.cm-bevel` sets its own colour unlayered, so the utility was dead, and what it named was a 2.27:1 failure. |
 | `league/TableCells` | The other half: `IndexCell`, the ordinal in CM's index block (`24.jpg` runs `1st 2nd 3rd` down the left of every table it draws), and `ROW_LINK`, the class a board's name cell links with. Both arrived at three occurrences and not before. `INDEX_WIDTH` lived here until 7 Sep 2026 and is in `desk.ts` now: its second consumer is `shell/ScoreRow`, and a `shell/` component importing from `league/` inverts this file's own layering. **`PointsCell`** (the Pts column in an index block) and **`CutRow`** (a dashed rule naming what it separates: playoffs, Champions League, relegation, a cup group's knockout line) joined on 2 Oct 2026 at three sites each. |
-| `league/TabEmpty` | The empty state INSIDE a shell: one muted line in a panel. Not `shell/Nothing`, which is a whole-page state and carries the read's code as `data-code`. |
+| `league/TabEmpty` | The empty state of a subject's tab (a team's, a club's or a match's) under its strip: one muted line in a panel, the read's code as `data-code` where there is one. Not `shell/Nothing`, which is for a page or a section. |
 | `league/GroupNav` | The stat groups under a board. Deliberately not `TabStrip`: it wraps, it is drawn shorter, and it lists groups rather than routes. |
 | `league/ScoreFigure` | A score, at the one size and weight every board sets it. |
 | `league/TeamName` | A fantasy team's name: `shortName` under a thumb, the whole name from `lg` (Craig, 6 Oct 2026), both rendered and CSS picking, as `football/ClubLabel` does for a club. The table and its head-to-head copy, through `TableRow`, and Team Stats. |
@@ -490,7 +490,8 @@ alternative for every animation. One focus treatment everywhere, never removed.
 
 **One h1 per route, and it is the title bar's** (DESIGN §2; review M64, 16 Oct 2026). Where the bar is drawn from
 controls (a match's two club links, a head-to-head's two buttons) or kept off a phone's screen (your own team's), the
-h1 is `sr-only`, never `hidden`. An empty state under a bar (`Nothing`) is an h2; one with no bar above it (the 404,
+h1 is `sr-only`, never `hidden`. A section's empty state under a bar (`Nothing`) is an h2 (a subject's empty tab is a
+`TabEmpty` line, no head); one with no bar above it (the 404,
 a refused profile, the squad index's outages) passes `page`. An article's headline is its h1, so its extras' heads
 start at h2. A skipped level is filled with an `sr-only` h2 naming the view, as Match stats and Live's Top stats do.
 
