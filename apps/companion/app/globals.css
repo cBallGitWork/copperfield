@@ -67,6 +67,8 @@
    Safari tints its status area and bars with. `body` stays clear, or it would paint over the fixed photograph. */
 html {
   background: var(--color-bg);
+  /* Holds the page scrollbar's width, so a short sibling tab does not shift sideways. */
+  scrollbar-gutter: stable;
 }
 
 body {

@@ -18,8 +18,9 @@ export default function Mailbox({
   return (
     <div className="flex flex-col gap-2 lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,6fr)] lg:items-start lg:gap-3">
       {back === null ? <KeepScroll /> : <ListBack href={back.href} label={back.label} />}
+      {/* 9rem is Mail's chrome above the list, and `<main>`'s foot padding is under it: /news's window then never scrolls. */}
       <ul
-        className={`${PANEL_FLUSH} cm-rows cm-scroll cm-scroll-y lg:max-h-[calc(100svh-9rem)] lg:overflow-y-auto ${
+        className={`${PANEL_FLUSH} cm-rows cm-scroll cm-scroll-y lg:max-h-[calc(100svh-9rem-var(--page-foot))] lg:overflow-y-auto ${
           back === null ? "" : "max-lg:hidden"
         }`}
       >
