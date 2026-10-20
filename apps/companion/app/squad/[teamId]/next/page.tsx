@@ -1,10 +1,10 @@
 import TabEmpty from "../../../components/league/TabEmpty";
 import TeamName from "../../../components/league/TeamName";
-import { headToHeads, inkOn } from "@epl/core";
+import { type LeagueTeam, clubById, headToHeads, inkOn, oppositionByClub } from "@epl/core";
 import TeamShell from "../Shell";
 import { SQUAD } from "../../routes";
 import { identify, whoseTeam } from "../team";
-import { getLeagueSquads, readableOr404 } from "../../../squads";
+import { getLeagueSquads, readableOr404, teamDisplay } from "../../../squads";
 import { planningRound } from "../../../round";
 import { leagueTable } from "../../../standings";
 import Link from "@/app/components/shell/Link";
@@ -14,9 +14,14 @@ import { teamColours } from "@/app/teamColours";
 import { placings } from "../../../league/placings";
 import { UNAVAILABLE } from "../../../config";
 import { teamTitle } from "../title";
+import { myTeamId } from "../../../session";
+import { FootFrame } from "../../../components/shell/FootFrame";
+import { SquadList } from "../../../league/matchups/[teamId]/sides";
+import { unplayedLists } from "../../../league/matchups/[teamId]/unplayed";
+import { SideFoot, TieSides, sideOf, sideTabs } from "./sides";
 
-// Who he plays: both sides on their own colours, as CM sets a match header (`cm9900/21.jpg`); the pairing is already
-// in the squads payload.
+// Who he plays: both sides on their own colours, as CM sets a match header (`cm9900/21.jpg`), then both line-ups as
+// the head-to-head lists them before kickoff (Craig, 20 Oct 2026). Everything is already in the squads payload.
 
 export const revalidate = 30;
 
@@ -24,10 +29,14 @@ export const generateMetadata = teamTitle("next");
 
 export default async function NextMatchPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ teamId: string }>;
+  /** `side=opponent` opens a phone on the other side; the desk shows both. */
+  searchParams: Promise<{ side?: string }>;
 }) {
-  const { teamId: slug } = await params;
+  const [{ teamId: slug }, query] = await Promise.all([params, searchParams]);
+  const open = sideOf(query.side);
   // The whole read, not `leagueTeams`: this screen needs the matchups and the period too.
   const [read, table] = await Promise.all([
     getLeagueSquads(await planningRound()),
@@ -35,7 +44,7 @@ export default async function NextMatchPage({
   ]);
   const squads = readableOr404(read, SQUAD);
 
-  const { team } = await whoseTeam(slug, squads.period.teams);
+  const [{ team }, mine] = await Promise.all([whoseTeam(slug, squads.period.teams), myTeamId(squads.period.teams)]);
   const teamId = team.teamId;
 
   // Two in a double header, one under the other.
@@ -48,6 +57,15 @@ export default async function NextMatchPage({
   // Where each side stands, for the bracket under his name; no bracket when the table would not answer.
   const placing = placings(table);
 
+  // A rival's eleven only once his period opens, as the head-to-head gates it; until then his squad, unarranged.
+  const rostered = new Map(squads.period.teams.map((t) => [t.teamId, t]));
+  const shows = (side: LeagueTeam) => teamDisplay(squads, side.teamId === mine).show === "lineup";
+  const clubs = clubById(squads.snapshot);
+  const opposition = oppositionByClub(squads.snapshot);
+  // No bench order: that is a Fantrax read per team, so a bench stands in position order here.
+  const listsOf = (tie: (typeof ties)[number]) =>
+    unplayedLists({ pairing: tie, rostered, shows, benches: new Map(), clubs, opposition });
+
   return (
     <TeamShell
       team={identify(team, slug)}
@@ -57,19 +75,30 @@ export default async function NextMatchPage({
       {ties.length === 0 ? (
         <TabEmpty>{squads.info === null ? UNAVAILABLE : `${team.teamName} has no fixture this gameweek.`}</TabEmpty>
       ) : (
-        ties.map((tie) => (
-          <Fixture
-            key={tie.opponent.teamId}
-            gameweek={gameweek}
-            href={matchupHref(teamId, gameweek, undefined, tie.opponent.teamId)}
-            home={{ teamId: tie.team.teamId, name: tie.team.name, place: placing.get(tie.team.teamId) }}
-            away={{
-              teamId: tie.opponent.teamId,
-              name: tie.opponent.name,
-              place: placing.get(tie.opponent.teamId),
-            }}
-          />
-        ))
+        <FootFrame foot={<SideFoot open={open} tabs={sideTabs(slug, ties[0].team, ties.map((tie) => tie.opponent))} />}>
+          {ties.map((tie) => {
+            const listed = listsOf(tie);
+            return (
+              <div key={tie.opponent.teamId} className="flex flex-col gap-2">
+                <Fixture
+                  gameweek={gameweek}
+                  href={matchupHref(teamId, gameweek, undefined, tie.opponent.teamId)}
+                  home={{ teamId: tie.team.teamId, name: tie.team.name, place: placing.get(tie.team.teamId) }}
+                  away={{
+                    teamId: tie.opponent.teamId,
+                    name: tie.opponent.name,
+                    place: placing.get(tie.opponent.teamId),
+                  }}
+                />
+                <TieSides
+                  open={open}
+                  team={<SquadList listed={listed.get(tie.team.teamId)} teamId={tie.team.teamId} />}
+                  opponent={<SquadList listed={listed.get(tie.opponent.teamId)} teamId={tie.opponent.teamId} />}
+                />
+              </div>
+            );
+          })}
+        </FootFrame>
       )}
     </TeamShell>
   );
