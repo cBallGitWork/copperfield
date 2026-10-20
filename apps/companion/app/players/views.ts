@@ -24,7 +24,7 @@ export const STATS_SORT = "xg";
 export function onPlayers(column: PoolColumn, categories: Record<string, ScoringCategory>): boolean {
   if (column.fantasy) return true;
   if (column.scores === undefined) return false;
-  return Object.keys(categories).length === 0 || firstScored(categories, [column.scores]) !== null;
+  return Object.keys(categories).length === 0 || firstScored(categories, column.also ? [column.scores, column.also] : [column.scores]) !== null;
 }
 
 /** One board, its columns split off the league's scoring categories as getLeagueInfo gives them. */

@@ -44,6 +44,11 @@ export interface PlayersQuery {
   panel?: string;
 }
 
+/** A sort key a shared link may still carry, by the column that now holds it: GAO merged into GA. */
+const RENAMED: Readonly<Record<string, string>> = { gao: "ga" };
+
+const renamed = (sort: string | undefined) => (sort === undefined ? undefined : (RENAMED[sort] ?? sort));
+
 /** The last value wins, as a browser does with a repeated field. */
 export function playersQuery(raw: PlayersSearchParams): PlayersQuery {
   return {
@@ -51,7 +56,7 @@ export function playersQuery(raw: PlayersSearchParams): PlayersQuery {
     q: lastValue(raw.q),
     pos: lastValue(raw.pos),
     status: lastValue(raw.status),
-    sort: lastValue(raw.sort),
+    sort: renamed(lastValue(raw.sort)),
     dir: lastValue(raw.dir),
     all: lastValue(raw.all),
     group: lastValue(raw.group),
