@@ -8,7 +8,7 @@ import { normalizeReports } from "./reports/cargoRead";
 import { normalizeBin, type StoryBin } from "./binXi/cargo";
 import { normalizeApplied, type AppliedMove } from "./season/editor";
 import { normalizeTransfer, type StoryTransfer } from "./trades/cargo";
-import { stringOrEmpty, textOrNull } from "../untrusted";
+import { codeOrNull, stringOrEmpty, textOrNull } from "../untrusted";
 
 // The structured cargo a story carries beside its prose, and its normaliser: everything that is not paragraphs.
 
@@ -180,13 +180,13 @@ function lineupSide(raw: unknown): StoryLineupSide | null {
   const side = raw as Partial<StoryLineupSide> | null;
   if (side === null || typeof side !== "object") return null;
   if (typeof side.club !== "string" || side.club.trim() === "") return null;
-  // A code that is not a real FPL one draws the wrong crest or none.
-  if (typeof side.code !== "number" || !Number.isInteger(side.code) || side.code <= 0) return null;
+  const code = codeOrNull(side.code);
+  if (code === null) return null;
   if (typeof side.formation !== "string" || side.formation === "") return null;
   const men = Array.isArray(side.men) ? side.men.flatMap(lineupMan) : [];
   return men.length === 0
     ? null
-    : { club: side.club, code: side.code, formation: side.formation, men };
+    : { club: side.club, code, formation: side.formation, men };
 }
 
 /** A fixture prints both elevens or neither. */
@@ -220,7 +220,7 @@ export function normalizeExtras(raw: unknown): StoryExtras | undefined {
     .map((row): StoryTeamNews => ({
       club: row.club,
       // A club code must be a real FPL one: it draws the crest and joins the fixture.
-      code: typeof row.code === "number" && Number.isInteger(row.code) && row.code > 0 ? row.code : null,
+      code: codeOrNull(row.code),
       ...(typeof row.line === "string" && row.line.trim() !== "" ? { line: row.line } : {}),
       men: men(row.men),
       alsoOut: names(row.alsoOut),
