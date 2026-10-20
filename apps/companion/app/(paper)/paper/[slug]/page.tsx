@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
-import { readerTeamId } from "../../../squads";
-import { edition } from "../../../edition";
+import { getLeagueSquads, readable, readerTeamId } from "../../../squads";
 import { archived, filed, renamedSlug } from "../../../paper";
 import { clubById, withReportFace } from "@epl/core";
 import Extras from "../../../components/gazette/Extras";
@@ -42,17 +41,19 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
   }
 
   // A column returns team ids; names are joined at render.
-  const mine = await readerTeamId();
-  const paper = await edition(mine);
-  const story = paper.snapshot ? withReportFace(found, paper.snapshot) : found;
-  const who = named(paper.teams);
+  // The squads alone, not the whole edition: an unreadable league still prints the story, unpictured.
+  const [mine, drafted] = await Promise.all([readerTeamId(), getLeagueSquads().then(readable)]);
+  const snapshot = drafted?.snapshot ?? null;
+  const teams = drafted?.info?.teams ?? [];
+  const story = snapshot ? withReportFace(found, snapshot) : found;
+  const who = named(teams);
 
   return (
     <>
       <Folio at={story.filedAt} />
       <article className="pt-4">
-        <Written story={story} teams={paper.teams} clubs={paper.snapshot ? clubById(paper.snapshot) : undefined} />
-        <Extras story={story} named={who} mine={paper.mine} snapshot={paper.snapshot} />
+        <Written story={story} teams={teams} clubs={snapshot ? clubById(snapshot) : undefined} />
+        <Extras story={story} named={who} mine={mine} snapshot={snapshot} />
       </article>
     </>
   );

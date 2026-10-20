@@ -23,10 +23,6 @@ export default function Dateline({
   className?: string;
 }) {
   const Tag = as;
-  // A story always has an edition or a filing instant or neither; `Written`
-  // renders nothing at all when there is no `filedAt`, and that stays true here.
-  if (story.filedAt === "") return null;
-
   return (
     <Tag className={`${QUIET_CAPS} ${className}`}>
       {byline ? `by ${writerOf(story)} · ` : ""}
