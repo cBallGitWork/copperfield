@@ -52,6 +52,7 @@ export {
 export {
   mapRoundGoals,
   plFixtureCode,
+  keyMoments,
   plCommentary,
   worthReading,
 } from "./premierleague/map";

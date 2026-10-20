@@ -64,7 +64,8 @@ for every shape decision below.
    half-time score at the right **in cyan**, then either the scoresheet or the
    preview. Under it, the **Match Report** — the commentary under a blue bar, run
    the page's full length rather than in a box of its own (Craig, 23 Sep 2026: *"we
-   have a browser scroll AND a match report scroll"*).
+   have a browser scroll AND a match report scroll"*). On a phone a plate row,
+   `Key moments · Full commentary`, stands where the bar was; see the report section.
 5. **The foot row** — CM's related-screens strip (`cm0102/02.jpg`), under the
    panel on Stats (`Brentford · Match · Chelsea`) and Line-ups (`Team Sheet ·
    Pitch`). The shell's `foot` slot draws it with `TabStrip`. **It is docked at every width**, so a long page
@@ -592,6 +593,16 @@ its fouls with a match between them.
 The emptiness test on the Report tab is asked of the WHOLE feed, not the filtered
 one: a match with commentary but no incident outside the fouls still has
 commentary, and "no commentary" would be the wrong sentence.
+
+**A phone opens on the key moments** (review M-LIVE-1, 20 Oct 2026). Tottenham 3-1 Coventry's report was
+63 rows over four screens at 390: 24 shots, which Action Zones lists with their xG, 8 corners, 6 delays and 2
+added-time notices, against the 4 goals, 4 bookings, 10 changes and the whistles a reader came for. `keyMoments`
+(core, beside `worthReading`) keeps goals, penalties, cards, VAR, changes, injuries and the whistles, 23 rows there.
+A plate row, `Key moments · Full commentary` (`?report=full`, replacing history), takes the bar's place on a
+phone; both views run the page's length. The desk keeps the one list without fouls, under the bar.
+
+**The feed sorts by period, then the clock.** Opta's clock restarts at 45:00, so 45+4 (2,910s) outranked
+46' (2,700s), and it stamps `Match ends` at the first minute; `plCommentary` reads the period off the label.
 
 `Commentary.tsx` is the row both screens draw. Two callers rather than three, so
 CODE_RULES §1 would leave it duplicated — and would, if what was duplicated were

@@ -6,7 +6,7 @@ import { PANEL } from "@/app/desk";
 import MatchShell from "./Shell";
 import Scoresheet from "./Scoresheet";
 import Preview from "./Preview";
-import MatchReport from "./MatchReport";
+import MatchReport, { reportView } from "./MatchReport";
 import { matchOwners, readMatch } from "./match";
 import { sheetReads } from "./sheetReads";
 import { side } from "./scoreLines";
@@ -23,8 +23,15 @@ export const revalidate = 30;
 
 export const generateMetadata = matchTitle("overview");
 
-export default async function MatchPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function MatchPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ report?: string }>;
+}) {
   const { id } = await params;
+  const view = reportView((await searchParams).report);
   const match = await readMatch(id);
   const { fixture } = match;
   // The detail read the shell's ground caption makes too; the half-time score rides on it.
@@ -54,7 +61,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
       {/* Two rows of air, then the report: the scoresheet ends before the account of how starts. */}
       {fixture.status === "upcoming" ? null : (
         <div className="mt-6 lg:mt-8">
-          <MatchReport match={match} />
+          <MatchReport match={match} view={view} />
         </div>
       )}
     </MatchShell>

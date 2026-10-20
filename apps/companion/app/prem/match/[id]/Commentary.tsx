@@ -9,10 +9,13 @@ import { ROW_NAME, SMALL_CAPS } from "@/app/desk";
 export default function Line({
   line,
   names = [],
+  deskOnly = false,
 }: {
   line: PlCommentaryLine;
   /** Every man on either team sheet, as Opta's prose spells him — bolded where the sentence names him. */
   names?: readonly string[];
+  /** Hidden on a phone, which reads the key moments alone. */
+  deskOnly?: boolean;
 }) {
   // An injury is a substitution whose sentence says why, so it is read off the text; it takes the negative slot.
   const hurt = saysInjury(line);
@@ -20,7 +23,7 @@ export default function Line({
   const tone = hurt ? "text-bad" : (TONE[line.type] ?? "text-muted");
   const toned = hurt || TONE[line.type] !== undefined;
   return (
-    <li className="flex min-h-9 items-stretch gap-2 lg:min-h-8">
+    <li className={`flex min-h-9 items-stretch gap-2 lg:min-h-8 ${deskOnly ? "max-lg:hidden" : ""}`}>
       {/* `w-11` holds stoppage time, `90+7`. */}
       <span className="cm-index numeric flex w-11 shrink-0 items-center justify-center">
         {line.minute.replace(/^0(?=\d)/, "")}&prime;

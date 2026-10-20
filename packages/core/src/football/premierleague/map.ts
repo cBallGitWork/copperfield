@@ -131,3 +131,21 @@ function period(line: PlCommentaryLine): number {
   const at = PERIOD_ENDS.findIndex((end) => minute <= end);
   return at === -1 ? PERIOD_ENDS.length : at;
 }
+
+/** What a reader opens a report for: goals, penalties, cards, VAR, changes and injuries, and the whistles.
+ *  Shots, corners, delays and added time stay out: Action Zones owns the shots. */
+const KEY_TYPES: ReadonlySet<string> = new Set([
+  "goal", "penalty goal", "own goal", "VAR cancelled goal", "contentious referee decisions",
+  "penalty won", "penalty lost", "penalty saved",
+  "yellow card", "secondyellow card", "red card",
+  "substitution", "player retired",
+  "start", "end 1", "end 2", "end 14",
+]);
+
+/** Opta files a penalty miss as `miss` or `post`; only its sentence says so. */
+const PENALTY_MISSED = /^Penalty missed!/;
+
+/** The key moments of a match, in the feed's order; a phone opens its report on these. */
+export function keyMoments(lines: readonly PlCommentaryLine[]): PlCommentaryLine[] {
+  return lines.filter((line) => KEY_TYPES.has(line.type) || PENALTY_MISSED.test(line.text));
+}
