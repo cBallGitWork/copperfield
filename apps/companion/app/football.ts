@@ -33,6 +33,7 @@ import { hourly, onTheClock } from "./fplClock";
 import { restAfterFailure } from "./restAfterFailure";
 import {
   BASE_REVALIDATE,
+  FPL_REST_MAX_MS,
   FPL_REST_MS,
   LIVE_LEAD_MINUTES,
   LIVE_REVALIDATE,
@@ -46,11 +47,12 @@ import {
 // 1.3 MB bootstrap, which moves with news, and the round's fixtures and live lines, which move with the match. Nothing
 // about who is asking may cross into any of them.
 
-// FPL's endpoints, each resting a minute in this process after a failure rather than asked again on every view.
-const fplBootstrap = restAfterFailure(fetchBootstrap, FPL_REST_MS);
-const fplFixtures = restAfterFailure(fetchFixtures, FPL_REST_MS);
+// FPL's endpoints, each resting in this process after a failure (longer for each in a row), not asked on every view.
+const fplRest = { maxRestMs: FPL_REST_MAX_MS };
+const fplBootstrap = restAfterFailure(fetchBootstrap, FPL_REST_MS, fplRest);
+const fplFixtures = restAfterFailure(fetchFixtures, FPL_REST_MS, fplRest);
 /** FPL's live read for a round; shared with the FPL tab, so both rest together. */
-export const fplLive = restAfterFailure(fetchLive, FPL_REST_MS);
+export const fplLive = restAfterFailure(fetchLive, FPL_REST_MS, fplRest);
 
 /** The season's list, stamped: it stands in for a round FPL will not read (`roundSnapshot`). */
 const readSeason = async (): Promise<{ fixtures: Fixture[]; fetchedAt: string }> => ({
@@ -154,8 +156,9 @@ export async function gameweekSnapshot(gameweek: number): Promise<FootballSnapsh
   return roundSnapshot(base, gameweek, round);
 }
 
-/** The whole season's list, on a slow clock: the round in view comes from that round's own reading. */
-const seasonList = onTheClock("fpl-season-list", readSeason, SEASON_FIXTURES_REVALIDATE, matchOn, seasonThisHour);
+/** The whole season's list, the hour's reading in a match window too: the round in view comes from its own reading,
+ *  so this carries only dates and finished rounds. The slow clock's entry stands in when the hour's is refused. */
+const seasonList = onTheClock("fpl-season-list", readSeason, SEASON_FIXTURES_REVALIDATE, async () => false, seasonThisHour);
 
 /** Every fixture in the season, as FPL dates them (a snapshot holds one gameweek), the round in focus as fresh as its
  *  own reading; once per request. Without a round to lay over it, the season list alone. */

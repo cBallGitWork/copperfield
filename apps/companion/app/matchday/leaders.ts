@@ -1,6 +1,6 @@
-import type { Club, FootballPlayer, FootballSnapshot, LeagueScoring, PlayerMatchStats, PoolPlayer, StatKey } from "@epl/core";
-import { DEFCON, clubById, defConAt, playerByCode, playerById } from "@epl/core";
-import { LISTS, asPrinted, ranked, type LeaderList, type Ranked } from "../prem/(competition)/data/leaders";
+import type { Club, FootballPlayer, FootballSnapshot, LeagueScoring, PlayerMatchStats, PoolPlayer } from "@epl/core";
+import { clubById, defConAt, playerByCode, playerById } from "@epl/core";
+import { LISTS, asPrinted, ranked, type LeaderList, type Ranked } from "./lists";
 import type { Held } from "../players/holder";
 import type { PeriodLine } from "../statsLeague";
 
@@ -15,7 +15,7 @@ export interface TopRow extends Ranked {
   held: Held | null;
 }
 
-/** One list: its key in the address, the word on its tab, the Data tab's list it is drawn as, and its men. */
+/** One list: its key in the address, the word on its tab, the list it is drawn as, and its men. */
 export interface TopBoard {
   key: string;
   tab: string;
@@ -26,19 +26,16 @@ export interface TopBoard {
 /** Our league's word for a position in a list's title; a letter not here prints as itself. */
 const POSITION_WORD: Record<string, string> = { G: "keepers", D: "defenders", M: "midfielders", F: "forwards" };
 
-/** The Data tab's own list for a measure. */
+/** The list for a measure. */
 function listOf(key: string): LeaderList {
   const list = LISTS.find((each) => each.key === key);
-  if (list === undefined) throw new Error(`no Data list "${key}"`);
+  if (list === undefined) throw new Error(`no Top stats list "${key}"`);
   return list;
 }
 
 const POINTS = listOf("points");
 const XG = listOf("xg");
 const XA = listOf("xa");
-
-/** The stats league's key for each DefCon count: a recorded figure, so its list inks amber. */
-const COUNTED: Readonly<Record<string, StatKey>> = { [DEFCON[0].short]: "defensivePoints", [DEFCON[1].short]: "defensivePoints3" };
 
 /** Positions the league counts DefCon alike at, drawn as one list: the category counted and its positions in pitch order. */
 export interface DefconGroup {
@@ -52,12 +49,11 @@ export function defconList(group: DefconGroup): { tab: string; list: LeaderList 
   return {
     tab: `DefCon ${positions.join("/")}`,
     list: {
-      ...listOf("defcon"),
       key: `defcon-${positions.join("")}`,
       title: `DefCon, ${positions.map((position) => POSITION_WORD[position] ?? position).join(" and ")}`,
       head: "DC",
       explain: "DefCon this gameweek, counted as the league counts it at these positions",
-      source: { stats: COUNTED[group.category] ?? "defensivePoints" },
+      kind: "count",
     },
   };
 }

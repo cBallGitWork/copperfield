@@ -2,7 +2,7 @@ import { readdirSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { describe, expect, it } from "vitest";
 import { CUPS } from "@epl/core";
-import { NEVER_WALKED, skipped, walkPaths } from "./routes";
+import { FEEDS, NEVER_WALKED, feedProblems, skipped, walkPaths } from "./routes";
 
 // Holds the smoke walk to the app's route table, found by walking `app/` for its pages, never from a list.
 
@@ -55,6 +55,15 @@ describe("the smoke walk", () => {
     expect(walkPaths(ALL_IDS)).toContain("/players/analysis?a=p1&b=p2");
     expect(walkPaths({ ...ALL_IDS, rivalId: null }).filter((path) => path.startsWith("/players/analysis?"))).toEqual([]);
     expect(skipped({ ...ALL_IDS, rivalId: null })).toEqual([expect.stringMatching(/^\/players\/analysis\?a=\[fantraxId\]&b=\[fantraxId\] /)]);
+  });
+
+  it("takes the lock calendar's 200 as text/calendar and its 503, and nothing else", () => {
+    const [calendar] = FEEDS;
+    expect(calendar.path).toBe("/calendar.ics");
+    expect(feedProblems(calendar, 200, "text/calendar; charset=utf-8")).toEqual([]);
+    expect(feedProblems(calendar, 503, "text/plain;charset=UTF-8")).toEqual([]);
+    expect(feedProblems(calendar, 200, "text/html; charset=utf-8")).toEqual([expect.stringMatching(/expected text\/calendar/)]);
+    expect(feedProblems(calendar, 500, null)).toEqual(["answered 500, expected 200 or 503"]);
   });
 
   it("walks each declared cup by its id, and no other", () => {

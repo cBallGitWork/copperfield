@@ -6,7 +6,7 @@ import ScrollBoard from "./ScrollBoard";
 import { Head, HeadRow, MUTE, NameHead, PLATE, SortHead, sortedAs } from "./TableHeads";
 import { CutRow, PointsCell, TIGHT_ROW } from "./TableCells";
 import { yoursEdge, yoursInk } from "@/app/mine";
-import { BOARD, DESK_ONLY, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TONE, standDown } from "@/app/desk";
+import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TONE, standDown } from "@/app/desk";
 import { FORM_GAMES } from "@/app/config";
 
 // Every league table in the app (`cm9900/24.jpg`): the fantasy league's, the Premier League's and a cup's groups.
@@ -24,12 +24,7 @@ export type StandingsColumn<K extends string> = {
   width: string;
   /** A column the phone does without, so the table fits at 390 without a sideways scroll. */
   deskOnly?: true;
-  /** Which of Pts' two copies this is: a phone reads it straight after Pld, a desk at the end. */
-  copy?: keyof typeof COPY;
 };
-
-/** Where each copy of Pts shows. A table cell cannot be reordered by CSS, so Pts is printed twice. */
-const COPY = { phone: "lg:hidden", desk: DESK_ONLY } as const;
 
 /** A row's height under a thumb: the tap floor, or the Draft tab's 36px (PRODUCT.md's exceptions). */
 const ROWS = { tap: "cm-row flex min-h-11 items-center gap-2", tight: TIGHT_ROW } as const;
@@ -76,7 +71,7 @@ export default function StandingsTable<K extends string>({
         <thead>
           <HeadRow>
             {columns.map((column) => (
-              <ColumnHead key={columnKey(column)} column={column} sort={sort} descending={descending} sortHref={sortHref} />
+              <ColumnHead key={column.key} column={column} sort={sort} descending={descending} sortHref={sortHref} />
             ))}
           </HeadRow>
         </thead>
@@ -85,7 +80,7 @@ export default function StandingsTable<K extends string>({
             <Fragment key={line.key}>
               <tr className={`${ROW_RULE} ${line.mine ? "bg-raised" : line.href === undefined ? "" : "hover:bg-surface"}`}>
                 {columns.map((column) => (
-                  <Cell key={columnKey(column)} column={column} line={line} sort={sort} row={ROWS[rows]} />
+                  <Cell key={column.key} column={column} line={line} sort={sort} row={ROWS[rows]} />
                 ))}
               </tr>
               {(line.cuts ?? []).map((cut) => (
@@ -104,14 +99,9 @@ export function StandingsName({ children }: { children: ReactNode }) {
   return <span className={`min-w-0 truncate ${ROW_NAME}`}>{children}</span>;
 }
 
-/** The width class a column shows at: its copy's, else stood down under a thumb unless it orders the table. */
+/** The width class a column shows at: stood down under a thumb unless it orders the table. */
 function shownAt<K extends string>(column: StandingsColumn<K>, sort: K | undefined): string {
-  return column.copy === undefined ? standDown(column.deskOnly, column.key === sort) : COPY[column.copy];
-}
-
-/** A React key for a column, unique though Pts appears twice. */
-function columnKey<K extends string>(column: StandingsColumn<K>): string {
-  return column.copy === undefined ? column.key : `${column.key}-${column.copy}`;
+  return standDown(column.deskOnly, column.key === sort);
 }
 
 function ColumnHead<K extends string>({

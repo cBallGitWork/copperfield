@@ -3,6 +3,9 @@
 /** The league table, the section's front page. */
 export const LEAGUE = "/league";
 
+/** When waiver claims next run, the claim order and the last run's claims: a view of Transfers, not a tab. */
+export const WAIVERS = `${LEAGUE}/waivers`;
+
 /** Every pairing this round. */
 export const MATCHUPS = `${LEAGUE}/matchups`;
 

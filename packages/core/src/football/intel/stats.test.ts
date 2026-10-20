@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { STAT_COLUMNS } from "./statKeys";
-import { columnDrift, stat, statIntel, type IntelStats } from "./stats";
+import { blocks, columnDrift, stat, statIntel, type IntelStats } from "./stats";
 
 const FILE: IntelStats = {
   manifest: { season: "26-27", gameweek: null, exportedAt: "2026-09-26T19:00:00Z", rows: 2, sources: [] },
@@ -31,6 +31,18 @@ describe("stat", () => {
   it("reads a count, and null for a man we hold nothing on", () => {
     expect(stat(rows.get(60307), "tacklesWon")).toBe(5);
     expect(stat(rows.get(999), "tacklesWon")).toBeNull();
+  });
+});
+
+describe("blocks", () => {
+  it("takes his tackles won and interceptions out of DefCon's count, leaving the shots he blocked", () => {
+    expect(blocks({ defensivePoints: 19, tacklesWon: 9, interceptions: 6 })).toBe(4);
+    expect(blocks({ defensivePoints: 15, tacklesWon: 9, interceptions: 6 })).toBe(0);
+  });
+
+  it("is null where any part is missing: a keeper's half carries none of them", () => {
+    expect(blocks({ defensivePoints: 19, tacklesWon: null, interceptions: 6 })).toBeNull();
+    expect(blocks(undefined)).toBeNull();
   });
 });
 

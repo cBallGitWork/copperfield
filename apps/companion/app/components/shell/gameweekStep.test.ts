@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { besideGameweek, openGameweek } from "./gameweekStep";
+import { beside, openGameweek } from "./gameweekStep";
 
 const season = [
   { gameweek: 5, started: true, finished: true },
@@ -37,15 +37,15 @@ describe("openGameweek", () => {
   });
 });
 
-describe("besideGameweek", () => {
+describe("beside", () => {
   const weeks = season.map((round) => round.gameweek);
 
   it("steps over a break", () => {
-    expect(besideGameweek(weeks, 7)).toEqual({ previous: 6, next: 9 });
+    expect(beside(weeks, 7)).toEqual({ previous: 6, next: 9 });
   });
 
   it("stops at either end", () => {
-    expect(besideGameweek(weeks, 5)).toEqual({ previous: null, next: 6 });
-    expect(besideGameweek(weeks, 9)).toEqual({ previous: 7, next: null });
+    expect(beside(weeks, 5)).toEqual({ previous: null, next: 6 });
+    expect(beside(weeks, 9)).toEqual({ previous: 7, next: null });
   });
 });

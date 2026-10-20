@@ -37,6 +37,10 @@ export const TOKEN_SRGB = {
   muted: "#b9b0a2",
   well: "#23201a",
   wellEdge: "#323439",
+  // A gameweek's shared scores: the derived-reading cyan, the quiet ink and a panel's rule.
+  info: "#3adaf2",
+  faint: "#968e80",
+  line: "#4b4741",
   // The index block's ramp at its two ends, as measured down `/league` (DESIGN §2).
   indexTop: "#3554a9",
   indexFoot: "#162e7c",
@@ -53,6 +57,9 @@ export const LEADERS_SHOWN = 10;
 
 /** How many gameweeks of xMins a player card prints, the screen's own first. */
 export const XMINS_WEEKS = 5;
+
+/** xMins under which the planner says a starter might not start, when a sub could play in his place (19 Oct 2026). */
+export const START_DOUBT_MINUTES = 50;
 
 /** How many results a form guide shows, oldest first: both tables' Form column and a match preview's. */
 export const FORM_GAMES = 5;
@@ -75,6 +82,15 @@ export const UNAVAILABLE = "Not available right now";
 /** How stale a rendered page may be, in seconds. Next reads `revalidate` statically, so every
  *  route segment repeats it as a literal; `scripts/revalidate.test.ts` holds them together. */
 export const PAGE_REVALIDATE = 30;
+
+/** How long the league's waiver schedule is held, in seconds: it moves only when the commissioner edits the setup. */
+export const WAIVER_SCHEDULE_REVALIDATE = 60 * 60 * 6;
+
+/** How near the next waiver run is before a banner says so, in hours (Craig, 19 Oct 2026: "when 18 hours left"). */
+export const WAIVER_BANNER_HOURS = 18;
+
+/** How many waiver runs a page carries, so a countdown left open past one moves on to the next without a reload. */
+export const WAIVER_RUNS_AHEAD = 4;
 
 /** How stale a printed article may be, in seconds: a story ships with the deploy that files it. */
 export const ARTICLE_REVALIDATE = 300;
@@ -106,16 +122,16 @@ export const FINAL_REVALIDATE = 60 * 60 * 24;
 /** His completed seasons, which nothing moves until the summer: `FINAL_REVALIDATE` under `grid.ts`'s name. */
 export const PAST_SEASONS_REVALIDATE = FINAL_REVALIDATE;
 
-/** Lifetime of the two reads a live score is drawn from, in seconds. Below `POLL.live` plus a
- *  fetch, or a stale-while-revalidate entry makes a lone reader see new scores every other poll. */
+/** Lifetime of the reads a live score is drawn from (FPL's round, the PL's, Fantrax's live scoring), in seconds. Below
+ *  `POLL.live` plus a fetch, or a stale-while-revalidate entry makes a lone reader see new scores every other poll. */
 export const LIVE_REVALIDATE = 20;
 
 /** Lifetime of FPL's bootstrap as the snapshot keeps it, in seconds: 1.3 MB of players, clubs and calendar that moves
  *  with news, not the match; on the live clock it was 39 MB in four minutes of three pages polling (11 Oct 2026). */
 export const BASE_REVALIDATE = 300;
 
-/** Lifetime of FPL's whole-season fixture list, in seconds: the round in view rides on its own live reading
- *  (`seasonFixtures`), so this read only carries dates and finished rounds; at 30s it was 2 of FPL's ~10 a minute. */
+/** Lifetime of the season list's standby entry, in seconds, read only when the hour's is refused: the list is the
+ *  hour's reading in a match window too, since the round in view rides on its own (19 Oct 2026). */
 export const SEASON_FIXTURES_REVALIDATE = 300;
 
 /** When FPL is read on the live clock: from `leadMinutes` before a London day's first kickoff to `tailMinutes` after
@@ -130,10 +146,18 @@ export const QUIET_REVALIDATE = 60 * 60;
  *  read about once a minute, and a stale entry otherwise asked a refusing FPL on every page view (11 Oct 2026). */
 export const FPL_REST_MS = 60_000;
 
-/** How often an open page asks for a fresh render, in seconds. */
+/** The longest that rest grows to, in ms: it doubles on each refusal in a row (60, 120, 240s), since FPL refuses
+ *  Vercel for stretches of an hour and more and asking every minute only adds to them (19 Oct 2026). */
+export const FPL_REST_MAX_MS = 240_000;
+
+/** How often an open page asks for a fresh render, in seconds; `settle` is how soon it asks again after an open or a
+ *  return in a match window, when the first answer was a stale read's (a deployment ask, a render and Fantrax's 0.5s read). */
 export const POLL = {
   live: 30,
   idle: 300,
+  settle: 4,
+  // How long after a refresh the rail's tabs are fetched: past an FPL read, so they find it cached, not ask again.
+  ahead: 5,
 } as const;
 
 /** Minutes before a gameweek's first kickoff that the Live tab opens, to build to it (Craig, 8 Oct 2026). */

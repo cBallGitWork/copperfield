@@ -49,7 +49,8 @@ Where a section below disagrees with this one, this one is current.
 - **The row under a thumb is two fixed lines**: the search and Filter, then `GK DEF MID FWD` and `Free Owned`
   (4 × 44 + 50 + 57 and gaps: it fits 346 at 390 and 316 at 360; at 320 the status pair takes a third line). Nothing
   on it moves when pressed, so the 16 Oct "row jumps 50px" is gone. **On a desk it is one row**: search, positions,
-  Free and Owned, Adv Stats' plates and Per 90 from `xl`, and Filter at the end.
+  Free and Owned, Adv Stats' plates and Per 90 from `xl`, and Filter at the end (Adv Stats' `Key` before it, and its
+  plates a third line below `xl`, since 19 Oct 2026).
 - **Position is on the row at every width** as grey plates, a union as before, and left the sheet: nothing is in two
   visible places. *Forwards in the bin* is **one tap** (FWD) at 390, from five (FA, WW, Filter, FWD, Show); Fantrax's
   is one.
@@ -59,22 +60,58 @@ Where a section below disagrees with this one, this one is current.
   only one of them, which Free already is.
 - **The tick sits in the plate's corner** (`Chip`), so a press never changes a chip's width; the Filter badge keeps
   a slot of its own at nought, so Filter never moves either. The badge counts what the sheet holds that is on: the
-  club, a lone half of the bin, and on Adv Stats below `xl`, its plate and Per 90.
+  club, a lone half of the bin, and on Adv Stats below `xl`, Per 90 (its plate too until 19 Oct 2026).
 - **Clubs** is the label of `/players/teams` (teams.md); its key and route stay `teams`.
 
+### Adv Stats: Attack, Creating, Defence and a key (19 Oct 2026) — current
+
+Craig, 19 Oct 2026: *"data section, adv stats needs more things like xg, touches in box etc, and split into
+attack/defending, and a glossary, need to think about mobile"*. Where the 16 Oct section below disagrees, this one is
+current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Users) for this board.
+
+- **Plates, no `All`**: `Attack · Creating · Defence · Attributes` (`groups.POOL_GROUPS`), resting on Attack. Each
+  plate orders the board by its own column and clears the reader's sort, so a plate always opens on its own order:
+  Attack by `xG`, Creating by `xA`, Defence by `Tkl`, Attributes by `Acc`, its first rating.
+  `?group=all` and any group the board lacks land on Attack. Sort by in the sheet still reaches every column, and the
+  sorted column is drawn under any plate.
+- **Attack** `xG xGI Sh SoT BCM`; **Creating** `xA KP BCC Crs AC`, with `AT A AF` first in a league that carries them
+  unscored; **Defence** `Tkl Int Blk Clr Rec AW xGC`, with `Sv` last where carried unscored (`seasonColumns.ts`).
+  Five, five and seven figures at 390 in the real league, where `All` drew seven of seven at 390 before (counted off the
+  columns; the lead measures the shot). `Blk` is the stats league's DefCon count less tackles won and interceptions
+  (`core:blocks`; DFP3 is DFP + Clr + Rec on 445 of 445 rows, 19 Oct 2026). `DFP` is the league's own DefCon count,
+  tackles won + interceptions + blocks (282/282 against Opta, 6 Oct), not the CBIT/CBIRT of the other game; the
+  difference equals that game's clearances-blocks-interceptions less the same Clr and Int on 420 of 420 men, and runs
+  0.65 a 90 for defenders, 0.24 midfielders, 0.14 forwards (Gabriel 1.00, Tarkowski 0.86, Haaland 0.15). `xG xA xGI xGC` are the football
+  snapshot's season figures, which have no league twin to disagree with; a man with no minutes dashes, and Per 90
+  divides them by the same snapshot's minutes.
+- **The plates have a line of their own under a thumb** (third, under positions; inline from `xl`), one tap from
+  any plate to the next where the sheet took three. They left the sheet, so nothing is in two places, and the Filter
+  badge below `xl` counts Per 90 alone. The four end at 309 of 338 at 360 with Chances (UX review, 19 Oct 2026), so
+  Creating, a capital longer, holds one line there too.
+- **`Key` sits beside Filter** (`players/ColumnKey`, the house dialog, Back shuts it): every head on the plate,
+  its name and one line on what it counts, in plain words and never a source. Players keeps its `Key` under the
+  board. Every line is one shape, "Title. What it counts." (attributes "Acceleration. 1–20, from sprints per 90, this
+  season."); an expected figure's head keeps its lower-case x (`TableHeads.headWord`), as the Key prints it.
+- **Not held, so not drawn**: touches in the box (Opta's per-man match read has it, one request per man per match;
+  a season total is one request per man, a new cron; the touch cloud's box count ran 25 to 60% over Opta's on three
+  men, 19 Oct 2026), successful dribbles (the stats league holds take-ons tried, not won), npxG (the shot file's xG
+  is another model's, and two xGs on one board would disagree).
+
 ### Adv Stats (16 Oct 2026)
+
+*Plates, sort and the key superseded 19 Oct 2026 (above).*
 
 `/players/stats`, second on the strip: the same pool, rows, row of controls and resting free men as Players, under
 every figure Players does not draw.
 
 - **Its columns**: the stats league's season counts (`Sh SoT KP BCC BCM Crs AC`, below), any count the league's read
   carries but the league does not score (`A`, `AF`, `Sv` in a league that carries them), and the attribute grid.
-  Shots first and the default order (`STATS_SORT`); a `?sort=` it does not draw falls to it, as one Players does not
-  draw falls to FPts.
-- **Its plates are the ones its columns fill** (`groups.platesFor`): `All`, then each group with a column in it, less
-  a lone group of counts that would only repeat `All`. Today that is `All · Attributes`. **Per 90 lives here only.**
-  From `xl` both sit on the row; below it they are in the sheet, under Columns.
-- The quiet "Season to …" line follows the board here, since the season counts are its columns.
+  ~~Shots first and the default order (`STATS_SORT`)~~ (xG since 19 Oct); a `?sort=` it does not draw falls to its
+  plate's order, as one Players does not draw falls to FPts.
+- ~~**Its plates are the ones its columns fill** (`groups.platesFor`): `All`, then each group with a column in it, less
+  a lone group of counts that would only repeat `All`. Today that is `All · Attributes`.~~ **Per 90 lives here only.**
+  From `xl` it sits on the row; below it, in the sheet.
+- The quiet "Season to …" line follows the board here, under a plate drawing the daily file's counts.
 
 ## The board as redesigned, 24 Sep 2026
 
@@ -122,8 +159,7 @@ above does, that one is.
   panel from `lg`, headed "Filter players" (*16 Oct 2026: Position moved to the row, the sheet's Status is FA and WW
   alone at every width, and the plates and Per 90 are Adv Stats' only; above*): Position as CM's index tiles (chosen: an accent edge and a tick, the word stays white), Status
   chips between `lg` and `xl` (the row carries them at every other width), Club and **Sort by** selects side by side (`QuerySelect`, one component for every Data
-  select), the stat groups (which a phone could not reach
-  before: the old drawer never drew them), Per 90, then Reset and `Show N`, pinned at the foot. A tap outside, Escape or the cross closes it.
+  select), the stat groups (on the row since 19 Oct 2026), Per 90, then Reset and `Show N`, pinned at the foot. A tap outside, Escape or the cross closes it.
   **Reset** turns everything off (search, sort and Show all with the filters) and shuts the sheet; only a comparison's
   `compare` stays, so a picker stays one. **`Show N` promises what the board draws**: `Show 100 of 145` while it
   draws a page (16 Oct 2026; no count line above the board, Craig's call). While the sheet is open every tap in it
@@ -134,8 +170,9 @@ above does, that one is.
 *On Adv Stats since 16 Oct 2026*, not Players: the served league scores none of the seven.
 
 Craig: *"We are missing a lot of stats like shots, chances created, maybe even big chances … Key passes, crosses
-etc."* Seven columns follow `AF` under **Attacking** and on **All**: `Sh` shots, `SoT` on target, `KP` (titled
-"Chances created"), `BCC` big chances created, `BCM` big chances missed, `Crs` crosses, `AC` accurate crosses
+etc."* Seven columns follow `AF` under **Attacking** and on **All** (*split across Attack and Creating, 19 Oct 2026,
+with Defence's six beside them*): `Sh` shots, `SoT` on target, `KP` (titled
+"Chances created" until 19 Oct 2026, "Key passes" since, as its head says), `BCC` big chances created, `BCM` big chances missed, `Crs` crosses, `AC` accurate crosses
 (`seasonColumns.ts`).
 
 - **The stats league's season, not the served league's.** The served league scores none of the seven, so they come
@@ -218,7 +255,8 @@ absolute ranking is a fact about a different competition. Nothing sorted by it �
 
 ## The plates, the rate and the marks (10 Sep 2026)
 
-*The plates and Per 90 are Adv Stats' since 16 Oct 2026; Players' few columns need neither. The marks stand on both.*
+*The plates and Per 90 are Adv Stats' since 16 Oct 2026; Players' few columns need neither. The marks stand on both.
+`All` left on 19 Oct 2026, for Attack · Creating · Defence · Attributes (above).*
 
 Craig put **Opta's season-stats grid** beside this board — *"it organises the
 data much better than us, but we still keep our standard CM style"* — and four

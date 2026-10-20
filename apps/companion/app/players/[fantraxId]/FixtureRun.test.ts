@@ -17,7 +17,7 @@ const run = [7, 8].map(
 );
 
 const html = renderToStaticMarkup(
-  createElement(FixtureRun, { run, minutes: new Map([[7, 83], [8, 85]]), asOf: "Thu 15 Oct", weeks: null, group: null }),
+  createElement(FixtureRun, { run, minutes: new Map([[7, 83], [8, 85]]), asOf: "Thu 15 Oct" }),
 );
 
 describe("Next up", () => {

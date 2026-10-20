@@ -70,11 +70,10 @@ already drawn on both, and now draws only there. `tabs.test.ts` holds which bloc
    penalty, direct free-kick and corner orders (Craig, 30 Sep 2026: "their fk/pk/corner rank for the club"), the same order the
    club's Set Pieces tab draws, counted among the men still there; a dash where he takes none.
 3. **The run to come**, the next eight across the row, in FPL's difficulty, and under each
-   gameweek the sister model's xMins in cyan (Craig, 7 Oct 2026: *"we have confidence of our xmins more"*). Only
-   while `PROJECTIONS_SHOWN` is on, also its projection in our league's points and his place among his group's
-   (Craig, 30 Sep 2026: "maybe add projections here (and a ranking?)"), lit on the pool board's
-   standout rule; a week the model has not read is a dash. No source caption on the panel
-   ("FPL's own · Fantrax's own remove"); a leading column names each row, `xMins` (and `Pts`, `Rank`), since the
+   gameweek the sister model's xMins in cyan (Craig, 7 Oct 2026: *"we have confidence of our xmins more"*). The
+   projected points and rank under it, off since 7 Oct, went with the projections page on 19 Oct 2026 (Craig: *"ok"*).
+   No source caption on the panel
+   ("FPL's own · Fantrax's own remove"); a leading column names the row, `xMins`, since the
    titles never reach a phone, and the heading's aside dates them, "xMins as of Thu 15 Oct" (16 Oct 2026). *Fantrax's projection for the
    round was here and is gone* (25 Sep: "remove row"): it covered one period and only the men
    fielded, so it could not fill a run; the round just gone went on 4 Sep.
@@ -187,8 +186,9 @@ one line twice under itself. A transfer story has a longer body and gets both.
 CM's Transfer tab for our league (Craig, 25 Sep 2026: "improve this page so its more CM
 like"), in four blocks:
 
-1. **Transfer status** — CM's label-and-value lines: who holds him (a team, or "Free
-   agent" / "Waivers" in Fantrax's words), how and when he joined that team (the latest
+1. **Transfer status** — CM's label-and-value lines: who holds him ("Held by" a team), or
+   for a man nobody holds his "Status", "Free agent" or "On waivers" (19 Oct 2026: it had
+   read "Held by Waivers"), how and when he joined that team (the latest
    executed move that put him there, or "In the draft"), and his draft pick with what it
    is worth against Fantrax's ranking (`+15 on his pick`). A man nobody holds has joined
    nobody: his line is "Dropped by" the team that let him go, and when, or no line at all.

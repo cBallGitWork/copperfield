@@ -6,16 +6,20 @@ named by the league's short team names** (Craig, 16 Oct 2026: *"but use short te
 advises; its one read of its own is the scout's xMins (`core/inbox/types.ts`).
 
 `../rules/DESIGN.md` is binding for colour and type and this file defers to it; its Mail paragraphs (§2) govern the
-label, the bar (`123 Mail`) and the unread count.
+label and the unread count. **Mail draws no bar** (Craig, 19 Oct 2026: *"remove the 'raccoons mail section' already
+too many buttons"*): Read's strip sits straight over the Fantrax button and the list, and the page's heading
+(`123 Mail`, `Mail` signed out) is screen-reader only. This supersedes the `123 News` bar of 5 Sep 2026, DESIGN §2's
+one granted exception.
 
 ## On the page
 
-- Read's strip (`news/layout.tsx`), Mail lit; the bar names the reader's team, `Mail` alone signed out.
+- Read's strip (`news/layout.tsx`), Mail lit, and no bar under it; the `sr-only` heading names the reader's team,
+  `Mail` alone signed out.
 - On the list only, a button to the reader's pending claims and trades on Fantrax.
 - The list (`news/Mailbox`, `news/MailRow`): the London day and time in CM's blue block, the headline, a doubt's
   `INJ`/`DBT` box, and whose item it is (`You`, or the short name) unless the headline already names the team.
 - The letter (`news/Letter`): From, Subject in the accent, Date, Squad for an opponent's man, the body, and at most
-  one button.
+  one button. A deal's body links each man to his page and each team but yours to its squad (19 Oct 2026).
 
 ## What it files
 
@@ -30,9 +34,20 @@ label, the bar (`123 Mail`) and the unread count.
 | A trade block, an offer to or from you | its save, its proposal | none |
 | The scout's xMins moves | the export | none |
 | A Team Sheet column | its filing | `Read the article` |
+| A story about your team, signed in: one per tie | its filing | `Read the article`, at the tie's section where it has one |
 
 An undated item (a doubt FPL never stamped, a result with no calendar) falls to the foot. Until 16 Oct 2026 the
 result was always undated, and sat 44th of 44 (review N1).
+
+## The paper about you
+
+A story files a letter to each manager its own cargo names (Craig, 19 Oct 2026: *"yes sure"*), so the paper about
+him moves the unread count as the Team Sheet already did (`core/inbox/paperLetters.ts`, LOOPS-2). The team comes
+from the story's data, never its prose: the draft report's match-ups (`The Gazetta on your win over Bannan`, linking
+`#d-N`), the predictions' ties (`The Gazetta backs Hazza to beat you`), Here We Go's receiving side (`The Gazetta on
+your signing of Jeremy Doku`) and the power rankings (`The Gazetta ranks you 3rd`). A story that names every team
+writes each reader his own tie, two in a double header. The Bin XI and the Prem reports name no team as data and
+file none. Counted on the archive on 19 Oct 2026: at most 3 a week per reader (Dome's week of 12 Oct), 2 for the rest.
 
 ## Short names, said once
 
@@ -67,6 +82,8 @@ drawn and clamped it to the top (review M13, 800 → 0). Both sit in `Mailbox`, 
 
 ## Known gaps
 
-- Names inside a body are not links: the body would have to carry ids (review N2, the "yes" half only). The xMins
-  letter names eight men and links none.
+- Only a deal's body links its names: it carries them as `mentions`, each with its id, and `core/inbox/mentions`
+  cuts the body at each (review N2, LOOPS-3). The xMins letter names eight men and links none.
+- A paper letter lasts as long as its story is in `paper.json`, as a Team Sheet column's does; an archived story leaves
+  Mail. Here We Go writes only to the side the lead man joined; the other side has its deal letter.
 - `KeepScroll` keys on the Navigation API's entry; a browser without it keeps no place.

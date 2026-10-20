@@ -7,7 +7,7 @@ import { PITCH_BOX, toBoxY } from "@/app/components/football/pitchBox";
 import { drawOrder } from "@/app/components/football/shotGeometry";
 import ShotMarks, { MarksKey } from "../../../components/football/ShotMarks";
 import { KeyPassKey, KeyPassLines, KeyPassOrigins, Pitch } from "../../../components/football/ShotPitch";
-import { BOARD, ROW_RULE, SECTION_BAR, SMALL_CAPS } from "@/app/desk";
+import { BOARD, PINNED_ON_PHONE, ROW_RULE, SECTION_BAR, SMALL_CAPS } from "@/app/desk";
 import {
   Head,
   HeadRow,
@@ -88,12 +88,13 @@ export default function ShotMap({
 
   return (
     // Capped on a desk, or a full-width pitch is 700px tall and the list starts below the fold.
-    // The pitch and its key at the left on a desk, the list beside it; stacked under a thumb.
+    // The pitch and its key at the left on a desk, the list spanning both rows beside it; stacked under a thumb.
     <figure className="flex w-full flex-col gap-1">
       {/* A phone's control row already names the section in view. */}
       <figcaption className={`${SECTION_BAR} max-lg:hidden`}>Shots</figcaption>
-      <div className="grid gap-2 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start">
-        <div className="flex min-w-0 flex-col gap-1">
+      <div className="grid gap-x-2 gap-y-1 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:grid-rows-[auto_1fr] lg:items-start">
+        {/* Pinned on a phone while the list scrolls under it (Craig, 19 Oct 2026); capped so the list keeps the screen. */}
+        <div className={`flex min-w-0 flex-col gap-1 lg:col-start-1 ${PINNED_ON_PHONE}`}>
           {/* Each club's plate over the end it attacked. */}
           <div className={`grid grid-cols-2 ${SMALL_CAPS}`}>
             <span
@@ -114,7 +115,7 @@ export default function ShotMap({
 
           <svg
             viewBox={`0 0 ${PITCH_BOX.width} ${PITCH_BOX.height}`}
-            className="w-full"
+            className="w-full max-lg:max-h-[32svh]"
             role="img"
             aria-label="Where both sides shot from"
           >
@@ -157,6 +158,8 @@ export default function ShotMap({
               );
             })}
           </svg>
+        </div>
+        <div className="lg:col-start-1">
           <MarksKey>
             <KeyPassKey />
           </MarksKey>
@@ -164,7 +167,7 @@ export default function ShotMap({
 
         {/* The board standard: `BOARD` and `SortHead`, the heads every sortable table wears. */}
         <table
-          className={`${BOARD} table-fixed cm-index-scoped bg-surface`}
+          className={`${BOARD} table-fixed cm-index-scoped bg-surface max-lg:mt-1 lg:col-start-2 lg:row-span-2 lg:row-start-1`}
           {...MATCH_ROW}
         >
           <thead>

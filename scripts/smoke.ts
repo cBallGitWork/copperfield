@@ -11,7 +11,7 @@ import {
 import { walkLeague, type WalkLeague } from "./smoke/league";
 import { serverError } from "./smoke/broken";
 import { launchScreenProblems } from "./smoke/installable";
-import { skipped, walkPaths } from "./smoke/routes";
+import { FEEDS, feedProblems, skipped, walkPaths } from "./smoke/routes";
 
 // Every route against the league the server serves: a league with no teams must print its empty states, and one where
 // somebody holds a player must print none of them; teams with empty squads assert neither.
@@ -29,7 +29,6 @@ const UNDRAFTED: Record<string, string> = {
   "/league": "No table yet",
   "/league/matchups": "Nobody plays anybody yet",
   "/squad": "Nobody has a squad yet",
-  "/matchday/desk": "The league has not drafted yet",
 };
 
 /** Every outage panel's title (`UNAVAILABLE`). Used only to explain a failure: an outage, not
@@ -185,7 +184,17 @@ async function main() {
     for (const problem of problems) console.log(`    ${problem}`);
   }
 
-  console.log(`\n${paths.length - failures.length}/${paths.length} routes clean.`);
+  // A feed is no page: its status and content type are the whole check.
+  for (const feed of FEEDS) {
+    const res = await fetch(`${BASE}${feed.path}`, { redirect: "follow" });
+    await res.body?.cancel();
+    const problems = feedProblems(feed, res.status, res.headers.get("content-type"));
+    for (const problem of problems) failures.push(`${feed.path} — ${problem}`);
+    console.log(problems.length === 0 ? `✓ ${feed.path}  ${res.status}` : `✗ ${feed.path}  ${problems.join("; ")}`);
+  }
+
+  const walked = paths.length + FEEDS.length;
+  console.log(`\n${walked - failures.length}/${walked} routes clean.`);
   if (failures.length > 0) process.exitCode = 1;
 }
 

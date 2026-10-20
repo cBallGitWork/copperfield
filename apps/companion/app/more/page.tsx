@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Link from "@/app/components/shell/Link";
 import type { ReactNode } from "react";
 import { FANTRAX_HOME_PATH } from "@epl/core";
+import { feedAddresses } from "../calendar.ics/locks";
 import { fantraxPage } from "../fantraxPages";
 import { BUTTON } from "../components/shell/ButtonLink";
 import OutLink from "../components/shell/OutLink";
@@ -39,7 +41,7 @@ const INSTALL: { device: string; steps: ReactNode[] }[] = [
 ];
 
 export default async function MorePage() {
-  const team = await readerTeamName();
+  const [team, feed] = await Promise.all([readerTeamName(), lockFeed()]);
   return (
     <>
       <ReadViews current="more" />
@@ -60,6 +62,16 @@ export default async function MorePage() {
           Open the league on Fantrax
         </OutLink>
       </div>
+      {feed === null ? null : (
+        <div className={PANEL}>
+          <a href={feed.webcal} className={`${BUTTON} lg:self-start`}>
+            Add the lock times to your calendar
+          </a>
+          <a href={feed.https} className="flex min-h-11 items-center px-1 text-sm text-muted underline lg:min-h-9">
+            Or subscribe by address
+          </a>
+        </div>
+      )}
       {/* Gone once installed: the app then opens in its own window. */}
       <section
         aria-labelledby="more-install"
@@ -110,4 +122,11 @@ function Row({ href, aside, children }: { href: string; aside?: string; children
 async function readerTeamName(): Promise<string | null> {
   const [info, mine] = await Promise.all([leagueInfo(), readerTeamId()]);
   return info?.teams.find((team) => team.teamId === mine)?.name ?? null;
+}
+
+/** The lock calendar's addresses on the host this page was asked for; null with no host to name. */
+async function lockFeed(): Promise<{ webcal: string; https: string } | null> {
+  const asked = await headers();
+  const host = asked.get("x-forwarded-host") ?? asked.get("host");
+  return host === null ? null : feedAddresses(`${asked.get("x-forwarded-proto") ?? "https"}://${host}`);
 }

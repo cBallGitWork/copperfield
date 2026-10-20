@@ -18,12 +18,15 @@ export default function SquadMarker({
   player,
   show,
   eager,
+  started,
 }: {
   player: SquadPlayerDetail;
   /** What the line under his name carries — see `PitchMarker`. */
   show?: "points" | "fixture";
   /** Load the kit at once — see `PlayerShirt`. */
   eager?: boolean;
+  /** Whether his match is on, where the caller knows better than FPL — see `PitchMarker`. */
+  started?: boolean;
 }) {
   const { rostered } = player;
   return (
@@ -38,6 +41,7 @@ export default function SquadMarker({
       points={player.points}
       show={show}
       eager={eager}
+      started={started}
     />
   );
 }

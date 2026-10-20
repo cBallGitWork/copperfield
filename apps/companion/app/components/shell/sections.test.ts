@@ -8,6 +8,7 @@ import {
   PAPER,
   READ_VIEWS,
   SECTIONS,
+  aheadFor,
   aheadOf,
   barSections,
   drawsOwnGround,
@@ -185,6 +186,21 @@ describe("the tabs fetched ahead", () => {
 
   it("add Live while football is on, as the bar does", () => {
     expect(aheadOf(sectionsFor(true)).each).toEqual([MAIL, MY_TEAM, LIVE, LEAGUE, PREM_FIXTURES, PAPER]);
+  });
+});
+
+describe("aheadFor", () => {
+  const build = "epl-draft-companion-nlx585vdl-gsi-draft.vercel.app";
+
+  // 19 Oct 2026: Vercel's screenshot of each new build fetched every tab four times, 140 requests in five seconds.
+  it("fetches nothing ahead for a visit to the build's own address", () => {
+    expect(aheadFor(sectionsFor(true), build, build)).toEqual({ each: [], once: [] });
+  });
+
+  it("fetches the tabs for the app's own address, and wherever no build is named", () => {
+    expect(aheadFor(sectionsFor(true), "timproleague.vercel.app", build)).toEqual(aheadOf(sectionsFor(true)));
+    expect(aheadFor(sectionsFor(true), "localhost:3000", undefined)).toEqual(aheadOf(sectionsFor(true)));
+    expect(aheadFor(sectionsFor(true), null, "")).toEqual(aheadOf(sectionsFor(true)));
   });
 });
 

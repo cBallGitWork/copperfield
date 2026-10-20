@@ -111,12 +111,24 @@ export function tabOwns(sections: readonly Section[], section: Section, pathname
 
 /** The pages `AutoRefresh` fetches ahead so a tap draws at once: the bar's tabs and the paper, a tap from Mail, on
  *  each tick, and a heavy one only when the app opens. */
-export function aheadOf(sections: readonly Section[]): { each: string[]; once: string[] } {
+/** The pages fetched ahead: `each` on every tick, `once` when the app opens. */
+export interface Ahead {
+  each: readonly string[];
+  once: readonly string[];
+}
+
+export function aheadOf(sections: readonly Section[]): Ahead {
   const bar = barSections(sections);
   return {
     each: [...bar.filter((section) => !section.heavy).map((section) => section.href), PAPER],
     once: bar.filter((section) => section.heavy).map((section) => section.href),
   };
+}
+
+/** `aheadOf`, or nothing for a visit to the build's own address (`VERCEL_URL`): Vercel's screenshot of each new
+ *  deployment, which fetched every tab four times over, 140 requests in five seconds (19 Oct 2026). */
+export function aheadFor(sections: readonly Section[], host: string | null, ownUrl: string | undefined): Ahead {
+  return ownUrl !== undefined && ownUrl !== "" && host === ownUrl ? { each: [], once: [] } : aheadOf(sections);
 }
 
 export function owns(routes: readonly string[], pathname: string): boolean {

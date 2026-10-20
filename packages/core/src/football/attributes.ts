@@ -95,7 +95,7 @@ const MEASURES: readonly Measure[] = [
   { name: "Finishing", from: "expected goals on target per 90", for: "outfield", of: per90("xgot") },
   { name: "Handling", from: "share of the shots on target he faced that he saved", for: "keeper", of: saveShare },
   { name: "Heading", from: "aerial duels won per 90", for: "outfield", of: per90("aerialsWon") },
-  { name: "Influence", from: "Influence per 90", for: "both", of: fpl90("influence") },
+  { name: "Influence", from: "how much he decides his matches, per 90", for: "both", of: fpl90("influence") },
   { name: "Long Shots", from: "shots from outside the box per 90", for: "outfield", of: per90("outsideBox") },
   { name: "Marking", from: "clearances, blocks and interceptions per 90", for: "outfield", of: per90("clearances", "blocks", "interceptions") },
   { name: "Off The Ball", from: "touches in the opposition box per 90", for: "outfield", of: per90("boxTouches") },
@@ -107,7 +107,7 @@ const MEASURES: readonly Measure[] = [
   { name: "Set Pieces", from: "share of his club's free kicks and corners", for: "outfield", of: (m) => m.setPieceShare },
   { name: "Stamina", from: "minutes per start", for: "outfield", of: stamina },
   { name: "Tackling", from: "tackles per 90", for: "outfield", of: per90("tackles") },
-  { name: "Teamwork", from: "part in the build-up to shots per 90 (xGBuildup)", for: "both", of: per90("xgBuildup") },
+  { name: "Teamwork", from: "his part in moves that end in a shot, per 90", for: "both", of: per90("xgBuildup") },
   { name: "Work Rate", from: "distance covered per 90, this season", for: "outfield", of: ran90("km") },
 ];
 

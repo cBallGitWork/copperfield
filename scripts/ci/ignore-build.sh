@@ -6,7 +6,6 @@ if git rev-parse -q --verify HEAD^2 >/dev/null; then exit 1; fi
 git diff --quiet HEAD^ HEAD -- ':(top)' \
   ':(exclude,top)data/snapshots' \
   ':(exclude,top)data/probes' \
-  ':(exclude,top)data/intel/xi' \
   ':(exclude,top)docs' \
   ':(exclude,top).claude' \
   ':(exclude,top,glob)**/*.md'

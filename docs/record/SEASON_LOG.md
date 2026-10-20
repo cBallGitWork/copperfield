@@ -2975,7 +2975,9 @@ field, and each one moved the design:
   page. So the Mercato Wire's trigger is DETECTION — a fresh claim batch in the
   transactions feed since the last covered key — and the cron merely sweeps
   Thursday morning because Craig says waivers process Wednesday evening. The
-  day is when we look; the feed is what decides.
+  day is when we look; the feed is what decides. *(Corrected 19 Oct 2026: league
+  setup carries it, Wed, Thu and Fri at 1:00 PM US Eastern; PLATFORM_NOTES, "The
+  waiver schedule is read off the league's setup".)*
 - **Only `EXECUTED` transactions are visible.** Every TRADE and CLAIM_DROP row
   across 20 daily captures carries `resultCode: "EXECUTED"`, and Fantrax's own
   tab vocabulary has nowhere to put a pending or declined view. Trade coverage

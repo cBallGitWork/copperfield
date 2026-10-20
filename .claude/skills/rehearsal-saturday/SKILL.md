@@ -49,7 +49,7 @@ order — so **agreement with BPS is not evidence a bonus is final**.
 
 With the round live:
 
-- `/matchday` and `/matchday/desk` at 390 and at 1440 — shoot and **read** them.
+- `/matchday` at 390 and at 1440 — shoot and **read** it.
 - Time the shared Fantrax read: the hot path must stay ONE read per window for
   all sixteen phones, not one per phone.
 - Watch a score change and note how long it took to appear.

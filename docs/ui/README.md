@@ -26,15 +26,16 @@ nothing.**
 | `/league` | [league-table.md](league-table.md) | The table. Fantrax computes it. |
 | `/league/fixtures` | [league-fixtures.md](league-fixtures.md) | One gameweek at a time, every competition on it: results once played. |
 | `/league/transfers` | [league-transfers.md](league-transfers.md) | Every claim, drop and trade in the league, newest first. |
+| `/league/waivers` | [league-waivers.md](league-waivers.md) | When claims next run, the claim order and the last run; the waiver banner. |
 | `/league/matchups` | [league-matchups.md](league-matchups.md) | This period's head-to-heads, with live points. |
 | `/league/matchups/[teamId]` | [matchup.md](matchup.md) | One head-to-head: two totals, and the eleven behind each. |
 | `/league/team-stats` | [league-table.md](league-table.md) | The league ranked by one scoring category at a time. |
 | `/league/cups` | [league-cups.md](league-cups.md) | Each cup's whole draw, round by round, before anyone is drawn. |
 | `/scoring` | [scoring.md](scoring.md) | Listed on More: what the league pays each roster slot for each category, read from Fantrax. |
+| `/more` | here | The sections with no tab, the squads, the scoring, Fantrax's exit, **"Add the lock times to your calendar"** (a `webcal:` button, then "Or subscribe by address" as the `https:` fallback for Android and desktop; added 19 Oct 2026 after Craig's "nothing in the app reaches the phone"), how to install, the credits. |
+| `/calendar.ics` | here | No screen: the line-up locks still ahead as an iCalendar feed, one event per gameweek from lock to first ball, alarms an hour before and at 09:00 London on lock day, the morning one dropped for a lock before 10:00 (`calendar.ics/locks.ts`). UID per period and league, so a re-fetch moves an event. Waiver runs join it once their schedule is read. |
 | `/prem` | [prem.md](prem.md) | **The real Premier League table, computed from finished fixtures.** |
 | `/prem/fixtures` | [prem.md](prem.md) | One round of football at a time, played or to come. |
-| `/prem/team-stats` | [prem.md](prem.md) | The twenty ranked by one measure at a time. |
-| `/prem/data` | [prem.md](prem.md) | The season's leaders: eight lists in three sections, the top twenty each and fifty on asking. |
 | `/prem/club/[code]` | [prem.md](prem.md) | One club's squad, with the real position and Fantrax's eligibility side by side. |
 | `/prem/club/[code]/set-pieces` | [prem.md](prem.md) | Who takes that club's penalties, free kicks and corners. |
 | `/prem/club/[code]/fixtures` | [prem.md](prem.md) | That club's season, oldest first. Premier League only. |
@@ -49,13 +50,11 @@ nothing.**
 | `/squad/[teamId]/fixtures` | [squad.md](squad.md) | His whole season, played and to come. |
 | `/squad/[teamId]/stats` | [squad.md](squad.md) | Every man he owns, by scoring category, with the stats league's counts beneath each group. |
 | `/matchday` | [matchday.md](matchday.md) | Live: your head-to-head, then the real football. |
-| `/matchday/desk` | [desk.md](desk.md) | Every score in the league and the round, on one screen. |
 | `/gw/[gameweek]` | [gameweek.md](gameweek.md) | Any round of football, addressable. |
 | `/players` | [players.md](players.md) | **Data** — Players: the pool under the league's own scoring, resting on the free men, sortable, filterable, lit in ink. |
 | `/players/stats` | [players.md](players.md#adv-stats-16-oct-2026) | Adv Stats: the same pool under every figure the league does not score, with the stat-group plates and Per 90. |
 | `/players/analysis` | [analysis.md](analysis.md) | Compare: two players' figures, shots, key passes, touches and attributes, season or last 6. |
 | `/players/teams` | [teams.md](teams.md) | Clubs: the twenty clubs as a fantasy manager reads them, 13 measures in five groups. |
-| `/players/projections` | [projections.md](projections.md) | Projections: the sister model's projection in our league's points for the next six gameweeks. |
 | `/players/planner` | [planner.md](planner.md) | The fixture planner: every club's next six opponents, ranked by our strength model. |
 | `/players/[fantraxId]` | [player.md](player.md) | One player's profile. |
 | `/fpl` | [fpl.md](fpl.md) | The other game, kept small on purpose. |

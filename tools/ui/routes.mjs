@@ -3,14 +3,6 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { discover } from "./cdp.mjs";
 
-/** Data's projections board, walked only while the app shows it: switched off it is a true 404 (`PROJECTIONS_SHOWN`). */
-const PROJECTIONS_SHOWN = (() => {
-  const routes = readFileSync(new URL("../../apps/companion/app/players/routes.ts", import.meta.url), "utf8");
-  const flag = /export const PROJECTIONS_SHOWN = (true|false);/.exec(routes);
-  if (flag === null) throw new Error("tools/ui/routes.mjs: cannot read PROJECTIONS_SHOWN from players/routes.ts");
-  return flag[1] === "true";
-})();
-
 /** Each declared cup but the first, which the bare `/league/cups` draws, by the ids core's `CUPS` declares. */
 const CUP_ROUTES = (() => {
   const declared = readFileSync(new URL("../../packages/core/src/league/cups/declared.ts", import.meta.url), "utf8");
@@ -36,12 +28,9 @@ export const DESK_ROUTES = [
   "/players/teams",
   "/players/planner",
   "/players/planner?view=defence",
-  ...(PROJECTIONS_SHOWN ? ["/players/projections"] : []),
   "/matchday",
-  // The Live tab's other two views are queries, so nothing links a crawler to them.
-  "/matchday?view=vidiprinter",
+  // The Live tab's Top stats is a query, so nothing links a crawler to it.
   "/matchday?view=stats",
-  "/matchday/desk",
   "/fpl",
   "/news",
   // Not a section: reachable only from the rail's foot and the phone's drawer.

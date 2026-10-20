@@ -1,7 +1,6 @@
 import { type IntelProjections, projectionIntel } from "./projections";
 
-// The sister model's expected minutes (xMins) per man per gameweek, off its projections export. Only the minutes:
-// the points beside them stay off while Craig does not trust them (`PROJECTIONS_SHOWN`).
+// The sister model's expected minutes (xMins) per man per gameweek, off its projections export. Only the minutes.
 
 /** One gameweek's xMins, summed over his club's fixtures that week, so a blank week is a reading of nought. */
 export interface ExpectedMinutes {

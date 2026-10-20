@@ -1,7 +1,7 @@
 import { listed } from "../format";
 import type { Deal, DealSide } from "../gazette/types";
 import { toFplClubCode } from "../identity/clubCodes";
-import type { InboxItem } from "./types";
+import type { InboxItem, Mention } from "./types";
 import { fantraxInstant } from "./when";
 
 // The league's business, as CM's Messages: who signed, who released, who traded. A headline is a bare fact; the
@@ -35,10 +35,8 @@ export function dealNews(
     if (gained.length === 0 && lost.length === 0) return [];
 
     // Whose item it is: a trade has two sides, so it is the league's.
-    const sides = new Set(
-      [...deal.inbound, ...deal.outbound].map((side) => side.teamId).filter((id) => id !== null),
-    );
-    const teamId = sides.size === 1 ? [...sides][0] : null;
+    const teams = teamsOf(deal);
+    const teamId = teams.length === 1 ? teams[0] : null;
     const yours = teamId !== null && teamId === mine;
     const who = yours ? "You" : teamId === null ? null : teamName(teamId);
 
@@ -49,7 +47,7 @@ export function dealNews(
           ? `${who ?? "A manager"} sign ${listed(gained.slice(0, NAMES_IN_HEADLINE))}`
           : `${who ?? "A manager"} release ${listed(lost.slice(0, NAMES_IN_HEADLINE))}`;
 
-    const party = deal.kind === "trade" && [...deal.inbound, ...deal.outbound].some((side) => side.teamId === mine);
+    const party = deal.kind === "trade" && sidesOf(deal).some((side) => side.teamId === mine);
     const body = dealBody(deal, yours ? null : (who ?? "A manager"), teamName, mine);
 
     return [
@@ -67,9 +65,26 @@ export function dealNews(
         mark: null,
         // Business is never red: your own deal you know of, and a rival's is news, not bad news.
         urgent: false,
+        mentions: dealMentions(deal, body, teamName, mine),
       },
     ];
   });
+}
+
+/** The names a deal's body prints that its letter links: each man the feed gave an id, each team but the reader's. */
+function dealMentions(
+  deal: Deal,
+  body: string,
+  teamName: (teamId: string) => string | null,
+  mine: string | null,
+): Mention[] {
+  const men = sidesOf(deal).flatMap((side) => (side.fantraxId ? [{ text: side.playerName, fantraxId: side.fantraxId }] : []));
+  const teams = teamsOf(deal).flatMap((teamId) => {
+    if (teamId === mine) return [];
+    const text = teamName(teamId);
+    return text === null ? [] : [{ text, teamId }];
+  });
+  return [...men, ...teams].filter((mention) => body.includes(mention.text));
 }
 
 /** The letter under the headline: what the headline did not say, as a person would say it.
@@ -90,7 +105,7 @@ function dealBody(
       return `${spoken(side)} joins ${to ?? "a manager"}`;
     });
     if (moves.length === 0) return "";
-    const party = [...deal.inbound, ...deal.outbound].some((side) => side.teamId === mine);
+    const party = sidesOf(deal).some((side) => side.teamId === mine);
     return `${party ? "Your trade has gone through" : "The trade has gone through"}: ${listed(moves)}.`;
   }
 
@@ -115,9 +130,16 @@ function dealBody(
 
 /** Both managers, when a trade has two. Reads as the game would say it. */
 function tradeHeadline(deal: Deal, teamName: (teamId: string) => string | null): string {
-  const ids = [...new Set([...deal.inbound, ...deal.outbound].map((side) => side.teamId))].filter(
-    (id) => id !== null,
-  );
-  const names = ids.map((id) => teamName(id) ?? "a manager");
+  const names = teamsOf(deal).map((id) => teamName(id) ?? "a manager");
   return names.length >= 2 ? `${names[0]} and ${names[1]} agree a trade` : "A trade is agreed";
+}
+
+/** Everyone a deal moves, gained then lost. */
+function sidesOf(deal: Deal): DealSide[] {
+  return [...deal.inbound, ...deal.outbound];
+}
+
+/** The teams a deal touches, each once, in the feed's order. */
+function teamsOf(deal: Deal): string[] {
+  return [...new Set(sidesOf(deal).map((side) => side.teamId))].filter((id) => id !== null);
 }

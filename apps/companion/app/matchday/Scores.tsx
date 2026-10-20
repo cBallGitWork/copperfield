@@ -1,7 +1,6 @@
 import {
   COMPETITION_NAME,
   LEAGUE_COMPETITION,
-  LEAGUE_NAME,
   type Club,
   type CompetitionTie,
   type Fixture,
@@ -16,6 +15,9 @@ import type { FixtureGoals } from "./fixtureGoals";
 import { opensOn, tieSide } from "../components/league/tieSide";
 import { toPlayWord } from "../components/league/toPlay";
 import { tieHref } from "@/app/league/routes";
+import StepHead from "../components/shell/StepHead";
+import type { DayStep } from "./scoreDay";
+import { readerFirst, tieGroupTitle } from "./tieOrder";
 
 // Both competitions in Championship Manager's results row, the football first (Craig, 21 Sep 2026).
 
@@ -45,7 +47,7 @@ function DraftRow({
     <ScoreRow
       home={tieSide(tie.home, places, mine, left(tie.home.team?.teamId))}
       away={tieSide(tie.away, places, mine, left(tie.away.team?.teamId))}
-      // No `pending`: a fantasy total has no kick-off, and a missing one prints the dash.
+      // A missing total prints the dash; Fantrax answers 0 for an unplayed week, so one is never asked for then.
       score={{ home: pointsOf(tie.home.team?.teamId, scores), away: pointsOf(tie.away.team?.teamId, scores) }}
       // No tail: a fantasy tie has no minute, and the accent edge and name already mark yours.
       href={opens ? tieHref(on, gameweek, tie.home.team?.teamId, tie.away.team?.teamId) : undefined}
@@ -60,6 +62,7 @@ export function Scores({
   clubPlaces,
   mine,
   fixtures,
+  day,
   clubs,
   now,
   gameweek,
@@ -74,6 +77,8 @@ export function Scores({
   clubPlaces: Map<number, number>;
   mine: string | null;
   fixtures: readonly Fixture[];
+  /** The match day on show and its arrows; null shows the gameweek whole. */
+  day: DayStep | null;
   clubs: Map<number, Club>;
   now: boolean;
   gameweek: number;
@@ -86,6 +91,10 @@ export function Scores({
     <>
       {/* Headed, so the rows name their competition (Craig, 21 Sep 2026). */}
       <Section title={COMPETITION_NAME}>
+        {/* The day steps the football only: the draft's ties below are the gameweek's. */}
+        {day === null ? null : (
+          <StepHead label="Match days" title={day.title} previous={day.previous} next={day.next} heading="h3" />
+        )}
         <ul className="cm-rows">
           {fixtures.map((f) => {
             const scored = goals.get(f.id);
@@ -98,18 +107,11 @@ export function Scores({
           })}
         </ul>
       </Section>
-      {/* Nothing with no draft, schedule or Fantrax answer; the football above needs none of them.
-          The league's full name, not `LEAGUE_COMPETITION.name` (Craig, 21 Sep 2026). */}
-      {groupTies(ties).map((group) => (
+      {/* Nothing with no draft, schedule or Fantrax answer; the football above needs none of them. */}
+      {groupTies(readerFirst(ties, mine)).map((group) => (
         <Section
           key={`${group.competition.id}-${group.round ?? ""}`}
-          title={
-            group.competition.id === LEAGUE_COMPETITION.id
-              ? LEAGUE_NAME
-              : group.round === null
-                ? group.competition.name
-                : `${group.competition.name} · ${group.round}`
-          }
+          title={tieGroupTitle(group)}
           aside={asOf === null ? undefined : `as of ${asOf}`}
         >
           <ul className="cm-rows">

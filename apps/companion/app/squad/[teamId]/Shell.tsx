@@ -4,6 +4,7 @@ import { leagueInfo } from "../../round";
 import { OWN, teamBack } from "../routes";
 import TeamTabs from "./TeamTabs";
 import type { TeamTab } from "./TeamTabs";
+import WaiverBanner from "../../league/waivers/WaiverBanner";
 
 // The frame of a team's five screens, empty states included: a club's plated bar (`cm9900/25.jpg`), not a
 // competition's, in the manager's own colour, and his tabs.
@@ -27,6 +28,8 @@ export default async function TeamShell({
       back={teamBack(team.slug)}
       phoneBar={team.slug !== OWN}
       tabs={<TeamTabs slug={team.slug} current={current} empty={empty} />}>
+      {/* His own Transfers only: a rival's is not where he claims, and over his pitch it would push the bench off the screen. */}
+      {team.slug === OWN && current === "transfers" ? <WaiverBanner always /> : null}
       {children}
     </PlateShell>
   );

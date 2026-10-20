@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { kickoffAt, londonDate, londonDayAndTime, londonDayOf, londonMoment, londonTime, londonWeekday, onLondonDay, wallClockInstant } from "./time";
+import { dayAndDateOfDay, kickoffAt, londonDate, londonDayAndTime, londonDayMonth, londonDayOf, londonMoment, londonTime, londonWeekday, onLondonDay, wallClockInstant } from "./time";
 
 // A real kickoff: 14:00Z in October is 15:00 in London, which is the whole
 // reason this module exists rather than a call to `toLocaleString`.
@@ -16,6 +16,13 @@ describe("London time", () => {
     expect(londonWeekday(KICKOFF)).toBe("Sat");
     expect(londonDate(KICKOFF)).toBe("Saturday 10 October");
     expect(londonMoment(KICKOFF)).toBe("Sat 10 Oct, 15:00");
+    expect(londonDayMonth(KICKOFF)).toBe("10 Oct");
+  });
+
+  it("names a league day as a reader says it, in summer and in winter", () => {
+    expect(dayAndDateOfDay("2026-10-10")).toBe("Sat 10 Oct");
+    expect(dayAndDateOfDay("2026-07-05")).toBe("Sun 5 Jul");
+    expect(dayAndDateOfDay("2027-01-04")).toBe("Mon 4 Jan");
   });
 
   it("says TBC for an undated kickoff, in whichever form", () => {
@@ -33,6 +40,7 @@ describe("London time", () => {
       expect(londonTime(bad)).toBe(bad);
       expect(londonDayAndTime(bad)).toBe(bad);
       expect(londonWeekday(bad)).toBe(bad);
+      expect(londonDayMonth(bad)).toBe(bad);
       expect(londonDayOf(bad)).toBeNull();
     }
   });

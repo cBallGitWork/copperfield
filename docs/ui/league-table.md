@@ -11,6 +11,10 @@ dead end. **Matchups is not on the strip**; it is in `SectionNav`'s `FOOT`,
 which is where CM files a screen that is about a fixture rather than about the
 division.
 
+*A match-up plate under the strip (`league/MyMatchup.tsx`, your tie for the week in Live's row) went in on 19 Oct 2026
+and came out the same day (Craig: *"Hate the current match up row you introduced, removed"*). Your tie is on
+Matchups and Live.*
+
 *This paragraph said "the three-way section nav (Table · Schedule · Matchups)"
 until 3 Sep 2026, and had been wrong since 31 Aug — the strip gained Results and
 both stats boards and lost Matchups on the same day. Corrected against
@@ -35,12 +39,21 @@ league's tiebreak, so it is a column a reader compares rather than one he audits
 The visibility rides in each column's `width` string, so the heads and the rows
 read it from one place.
 
-**And the phone reads `Pts` straight after `Pld`, under the team's short name**
-(Craig, 6 Oct 2026: *"teams should use shortened names, and put PTS after PLD on
-mobile"*). Whole names had pushed the table 89px past a 390 screen and `Pts` was
-the column cut. `Pts` is printed twice, `COPY.phone` after `Pld` and `COPY.desk`
-at the end, because a table cell cannot be reordered by CSS; `league/TeamName`
-picks the name. The desk keeps the whole names and the order above.
+**And the phone ends on `Pts`, under the team's short name** (Craig, 19 Oct 2026:
+*"draft table on mobile, pts can be the last column"*): `# Team Pld W D L For Pts`.
+With `Ag` and `Form` standing down, the desk's order already ends the phone on `Pts`,
+so there is one list and one `Pts` for both widths, and the phone is the shape
+DESIGN §2 asks of a table whose last column is what it is FOR. The columns are the
+same eight, so the width at 390 and 360 is what it was. `league/TeamName` picks the
+name; the desk keeps the whole names. The head-to-head's copy of the table
+(`league/matchups/[teamId]/wider`) reads the same list and follows.
+
+~~**And the phone reads `Pts` straight after `Pld`**~~ (Craig, 6 Oct 2026: *"teams
+should use shortened names, and put PTS after PLD on mobile"*). **Superseded 19 Oct
+2026** by the ruling above. Whole names had pushed the table 89px past a 390 screen
+and `Pts` was the column cut; `Pts` was printed twice, a phone copy after `Pld` and a
+desk copy at the end, because a table cell cannot be reordered by CSS. The short
+names stayed; the second copy went.
 
 **And For and Ag are ink, not amber** (Craig, same day). DESIGN §3's amber slot
 now reads "a figure standing alone beside a name — never a column of a standings

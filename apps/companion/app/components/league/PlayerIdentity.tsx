@@ -12,6 +12,7 @@ import {
   DASH,
 } from "@epl/core";
 import EmptySlot from "./EmptySlot";
+import MatchClock from "../football/MatchClock";
 import PlayerImage from "./PlayerImage";
 import { fdrStep } from "../football/fdr";
 import { positionLabel } from "../../positions";
@@ -24,12 +25,14 @@ export default function PlayerIdentity({
   rostered,
   club,
   opposition,
+  started = kickedOff(opposition),
 }: {
   rostered: RosteredPlayer;
   club: Club | undefined;
   opposition: Opposition[] | undefined;
+  /** Whether his match is on, where the caller knows better than FPL's fixture status (`underway`). */
+  started?: boolean;
 }) {
-  const started = kickedOff(opposition);
   // Only for a single match: beside a double's two chips, one kickoff reads as the time of both.
   const kickoff = opposition?.length === 1 ? (opposition[0]?.fixture.kickoff ?? null) : null;
 
@@ -54,9 +57,9 @@ export default function PlayerIdentity({
         <p className="truncate text-sm text-muted">
           {[club?.name, positionLabel(rostered.slot.position)].filter(Boolean).join(" · ") || DASH}
         </p>
-        <Fixture club={club} opposition={opposition} />
+        <Fixture club={club} opposition={opposition} started={started} />
         {/* Nothing to come for a man with no fixture: "No fixture" above already says so. */}
-        {started || opposition === undefined || opposition.length === 0 ? null : (
+        {opposition === undefined || opposition.length === 0 || started ? null : (
           <p className={QUIET_FIGURE}>
             {kickoff ? `Kicks off ${londonDayAndTime(kickoff)}` : "Yet to play"}
           </p>
@@ -66,13 +69,16 @@ export default function PlayerIdentity({
   );
 }
 
-/** His club's crest, a "v", and each opponent as the squad list writes him (`LEE (A)`); shares `fdrStep`'s colour. */
+/** His club's crest, a "v", and each opponent as the squad list writes him (`LEE (A)`); shares `fdrStep`'s colour.
+ *  Once on, a match is its score instead: a red difficulty chip over "BHA 5–0 CRY" read as the result (UX-10). */
 function Fixture({
   club,
   opposition,
+  started,
 }: {
   club: Club | undefined;
   opposition: Opposition[] | undefined;
+  started: boolean;
 }) {
   return (
     <p className="flex flex-wrap items-center gap-1.5">
@@ -82,21 +88,47 @@ function Fixture({
       )}
       {opposition === undefined || opposition.length === 0 ? (
         <span className={LABEL}>No fixture</span>
+      ) : started ? (
+        opposition.map((against) => <Score key={against.fixture.id} club={club} against={against} />)
       ) : (
         <>
           <span className="text-2xs text-faint">v</span>
           {/* One chip per fixture: none in a blank gameweek, two in a double, each rated on its own. */}
           {opposition.map((against) => (
-            <span
-              key={against.fixture.id}
-              className={`numeric px-1.5 py-0.5 text-sm font-bold leading-snug ${fdrStep(against.difficulty).ink}`}
-              style={{ backgroundColor: fdrStep(against.difficulty).ground }}
-            >
-              {fixtureLabel([against])}
-            </span>
+            <Chip key={against.fixture.id} against={against} />
           ))}
         </>
       )}
     </p>
+  );
+}
+
+/** One match he is in once it has kicked off, home side first, as a scoreline reads: the minute while it runs, FT after. */
+function Score({ club, against }: { club: Club | undefined; against: Opposition }) {
+  const { fixture } = against;
+  // A double's match still to come keeps its chip.
+  if (fixture.status === "upcoming") return <Chip against={against} />;
+  const his = club?.shortName ?? DASH;
+  const [home, away] = against.home ? [his, against.club.shortName] : [against.club.shortName, his];
+  return (
+    // A span: it sits in the fixture line's paragraph, and a paragraph in a paragraph breaks hydration.
+    <span className="numeric flex items-baseline gap-1.5 text-sm">
+      <span className="font-bold text-ink">
+        {home} {fixture.homeScore ?? DASH}–{fixture.awayScore ?? DASH} {away}
+      </span>
+      <MatchClock fixture={fixture} />
+    </span>
+  );
+}
+
+/** One opponent as the squad list writes him, on his difficulty step. */
+function Chip({ against }: { against: Opposition }) {
+  return (
+    <span
+      className={`numeric px-1.5 py-0.5 text-sm font-bold leading-snug ${fdrStep(against.difficulty).ink}`}
+      style={{ backgroundColor: fdrStep(against.difficulty).ground }}
+    >
+      {fixtureLabel([against])}
+    </span>
   );
 }

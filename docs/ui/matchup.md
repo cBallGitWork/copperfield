@@ -32,7 +32,8 @@ draws none.
    side and nothing beside it** — see the constraint below. A phone gets the
    `←` back plate at its left, as a match does; on a board opened cold it goes to that gameweek on Draft › Fixtures,
    where the tie is listed (review M12; it went to `/league/matchups`, which no plate lights). Before a ball is kicked the board
-   is two squad lists, and the plate sits beside the first one's name. A side the lineup gate has opened, your
+   is the same board, each side's Line-ups a squad list instead of a pitch, and Stats is off the strip until kickoff
+   (Craig, 19 Oct 2026: the bare two lists had "no page template"). A side the lineup gate has opened, your
    own always, is its eleven then a plated Bench in Fantrax's bench order (`TeamSheet` as a list); a rival before
    his lock stays unarranged, alphabetical within a line, so nothing leaks who starts (`unplayedLists`; review N6,
    16 Oct 2026: your GW7 preview was two 14-man lists).
@@ -85,11 +86,11 @@ draws none.
    through the index cell's own ground at all. `mine` wins where both apply.
 6. **Fixtures** — every Premier League match either squad has a man in, in kick-off
    order, each drawn as the Live tab draws a fixture (`ScoreRow`: table places,
-   crests, score, live minute or FT, a link to the match). Under each row, the URL's
-   side's men from the left and the other side's from the right, with Fantrax's
-   points; a reserve is dimmed and uncounted, and a double's period figure prints
-   under the later match only (`fixtureMen.ts`). A side whose eleven is not public
-   names nobody. It replaced Scores on 24 Sep (Craig: *"scores is pointless"*).
+   crests, score, live minute or FT, a link to the match). Under each row, each man
+   under his own club, home left and away right, chipped in his manager's colour, with Fantrax's points between
+   chip and name (Craig, 19 Oct 2026: split by manager, Cunha sat under Chelsea). A reserve is dimmed and
+   uncounted, and a double's period figure prints under the later match only (`fixtureMen.ts`). A side whose eleven
+   is not public names nobody; before kickoff a rival's squad is public, so his men are named, with no figures. It replaced Scores on 24 Sep (Craig: *"scores is pointless"*).
 7. **A live player card** (`LivePlayerCard`) over the top, when one is tapped.
 
 ## What the round is doing
@@ -140,7 +141,8 @@ pairing it with `isMatchdayLive` rather than inventing a fourth state.
 ## The two providers
 
 The scoreline is `getLiveScoringStats` — Fantrax's own totals under Fantrax's own
-scoring, which we never recompute.
+scoring — **plus the auto subs Fantrax will make at the period's end** (see [Auto subs](#auto-subs)). Until
+19 Oct 2026 this said "which we never recompute"; Craig's GW7 (31 with Sarr blank, 34 with Kerkez on) superseded it.
 
 Everything under a player is **two sources joined**: his fantasy points come from
 the same `getLiveScoringStats` payload, priced at his slot — reserves included
@@ -202,6 +204,21 @@ only question is *why* he is on the number he is on.
 - **Before he kicks off** there is no table: the fixture line under his name says
   when, and an empty breakdown under a live score would read as a score of
   nought.
+- **Once he kicks off** the fixture line is his match: his crest, the score home side
+  first (`MCI 2–1 IPS`), then the minute in the live colour while it runs, FT
+  after. The difficulty chip goes: Sarr's red `BHA (A)` over `BHA 5–0 CRY` read as
+  the result (review UX-10). A double's match still to come keeps its chip. Craig, 19 Oct 2026: a tap
+  *"brings up no live points for the player/scores etc, just an empty card"*. A
+  played man's card did carry his table (checked in WebKit and Chrome at 390 on
+  GW7: Haaland, Leno, Kerkez, Sarr); what no card said was how his match stood,
+  and a man still to play has only his kickoff.
+- **A provider that will not answer never leaves it empty.** The production logs that match day show FPL 403s and
+  Fantrax timeouts. While FPL's fixtures were held from before kickoff, the card waited for a whistle FPL never
+  reported and drew name, fixture and kickoff over Fantrax's 10 points. Now Fantrax crediting him (a category or his
+  minutes, `underway`) counts as kicked off, on the card and on the grass. A missing table says *No breakdown right
+  now.* with Try again (a refresh); a match read that fails, hangs past 20 seconds or meets a deploy's old action id
+  says *No match figures right now.* with Try again; one still out says it is getting them. The house's "right now"
+  words, in muted ink: amber is a figure beside a name (review UX-9).
 - The three states of `points` are three different sentences: no table at all is
   Fantrax refusing and says so, a table that does not name him is a dash, and a
   table that gives him a nought is a real nought.
@@ -214,12 +231,29 @@ after his kit.
 - **Once he has played it flips dark** — near-black ground, cream numerals, his
   chips beside them. It used to be a small number on the same cream as his name,
   which made the one figure a manager came for the smallest thing on the screen.
-- **Until he plays it is his fixture**, at full FDR colour and full strength.
+- **Until he plays it is his fixture**, `v COV (H)` as every fixture is written, never his club's short name:
+  Craig, 19 Oct 2026, *"just show who he is playing"*, after the band had drifted to the club. A man with no match
+  this gameweek is a dash. The same `PitchMarker` draws the Team tab's pitch and the FPL tab's, so both say it too.
 - **Not-played is said by the kit alone** — dimmed and lightly
   desaturated. The whole card used to dim, which took the fixture colour and the
   name with it: the two things a waiting player still needs.
 - Both states are the same fixed height, because a line whose cards stand at
   different heights stops reading as a line.
+
+## Auto subs
+
+Craig, 19 Oct 2026: *"on the live head to head we show an auto subbed icon? then sarr (my sub) goes to the back of
+the bench, no number assigned to him, make it clear its auto sub"*. A starter whose football is done without a minute
+gives way to the first reserve by bench number who has played or may yet and keeps the shape legal
+(`league/autoSubs.ts`, the paper's rule; PLATFORM_NOTES, 19 Oct 2026). The scoreline counts the reserve; on the pitch
+(`autoSubbed`):
+
+- **The reserve stands in the starter's place**, his points under him, with a small swap chip at the card's top left
+  in cyan, the derived reading's slot: the sub is ours until Fantrax makes it. The real match's ▲/▼ keeps the right.
+- **The starter goes to the end of the bench** with no number, "Auto-sub" over him where the number and position were.
+- **Each man's card says it in one line**: "Auto-sub: on for Sarr, who did not play." and "Auto-sub: did not play, so
+  Kerkez comes on for him." A reserve still to play comes on provisionally ("…if he plays"), adding nothing yet.
+- Once Fantrax has made the subs its board holds the new eleven, and the marks go.
 
 ## Who is still to play
 

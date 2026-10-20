@@ -13,8 +13,8 @@ import {
 import MatchupBoard, { type MatchupSide } from "../../../components/league/MatchupBoard";
 import Nothing from "../../../components/shell/Nothing";
 import TeamSheet from "../../../components/league/TeamSheet";
-import { SquadLists, arrangeBoth } from "./sides";
-import { unplayedLists } from "./unplayed";
+import { SquadList, arrangeBoth } from "./sides";
+import { unplayedLists, unplayedSheet } from "./unplayed";
 import { SideTab, StatsTab, sharedSides, withheldNotice, type SharedSide } from "./tabs";
 import { FixturesTab, TableTab } from "./wider";
 import LeagueShell from "../../Shell";
@@ -44,6 +44,7 @@ import { toPlayWord } from "../../../components/league/toPlay";
 import RoundWord from "../../../components/league/RoundWord";
 import { withoutFitness } from "./pastWeek";
 import { leagueFixturesHref } from "../../SectionNav";
+import { autoSubbed } from "../../../components/league/autoSubbed";
 
 // One head-to-head: the scoreline and the elevens behind it. The URL's team is the side the board opens on; the side
 // Fantrax calls home decides only the ground, its venue.
@@ -62,7 +63,6 @@ export default async function HeadToHeadPage({
 }) {
   const [{ teamId }, query] = await Promise.all([params, searchParams]);
   const { gw } = query;
-  const view = matchupView(query.view);
   const of = statsOf(query.of);
   const sort = { head: query.sort ?? DEFAULT_SIDE_SORT, descending: query.dir !== "asc" };
 
@@ -75,9 +75,12 @@ export default async function HeadToHeadPage({
   const period = squads.roundPeriod;
   if (squads.info === null || period === null) redirect(MATCHUPS);
 
-  // A round nobody has kicked off is two squad lists (Craig, 11 Sep 2026). `gameweekStarted`, not `roundState`, which
-  // is null between two Saturday kickoffs too.
+  // A round nobody has kicked off draws each side as a squad list, on the same board. `gameweekStarted`, not
+  // `roundState`, which is null between two Saturday kickoffs too.
   const started = gameweekStarted(squads.snapshot.fixtures, squads.snapshot.gameweek);
+  // Stats has nothing to count before a ball is kicked, so its plate waits for kickoff.
+  const asked = matchupView(query.view);
+  const view = started || asked !== "stats" ? asked : matchupView(undefined);
 
   const rostered = new Map(squads.period.teams.map((team) => [team.teamId, team]));
   const named = rostered.get(teamId);
@@ -104,7 +107,7 @@ export default async function HeadToHeadPage({
 
   // One cached read of the whole pool's news, narrowed per sheet below.
   const [mine, stories] = await Promise.all([myTeamId(squads.period.teams), readPoolNews()]);
-  const { scores, refused } = await liveScores(period);
+  const { scores, subs, refused } = await liveScores(period);
   // Under way, gaps between kickoffs included: "all played" says something only then.
   const underway = roundUnderway(squads.snapshot);
   // A finished week says so under each name, and wears none of today's fitness (review N9).
@@ -120,13 +123,13 @@ export default async function HeadToHeadPage({
     teamDisplay(squads, team.teamId === mine).show === "lineup";
 
   // Each man's points off the scoreboard's own live payload, priced at his slot, so an eleven adds up to its header.
-  // Only for a side whose eleven shows: where a man is priced says who is in it.
+  // Only for a side whose eleven shows, once a ball is kicked: where a man is priced says who is in it.
   // Fantrax's bench order for the period: fixed once a ball is kicked, still the manager's to change before.
   const benchOf = async (team: LeagueTeam) =>
     [team.teamId, shows(team) ? await benchOrder(team.teamId, period, started) : []] as const;
   const [yours, theirs, ...benched] = await Promise.all([
-    shows(pairing.team) ? squadLivePoints(period, pairing.team.teamId, categories) : null,
-    shows(pairing.opponent) ? squadLivePoints(period, pairing.opponent.teamId, categories) : null,
+    started && shows(pairing.team) ? squadLivePoints(period, pairing.team.teamId, categories) : null,
+    started && shows(pairing.opponent) ? squadLivePoints(period, pairing.opponent.teamId, categories) : null,
     benchOf(pairing.team),
     benchOf(pairing.opponent),
   ]);
@@ -137,7 +140,9 @@ export default async function HeadToHeadPage({
   ]);
 
   const { arranged: sheets, widest } = arrangeBoth({ pairing, rostered, shows, scored, benches, clubs, opposition });
-  const arranged = over === null ? sheets : new Map([...sheets].map(([id, sheet]) => [id, withoutFitness(sheet)]));
+  // After the auto subs, so the eleven on the grass is the one the score counts.
+  const made = new Map([...sheets].map(([id, sheet]) => [id, autoSubbed(over === null ? sheet : withoutFitness(sheet), subs.get(id) ?? [])]));
+  const arranged = new Map([...made].map(([id, { sheet }]) => [id, sheet]));
   const listed = started ? null : unplayedLists({ pairing, rostered, shows, benches, clubs, opposition });
 
   // Who came on and off, which only the pitch marks.
@@ -156,11 +161,14 @@ export default async function HeadToHeadPage({
     const score = scores.get(team.teamId);
     return {
       team,
-      score,
+      // Fantrax's 0 before kickoff is no score yet, so the plate keeps its dash.
+      score: started ? score : undefined,
       mine: team.teamId === mine,
       line: over ?? toPlayWord(score?.toPlay, underway),
       lineup:
-        detail === undefined ? (
+        listed !== null ? (
+          <SquadList listed={listed.get(team.teamId)} teamId={team.teamId} />
+        ) : detail === undefined ? (
           withheld
         ) : (
           <TeamSheet
@@ -168,6 +176,7 @@ export default async function HeadToHeadPage({
             bench={detail.bench}
             widest={widest}
             subs={subMarks(everyone(detail), events)}
+            autoSubs={made.get(team.teamId)?.marks}
             breakdown={priced?.breakdown ?? {}}
             played={priced?.played}
             // This sheet's men only — a story is keyed by player, and would name a withheld eleven.
@@ -186,6 +195,11 @@ export default async function HeadToHeadPage({
   // ← on a board opened cold: this gameweek on Draft › Fixtures, where its ties are listed (review M12).
   const back = leagueFixturesHref(squads.snapshot.gameweek);
   const stat = both[of === "opponent" ? 1 : 0];
+  // Before kickoff a rival's squad is public, unarranged, so Fixtures names his men as Line-ups lists them.
+  const unplayedOf = (team: LeagueTeam) => {
+    const side = listed?.get(team.teamId);
+    return side === undefined ? undefined : unplayedSheet(side);
+  };
 
   return (
     // A match screen: the scoreline is its header, and its strip picks one of its own views.
@@ -193,7 +207,7 @@ export default async function HeadToHeadPage({
       // A double header's tie strip takes a row from a phone's filled pitch (`pitch.css`).
       className={switcher.length === 0 ? "" : "pitch-ties"}
       foot={
-        view === "stats" && listed === null ? (
+        view === "stats" ? (
           <StatsViews teams={[both[0].team, both[1].team]} current={of} teamId={teamId} gameweek={gameweek} vs={vs} />
         ) : undefined
       }
@@ -203,48 +217,45 @@ export default async function HeadToHeadPage({
       <h1 className="sr-only">{versus(pairing.team.name, pairing.opponent.name)}</h1>
       {refused === null ? null : <ScoreboardDown refused={refused} />}
       {switcher.length === 0 ? null : <TabStrip label="Ties this gameweek" current={pairing.opponent.teamId} tabs={switcher} />}
-      {listed === null ? (
-        <MatchupBoard
-          back={back}
-          team={side(both[0])}
-          opponent={side(both[1])}
-          view={view}
-          tabs={matchupTabs(teamId, gameweek, vs)}
-          body={
-            view === "stats" && of !== "fantasy" ? (
-              <SideTab
-                side={stat}
-                columns={columns}
-                counts={(of === "team" ? yours : theirs)?.counts ?? {}}
-                breakdown={(of === "team" ? yours : theirs)?.breakdown ?? {}}
-                sort={sort}
-                hrefFor={(head: string) =>
-                  statsHref(teamId, gameweek, of, { head, descending: head === sort.head ? !sort.descending : true }, vs)
-                }
-              />
-            ) : view === "stats" ? (
-              <StatsTab
-                bands={bands}
-                names={both[0].names}
-                theirNames={both[1].names}
-                priced={[yours !== null, theirs !== null]}
-                withheld={withheld}
-              />
-            ) : view === "table" ? (
-              <TableTab tie={[pairing.team.teamId, pairing.opponent.teamId]} mine={mine} />
-            ) : view === "fixtures" ? (
-              <FixturesTab
-                fixtures={squads.snapshot.fixtures}
-                sides={both}
-                snapshotClubs={squads.snapshot.clubs}
-                withheld={withheld}
-              />
-            ) : null
-          }
-        />
-      ) : (
-        <SquadLists team={pairing.team} opponent={pairing.opponent} lists={listed} back={back} />
-      )}
+      <MatchupBoard
+        back={back}
+        team={side(both[0])}
+        opponent={side(both[1])}
+        view={view}
+        tabs={matchupTabs(teamId, gameweek, vs).filter((tab) => started || tab.key !== "stats")}
+        body={
+          view === "stats" && of !== "fantasy" ? (
+            <SideTab
+              side={stat}
+              columns={columns}
+              counts={(of === "team" ? yours : theirs)?.counts ?? {}}
+              breakdown={(of === "team" ? yours : theirs)?.breakdown ?? {}}
+              sort={sort}
+              hrefFor={(head: string) =>
+                statsHref(teamId, gameweek, of, { head, descending: head === sort.head ? !sort.descending : true }, vs)
+              }
+            />
+          ) : view === "stats" ? (
+            <StatsTab
+              bands={bands}
+              names={both[0].names}
+              theirNames={both[1].names}
+              priced={[yours !== null, theirs !== null]}
+              withheld={withheld}
+            />
+          ) : view === "table" ? (
+            <TableTab tie={[pairing.team.teamId, pairing.opponent.teamId]} mine={mine} />
+          ) : view === "fixtures" ? (
+            <FixturesTab
+              fixtures={squads.snapshot.fixtures}
+              sides={listed === null ? both : both.map((side) => ({ ...side, detail: unplayedOf(side.team) }))}
+              snapshotClubs={squads.snapshot.clubs}
+              withheld={listed === null ? withheld : null}
+              kicked={listed === null}
+            />
+          ) : null
+        }
+      />
     </FootFrame>
   );
 }

@@ -65,7 +65,7 @@ export type { PlGoal, PlGoalGroup } from "./premierleague/goals";
 export { streamCredits } from "./premierleague/assists";
 export { creditSide } from "./premierleague/assistKinds";
 export type { AssistKinds } from "./premierleague/assistKinds";
-export { creditRoundAssists, streamRedCards } from "./premierleague/wire";
+export { creditRoundAssists } from "./premierleague/wire";
 export type { FixtureStream } from "./premierleague/wire";
 export { injuryMinutes, saysInjury } from "./premierleague/injuries";
 export type { StreamCredit } from "./premierleague/assists";
@@ -76,14 +76,12 @@ export { plMatchBoard } from "./premierleague/matchStats";
 export { plMatchParts, plPlayerId, sumParts } from "./premierleague/playerMatch";
 export type { MatchParts } from "./premierleague/playerMatch";
 export type { MatchStatRow } from "./premierleague/matchStats";
-export { mapRoundBreaks } from "./premierleague/breaks";
 export { plMatchFacts } from "./premierleague/matchFacts";
 export { withPlState } from "./premierleague/matchState";
 export { plMoments } from "./premierleague/moments";
 export { plManager } from "./premierleague/staff";
 export { proseSpans, shortProse } from "./premierleague/prose";
 export type { PlMatchFacts } from "./premierleague/matchFacts";
-export type { RoundBreak } from "./premierleague/breaks";
 export type {
   RawPlFixture,
   RawPlTextstream,
@@ -113,7 +111,7 @@ export type { ClubDepth, DepthSpot, IntelDepth } from "./intel/depth";
 // Season-to-date event counts off the stats league, in football terms and keyed on FPL code.
 export { STAT_COLUMNS } from "./intel/statKeys";
 export type { StatKey } from "./intel/statKeys";
-export { columnDrift, stat, statIntel } from "./intel/stats";
+export { blocks, columnDrift, stat, statIntel } from "./intel/stats";
 export type { IntelStats, StatsRow } from "./intel/stats";
 // A window of recent gameweeks, for narrowing the intel to recent form.
 export { fixtureGameweeks, gameweekSpan, inGameweeks, lastPlayed } from "./intel/window";
@@ -121,15 +119,15 @@ export type { IntelShots, Shot } from "./intel/shots";
 // Each club's Dixon-Coles strength from the sister repo, ranked 1–20 as an opponent for the fixture planner.
 export { easeStep, plannerGameweeks, plannerRows, strengthIntel, strengthPlaces, strengthTable } from "./intel/strength";
 export type { ClubStrength, IntelStrength, PlannerCell, PlannerRow, PlannerView, StrengthRank } from "./intel/strength";
-// The sister model's projected FPL points per player per gameweek, for the Projections tab.
-export { nextGameweeks, projectedPlace, projectedPoints, projectionIntel } from "./intel/projections";
+// The sister model's projected FPL points per player per gameweek, for the paper's predictions.
+export { projectionIntel } from "./intel/projections";
 export { minutesAhead, minutesIntel } from "./intel/minutes";
 export type { ExpectedMinutes } from "./intel/minutes";
 export { minuteMovesIntel, minutesUpdate } from "./intel/minuteMoves";
 export { historyOf, slimSummary } from "./intel/history";
 export type { IntelHistory } from "./intel/history";
 export type { IntelMinuteMoves, MinutesUpdate } from "./intel/minuteMoves";
-export type { IntelProjections, ProjectedPlace, ProjectedPlayer, ProjectedGameweek } from "./intel/projections";
+export type { IntelProjections, ProjectedPlayer, ProjectedGameweek } from "./intel/projections";
 export type { MatchSheet, MatchSheetLine, SheetRow } from "./matchSheet";
 // His completed seasons before this one.
 export { mapPastSeasons } from "./seasons";

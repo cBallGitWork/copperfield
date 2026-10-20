@@ -42,6 +42,7 @@ const render = (asOf: string | null) =>
       clubPlaces: new Map(),
       mine: null,
       fixtures: [],
+      day: null,
       clubs: new Map(),
       now: true,
       gameweek: 7,
@@ -69,11 +70,26 @@ describe("Live's Premier League scores", () => {
   it("names the scorer and the assister under the match, yours in the accent", () => {
     const html = renderToStaticMarkup(
       createElement(Scores, {
-        ties: [], scores, places: new Map(), clubPlaces: new Map(), mine: null, fixtures: [fixture], clubs, now: true,
-        gameweek: 7, asOf: null, goals: new Map([[58, { home: [], away: [haaland] }]]),
+        ties: [], scores, places: new Map(), clubPlaces: new Map(), mine: null, fixtures: [fixture], day: null, clubs,
+        now: true, gameweek: 7, asOf: null, goals: new Map([[58, { home: [], away: [haaland] }]]),
       }),
     );
     expect(html).toContain("Haaland");
     expect(html).toMatch(/As<\/span> <span class="text-accent">Doku/);
+  });
+
+  it("names the match day on show, with an arrow to the next and an inert one at the gameweek's start", () => {
+    const day = { day: "2026-10-17", title: "Sat 17 Oct", previous: null, next: { href: "/matchday?day=2026-10-18", label: "Sun 18 Oct" } };
+    const html = renderToStaticMarkup(
+      createElement(Scores, {
+        ties: [], scores, places: new Map(), clubPlaces: new Map(), mine: null, fixtures: [fixture], day, clubs,
+        now: true, gameweek: 7, asOf: null, goals: new Map(),
+      }),
+    );
+    expect(html).toContain('<nav aria-label="Match days"');
+    expect(html).toContain("Sat 17 Oct");
+    expect(html).toMatch(/href="\/matchday\?day=2026-10-18"[^>]*aria-label="Sun 18 Oct"|aria-label="Sun 18 Oct"[^>]*href="\/matchday\?day=2026-10-18"/);
+    const nav = html.slice(html.indexOf("<nav"), html.indexOf("</nav>"));
+    expect(nav.match(/<a /g)?.length).toBe(1);
   });
 });

@@ -43,8 +43,7 @@ hides a section behind furniture nobody knows to drag. **rail / page:** what the
 rail leaves the content column, which the bar never took.
 
 Any chrome change re-runs this. A seventh section is a height question now rather
-than a width one, but `/matchday/desk` is still reached from the Live section and
-not from one of its own (`docs/ui/desk.md`).
+than a width one.
 
 ## 3. Tapfit — is every target as big as its width requires
 

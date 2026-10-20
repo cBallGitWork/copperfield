@@ -1,11 +1,9 @@
 import { type Club, type Fixture, kickoffAt } from "@epl/core";
 import ScoreRow from "../components/shell/ScoreRow";
+import MatchClock from "../components/football/MatchClock";
 import { scoreSide } from "../components/football/scoreSide";
 import { matchHref } from "../prem/match/[id]/matchRoutes";
 import { hasScore } from "../prem/score";
-
-/** The state beside the score, inside the score cell: a sixth track would clip `TOT` at 390. */
-const CLOCK = "text-sm font-bold uppercase lg:text-base";
 
 /** One Premier League match as a Championship Manager results row, linking to its match page by
  *  the per-season id `/prem/match/[id]` takes. */
@@ -25,7 +23,6 @@ export default function FootballRow({
   const home = clubs.get(fixture.homeClubId);
   const away = clubs.get(fixture.awayClubId);
   const played = hasScore(fixture);
-  const live = now && fixture.status === "live";
 
   return (
     <ScoreRow
@@ -34,15 +31,8 @@ export default function FootballRow({
       score={played ? { home: fixture.homeScore, away: fixture.awayScore } : null}
       pending={kickoffAt(fixture.kickoff)}
       // Right of the figures (Craig, 5 Sep 2026); `--color-live` means a match in play and nothing else (DESIGN §3).
-      clock={
-        // A step up with the score it sits beside (Craig, 21 Sep 2026): the
-        // minute is the other half of what a live row says.
-        live ? (
-          <span className={`${CLOCK} numeric text-live`}>{fixture.minutes}&prime;</span>
-        ) : fixture.status === "finished" ? (
-          <span className={`${CLOCK} text-faint`}>FT</span>
-        ) : null
-      }
+      // A stale snapshot keeps no minute: it would be speaking in the present tense.
+      clock={fixture.status === "live" && !now ? null : <MatchClock fixture={fixture} />}
       href={matchHref(fixture.id, "overview")}
     />
   );

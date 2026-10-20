@@ -32,3 +32,8 @@ export function unplayedLists({
     }),
   );
 }
+
+/** A side before kickoff as a sheet for Fixtures: a rival's squad is all rows, so no man reads as benched. */
+export function unplayedSheet(side: UnplayedSide): LineupDetail {
+  return "sheet" in side ? side.sheet : { rows: side.lines, bench: [], shape: "" };
+}

@@ -1,6 +1,6 @@
 import { clubById, gameweekStarted, gameweekStatus } from "@epl/core";
 import Nothing from "../../../components/shell/Nothing";
-import { besideGameweek, openGameweek } from "../../../components/shell/gameweekStep";
+import { beside, openGameweek } from "../../../components/shell/gameweekStep";
 import PremShell from "../../Shell";
 import { clubPlaces } from "../../places";
 import RoundMatches, { byRound } from "../../Rounds";
@@ -57,7 +57,7 @@ export default async function FixturesPage({ searchParams }: { searchParams: Pro
         round={round}
         clubs={clubById(snapshot)}
         places={clubPlaces(fixtures, snapshot.clubs)}
-        step={{ ...besideGameweek(rounds.map((each) => each.gameweek), round.gameweek), href: premFixturesHref }}
+        step={{ ...beside(rounds.map((each) => each.gameweek), round.gameweek), href: premFixturesHref }}
         yours={yours}
       />
     </PremShell>

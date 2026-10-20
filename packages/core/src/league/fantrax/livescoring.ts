@@ -1,5 +1,5 @@
 import { rounded } from "../../format";
-import type { LivePlayerPoints, LiveSquadPoints, LiveTeamScore, TeamProjection } from "../points";
+import type { LivePlayerPoints, LiveRemaining, LiveSquadPoints, LiveTeamScore, TeamProjection } from "../points";
 
 // Fantrax's live scoring: cookieless, typed, every team in one call (`matchupId` filters nothing); their points, not ours.
 
@@ -78,6 +78,16 @@ export function mapLiveScores(raw: RawLiveScoring): LiveTeamScore[] {
       },
     ];
   });
+}
+
+/** Each team's eleven and bench as Fantrax lists them, with the share of each man's football still to come. */
+export function mapLiveRemaining(raw: RawLiveScoring): LiveRemaining[] {
+  const teams = raw.statsPerTeam?.allTeamsStats ?? {};
+  const shares = (section: RawTeamSection | undefined): Record<string, number> =>
+    Object.fromEntries(Object.entries(section?.remainingEventPercent ?? {}).filter((entry): entry is [string, number] => typeof entry[1] === "number"));
+  return Object.entries(teams).flatMap(([teamId, sections]) =>
+    sections?.ACTIVE === undefined ? [] : [{ teamId, eleven: shares(sections.ACTIVE), bench: shares(sections.BENCH) }],
+  );
 }
 
 /** How many of the eleven still have football to come, counted from Fantrax's list: names nobody before a period opens. */

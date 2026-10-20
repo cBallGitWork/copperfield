@@ -8,6 +8,7 @@ vi.mock("next/image", () => ({ default: () => null }));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 vi.mock("@/app/desk", async () => await import("../../desk"));
 vi.mock("../../matchParts", () => ({ readMatchParts: () => new Promise(() => undefined) }));
+vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: () => undefined }) }));
 
 const man: SquadPlayerDetail = {
   rostered: { slot: { fantraxId: "a", position: "D", status: "" }, unresolved: "unmapped" },
@@ -98,3 +99,40 @@ describe("a live man's card with Fantrax and Opta but no FPL", () => {
     expect(benched).not.toContain("Full match stats");
   });
 });
+
+// Craig, 19 Oct 2026: a tap on a match day "brings up no live points for the player/scores etc, just an empty card",
+// while production logged FPL 403s and Fantrax timeouts.
+describe("a live man's card when a provider would not answer", () => {
+  const upcoming = { id: 1, code: 1, gameweek: 7, status: "upcoming", kickoff: "2026-10-18T13:00:00Z" };
+  const haaland: SquadPlayerDetail = {
+    rostered: {
+      slot: { fantraxId: "061vq", position: "F", status: "" },
+      player: { id: 411, code: 223094, name: "Haaland", fullName: "Erling Haaland", optaCode: "p223094", clubId: 15 } as FootballPlayer,
+      stats: [],
+    },
+    club: undefined,
+    // FPL's fixtures held from before kickoff: its read was refused since.
+    opposition: [{ club: { shortName: "IPS" }, home: true, difficulty: 3, fixture: upcoming } as unknown as Opposition],
+    points: 10,
+    minutes: [],
+  };
+  const goals: BreakdownLine = { code: "G", name: "Goals", points: 8, value: "2" };
+  const card = (player: SquadPlayerDetail, breakdown: BreakdownLine[], played: number | null) =>
+    renderToStaticMarkup(createElement(LivePlayerCard, { player, breakdown, played, reserve: false, onClose: () => undefined }));
+
+  it("shows Fantrax's points once Fantrax has priced him, though FPL's fixture still reads as to come", () => {
+    const html = card(haaland, [goals], 90);
+    expect(html).toContain("Goals");
+    expect(html).toMatch(/>10</);
+    expect(html).not.toContain("Kicks off");
+  });
+
+  it("says it could not get his points, with a way to try again, when Fantrax's table is missing", () => {
+    const live = { ...upcoming, status: "live" };
+    const started = { ...haaland, opposition: [{ ...haaland.opposition![0], fixture: live } as Opposition], points: undefined };
+    const html = card(started, [], null);
+    expect(html).toContain("No breakdown right now.");
+    expect(html).toMatch(/<button[^>]*>Try again<\/button>/);
+  });
+});
+

@@ -3,7 +3,7 @@ import { PAPER_NAME } from "../../config";
 import { londonDate } from "@epl/core";
 import { STANDING_CAPS } from "./heads";
 
-// The head of an article: the paper's name and the date in small capitals. The story's kicker is the article's own.
+// The head of an article: the paper's name and the date in small capitals.
 
 export default function Folio({
   at,

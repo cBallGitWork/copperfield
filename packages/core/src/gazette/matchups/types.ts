@@ -123,8 +123,4 @@ export interface SlotWorth {
   bonus: Record<string, number>;
 }
 
-/** Position letter to the fewest and most the eleven may field there. */
-export interface PositionLimits {
-  min: Record<string, number>;
-  max: Record<string, number>;
-}
+export type { PositionLimits } from "../../league/autoSubs";

@@ -376,6 +376,14 @@ unresolved when it is, and a way out to the full profile.
 - `violations()` reports what is already wrong — nothing the planner offers can create any of it, so anything
   listed arrived from Fantrax, usually a commissioner narrowing an eligibility under a lineup that was legal
   when it was set.
+- **"Might not start: Sarr, Kudus, Osula"** under the planner, in the doubt red (Craig, 19 Oct 2026: *"i like
+  like"*, to a GW8 eleven starting Sarr on 34 xMins, Kudus 46 and Osula 48 with a bench at 81, 73 and 71, figures
+  only the List showed). A starter is named when his xMins for the planned week are under `START_DOUBT_MINUTES`
+  (50) and a sub who could legally swap in for him (`legalMoves`) is clearly above: at 50 or more, and more than
+  the scout's bar (`XMINS_MOVE`, 10) over him (`mightNotStart`). No xMins code had a floor before; 50 is just
+  over half a match, and catches all three of Craig's men and none of his bench. A man with no reading is never
+  named, and the line never says who would come on: football has no depth chart. The planner opens only on the
+  open week, so a locked week never carries it.
 
 ## Constraints
 
@@ -417,8 +425,8 @@ this section, and it goes on doing it — `owns()` prefix-matches `/squad/`.
 | Tab | Route | What it is | Where the data comes from |
 |---|---|---|---|
 | Squad | `/squad/[teamId]` | The list and the pitch, side by side on the desk | the rosters read this page already makes |
-| Transfers | `…/transfers` | His business, as `cm0102/23.jpg`'s ledger: one row a deal, a With column only once he has traded | `readDeals`, filtered to him — the same feed the paper's business column reads |
-| Match | `…/next` | Who he plays, both sides on their own colours (`21.jpg`) | `headToHeads`, already on the page; two panels for a double header |
+| Transfers | `…/transfers` | His business, as `cm0102/23.jpg`'s ledger: one row a deal, a With column only once he has traded; on his own team, the waiver line over it all week (`league-waivers.md`, 19 Oct 2026) | `readDeals`, filtered to him — the same feed the paper's business column reads |
+| Match | `…/next` | Who he plays, both sides on their own colours (`21.jpg`); the whole plate opens that tie's head-to-head at the gameweek, where both squads are listed (19 Oct 2026; it linked only the opponent's squad, and the box itself was a dead end) | `headToHeads`, already on the page; two panels for a double header, each opening its own tie |
 | Fixtures | `…/fixtures` | The whole season, played and to come | `seasonRows` + `Season`, imported from `/league/schedule` rather than copied |
 | Stats | `…/stats` | Every man he owns, filtered by category | `getPlayerStats` filtered on `ownerTeamId`, off a warm cache; the stats league's season beneath each group (`statsLeague.ts`); DefCon points of ours on Scoring, off its periods |
 

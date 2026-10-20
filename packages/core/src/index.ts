@@ -4,6 +4,7 @@
 export * from "./config";
 export * from "./time";
 export * from "./format";
+export { sharedPlaces } from "./places";
 export * from "./names";
 export * from "./grouped";
 export * from "./mean";
@@ -30,5 +31,5 @@ export * from "./join/squadDetail";
 export * from "./join/squadStats";
 export * from "./league";
 export { politeFetch } from "./http/fetch";
-export { fetchJson } from "./http/get";
+export { fetchJson, fetchJsonOr404 } from "./http/get";
 export { ProviderError } from "./http/errors";

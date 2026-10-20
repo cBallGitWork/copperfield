@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { LeagueTransaction } from "../league/types";
-import { deals } from "./deals";
+import { deals, lastWaiverRun } from "./deals";
+import type { Deal } from "./types";
 
 const tx = (over: Partial<LeagueTransaction> & { fantraxId: string }): LeagueTransaction => ({
   setId: "s1", kind: "claim", playerName: "A Player", position: null, club: null, clubName: null, via: null, fromTeamId: null,
@@ -100,5 +101,30 @@ describe("deals", () => {
         processedAt: "Wed Aug 12, 2026, 9:15AM" }),
     ]);
     expect(told.map((m) => m.inbound[0].playerName)).toEqual(["First", "Second"]);
+  });
+});
+
+describe("lastWaiverRun", () => {
+  const WED = "Wed Oct 14, 2026, 1:00PM";
+  const FRI = "Fri Oct 16, 2026, 1:00PM";
+  const claim = (setId: string, processedAt: string, via: "waivers" | "free agency") =>
+    tx({ setId, fantraxId: setId, kind: "claim", toTeamId: "t1", processedAt, via });
+
+  // The real league, 14 to 16 Oct 2026: eleven claims ran on Wednesday, one on Friday, and free agents between.
+  it("takes the claims off waivers on the latest run's stamp, and no free agent", () => {
+    const told = deals([claim("w1", WED, "waivers"), claim("w2", WED, "waivers"), claim("f1", FRI, "waivers"),
+      claim("fa", "Sat Oct 17, 2026, 9:02AM", "free agency")]);
+    expect(lastWaiverRun(told).map((deal) => deal.setId)).toEqual(["f1"]);
+  });
+
+  it("keeps every claim one run resolved", () => {
+    const told = deals([claim("w1", WED, "waivers"), claim("w2", WED, "waivers")]);
+    expect(lastWaiverRun(told).map((deal) => deal.setId).sort()).toEqual(["w1", "w2"]);
+  });
+
+  it("has nothing before the first run, or for claims it cannot date", () => {
+    expect(lastWaiverRun(deals([claim("fa", WED, "free agency")]))).toEqual([]);
+    const undated: Deal = { setId: "w1", kind: "claim", inbound: [], outbound: [], processedAt: null, period: 1, via: "waivers" };
+    expect(lastWaiverRun([undated])).toEqual([]);
   });
 });

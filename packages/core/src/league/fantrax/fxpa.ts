@@ -39,6 +39,8 @@ const SESSION_METHODS: ReadonlySet<string> = new Set([
   "getTradeBlocks",
   // A read: the session's own teams' pending claims and trades, which no other read lists.
   "getPendingTransactions",
+  // A read: league setup, for the waiver schedule. `saveLeagueSetup` is the write and stays out.
+  "getLeagueSetup",
   "confirmOrExecuteTeamRosterChanges",
   "setAutoSubsOrder",
 ]);

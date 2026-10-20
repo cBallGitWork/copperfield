@@ -4,35 +4,44 @@ import type { PoolColumn } from "./columns";
 // Which columns a reader is looking at, and the plates that choose between them (Opta's stat groups, Craig, 10 Sep 2026).
 
 /** Which plate a column appears under: the pool's own groups, since core's `GroupKey` has no fantasy return. */
-export type PoolGroup = "scoring" | "attacking" | "defensive" | "discipline" | "attributes";
+export type PoolGroup = "scoring" | "attacking" | "creating" | "defensive" | "discipline" | "attributes";
 
-/** The plates in the order a reader looks for them; `All` first and the default (Craig, 6 Sep 2026). */
-export const POOL_GROUPS = [
-  { key: "all", label: "All" },
-  { key: "scoring", label: "Scoring" },
-  { key: "attacking", label: "Attacking" },
-  { key: "defensive", label: "Defensive" },
-  { key: "discipline", label: "Discipline" },
-  { key: "attributes", label: "Attributes" },
-] as const;
-
-export type PoolGroupKey = (typeof POOL_GROUPS)[number]["key"];
-
-export type PoolPlate = (typeof POOL_GROUPS)[number];
-
-/** What the URL asked for, narrowed to a plate the board offers; anything else is the whole board. */
-export function groupFor(key: string | undefined, plates: readonly PoolPlate[]): PoolGroupKey {
-  return plates.find((group) => group.key === key)?.key ?? "all";
+/** One plate: its group, its word, and the column it orders by, where it names one. */
+export interface PoolPlate {
+  key: PoolGroup;
+  label: string;
+  sort?: string;
 }
 
-/** The plates a board offers over its columns: `All`, then each group it has a column under, less a lone group of
- *  counts, which would only repeat `All`. */
+/** The plates in the order a reader looks for them, the first the resting one (Craig, 19 Oct 2026: "split into
+ *  attack/defending"). */
+const POOL_GROUPS: readonly PoolPlate[] = [
+  { key: "attacking", label: "Attack", sort: "xg" },
+  { key: "creating", label: "Creating", sort: "xa" },
+  { key: "defensive", label: "Defence", sort: "tkl" },
+  { key: "scoring", label: "Scoring" },
+  { key: "discipline", label: "Discipline" },
+  { key: "attributes", label: "Attributes", sort: "acc" },
+];
+
+/** A plate's group, or `all`: a board with no plates, which draws every column (Players). */
+export type PoolGroupKey = PoolGroup | "all";
+
+/** What the URL asked for, narrowed to a plate the board offers; anything else is its first, or the whole board. */
+export function groupFor(key: string | undefined, plates: readonly PoolPlate[]): PoolGroupKey {
+  return (plates.find((plate) => plate.key === key) ?? plates[0])?.key ?? "all";
+}
+
+/** The column a plate orders by, where it names one. */
+export function groupSort(group: PoolGroupKey): string | undefined {
+  return POOL_GROUPS.find((plate) => plate.key === group)?.sort;
+}
+
+/** The plates a board offers over its columns: each group it has a column under, or none for a lone group. */
 export function platesFor(columns: readonly PoolColumn[]): PoolPlate[] {
   const groups = new Set(columns.map((column) => column.group));
-  const counts = [...groups].filter((group) => group !== undefined && group !== "attributes");
-  return POOL_GROUPS.filter(
-    (plate) => plate.key === "all" || (groups.has(plate.key) && (plate.key === "attributes" || counts.length > 1)),
-  );
+  const plates = POOL_GROUPS.filter((plate) => groups.has(plate.key));
+  return plates.length > 1 ? plates : [];
 }
 
 /** The columns one plate shows: the spine (no `group`) under every plate, the attributes off `All`, and always the

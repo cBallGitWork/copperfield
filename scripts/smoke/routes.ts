@@ -1,5 +1,6 @@
 import { CUPS } from "@epl/core";
-import { ANALYSIS, PROJECTIONS, PROJECTIONS_SHOWN } from "../../apps/companion/app/players/routes";
+import { CALENDAR_FEED } from "../../apps/companion/app/calendar.ics/locks";
+import { ANALYSIS } from "../../apps/companion/app/players/routes";
 
 // The routes a smoke walk visits: those that need no id, then each id-scoped family once a read has named an id.
 
@@ -12,6 +13,7 @@ const ROUTES = [
   "/league",
   "/league/fixtures",
   "/league/transfers",
+  "/league/waivers",
   "/league/matchups",
   "/league/team-stats",
   "/league/cups",
@@ -29,14 +31,9 @@ const ROUTES = [
   "/players/teams",
   "/players/planner",
   "/players/planner?view=defence",
-  // Walked only while shown: switched off, it is a true 404.
-  ...(PROJECTIONS_SHOWN ? [PROJECTIONS] : []),
   "/matchday",
-  "/matchday/desk",
   "/prem",
   "/prem/fixtures",
-  "/prem/team-stats",
-  "/prem/data",
   "/gw/1",
   "/fpl",
   "/more",
@@ -57,7 +54,6 @@ export interface WalkIds {
 export const NEVER_WALKED: Readonly<Record<string, string>> = {
   "/paper/[slug]": "a slug exists only once a story is filed",
   "/news": "the inbox is the reader's own",
-  ...(PROJECTIONS_SHOWN ? {} : { [PROJECTIONS]: "switched off, it is a true 404" }),
 };
 
 /** The routes one id opens, and what to say when no read named it. */
@@ -127,4 +123,21 @@ export function walkPaths(ids: WalkIds): string[] {
 /** One line per id-scoped family the walk could not visit: a walk that quietly drops a route still prints a full count. */
 export function skipped(ids: WalkIds): string[] {
   return FAMILIES.filter((family) => ids[family.id] === null).map((family) => `${family.route}  ${family.unnamed}, so it was not walked`);
+}
+
+/** A route that serves no page: the statuses it may answer with, and the content type a 200 must carry. */
+export interface Feed {
+  path: string;
+  statuses: readonly number[];
+  type: string;
+}
+
+/** The feeds a walk fetches: the lock calendar answers 503 when the league refuses, so a subscriber keeps its events. */
+export const FEEDS: readonly Feed[] = [{ path: CALENDAR_FEED, statuses: [200, 503], type: "text/calendar" }];
+
+/** What is wrong with one feed's answer; none when its status is allowed and a 200 carries the type. */
+export function feedProblems(feed: Feed, status: number, contentType: string | null): string[] {
+  if (!feed.statuses.includes(status)) return [`answered ${status}, expected ${feed.statuses.join(" or ")}`];
+  if (status === 200 && !(contentType ?? "").startsWith(feed.type)) return [`served ${contentType ?? "no content type"}, expected ${feed.type}`];
+  return [];
 }

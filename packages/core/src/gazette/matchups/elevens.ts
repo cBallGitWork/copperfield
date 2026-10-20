@@ -1,5 +1,5 @@
 import { londonWeekday } from "../../time";
-import { blank } from "./autoSubs";
+import { blank } from "../../league/autoSubs";
 import { counted, type SideState } from "./state";
 import { byClock } from "./stories";
 import type { DraftMan, GoalTime, NextMatch } from "./types";

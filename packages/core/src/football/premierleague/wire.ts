@@ -2,7 +2,6 @@ import type { Fixture, FootballPlayer, MatchEvent, PlayerMatchStats } from "../t
 import { creditSide, type AssistKinds } from "./assistKinds";
 import { streamCredits } from "./assists";
 import type { PlGoal } from "./goals";
-import { mapMatchEvents } from "./map";
 import type { RawPlEvent } from "./raw";
 
 // The round wire's reads of Opta's per-fixture commentary, pure: the app fetches each played
@@ -12,18 +11,6 @@ import type { RawPlEvent } from "./raw";
 export interface FixtureStream {
   events: readonly RawPlEvent[];
   kickoffMillis: number | null;
-}
-
-/** Every red card in the round, oldest first per fixture. */
-export function streamRedCards(
-  streams: ReadonlyMap<number, FixtureStream>,
-  codes: Map<number, number>,
-): MatchEvent[] {
-  return [...streams].flatMap(([fixtureCode, stream]) =>
-    mapMatchEvents(stream.events, fixtureCode, codes, stream.kickoffMillis).filter(
-      (event) => event.kind === "red-card",
-    ),
-  );
 }
 
 /** The round's goals with the assists FPL pays and Opta never placed — a penalty won, an own

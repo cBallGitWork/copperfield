@@ -52,8 +52,29 @@ describe("the number on a head-to-head tile", () => {
     expect(band(rice(null, "finished"))).toEqual(["Rice", "—"]);
   });
 
-  it("is his club before it kicks off, whatever the table says", () => {
-    expect(band(rice(3, "upcoming"))).toEqual(["Rice", "ARS"]);
+  // Craig, 19 Oct 2026: "just show who he is playing", not the club on his shirt.
+  it("is his fixture before it kicks off, whatever the table says", () => {
+    expect(band(rice(3, "upcoming"))).toEqual(["Rice", "v WHU (H)"]);
+  });
+
+  // 19 Oct 2026: FPL's fixtures held from before kickoff while its reads were refused; Fantrax had credited him.
+  it("is his score when Fantrax has credited him, though FPL's fixture still reads as to come", () => {
+    const html = renderToStaticMarkup(createElement(SquadMarker, { player: rice(6, "upcoming"), started: true }));
+    expect([...html.matchAll(/<span class="w-full truncate">([^<]*)<\/span>/g)].map((m) => m[1])).toEqual(["Rice", "6"]);
+  });
+
+  it("is a dash for a man whose club has no match this gameweek", () => {
+    expect(band({ ...rice(null, "upcoming"), opposition: [] })).toEqual(["Rice", "—"]);
+  });
+
+  it("is a dash, never his club, on a week still to come with no match in it", () => {
+    const blank = { ...rice(null, "upcoming"), opposition: [] };
+    const fixtureBand = [
+      ...renderToStaticMarkup(createElement(SquadMarker, { player: blank, show: "fixture" })).matchAll(
+        /<span class="w-full truncate">([^<]*)<\/span>/g,
+      ),
+    ].map((m) => m[1]);
+    expect(fixtureBand).toEqual(["Rice", "—"]);
   });
 });
 

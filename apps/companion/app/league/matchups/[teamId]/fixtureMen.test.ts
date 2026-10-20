@@ -1,14 +1,16 @@
 import { describe, expect, it } from "vitest";
 import type { Fixture, FootballPlayer, LineupDetail, SquadPlayerDetail } from "@epl/core";
-import { byKickoff, fixtureMen } from "./fixtureMen";
+import { byKickoff, fixtureMen, menByEnd } from "./fixtureMen";
 
 const fixture = (id: number, kickoff: string | null): Fixture =>
   ({ id, code: id, kickoff, status: "finished" }) as Fixture;
 
-const man = (fantraxId: string, points: number | null, ...fixtures: Fixture[]): SquadPlayerDetail => ({
+const man = (fantraxId: string, points: number | null, ...fixtures: Fixture[]): SquadPlayerDetail => placed(fantraxId, points, true, ...fixtures);
+
+const placed = (fantraxId: string, points: number | null, home: boolean, ...fixtures: Fixture[]): SquadPlayerDetail => ({
   rostered: { slot: { fantraxId, position: "M", status: "" }, player: { code: 1, name: fantraxId } as FootballPlayer, stats: [] },
   club: undefined,
-  opposition: fixtures.map((f) => ({ club: { id: 2, code: 2, name: "B", shortName: "B" }, home: true, difficulty: null, fixture: f })),
+  opposition: fixtures.map((f) => ({ club: { id: 2, code: 2, name: "B", shortName: "B" }, home, difficulty: null, fixture: f })),
   points,
   minutes: [],
 });
@@ -38,6 +40,18 @@ describe("fixtureMen", () => {
     const double = { rows: [{ position: "M", players: [man("e", 9, sat, sun)] }], bench: [] } as unknown as LineupDetail;
     expect(fixtureMen(double, 1)[0]?.scored).toBe(false);
     expect(fixtureMen(double, 2)[0]?.scored).toBe(true);
+  });
+});
+
+describe("menByEnd", () => {
+  // 19 Oct 2026: split by manager, Cunha printed under Chelsea though he plays for Man Utd.
+  it("puts each man under his own club, whichever manager holds him", () => {
+    const mine = { rows: [{ position: "F", players: [placed("cunha", 2, false, sat), man("palmer", 5, sat)] }], bench: [] };
+    const theirs = { rows: [{ position: "F", players: [placed("mbeumo", 3, false, sat)] }], bench: [] };
+    const ends = menByEnd([mine, theirs] as unknown as LineupDetail[], 1);
+    const ids = (men: typeof ends.home) => men.map((m) => [m.player.rostered.slot.fantraxId, m.side]);
+    expect(ids(ends.home)).toEqual([["palmer", 0]]);
+    expect(ids(ends.away)).toEqual([["cunha", 0], ["mbeumo", 1]]);
   });
 });
 

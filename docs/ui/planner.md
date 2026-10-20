@@ -12,7 +12,9 @@ rankings switcher"*, *"rankings - best at top"*, and remove the rows that explai
   ranks each opponent's DEFENCE (who your forwards face); **Defence** ranks each opponent's ATTACK (who your
   back line faces); **Rankings** is every club's own strength.
 - **The board**: every club down, the next six gameweeks with a match left across (`plannerGameweeks`), easiest
-  run first. A cell is one fixture: the opponent, its venue `(H)` / `(A)` (under the code on a phone, beside it
+  run first. It opens on the week the Team tab plans (`planningRound`), so a gameweek drops off once its lineups
+  lock, even with a Monday match to come (19 Oct 2026: GW7 led the board after 18 of 20 clubs had played it).
+  Without the league's calendar it falls back to the first gameweek with a match left. A cell is one fixture: the opponent, its venue `(H)` / `(A)` (under the code on a phone, beside it
   on a desk, Craig 30 Sep 2026) and its rank as an ordinal, `1st` the easiest (Craig, 1 Oct 2026: *"use '1st'
   'th'"*). On a phone the rank shares the venue's line under the code: a 37px cell cannot hold `20th` beside it.
   The ground is the ease ramp (DESIGN §3), two ranks a step.

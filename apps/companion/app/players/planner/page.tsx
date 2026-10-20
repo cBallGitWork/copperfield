@@ -5,6 +5,7 @@ import TabStrip from "../../components/shell/TabStrip";
 import PlannerBoard from "./PlannerBoard";
 import StrengthRanks from "./StrengthRanks";
 import { footballNow, seasonFixtures } from "../../football";
+import { planningRound } from "../../round";
 import { intelStrength } from "../../intel";
 import { PLANNER } from "../routes";
 import { SECTION_BAR } from "@/app/desk";
@@ -35,8 +36,9 @@ export default async function PlannerPage({
 }) {
   const asked = (await searchParams).view;
   const view: View = VIEWS.find((entry) => entry.key === asked)?.key ?? "attack";
-  const [fixtures, snapshot] = await Promise.all([seasonFixtures(), footballNow()]);
-  const gameweeks = plannerGameweeks(fixtures, PLANNER_RUN);
+  const [fixtures, snapshot, planning] = await Promise.all([seasonFixtures(), footballNow(), planningRound()]);
+  // From the Team tab's week: once a gameweek's lineups lock, its fixtures are past planning.
+  const gameweeks = plannerGameweeks(fixtures, PLANNER_RUN, planning?.gameweek ?? null);
 
   if (intelStrength.size === 0 || gameweeks.length === 0) {
     return (

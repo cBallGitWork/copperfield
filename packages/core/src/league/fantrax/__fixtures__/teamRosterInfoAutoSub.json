@@ -1,0 +1,20 @@
+{"displayedSelections":{"displayedPeriod":7},"miscData":{"autoSubsOrderingType":"USER","autoSubOrderMap":{"06do9":1,"067ys":3},"statusTotals":[{"total":11,"max":11,"name":"Active","id":"1"},{"total":3,"max":3,"name":"Reserve","id":"2"}]},"tables":[{"header":{"cells":[{"key":"opponent"},{"key":"fpts"},{"key":"fptsPerGame"},{"key":"5020#6060#-1"},{"key":"5020#6120#-1"},{"key":"5020#6249#-1"},{"key":"5020#6112#-1"},{"key":"5020#6280#-1"},{"key":"5020#6190#-1"},{"key":"5020#6170#-1"},{"key":"5020#6332#-1"},{"key":"5020#6689#-1"},{"key":"5020#6090#-1"},{"key":"5020#6362#-1"},{"key":"5020#6105#-1"}]},"rows":[
+{"statusId":"1","posId":"704","scorer":{"scorerId":"04qor","shortName":"B. Leno","posIds":["704"],"posShortNames":"G"},"cells":[{},{"content":"25"}]},
+{"statusId":"2"}]},{"header":{"cells":[{"key":"opponent"},{"key":"fpts"},{"key":"fptsPerGame"},{"key":"5010#6060#-1"},{"key":"5010#6120#-1"},{"key":"5010#6090#-1"},{"key":"5010#6362#-1"},{"key":"5010#6280#-1"},{"key":"5010#6190#-1"},{"key":"5010#6696#-1"},{"key":"5010#6700#-1"},{"key":"5010#6332#-1"},{"key":"5010#6105#-1"},{"key":"5010#6101#-1"},{"key":"5010#6249#-1"}]},"rows":[
+{"statusId":"1","posId":"703","scorer":{"scorerId":"0787y","shortName":"Antonio Silva","posIds":["703"],"posShortNames":"D"},"cells":[{},{"content":"14"}]},
+{"statusId":"1","posId":"703","scorer":{"scorerId":"063zi","shortName":"Matheus Nunes","posIds":["703"],"posShortNames":"D"},"cells":[{},{"content":"19"}]},
+{"statusId":"1","posId":"703","scorer":{"scorerId":"05oh0","shortName":"J. van Hecke","posIds":["703"],"posShortNames":"D"},"cells":[{},{"content":"26"}]},
+{"statusId":"1","posId":"703"},
+{"statusId":"1","posId":"703"},
+{"statusId":"1","posId":"702","scorer":{"scorerId":"05gcc","shortName":"K. Dewsbury-Hall","posIds":["702"],"posShortNames":"M"},"cells":[{},{"content":"34"}]},
+{"statusId":"1","posId":"702","scorer":{"scorerId":"05748","shortName":"Ismaila Sarr","posIds":["702","701"],"posShortNames":"M,F"},"cells":[{},{"content":"2"}]},
+{"statusId":"1","posId":"702","scorer":{"scorerId":"06fv8","shortName":"M. Kudus","posIds":["702","701"],"posShortNames":"M,F"},"cells":[{},{"content":"10"}]},
+{"statusId":"1","posId":"702","scorer":{"scorerId":"05l8q","shortName":"C. Palmer","posIds":["702"],"posShortNames":"M"},"cells":[{},{"content":"37"}]},
+{"statusId":"1","posId":"702"},
+{"statusId":"1","posId":"701","scorer":{"scorerId":"07898","shortName":"G. García","posIds":["701"],"posShortNames":"F"},"cells":[{},{"content":"19"}]},
+{"statusId":"1","posId":"701","scorer":{"scorerId":"061vq","shortName":"E. Haaland","posIds":["701"],"posShortNames":"F"},"cells":[{},{"content":"47"}]},
+{"statusId":"1","posId":"701","scorer":{"scorerId":"05t6x","shortName":"W. Osula","posIds":["701"],"posShortNames":"F"},"cells":[{},{"content":"5"}]},
+{"statusId":"2","posId":"703","scorer":{"scorerId":"06do9","shortName":"M. Kerkez","posIds":["703"],"posShortNames":"D"},"cells":[{},{"content":"21"}]},
+{"statusId":"2","posId":"703","scorer":{"scorerId":"078qg","shortName":"A. Khalaili","posIds":["703"],"posShortNames":"D"},"cells":[{},{"content":"23"}]},
+{"statusId":"2","posId":"702","scorer":{"scorerId":"067ys","shortName":"J. Hinshelwood","posIds":["702"],"posShortNames":"M"},"cells":[{},{"content":"19"}]},
+{"statusId":"2"}]}]}

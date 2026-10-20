@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "@/app/components/shell/Link";
+import { plainClick } from "@/app/components/shell/plainClick";
 import { usePathname, useRouter } from "next/navigation";
 import { startTransition, useEffect, useRef, type ReactNode } from "react";
 
@@ -37,8 +38,7 @@ export default function TurnLink({
       className={className}
       onClick={(event) => {
         // A modified or middle click is a new tab.
-        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-        if (event.button !== 0) return;
+        if (!plainClick(event)) return;
 
         const start = (
           document as Document & { startViewTransition?: (cb: () => void) => void }

@@ -44,11 +44,5 @@ export const STATS = `${POOL}/stats`;
 /** Data's club board: every real club as a fantasy manager reads it. */
 export const TEAMS = `${POOL}/teams`;
 
-/** The sister model's projected points for the next six gameweeks. */
-export const PROJECTIONS = `${POOL}/projections`;
-
-/** Off while the projections are bad data (Craig, 7 Oct 2026): no tab, and the page 404s. */
-export const PROJECTIONS_SHOWN = false;
-
 /** The fixture planner: every club's next six opponents, ranked by our strength model. */
 export const PLANNER = `${POOL}/planner`;

@@ -8,13 +8,11 @@ export function written(lead: Story, who: (teamId: string | null) => string) {
   switch (lead.kind) {
     case "squeaker":
       return {
-        kicker: "Down to the wire",
         headline: `${lead.result.winner.name} edged ${lead.result.loser.name}`,
         standfirst: `Decided by ${points(lead.result.margin)}.`,
       };
     case "bench":
       return {
-        kicker: "Left out",
         headline: `${lead.pick.ownerName} left ${lead.pick.playerName} out`,
         // The owner is named once, off the pick, so the headline and its line agree.
         standfirst:
@@ -25,13 +23,11 @@ export function written(lead: Story, who: (teamId: string | null) => string) {
       };
     case "rout":
       return {
-        kicker: "No contest",
         headline: `${lead.result.winner.name} took ${lead.result.loser.name} apart`,
         standfirst: `${points(lead.result.margin)} between them.`,
       };
     case "trade":
       return {
-        kicker: "Business",
         headline: `${lead.sides.map(who).join(" and ")} have traded`,
         // Counted off the deal: `sides` is two or more, and `traded` is only the newest trade.
         standfirst: `${players(lead.deal.inbound.length)} changed hands.`,

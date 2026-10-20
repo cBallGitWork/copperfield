@@ -19,6 +19,7 @@ import {
   minutesNews,
   nextDeadline,
   offerNews,
+  paperNews,
   presserNews,
   roundNews,
 } from "@epl/core";
@@ -126,6 +127,8 @@ export async function readInbox(): Promise<Inbox> {
       scout,
       // The Team Sheet's columns, each a letter that sends him to the paper.
       presserNews(filed, storyHref),
+      // A story whose cargo names his team, a letter per tie, so the paper about him moves the unread count.
+      paperNews(filed, { mine, name: nameOf, href: storyHref }),
       // `deals()` pairs a claim with its drop and both halves of a trade.
       dealNews(deals(feed.rows), nameOf, mine),
       blockNews(blocks, { name: nameOf, mine, holder: (fantraxId) => holders.get(fantraxId) ?? null }),

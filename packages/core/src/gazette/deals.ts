@@ -56,6 +56,14 @@ export function deals(transactions: readonly LeagueTransaction[]): Deal[] {
   return newestFirst(told);
 }
 
+/** The last waiver run's claims, in the feed's order: a run resolves every claim on one stamp, so it is the claims off
+ *  waivers on the latest. Undated claims belong to no run. */
+export function lastWaiverRun(told: readonly Deal[]): Deal[] {
+  const claims = told.filter((deal) => deal.via === "waivers");
+  const latest = Math.max(...claims.map((deal) => orderKey(deal.processedAt) ?? Number.NEGATIVE_INFINITY));
+  return claims.filter((deal) => orderKey(deal.processedAt) === latest);
+}
+
 function side(row: LeagueTransaction, teamId: string | null) {
   const { playerName, fantraxId, position, club, clubName } = row;
   return { playerName, fantraxId, position, club, clubName, teamId };

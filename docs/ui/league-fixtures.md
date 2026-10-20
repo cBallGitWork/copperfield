@@ -15,7 +15,7 @@ the latest gameweek under way (`openGameweek`), so Saturday's reader lands on th
 scores, and **on the next once that one is done** (Craig, 16 Oct 2026), so
 Friday's lands on the weekend to come and its deadline; `?gw=` names any other. The arrows flank
 the round's head (`shell/RoundHead`'s `step`) and step over a break's missing
-week (`besideGameweek`) and over any gameweek with no tie on (`onTheCard`): the
+week (`beside`) and over any gameweek with no tie on (`onTheCard`): the
 calendar runs from Gameweek 1, the real league's pairings from Gameweek 6, and ◀
 walked into five empty weeks each headed "Full time" until 16 Oct 2026. This replaces the scrolled schedule of 5 Sep (*"Dont
 show all the grey arrows here"*), which was a filter row, not a stepper; the team

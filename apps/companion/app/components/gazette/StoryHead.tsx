@@ -1,7 +1,4 @@
-// A story's display block as every rank that prints one sets it; the chip over it is the caller's to place.
-
-/** A story's kicker or a column's standing title: stock on an ink chip, 14.2:1, in the sheet's own two colours. */
-export const KICKER = "inline-block bg-ink px-2 py-1 font-sans text-2xs font-bold uppercase tracking-[0.15em] text-bg";
+// A story's display block as every rank that prints one sets it.
 
 /** The headline's step at width: the front page's, asked of the stories' container, or an article's own. */
 const STEP = { front: "@md/stories:text-6xl", article: "@3xl:text-5xl" } as const;

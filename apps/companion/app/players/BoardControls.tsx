@@ -27,7 +27,6 @@ const FIELDS = [
   "per",
   "club",
   "panel",
-  "cat",
 ] as const;
 
 /** The rest of the query as hidden inputs for a GET form; `except` is the form's own field. */
@@ -66,7 +65,7 @@ export function Plates({
   className,
 }: {
   query: PlayersQuery;
-  /** The plates this board offers, `All` first. */
+  /** The plates this board offers, the resting one first. */
   plates: readonly PoolPlate[];
   group: PoolGroupKey;
   route: string;
@@ -78,8 +77,9 @@ export function Plates({
   return (
     // The `<nav>` is the landmark that names the strip; it travels with it.
     <nav aria-label="Stat groups" className={className}>
-      {plates.map((entry) => {
-        const change = { set: { group: entry.key === "all" ? "" : entry.key } };
+      {plates.map((entry, at) => {
+        // Each plate sets its own order, so a sort chosen on another plate does not follow the reader here.
+        const change = { set: { group: at === 0 ? "" : entry.key, sort: "", dir: "" } };
         return (
           <BoardLink
             key={entry.key}
@@ -151,7 +151,7 @@ export function Figures({
 }
 
 /** How many of the board's settings the sheet holds that are on, so a shut sheet cannot hide a filtered board: the
- *  club, a lone half of the bin, and below `xl`, where the sheet carries them, Adv Stats' plate and Per 90. The sort is
+ *  club, a lone half of the bin, and below `xl`, where the sheet carries it, Per 90. The sort is
  *  never counted; the table's head says it. Its slot keeps its width at nought, so Filter never moves. */
 export function Count({ sheet, wide }: { sheet: number; wide: number }) {
   return (

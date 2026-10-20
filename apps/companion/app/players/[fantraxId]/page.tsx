@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Nothing from "../../components/shell/Nothing";
 import { PANEL } from "@/app/desk";
 import ButtonLink from "../../components/shell/ButtonLink";
-import { POOL, PROJECTIONS_SHOWN } from "../routes";
+import { POOL } from "../routes";
 import { intelMinutes, intelSquads } from "../../intel";
 import { XMINS_AS_OF } from "../../xmins";
 import AttributeGrid from "./AttributeGrid";
@@ -15,7 +15,7 @@ import PlayerShell from "./PlayerShell";
 import Portrait from "./Portrait";
 import RealPosition from "./RealPosition";
 import SetPieces from "./SetPieces";
-import { playerGrid, playerPieces, playerStanding, projectedWeeks } from "./grid";
+import { playerGrid, playerPieces, playerStanding } from "./grid";
 import { scouting } from "./scouting";
 import { subject } from "./subject";
 import { playerTitle } from "./title";
@@ -43,11 +43,6 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
   const position = football === null ? null : (intelSquads.get(football.player.code) ?? null);
   // His run to come, off the snapshot and calendar every screen holds, so outside any boundary.
   const run = football === null ? null : await scouting(football.player);
-  // Projected points only while Craig trusts them; xMins always.
-  const weeks =
-    football === null || run === null || !PROJECTIONS_SHOWN
-      ? null
-      : await projectedWeeks(football.player, run.flatMap((against) => against.fixture.gameweek ?? []));
   const minutes = new Map(
     (football === null ? [] : (intelMinutes.get(football.player.code) ?? [])).map((week) => [week.gameweek, week.minutes]),
   );
@@ -93,7 +88,7 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
       {pieces === null ? null : <SetPieces pieces={pieces} club={football?.club?.name ?? null} />}
 
       {/* The run to come, not the round just gone (Craig, 4 Sep 2026). */}
-      {run === null ? null : <FixtureRun run={run} minutes={minutes} asOf={XMINS_AS_OF} weeks={weeks} group={standing?.group ?? null} />}
+      {run === null ? null : <FixtureRun run={run} minutes={minutes} asOf={XMINS_AS_OF} />}
 
       {/* What he actually plays, last and loudest, where CM puts it (Craig, 4 Sep 2026). */}
       <RealPosition position={position} />

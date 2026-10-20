@@ -34,6 +34,14 @@ export function stat(row: StatsRow | undefined, key: StatKey): number | null {
   return row?.[key] ?? null;
 }
 
+/** Shots he blocked: DefCon's count less its tackles won and interceptions (DFP is the three); null missing any part. */
+export function blocks(row: StatsRow | undefined): number | null {
+  const all = stat(row, "defensivePoints");
+  const tackles = stat(row, "tacklesWon");
+  const interceptions = stat(row, "interceptions");
+  return all === null || tackles === null || interceptions === null ? null : all - tackles - interceptions;
+}
+
 /** The keys one list of columns has that the other has not: a changed scoring in the stats league. */
 export function columnDrift(
   held: readonly string[],

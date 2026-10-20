@@ -1,12 +1,12 @@
 import TabStrip from "../components/shell/TabStrip";
 import { phoneShows } from "@/app/desk";
-import LeaderBoard from "../prem/(competition)/data/LeaderBoard";
+import LeaderBoard from "./LeaderBoard";
 import { Holder } from "../players/BoardRow";
 import type { TopBoard } from "./leaders";
 import { LIVE } from "../components/shell/sections";
 
 // This gameweek's leaders (Craig, 1 Oct 2026: "match day have 3rd tab, that shows top stats for just
-// this gameweek"). A phone picks one list from a strip; a desk shows them all, each drawn as the Data tab's lists are.
+// this gameweek"). A phone picks one list from a strip; a desk shows them all, each its own `LeaderBoard`.
 
 /** The Live tab's third view, by its query value. */
 export const STATS_VIEW = "stats";

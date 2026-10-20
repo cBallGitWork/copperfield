@@ -10,3 +10,16 @@ export function nextPoll(
   if (remaining <= 0) return rates.live;
   return Math.min(remaining, rates.idle);
 }
+
+/** Seconds until a second refresh after the app opens or comes back in a match window, or null for none: a read past
+ *  its lifetime answers the first with its old reading and fetches behind it. `since` is null on a cold open. */
+export function settleAfter(
+  liveIn: number | null,
+  elapsed: number,
+  since: number | null,
+  rules: { lifetime: number; settle: number },
+): number | null {
+  if (liveIn === null || liveIn - elapsed > 0) return null;
+  if (since !== null && since <= rules.lifetime) return null;
+  return rules.settle;
+}

@@ -1,4 +1,5 @@
 import { mean } from "../../mean";
+import { sharedPlaces } from "../../places";
 import type { Club, Fixture } from "../types";
 import { byCode } from "./byCode";
 import type { IntelManifest } from "./types";
@@ -101,26 +102,21 @@ function competitionRanks(
   rating: (club: ClubStrength) => number,
 ): Map<number, number> {
   const ordered = [...strengths.values()].sort((a, b) => rating(a) - rating(b));
-  const ranks = new Map<number, number>();
-  ordered.forEach((club, index) => {
-    const previous = ordered[index - 1];
-    const tied = previous !== undefined && rating(previous) === rating(club);
-    ranks.set(club.code, tied ? (ranks.get(previous.code) ?? index + 1) : index + 1);
-  });
-  return ranks;
+  const places = sharedPlaces(ordered, (above, club) => rating(above) === rating(club));
+  return new Map(ordered.map((club, at) => [club.code, places[at]]));
 }
 
-/** `count` gameweeks from the first with a match still to finish, stopping at the season's last. A round behind
- *  one already over is skipped: FPL keeps a rearranged match in its original round. */
-export function plannerGameweeks(fixtures: readonly Fixture[], count: number): number[] {
+/** `count` gameweeks from the first with a match still to finish, and none before `from` (the one being planned), to
+ *  the season's last. A round behind one already over is skipped: FPL keeps a rearranged match in its original round. */
+export function plannerGameweeks(fixtures: readonly Fixture[], count: number, from: number | null = null): number[] {
   const unfinished = (gameweek: number) => fixtures.some((f) => f.gameweek === gameweek && f.status !== "finished");
   const rounds = new Set(fixtures.flatMap((f) => (f.gameweek === null ? [] : [f.gameweek])));
   const lastOver = Math.max(0, ...[...rounds].filter((gameweek) => !unfinished(gameweek)));
   const open = [...rounds].filter((gameweek) => gameweek > lastOver && unfinished(gameweek));
   if (open.length === 0) return [];
-  const first = Math.min(...open);
+  const first = Math.max(Math.min(...open), from ?? 0);
   const last = Math.max(...fixtures.map((f) => f.gameweek ?? 0));
-  return Array.from({ length: Math.min(count, last - first + 1) }, (_, index) => first + index);
+  return Array.from({ length: Math.max(0, Math.min(count, last - first + 1)) }, (_, index) => first + index);
 }
 
 /** Every club's run over `gameweeks`, easiest first: a double averages its two, a blank counts as the hardest. */

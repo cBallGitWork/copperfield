@@ -17,6 +17,7 @@ import { identify } from "./team";
 import { squadView } from "./squadView";
 import { commissionerSession } from "./saving";
 import { teamTitle } from "./title";
+import { autoSubbed } from "../../components/league/autoSubbed";
 
 // One manager's squad, laid out on a pitch. The screen the league opens on a
 // Saturday, and the reason the join exists.
@@ -39,7 +40,7 @@ export default async function TeamPage({
   const [{ teamId: slug }, { gw }] = await Promise.all([params, searchParams]);
   // No team yet: the index and its sign-in in place, so the Team tab that led here stays lit.
   if (slug === OWN && (await readerTeamId()) === null) return <SquadIndex />;
-  const { team, mine, planning, open, standing, weeks, benchRanks, locks, bench, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = await squadView(slug, gw);
+  const { team, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = await squadView(slug, gw);
   // Fantrax's period selector, on every branch: an earlier week shows its scores, a later one its opponents.
   const picker =
     weeks === null ? null : (
@@ -94,7 +95,7 @@ export default async function TeamPage({
       ) : (
         /* An eleven nobody may change here: a rival's once locked, or your own in any week but the open one. */
         <Sheet
-          {...lineupDetail(team, clubs, opposition, points, minutes, bench)}
+          {...afterSubs(lineupDetail(team, clubs, opposition, points, minutes, bench), autoSubs)}
           breakdown={live?.breakdown ?? {}}
           played={live?.played}
           news={news}
@@ -109,4 +110,10 @@ export default async function TeamPage({
       )}
     </TeamShell>
   );
+}
+
+/** The sheet with the auto subs made, and the marks that say so. */
+function afterSubs(...args: Parameters<typeof autoSubbed>) {
+  const { sheet, marks } = autoSubbed(...args);
+  return { ...sheet, marks };
 }

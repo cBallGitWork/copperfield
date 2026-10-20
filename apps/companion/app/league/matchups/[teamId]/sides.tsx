@@ -11,17 +11,14 @@ import type {
 import { NO_MINUTES, lineupDetail, openingGameweek } from "@epl/core";
 import type { UnplayedSide } from "./unplayed";
 import { widestLine } from "../../../components/league/PitchRows";
-import BackPlate from "../../../components/shell/BackPlate";
-import Caption from "../../../components/shell/Caption";
 import Nothing from "../../../components/shell/Nothing";
 import SquadRows from "../../../components/league/SquadRows";
 import TeamSheet from "../../../components/league/TeamSheet";
-import TeamName from "../../../components/league/TeamName";
 import { teamHref } from "@/app/squad/routes";
 import { SMALL_CAPS } from "@/app/desk";
 
-// The head-to-head's per-side pieces: why a side is withheld, both sides' arrangements, and the two squad lists a
-// round not yet kicked off is reduced to. The shared boards are `tabs.tsx`'s.
+// The head-to-head's per-side pieces: why a side is withheld, both sides' arrangements, and the squad list a side
+// shows before kickoff. The shared boards are `tabs.tsx`'s.
 
 /** Why a side is not on screen: no roster from Fantrax, a lineup not yet locked, or our calendar failing. */
 export function Withheld({
@@ -62,57 +59,14 @@ function lockOf(gameweek: number | undefined): string {
   return gameweek === undefined ? "its line-ups" : `gameweek ${gameweek}'s line-ups`;
 }
 
-/** A tie before a ball is kicked: the two squads and nothing else, scoreline included (Craig, 11 Sep 2026: *"just show
- *  the two squad lists, thats it"*). A side the gate has opened (always your own) is its eleven, then its bench; any
- *  other is unarranged, so not even the order leaks who starts. */
-export function SquadLists({
-  team,
-  opponent,
-  lists,
-  back,
-}: {
-  team: LeagueTeam;
-  opponent: LeagueTeam;
-  /** Where ← goes on a page opened cold: the gameweek's fixtures. */
-  back: string;
-  /** Each side's squad, by team id; a side with no roster is absent and says so. */
-  lists: Map<string, UnplayedSide>;
-}) {
-  // The top of the page on a phone, so the first side's caption carries the way back.
-  const half = (side: LeagueTeam, top: boolean) => {
-    const listed = lists.get(side.teamId);
-    const caption = (
-      <Caption>
-        <TeamName teamId={side.teamId} name={side.name} />
-      </Caption>
-    );
-    return (
-      <section key={side.teamId} className="flex min-w-0 flex-1 flex-col gap-1">
-        {top ? (
-          <div className="flex min-h-11 items-stretch lg:min-h-0">
-            <BackPlate fallback={back} />
-            <div className="grid min-w-0 flex-1">{caption}</div>
-          </div>
-        ) : (
-          caption
-        )}
-        {/* No figure column either way: nothing has scored in a round with no football. */}
-        {listed === undefined ? (
-          <Nothing title="No squad" code={side.teamId} />
-        ) : "sheet" in listed ? (
-          <TeamSheet rows={listed.sheet.rows} bench={listed.sheet.bench} breakdown={{}} mode="list" />
-        ) : (
-          <SquadRows lines={listed.lines} projected={false} />
-        )}
-      </section>
-    );
-  };
-
-  return (
-    <div className="flex flex-col gap-2 lg:flex-row lg:items-start">
-      {half(team, true)}
-      {half(opponent, false)}
-    </div>
+/** One side of a tie before a ball is kicked: no figure column, since nothing has scored. A side the gate has opened
+ *  (always your own) is its eleven, then its bench; any other is unarranged, so not even the order leaks who starts. */
+export function SquadList({ listed, teamId }: { listed: UnplayedSide | undefined; teamId: string }) {
+  if (listed === undefined) return <Nothing title="No squad" code={teamId} />;
+  return "sheet" in listed ? (
+    <TeamSheet rows={listed.sheet.rows} bench={listed.sheet.bench} breakdown={{}} mode="list" />
+  ) : (
+    <SquadRows lines={listed.lines} projected={false} />
   );
 }
 

@@ -47,6 +47,134 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## FPL refuses Vercel's London egress, not our volume — measured 19 Oct 2026
+
+GW7's Monday, TOT v COV kicking off at 19:00 UTC. Twelve hours of production's runtime logs (387 lines) and 80 minutes
+of its request log (1,153 records), joined on `requestId`:
+
+- **The region in a runtime log line is the edge that took the request, not where the function ran.** Every deployment
+  reads `regions: ["lhr1"]` from the API and every lambda is `[lhr1]` in `vercel inspect`; the "sfo1" and "pdx1" lines
+  match their request's `edgeNetworkRegion` 27 times in 27. So the London pin (7 Oct, above) holds and nothing to FPL
+  leaves from the US. Of 232 refusal lines, 88 were tagged pdx1, 85 sfo1, 59 lhr1.
+- **Half the lines are one refusal logged twice**: our "not asked again for 60s" once per real ask, and Next's
+  "revalidating cache with key: …" once per request that waited on it. 89 real asks were refused in eleven hours (08:06 to 19:04).
+- **Single asks are refused too.** 10:21, 10:24 and 10:30 were one ask each; 16:26 to 18:23 a lone US reader's tab
+  drew 2 to 6 asks every few minutes and every one was refused, for two hours. A burst is not needed, and the same
+  URLs answer 200 from Craig's Mac. FPL is refusing the shared cloud addresses Vercel's London functions leave from;
+  our own rate is a few asks a minute per instance (20 s round reads, 300 s bootstrap and season list).
+- **A production deploy is a burst of its own.** Vercel's screenshot bot (`HeadlessChrome/141`, US) opens `/` on every
+  new deployment's own URL, and the six tabs it can see are prefetched four times each: 136 to 142 requests and 24 to
+  26 server renders in five seconds. Six deploys landed between 18:56 and 19:07, the hour of a kick-off; 19:03's was
+  12 refused asks (3 bootstraps, so three instances) and 58 lines in four seconds. A reader opening the app does the
+  same in small: Craig's iPhone at 18:32 rendered seven pages in three seconds across four instances, 16 asks.
+- **What changed.** A refused read rests 60 s, then 120, then 240 for each refusal in a row, and a success starts it
+  over (`nextRest`, `FPL_REST_MAX_MS`); the predicted elevens keep their flat rest. Every provider request names
+  `Accept-Language: en-GB` (`HTTP_ACCEPT_LANGUAGE`): undici sent `*`, which no browser does.
+- **Not done.** A different egress needs Vercel's static IPs, a paid add-on. Merging a run of PRs inside a match window
+  is the one burst we choose; hold merges until the window closes.
+
+## A live score counts the auto subs — decided 19 Oct 2026
+
+Craig, 19 Oct, of GW7's Raccoons 31 v Bannan 43 with Sarr blank and Kerkez, bench #1, on 3: *"yeah maybe 34 then, and
+on the live head to head we show an auto subbed icon? then sarr (my sub) goes to the back of the bench, no number
+assigned to him, make it clear its auto sub"*. This supersedes matchup.md's "Fantrax's own totals, which we never
+recompute": every draft score printed during a gameweek is Fantrax's total plus each reserve certain to come on.
+
+- **The real league subs.** Probed 19 Oct, read-only: its `LINEUP_CHANGE` log carries two moves "Executed by System" at
+  Mon 12 Oct 6:52 PM EDT, GW6's close (Szoboszlai → Pino, Castagne → Muharemovic, each like for like), and GW6's board
+  now holds one blank starter, whose bench had nobody who played. `getTeamRosterInfo` says `autoSubsOrderingType:
+  "USER"`. No read publishes an on/off setting, so the rule is the one the paper has used since GW5 (`league/autoSubs.ts`).
+- **The rule.** A starter is replaced only once his football is done (`remainingEventPercent` 0 on the board) without
+  a minute; never while his match is to come or in play. The first reserve in bench order (`mapBenchOrder`) who has
+  played or may yet, and who keeps every slot within `maxActiveByPosition` and the recorded minimums, comes on. A
+  reserve still to play comes on provisionally: he adds nothing until he plays, and counts as one to play.
+- **One function.** `liveScores` (`app/scoreboard.ts`) applies `withAutoSubs` to every team, so Live, the matchups list,
+  the head-to-head, Draft › Fixtures, the live strip, Mail and the Team tab print the one figure. A bench is read
+  (`getTeamRosterInfo`, the five-minute locked cache, now holding each man's slot too) only for a team with a blank.
+- **Scoring stays the slot's.** A reserve's points are Fantrax's BENCH price at the slot he is filed at; a
+  dual-eligible man Fantrax moves to another slot could price differently, unseen so far.
+- **The pitch.** The reserve stands in the starter's place with a cyan swap chip (ours until Fantrax makes it); the
+  starter goes to the end of the bench under "Auto-sub", with no number. Once Fantrax has run the subs its board holds
+  the new eleven, the rule finds no blank, and the marks go.
+
+## One FPL ask per lifetime, not one per instance — measured 19 Oct 2026
+
+Craig, 19 Oct, on FPL refusing production: *"we spam it too much"*. Two hours of production's request log (1,993
+records, 17:50 to 19:50 UTC, GW7's Monday) and its runtime log (908 lines). A successful FPL ask logs nothing, so the
+counts below come from the renders the log does show and the caches' lifetimes.
+
+- **The Data Cache is shared, its refresh is not.** `unstable_cache` reads through Vercel's cache handler, one store per
+  region, so every instance sees one entry; but a stale entry is refreshed by each instance whose request finds it
+  stale before the new one lands. An open tab's 30 s tick was the page's refresh and the rail's six tabs at once:
+  Craig's Mac at 19:17:56, seven renders in the same second. Round fixtures and lines live 20 s, so every tick found
+  both stale, and each instance the seven landed on asked twice: up to 16 asks a minute from one tab on four instances.
+- **The tabs now follow the refresh by `POLL.ahead` (5 s)**, past an FPL round trip, so they find what the page's own
+  render fetched. One tab in a match window: about 13 to 18 asks a minute down to about 4 (fixtures and lines once per
+  tick, the bootstrap once in five minutes). Nothing is staler: the page still asks every 30 s, and a tab is fetched
+  5 s later in each tick, so a tap draws a reading 5 s newer than before. A tap in the first 5 s after an open renders
+  on the tap.
+- **Vercel's screenshot of a new build** opens `/` twice on the deployment's own address and fetched every tab four
+  times: 136 to 142 requests, 24 to 26 renders, six deploys in these two hours. A visit to `VERCEL_URL` now fetches
+  nothing ahead (`aheadFor`): two renders a deploy. No project setting turns the screenshot off that we could find.
+- **The season list is the hour's reading in a match window too.** The round in focus is laid over it from its own
+  20 s read, so in a window it carried only dates and finished rounds; `matchOn` already held the hour's copy of the
+  same URL. Twelve asks an hour become one; the 300 s entry stands in only when the hour's read is refused.
+- **Left alone, measured.** `/fixtures/?event=N` stays: the season list is 183 KB now and ~1.1 MB by May against the
+  round's 26 KB. `fpl-score-lines` reads the same event-live URL as `fpl-round-lines`, for `/fpl` only: 2 renders in
+  the two hours. `fpl-entry` stays at 30 s off the clock, since a transfer made on FPL should show inside a minute.
+  Every other FPL read is on the football clock (`onTheClock`), so outside a match window it is one an hour; the player
+  card's server action reads the PL and Fantrax, never FPL.
+- **Watch.** Fewer `not asked again` lines per minute in a match window while FPL refuses (one per endpoint per
+  instance per rest), and no requests from `HeadlessChrome` on a deployment's own address but its two `/` renders.
+
+## The back plate goes where the reader tapped from — decided 19 Oct 2026
+
+Craig, 19 Oct, on the installed app: *"live → click prem match → tap back. expected: back to live. current: back to
+prem section; back arrow needs to remember where it came from"*. The plate asked the Navigation API whether the app
+had a page behind (`currentEntry.index > 0`) and took the section's fallback when it said not. Desktop WebKit 26.5 and
+Chrome both count a Next push correctly (probed 19 Oct: index 0 → 1, kept over a reload), so any loss is the iPhone's
+own; WebKit tracks its history entries and the API's in two places that can part (bugs.webkit.org 282627). Now
+`shell/CameFrom` files every same-origin link tap in `sessionStorage` (`came-from`: each page's path → the URL it was
+tapped from; a `TabStrip` tab, marked `data-replace` by `Link`, inherits its page's origin, but a replace made from a
+card's own entry is a push from the page under it). The plate still steps back whenever the browser names a page
+behind; only when it names none or cannot say does it go to the remembered page, in this one's place, and it takes the
+section instead when following the trail would revisit a page it has already stepped from since the last tap
+(`came-from-stepped`). Preferring the trail over a page the browser does name sent a card's Full profile back past the
+page under the card and trapped a loop of taps (GW7 › GW8 › GW7) between two pages (QA, 19 Oct). The iPhone's actual
+cause is unproven: no engine we run loses the entry.
+
+## The waiver schedule is read off the league's setup — probed and decided 19 Oct 2026
+
+**Fantrax states when claims run**, in `getLeagueSetup {action: "transactions"}` (commissioner cookie;
+`WARNING_NOT_LOGGED_IN` without one), found by reading the SPA's league-setup chunk. `waiverWire` carries
+`waiverWireProcessType` (`DAYS_OF_WEEK`, or `NUM_DAYS`), `waiverWireClaimResolutionDays` (`"1"` Sunday to `"7"`
+Saturday) and the clock as a twelve-hour triple, `waiverWireClaimResolutionTimeHour`/`Minute`/`AmPm`, with no zone:
+it is US Eastern like every Fantrax stamp (all history stamps of the real league's waiver claims read exactly
+`1:00PM`). Real league: `["4","5","6"]` at 1:00 PM, so **Wednesday, Thursday and Friday** at 18:00 London, 17:00 on 28–30
+Oct while the UK is on GMT and the US still on EDT. Rehearsal and dummy: `["3","6"]` at 5:00 AM. So the days are a
+league's own and never a constant. `getLeagueInfo` carries none of it (0 of 64,497 bytes match waiv|claim|process).
+**The claim order is a column of the standings page** the app already reads: `wwOrder`, a string `"1"`..`"10"`, 1 first,
+10/10 teams in all three leagues, anonymous. It is not the reverse of the table (the real league's bottom team was 10th
+in it on 19 Oct, having claimed on Fri 16), since a claim sends its maker to the back and the order resets on its own
+day (`waiverWireClaimOrderResetDays`). So it is read, never derived.
+
+Decided: `getLeagueSetup` joins the fxpa session allow-list as a read (`saveLeagueSetup` stays out), held 6 hours
+(`WAIVER_SCHEDULE_REVALIDATE`); no cookie or a refusal is no schedule and no banner. Draft › Waivers and the banner:
+`docs/ui/league-waivers.md`. This corrects SEASON_LOG's "No API read carries the waiver-processing schedule" (written
+when only `getLeagueInfo` had been grepped); the Mercato Wire's detection-not-schedule trigger stands on its own merits.
+
+## Live drops the vidiprinter and the desk — decided 19 Oct 2026
+
+Craig, 19 Oct: *"ditch vidiprinter, no longer needed"*. Scores had carried each match's goals since 16 Oct, so the
+wire's tab said nothing Scores did not. Live's strip is `Scores · Top stats`; `?view=vidiprinter` falls back to
+Scores. The ownership join (`wireLines`) stays, as it feeds `fixtureGoals`; the full-time and red-card reads that fed
+only the wire went with it.
+
+Craig, the same day: *"ditch all links and reference to The Desk, its not needed"*. `/matchday/desk`, its button at
+the foot of Live and `docs/ui/desk.md` are gone, and the route is a 404. It was the last route `groundfit` found
+printing on the bare ground (DESIGN §2), so that list is empty until the next run. `app/desk.ts`, the register's
+class recipes, is a different thing and stays.
+
 ## A pinned page reloads onto the live deployment — decided 16 Oct 2026
 
 Craig, 16 Oct: the Line-Ups, a Here We Go and Friday's presser were live but his installed app showed none of them
@@ -190,7 +318,7 @@ careers and league projections with an age check, and a dated weekly snapshot of
 - **Tuesday's run keeps every new stamp**, so an 8-day limit means "the weekly export ran", not "the content
   changed". Pressers runs still drop a manifest-only change. intel-check had gone red on files nothing had changed:
   cups over an international break.
-- **Projections every week**, no longer only while `PROJECTIONS_SHOWN`; `npm run draft-pack` reprices them in the
+- **Projections every week** (the flag `PROJECTIONS_SHOWN` and its page went on 19 Oct 2026); `npm run draft-pack` reprices them in the
   real league's points (`league-projections`, now with a manifest), and a copy is kept as
   `data/intel/league-projections/weekly/<season>-<date>.json`: a trade is judged by a man's worth that week.
 - **Careers** come from `scripts/intel-careers.ts`, the sister's identity store read-only; it reproduced the hand
@@ -276,11 +404,16 @@ docs or the crew's files. The rule lives in `scripts/ci/ignore-build.sh`, which 
 root directory (`apps/companion`, hence `../../`): Vercel refuses an `ignoreCommand` over 256 characters outright, and
 the inline one had reached 290 (#531). `scripts/ci/ignoreCommand.test.ts` runs it against a throwaway repo.
 
-**Nor for the predicted elevens** (16 Oct 2026, the lead's call on Craig's *"Data-only commits and deploys: lead's
-call"*): 11 of those 21 builds were `scout-xi`'s hourly commits, Saturday's match hours included. The club page reads
-the elevens off the deployed branch's raw file on GitHub (`predictedXi.ts`, 600 s, from Vercel's `VERCEL_GIT_*`), and
-`newerElevens` keeps the build's copy unless the read is shaped as the elevens and newer, so the build-time parse
-guard (`intel.ts`) still backs it. Every other `data/intel` kind still builds: they are baked in and read nowhere else.
+**The predicted elevens build again** (19 Oct 2026). *Superseded: from 16 Oct (the lead's call on Craig's
+"Data-only commits and deploys: lead's call") `scout-xi`'s commits skipped the build, 11 of those 21, and the club page
+read the elevens off the deployed branch's raw file on GitHub instead.* The repo went private around 17 Oct and that
+read has answered 404 since, so production kept its last build's elevens: Saturday's five XI commits from 13:09 to
+19:55 UTC reached nobody until a paper commit rebuilt at 20:20. The cost is about 26 builds a week: 8 XI commits on Thu
+15 Oct, 8 on Fri 16, 7 on Sat 17 and one a day otherwise, each about a minute (45–60 s on `vercel ls`, 19 Oct).
+`predictedXi.ts` still reads the branch, 600 s, from Vercel's `VERCEL_GIT_*`, and `newerElevens` keeps the build's copy
+unless the read is shaped as the elevens and newer. A 404 is remembered for the life of the process and never logged,
+so the dead read costs one request per cold start. A read-only token on Vercel would revive it; that is Craig's call,
+and a public repo would do the same. Every other `data/intel` kind builds: they are baked in and read nowhere else.
 
 ## Kits load straight from FPL, not through Vercel's optimizer — decided 5 Oct 2026
 
@@ -385,7 +518,7 @@ the served league's rules: the rehearsal's in production and the dummy's, every 
 - **DefCon points on a squad's Stats tab** (`DCP`, 1 Oct): DefCon pays per match, so each stats-league period begun
   so far is read once (a finished one held a day) and its `DFP`/`DFP3` priced as one match at the man's roster slot
   (`league/defcon.ts`). A period holding two of his matches prices nothing rather than guess the split. Since 8 Oct
-  the same figure is on Prem › Data and the Players board (`app/defcon.ts`): an owned man at his roster slot, a free
+  the same figure is on the Players board (Prem › Data too, until 19 Oct) (`app/defcon.ts`): an owned man at his roster slot, a free
   agent at whichever eligible position pays more (only the 71 `F,M` men have two, and a forward's band never pays less).
 - **A range is read off the settings mirror, never the string.** `scoringCategorySettings` gives each band (`start`,
   `end`, `points`, `interval`), `rangeType` and `cumulative`; the string table has no `cumulative`. The real league's
@@ -574,7 +707,7 @@ changed in each name, as Pro Evolution printed its unlicensed players, and never
   its reader was deleted on 25 Sep. So the run reads the export, in FPL scoring until 2 Oct (above); the panel carries no source caption, and each figure's title
   says whose it is.
 - **The rank is among his grid's group** (the sister's line: 108 midfielders, 23 goalkeepers), the men with a
-  reading that week, ties sharing a place (`projectedPlace` in core); lit on the pool board's shares (`poolCut`).
+  reading that week, ties sharing a place; lit on the pool board's shares (`poolCut`). Deleted with the projections page, 19 Oct 2026.
 - **Mail's frame and row are shared at two, by Craig's asking** ("use the mail template more"), a recorded
   exception to CODE_RULES §1 like `DateChip`'s: `news/Mailbox` and `news/MailRow` serve Mail and a player's
   News, and the row's headline now wraps to two lines on both rather than clipping on a phone.
@@ -687,8 +820,13 @@ Craig set the formats on 27 Sep. The cups are declared in `packages/core/src/lea
   playoffs; 4-5 playoffs play in; 5-8 Plate - winner gets 1st pick next season"*) are declared in
   `league/tableLines.ts`: under 1st, under the place before Fantrax's last semi place, under the place after
   it, and under 8th, the Plate being the play-in's loser and 6th to 8th. A league with no playoff draws none.
-- **A level knockout tie** is settled by points, then the starting eleven's goals, assists, clean sheets and
-  minutes played in the tie. Level on all five is a coin toss, which Craig makes. Every cup tie is one leg.
+- ~~**A level knockout tie** is settled by points, then the starting eleven's goals, assists, clean sheets and
+  minutes played in the tie. Level on all five is a coin toss, which Craig makes.~~ Superseded 19 Oct 2026 (Craig:
+  *"tie is goals scored, assists, cs, cards (least better) then toss of coin, but in rules section in more"*):
+  points, goals, assists, clean sheets, fewer cards (a red counts one), then a repeatable coin, in
+  `cups/tieBreak.ts`; `docs/ui/league-cups.md` *A level tie*. Every cup tie is one leg.
+  **Rule exception (CODE_RULES §2)**: `decideTie` and `tieTally` have no caller until cup results are wired after
+  the GW10 draw; only `CUP_TIE_STEPS` is read today, by `/scoring`. Delete neither as unused before then.
 - **Group points are 3 for a win and 1 for a draw** (Craig, 27 Sep). A group is placed on points, then
   points for, then draw order; the order after points for is assumed.
 - **On screen with a placeholder draw** (Craig, 27 Sep: *"Placeholder brackets are fine for now"*):
@@ -699,7 +837,7 @@ Craig set the formats on 27 Sep. The cups are declared in `packages/core/src/lea
   draw" (Craig, 30 Sep: *"remove placeholder draw sentence"*). The Davy Propper groups are drawn as
   `groupTable` league tables (Craig, 1 Oct: *"propper cup should be a table view"*), every figure 0 until
   results are wired in.
-- **The seeding and the tie-break are Craig's, by hand** (8 Oct 2026). GW9's points only split the six byes
+- **The seeding and the tie-break are Craig's, by hand** (8 Oct 2026; the tie-break half superseded 19 Oct, above). GW9's points only split the six byes
   from the four in round 1, and both rounds are drawn off the app, so no screen ever prints a seed; no tie is
   decided here either. The code for both went unread and was deleted; git has it.
 
@@ -1091,7 +1229,22 @@ Read against the installed Next 16.2.7 source. Standing rules for anything that 
   than the read's lifetime plus one fetch.** At 30 = 30, a lone reader saw new
   scores on every other poll. So `LIVE_REVALIDATE = 20` applies to the two reads
   a live score is drawn from (`currentRound`, `plRound`), and everything heavier
-  stays at 30.
+  stays at 30. **Fantrax's live scoring joined them on 19 Oct 2026** (`readScores`,
+  `live-scores`, was 30): at 30 = 30 the head-to-head moved once a minute and a
+  lone reader could be shown a reading 90s old, now 60s. Fantrax names no
+  rate limit; a lone poller asks it twice a minute instead of once, and a crowd at
+  most three times (0.5s, 216 KB a read, timed 19 Oct).
+- **An open or a return asks twice** (19 Oct 2026; Craig: *"when opening app,
+  sometimes still needs a pull refresh to get the latest scores update"*). The
+  refresh on `visibilitychange`, and a cold open's document, find the live reads
+  stale and draw the reading from before the reader left. On Sunday 18 Oct both
+  in-window returns not mid-session (13:09:15, 15:16:16) were followed by a pull
+  3s and 8s later, and a cold open at 13:03:44 by seven pulls in 17s. So in a
+  match window `AutoRefresh` refreshes again `POLL.settle` (4s) after an open, or a
+  return more than `LIVE_REVALIDATE` since its last refresh (`settleAfter`): a
+  deployment ask, a ~0.2s render and the slowest live read's 0.5s fit well inside
+  it. One more ~50 KB request per open; nothing more on the 30s tick. Its clock is
+  `Date.now()`, since `performance.now()` stops while a phone sleeps.
 - **A nested `unstable_cache` bypasses its own cache**
   (`unstable-cache.js:144`, "when we are nested inside of other unstable_cache's
   we should bypass cache"). `readLeague` read `footballNow` inside itself, so
@@ -1523,7 +1676,8 @@ invention.
 `claimTypes` is `{1: FREE_FOR_ALL, 2: RANKING}` and `selectedTxType` is `CLAIM`.
 `noResults: true` in dummy at the time of probing — the method answers, the
 league simply had nothing pending, so **the populated table shape is also
-unknown**. Read it on a Wednesday. (Read on 1 Oct 2026: *Re-probed 1 Oct 2026 off the page itself*, below.)
+unknown**. Read it on a Wednesday. (Read on 1 Oct 2026: *Re-probed 1 Oct 2026 off the page itself*, below. The
+schedule the claims run on: *The waiver schedule is read off the league's setup*, 19 Oct 2026.)
 
 ### Nineteen commissioner actions, in five groups
 
@@ -3989,7 +4143,7 @@ LISTS — who is at a club, and who can be picked up:
 | `/prem/club/[code]` Squad, Stats | `/prem/match/[id]/*` — **seven of the 104 played before they left** (Sánchez a full 90, Richarlison 67, Drameh 65, Millar 50, Beto 31, Woltemade 19). A scoresheet that dropped them would say a match was played by ten men |
 | `/prem/club/[code]/set-pieces` — **6 of the 135 ranked takers had gone**, Woltemade first on Newcastle's penalties at a 0.57 share. Filtered before the rank is drawn, so the order still counts 1, 2, 3 | `/squad/[teamId]` and every Fantrax roster — 2 of the dummy league's 150 slots hold one. Hiding a slot a manager is still paying for hides the problem, not the man; he is greyed and boxed `Unav` instead |
 | `/players` and `/players/analysis` — `stillHere` in `players/pool.ts`, outside the league cache so a Fantrax entry cannot keep offering a man who left | `/players/[fantraxId]` — a page ABOUT one man, reachable only by a link nothing now draws or by a typed URL. It says what happened to him |
-| the attribute percentile cohort (`players/[fantraxId]/grid.ts`) — 104 frozen, mostly-nought seasons in the denominator is what makes an ordinary player look good | `clubStats` and `/prem/team-stats` — a SUM, not a list. The goals a departed man scored for that club are still that club's season |
+| the attribute percentile cohort (`players/[fantraxId]/grid.ts`) — 104 frozen, mostly-nought seasons in the denominator is what makes an ordinary player look good | `clubStats` and Data › Clubs (`/prem/team-stats` until 19 Oct 2026) — a SUM, not a list. The goals a departed man scored for that club are still that club's season |
 
 `players/pool.ts` is now the one place a page that is otherwise entirely Fantrax's
 makes a football read, and it is a hard dependency rather than a column that may
@@ -4544,8 +4698,8 @@ Craig, 7 Oct: *"we have confidence of our xmins more. So let's put it back into 
 draft squads' list "by gameweek", and the player card "for future weeks too". The minutes come from
 `data/intel/projections` (`players[].gameweeks[].minutes`, FPL code, GW6–17, all 666 men; the export contract's
 `xMins` is called `minutes`), a football reading, so not from the league join's `minutesPerGw` (537 men). Only the
-minutes cross: `minutesIntel` drops the points, which stay behind `PROJECTIONS_SHOWN` (off). The player page's
-"Next up" had kept printing projected points through the switch; it now prints xMins and the points only when on.
+minutes cross: `minutesIntel` drops the points. The player page's "Next up" prints xMins only; its projected points
+and the projections page were deleted on 19 Oct 2026 (Craig: *"ok"*).
 
 - **Flat after next week**: GW7–17 are one repeated figure for 289 of 537 men (Haaland 85, then 85.7 to GW17).
   The card prints them as they are; it is the model saying it knows nothing new, not a fault.
@@ -5007,7 +5161,7 @@ grass, and a withheld side draws the `Withheld` panel on every tab rather than a
 empty board. Said here because "the gate is about the pitch" is the easy reading
 and it is wrong: it is about anything whose existence states who is active.
 
-`SquadLists` — the unplayed-round branch — is the same rule from the other side:
+`SquadList` — a side's Line-ups before kickoff — is the same rule from the other side:
 it draws `squadUnarranged`, which sorts alphabetically within position so even
 the payload order cannot leak who starts.
 
@@ -5229,8 +5383,9 @@ at most, summed over every man each team holds now (`join/squadStats.ts`).
   any live match.
 - ~~What should `apps/lab` look like for the 27/28 platform prototype?~~ Closed 14 Oct 2026: the platform gets its own
   repo (Craig: *"yes new repo"*) and `apps/lab` is deleted.
-- **The cups, open since 27 Sep** (see *The cups are declared as ours*): where the starting eleven's
-  goals, assists, clean sheets and minutes per team per gameweek are read from; how a group tie on points
+- **The cups, open since 27 Sep** (see *The cups are declared as ours*): where the counted eleven's
+  goals, assists, clean sheets and cards per team per gameweek are read from (19 Oct: `tieTally` takes live
+  scoring's `ACTIVE` rows; nothing feeds it yet); how a group tie on points
   and points for is placed (draw order assumed); and whether Fantrax can express the playoff's one-leg play-in before two-leg semis (on 5 Oct it
   answered four teams, the semis alone).
 

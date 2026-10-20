@@ -1,0 +1,46 @@
+import { cupTies, leagueTies, periodPairings, roundState, type LiveTeamScore } from "@epl/core";
+import { now } from "../../clock";
+import { PAGE_REVALIDATE } from "../../config";
+import { footballNow } from "../../football";
+import { placings } from "../../league/placings";
+import { liveScores } from "../../scoreboard";
+import { getLeagueSquads, readable } from "../../squads";
+import { leagueTable } from "../../standings";
+import { shareList } from "../shareList";
+import { shareListCard } from "../shareListCard";
+
+// `/matchday/share.png`: Live's league list as a picture for the group chat, the same for every reader so it caches.
+
+export const dynamic = "force-dynamic";
+
+export async function GET(): Promise<Response> {
+  const [snapshot, squads, table] = await Promise.all([footballNow(), getLeagueSquads(), leagueTable()]);
+  const drafted = readable(squads);
+  const period = drafted?.roundPeriod ?? null;
+  const { scores, fetchedAt } =
+    period === null ? { scores: new Map<string, LiveTeamScore>(), fetchedAt: null } : await liveScores(period);
+  // The same ties as Live's list: the league's pairings, then our cups.
+  const ties =
+    drafted?.info != null && period !== null
+      ? [
+          ...leagueTies(periodPairings(drafted.info.matchups, drafted.info.teams, period)),
+          ...cupTies(drafted.info.teams.length, snapshot.gameweek),
+        ]
+      : [];
+  const list = shareList({
+    ties,
+    scores,
+    places: placings(table),
+    gameweek: snapshot.gameweek,
+    state: roundState(snapshot),
+    takenAt: fetchedAt ?? now().toISOString(),
+  });
+  const png = await (await shareListCard(list)).arrayBuffer();
+  return new Response(png, {
+    headers: {
+      "Content-Type": "image/png",
+      // It moves with the scores: as long as a page's own revalidate, and no longer.
+      "Cache-Control": `public, max-age=${PAGE_REVALIDATE}, s-maxage=${PAGE_REVALIDATE}`,
+    },
+  });
+}

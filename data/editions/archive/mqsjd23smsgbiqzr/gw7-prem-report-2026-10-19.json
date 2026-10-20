@@ -1,0 +1,481 @@
+{
+  "slug": "gw7-prem-report-2026-10-19",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 7,
+  "gameweek": 7,
+  "filedAt": "2026-10-19T22:11:37.394Z",
+  "expiresAt": null,
+  "edition": "Monday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Maddison sends Coventry to Coventry",
+  "deck": "Tottenham Hotspur beat Coventry City 3-1",
+  "body": "",
+  "subjects": [
+    "match-report:gw7:2026-10-19"
+  ],
+  "image": null,
+  "face": {
+    "code": 172780,
+    "name": "Maddison",
+    "clubId": 19,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645264,
+        "kickoff": "2026-10-19T19:00:00Z",
+        "home": {
+          "code": 6,
+          "score": 3,
+          "goals": [
+            "Maddison 14",
+            "Marmoush 58",
+            "Davies 90+6"
+          ],
+          "assists": [
+            "Kudus 14",
+            "Robertson 58",
+            "Solanke 90+6"
+          ],
+          "manager": "Roberto De Zerbi",
+          "lineup": {
+            "formation": "3-1-4-2",
+            "lines": [
+              [
+                {
+                  "name": "Kinsky",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "van Hecke",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.7
+                },
+                {
+                  "name": "Adarabioyo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Fernandes",
+                    "minute": "71",
+                    "booked": false,
+                    "mark": 3.4
+                  },
+                  "mark": 4.5
+                },
+                {
+                  "name": "van de Ven",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Tonali",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.6
+                }
+              ],
+              [
+                {
+                  "name": "Kudus",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Kulusevski",
+                    "minute": "87",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 6.5
+                },
+                {
+                  "name": "Gray",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.1
+                },
+                {
+                  "name": "Maddison",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Gallagher",
+                    "minute": "69",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 7.4
+                },
+                {
+                  "name": "Robertson",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Davies",
+                    "minute": "69",
+                    "booked": false,
+                    "mark": 7.3
+                  },
+                  "mark": 6.1
+                }
+              ],
+              [
+                {
+                  "name": "Solanke",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.6
+                },
+                {
+                  "name": "Marmoush",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Tel",
+                    "minute": "87",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 7.4
+                }
+              ]
+            ],
+            "unused": [
+              "Williams-Barnett",
+              "Olusesi",
+              "Senesi",
+              "Dúbravka"
+            ]
+          },
+          "next": "Chelsea (a)"
+        },
+        "away": {
+          "code": 9,
+          "score": 1,
+          "goals": [
+            "Rudoni 49"
+          ],
+          "assists": [
+            "Thomas-Asante 49"
+          ],
+          "manager": "Frank Lampard",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Rushworth",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 2.1
+                }
+              ],
+              [
+                {
+                  "name": "van Ewijk",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Thomas",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Pinnock",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Dasilva",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 2.5
+                }
+              ],
+              [
+                {
+                  "name": "Yirenkyi",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Onyeka",
+                    "minute": "60",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 2.4
+                },
+                {
+                  "name": "Grimes",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Sakamoto",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Hamer",
+                    "minute": "78",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 4.5
+                },
+                {
+                  "name": "Rudoni",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Kesler-Hayden",
+                    "minute": "87",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 6.6
+                },
+                {
+                  "name": "Thomas-Asante",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Mason-Clark",
+                    "minute": "78",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 6.1
+                }
+              ],
+              [
+                {
+                  "name": "Cherif",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Awoniyi",
+                    "minute": "60",
+                    "booked": false,
+                    "mark": 3.4
+                  },
+                  "mark": 3.2
+                }
+              ]
+            ],
+            "unused": [
+              "Bentley",
+              "Torp",
+              "Simms",
+              "Mfuni"
+            ]
+          },
+          "next": "Fulham (h)"
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 0
+        },
+        "venue": "Tottenham Hotspur Stadium",
+        "attendance": 60913,
+        "referee": "Andy Madley",
+        "standfirst": "Tottenham Hotspur beat Coventry City 3-1, with James Maddison scoring first from outside the box.",
+        "account": "Maddison put Tottenham ahead after 14 minutes, taking Mohammed Kudus's pass and striking it right-footed from long range into the top corner. Jack Rudoni levelled just after half-time, turning Brandon Thomas-Asante's pass on the break low into the corner, right-footed from inside the six-yard box. Omar Marmoush restored the lead after 58 minutes, his right-footed shot from distance going low into a corner from Andy Robertson's pass. Robertson went off injured midway through the second half.\nTosin Adarabioyo followed him off hurt with 19 minutes left. Marmoush was forced off three minutes from time. Deep into stoppage time Ben Davies, on for Robertson, made it 3-1, his left-footed shot from beyond the box finding the bottom corner from Dominic Solanke's pass.",
+        "sections": [
+          {
+            "head": "Marmoush scores, then hurt",
+            "pitch": "Beyond his goal, Marmoush earned one defensive point for his defending, half of the most a match pays, before the injury that ended his match.",
+            "stake": "A free agent since domeitalycoach let him go on Friday; seven points."
+          },
+          {
+            "head": "Solanke sets up Davies",
+            "pitch": "Solanke had three shots of his own before laying on the closing goal, and the defensive side of his game brought two defensive points, the most a match pays.",
+            "stake": "Bayern Bru claimed him on Wednesday, for six points, and beat The Truffle Pigs 53-49."
+          },
+          {
+            "head": "Maddison, Davies, Rudoni score",
+            "pitch": "Maddison and Davies scored once each, both from outside the area, Davies having come on as a substitute earlier in the game. Rudoni's goal was his second of the league season, and the only one Coventry managed.",
+            "stake": "Maddison, a free agent, seven points in his first league start this season; Davies, a free agent, seven points; Rudoni, a free agent, six points."
+          }
+        ],
+        "keyStats": [
+          {
+            "label": "Points",
+            "value": "Maddison 7, Marmoush 7, Davies 7, Kudus 6 (The Raccoons)"
+          },
+          {
+            "label": "Shots",
+            "value": "16 (5 on target) v 12 (1)"
+          },
+          {
+            "label": "xG",
+            "value": "Tottenham 0.86, Coventry 0.81"
+          },
+          {
+            "label": "DefCon",
+            "value": "Tonali 2, van Hecke 2, Solanke 2"
+          },
+          {
+            "label": "Chances created",
+            "value": "van Ewijk 3"
+          },
+          {
+            "label": "Top xG",
+            "value": "Solanke 0.32"
+          },
+          {
+            "label": "Top xA",
+            "value": "Tonali 0.30"
+          }
+        ],
+        "star": {
+          "name": "Marmoush",
+          "club": "Tottenham",
+          "holder": null,
+          "mark": 7.4,
+          "did": "1 goal"
+        },
+        "rows": [
+          {
+            "minute": "14",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Maddison (Kudus)"
+          },
+          {
+            "minute": "20",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Yirenkyi"
+          },
+          {
+            "minute": "22",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Solanke"
+          },
+          {
+            "minute": "45",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Dasilva"
+          },
+          {
+            "minute": "49",
+            "kind": "Goal",
+            "side": "away",
+            "text": "Rudoni (Thomas-Asante)"
+          },
+          {
+            "minute": "58",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Marmoush (Robertson)"
+          },
+          {
+            "minute": "60",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Awoniyi for Cherif"
+          },
+          {
+            "minute": "60",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Onyeka for Yirenkyi"
+          },
+          {
+            "minute": "64",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Rudoni"
+          },
+          {
+            "minute": "69",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Davies for Robertson, injured"
+          },
+          {
+            "minute": "69",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Gallagher for Maddison"
+          },
+          {
+            "minute": "71",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Fernandes for Adarabioyo, injured"
+          },
+          {
+            "minute": "78",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Mason-Clark for Thomas-Asante"
+          },
+          {
+            "minute": "78",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Hamer for Sakamoto"
+          },
+          {
+            "minute": "87",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Tel for Marmoush, injured"
+          },
+          {
+            "minute": "87",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Kulusevski for Kudus"
+          },
+          {
+            "minute": "87",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Kesler-Hayden for Rudoni"
+          },
+          {
+            "minute": "90+6",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Davies (Solanke)"
+          }
+        ],
+        "video": "RqrmnDOPhyI"
+      }
+    ]
+  }
+}

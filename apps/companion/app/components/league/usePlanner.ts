@@ -22,6 +22,7 @@ import { benchFrom, orderAfter, orderBench, swapInOrder } from "./benchOrder";
 import { freeMoves } from "./openings";
 import { pitchTap } from "./pitchTap";
 import { whyBlocked } from "./blocked";
+import { mightNotStart } from "./mightNotStart";
 
 // The lineup planner's state: the slots being arranged, the pick in progress, and every move the
 // league's rules allow from here. `LineupPlanner` draws it.
@@ -92,6 +93,14 @@ export function usePlanner(
 
   // What is wrong with the XI as it stands; no offered move creates any, so anything here came from Fantrax.
   const broken = violations(slots, eligibility, limits);
+  // Starters short on xMins for the planned week whom a sub could legally replace, as the pitch draws them.
+  const doubts = mightNotStart(
+    slots,
+    eligibility,
+    limits,
+    (id) => detailOf.get(id)?.minutes[0]?.minutes ?? null,
+    rows.flatMap((row) => row.players.map((p) => p.rostered.slot.fantraxId)),
+  ).map(nameOf);
   // Null where the league publishes no XI size (`RosterLimits.maxActivePlayers`): no shortfall to measure.
   const empty =
     limits.maxActivePlayers === null
@@ -181,6 +190,7 @@ export function usePlanner(
     dirty,
     broken,
     empty,
+    doubts,
     card,
     setCard,
     pickStateOf,

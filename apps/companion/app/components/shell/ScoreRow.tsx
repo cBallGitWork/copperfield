@@ -7,8 +7,7 @@ import Absent from "./Absent";
 import Scoreline from "./Scoreline";
 
 // Championship Manager's results row: an index block at each end holding the side's league position, and the
-// names and score in fixed columns so every name and colon lines up down a panel. `matchday/desk/Rows` stays
-// its own: its rows are 26px with no tap floor.
+// names and score in fixed columns so every name and colon lines up down a panel.
 
 /** One side of a scoreline. */
 export interface ScoreSide {

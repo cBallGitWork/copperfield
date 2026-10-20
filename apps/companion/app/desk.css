@@ -376,6 +376,11 @@ select.cm-bevel {
   display: none;
 }
 
+/* Where a pinned head sticks: under the installed app's clock, not behind it. Set while hidden, as `stickyHead` reads it. */
+.cm-board-head {
+  top: var(--safe-top);
+}
+
 @media (width < 64rem) {
   /* More to the right: a fade over the last figures; taps pass through it to the figure underneath. */
   .cm-board[data-more] .cm-board-fade {
@@ -417,7 +422,6 @@ select.cm-bevel {
   .cm-board[data-headless] .cm-board-head {
     display: block;
     position: sticky;
-    top: 0;
     z-index: 30;
     height: 0;
   }

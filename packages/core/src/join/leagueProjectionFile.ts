@@ -1,6 +1,5 @@
 import type { IntelManifest } from "../football/intel/types";
-import { finiteOrNull } from "../untrusted";
-import { eachPart, type LeagueProjectionPart, type SlotRates } from "./leagueProjection";
+import type { LeagueProjectionPart, SlotRates } from "./leagueProjection";
 
 // `npm run draft-pack`'s file: the projection in our league's points for every pool man, at each slot he is eligible
 // for, and the reading the boards take from it. A week the model has no reading for is null, never nought.
@@ -58,37 +57,4 @@ export interface LeagueProjectionFile {
   gameweeks: number[];
   priors: Record<string, SlotRates>;
   players: LeagueProjectionRow[];
-}
-
-/** One man's window at his best slot, as the boards read it. */
-export interface LeagueProjection {
-  code: number;
-  fantraxId: string;
-  /** FPL's three letters. */
-  club: string;
-  slot: string;
-  gameweeks: { gw: number; points: number | null; minutes: number | null; parts: Record<LeagueProjectionPart, number | null> }[];
-}
-
-/** Every man by FPL code at his best slot; a row without a code or a slot it was priced at is dropped. */
-export function leagueProjectionIntel(file: LeagueProjectionFile | null): Map<number, LeagueProjection> {
-  const byCode = new Map<number, LeagueProjection>();
-  const gameweeks = file?.gameweeks ?? [];
-  for (const row of file?.players ?? []) {
-    const best = row?.positions?.[row.pricedAt];
-    if (!Number.isInteger(row?.fplCode) || best === undefined) continue;
-    byCode.set(row.fplCode, {
-      code: row.fplCode,
-      fantraxId: row.fantraxId,
-      club: row.fplClub ?? "",
-      slot: row.pricedAt,
-      gameweeks: gameweeks.map((gw, at) => ({
-        gw,
-        points: finiteOrNull(best.perGw?.[at]),
-        minutes: finiteOrNull(row.minutesPerGw?.[at]),
-        parts: eachPart((part) => finiteOrNull(best.partsPerGw?.[part]?.[at])),
-      })),
-    });
-  }
-  return byCode;
 }

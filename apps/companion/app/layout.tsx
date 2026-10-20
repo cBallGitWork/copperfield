@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { LEAGUE_NAME } from "@epl/core";
 import { groundFaces, liveIn, offerLive } from "./football";
 import { Suspense } from "react";
+import { headers } from "next/headers";
 import AutoRefresh from "./components/shell/AutoRefresh";
+import CameFrom from "./components/shell/CameFrom";
 import Glyph from "./components/shell/glyphs";
 import LaunchFrame from "./components/shell/LaunchFrame";
 import LiveFigure from "./components/shell/LiveFigure";
@@ -14,7 +16,7 @@ import Rail from "./components/shell/Rail";
 import ReplayStrip from "./components/shell/ReplayStrip";
 import UnreadBadge from "./components/shell/UnreadBadge";
 import { liveTie } from "./components/shell/liveTie";
-import { aheadOf, sectionsFor } from "./components/shell/sections";
+import { aheadFor, sectionsFor } from "./components/shell/sections";
 import { readInbox } from "./news/inbox";
 import { readerTeamId } from "./squads";
 import { orDegraded } from "./refusals";
@@ -50,8 +52,9 @@ export const viewport: Viewport = {
 /** The one poller, once it knows how far off live football is. A failed read gives null, the idle rate, so a failing
  *  provider is not polled hard. */
 async function Poller({ matchday }: { matchday: boolean }) {
-  const live = await liveIn().catch(() => null);
-  return <AutoRefresh liveIn={live} ahead={aheadOf(sectionsFor(matchday))} />;
+  const [live, asked] = await Promise.all([liveIn().catch(() => null), headers()]);
+  const ahead = aheadFor(sectionsFor(matchday), asked.get("host"), process.env.VERCEL_URL);
+  return <AutoRefresh liveIn={live} ahead={ahead} />;
 }
 
 /** The desk's ground, over the reader's own team's once signed in (Craig, 8 Oct 2026), Anfield's crowd before. The
@@ -114,6 +117,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {/* The same fresh render on demand, by pulling down from the top, in the home-screen app only. */}
           <PullToRefresh />
           <OfflineWorker />
+          <CameFrom />
           <ReplayStrip />
           {/* In the content column, so the strip does not start under the rail; suspended so a slow
               league read holds up no page, and drawn as nothing while it waits. */}

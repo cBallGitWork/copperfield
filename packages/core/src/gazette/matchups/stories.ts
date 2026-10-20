@@ -1,7 +1,7 @@
 import { CLEAN_SHEET_MINUTES, DRAFT_DESK, LATE_GOAL_MINUTE } from "../../config";
 import { ordinal } from "../../league/ordinal";
 import { groupedBy } from "../../grouped";
-import type { AutoSub } from "./autoSubs";
+import type { AutoSub } from "../../league/autoSubs";
 import type { DraftMan, DraftSide, GoalTime, SlotWorth } from "./types";
 import { howMany, listed } from "../../format";
 import { aCount } from "../counted";
@@ -75,14 +75,14 @@ export function newLine(m: DraftMan, side: DraftSide): string | null {
 export const fitnessLine = (m: DraftMan) => (m.fitness === null ? null : `${m.minutes === 0 ? "did not play; " : ""}since: ${m.fitness}`);
 
 /** A reserve with a man ahead still to play: whom he replaces is not yet known, and whether he comes on at all. */
-export const aheadWords = (s: AutoSub) => `comes on at the end of the gameweek for a man who did not play${s.provisional ? ", if he plays" : ""}`;
+export const aheadWords = (s: AutoSub<DraftMan>) => `comes on at the end of the gameweek for a man who did not play${s.provisional ? ", if he plays" : ""}`;
 
 /** A man in the eleven who did not play and no reserve can replace. */
 export const uncoveredLine = (m: DraftMan) => `${m.name} did not play and no reserve came on for him`;
 
 /** The reserves not coming on who scored benchScore or more, told whatever the margin and more so past the deficit of
  *  the side behind; `margin` is this side's points less the other's. */
-export function benchLines(side: DraftSide, subs: readonly AutoSub[], margin: number): { man: DraftMan; line: string; pastMargin: boolean }[] {
+export function benchLines(side: DraftSide, subs: readonly AutoSub<DraftMan>[], margin: number): { man: DraftMan; line: string; pastMargin: boolean }[] {
   return side.bench
     .filter((x) => !subs.some((s) => s.in === x) && (x.points ?? 0) >= DRAFT_DESK.benchScore)
     .map((m) => {

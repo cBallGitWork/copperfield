@@ -68,6 +68,8 @@ const DAY_AND_DATE = new Intl.DateTimeFormat("en-GB", {
   timeZone: LEAGUE_TIMEZONE,
 });
 
+const DAY_MONTH = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: LEAGUE_TIMEZONE });
+
 const DATE = new Intl.DateTimeFormat("en-GB", {
   weekday: "long",
   day: "numeric",
@@ -90,6 +92,11 @@ export function londonDate(iso: string): string {
 /** `Sat 10 Oct`. */
 export function londonDayAndDate(iso: string): string {
   return readable(iso, DAY_AND_DATE);
+}
+
+/** `10 Oct`. */
+export function londonDayMonth(iso: string): string {
+  return readable(iso, DAY_MONTH);
 }
 
 /** `15:00`. */
@@ -122,14 +129,24 @@ export function londonWeekdayLong(iso: string): string {
   return readable(iso, WEEKDAY_LONG);
 }
 
-/** `Sat` for a London day, `2026-10-10`: noon UTC falls on that date in London in summer and in winter. */
+/** A London day, `2026-10-10`, as an instant on it: noon UTC falls on that date in London in summer and in winter. */
+function noonOf(day: string): string {
+  return `${day}T12:00:00Z`;
+}
+
+/** `Sat` for a London day, `2026-10-10`. */
 export function weekdayOfDay(day: string): string {
-  return londonWeekday(`${day}T12:00:00Z`);
+  return londonWeekday(noonOf(day));
 }
 
 /** `Saturday` for a London day, `2026-10-10`. */
 export function weekdayLongOfDay(day: string): string {
-  return londonWeekdayLong(`${day}T12:00:00Z`);
+  return londonWeekdayLong(noonOf(day));
+}
+
+/** `Sat 10 Oct` for a London day, `2026-10-10`. */
+export function dayAndDateOfDay(day: string): string {
+  return londonDayAndDate(noonOf(day));
 }
 
 /** A wall clock in a zone, given as if it were UTC (ms), as the instant it names. The offset at the wall reading is

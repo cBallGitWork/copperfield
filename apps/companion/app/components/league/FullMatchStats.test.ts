@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { MatchParts } from "@epl/core";
-import { MatchFigures } from "./FullMatchStats";
+import { MatchFigures, settled } from "./FullMatchStats";
 
 vi.mock("@/app/desk", async () => await import("../../desk"));
 vi.mock("../../matchParts", () => ({ readMatchParts: () => new Promise(() => undefined) }));
@@ -44,7 +44,30 @@ describe("a live man's full match stats, with Fantrax and Opta and no FPL", () =
     expect(over).toContain("No match figures for him.");
   });
 
-  it("draws nothing while the read is out", () => {
-    expect(figures(null)).toBe("");
+  // Craig, 19 Oct 2026: "just an empty card". An open panel with nothing under it read as broken.
+  it("says it is getting them while the read is out", () => {
+    expect(figures(null)).toContain("Getting his match figures");
+  });
+
+  it("says it could not get them, with a way to try again, when the read failed", () => {
+    const html = renderToStaticMarkup(createElement(MatchFigures, { read: "failed", position: "D", onRetry: () => undefined }));
+    expect(html).toContain("No match figures right now.");
+    expect(html).toMatch(/<button[^>]*>Try again<\/button>/);
+    expect(html).not.toContain("No match figures for him");
+    // Amber is a figure beside a name (DESIGN §3); a sentence is muted, beside the accent's Try again.
+    expect(html).toContain("text-muted");
+    expect(html).not.toContain("text-mid");
+  });
+});
+
+// A rejected action (a timeout, a deploy's old action id) and an empty answer are failures, never "no figures".
+describe("a match read as it comes back", () => {
+  it("is failed when the answer is missing", () => {
+    expect(settled(null)).toBe("failed");
+    expect(settled(undefined)).toBe("failed");
+  });
+
+  it("is the answer when there is one, an empty one included", () => {
+    expect(settled({ parts: null, scored: [] })).toEqual({ parts: null, scored: [] });
   });
 });

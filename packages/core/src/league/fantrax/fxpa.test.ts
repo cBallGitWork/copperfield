@@ -144,4 +144,11 @@ describe("fxpaRead with a session", () => {
   it("refuses any method off the allow-list before a request is made", async () => {
     await expect(fxpaRead("league", "deleteLeague", {}, "cookie")).rejects.toMatchObject({ code: "NOT_ALLOWED" });
   });
+
+  // League setup is read for the waiver schedule; the same cookie would save it.
+  it("lets the setup read carry a session and never the setup save", async () => {
+    await expect(fxpaRead("league", "saveLeagueSetup", {}, "cookie")).rejects.toMatchObject({ code: "NOT_ALLOWED" });
+    serve(() => Response.json({ responses: [{ data: { waiverWire: {} } }] }));
+    await expect(fxpaRead("league", "getLeagueSetup", { action: "transactions" }, "cookie")).resolves.toEqual({ waiverWire: {} });
+  });
 });

@@ -40,6 +40,7 @@ export default function PitchMarker({
   band,
   face,
   eager,
+  started = kickedOff(opposition),
 }: {
   /** The footballer, or null for a slot with nobody behind it — read to tell the two apart and for his doubt. */
   player: FootballPlayer | null;
@@ -61,20 +62,16 @@ export default function PitchMarker({
   face?: { code: number; name: string };
   /** Load the kit at once — see `PlayerShirt`. */
   eager?: boolean;
+  /** Whether his match is on, where the caller knows better than FPL's fixture status (`underway`). */
+  started?: boolean;
 }) {
-  const started = kickedOff(opposition);
   // Nobody at all: no man AND no club. A named man the bootstrap lacks still has his club's kit.
   const nobody = player === null && club === undefined;
 
-  // `v` before an opponent, or three letters under a shirt read as his own club.
+  // Who he plays until he has kicked off, never his own club (Craig, 19 Oct 2026); a blank is a dash.
   const against = fixtureLabel(opposition);
-  const line =
-    band ??
-    (show === "fixture"
-      ? (against === null ? (club?.shortName ?? DASH) : `v ${against}`)
-      : started
-        ? String(points ?? DASH)
-        : (club?.shortName ?? DASH));
+  const fixture = against === null ? DASH : `v ${against}`;
+  const line = band ?? (show === "points" && started ? String(points ?? DASH) : fixture);
 
   // How likely he is to miss (red out, orange major, yellow slight), as the card's wash and the plate's ground.
   const doubt = doubtBand(availabilityOf(player));

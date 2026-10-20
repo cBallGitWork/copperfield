@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect } from "react";
-import { currentEntry } from "./historyEntry";
+import { currentEntry } from "../components/shell/historyEntry";
 
 // A list's place, kept per history entry: noted on every tap, put back when Back returns to that entry. The browser's
 // own restore lands while the short letter is still drawn, which pinned it at the top (800 → 0).

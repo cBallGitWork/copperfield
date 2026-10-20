@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { FootballPlayer, LeagueTeam, RosteredPlayer, RosteredTeam } from "@epl/core";
-import { unplayedLists } from "./unplayed";
+import { unplayedLists, unplayedSheet } from "./unplayed";
 
 const man = (fantraxId: string, position: string, status: "ACTIVE" | "RESERVE"): RosteredPlayer => ({
   slot: { fantraxId, position, status },
@@ -39,5 +39,14 @@ describe("a tie before a ball is kicked", () => {
     const rival = lists.get("rival");
     if (rival === undefined || !("lines" in rival)) throw new Error("expected his squad");
     expect(rival.lines.map((line) => line.players.map((p) => p.rostered.slot.fantraxId))).toEqual([["keeper"], ["abe", "zed"]]);
+  });
+
+  // Fixtures names a rival's men under each match before kickoff: all of them as one undimmed squad, so no bench.
+  it("lays a rival's squad out for Fixtures with nobody on the bench", () => {
+    const rival = lists.get("rival");
+    if (rival === undefined) throw new Error("expected his squad");
+    const sheet = unplayedSheet(rival);
+    expect(sheet.rows.flatMap((line) => line.players.map((p) => p.rostered.slot.fantraxId))).toEqual(["keeper", "abe", "zed"]);
+    expect(sheet.bench).toEqual([]);
   });
 });

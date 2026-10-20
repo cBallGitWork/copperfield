@@ -1,4 +1,4 @@
-// Which gameweek a one-gameweek page shows, and its neighbours; the rounds come ascending.
+// Which gameweek a one-gameweek page shows, and the neighbours of anything a page steps through; lists come ascending.
 
 /** The gameweek asked for when the page has it, else the latest under way, or the next once that one is done
  *  (Craig, 16 Oct 2026: Friday's reader wants the weekend), else the first; null with no rounds at all. */
@@ -12,14 +12,11 @@ export function openGameweek(
   return (rounds[latest].finished ? rounds[latest + 1] : undefined)?.gameweek ?? rounds[latest].gameweek;
 }
 
-/** The gameweeks either side of one on the page's list, null at either end; a break's missing week is stepped over. */
-export function besideGameweek(
-  gameweeks: readonly number[],
-  at: number,
-): { previous: number | null; next: number | null } {
-  const index = gameweeks.indexOf(at);
+/** The entries either side of one on the page's list, null at either end; a break's missing week is stepped over. */
+export function beside<T>(list: readonly T[], at: T): { previous: T | null; next: T | null } {
+  const index = list.indexOf(at);
   return {
-    previous: index > 0 ? gameweeks[index - 1] : null,
-    next: index >= 0 && index < gameweeks.length - 1 ? gameweeks[index + 1] : null,
+    previous: index > 0 ? list[index - 1] : null,
+    next: index >= 0 && index < list.length - 1 ? list[index + 1] : null,
   };
 }

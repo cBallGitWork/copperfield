@@ -7,22 +7,19 @@ import { SCORE_RULE } from "../components/shell/Scoreline";
 import { FORM_GAMES } from "../config";
 
 // The fantasy league's table, for the page and the head-to-head: its columns, and a Fantrax standing as a line.
-// A phone reads Pts after Pld and the short name, and stands Ag and Form down unless one orders the table (Craig, 6 Oct 2026).
-
-const PTS_TITLE = "League points";
+// A phone reads the short name, stands Ag and Form down unless one orders the table, and ends on Pts (Craig, 19 Oct 2026).
 
 /** A football table's row (`cm9900/24.jpg`) plus form; the list is what `colSpan` counts, a hidden cell spanning zero. */
 export const COLUMNS: readonly StandingsColumn<SortKey>[] = [
   { key: "rank", kind: "place", label: "Placing", title: "Points, then fantasy points scored; level on both shares the place", width: "w-8 lg:w-14" },
   { key: "name", kind: "name", label: "Team", title: undefined, width: "" },
   { key: "played", kind: "figure", label: "Pld", title: "Played", width: "w-8 lg:w-20" },
-  { key: "pts", kind: "points", label: "Pts", title: PTS_TITLE, width: "w-10", copy: "phone" },
   { key: "won", kind: "figure", label: "W", title: "Won", width: "w-7 lg:w-16" },
   { key: "drawn", kind: "figure", label: "D", title: "Drawn", width: "w-7 lg:w-16" },
   { key: "lost", kind: "figure", label: "L", title: "Lost", width: "w-7 lg:w-16" },
   { key: "for", kind: "figure", label: "For", title: "Fantasy points scored", width: "w-11 lg:w-24" },
   { key: "against", kind: "figure", label: "Ag", title: "Fantasy points conceded", width: "w-11 lg:w-24", deskOnly: true },
-  { key: "pts", kind: "points", label: "Pts", title: PTS_TITLE, width: "w-10 lg:w-24", copy: "desk" },
+  { key: "pts", kind: "points", label: "Pts", title: "League points", width: "w-10 lg:w-24" },
   { key: "form", kind: "form", label: "Form", title: `The last ${spelled(FORM_GAMES)} gameweeks, oldest first`, width: "w-14 lg:w-32", deskOnly: true },
 ];
 

@@ -6,7 +6,6 @@ import {
   type SquadPlayerDetail,
   fullPlayerName,
   isResolved,
-  kickedOff,
   londonDayAndTime,
   matchesOver,
 } from "@epl/core";
@@ -19,6 +18,8 @@ import FullMatchStats from "./FullMatchStats";
 import MinutesRun from "./MinutesRun";
 import PlayerIdentity from "./PlayerIdentity";
 import Note from "./Note";
+import { underway } from "./underway";
+import { useRouter } from "next/navigation";
 import { playerHref } from "../../players/routes";
 import { unresolvedReason } from "../../unresolved";
 import { LABEL, QUIET_FIGURE } from "@/app/desk";
@@ -31,6 +32,7 @@ export default function LivePlayerCard({
   played,
   reserve,
   story,
+  autoSub = null,
   onClose,
 }: {
   player: SquadPlayerDetail;
@@ -42,9 +44,13 @@ export default function LivePlayerCard({
   reserve: boolean;
   /** Fantrax's latest on him, or null; the pool feed is a day wide (`poolNews.ts`), so null means none filed today. */
   story?: PlayerStory | null;
+  /** What his auto sub is, in one line; null when he has none. */
+  autoSub?: string | null;
   onClose: () => void;
 }) {
-  const started = kickedOff(opposition);
+  // Fantrax crediting him says his match is on even while FPL's fixtures are held from before kickoff (19 Oct 2026).
+  const started = underway(opposition, { breakdown, played });
+  const router = useRouter();
   const over = matchesOver(opposition);
   // The breakdown says "Did not play."; an empty drop-down under it would say it again.
   const satOut = over && breakdown.length === 0 && (points === 0 || points === null) && !played;
@@ -63,7 +69,9 @@ export default function LivePlayerCard({
       foot={<DialogFoot href={playerHref(rostered.slot.fantraxId)} onClose={onClose} />}
     >
       <div className="flex flex-col gap-2 p-3">
-        <PlayerIdentity rostered={rostered} club={club} opposition={opposition} />
+        <PlayerIdentity rostered={rostered} club={club} opposition={opposition} started={started} />
+
+        {autoSub === null ? null : <p className="cm-panel px-3 py-2 text-2xs text-info">{autoSub}</p>}
 
         {/* Why there is nobody behind the slot, in `PlayerCard`'s own words. */}
         {isResolved(rostered) ? null : (
@@ -81,6 +89,7 @@ export default function LivePlayerCard({
               reserve={reserve}
               minutes={played}
               over={over}
+              onRetry={() => router.refresh()}
             />
             {isResolved(rostered) && !satOut ? (
               <FullMatchStats

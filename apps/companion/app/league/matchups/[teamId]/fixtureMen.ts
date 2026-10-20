@@ -23,3 +23,15 @@ export function fixtureMen(sheet: LineupDetail | undefined, fixtureId: number): 
 export function byKickoff(fixtures: readonly Fixture[]): Fixture[] {
   return [...fixtures].sort(kickoffOrder);
 }
+
+/** A man in one match and whose he is: 0 the URL's side, 1 the other. */
+export interface PlacedMan extends FixtureMan {
+  side: number;
+}
+
+/** Both sheets' men in one match, each under his own club's end, the URL's side first at either end. */
+export function menByEnd(sheets: readonly (LineupDetail | undefined)[], fixtureId: number) {
+  const placed = sheets.flatMap((sheet, side) => fixtureMen(sheet, fixtureId).map((man): PlacedMan => ({ ...man, side })));
+  const atHome = (man: PlacedMan) => man.player.opposition?.find(({ fixture }) => fixture.id === fixtureId)?.home === true;
+  return { home: placed.filter(atHome), away: placed.filter((man) => !atHome(man)) };
+}

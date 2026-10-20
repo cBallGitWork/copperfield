@@ -1,9 +1,9 @@
 import type { Club, Story } from "@epl/core";
 import Picture from "./Picture";
 import { written } from "./sentences";
-import StoryHead, { KICKER } from "./StoryHead";
+import StoryHead from "./StoryHead";
 
-// The desk's own lead, when nothing has been filed: its picture, kicker, headline and standfirst.
+// The desk's own lead, when nothing has been filed: its picture, headline and standfirst.
 // `gazette/stories.ts` ranks the stories and `sentences.ts` writes the words.
 
 export default function Lead({
@@ -17,15 +17,14 @@ export default function Lead({
    *  it. Empty is ordinary and costs the cut-out its kit, not the lead. */
   clubs: Map<number, Club>;
 }) {
-  const { kicker, headline, standfirst } = written(lead, who);
+  const { headline, standfirst } = written(lead, who);
 
   return (
     <section className="flex flex-col">
       <Picture lead={lead} who={who} clubs={clubs} />
-      <p className="mt-3">
-        <span className={KICKER}>{kicker}</span>
-      </p>
-      <StoryHead headline={headline} standfirst={standfirst} rank="front" />
+      <div className="mt-3 flex flex-col">
+        <StoryHead headline={headline} standfirst={standfirst} rank="front" />
+      </div>
     </section>
   );
 }

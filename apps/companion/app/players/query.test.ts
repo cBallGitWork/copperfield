@@ -134,7 +134,7 @@ describe("activeSort", () => {
 
   it("falls to the board's own default for a column it does not draw", () => {
     expect(activeSort({ sort: "fin" }, PLAYERS).column.key).toBe("fpts");
-    expect(activeSort({ sort: "fpts" }, boardView("stats", {})).column.key).toBe("sh");
+    expect(activeSort({ sort: "fpts" }, boardView("stats", {})).column.key).toBe("xg");
     expect(activeSort({ sort: "fin" }, boardView("stats", {})).column.key).toBe("fin");
   });
 });

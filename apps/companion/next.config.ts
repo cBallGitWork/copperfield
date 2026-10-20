@@ -102,6 +102,9 @@ const nextConfig: NextConfig = {
       { source: "/news/transfers", destination: "/league/transfers", permanent: false },
       { source: "/prem/results", destination: "/prem/fixtures", permanent: false },
       { source: "/league/scoring", destination: "/scoring", permanent: false },
+      // Prem's Team Stats and Data repeated Data's Clubs and Players (19 Oct 2026).
+      { source: "/prem/team-stats", destination: "/players/teams", permanent: false },
+      { source: "/prem/data", destination: "/players", permanent: false },
     ];
   },
 

@@ -3,7 +3,7 @@
 /** Fantrax's status codes in the manager's words; a code not here prints as itself, never a guess. */
 export const STATUS: Record<string, string> = {
   FA: "Free agent",
-  WW: "Waivers",
+  WW: "On waivers",
   T: "Rostered",
 };
 

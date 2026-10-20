@@ -1,6 +1,7 @@
 import Link from "@/app/components/shell/Link";
 import { TAB } from "@/app/desk";
 import { STANDING_CAPS } from "../gazette/heads";
+import { headWord } from "../league/TableHeads";
 
 // Championship Manager's blue tab strip: one row of plates, edge to edge under a title bar, picking one of a set.
 // Callers keep their own tab lists; `components/league/GroupNav` wraps and is shorter, so it is not one of these.
@@ -55,7 +56,7 @@ export default function TabStrip<K extends string>({
                   }`
             }
           >
-            {tab.label}
+            {headWord(tab.label)}
           </Link>
         );
       })}

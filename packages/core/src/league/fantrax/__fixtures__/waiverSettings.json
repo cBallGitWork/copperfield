@@ -1,0 +1,49 @@
+{
+  "waiverWire": {
+    "autoWaiveNotPlayingType": "DO_NOT_WAIVE",
+    "waiverWireChangeoverTimeAmPm": "AM",
+    "waiverWireClaimResolutionTimeMinute": 0,
+    "waiverWireChangeoverRule": "SATURDAY_BEFORE_GAME_START",
+    "waiverWireClaimResolutionDays": [
+      "4",
+      "5",
+      "6"
+    ],
+    "waiverWireClaimResolutionDaysFreeAgent": [
+      "4",
+      "5",
+      "6"
+    ],
+    "waiverWireClaimResolutionTimeFreeAgentMinute": 0,
+    "waiverWireClaimResolutionTimeHour": 1,
+    "waiverWireClaimResolutionTimeFreeAgentHour": 1,
+    "waiverWireProcessedTime24HoursTimesNumDays": false,
+    "waiverWireClaimsPerTeam": "ONE_PICK",
+    "rotateOrderAfterEachClaimWaiverWire": true,
+    "changeDropWaiverProcessTimeToBulkIfPlaying": false,
+    "waiverWireClaimOrderResetTimeAmPm": "AM",
+    "waiverWireProcessedTimeFreeAgent24HoursTimesNumDays": false,
+    "waiverWireChangeoverTimeHour": 12,
+    "preventWaiverChurning": true,
+    "numDaysWaiverWire": 3,
+    "waiverWireChangeoverTimeBeforeGameHours": 0,
+    "waiverWireProcessTypeFreeAgent": "DAYS_OF_WEEK",
+    "selectedWaiverWireClaimSystem": "RANKING",
+    "waiverWireClaimSystem": "RANKING",
+    "bypassWaiversForNewPoolEntrants": false,
+    "waiverWireChangeoverTimeBeforeGameMinutes": 15,
+    "add24HoursToOffWaiverDate": true,
+    "waiverWireClaimResolutionTimeFreeAgentAmPm": "PM",
+    "waiverWireClaimResolutionTimeAmPm": "PM",
+    "waiverWireClaimOrderResetTimeHour": 1,
+    "waiverWireChangeoverTimeMinute": 5,
+    "waiverWireClaimOrderResetDays": [
+      "3"
+    ],
+    "waiverWireClaimPriorityOrder": "REVERSE_ORDER_STANDINGS_NON_SERPENTINE",
+    "numDaysWaiverWireFreeAgent": 3,
+    "waiverWireClaimOrderResetTimeMinute": 0,
+    "waiverWireProcessType": "DAYS_OF_WEEK",
+    "advancedBulkWaivingOptionsUsed": false
+  }
+}

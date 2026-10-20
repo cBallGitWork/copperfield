@@ -8,6 +8,8 @@ import { STATS_SORT, boardView } from "./views";
 // Both leagues' getLeagueInfo of 1 Oct 2026: the real one scores AT, GKP, DFP and DFP3, the rehearsal A, AF and Sv.
 const realCategories = mapLeagueInfo(real).scoringCategories;
 const rehearsalCategories = mapLeagueInfo(rehearsal).scoringCategories;
+// The season's figures, Attack, Chances and Defence in turn (Craig, 19 Oct 2026).
+const ADV = ["xG", "xGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC"];
 const labels = (key: "pool" | "stats", categories: typeof realCategories) =>
   boardView(key, categories).columns.filter((column) => column.group !== "attributes").map((column) => column.label);
 
@@ -19,7 +21,9 @@ describe("boardView", () => {
   });
 
   it("puts every other figure on Adv Stats: the season's counts, the counts the league does not score, the attributes", () => {
-    expect(labels("stats", realCategories)).toEqual(["Player", "A", "AF", "Sh", "SoT", "KP", "BCC", "BCM", "Crs", "AC", "Sv"]);
+    expect(labels("stats", realCategories)).toEqual([
+      "Player", "A", "AF", ...ADV, "Sv",
+    ]);
     expect(boardView("stats", realCategories).columns.some((column) => column.key === "fin")).toBe(true);
   });
 
@@ -39,7 +43,7 @@ describe("boardView", () => {
 
   it("keeps every count on Players for a league whose scoring did not arrive", () => {
     expect(labels("pool", {})).toEqual(expect.arrayContaining(["AT", "A", "AF", "Sv", "GKP"]));
-    expect(labels("stats", {})).toEqual(["Player", "Sh", "SoT", "KP", "BCC", "BCM", "Crs", "AC"]);
+    expect(labels("stats", {})).toEqual(["Player", ...ADV]);
   });
 
   it("orders Adv Stats by a column it draws", () => {

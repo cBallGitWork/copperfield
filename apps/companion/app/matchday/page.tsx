@@ -27,20 +27,19 @@ import TabStrip from "../components/shell/TabStrip";
 import { getLeagueSquads, readable, readerTeamId } from "../squads";
 import { liveScores } from "../scoreboard";
 import { marks } from "../involvement";
-import { creditAssists, roundBreaks, roundGoals, roundRedCards, roundStreams, withRoundState } from "../commentary";
+import { creditAssists, roundGoals, roundStreams, withRoundState } from "../commentary";
 import { roundAssistKinds } from "../assistKinds";
-import Vidiprinter from "./Vidiprinter";
 import TopStats, { STATS_VIEW, TOP_STATS, statsHref } from "./TopStats";
 import { gameweekBoards } from "./boards";
 import { wireLines } from "./wireLines";
 import { roundCodes } from "./sheetCodes";
 import { fixtureGoals } from "./fixtureGoals";
+import { dayStep, matchDays } from "./scoreDay";
 import { lockAhead } from "../lockAhead";
 import { now } from "../clock";
 import { BetweenGameweeks } from "./Between";
+import ShareButton from "./ShareButton";
 import OutLink from "../components/shell/OutLink";
-import ButtonLink from "../components/shell/ButtonLink";
-import { DESK } from "./routes";
 import { fantraxPage } from "../fantraxPages";
 import Link from "@/app/components/shell/Link";
 import { LIVE } from "../components/shell/sections";
@@ -50,6 +49,9 @@ import { placings } from "../league/placings";
 import type { Metadata } from "next";
 import { orDegraded } from "../refusals";
 import { draftGameweek, titled } from "../titles";
+
+/** The ties as a PNG, drawn by `share.png/route.ts`. */
+const SHARE_PICTURE = `${LIVE}/share.png`;
 
 // The live centre: your head-to-head first, the real football under it. The football half runs
 // off FPL's public API alone, so it works with no Fantrax, no draft and no credential.
@@ -79,21 +81,19 @@ async function matchday(): Promise<{
 export default async function MatchdayPage({
   searchParams,
 }: {
-  searchParams: Promise<{ view?: string; stat?: string }>;
+  searchParams: Promise<{ view?: string; stat?: string; day?: string }>;
 }) {
-  // Scores is the landing view (Craig, 21 Sep 2026); the vidiprinter and the top stats are a tap away.
+  // Scores is the landing view (Craig, 21 Sep 2026); the top stats are a tap away.
   const query = await searchParams;
-  const printing = query.view === PRINTER;
   const leading = query.view === STATS_VIEW;
   const { snapshot, season, during, up } = await matchday();
   const league = await marks(snapshot.fixtures);
 
-  // The round's goals joined to the men who own them, and the breaks, off one cached read.
+  // The round's goals joined to the men who own them, off one cached read.
   const sheets = roundCodes(snapshot.gameweek, snapshot.players);
-  const [goals, streams, breaks, stats, mine, squads, kinds, codes] = await Promise.all([
+  const [goals, streams, stats, mine, squads, kinds, codes] = await Promise.all([
     sheets.then((codes) => roundGoals(snapshot.gameweek, snapshot.players, codes)),
     roundStreams(snapshot.gameweek),
-    roundBreaks(snapshot.gameweek),
     // FPL's own per-man assist counts, which audit every proposal in `creditAssists`.
     roundFigures(snapshot.gameweek),
     readerTeamId(),
@@ -101,18 +101,17 @@ export default async function MatchdayPage({
     roundAssistKinds(snapshot.gameweek),
     sheets,
   ]);
-  const reds = roundRedCards(streams, snapshot.players, codes);
   const scored = creditAssists(goals, snapshot, stats, streams, kinds, codes);
 
-  const wire = wireLines([...scored, ...reds], breaks, snapshot, league.owners, mine).lines;
+  const lines = wireLines(scored, snapshot, league.owners, mine);
 
   const realPlaces = clubPlaces(season, snapshot.clubs);
 
-  // Today's matches (Craig, 5 Sep 2026), and the whole round when today has none.
+  // One match day at a time (Craig, 5 Sep 2026: today's matches), stepped through by its arrows (19 Oct 2026);
+  // the whole round when no match is dated.
   const round = await withRoundState(fixturesInOrder(snapshot), snapshot.gameweek);
-  const day = londonDay(now());
-  const onToday = round.filter((f) => onLondonDay(f.kickoff, day));
-  const today: readonly Fixture[] = onToday.length > 0 ? onToday : round;
+  const day = dayStep(matchDays(round), londonDay(now()), query.day);
+  const shown: readonly Fixture[] = day === null ? round : round.filter((f) => onLondonDay(f.kickoff, day.day));
 
   // The draft's ties; no draft, no schedule or a silent Fantrax costs this half and nothing else.
   const drafted = readable(squads);
@@ -161,15 +160,12 @@ export default async function MatchdayPage({
       <TabStrip
         label="Which view"
         tabs={[
-          { key: PRINTER, label: "Vidiprinter", href: `${LIVE}?view=${PRINTER}` },
           { key: "scores", label: "Scores", href: LIVE },
           { key: STATS_VIEW, label: TOP_STATS, href: statsHref() },
         ]}
-        current={printing ? PRINTER : leading ? STATS_VIEW : "scores"}
+        current={leading ? STATS_VIEW : "scores"}
       />
-      {printing ? (
-        <Vidiprinter lines={wire} />
-      ) : top !== null ? (
+      {top !== null ? (
         <TopStats boards={top.boards} stat={query.stat} teamNames={top.teamNames} reader={mine} />
       ) : during ? (
         <Scores
@@ -178,17 +174,21 @@ export default async function MatchdayPage({
           places={places}
           clubPlaces={realPlaces}
           mine={mine}
-          fixtures={today}
+          fixtures={shown}
+          day={day}
           clubs={clubById(snapshot)}
           now={speaksForNow(snapshot)}
           gameweek={snapshot.gameweek}
           asOf={asOf}
-          goals={fixtureGoals(wire, today)}
+          goals={fixtureGoals(lines, shown)}
         />
       ) : (
         <BetweenGameweeks snapshot={snapshot} up={up} locksAt={nextLock} />
       )}
-      <ButtonLink href={DESK}>The desk</ButtonLink>
+      {/* The league's ties as a picture for the group (Craig, 19 Oct 2026), under the list it draws. */}
+      {top === null && during && ties.length > 0 ? (
+        <ShareButton href={SHARE_PICTURE} name={`draft-gameweek-${snapshot.gameweek}.png`} />
+      ) : null}
       {/* Fantrax's Matchups for this gameweek's period; its current one when we could not read it. */}
       <OutLink href={fantraxPage(FANTRAX_MATCHUPS_PATH, period)}>
         Matchups on Fantrax
@@ -196,9 +196,6 @@ export default async function MatchdayPage({
     </div>
   );
 }
-
-/** Which plate is open: a query rather than a route, so one page keeps its panels in step. */
-const PRINTER = "vidiprinter";
 
 /** The build-up's line: whole minutes to the first kickoff, rounded up, then the lineup lock while it is ahead, as a
  *  way to his team, whose tab Live has taken on a phone. */

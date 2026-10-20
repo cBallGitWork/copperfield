@@ -9,6 +9,9 @@ import PitchRows, { GROWS, widestLine } from "./PitchRows";
 import SquadMarker, { squadBench, squadKey } from "./SquadMarker";
 import SquadRows from "./SquadRows";
 import SubMarker, { type SubMark } from "../football/SubMarker";
+import { underway } from "./underway";
+import AutoSubChip from "./AutoSubChip";
+import { autoSubLine, type AutoSubMark } from "./autoSubbed";
 import { HEADING_PLATE } from "@/app/desk";
 
 // A team on a scoring day: the eleven on the grass, the reserves under them, each tappable for his points.
@@ -27,6 +30,7 @@ export default function TeamSheet({
   bare = false,
   show,
   subs = {},
+  autoSubs = {},
 }: {
   /** The XI in its lines, arranged on the server: `slot.status` is blanked on the way, so this is the only split. */
   rows: SquadDetailLine[];
@@ -50,11 +54,25 @@ export default function TeamSheet({
   widest?: number;
   /** Who came on or went off in his real match, by `fantraxId`. */
   subs?: Record<string, SubMark>;
+  /** Who comes on for whom at the end of the gameweek, by `fantraxId`; the sheet is already arranged after them. */
+  autoSubs?: Record<string, AutoSubMark>;
 }) {
   // The open card is held by id and read from each poll's rows: holding the tapped man froze his total.
   const [openId, setOpenId] = useState<string | null>(null);
   const open = openId === null ? undefined : [...rows.flatMap((line) => line.players), ...bench].find((p) => p.rostered.slot.fantraxId === openId);
   const setOpen = (player: SquadPlayerDetail) => setOpenId(player.rostered.slot.fantraxId);
+  // Fantrax crediting a man says his match is on while FPL's fixtures are held from before kickoff.
+  const on = (player: SquadPlayerDetail) => {
+    const id = player.rostered.slot.fantraxId;
+    return underway(player.opposition, { breakdown: breakdown[id] ?? [], played: played[id] ?? null });
+  };
+
+  // Each man's auto sub in his card's words: on the grass the chip's title, on the bench the word over him.
+  const subLine = (player: SquadPlayerDetail) => {
+    const mark = autoSubs[player.rostered.slot.fantraxId];
+    return mark === undefined ? null : autoSubLine(mark);
+  };
+  const offWord = (player: SquadPlayerDetail) => (autoSubs[player.rostered.slot.fantraxId]?.on === false ? "Auto-sub" : null);
 
   // The bench counts as a line, so a reserve is drawn as wide as the man he would replace.
   const widest = agreed ?? widestLine([...rows, { players: bench }]);
@@ -72,16 +90,18 @@ export default function TeamSheet({
             inColumn={inColumn}
           >
             {(player) => (
-              <Marked mark={subs[player.rostered.slot.fantraxId]}>
-                <Cell player={player} onOpen={() => setOpen(player)} show={show} />
-              </Marked>
+              <AutoSubChip title={subLine(player)}>
+                <Marked mark={subs[player.rostered.slot.fantraxId]}>
+                  <Cell player={player} onOpen={() => setOpen(player)} show={show} started={on(player)} />
+                </Marked>
+              </AutoSubChip>
             )}
           </PitchRows>
 
-          <BenchStrip {...squadBench} bench={bench} rows={rows.length} widest={widest} inColumn={inColumn}>
+          <BenchStrip {...squadBench} bench={bench} rows={rows.length} widest={widest} inColumn={inColumn} instead={offWord}>
             {(player) => (
               <Marked mark={subs[player.rostered.slot.fantraxId]}>
-                <Cell player={player} onOpen={() => setOpen(player)} />
+                <Cell player={player} onOpen={() => setOpen(player)} started={on(player)} />
               </Marked>
             )}
           </BenchStrip>
@@ -95,6 +115,7 @@ export default function TeamSheet({
             onOpen={setOpen}
             eligibility={eligibility}
             bare={bare}
+            notes={autoSubs}
           />
           {bench.length === 0 ? null : (
             <>
@@ -110,6 +131,7 @@ export default function TeamSheet({
                 onOpen={setOpen}
                 eligibility={eligibility}
                 bare={bare}
+                notes={autoSubs}
               />
             </>
           )}
@@ -124,6 +146,7 @@ export default function TeamSheet({
           breakdown={breakdown[open.rostered.slot.fantraxId] ?? []}
           played={played[open.rostered.slot.fantraxId] ?? null}
           story={news?.[open.rostered.slot.fantraxId] ?? null}
+          autoSub={subLine(open)}
           // The live table lists only the active eleven; without this a reserve reads as having no football.
           reserve={bench.some((p) => p.rostered.slot.fantraxId === open.rostered.slot.fantraxId)}
           onClose={() => setOpenId(null)}
@@ -137,10 +160,12 @@ function Cell({
   player,
   onOpen,
   show,
+  started,
 }: {
   player: SquadPlayerDetail;
   onOpen: () => void;
   show?: "points" | "fixture";
+  started: boolean;
 }) {
   return (
     <button
@@ -150,7 +175,7 @@ function Cell({
       aria-label={playerName(player.rostered)}
       className={`${GROWS} w-full`}
     >
-      <SquadMarker player={player} show={show} />
+      <SquadMarker player={player} show={show} started={started} />
     </button>
   );
 }

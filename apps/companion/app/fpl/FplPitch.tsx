@@ -22,7 +22,7 @@ export default function FplPitch({
   bench: FplPick[];
   players: Map<number, FootballPlayer>;
   clubs: Map<number, Club>;
-  /** Each club's fixtures this gameweek: until his club kicks off, the disc prints the club, not a nought. */
+  /** Each club's fixtures this gameweek: until his club kicks off, the disc prints his fixture, not a nought. */
   opposition: Map<number, Opposition[]>;
   /** Who came on or went off in his real match, by FPL code. */
   subs: Record<number, SubMark>;

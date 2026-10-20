@@ -101,7 +101,7 @@ describe("gameweekLeaders on a fixture gameweek", () => {
 
   it("heads the counts DC, a recorded figure, never DefCon points", () => {
     const list = board("defcon-MF")!.list;
-    expect(list).toMatchObject({ title: "DefCon, midfielders and forwards", head: "DC", source: { stats: "defensivePoints3" } });
+    expect(list).toMatchObject({ title: "DefCon, midfielders and forwards", head: "DC", kind: "count" });
   });
 
   it("ranks ten on FPL's xG and xA among the fourteen who played", () => {

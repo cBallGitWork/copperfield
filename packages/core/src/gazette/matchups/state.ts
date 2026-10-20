@@ -1,5 +1,5 @@
 import { DASH } from "../../format";
-import { autoSubs, type AutoSub } from "./autoSubs";
+import { autoSubs, type AutoSub } from "../../league/autoSubs";
 import { byClock, isLate } from "./stories";
 import type { DraftMan, DraftMatchupInput, DraftSide, GoalTime, PositionLimits, SlotWorth } from "./types";
 import { priceOf } from "./worth";
@@ -9,7 +9,7 @@ import { priceOf } from "./worth";
 
 export interface SideState {
   side: DraftSide;
-  subs: AutoSub[];
+  subs: AutoSub<DraftMan>[];
   /** Fantrax's total plus the points of reserves certain to come on. */
   total: number;
   /** Men in the eleven, or certain to come into it, with a match still to play. */

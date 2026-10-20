@@ -1,0 +1,92 @@
+[
+  {
+    "teamName": "testf",
+    "totalPointsFor": 283,
+    "teamId": "pzmd243ymtj36y3g",
+    "gamesBack": 0,
+    "rank": 1,
+    "points": "4-0-2",
+    "winPercentage": 0.667
+  },
+  {
+    "teamName": "test1",
+    "totalPointsFor": 243,
+    "teamId": "hy0w28p5mtj36y3g",
+    "gamesBack": 0,
+    "rank": 2,
+    "points": "4-0-2",
+    "winPercentage": 0.667
+  },
+  {
+    "teamName": "test2",
+    "totalPointsFor": 215,
+    "teamId": "1b6gp5utmtj36y3g",
+    "gamesBack": 0.5,
+    "rank": 3,
+    "points": "3-1-2",
+    "winPercentage": 0.583
+  },
+  {
+    "teamName": "123",
+    "totalPointsFor": 256,
+    "teamId": "98yx3o50mtj36y3g",
+    "gamesBack": 1,
+    "rank": 4,
+    "points": "3-0-3",
+    "winPercentage": 0.5
+  },
+  {
+    "teamName": "test31",
+    "totalPointsFor": 232,
+    "teamId": "dpdkp2bbmtj36y3g",
+    "gamesBack": 1,
+    "rank": 5,
+    "points": "3-0-3",
+    "winPercentage": 0.5
+  },
+  {
+    "teamName": "test211",
+    "totalPointsFor": 228,
+    "teamId": "fq5omv5kmtj36y3g",
+    "gamesBack": 1,
+    "rank": 6,
+    "points": "3-0-3",
+    "winPercentage": 0.5
+  },
+  {
+    "teamName": "test3",
+    "totalPointsFor": 218,
+    "teamId": "y6viv6jfmtj36y3g",
+    "gamesBack": 1,
+    "rank": 7,
+    "points": "3-0-3",
+    "winPercentage": 0.5
+  },
+  {
+    "teamName": "test3331",
+    "totalPointsFor": 199,
+    "teamId": "kg18w2cvmtj36y3g",
+    "gamesBack": 1.5,
+    "rank": 8,
+    "points": "2-1-3",
+    "winPercentage": 0.417
+  },
+  {
+    "teamName": "test31121",
+    "totalPointsFor": 190,
+    "teamId": "g80h3bf5mtj36y3g",
+    "gamesBack": 1.5,
+    "rank": 9,
+    "points": "2-1-3",
+    "winPercentage": 0.417
+  },
+  {
+    "teamName": "test4",
+    "totalPointsFor": 209,
+    "teamId": "deo9ljvtmtj36y3g",
+    "gamesBack": 2.5,
+    "rank": 10,
+    "points": "1-1-4",
+    "winPercentage": 0.25
+  }
+]

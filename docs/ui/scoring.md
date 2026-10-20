@@ -21,6 +21,8 @@ that has the league points rules in it, maybe in draft section?"* (#293).
 - **Said once where every slot is paid alike.** Minutes, assists, cards and own goals span the row in one cell
   rather than printing the same price four times.
 - A category that pays no slot anything (CLRA, Pen in the real league) is left off.
+- **Cup ties**, a panel under the table, printed in every state: how a level cup tie is settled, its list
+  read from core's `CUP_TIE_STEPS` (Craig, 19 Oct 2026: *"… but in rules section in more"*; `league-cups.md`).
 
 ## Whose rules
 
@@ -39,6 +41,6 @@ disagree. Fantrax's own points stay the served league's.
 
 | File | Draws |
 |---|---|
-| `scoring/page.tsx` | the table |
+| `scoring/page.tsx` | the table, and the Cup ties panel |
 | `packages/core/src/league/rulesCard.ts` | `scoredSlots` and `rulesCard`: the slots and the lines, pure and tested |
 | `app/scoring.ts` | `leagueScoring()`, the cached read |

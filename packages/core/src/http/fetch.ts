@@ -1,8 +1,8 @@
-import { FETCH_TIMEOUT_MS, HTTP_BACKOFF_BASE_MS, HTTP_RETRIES, HTTP_USER_AGENT } from "../config";
+import { FETCH_TIMEOUT_MS, HTTP_ACCEPT_LANGUAGE, HTTP_BACKOFF_BASE_MS, HTTP_RETRIES, HTTP_USER_AGENT } from "../config";
 import { droppedConnection, retryDelay, worthRetrying } from "./backoff";
 import { unreachable } from "./errors";
 
-// One request, asked politely: the browser User-Agent, a deadline, and backing off when told to.
+// One request, asked politely: a browser's User-Agent and language, a deadline, and backing off when told to.
 // Shared by both provider layers, which may not import each other; the clock and the randomness
 // live here, at the edge, so `backoff.ts` stays pure.
 
@@ -25,7 +25,7 @@ export async function politeFetch(
     try {
       res = await fetch(url, {
         ...init,
-        headers: { "User-Agent": HTTP_USER_AGENT, ...init.headers },
+        headers: { "User-Agent": HTTP_USER_AGENT, "Accept-Language": HTTP_ACCEPT_LANGUAGE, ...init.headers },
         // A deadline per attempt: a provider that never answers would otherwise hold the render.
         signal: init.signal ?? AbortSignal.timeout(FETCH_TIMEOUT_MS),
       });

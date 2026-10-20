@@ -137,6 +137,11 @@ Methods that matter:
   and TBD `"-2"`. `saveLeagueSetup {action: "scheduleMatchups", matchups: ["<period>|<away>_<home>|…"],
   matchupsEditedManually: true, matchupsReviewed: true}` replaces it whole; a period left out is cleared, and
   one may hold a double header at `numMatchupsPerPeriod` 1. PLATFORM_NOTES, 2 Oct 2026.
+- `getLeagueSetup {action: "transactions"}` (commissioner cookie) holds the **waiver schedule**: `waiverWire`'s
+  `waiverWireProcessType` `DAYS_OF_WEEK`, `waiverWireClaimResolutionDays` (`"1"` Sunday to `"7"` Saturday; real
+  `["4","5","6"]`, rehearsal and dummy `["3","6"]`) and a twelve-hour clock (`…TimeHour`/`Minute`/`AmPm`) in US
+  Eastern with no zone. `getLeagueInfo` has none of it. The **claim order** is `wwOrder` on the cookieless
+  `getStandings` table, `"1"` first, and is not reverse standings. PLATFORM_NOTES, 19 Oct 2026.
 - `getCommissionerHubInfo` + `executeCommissionerHubAction({actionKey, …})` — the
   commissioner console. The returned action list is server-driven; do not hardcode.
 - `getMatchups` — Fantrax computes live H2H points itself. Their live scores are

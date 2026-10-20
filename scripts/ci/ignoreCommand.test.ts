@@ -77,10 +77,10 @@ describe("production builds", () => {
     expect(builds()).toBe(false);
   });
 
-  // 16 Oct 2026: 11 of the 21 commits that built production since the 15th were the elevens; a page reads them live.
-  it("not for the predicted elevens, which the club page reads off the branch (`predictedXi.ts`)", () => {
+  // 19 Oct 2026: since the repo went private the club page's read of the branch 404s, so only a build ships them.
+  it("for the predicted elevens", () => {
     commit("data/intel/xi/26-27.json");
-    expect(builds()).toBe(false);
+    expect(builds()).toBe(true);
   });
 
   // 16 Oct 2026: a docs-only commit built production (1ee08603), and so did each change to the crew's own files.

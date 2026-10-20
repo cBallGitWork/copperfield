@@ -10,7 +10,7 @@ import { footballLinesNow } from "../../football";
 import { getLeagueSquads, readableOr404, teamDisplay } from "../../squads";
 import { lastLockedRound, leagueInfo, planningRound, readCalendar } from "../../round";
 import { newsFor, readPoolNews } from "../../poolNews";
-import { pendingByTeam, squadLivePoints } from "../../scoreboard";
+import { liveScores, pendingByTeam, squadLivePoints } from "../../scoreboard";
 import { leagueScoring } from "../../scoring";
 import { squadSeason } from "../../teamStats";
 import { myTeamId } from "../../session";
@@ -79,13 +79,16 @@ export async function squadView(slug: string, gw: string | undefined) {
   // Whether the sheet is the branch that renders, which decides whether the news read is worth making.
   const sheet = planning === null && display.show === "lineup";
   // Concurrent, not serial: this screen is read on a matchday. Only the sheet reads the round.
-  const [live, stories, scoring, bench] = await Promise.all([
+  const [live, stories, scoring, bench, scoreboard] = await Promise.all([
     priced === null || !sheet ? null : squadLivePoints(priced.period, teamId, priced.categories),
     sheet ? readPoolNews() : null,
     leagueScoring(),
     // The sheet's bench in Fantrax's order for its period, numbered as it will come on.
     sheet && round !== null ? benchOrder(teamId, round.period, standing === "locked") : [],
+    // Who comes on for whom, so the eleven and its total are the ones every other screen counts.
+    priced === null || !sheet ? null : liveScores(priced.period),
   ]);
+  const autoSubs = scoreboard?.subs.get(teamId) ?? [];
   // xMins from the week on screen, so a future week's list reads that week's minutes.
   const minutes = minutesFrom(round?.gameweek ?? null);
   // Fifteen men's news, not the pool's 74 — this crosses to the browser.
@@ -112,7 +115,7 @@ export async function squadView(slug: string, gw: string | undefined) {
   )?.points;
   const pending = owed ? owed : null;
 
-  return { team, mine, planning, open, standing, weeks, benchRanks, locks, bench, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes };
+  return { team, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes };
 }
 
 /** The gameweek whose football is still to finish (in play, or not kicked off), or null once it is done; the lines

@@ -158,6 +158,6 @@ export function plMatchMetrics(
 }
 
 /** A moment `secs` into a match as epoch ms, the only order across fixtures; null without a kick-off time. */
-export function wallClock(kickoffMillis: number | null | undefined, secs: number): number | null {
+function wallClock(kickoffMillis: number | null | undefined, secs: number): number | null {
   return kickoffMillis == null ? null : kickoffMillis + secs * 1000;
 }

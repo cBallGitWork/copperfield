@@ -1,4 +1,5 @@
 import type { SquadDetailLine, SquadPlayerDetail } from "@epl/core";
+import type { AutoSubMark } from "./autoSubbed";
 import ScrollBoard from "./ScrollBoard";
 import SquadRow, { SQUAD_CREST, SQUAD_GAP, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
 import { MUTE } from "./TableHeads";
@@ -17,6 +18,7 @@ export default function SquadRows({
   bare = false,
   head = true,
   reserve = false,
+  notes = {},
 }: {
   lines: SquadDetailLine[];
   /** Skip the panel: the caller has drawn one round this and whatever stands beside it. */
@@ -32,6 +34,8 @@ export default function SquadRows({
   head?: boolean;
   /** These rows are the bench, greyed as Championship Manager greys everyone not in the side. */
   reserve?: boolean;
+  /** Who an auto sub concerns, by Fantrax id: a word under his name says which way. */
+  notes?: Record<string, AutoSubMark>;
 }) {
   const scored = lines.some((line) =>
     line.players.some((p) => p.points !== undefined),
@@ -85,6 +89,7 @@ export default function SquadRows({
                   eligible={eligibility?.[player.rostered.slot.fantraxId]}
                   onOpen={onOpen && (() => onOpen(player))}
                   reserve={reserve}
+                  autoSub={notes[player.rostered.slot.fantraxId]}
                 />
               </li>
             )),

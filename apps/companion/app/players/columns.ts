@@ -38,6 +38,8 @@ export interface PoolColumn {
   key: string;
   label: string;
   title: string;
+  /** The key's one line on what it counts, where its title alone does not say. */
+  means?: string;
   /** Which plate it appears under; absent is the spine, drawn under all of them. */
   group?: PoolGroup;
   /** Which end of it is lit, if either. */
@@ -125,9 +127,9 @@ export const COLUMNS: PoolColumn[] = [
   denominator(count(MINUTES, "scoring")),
   { ...denominator(byAbbreviation("GP", "Games played", "scoring")), fantasy: true },
   count(GOALS, "attacking"),
-  count(ASSISTS_TOTAL, "attacking"),
-  count(ASSISTS_OFFICIAL, "attacking"),
-  count(ASSISTS_FANTASY, "attacking"),
+  count(ASSISTS_TOTAL, "creating"),
+  count(ASSISTS_OFFICIAL, "creating"),
+  count(ASSISTS_FANTASY, "creating"),
   ...SEASON_COLUMNS,
   count(CLEAN_SHEETS, "defensive"),
   ...DEFCON.map((category) => count(category, "defensive")),

@@ -9,7 +9,7 @@ import { planningRound } from "../../../round";
 import { leagueTable } from "../../../standings";
 import Link from "@/app/components/shell/Link";
 import { LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
-import { teamHref } from "@/app/squad/routes";
+import { matchupHref } from "@/app/league/routes";
 import { teamColours } from "@/app/teamColours";
 import { placings } from "../../../league/placings";
 import { UNAVAILABLE } from "../../../config";
@@ -44,6 +44,7 @@ export default async function NextMatchPage({
       ? headToHeads(squads.info.matchups, squads.info.teams, squads.roundPeriod, teamId)
       : [];
 
+  const gameweek = squads.snapshot.gameweek;
   // Where each side stands, for the bracket under his name; no bracket when the table would not answer.
   const placing = placings(table);
 
@@ -59,7 +60,8 @@ export default async function NextMatchPage({
         ties.map((tie) => (
           <Fixture
             key={tie.opponent.teamId}
-            gameweek={squads.snapshot.gameweek}
+            gameweek={gameweek}
+            href={matchupHref(teamId, gameweek, undefined, tie.opponent.teamId)}
             home={{ teamId: tie.team.teamId, name: tie.team.name, place: placing.get(tie.team.teamId) }}
             away={{
               teamId: tie.opponent.teamId,
@@ -76,10 +78,13 @@ export default async function NextMatchPage({
 /** The two sides, each on its own colour; no ground, so the team whose screen this is reads first. */
 function Fixture({
   gameweek,
+  href,
   home,
   away,
 }: {
   gameweek: number;
+  /** The tie's head-to-head at this gameweek, where both squads are listed. */
+  href: string;
   home: SideTeam;
   away: SideTeam;
 }) {
@@ -90,13 +95,14 @@ function Fixture({
         <span className={`numeric ${SMALL_CAPS} text-ink`}>Gameweek {gameweek}</span>
       </div>
 
-      <div className="flex items-stretch gap-2 p-2">
+      {/* The whole plate opens the tie's head-to-head, never a dead box (19 Oct 2026). */}
+      <Link href={href} className="flex min-h-11 items-stretch gap-2 p-2 hover:bg-raised">
         <Side team={home} />
         <span className={`flex shrink-0 items-center px-1 font-chrome ${LABEL}`}>
           v
         </span>
-        <Side team={away} linked />
-      </div>
+        <Side team={away} />
+      </Link>
     </section>
   );
 }
@@ -108,11 +114,11 @@ interface SideTeam {
   place: string | undefined;
 }
 
-function Side({ team, linked = false }: { team: SideTeam; linked?: boolean }) {
+function Side({ team }: { team: SideTeam }) {
   const colours = teamColours(team.teamId);
-  const label = (
+  return (
     <span
-      className="flex min-h-11 flex-1 flex-col items-center justify-center px-2 text-center leading-tight"
+      className="flex min-h-11 min-w-0 flex-1 flex-col items-center justify-center px-2 text-center leading-tight"
       style={{ background: colours.primary, color: inkOn(colours) }}
     >
       <span className="text-sm font-bold uppercase"><TeamName teamId={team.teamId} name={team.name} /></span>
@@ -121,14 +127,5 @@ function Side({ team, linked = false }: { team: SideTeam; linked?: boolean }) {
         <span className="numeric text-3xs font-bold opacity-80">({team.place})</span>
       )}
     </span>
-  );
-
-  // Only the opponent links: a link to this page would be a dead control.
-  return linked ? (
-    <Link href={teamHref(team.teamId)} className="flex min-w-0 flex-1">
-      {label}
-    </Link>
-  ) : (
-    <span className="flex min-w-0 flex-1">{label}</span>
   );
 }

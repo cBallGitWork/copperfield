@@ -34,12 +34,16 @@ export function cupHref(cupId: string): string {
   return `${CUPS_PAGE}?${new URLSearchParams({ cup: cupId })}`;
 }
 
-/** The tabs, plus Matchups: a section a route can be on without a plate in the strip. */
-export type LeagueSection = (typeof SECTIONS)[number]["key"] | "matchups";
+/** The tabs, plus Matchups and Waivers: sections a route can be on without a plate of its own in the strip. */
+export type LeagueSection = (typeof SECTIONS)[number]["key"] | "matchups" | "waivers";
+
+/** Waivers lights Transfers, whose view it is: a sixth plate would not fit a phone (13 Oct 2026). */
+const LIGHTS: Partial<Record<LeagueSection, LeagueSection>> = { waivers: "transfers" };
 
 export default function SectionNav({ current }: { current: LeagueSection }) {
   // On Matchups no plate is current.
-  const here = SECTIONS.find((section) => section.key === current)?.key ?? null;
+  const lit = LIGHTS[current] ?? current;
+  const here = SECTIONS.find((section) => section.key === lit)?.key ?? null;
   // `word` labels: at 11px "Team Stats" ran its plate 34px past a 390 viewport.
   return <TabStrip label="League views" tabs={SECTIONS} current={here} labels="word" />;
 }

@@ -107,4 +107,26 @@ describe("dealNews", () => {
     expect(dealNews([trade], name, "t1")[0].body).toBe("Your trade has gone through: Declan Rice joins you.");
     expect(dealNews([trade], name, "t1")[0].from).toBe("Your assistant");
   });
+
+  it("names each man by his Fantrax id and a rival by his team, for the letter to link", () => {
+    const signed: Deal = {
+      ...claim,
+      inbound: [{ playerName: "Levi Colwill", fantraxId: "f1", teamId: "t1", clubName: "Chelsea" }],
+      outbound: [{ playerName: "Cody Gakpo", fantraxId: "f2", teamId: "t1", clubName: "Liverpool" }],
+    };
+    const [item] = dealNews([signed], name, "t2");
+    expect(item.body).toBe("Craig's XI have signed Chelsea's Levi Colwill, releasing Liverpool's Cody Gakpo to make room.");
+    expect(item.mentions).toEqual([
+      { text: "Levi Colwill", fantraxId: "f1" },
+      { text: "Cody Gakpo", fantraxId: "f2" },
+      { text: "Craig's XI", teamId: "t1" },
+    ]);
+  });
+
+  it("links no team the letter calls you, and no man the feed gave no id", () => {
+    const [own] = dealNews([{ ...claim, inbound: [{ playerName: "Levi Colwill", fantraxId: "f1", teamId: "t1" }] }], name, "t1");
+    expect(own.mentions).toEqual([{ text: "Levi Colwill", fantraxId: "f1" }]);
+    // "Declan Rice joins you": no id for him, and Dave's XI is not in the body.
+    expect(dealNews([trade], name, "t1")[0].mentions).toEqual([]);
+  });
 });

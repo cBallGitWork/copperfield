@@ -41,7 +41,8 @@ export const ATTRIBUTE_COLUMNS: PoolColumn[] = ATTRIBUTE_ROWS.map((row) => {
   return {
     key: label.toLowerCase(),
     label,
-    title: `${row.name}, 1–20: ${row.from}`,
+    title: row.name,
+    means: `1–20, from ${row.from}.`,
     group: "attributes",
     mark: "high",
     ascending: false,

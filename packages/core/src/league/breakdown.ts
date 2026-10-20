@@ -3,7 +3,7 @@ import type { ScoringCategory } from "./scoring";
 import { MINUTES, idsOf } from "./categoryNames";
 import { wordsOf } from "./categoryWords";
 import { numeric } from "./fantrax/stats";
-import type { LivePlayerCategory } from "./points";
+import type { LivePlayerCategory, LivePlayerPoints } from "./points";
 // Why a player is on his number, by the league's own scoring categories: read from Fantrax, never computed.
 
 /** One category's contribution to a player's total. */
@@ -48,6 +48,16 @@ export function liveMinutes(
 ): number | null {
   const ids = idsOf(names ?? {}, [MINUTES]);
   return numeric(categories.find((category) => ids.has(category.category))?.value ?? undefined);
+}
+
+/** Each man's minutes as Fantrax counts them, by fantraxId; a man it stated none for is absent. */
+export function minutesByMan(men: readonly LivePlayerPoints[], names: Record<string, ScoringCategory> | undefined): Record<string, number> {
+  return Object.fromEntries(
+    men.flatMap((man) => {
+      const minutes = liveMinutes(man.counts, names);
+      return minutes === null ? [] : [[man.fantraxId, minutes]];
+    }),
+  );
 }
 
 /** One man's part in one category, by id alone: the app puts the name to him. */

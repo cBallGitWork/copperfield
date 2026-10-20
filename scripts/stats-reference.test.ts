@@ -31,7 +31,6 @@ const STAT_TYPES: readonly { file: string; types: readonly string[] }[] = [
   { file: "packages/core/src/football/premierleague/sheetEvents.ts", types: ["PlManMatch"] },
   { file: "packages/core/src/football/premierleague/goals.ts", types: ["PlGoal"] },
   { file: "packages/core/src/football/premierleague/assists.ts", types: ["StreamCredit"] },
-  { file: "packages/core/src/football/premierleague/breaks.ts", types: ["RoundBreak"] },
   { file: "packages/core/src/football/premierleague/map.ts", types: ["PlCommentaryLine"] },
   { file: "packages/core/src/football/rankings.ts", types: ["Ranked"] },
   {
@@ -84,7 +83,6 @@ const NAMED = [
   "MatchEvent.kind",
   "mapRoundGoals()",
   "mapMatchEvents()",
-  "streamRedCards()",
   "PlTeamSheet.formation",
   "IntelPlayer.position",
   "IntelPlayer.secondaryPositions",
@@ -186,7 +184,7 @@ const STATS_LEAGUE = {
 const PLAIN_ROWS: Record<string, number> = {
   "Fetched but read by nobody": 29,
   "FPL bootstrap keys never typed": 11,
-  "Computed in the app, not core": 14,
+  "Computed in the app, not core": 12,
   "Stored history and live-only reads": 18,
   "Counted and refused": 30,
   "Where the record disagrees with the tree": 6,

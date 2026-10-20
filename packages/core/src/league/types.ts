@@ -190,3 +190,18 @@ export interface TradeBlock {
   /** The manager's own note, verbatim. */
   comment: string | null;
 }
+
+/** A team's place in the waiver claim order: 1 claims first. */
+export interface ClaimPlace {
+  teamId: string;
+  place: number;
+}
+
+/** When a league's waiver claims run: on these weekdays (0 Sunday) at this wall clock in `timeZone`, every week. */
+export interface WaiverSchedule {
+  weekdays: number[];
+  hour: number;
+  minute: number;
+  /** The zone the clock is set in: the league host's, never the reader's. */
+  timeZone: string;
+}

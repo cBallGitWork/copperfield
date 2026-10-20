@@ -17,8 +17,8 @@ export default function TransferStatus({
   pedigree,
   drafterName,
 }: {
-  /** The team holding him, or his status in words ("Free agent", "Waivers"). */
-  holder: string | null;
+  /** "Held by" the team holding him, or his "Status" in words ("Free agent", "On waivers"); `holding.ts`. */
+  holder: { label: string; value: string | null };
   arrival: Arrival;
   pedigree: Pedigree;
   drafterName: string | null;
@@ -28,7 +28,7 @@ export default function TransferStatus({
   return (
     <Section title="Transfer status">
       <dl className="grid gap-x-6 lg:grid-cols-3">
-        <Fact label="Held by">{holder}</Fact>
+        <Fact label={holder.label}>{holder.value}</Fact>
         <ArrivalLine arrival={arrival} drafted={drafted !== null} />
         <Fact label="Draft">
           {drafted === null ? (

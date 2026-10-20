@@ -1,5 +1,6 @@
 import { type BreakdownLine, signed, DASH } from "@epl/core";
 import Note from "./Note";
+import Failed from "./Failed";
 import { emptyBreakdownNote } from "./breakdownNote";
 import { FACT_LABEL, HEAD_PLATE, HEAD_PLATE_CENTRE, LABEL, PANEL_FLUSH, SMALL_CAPS, gainOrLoss } from "@/app/desk";
 
@@ -14,6 +15,7 @@ export default function Breakdown({
   reserve,
   minutes,
   over,
+  onRetry,
 }: {
   breakdown: BreakdownLine[];
   points: number | null | undefined;
@@ -22,9 +24,17 @@ export default function Breakdown({
   minutes: number | null;
   /** Whether his match is finished, so an empty table reads as final rather than "yet". */
   over: boolean;
+  /** Asks again where the table is missing; without one the note stands alone. */
+  onRetry?: () => void;
 }) {
   // No table at all is a refused read; `emptyBreakdownNote` tells a dash from a real nought.
-  if (points === undefined) return <Note>No breakdown right now.</Note>;
+  if (points === undefined) {
+    return onRetry === undefined ? (
+      <Note>No breakdown right now.</Note>
+    ) : (
+      <Failed onRetry={onRetry}>No breakdown right now.</Failed>
+    );
+  }
 
   return (
     <div className="flex flex-col">

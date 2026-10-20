@@ -33,4 +33,9 @@ export interface InboxItem {
   urgent: boolean;
   /** The letter's one button: the column, the man, the reader's team or the head-to-head; absent where none fits. */
   link?: { href: string; label: string };
+  /** Names the body prints that the letter links, each as printed; absent where none do. */
+  mentions?: readonly Mention[];
 }
+
+/** A name in a letter's body, carrying the id its link hangs off: a man's Fantrax id, or a team's. */
+export type Mention = { text: string } & ({ fantraxId: string } | { teamId: string });

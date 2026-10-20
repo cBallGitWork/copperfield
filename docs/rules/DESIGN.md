@@ -153,8 +153,8 @@ the audit could not fail. It was repaired on 4 Sep and reported six routes over 
 two of them at its cap. **ONE remains, re-run 10 Sep 2026**: `/matchday/desk` at
 the cap, which is the `≥lg` wall and has never had a plate under any of it.
 `/squad` was the second at 2 and now measures clean, so the list has shrunk
-rather than grown. PLATFORM_NOTES carries the run. Moving `SCRIM` or `DARKEN` is
-safe for exactly as long as that one is the whole of the list.
+rather than grown. PLATFORM_NOTES carries the run. **The desk page was deleted on 19 Oct 2026**, so
+the list is empty until `groundfit` next runs; moving `SCRIM` or `DARKEN` waits on that run.
 
 **Which way a surface faces is the whole grammar, and it has three answers.**
 
@@ -307,7 +307,7 @@ Team's. The Live tab puts your score where the glyph sits, a rung smaller per ex
 
 **Read is Mail and the Gazetta under one tab, opening on Mail** (Craig, 11 Oct 2026: *"both should show"*).
 Its pages carry Read's strip at their head, `Mail · Gazetta · More`, drawn by `TabStrip` (`shell/ReadViews`),
-so each is a tap from the other: over Mail's own bar on `/news`, over More's on `/more`,
+so each is a tap from the other: over Mail's list on `/news`, over More's bar on `/more`,
 and on the front page `/` in the paper's register, tracked small capitals with the current one in the print red
 over a rule, above a masthead it leaves untouched. Read lights on Mail, the paper and its stories, More, the
 credits, and on a phone FPL too, which More lists.
@@ -350,7 +350,11 @@ caption repeated it and cost a row on a phone. **Data draws none either** (Craig
 24 Sep 2026: *"remove the yellow title for space"*): its strip names the view.
 The competition screens keep theirs.
 
-**The one exception is CM's own news screen, and it is granted.** Its bar reads
+**Mail draws no bar at all** (Craig, 19 Oct 2026: *"remove the 'raccoons mail section' already too many
+buttons"*): Read's strip already names the view, so `/news` keeps its heading for a screen reader only. The exception
+below is superseded and kept as the record.
+
+~~**The one exception is CM's own news screen, and it is granted.**~~ *Superseded 19 Oct 2026.* Its bar reads
 `Mike Paul News` — subject and view in one line, with no caption — and it is the
 single screen in the library that does.
 
@@ -717,10 +721,8 @@ Four faces, four roles.
 | Archivo | letterspaced small capitals | Paper |
 | Archivo Narrow, `tnum` | **every figure** | both |
 
-**One exception: the vidiprinter line is one face** (Craig, 1 Oct 2026: *"font is different for
-different things like goal etc"*). On `/matchday` its word, names, minute, managers and full-time
-scores are all Oxanium, at two sizes. Its figures sit inline and never in a column, so `tnum` has
-nothing to line up.
+~~One exception: the vidiprinter line is one face~~ (Craig, 1 Oct 2026) — **superseded 19 Oct 2026**,
+when the vidiprinter went (Craig: *"ditch vidiprinter, no longer needed"*). No exception remains.
 
 Fraunces and Newsreader load from `app/paperFonts.ts`, imported only by paper
 routes, so the desk pays nothing for them. Georgia is the declared fallback and
@@ -1091,11 +1093,9 @@ therefore stands rather than being rewritten. A sticky first column is the cost.
 why — see §2's table geometry below. Both are built: the name column is frozen
 (`PINNED_NAME` in `desk.ts`) and the sideways scroll carries CM's own bar, drawn as a gauge under a thumb (§2).*
 
-**The live desk splits.** Mobile `/matchday` rows expand in place from data
-already on the page; the `≥lg` wall at `/matchday/desk` keeps the no-tap rule
-`docs/ui/desk.md` makes binding by name, and links out instead. The rule was
-written because the wall is read across a room rather than operated, and that is
-still true of the wall and was never true of a phone.
+~~**The live desk splits.**~~ **Superseded 19 Oct 2026**: the `≥lg` wall at `/matchday/desk` and its
+no-tap rule are gone (Craig: *"ditch all links and reference to The Desk, its not needed"*).
+Mobile `/matchday` rows still expand in place from data already on the page.
 
 **The masthead photograph is deferred, not chosen.** The picture it wants is a
 league one (draft night, a trophy, ten names on a board) rather than a stock

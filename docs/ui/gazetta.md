@@ -45,11 +45,11 @@ business, and when lineups lock.
      in the sidebar carries the lock to the minute. A masthead that repeats the
      page pays for itself twice.
 2. *(The scoreboard, removed 11 Oct 2026: see* The scoreboard, removed *below.)*
-3. **The lead** — a full-bleed picture band, then a kicker, a headline set larger
+3. **The lead** — a full-bleed picture band, then a headline set larger
    than anything but the masthead, and a standfirst. See *The lead* below.
 4. **The column**, when one has been filed about this round — and then it
    *leads*, taking the picture the desk chose and dropping the desk's own
-   headline. It runs as a **splash** (`gazette/Splash`): the byline chip, the
+   headline. It runs as a **splash** (`gazette/Splash`): the
    headline, the deck, the ornament rule, and the dateline with its writer's name,
    ending "read on".
    See *The written column* below.
@@ -147,7 +147,7 @@ business, and when lineups lock.
    **Each opens its article**, on a `<Link>`: the article prints whole at
    `/paper/{slug}`, under `Folio` — THE GAZETTA, a link back to the front page
    (`← THE GAZETTA` on a phone), and the date. Then the article's own head:
-   kicker, headline, deck, dateline; a pictured man prints under that head on a
+   headline, deck, dateline; a pictured man prints under that head on a
    phone and in a column beside it on a desk.
 
    **The dateline carries the article's Share**, a word at its right in the
@@ -161,9 +161,15 @@ business, and when lineups lock.
    **One name per story, one name per level** (Craig, 9 Oct 2026: *"clean up the
    ui"*). A Team Sheet printed "Team news" as a page title, "The Team Sheet" as its
    kicker and again in its dateline, over the headline "Friday Pressers". The
-   kicker is now `kickers.kickerOf`, the column's name else the edition's, at
-   every rank; the folio prints no title; a dateline is the writer and the
-   filing time, never the edition's name.
+   kicker became the column's name else the edition's, at every rank; the folio
+   prints no title; a dateline is the writer and the filing time, never the
+   edition's name.
+
+   **No kicker at all** (Craig, 19 Oct 2026: *"remove tags above the titles like 'the back page' nobody knows what
+   that is, Prem Report, Bin XI etc"*). The ink chip over the splash and the article and the small capitals over a
+   shoulder or a brief are gone; a story's column and edition print nowhere on the sheet, and the headline opens every
+   rank. *This supersedes the kicker of 9 Oct 2026 above.*
+   The shared link's card (`shareCard.tsx`) still credits the edition under its headline.
 
    *The paper had numbered pages from 2 Sep to 30 Sep 2026*: a strip of ink
    chips (`Pages`), "turn to page 2" on every dateline, a page number on every
@@ -171,7 +177,7 @@ business, and when lineups lock.
    `/paper/columns`. Craig cut them on 30 Sep (*"the pages thing doesnt
    work"*). Nothing became unreachable: the section pages printed only stories
    the front page already headlines, since `HEADLINES_SHOWN` is the whole paper.
-6. **Also this week** — the next two DESK stories as headlines: a kicker and a line,
+6. **Also this week** — the next two DESK stories as headlines: a line each,
    no picture, no standfirst. The hierarchy *is* the design — a newspaper's
    second story is recognisable as the second story before you have read a word
    of it, and a page that gave every story a photograph would be a page with no
@@ -265,12 +271,12 @@ files, because the file that did all three had reached the ceiling.
 The type is `Story` and not `Lead`, and it was `Lead` until the paper ran more
 than one of them.
 
-| kind | kicker | reads |
-|---|---|---|
-| `squeaker` | Down to the wire | the scoreline · *test3 edged test2* · Decided by 1 point. |
-| `bench` | Left out | his cut-out · *test4 left Pickford out* · He is in the week's eleven. test4 lost 19–41 to test2. |
-| `rout` | No contest | the scoreline · *test2 took test4 apart* · 22 points between them. |
-| `trade` | Business | the two players · *123 and test3 have traded* · Adrien Truffert to 123 · Gabriel Magalhaes to test3 |
+| kind | reads |
+|---|---|
+| `squeaker` | the scoreline · *test3 edged test2* · Decided by 1 point. |
+| `bench` | his cut-out · *test4 left Pickford out* · He is in the week's eleven. test4 lost 19–41 to test2. |
+| `rout` | the scoreline · *test2 took test4 apart* · 22 points between them. |
+| `trade` | the two players · *123 and test3 have traded* · Adrien Truffert to 123 · Gabriel Magalhaes to test3 |
 
 The standfirst does **not** repeat the scoreline on a result: the picture above it
 is the scoreline, and a line that says it again is a caption rather than a
@@ -292,8 +298,8 @@ accent is a reading aid for scanning a list of ten and there is nothing here
 to scan; a manager knows his own name in a headline.
 
 It is deliberately not a `Column` either, though it borrows that head. A column's
-head is a label over a list and the list is the point; here the head is a kicker
-and the headline is the point, so the headline has to be the heading.
+head is a label over a list and the list is the point; here the headline is the point, so the headline has to be
+the heading.
 
 ## What may be said about a bench
 
@@ -456,7 +462,10 @@ the paper is newest first again. A story filed without one orders by filing.
 
 The filing time prints. Every other figure on the page is thirty seconds old and
 this could be three days old and still be the current edition; a reader is
-entitled to know which he is reading.
+entitled to know which he is reading. Within six days it is a weekday and a time,
+`Filed Sun 20:07`; from a week back the weekday would read as this week's, so it
+is the date, `Filed Mon 5 Oct` (19 Oct 2026: a 5 Oct column read as Monday's,
+`filedWhen`).
 
 Team names are joined from ids the writer returns, never from names he types: a
 name typed by a model goes stale the day somebody renames their team, and
@@ -550,8 +559,8 @@ scored, as many as the league has reserves. It is where the real-life numbers sh
 
 ## Here We Go is a completed trade, told by the insider
 
-Added 9 Oct 2026. `trade` files once per completed trade, on detection and on any day (PLATFORM_NOTES, 9 Oct): kicker
-"Here We Go", edition "The Mercato Wire", by Fabrisio Romeno. The headline and deck are the desk's, the item is two to
+Added 9 Oct 2026. `trade` files once per completed trade, on detection and on any day (PLATFORM_NOTES, 9 Oct): byline
+"Here We Go" (printed nowhere since 19 Oct), edition "The Mercato Wire", by Fabrisio Romeno. The headline and deck are the desk's, the item is two to
 four sentences, and "Here we go!" closes it as its own paragraph. It prints as an ordinary written story, newest first
 with the rest; the Line-Ups still lead until the lock.
 
@@ -591,7 +600,6 @@ appended second ink loses on stylesheet order.
 | `HAIRLINES` | `gazette/rules.ts` | the faint hairline between a list's rows: `divide-y` alone rules them in each row's own ink | 7 |
 | `STANDING_CAPS` | `gazette/heads.ts` | `3xs` semibold tracked capitals, no ink: a standing head, the masthead's and folio's dateline rows | 5 (and `(paper)/not-found` writes it out) |
 | `STANDING_HEAD` | `gazette/heads.ts` | `STANDING_CAPS` in muted ink: a label over a list, a panel or a line of figures; an article's Share | 16 |
-| `KICKER_CAPS` | `gazette/heads.ts` | the same capitals in bold, no ink: a card's standing head | 3 |
 | `QUIET_CAPS` | `gazette/heads.ts` | the same at the body's weight in faint ink: a dateline, who is left to play | 3 |
 | `CAPTION_CAPS` | `gazette/heads.ts` | a caption's capitals, `2xs` and `tracking-widest`, no weight and no ink | 8 (3 inked by the caller) |
 | `CAPTION` | `gazette/heads.ts` | `CAPTION_CAPS` in muted ink: a kickoff, a club's fixture, a quote's credit, the line over a side's eleven | 5 |
@@ -660,14 +668,15 @@ article, so "read on" there would point at the page you are on.
 
 The class string is named by weight, not once, because the weights are not noise: one constant over all three
 would be followed by some sites and overridden by the rest, the DASH failure CODE_RULES §4 names. The three weights
-of `font-sans text-3xs uppercase tracking-[0.16em]` are `STANDING_CAPS`, `KICKER_CAPS` and `QUIET_CAPS` in
-`gazette/heads.ts`, counted in the table under "The sheet's class strings" (9 Oct 2026).
+of `font-sans text-3xs uppercase tracking-[0.16em]` are `STANDING_CAPS` and `QUIET_CAPS` in `gazette/heads.ts`,
+counted in the table under "The sheet's class strings" (9 Oct 2026); the bold third, `KICKER_CAPS`, went with the
+kickers on 19 Oct 2026.
 
 **The display block is one component across three renderers** (8 Oct 2026). `Splash`, the desk's own lead
-(`Stories`) and `Written` each set the same headline, standfirst and 24px rule under the same inverted chip;
-`gazette/StoryHead` draws the three, and the front page's silences under their tell (`Silence`), and exports the
-chip as `KICKER`. Two things are the caller's: the chip's paragraph, because the lead's follows its picture and takes
-a margin the others do not, and the headline's step at width (`rank`, the front page's or an article's). The paper's
+(`Stories`) and `Written` each set the same headline, standfirst and 24px rule; `gazette/StoryHead` draws the
+three, and the front page's silences under their tell (`Silence`). The headline's step at width (`rank`, the front
+page's or an article's) is the caller's, and the desk's own lead sets the block 12px under its picture. The inverted
+chip over it (`KICKER`) went on 19 Oct 2026. The paper's
 own 404 sets an `h1` a step tighter, unbalanced, and keeps its standfirst and rule written out: two of each.
 
 **The page turn** is `document.startViewTransition`, driven by `TurnLink` — the

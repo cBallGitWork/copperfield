@@ -6,6 +6,7 @@ import Pending from "../../components/league/Pending";
 import ListAndPitch from "@/app/components/league/ListAndPitch";
 import { PITCH_CAPTION } from "@/app/desk";
 import { sheetCaption } from "./caption";
+import type { AutoSubMark } from "../../components/league/autoSubbed";
 
 // A read-only eleven, a rival's once his lineups lock or your own in any week but the open one, with the
 // Pitch/List control and the gameweek picker.
@@ -22,6 +23,7 @@ export default function Sheet({
   show,
   opens,
   gameweek,
+  marks,
 }: {
   rows: SquadDetailLine[];
   bench: SquadPlayerDetail[];
@@ -42,6 +44,8 @@ export default function Sheet({
   opens: View;
   /** The gameweek on screen, which a played week's caption names beside its total; null when the calendar cannot say. */
   gameweek: number | null;
+  /** Who comes on for whom at the end of the gameweek, by Fantrax id; the rows are already arranged after them. */
+  marks: Record<string, AutoSubMark>;
 }) {
   // No shape line (Craig, 2 Sep: "so remove 1-3-4-3"); the toggle shares the pending figure's row and the week's,
   // since stacked the grass sat 421px past the fold at 390.
@@ -65,6 +69,7 @@ export default function Sheet({
           mode="list"
           eligibility={eligibility}
           bare
+          autoSubs={marks}
         />
       }
       pitch={
@@ -84,6 +89,7 @@ export default function Sheet({
             mode="pitch"
             inColumn
             show={show}
+            autoSubs={marks}
           />
         </div>
       }

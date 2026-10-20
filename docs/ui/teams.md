@@ -4,8 +4,8 @@
 sides). Label only: the route and the strip's key stay `teams`, because a URL outlives a label.
 
 Craig, 24 Sep 2026: *"we're going to need a team stats section, contains all data for that, cm-ify it"*; and
-30 Sep 2026: *"this page should be more pure stats, chances created, shots etc, errors"*. Prem keeps its own
-`/prem/team-stats` (one measure at a time); this is every club's football on one board. No fantasy points of
+30 Sep 2026: *"this page should be more pure stats, chances created, shots etc, errors"*. Prem's own one-measure
+board, `/prem/team-stats`, was cut on 19 Oct 2026 and redirects here; this is every club's football on one board. No fantasy points of
 anybody's, and no fixture run: the Planner owns that.
 
 ## On the page

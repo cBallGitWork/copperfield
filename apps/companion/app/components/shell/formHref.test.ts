@@ -15,7 +15,7 @@ describe("formHref", () => {
   });
 
   it("keeps the last of a field sent twice", () => {
-    expect(formHref("/prem/data", [["list", "goals"], ["list", "assists"]])).toBe("/prem/data?list=assists");
+    expect(formHref("/players", [["pos", "D"], ["pos", "M"]])).toBe("/players?pos=M");
   });
 
   it("encodes what it carries", () => {

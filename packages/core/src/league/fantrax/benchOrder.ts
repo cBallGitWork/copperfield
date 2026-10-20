@@ -16,7 +16,10 @@ export interface RawTeamRosterInfo {
 export interface RawRosterRow {
   /** "1" in the eleven, "2" on the bench. A row with no scorer is an empty slot. */
   statusId?: string;
-  scorer?: { scorerId?: string; shortName?: string; posShortNames?: string };
+  /** The slot he is filed at, one of his `posIds`. */
+  posId?: string;
+  /** `posIds` and `posShortNames` name the same positions in the same order: `["702", "701"]`, `"M,F"`. */
+  scorer?: { scorerId?: string; shortName?: string; posIds?: string[]; posShortNames?: string };
   cells?: { content?: string }[];
 }
 
@@ -34,6 +37,20 @@ export function mapBenchOrder(raw: RawTeamRosterInfo): BenchOrder {
     .filter((x) => x.n > 0 && reserves.some((r) => r.id === x.id));
   if (numbers.length > 0) return { order: numbers.sort((a, b) => a.n - b.n).map((x) => x.id), by: "manager" };
   return { order: byPoints(reserves), by: "points" };
+}
+
+/** Each rostered man's slot in the league's letters, eleven and bench, by fantraxId; a row it cannot name is left out. */
+export function mapRosterSlots(raw: RawTeamRosterInfo): Record<string, string> {
+  return Object.fromEntries(
+    (raw.tables ?? []).flatMap((table) =>
+      (table.rows ?? []).flatMap((r) => {
+        const id = r.scorer?.scorerId;
+        const at = r.posId === undefined ? -1 : (r.scorer?.posIds ?? []).indexOf(r.posId);
+        const name = r.scorer?.posShortNames?.split(",")[at]?.trim();
+        return typeof id === "string" && at >= 0 && name ? [[id, name] as const] : [];
+      }),
+    ),
+  );
 }
 
 /** The deadline's order for this bench, whatever the manager numbered: total fantasy points, highest first. */

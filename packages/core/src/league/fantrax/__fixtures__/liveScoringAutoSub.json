@@ -1,0 +1,157 @@
+{
+ "statsPerTeam": {
+  "allTeamsStats": {
+   "l5kunst8msgbirdf": {
+    "ACTIVE": {
+     "statsMap": {
+      "063zi": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "75",
+         "av": 75,
+         "fpts": 2
+        }
+       ],
+       "object1": 3
+      },
+      "061vq": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "90",
+         "av": 90,
+         "fpts": 2
+        }
+       ],
+       "object1": 10
+      },
+      "05gcc": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "90",
+         "av": 90,
+         "fpts": 2
+        }
+       ],
+       "object1": 3
+      },
+      "04qor": {
+       "object2": [
+        {
+         "scipId": "5020#6120#-1",
+         "sv": "90",
+         "av": 90,
+         "fpts": 2
+        }
+       ],
+       "object1": 6
+      },
+      "0787y": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "90",
+         "av": 90,
+         "fpts": 2
+        }
+       ],
+       "object1": 5
+      },
+      "07898": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "84",
+         "av": 84,
+         "fpts": 2
+        }
+       ],
+       "object1": 2
+      },
+      "05l8q": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "90",
+         "av": 90,
+         "fpts": 2
+        }
+       ],
+       "object1": 2
+      },
+      "05t6x": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "34",
+         "av": 34,
+         "fpts": 1
+        }
+       ],
+       "object1": 0
+      }
+     },
+     "totalFpts": 31,
+     "remainingEventPercent": {
+      "063zi": 0,
+      "061vq": 0,
+      "05748": 0,
+      "06fv8": 1,
+      "05gcc": 0,
+      "05oh0": 1,
+      "0787y": 0,
+      "04qor": 0,
+      "05l8q": 0,
+      "07898": 0,
+      "05t6x": 0
+     }
+    },
+    "BENCH": {
+     "statsMap": {
+      "067ys": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "19",
+         "av": 19,
+         "fpts": 1
+        }
+       ],
+       "object1": 6
+      },
+      "06do9": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "90",
+         "av": 90,
+         "fpts": 2
+        }
+       ],
+       "object1": 3
+      },
+      "078qg": {
+       "object2": [
+        {
+         "scipId": "5010#6120#-1",
+         "sv": "90",
+         "av": 90,
+         "fpts": 2
+        }
+       ],
+       "object1": 1
+      }
+     },
+     "totalFpts": 10,
+     "remainingEventPercent": {
+      "06do9": 0,
+      "067ys": 0,
+      "078qg": 0
+     }
+    }
+   }
+  }
+ }
+}

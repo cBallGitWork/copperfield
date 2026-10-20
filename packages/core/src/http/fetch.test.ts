@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, onTestFinished, vi } from "vitest";
+import { HTTP_ACCEPT_LANGUAGE, HTTP_USER_AGENT } from "../config";
 import { ProviderError } from "./errors";
 import { serve, statusOnly } from "./fakeFetch";
 import { politeFetch } from "./fetch";
@@ -42,6 +43,12 @@ describe("politeFetch", () => {
     const seen = capture();
     await politeFetch("https://example.test/");
     expect(seen[0].signal).toBeInstanceOf(AbortSignal);
+  });
+
+  it("asks as a browser would: its User-Agent and language, a caller's own header kept", async () => {
+    const seen = capture();
+    await politeFetch("https://example.test/", { headers: { Cookie: "a=1" } });
+    expect(seen[0].headers).toEqual({ "User-Agent": HTTP_USER_AGENT, "Accept-Language": HTTP_ACCEPT_LANGUAGE, Cookie: "a=1" });
   });
 
   it("keeps a caller's own signal", async () => {

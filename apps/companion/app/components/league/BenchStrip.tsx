@@ -12,6 +12,7 @@ export default function BenchStrip<T>({
   label,
   numbered = true,
   captionOf,
+  instead,
   inColumn = false,
   children,
 }: {
@@ -28,6 +29,8 @@ export default function BenchStrip<T>({
   numbered?: boolean;
   /** A word beside the number: his position in the league's letters. */
   captionOf?: (player: T) => string;
+  /** A word over his card in place of the number and the position: a starter the auto subs sent to the end. */
+  instead?: (player: T) => string | null;
   /** Fill the column rather than bleed through the gutters; beside the list a bleed drags the strip across the grass. */
   inColumn?: boolean;
   children: (player: T) => ReactNode;
@@ -48,7 +51,10 @@ export default function BenchStrip<T>({
         {bench.map((player, at) => (
           // His card grows to the strip's tallest, as on the grass (`PitchRows`).
           <li key={keyOf(player)} className="flex min-w-0 shrink-0 flex-col [&>:last-child]:grow" style={{ flexBasis: basis }}>
-            {numbered || captionOf !== undefined ? (
+            {instead?.(player) ? (
+              // No number: he is not in the order, and the word says why.
+              <p className={`pb-0.5 text-center font-display leading-none ${SMALL_CAPS} text-info`}>{instead(player)}</p>
+            ) : numbered || captionOf !== undefined ? (
               <p className="flex items-center justify-center gap-1 pb-0.5 leading-none">
                 {numbered ? <span className="cm-index numeric px-1 text-3xs">{at + 1}</span> : null}
                 {captionOf === undefined ? null : (

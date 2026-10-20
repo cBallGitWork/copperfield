@@ -97,8 +97,10 @@ content does** rather than filling to the foot of the screen, and a phone gets a
 `←` plate at the left of the score bar, because the rail's arrows are a desk's.
 **Back leaves the match** (Craig, 11 Oct 2026: *"the back button should leave the section"*): every
 `TabStrip` plate, the foot rows included, and every sort head replaces the page in history rather than
-pushing one, so the `←` and a phone's swipe both return to the page the reader came from, the Prem list
-usually; a match opened cold goes to Prem › Fixtures at its own gameweek, in its own place (`premFixturesHref`).
+pushing one, so the `←` and a phone's swipe both return to the page the reader came from. **The `←` remembers
+it** (Craig, 19 Oct 2026: *"live → click prem match → tap back. expected: back to live"*): the tap that opened the
+match is filed (`shell/CameFrom`), so Live, a gameweek or a player is where it goes even when the iPhone's history has
+lost it; only a match no tap opened goes to Prem › Fixtures at its own gameweek, in its own place (`premFixturesHref`).
 
 **The Fantasy Report is a Stats view of its own** (Craig, 23 Sep 2026: *"fantasy
 report needs a full page, put it in stats"*, the fourth plate on the foot row) and **the one
@@ -155,6 +157,13 @@ dropped only where its unpriced goal and FPL's `ownGoals` for that man agree. **
 is only as current as the sister repo's shot and touch export** — fixtures 1-30 as
 last run on 10 Sep — and a match past it says so rather than drawing two empty
 pitches.
+
+**On a phone the shot pitch stays pinned while the list scrolls under it** (Craig, 19 Oct 2026: *"scroll down
+looking at shots · expected - pitch stays locked in place · current, pitch lost out of view so you have to scroll
+up and down to see a shot on pitch, poor user behaviour"*). Below `lg` the two plates and the grass stick under the
+status bar (`PINNED_ON_PHONE`, `top: var(--safe-top)`, opaque) and the key scrolls away with the list; the grass is
+capped at `32svh` and scaled, never cropped, so the pin is 30% of a 390x844 screen and 37% of a 360x640 (measured in
+Chromium and WebKit on a static mock, 19 Oct 2026). The desk keeps the list beside the pitch.
 
 **Line-ups is where the game files Player Ratings**, which is a FOOT button in
 `16.jpg` and `21.jpg` rather than a tab. It is a tab here because it is the view

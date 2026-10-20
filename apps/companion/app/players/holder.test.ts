@@ -24,7 +24,7 @@ describe("holderOf", () => {
 
   it("prints a free man's status code, titled in words", () => {
     expect(holderOf({ ownerTeamId: null, status: "FA" }, names, null)).toEqual({ text: "FA", title: "Free agent", tone: "free" });
-    expect(holderOf({ ownerTeamId: null, status: "WW" }, names, null)?.title).toBe("Waivers");
+    expect(holderOf({ ownerTeamId: null, status: "WW" }, names, null)?.title).toBe("On waivers");
   });
 
   // "(WW)" on 100 of 100 rows of a board filtered to WW (review M37).

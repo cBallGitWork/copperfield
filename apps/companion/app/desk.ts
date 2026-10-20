@@ -84,6 +84,10 @@ export const PINNED_BESIDE_TILE = `${PINNED_NAME} left-10 lg:left-14`;
 /** `PINNED_NAME` starting where a pinned index block ends; the offsets are `INDEX_WIDTH`'s widths. */
 export const PINNED_BESIDE_INDEX = `${PINNED_NAME} left-8 lg:left-9`;
 
+/** A picture pinned under the status bar on a phone while the list that reads it scrolls beneath; opaque so rows
+ *  do not show through. Its parent must span the list, and no ancestor may clip overflow, or it stops sticking. */
+export const PINNED_ON_PHONE = "max-lg:sticky max-lg:top-[var(--safe-top)] max-lg:z-10 max-lg:bg-surface max-lg:pb-1";
+
 /** One plate of a tab strip. Size and padding stay the caller's. */
 export const TAB =
   "cm-tab flex flex-1 items-center justify-center font-bold uppercase lg:text-sm";

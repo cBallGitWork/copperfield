@@ -8,7 +8,6 @@ import { doubtWash } from "../components/football/doubtRow";
 import Nothing from "../components/shell/Nothing";
 import OutLink from "../components/shell/OutLink";
 import { BUTTON } from "../components/shell/ButtonLink";
-import PageHeader from "../components/shell/PageHeader";
 import { fantraxPage } from "../fantraxPages";
 import { readInbox } from "./inbox";
 import { ownerTag } from "./owner";
@@ -36,8 +35,8 @@ export default async function NewsPage({
 
   return (
     <div className="flex flex-col gap-2">
-      {/* The bar is the manager's ("123 News"), with no caption: DESIGN §2's one exception. */}
-      <PageHeader title={mine === null ? NEWS : `${mine} ${NEWS}`} />
+      {/* No bar under Read's strip (Craig, 19 Oct 2026: "already too many buttons"); the heading stays for a screen reader. */}
+      <h1 className="sr-only">{mine === null ? NEWS : `${mine} ${NEWS}`}</h1>
       {/* Fantrax shows a manager's pending claims and trades only to his own session (PLATFORM_NOTES, 1 Oct 2026). */}
       <OutLink
         href={fantraxPage(FANTRAX_PENDING_PATH)}

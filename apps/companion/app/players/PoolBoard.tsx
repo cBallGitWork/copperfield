@@ -17,13 +17,15 @@ import {
 import { ALL_ROWS, pageRows } from "./pageRows";
 import { wayOut } from "./wayOut";
 import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
-import { boardView, type BoardName } from "./views";
+import { boardView, onPlate, type BoardName } from "./views";
 import { leagueInfo } from "../round";
 import { figureOf } from "./figure";
 import { DEFCON_POINTS } from "./columns";
 import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
-import { SEASON_COLUMNS, seasonStats } from "./seasonColumns";
+import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
+import ColumnKey from "./ColumnKey";
+import { PRESSABLE } from "./BoardControls";
 import { intelStats, intelStatsDay } from "../intel";
 import { divisionGrids } from "./[fantraxId]/grid";
 import { cutsFor } from "./standout";
@@ -44,7 +46,7 @@ export default async function PoolBoard({
   board: BoardName;
   searchParams: Promise<PlayersSearchParams>;
 }) {
-  const [pool, asked, lines, reader, grids, pricing, info] = await Promise.all([
+  const [pool, asked, lines, reader, grids, pricing, info, football] = await Promise.all([
     getLeaguePool(),
     searchParams,
     getPlayerStats(),
@@ -52,9 +54,10 @@ export default async function PoolBoard({
     divisionGrids(),
     defconPricing(),
     leagueInfo(),
+    footballNow(),
   ]);
   const query = playersQuery(asked);
-  const view = boardView(board, info?.scoringCategories ?? {});
+  const footballers = playerByCode(football);
 
   // The raw counts by Fantrax id; the fantasy figures ride on `PoolRow`, and the two never overlap.
   const raw = new Map(lines.map((line) => [line.fantraxId, line.stats]));
@@ -67,7 +70,7 @@ export default async function PoolBoard({
     );
   }
 
-  // Our ratings, our DefCon points and the stats league's season ride in the same bag, so they sort like any count.
+  // Our ratings, our DefCon points and the season's figures ride in the same bag, so they sort like any count.
   const defcon = pricing?.(poolPositions(pool.rows));
   for (const row of pool.rows) {
     const id = row.entry.player.fantraxId;
@@ -77,23 +80,28 @@ export default async function PoolBoard({
       ...(grid === undefined ? {} : attributeStats(grid)),
       ...(defcon === undefined ? {} : { [DEFCON_POINTS]: defcon[id] }),
       ...seasonStats(code === null ? undefined : intelStats.get(code)),
+      ...expectedStats(code === null ? undefined : footballers.get(code)),
     };
     if (Object.keys(ours).length > 0) raw.set(id, { ...raw.get(id), ...ours });
   }
-
-  const shown = shownRows(pool.rows, query, raw, view);
-  const capped = pageRows(shown, query);
-  const way = wayOut(query, view.route);
 
   const scored = new Set(lines.flatMap((line) => Object.keys(line.stats)));
   // An empty set keeps every column, so ours joins only one the read filled.
   if (defcon !== undefined && scored.size > 0) scored.add(DEFCON_POINTS);
   // Players is the league's own few figures, so it needs no plates and no rate (Craig, 16 Oct 2026).
   const players = board === "pool";
-  const plates = players ? [] : platesFor(sortableIn(view.columns, scored));
+  const whole = boardView(board, info?.scoringCategories ?? {});
+  const plates = players ? [] : platesFor(sortableIn(whole.columns, scored));
   const group = groupFor(query.group, plates);
+  const view = onPlate(whole, group);
   const rated = players ? null : isPer90(query);
+
+  const shown = shownRows(pool.rows, query, raw, view);
+  const capped = pageRows(shown, query);
+  const way = wayOut(query, view.route);
   const columns = columnsIn(view.columns, group, activeSort(query, view).column.key, scored);
+  // Plain data, since the key is a client component: a column carries functions.
+  const heads = columns.filter((column) => column.key !== "name").map(({ label, title, means }) => ({ label, title, means }));
 
   // Cut over the rows drawn, so a mark means the top of what is in front of you.
   const cuts = cutsFor(
@@ -139,6 +147,7 @@ export default async function PoolBoard({
         rated={rated}
         shown={shown.length}
         scored={scored}
+        glossary={players ? null : <ColumnKey entries={heads} className={`${PRESSABLE} min-w-11`} />}
       />
 
       {/* A column headed FPts that silently became a projection would be the confident wrong answer (DESIGN §7). */}
@@ -166,7 +175,7 @@ export default async function PoolBoard({
           raw={raw}
           rated={rated === true}
           cuts={cuts}
-          footballers={playerByCode(await footballNow())}
+          footballers={footballers}
         />
       )}
 
@@ -178,10 +187,11 @@ export default async function PoolBoard({
           </Link>
         </p>
       ) : null}
-      {shown.length === 0 ? null : <BoardKey entries={columns.filter((column) => column.key !== "name")} />}
+      {/* Adv Stats' key is a tap away beside Filter; Players' few heads keep theirs under the board. */}
+      {shown.length === 0 || !players ? null : <BoardKey entries={heads} />}
 
       {/* The stats league's file is daily, so a gameweek in play runs ahead of it. */}
-      {shown.length > 0 && columns.some((column) => SEASON_COLUMNS.includes(column)) ? (
+      {shown.length > 0 && columns.some((column) => DAILY_COLUMNS.includes(column)) ? (
         <p className={QUIET_NOTE}>Season to {intelStatsDay}.</p>
       ) : null}
 

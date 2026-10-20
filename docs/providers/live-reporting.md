@@ -192,8 +192,8 @@ are **per revalidate and not per phone**.
 
 ## Built, and not built
 
-**Live on `/matchday` today:** the wire (one row per event, both men and both
-owners), the goal flash, the draft ties by competition, the day's real scores,
+**Live on `/matchday` on 5 Sep 2026:** the wire (one row per event, both men and both
+owners; gone 19 Oct 2026), the goal flash, the draft ties by competition, the day's real scores,
 your own head-to-head, and your afternoon still to come.
 
 **Written, tested, and drawing nothing yet** — each one is a tab away rather than

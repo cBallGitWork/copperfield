@@ -3,7 +3,7 @@ import { derbyBrief } from "../../league/derbies";
 import { ordinal } from "../../league/ordinal";
 import { londonWeekdayLong } from "../../time";
 import type { MatchupContext, NextOpponent } from "./brief";
-import { blank } from "./autoSubs";
+import { blank } from "../../league/autoSubs";
 import { counted, everyMan, type SideState } from "./state";
 import { aheadWords, fitnessLine, minutesLine, newLine, pts, returnCount, returnWords } from "./stories";
 import type { Thread } from "./thread";

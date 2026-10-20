@@ -62,6 +62,7 @@ export default function LineupPlanner({
     dirty,
     broken,
     empty,
+    doubts,
     card,
     setCard,
     pickStateOf,
@@ -169,7 +170,7 @@ export default function LineupPlanner({
           clear();
         }}
       />
-      <PlanStatus broken={broken} empty={empty} nameOf={nameOf} />
+      <PlanStatus broken={broken} empty={empty} doubts={doubts} nameOf={nameOf} />
       <LeaveGuard dirty={dirty} canSave={canSave && broken.length === 0} onSave={save} />
 
       <OutLink href={fantraxUrl}>Set this line-up in Fantrax</OutLink>

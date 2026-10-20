@@ -2,11 +2,9 @@ import TurnLink from "./TurnLink";
 import StoryFace, { hasPicture } from "./StoryFace";
 import Dateline from "./Dateline";
 import type { Club, PublishedStory } from "@epl/core";
-import { kickerOf } from "./kickers";
 import { storyHref } from "./paperPages";
-import { KICKER_CAPS } from "./heads";
 
-// A story in the tail, the sheet's third rank. On a phone, a row: thumbnail, standing head, headline.
+// A story in the tail, the sheet's third rank. On a phone, a row: thumbnail and headline.
 // On a desk, a card in the grid: the same picture full width over the headline, and its dateline.
 
 export default function Brief({
@@ -16,8 +14,6 @@ export default function Brief({
   story: PublishedStory;
   clubs: Map<number, Club>;
 }) {
-  const kicker = kickerOf(story);
-
   return (
     <li id={story.slug} className="scroll-mt-4 border-t border-line @md/stories:pt-3">
       <TurnLink
@@ -30,9 +26,6 @@ export default function Brief({
           </span>
         ) : null}
         <span className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 @md/stories:gap-1">
-          {kicker !== "" ? (
-            <span className={`${KICKER_CAPS} text-muted`}>{kicker}</span>
-          ) : null}
           <h3 className="paper-display text-pretty text-base font-bold leading-snug text-ink @md/stories:text-lg">
             {story.headline}
           </h3>

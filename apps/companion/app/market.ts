@@ -10,14 +10,12 @@ import {
   mapPositionNames,
   mapTradeBlocks,
 } from "@epl/core";
+import { fantraxSession as session } from "./fantraxSession";
 import { leagueCache } from "./leagueCache";
 import { orRefusal } from "./refusals";
 
 // The trade market, read as the commissioner (Fantrax shows it to members only) and cached for everybody.
 // No session in this environment, or a refusal, is no market news rather than a broken inbox.
-
-/** The commissioner's Fantrax cookie, or null where this environment has none. Two: `saving.ts` reads its own. */
-const session = () => process.env.FANTRAX_COOKIE || null;
 
 export const readTradeBlocks = leagueCache("trade-blocks",
   async (): Promise<TradeBlock[]> => {

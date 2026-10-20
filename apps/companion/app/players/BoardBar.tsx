@@ -12,9 +12,9 @@ import QuerySelect from "../components/shell/QuerySelect";
 import FilterSheet from "./FilterSheet";
 
 // Every control on a Data board. Under a thumb two fixed lines: the search and Filter, then position and who holds
-// him (Craig, 16 Oct 2026); on a desk one row, Adv Stats adding its plates and Per 90 from `xl`. The rest is in the
-// filters, URL state (`?panel=1`), so a filtered board can be shared; while they are open a tap replaces the history
-// entry, so one Back leaves them.
+// him (Craig, 16 Oct 2026), Adv Stats adding its Key beside Filter and its plates as a third (19 Oct 2026); on a desk
+// one row from `xl`, with Per 90. The rest is in the filters, URL state (`?panel=1`), so a filtered board can be
+// shared; while they are open a tap replaces the history entry, so one Back leaves them.
 
 /** Reset: everything off and the sheet shut; a comparison's picker stays one. */
 const RESET: BoardChange = { keep: ["compare"] };
@@ -32,6 +32,7 @@ export default function BoardBar({
   rated,
   shown,
   scored,
+  glossary = null,
 }: {
   query: PlayersQuery;
   view: BoardView;
@@ -50,17 +51,13 @@ export default function BoardBar({
   shown: number;
   /** Every column the league's stat read carries, so the sort offers no count it does not score. */
   scored: ReadonlySet<string>;
+  /** The board's key, beside Filter, where the board has one. */
+  glossary?: React.ReactNode;
 }) {
   const open = query.panel === "1";
   const route = view.route;
-  const wide = plates.length > 0 ? (
-    <>
-      <Plates query={query} plates={plates} group={group} route={route} replace={open} className="flex gap-1.5" />
-      {rated === null ? null : <Figures query={query} rated={rated} route={route} replace={open} />}
-    </>
-  ) : null;
   const held = (query.club ? 1 : 0) + loneCount(query);
-  const narrow = (group === "all" ? 0 : 1) + (rated ? 1 : 0);
+  const narrow = rated ? 1 : 0;
   // The board draws a page of rows unless asked for all; the button promises no more than that.
   const drawn = query.all === "1" ? shown : Math.min(shown, PAGE_ROWS);
 
@@ -78,20 +75,31 @@ export default function BoardBar({
           <Statuses query={query} counted={counted} route={route} replace={open} />
         </div>
 
-        {wide === null ? null : <div className="hidden xl:flex xl:gap-1.5">{wide}</div>}
+        {/* A line of their own below `xl`: one tap from any plate to the next. */}
+        {plates.length === 0 ? null : (
+          <Plates
+            query={query}
+            plates={plates}
+            group={group}
+            route={route}
+            replace={open}
+            className="flex flex-wrap gap-1.5 max-xl:order-last max-xl:basis-full"
+          />
+        )}
+        {rated === null ? null : (
+          <div className="hidden xl:flex">
+            <Figures query={query} rated={rated} route={route} replace={open} />
+          </div>
+        )}
 
-        <BoardLink
-          query={query}
-          change={FILTER}
-          route={route}
-          replace={open}
-          aria-expanded={open}
-          className={`${PRESSABLE} ml-auto`}
-        >
-          Filter
-          <Count sheet={held} wide={narrow} />
-          <span aria-hidden>{open ? "▾" : "▸"}</span>
-        </BoardLink>
+        <div className="ml-auto flex gap-1.5">
+          {glossary}
+          <BoardLink query={query} change={FILTER} route={route} replace={open} aria-expanded={open} className={PRESSABLE}>
+            Filter
+            <Count sheet={held} wide={narrow} />
+            <span aria-hidden>{open ? "▾" : "▸"}</span>
+          </BoardLink>
+        </div>
       </div>
 
       {open ? (
@@ -145,12 +153,7 @@ export default function BoardBar({
             </Block>
           </div>
 
-          {/* The row carries these from `xl`; below it they are only here. */}
-          {plates.length === 0 ? null : (
-            <Block label="Columns" className="xl:hidden">
-              <Plates query={query} plates={plates} group={group} route={route} replace className="grid grid-cols-3 gap-1.5" />
-            </Block>
-          )}
+          {/* The row carries it from `xl`; below it, only here. */}
           {rated === null ? null : (
             <div className="flex xl:hidden">
               <Figures query={query} rated={rated} route={route} replace />

@@ -1,7 +1,7 @@
 import { seededIn } from "@epl/core";
 import Nothing from "../../components/shell/Nothing";
 import FantraxSilent from "../../components/shell/FantraxSilent";
-import { besideGameweek, openGameweek } from "../../components/shell/gameweekStep";
+import { beside, openGameweek } from "../../components/shell/gameweekStep";
 import LeagueShell from "../Shell";
 import Round, { EMPTY } from "../schedule/Round";
 import { getSchedule, getSeasonResults, type ScheduleRound } from "../schedule/schedule";
@@ -62,7 +62,7 @@ export default async function FixturesPage({ searchParams }: { searchParams: Pro
         places={placings(table)}
         mine={mine}
         note={seeding(round.gameweek)}
-        step={{ ...besideGameweek(rounds.map((each) => each.gameweek), round.gameweek), href: leagueFixturesHref }}
+        step={{ ...beside(rounds.map((each) => each.gameweek), round.gameweek), href: leagueFixturesHref }}
       />
     </LeagueShell>
   );

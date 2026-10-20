@@ -10,6 +10,11 @@ export function HeadRow({ children }: { children: ReactNode }) {
   return <tr className="text-3xs uppercase">{children}</tr>;
 }
 
+/** A head's or tab's word in capitals, unless a lower-case prefix runs into a capital: `xG` is not `XG`. */
+export function headWord(label: ReactNode): ReactNode {
+  return typeof label === "string" && /^[a-z]+[A-Z]/.test(label) ?<span className="normal-case">{label}</span> : label;
+}
+
 /** One head cell; `p-0` because the plate inside carries the padding. */
 export function Head({
   width = "",
@@ -84,7 +89,7 @@ export function SortHead({
   const plate = `flex items-center gap-0.5 whitespace-nowrap ${size} ${JUSTIFY[align]} ${heldPlate(sorted !== undefined)}`;
   const face = (
     <>
-      {mute ? <span className={MUTE}>{label}</span> : label}
+      {mute ? <span className={MUTE}>{label}</span> : headWord(label)}
       {arrow && sorted !== undefined ? <SortArrow down={sorted === "descending"} /> : null}
     </>
   );
@@ -159,7 +164,7 @@ export function PlateHead({
   return (
     <th scope={scope} colSpan={colSpan} title={title} aria-sort={sorted} className={`${HEAD_CELL} ${className}`}>
       <div className={plate}>
-        {children}
+        {headWord(children)}
         {sorted === undefined ? null : <SortArrow down={sorted === "descending"} />}
       </div>
     </th>

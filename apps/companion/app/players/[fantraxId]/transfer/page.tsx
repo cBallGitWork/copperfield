@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import OutLink from "../../../components/shell/OutLink";
 import { readerTeamId } from "../../../squads";
-import { STATUS } from "../../status";
+import { holding } from "../holding";
 import { StackWaiting } from "../Waiting";
 import Moves from "../Moves";
 import NoProfile from "../NoProfile";
@@ -45,7 +45,7 @@ async function Business({ found, fantraxId }: { found: Subject; fantraxId: strin
   ]);
   const owner = found.intel.ownerTeamId;
   const status = found.intel.league.find((row) => row.label === "Status/Team")?.value?.trim() ?? "";
-  const holder = found.ownerName ?? (STATUS[status] ?? (status || null));
+  const holder = holding(found.ownerName, status);
   const exit = fantraxExit(fantraxId, owner, reader);
 
   return (

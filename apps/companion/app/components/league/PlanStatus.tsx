@@ -1,6 +1,6 @@
 import type { Violation } from "@epl/core";
 
-// Under the planner: every league rule the arrangement breaks.
+// Under the planner: every league rule the arrangement breaks, and the starters who might not start.
 
 /** A broken rule and the number that broke it, never worded as the manager's doing: most arrive from Fantrax broken. */
 function sentence(violation: Violation, nameOf: (id: string) => string): string {
@@ -21,14 +21,17 @@ function sentence(violation: Violation, nameOf: (id: string) => string): string 
 export default function PlanStatus({
   broken,
   empty,
+  doubts,
   nameOf,
 }: {
   broken: Violation[];
+  /** Starters' names, short on minutes with a sub who could play instead (`mightNotStart`). */
+  doubts: readonly string[];
   /** Places left in the XI, or null when the league sets no cap. */
   empty: number | null;
   nameOf: (id: string) => string;
 }) {
-  return broken.length > 0 || (empty !== null && empty > 0) ? (
+  return broken.length > 0 || (empty !== null && empty > 0) || doubts.length > 0 ? (
     <ul className="flex flex-col gap-1 border border-line bg-surface px-3 py-2">
       {broken.map((violation) => (
         <li key={sentence(violation, nameOf)} className="text-2xs text-bad">
@@ -41,6 +44,7 @@ export default function PlanStatus({
           {empty} empty {empty === 1 ? "place" : "places"} in the XI — allowed, and nothing scores from them.
         </li>
       ) : null}
+      {doubts.length > 0 ? <li className="text-2xs text-bad">Might not start: {doubts.join(", ")}</li> : null}
     </ul>
   ) : null;
 }

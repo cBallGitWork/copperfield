@@ -1,4 +1,5 @@
-export type { InboxItem } from "./types";
+export type { InboxItem, Mention } from "./types";
+export { type BodySpan, bodySpans } from "./mentions";
 export { availabilityNews } from "./doubts";
 export { blockNews } from "./block";
 export { inboxItems, roundNews } from "./items";
@@ -6,6 +7,7 @@ export { dealNews } from "./messages";
 export { minutesNews } from "./minutes";
 export { noteBesideChance } from "./notes";
 export { offerNews } from "./offers";
+export { paperNews } from "./paperLetters";
 export { presserNews } from "./pressers";
 export { fantraxDay, fantraxInstant, fantraxTime } from "./when";
 export { readNote } from "./notes";

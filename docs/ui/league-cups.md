@@ -29,6 +29,39 @@ numbered 5 in the bracket. A round drawn at random (the Timbeibs Cup's first two
 on both sides until Craig's draw fills it. Ties are numbered in the order they are played. The draw is laid out for
 however many teams `getLeagueInfo` has, so a league still filling up gets a smaller bracket.
 
+## A level tie
+
+Craig, 19 Oct 2026: *"tie is goals scored, assists, cs, cards (least better) then toss of coin, but in rules
+section in more"*. It replaces the 27 Sep order (goals, assists, clean sheets, minutes, then Craig's own toss)
+and the 8 Oct ruling that he settles ties by hand.
+
+- Every tie is one leg; the higher Fantrax score goes through. Level on points (compared in hundredths), the
+  winner has, in turn: more goals, more assists, more clean sheets, fewer cards, then a coin toss.
+- The figures are the counted men's, Fantrax's `ACTIVE` eleven for the gameweek after the auto-sub run, read
+  by the league's own categories (`idsOf` on `getLeagueInfo`'s names, never a code): Goals, the assist total
+  (`AT`, or `A` plus `AF` where a league scores no total), Clean Sheets On Field, Yellow plus Red Cards.
+  **A red counts as one card, like a yellow** (Craig said "cards"; the league prices them −1 and −3, which is
+  scoring, not a count). A category the league does not score counts nought for both.
+- **The coin is repeatable**: FNV-1a over the cup id, both team ids sorted and the gameweek, mixed by
+  MurmurHash3's finaliser, top bit. Every reader sees the same winner, and home or away makes no difference.
+- The tie prints which step settled it: "Through on goals scored", "Through on assists", "Through on clean
+  sheets", "Through on fewer cards", "Through on the toss of a coin"; nothing when points did.
+- The rule is printed under the scoring table on `/scoring` (More › Scoring), as "Cup ties", from the same
+  `CUP_TIE_STEPS` the decider walks.
+- `packages/core/src/league/cups/tieBreak.ts`: `tieTally`, `decideTie`, `coinToss`, `throughOn`, tested in
+  `tieBreak.test.ts`. **No tie calls it yet**: no cup tie has two teams until the draw is entered (below).
+
+## What the draw still needs
+
+Today every GW10 and GW11 side prints "To be drawn" and nothing puts a team into a slot. Before GW10:
+
+- **The GW9 seeding**: nothing reads GW9's points into seeds (the reader was deleted in #378). They only split
+  the six byes from the four in round 1.
+- **The draw itself**: Craig draws rounds 1 and 2 off the app; there is no file or form to enter who he drew,
+  so the bracket cannot name a team.
+- **Cup results**: no read puts each side's GW points and counted men's categories against a tie, so
+  `decideTie` has no caller and Bracket, Fixtures and Live cannot print a winner or a "Through on" line.
+
 ## States
 
 - Fantrax silent: `getLeagueInfo` refused, so there is no team count to draw for.

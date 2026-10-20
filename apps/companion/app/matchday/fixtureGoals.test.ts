@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Fixture, FootballPlayer, MatchEventKind } from "@epl/core";
 import { fixtureGoals } from "./fixtureGoals";
-import type { WireLine, WireRow } from "./wireLines";
+import type { WireLine } from "./wireLines";
 
 // Liverpool 1 Man City 2, GW6: Live's Scores row carries who scored and who made it, under the score.
 
@@ -10,17 +10,17 @@ const MCI = 43;
 const FIXTURE = { id: 58, code: 2645258, homeClubId: LIV, awayClubId: MCI } as Fixture;
 
 function man(name: string, clubId: number, mine = false) {
-  return { player: { name, clubId } as FootballPlayer, owner: null, mine };
+  return { player: { name, clubId } as FootballPlayer, mine };
 }
 
 function goal(minute: string, at: number, kind: MatchEventKind, scorer: WireLine["man"], assister: WireLine["man"] = null): WireLine {
-  return { key: minute, fixtureCode: FIXTURE.code, minute, kind, club: null, man: scorer, second: assister, at };
+  return { key: minute, fixtureCode: FIXTURE.code, minute, kind, man: scorer, second: assister, at };
 }
 
 const doku = man("Doku", MCI, true);
-const lines: WireRow[] = [
+const lines: WireLine[] = [
   goal("68", 3, "goal", doku),
-  { key: "red", fixtureCode: FIXTURE.code, minute: "70", kind: "red-card", club: null, man: man("Van Dijk", LIV), second: null, at: 4 },
+  { key: "red", fixtureCode: FIXTURE.code, minute: "70", kind: "red-card", man: man("Van Dijk", LIV), second: null, at: 4 },
   goal("65", 2, "goal", man("Haaland", MCI), doku),
   goal("12", 1, "own-goal", man("Dias", MCI)),
 ];

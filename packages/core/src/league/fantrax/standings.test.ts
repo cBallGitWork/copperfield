@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapStandings, placeTable } from "./standings";
+import { mapClaimOrder, mapStandings, placeTable } from "./standings";
 import type { StandingsRow } from "../types";
 import type { RawStandingsPage } from "./standingsPage";
 import standingsPage from "./__fixtures__/standingsPage.json";
@@ -123,5 +123,27 @@ describe("placeTable", () => {
   it("puts every team in first before a ball is kicked", () => {
     const placed = placeTable([row("x", 0, 0, 2), row("y", 0, 0, 1), row("z", 0, 0, 3)]);
     expect(placed.map((r) => r.rank)).toEqual([1, 1, 1]);
+  });
+});
+
+describe("mapClaimOrder", () => {
+  const page = standingsPage as RawStandingsPage;
+
+  // The table's foot is first in the order and its third is not second: a claim sends its maker to the back.
+  it("reads Fantrax's claim order off its own column, first claim first, never the table's reverse", () => {
+    expect(mapClaimOrder(page)).toEqual([
+      { teamId: "sezrgvl2mshcpazf", place: 1 },
+      { teamId: "j9zadacnmshcpazf", place: 2 },
+      { teamId: "pbxm9fgimshcpazf", place: 3 },
+      { teamId: "8enbgqo5msgb375j", place: 4 },
+    ]);
+  });
+
+  it("leaves out a team whose place does not read, and has none without the column", () => {
+    const [table] = page.tableList ?? [];
+    const blanked = { tableList: [{ ...table, rows: table?.rows?.map((r, at) => (at === 0 ? { ...r, cells: [] } : r)) }] };
+    expect(mapClaimOrder(blanked)).toHaveLength(3);
+    expect(mapClaimOrder({ tableList: [{ ...table, header: { cells: [] } }] })).toEqual([]);
+    expect(mapClaimOrder({})).toEqual([]);
   });
 });

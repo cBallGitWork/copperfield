@@ -58,6 +58,9 @@ export const HTTP_USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
   "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
 
+/** The language a browser names; left out, undici sends `*`, which no browser does. */
+export const HTTP_ACCEPT_LANGUAGE = "en-GB,en;q=0.9";
+
 /** Attempts after the first when a provider is busy: enough for a blip, not an outage. */
 export const HTTP_RETRIES = 2;
 

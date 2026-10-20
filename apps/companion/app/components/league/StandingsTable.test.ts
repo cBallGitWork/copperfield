@@ -28,3 +28,11 @@ describe("a league table row", () => {
     expect(repeatedKeys(table)).toEqual([]);
   });
 });
+
+describe("the league table's columns", () => {
+  it("end on Pts under a thumb, printed once (Craig, 19 Oct 2026)", () => {
+    const phone = COLUMNS.filter((column) => column.deskOnly === undefined).map((column) => column.label);
+    expect(phone).toEqual(["Placing", "Team", "Pld", "W", "D", "L", "For", "Pts"]);
+    expect(COLUMNS.filter((column) => column.key === "pts")).toHaveLength(1);
+  });
+});

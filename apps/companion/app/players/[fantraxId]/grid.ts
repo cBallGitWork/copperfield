@@ -8,8 +8,6 @@ import {
   fetchElementSummary,
   onTheBooks,
   preferredFoot,
-  projectedPlace,
-  projectedPoints,
   rankings,
   setPieceRanks,
   ratedLine,
@@ -17,7 +15,7 @@ import {
   shotLine,
   squadOf,
 } from "@epl/core";
-import type { Attribute, FootballPlayer, PastSeason, ProjectedPlace, Ranked, Scouted, Tallied } from "@epl/core";
+import type { Attribute, FootballPlayer, PastSeason, Ranked, Scouted, Tallied } from "@epl/core";
 import { unstable_cache } from "next/cache";
 import { orDegraded } from "../../refusals";
 import { heldHistory } from "./scouting";
@@ -26,22 +24,19 @@ import { footballNow } from "../../football";
 import {
   SET_PIECES,
   intelLines,
-  intelLeagueProjections,
   intelSetPieces,
   intelShots,
   intelSquads,
   lineFloors,
   lineSeasons,
 } from "../../intel";
-import type { StandoutCut } from "../../components/league/standout";
-import { poolCut } from "../standout";
 import { PAST_SEASONS_REVALIDATE } from "../../config";
 
 // The Championship Manager half of the player screen: the attribute grid, his rankings, the real
 // position under them, and the seasons behind them. Every rating is a percentile, so this needs
 // the division in hand; it is the snapshot every other screen keeps warm.
 
-/** The sister's position lines, gathered into the groups his Rankings and projections sit within. */
+/** The sister's position lines, gathered into the groups his Rankings sit within. */
 const GROUP: Readonly<Record<string, string>> = {
   GK: "goalkeepers",
   CB: "defenders",
@@ -96,7 +91,7 @@ const division = cache(async (): Promise<{ rated: Scouted[]; tallied: Tallied[] 
   };
 });
 
-/** Him, and his position group: the men his Rankings and projections are placed among. */
+/** Him, and his position group: the men his Rankings are placed among. */
 async function measured(player: FootballPlayer) {
   const { tallied } = await division();
   const group = groupOf(player.code);
@@ -161,27 +156,6 @@ export async function playerStanding(
     keeper,
     foot: preferredFoot(man.shots),
   };
-}
-
-/** One gameweek of the model's projection in our league's points: his place in his group, and the group's standout cuts. */
-export interface ProjectedWeek {
-  place: ProjectedPlace | null;
-  cut: StandoutCut;
-}
-
-/** His projected gameweeks, each ranked within the group his grid is rated in. */
-export async function projectedWeeks(player: FootballPlayer, gameweeks: readonly number[]): Promise<Map<number, ProjectedWeek>> {
-  const { cohort } = await measured(player);
-  const codes = cohort.map((other) => other.player.code);
-  return new Map(
-    gameweeks.map((gw) => [
-      gw,
-      {
-        place: projectedPlace(player.code, codes, intelLeagueProjections, gw),
-        cut: poolCut(codes.map((code) => projectedPoints(intelLeagueProjections, code, gw))),
-      },
-    ]),
-  );
 }
 
 /** His place in each of his club's set-piece orders, among the men still on its books. */

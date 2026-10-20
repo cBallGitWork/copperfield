@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Failed from "./Failed";
 import { type Opposition, attackingStats, defensiveStats, fullMatchStats } from "@epl/core";
 import { readMatchParts, type MatchRead } from "../../matchParts";
 import { BLOCK_PLATE, FACT_LABEL, LABEL } from "@/app/desk";
@@ -8,7 +9,16 @@ import { BLOCK_PLATE, FACT_LABEL, LABEL } from "@/app/desk";
 // What he did in the match or gameweek shown, under a drop-down, all Opta's: the parts of what this league scores at
 // his slot that Fantrax counts whole, then his attacking and defending, priced or not. Fantrax's own counts sit above.
 
-const UNREAD: MatchRead = { parts: null, scored: null };
+/** A read that never settles is a failure after this long: a hung action left the panel empty. */
+const READ_TIMEOUT_MS = 20_000;
+
+/** A read still out, one that failed, or its answer. */
+type Reading = MatchRead | null | "failed";
+
+/** What came back from the action: a missing answer is a failure, never "no figures". */
+export function settled(answer: MatchRead | null | undefined): MatchRead | "failed" {
+  return answer ?? "failed";
+}
 
 export default function FullMatchStats({
   opta,
@@ -26,7 +36,8 @@ export default function FullMatchStats({
   /** Drawn open, as the live card wants its figures without a tap. */
   open?: boolean;
 }) {
-  const [read, setRead] = useState<MatchRead | null>(null);
+  const [read, setRead] = useState<Reading>(null);
+  const [attempt, setAttempt] = useState(0);
   // Read again when a match starts, not on every poll that hands over the same fixtures afresh.
   const startedKey = JSON.stringify(
     (opposition ?? []).flatMap(({ fixture }) =>
@@ -36,14 +47,21 @@ export default function FullMatchStats({
   useEffect(() => {
     let live = true;
     const fixtures = JSON.parse(startedKey) as { gameweek: number; code: number }[];
+    // A rejection is a timeout, a refused provider or a deploy's stale action id: all three say so and offer a retry.
+    const timer = setTimeout(() => live && setRead("failed"), READ_TIMEOUT_MS);
     readMatchParts({ opta, fixtures, position }).then(
-      (answer) => live && setRead(answer),
-      () => live && setRead(UNREAD),
-    );
+      (answer) => live && setRead(settled(answer)),
+      () => live && setRead("failed"),
+    ).finally(() => clearTimeout(timer));
     return () => {
       live = false;
+      clearTimeout(timer);
     };
-  }, [opta, position, startedKey]);
+  }, [opta, position, startedKey, attempt]);
+  const retry = () => {
+    setRead(null);
+    setAttempt((n) => n + 1);
+  };
 
   return (
     <details className="group cm-panel" open={open}>
@@ -61,7 +79,7 @@ export default function FullMatchStats({
         </svg>
       </summary>
 
-      <MatchFigures read={read} position={position} over={over} />
+      <MatchFigures read={read} position={position} over={over} onRetry={retry} />
     </details>
   );
 }
@@ -71,12 +89,15 @@ export function MatchFigures({
   read,
   position,
   over = false,
+  onRetry,
 }: {
-  read: MatchRead | null;
+  read: Reading;
   position: string | null;
   over?: boolean;
+  onRetry?: () => void;
 }) {
-  if (read === null) return null;
+  if (read === null) return <p className="border-t border-line px-2 py-1.5 text-2xs text-muted">Getting his match figures…</p>;
+  if (read === "failed") return <Failed onRetry={onRetry}>No match figures right now.</Failed>;
   const rows = fullMatchStats(read.parts, read.scored);
   const attacking = attackingStats(read.parts, position);
   const defensive = defensiveStats(read.parts, position);

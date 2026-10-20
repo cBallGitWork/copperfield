@@ -1,5 +1,6 @@
 import type { CategoryLine } from "./fantrax/seasonStats";
 import type { Measure, StatCategory } from "./categories";
+import { sharedPlaces } from "../places";
 
 // A group of categories, every team, one figure per cell: one measure for the whole board, never two per cell.
 
@@ -45,17 +46,11 @@ export function rankBy(
     return ascending ? left - right : right - left;
   });
 
-  const board: BoardRow[] = [];
-  let rank = 0;
-  let previous: number | null | undefined;
-
-  for (const [at, teamId] of sorted.entries()) {
-    const figure = ordering.get(teamId) ?? null;
-    // A new rank only when the figure moves; `at + 1` makes the rank after a tie skip, as a table counts.
-    if (previous === undefined || figure !== previous) rank = at + 1;
-    previous = figure;
-    board.push({ rank, teamId, figures: columns.map((column) => column.get(teamId) ?? null) });
-  }
-
-  return board;
+  const figureOf = (teamId: string) => ordering.get(teamId) ?? null;
+  const ranks = sharedPlaces(sorted, (above, team) => figureOf(above) === figureOf(team));
+  return sorted.map((teamId, at) => ({
+    rank: ranks[at],
+    teamId,
+    figures: columns.map((column) => column.get(teamId) ?? null),
+  }));
 }

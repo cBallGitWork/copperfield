@@ -21,7 +21,7 @@ vi.mock("../../leagueCache", () => ({
       inCache.run(key, () => read(...args)),
 }));
 vi.mock("../../football", () => ({ seasonFixtures: ownCache("season-fixtures", []) }));
-vi.mock("../../standings", () => ({ leagueTable: ownCache("standings-page", []) }));
+vi.mock("../../standings", () => ({ leagueTable: ownCache("standings-and-order", []) }));
 vi.mock("@epl/core", async (actual) => {
   const core = await actual<typeof import("@epl/core")>();
   return {

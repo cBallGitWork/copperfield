@@ -3,7 +3,7 @@
 
 export { availability } from "./availability";
 export { nextDeadline } from "./deadline";
-export { deals } from "./deals";
+export { deals, lastWaiverRun } from "./deals";
 export { kindOf, moverOf, movement } from "./dealSides";
 export { strangers } from "./strangers";
 export { hasRoom } from "./running";

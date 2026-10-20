@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "@/app/components/shell/Link";
 import ScrollBoard from "./ScrollBoard";
 import type { Deal, DealSide } from "@epl/core";
-import { crestForShortName, fantraxDay, inkOn, kindOf, moverOf, movement, toFplClubCode, DASH } from "@epl/core";
+import { crestForShortName, fantraxInstant, inkOn, kindOf, londonDayMonth, londonWeekday, moverOf, movement, toFplClubCode, DASH } from "@epl/core";
 import { LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
 import TeamName from "./TeamName";
 import { teamColours } from "@/app/teamColours";
@@ -49,48 +49,56 @@ export default function Ledger({
 
       <ScrollBoard>
         <ul className="cm-rows flex flex-col">
-          {rows.map(({ deal, mover, in: arrived, out: left, partners }) => (
-            // One row at both widths: a phone stacks date over type and In over Out inside it.
-            <li
-              key={deal.setId || `${deal.processedAt}-${deal.period}`}
-              className="cm-row flex min-h-14 items-center gap-2 px-1.5 py-1.5"
-            >
-              <span className="flex w-24 shrink-0 flex-col gap-1 lg:contents">
-                {/* The London day, as Mail spells it, never cut. */}
-                <span className="cm-index numeric w-24 shrink-0 whitespace-nowrap px-1.5 py-0.5">
-                  {fantraxDay(deal.processedAt ?? "") ?? DASH}
-                </span>
-                {/* Whose move, on the league's list: under the date on a phone, its own column on a desk. */}
-                {everyone ? (
-                  <span className="shrink-0 lg:w-32">
-                    {mover === null ? DASH : <TeamPlate teamId={mover} name={names[mover]} />}
-                  </span>
-                ) : null}
-                <span className={`w-24 shrink-0 ${SMALL_CAPS} text-info lg:text-sm`}>
-                  {kindOf(deal, arrived.length, left.length)}
-                </span>
-                {/* Who he traded with: under the type on a phone, the last column on a desk. */}
-                {traded ? (
-                  <span className={`shrink-0 lg:order-last lg:w-32 ${partners.length === 0 ? "hidden lg:block" : ""}`}>
-                    {partners.length === 0 ? null : (
-                      <span className="flex flex-col items-stretch gap-0.5">
-                        <TeamPlate teamId={partners[0]} name={names[partners[0]]} />
-                        {partners.length > 1 ? (
-                          <span className="text-center text-2xs text-faint">+{partners.length - 1}</span>
-                        ) : null}
-                      </span>
-                    )}
-                  </span>
-                ) : null}
+          {rows.map(({ deal, mover, in: arrived, out: left, partners }) => {
+            const kind = (
+              <span
+                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${everyone ? "min-w-0 text-right" : "w-24"}`}
+              >
+                {kindOf(deal, arrived.length, left.length)}
               </span>
+            );
+            return (
+              // Two rows under a thumb, In beside the date and Out beside whose move; one row on a desk, in the strip's order.
+              <li
+                key={deal.setId || `${deal.processedAt}-${deal.period}`}
+                className="cm-row grid grid-cols-[6rem_minmax(0,1fr)] items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5"
+              >
+                <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
+                  <Day stamp={deal.processedAt} weekday={!everyone} />
+                  {/* The league's list sets the type beside the date, leaving the row below to whose move it was. */}
+                  {everyone ? kind : null}
+                </span>
+                <span className="col-start-1 row-start-2 flex flex-col gap-0.5 lg:contents">
+                  {everyone ? (
+                    <span className="shrink-0 lg:order-1 lg:w-32">
+                      {mover === null ? DASH : <TeamPlate teamId={mover} name={names[mover]} />}
+                    </span>
+                  ) : (
+                    kind
+                  )}
+                  {/* Who he traded with: under whose move on a phone, the last column on a desk. */}
+                  {traded ? (
+                    <span className={`shrink-0 lg:order-last lg:w-32 ${partners.length === 0 ? "hidden lg:block" : ""}`}>
+                      {partners.length === 0 ? null : (
+                        <span className="flex flex-col items-stretch gap-0.5">
+                          {/* The desk's With head, said on the phone: two plates flush read as one side (UX-8). */}
+                          <span className={`text-center ${LABEL} lg:hidden`}>With</span>
+                          <TeamPlate teamId={partners[0]} name={names[partners[0]]} />
+                          {partners.length > 1 ? (
+                            <span className="text-center text-2xs text-faint">+{partners.length - 1}</span>
+                          ) : null}
+                        </span>
+                      )}
+                    </span>
+                  ) : null}
+                </span>
 
-              {/* Both sides always drawn, so a claim's empty side is a dash rather than a reflow. */}
-              <span className="flex min-w-0 flex-1 flex-col gap-1 lg:contents">
-                <Side players={arrived} tone="text-ink" label="In" />
-                <Side players={left} tone="text-faint" label="Out" />
-              </span>
-            </li>
-          ))}
+                {/* Both sides always drawn, so a claim's empty side is a dash rather than a reflow. */}
+                <Side players={arrived} tone="text-ink" label="In" className="col-start-2 row-start-1 lg:order-3" />
+                <Side players={left} tone="text-faint" label="Out" className="col-start-2 row-start-2 lg:order-4" />
+              </li>
+            );
+          })}
         </ul>
       </ScrollBoard>
     </section>
@@ -102,14 +110,17 @@ function Side({
   players,
   tone,
   label,
+  className,
 }: {
   players: DealSide[];
   tone: string;
   /** "In" or "Out", printed only on a phone, where the head strip is hidden. */
   label: string;
+  /** Its cell in the phone's two rows, and its place in the desk's strip. */
+  className: string;
 }) {
   return (
-    <span className={`flex min-w-0 flex-1 items-center gap-1.5 ${tone}`}>
+    <span className={`flex min-w-0 flex-1 items-center gap-1.5 ${tone} ${className}`}>
       <span className={`w-7 shrink-0 ${LABEL} lg:hidden`}>{label}</span>
       <span className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
         {players.length === 0 ? (
@@ -150,6 +161,23 @@ function Side({
           })
         )}
       </span>
+    </span>
+  );
+}
+
+/** The London day, as Mail spells it and never cut; the league's list drops the weekday under a thumb, for the type's room. */
+function Day({ stamp, weekday }: { stamp: string | null; weekday: boolean }) {
+  const at = fantraxInstant(stamp ?? "");
+  return (
+    <span className={`cm-index numeric shrink-0 whitespace-nowrap px-1.5 py-0.5 lg:w-24 ${weekday ? "w-24" : ""}`}>
+      {at === null ? (
+        DASH
+      ) : (
+        <>
+          <span className={weekday ? "" : "hidden lg:inline"}>{londonWeekday(at)} </span>
+          {londonDayMonth(at)}
+        </>
+      )}
     </span>
   );
 }

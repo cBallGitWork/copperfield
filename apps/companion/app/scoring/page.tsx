@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { rulesCard, scoredSlots } from "@epl/core";
+import { CUP_TIE_STEPS, rulesCard, scoredSlots } from "@epl/core";
 import Nothing from "../components/shell/Nothing";
 import { HeadRow, NameHead, PlateHead } from "../components/league/TableHeads";
 import { leagueScoring } from "@/app/scoring";
@@ -8,7 +8,7 @@ import { backToFront, leaguePositionLabel } from "../positions";
 import PageHeader from "../components/shell/PageHeader";
 import ReadViews from "../components/shell/ReadViews";
 import { SCORING_TITLE } from "../titles";
-import { BOARD, FIGURE, PANEL_FLUSH, ROW_NAME, ROW_RULE } from "@/app/desk";
+import { BOARD, FIGURE, LABEL, PANEL_FLUSH, ROW_NAME, ROW_RULE } from "@/app/desk";
 
 // What every category pays each roster slot, read from getLeagueInfo: a line once where every slot is paid alike.
 // Listed on More since 13 Oct 2026, not a Draft tab: reference read once, not weekly.
@@ -67,13 +67,35 @@ export default async function ScoringPage() {
   );
 }
 
-/** More's strip over the page's own bar, as Credits and More wear it. */
+/** More's strip over the page's own bar, as Credits and More wear it, then the cups' tie-break. */
 function Frame({ children }: { children: ReactNode }) {
   return (
     <>
       <ReadViews current="more" />
       <PageHeader title={SCORING_TITLE} competition />
       <section className={PANEL_FLUSH}>{children}</section>
+      <CupTies />
     </>
+  );
+}
+
+/** How a level cup tie is settled, in the order the decider walks (Craig, 19 Oct 2026). */
+function CupTies() {
+  return (
+    <section aria-labelledby="scoring-cup-ties" className={`${PANEL_FLUSH} gap-2 px-3.5 pb-3 pt-2`}>
+      <h2 id="scoring-cup-ties" className={LABEL}>
+        Cup ties
+      </h2>
+      <p className="text-sm">One leg: the higher score goes through. Level on points, it is settled by, in turn:</p>
+      <ol className="list-decimal pl-5 text-sm">
+        {CUP_TIE_STEPS.map((each) => (
+          <li key={each.step}>{each.rule}</li>
+        ))}
+      </ol>
+      <p className="text-sm">
+        Only each side&apos;s eleven counts, after any substitute comes on. The tie says which one settled it, and the
+        coin falls the same way for everyone.
+      </p>
+    </section>
   );
 }

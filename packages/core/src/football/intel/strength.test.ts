@@ -159,6 +159,18 @@ describe("plannerGameweeks", () => {
     expect(plannerGameweeks(fixtures, 2)).toEqual([5, 6]);
   });
 
+  // 19 Oct 2026: GW7's lineups had locked and 18 of 20 clubs had played it, yet the planner still opened on it.
+  it("starts no earlier than the gameweek being planned", () => {
+    const fixtures = [
+      fixture(1, 7, ARS, BUR, "finished"),
+      fixture(2, 7, CHE, HUL),
+      fixture(3, 8, ARS, CHE),
+      fixture(4, 9, BUR, HUL),
+    ];
+    expect(plannerGameweeks(fixtures, 2, 8)).toEqual([8, 9]);
+    expect(plannerGameweeks(fixtures, 2, null)).toEqual([7, 8]);
+  });
+
   it("keeps a round in play, and one with a match brought forward from it", () => {
     const fixtures = [
       fixture(1, 5, ARS, BUR, "finished"),

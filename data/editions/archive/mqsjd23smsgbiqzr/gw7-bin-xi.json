@@ -1,0 +1,135 @@
+{
+  "slug": "gw7-bin-xi",
+  "kind": "bin-xi",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 7,
+  "gameweek": 7,
+  "filedAt": "2026-10-20T07:46:15.579Z",
+  "expiresAt": null,
+  "edition": "Bins Out",
+  "byline": "Top Bins",
+  "headline": "Cottage industry at the back",
+  "deck": "Jorrel Hato's 9 points led a Bin XI that scored 73, more than any side in the league.",
+  "body": "Jorrel Hato tops the bin. Chelsea won 2-0 away to Everton and the defender took an assist and a clean sheet from it across 90 minutes, with a tackle won and a clearance beside them.\n\nThe back is clean sheets throughout. Zion Suzuki kept one in goal in Aston Villa's 1-0 win away to Newcastle United, after Hazza Maguazza's Redempshazza dropped him ahead of the gameweek. Fulham's 1-0 over Hull City puts Calvin Bassey, Antonee Robinson and Timothy Castagne in the same line, with Adam Smith beside them from AFC Bournemouth's 2-0 against Sunderland. The middle is two clean sheets and a goal: Boubacar Kamara for the Villans, Tyler Adams for the Cherries, and James Maddison scoring in Tottenham Hotspur's 3-1 win over Coventry City. Up front Omar Marmoush scored in that same match, and Daizen Maeda scored in Ipswich Town's 3-2 defeat away to Manchester City.",
+  "subjects": [
+    "bin-xi:gw7"
+  ],
+  "image": null,
+  "face": {
+    "code": 551210,
+    "name": "Jorrel Hato",
+    "clubId": 6,
+    "position": "D"
+  },
+  "ties": [],
+  "extras": {
+    "bin": {
+      "shape": "5-3-2",
+      "total": 73,
+      "xi": [
+        {
+          "name": "Zion Suzuki",
+          "code": 433969,
+          "slot": "G",
+          "club": "AVL",
+          "points": 8,
+          "minutes": 90
+        },
+        {
+          "name": "Adam Smith",
+          "code": 54469,
+          "slot": "D",
+          "club": "BOU",
+          "points": 6,
+          "minutes": 90
+        },
+        {
+          "name": "Jorrel Hato",
+          "code": 551210,
+          "slot": "D",
+          "club": "CHE",
+          "points": 9,
+          "minutes": 90
+        },
+        {
+          "name": "Calvin Bassey",
+          "code": 232892,
+          "slot": "D",
+          "club": "FUL",
+          "points": 7,
+          "minutes": 90
+        },
+        {
+          "name": "Antonee Robinson",
+          "code": 169528,
+          "slot": "D",
+          "club": "FUL",
+          "points": 7,
+          "minutes": 90
+        },
+        {
+          "name": "Timothy Castagne",
+          "code": 166477,
+          "slot": "D",
+          "club": "FUL",
+          "points": 6,
+          "minutes": 90
+        },
+        {
+          "name": "Tyler Adams",
+          "code": 200785,
+          "slot": "M",
+          "club": "BOU",
+          "points": 5,
+          "minutes": 88
+        },
+        {
+          "name": "Boubacar Kamara",
+          "code": 226944,
+          "slot": "M",
+          "club": "AVL",
+          "points": 5,
+          "minutes": 90
+        },
+        {
+          "name": "James Maddison",
+          "code": 172780,
+          "slot": "M",
+          "club": "TOT",
+          "points": 7,
+          "minutes": 68
+        },
+        {
+          "name": "Omar Marmoush",
+          "code": 438234,
+          "slot": "F",
+          "club": "TOT",
+          "points": 7,
+          "minutes": 86
+        },
+        {
+          "name": "Daizen Maeda",
+          "code": 442967,
+          "slot": "F",
+          "club": "IPS",
+          "points": 6,
+          "minutes": 70
+        }
+      ],
+      "keyStats": [
+        {
+          "label": "Most shots",
+          "value": "Maddison, Marmoush 2"
+        },
+        {
+          "label": "Chances created",
+          "value": "Smith 2"
+        },
+        {
+          "label": "Top xG",
+          "value": "Smith 0.54, Maeda 0.40"
+        }
+      ]
+    }
+  }
+}

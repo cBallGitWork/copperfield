@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-// The elevens' hourly commits stop rebuilding production (vercel.json), so a page reads them off the branch.
+// A page reads the elevens off the branch, ahead of the deploy each of their commits starts.
 
 vi.mock("next/cache", () => ({ unstable_cache: <F>(read: F) => read }));
 const held = { manifest: { gameweek: 7 }, fetchedAt: "2026-10-16T10:07:00Z", source: "rotowire", clubs: {} };
@@ -49,6 +49,17 @@ describe("the predicted elevens", { timeout: 20_000 }, () => {
     answer = () => new Response("<!doctype html>", { status: 200 });
     vi.resetModules();
     expect(await (await import("./predictedXi")).predictedElevens()).toBe(held);
+  });
+
+  // 19 Oct 2026: the repo went private, so the raw file 404s on every read; production logged it each minute.
+  it("stop asking the branch once it says the file is not there", async () => {
+    onVercel();
+    answer = () => new Response("Not Found", { status: 404 });
+    const { predictedElevens } = await import("./predictedXi");
+    expect(await predictedElevens()).toBe(held);
+    expect(await predictedElevens()).toBe(held);
+    expect(asked).toHaveLength(1);
+    expect(console.error).not.toHaveBeenCalled();
   });
 
   it("are the build's off Vercel, without asking anyone", async () => {

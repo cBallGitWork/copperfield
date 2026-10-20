@@ -10,4 +10,11 @@ describe("the app's Link", () => {
     const last = Children.toArray(link.props.children).at(-1);
     expect(isValidElement(last) && last.type).toBe(Pending);
   });
+
+  it("tells the back plate's trail a tab replaces its page rather than leaving it", () => {
+    const tab = Link({ href: "/prem/match/81/players", replace: true, children: "Line-ups" }) as ReactElement<Record<string, unknown>>;
+    const row = Link({ href: "/prem/match/81", children: "Arsenal v Spurs" }) as ReactElement<Record<string, unknown>>;
+    expect(tab.props["data-replace"]).toBe("");
+    expect(row.props["data-replace"]).toBeUndefined();
+  });
 });

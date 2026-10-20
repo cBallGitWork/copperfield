@@ -1,6 +1,9 @@
-import type { InboxItem } from "@epl/core";
-import { londonMoment } from "@epl/core";
+import type { InboxItem, Mention } from "@epl/core";
+import { bodySpans, londonMoment } from "@epl/core";
 import { LABEL } from "@/app/desk";
+import Link from "@/app/components/shell/Link";
+import { playerHref } from "@/app/players/routes";
+import { teamHref } from "@/app/squad/routes";
 import ButtonLink from "../components/shell/ButtonLink";
 
 /** The item you are reading, as a letter in a panel: From, Subject in CM's yellow, Date, then the body. */
@@ -19,7 +22,22 @@ export default function Letter({ item }: { item: InboxItem }) {
         {/* Only when the sender ("The FA", "The transfer desk") does not already name the squad. */}
         {item.about === null ? null : <Field label="Squad">{item.about}</Field>}
       </header>
-      <p className="pt-3 text-sm leading-relaxed text-ink lg:pt-4 lg:text-base">{item.body}</p>
+      <p className="pt-3 text-sm leading-relaxed text-ink lg:pt-4 lg:text-base">
+        {/* Each man to his page and each team to its squad; the words are the body's own. */}
+        {bodySpans(item.body, item.mentions ?? []).map((span, at) =>
+          span.mention === null ? (
+            span.text
+          ) : (
+            <Link
+              key={at}
+              href={mentionHref(span.mention)}
+              className="underline decoration-muted underline-offset-2 hover:decoration-ink"
+            >
+              {span.text}
+            </Link>
+          ),
+        )}
+      </p>
       {item.link === undefined ? null : (
         <div className="flex pt-3 lg:pt-4">
           <ButtonLink href={item.link.href}>{item.link.label}</ButtonLink>
@@ -27,6 +45,10 @@ export default function Letter({ item }: { item: InboxItem }) {
       )}
     </article>
   );
+}
+
+function mentionHref(mention: Mention): string {
+  return "fantraxId" in mention ? playerHref(mention.fantraxId) : teamHref(mention.teamId);
 }
 
 /** One line of the letter's head: a fixed-width label, so the values line up, then the fact. */

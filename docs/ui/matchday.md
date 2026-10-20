@@ -12,15 +12,36 @@ whose phone tab Live has taken. Opening the app in that hour lands on Live, and 
 page polls at the live rate. Replay reads the round ahead from the same hour, as FPL
 turns its round 90 minutes before the first kickoff.
 
+**Scores shows one match day at a time, with arrows to the others** (Craig, 19 Oct 2026: *"live scores
+shows the days games, why dont we have a back/forward arrow for each day so you can access?"*). Under the
+Premier League section's head, `‹ Sat 18 Oct ›` steps through the London days the gameweek has matches on
+(`matchDays`, `dayStep`); it opens on today when there is football today, else the next match day, else the
+last, and `?day=2026-10-18` names any other. An arrow at either end of the gameweek is an inert outline. Each
+day's goals follow it. The draft's ties below stay the gameweek's. With no match dated, the gameweek shows
+whole and no arrows are drawn. Until then today's matches showed, or the whole gameweek when today had none
+(Craig, 5 Sep 2026).
+
 **Scores carries the goals** (16 Oct 2026, the review's 15:50 test: "who scored" took a tap):
 under each Premier League row with a goal, home's down the left and away's down the right,
 oldest first, `Haaland 65′ AS Doku`, a penalty `pen` and an own goal `og` under the side it
-counts for; the reader's men are in the accent. Off the vidiprinter's own join (`fixtureGoals`
-over `wireLines`), so the two views cannot disagree. Scores stays the landing view and the
-football stays first (Craig, 21 Sep 2026). **Each tie side says its men still to play** under the
+counts for; the reader's men are in the accent. Off the ownership join (`fixtureGoals` over
+`wireLines`). Scores stays the landing view and the football stays first (Craig, 21 Sep 2026). **The reader's own tie leads the league list** (19 Oct 2026, the
+behaviour review: on a six-match Saturday it was the last of five rows, below the tab bar); the rest keep
+Fantrax's order, and a signed-out reader sees that order unchanged (`readerFirst`). **Each tie side says its men still to play** under the
 name, `2 to play` or `all played` (`toPlayWord`, as the head-to-head board prints it).
 
-**The wire's names come off the team sheets too** (`roundCodes`): the bridge is harvested by
+**`Share the scores` sends the league list as a picture** (Craig, 19 Oct 2026: *"share button or screenshot to
+capture the list of all matches, i use that more"*). One plate under the draft's ties, while Scores shows them.
+On a phone whose share sheet takes a file (`navigator.canShare({files})`, the iPhone) it opens the sheet with
+`draft-gameweek-7.png`; anywhere else, or if the sheet fails, the picture opens in a tab to be held and saved.
+`/matchday/share.png` draws it (`shareList` lays it out, `shareListCard` paints it): the gameweek, `as of 15:52`
+while the scores can move, `Full time` once the football has stopped and `Final` at FPL's sign-off, then every
+tie as Live lists it, the short name, the place, the score off Live's own read and `2 to play`; the dash for a
+total not given. The league's order, with no side in the accent: it goes to the whole group, so it is the same
+picture for every reader and caches for 30s. 780px wide, as tall as its rows, so a cup week grows it. No source
+is named on it.
+
+**The scorers' names come off the team sheets too** (`roundCodes`): the bridge is harvested by
 hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers printed `—`.
 
 ## On the page
@@ -39,56 +60,16 @@ hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers print
    like if you only ever picture a Saturday. GW1 ran Friday night to Monday
    night and the strip read `15:00` above `14:00` — right, because one was
    Saturday and the other Sunday, and unreadable, because it said neither.
-3. **`Wire`** — Sky's teleprinter, with the ownership on it. Craig, 5 Sep 2026,
-   with a still of Soccer Saturday: *"the wire should mock Gillette Soccer
-   Saturday a little like this. Have the minute in brackets rather than the blue
-   tab. Wire should also include half and full time."* Sky runs `GOAL   LEEDS 1
-   BRISTOL CITY 0   LUKE AYLING (16)`; ours keeps the word and the man, puts the
-   minute in brackets after his name, and spends the middle of the row on the
-   sentence no score centre in the world prints — the manager who holds him.
-
-   **The minute left CM's blue index block for those brackets.** The block was a
-   royal-blue plate down the left of every row restating a number that belongs to
-   the name beside it, and it was the loudest object on the panel. A wire is read
-   down the names.
-
-   **A manager's bracket wraps under his man, never cut** (review M4: 12 cut on 11
-   lines at 390). The brackets are already short names, so only a wrap saves them.
-
-   **`FT` rows carry the scoreline**, interleaved by wall clock like everything
-   else, because full time is the one thing a scoreline cannot say about itself: a
-   2-1 with a clock on it and a 2-1 that is finished look identical. `FT` is
-   amber (`--color-mid`, a fact and a ledger line) since Craig's *"FT should be
-   yellow, grey bad"* (1 Oct 2026): not the accent, which means "yours" on this
-   very panel, nor `--color-live`, which means a match in PLAY. Off the SAME
-   cached round read as the goals — one upstream request for ten matches.
-
-   **One face for the whole line** (1 Oct 2026): the chrome face for the word,
-   the names, the minute and the managers, names a step up. The minute and the
-   manager are ink: a name is white, and yours is the accent. The assister is
-   marked `As`, not `Assist`, so his manager fits at 390 (Craig, 2 Oct 2026:
-   *"Could just put 'As'"*).
-
-   **Half time was here for an evening and went** (Craig, 5 Sep 2026: *"ditch the
-   HT"*). On a Saturday teatime it lands within an hour of full time with the
-   scoreline unchanged between them, so the wire drew `HT HUL 0 v AVL 0` directly
-   under `FT HUL 0 v AVL 0` — ten fixtures would have been twenty rows of
-   furniture between the goals. The derivation that fed it went too: the Premier
-   League publishes `halfTimeScore` on its per-fixture DETAIL read and not on the
-   round one (0 of 10, counted 5 Sep 2026), which is still worth knowing and is
-   why the score had to be counted off the goals rather than read.
-
-   **Two versions, behind a `Rows · Report` strip.** The second is Opta's own
-   prose, shortened — see `roundCommentary`. It carries the VAR-cancelled goal and
-   the man who won a penalty, which the row wire has no source for, and it loses
-   the ownership, which is the row wire's whole reason for existing. A temporary
-   object: the loser is deleted rather than kept behind a flag.
+3. ~~**`Wire`**, the vidiprinter~~ — **superseded 19 Oct 2026** (Craig: *"ditch vidiprinter, no
+   longer needed"*). Sky's teleprinter with the ownership on it, behind its own tab since 5 Sep;
+   Scores has carried the goals under each match since 16 Oct, so the tab, the component and the
+   full-time and red-card reads that fed only it are gone. Live's strip is `Scores · Top stats`.
 4. **`GameweekView`** — the round's fixtures (see [gameweek.md](gameweek.md)),
    now with **your players marked and every scorer tagged with the squad holding
    him**. The two halves of the page finally share both grammars: the scoreline,
    and the accent mark that means "yours".
 
-**Top stats**, the third view (`?view=stats`; Craig, 1 Oct 2026: *"match day have 3rd tab, that
+**Top stats**, the second view (`?view=stats`; Craig, 1 Oct 2026: *"match day have 3rd tab, that
 shows top stats for just this gameweek, like xg, fpts, ratings etc"*): the gameweek's ten leaders in
 Fantrax points, the DefCon count (defenders, then midfielders and forwards together; no keeper list,
 as the league counts no keeper DefCon), xG and xA, each man with whoever holds him. Craig, 11 Oct
@@ -97,7 +78,7 @@ defcon"*, then *"Just group defcon mid and forward together. Use the actual valu
 The phone picks one list from a strip (`Points · DefCon D · DefCon M/F · xG · xA`, `&stat=`; DefCon is its one name on every screen, with the slots it counts, 16 Oct 2026, review N30); a desk shows
 all five, three across.
 
-- **Each list is the Data tab's `LeaderBoard`** ([prem.md](prem.md)), with no `Top 50` plate: the
+- **Each list is a `matchday/LeaderBoard`**, Prem › Data's own until that page went (19 Oct 2026): the
   same head, places shared by men level on the figure printed, crest, name linking to his page,
   amber for every figure, all of them recorded.
 - **Who holds him is the Data boards' `Holder`**: `(Yours)` in the accent, a rival's short name quiet,
@@ -116,7 +97,7 @@ all five, three across.
 - **xG and xA** are FPL's round figures, read once per man, for everyone who played.
 - The rating list went on 11 Oct; the season's marks are still a Data tab list.
 
-Last, on every view, **The desk** ([desk.md](desk.md)), then **Matchups on Fantrax**: their live scoring for this gameweek's period
+Last, on every view, **Matchups on Fantrax**: their live scoring for this gameweek's period
 (`livescoring;period={n}`, `FANTRAX_MATCHUPS_PATH`), or their current period when we could not
 read ours (Craig, 1 Oct 2026: *"have fantrax link at bottom which goes to the match ups screen"*).
 
@@ -125,6 +106,9 @@ lineup lock while it is ahead (`lockAhead`, off the league's roster periods, han
 panel as plain data), and the first kickoff when the league gives no lock. FPL's deadline
 went on 12 Oct 2026; the lock took its place on 16 Oct (the review: Friday's Live said
 "starts Sat 12:30" and never "lock 12:15").
+
+**Every draft score counts the auto subs** (`liveScores`; Craig, 19 Oct 2026: GW7's Raccoons read 34, not
+Fantrax's 31, with Kerkez on for Sarr): one figure per side, the one the head-to-head prints ([matchup.md](matchup.md#auto-subs)).
 
 **When a live-score read fails**, Live keeps the last good head-to-head scores, and each
 draft section's head says `as of 15:47` once they are older than the present tense

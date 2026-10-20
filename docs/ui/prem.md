@@ -1,8 +1,8 @@
 # `/prem` — the FA Barclays Premiership
 
-The real competition, on the desk. Five routes: the table, the fixtures (a
-round at a time, played or to come), the team-stats board, the season's leaders (Data), and a club page the
-first two link into.
+The real competition, on the desk. Three routes: the table, the fixtures (a
+round at a time, played or to come), and a club page the two link into. Team Stats and Data were cut on
+19 Oct 2026 (below).
 
 `../rules/DESIGN.md` is binding for colour and type and this file defers to it.
 
@@ -62,15 +62,12 @@ reproduction in the app and sets most of its decisions:
 
 ## The strip
 
-`Table · Fixtures · Team Stats · Data`; Results and Fixtures became one on 13 Oct 2026. The reference runs four; Data
-is CM's Player Stats, deferred on 2 Sep 2026 and arrived on 1 Oct as a view of
-this section. Until then the Data plate led out to the pool and no tab drew
-current on it. There is still **no foot row**: a row of one is the stray button
-`league/SectionNav` records Craig rejecting.
+`Table · Fixtures` since 19 Oct 2026; Results and Fixtures became one on 13 Oct 2026. Team Stats and Data are gone
+(below). Two plates is still a strip, not the stray button of one that `league/SectionNav` records Craig rejecting.
+There is still **no foot row**.
 
-The strip is a `word` strip: under a thumb each plate is sized to its label, so
-"Team Stats" sits on one line at 11px from 375 up (27 Sep 2026; it wrapped in an
-equal 76px share, which is why the strip was 9px until then). Under 375 it drops to 9px.
+The strip is a `word` strip: under a thumb each plate is sized to its label, at 11px from 375 up; under 375 it drops
+to 9px.
 
 **A plate replaces the page in history** (Craig, 11 Oct 2026: *"the back button should leave the
 section aka prem"*). `TabStrip` does it once for this strip, a club's, a match's and their foot rows,
@@ -128,18 +125,15 @@ It costs one thing more the club page does not: **a second cached FPL read**,
 season's `stats` blocks are 183 KB today and about 1.1 MB by May, and that read
 is on the paper's front page.
 
-`/prem` itself — the table and team stats — still costs no
+`/prem` itself, the table, still costs no
 provider request. **Fixtures does for a reader with a team**: its "N yours" reads the league's squads (`marks()`,
-the `leagueCache` entry the match page shares), and a reader without one costs none. **Data does**: its Fantrax points list reads the pool
-(`getLeaguePool`, the Data board's own cache entry) and its names link through
-`leagueOpinions`, as a club page's do. Its Chances and Crossing lists read the
-committed stats export, which costs none.
+the `leagueCache` entry the match page shares), and a reader without one costs none.
 
 ## Fixtures
 
 One read, one round on screen, opening on the latest under way (`openGameweek`), or on the next once every
 match of it is finished (Craig, 16 Oct 2026, as Draft's Fixtures), with arrows either side of its head to step a
-round (`besideGameweek`); `?gw=` names any. A round in play shows its scores as they stand, as Live does.
+round (`beside`); `?gw=` names any. A round in play shows its scores as they stand, as Live does.
 
 They deliberately do **not** use `components/football/MatchList`. That component
 expands a match into who did what, off the per-player stats a snapshot carries
@@ -156,69 +150,11 @@ column is held. This is the one owner mark in the section: the table still carri
 A fixture FPL has not assigned to a gameweek is left out rather than filed under
 nought. One it has not dated reads **TBC** rather than a guessed kickoff.
 
-## Team Stats
+## Team Stats and Data — removed 19 Oct 2026
 
-A leaderboard, not a spreadsheet: one measure at a time, every club in order, the
-figure at the end. Seventeen measures as seventeen columns is what a provider's
-own page does and is unreadable under a thumb.
-
-*`league/team-stats` used to record the same ruling off the same shot and no
-longer does: its foot row had already cut twelve categories to a group of three
-or four, and on 11 Sep 2026 it began drawing the whole group at once. This board
-has no such row — seventeen measures in one list — so the ruling stands here on
-its own arithmetic rather than by agreement with the other board.*
-
-**The category list lives in the app** (`prem/team-stats/categories.ts`), not in
-core. `clubStats` and `leagueTable` are the domain and are tested on what a club
-has done; *which* of their fields are worth a screen is a product decision that
-changes when Craig looks at it rather than when the competition does.
-`league/team-stats` reads its categories from core because Fantrax defines those.
-Nobody defines these but us.
-
-Every category declares which way is good. Goals conceded and matches without
-scoring open smallest-first, because a board that did otherwise would head the
-ranking with the worst side in the division. Ties fall back to the table's own
-order, so two clubs level on clean sheets do not swap places between refreshes.
-
-**Expected conceded is the squad's FPL xGC over eleven** (1 Oct 2026). FPL credits
-every man on the pitch with the side's chances against, so the squad's sum is about
-eleven sides' worth: Arsenal printed 44.4 after GW5 where the side's own figure
-is 4.04. Data › Teams divides the same way. The three expected figures print to two
-places, as FPL publishes them.
-
-## Data — the season's leaders
-
-Craig, 1 Oct 2026: *"simple list like top scorer, top xg, top fantasy ratings etc
-in a list, not a link to data section, with a top 50 for each"*. Thirteen lists,
-each the top twenty with a `Top 50` plate under it (`?list=…&n=50`), in five sections
-(Craig, 8 Oct 2026: *"show a top 20 as default, and organise it better"*): Attacking
-(top scorers, assists, expected goals, expected assists), Fantasy (Fantrax points,
-match ratings) and Defending (DefCon points, saves). Clean sheets went the same day:
-too many men share a place. Chances (shots, chances created, big chances created, big
-chances missed) and Crossing (crosses) came on 9 Oct (Craig: *"We are missing a lot of
-stats like shots, chances created, maybe even big chances"*). A row on the desk holds
-four lists, so a section holds four at most: Attacking stands four across, Fantasy and
-Defending share the row beneath, Chances stands four across under them and Crossing
-alone at the foot. The one asked for runs to fifty. A phone gets a picker and one list
-at a time.
-
-- **One figure per list, and a list that is not FPL's says whose it is**: *Match
-  ratings* in cyan, the derived slot (the average of his marks
-  once he is rated in half as many matches as the most-rated man), *DefCon points*
-  in cyan too (ours, as on a squad's Stats tab; absent where the league prices no
-  DefCon), and *Fantrax points* in its bar (the served league's own, never beside
-  FPL's count of anything).
-- **A list ranks on the figure it prints**, so two marks that both read 6.3
-  share a place, and a nought earns none.
-- A man who has left the division is off every list (`onTheBooks`).
-- **Chances and Crossing are the stats league's season counts** (`intelStats`, the
-  daily export in `data/intel/stats/26-27.json`), joined on FPL's code; a man the file
-  does not carry, or carries with no reading, is on none of them. Each section is
-  dated `Season to …`, the export's day, because the FPL lists above move the night a
-  match ends. Amber, being recorded counts, and no byline: nothing else here counts
-  shots, chances or crosses, so none can be taken for another's (DESIGN §7). `KP` is
-  titled *Chances created*; Crosses counts every cross, accurate or not, because the
-  accurate count tied too many men to rank.
+Craig, 19 Oct 2026, *"ok"* to the call to cut them: Team Stats repeated Data › Clubs and Data repeated the Players and Adv Stats boards. Both routes redirect, not permanently (`next.config.ts`): `/prem/team-stats` to
+`/players/teams`, `/prem/data` to `/players`. Live's Top stats kept the leaders' list and board it borrowed
+(`matchday/lists.ts`, `matchday/LeaderBoard.tsx`). What they were is in git history.
 
 ## The club — a spine, not a page
 
@@ -362,7 +298,7 @@ the same export that will fill the Pos column — one crossing, not two.
 
 | Screen | State | What it says |
 |---|---|---|
-| Table, Results, Fixtures, Team Stats | FPL silent | `Nothing`, with the provider's code |
+| Table, Fixtures | FPL silent | `Nothing`, with the provider's code |
 | `/prem/club/[code]` | code is not an integer, or names no club | `notFound()` |
 | Squad | FPL lists nobody | `TabEmpty` |
 | Squad | Fantrax silent | Elig empties to `—`; the squad still renders |
@@ -378,7 +314,7 @@ the moment somebody shares it, and FPL's per-season ids are recycled
 
 ## The route group
 
-`prem/(competition)/` holds the table, fixtures and team stats; the
+`prem/(competition)/` holds the table and fixtures; the
 club pages sit outside it. The URLs are unchanged — a group is invisible to the
 router — and the reason is `loading.tsx`: Next applies a segment's loading file
 to everything beneath it, so a league-table skeleton at `/prem` was streamed in
@@ -389,9 +325,9 @@ has one since 7 Oct 2026, so the group now only groups.
 
 ## What is deliberately absent
 
-- **Player Stats.** Deferred, above. The football layer now carries goals,
-  assists and clean sheets for it (`SeasonTotals`), and the bound travels with
-  them: those three may not appear on a fantasy screen beside a Fantrax figure.
+- **Player Stats.** Built as Data on 1 Oct 2026 and cut on 19 Oct (above): Data's Players and Adv Stats boards
+  answer it. The bound on FPL's goals, assists and clean sheets (`SeasonTotals`) travels with them: those three may
+  not appear on a fantasy screen beside a Fantrax figure.
 - **A position column anywhere.** FPL's `element_type` is FPL's own fantasy
   classification, not a fact about a footballer, and it is why position left the
   football layer in the first place.

@@ -2,7 +2,7 @@ import { type FootballPlayer, type RawPlFixture, plPlayerCodes } from "@epl/core
 import { optaToCode, plFixture, plRound, playerCodes } from "../plFeed";
 import { orDegraded } from "../refusals";
 
-// The wire's identity join: the bridge, plus every man the round's team sheets name, so a man the bridge has not
+// The goals' identity join: the bridge, plus every man the round's team sheets name, so a man the bridge has not
 // harvested yet still has a name beside his goal, as he does on the match page.
 
 /** The bridge's Premier League id → FPL code, with each team sheet's men added. */

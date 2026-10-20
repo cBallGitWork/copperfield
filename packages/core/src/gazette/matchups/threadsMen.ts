@@ -1,5 +1,5 @@
 import { CLEAN_SHEET_MINUTES, DRAFT_DESK, DRAFT_NEWS } from "../../config";
-import { blank } from "./autoSubs";
+import { blank } from "../../league/autoSubs";
 import type { MatchupContext } from "./brief";
 import { counted } from "./state";
 import { benchLines, clubLines, fitnessLine, isLate, keeperHauled, lostCleanLine, minutesLine, newLine, pts, returnCount, scoredLine, uncoveredLine, whenScored } from "./stories";

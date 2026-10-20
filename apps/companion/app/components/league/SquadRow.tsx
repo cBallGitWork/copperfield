@@ -13,6 +13,7 @@ import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
 import { QUIET_NOTE, ROW_NAME } from "@/app/desk";
 import { returnDate } from "./returnDate";
+import type { AutoSubMark } from "./autoSubbed";
 
 // One man's row in a squad list: our position, his club's crest, his name, his fixture and his figure.
 
@@ -27,11 +28,14 @@ export default function SquadRow({
   eligible,
   onOpen,
   reserve,
+  autoSub,
 }: {
   player: SquadPlayerDetail;
   eligible: string[] | undefined;
   onOpen?: () => void;
   reserve: boolean;
+  /** His auto sub, if he has one: on for a man who did not play, or off for a reserve. */
+  autoSub?: AutoSubMark;
 }) {
   const { club, points } = player;
   const resolved = isResolved(player.rostered) ? player.rostered : null;
@@ -79,6 +83,11 @@ export default function SquadRow({
           <StateBox player={footballer} />
         </span>
         {back === null ? null : <span className={`${QUIET_NOTE} shrink-0 leading-tight`}>{back}</span>}
+        {autoSub === undefined ? null : (
+          <span className="shrink-0 truncate text-2xs leading-tight text-info">
+            {autoSub.on ? `Auto-sub for ${autoSub.with}` : `Auto-sub: ${autoSub.with} on`}
+          </span>
+        )}
       </span>
 
       {/* His fixture this week; his own club is not repeated beside it, or it reads as two unrelated clubs. */}

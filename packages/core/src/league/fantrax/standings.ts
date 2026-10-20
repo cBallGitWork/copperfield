@@ -1,6 +1,7 @@
-import type { StandingsRow } from "../types";
+import type { ClaimPlace, StandingsRow } from "../types";
 import type { RawStandingsPage, RawStandingsTable, RawTableCell } from "./standingsPage";
 import { numeric } from "./stats";
+import { sharedPlaces } from "../../places";
 
 // The league table, off the page Fantrax draws for its own site: the only read carrying league points. Pure.
 // Points are READ, never computed, as what a win is worth is a commissioner setting.
@@ -47,6 +48,23 @@ export function mapStandings(raw: RawStandingsPage): StandingsRow[] {
   return placeTable(rows);
 }
 
+/** Fantrax's waiver claim order, first claim first, off its own column: never derived from the table, since a claim
+ *  sends its maker to the back. A team with no readable place is left out. */
+export function mapClaimOrder(raw: RawStandingsPage): ClaimPlace[] {
+  const table = standingsTable(raw);
+  if (table === null) return [];
+
+  const team = columns(table.fixedHeader?.cells).get(TEAM);
+  const place = columns(table.header?.cells).get("wwOrder");
+  const order: ClaimPlace[] = [];
+  for (const row of table.rows ?? []) {
+    const teamId = at(row.fixedCells, team)?.teamId;
+    const value = numeric(at(row.cells, place)?.content);
+    if (teamId !== undefined && value !== null && Number.isInteger(value) && value > 0) order.push({ teamId, place: value });
+  }
+  return order.sort((a, b) => a.place - b.place);
+}
+
 /** The table in the league's order: points, then fantasy points for. Teams level on both share a place (1, 1, 3) and
  *  are listed by name, as Fantrax re-deals its own ranks for them on every read. */
 export function placeTable(rows: readonly Unplaced[]): StandingsRow[] {
@@ -57,13 +75,8 @@ export function placeTable(rows: readonly Unplaced[]): StandingsRow[] {
       a.teamName.localeCompare(b.teamName, "en") ||
       a.teamId.localeCompare(b.teamId),
   );
-  const placed: StandingsRow[] = [];
-  ordered.forEach((row, at) => {
-    const above = placed[at - 1];
-    const level = above !== undefined && above.points === row.points && above.pointsFor === row.pointsFor;
-    placed.push({ ...row, rank: level ? above.rank : at + 1 });
-  });
-  return placed;
+  const ranks = sharedPlaces(ordered, (above, row) => above.points === row.points && above.pointsFor === row.pointsFor);
+  return ordered.map((row, at) => ({ ...row, rank: ranks[at] }));
 }
 
 /** The standings table among the per-round ones: the only one with a pinned TEAM column, never found by caption. */

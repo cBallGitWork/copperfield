@@ -13,12 +13,15 @@ export type {
   RosterSlot,
   StandingsRow,
   TransactionView,
+  ClaimPlace,
+  WaiverSchedule,
 } from "./types";
 
 export type {
   LivePlayerCategory,
   LivePlayerPoints,
   LiveSquadPoints,
+  LiveRemaining,
   LiveTeamScore,
   TeamProjection,
 } from "./points";
@@ -29,6 +32,7 @@ export {
   bandCategories,
   liveBreakdown,
   liveMinutes,
+  minutesByMan,
 } from "./breakdown";
 export type { BreakdownLine, CategoryBand, CategoryMan } from "./breakdown";
 
@@ -77,6 +81,7 @@ export type { Cup, GroupStage } from "./cups/declared";
 export { groupTable } from "./cups/groupTable";
 export { cupGroups, cupPlan } from "./cups/plan";
 export type { CupStage } from "./cups/plan";
+export { CUP_TIE_STEPS } from "./cups/tieBreak";
 
 export { FantraxError } from "./fantrax/errors";
 export { categoryPoints, keeperRung, pointsFor, returnPoints } from "./scoring";
@@ -84,16 +89,21 @@ export type { LeagueScoring, ScoringCategory, ScoringRules } from "./scoring";
 export { orphaned, unacknowledged } from "./fantrax/baseline";
 export type { AcknowledgedDifference } from "./fantrax/baseline";
 export { rulesCard, scoredSlots } from "./rulesCard";
+export { autoSubs, blank } from "./autoSubs";
+export type { AutoSub, PositionLimits, SubMan } from "./autoSubs";
+export { awaitsSub, withAutoSubs } from "./afterSubs";
+export type { AutoSubPair, SubsReading } from "./afterSubs";
 export {
   mapBenchPlayerPoints,
   mapLivePlayerPoints,
+  mapLiveRemaining,
   mapLiveScores,
   mapProjectedTotals,
 } from "./fantrax/livescoring";
 export { mapPoolStats, mapTeamStats, numeric } from "./fantrax/stats";
 export { mapStatSheet } from "./fantrax/statSheet";
 export type { StatSheet } from "./fantrax/statSheet";
-export { benchByPoints, mapBenchOrder } from "./fantrax/benchOrder";
+export { benchByPoints, mapBenchOrder, mapRosterSlots } from "./fantrax/benchOrder";
 export type { RawTeamRosterInfo } from "./fantrax/benchOrder";
 export { isFantraxPlayerId, mapPlayerProfile } from "./fantrax/profile";
 export type { PlayerIntel, PlayerMatch } from "./fantrax/profile";
@@ -134,7 +144,10 @@ export type { WriteAnswer } from "./fantrax/lineupWrite";
 export { mapTeamRosters } from "./fantrax/rosters";
 export { mapDraftPicks } from "./fantrax/draft";
 export type { DraftPick } from "./fantrax/draft";
-export { mapStandings } from "./fantrax/standings";
+export { mapClaimOrder, mapStandings } from "./fantrax/standings";
+export { fetchWaiverSettings } from "./fantrax/waiverClient";
+export { mapWaiverSchedule } from "./fantrax/waivers";
+export { nextRun, timeLeft, upcomingRuns } from "./waivers";
 export { mapSeasonResults } from "./fantrax/results";
 export type { PeriodResult } from "./fantrax/results";
 export { mapSeasonStats } from "./fantrax/seasonStats";

@@ -47,8 +47,8 @@ function Player({
         picked ? "ring-2 ring-accent" : ""
       } ${pick === "swappable" ? "ring-1 ring-accent/60" : ""} ${dim ? "opacity-30" : ""}`}
     >
-      {/* His fixture, not his club: before kickoff `show="points"` would repeat the club on his shirt. Eager, as
-          this pitch is the first screen: 14 lazy kits put its largest paint at 4.2 s on a throttled phone. */}
+      {/* His fixture even once he has played: the planner is about the week to come. Eager, as this pitch is the
+          first screen: 14 lazy kits put its largest paint at 4.2 s on a throttled phone. */}
       <SquadMarker player={player} show="fixture" eager />
     </button>
   );

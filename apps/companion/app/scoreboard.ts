@@ -1,25 +1,34 @@
 import {
   FANTRAX_LEAGUE_ID,
   FantraxError,
+  type AutoSubPair,
   type BreakdownLine,
   type FootballSnapshot,
   type LivePlayerPoints,
+  type LiveRemaining,
   type LiveTeamScore,
   type PendingCleanSheets,
   type RosterDisplay,
   type RosteredTeam,
   type ScoringCategory,
   type ScoringRules,
+  awaitsSub,
   fetchLiveScoring,
   liveBreakdown,
-  liveMinutes,
   mapBenchPlayerPoints,
   mapLivePlayerPoints,
+  mapLiveRemaining,
   mapLiveScores,
+  minutesByMan,
   pendingCleanSheets,
+  withAutoSubs,
 } from "@epl/core";
+import { benchRoster } from "./benchOrders";
+import { LIVE_REVALIDATE } from "./config";
 import { leagueCache } from "./leagueCache";
 import { orRefusal, tell } from "./refusals";
+import { leagueInfo } from "./round";
+import { rosterMinimums } from "./rosterMinimums";
 
 // The head-to-head board's reads and joins, kept out of the page.
 
@@ -33,31 +42,68 @@ const readScores = leagueCache("live-scores",
     players: [string, LivePlayerPoints[]][];
     /** Per team, the reserves Fantrax priced, which count in no total. */
     bench: [string, LivePlayerPoints[]][];
+    /** Each team's eleven and bench with the football each man has left, for the auto subs. */
+    remaining: LiveRemaining[];
     refused: string | null;
     /** When Fantrax answered: a refresh that fails serves this entry again, and its age is how Live tells. */
     fetchedAt: string | null;
   }> => {
     const raw = await orRefusal(fetchLiveScoring(FANTRAX_LEAGUE_ID, period));
     if (raw instanceof FantraxError) {
-      return { scores: [], players: [], bench: [], refused: tell(raw), fetchedAt: null };
+      return { scores: [], players: [], bench: [], remaining: [], refused: tell(raw), fetchedAt: null };
     }
     return {
       scores: mapLiveScores(raw).map((score) => [score.teamId, score]),
       players: mapLivePlayerPoints(raw).map((squad) => [squad.teamId, squad.players]),
       bench: mapBenchPlayerPoints(raw).map((squad) => [squad.teamId, squad.players]),
+      remaining: mapLiveRemaining(raw),
       refused: null,
       fetchedAt: new Date().toISOString(),
     };
   },
-  (error) => ({ scores: [], players: [], bench: [], refused: tell(error), fetchedAt: null }),
+  (error) => ({ scores: [], players: [], bench: [], remaining: [], refused: tell(error), fetchedAt: null }),
+  LIVE_REVALIDATE,
 );
 
-export async function liveScores(
-  period: number,
-): Promise<{ scores: Map<string, LiveTeamScore>; refused: string | null; fetchedAt: string | null }> {
+/** Every team's score this period with the auto subs counted, the one total any screen prints, and each team's subs. */
+export async function liveScores(period: number): Promise<{
+  scores: Map<string, LiveTeamScore>;
+  /** By team: who comes on for whom; absent where nobody does. */
+  subs: Map<string, AutoSubPair[]>;
+  refused: string | null;
+  fetchedAt: string | null;
+}> {
   // A Map does not survive the cache, so entries cross it and the Map is built out here.
-  const { scores, refused, fetchedAt } = await readScores(period);
-  return { scores: new Map(scores), refused, fetchedAt };
+  const { scores, players, bench, remaining, refused, fetchedAt } = await readScores(period);
+  const sides = await afterSubs(period, scores, [...players, ...bench], remaining ?? []);
+  return {
+    scores: new Map(sides.map((side) => [side.score.teamId, side.score])),
+    subs: new Map(sides.flatMap((side) => (side.subs.length === 0 ? [] : [[side.score.teamId, side.subs] as const]))),
+    refused,
+    fetchedAt,
+  };
+}
+
+/** Each team's score after Fantrax's end-of-period subs; a bench is read only where a starter finished without a minute. */
+async function afterSubs(
+  period: number,
+  scores: readonly [string, LiveTeamScore][],
+  priced: readonly [string, LivePlayerPoints[]][],
+  remaining: readonly LiveRemaining[],
+): Promise<{ score: LiveTeamScore; subs: AutoSubPair[] }[]> {
+  const info = await leagueInfo();
+  if (info === null) return scores.map(([, score]) => ({ score, subs: [] }));
+  const men = priced.flatMap(([, squad]) => squad);
+  const read = { points: new Map(men.map((man) => [man.fantraxId, man.points])), minutes: minutesByMan(men, info.scoringCategories) };
+  const limits = { min: rosterMinimums(), max: info.roster.maxActiveByPosition };
+  return Promise.all(
+    scores.map(async ([teamId, score]) => {
+      const side = remaining.find((men) => men.teamId === teamId);
+      if (side === undefined || !awaitsSub(side, read)) return { score, subs: [] };
+      // A blank is a played match, so the period is locked.
+      return withAutoSubs(score, side, { ...read, ...(await benchRoster(teamId, period, true)), limits });
+    }),
+  );
 }
 
 /** Every man Fantrax priced this period, eleven and reserves, by Fantrax id; empty when it refused. */
@@ -109,12 +155,7 @@ export async function squadLivePoints(
         ),
       ]),
     ),
-    played: Object.fromEntries(
-      [...eleven, ...reserves].flatMap((player) => {
-        const minutes = liveMinutes(player.counts, categories);
-        return minutes === null ? [] : [[player.fantraxId, minutes]];
-      }),
-    ),
+    played: minutesByMan([...eleven, ...reserves], categories),
   };
 }
 

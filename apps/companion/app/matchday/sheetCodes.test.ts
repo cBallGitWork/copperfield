@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 import { type FootballPlayer, type FootballSnapshot, type RawPlFixture, mapRoundGoals } from "@epl/core";
-import { isBreak, wireLines } from "./wireLines";
+import { wireLines } from "./wireLines";
 import { withSheets } from "./sheetCodes";
 
 vi.mock("../plFeed", () => ({}));
 
 // GW6: 6 of 36 scorers and 2 assisters printed "—" on the wire, Henderson twice, because the bridge was last
-// harvested on 7 Sep. The match pages named them all off the team sheets; the wire now reads the same sheets.
+// harvested on 7 Sep. The match pages named them all off the team sheets; Live's goals now read the same sheets.
 
 const HENDERSON = 3712;
 const MANZAMBI = 304175;
@@ -40,11 +40,11 @@ const players = [
 const snapshot = { clubs: [], players, fixtures: [] } as unknown as FootballSnapshot;
 
 function names(codes: Map<number, number>): (string | undefined)[] {
-  const lines = wireLines(mapRoundGoals([ROUND], codes), [], snapshot, undefined, null).lines;
-  return lines.flatMap((row) => (isBreak(row) ? [] : [row.man?.player.name, row.second?.player.name]));
+  const lines = wireLines(mapRoundGoals([ROUND], codes), snapshot, undefined, null);
+  return lines.flatMap((row) => [row.man?.player.name, row.second?.player.name]);
 }
 
-describe("the wire's names", () => {
+describe("the goals' names", () => {
   it("prints no name for a man the bridge has not harvested", () => {
     expect(names(new Map())).toEqual([undefined, undefined]);
   });

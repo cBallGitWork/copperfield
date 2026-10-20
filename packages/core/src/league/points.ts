@@ -43,3 +43,9 @@ export interface LiveSquadPoints {
   players: LivePlayerPoints[];
 }
 
+/** One team's eleven and bench by fantraxId, each with the share of his football still to come: nought is done. */
+export interface LiveRemaining {
+  teamId: string;
+  eleven: Record<string, number>;
+  bench: Record<string, number>;
+}

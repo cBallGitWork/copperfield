@@ -6,13 +6,10 @@ import {
   type FootballSnapshot,
   type MatchEvent,
   type PlayerMatchStats,
-  type RoundBreak,
   before,
   creditRoundAssists,
-  mapRoundBreaks,
   mapRoundGoals,
   plFixtureCode,
-  streamRedCards,
   withPlState,
 } from "@epl/core";
 import { replayAt } from "./clock";
@@ -42,12 +39,6 @@ export async function roundGoals(
   return goals.sort((a, b) => (b.absolute ?? 0) - (a.absolute ?? 0));
 }
 
-/** Every half time and full time reached in the round, oldest first; empty rather than a throw. */
-export async function roundBreaks(gameweek: number): Promise<RoundBreak[]> {
-  const round = await orDegraded(plRound(gameweek), () => null);
-  return round === null ? [] : asOf(mapRoundBreaks(round.content));
-}
-
 /** Each kicked-off fixture's commentary this round, keyed by FPL's fixture code, never its id, which
  *  the Premier League numbers differently. Up to ten reads a window; empty, never a throw. */
 export async function roundStreams(gameweek: number): Promise<Map<number, FixtureStream>> {
@@ -65,18 +56,8 @@ export async function roundStreams(gameweek: number): Promise<Map<number, Fixtur
   return new Map(entries.filter((entry) => entry !== null));
 }
 
-/** Every red card in the round, joined to the men who own them. Reds only: a round has about a
- *  hundred bookings, and a wire of yellows is a wire nobody reads down. */
-export function roundRedCards(
-  streams: ReadonlyMap<number, FixtureStream>,
-  players: readonly FootballPlayer[],
-  codes: Map<number, number> = playerCodes(players),
-): MatchEvent[] {
-  return asOf(streamRedCards(streams, codes));
-}
-
 /** The round's goals with the assists FPL pays and Opta never placed (`creditRoundAssists`).
- *  The streams are `roundRedCards`' own; the kinds are the stats league's (`roundAssistKinds`). */
+ *  The streams are `roundStreams`' own; the kinds are the stats league's (`roundAssistKinds`). */
 export function creditAssists(
   goals: readonly MatchEvent[],
   snapshot: FootballSnapshot,

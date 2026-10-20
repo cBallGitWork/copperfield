@@ -26,8 +26,6 @@ export interface PlayersSearchParams {
   sort?: string | string[];
   dir?: string | string[];
   all?: string | string[];
-  /** Projections' category: which of a week's points the columns show. */
-  cat?: string | string[];
 }
 
 /** The same query, narrowed. */
@@ -44,7 +42,6 @@ export interface PlayersQuery {
   per?: string;
   club?: string;
   panel?: string;
-  cat?: string;
 }
 
 /** The last value wins, as a browser does with a repeated field. */
@@ -61,7 +58,6 @@ export function playersQuery(raw: PlayersSearchParams): PlayersQuery {
     per: lastValue(raw.per),
     club: lastValue(raw.club),
     panel: lastValue(raw.panel),
-    cat: lastValue(raw.cat),
   };
 }
 

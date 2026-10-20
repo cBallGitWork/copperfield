@@ -15,6 +15,7 @@ export const LEAGUE_CAPTION: Record<LeagueSection, string> = {
   cups: "Cups",
   // Not a tab (`SectionNav` records why), but a section a route can BE on.
   matchups: "Matchups",
+  waivers: "Waivers",
 };
 
 /** The fantasy deep dive's bar; the rail says the same word. */
@@ -27,8 +28,6 @@ export const HEAD_TO_HEAD = "Head-to-head";
 export const PREM_CAPTION: Record<PremSection, string> = {
   table: "League Table",
   fixtures: "Fixtures",
-  teamStats: "Team Stats",
-  data: "Player Stats",
 };
 
 /** The word the inbox's bar ends with (`123 Mail`), and the whole bar for a reader with no team. */
@@ -42,9 +41,6 @@ export const SCORING_TITLE = "Scoring";
 
 /** The page that names who made the app's pictures and data. */
 export const CREDITS_TITLE = "Credits";
-
-/** Every score on one screen, Live's second page. */
-export const DESK_TITLE = "The desk";
 
 /** The squad index's bar: the reader's own, or every team's. */
 export const YOUR_SQUAD = "Your squad";

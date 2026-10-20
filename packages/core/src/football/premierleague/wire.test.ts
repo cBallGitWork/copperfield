@@ -3,7 +3,7 @@ import stream from "../__fixtures__/plTextstreamAssists.json";
 import fixture from "../__fixtures__/plFixtureAssists.json";
 import type { MatchEvent } from "../types";
 import type { RawPlEvent, RawPlFixture, RawPlTextstream } from "./raw";
-import { creditRoundAssists, streamRedCards, type FixtureStream } from "./wire";
+import { creditRoundAssists, type FixtureStream } from "./wire";
 
 // Manchester United 5-2 Ipswich Town, gameweek 2 — the fixture `assists.test.ts` records.
 // Three of United's assists are ones Opta never placed, owed to three different men, so
@@ -93,15 +93,5 @@ describe("creditRoundAssists", () => {
       ["68", null],
       ["82", FERNANDES],
     ]);
-  });
-});
-
-describe("streamRedCards", () => {
-  it("keeps only the sendings-off, filed under the stream's fixture code", () => {
-    const red: RawPlEvent = { id: 900, type: "red card", text: "Sent off.", time: { label: "77", secs: 4620 }, playerIds: [9566] };
-    const streams = new Map<number, FixtureStream>([[CODE, { events: [...EVENTS, red], kickoffMillis: 0 }]]);
-    const cards = streamRedCards(streams, codes);
-    expect(cards.every((card) => card.kind === "red-card" && card.fixtureCode === CODE)).toBe(true);
-    expect(cards.some((card) => card.id === 900 && card.players[0] === MAGUIRE)).toBe(true);
   });
 });
