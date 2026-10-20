@@ -22,9 +22,9 @@ export default function Masthead({
       {/* Allowed to wrap rather than shrink. */}
       <h1 className="paper-masthead text-balance pt-0.5 text-center">{PAPER_NAME}</h1>
 
-      {/* The dateline, fenced: date at the left, season at the right. */}
+      {/* The dateline, fenced: date at the left (an empty span holds the place when undated), season at the right. */}
       <div className={`${STANDING_CAPS} mt-2 flex items-baseline justify-between gap-3 border-y-2 py-1`} style={{ borderColor: "currentColor" }}>
-        <span>{at === null ? LEAGUE_NAME : londonDate(at)}</span>
+        <span>{at === null ? null : londonDate(at)}</span>
         <span className="numeric">{SEASON}</span>
       </div>
     </header>
