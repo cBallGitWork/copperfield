@@ -14,6 +14,8 @@ const NAME = "font-chrome text-lg font-bold lg:text-3xl";
 const SCORER_FIGURE = "numeric shrink-0 font-bold text-accent text-lg lg:text-3xl";
 /** The assister's minutes: the scorer's ink and column, at the assister's size. */
 const ASSIST_FIGURE = "numeric shrink-0 font-bold text-accent text-sm lg:text-xl";
+/** The owner's bracket, cut to nothing before the name loses a letter: a phone drew 'R. Sessegn…' for '(Dome)'. */
+const GIVES_WAY = "min-w-0 shrink-[999] truncate";
 
 /** One scorer with all his minutes, and under him the men who made them, in the order the goals came. */
 export function Goal({
@@ -55,9 +57,11 @@ export function Goal({
             className="flex min-h-9 w-full items-baseline gap-1.5 pl-3 text-left hover:underline lg:pl-4"
           >
             <span className={`${SMALL_CAPS} shrink-0 text-faint`}>A</span>
-            <span className="min-w-0 flex-1 truncate font-chrome text-sm font-bold text-muted lg:text-xl">
-              <PlayerName name={assister.name} short={fullFootballerName(assister)} />
-              <OwnedBy owner={owner} size="scoresheet" className="ml-1" />
+            <span className="flex min-w-0 flex-1 items-baseline font-chrome text-sm font-bold text-muted lg:text-xl">
+              <span className="min-w-0 truncate">
+                <PlayerName name={assister.name} short={fullFootballerName(assister)} />
+              </span>
+              <OwnedBy owner={owner} size="scoresheet" className={`ml-1 ${GIVES_WAY}`} />
             </span>
             {paired ? <span className={ASSIST_FIGURE}>{minutes(his)}</span> : null}
           </MaybeCard>
@@ -106,12 +110,12 @@ export function Man({
           <EventIcon glyph={glyph} />
         </span>
       )}
-      <span className="min-w-0 flex-1 truncate">
-        <span className={`group-hover:underline ${NAME}`}>
+      <span className="flex min-w-0 flex-1 items-baseline">
+        <span className={`min-w-0 truncate group-hover:underline ${NAME}`}>
           <PlayerName name={name} short={short} />
         </span>
-        {note === null ? null : <span className={`${SMALL_CAPS} ml-1.5 text-bad`}>{note}</span>}
-        <OwnedBy owner={owner} size="scoresheet" className="ml-1.5" />
+        {note === null ? null : <span className={`${SMALL_CAPS} ml-1.5 shrink-0 text-bad`}>{note}</span>}
+        <OwnedBy owner={owner} size="scoresheet" className={`ml-1.5 ${GIVES_WAY}`} />
       </span>
       <span className={SCORER_FIGURE}>{figure}</span>
     </MaybeCard>
