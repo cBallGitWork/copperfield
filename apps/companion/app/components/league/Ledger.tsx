@@ -60,7 +60,7 @@ export default function Ledger({
           {rows.map(({ deal, mover, instant, opens, in: arrived, out: left, partners }) => {
             const kind = (
               <span
-                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${groupByDay ? "min-w-0" : everyone ? "min-w-0 text-right" : "w-24"}`}
+                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${everyone ? "ml-auto min-w-0 text-right lg:ml-0" : groupByDay ? "min-w-0" : "w-24"}`}
               >
                 {kindOf(deal, arrived.length, left.length)}
               </span>
@@ -73,7 +73,7 @@ export default function Ledger({
                 ) : null}
                 {/* Two rows under a thumb, In beside the date or type and Out beside whose move; one row on a desk. */}
                 <li
-                  className={`cm-row grid ${groupByDay ? (everyone ? "grid-cols-[4.5rem_minmax(0,1fr)]" : "grid-cols-[4rem_minmax(0,1fr)]") : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5`}
+                  className={`cm-row grid ${groupByDay ? (everyone ? "grid-cols-[5.25rem_minmax(0,1fr)]" : "grid-cols-[4rem_minmax(0,1fr)]") : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5`}
                 >
                   <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
                     <Day at={instant} weekday={!everyone} deskOnly={groupByDay} />
@@ -154,16 +154,7 @@ function Side({
                 ) : (
                   <span className={CREST} />
                 )}
-                {/* Under a thumb one run of text, the position after the last word; a desk cuts the name, never the tag. */}
-                <span className="min-w-0 [overflow-wrap:anywhere] lg:flex lg:items-center lg:gap-1.5">
-                  <span className="lg:truncate">{player.playerName}</span>
-                  {player.position ? (
-                    <>
-                      {" "}
-                      <span className="whitespace-nowrap text-2xs font-bold text-mid lg:shrink-0 lg:text-xs">({player.position})</span>
-                    </>
-                  ) : null}
-                </span>
+                <Named name={player.playerName} position={player.position} />
               </>
             );
             // His page, at the tight row's 36 under a thumb; a deal from another feed carries no id and stays text.
@@ -182,6 +173,28 @@ function Side({
         )}
       </span>
     </span>
+  );
+}
+
+/** Under a thumb one run of text whose last letter carries the position, so the tag never starts a line alone; a desk
+ *  cuts the name, never the tag. Both render and CSS picks, as `TeamName` does. */
+function Named({ name, position }: { name: string; position?: string | null }) {
+  if (!position) return <span className="min-w-0 [overflow-wrap:anywhere] lg:truncate">{name}</span>;
+  const tag = "text-2xs font-bold text-mid lg:text-xs";
+  const last = [...new Intl.Segmenter("en", { granularity: "grapheme" }).segment(name)].pop()?.segment ?? "";
+  return (
+    <>
+      <span className="min-w-0 [overflow-wrap:anywhere] lg:hidden">
+        {name.slice(0, name.length - last.length)}
+        <span className="whitespace-nowrap">
+          {last}{"\u00a0"}<span className={tag}>({position})</span>
+        </span>
+      </span>
+      <span className="hidden min-w-0 items-center gap-1.5 lg:flex">
+        <span className="truncate">{name}</span>
+        <span className={`shrink-0 ${tag}`}>({position})</span>
+      </span>
+    </>
   );
 }
 
