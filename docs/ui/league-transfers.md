@@ -14,6 +14,9 @@ Transfers tab's ledger with each row's mover named, read off the same feed, so t
 - The ledger (`components/league/Ledger`, no `teamId`): the date block, **the mover** on his own colour, the type
   in the info ink, who came in, who went out, and a trade's partner. Under a thumb a plate prints the league's short
   name (*DOME*); the desk prints the full one.
+- **The type is the league's word** (`kindOf`): *Trade*; *Waiver* for a claim off waivers and its drop; *Free agent*
+  for a free agent signed for a drop (Craig, 20 Oct 2026, so this tab and Waivers' Last run agree); *Bin Pick Up*
+  and *To The Bin* for a one-sided claim. A claim the feed never said the route of stays *Waiver*.
 - **Under a thumb a transfer is two rows** (Craig, 19 Oct 2026: *"transfers tab, we can get each transfer to 2
   rows, on 3 currently"*). Row one is the date and the type, beside **In**; row two is the mover's plate, beside
   **Out**. The weekday stands down below `lg` (`16 Oct`, not `Fri 16 Oct`) so the date and the type share the
