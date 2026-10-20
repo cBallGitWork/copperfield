@@ -132,7 +132,8 @@ function Side({
           players.map((player) => {
             // His real club as its crest; an unknown club leaves the slot empty rather than guess.
             const crest = player.club ? crestForShortName(toFplClubCode(player.club)) : null;
-            const line = `flex min-w-0 items-center gap-1.5 ${NAME}`;
+            // The desk row's 28 floor on every name, linked or not, so stacked names keep one rhythm.
+            const line = `flex min-w-0 items-center gap-1.5 lg:min-h-7 ${NAME}`;
             const body = (
               <>
                 {crest ? (
@@ -187,11 +188,11 @@ function TeamPlate({ teamId, name }: { teamId: string; name: string }) {
   const colours = teamColours(teamId);
   return (
     <span
-      className={`block truncate px-1.5 py-0.5 text-center ${SMALL_CAPS}`}
+      className={`block truncate px-1.5 py-0.5 text-center lg:line-clamp-2 lg:whitespace-normal ${SMALL_CAPS}`}
       style={{ background: colours.primary, color: inkOn(colours) }}
     >
       {/* A manager who has left the league still has an id on the row. The league's short name under a thumb, where
-          the full one ran out of plate ("DOMEITALYC…"); the desk has the room. */}
+          the full one ran out of plate ("DOMEITALYC…"); the desk's full name wraps to two lines in the plate. */}
       {name === DASH ? "Unknown" : <TeamName teamId={teamId} name={name} />}
     </span>
   );

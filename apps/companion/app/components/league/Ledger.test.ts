@@ -63,3 +63,17 @@ describe("a transfer under a thumb (Craig, 19 Oct 2026: two rows, not three)", (
     expect(render(BEEF)).toContain('<span class="">Fri </span>16 Oct');
   });
 });
+
+// Review SHELL-1 and LEAGUE-6 (20 Oct 2026): desk names at 24px under the row's 28 floor, and plates cut at 128px.
+describe("a transfer on a desk", () => {
+  it("holds every name, linked or not, to the desk row's 28px floor", () => {
+    const linked: Deal = { ...WAIVER, inbound: [{ ...man("Levi Colwill", BEEF), fantraxId: "p1" }] };
+    const html = renderToStaticMarkup(createElement(Ledger, { deals: [linked], nameOf: named([{ teamId: BEEF, name: "Cowthenbeef" }]) }));
+    expect(html.match(/<a [^>]*class="[^"]*lg:min-h-7/g)).toHaveLength(1);
+    expect(html.match(/<span class="[^"]*lg:min-h-7/g)).toHaveLength(1);
+  });
+
+  it("lets a long team name wrap in its plate rather than cut", () => {
+    expect(render()).toContain("lg:line-clamp-2 lg:whitespace-normal");
+  });
+});
