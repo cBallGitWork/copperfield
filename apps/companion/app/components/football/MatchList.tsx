@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "@/app/components/shell/Link";
 import {
   type Club,
   type Fixture,
@@ -23,6 +24,7 @@ import { ROW_NAME } from "@/app/desk";
 import PlayerName from "../shell/PlayerName";
 import Scoreline from "../shell/Scoreline";
 import PlayerPortrait from "./PlayerPortrait";
+import { matchHref } from "../../prem/match/[id]/matchRoutes";
 
 // The matchday list: each fixture is a native <details>, so the drop-down needs no JavaScript.
 
@@ -172,6 +174,16 @@ function MatchRow({
             })}
           </ul>
         )}
+        {/* In the body, not the summary, so a tap on the row still only opens it. */}
+        <Link
+          href={matchHref(fixture.id, "overview")}
+          className="mt-1 flex min-h-11 items-center justify-end gap-1 text-xs font-semibold text-muted hover:text-ink lg:min-h-9"
+        >
+          Match
+          <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
       </div>
     </details>
   );

@@ -24,10 +24,15 @@ Drawn by `GameweekView`, which only this route uses. Linked from each "N yours" 
   who did what: goals, assists, cards, notable saves, ordered by impact (FPL's
   bonus left it on 6 Oct 2026: the FPL tab's alone).
   Merely turning out does not qualify — the drop-down answers "what happened",
-  not "who played".
+  not "who played". The foot of every opened row, played or not, is a **Match ›**
+  link to `/prem/match/[id]`, in the body rather than the summary so a tap on the
+  row still only opens it. The score prints as Prem's does, `1:3` in the reading
+  cyan through `Scoreline`.
 - **Your players marked.** A fixture with one of the reader's men in it carries
-  the standard accent border (`yoursBorder`, the same mark as every other "this
-  is yours" row) and a counted `2 yours` in the summary. Open it and a **Yours ·
+  the accent edge (`yoursEdge`, the same mark as every other "this is yours"
+  row) and a counted `2 yours` in the summary. A reader's every row holds the
+  count's fixed column and a clear edge of the same width, empty where he has
+  nobody, so the scores stay on one line; signed out, neither is held. Open it and a **Yours ·
   Saka · Gabriel** line sits above the contributions — a different question from
   the one below it, because "which of mine is in this match" has to include the
   man who has done nothing, which on a Saturday is most of them.

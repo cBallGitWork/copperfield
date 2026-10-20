@@ -6,6 +6,7 @@ import MatchList from "./MatchList";
 
 vi.mock("next/image", () => ({ default: () => null }));
 vi.mock("@/app/desk", () => ({ ROW_NAME: "" }));
+vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 
 /** One match and nobody in it yet, as the gameweek list draws it. */
 function list(status: FixtureStatus, now: boolean, mine?: Map<number, FootballPlayer[]>): string {
@@ -55,5 +56,16 @@ describe("a played match's score", () => {
     const out = list("finished", true);
     expect(out).not.toContain("0–0");
     expect(out).toMatch(/text-info[^>]*>0<span aria-hidden="true"[^>]*>:<\/span>0</);
+  });
+});
+
+describe("the way through to the match", () => {
+  it.each(["finished", "live", "upcoming"] as const)("leads an opened %s row to its match page", (status) => {
+    expect(list(status, true)).toContain('href="/prem/match/1"');
+  });
+
+  it("keeps the link out of the summary, so tapping the row still only opens it", () => {
+    const summary = list("finished", true).split("</summary>")[0];
+    expect(summary).not.toContain("/prem/match/");
   });
 });
