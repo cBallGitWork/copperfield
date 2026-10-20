@@ -56,11 +56,12 @@ function pastRounds(gameweek: number): Promise<(PlayerMatchStats[] | null)[]> {
   return Promise.all(Array.from({ length: gameweek - 1 }, (_, i) => fetchLive(i + 1).then(mapLiveStats).catch(() => null)));
 }
 
-/** Each man's season before this gameweek, from FPL's live figures per past gameweek, by code; null when a gameweek is
- *  missing, since a start or a goal in it would go uncounted. */
+/** Each man's season before this gameweek, from FPL's live figures per past gameweek, by code, with this gameweek's goals up
+ *  to `day`; null when a gameweek is missing, since a start or a goal in it would go uncounted. */
 export function seasonLines(
   past: readonly (readonly PlayerMatchStats[] | null)[],
-  snapshot: { players: readonly { id: number; code: number }[]; stats: readonly PlayerMatchStats[] },
+  snapshot: { players: readonly { id: number; code: number }[]; stats: readonly PlayerMatchStats[]; fixtures: readonly { id: number; kickoff: string | null }[] },
+  day: string,
 ): Map<number, SeasonLine> | null {
   const rounds = past.filter((rows) => rows !== null);
   if (rounds.length < past.length) return null;
@@ -68,19 +69,30 @@ export function seasonLines(
   const lines = new Map<number, SeasonLine>();
   const line = (code: number) => lines.get(code) ?? lines.set(code, { startsBefore: 0, matchesBefore: 0, goalsSeason: 0 }).get(code)!;
   for (const rows of rounds) {
+    // A double's rows each carry the gameweek's starts, so a gameweek counts its largest once.
+    const starts = new Map<number, number>();
     for (const row of rows) {
       const code = codeOf.get(row.playerId);
       if (code === undefined) continue;
-      const l = line(code);
-      l.startsBefore += row.starts;
-      l.goalsSeason += row.goals;
+      starts.set(code, Math.max(starts.get(code) ?? 0, row.starts));
+      line(code).goalsSeason += row.goals;
     }
+    for (const [code, n] of starts) line(code).startsBefore += n;
   }
+  const kickoffOf = new Map(snapshot.fixtures.map((f) => [f.id, f.kickoff]));
   for (const row of snapshot.stats) {
     const code = codeOf.get(row.playerId);
-    if (code !== undefined) line(code).goalsSeason += row.goals;
+    if (code !== undefined && (londonDayOf(kickoffOf.get(row.fixtureId)) ?? "") <= day) line(code).goalsSeason += row.goals;
   }
   return lines;
+}
+
+/** His starts this gameweek on days before `day`: FPL counts starts per gameweek, so today's start comes off it and his
+ *  earlier fixtures with minutes cap it. */
+export function startsEarlierThisRound(rows: readonly PlayerMatchStats[], kickoffOf: ReadonlyMap<number, string | null>, day: string, startedToday: boolean): number {
+  const round = Math.max(0, ...rows.map((r) => r.starts));
+  const earlier = rows.filter((r) => r.minutes > 0 && (londonDayOf(kickoffOf.get(r.fixtureId)) ?? day) < day).length;
+  return Math.max(0, Math.min(round - (startedToday ? 1 : 0), earlier));
 }
 
 function reportClub(club: Club | undefined, manager: string | null) {
@@ -112,7 +124,7 @@ export async function matchdayInput(opts: {
   const optaToCode = codesByOpta(snapshot.players);
   const league = leagueJoin(facts, periodFixtures(opts.scoring, season), clubOfCode, day, opts.scoring?.number ?? null);
   const past = await pastRounds(gameweek);
-  const seasons = seasonLines(past, snapshot);
+  const seasons = seasonLines(past, snapshot, day);
   if (seasons === null) say("  FPL would not give every past gameweek: no man's starts or goals this season are told.");
   const codeOfId = new Map(snapshot.players.map((p) => [p.id, p.code]));
   const liveLines = new Map(snapshot.stats.map((s) => [codeOfId.get(s.playerId) ?? -1, { minutes: s.minutes, saves: s.saves, expectedGoals: s.expectedGoals, expectedAssists: s.expectedAssists }]));
@@ -177,11 +189,14 @@ export async function matchdayInput(opts: {
     });
   }
 
-  // Each man's club matches before this day, which his starts are counted against.
+  // Each man's club matches before this day, which his starts are counted against, and his starts earlier this gameweek.
+  const kickoffOf = new Map(snapshot.fixtures.map((f) => [f.id, f.kickoff]));
   for (const match of matches) {
     for (const man of match.men) {
       const clubId = clubOfCode.get(man.code);
       man.matchesBefore = season.filter((f) => f.status === "finished" && clubId !== undefined && involves(f, clubId) && (londonDayOf(f.kickoff) ?? "") < day).length;
+      const rows = snapshot.stats.filter((s) => codeOfId.get(s.playerId) === man.code);
+      if (man.startsBefore !== null) man.startsBefore += startsEarlierThisRound(rows, kickoffOf, day, man.started);
     }
   }
 
