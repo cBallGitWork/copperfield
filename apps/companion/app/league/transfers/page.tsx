@@ -3,7 +3,7 @@ import Ledger from "../../components/league/Ledger";
 import Nothing from "../../components/shell/Nothing";
 import LeagueShell from "../Shell";
 import { readDeals } from "../../business";
-import { getLeagueSquads } from "../../squads";
+import { leagueInfo } from "../../round";
 import { LEAGUE_CAPTION, titled } from "../../titles";
 
 // Every move in the league on one page, newest first: the team Transfers tab's ledger with each row's mover named,
@@ -14,16 +14,14 @@ export const revalidate = 30;
 export const metadata = titled(LEAGUE_CAPTION.transfers);
 
 export default async function LeagueTransfersPage() {
-  const [squads, feed] = await Promise.all([getLeagueSquads(), readDeals()]);
+  const [info, feed] = await Promise.all([leagueInfo(), readDeals()]);
 
-  // Every team's name by id; a deal's own copy goes stale when a manager renames.
-  const teams = ("period" in squads ? squads.info?.teams : null) ?? [];
-  const names: Record<string, string> = {};
-  for (const team of teams) names[team.teamId] = team.name;
+  // Every team's name by id, the league's and not the rosters': a deal's own copy goes stale when a manager renames.
+  const names: Record<string, string> = Object.fromEntries((info?.teams ?? []).map((team) => [team.teamId, team.name]));
   const all = deals(feed.rows);
 
   return (
-    <LeagueShell current="transfers" teams={teams.length}>
+    <LeagueShell current="transfers" teams={info?.teams.length}>
       {all.length === 0 ? <Nothing title="No moves yet" code="0 deals" /> : <Ledger deals={all} names={names} />}
     </LeagueShell>
   );
