@@ -1,6 +1,7 @@
 import type { StoryFace } from "../face";
 import type { StorySkit } from "./cargo";
-import { pencil, tieKey, type Fault, type LawroDraft } from "./checks";
+import { pencil, type Fault } from "../fault";
+import { tieKey, type LawroDraft } from "./checks";
 import type { PredictionCall } from "./pick";
 import { mentionAt } from "./prose";
 import type { Marked } from "./record";

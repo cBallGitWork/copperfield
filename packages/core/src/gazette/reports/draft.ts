@@ -1,9 +1,8 @@
-import type { Fault } from "../predictions/checks";
+import { pencil, type Fault } from "../fault";
 import type { MatchDesk } from "./desk";
 import { capital } from "../../format";
 import { escapeRegExp } from "../../regExp";
 import { recordOrEmpty, stringOrEmpty } from "../../untrusted";
-import { pencil } from "../predictions/checks";
 import { numbersIn, sentences, wordCount } from "../predictions/prose";
 import { numeral } from "./minutes";
 import { REPORT_PENCIL } from "./words";

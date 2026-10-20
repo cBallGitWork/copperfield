@@ -30,6 +30,11 @@ describe("checkDraft", () => {
     expect(named("Haaland scored in City's 3-0 win at Liverpool for 6, and 123 beat test2.")).toEqual([]);
   });
 
+  it("refuses every source by name, not FPL alone", () => {
+    const named = checks(clean.replace("by the one point", "by the one point Fantrax gave them, as SofaScore and our model had it,")).filter((f) => f.startsWith("hard: names a source"));
+    expect(named).toEqual(expect.arrayContaining(["hard: names a source (Fantrax)", "hard: names a source (SofaScore)", "hard: names a source (our model)"]));
+  });
+
   it("passes writing drawn from its own block", () => {
     expect(checks(clean)).toEqual([]);
   });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Fault } from "../predictions/checks";
+import type { Fault } from "../fault";
 import { correct, mergeReports, overTheLead, plainHead, readReportsDraft, type ReportsDraft } from "./draft";
 
 const piece = (tag: string) => ({ standfirst: `${tag} standfirst`, account: `${tag} account`, sections: [] });

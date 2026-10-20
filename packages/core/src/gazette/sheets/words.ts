@@ -30,7 +30,7 @@ export const SHEETS_AMERICAN: readonly string[] = [
  *  ("oversized"), are not verbs of the kind. */
 export const AMERICAN_IZE = /\b(?!(?:(?:over|under|down|super|up|mid|full|king|life|bite)?-?size[ds]?|sizing|prize[ds]?|prizing|seize[ds]?|seizing|capsize[ds]?|capsizing|maize|baize)\b)\p{L}{2,}(?:ize|izes|ized|izing|ization)\b/iu;
 
-/** Where a fact came from stays off the page: a reporter does not cite his workings. */
-export const SOURCE = /%|\bper ?cent\b|\b(?:projected|projections?|predicted|predictions?|model|FPL|Fantrax|according to|The Athletic)\b|\bper (?!cent)\p{L}/iu;
+/** How a fact was worked out stays off the page; the sources by name are `SOURCE_NAMES`. */
+export const SOURCE = /%|\bper ?cent\b|\b(?:projected|projections?|predicted|predictions?|model|according to|The Athletic)\b|\bper (?!cent)\p{L}/iu;
 /** Unchanged is the whole of it: never how many gameweeks, nor a season's count. */
 export const COUNTED = /\b(?:(?:second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|\d+(?:st|nd|rd|th)) (?:week|round|game|gameweek)|(?:weeks?|rounds?) running|in a row|on the (?:trot|spin)|all (?:two|three|four|five|six|seven|eight|nine|ten|\d+) (?:\p{L}+ )?(?:matches|games|starts|appearances)|this season)\b/iu;

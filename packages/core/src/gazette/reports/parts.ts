@@ -1,4 +1,4 @@
-import type { Report } from "../predictions/checks";
+import type { Report } from "../fault";
 import { masked, ngrams, sentences } from "../predictions/prose";
 import { blanked } from "../proofing";
 import { banned } from "../banned";

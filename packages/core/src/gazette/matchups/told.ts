@@ -1,4 +1,4 @@
-import type { Fault } from "../predictions/checks";
+import type { Fault } from "../fault";
 import { mentionAt, numbersIn, sentences } from "../predictions/prose";
 import { blanked } from "../proofing";
 import type { StoryReport } from "../reports/cargo";

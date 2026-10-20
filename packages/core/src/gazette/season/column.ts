@@ -1,4 +1,4 @@
-import { pencil, type Fault } from "../predictions/checks";
+import { pencil, type Fault } from "../fault";
 import type { SeasonCalls } from "./calls";
 import { lineKey, type SeasonDraft } from "./checks";
 import { stringOrEmpty } from "../../untrusted";

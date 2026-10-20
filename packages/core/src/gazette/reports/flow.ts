@@ -1,6 +1,6 @@
 import { REPORTS } from "../../config";
 import { banned } from "../banned";
-import type { Report } from "../predictions/checks";
+import type { Report } from "../fault";
 import { mentionAt, sentences, wordCount } from "../predictions/prose";
 import { blanked } from "../proofing";
 import { capital, howMany } from "../../format";

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Fault } from "../predictions/checks";
+import type { Fault } from "../fault";
 import { seasonCalls, type SeasonCalls } from "./calls";
 import { lineKey } from "./checks";
 import { assembleSeason, mergeSeason, readSeasonDraft } from "./column";

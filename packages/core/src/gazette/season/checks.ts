@@ -1,6 +1,7 @@
 import { LAWRO_LIMITS, SEASON_RANKINGS } from "../../config";
 import { americanisms, banned } from "../banned";
-import { columnRules, faultLog, faultOnMatch, lawroProse, type CheckContext, type Fault, type Report } from "../predictions/checks";
+import { faultLog, faultOnMatch, type Fault, type Report } from "../fault";
+import { columnRules, lawroProse, type CheckContext } from "../predictions/checks";
 import { lengthOf, masked, mentionAt, sentences, wordCount } from "../predictions/prose";
 import { REPORT_FPL } from "../reports/words";
 import type { SeasonCalls } from "./calls";

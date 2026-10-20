@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { checkLawro, pencil } from "./checks";
+import { pencil } from "../fault";
+import { checkLawro } from "./checks";
 import { CALLS, SAMPLE, TEAMS, call, ctx, draft } from "./__fixtures__/column";
 
 const serious = (faults: ReturnType<typeof checkLawro>) => faults.filter((each) => each.severity !== "warn");
@@ -18,6 +19,11 @@ describe("checkLawro", () => {
     for (const tell of ["table-toppers", "shaping up", "clash", "boast", "firepower", "leaky", "belief", "delved", "in a bid to", "turn the tide", "only time will tell", "all eyes", "projected", "welcome", ";", "...", "n't just"]) {
       expect(sent).toContain(tell);
     }
+  });
+
+  it("refuses a source named in his column", () => {
+    const named = checkLawro(draft(SAMPLE, { intro: "SofaScore rates Oduya the best man in the league." }), ctx()).map((each) => `${each.severity}: ${each.check} (${each.evidence})`);
+    expect(named).toContain("hard: names a source or a percentage (SofaScore)");
   });
 
   it("refuses a tie the writer backed the wrong way, or argued for the other side", () => {

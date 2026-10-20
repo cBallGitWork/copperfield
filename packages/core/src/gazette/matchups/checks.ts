@@ -2,9 +2,9 @@ import { DRAFT_WRITING } from "../../config";
 import { everyMan } from "./state";
 import { derbyNames } from "../../league/derbies";
 import { QUOTE_MARKS, americanisms, banned } from "../banned";
-import { faultLog, type Fault } from "../predictions/checks";
+import { faultLog, type Fault } from "../fault";
 import { mentionAt, numbersIn, sentences, wordCount } from "../predictions/prose";
-import { blanked, faultOn, strayFigures } from "../proofing";
+import { SOURCE_NAMES, blanked, faultOn, strayFigures } from "../proofing";
 import { repeatsIn } from "../reports/repeats";
 import { REPORT_FPL } from "../reports/words";
 import type { MatchupContext } from "./brief";
@@ -60,7 +60,7 @@ export function checkDraft(writing: DraftWriting, contexts: readonly MatchupCont
     faultOn(fault, `${n}:matchup`, "a quotation mark: the paper prints nobody's words", "hard", QUOTE_MARKS, prose);
     // A man's name is never a banned word: Archie Gray is not American spelling.
     const plain = blanked(prose, [...everyone.flat(), ctx.state.home.side.name, ctx.state.away.side.name, ...derbyNames(ctx.derby)]);
-    for (const phrase of banned(plain, REPORT_FPL)) fault(`${n}:matchup`, "names a source", "hard", phrase);
+    for (const phrase of banned(plain, [...new Set([...SOURCE_NAMES, ...REPORT_FPL])])) fault(`${n}:matchup`, "names a source", "hard", phrase);
     for (const phrase of banned(plain, DRAFT_NEVER)) fault(`${n}:matchup`, "a phrase this paper does not print", "send-back", phrase);
     for (const phrase of americanisms(plain)) fault(`${n}:matchup`, "American, not British", "send-back", phrase);
     faultOn(fault, `${n}:matchup`, "a colon, a question or an exclamation mark", "send-back", MARKS, prose);
