@@ -37,7 +37,7 @@ Where a section below disagrees with this one, this one is current.
 - **Players (`/players`) carries the fantasy figures only**: the categories the league scores, as getLeagueInfo
   gives them and never a list, plus FPts, FP/G, GP and DCP. Each count names its Fantrax category
   (`PoolColumn.scores`) and `views.ts` keeps it where `firstScored` finds the league scoring it; the four are
-  `fantasy`. In the real league that is `FPts FP/G Min GP G AT CS DC DC+ DCP GAO GA GKP PKS YC RC PKM OG`, which fits
+  `fantasy`. In the real league that is `FPts FP/G Min GP G AT CS DC DC+ DCP GA GKP PKS YC RC PKM OG`, which fits
   a 1440 desk (1100 of 1100) and a 1280 (1098 of 1098), where 27 heads had run 38px past both. A league whose scoring
   did not arrive keeps every count here. Players has no stat plates and no Per 90.
 - **Players rests on the free men** (`boardChange.statusesShown`): an absent `status` is FA and WW, and `status=all`
@@ -60,7 +60,9 @@ Where a section below disagrees with this one, this one is current.
   only one of them, which Free already is.
 - **The tick sits in the plate's corner** (`Chip`), so a press never changes a chip's width; the Filter badge keeps
   a slot of its own at nought, so Filter never moves either. The badge counts what the sheet holds that is on: the
-  club, a lone half of the bin, and on Adv Stats below `xl`, Per 90 (its plate too until 19 Oct 2026).
+  club, a lone half of the bin, and on Adv Stats below `xl`, Per 90 (its plate too until 19 Oct 2026). Per 90
+  stands down on a plate where no drawn column divides by minutes, as Attributes unless a rated column is sorted
+  (`ratedOn` in `columns.ts`, 20 Oct 2026): there `?per=90` neither lights the toggle nor counts on the badge.
 - **Clubs** is the label of `/players/teams` (teams.md); its key and route stay `teams`.
 
 ### Adv Stats: Attack, Creating, Defence and a key (19 Oct 2026) — current
@@ -86,7 +88,7 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
   divides them by the same snapshot's minutes.
 - **The plates have a line of their own under a thumb** (third, under positions; inline from `xl`), one tap from
   any plate to the next where the sheet took three. They left the sheet, so nothing is in two places, and the Filter
-  badge below `xl` counts Per 90 alone. The four end at 309 of 338 at 360 with Chances (UX review, 19 Oct 2026), so
+  badge below `xl` counts Per 90 alone, and not on a plate where it stands down (`ratedOn`). The four end at 309 of 338 at 360 with Chances (UX review, 19 Oct 2026), so
   Creating, a capital longer, holds one line there too.
 - **`Key` sits beside Filter** (`players/ColumnKey`, the house dialog, Back shuts it): every head on the plate,
   its name and one line on what it counts, in plain words and never a source. Players keeps its `Key` under the
@@ -121,7 +123,7 @@ position title on the left here. Put position elsewhere"*, *"Remove opponent as 
 headers too?"*. Where the sections below disagree with this one, this one is current; where the 16 Oct section
 above does, that one is.
 
-- **Phone-first order** (*split on 16 Oct 2026: Players draws the scored share, Adv Stats the rest, in this order*): `FPts FP/G Min GP G AT A AF Sh SoT KP BCC BCM Crs AC CS DC DC+ DCP GAO GA Sv PKS YC RC PKM OG`
+- **Phone-first order** (*split on 16 Oct 2026: Players draws the scored share, Adv Stats the rest, in this order*): `FPts FP/G Min GP G AT A AF Sh SoT KP BCC BCM Crs AC CS DC DC+ DCP GA Sv PKS YC RC PKM OG`
   (`Sh` to `AC` are the stats league's season, below; `Ros` and `+/-`, the share of every Fantrax league
   rostering him, went on 12 Oct 2026 under DESIGN §7). `DC` and `DC+`
   are the league's DefCon counts, Fantrax's `DFP` and `DFP3` (Craig, 6 Oct 2026: *"data page needs our dfp and dfp3
@@ -210,9 +212,10 @@ absolute ranking is a fact about a different competition. Nothing sorted by it �
   which answers 18 columns for the outfield and 20 for keepers. Both halves were
   already being fetched to feed the board this replaced. `mapPlayerStats` drops
   the fantasy seven from its bag, so the two never overlap.
-- **A keeper's blanks are absences, not noughts.** An outfielder has no `Sv` and
-  a keeper no `GAO` — the key is missing rather than nought and the cell dashes.
-  Nought saves for Haaland is a statistic about a thing that cannot happen.
+- **A keeper's blanks are absences, not noughts.** An outfielder has no `Sv`: the key is
+  missing rather than nought and the cell dashes. Nought saves for Haaland is a statistic
+  about a thing that cannot happen. Since 19/20 Oct 2026 a keeper's `GA` and an outfielder's
+  `GAO` share one `GA` column (`PoolColumn.also`), so only an outfielder's `Sv` dashes.
 - **Every row leads with a face on his club's colour.** The FPL code comes
   straight off the bridge rather than through a football snapshot: the code is
   all a portrait needs, and joining the whole football layer here would give a
