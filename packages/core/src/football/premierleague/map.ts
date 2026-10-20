@@ -48,7 +48,11 @@ export function plCommentary(events: readonly RawPlEvent[]): PlCommentaryLine[] 
     if (event.text.trim().length === 0) continue;
     lines.push({ id: event.id, type: event.type, minute, seconds, text: event.text });
   }
-  return lines.sort((a, b) => period(b) - period(a) || b.seconds - a.seconds);
+  const sorted = lines.sort((a, b) => period(b) - period(a) || b.seconds - a.seconds);
+  // Opta stamps the final whistle at the first minute; it takes the clock of the last line before it.
+  const [end, last] = sorted;
+  if (end?.type === MATCH_ENDS && last !== undefined) sorted[0] = { ...end, minute: last.minute, seconds: last.seconds };
+  return sorted;
 }
 
 /** Every goal in a gameweek from the one read that carries them all, as `MatchEvent` with a synthesised id.
@@ -118,7 +122,7 @@ function wallClock(kickoffMillis: number | null | undefined, secs: number): numb
   return kickoffMillis == null ? null : kickoffMillis + secs * 1000;
 }
 
-/** Opta's code for the final whistle, which it stamps at the first minute. */
+/** Opta's code for the final whistle. */
 const MATCH_ENDS = "end 14";
 
 /** The last minute of each period before its added time: football's, so a constant. */

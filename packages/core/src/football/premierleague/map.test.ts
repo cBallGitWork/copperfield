@@ -63,8 +63,16 @@ describe("plCommentary", () => {
     expect(at("Second Half begins")).toBeLessThan(at("First Half ends"));
   });
 
-  it("tops the feed with 'Match ends', which Opta stamps at the first minute", () => {
+  it("tops the feed with 'Match ends' at the last whistle's minute, not Opta's first-minute stamp", () => {
     expect(lines[0].type).toBe("end 14");
+    expect(lines[1].text.startsWith("Second Half ends")).toBe(true);
+    expect(lines[0].minute).toBe(lines[1].minute);
+    expect(lines[0].seconds).toBe(lines[1].seconds);
+  });
+
+  it("leaves a lone 'Match ends' as Opta stamped it", () => {
+    const [end] = plCommentary([{ id: 1, type: "end 14", text: "Match ends", time: { label: "1", secs: 0 } }]);
+    expect(end.minute).toBe("1");
   });
 
   it("orders extra time after the second half", () => {
