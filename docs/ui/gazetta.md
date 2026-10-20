@@ -149,6 +149,12 @@ business, and when lineups lock.
    (`← THE GAZETTA` on a phone), and the date. Then the article's own head:
    headline, deck, dateline; a pictured man prints under that head on a
    phone and in a column beside it on a desk.
+   **On a phone an article whose substance is the block below prints no head
+   picture when its blocks carry their own** (20 Oct 2026; amends the phone order
+   of 9 Oct, #435): the draft report and the Prem Report go from the head straight
+   to the prose, so the first block's header lands in screen one. The desk keeps
+   the picture in its column; the Team Sheet keeps its picture on a phone,
+   and a trade keeps its plate.
 
    **The dateline carries the article's Share**, a word at its right in the
    standing head's capitals (Craig, 9 Oct 2026: *"add a share link to these
