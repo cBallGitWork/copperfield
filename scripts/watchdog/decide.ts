@@ -99,7 +99,7 @@ interface Opened {
   slot: Slot;
 }
 
-/** Every slot opened in the last week, latest first. */
+/** Every slot opened in the last week. */
 function opened(slots: readonly Slot[], now: number): Opened[] {
   const out: Opened[] = [];
   for (let back = 0; back <= 7; back++) {
@@ -110,12 +110,12 @@ function opened(slots: readonly Slot[], now: number): Opened[] {
       if (start <= now) out.push({ start, due: wallClock(day, slot.due, slot.zone), slot });
     }
   }
-  return out.sort((a, b) => b.start - a.start);
+  return out;
 }
 
-/** The slot whose deadline passed most recently, looking back a week. */
-function lastDue(slots: readonly Slot[], now: number): Opened | null {
-  return opened(slots, now).filter((one) => one.due <= now).sort((a, b) => b.due - a.due)[0] ?? null;
+/** Of `slots`, those whose deadline has passed at `at`, latest deadline first. */
+function pastDue(slots: readonly Opened[], at: number): Opened[] {
+  return slots.filter((one) => one.due <= at).sort((a, b) => b.due - a.due);
 }
 
 function utc(at: number): string {
@@ -141,7 +141,7 @@ function workflowFindings(rule: WorkflowRule, runs: readonly Run[], now: number)
       found.push({ source, message: `${rule.workflow} ${since}; it owes one every ${rule.within}h.` });
     }
   } else {
-    const due = lastDue([rule.slot], now);
+    const due = pastDue(opened([rule.slot], now), now)[0] ?? null;
     if (due !== null && (last === null || last < due.start)) {
       found.push({ source, message: `${rule.workflow} owed a success between ${utc(due.start)} and ${utc(due.due)}, and ${since}.` });
     }
@@ -151,18 +151,32 @@ function workflowFindings(rule: WorkflowRule, runs: readonly Run[], now: number)
 
 /** How far back a missed Mac slot is still told, beyond the latest one: a watchdog run GitHub drops or delays loses none. */
 const MAC_LOOK_BACK = 24 * HOUR;
+/** watchdog.yml's cron spacing, so the runs before this one stood at `now` less a multiple of it. */
+const WATCHDOG_SPACING = 2 * HOUR;
+
+/** Slots past their deadline at `at` with no report, latest deadline first; each takes the latest report since it opened. */
+function unreported(slots: readonly Opened[], reports: readonly number[], at: number): Opened[] {
+  const times = reports.filter((time) => time <= at);
+  const missed: Opened[] = [];
+  for (const one of pastDue(slots, at)) {
+    const taken = times.findIndex((time) => time >= one.start);
+    if (taken >= 0) times.splice(taken, 1);
+    else missed.push(one);
+  }
+  return missed;
+}
 
 function macFindings(rule: MacRule, reports: readonly Run[], now: number): Finding[] {
   const name = new RegExp(`^alert ${rule.source} (ok|fail)$`);
   const times = reports.filter((run) => name.test(run.displayTitle) && Date.parse(run.createdAt) <= now).map((run) => Date.parse(run.createdAt)).sort((a, b) => b - a);
-  const latest = lastDue(rule.slots, now);
-  // Latest slot first, each takes the latest report since it opened, so one report never covers two slots.
-  const missed: Opened[] = [];
-  for (const one of opened(rule.slots, now)) {
-    const taken = times.findIndex((at) => at >= one.start);
-    if (taken >= 0) times.splice(taken, 1);
-    else if (one.due <= now && (one.due > now - MAC_LOOK_BACK || one.start === latest?.start)) missed.unshift(one);
-  }
+  const week = opened(rule.slots, now);
+  const latest = pastDue(week, now)[0];
+  // A miss an earlier watchdog run saw was told then, and any report since closed its issue: telling it again opens another.
+  const runsBefore = Array.from({ length: MAC_LOOK_BACK / WATCHDOG_SPACING }, (_, k) => now - (k + 1) * WATCHDOG_SPACING);
+  const told = new Set(runsBefore.filter((at) => (times[0] ?? -Infinity) > at).flatMap((at) => unreported(week, times, at).map((one) => one.start)));
+  const missed = unreported(week, times, now)
+    .filter((one) => one.start === latest?.start || (one.due > now - MAC_LOOK_BACK && !told.has(one.start)))
+    .reverse();
   if (missed.length === 0) return [];
   const slots = missed.map((one) => `${one.slot.start} ${one.slot.zone} slot (${utc(one.start)}) by ${one.slot.due}`).join(" and its ");
   return [{ source: rule.source, message: `The Mac's ${rule.source} job sent no report for its ${slots}. Asleep, offline, or launchd unloaded?` }];

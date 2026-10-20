@@ -101,16 +101,13 @@ describe("the Mac's jobs, by their alert.yml reports", () => {
     expect(mac([four, quarterPast, run("2026-10-06T07:10:00Z", "success", "alert intel-weekly ok")], "2026-10-08T17:20:00Z")).toEqual([]);
   });
 
-  // Thursday's two reports, which every quiet Friday below also owes.
-  const thursday = [run("2026-10-08T15:05:00Z", "success", "alert intel-pressers ok"), run("2026-10-08T16:25:00Z", "success", "alert intel-pressers ok")];
-
   it("owes Friday's 15:45 run its own report, before the 16:30 Team Sheet", () => {
     // 16:40 London is 15:40 UTC; the 12:30 run's report does not cover the 15:45 slot.
     const lunch = run("2026-10-09T11:35:00Z", "success", "alert intel-pressers ok");
     expect(mac([lunch], "2026-10-09T15:40:00Z").map((one) => one.source)).toContain("intel-pressers");
     const quarterTo = run("2026-10-09T14:55:00Z", "success", "alert intel-pressers ok");
     const two = run("2026-10-09T13:10:00Z", "success", "alert intel-pressers ok");
-    expect(mac([...thursday, lunch, two, quarterTo, run("2026-10-06T07:10:00Z", "success", "alert intel-weekly ok")], "2026-10-09T15:40:00Z")).toEqual([]);
+    expect(mac([lunch, two, quarterTo, run("2026-10-06T07:10:00Z", "success", "alert intel-weekly ok")], "2026-10-09T15:40:00Z")).toEqual([]);
   });
 
   it("owes Friday's 14:00 run its own report, between the lunchtime and afternoon conferences", () => {
@@ -118,7 +115,7 @@ describe("the Mac's jobs, by their alert.yml reports", () => {
     const lunch = run("2026-10-09T11:35:00Z", "success", "alert intel-pressers ok");
     expect(mac([lunch], "2026-10-09T14:05:00Z").map((one) => one.source)).toContain("intel-pressers");
     const two = run("2026-10-09T13:10:00Z", "success", "alert intel-pressers ok");
-    expect(mac([...thursday, lunch, two, run("2026-10-06T07:10:00Z", "success", "alert intel-weekly ok")], "2026-10-09T14:05:00Z")).toEqual([]);
+    expect(mac([lunch, two, run("2026-10-06T07:10:00Z", "success", "alert intel-weekly ok")], "2026-10-09T14:05:00Z")).toEqual([]);
   });
 
   it("reads London in winter as GMT", () => {
@@ -126,8 +123,7 @@ describe("the Mac's jobs, by their alert.yml reports", () => {
     const before = run("2026-12-11T12:20:00Z", "success", "alert intel-pressers ok");
     expect(mac([before], "2026-12-11T14:05:00Z").map((one) => one.source)).toContain("intel-pressers");
     const after = run("2026-12-11T12:40:00Z", "success", "alert intel-pressers ok");
-    const winterThursday = [run("2026-12-10T16:05:00Z", "success", "alert intel-pressers ok"), run("2026-12-10T17:20:00Z", "success", "alert intel-pressers ok")];
-    expect(mac([...winterThursday, after, run("2026-12-08T08:10:00Z", "success", "alert intel-weekly ok")], "2026-12-11T14:05:00Z")).toEqual([]);
+    expect(mac([after, run("2026-12-08T08:10:00Z", "success", "alert intel-weekly ok")], "2026-12-11T14:05:00Z")).toEqual([]);
   });
 });
 
@@ -138,9 +134,9 @@ describe("every presser slot, at the watchdog's two-hourly runs", () => {
     "2026-11-19": ["16:00", "17:15"], "2026-11-20": ["12:30", "14:00", "15:45", "17:45"],
   };
   const starts = Object.entries(weeks).flatMap(([day, times]) => times.map((time) => `${day}T${time}:00Z`));
-  // A report five minutes into each slot, this week and last.
+  // A report five minutes into each slot, this week and last, but for one slot this week.
   const reportsBut = (missed: string | null) =>
-    [0, 7].flatMap((back) => starts.filter((at) => at !== missed).map((at) => run(new Date(Date.parse(at) + 5 * 60_000 - back * 24 * HOUR).toISOString(), "success", "alert intel-pressers ok")));
+    [0, 7].flatMap((back) => starts.filter((at) => back > 0 || at !== missed).map((at) => run(new Date(Date.parse(at) + 5 * 60_000 - back * 24 * HOUR).toISOString(), "success", "alert intel-pressers ok")));
   const pressers = MAC_RULES.filter((rule) => rule.source === "intel-pressers");
   const watchdogRuns = (day: string) => Array.from({ length: 9 }, (_, i) => Date.parse(`${day}T${String(6 + 2 * i).padStart(2, "0")}:50:00Z`));
   const raised = (reports: Run[], at: number) => findings([], pressers, new Map([["alert.yml", reports]]), at);
@@ -154,6 +150,28 @@ describe("every presser slot, at the watchdog's two-hourly runs", () => {
   it("is quiet at every run when every slot reported", () => {
     const days = Object.keys(weeks);
     expect(days.flatMap((day) => watchdogRuns(day).flatMap((at) => raised(reportsBut(null), at)))).toEqual([]);
+  });
+
+  // alert.sh: a fail opens an issue when none is open, and a report closes it.
+  it.each(starts)("opens one issue, not one per Friday report, for the slot starting %s", (missed) => {
+    const reports = reportsBut(missed);
+    const days = Object.keys(weeks).filter((day) => day.slice(0, 7) === missed.slice(0, 7));
+    const events = [
+      ...reports.map((one) => ({ at: Date.parse(one.createdAt), report: true })),
+      ...days.flatMap((day) => watchdogRuns(day).map((at) => ({ at, report: false }))),
+    ].sort((a, b) => a.at - b.at);
+    let open = false;
+    let opened = 0;
+    for (const { at, report } of events) {
+      if (report) open = false;
+      else if (raised(reports, at).length > 0 && !open) [open, opened] = [true, opened + 1];
+    }
+    expect(opened).toBe(1);
+  });
+
+  it("gives a late report to its own slot, not to one that is open but not yet due", () => {
+    const reports = ["2026-10-15T15:05:00Z", "2026-10-15T16:20:00Z", "2026-10-16T13:02:00Z"].map((at) => run(at, "success", "alert intel-pressers ok"));
+    expect(raised(reports, Date.parse("2026-10-16T13:50:00Z"))).toEqual([]);
   });
 
   it("files one finding however many slots went unreported", () => {
