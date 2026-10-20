@@ -28,7 +28,8 @@ export default function BinXi({ story, snapshot }: { story: PublishedStory; snap
             const player = players.get(man.code) ?? null;
             return (
               <PitchMarker
-                player={player}
+                // Null so today's injury doubt stays off a gameweek already played.
+                player={null}
                 label={man.slot}
                 name={pitchName(player ?? { name: man.name })}
                 keeper={isGoalkeeper(man.slot)}

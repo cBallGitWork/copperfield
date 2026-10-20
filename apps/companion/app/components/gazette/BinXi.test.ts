@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { PublishedStory } from "@epl/core";
+import type { FootballSnapshot, PublishedStory } from "@epl/core";
 import BinXi from "./BinXi";
 
 vi.mock("next/image", () => ({ default: () => null }));
@@ -25,5 +25,14 @@ describe("the Bin XI", () => {
     const html = renderToStaticMarkup(createElement(BinXi, { story: { ...story, extras: { bin } } as unknown as PublishedStory, snapshot: null }));
     expect(html).not.toContain("Bench");
     expect(html).not.toContain("Rashford");
+  });
+
+  // 20 Oct 2026: GW7's Bin XI washed Marmoush yellow for a calf knock reported after the gameweek.
+  it("carries no doubt wash from today's news onto a gameweek already played, and keeps his card", () => {
+    const doubtful = { code: 2, name: "Thomas", clubId: 9, status: "d", news: "Calf injury - 75% chance of playing", chanceOfPlaying: 75 };
+    const snapshot = { players: [doubtful], clubs: [{ id: 9, code: 94, shortName: "COV", name: "Coventry" }] } as unknown as FootballSnapshot;
+    const html = renderToStaticMarkup(createElement(BinXi, { story, snapshot }));
+    expect(html).not.toContain("cm-card-doubt");
+    expect(html).toContain("Thomas");
   });
 });
