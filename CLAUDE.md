@@ -100,6 +100,7 @@ The binding set is `docs/rules/CODE_RULES.md`. The ones that bite most here:
   commit message, or in PLATFORM_NOTES if it is a standing decision.
 - Phone-first: one column, thumb-reachable (`min-h-11`), readable at arm's length.
 - A bug starts with the failing test.
+- Before starting, say how the result will be checked: a test, a script, a shot. No check, rethink the task.
 
 ## Never
 

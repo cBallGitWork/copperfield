@@ -6,6 +6,8 @@ argument-hint: "[since <ref>]"
 
 # The refactor ritual
 
+**Contents:** Scope · Pass 1, count then extract · Pass 2, debloat and de-hardcode · Bug hunt · Two passes minimum · Gates · The commit
+
 Feature work leaves sediment: the third copy nobody counted, the pipeline behind
 UI that was deleted, the comment that describes a constant's old value. This is
 the named pass that clears it. It is **one commit**, behaviour-preserving except

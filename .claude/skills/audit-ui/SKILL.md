@@ -6,6 +6,8 @@ argument-hint: "[--base <url>]"
 
 # The six instruments
 
+**Contents:** 1 Sweep · 2 Navfit · 3 Tapfit · 4 Pitchfit · 5 Groundfit · 6 Dialog · Report
+
 Deterministic checks that a screenshot cannot make. They need the app up and
 headless Chrome on 9261 — see `/shoot` steps 1 and 2 for both.
 

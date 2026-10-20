@@ -7,6 +7,8 @@ disable-model-invocation: true
 
 # Go live — Wed 7 Oct 2026
 
+**Contents:** 1 After the draft · 2 Team codes · 3 One Vercel change · 4 Redeploy · 5 Smoke the deployed url · 6 Warm the pages · 7 Look at the paper and the desk · 8 Craig's list · Report
+
 The app stops serving the rehearsal league and starts serving the real one,
 `mqsjd23smsgbiqzr`. The real league drafts on Fantrax **Sat 3 Oct, 10:00 BST**;
 the dry run is **Tue 6 Oct**; GW6, the first lineup lock, is **Sat 10 Oct, 12:15
