@@ -10,14 +10,21 @@ import { fantraxInstant } from "./when";
 /** How many names any inbox headline carries: two fill one line on a 390 phone; the rest go in the body. */
 export const NAMES_IN_HEADLINE = 2;
 
-/** A side's name for a headline: `Brian Brobbey (SUN)`, where the feed gave a club, spelt as every other screen does. */
-function named(side: DealSide): string {
-  return side.club ? `${side.playerName} (${toFplClubCode(side.club)})` : side.playerName;
+/** A man as a deal, a block or an offer lists him. */
+interface ListedMan {
+  playerName: string;
+  club?: string | null;
+  clubName?: string | null;
 }
 
-/** The same man in a letter: `Sunderland's Brian Brobbey`. */
-function spoken(side: DealSide): string {
-  return side.clubName ? `${side.clubName}'s ${side.playerName}` : named(side);
+/** A man's name for a headline: `Brian Brobbey (SUN)`, where the feed gave a club, spelt as every other screen does. */
+export function named(man: ListedMan): string {
+  return man.club ? `${man.playerName} (${toFplClubCode(man.club)})` : man.playerName;
+}
+
+/** The same man in a letter: `Sunderland's Brian Brobbey`, else as headlined. */
+export function spoken(man: ListedMan): string {
+  return man.clubName ? `${man.clubName}'s ${man.playerName}` : named(man);
 }
 
 /** The league's business, as messages: one item per trade or claim, whose halves Fantrax files as rows sharing a

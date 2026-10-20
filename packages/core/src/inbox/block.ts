@@ -1,21 +1,10 @@
 import { listed } from "../format";
-import { toFplClubCode } from "../identity/clubCodes";
 import type { BlockPlayer, TradeBlock } from "../league/types";
-import { NAMES_IN_HEADLINE } from "./messages";
+import { NAMES_IN_HEADLINE, named, spoken } from "./messages";
 import type { InboxItem } from "./types";
 
 // The trade block, as the transfer desk would put it: who has been transfer-listed, who is in the market for what.
 // One letter per team's block, dated by its last save, so a change reaches every manager's mail as new.
-
-/** `Erling Haaland (MCI)`, for a headline, the club spelt as every other screen does. */
-function named(man: BlockPlayer): string {
-  return man.club ? `${man.playerName} (${toFplClubCode(man.club)})` : man.playerName;
-}
-
-/** `Manchester City's Erling Haaland`, for a letter. */
-function spoken(man: BlockPlayer): string {
-  return man.clubName ? `${man.clubName}'s ${man.playerName}` : named(man);
-}
 
 /** "Defender" as a letter says it: `a defender`. Two: so `notes.ts`'s copy stays. */
 function aPosition(name: string): string {

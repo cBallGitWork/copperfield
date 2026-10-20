@@ -72,4 +72,10 @@ describe("offerNews", () => {
     const [item] = offerNews([{ ...proposal, moves: [proposal.moves[0]] }], { name, mine: "t1", now: NOW });
     expect(item.body).toBe("You'd get Arsenal's Bukayo Saka. Awaiting your answer.");
   });
+
+  it("names a man's club by its code when Fantrax gives no club name, as a deal or block letter does", () => {
+    const move = { ...proposal.moves[0], clubName: null };
+    const [item] = offerNews([{ ...proposal, moves: [move] }], { name, mine: "t1", now: NOW });
+    expect(item.body).toBe("You'd get Bukayo Saka (ARS). Awaiting your answer.");
+  });
 });
