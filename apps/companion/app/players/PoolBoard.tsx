@@ -14,7 +14,7 @@ import {
   shownRows,
   type PlayersSearchParams,
 } from "./query";
-import { ALL_ROWS, pageRows } from "./pageRows";
+import { ALL_ROWS, litRows, nextStep, pageRows } from "./pageRows";
 import { wayOut } from "./wayOut";
 import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
 import { boardView, onPlate, type BoardName } from "./views";
@@ -25,7 +25,9 @@ import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
 import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
 import ColumnKey from "./ColumnKey";
-import { PRESSABLE } from "./BoardControls";
+import { PRESSABLE, Plates } from "./BoardControls";
+import BoardLink from "./BoardLink";
+import { FootFrame } from "../components/shell/FootFrame";
 import { intelStats, intelStatsDay } from "../intel";
 import { divisionGrids } from "./[fantraxId]/grid";
 import { cutsFor } from "./standout";
@@ -97,17 +99,18 @@ export default async function PoolBoard({
 
   const shown = shownRows(pool.rows, query, raw, view);
   const capped = pageRows(shown, query);
+  const step = nextStep(shown.length, query);
   const way = wayOut(query, view.route);
   const columns = columnsIn(view.columns, group, activeSort(query, view).column.key, scored);
   const rated = players ? null : ratedOn(columns, isPer90(query));
   // Plain data, since the key is a client component: a column carries functions.
   const heads = columns.filter((column) => column.key !== "name").map(({ label, title, means }) => ({ label, title, means }));
 
-  // Cut over the rows drawn, so a mark means the top of what is in front of you.
+  // Cut over the first hundred rows the query chose, so a short page keeps its inks as Show N more pages in.
   const cuts = cutsFor(
     columns.filter((column) => column.mark !== undefined),
     (column) =>
-      capped.map((row) => {
+      litRows(shown, capped).map((row) => {
         const value = figureOf(column, row, raw.get(row.entry.player.fantraxId), rated === true);
         return typeof value === "number" ? value : null;
       }),
@@ -124,7 +127,7 @@ export default async function PoolBoard({
     if (row.entry.status) counted.set(row.entry.status, (counted.get(row.entry.status) ?? 0) + 1);
   }
 
-  return (
+  const page = (
     <ScoutShell current={board} rows={POOL_ROWS}>
       {/* While the board is a picker every row's link has changed, so it says so, with a way out. */}
       {query.compare ? (
@@ -139,8 +142,6 @@ export default async function PoolBoard({
       <BoardBar
         query={query}
         view={view}
-        plates={plates}
-        group={group}
         positions={pool.positions}
         clubs={clubs}
         counted={counted}
@@ -179,14 +180,20 @@ export default async function PoolBoard({
         />
       )}
 
-      {capped.length < shown.length ? (
-        <p className={QUIET_NOTE}>
-          First {capped.length} of {shown.length} ·{" "}
-          <Link href={boardHref(query, { all: ALL_ROWS }, view.route)} className={NOTE_LINK}>
-            Show all
-          </Link>
-        </p>
-      ) : null}
+      {/* A page more at a tap, in the URL beside Show all (M-SQUADS-1, Craig 20 Oct 2026). */}
+      {step === null ? null : (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <BoardLink query={query} change={{ set: { rows: step.rows } }} route={view.route} className={`${PRESSABLE} max-lg:w-full`}>
+            Show {step.more} more
+          </BoardLink>
+          <p className={QUIET_NOTE}>
+            First {capped.length} of {shown.length} ·{" "}
+            <Link href={boardHref(query, { all: ALL_ROWS }, view.route)} className={NOTE_LINK}>
+              Show all
+            </Link>
+          </p>
+        </div>
+      )}
       {/* Adv Stats' key is a tap away beside Filter; Players' few heads keep theirs under the board. */}
       {shown.length === 0 || !players ? null : <BoardKey entries={heads} />}
 
@@ -207,5 +214,14 @@ export default async function PoolBoard({
         Claim on Fantrax
       </OutLink>
     </ScoutShell>
+  );
+
+  // Adv Stats' plates are its sub-views, so they switch from the foot (M-CONSIST-1, 20 Oct 2026).
+  return plates.length === 0 ? (
+    page
+  ) : (
+    <FootFrame foot={<Plates query={query} plates={plates} group={group} route={view.route} replace={query.panel === "1"} />}>
+      {page}
+    </FootFrame>
   );
 }

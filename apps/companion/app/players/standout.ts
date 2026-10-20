@@ -1,6 +1,6 @@
 import { standoutCuts, type StandoutCut, type StandoutShares } from "../components/league/standout";
 
-// Which figures on the pool board are lit: a column's top values, among the rows drawn, while they stay rare.
+// Which figures on the pool board are lit: a column's top values, among the first hundred rows (`litRows`), while they stay rare.
 // The rule and the inks are shared with the match board (`components/league/standout.ts`); the shares are ours.
 
 /** A sixth in yellow, the largest share that still reads as an exception; a twentieth in orange, its best. */
@@ -9,7 +9,7 @@ const SHARES: StandoutShares = { good: 1 / 6, best: 1 / 20 };
 /** Ten scored figures before a column has a top: under that a sixth is one man, and means nothing. */
 const FLOOR = 10;
 
-/** Every lit column's cuts, taken over the figures the caller hands it — the rows on screen. */
+/** Every lit column's cuts, taken over the figures the caller hands it — the first hundred rows the query chose. */
 export function cutsFor<Column extends { key: string }>(
   columns: readonly Column[],
   values: (column: Column) => Iterable<number | null>,

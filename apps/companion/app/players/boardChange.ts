@@ -23,6 +23,8 @@ export const EVERYONE = "all";
 export function changed(search: string, change: BoardChange): string {
   const params = new URLSearchParams(search);
   if (change.keep) for (const name of [...params.keys()]) if (!change.keep.includes(name)) params.delete(name);
+  // A page's rows ride with Show all: a change that names one and not the other leaves a new list or all of it.
+  if (change.set && Object.hasOwn(change.set, "all") && !Object.hasOwn(change.set, "rows")) params.delete("rows");
   for (const [name, value] of Object.entries(change.set ?? {})) {
     if (value) params.set(name, value);
     else params.delete(name);
