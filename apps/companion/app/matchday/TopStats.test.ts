@@ -10,13 +10,22 @@ vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => crea
 vi.mock("next/image", () => ({ default: () => null }));
 
 const boards: TopBoard[] = LISTS.slice(0, 2).map((list) => ({ key: list.key, tab: list.title, list, rows: [] }));
-const html = renderToStaticMarkup(createElement(TopStats, { boards, stat: undefined, teamNames: new Map(), reader: null }));
+const exit = createElement("a", { href: "/out" }, "Matchups");
+const html = renderToStaticMarkup(createElement(TopStats, { boards, stat: undefined, teamNames: new Map(), reader: null, exit }));
 
 describe("Live's Top stats", () => {
-  // The frame sits under the bar and the view strip, with the Fantrax exit after it: a viewport-high frame scrolls a short board.
-  it("keeps the frame to its own height at every width, and the desk's free of the foot's gap", () => {
+  // Final review, 21 Oct 2026: at 390x844 a ten-row board left the picker at y=686, 102px above the rail.
+  it("fills what the page leaves under the bar, not a viewport of its own, and the desk's free of the foot's gap", () => {
     const frame = html.match(/^<div class="([^"]*)"/)?.[1] ?? "";
-    expect(frame.split(" ")).toEqual(expect.arrayContaining(["min-h-0!", "lg:gap-0"]));
+    expect(frame.split(" ")).toEqual(expect.arrayContaining(["min-h-0!", "flex-1", "lg:gap-0"]));
+  });
+
+  it("keeps the exit above the dock, so the picker is the last block", () => {
+    const grid = html.indexOf('class="grid ');
+    const out = html.indexOf('href="/out"');
+    expect(out).toBeGreaterThan(grid);
+    expect(out).toBeLessThan(html.indexOf('class="sticky '));
+    expect(html).toContain('<div class="lg:mt-4"><a href="/out">');
   });
 
   it("docks the leaders picker in the sticky foot, after the boards", () => {
