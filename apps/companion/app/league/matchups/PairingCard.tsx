@@ -2,7 +2,7 @@ import Link from "@/app/components/shell/Link";
 import type { LeagueTeam, LiveTeamScore, PeriodPairing, PendingCleanSheets } from "@epl/core";
 import { pairingInvolves } from "@epl/core";
 import ScoreFigure from "../../components/league/ScoreFigure";
-import { yoursBorder, yoursInk } from "../../mine";
+import { yoursEdge, yoursInk } from "../../mine";
 import Pending from "../../components/league/Pending";
 import TeamName from "../../components/league/TeamName";
 import { toPlayWord } from "../../components/league/toPlay";
@@ -31,11 +31,8 @@ export default function PairingCard({
   const away = scores.get(pairing.away.teamId);
 
   return (
-    <div
-      className={`flex flex-col ${yoursBorder(
-        pairingInvolves(pairing, mine),
-      )}`}
-    >
+    // Every card carries the 4px edge, transparent on the others, so the reader's card keeps the column.
+    <div className={`flex flex-col border-line ${yoursEdge(pairingInvolves(pairing, mine))}`}>
       <div className="flex items-stretch">
         <Side
           team={pairing.home}

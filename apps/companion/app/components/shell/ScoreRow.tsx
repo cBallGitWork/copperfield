@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "@/app/components/shell/Link";
 import type { ReactNode } from "react";
 import { INDEX_WIDTH, ROW_NAME } from "@/app/desk";
-import { yoursMark } from "@/app/mine";
+import { yoursEdge } from "@/app/mine";
 import Absent from "./Absent";
 import Scoreline from "./Scoreline";
 
@@ -53,7 +53,7 @@ export default function ScoreRow({
   const yours = home.mine === true || away.mine === true;
   const row = (
     <div
-      className={`grid min-h-11 items-stretch lg:min-h-7 ${GRID} ${yoursMark(yours)}`}
+      className={`grid min-h-11 items-stretch lg:min-h-7 ${GRID} ${yoursEdge(yours)}`}
     >
       <Block side={home} />
       <Name side={home} at="home" />

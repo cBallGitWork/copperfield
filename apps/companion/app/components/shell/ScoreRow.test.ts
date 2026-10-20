@@ -6,7 +6,7 @@ import { tieSide } from "../league/tieSide";
 
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 vi.mock("@/app/desk", () => ({ INDEX_WIDTH: "", ROW_NAME: "" }));
-vi.mock("@/app/mine", () => ({ yoursMark: () => "" }));
+vi.mock("@/app/mine", () => import("../../mine"));
 
 const places = new Map<string, string>();
 const seat = (teamId: string, label: string) => ({ team: { teamId }, label });
@@ -30,5 +30,16 @@ describe("a fantasy tie's results row", () => {
     );
     expect(html).not.toContain("to play");
     expect(html).not.toContain("played");
+  });
+});
+
+// Review LEAGUE-2: the reader's row stepped 4px right of the column, its accent edge the only border on the list.
+describe("the reader's row in a column of rows", () => {
+  const row = (mine: boolean) =>
+    renderToStaticMarkup(createElement(ScoreRow, { home: { name: "Home", mine }, away: { name: "Away" }, score: null }));
+
+  it("gives every row the same 4px left edge, so names and scores keep one column", () => {
+    expect(row(true)).toContain("border-l-4 border-l-accent");
+    expect(row(false)).toContain("border-l-4 border-l-transparent");
   });
 });
