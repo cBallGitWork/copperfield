@@ -10,9 +10,10 @@ anybody's, and no fixture run: the Planner owns that.
 
 ## On the page
 
-Twenty clubs, twenty-two measures in four groups. Under a thumb a row of plates (Attack, Chances, Defence,
-Discipline; `?group=`, an absent or unknown one Attack) draws one group's columns, with the Key beside it listing
-that group's heads alone; Defence's eight still scroll sideways inside it. From `lg` there are no plates: every
+Twenty clubs, twenty-two measures in four groups. Under a thumb a row of plates docked at the foot (Attack,
+Chances, Defence, Discipline; `?group=`, an absent or unknown one Attack) draws one group's columns, as Adv Stats
+does, with the Key at the top listing that group's heads alone; Defence's eight still scroll sideways inside it, the
+Place block held at its width so the pinned Club never covers GC. From `lg` there are no plates: every
 column side by side under its group's head. Errors folded into Discipline on 20 Oct 2026, since five plates did not
 fit one line at 320 in WebKit.
 

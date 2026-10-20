@@ -5,7 +5,11 @@ import Board from "../../components/league/Board";
 import { LEAD_BOX } from "../../components/league/LeadFace";
 import { SIDE_SHARES, standoutCuts, standoutInk, type StandoutCut } from "../../components/league/standout";
 import { POOL } from "../routes";
-import { TEAM_GROUPS, sortHref, type TeamColumn } from "./columns";
+import TabStrip from "../../components/shell/TabStrip";
+import { FootFrame } from "../../components/shell/FootFrame";
+import ColumnKey from "../ColumnKey";
+import { PRESSABLE } from "../BoardControls";
+import { TEAM_COLUMNS, TEAM_GROUPS, plateHref, sortHref, type TeamColumn, type teamsView } from "./columns";
 import type { TeamRow } from "./teamRows";
 
 // The clubs as one board of football figures, every group under its head on the desk, one plate's under a thumb.
@@ -38,7 +42,8 @@ export default function TeamBoard({
       rows={rows}
       keyOf={(row) => String(row.club.code)}
       lead={{
-        index: { label: "Place", of: (_, at) => at + 1 },
+        // The block held at the width the pinned Club starts beside, or a squeezed table slides Club over the first head.
+        index: { label: "Place", of: (_, at) => at + 1, className: "min-w-8 lg:min-w-9" },
         name: {
           label: "Club",
           of: (row) => (
@@ -63,5 +68,34 @@ export default function TeamBoard({
         },
       }))}
     />
+  );
+}
+
+/** Under a thumb one plate at a time, switched from the foot with the Key at the top (DESIGN §2); the desk holds
+ *  every column. */
+export function ClubsBoards({ view, rows }: { view: ReturnType<typeof teamsView>; rows: readonly TeamRow[] }) {
+  const { sort, descending } = view;
+  const plates = (
+    <div className="lg:hidden">
+      <TabStrip
+        label="Stat groups"
+        tabs={TEAM_GROUPS.map((group) => ({ key: group.key, label: group.label, href: plateHref(group) }))}
+        current={view.group.key}
+        labels="word"
+      />
+    </div>
+  );
+  return (
+    <FootFrame foot={plates}>
+      <div className="flex justify-end lg:hidden">
+        <ColumnKey entries={view.columns.map((column) => ({ label: column.head, title: column.title }))} className={`${PRESSABLE} min-w-11`} />
+      </div>
+      <div className="lg:hidden">
+        <TeamBoard rows={rows} columns={view.columns} grouped={false} sort={sort} descending={descending} />
+      </div>
+      <div className="max-lg:hidden">
+        <TeamBoard rows={rows} columns={TEAM_COLUMNS} grouped sort={sort} descending={descending} />
+      </div>
+    </FootFrame>
   );
 }
