@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 import { clubIndex } from "../../../components/football/clubIndex";
 import type { Club, MatchStatRow } from "@epl/core";
-import Nothing from "../../../components/shell/Nothing";
 import { GROUP_PLATE, PANEL, SMALL_CAPS } from "@/app/desk";
 
 // Championship Manager's Match Stats board (`cm9900/22.jpg`): each side's figure on its own plate, the label between.
@@ -26,17 +25,10 @@ export default function MatchStats({
   home,
   away,
 }: {
-  rows: MatchStatRow[] | null;
+  rows: MatchStatRow[];
   home: Club | undefined;
   away: Club | undefined;
 }) {
-  // Absent, not a board of noughts: an unplayed match has no stats (DESIGN §7).
-  if (rows === null || rows.length === 0) {
-    return (
-      <Nothing title="No stats yet" />
-    );
-  }
-
   const byKey = new Map(rows.map((row) => [row.key, row]));
   const grouped = new Set(GROUPS.flatMap((group) => group.keys));
   // A row no group names still shows, under the last plate, rather than vanishing.
