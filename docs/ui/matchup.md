@@ -31,7 +31,7 @@ draws none.
    name reads in accent, the standard "this is yours" mark. **One number per
    side and nothing beside it** — see the constraint below. A phone gets the
    `←` back plate at its left, as a match does; on a board opened cold it goes to that gameweek on Draft › Fixtures,
-   where the tie is listed (review M12; it went to `/league/matchups`, which no plate lights). Before a ball is kicked the board
+   where the tie is listed (review M12; it went to `/league/matchups`, which no plate lit, retired 20 Oct 2026). Before a ball is kicked the board
    is the same board, each side's Line-ups a squad list instead of a pitch, and Stats is off the strip until kickoff
    (Craig, 19 Oct 2026: the bare two lists had "no page template"). A side the lineup gate has opened, your
    own always, is its eleven then a plated Bench in Fantrax's bench order (`TeamSheet` as a list); a rival before
@@ -272,8 +272,8 @@ the pitch names them (review M2, 16 Oct 2026: nothing on Live or the board said 
 - **No pairing** — a bye, or a schedule that has not reached its first
   head-to-head. A `Nothing` panel inside the league shell.
 - **Scoreboard refused** — both totals read as dashes. The elevens are unaffected.
-- **No such team** — 404. Fantrax silent, or no schedule at all — back to
-  `/league/matchups`, which describes both.
+- **No such team** — 404. Fantrax silent, or no schedule at all — to that gameweek on
+  `/league/fixtures`, which describes both (the Matchups list it went to was retired on 20 Oct 2026).
 
 ## Constraints
 

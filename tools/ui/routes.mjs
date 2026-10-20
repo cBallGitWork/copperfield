@@ -21,7 +21,6 @@ export const DESK_ROUTES = [
   "/league/cups",
   "/scoring",
   ...CUP_ROUTES,
-  "/league/matchups",
   "/squad",
   "/players",
   "/players/stats",

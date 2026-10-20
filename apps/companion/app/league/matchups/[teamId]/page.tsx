@@ -70,11 +70,12 @@ export default async function HeadToHeadPage({
   // Through the calendar seam, the league's weeks only: a gameweek it does not play opens the default (#529).
   const [info, calendar] = await Promise.all([leagueInfo(), readCalendar()]);
   const round = askedWeek(leagueWeeks(calendar, info?.matchups ?? []), wholeNumber(gw));
-  const squads = readableOr404(await getLeagueSquads(round), MATCHUPS);
+  // The retired Matchups list 308s to Fixtures, so a round we cannot name still lands there.
+  const squads = readableOr404(await getLeagueSquads(round), round === null ? MATCHUPS : leagueFixturesHref(round.gameweek));
 
-  // Undrafted is a 404; the other two states go to the board, which describes them.
+  // Undrafted is a 404; the other two states go to Fixtures, which describes them.
   const period = squads.roundPeriod;
-  if (squads.info === null || period === null) redirect(MATCHUPS);
+  if (squads.info === null || period === null) redirect(leagueFixturesHref(squads.snapshot.gameweek));
 
   // A round nobody has kicked off draws each side as a squad list, on the same board. `gameweekStarted`, not
   // `roundState`, which is null between two Saturday kickoffs too.

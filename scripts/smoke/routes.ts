@@ -14,7 +14,6 @@ const ROUTES = [
   "/league/fixtures",
   "/league/transfers",
   "/league/waivers",
-  "/league/matchups",
   "/league/team-stats",
   "/league/cups",
   "/scoring",

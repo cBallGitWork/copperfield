@@ -25,6 +25,12 @@ Under each round's head, the ties, boxed by competition. Each tie is **one row**
 both sides by name and the score between them, the way a results page
 prints a football match.
 
+**Your tie first** in each block (`fixtureTies`), and in the gameweek in play a `+n` beside a side's name for the
+clean sheets Fantrax has not credited yet (`league/Pending`, through `ScoreSide.pending`), with one key line above
+the head while any is owed. League ties only, never a cup's. Both came from Matchups, which folded into this page on
+20 Oct 2026 (Craig); `/league/matchups` 308s here with its `?gw=`. The panel reserves the gameweek's own ties and its
+head, not the table's ten rows.
+
 A round still to come shows **`test4 v test2`, never `0 – 0`**. Fantrax answers 0
 for every unplayed period, and printing it against a date in March states a
 result for a match nobody has played.
@@ -121,7 +127,7 @@ points is scored by the week's points.
 | File | What it is |
 |---|---|
 | `../fixtures/page.tsx` | The route: which gameweek, its points, and the empty states. |
-| `../fixtures/roundTies.ts` | A gameweek's ties, and the gameweeks that have any. |
+| `../fixtures/roundTies.ts` | A gameweek's ties, the reader's first, and the gameweeks that have any. |
 | `schedule.ts` | The four provider reads, and the season's results on their own. |
 | `RoundHeader.tsx` | What this screen adds to `shell/RoundHead`: the deadline, and whether the round is live or done. |
 | `Tie.tsx` | One scoreline. |

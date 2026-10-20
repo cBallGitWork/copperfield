@@ -47,6 +47,17 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## Matchups folds into League › Fixtures — decided 20 Oct 2026
+
+Craig, 20 Oct 2026: retire `/league/matchups` into Fixtures. Both drew the same gameweek's pairings with the same
+scores through two row components (`PairingCard` and `Tie` → `ScoreRow`), already out of step. What Matchups alone had
+moved across: the reader's tie first (`fixtureTies`, at every width, inside each competition's block) and the clean
+sheets Fantrax has not credited (`ScoreSide.pending`, drawn by `ScoreRow` with `league/Pending`), computed for the
+gameweek in play only and for league ties only, never a cup's. Men still to play stay on Live. `/league/matchups` and
+`/matchup` 308 to `/league/fixtures`, `?gw=` kept; the head-to-head stays at `/league/matchups/[teamId]` (`MATCHUPS` builds
+it), its fallbacks go to Fixtures, and its gameweek line moved from the bar into its caption so the tabs do not drop
+24px. Fixtures' panel reserves its own ties plus the head, not the table's ten.
+
 ## FPL refuses Vercel's London egress, not our volume — measured 19 Oct 2026
 
 GW7's Monday, TOT v COV kicking off at 19:00 UTC. Twelve hours of production's runtime logs (387 lines) and 80 minutes

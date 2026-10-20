@@ -27,7 +27,6 @@ const PACE_MS = Number(process.env.SMOKE_PACE_MS || 0);
 const UNDRAFTED: Record<string, string> = {
   "/": "No news yet",
   "/league": "No table yet",
-  "/league/matchups": "Nobody plays anybody yet",
   "/squad": "Nobody has a squad yet",
 };
 
