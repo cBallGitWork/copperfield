@@ -79,7 +79,21 @@ describe("a signed-in reader's count", () => {
 
   it("holds the count's column on a row with none of his men", () => {
     const [, other] = rows(round(new Map([[1, [saka]]])));
-    expect(other).toContain("w-16");
+    expect(other).toContain("min-[390px]:w-16");
+  });
+
+  // At 320 a column beside the row took the club codes to 0px; under 390 the count drops beneath the row.
+  it("puts the count under the row below 390, so the club codes keep their room", () => {
+    const html = round(new Map([[1, [saka]]]));
+    expect(html.match(/class="flex flex-col min-\[390px\]:flex-row/g)).toHaveLength(2);
+    expect(html).not.toMatch(/class="[^"]*(?<![:\w-])w-16/);
+    const [, other] = rows(html);
+    expect(other).toMatch(/<span class="[^"]*max-\[389px\]:hidden/);
+  });
+
+  it("hangs the owner edge in the gutter below 390, so the row keeps its full width", () => {
+    const html = round(new Map([[1, [saka]]]));
+    expect(html.match(/border-l-4[^"]*max-\[389px\]:-ml-1/g)).toHaveLength(2);
   });
 });
 
