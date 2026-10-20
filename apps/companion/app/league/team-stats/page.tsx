@@ -15,6 +15,7 @@ import {
 import Nothing from "../../components/shell/Nothing";
 import { TIGHT_ROW } from "../../components/league/TableCells";
 import GroupNav from "../../components/league/GroupNav";
+import { FootFrame } from "../../components/shell/FootFrame";
 import LeagueShell from "../Shell";
 import Measures, { viewFor, type View } from "./Measures";
 import { boardHref } from "./boardHref";
@@ -24,7 +25,7 @@ import { squadColumnsIn } from "./squadColumns";
 import { intelStatsDay } from "../../intel";
 import { getSchedule } from "../schedule/schedule";
 import { readerTeamId } from "../../squads";
-import { yoursInk } from "../../mine";
+import { yoursEdge, yoursInk } from "../../mine";
 import { MINOR_LABEL, ROW_NAME } from "@/app/desk";
 import { teamHref } from "@/app/squad/routes";
 import FantraxSilent from "../../components/shell/FantraxSilent";
@@ -79,65 +80,66 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
   const groupLabel = columns.map((entry) => entry.label).join(", ");
 
   return (
-    <LeagueShell current="teamStats" teams={info.teams.length}>
-      <div className="flex items-center justify-between gap-2">
-        <Measures view={view} href={(by) => boardHref(by, group, category.key)} />
-        {squad ? <p className={MINOR_LABEL}>Season to {intelStatsDay}</p> : null}
-      </div>
+    // The group row docks in the foot, above the thumb rail, as the head-to-head's Stats does.
+    <FootFrame foot={<GroupNav group={group} href={(key) => boardHref(view, key)} />}>
+      <LeagueShell current="teamStats" teams={info.teams.length}>
+        <div className="flex items-center justify-between gap-2">
+          <Measures view={view} href={(by) => boardHref(by, group, category.key)} />
+          {squad ? <p className={MINOR_LABEL}>Season to {intelStatsDay}</p> : null}
+        </div>
 
-      {!squad && begun.length === 0 ? (
-        <Nothing title="No gameweek played yet" code={`getLeagueInfo → first pairing in period ${season?.firstPeriod ?? DASH}`}>
-          Nothing counts until {opening === undefined ? "the league's first gameweek" : `Gameweek ${opening.gameweek}, the league's first`}.
-        </Nothing>
-      ) : board.length === 0 ? (
-        squad ? (
-          <Nothing title="No squads yet" code="getTeamRosters → no squads" />
+        {!squad && begun.length === 0 ? (
+          <Nothing title="No gameweek played yet" code={`getLeagueInfo → first pairing in period ${season?.firstPeriod ?? DASH}`}>
+            Nothing counts until {opening === undefined ? "the league's first gameweek" : `Gameweek ${opening.gameweek}, the league's first`}.
+          </Nothing>
+        ) : board.length === 0 ? (
+          squad ? (
+            <Nothing title="No squads yet" code="getTeamRosters → no squads" />
+          ) : (
+            <Nothing title="Nothing recorded yet" code={`${begun.length} gameweeks begun`} />
+          )
         ) : (
-          <Nothing title="Nothing recorded yet" code={`${begun.length} gameweeks begun`} />
-        )
-      ) : (
-        <Board
-          fixed
-          caption={`Every team across ${groupLabel}, ordered by ${category.label} in ${ORDERED_BY[view]}`}
-          rows={board}
-          keyOf={(row) => row.teamId}
-          rowClass={(row) => (row.teamId === mine ? "bg-raised" : "")}
-          lead={{
-            index: { label: "Place", of: (row) => places.get(row.teamId) ?? DASH },
-            name: {
-              label: "Team",
-              of: (row) => (
-                <Link href={teamHref(row.teamId)} className={`${TIGHT_ROW} px-1.5 hover:underline ${yoursInk(row.teamId === mine)}`}>
-                  <span className={`min-w-0 truncate ${ROW_NAME}`}>
-                    <TeamName teamId={row.teamId} name={nameOf(row.teamId)} />
-                  </span>
-                </Link>
-              ),
-            },
-          }}
-          order={{
-            key: category.key,
-            descending: direction(category, measure) === "descending",
-            href: (key) => boardHref(view, group, key),
-          }}
-          columns={columns.map((entry, at) => ({
-            key: entry.key,
-            head: entry.short,
-            title: entry.title ?? entry.label,
-            width: FIGURE_WIDTH,
-            // Every figure is ink: the accent means "yours", and the pressed plate says which column sorts.
-            cell: (row: (typeof board)[number]) => {
-              const figure = row.figures[at] ?? null;
-              return { value: figure === null ? DASH : thousands(figure), className: "text-ink" };
-            },
-          }))}
-        />
-      )}
-      {/* Air between the last row and the foot row (Craig, 1 Sep). */}
-      <div className="pt-2">
-        <GroupNav group={group} href={(key) => boardHref(view, key)} />
-      </div>
-    </LeagueShell>
+          <Board
+            fixed
+            caption={`Every team across ${groupLabel}, ordered by ${category.label} in ${ORDERED_BY[view]}`}
+            rows={board}
+            keyOf={(row) => row.teamId}
+            rowClass={(row) => (row.teamId === mine ? "bg-raised" : "")}
+            lead={{
+              index: { label: "Place", of: (row) => places.get(row.teamId) ?? DASH },
+              name: {
+                label: "Team",
+                // The edge on the pinned cell, not the row: a `<tr>` border never paints through a pinned cell's ground.
+                className: (row) => yoursEdge(row.teamId === mine),
+                of: (row) => (
+                  <Link href={teamHref(row.teamId)} className={`${TIGHT_ROW} px-1.5 hover:underline ${yoursInk(row.teamId === mine)}`}>
+                    <span className={`min-w-0 truncate ${ROW_NAME}`}>
+                      <TeamName teamId={row.teamId} name={nameOf(row.teamId)} />
+                    </span>
+                  </Link>
+                ),
+              },
+            }}
+            order={{
+              key: category.key,
+              descending: direction(category, measure) === "descending",
+              href: (key) => boardHref(view, group, key),
+            }}
+            columns={columns.map((entry, at) => ({
+              key: entry.key,
+              head: entry.short,
+              title: entry.title ?? entry.label,
+              width: FIGURE_WIDTH,
+              // Every figure is ink: the accent means "yours", and the pressed plate says which column sorts.
+              cell: (row: (typeof board)[number]) => {
+                const figure = row.figures[at] ?? null;
+                return { value: figure === null ? DASH : thousands(figure), className: "text-ink" };
+              },
+            }))}
+          />
+        )}
+      </LeagueShell>
+    </FootFrame>
   );
 }
 

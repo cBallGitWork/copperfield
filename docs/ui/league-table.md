@@ -103,6 +103,13 @@ Keeping · Appearances · Discipline — and **the whole group draws at once**, 
 categories across the top with every team down the side (Craig, 11 Sep 2026:
 *"for each section, we can get all the columns in one go"*). Under `lg` the plates
 read Attack · Defence · Keeping · Apps · Discipline, which keeps five on one row at 390.
+**The group row is docked** in `FootFrame`'s foot, just above the thumb rail on a phone and at the screen's foot on
+the desk, as the head-to-head's Stats docks its own (review M-LEAGUE-6, 20 Oct 2026): at 320 it had sat under the
+board, below the fold.
+
+**The reader's own row is marked as on `/league`**: the raised ground, his name in the accent, and the 4px accent
+edge on its pinned name cell (`yoursEdge`, transparent on the other rows so every name keeps one column; on the cell
+because a `<tr>` border never paints through a pinned cell's ground).
 
 **One grey toggle at the top, `FPts` · `Total`, and it governs every cell.** The
 same category is two numbers — what Fantrax paid for it and the raw figure behind
