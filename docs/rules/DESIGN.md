@@ -240,7 +240,12 @@ standings table — shows that column at 390 without a sideways scroll, and drop
 whatever it must to do it. A many-measure board — the pool's directory, a stats
 board, a match's player stats — keeps every column and scrolls sideways with CM's
 own bevelled bar, because there is no last column that matters more than the
-rest and hiding any of them is choosing for the reader.
+rest and hiding any of them is choosing for the reader. **Two boards are plated
+instead under a thumb**, Adv Stats and Clubs: a row of group plates draws one
+group's columns at a time, a plate orders by its own lead column, and a `?sort=`
+outside it opens that column's plate, so the order is never hidden (Craig, 19 Oct
+2026: *"split into attack/defending"*; Clubs since 20 Oct 2026). Clubs keeps
+every column from `lg`.
 
 **Under a thumb that bar is drawn, because iOS draws none** (27 Sep 2026: Craig, *"scrollbars not obvious"*).
 `::-webkit-scrollbar` never reaches iOS Safari, and on Chrome the bar sat at the board's foot, under row 100 on
