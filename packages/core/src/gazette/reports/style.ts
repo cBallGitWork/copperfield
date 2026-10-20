@@ -3,7 +3,7 @@ import { FILLER, GROUNDS, QUOTE_MARKS, REGISTER, americanisms, banned, overused 
 import type { Report } from "../fault";
 import { masked, ngrams, sentences, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
-import { blanked, faultOn } from "../proofing";
+import { SOURCE_NAMES, blanked, faultOn } from "../proofing";
 import {
   REPORT_ADVICE, REPORT_CAPPED_DAY, REPORT_CAPPED_MATCH, REPORT_CLICHES, REPORT_CROWD, REPORT_DEPTH_CHART,
   REPORT_FANTASY, REPORT_FPL, REPORT_GROUNDS, REPORT_NOT_HIS_NAME, REPORT_OWNERSHIP, REPORT_SHOTS, REPORT_TELLS, REPORT_VARIATIONS, REPORT_VERDICTS,
@@ -20,7 +20,7 @@ export const REPORT_NEVER: readonly string[] = [...new Set([
   ...REPORT_TELLS, ...REPORT_DEPTH_CHART, ...REPORT_VARIATIONS,
 ])];
 
-const SOURCE = /%|\bper ?cent\b|\b(?:projected|projections?|predicted|predictions?|model|Fantrax|according to)\b/iu;
+const SOURCE = /%|\bper ?cent\b|\b(?:projected|projections?|predicted|predictions?|model|according to)\b/iu;
 const CLOCK = /\b\d{1,3}(?:\+\d{1,2})?['’](?!s\b)|\b\d{2}\+\d{1,2}\b/u;
 const NOT_BUT = /\bnot (?:just |only |merely )?[^.;]{1,40}?,? but\b/iu;
 /** Whose a man is, said as a side's man or one of its players. */
@@ -32,6 +32,7 @@ export function wordFaults(section: string, text: string, football: boolean, nam
   const plain = blanked(text, names, "X");
   faultOn(fault, section, "quotation marks: no quotes were given", "hard", QUOTE_MARKS, text);
   faultOn(fault, section, "names a source or a percentage", "hard", SOURCE, plain);
+  for (const word of banned(plain, SOURCE_NAMES)) fault(section, "names a source or a percentage", "hard", word);
   for (const word of banned(plain, REPORT_FPL)) fault(section, "a fantasy game's term", "hard", word);
   for (const word of banned(plain, REPORT_NEVER)) fault(section, "a phrase this paper does not print", "send-back", word);
   for (const word of americanisms(plain)) fault(section, "American, not British", "send-back", word);

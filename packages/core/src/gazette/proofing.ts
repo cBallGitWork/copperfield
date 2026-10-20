@@ -3,6 +3,9 @@ import { masked, numbersIn } from "./predictions/prose";
 
 // The sub-editor's small tools, shared by every desk's checks.
 
+/** Where a fact came from stays off the page: every desk refuses these names, run on blanked text. */
+export const SOURCE_NAMES: readonly string[] = ["Fantrax", "FPL", "SofaScore", "Understat", "Opta", "our model"];
+
 /** Faults `text` on the first match of `pattern`, quoting it; nothing when it does not match. */
 export function faultOn(fault: Report, section: string, check: string, severity: Fault["severity"], pattern: RegExp, text: string): void {
   const said = text.match(pattern)?.[0];

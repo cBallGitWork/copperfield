@@ -25,6 +25,7 @@ describe("checkBin", () => {
 
   it("refuses a source or a percentage", () => {
     expect(faultsOf({ body: body("FPL had him at 12.") })).toContain("names a source or a percentage");
+    expect(faultsOf({ body: body("SofaScore had Jay da Silva as the best man on the pitch.") })).toContain("names a source or a percentage");
   });
 
   it("refuses a figure and a name the brief does not give", () => {

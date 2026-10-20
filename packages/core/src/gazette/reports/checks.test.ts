@@ -58,6 +58,7 @@ describe("checkReports", () => {
 
   it("refuses a percentage and a fantasy game's term outright", () => {
     expect(checksOf(draft({ account: `${CLEAN.account} Spurs had 64% of the ball.` }))).toEqual(expect.arrayContaining([expect.stringMatching(/^hard: names a source/)]));
+    expect(checksOf(draft({ account: `${CLEAN.account} SofaScore rated him highest.` }))).toContain("hard: names a source or a percentage (SofaScore)");
     expect(checksOf(draft({ sections: [{ ...CLEAN.sections[0], pitch: "His xG was high." }, ...CLEAN.sections.slice(1)] }))).toEqual(expect.arrayContaining([expect.stringMatching(/^hard: a fantasy game's term/)]));
   });
 

@@ -56,6 +56,7 @@ describe("checkTrade", () => {
     expect(faults("Gabriel Magalhaes joins Truffles. Per Fantrax, Adrien Truffert goes to Beef.")[0]).toBe(
       "hard: names a source or a percentage (Per F)",
     );
+    expect(faults("Gabriel Magalhaes joins Truffles. Opta had Adrien Truffert going to Beef.")).toContain("hard: names a source or a percentage (Opta)");
     expect(faults("Gabriel Magalhaes joins Truffles to organize the defense. Adrien Truffert goes to Beef.")).toContain(
       "send-back: not British football English (organize)",
     );

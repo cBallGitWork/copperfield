@@ -3,7 +3,7 @@ import { BANNED, americanisms, banned } from "../banned";
 import { faultLog, type Fault } from "../fault";
 import { masked, numbersIn, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
-import { faultOn, strayFigures } from "../proofing";
+import { SOURCE_NAMES, faultOn, strayFigures } from "../proofing";
 import { REPORT_ADVICE, REPORT_FPL } from "../reports/words";
 import { COUNTED, SHEETS_STOCK, SOURCE } from "../sheets/words";
 import { strangers } from "../strangers";
@@ -31,6 +31,7 @@ export function checkBin(column: Record<string, unknown>, ctx: BinCheck): Fault[
     const written = text(section);
     const plain = masked(written, ctx.names);
     faultOn(fault, section, "names a source or a percentage", "hard", SOURCE, written);
+    for (const word of banned(plain, SOURCE_NAMES)) fault(section, "names a source or a percentage", "hard", word);
     for (const word of banned(plain, [...BIN_MARKET, ...REPORT_ADVICE])) fault(section, "the market is the wire's, and never advice", "hard", word);
     for (const word of banned(plain, [...BIN_WORKINGS, ...REPORT_FPL])) fault(section, "the desk's figures and the draft's round stay off the page", "hard", word);
     for (const word of banned(plain, BIN_NEGLECT)) fault(section, "why nobody has him is a verdict the facts cannot give", "hard", word);
