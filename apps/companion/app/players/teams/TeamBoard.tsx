@@ -7,6 +7,7 @@ import { SIDE_SHARES, standoutCuts, standoutInk, type StandoutCut } from "../../
 import { POOL } from "../routes";
 import TabStrip from "../../components/shell/TabStrip";
 import { FootFrame } from "../../components/shell/FootFrame";
+import ScoutShell from "../Shell";
 import ColumnKey from "../ColumnKey";
 import { PRESSABLE } from "../BoardControls";
 import { TEAM_COLUMNS, TEAM_GROUPS, plateHref, sortHref, type TeamColumn, type teamsView } from "./columns";
@@ -72,7 +73,7 @@ export default function TeamBoard({
 }
 
 /** Under a thumb one plate at a time, switched from the foot with the Key at the top (DESIGN §2); the desk holds
- *  every column. */
+ *  every column. The frame wraps the shell, as Adv Stats' does, so the dock spans the screen. */
 export function ClubsBoards({ view, rows }: { view: ReturnType<typeof teamsView>; rows: readonly TeamRow[] }) {
   const { sort, descending } = view;
   const plates = (
@@ -87,15 +88,17 @@ export function ClubsBoards({ view, rows }: { view: ReturnType<typeof teamsView>
   );
   return (
     <FootFrame foot={plates}>
-      <div className="flex justify-end lg:hidden">
-        <ColumnKey entries={view.columns.map((column) => ({ label: column.head, title: column.title }))} className={`${PRESSABLE} min-w-11`} />
-      </div>
-      <div className="lg:hidden">
-        <TeamBoard rows={rows} columns={view.columns} grouped={false} sort={sort} descending={descending} />
-      </div>
-      <div className="max-lg:hidden">
-        <TeamBoard rows={rows} columns={TEAM_COLUMNS} grouped sort={sort} descending={descending} />
-      </div>
+      <ScoutShell current="teams">
+        <div className="flex justify-end lg:hidden">
+          <ColumnKey entries={view.columns.map((column) => ({ label: column.head, title: column.title }))} className={`${PRESSABLE} min-w-11`} />
+        </div>
+        <div className="lg:hidden">
+          <TeamBoard rows={rows} columns={view.columns} grouped={false} sort={sort} descending={descending} />
+        </div>
+        <div className="max-lg:hidden">
+          <TeamBoard rows={rows} columns={TEAM_COLUMNS} grouped sort={sort} descending={descending} />
+        </div>
+      </ScoutShell>
     </FootFrame>
   );
 }

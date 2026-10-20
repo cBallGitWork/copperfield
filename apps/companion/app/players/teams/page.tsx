@@ -1,5 +1,4 @@
 import { clubStats } from "@epl/core";
-import ScoutShell from "../Shell";
 import { ClubsBoards } from "./TeamBoard";
 import { sortedTeams, teamsView } from "./columns";
 import { teamRows } from "./teamRows";
@@ -27,9 +26,5 @@ export default async function TeamsPage({
   const squads = new Map(clubStats(fixtures, snapshot.clubs, snapshot.players).map((club) => [club.clubId, club.squad]));
   const ordered = sortedTeams(teamRows(snapshot.clubs, seasons, squads), view.sort, view.descending);
 
-  return (
-    <ScoutShell current="teams">
-      <ClubsBoards view={view} rows={ordered} />
-    </ScoutShell>
-  );
+  return <ClubsBoards view={view} rows={ordered} />;
 }
