@@ -9,7 +9,10 @@ const scores = new Map([["t1", { points: 40 }], ["t2", { points: 31 }], ["t3", {
 
 vi.mock("next/server", () => ({ connection: async () => {} }));
 vi.mock("../../football", () => ({ footballNow: () => football(), speaksForNow: () => true }));
-vi.mock("../../squads", () => ({ getLeagueSquads: () => squads() }));
+vi.mock("../../squads", async (actual) => ({
+  readable: (await actual<typeof import("../../squads")>()).readable,
+  getLeagueSquads: () => squads(),
+}));
 vi.mock("../../scoreboard", () => ({ liveScores: async () => ({ scores, refused: null }) }));
 vi.mock("../../session", () => ({ myTeamId: () => reader() }));
 vi.mock("@/app/league/routes", () => ({ matchupHref: (id: string, _gw?: number, _view?: string, vs?: string) => `/league/matchups/${id}${vs === undefined ? "" : `?vs=${vs}`}` }));

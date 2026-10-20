@@ -3,7 +3,7 @@ import { headToHeads, isMatchdayLive, ProviderError } from "@epl/core";
 import { footballNow, speaksForNow } from "../../football";
 import { liveScores } from "../../scoreboard";
 import { myTeamId } from "../../session";
-import { getLeagueSquads } from "../../squads";
+import { getLeagueSquads, readable } from "../../squads";
 import { matchupHref } from "@/app/league/routes";
 
 // Whether there is a live scoreline of the reader's to put in the chrome, and what it says: one per tie, two in a
@@ -35,8 +35,8 @@ async function askedWhileLive(): Promise<LiveTie[]> {
   const snapshot = await footballNow();
   if (!isMatchdayLive(snapshot) || !speaksForNow(snapshot)) return [];
 
-  const squads = await getLeagueSquads();
-  if (!("period" in squads) || squads.info === null || squads.roundPeriod === null) return [];
+  const squads = readable(await getLeagueSquads());
+  if (squads === null || squads.info === null || squads.roundPeriod === null) return [];
 
   const mine = await myTeamId(squads.period.teams);
   if (mine === null) return [];

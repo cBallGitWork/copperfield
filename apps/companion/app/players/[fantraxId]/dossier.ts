@@ -4,7 +4,7 @@ import type { LeagueTransaction, PlayerStory } from "@epl/core";
 import { unstable_cache } from "next/cache";
 import { orDegraded, refusedAs } from "../../refusals";
 import { readDeals } from "../../business";
-import { getLeagueSquads } from "../../squads";
+import { getLeagueSquads, readable } from "../../squads";
 import { PAGE_REVALIDATE } from "../../config";
 
 // What has been written about a man, and the business our league has done with him.
@@ -41,11 +41,7 @@ export interface PlayerMove {
 export async function playerMoves(fantraxId: string): Promise<{ moves: PlayerMove[]; whole: boolean }> {
   const [deals, squads] = await Promise.all([readDeals(), getLeagueSquads()]);
   // A league we cannot read costs the moves their names, not the moves.
-  const names = new Map(
-    "period" in squads
-      ? squads.period.teams.map((team) => [team.teamId, team.teamName] as const)
-      : [],
-  );
+  const names = new Map(readable(squads)?.period.teams.map((team) => [team.teamId, team.teamName] as const));
   return { moves: movesOf(deals.rows, fantraxId, names), whole: deals.whole };
 }
 

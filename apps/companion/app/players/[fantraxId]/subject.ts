@@ -9,7 +9,7 @@ import { leagueRead } from "../../leagueCache";
 import type { Club, FootballPlayer, PlayerIntel } from "@epl/core";
 import { unavailable } from "../../refusals";
 import type { Unavailable } from "../../refusals";
-import { getLeagueSquads } from "../../squads";
+import { getLeagueSquads, readable } from "../../squads";
 import { getLeaguePool } from "../pool";
 import { footballSelf } from "./footballSelf";
 import { unknownToPool } from "./unknown";
@@ -51,7 +51,7 @@ export async function subject(fantraxId: string): Promise<Subject | Unavailable>
 /** The owning side's name off the rosters, never parsed out of the profile's wording; null on any ordinary failure. */
 async function teamName(ownerTeamId: string | null): Promise<string | null> {
   if (ownerTeamId === null) return null;
-  const squads = await getLeagueSquads();
-  if (!("period" in squads)) return null;
+  const squads = readable(await getLeagueSquads());
+  if (squads === null) return null;
   return squads.period.teams.find((team) => team.teamId === ownerTeamId)?.teamName ?? null;
 }

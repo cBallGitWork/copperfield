@@ -1,6 +1,6 @@
 import { fplCodeOf, owners, type PlayerOwner } from "@epl/core";
 import { leagueInfo } from "../round";
-import { bridge, getLeagueSquads } from "../squads";
+import { bridge, getLeagueSquads, readable } from "../squads";
 
 // Our league's view of the footballers on the Premiership screens — a club's squad and a match's two sides.
 
@@ -26,7 +26,8 @@ export async function leagueOpinions(): Promise<Map<number, LeagueOpinion>> {
   if (info === null) return new Map();
 
   // An undrafted or unreadable league answers nobody.
-  const held = "period" in squads ? owners(squads.period.teams) : new Map<number, PlayerOwner>();
+  const drafted = readable(squads);
+  const held = drafted === null ? new Map<number, PlayerOwner>() : owners(drafted.period.teams);
 
   const opinions = new Map<number, LeagueOpinion>();
   for (const player of info.players) {
