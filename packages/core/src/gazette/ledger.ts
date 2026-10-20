@@ -1,6 +1,8 @@
 // The newsroom's memory, committed beside the paper: covered keys (club codes, never per-season ids) stop a
 // story filing twice, and threads count their beats so a worn storyline is not reused.
 
+import { TRADE_KEY_PREFIX } from "./trades/trades";
+
 /** One running storyline, as the model reports it and the ledger wears it. */
 export interface StoryThread {
   /** What the saga is about, in a few words; slugged, it is the merge key. */
@@ -27,7 +29,7 @@ export type Ledger = Record<string, LedgerBook>;
 export const MAX_COVERED = 400;
 
 /** A trade's key names no gameweek and is offered all season, so the trim never drops one. */
-const SEASON_LONG = "trade:";
+const SEASON_LONG = TRADE_KEY_PREFIX;
 
 /** Threads kept per league, open and retired together. */
 const MAX_THREADS = 24;
