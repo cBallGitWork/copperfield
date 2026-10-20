@@ -1,4 +1,5 @@
-import { LEAGUE_COMPETITION, type CompetitionTie, type TieSide, leads } from "@epl/core";
+import { LEAGUE_COMPETITION, type TieSide, leads } from "@epl/core";
+import type { FixtureTie } from "../fixtures/roundTies";
 import type { ScheduleRound } from "./schedule";
 import ScoreRow from "../../components/shell/ScoreRow";
 import { opensOn, tieSide } from "../../components/league/tieSide";
@@ -15,7 +16,7 @@ export default function Tie({
   round,
   mine,
 }: {
-  tie: CompetitionTie;
+  tie: FixtureTie;
   /** Each side's Fantrax total for the gameweek, by team id. */
   points: Map<string, number | null>;
   /** Each team's place in the table, for CM's blue block (`placings`). */
@@ -38,8 +39,8 @@ export default function Tie({
 
   return (
     <ScoreRow
-      home={tieSide(tie.home, places, mine, { lost: settled && leads(away, home) })}
-      away={tieSide(tie.away, places, mine, { lost: settled && leads(home, away) })}
+      home={tieSide(tie.home, places, mine, { lost: settled && leads(away, home), pending: owedTo(tie, tie.home) })}
+      away={tieSide(tie.away, places, mine, { lost: settled && leads(home, away), pending: owedTo(tie, tie.away) })}
       score={round.started ? { home, away } : null}
       pending={<span className={LABEL}>{tie.code ?? "v"}</span>}
       marks
@@ -50,4 +51,8 @@ export default function Tie({
 
 function scoreOf(side: TieSide, points: Map<string, number | null>): number | null {
   return side.team === null ? null : (points.get(side.team.teamId) ?? null);
+}
+
+function owedTo(tie: FixtureTie, side: TieSide): number | null {
+  return side.team === null ? null : (tie.owed?.get(side.team.teamId) ?? null);
 }

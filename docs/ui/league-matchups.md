@@ -1,4 +1,9 @@
-# `/league/matchups` — this period's head-to-heads
+# `/league/matchups` — this period's head-to-heads (retired)
+
+> **Superseded 20 Oct 2026.** Craig: retire `/league/matchups` into League › Fixtures. With `?gw=` the route
+> 308s to `/league/fixtures` for that gameweek; a bare link 307s to the gameweek in focus; the reader's tie first and the clean sheets owed moved there
+> ([league-fixtures.md](league-fixtures.md)). The head-to-head, `/league/matchups/[teamId]`, stays
+> ([matchup.md](matchup.md)). What follows is the page as it was, kept as the record.
 
 Who each squad plays this period, and what they have scored.
 

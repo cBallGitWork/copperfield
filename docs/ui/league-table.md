@@ -7,13 +7,12 @@ Wrapped in `LeagueShell`: page header, then the section nav — `League · Cups
 2nd"*; Schedule and Results one Fixtures, and Transfers in from Mail and Scoring out to More, 13 Oct) — that the League tab is divided into.
 The nav stays on screen even in the empty states: without it a reader landing
 here during an outage has no way to reach the others and the section becomes a
-dead end. **Matchups is not on the strip**; it is in `SectionNav`'s `FOOT`,
-which is where CM files a screen that is about a fixture rather than about the
-division.
+dead end. **Matchups is not on the strip**: the list folded into Fixtures on 20 Oct 2026 (Craig), and only the
+head-to-head, `/league/matchups/[teamId]`, is left under its name.
 
 *A match-up plate under the strip (`league/MyMatchup.tsx`, your tie for the week in Live's row) went in on 19 Oct 2026
 and came out the same day (Craig: *"Hate the current match up row you introduced, removed"*). Your tie is on
-Matchups and Live.*
+Fixtures and Live.*
 
 *This paragraph said "the three-way section nav (Table · Schedule · Matchups)"
 until 3 Sep 2026, and had been wrong since 31 Aug — the strip gained Results and

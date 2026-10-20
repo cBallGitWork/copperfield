@@ -27,7 +27,7 @@ nothing.**
 | `/league/fixtures` | [league-fixtures.md](league-fixtures.md) | One gameweek at a time, every competition on it: results once played. |
 | `/league/transfers` | [league-transfers.md](league-transfers.md) | Every claim, drop and trade in the league, newest first. |
 | `/league/waivers` | [league-waivers.md](league-waivers.md) | When claims next run, the claim order and the last run; the waiver banner. |
-| `/league/matchups` | [league-matchups.md](league-matchups.md) | This period's head-to-heads, with live points. |
+| `/league/matchups` | [league-matchups.md](league-matchups.md) | Retired 20 Oct 2026: to `/league/fixtures`, 308 with `?gw=`, 307 to the gameweek in focus without. |
 | `/league/matchups/[teamId]` | [matchup.md](matchup.md) | One head-to-head: two totals, and the eleven behind each. |
 | `/league/team-stats` | [league-table.md](league-table.md) | The league ranked by one scoring category at a time. |
 | `/league/cups` | [league-cups.md](league-cups.md) | Each cup's whole draw, round by round, before anyone is drawn. |

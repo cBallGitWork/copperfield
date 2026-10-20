@@ -27,7 +27,6 @@ const PACE_MS = Number(process.env.SMOKE_PACE_MS || 0);
 const UNDRAFTED: Record<string, string> = {
   "/": "No news yet",
   "/league": "No table yet",
-  "/league/matchups": "Nobody plays anybody yet",
   "/squad": "Nobody has a squad yet",
 };
 
@@ -170,6 +169,11 @@ async function main() {
     }
 
     if (path === "/") problems.push(...launchScreenProblems(body));
+
+    // Fixtures' default is the next gameweek once one is done; an old Matchups link meant the one in focus.
+    if (path === "/league/matchups" && state === "drafted" && !/[?&]gw=\d+/.test(res.url)) {
+      problems.push(`landed on ${res.url}, not a named gameweek`);
+    }
 
     const never = NEVER[path];
     if (never !== undefined && body.includes(never)) {

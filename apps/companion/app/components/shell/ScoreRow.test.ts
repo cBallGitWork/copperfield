@@ -24,6 +24,29 @@ describe("a fantasy tie's results row", () => {
     expect(html).toMatch(/Home[\s\S]*2 to play[\s\S]*Away[\s\S]*all played/);
   });
 
+  // Review LEAGUE-8: Matchups, now retired into Fixtures, was the only screen with the clean sheets owed.
+  it("prints the clean sheets Fantrax has not credited beside the men still to play", () => {
+    const html = renderToStaticMarkup(
+      createElement(ScoreRow, {
+        home: tieSide(seat("a", "Home"), places, null, { left: "2 to play", pending: 4 }),
+        away: tieSide(seat("b", "Away"), places, null, { pending: 6 }),
+        score: { home: 30, away: 41 },
+      }),
+    );
+    expect(html).toMatch(/Home[\s\S]*2 to play[\s\S]*\+4[\s\S]*Away[\s\S]*\+6/);
+  });
+
+  it("prints no clean sheets for a side owed none", () => {
+    const html = renderToStaticMarkup(
+      createElement(ScoreRow, {
+        home: tieSide(seat("a", "Home"), places, null, { pending: 0 }),
+        away: tieSide(seat("b", "Away"), places, null, { pending: null }),
+        score: { home: 30, away: 41 },
+      }),
+    );
+    expect(html).not.toContain("+");
+  });
+
   it("prints nothing under a name with nothing to say", () => {
     const html = renderToStaticMarkup(
       createElement(ScoreRow, { home: tieSide(seat("a", "Home"), places, null), away: tieSide(seat("b", "Away"), places, null), score: null }),

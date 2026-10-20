@@ -3,6 +3,7 @@ import Link from "@/app/components/shell/Link";
 import type { ReactNode } from "react";
 import { INDEX_WIDTH, ROW_NAME } from "@/app/desk";
 import { yoursEdge, yoursMark } from "@/app/mine";
+import Pending from "../league/Pending";
 import Absent from "./Absent";
 import Scoreline from "./Scoreline";
 
@@ -26,6 +27,8 @@ export interface ScoreSide {
   lost?: boolean;
   /** A fantasy side's men still to play ("2 to play"), under the name; absent says nothing. */
   left?: string | null;
+  /** The clean sheets Fantrax has not credited, beside `left`; nought and null print nothing. */
+  pending?: number | null;
 }
 
 /** The crest beside the name, 20px under a thumb and 26 on the desk; fetched at the larger so it is never soft. */
@@ -128,7 +131,14 @@ function Name({ side, at }: { side: ScoreSide; at: "home" | "away" }) {
       <span className={`flex min-w-0 flex-col lg:flex-row lg:items-baseline lg:gap-1.5 ${at === "away" ? "items-end lg:flex-row-reverse" : ""}`}>
         <span className="max-w-full truncate lg:hidden">{side.short ?? side.name}</span>
         <span className="hidden truncate lg:inline">{side.name}</span>
-        {side.left ? <span className="shrink-0 font-sans text-2xs font-normal text-faint">{side.left}</span> : null}
+        {side.pending ? (
+          <span className={`flex shrink-0 items-baseline gap-1 font-sans text-2xs font-normal ${READS[at]}`}>
+            {side.left ? <span className="text-faint">{side.left}</span> : null}
+            <Pending points={side.pending} />
+          </span>
+        ) : side.left ? (
+          <span className="shrink-0 font-sans text-2xs font-normal text-faint">{side.left}</span>
+        ) : null}
       </span>
     </span>
   );
