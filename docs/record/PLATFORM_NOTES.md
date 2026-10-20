@@ -61,7 +61,8 @@ of its request log (1,153 records), joined on `requestId`:
 - **Single asks are refused too.** 10:21, 10:24 and 10:30 were one ask each; 16:26 to 18:23 a lone US reader's tab
   drew 2 to 6 asks every few minutes and every one was refused, for two hours. A burst is not needed, and the same
   URLs answer 200 from Craig's Mac. FPL is refusing the shared cloud addresses Vercel's London functions leave from;
-  our own rate is a few asks a minute per instance (20 s round reads, 300 s bootstrap and season list).
+  our own rate is a few asks a minute per instance (20 s round reads, 300 s bootstrap and season list; the season
+  list has been one ask an hour since 20 Oct).
 - **A production deploy is a burst of its own.** Vercel's screenshot bot (`HeadlessChrome/141`, US) opens `/` on every
   new deployment's own URL, and the six tabs it can see are prefetched four times each: 136 to 142 requests and 24 to
   26 server renders in five seconds. Six deploys landed between 18:56 and 19:07, the hour of a kick-off; 19:03's was
@@ -118,7 +119,9 @@ counts below come from the renders the log does show and the caches' lifetimes.
   nothing ahead (`aheadFor`): two renders a deploy. No project setting turns the screenshot off that we could find.
 - **The season list is the hour's reading in a match window too.** The round in focus is laid over it from its own
   20 s read, so in a window it carried only dates and finished rounds; `matchOn` already held the hour's copy of the
-  same URL. Twelve asks an hour become one; the 300 s entry stands in only when the hour's read is refused.
+  same URL. Twelve asks an hour become one. Since 20 Oct it is one entry with an hour's lifetime and no hour in its
+  key, so a refused refresh leaves the last list in place: the 300 s stand-in it replaced was never filled, and the
+  first new hour of an outage threw on every league page. `matchOn` reads the same entry.
 - **Left alone, measured.** `/fixtures/?event=N` stays: the season list is 183 KB now and ~1.1 MB by May against the
   round's 26 KB. `fpl-score-lines` reads the same event-live URL as `fpl-round-lines`, for `/fpl` only: 2 renders in
   the two hours. `fpl-entry` stays at 30 s off the clock, since a transfer made on FPL should show inside a minute.

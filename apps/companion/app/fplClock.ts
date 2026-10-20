@@ -16,14 +16,14 @@ export function hourly<A extends unknown[], R>(name: string, read: (...args: A) 
 }
 
 /** A read on the football clock: `liveSeconds` while `inPlay`, else `hourly`, and a refused quiet read serves the last
- *  reading the live clock held (its refresh is refused by the endpoint's own rest, not asked again). */
+ *  reading the live clock held, which only a match window fills (its refresh is refused by the endpoint's own rest). */
 export function onTheClock<A extends unknown[], R>(
   name: string,
   read: (...args: A) => Promise<R>,
   liveSeconds: number,
   inPlay: () => Promise<boolean>,
-  quiet: (...args: A) => Promise<R> = hourly(name, read),
 ): (...args: A) => Promise<R> {
+  const quiet = hourly(name, read);
   const live = unstable_cache(singleFlight(read), [name], { revalidate: liveSeconds });
   return async (...args) => ((await inPlay()) ? live(...args) : quiet(...args).catch(() => live(...args)));
 }
