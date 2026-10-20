@@ -25,8 +25,9 @@ export default function Season({
         // The opponent too: a double header pairs a team twice in one period.
         <li key={`${row.round.period}-${row.tie.competition.id}-${row.tie.round ?? ""}-${row.opponent.team?.teamId ?? row.opponent.label}`}>
           <div className="cm-row flex min-h-11 items-center gap-2 px-1.5">
-            {/* The gameweek always; its date only on a desk, where the opponent still has room. */}
-            <span className="cm-index numeric flex shrink-0 items-baseline gap-1 px-1.5 py-0.5">
+            {/* The gameweek always; its date only on a desk, where the opponent still has room. The floor holds the widest label
+                (GW10, "GW15 Saturday 12 December") so every opponent starts on one line. */}
+            <span className="cm-index numeric flex min-w-11 shrink-0 items-baseline gap-1 px-1.5 py-0.5 lg:min-w-48">
               <span>GW{row.round.gameweek}</span>
               {row.round.deadline === null ? null : (
                 <span className="hidden font-normal opacity-90 lg:inline">
