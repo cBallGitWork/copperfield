@@ -64,8 +64,8 @@ export default async function FixturesPage({ searchParams }: { searchParams: Pro
       : { mine: league.mine, owners: league.owners, lines, now: lines !== null && speaksForNow(lines) };
 
   return (
-    // Its matches and the round's head: the panel fits the gameweek, not the table's twenty.
-    <PremShell current="fixtures" rows={round.fixtures.length + 1}>
+    // Its matches, the round's head standing as the board's chrome: the panel fits the gameweek, not the table's twenty.
+    <PremShell current="fixtures" rows={round.fixtures.length}>
       <RoundMatches
         round={round}
         clubs={clubById(snapshot)}
