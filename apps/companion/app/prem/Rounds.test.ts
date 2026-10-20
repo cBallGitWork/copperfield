@@ -51,7 +51,7 @@ describe("a signed-in reader's count", () => {
   it("opens his men under the row rather than leading to another page", () => {
     const html = round(new Map([[1, [saka]]]));
     expect(html).not.toContain("/gw/");
-    expect(html).toMatch(/<button[^>]*aria-expanded="false"[^>]*>1 yours<\/button>/);
+    expect(html).toMatch(/<button[^>]*aria-expanded="false"[^>]*>1 yours<svg/);
     expect(html).toContain("Saka");
   });
 
@@ -70,16 +70,23 @@ describe("a signed-in reader's count", () => {
     expect(html.indexOf("border-l-transparent")).toBeGreaterThan(html.indexOf('href="/prem/match/1"'));
   });
 
+  it("marks the count as one that opens, with a chevron inside its button", () => {
+    const html = round(new Map([[1, [saka]]]));
+    const button = html.slice(html.indexOf("<button"), html.indexOf("</button>"));
+    expect(button).toMatch(/<svg[^>]*aria-hidden="true"/);
+    expect(button).not.toContain("rotate-180");
+  });
+
   it("holds the count's column on a row with none of his men", () => {
     const [, other] = rows(round(new Map([[1, [saka]]])));
-    expect(other).toContain("w-12");
+    expect(other).toContain("w-16");
   });
 });
 
 describe("a signed-out reader", () => {
   it("gets no column, no edge and no button", () => {
     const html = round();
-    expect(html).not.toContain("w-12");
+    expect(html).not.toContain("w-16");
     expect(html).not.toContain("border-l-4");
     expect(html).not.toContain("<button");
   });

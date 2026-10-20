@@ -11,8 +11,8 @@ import Yours from "./Yours";
 // One Premier League match as Championship Manager's results row (Craig, 5 Sep 2026).
 // Its count opens `MatchList` under the row: Fixtures shows one round, so one read of its lines serves every row.
 
-/** The count's column, held on every row of a reader's round so the colons stay in line. */
-const COUNT = "numeric flex w-12 shrink-0 items-center justify-end pr-1.5 text-2xs font-semibold text-accent";
+/** The count's column with room for its chevron, held on every row of a reader's round so the colons stay in line. */
+const COUNT = "numeric flex w-16 shrink-0 items-center justify-end pr-1.5 text-2xs font-semibold text-accent";
 
 export default function Match({
   fixture,

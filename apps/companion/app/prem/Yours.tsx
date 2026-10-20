@@ -28,9 +28,19 @@ export default function Yours({
           aria-expanded={open}
           aria-controls={id}
           onClick={() => setOpen(!open)}
-          className={`cm-row min-h-11 cursor-pointer hover:brightness-110 ${className}`}
+          className={`cm-row min-h-11 cursor-pointer gap-1 hover:brightness-110 ${className}`}
         >
           {count} yours
+          <svg
+            aria-hidden
+            viewBox="0 0 24 24"
+            className={`h-4 w-4 shrink-0 text-faint transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
+            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
       </div>
       <div id={id} hidden={!open}>
