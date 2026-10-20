@@ -49,8 +49,8 @@ Where a section below disagrees with this one, this one is current.
 - **The row under a thumb is two fixed lines**: the search and Filter, then `GK DEF MID FWD` and `Free Owned`
   (4 × 44 + 50 + 57 and gaps: it fits 346 at 390 and 316 at 360; at 320 the status pair takes a third line). Nothing
   on it moves when pressed, so the 16 Oct "row jumps 50px" is gone. **On a desk it is one row**: search, positions,
-  Free and Owned, Adv Stats' plates and Per 90 from `xl`, and Filter at the end (Adv Stats' `Key` before it, and its
-  plates a third line below `xl`, since 19 Oct 2026).
+  Free and Owned, Per 90 from `xl`, and Filter at the end (Adv Stats' `Key` before it). Adv Stats' plates dock at the
+  screen's foot since 20 Oct 2026 (below).
 - **Position is on the row at every width** as grey plates, a union as before, and left the sheet: nothing is in two
   visible places. *Forwards in the bin* is **one tap** (FWD) at 390, from five (FA, WW, Filter, FWD, Show); Fantrax's
   is one.
@@ -86,8 +86,11 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
   0.65 a 90 for defenders, 0.24 midfielders, 0.14 forwards (Gabriel 1.00, Tarkowski 0.86, Haaland 0.15). `xG xA xGI xGC` are the football
   snapshot's season figures, which have no league twin to disagree with; a man with no minutes dashes, and Per 90
   divides them by the same snapshot's minutes.
-- **The plates have a line of their own under a thumb** (third, under positions; inline from `xl`), one tap from
-  any plate to the next where the sheet took three. They left the sheet, so nothing is in two places, and the Filter
+- **The plates dock at the screen's foot** (M-CONSIST-1, 20 Oct 2026, the 24 Sep rule: a screen's sub-views switch
+  from its foot): `FootFrame`, above the thumb rail on a phone and at the screen's foot on a desk, on the main strip's
+  label ladder (`TabStrip`'s `word` plates, 3xs under 375), so the four hold one row at 320 where they wrapped to 94px.
+  They were a third line under positions (inline from `xl`) from 19 Oct 2026, one tap from any plate to the next where
+  the sheet took three. They left the sheet, so nothing is in two places, and the Filter
   badge below `xl` counts Per 90 alone, and not on a plate where it stands down (`ratedOn`). The four end at 309 of 338 at 360 with Chances (UX review, 19 Oct 2026), so
   Creating, a capital longer, holds one line there too.
 - **`Key` sits beside Filter** (`players/ColumnKey`, the house dialog, Back shuts it): every head on the plate,
@@ -164,7 +167,7 @@ above does, that one is.
   select), the stat groups (on the row since 19 Oct 2026), Per 90, then Reset and `Show N`, pinned at the foot. A tap outside, Escape or the cross closes it.
   **Reset** turns everything off (search, sort and Show all with the filters) and shuts the sheet; only a comparison's
   `compare` stays, so a picker stays one. **`Show N` promises what the board draws**: `Show 100 of 145` while it
-  draws a page (16 Oct 2026; no count line above the board, Craig's call). While the sheet is open every tap in it
+  draws a page (16 Oct 2026; no count line above the board, Craig's call), `Show 30 of 145` since 20 Oct. While the sheet is open every tap in it
   **replaces** the history entry, so one Back after Show returns to the board as it was before Filter.
 
 ## Shots, chances and crosses (9 Oct 2026)
@@ -245,9 +248,13 @@ absolute ranking is a fact about a different competition. Nothing sorted by it �
   than the rest.
 - **No opponent column** (Craig, 24 Sep 2026: *"Remove opponent as well"*; `columns.test.ts` holds it). The next
   fixture is the planner's question, and the planner writes it as every fixture is written, `CHE (A)`.
-- Paged at `PAGE_ROWS` with a "show all" escape. Show all holds for a sort, a stat group or Per 90, which reorder
-  or re-column the same rows; a filter, a search, a club or Reset drops it (16 Oct 2026: it had stuck to every tap at
-  2–3 MB each).
+- **Paged at `PAGE_ROWS`, thirty at every width** (Craig, 20 Oct 2026, M-SQUADS-1: a hundred two-line men ran eight
+  phone screens, twelve at 320; the server never guesses the screen). A **`Show N more`** plate at the foot adds a
+  page at a time, `?rows=60` and so on, and N is what it will draw, `min(30, left)` (`pageRows.nextStep`); "First 30
+  of 145 · Show all" stays beside it as the escape. A step and Show all hold for a sort, a stat group or Per 90, which
+  reorder or re-column the same rows; a filter, a search, a club or Reset drops both (16 Oct 2026: Show all had stuck
+  to every tap at 2–3 MB each), so a step never outlives the list it counted (`boardChange.changed`, `Carried`). It
+  was a hundred until 20 Oct.
 - **Men the league holds no status for are not listed** (16 Oct 2026): 96 left its pool at setup and every figure
   of theirs was `—`, so "every player" read 639 where no filter could reach past 543. `shownRows` keeps them only
   when no man has a status, so a league whose statuses did not arrive still lists its pool. Compare's boxes still
@@ -456,7 +463,8 @@ nothing rather than yesterday's.
 players* when there is a search (it keeps the search and the sort, drops position, status and club), *Clear filters*
 when there is not. A bare search that finds nobody says so and offers nothing, since no filter hid him.
 
-**Show all is `?all=1` and only that** (16 Oct 2026, review N22): `?all=0` or any other value draws the first hundred.
+**Show all is `?all=1` and only that** (16 Oct 2026, review N22): `?all=0` or any other value draws what `?rows=` asks, the first thirty
+without it; `?rows=` below thirty or not a whole number is the first thirty.
 **FP/G is a dash for a man with no game**: Fantrax prints `0.00` for him, which is no reading (124 of 543 rows, 16 Oct
 2026); a man who played prints his nought.
 
@@ -527,7 +535,8 @@ Two exceptions, both stated rather than drifted: the search **field** keeps
 read and typed into rather than pressed; and the club and sort `<select>`s are the app's one dropdown
 (`shell/QuerySelect`, `SELECT`), the same plate every other screen's picker wears (2 Oct 2026).
 
-**The stat plates are `cm-tab-quiet`**, a new modifier — *"we already have blue
+*Superseded 20 Oct 2026: the stat plates dock at the foot on the main strip's ladder and are no longer
+`cm-tab-quiet` (Adv Stats, above).* **The stat plates were `cm-tab-quiet`**, a new modifier — *"we already have blue
 bars on this page, do we need them this big?"*. `.cm-tab` is 56px above `lg`
 because CM's tab strip is chunky, and that reasoning is about the strip a screen
 is navigated by; a second strip choosing a view of the same board is not that

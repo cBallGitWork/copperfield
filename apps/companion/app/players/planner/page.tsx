@@ -2,6 +2,7 @@ import { PLANNER_RUN, plannerGameweeks, plannerRows, strengthTable, type Planner
 import ScoutShell from "../Shell";
 import Nothing from "../../components/shell/Nothing";
 import TabStrip from "../../components/shell/TabStrip";
+import { FootFrame } from "../../components/shell/FootFrame";
 import PlannerBoard from "./PlannerBoard";
 import StrengthRanks from "./StrengthRanks";
 import { footballNow, seasonFixtures } from "../../football";
@@ -50,30 +51,36 @@ export default async function PlannerPage({
 
   const clubs = new Map(snapshot.clubs.map((club) => [club.code, club]));
 
+  // Its views are sub-views of Data's Planner, so they switch from the foot (M-CONSIST-1, 20 Oct 2026).
+  const views = (
+    <TabStrip
+      label="Planner views"
+      tabs={VIEWS.map((entry) => ({ ...entry, href: `${PLANNER}?view=${entry.key}` }))}
+      current={view}
+      labels="word"
+    />
+  );
+
   return (
-    <ScoutShell current="planner">
-      <TabStrip
-        label="Planner views"
-        tabs={VIEWS.map((entry) => ({ ...entry, href: `${PLANNER}?view=${entry.key}` }))}
-        current={view}
-        labels="word"
-      />
-      {view === "rankings" ? (
-        <div className="grid gap-2 lg:grid-cols-2">
-          {(["defence", "attack"] as const).map((measure) => (
-            <section key={measure} className="flex min-w-0 flex-col gap-2">
-              <p className={SECTION_BAR}>{RANKING_TITLE[measure]}</p>
-              <StrengthRanks table={strengthTable(intelStrength, measure)} clubs={clubs} />
-            </section>
-          ))}
-        </div>
-      ) : (
-        <PlannerBoard
-          view={view}
-          rows={plannerRows(fixtures, snapshot.clubs, intelStrength, view, gameweeks)}
-          gameweeks={gameweeks}
-        />
-      )}
-    </ScoutShell>
+    <FootFrame foot={views}>
+      <ScoutShell current="planner">
+        {view === "rankings" ? (
+          <div className="grid gap-2 lg:grid-cols-2">
+            {(["defence", "attack"] as const).map((measure) => (
+              <section key={measure} className="flex min-w-0 flex-col gap-2">
+                <p className={SECTION_BAR}>{RANKING_TITLE[measure]}</p>
+                <StrengthRanks table={strengthTable(intelStrength, measure)} clubs={clubs} />
+              </section>
+            ))}
+          </div>
+        ) : (
+          <PlannerBoard
+            view={view}
+            rows={plannerRows(fixtures, snapshot.clubs, intelStrength, view, gameweeks)}
+            gameweeks={gameweeks}
+          />
+        )}
+      </ScoutShell>
+    </FootFrame>
   );
 }
