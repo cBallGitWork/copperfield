@@ -1077,7 +1077,8 @@ gameweek for every player, but only in a league whose scoring lists those column
   DOM on 14 route×width pairs) and the head-to-head's Stats.
 - **Extended 20 Oct 2026 (mobile review, M-CONSIST-1)** to every second top strip: Cups, Waivers, a match's
   Line-ups, the planner's views, Adv Stats' and Team Stats' groups, the team and club Stats views, and Pitch|List
-  on a club's squad and depth and a rival's squad sheet (`ListAndPitch`'s opt-in `foot`, docked by `FOOT_DOCK`).
+  on a rival's squad sheet (`ListAndPitch`'s opt-in `foot`, docked by `FOOT_DOCK`) and a club's squad and depth
+  (`?view=` links in the club shell's `FootFrame` foot, since a dock inside a panel sat inset and short of the rail).
   Foot strips take the main strip's ladder (`WORD_PLATE`: 2xs, 3xs under 375), so none wraps; `GroupNav` is one
   44px row at 320. Each screen moves in its own lane. **Exceptions**: Matchday's `Scores · Top stats` is Live's
   own strip and stays on top (its stat picker moves); the own-squad planner keeps its toggle, its foot being
