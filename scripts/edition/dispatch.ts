@@ -14,6 +14,7 @@ import {
   type ThreadUpdate,
 } from "@epl/core";
 import { presserEdition, withStillOut } from "./presserWeek";
+import { withoutEchoes } from "./checks";
 import { faceOf, type FaceContext } from "./faces";
 import type { DeskFacts } from "./facts";
 import type { PredictionsDesk } from "./predictions";
@@ -99,10 +100,7 @@ export function file(
           headline: presserHeadline(assignment.day ?? ""),
           // The fixture and the still-out list are the desk's, joined on the club code the writer echoed, never recalled by
           // a model. They join at the column's top level: `storyOfColumn` folds `teamNews` into `extras` only afterwards.
-          teamNews: withStillOut(
-            withTies(column.teamNews, ctx.presserTies, ctx.presserClubs),
-            edition(ctx, assignment).lines,
-          ),
+          teamNews: teamSheetRows(column.teamNews, ctx, edition(ctx, assignment).lines),
         }
       : column;
 
@@ -134,6 +132,16 @@ function deskFace(assignment: Assignment, ctx: DeskContext) {
   if (assignment.kind === "bin-xi") return ctx.bin?.face ?? null;
   if (assignment.kind === "trade") return ctx.trades.get(assignment.key)?.face ?? null;
   return faceOf(assignment, faceCtx(ctx, assignment));
+}
+
+/** The Team Sheet's rows as printed: the desk's fixtures and still-out men, then every line that only echoes a bullet
+ *  blanked. It runs after the subedit, so a blanked line never draws the 'no line' send-back. */
+export function teamSheetRows(
+  rows: unknown,
+  ctx: Pick<DeskContext, "presserTies" | "presserClubs">,
+  lines: readonly PresserLine[],
+): unknown {
+  return withoutEchoes(withStillOut(withTies(rows, ctx.presserTies, ctx.presserClubs), lines));
 }
 
 /** Each team-news row given its club's fixture from the desk and stripped of any the column wrote; a club code that is
