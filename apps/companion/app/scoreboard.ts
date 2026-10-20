@@ -23,6 +23,7 @@ import {
   pendingCleanSheets,
   withAutoSubs,
 } from "@epl/core";
+import { cache } from "react";
 import { benchRoster } from "./benchOrders";
 import { LIVE_REVALIDATE } from "./config";
 import { leagueCache } from "./leagueCache";
@@ -65,6 +66,12 @@ const readScores = leagueCache("live-scores",
   LIVE_REVALIDATE,
 );
 
+/** The period's sides after subs, once per request: Live and the layout's live strip both ask, and one screen gets one reading. */
+const periodSides = cache(async (period: number) => {
+  const { scores, players, bench, remaining, refused, fetchedAt } = await readScores(period);
+  return { sides: await afterSubs(period, scores, [...players, ...bench], remaining ?? []), refused, fetchedAt };
+});
+
 /** Every team's score this period with the auto subs counted, the one total any screen prints, and each team's subs. */
 export async function liveScores(period: number): Promise<{
   scores: Map<string, LiveTeamScore>;
@@ -73,9 +80,8 @@ export async function liveScores(period: number): Promise<{
   refused: string | null;
   fetchedAt: string | null;
 }> {
-  // A Map does not survive the cache, so entries cross it and the Map is built out here.
-  const { scores, players, bench, remaining, refused, fetchedAt } = await readScores(period);
-  const sides = await afterSubs(period, scores, [...players, ...bench], remaining ?? []);
+  // A Map does not survive the cache, so entries cross it and each caller gets its own Maps.
+  const { sides, refused, fetchedAt } = await periodSides(period);
   return {
     scores: new Map(sides.map((side) => [side.score.teamId, side.score])),
     subs: new Map(sides.flatMap((side) => (side.subs.length === 0 ? [] : [[side.score.teamId, side.subs] as const]))),
