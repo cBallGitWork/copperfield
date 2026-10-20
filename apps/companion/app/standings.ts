@@ -6,8 +6,8 @@ import {
   mapClaimOrder,
   mapStandings,
 } from "@epl/core";
-import { leagueCache } from "./leagueCache";
-import { refusedAs, tell } from "./refusals";
+import { leagueRead } from "./leagueCache";
+import { tell } from "./refusals";
 import type { Unavailable } from "./refusals";
 
 // The standings page Fantrax draws for its own site, the table's whole source: the fxea array has no points column.
@@ -21,13 +21,9 @@ interface StandingsPage {
 
 /** The table and the claim order, and the refusal if there was one. The key changed with the shape, so no entry
  *  cached before the order was read can answer without it. */
-const read = leagueCache("standings-and-order",
-  (): Promise<StandingsPage> =>
-    refusedAs(fetchStandingsPage(FANTRAX_LEAGUE_ID), (error) => refusal(tell(error)), (raw) => ({
-      table: mapStandings(raw),
-      order: mapClaimOrder(raw),
-      refused: null,
-    })),
+const read = leagueRead("standings-and-order",
+  () => fetchStandingsPage(FANTRAX_LEAGUE_ID),
+  (raw): StandingsPage => ({ table: mapStandings(raw), order: mapClaimOrder(raw), refused: null }),
   (error) => refusal(tell(error)),
 );
 

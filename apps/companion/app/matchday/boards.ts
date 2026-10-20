@@ -9,10 +9,9 @@ import {
 } from "@epl/core";
 import { LEADERS_SHOWN } from "../config";
 import { seasonKickoffs } from "../football";
-import { leagueCache } from "../leagueCache";
+import { leagueRead } from "../leagueCache";
 import { getLeaguePool } from "../players/pool";
 import { playerHref } from "../players/routes";
-import { refusedAs } from "../refusals";
 import { periodPoints } from "../scoreboard";
 import { leagueScoring } from "../scoring";
 import { bridge } from "../squads";
@@ -23,13 +22,11 @@ import { type Listed, type TopBoard, defconCounts, defconGroups, defconSeats, ga
 // The Top stats view's reads, kept out of the page: each is cached, and only this view asks for them.
 
 /** Fantrax's points for the whole pool in one period, free agents included, as entries for the cache. */
-const poolPeriodPoints = leagueCache(
+const poolPeriodPoints = leagueRead(
   "pool-period-points",
-  (period: number): Promise<[string, number][]> =>
-    refusedAs(fetchPoolStats(FANTRAX_LEAGUE_ID, POOL_PAGE_SIZE, undefined, undefined, period), () => [], (raw) =>
-      mapPoolStats(raw).rows.flatMap((row): [string, number][] => (row.points === null ? [] : [[row.fantraxId, row.points]])),
-    ),
-  () => [],
+  (period: number) => fetchPoolStats(FANTRAX_LEAGUE_ID, POOL_PAGE_SIZE, undefined, undefined, period),
+  (raw) => mapPoolStats(raw).rows.flatMap((row): [string, number][] => (row.points === null ? [] : [[row.fantraxId, row.points]])),
+  (): [string, number][] => [],
 );
 
 /** The gameweek's lists and the team names their brackets print; `period` is the served league's for this
