@@ -30,7 +30,7 @@ export function articleMetadata(
       title,
       description,
       ...(host ? { url } : {}),
-      ...(story.filedAt === "" ? {} : { publishedTime: story.filedAt }),
+      publishedTime: story.filedAt,
     },
     twitter: { card: "summary_large_image", title, description },
   };

@@ -209,7 +209,8 @@ business, and when lineups lock.
    Rank · name · played · goal difference or owner · points, on hairlines, in
    the tabular face; a column no row carries is not printed, so the scorers chart
    has no played column and the draft table is rank, name and points alone
-   (Craig, 1 Oct 2026: *"remove the WLT and gp, just points and names fine"*). A team is its **short name** in
+   (Craig, 1 Oct 2026: *"remove the WLT and gp, just points and names fine"*). Men level on points share a
+   place, as the Live leaders do (20 Oct 2026); the chart still cuts at ten rows. A team is its **short name** in
    both, as in Team of the Week beside them (16 Oct 2026, review N30: Top points printed AtleticoTimHortons
    under Atletico); a story's prose keeps the full name.
    None of the three is a link or a tap target — the sortable, tappable
@@ -218,7 +219,9 @@ business, and when lineups lock.
 9. **The week's business** — trades and claims, grouped so both halves of a trade
    read as one deal. Fantrax's US Eastern timestamps are printed in London time
    (`fantraxTime`), with no zone in the heading (Craig, 2 Oct 2026: *"Times need
-   to be local time"*).
+   to be local time"*). The week is the newest period that has deals, not the round's: a claim run after the
+   deadline lands in the next period, and Tuesday's open one has none yet (20 Oct 2026: the head counted the
+   season's 43). A team is its short name here too, as in the tables.
 10. **Next deadline** — the period boundary, with an explicit note that the
    commissioner's real lock is fifteen minutes before the first fixture and is
    not something Fantrax publishes.

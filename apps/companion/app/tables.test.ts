@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { draftRows, scorerRows } from "./tables";
 
 // Two teams with a short name in data/leagues/short-names.json, one man each on the scorers chart.
@@ -12,12 +12,12 @@ vi.mock("./standings", () => ({
   ],
 }));
 
+const scorer = (name: string, owner: string, points: number) => ({ entry: { player: { fantraxId: name, displayName: name }, ownerTeamId: owner }, stats: { points } });
+let scorers = [scorer("Pascal Gross", ATLETICO, 44), scorer("João Pedro", BEEF, 40)];
+
 vi.mock("./players/pool", () => ({
   getLeaguePool: async () => ({
-    rows: [
-      { entry: { player: { fantraxId: "gross", displayName: "Pascal Gross" }, ownerTeamId: ATLETICO }, stats: { points: 44 } },
-      { entry: { player: { fantraxId: "pedro", displayName: "João Pedro" }, ownerTeamId: BEEF }, stats: { points: 40 } },
-    ],
+    rows: scorers,
     teamNames: new Map([
       [ATLETICO, "AtleticoTimHortons"],
       [BEEF, "Cowthenbeef"],
@@ -27,9 +27,19 @@ vi.mock("./players/pool", () => ({
 
 vi.mock("./football", () => ({ footballNow: async () => ({ clubs: [] }), seasonFixtures: async () => [] }));
 
+beforeEach(() => {
+  scorers = [scorer("Pascal Gross", ATLETICO, 44), scorer("João Pedro", BEEF, 40)];
+});
+
 describe("the paper's tables", () => {
   it("name a team by its short name, as Team of the Week beside them does", async () => {
     expect((await scorerRows()).map((row) => row.detail)).toEqual(["Atletico", "Beef"]);
     expect((await draftRows(null)).map((row) => row.name)).toEqual(["Atletico", "Beef"]);
+  });
+
+  // 20 Oct 2026: Raya and Calafiori, both on 41, printed 5 and 6, their order settled by spelling.
+  it("gives men level on points one place, as the Live leaders do", async () => {
+    scorers = [scorer("Haaland", BEEF, 47), scorer("Saka", BEEF, 41), scorer("Palmer", BEEF, 41), scorer("Isak", BEEF, 39)];
+    expect((await scorerRows()).map((row) => `${row.rank} ${row.name}`)).toEqual(["1 Haaland", "2 Palmer", "2 Saka", "4 Isak"]);
   });
 });

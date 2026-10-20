@@ -52,3 +52,4 @@ describe("the paper's edition", () => {
     expect((await edition(null)).filed[0]?.face).toEqual({ code: 204480, name: "Rice", clubId: 1, position: null });
   });
 });
+

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { LeagueTransaction } from "../league/types";
-import { deals, lastWaiverRun } from "./deals";
+import { deals, lastWaiverRun, weekOfBusiness } from "./deals";
 import type { Deal } from "./types";
 
 const tx = (over: Partial<LeagueTransaction> & { fantraxId: string }): LeagueTransaction => ({
@@ -126,5 +126,19 @@ describe("lastWaiverRun", () => {
     expect(lastWaiverRun(deals([claim("fa", WED, "free agency")]))).toEqual([]);
     const undated: Deal = { setId: "w1", kind: "claim", inbound: [], outbound: [], processedAt: null, period: 1, via: "waivers" };
     expect(lastWaiverRun([undated])).toEqual([]);
+  });
+});
+
+// 20 Oct 2026: "The week's business · 43" counted the season's deals under a head that says week.
+describe("weekOfBusiness", () => {
+  const deal = (setId: string, period: number | null): Deal => ({ setId, kind: "claim", inbound: [], outbound: [], processedAt: null, period });
+
+  it("keeps the newest period that has deals, and any deal Fantrax gave no period", () => {
+    const week = weekOfBusiness([deal("a", 7), deal("b", null), deal("c", 6), deal("d", 7), deal("e", 1)]);
+    expect(week.map((kept) => kept.setId)).toEqual(["a", "b", "d"]);
+  });
+
+  it("is empty when there is no business", () => {
+    expect(weekOfBusiness([])).toEqual([]);
   });
 });

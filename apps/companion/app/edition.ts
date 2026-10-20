@@ -14,6 +14,7 @@ import {
   stories,
   teamOfTheWeek,
   wasFielded,
+  weekOfBusiness,
   withReportFace,
 } from "@epl/core";
 import { now } from "./clock";
@@ -37,7 +38,10 @@ export interface Edition {
   /** Null when there is something to print. */
   silence: Silence | null;
   snapshot: FootballSnapshot | null;
+  /** The season's deals: the desk's stories pick their own week, and silence counts them all. */
   deals: Deal[];
+  /** The sidebar's week: the newest period that has deals, plus any Fantrax gave no period. */
+  business: Deal[];
   deadline: Deadline | null;
   teams: LeagueTeam[];
   /** Null until somebody has actually played. */
@@ -82,6 +86,7 @@ export async function edition(mine: string | null): Promise<Edition> {
   const paper = {
     snapshot: drafted?.snapshot ?? null,
     deals: business,
+    business: weekOfBusiness(business),
     deadline: drafted?.info ? nextDeadline(drafted.info.rosterPeriods, kickoffs, at) : null,
     teams: drafted?.info?.teams ?? [],
     eleven: picked,

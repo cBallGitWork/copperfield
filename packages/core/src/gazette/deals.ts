@@ -56,6 +56,14 @@ export function deals(transactions: readonly LeagueTransaction[]): Deal[] {
   return newestFirst(told);
 }
 
+/** The sidebar's week: the newest period that has deals, plus any with no period. Not the round's period: a claim run
+ *  after the deadline lands in the next one, and Tuesday's open period has none yet. */
+export function weekOfBusiness(all: readonly Deal[]): Deal[] {
+  const periods = all.flatMap((deal) => (deal.period === null ? [] : [deal.period]));
+  const newest = periods.length === 0 ? null : Math.max(...periods);
+  return all.filter((deal) => deal.period === null || deal.period === newest);
+}
+
 /** The last waiver run's claims, in the feed's order: a run resolves every claim on one stamp, so it is the claims off
  *  waivers on the latest. Undated claims belong to no run. */
 export function lastWaiverRun(told: readonly Deal[]): Deal[] {

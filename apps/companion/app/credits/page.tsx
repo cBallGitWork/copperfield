@@ -22,7 +22,7 @@ export default function CreditsPage() {
   const credits = [
     ...(DESK_GROUND_CREDIT === null
       ? []
-      : [{ place: "Anfield, behind every desk screen", photo: DESK_GROUND_CREDIT }]),
+      : [{ place: "Anfield, behind the desk until you sign in", photo: DESK_GROUND_CREDIT }]),
     ...venueCredits().map(({ place, ...photo }) => ({ place, photo })),
     ...groundPhotoCredits().map(({ shortName, photo }) => ({
       place: clubGround(shortName) ?? shortName,
@@ -42,7 +42,7 @@ export default function CreditsPage() {
       <section className={PANEL}>
         <p className="text-sm text-muted">
           The photographs behind the desk, behind each club&rsquo;s screens, behind each
-          team&rsquo;s home head-to-heads and beside Lawro&rsquo;s column are somebody else&rsquo;s
+          team&rsquo;s own screens and home head-to-heads and beside Lawro&rsquo;s column are somebody else&rsquo;s
           work, used under the licence named beside each. Crests, kits and player portraits are the Premier League&rsquo;s own.
         </p>
         <ul className="flex flex-col">
