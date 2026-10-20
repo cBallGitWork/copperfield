@@ -26,7 +26,8 @@ and this is not a second attempt at it.
   still too big on desktop and mobile, make much smaller and show bench"), captain and
   vice marked, and a points-hit note when there is one. `.pitch-fpl` keeps 28rem of the
   screen off the grass, so the XI and the bench share one screen: about 430px wide on a
-  1440 desk, beside the mini-leagues, and full width but 392px tall at 390x844. A line
+  1440 desk, beside the mini-leagues, and full width but 392px tall at 390x844. A phone
+  with mini-leagues keeps 31.25rem, paying for the strip above the views (20 Oct 2026). A line
   under the strip totals what the bench left: "did my bench outscore my side" is the
   question a benched hat-trick provokes. A bench kit and that total read `FplPick.scored`,
   his own points: the pick's `points` are multiplied by FPL's nought for the bench, and
@@ -45,12 +46,16 @@ and this is not a second attempt at it.
   The split rests on `FplPick.slot` — FPL's own 1–15 ordering, named `slot` and
   not `position` because `position` in this codebase means the letter a league
   files a player under, and this is neither that nor a place on a pitch.
-- **Mini-leagues** with your rank in each, beside the round on a desk.
-- "Not your side? Forget it."
+- **Mini-leagues** with your rank in each, beside the round on a desk. Under a thumb the
+  gameweek and the mini-leagues are one view at a time behind a `TabStrip`
+  (`?view=leagues`), drawn only when there are mini-leagues (20 Oct 2026). FPL's global
+  Overall league (FPL's id 314) is not listed: its rank is the Rank figure.
+- **"Open on FPL" and "Not your side? Forget it"**, above the views on a desk and under
+  them on a phone, so neither a long list nor the pitch's budget pays for them.
 
 Before an entry id is set, the page is just the entry form. A bad id gets a
-`Nothing` panel telling the reader where to find the number in their own address
-bar.
+`Nothing` panel with its title and the id, over the form, which already says where
+the number is.
 
 ## The one rule this page carries
 

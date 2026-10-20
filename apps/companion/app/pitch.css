@@ -26,6 +26,13 @@
   --pitch-page: 28rem;
 }
 
+/* Under a thumb with mini-leagues, the Gameweek · Mini-leagues strip (36px) and its 16px gap stand above it too. */
+@media (width < 64rem) {
+  .fpl-views .pitch-fpl {
+    --pitch-page: 31.25rem;
+  }
+}
+
 /* A pitch with a bench under it budgets for the bench; set by `TeamSheet` and `LineupPitch`. */
 .pitch-with-bench {
   --pitch-page: 26.5rem;

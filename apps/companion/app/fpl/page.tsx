@@ -85,7 +85,7 @@ export default async function FplPage({ searchParams }: { searchParams: Promise<
   );
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className={`flex flex-col gap-4 ${entry.leagues.length > 0 ? "fpl-views" : ""}`}>
       <PageHeader title={entry.teamName || FPL_TITLE} sub={entry.managerName} back={MORE} />
 
       {/* This week's points off `summary_event_points`, not `squad.total`, which lags the live figure. */}
@@ -94,9 +94,9 @@ export default async function FplPage({ searchParams }: { searchParams: Promise<
         <Figure label="Rank" value={entry.overallRank} />
       </dl>
 
-      {/* Transfers, captaincy and chips are FPL's: the way out opens the gameweek on screen, above the views
-          so neither a pitch nor a long list buries it. */}
-      <div className="flex flex-wrap items-center gap-2">
+      {/* Transfers, captaincy and chips are FPL's: the way out opens the gameweek on screen. Above the views on a
+          desk; under them on a phone, so the pitch keeps `.pitch-fpl`'s budget (`fpl-views` pays for the strip). */}
+      <div className="flex flex-wrap items-center gap-2 max-lg:order-last">
         <OutLink href={`${FPL_SITE}/entry/${entryId}/event/${squad?.gameweek ?? snapshot.gameweek}`}>
           Open on FPL
         </OutLink>
