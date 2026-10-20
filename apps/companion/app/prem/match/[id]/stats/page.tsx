@@ -15,6 +15,7 @@ import { teamSheets } from "../../../../matchDetail";
 import { leagueScoring } from "../../../../scoring";
 import { scoringDay } from "../../../../scoringDay";
 import { matchTitle } from "../title";
+import { beforeKickOff } from "../matchState";
 
 // Both sides against each other, one club's men, or the Fantasy Report — CM 01/02's Match Stats with its foot row.
 
@@ -127,9 +128,4 @@ async function BothSides({ match }: { match: Match }) {
 /** A club's board and the Fantasy Report both read the team sheet, which a match has only once its sides are named. */
 function NoSheet({ match }: { match: Match }) {
   return <TabEmpty>{beforeKickOff(match) ?? "No team sheet yet"}</TabEmpty>;
-}
-
-/** The match tabs' one line for a match not yet started; null once it has. */
-function beforeKickOff(match: Match): string | null {
-  return match.fixture.status === "upcoming" ? "Not kicked off" : null;
 }

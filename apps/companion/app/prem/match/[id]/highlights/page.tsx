@@ -4,6 +4,7 @@ import MatchShell from "../Shell";
 import { matchVideo, readMatch } from "../match";
 import { PANEL, QUIET_NOTE } from "@/app/desk";
 import { matchTitle } from "../title";
+import { beforeKickOff } from "../matchState";
 
 // The match's highlights, from Sky Sports Premier League's YouTube playlist (Craig, 11 Sep 2026).
 // Embedded, never fetched: YouTube's iframe plays it, and we read only titles and ids.
@@ -29,7 +30,7 @@ export default async function MatchHighlightsPage({
         {video === null ? (
           // TabEmpty is the panel here, so the line is not boxed twice.
           <TabEmpty code={`fixture ${fixture.code}`}>
-            {fixture.status === "upcoming" ? "Not kicked off" : "No highlights"}
+            {beforeKickOff(match) ?? "No highlights"}
           </TabEmpty>
         ) : (
           <section className={PANEL}>

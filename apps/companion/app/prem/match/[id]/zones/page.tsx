@@ -14,6 +14,7 @@ import { teamSheets } from "../../../../matchDetail";
 import { matchHref } from "../matchRoutes";
 import { MATCH_ROW } from "../matchRow";
 import { matchTitle } from "../title";
+import { beforeKickOff } from "../matchState";
 
 // CM's Action Zones (`cm9900/22.jpg`): where both sides shot from and who took them, then where the eleven stood.
 
@@ -53,7 +54,7 @@ export default async function MatchZonesPage({
   if (shots.length === 0 && homeMen.length === 0 && awayMen.length === 0) {
     return (
       <MatchShell match={match} current="zones">
-        <TabEmpty>{match.fixture.status === "upcoming" ? "Not kicked off" : "No shot data yet"}</TabEmpty>
+        <TabEmpty>{beforeKickOff(match) ?? "No shot data yet"}</TabEmpty>
       </MatchShell>
     );
   }
