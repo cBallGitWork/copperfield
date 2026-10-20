@@ -39,6 +39,8 @@ export interface MatchDesk {
   /** The sections, weightiest first. */
   sections: DeskSection[];
   keyStats: KeyStat[];
+  /** The fewest saves the league pays a keeper for; null when unread. */
+  keeperRung: number | null;
   star: StarMan | null;
   lead: boolean;
 }
@@ -96,6 +98,7 @@ export function deskDay(input: ReportDayInput): MatchDesk[] {
       budget: { account: accountWords(events) },
       sections: picks.map((p, j) => ({ men: p.men, stake: stakes[i][j] })),
       keyStats: keyStats(match, events, counts, size.stats, input.keeperRung),
+      keeperRung: input.keeperRung,
       star: starMan(match, events),
       lead: i === 0,
     };

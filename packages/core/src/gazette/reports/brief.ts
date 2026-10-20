@@ -49,7 +49,7 @@ export function matchBlock(desk: MatchDesk): string {
     [
       "THE SECTIONS, one for each line and in its order: a head, then what the man did that the account does not, in one or two sentences. The desk prints each stake after your words:",
       ...sections.map((s, i) => {
-        const said = s.men.map((m) => `${withClub(match, m)}: ${manLine(match, m, counts.get(m.code), events) || "played"}`);
+        const said = s.men.map((m) => `${withClub(match, m)}: ${manLine(match, m, counts.get(m.code), events, desk.keeperRung) || "played"}`);
         const all = said.length === 2 ? "BOTH MEN" : `ALL ${spelled(said.length).toUpperCase()} MEN`;
         return `- ${i + 1}. ${said.length === 1 ? said[0] : `ONE SECTION ON ${all}, each named: ${said.join("; AND ")}`}.`;
       }),

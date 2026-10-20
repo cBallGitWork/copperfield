@@ -19,16 +19,16 @@ describe("a man sent off", () => {
 
   it("is told as sent off, never as taken off", () => {
     expect(men[0]).toMatchObject({ offAt: "55", sentOff: true, injuredOff: false });
-    expect(manLine(matchInput(men, moments, [0, 0]), men[0], manCounts(events, men).get(1), events)).toBe("was sent off");
+    expect(manLine(matchInput(men, moments, [0, 0]), men[0], manCounts(events, men).get(1), events, null)).toBe("was sent off");
   });
 });
 
 describe("manLine", () => {
-  const line = (over: Partial<ReportMan>, moments = [moment("10", "goal", [3, null])], score: [number, number] = [0, 1]) => {
+  const line = (over: Partial<ReportMan>, moments = [moment("10", "goal", [3, null])], score: [number, number] = [0, 1], keeperRung: number | null = 3) => {
     const man = reportMan(1, "William Saliba", "home", { line: "D", ...over });
     const match = matchInput([man, PALMER], moments, score);
     const events = matchEvents(match);
-    return manLine(match, man, manCounts(events, match.men).get(1), events);
+    return manLine(match, man, manCounts(events, match.men).get(1), events, keeperRung);
   };
 
   it("says a start or a change only when it is news: a first league start, off before the hour", () => {
@@ -45,6 +45,12 @@ describe("manLine", () => {
   it("gives the chances good enough to score of a man who did not, his defensive points, and a whole match without conceding", () => {
     expect(line({ expectedGoals: 0.6, defensive: 2 })).toBe("chances good enough to score; two defensive points");
     expect(line({}, [], [0, 0])).toBe("the whole match without conceding");
+  });
+
+  it("gives a keeper's saves from the league's paid rung, and none when the league's rung is unread", () => {
+    expect(line({ line: "G", saves: 3 })).toBe("three saves");
+    expect(line({ line: "G", saves: 3 }, undefined, undefined, 4)).toBe("");
+    expect(line({ line: "G", saves: 6 }, undefined, undefined, null)).toBe("");
   });
 
   it("hands defensive points over as points the league pays, with the most a match pays, never as a count of actions", () => {
