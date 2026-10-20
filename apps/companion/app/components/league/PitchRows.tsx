@@ -55,6 +55,7 @@ export default function PitchRows<T>({
   keyOf,
   widest: agreed,
   inColumn = false,
+  empty,
   children,
 }: {
   rows: PitchRow<T>[];
@@ -63,6 +64,8 @@ export default function PitchRows<T>({
   inColumn?: boolean;
   /** A fullest-line count shared by two pitches toggled in one view, so the cards hold still. */
   widest?: number;
+  /** What a line nobody fills draws in its place, by its label; without it the line is bare. */
+  empty?: (label: string) => ReactNode;
   children: (player: T) => ReactNode;
 }) {
   // Read from the rows, not the league's position caps: this may not be the whole squad.
@@ -79,6 +82,11 @@ export default function PitchRows<T>({
       className={`flex items-start justify-center ${GAP_CLASS}`}
       aria-label={`${row.label} — ${row.players.length}`}
     >
+      {row.players.length === 0 && empty !== undefined ? (
+        <li className={`${GROWS} min-w-0 shrink-0`} style={{ flexBasis: cardBasis(widest) }}>
+          {empty(row.label)}
+        </li>
+      ) : null}
       {row.players.map((player) => (
         <li
           key={keyOf(player)}

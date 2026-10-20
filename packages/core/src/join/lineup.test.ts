@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { NO_SEASON } from "../football/noSeason";
 import type { FootballPlayer } from "../football/types";
 import type { RosteredPlayer, RosteredTeam } from "./roster";
-import { lineup, squadUnarranged } from "./lineup";
+import { everyLine, lineup, squadUnarranged } from "./lineup";
 import { mapBenchOrder, type RawTeamRosterInfo } from "../league/fantrax/benchOrder";
 import raccoons from "../league/fantrax/__fixtures__/teamRosterInfoBench.json";
 
@@ -152,5 +152,23 @@ describe("squadUnarranged", () => {
     const lines = squadUnarranged(dual);
     expect(lines.map((line) => line.position)).toEqual(["M", "F"]);
     expect(lines.flatMap((line) => line.players)).toHaveLength(2);
+  });
+});
+
+describe("everyLine", () => {
+  // 19 Oct 2026: an eleven with no keeper drew three lines spread over the whole pitch, off its markings.
+  it("holds an empty place for a line nobody fills, in pitch order", () => {
+    const lines = [{ position: "D", players: ["a"] }, { position: "F", players: ["b"] }];
+    expect(everyLine(lines)).toEqual([
+      { position: "G", players: [] },
+      { position: "D", players: ["a"] },
+      { position: "M", players: [] },
+      { position: "F", players: ["b"] },
+    ]);
+  });
+
+  it("keeps a letter it does not know, at the front", () => {
+    const lines = [{ position: "G", players: ["k"] }, { position: "D", players: [] }, { position: "M", players: [] }, { position: "F", players: [] }, { position: "", players: ["u"] }];
+    expect(everyLine(lines).map((line) => line.position)).toEqual(["G", "D", "M", "F", ""]);
   });
 });
