@@ -15,4 +15,10 @@ describe("a tie's side in the results row", () => {
     expect(side.short).toBeUndefined();
     expect(side.name).toBe("Winner of tie 1");
   });
+
+  it("carries the clean sheets owed to a side, and none by default", () => {
+    const seat = { team: { teamId: "uexqrijomu8l5asi" }, label: "AtleticoTimHortons" };
+    expect(tieSide(seat, places, null, { pending: 4 }).pending).toBe(4);
+    expect(tieSide(seat, places, null).pending).toBeNull();
+  });
 });
