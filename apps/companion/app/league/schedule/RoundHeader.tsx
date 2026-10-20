@@ -1,5 +1,6 @@
 import type { ScheduleRound } from "./schedule";
 import RoundHead, { type RoundStep } from "../../components/shell/RoundHead";
+import LiveMark from "../../components/shell/LiveMark";
 import { londonDayAndDate, londonTime } from "@epl/core";
 
 // A round's line (`RoundHead`): which gameweek, when lineups lock until it starts, and where the football is. With no roster
@@ -35,12 +36,7 @@ export default function RoundHeader({ round, step }: { round: ScheduleRound; ste
 function Status({ round }: { round: ScheduleRound }) {
   if (round.status === "live") {
     // No `--color-live` on the light plate (1.39:1); the dot carries the colour, and a 6px mark is not text.
-    return (
-      <span className="flex shrink-0 items-center gap-1.5">
-        <span className="live-dot" />
-        Live
-      </span>
-    );
+    return <LiveMark className="shrink-0 gap-1.5" />;
   }
 
   return round.status === "finished" ? (

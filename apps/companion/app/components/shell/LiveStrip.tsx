@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { DASH, trails } from "@epl/core";
 import { SMALL_CAPS } from "@/app/desk";
 import { LIVE, owns } from "./sections";
+import LiveMark from "./LiveMark";
 
 // Your tie's score across the top of a desk screen while a ball is in the air, both of a double header's. It stands
 // down on a phone, where the Live tab carries the figure, and on the front page and Live, which show the tie in full.
@@ -18,10 +19,7 @@ export default function LiveStrip({ ties }: { ties: readonly LiveTie[] }) {
   return (
     // Sticky and full-bleed: the shell's strip, not the page's.
     <div className="sticky top-0 z-40 hidden min-h-11 items-center justify-center gap-5 bg-league-deep px-[var(--page-gutter)] text-cream lg:flex">
-      <span className={`flex items-center gap-1.5 ${SMALL_CAPS}`}>
-        <span className="live-dot" />
-        Live
-      </span>
+      <LiveMark className={`gap-1.5 ${SMALL_CAPS}`} />
       {ties.map(({ yours, theirs, opponent, href }) => (
         <Link key={href} href={href} className="flex min-h-11 min-w-0 items-center gap-2.5">
           <span className="numeric flex items-baseline gap-1.5 text-base font-bold">

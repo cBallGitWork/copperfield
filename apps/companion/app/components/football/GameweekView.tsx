@@ -1,6 +1,7 @@
 import ButtonLink from "../shell/ButtonLink";
 import PageHeader from "../shell/PageHeader";
 import RoundHead from "../shell/RoundHead";
+import LiveMark from "../shell/LiveMark";
 import {
   type FootballPlayer,
   type FootballSnapshot,
@@ -45,10 +46,7 @@ export default function GameweekView({
       <RoundHead gameweek={snapshot.gameweek} step={{ previous, next, href: gameweekHref }}>
         {/* No `--color-live` on the light plate (1.39:1), as RoundHeader: the dot carries the colour. */}
         {live ? (
-          <span className="flex shrink-0 items-center gap-1.5">
-            <span className="live-dot" />
-            LIVE
-          </span>
+          <LiveMark className="shrink-0 gap-1.5" />
         ) : locksAt ? (
           <span className="truncate">
             Line-ups lock <span className="numeric font-normal normal-case">{londonDayAndTime(locksAt)}</span>

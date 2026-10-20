@@ -23,6 +23,7 @@ import { yoursBorder, yoursEdge } from "../../mine";
 import { ROW_NAME } from "@/app/desk";
 import PlayerName from "../shell/PlayerName";
 import Scoreline from "../shell/Scoreline";
+import LiveMark from "../shell/LiveMark";
 import PlayerPortrait from "./PlayerPortrait";
 import { matchHref } from "../../prem/match/[id]/matchRoutes";
 
@@ -231,10 +232,7 @@ function ScoreBlock({ fixture, now }: { fixture: Fixture; now: boolean }) {
       </span>
       {/* State never rides on colour alone — the dot is always paired with a word. */}
       {live ? (
-        <span className={`${STATE} flex items-center gap-1 text-live`}>
-          <span className="live-dot" />
-          Live {fixture.minutes}′
-        </span>
+        <LiveMark className={`${STATE} gap-1 text-live`}> {fixture.minutes}′</LiveMark>
       ) : fixture.status === "finished" ? (
         <span className={`${STATE} text-faint`}>FT</span>
       ) : fixture.kickoff !== null ? (
