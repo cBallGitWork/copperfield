@@ -60,6 +60,22 @@ one is done. That hop is a 307 on purpose: its target moves every week, and a br
 it), its fallbacks go to Fixtures, and its gameweek line moved from the bar into its caption so the tabs do not drop
 24px. Fixtures' panel reserves its own ties plus the head, not the table's ten.
 
+## Prem › Fixtures is the one gameweek screen, and `/gw/N` redirects to it — decided 20 Oct 2026
+
+Reverses the 16 Oct record that Fixtures "deliberately do not use `MatchList`". That reason was one live feed
+against thirty-eight rounds of rows, and it went when Fixtures began showing one round at a time (13 Oct). The same
+round was then drawn twice, two ways (a colon on one, a stepper plate on one, foot buttons on the other, no tab lit),
+and a tap on `N yours` left Fixtures for the copy. Now:
+
+- `/gw/:gameweek` is a `next.config.ts` redirect, not permanent, to `/prem/fixtures?gw=N`; `gameweekHref` points
+  there, so Live's between-rounds buttons move with it. A whole-number gameweek the season lacks 404s on Fixtures,
+  as it did on `/gw`. `GameweekView` and the route's page are deleted.
+- `N yours` is a button beside the row's link, not inside it, and opens `MatchList` under the row: the `Yours ·`
+  line naming every man, each scorer tagged with his holder, and *Scorers not available right now.* when the lines
+  are missing. The row takes the accent edge (`yoursEdge`), as `/gw` drew it.
+- **One `gameweekSnapshot` read per page**, for the round in view, only for a reader with a team and only once that
+  round has started. A signed-out reader reads no squads and no lines, and gets no column to open.
+
 ## FPL refuses Vercel's London egress, not our volume — measured 19 Oct 2026
 
 GW7's Monday, TOT v COV kicking off at 19:00 UTC. Twelve hours of production's runtime logs (387 lines) and 80 minutes
