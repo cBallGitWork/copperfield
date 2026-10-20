@@ -68,7 +68,7 @@ already drawn on both, and now draws only there. `tabs.test.ts` holds which bloc
    fitness line. Only the newest: the list is News's. No source caption. With neither, no panel.
    **Set pieces** under that, a duty at his club rather than a count: his place in his club's
    penalty, direct free-kick and corner orders (Craig, 30 Sep 2026: "their fk/pk/corner rank for the club"), the same order the
-   club's Set Pieces tab draws, counted among the men still there; a dash where he takes none.
+   club's Set Pieces tab draws, counted among the men still there; a dash beside an order he is not in; no panel when he takes none.
 3. **The run to come**, the next eight across the row, in FPL's difficulty, and under each
    gameweek the sister model's xMins in cyan (Craig, 7 Oct 2026: *"we have confidence of our xmins more"*). The
    projected points and rank under it, off since 7 Oct, went with the projections page on 19 Oct 2026 (Craig: *"ok"*).

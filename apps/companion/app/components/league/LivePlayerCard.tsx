@@ -14,6 +14,7 @@ import DialogHead from "../shell/DialogHead";
 import PlayerName from "../shell/PlayerName";
 import Modal from "../shell/Modal";
 import Breakdown from "./Breakdown";
+import CardBlock from "./CardBlock";
 import FullMatchStats from "./FullMatchStats";
 import MinutesRun from "./MinutesRun";
 import PlayerIdentity from "./PlayerIdentity";
@@ -22,7 +23,6 @@ import { underway } from "./underway";
 import { useRouter } from "next/navigation";
 import { playerHref } from "../../players/routes";
 import { unresolvedReason } from "../../unresolved";
-import { LABEL, QUIET_FIGURE } from "@/app/desk";
 
 // What a player is scoring, and why: Fantrax's breakdown at his slot, then what he did under its own heading.
 
@@ -115,14 +115,7 @@ export default function LivePlayerCard({
 function Story({ story }: { story: PlayerStory }) {
   return (
     <div className="cm-panel flex flex-col gap-1 px-2 py-1.5">
-      <p className="flex items-baseline justify-between gap-2">
-        <span className={LABEL}>News</span>
-        {story.at === null ? null : (
-          <span className={QUIET_FIGURE}>
-            {londonDayAndTime(new Date(story.at).toISOString())}
-          </span>
-        )}
-      </p>
+      <CardBlock label="News" aside={story.at === null ? null : londonDayAndTime(new Date(story.at).toISOString())} />
       <p className="text-sm leading-snug text-ink">{story.content}</p>
     </div>
   );

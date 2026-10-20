@@ -20,7 +20,7 @@ import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
 import { boardView, onPlate, type BoardName } from "./views";
 import { leagueInfo } from "../round";
 import { figureOf } from "./figure";
-import { DEFCON_POINTS } from "./columns";
+import { DEFCON_POINTS, ratedOn } from "./columns";
 import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
 import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
@@ -94,12 +94,12 @@ export default async function PoolBoard({
   const plates = players ? [] : platesFor(sortableIn(whole.columns, scored));
   const group = groupFor(query.group, plates);
   const view = onPlate(whole, group);
-  const rated = players ? null : isPer90(query);
 
   const shown = shownRows(pool.rows, query, raw, view);
   const capped = pageRows(shown, query);
   const way = wayOut(query, view.route);
   const columns = columnsIn(view.columns, group, activeSort(query, view).column.key, scored);
+  const rated = players ? null : ratedOn(columns, isPer90(query));
   // Plain data, since the key is a client component: a column carries functions.
   const heads = columns.filter((column) => column.key !== "name").map(({ label, title, means }) => ({ label, title, means }));
 

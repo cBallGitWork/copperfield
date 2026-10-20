@@ -15,7 +15,7 @@ export const APPLE_ICON_SIZE = 180;
 const CREST_SPAN = 0.75;
 
 /** The crest's mark, `width` wide, centred on a flat `ground` the image's `size`. */
-export function crestOn(ground: string, width: number, size: { width: number; height: number }): ImageResponse {
+function crestOn(ground: string, width: number, size: { width: number; height: number }): ImageResponse {
   return new ImageResponse(
     (
       <div

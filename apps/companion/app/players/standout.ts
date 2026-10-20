@@ -18,7 +18,7 @@ export function cutsFor<Column extends { key: string }>(
 }
 
 /** One column's cuts on the pool's shares. */
-export function poolCut(values: Iterable<number | null>): StandoutCut {
+function poolCut(values: Iterable<number | null>): StandoutCut {
   return standoutCuts([...values], SHARES, { floor: FLOOR });
 }
 

@@ -80,6 +80,8 @@ function Fixture({
   opposition: Opposition[] | undefined;
   started: boolean;
 }) {
+  // Scores only once FPL has a match kicked off: Fantrax can credit him while FPL still says upcoming.
+  const scored = started && opposition?.some((against) => against.fixture.status !== "upcoming");
   return (
     <p className="flex flex-wrap items-center gap-1.5">
       {club === undefined ? null : (
@@ -88,14 +90,14 @@ function Fixture({
       )}
       {opposition === undefined || opposition.length === 0 ? (
         <span className={LABEL}>No fixture</span>
-      ) : started ? (
+      ) : scored ? (
         opposition.map((against) => <Score key={against.fixture.id} club={club} against={against} />)
       ) : (
         <>
           <span className="text-2xs text-faint">v</span>
           {/* One chip per fixture: none in a blank gameweek, two in a double, each rated on its own. */}
           {opposition.map((against) => (
-            <Chip key={against.fixture.id} against={against} />
+            <Chip key={against.fixture.id} against={against} plain={started} />
           ))}
         </>
       )}
@@ -121,8 +123,9 @@ function Score({ club, against }: { club: Club | undefined; against: Opposition 
   );
 }
 
-/** One opponent as the squad list writes him, on his difficulty step. */
-function Chip({ against }: { against: Opposition }) {
+/** One opponent as the squad list writes him, on his difficulty step; plain once his match is on (UX-10). */
+function Chip({ against, plain = false }: { against: Opposition; plain?: boolean }) {
+  if (plain) return <span className="numeric text-sm font-bold leading-snug text-ink">{fixtureLabel([against])}</span>;
   return (
     <span
       className={`numeric px-1.5 py-0.5 text-sm font-bold leading-snug ${fdrStep(against.difficulty).ink}`}

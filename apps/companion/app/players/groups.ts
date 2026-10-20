@@ -68,7 +68,7 @@ export function sortableIn(columns: readonly PoolColumn[], scored: ReadonlySet<s
 
 /** A count the league's read carries, or a column that is not a count. */
 function isScored(column: PoolColumn, scored: ReadonlySet<string>): boolean {
-  return column.stat === undefined || carries(scored, column.stat);
+  return column.stat === undefined || carries(scored, column.stat, column.also?.short);
 }
 
 /** The sorted column straight after the spine: twenty-five attributes run far past a phone's seven. */

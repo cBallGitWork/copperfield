@@ -16,6 +16,7 @@ import DialogFoot from "../shell/DialogFoot";
 import DialogHead from "../shell/DialogHead";
 import PlayerName from "../shell/PlayerName";
 import Modal from "../shell/Modal";
+import CardBlock from "./CardBlock";
 import FullMatchStats from "./FullMatchStats";
 import MinutesRun from "./MinutesRun";
 import Note from "./Note";
@@ -24,7 +25,7 @@ import { unresolvedReason } from "../../unresolved";
 import { playerHref } from "../../players/routes";
 import { latestNews } from "../../players/[fantraxId]/latestNews";
 import { filedAt, noteBody, type NewsItem } from "../../players/[fantraxId]/newsItems";
-import { LABEL, QUIET_FIGURE, SMALL_CAPS } from "@/app/desk";
+import { SMALL_CAPS } from "@/app/desk";
 
 // One player over the squad or match he was tapped from: who he is, whether he is fit, and what he did once his match
 // has kicked off. `LivePlayerCard` is the same dialog with Fantrax's breakdown in the middle.
@@ -106,14 +107,16 @@ function Story({ story }: { story: NewsItem }) {
   const at = filedAt(story);
   return (
     <section className="cm-panel flex flex-col gap-1.5 px-3 py-2">
-      <p className="flex items-baseline justify-between gap-2">
-        <span className={LABEL}>News</span>
-        {at === null ? null : (
-          <span className={QUIET_FIGURE}>
-            {londonDayAndDate(at)} {londonTime(at)}
-          </span>
-        )}
-      </p>
+      <CardBlock
+        label="News"
+        aside={
+          at === null ? null : (
+            <>
+              {londonDayAndDate(at)} {londonTime(at)}
+            </>
+          )
+        }
+      />
       <p className="text-sm font-bold leading-snug text-ink">{story.headline}</p>
       {noteBody(story).map((paragraph) => (
         <p key={paragraph} className="text-sm leading-snug text-ink">

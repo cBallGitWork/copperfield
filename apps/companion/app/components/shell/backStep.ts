@@ -44,6 +44,6 @@ export function historyStep(historyLength: number): "back" | "list" {
 }
 
 /** The page a URL or path is, without its query. */
-export function pathOf(url: string): string {
+function pathOf(url: string): string {
   return url.split(/[?#]/)[0];
 }

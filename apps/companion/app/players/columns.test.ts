@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { ATTRIBUTE_ROWS } from "@epl/core";
-import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor } from "./columns";
+import { ATTRIBUTE_ROWS, GOALS_AGAINST_OUTFIELD } from "@epl/core";
+import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor, ratedOn } from "./columns";
 import { attributeStats } from "./attributeColumns";
 import { columnsIn } from "./groups";
 import { figureOf } from "./figure";
+import { activeSort, playersQuery } from "./query";
+import { boardView } from "./views";
 
 describe("COLUMNS", () => {
   it("gives every column a unique key", () => {
@@ -30,7 +32,7 @@ describe("COLUMNS", () => {
   it("runs phone-first, so the figures a thumb sees first are the ones worth seeing", () => {
     // Craig, 24 Sep 2026: seven figures fit beside a name at 390, and these are the seven.
     expect(COLUMNS.filter((column) => column.group !== "attributes").map((column) => column.label)).toEqual([
-      "Player", "FPts", "FP/G", "Min", "GP", "G", "AT", "A", "AF", "xG", "xGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC", "CS", "DC", "DC+", "DCP", "GAO", "GA", "Sv", "GKP", "PKS", "YC", "RC", "PKM", "OG",
+      "Player", "FPts", "FP/G", "Min", "GP", "G", "AT", "A", "AF", "xG", "xGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC", "CS", "DC", "DC+", "DCP", "GA", "Sv", "GKP", "PKS", "YC", "RC", "PKM", "OG",
     ]);
   });
 
@@ -74,6 +76,29 @@ describe("COLUMNS", () => {
   });
 });
 
+describe("goals conceded", () => {
+  // A keeper's read calls it GA and an outfielder's GAO: one fact, one column, as on the team's Stats tab.
+  const ga = columnFor("ga");
+
+  it("reads a keeper's GA and an outfielder's GAO into the one column, and dashes a man with neither", () => {
+    expect(ga?.value({} as never, { GA: 10 })).toBe(10);
+    expect(ga?.value({} as never, { GAO: 7 })).toBe(7);
+    expect(ga?.value({} as never, { GAO: 0 })).toBe(0);
+    expect(ga?.value({} as never, {})).toBeNull();
+    expect(columnFor("gao")).toBeUndefined();
+  });
+
+  it("stays on Players for a league whose read or scoring carries only the outfield half", () => {
+    expect(columnsIn(COLUMNS, "defensive", "fpts", new Set(["Min", "GAO"])).map((column) => column.key)).toContain("ga");
+    const outfieldOnly = { "x#GAO": { code: GOALS_AGAINST_OUTFIELD.short, name: "Goals Against (Outfield)", longCode: null } };
+    expect(boardView("pool", outfieldOnly).columns.map((column) => column.key)).toContain("ga");
+  });
+
+  it("sorts an old ?sort=gao link by the merged column", () => {
+    expect(activeSort(playersQuery({ sort: "gao" }), boardView("pool", {})).column.key).toBe("ga");
+  });
+});
+
 describe("the columns a league scores", () => {
   // Each league's getPlayerStats columns on 1 Oct 2026, both halves together.
   const real = new Set(["GP", "Min", "G", "AT", "YC", "RC", "Pen", "DFP", "DFP3", "PKM", "OG", "GAO", "CS", "GA", "PKS", "GKP"]);
@@ -81,7 +106,7 @@ describe("the columns a league scores", () => {
   const counts = (scored: ReadonlySet<string>) => columnsIn(COLUMNS, "all", "fpts", scored).filter((column) => column.stat !== undefined).map((column) => column.label);
 
   it("draws the real league's AT, GKP and both DefCon counts, and not the A, AF and Sv it no longer scores", () => {
-    expect(counts(real)).toEqual(["Min", "GP", "G", "AT", "CS", "DC", "DC+", "GAO", "GA", "GKP", "PKS", "YC", "RC", "PKM", "OG"]);
+    expect(counts(real)).toEqual(["Min", "GP", "G", "AT", "CS", "DC", "DC+", "GA", "GKP", "PKS", "YC", "RC", "PKM", "OG"]);
   });
 
   it("draws our DefCon points after the counts once the page says the league prices them", () => {
@@ -90,7 +115,7 @@ describe("the columns a league scores", () => {
   });
 
   it("draws the rehearsal league's, with the one DefCon count it scores", () => {
-    expect(counts(rehearsal)).toEqual(["Min", "GP", "G", "A", "AF", "CS", "DC", "GAO", "GA", "Sv", "PKS", "YC", "RC", "PKM", "OG"]);
+    expect(counts(rehearsal)).toEqual(["Min", "GP", "G", "A", "AF", "CS", "DC", "GA", "Sv", "PKS", "YC", "RC", "PKM", "OG"]);
   });
 
   // Craig, 6 Oct 2026: "data page needs our dfp and dfp3 stats".
@@ -138,5 +163,20 @@ describe("the attribute columns", () => {
     const plate = columnsIn(COLUMNS, "attributes", "wor", new Set()).map((column) => column.key);
     expect(plate.slice(0, 2)).toEqual(["name", "wor"]);
     expect(plate.filter((key) => key === "wor")).toHaveLength(1);
+  });
+});
+
+describe("ratedOn", () => {
+  const read = new Set(["Min", "G", "GA"]);
+
+  it("hides Per 90 on a plate where no drawn column divides by minutes, so it is never lit doing nothing", () => {
+    // The Attributes plate is 1-20 ratings: per=90 lit the toggle and counted as a filter, and changed no figure.
+    expect(ratedOn(columnsIn(COLUMNS, "attributes", "acc", read), true)).toBeNull();
+    expect(ratedOn(columnsIn(COLUMNS, "attributes", "acc", read), false)).toBeNull();
+  });
+
+  it("keeps it where one does, the sorted xG beside the attributes included", () => {
+    expect(ratedOn(columnsIn(COLUMNS, "attributes", "xg", read), true)).toBe(true);
+    expect(ratedOn(columnsIn(COLUMNS, "defensive", "fpts", read), false)).toBe(false);
   });
 });

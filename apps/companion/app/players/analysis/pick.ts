@@ -1,5 +1,6 @@
-import { nameMatches, searchKey } from "@epl/core";
-import type { PoolRow } from "../pool";
+import { isFantraxPlayerId, nameMatches, searchKey } from "@epl/core";
+import type { LeaguePool, PoolRow } from "../pool";
+import { unknownToPool } from "../[fantraxId]/unknown";
 
 // Who a search box offers, out of the cached pool, never a profile read (Fantrax throttles those). A folded word
 // match on the name (core's `nameMatches`), as the board's own search matches.
@@ -26,6 +27,13 @@ export interface Sides {
 export function sides({ a, b, qa, qb }: Sides): Sides {
   if (a === undefined && b !== undefined) return { a: b, b: undefined, qa: qb, qb: qa };
   return { a, b: b === a ? undefined : b, qa, qb };
+}
+
+/** The sides minus an id the player page would 404 (bad shape, or one the pool answered without), so one stale side
+ *  leaves the picker and the other man on screen. */
+export function knownSides(pool: LeaguePool, asked: Sides): Sides {
+  const known = (id: string | undefined) => (id !== undefined && isFantraxPlayerId(id) && !unknownToPool(pool, id) ? id : undefined);
+  return sides({ ...asked, a: known(asked.a), b: known(asked.b) });
 }
 
 /** The names matching what was typed, minus the man already on the other side; an empty box offers nothing. */

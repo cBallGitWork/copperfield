@@ -8,7 +8,7 @@ import { intelShots, intelTouches } from "../../intel";
 export type Found = Extract<Awaited<ReturnType<typeof subject>>, { intel: unknown }>;
 
 /** The range on screen: the season, or the gameweeks in it and which gameweek each fixture is. */
-export interface Window {
+interface ManWindow {
   recent: boolean;
   inWindow: ReadonlySet<number>;
   gameweekOf: ReadonlyMap<number, number>;
@@ -16,7 +16,7 @@ export interface Window {
 
 /** One man over the window: FPL's totals (the season's, or his game log's added up), and the export's marks.
  *  A man the export never bridged has no touches, and his three export counts are a dash rather than nought. */
-export async function manOver(side: Found, name: string, { recent, inWindow, gameweekOf }: Window) {
+export async function manOver(side: Found, name: string, { recent, inWindow, gameweekOf }: ManWindow) {
   const player = side.football?.player;
   const code = player?.code ?? -1;
   const keep = <Row extends { fplFixtureId: number }>(rows: readonly Row[]) =>

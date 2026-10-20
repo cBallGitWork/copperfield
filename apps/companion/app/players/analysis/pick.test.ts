@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { PoolRow } from "../pool";
-import { candidates, sides, type Sides } from "./pick";
+import type { LeaguePool, PoolRow } from "../pool";
+import { candidates, knownSides, sides, type Sides } from "./pick";
 
 /** Just enough of a pool row for the picker, which reads two fields of it. */
 function pool(names: [string, string][]): PoolRow[] {
@@ -97,5 +97,27 @@ describe("candidates, however a name is typed", () => {
     expect(candidates(rows, "Gyökeres", undefined).map((each) => each.fantraxId)).toEqual(["g"]);
     expect(candidates(rows, "wan bissaka", undefined).map((each) => each.fantraxId)).toEqual(["w"]);
     expect(candidates(rows, "O'Reilly", undefined).map((each) => each.fantraxId)).toEqual(["r"]);
+  });
+});
+
+describe("knownSides", () => {
+  const link = (over: Partial<Sides>): Sides => ({ a: undefined, b: undefined, qa: "", qb: "", ...over });
+  const answered = { rows: pool([["061vq", "Haaland, Erling"], ["05l8q", "Palmer, Cole"]]) } as unknown as LeaguePool;
+
+  it("drops an id the pool answered without, so the picker shows rather than a 404", () => {
+    expect(knownSides(answered, link({ a: "061vq", b: "zzzzz" }))).toEqual(link({ a: "061vq" }));
+  });
+
+  it("drops an id not in Fantrax's shape", () => {
+    expect(knownSides(answered, link({ a: "0000" }))).toEqual(link({}));
+  });
+
+  it("moves a lone known man to A, with the typed searches carried", () => {
+    expect(knownSides(answered, link({ a: "zzzzz", b: "05l8q", qa: "sal" }))).toEqual(link({ a: "05l8q", qb: "sal" }));
+  });
+
+  it("lets every well-formed id through a silent pool, which says nothing either way", () => {
+    const silent = { unavailable: "getPlayerStats → WARNING" } as LeaguePool;
+    expect(knownSides(silent, link({ a: "zzzzz" }))).toEqual(link({ a: "zzzzz" }));
   });
 });

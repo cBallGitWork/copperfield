@@ -6,7 +6,8 @@ import Board from "../../components/league/Board";
 // Where he stands in his club's penalty, free-kick and corner orders: first choice in CM's orange.
 
 export default function SetPieces({ pieces, club }: { pieces: readonly SetPieceRank[]; club: string | null }) {
-  if (pieces.every((p) => p.of === 0)) return null;
+  // Nothing when he takes none: three dashes tell a phone nothing, and the club page lists the order.
+  if (pieces.every((p) => p.rank === null)) return null;
 
   return (
     <Section title="Set pieces" aside={club === null ? undefined : `At ${club}`}>
