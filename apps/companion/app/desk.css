@@ -128,7 +128,9 @@ select.cm-bevel {
 .cm-thumbrail {
   font-family: var(--font-chrome);
   color: var(--color-ink);
-  background: linear-gradient(
+  /* A declared colour under the ramp, which sweep and groundfit read (PLATFORM_NOTES, one row style). */
+  background-color: var(--color-bg);
+  background-image: linear-gradient(
     to bottom,
     color-mix(in oklch, var(--color-chrome), var(--color-bg) 62%),
     var(--color-bg) 70%
