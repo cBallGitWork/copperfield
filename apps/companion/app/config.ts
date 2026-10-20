@@ -150,6 +150,14 @@ export const FPL_REST_MS = 60_000;
  *  Vercel for stretches of an hour and more and asking every minute only adds to them (19 Oct 2026). */
 export const FPL_REST_MAX_MS = 240_000;
 
+/** How long one reading of the branch's predicted elevens is held, in seconds: they move hourly at most, Thursday to
+ *  Saturday's lock. */
+export const XI_REVALIDATE = 600;
+
+/** How long a failed read of the branch's elevens rests before this process asks again, in ms, so a cold key is not
+ *  asked on every view. GitHub's, not FPL's: the two need not move together. */
+export const XI_REST_MS = 60_000;
+
 /** How often an open page asks for a fresh render, in seconds; `settle` is how soon it asks again after an open or a
  *  return in a match window, when the first answer was a stale read's (a deployment ask, a render and Fantrax's 0.5s read). */
 export const POLL = {

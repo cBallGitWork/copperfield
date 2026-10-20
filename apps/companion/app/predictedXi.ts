@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { fetchJsonOr404, newerElevens, type IntelXi } from "@epl/core";
+import { XI_REST_MS, XI_REVALIDATE } from "./config";
 import { intelXi } from "./intel";
 import { restAfterFailure } from "./restAfterFailure";
 import { singleFlight } from "./singleFlight";
@@ -8,14 +9,8 @@ import { singleFlight } from "./singleFlight";
 // copy (`intel.ts`, which fails the build if it will not parse) stands in for a read that fails, a 404, a body not
 // shaped as the elevens, or an older file.
 
-/** Where `rotowire-xi` writes the elevens, from the repo's root. */
-const XI_FILE = "data/intel/xi/26-27.json";
-
-/** How long one reading is held, in seconds: the elevens move hourly at most, Thursday to Saturday's lock. */
-const XI_REVALIDATE = 600;
-
-/** How long a failed read rests before this process asks again, in ms, so a cold key is not asked on every view. */
-const XI_REST_MS = 60_000;
+/** Where `rotowire-xi` writes the elevens, from the repo's root: the file `intel.ts` imports for the build's copy. */
+export const XI_FILE = "data/intel/xi/26-27.json";
 
 /** The raw file on the branch this deployment was built from; null off Vercel, where the build's copy is the tree's. */
 function rawUrl(): string | null {
