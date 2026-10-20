@@ -7,11 +7,6 @@ import { statsLeagueSeason } from "../../../statsLeague";
 import StatBoard from "./StatBoard";
 import { defconPricing } from "../../../defcon";
 import { STATS_LEAGUE_KEYS } from "./statViews";
-import { rosterOrder, squadTabOrder } from "./order";
-import { getLeagueSquads, readableOr404, readerTeamId, teamDisplay } from "../../../squads";
-import { planningRound } from "../../../round";
-import { benchOrder } from "../../../benchOrders";
-import { SQUAD } from "../../routes";
 import { teamTitle } from "../title";
 
 // Every man this manager owns and what each has done: the served league's counts off the Player Stats board's warm
@@ -27,23 +22,15 @@ export default async function StatsPage({
   params: Promise<{ teamId: string }>;
 }) {
   const { teamId: slug } = await params;
-  const [{ team, squad }, squads, reader, all, statsLeague, pricing] = await Promise.all([
+  const [{ team, squad }, all, statsLeague, pricing] = await Promise.all([
     leagueTeams(slug),
-    planningRound().then(getLeagueSquads),
-    readerTeamId(),
     getPlayerStats(),
     statsLeagueSeason(STATS_LEAGUE_KEYS),
     defconPricing(),
   ]);
 
-  // Opens in the Squad tab's order, under its gate: a rival's eleven only once his lineups lock.
-  const display = teamDisplay(readableOr404(squads, SQUAD), reader === team.teamId);
-  const bench = display.show === "lineup" ? await benchOrder(team.teamId, display.period, false) : [];
   // `team.teamId` and not the slug, which on the front door is the word `me`.
-  const his = rosterOrder(
-    all.filter((line) => line.ownerTeamId === team.teamId),
-    squadTabOrder(squad, display.show, bench),
-  );
+  const his = all.filter((line) => line.ownerTeamId === team.teamId);
   const ids = new Set(his.map((line) => line.fantraxId));
 
   // The footballer behind each resolved slot, for his availability.
