@@ -63,6 +63,7 @@ and a tap on `N yours` left Fixtures for the copy. Now:
 - **One `gameweekSnapshot` read per page**, for the round in view, only for a reader with a team and only once that
   round has started. A signed-out reader reads no squads and no lines, and gets no column to open.
 
+## FPL refuses Vercel's London egress, not our volume — measured 19 Oct 2026
 
 GW7's Monday, TOT v COV kicking off at 19:00 UTC. Twelve hours of production's runtime logs (387 lines) and 80 minutes
 of its request log (1,153 records), joined on `requestId`:
