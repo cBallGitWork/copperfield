@@ -10,21 +10,25 @@ anybody's, and no fixture run: the Planner owns that.
 
 ## On the page
 
-One board, twenty clubs, twenty-two measures in five labelled groups over one sortable head strip. The place
-and the club are pinned while the figures scroll on a phone; the desk shows everything.
+Twenty clubs, twenty-two measures in four groups. Under a thumb a row of plates docked at the foot (Attack,
+Chances, Defence, Discipline; `?group=`, an absent or unknown one Attack) draws one group's columns, as Adv Stats
+does, with the Key at the top listing that group's heads alone; Defence's eight still scroll sideways inside it, the
+Place block held at its width so the pinned Club never covers GC. From `lg` there are no plates: every
+column side by side under its group's head. Errors folded into Discipline on 20 Oct 2026, since five plates did not
+fit one line at 320 in WebKit.
 
 | Group | Heads | Whose, and how |
 |---|---|---|
 | Attack | G Sh SoT BC xG | Opta's goals, shots, on target, big chances scored or missed; FPL's squad xG |
 | Chances | A KP BCC xA | Opta's assists, key passes (passes that led to a shot), big chances created; FPL's squad xA |
 | Defence | GC xGC CS ShA Tk Int Rec Blk | Opta's conceded, clean sheets, shots conceded, tackles, interceptions, ball recoveries, blocks; FPL's squad xGC over eleven |
-| Errors | ErS ErG | Opta's errors leading to a shot, and to a goal |
-| Discipline | Fls YC RC | Opta's fouls committed, yellow and red cards |
+| Discipline | ErS ErG Fls YC RC | Opta's errors leading to a shot and to a goal, fouls committed, yellow and red cards |
 
-Each head carries its meaning in a `title`; the phone has the shared Key under the board. Standouts are lit
-in ink over the twenty (a fifth yellow, a tenth orange); where more is worse (GC xGC ShA ErS ErG Fls YC RC)
-the top of the column is red. A played nought is white. Sort is a link (`?sort=&dir=`); goals descending by
-default, a column opens at its good end, ties fall to the name. A club opens the Players board at that club.
+Each head carries its meaning in a `title`. Standouts are lit in ink over the twenty (a fifth yellow, a tenth
+orange); where more is worse (GC xGC ShA ErS ErG Fls YC RC) the top of the column is red. A played nought is white.
+Sort is a link (`?sort=&dir=`), a column opening at its good end. A plate orders by its lead column (G, xA, GC, Fls)
+and clears the reader's sort; a `?sort=` names its column's plate, so the order is never hidden. Ties fall to the
+name. A club opens the Players board at that club.
 
 ## States
 
