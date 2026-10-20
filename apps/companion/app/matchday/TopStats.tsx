@@ -36,7 +36,7 @@ export default function TopStats({
   const picked = boards.find((board) => board.key === stat)?.key ?? first;
   return (
     <FootFrame
-      className="lg:min-h-0"
+      className="lg:min-h-0 lg:gap-0"
       foot={
         <div className="lg:hidden">
           <TabStrip
