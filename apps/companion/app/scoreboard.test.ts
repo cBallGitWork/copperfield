@@ -11,7 +11,17 @@ vi.mock("./leagueCache", () => ({
   },
 }));
 
-await import("./scoreboard");
+vi.mock("@epl/core", async (actual) => ({
+  ...(await actual<object>()),
+  fetchLiveScoring: async () => ({}),
+  mapLiveScores: () => [{ teamId: "a", points: 3 }],
+  mapLivePlayerPoints: () => [],
+  mapBenchPlayerPoints: () => [],
+  mapLiveRemaining: () => [],
+}));
+vi.mock("./round", () => ({ leagueInfo: async () => null }));
+
+const { liveScores } = await import("./scoreboard");
 
 describe("the live scoreboard's read", () => {
   // Craig, 19 Oct 2026: "live scores still a little slow to update". At 30 against a 30s poll, a lone reader's
@@ -20,5 +30,15 @@ describe("the live scoreboard's read", () => {
     const lifetime = lifetimes.get("live-scores");
     expect(lifetime).toBeDefined();
     expect(lifetime).toBeLessThan(POLL.live);
+  });
+});
+
+describe("the live scores", () => {
+  // Live and the layout's strip share one request's reading, so neither may hold Maps the other can change.
+  it("hands every caller Maps of its own", async () => {
+    const [one, two] = await Promise.all([liveScores(8), liveScores(8)]);
+    expect(one.scores).not.toBe(two.scores);
+    expect(one.subs).not.toBe(two.subs);
+    expect(one.scores.get("a")?.points).toBe(3);
   });
 });
