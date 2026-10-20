@@ -65,10 +65,12 @@ export default function StandingsTable<K extends string>({
   sortHref?: (key: K) => string;
   rows?: keyof typeof ROWS;
 }) {
+  // A head row whose only plate is the muted place would draw one empty plate; it stays for a screen reader.
+  const unread = columns.every((column) => column.kind === "place" || column.kind === "name");
   return (
     <ScrollBoard>
       <table className={BOARD}>
-        <thead>
+        <thead className={unread ? "sr-only" : undefined}>
           <HeadRow>
             {columns.map((column) => (
               <ColumnHead key={column.key} column={column} sort={sort} descending={descending} sortHref={sortHref} />
@@ -158,8 +160,8 @@ function Cell<K extends string>({
     case "place":
       return (
         <td
-          className={`cm-index numeric px-1.5 text-center ${edge(line)}`}
-          // On the cell, not the row: a `<tr>` border never paints through the index ground.
+          className={`cm-index numeric px-1.5 text-center ${column.width} ${edge(line)}`}
+          // The width rides the cell too, so an sr-only head keeps the column narrow; a `<tr>` border never paints through the index ground.
           style={line.mine || line.tint === undefined ? undefined : { borderLeftColor: line.tint }}
         >
           {line.place}

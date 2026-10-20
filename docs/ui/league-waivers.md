@@ -20,8 +20,10 @@ at 1:00 PM US Eastern, the rehearsal and dummy leagues Tuesday and Friday at 5:0
   team was tenth in it.
 - **Last run**: the claims off waivers on the latest run's stamp, in Transfers' own ledger (`Ledger`), headed with
   the run's London time. Free-agent pick-ups are not a run and are left out.
-- Under a thumb the order and the last run are one block at a time, picked by a compact strip (`?show=last`); the
-  desk shows both side by side and no strip.
+- Under a thumb the order and the last run are one block at a time, picked by a compact strip (`?show=last`) docked
+  in `FootFrame`'s foot above the thumb rail (20 Oct 2026); the desk shows both side by side and no strip.
+- The claim order's head row is for a screen reader only: its one plate, Order, is muted, and drawn it was a blank
+  grey box over the column (`StandingsTable` hides a head row with no figure in it).
 
 ## A view of Transfers, not a sixth tab
 
@@ -38,7 +40,8 @@ A slim line under the strip, linking here: **`Waivers run in 5h 12m · you're 9t
 
 - **On every Draft page**, from 18 hours before a run (`WAIVER_BANNER_HOURS`), but this one, which says it already.
 - **On both Transfers views it shows all week**, Draft's and the reader's own Team › Transfers, before the window as
-  `Waivers run Wed 18:00 · you're 9th`. **Not on Team's other tabs**: over the planner it would cost the pitch its
+  `Waivers run Wed 18:00 · you're 9th`, and **even when the schedule is unreadable** or every run has gone, as
+  `Waivers · you're 9th` (or `Waivers` for a reader with no place), so Transfers always has its way in (`WaiverLine`). **Not on Team's other tabs**: over the planner it would cost the pitch its
   height and push the bench under the rail (`squad.md`, the pitch fits the phone), and a rival's squad is not where a
   claim is made.
 - **Every run day opens it**: 18 hours before an 18:00 run is midnight London, so with Wed, Thu and Fri runs it is up
@@ -57,7 +60,7 @@ have not, 25 Oct to 1 Nov 2026, the runs are at **17:00** London, and 18:00 agai
 
 | Screen | State | What it says |
 |---|---|---|
-| Next run | no cookie in the environment, a refusal, or a league with no set run days | *Not available right now* (`UNAVAILABLE`); no banner anywhere |
+| Next run | no cookie in the environment, a refusal, or a league with no set run days | Nothing: the page opens on *Claim on Fantrax*; no banner but the Transfers line, without a time |
 | Next run | every run carried has gone (a page open for days) | *No run to come* |
 | Claim order | the standings page has no `wwOrder` column | *Nothing*: "No claim order" |
 | Last run | no claim off waivers in the feed yet | *No claims off waivers yet* |

@@ -14,7 +14,7 @@ import TeamName from "./TeamName";
 import { BAR_TITLE } from "@/app/desk";
 import { yoursMark } from "@/app/mine";
 
-// The head-to-head: both totals side by side, each the control that opens his team.
+// The head-to-head: both totals side by side; on Line-ups each is the control that opens his team, elsewhere a caption.
 // A phone shows the open side's team; the desk shows both. The leader is never accent-tinted: accent is "yours".
 
 type Which = "team" | "opponent";
@@ -58,8 +58,8 @@ export default function MatchupBoard<K extends string>({
       {/* One row, read as a scoreline: each side on its own colour, its total at its own right edge. */}
       <div className="flex items-stretch">
         <BackPlate fallback={back} />
-        <Side side={team} open={open === "team"} onOpen={() => setOpen("team")} />
-        <Side side={opponent} open={open === "opponent"} onOpen={() => setOpen("opponent")} />
+        <Side side={team} open={lineups ? open === "team" : null} onOpen={() => setOpen("team")} />
+        <Side side={opponent} open={lineups ? open === "opponent" : null} onOpen={() => setOpen("opponent")} />
       </div>
 
       <TabStrip label="Match views" tabs={tabs} current={view} />
@@ -81,7 +81,8 @@ export default function MatchupBoard<K extends string>({
   );
 }
 
-/** One half of the scoreline, doubling as the control that opens his team; the open half is marked by a bar, not a hue.
+/** One half of the scoreline: on Line-ups the control that opens his team, the open half marked by a bar, not a hue;
+ *  a caption (`open` null) on any other view, where the half picks nothing.
  *  `ScoreFigure` may not go inside the bevel: its dimmed ink fails contrast on the grey plate, so the dash is kept by hand. */
 function Side({
   side,
@@ -89,22 +90,15 @@ function Side({
   onOpen,
 }: {
   side: MatchupSide;
-  open: boolean;
+  open: boolean | null;
   onOpen: () => void;
 }) {
   const points = side.score?.points ?? null;
   const colours = teamColours(side.team.teamId);
   const ink = inkOn(colours);
-
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      aria-pressed={open}
-      aria-label={`Show ${side.team.name}`}
-      className={`relative flex min-h-16 min-w-0 flex-1 items-center lg:min-h-20 ${yoursMark(side.mine)}`}
-      style={{ background: colours.primary }}
-    >
+  const face = `relative flex min-h-16 min-w-0 flex-1 items-center lg:min-h-20 ${yoursMark(side.mine)}`;
+  const body = (
+    <>
       {/* Accent ink is unavailable on a colour plate, so "yours" is the left edge. The short name at 14px: nine
           capitals fit a half at 390. */}
       <span className="flex min-w-0 flex-1 flex-col px-2 text-left" style={{ color: ink }}>
@@ -119,9 +113,27 @@ function Side({
       </span>
 
       {/* The open half's bar, below `lg` only: on the desk both sides are on screen. */}
-      {open ? (
-        <span aria-hidden className="absolute inset-x-0 bottom-0 h-1 bg-accent lg:hidden" />
-      ) : null}
+      {open ? <span aria-hidden className="absolute inset-x-0 bottom-0 h-1 bg-accent lg:hidden" /> : null}
+    </>
+  );
+
+  if (open === null) {
+    return (
+      <div className={face} style={{ background: colours.primary }}>
+        {body}
+      </div>
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-pressed={open}
+      aria-label={`Show ${side.team.name}`}
+      className={face}
+      style={{ background: colours.primary }}
+    >
+      {body}
     </button>
   );
 }

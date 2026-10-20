@@ -1,8 +1,9 @@
 import { createElement, type ReactNode } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { FormGame, StandingsRow } from "@epl/core";
 import { repeatedKeys } from "../../repeatedKeys";
-import StandingsTable from "./StandingsTable";
+import StandingsTable, { type StandingsColumn } from "./StandingsTable";
 import { COLUMNS, leagueLine } from "../../league/Columns";
 
 // The app's `@/` alias is Next's, not vitest's: each is the real module by its relative path, or a stand-in.
@@ -34,5 +35,29 @@ describe("the league table's columns", () => {
     const phone = COLUMNS.filter((column) => column.deskOnly === undefined).map((column) => column.label);
     expect(phone).toEqual(["Placing", "Team", "Pld", "W", "D", "L", "For", "Pts"]);
     expect(COLUMNS.filter((column) => column.key === "pts")).toHaveLength(1);
+  });
+});
+
+describe("a table whose only head is its place", () => {
+  // Review M-LEAGUE-1: Waivers' claim order drew a blank 28px plate over its Order column at 390.
+  const ORDER: readonly StandingsColumn<"place">[] = [
+    { key: "place", kind: "place", label: "Order", title: undefined, width: "w-8" },
+    { key: "name", kind: "name", label: "Team", title: undefined, width: "" },
+  ];
+  const line = { key: "t1", place: "1st", name: "test1", values: {} };
+  const html = (columns: readonly StandingsColumn<string>[]) =>
+    renderToStaticMarkup(createElement(StandingsTable, { columns, lines: [line] }));
+
+  it("keeps its head row for a screen reader and draws no empty plate", () => {
+    expect(html(ORDER)).toContain('<thead class="sr-only">');
+  });
+
+  it("leaves a head row with figures in it drawn, as /league's is", () => {
+    expect(html(COLUMNS)).toContain("<thead>");
+  });
+
+  it("keeps its place column's width with the head hidden", () => {
+    // Integration review: an sr-only head took the th's w-8 with it, and the Order column grew to 116px at 390.
+    expect(html(ORDER)).toMatch(/<td class="cm-index[^"]* w-8[ "]/);
   });
 });

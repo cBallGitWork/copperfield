@@ -1,9 +1,10 @@
 "use client";
 
+import { ordinal } from "@epl/core";
 import Link from "../../components/shell/Link";
 import { SMALL_CAPS } from "../../desk";
 import { WAIVERS } from "../routes";
-import { bannerWords } from "./banner";
+import { bannerWords, type BannerWords } from "./banner";
 import { useMinute } from "./useMinute";
 
 // The slim line over a page when waivers are near: "Waivers run in 5h 12m · you're 9th", to Draft › Waivers.
@@ -22,14 +23,23 @@ export default function WaiverCountdown({
   always: boolean;
 }) {
   const at = useMinute(now);
-  const words = bannerWords(runs, at, place, always);
-  if (words === null) return null;
+  return <WaiverLine words={bannerWords(runs, at, place, always)} place={place} always={always} />;
+}
+
+/** The line itself; on Transfers (`always`) with no run to name it is still the way in: "Waivers · you're 7th". */
+export function WaiverLine({ words, place, always }: { words: BannerWords | null; place: number | null; always: boolean }) {
+  if (words === null && !always) return null;
+  const standing = words === null ? (place === null ? null : `you're ${ordinal(place)}`) : words.place;
   return (
     <Link href={WAIVERS} className="cm-panel flex min-h-11 items-center gap-2 px-2 text-sm lg:min-h-9">
       <span className={`${SMALL_CAPS} text-faint`}>Waivers</span>
       <span className="min-w-0 flex-1 truncate">
-        run <span className={`numeric font-bold ${words.near ? "text-accent" : "text-ink"}`}>{words.when}</span>
-        {words.place === null ? null : <span className="text-muted"> · {words.place}</span>}
+        {words === null ? null : (
+          <>
+            run <span className={`numeric font-bold ${words.near ? "text-accent" : "text-ink"}`}>{words.when}</span>
+          </>
+        )}
+        {standing === null ? null : <span className="text-muted">{words === null ? "· " : " · "}{standing}</span>}
       </span>
       <span aria-hidden className="text-faint">›</span>
     </Link>

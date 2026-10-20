@@ -5,8 +5,8 @@ import TeamName from "../../components/league/TeamName";
 import Nothing from "../../components/shell/Nothing";
 import OutLink from "../../components/shell/OutLink";
 import TabStrip from "../../components/shell/TabStrip";
+import { FootFrame } from "../../components/shell/FootFrame";
 import { BUTTON } from "../../components/shell/ButtonLink";
-import { UNAVAILABLE } from "../../config";
 import { BLOCK_PLATE, QUIET_NOTE } from "../../desk";
 import { readDeals } from "../../business";
 import { fantraxPage } from "../../fantraxPages";
@@ -45,57 +45,59 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
   const ranAt = run[0]?.processedAt ?? null;
 
   return (
-    <LeagueShell current="waivers" teams={info?.teams.length}>
-      <section className="flex flex-col gap-2">
-        {waivers.runs.length === 0 ? (
-          <p className="text-sm text-muted">{UNAVAILABLE}</p>
-        ) : (
-          <NextRun runs={waivers.runs} now={waivers.now} />
-        )}
-        <OutLink href={fantraxPage(FANTRAX_PLAYERS_PATH)} className={`${BUTTON} lg:self-start`}>
-          Claim on Fantrax
-        </OutLink>
-      </section>
-
-      <div className="lg:hidden">
-        <TabStrip label="Waiver views" tabs={BLOCKS} current={shown} labels="word" compact />
-      </div>
-
-      {/* The last run takes two thirds: its ledger holds a date, a team, a type and two names to the order's one. */}
-      <div className="grid gap-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-        <section className={`flex flex-col gap-1 ${shown === "order" ? "" : "max-lg:hidden"}`}>
-          <h2 className={`${BLOCK_PLATE} max-lg:sr-only`}>Claim order</h2>
-          {waivers.order.length === 0 ? (
-            <Nothing title="No claim order" code="getStandings → no wwOrder" />
-          ) : (
-            <StandingsTable
-              columns={ORDER}
-              rows="tight"
-              lines={waivers.order.map(({ teamId, place }) => ({
-                key: teamId,
-                place: ordinal(place),
-                name: (
-                  <StandingsName>
-                    <TeamName teamId={teamId} name={nameOf(teamId)} />
-                  </StandingsName>
-                ),
-                href: teamHref(teamId),
-                mine: teamId === waivers.mine,
-                values: {},
-              }))}
-            />
-          )}
+    // Under a thumb the block is picked from the foot, above the thumb rail; the desk shows both and no strip.
+    <FootFrame
+      foot={
+        <div className="lg:hidden">
+          <TabStrip label="Waiver views" tabs={BLOCKS} current={shown} labels="word" compact />
+        </div>
+      }
+    >
+      <LeagueShell current="waivers" teams={info?.teams.length}>
+        <section className="flex flex-col gap-2">
+          {/* No schedule read prints nothing: the exit and the blocks still stand. */}
+          {waivers.runs.length === 0 ? null : <NextRun runs={waivers.runs} now={waivers.now} />}
+          <OutLink href={fantraxPage(FANTRAX_PLAYERS_PATH)} className={`${BUTTON} lg:self-start`}>
+            Claim on Fantrax
+          </OutLink>
         </section>
 
-        <section className={`flex flex-col gap-1 ${shown === "last" ? "" : "max-lg:hidden"}`}>
-          <h2 className={BLOCK_PLATE}>{ranAt === null ? "Last run" : `Last run · ${fantraxTime(ranAt) ?? ranAt}`}</h2>
-          {run.length === 0 ? (
-            <p className={`${QUIET_NOTE} p-2`}>No claims off waivers yet</p>
-          ) : (
-            <Ledger deals={run} nameOf={nameOf} />
-          )}
-        </section>
-      </div>
-    </LeagueShell>
+        {/* The last run takes two thirds: its ledger holds a date, a team, a type and two names to the order's one. */}
+        <div className="grid gap-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+          <section className={`flex flex-col gap-1 ${shown === "order" ? "" : "max-lg:hidden"}`}>
+            <h2 className={`${BLOCK_PLATE} max-lg:sr-only`}>Claim order</h2>
+            {waivers.order.length === 0 ? (
+              <Nothing title="No claim order" code="getStandings → no wwOrder" />
+            ) : (
+              <StandingsTable
+                columns={ORDER}
+                rows="tight"
+                lines={waivers.order.map(({ teamId, place }) => ({
+                  key: teamId,
+                  place: ordinal(place),
+                  name: (
+                    <StandingsName>
+                      <TeamName teamId={teamId} name={nameOf(teamId)} />
+                    </StandingsName>
+                  ),
+                  href: teamHref(teamId),
+                  mine: teamId === waivers.mine,
+                  values: {},
+                }))}
+              />
+            )}
+          </section>
+
+          <section className={`flex flex-col gap-1 ${shown === "last" ? "" : "max-lg:hidden"}`}>
+            <h2 className={BLOCK_PLATE}>{ranAt === null ? "Last run" : `Last run · ${fantraxTime(ranAt) ?? ranAt}`}</h2>
+            {run.length === 0 ? (
+              <p className={`${QUIET_NOTE} p-2`}>No claims off waivers yet</p>
+            ) : (
+              <Ledger deals={run} nameOf={nameOf} />
+            )}
+          </section>
+        </div>
+      </LeagueShell>
+    </FootFrame>
   );
 }

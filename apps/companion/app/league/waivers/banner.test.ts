@@ -1,5 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, it, vi } from "vitest";
 import { bannerWords, runsAfter } from "./banner";
+import { WaiverLine } from "./WaiverCountdown";
+
+vi.mock("../../components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 
 // The real league's week from Tuesday 20 Oct 2026: runs Wed, Thu and Fri at 18:00 London.
 const RUNS = ["2026-10-21T17:00:00.000Z", "2026-10-22T17:00:00.000Z", "2026-10-23T17:00:00.000Z"];
@@ -35,5 +40,30 @@ describe("bannerWords", () => {
     expect(bannerWords(RUNS, at("2026-10-21T12:00:00Z"), null, false)?.place).toBeNull();
     expect(bannerWords(RUNS, at("2026-10-24T00:00:00Z"), 9, true)).toBeNull();
     expect(bannerWords([], at("2026-10-21T12:00:00Z"), 9, true)).toBeNull();
+  });
+});
+
+describe("the waiver line", () => {
+  // Review M-LEAGUE-1: with no schedule read, Transfers had no way in to Waivers.
+  const line = (words: ReturnType<typeof bannerWords>, place: number | null, always: boolean) =>
+    renderToStaticMarkup(createElement(WaiverLine, { words, place, always }));
+
+  it("still leads to Waivers on Transfers with no run to count down to, naming the reader's place", () => {
+    const html = line(null, 7, true);
+    expect(html).toContain('href="/league/waivers"');
+    expect(html).toContain("you&#x27;re 7th");
+    expect(html).not.toMatch(/>run /);
+  });
+
+  it("says just Waivers for a reader with no place", () => {
+    expect(line(null, null, true)).not.toContain("you");
+  });
+
+  it("draws nothing off Transfers with no run near", () => {
+    expect(line(null, 7, false)).toBe("");
+  });
+
+  it("counts down when a run is near", () => {
+    expect(line({ when: "in 5h 12m", near: true, place: "you're 9th" }, 9, false)).toContain("in 5h 12m");
   });
 });
