@@ -21,6 +21,7 @@ import { chipsFor } from "../league/Chips";
 import { yoursBorder, yoursEdge } from "../../mine";
 import { ROW_NAME } from "@/app/desk";
 import PlayerName from "../shell/PlayerName";
+import Scoreline from "../shell/Scoreline";
 import PlayerPortrait from "./PlayerPortrait";
 
 // The matchday list: each fixture is a native <details>, so the drop-down needs no JavaScript.
@@ -208,8 +209,13 @@ function ScoreBlock({ fixture, now }: { fixture: Fixture; now: boolean }) {
 
   return (
     <span className="flex shrink-0 flex-col items-center gap-0.5">
-      <span className={`numeric text-lg font-bold leading-none ${live ? "text-ink" : ""}`}>
-        {played ? `${fixture.homeScore}–${fixture.awayScore}` : kickoffAt(fixture.kickoff)}
+      {/* The score in the reading cyan and CM's colon, as Prem's results row prints it. */}
+      <span className={`numeric text-lg font-bold leading-none ${played ? "text-info" : live ? "text-ink" : ""}`}>
+        {played ? (
+          <Scoreline home={fixture.homeScore} away={fixture.awayScore} rule="px-px text-muted" />
+        ) : (
+          kickoffAt(fixture.kickoff)
+        )}
       </span>
       {/* State never rides on colour alone — the dot is always paired with a word. */}
       {live ? (

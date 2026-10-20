@@ -49,3 +49,11 @@ describe("a signed-in reader's rows", () => {
     expect(out).not.toContain("border-l-transparent");
   });
 });
+
+describe("a played match's score", () => {
+  it("prints CM's colon in the reading cyan, never an en dash", () => {
+    const out = list("finished", true);
+    expect(out).not.toContain("0–0");
+    expect(out).toMatch(/text-info[^>]*>0<span aria-hidden="true"[^>]*>:<\/span>0</);
+  });
+});
