@@ -834,7 +834,7 @@
             },
             {
               "tooltip": "Oct 19, 2:16 AM: Okafor generated one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1072,7 +1072,7 @@
             },
             {
               "tooltip": "Oct 19, 2:23 AM: Chavarria (undisclosed) was scheduled...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1548,7 +1548,7 @@
             },
             {
               "tooltip": "Oct 19, 4:50 AM: Eze recorded no stats in Sunday's 1-0...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1669,7 +1669,7 @@
             },
             {
               "tooltip": "Oct 19, 8:12 AM: Ajer had one cross (zero accurate) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2333,7 +2333,7 @@
             },
             {
               "tooltip": "Oct 19, 2:08 AM: Lammens registered three saves and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2451,8 +2451,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Oct 18, 8:22 AM: Shaw (undisclosed) is absent from...",
-              "typeId": "9"
+              "tooltip": "Oct 20, 6:23 AM: Shaw (undisclosed) was absent from...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -2871,7 +2871,7 @@
             },
             {
               "tooltip": "Oct 19, 2:15 AM: Gudmundsson had six crosses (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3470,7 +3470,7 @@
             },
             {
               "tooltip": "Oct 19, 2:14 AM: Justin recorded seven crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3532,8 +3532,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Oct 10, 11:30 AM: Rashford (strain) is on the bench for...",
-              "typeId": "8"
+              "tooltip": "Hip - Late fitness test (Game-time decision) - Expected return Oct 21",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Oct 20, 6:29 AM: Rashford (hip) was not spotted in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -3647,7 +3651,7 @@
             },
             {
               "tooltip": "Oct 19, 2:23 AM: Chavarria (undisclosed) was scheduled...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3764,7 +3768,7 @@
             },
             {
               "tooltip": "Oct 19, 4:50 AM: Eze recorded no stats in Sunday's 1-0...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3879,7 +3883,7 @@
             },
             {
               "tooltip": "Oct 19, 4:51 AM: Williams generated one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4280,7 +4284,7 @@
             },
             {
               "tooltip": "Oct 19, 2:23 AM: Chavarria (undisclosed) was scheduled...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4347,7 +4351,7 @@
             },
             {
               "tooltip": "Oct 19, 2:14 AM: Justin recorded seven crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4702,8 +4706,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Hamstring - Out for next game - Expected return Oct 24",
-              "typeId": "30"
+              "tooltip": "Hamstring - Late fitness test (Game-time decision) - Expected return Oct 24",
+              "typeId": "1"
             },
             {
               "tooltip": "Oct 18, 5:09 AM: Porro (hamstring) remains sidelined for...",
@@ -5000,7 +5004,7 @@
             },
             {
               "tooltip": "Oct 19, 8:09 AM: Anthony recorded four shots (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5063,7 +5067,7 @@
           "icons": [
             {
               "tooltip": "Oct 19, 4:51 AM: Wood had one shot (zero on goal) in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,

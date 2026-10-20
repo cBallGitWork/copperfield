@@ -3,7 +3,7 @@
     "totalNumPages": 1,
     "pageNumber": 1,
     "maxResultsPerPage": 100,
-    "totalNumResults": 96
+    "totalNumResults": 97
   },
   "filterSettings": {
     "positionOrGroup": "ALL",
@@ -250,6 +250,132 @@
     "rows": [
       {
         "scorer": {
+          "teamName": "Newcastle United",
+          "urlName": "william-osula",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Newcastle_United.png",
+          "scorerId": "05t6x",
+          "upcomingEventStatusId": "2",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "701"
+          ],
+          "defaultPosId": "701",
+          "posShortNames": "F",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Oct 12, 2:14 PM: Osula (foot) is on the bench for...",
+              "typeId": "8"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "701"
+          ],
+          "teamId": "110101",
+          "name": "William Osula",
+          "teamShortName": "NEW",
+          "shortName": "W. Osula"
+        },
+        "executed": true,
+        "numInGroup": 2,
+        "txSetId": "xwtrlxbamvgfx27p",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "The Raccoons",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "l5kunst8msgbirdf"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Reserve",
+            "key": "to"
+          },
+          {
+            "align": "LEFT",
+            "content": "Tue Oct 20, 2026, 4:47AM",
+            "rowspan": 2,
+            "key": "date"
+          },
+          {
+            "content": "8",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Crystal Palace",
+          "urlName": "ismaila-sarr",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Crystal_Palace.png",
+          "scorerId": "05748",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702",
+            "701"
+          ],
+          "defaultPosId": "701",
+          "posShortNames": "M,F",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Oct 9, 8:21 AM: Sarr is fully available and fit enough...",
+              "typeId": "8"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702",
+            "701"
+          ],
+          "teamId": "110045",
+          "name": "Ismaila Sarr",
+          "teamShortName": "CRY",
+          "shortName": "Ismaila Sarr"
+        },
+        "executed": true,
+        "txSetId": "xwtrlxbamvgfx27p",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "The Raccoons",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "l5kunst8msgbirdf"
+          },
+          {
+            "align": "LEFT",
+            "content": "Reserve",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "to"
+          },
+          {
+            "content": "8",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
           "teamName": "Ipswich",
           "urlName": "julio-enciso",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Ipswich_Town.png",
@@ -283,6 +409,7 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "juxk249jmvfvdqam",
         "deleted": false,
@@ -358,6 +485,7 @@
           "shortName": "M. Gibbs-White"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "juxk249jmvfvdqam",
         "deleted": false,
         "cells": [
@@ -416,7 +544,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5gz0yvu6mvfvdqaf",
         "deleted": false,
@@ -474,7 +601,7 @@
             },
             {
               "tooltip": "Oct 19, 8:06 AM: Kerkez registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -488,7 +615,6 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5gz0yvu6mvfvdqaf",
         "deleted": false,
         "cells": [
@@ -535,7 +661,7 @@
             },
             {
               "tooltip": "Oct 19, 2:23 AM: Chavarria (undisclosed) was scheduled...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -549,6 +675,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "c7ym71eumvfvdqab",
         "deleted": false,
@@ -620,6 +747,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "c7ym71eumvfvdqab",
         "deleted": false,
         "cells": [
@@ -678,7 +806,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cim7040omvfvdqa8",
         "deleted": false,
@@ -750,7 +877,6 @@
           "shortName": "M. Sangaré"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cim7040omvfvdqa8",
         "deleted": false,
         "cells": [
@@ -798,7 +924,7 @@
             },
             {
               "tooltip": "Oct 19, 4:52 AM: Munoz registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -812,6 +938,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9vrl1qdfmvfvdqa3",
         "deleted": false,
@@ -878,6 +1005,7 @@
           "shortName": "R. Cherki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9vrl1qdfmvfvdqa3",
         "deleted": false,
         "cells": [
@@ -939,7 +1067,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mn4kwoedmvfvdq9s",
         "deleted": false,
@@ -996,7 +1123,7 @@
             },
             {
               "tooltip": "Oct 19, 3:14 AM: Brobbey (hamstring) is expected to...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1010,7 +1137,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mn4kwoedmvfvdq9s",
         "deleted": false,
         "cells": [
@@ -1073,6 +1199,7 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "q9lk4zyrmvfrn6uw",
         "deleted": false,
@@ -1125,8 +1252,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Oct 18, 8:20 AM: Mainoo (undisclosed) has been ruled out...",
-              "typeId": "9"
+              "tooltip": "Oct 20, 6:22 AM: Mainoo (undisclosed) was not spotted in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -1140,6 +1267,7 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "q9lk4zyrmvfrn6uw",
         "deleted": false,
         "cells": [
@@ -1202,7 +1330,6 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "96mdck8umvfrmz3h",
         "deleted": false,
@@ -1257,7 +1384,7 @@
             },
             {
               "tooltip": "Oct 19, 7:10 AM: Semenyo is expected to miss...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1272,7 +1399,6 @@
           "shortName": "A. Semenyo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "96mdck8umvfrmz3h",
         "deleted": false,
         "cells": [
@@ -1319,7 +1445,7 @@
             },
             {
               "tooltip": "Oct 19, 2:23 AM: Chavarria (undisclosed) was scheduled...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1333,6 +1459,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "488tajtlmvfrbd34",
         "deleted": false,
@@ -1401,6 +1528,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "488tajtlmvfrbd34",
         "deleted": false,
         "cells": [
@@ -1448,7 +1576,7 @@
             },
             {
               "tooltip": "Oct 19, 8:08 AM: Igor Thiago assisted once to go with...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1462,7 +1590,6 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
@@ -1531,7 +1658,6 @@
           "shortName": "T. Barry"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -1593,7 +1719,6 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -1655,7 +1780,6 @@
           "shortName": "C. Kostoulas"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -1717,6 +1841,7 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5r0sgmxqmvf5gci2",
         "deleted": false,
@@ -1788,6 +1913,7 @@
           "shortName": "J. van Hecke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "5r0sgmxqmvf5gci2",
         "deleted": false,
         "cells": [
@@ -1849,7 +1975,6 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v84hmuufmve0eko6",
         "deleted": false,
@@ -1922,7 +2047,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v84hmuufmve0eko6",
         "deleted": false,
         "cells": [
@@ -1984,6 +2108,7 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cjwy2x77mve0e2sc",
         "deleted": false,
@@ -2054,6 +2179,7 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "cjwy2x77mve0e2sc",
         "deleted": false,
         "cells": [
@@ -2115,7 +2241,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "i4d9mv5umve0du0o",
         "deleted": false,
@@ -2186,7 +2311,6 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "i4d9mv5umve0du0o",
         "deleted": false,
         "cells": [
@@ -2248,6 +2372,7 @@
           "shortName": "S. Ajayi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
@@ -2316,6 +2441,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -2377,6 +2503,7 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -2440,6 +2567,7 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -2501,7 +2629,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
@@ -2565,7 +2692,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -2627,7 +2753,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -2674,7 +2799,7 @@
             },
             {
               "tooltip": "Oct 19, 3:14 AM: Brobbey (hamstring) is expected to...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2688,7 +2813,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -2752,6 +2876,7 @@
           "shortName": "K. Schade"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "bd3183hlmvc9tekd",
         "deleted": false,
@@ -2820,6 +2945,7 @@
           "shortName": "J. Hill"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bd3183hlmvc9tekd",
         "deleted": false,
         "cells": [
@@ -2862,7 +2988,7 @@
           "icons": [
             {
               "tooltip": "Oct 19, 4:49 AM: Timber had one cross (zero accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2876,7 +3002,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w8mzze3pmvbxjl6l",
         "deleted": false,
@@ -2931,7 +3056,7 @@
             },
             {
               "tooltip": "Oct 19, 4:52 AM: Munoz registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2945,7 +3070,6 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w8mzze3pmvbxjl6l",
         "deleted": false,
         "cells": [
@@ -2993,7 +3117,7 @@
             },
             {
               "tooltip": "Oct 19, 4:52 AM: Munoz registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3007,6 +3131,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g5dotpxumvbxgz56",
         "deleted": false,
@@ -3056,7 +3181,7 @@
           "icons": [
             {
               "tooltip": "Oct 19, 4:49 AM: Timber had one cross (zero accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3070,6 +3195,7 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g5dotpxumvbxgz56",
         "deleted": false,
         "cells": [
@@ -3117,7 +3243,7 @@
             },
             {
               "tooltip": "Oct 19, 4:52 AM: Munoz registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3131,7 +3257,6 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "dd2psngymvbiis5c",
         "deleted": false,
@@ -3200,7 +3325,6 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "dd2psngymvbiis5c",
         "deleted": false,
         "cells": [
@@ -3262,6 +3386,7 @@
           "shortName": "Y. Ayari"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "85l4gjdzmvbg4k0w",
         "deleted": false,
@@ -3329,6 +3454,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "85l4gjdzmvbg4k0w",
         "deleted": false,
         "cells": [
@@ -3376,7 +3502,7 @@
             },
             {
               "tooltip": "Oct 19, 8:12 AM: Ajer had one cross (zero accurate) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3390,7 +3516,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "dzxt9dxmmvbg49e4",
         "deleted": false,
@@ -3459,7 +3584,6 @@
           "shortName": "B. Thomas"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "dzxt9dxmmvbg49e4",
         "deleted": false,
         "cells": [
@@ -3521,6 +3645,7 @@
           "shortName": "S. Tonali"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wrhlh1yvmvbfv77p",
         "deleted": false,
@@ -3588,6 +3713,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wrhlh1yvmvbfv77p",
         "deleted": false,
         "cells": [
@@ -3649,7 +3775,6 @@
           "shortName": "L. Hall"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "feuu1kq8mvbfew24",
         "deleted": false,
@@ -3717,7 +3842,6 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "feuu1kq8mvbfew24",
         "deleted": false,
         "cells": [
@@ -3778,6 +3902,7 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "uh5r1qcymvbfelte",
         "deleted": false,
@@ -3846,6 +3971,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "uh5r1qcymvbfelte",
         "deleted": false,
         "cells": [
@@ -3902,7 +4028,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "76wdspo9mvbfbu6c",
         "deleted": false,
@@ -3957,7 +4082,7 @@
             },
             {
               "tooltip": "Oct 19, 8:10 AM: Kayode recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3971,7 +4096,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "76wdspo9mvbfbu6c",
         "deleted": false,
         "cells": [
@@ -4028,6 +4152,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7m5ax9opmvbfblme",
         "deleted": false,
@@ -4082,7 +4207,7 @@
             },
             {
               "tooltip": "Oct 19, 8:10 AM: Kayode recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4096,6 +4221,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7m5ax9opmvbfblme",
         "deleted": false,
         "cells": [
@@ -4159,7 +4285,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7unpam5qmvbfb8bs",
         "deleted": false,
@@ -4227,7 +4352,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "7unpam5qmvbfb8bs",
         "deleted": false,
         "cells": [
@@ -4288,6 +4412,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7lb34yi6mvbfb026",
         "deleted": false,
@@ -4358,6 +4483,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7lb34yi6mvbfb026",
         "deleted": false,
         "cells": [
@@ -4418,7 +4544,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3d80e42mmvbf8un9",
         "deleted": false,
@@ -4489,7 +4614,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3d80e42mmvbf8un9",
         "deleted": false,
         "cells": [
@@ -4546,6 +4670,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "n2g6xedumvbf8k8r",
         "deleted": false,
@@ -4600,7 +4725,7 @@
             },
             {
               "tooltip": "Oct 19, 8:10 AM: Kayode recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4614,6 +4739,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "n2g6xedumvbf8k8r",
         "deleted": false,
         "cells": [
@@ -4670,7 +4796,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mvta3gmtmvbf8ays",
         "deleted": false,
@@ -4725,7 +4850,7 @@
             },
             {
               "tooltip": "Oct 19, 8:10 AM: Kayode recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4739,7 +4864,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mvta3gmtmvbf8ays",
         "deleted": false,
         "cells": [
@@ -4803,6 +4927,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "eygbkc8mmvbf7wuy",
         "deleted": false,
@@ -4870,6 +4995,7 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "eygbkc8mmvbf7wuy",
         "deleted": false,
         "cells": [
@@ -4917,7 +5043,7 @@
             },
             {
               "tooltip": "Oct 19, 8:12 AM: Ajer had one cross (zero accurate) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4931,7 +5057,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "x13ryhibmvbf3zj3",
         "deleted": false,
@@ -4995,7 +5120,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "x13ryhibmvbf3zj3",
         "deleted": false,
         "cells": [
@@ -5054,6 +5178,7 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "5yn6slqumvbf3h68",
         "deleted": false,
@@ -5108,7 +5233,7 @@
             },
             {
               "tooltip": "Oct 19, 8:12 AM: Ajer had one cross (zero accurate) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5122,7 +5247,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
@@ -5177,7 +5301,7 @@
             },
             {
               "tooltip": "Oct 19, 8:10 AM: Kayode recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5191,7 +5315,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
         "cells": [
@@ -5240,7 +5363,7 @@
             },
             {
               "tooltip": "Oct 19, 8:09 AM: Anthony recorded four shots (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5255,7 +5378,6 @@
           "shortName": "J. Anthony"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
         "cells": [
@@ -5317,6 +5439,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "pqeaeaxemvbf257d",
         "deleted": false,
@@ -5387,7 +5510,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "8hyemwy5mvbf0q75",
         "deleted": false,
@@ -5443,7 +5565,7 @@
             },
             {
               "tooltip": "Oct 19, 8:09 AM: Anthony recorded four shots (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5458,6 +5580,7 @@
           "shortName": "J. Anthony"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0l65m5qymvbf07r3",
         "deleted": false,
@@ -5525,6 +5648,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "0l65m5qymvbf07r3",
         "deleted": false,
         "cells": [
@@ -5572,7 +5696,7 @@
             },
             {
               "tooltip": "Oct 19, 8:10 AM: Kayode recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5586,7 +5710,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
@@ -5652,7 +5775,6 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -5716,7 +5838,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -5764,7 +5885,7 @@
             },
             {
               "tooltip": "Oct 19, 8:12 AM: Ajer had one cross (zero accurate) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5778,7 +5899,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -5835,6 +5955,7 @@
           "shortName": "El Hadji Malick Diouf"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "uvkpvibtmvbetn0k",
         "deleted": false,
@@ -5905,7 +6026,6 @@
           "shortName": "J. Doku"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w5xyb79fmvbet2lt",
         "deleted": false,
@@ -5960,7 +6080,7 @@
             },
             {
               "tooltip": "Oct 19, 2:16 AM: Okafor generated one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5974,7 +6094,6 @@
           "shortName": "N. Okafor"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w5xyb79fmvbet2lt",
         "deleted": false,
         "cells": [
@@ -6038,6 +6157,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "ie4nzztdmvb9l6g3",
         "deleted": false,
@@ -6092,7 +6212,7 @@
             },
             {
               "tooltip": "Oct 19, 4:49 AM: Guimaraes recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6106,7 +6226,6 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
@@ -6175,7 +6294,6 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -6239,7 +6357,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -6298,7 +6415,6 @@
           "shortName": "H. Wilson"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -6360,6 +6476,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 3,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
@@ -6428,6 +6545,7 @@
           "shortName": "P. Foden"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
         "cells": [
@@ -6491,6 +6609,7 @@
           "shortName": "M. Tavernier"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
         "cells": [
@@ -6552,7 +6671,6 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "2tbyz9h9mvaz8806",
         "deleted": false,
@@ -6621,7 +6739,6 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "2tbyz9h9mvaz8806",
         "deleted": false,
         "cells": [
@@ -6683,6 +6800,7 @@
           "shortName": "V. Mykolenko"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "bmnzuq4jmvay0qoh",
         "deleted": false,
@@ -6751,6 +6869,7 @@
           "shortName": "P. Foden"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bmnzuq4jmvay0qoh",
         "deleted": false,
         "cells": [
@@ -6796,8 +6915,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Oct 18, 8:20 AM: Mainoo (undisclosed) has been ruled out...",
-              "typeId": "9"
+              "tooltip": "Oct 20, 6:22 AM: Mainoo (undisclosed) was not spotted in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -6811,7 +6930,6 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s7ttl08imvaxyrfa",
         "deleted": false,
@@ -6880,7 +6998,6 @@
           "shortName": "P. Foden"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "s7ttl08imvaxyrfa",
         "deleted": false,
         "cells": [
@@ -6927,7 +7044,7 @@
             },
             {
               "tooltip": "Oct 19, 2:23 AM: Chavarria (undisclosed) was scheduled...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6941,6 +7058,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "f77p6t3zmvaxyd9v",
         "deleted": false,
@@ -7009,6 +7127,7 @@
           "shortName": "V. Mykolenko"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "f77p6t3zmvaxyd9v",
         "deleted": false,
         "cells": [
@@ -7070,7 +7189,6 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
@@ -7141,7 +7259,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -7205,7 +7322,6 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -7271,7 +7387,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -7320,7 +7435,7 @@
             },
             {
               "tooltip": "Oct 19, 2:11 AM: Diallo registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7335,6 +7450,7 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "f21tai5smv9rhbgr",
         "deleted": false,
@@ -7402,7 +7518,6 @@
           "shortName": "B. Sesko"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
@@ -7458,7 +7573,7 @@
             },
             {
               "tooltip": "Oct 19, 2:11 AM: Diallo registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7473,7 +7588,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
         "cells": [
@@ -7532,7 +7646,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
         "cells": [
@@ -7594,6 +7707,7 @@
           "shortName": "J. Pickford"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "exan0e84mv9eqhif",
         "deleted": false,
@@ -7662,6 +7776,7 @@
           "shortName": "Z. Suzuki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "exan0e84mv9eqhif",
         "deleted": false,
         "cells": [
@@ -7722,7 +7837,6 @@
           "shortName": "B. Sesko"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "1bus2xcnmv8jrmwh",
         "deleted": false,
@@ -7793,6 +7907,7 @@
           "shortName": "R. Araujo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ld81du0ymv8irfht",
         "deleted": false,
@@ -7847,7 +7962,7 @@
             },
             {
               "tooltip": "Oct 19, 2:16 AM: Stach registered two shots (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7861,6 +7976,7 @@
           "shortName": "A. Stach"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ld81du0ymv8irfht",
         "deleted": false,
         "cells": [
@@ -7908,7 +8024,7 @@
             },
             {
               "tooltip": "Oct 19, 2:16 AM: Stach registered two shots (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7922,7 +8038,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "kool6l6dmv8ir100",
         "deleted": false,
@@ -7993,7 +8108,6 @@
           "shortName": "J. Doku"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kool6l6dmv8ir100",
         "deleted": false,
         "cells": [
@@ -8055,6 +8169,7 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "cwxb8od0mv8i8byz",
         "deleted": false,
@@ -8126,7 +8241,6 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qtbw28ylmv8i79y8",
         "deleted": false,
@@ -8195,7 +8309,6 @@
           "shortName": "Antonio Silva"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "qtbw28ylmv8i79y8",
         "deleted": false,
         "cells": [
@@ -8257,6 +8370,7 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
@@ -8322,6 +8436,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -8369,7 +8484,7 @@
             },
             {
               "tooltip": "Oct 19, 4:49 AM: Guimaraes recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8383,6 +8498,7 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -8446,6 +8562,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -8502,7 +8619,6 @@
           "shortName": "M. Lewis-Skelly"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 6,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
@@ -8552,7 +8668,7 @@
           "icons": [
             {
               "tooltip": "Oct 19, 4:49 AM: Timber had one cross (zero accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8566,7 +8682,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -8614,7 +8729,7 @@
             },
             {
               "tooltip": "Oct 19, 4:49 AM: Guimaraes recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8628,7 +8743,6 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -8687,7 +8801,6 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -8749,7 +8862,6 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -8813,7 +8925,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -8861,7 +8972,7 @@
             },
             {
               "tooltip": "Oct 19, 8:08 AM: Igor Thiago assisted once to go with...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8875,6 +8986,7 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rucjwi18mv7p6ll4",
         "deleted": false,
@@ -8943,6 +9055,7 @@
           "shortName": "N. Jackson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rucjwi18mv7p6ll4",
         "deleted": false,
         "cells": [
@@ -9004,7 +9117,6 @@
           "shortName": "Y. Pino"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wsa79iefmv5ukwq6",
         "deleted": false,
@@ -9075,7 +9187,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wsa79iefmv5ukwq6",
         "deleted": false,
         "cells": [
@@ -9137,6 +9248,7 @@
           "shortName": "T. Muharemovic"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qe8vjkkpmv5ukwq2",
         "deleted": false,
@@ -9208,6 +9320,7 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qe8vjkkpmv5ukwq2",
         "deleted": false,
         "cells": [
@@ -9269,7 +9382,6 @@
           "shortName": "M. Sangaré"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xupwp1xwmv5r5tpk",
         "deleted": false,
@@ -9343,7 +9455,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "xupwp1xwmv5r5tpk",
         "deleted": false,
         "cells": [
@@ -9405,6 +9516,7 @@
           "shortName": "J. Jacquet"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g7zgvhzqmv4xeb8g",
         "deleted": false,
@@ -9472,6 +9584,7 @@
           "shortName": "V. Janelt"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g7zgvhzqmv4xeb8g",
         "deleted": false,
         "cells": [
@@ -9513,8 +9626,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Oct 10, 11:30 AM: Rashford (strain) is on the bench for...",
-              "typeId": "8"
+              "tooltip": "Hip - Late fitness test (Game-time decision) - Expected return Oct 21",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Oct 20, 6:29 AM: Rashford (hip) was not spotted in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -9528,7 +9645,6 @@
           "shortName": "M. Rashford"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "b6ijmautmv4cd329",
         "deleted": false,
@@ -9584,7 +9700,7 @@
             },
             {
               "tooltip": "Oct 19, 2:11 AM: Diallo registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9599,7 +9715,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "b6ijmautmv4cd329",
         "deleted": false,
         "cells": [
@@ -9642,7 +9757,7 @@
           "icons": [
             {
               "tooltip": "Oct 19, 4:49 AM: Gyokeres generated one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9656,6 +9771,7 @@
           "shortName": "V. Gyökeres"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "gmq4dth1mv2b1y5d",
         "deleted": false,
@@ -9710,7 +9826,7 @@
             },
             {
               "tooltip": "Oct 19, 2:16 AM: Ampadu registered two crosses (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9724,7 +9840,6 @@
           "shortName": "E. Ampadu"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "knan2kv0mv2b1ovf",
         "deleted": false,
@@ -9793,6 +9908,7 @@
           "shortName": "J. McGinn"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "a8bajkgamv29c7yn",
         "deleted": false,
@@ -9863,6 +9979,7 @@
           "shortName": "Rayan"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "a8bajkgamv29c7yn",
         "deleted": false,
         "cells": [
@@ -9924,7 +10041,6 @@
           "shortName": "Omar Marmoush"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wl1l79lpmv292y88",
         "deleted": false,
@@ -9979,7 +10095,7 @@
             },
             {
               "tooltip": "Oct 19, 4:48 AM: Havertz generated two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9993,7 +10109,6 @@
           "shortName": "K. Havertz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wl1l79lpmv292y88",
         "deleted": false,
         "cells": [
@@ -10041,7 +10156,7 @@
             },
             {
               "tooltip": "Oct 19, 4:49 AM: Guimaraes recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10055,6 +10170,7 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ib6dj7cvmv28ue5v",
         "deleted": false,
@@ -10123,6 +10239,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ib6dj7cvmv28ue5v",
         "deleted": false,
         "cells": [
@@ -10169,7 +10286,7 @@
             },
             {
               "tooltip": "Oct 19, 2:23 AM: Chavarria (undisclosed) was scheduled...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10183,7 +10300,6 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "02m580ugmv28t6gz",
         "deleted": false,
@@ -10233,7 +10349,7 @@
           "icons": [
             {
               "tooltip": "Oct 19, 4:49 AM: Timber had one cross (zero accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10247,7 +10363,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "02m580ugmv28t6gz",
         "deleted": false,
         "cells": [
@@ -10306,6 +10421,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "883m4jkqmv28swv7",
         "deleted": false,
@@ -10360,7 +10476,7 @@
             },
             {
               "tooltip": "Oct 19, 2:21 AM: Caicedo was substituted late in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10374,7 +10490,6 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gwxxfg5imv26rzng",
         "deleted": false,
@@ -10443,7 +10558,6 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gwxxfg5imv26rzng",
         "deleted": false,
         "cells": [
@@ -10505,6 +10619,7 @@
           "shortName": "M. Cash"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "62kz5nibmv240kcu",
         "deleted": false,
@@ -10559,7 +10674,7 @@
             },
             {
               "tooltip": "Oct 19, 4:50 AM: Konsa generated one tackle (zero won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10573,6 +10688,7 @@
           "shortName": "E. Konsa"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "62kz5nibmv240kcu",
         "deleted": false,
         "cells": [
@@ -10634,7 +10750,6 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "yhm9q5t0mv1gisrp",
         "deleted": false,
@@ -10703,7 +10818,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yhm9q5t0mv1gisrp",
         "deleted": false,
         "cells": [
@@ -10751,7 +10865,7 @@
             },
             {
               "tooltip": "Oct 19, 2:16 AM: Ampadu registered two crosses (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10765,6 +10879,7 @@
           "shortName": "E. Ampadu"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7jl88646mv16ccri",
         "deleted": false,
@@ -10833,6 +10948,7 @@
           "shortName": "N. Mukiele"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7jl88646mv16ccri",
         "deleted": false,
         "cells": [
@@ -10896,7 +11012,6 @@
           "shortName": "M. Belloumi"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m8vqk8rmmv168kx1",
         "deleted": false,
@@ -10965,7 +11080,6 @@
           "shortName": "A. Isak"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "m8vqk8rmmv168kx1",
         "deleted": false,
         "cells": [
@@ -11014,7 +11128,7 @@
             },
             {
               "tooltip": "Oct 19, 2:11 AM: Diallo registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11029,6 +11143,7 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v1lmk34omv14xm91",
         "deleted": false,
@@ -11099,6 +11214,7 @@
           "shortName": "O. Bobb"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "v1lmk34omv14xm91",
         "deleted": false,
         "cells": [
@@ -11160,7 +11276,6 @@
           "shortName": "J. Kluivert"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
@@ -11226,7 +11341,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -11274,7 +11388,7 @@
             },
             {
               "tooltip": "Oct 19, 4:50 AM: White had one cross (zero accurate) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11288,7 +11402,6 @@
           "shortName": "B. White"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -11336,7 +11449,7 @@
             },
             {
               "tooltip": "Oct 19, 4:50 AM: Delap had four shots (one on goal), one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11350,7 +11463,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -11407,6 +11519,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "jfyn3xk2muyktbqt",
         "deleted": false,
@@ -11474,6 +11587,7 @@
           "shortName": "M. Ruggeri"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "jfyn3xk2muyktbqt",
         "deleted": false,
         "cells": [
@@ -11521,7 +11635,7 @@
             },
             {
               "tooltip": "Oct 19, 8:10 AM: Kayode recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11535,7 +11649,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gbfgq91umuykl61b",
         "deleted": false,
@@ -11599,7 +11712,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gbfgq91umuykl61b",
         "deleted": false,
         "cells": [
@@ -11656,6 +11768,7 @@
           "shortName": "Z. Flemming"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wafduhn2muykl02s",
         "deleted": false,
@@ -11710,7 +11823,7 @@
             },
             {
               "tooltip": "Oct 19, 4:48 AM: Havertz generated two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11724,6 +11837,7 @@
           "shortName": "K. Havertz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wafduhn2muykl02s",
         "deleted": false,
         "cells": [
@@ -11787,7 +11901,6 @@
           "shortName": "D. Maeda"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
@@ -11855,7 +11968,6 @@
           "shortName": "R. James"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -11901,8 +12013,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Oct 18, 8:22 AM: Shaw (undisclosed) is absent from...",
-              "typeId": "9"
+              "tooltip": "Oct 20, 6:23 AM: Shaw (undisclosed) was absent from...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -11916,7 +12028,6 @@
           "shortName": "L. Shaw"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -11980,7 +12091,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -12042,6 +12152,7 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 6,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
@@ -12096,7 +12207,7 @@
             },
             {
               "tooltip": "Oct 19, 4:50 AM: Eze recorded no stats in Sunday's 1-0...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12110,6 +12221,7 @@
           "shortName": "E. Eze"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -12171,6 +12283,7 @@
           "shortName": "C. Bassey"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -12218,7 +12331,7 @@
             },
             {
               "tooltip": "Oct 19, 2:14 AM: Justin recorded seven crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12232,6 +12345,7 @@
           "shortName": "J. Justin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -12293,6 +12407,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -12356,6 +12471,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -12419,7 +12535,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "cl1v1pozmuvukopt",
         "deleted": false,
@@ -12491,6 +12606,7 @@
           "shortName": "Emersonn"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
@@ -12548,7 +12664,7 @@
             },
             {
               "tooltip": "Oct 19, 8:06 AM: Kerkez registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12562,6 +12678,7 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -12618,6 +12735,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -12679,6 +12797,7 @@
           "shortName": "L. Davis"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -12726,7 +12845,7 @@
             },
             {
               "tooltip": "Oct 19, 4:50 AM: Delap had four shots (one on goal), one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12740,7 +12859,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "uafn0mzxmuvsn8ip",
         "deleted": false,
@@ -12789,8 +12907,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Oct 10, 11:30 AM: Rashford (strain) is on the bench for...",
-              "typeId": "8"
+              "tooltip": "Hip - Late fitness test (Game-time decision) - Expected return Oct 21",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Oct 20, 6:29 AM: Rashford (hip) was not spotted in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -12804,7 +12926,6 @@
           "shortName": "M. Rashford"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uafn0mzxmuvsn8ip",
         "deleted": false,
         "cells": [
@@ -12866,6 +12987,7 @@
           "shortName": "J. Jacquet"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6s56rcqhmuvrnrte",
         "deleted": false,
@@ -12920,7 +13042,7 @@
             },
             {
               "tooltip": "Oct 19, 4:48 AM: Rice assisted once to go with one shot...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12934,6 +13056,7 @@
           "shortName": "D. Rice"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "6s56rcqhmuvrnrte",
         "deleted": false,
         "cells": [
@@ -12981,7 +13104,7 @@
             },
             {
               "tooltip": "Oct 19, 4:48 AM: Rice assisted once to go with one shot...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12995,7 +13118,6 @@
           "shortName": "D. Rice"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m6er2gqumuvrndw7",
         "deleted": false,
@@ -13064,7 +13186,6 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "m6er2gqumuvrndw7",
         "deleted": false,
         "cells": [
@@ -13112,7 +13233,7 @@
             },
             {
               "tooltip": "Oct 19, 2:21 AM: Caicedo was substituted late in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13126,6 +13247,7 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
@@ -13194,6 +13316,7 @@
           "shortName": "N. Jackson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -13255,6 +13378,7 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -13316,6 +13440,7 @@
           "shortName": "T. Barry"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -13372,7 +13497,6 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mcwo6mv0muvri0z7",
         "deleted": false,
@@ -13446,7 +13570,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mcwo6mv0muvri0z7",
         "deleted": false,
         "cells": [
@@ -13494,7 +13617,7 @@
             },
             {
               "tooltip": "Oct 19, 4:51 AM: Ndoye had two shots (zero on goal) in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13508,6 +13631,7 @@
           "shortName": "D. Ndoye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 5,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
@@ -13560,8 +13684,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Oct 18, 8:20 AM: Mainoo (undisclosed) has been ruled out...",
-              "typeId": "9"
+              "tooltip": "Oct 20, 6:22 AM: Mainoo (undisclosed) was not spotted in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -13575,6 +13699,7 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -13622,7 +13747,7 @@
             },
             {
               "tooltip": "Oct 19, 7:10 AM: Semenyo is expected to miss...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13637,6 +13762,7 @@
           "shortName": "A. Semenyo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -13699,6 +13825,7 @@
           "shortName": "A. Elanga"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -13761,6 +13888,7 @@
           "shortName": "Y. Minteh"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -13822,7 +13950,6 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9vi1hf2smuvrfudv",
         "deleted": false,
@@ -13891,7 +14018,6 @@
           "shortName": "T. Muharemovic"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "9vi1hf2smuvrfudv",
         "deleted": false,
         "cells": [
@@ -13953,6 +14079,7 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
@@ -14020,6 +14147,7 @@
           "shortName": "W. Saliba"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -14081,6 +14209,7 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -14142,6 +14271,7 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -14188,7 +14318,7 @@
             },
             {
               "tooltip": "Oct 19, 3:14 AM: Brobbey (hamstring) is expected to...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -14202,7 +14332,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "me8uv0ksmuvqzjo9",
         "deleted": false,
@@ -14271,7 +14400,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "me8uv0ksmuvqzjo9",
         "deleted": false,
         "cells": [

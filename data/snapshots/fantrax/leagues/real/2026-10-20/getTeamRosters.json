@@ -468,7 +468,7 @@
         {
           "id": "05748",
           "position": "F",
-          "status": "RESERVE"
+          "status": "ACTIVE"
         },
         {
           "id": "078qg",
@@ -478,7 +478,7 @@
         {
           "id": "05t6x",
           "position": "F",
-          "status": "ACTIVE"
+          "status": "RESERVE"
         },
         {
           "id": "05gcc",

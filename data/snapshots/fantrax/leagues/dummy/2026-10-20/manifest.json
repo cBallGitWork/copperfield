@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-10-20T05:36:26.085Z",
+  "capturedAt": "2026-10-20T12:38:30.184Z",
   "leagueId": "w05aib75mtj36y1g",
   "reads": [
     {
@@ -19,19 +19,18 @@
     },
     {
       "method": "getDraftResults",
-      "ok": false,
-      "code": "RATE_LIMITED",
-      "message": "Fantrax getDraftResults: RATE_LIMITED — Too many requests - getDraftResults may be called at most once every 5 seconds per IP address."
+      "ok": true,
+      "bytes": 25166
     },
     {
       "method": "getTransactionDetailsHistory-CLAIM_DROP",
       "ok": true,
-      "bytes": 18481
+      "bytes": 18479
     },
     {
       "method": "getTransactionDetailsHistory-TRADE",
       "ok": true,
-      "bytes": 16290
+      "bytes": 16289
     },
     {
       "method": "getTransactionDetailsHistory-LINEUP_CHANGE",
