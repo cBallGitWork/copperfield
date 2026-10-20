@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { DASH, crestUrl, fullClubName, type FootballSnapshot, type PublishedStory } from "@epl/core";
 import { seasonFixtures } from "../../football";
@@ -25,6 +26,7 @@ export default async function Reports({ story, snapshot }: { story: PublishedSto
     reports.map(async (r) => r.video ?? (await matchHighlight({ home: clubs.get(r.home.code)?.name ?? "", away: clubs.get(r.away.code)?.name ?? "", homeScore: r.home.score, awayScore: r.away.score }))?.id ?? null),
   );
 
+  const listed = reports.length >= 2;
   const marked = listMarks(
     "rpt",
     reports.map((r) => `m-${r.fixtureCode}`),
@@ -33,7 +35,7 @@ export default async function Reports({ story, snapshot }: { story: PublishedSto
   return (
     <div className="rpt flex flex-col pt-4">
       <style>{marked}</style>
-      {reports.length < 2 ? null : (
+      {!listed ? null : (
         <nav aria-label="The day's matches" className={`rpt-list flex flex-col border-t ${RULE}`}>
           <h2 className={`${STANDING_HEAD} py-2`}>The day&apos;s matches</h2>
           {reports.map((r) => (
@@ -58,7 +60,11 @@ export default async function Reports({ story, snapshot }: { story: PublishedSto
         </nav>
       )}
       {/* On a phone one match shows: the one the list's anchor targets, or the lead. A desk shows every match. */}
-      <div className={`flex flex-col ${HAIRLINES} max-lg:[&:has(>section:target)>section:not(:target)]:hidden max-lg:[&:not(:has(>section:target))>section:not(:first-child)]:hidden`}>
+      <div
+        className={`flex flex-col ${HAIRLINES} max-lg:[&:has(>section:target)>section:not(:target)]:hidden max-lg:[&:not(:has(>section:target))>section:not(:first-child)]:hidden ${listed ? "max-lg:[&>section]:scroll-mt-(--list-h)" : ""}`}
+        // A tapped row lands its section under the list, so the next switch is one tap: rows of 2.75rem, the head and air.
+        style={listed ? ({ "--list-h": `calc(${reports.length} * 2.75rem + 3rem)` } as CSSProperties) : undefined}
+      >
         {reports.map((r, i) => {
           const id = idOf(r.fixtureCode);
           return (

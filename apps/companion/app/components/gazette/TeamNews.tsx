@@ -2,6 +2,7 @@ import Image from "next/image";
 import { crestUrl, type PublishedStory, londonDayAndTime, venueMark } from "@epl/core";
 import { RULE } from "./rules";
 import { CAPTION, CAPTION_CAPS, SUBHEAD } from "./heads";
+import { yoursInk } from "../../mine";
 
 // The team-news thread: a club, its crest and fixture, a line of context, one row per man, and at most one quote.
 
@@ -13,7 +14,12 @@ const STATUS: Record<string, string> = {
   FIT: "text-muted",
 };
 
-export default function TeamNews({ story }: { story: PublishedStory }) {
+/** Whether the man is the reader's, matched on the short name the desk filed his owner under; null matches nobody. */
+function isMine(owner: string | undefined, myName: string | null): boolean {
+  return owner !== undefined && owner === myName;
+}
+
+export default function TeamNews({ story, myName = null }: { story: PublishedStory; myName?: string | null }) {
   const rows = story.extras?.teamNews ?? [];
   if (rows.length === 0) return null;
 
@@ -49,9 +55,9 @@ export default function TeamNews({ story }: { story: PublishedStory }) {
                 <li key={man.name} className="col-span-2 grid grid-cols-subgrid items-baseline text-base leading-snug">
                   <span className={`${CAPTION_CAPS} ${STATUS[man.status] ?? "text-muted"}`}>{man.status}</span>
                   <p className="min-w-0 text-ink">
-                    <strong className="font-bold">{man.name}</strong>
+                    <strong className={`font-bold ${yoursInk(isMine(man.owner, myName))}`}>{man.name}</strong>
                     {/* The owner only when there is one, in ink: `.paper` does not re-point `--color-info`. */}
-                    {man.owner === undefined ? null : <span className="text-muted"> (<em>{man.owner}</em>)</span>}
+                    {man.owner === undefined ? null : <span className={isMine(man.owner, myName) ? yoursInk(true) : "text-muted"}> (<em>{man.owner}</em>)</span>}
                     {man.note === "" ? null : <span className="text-muted">, {man.note}</span>}
                   </p>
                 </li>
@@ -60,9 +66,9 @@ export default function TeamNews({ story }: { story: PublishedStory }) {
           )}
 
           {row.stillOut !== undefined ? (
-            <StillOut men={row.stillOut} />
+            <StillOut men={row.stillOut} myName={myName} />
           ) : row.alsoOut !== undefined ? (
-            <StillOut men={row.alsoOut.map((name) => ({ name }))} />
+            <StillOut men={row.alsoOut.map((name) => ({ name }))} myName={myName} />
           ) : null}
 
           {/* Carried from the source article, never composed. */}
@@ -81,15 +87,17 @@ export default function TeamNews({ story }: { story: PublishedStory }) {
 }
 
 /** The standing absences run in after their label, as a paper's team news sets them, each owner where there is one. */
-function StillOut({ men }: { men: readonly { name: string; owner?: string }[] }) {
+function StillOut({ men, myName }: { men: readonly { name: string; owner?: string }[]; myName: string | null }) {
   return (
     <p className="pt-2.5 text-base leading-snug text-muted">
       <span className={`${CAPTION_CAPS} pr-1.5 font-semibold text-ink`}>Still out</span>
       {men.map((man, at) => (
         <span key={man.name}>
           {at > 0 ? " · " : null}
-          {man.name}
-          {man.owner === undefined ? null : <> (<em>{man.owner}</em>)</>}
+          <span className={isMine(man.owner, myName) ? yoursInk(true) : undefined}>
+            {man.name}
+            {man.owner === undefined ? null : <> (<em>{man.owner}</em>)</>}
+          </span>
         </span>
       ))}
     </p>

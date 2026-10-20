@@ -28,7 +28,8 @@ export default function Teaser({
             <StoryFace story={story} clubs={clubs} rank="card" />
           </span>
         ) : null}
-        <h3 className="paper-display text-balance text-xl font-black leading-[1.08] text-ink @md/stories:text-2xl">
+        {/* A long word ('domeitalycoach') hyphenates or breaks inside a 138px shoulder rather than off the page. */}
+        <h3 className="paper-display text-balance wrap-anywhere max-lg:hyphens-auto text-xl font-black leading-[1.08] text-ink @md/stories:text-2xl">
           {story.headline}
         </h3>
         {story.deck !== "" ? (

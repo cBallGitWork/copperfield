@@ -162,6 +162,12 @@ business, and when lineups lock.
    (`← THE GAZETTA` on a phone), and the date. Then the article's own head:
    headline, deck, dateline; a pictured man prints under that head on a
    phone and in a column beside it on a desk.
+   **On a phone an article whose substance is the block below prints no head
+   picture when its blocks carry their own** (20 Oct 2026; amends the phone order
+   of 9 Oct, #435): the draft report and the Prem Report go from the head straight
+   to the prose, so the first block's header lands in screen one. The desk keeps
+   the picture in its column; the Team Sheet keeps its picture on a phone,
+   and a trade keeps its plate.
 
    **The dateline carries the article's Share**, a word at its right in the
    standing head's capitals (Craig, 9 Oct 2026: *"add a share link to these
@@ -413,6 +419,12 @@ line the gameweek's Prem Reports printed as already told, and a sentence giving 
 (`matchups/told.ts`). A starter off early is timed by the match clock the Prem Report reads ("went off in the 52nd
 minute"), not Fantrax's minutes, which put Schade off after 51 in one paper and 52 in the other.
 
+**A report's contents list stays in view on a phone** (20 Oct 2026). The draft report and the Prem Report show one
+block at a time, chosen from the list by its anchor; each section's phone-only `scroll-margin-top` is the list's height
+(`--list-h`, its rows at 2.75rem plus the head), so a tapped row lands its block under the list and the next switch is
+one tap, not a scroll back. A long team name in the full-time header wraps in its own column (`wrap-anywhere`), as
+the paper's headlines break a long word (`wrap-anywhere`, hyphenated on a phone only: `max-lg:hyphens-auto`) rather than push a 320px page sideways.
+
 **A piece that breaks a hard rule twice keeps what it can** (16 Oct 2026). A draft report's match-up and a Prem Report's
 match each keep the attempt with fewer hard faults, less every sentence carrying one; a lede (or standfirst) that
 carries one, or an account that goes whole, prints the bare result instead. **A written headline never stands over a
@@ -550,7 +562,9 @@ about him and not about the team sheet.
 Sheet's rule, and for a reason the Team Sheet does not have: a bracket on every
 one of two hundred and twenty names is noise, and the question this list answers
 is which of them are already owned. The mark is `yoursInk`, so the reader's own
-men are in the sheet's one print red.
+men are in the sheet's one print red. **The Team Sheet marks the reader's men the same way** (20 Oct 2026):
+a man and his owner tag take `yoursInk`, in his row and in Still out, when the tag is the reader's short name
+(`teamNames.shortName`, the form the desk filed it in); no reader, no mark, and no reordering.
 
 **A tie prints both elevens or neither.** `predictedLineups` refuses rather than
 repairs: a side `xiFault` rejects, or one naming a man the snapshot cannot, is
