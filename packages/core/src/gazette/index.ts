@@ -135,7 +135,7 @@ export { seasonMan } from "./season/men";
 export { playSeason } from "./season/play";
 export { seasonCalls } from "./season/calls";
 export { buildSeasonBrief } from "./season/brief";
-export { checkSeason, lineKey } from "./season/checks";
+export { checkSeason } from "./season/checks";
 export { assembleSeason, mergeSeason, readSeasonDraft } from "./season/column";
 export { readMoves } from "./season/editor";
 export type { CallMan, SeasonCalls } from "./season/calls";
