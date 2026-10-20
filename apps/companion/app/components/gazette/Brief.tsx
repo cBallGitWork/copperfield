@@ -25,12 +25,12 @@ export default function Brief({
             <StoryFace story={story} clubs={clubs} rank="card" />
           </span>
         ) : null}
-        <span className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 @md/stories:gap-1">
+        <span className="flex min-w-0 flex-1 flex-col justify-center gap-0 @md/stories:gap-1">
           <h3 className="paper-display text-pretty text-base font-bold leading-snug text-ink @md/stories:text-lg">
             {story.headline}
           </h3>
-          {/* A phone's row prints the day alone, so an old story reads as old without a second line of ink. */}
-          <Dateline story={story} as="span" byline={false} day className="@md/stories:hidden" />
+          {/* A phone's row prints the day alone, set solid and pushed right, so the row fits its thumbnail's height. */}
+          <Dateline story={story} as="span" byline={false} day className="self-end leading-none @md/stories:hidden" />
           <Dateline story={story} as="span" byline={false} className="hidden @md/stories:block" />
         </span>
       </TurnLink>

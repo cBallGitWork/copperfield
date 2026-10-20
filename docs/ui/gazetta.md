@@ -118,7 +118,8 @@ business, and when lineups lock.
    dateline, the grid's meta line. *This reverses "no dateline" on a phone's row*
    (Craig, 20 Oct 2026): the ordering below promises an old opinion prints under
    its own filed date, and a phone printed none, so a 15-day-old story read as
-   this week's. The thumbnail sets the row's height, so the day costs none, and
+   this week's. The day is set solid and pushed right under the headline, so a
+   two-line head and its day fit the thumbnail's height and the row gains none;
    the headline stays the only line in ink.
 
    **Every rank carries a picture, all in one frame** — `.paper-frame`, 16:9,

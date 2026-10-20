@@ -42,4 +42,11 @@ describe("a brief's filing day", () => {
     expect(html).toMatch(/<span class="[^"]*@md\/stories:hidden[^"]*">Sun 11 Oct<\/span>/);
     expect(html).toMatch(/<span class="[^"]*hidden @md\/stories:block[^"]*">Filed /);
   });
+
+  // Integration review, 20 Oct: the day sat on a line of its own and grew 8 of 9 rows at 320px.
+  it("adds no height on a phone: a gapless column, the day set solid and pushed right", () => {
+    const html = renderToStaticMarkup(createElement(Brief, { story: old, clubs: new Map() }));
+    expect(html).toContain('flex-col justify-center gap-0 @md/stories:gap-1"');
+    expect(html).toMatch(/<span class="[^"]*\bself-end leading-none @md\/stories:hidden">Sun 11 Oct<\/span>/);
+  });
 });
