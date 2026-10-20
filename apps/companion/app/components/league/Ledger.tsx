@@ -73,7 +73,7 @@ export default function Ledger({
                 ) : null}
                 {/* Two rows under a thumb, In beside the date or type and Out beside whose move; one row on a desk. */}
                 <li
-                  className={`cm-row grid ${groupByDay ? "grid-cols-[5.25rem_minmax(0,1fr)]" : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5`}
+                  className={`cm-row grid ${groupByDay ? (everyone ? "grid-cols-[4.5rem_minmax(0,1fr)]" : "grid-cols-[4rem_minmax(0,1fr)]") : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5`}
                 >
                   <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
                     <Day at={instant} weekday={!everyone} deskOnly={groupByDay} />
@@ -154,10 +154,16 @@ function Side({
                 ) : (
                   <span className={CREST} />
                 )}
-                <span className="min-w-0 lg:truncate">{player.playerName}</span>
-                {player.position ? (
-                  <span className="shrink-0 text-2xs font-bold text-mid lg:text-xs">({player.position})</span>
-                ) : null}
+                {/* Under a thumb one run of text, the position after the last word; a desk cuts the name, never the tag. */}
+                <span className="min-w-0 [overflow-wrap:anywhere] lg:flex lg:items-center lg:gap-1.5">
+                  <span className="lg:truncate">{player.playerName}</span>
+                  {player.position ? (
+                    <>
+                      {" "}
+                      <span className="whitespace-nowrap text-2xs font-bold text-mid lg:shrink-0 lg:text-xs">({player.position})</span>
+                    </>
+                  ) : null}
+                </span>
               </>
             );
             // His page, at the tight row's 36 under a thumb; a deal from another feed carries no id and stays text.

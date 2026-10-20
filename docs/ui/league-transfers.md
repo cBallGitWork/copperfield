@@ -21,8 +21,9 @@ Transfers tab's ledger with each row's mover named, read off the same feed, so t
   rows, on 3 currently"*). Row one is the type, beside **In**; row two is the mover's plate, beside **Out**. **A
   slim day heading** (*Fri 16 Oct*) opens each London day's deals instead of a date block on every row (review
   M-LEAGUE-2, 20 Oct 2026: seven dates printed 43 times), so the left column is only as wide as the type and the
-  plate (84px) and the names have the date's room. A name too long for its line wraps rather than cuts (at 320,
-  84 of 86 were cut). Words the type cannot fit break onto a second line inside row one. A trade's partner plate
+  plate (72px; a team's own tab, the type alone, 64px) and the names have the date's room. A name too long for its
+  line wraps rather than cuts (at 320, 84 of 86 were cut), its position following the last word, and a single word
+  too long for the box breaks inside it (integration review, 20 Oct: *Gudmundsson* painted over its tag). Words the type cannot fit break onto a second line inside row one. A trade's partner plate
   sits under the mover's behind a faint `With`, the desk's head said on the phone (review UX-8, 19 Oct: two
   plates flush, both green, read as one side), so a trade is the one transfer whose left side runs past two
   lines. The li is a two-column grid below `lg` and the old flex strip from `lg`, each cell placed in the head's
