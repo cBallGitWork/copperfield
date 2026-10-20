@@ -1,4 +1,4 @@
-import { type Club, type Fixture, type FootballPlayer, type FootballSnapshot, type PlayerOwner } from "@epl/core";
+import { type Club, type Fixture, type FootballPlayer, type FootballSnapshot, type PlayerOwner, kickoffOrder } from "@epl/core";
 import Match from "./Match";
 import MatchList from "../components/football/MatchList";
 import RoundHead, { type RoundStep } from "../components/shell/RoundHead";
@@ -76,7 +76,6 @@ export function byRound(fixtures: readonly Fixture[]): Round[] {
     .sort(([a], [b]) => a - b)
     .map(([gameweek, list]) => ({
       gameweek,
-      // Kick-off order; an undated fixture sorts last, not first as an empty string would.
-      fixtures: list.sort((a, b) => (a.kickoff ?? "￿").localeCompare(b.kickoff ?? "￿")),
+      fixtures: list.sort(kickoffOrder),
     }));
 }

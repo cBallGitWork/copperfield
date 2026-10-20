@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { Club, Fixture, FootballPlayer } from "@epl/core";
-import RoundMatches from "./Rounds";
+import RoundMatches, { byRound } from "./Rounds";
 
 vi.mock("next/image", () => ({ default: () => null }));
 vi.mock("@/app/desk", () => import("../desk"));
@@ -39,6 +39,13 @@ function round(mine?: Map<number, FootballPlayer[]>): string {
 function rows(html: string): string[] {
   return html.split('href="/prem/match/').slice(1);
 }
+
+describe("a round's order", () => {
+  it("breaks a level kickoff by fixture id, and puts an undated match last", () => {
+    const [only] = byRound([fixture(5, "2026-10-10T14:00:00Z"), fixture(3, null), fixture(4, "2026-10-10T14:00:00Z")]);
+    expect(only.fixtures.map((f) => f.id)).toEqual([4, 5, 3]);
+  });
+});
 
 describe("a signed-in reader's count", () => {
   it("opens his men under the row rather than leading to another page", () => {
