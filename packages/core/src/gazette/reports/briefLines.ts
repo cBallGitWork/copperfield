@@ -74,7 +74,7 @@ export function eventLine(match: ReportMatchInput, event: MatchEvent, since: str
 
 /** A section man's football, figures only where they tell: a start or a change only when it is news, and a free agent's
  *  first start is his stake's. */
-export function manLine(match: ReportMatchInput, man: ReportMan, counts: ManCounts | undefined, events: readonly MatchEvent[]): string {
+export function manLine(match: ReportMatchInput, man: ReportMan, counts: ManCounts | undefined, events: readonly MatchEvent[], keeperRung: number | null): string {
   const goals = events.filter(isGoal);
   const scored = goalsBy(goals, man.code);
   const madeOnes = assistsBy(goals, man.code);
@@ -88,9 +88,9 @@ export function manLine(match: ReportMatchInput, man: ReportMan, counts: ManCoun
   if (scored > 0) parts.push(`${numeral(scored)} ${plural(scored, "goal")}${man.goalsSeason !== null && man.goalsSeason > scored ? `, ${numeral(man.goalsSeason)} in the league this season` : ""}`);
   else if (man.expectedGoals >= REPORTS.missed.goodEnough) parts.push("chances good enough to score");
   if (madeOnes > 0) parts.push(`made ${numeral(madeOnes)}`);
-  if (counts !== undefined && counts.shots >= 3) parts.push(`${numeral(counts.shots)} shots`);
-  if (counts !== undefined && counts.chancesMade >= 3) parts.push(`made ${numeral(counts.chancesMade)} chances`);
-  if (man.line === "G" && man.saves >= 3) parts.push(`${numeral(man.saves)} saves`);
+  if (counts !== undefined && counts.shots >= REPORTS.stats.briefShots) parts.push(`${numeral(counts.shots)} shots`);
+  if (counts !== undefined && counts.chancesMade >= REPORTS.stats.chances) parts.push(`made ${numeral(counts.chancesMade)} chances`);
+  if (man.line === "G" && keeperRung !== null && man.saves >= keeperRung) parts.push(`${numeral(man.saves)} saves`);
   if ((man.line === "G" || man.line === "D") && man.started && man.offAt === null && conceded === 0) parts.push("the whole match without conceding");
   // Points the league pays for defending, capped a match: the writer read a bare count as "two defensive actions".
   if (man.defensive !== null && man.defensive > 0) {

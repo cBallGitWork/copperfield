@@ -161,8 +161,9 @@ export const REPORTS = {
   sentenceWords: 35,
   /** A burst is two goals by one side this close. */
   burstMinutes: 15,
-  /** A key-stats line earns its place past these, and the points line names this many men. xA only chooses; it never prints. */
-  stats: { mostShots: 4, chances: 3, expectedAssists: 0.4, pointsMen: 4 },
+  /** A key-stats line earns its place past these, and the points line names this many men. xA only chooses; it never prints.
+   *  `briefShots` is lower than `mostShots`: the writer hears of a busy forward the box would not print. */
+  stats: { mostShots: 4, briefShots: 3, chances: 3, expectedAssists: 0.4, pointsMen: 4 },
   /** Chances not taken the account tells, at most; the match xG from which a man who did not score had a good one; and the
    *  match xG from which his chances were good enough to score. */
   missed: { most: 1, quality: 0.3, goodEnough: 0.5 },

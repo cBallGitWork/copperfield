@@ -12,6 +12,8 @@ export interface SideState {
   subs: AutoSub<DraftMan>[];
   /** Fantrax's total plus the points of reserves certain to come on. */
   total: number;
+  /** The points of reserves certain to come on. */
+  brought: number;
   /** Men in the eleven, or certain to come into it, with a match still to play. */
   toPlay: DraftMan[];
 }
@@ -36,11 +38,11 @@ export function counted(s: SideState): DraftMan[] {
 function sideState(side: DraftSide, limits: PositionLimits): SideState {
   const numbered = side.subOrder.flatMap((id) => side.bench.filter((m) => m.fantraxId === id));
   const subs = autoSubs(side.eleven, numbered, limits);
-  const coming = subs.filter((s) => !s.provisional).reduce((sum, s) => sum + (s.in.points ?? 0), 0);
+  const brought = subs.filter((s) => !s.provisional).reduce((sum, s) => sum + (s.in.points ?? 0), 0);
   const eleven = side.eleven.filter((m) => !subs.some((s) => s.out === m));
   // The men most likely to matter first: a projection orders them and is never printed.
   const toPlay = [...eleven, ...subs.map((s) => s.in)].filter((m) => m.left > 0).sort((a, b) => (b.projected ?? 0) - (a.projected ?? 0));
-  return { side, subs, total: (side.total ?? 0) + coming, toPlay };
+  return { side, subs, total: (side.total ?? 0) + brought, brought, toPlay };
 }
 
 /** The winner's last goal, from the late minute on, worth more than the margin: without it the other side would have won. */

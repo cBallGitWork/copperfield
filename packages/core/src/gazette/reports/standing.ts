@@ -1,3 +1,4 @@
+import { PREMIERSHIP_CUTS } from "../../config";
 import { byKickoffUndatedFirst } from "../../football/selectors";
 import { leagueTable } from "../../football/table";
 import type { Club, Fixture } from "../../football/types";
@@ -70,7 +71,7 @@ function firsts(record: readonly { result: Result; home: boolean; conceded: numb
   return lines;
 }
 
-const zone = (place: number, size: number) => (place === 1 ? "top" : place > size - 3 ? "bottom three" : null);
+const zone = (place: number, size: number) => (place === 1 ? "top" : place > size - PREMIERSHIP_CUTS.relegate ? "bottom three" : null);
 
 /** Each club's standing after the London day `day`, for the clubs asked about. */
 export function clubStandings(season: readonly Fixture[], clubs: readonly Club[], day: string, codes: readonly number[]): Map<number, ClubStanding> {

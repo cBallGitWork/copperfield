@@ -3,7 +3,7 @@ import type { StoryFace } from "../face";
 import { mean } from "../../mean";
 import type { Availability } from "../../football/playerState";
 import type { PickSide } from "./pick";
-import { isBack } from "../sheets/sheet";
+import { isBack } from "../../join/lineup";
 
 // One side of a tie as Lawro may know it: the squad, never the line-up. Nothing here reads a
 // roster slot, so the brief says the same whatever the manager has arranged before the lock.

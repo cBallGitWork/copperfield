@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { finiteOrNull, recordOrEmpty, stringOrEmpty, stringsOrEmpty, textOrNull } from "./untrusted";
+import { codeOrNull, finiteOrNull, recordOrEmpty, stringOrEmpty, stringsOrEmpty, textOrNull } from "./untrusted";
 
 describe("finiteOrNull", () => {
   it("passes a real number and refuses everything dressed as one", () => {
@@ -34,5 +34,12 @@ describe("stringsOrEmpty", () => {
   it("keeps an array's non-empty strings in order and drops the rest", () => {
     expect(stringsOrEmpty(["Saka", "", 7, null, "Rice"])).toEqual(["Saka", "Rice"]);
     for (const bad of ["Saka", 7, null, undefined, {}]) expect(stringsOrEmpty(bad)).toEqual([]);
+  });
+});
+
+describe("codeOrNull", () => {
+  it("keeps a positive whole number and refuses zero, a negative, a fraction, a string and NaN", () => {
+    expect(codeOrNull(223094)).toBe(223094);
+    for (const bad of [0, -3, 1.5, "7", Number.NaN, null, undefined]) expect(codeOrNull(bad)).toBeNull();
   });
 });

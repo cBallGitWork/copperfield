@@ -7,6 +7,7 @@ import {
   recordCoverage,
   threadSlug,
 } from "./ledger";
+import { tradeSlot } from "./trades/trades";
 
 const LEAGUE = "zbn1z3ukmsgb36sz";
 const FILED = "2026-08-31T09:00:00.000Z";
@@ -27,6 +28,15 @@ describe("recordCoverage", () => {
     // A key that old is a round long superseded; the newest must all survive.
     expect(ledger[LEAGUE].covered.at(-1)).toBe(`news:item-${MAX_COVERED + 4}`);
     expect(ledger[LEAGUE].covered[0]).toBe("news:item-5");
+  });
+
+  it("never trims a trade key, which names no gameweek and is offered all season", () => {
+    const keys = Array.from({ length: MAX_COVERED + 5 }, (_, n) => `news:item-${n}`);
+    const early = tradeSlot({ id: "early" }).key;
+    const ledger = recordCoverage({}, LEAGUE, [early, ...keys], [], FILED);
+    expect(isCovered(ledger, LEAGUE, early)).toBe(true);
+    expect(ledger[LEAGUE].covered).toHaveLength(MAX_COVERED);
+    expect(ledger[LEAGUE].covered.at(-1)).toBe(`news:item-${MAX_COVERED + 4}`);
   });
 
   it("opens a thread at one beat and wears it on each advance", () => {

@@ -21,6 +21,24 @@ describe("threadsOf", () => {
     expect(threads.find((t) => t.kind === "bench-turned")?.facts).toEqual(["test4 would have won without the automatic substitutions, which put Vuskovic in for Dunk and Janelt in for Jensen for test3"]);
   });
 
+  it("never credits the winner's bench when it brought nobody on and the loser's own reserve cost it", () => {
+    const blank = draftMan("Blank", "M", 0, 0, 0, { club: "Blank FC" });
+    const sentOff = draftMan("Reserve", "M", -2, 12, 0, { club: "Red FC" });
+    const ctx = contextOf(draftSide("Cows", 39, eleven("c")), draftSide("Pigs", 40, eleven("p", { 5: blank }), [sentOff]));
+    expect(ctx.state.margin).toBe(1);
+    expect(kinds(ctx).map((t) => t.kind)).not.toContain("bench-turned");
+  });
+
+  it("never credits the winner's bench when its substitutions brought in less than the margin", () => {
+    const resC = draftMan("ResC", "M", 1, 20, 0, { club: "R1" });
+    const resP = draftMan("ResP", "M", -3, 20, 0, { club: "R2" });
+    const home = draftSide("Cows", 39, eleven("c", { 5: draftMan("BlankC", "M", 0, 0, 0, { club: "B1" }) }), [resC]);
+    const away = draftSide("Pigs", 40, eleven("p", { 5: draftMan("BlankP", "M", 0, 0, 0, { club: "B2" }) }), [resP]);
+    const ctx = contextOf(home, away);
+    expect(ctx.state.margin).toBe(3);
+    expect(kinds(ctx).map((t) => t.kind)).not.toContain("bench-turned");
+  });
+
   it("never tells who led at a day's end: a day's score is the fixture list's", () => {
     const told = [...kinds(), ...kinds(benchTurned())];
     expect(told.map((t) => t.kind)).not.toEqual(expect.arrayContaining(["comeback"]));

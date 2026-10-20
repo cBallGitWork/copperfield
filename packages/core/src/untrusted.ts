@@ -5,6 +5,11 @@ export function finiteOrNull(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
+/** A real FPL code or id, a positive whole number, or null: a zero, a negative or a fraction draws the wrong picture. */
+export function codeOrNull(value: unknown): number | null {
+  return typeof value === "number" && Number.isInteger(value) && value > 0 ? value : null;
+}
+
 /** A string, or "" for anything else. */
 export function stringOrEmpty(value: unknown): string {
   return typeof value === "string" ? value : "";

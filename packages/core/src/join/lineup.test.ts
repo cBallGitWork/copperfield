@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { NO_SEASON } from "../football/noSeason";
 import type { FootballPlayer } from "../football/types";
 import type { RosteredPlayer, RosteredTeam } from "./roster";
-import { everyLine, lineup, squadUnarranged } from "./lineup";
+import { everyLine, isBack, lineup, squadUnarranged } from "./lineup";
 import { mapBenchOrder, type RawTeamRosterInfo } from "../league/fantrax/benchOrder";
 import raccoons from "../league/fantrax/__fixtures__/teamRosterInfoBench.json";
 
@@ -170,5 +170,11 @@ describe("everyLine", () => {
   it("keeps a letter it does not know, at the front", () => {
     const lines = [{ position: "G", players: ["k"] }, { position: "D", players: [] }, { position: "M", players: [] }, { position: "F", players: [] }, { position: "", players: ["u"] }];
     expect(everyLine(lines).map((line) => line.position)).toEqual(["G", "D", "M", "F", ""]);
+  });
+});
+
+describe("isBack", () => {
+  it("holds the keeper and the back line, nobody further up and no empty slot", () => {
+    expect(["G", "D", "M", "F", "", null].map(isBack)).toEqual([true, true, false, false, false, false]);
   });
 });

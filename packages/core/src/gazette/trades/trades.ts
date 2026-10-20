@@ -41,7 +41,10 @@ export function completedTrades(rows: readonly LeagueTransaction[]): Trade[] {
   return newestFirst([...bySet.values()].filter((trade) => trade.moves.length > 0));
 }
 
+/** Every trade's covered key starts here; the ledger reads it to keep trades past the trim. */
+export const TRADE_KEY_PREFIX = "trade:";
+
 /** The trade's covered-key and slug, both from its own id. */
 export function tradeSlot(trade: Pick<Trade, "id">): { key: string; slug: string } {
-  return { key: `trade:${trade.id}`, slug: `here-we-go-${trade.id}` };
+  return { key: `${TRADE_KEY_PREFIX}${trade.id}`, slug: `here-we-go-${trade.id}` };
 }

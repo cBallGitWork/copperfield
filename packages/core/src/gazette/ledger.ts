@@ -1,6 +1,8 @@
 // The newsroom's memory, committed beside the paper: covered keys (club codes, never per-season ids) stop a
 // story filing twice, and threads count their beats so a worn storyline is not reused.
 
+import { TRADE_KEY_PREFIX } from "./trades/trades";
+
 /** One running storyline, as the model reports it and the ledger wears it. */
 export interface StoryThread {
   /** What the saga is about, in a few words; slugged, it is the merge key. */
@@ -25,6 +27,9 @@ export type Ledger = Record<string, LedgerBook>;
 
 /** Covered keys kept per league: months of margin over the two gameweeks in print. */
 export const MAX_COVERED = 400;
+
+/** A trade's key names no gameweek and is offered all season, so the trim never drops one. */
+const SEASON_LONG = TRADE_KEY_PREFIX;
 
 /** Threads kept per league, open and retired together. */
 const MAX_THREADS = 24;
@@ -106,8 +111,17 @@ export function recordCoverage(
 
   return {
     ...ledger,
-    [leagueId]: { covered: covered.slice(-MAX_COVERED), threads: kept },
+    [leagueId]: { covered: trimCovered(covered), threads: kept },
   };
+}
+
+/** The newest keys up to the cap, every trade key kept whatever its age. */
+function trimCovered(covered: readonly string[]): string[] {
+  const seasonLong = (key: string) => key.startsWith(SEASON_LONG);
+  const others = covered.filter((key) => !seasonLong(key));
+  const room = Math.max(0, MAX_COVERED - (covered.length - others.length));
+  const keep = new Set(others.slice(others.length - room));
+  return covered.filter((key) => seasonLong(key) || keep.has(key));
 }
 
 /** Whether a covered-key was already spent for this league. */

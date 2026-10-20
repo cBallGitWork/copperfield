@@ -2,14 +2,13 @@ import type { ReportRowKind, StoryReport, StoryReportSide } from "./cargo";
 import type { KeyStat } from "./keyStats";
 import type { LineupMan, LineupSub, StoryLineup } from "./lineups";
 import type { StarMan } from "./star";
-import { finiteOrNull as num, recordOrEmpty as obj, stringOrEmpty as str, stringsOrEmpty as strs, textOrNull as strOrNull } from "../../untrusted";
+import { codeOrNull as code, finiteOrNull as num, recordOrEmpty as obj, stringOrEmpty as str, stringsOrEmpty as strs, textOrNull as strOrNull } from "../../untrusted";
 
 // A filed match-day report read back field by field: a story is a contract, not a bag, so nothing a writer invented alongside
 // the shape reaches the page. A match prints with both sides and a standfirst, or not at all.
 
 type Raw = Record<string, unknown>;
 const list = <T>(v: unknown, read: (r: Raw) => T | null): T[] => (Array.isArray(v) ? v.flatMap((x) => read(obj(x)) ?? []) : []);
-const code = (v: unknown) => (typeof v === "number" && Number.isInteger(v) && v > 0 ? v : null);
 const KINDS: readonly ReportRowKind[] = ["Goal", "Pen", "OG", "VAR", "Pen missed", "Pen saved", "Post", "Booked", "Sent off", "Sub"];
 
 /** A mark as filed: absent on a report filed before marks, null when he was too brief to rate. */
