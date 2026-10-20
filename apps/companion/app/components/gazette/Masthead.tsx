@@ -28,7 +28,7 @@ export default function Masthead({
       {/* The dateline, fenced: date at the left (an empty span holds the place when undated), the next lock at the right. */}
       <div className={`${STANDING_CAPS} mt-2 flex items-baseline justify-between gap-3 border-y-2 py-1`} style={{ borderColor: "currentColor" }}>
         <span>{at === null ? null : londonDate(at)}</span>
-        <span className="numeric whitespace-nowrap">
+        <span className="tabular-nums whitespace-nowrap">
           {lock === null ? (
             SEASON
           ) : (

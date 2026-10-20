@@ -16,6 +16,13 @@ describe("the masthead's dateline", () => {
     expect(html).not.toContain(SEASON);
   });
 
+  // Integration review, 20 Oct: `numeric` set the lock's words in the display face beside the date's small caps.
+  it("sets the lock in the dateline's own face, figures tabular", () => {
+    const html = renderToStaticMarkup(createElement(Masthead, { at: AT, lock: { gameweek: 8, at: LOCKS } }));
+    expect(html).toContain('<span class="tabular-nums whitespace-nowrap">');
+    expect(html).not.toContain("numeric");
+  });
+
   it("prints no gameweek where the calendar cannot name one", () => {
     const html = renderToStaticMarkup(createElement(Masthead, { at: AT, lock: { gameweek: undefined, at: LOCKS } }));
     expect(html).toContain(">Locks Fri 19:45<");
