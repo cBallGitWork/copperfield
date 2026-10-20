@@ -22,8 +22,7 @@ import { COMMENTARY_REVALIDATE, LIVE_REVALIDATE, PAGE_REVALIDATE } from "./confi
 // and ours; `commentary.ts` asks the round's questions, `matchFeed.ts` one match's.
 // Nothing about who is asking may cross into these caches.
 
-/** Premier League player id → Opta code, from `npm run pl-bridge`. Asserted here, not parsed in
- *  core: core's tsconfig cannot read `data/`. */
+/** Premier League player id → Opta code, from `npm run pl-bridge`; asserted here, as core cannot read `data/`. */
 const PL_TO_OPTA: Record<string, string> = bridge.players;
 
 /** Opta code → FPL `code`, built from the bootstrap already held, so nothing per-season is stored. */
@@ -99,7 +98,7 @@ export async function theirFixture(
 }
 
 /** Their fixture for one of ours, read through `read`, answering `absent` at every step that can fail: a null
- *  gameweek (a postponement loses its round), no such fixture, or their API down on either hop. A bug still throws. */
+ *  gameweek (a postponement loses its round), no such fixture, or their API down on either hop. */
 export async function ofFixture<T>(
   gameweek: number | null,
   fixtureCode: number,
@@ -111,6 +110,7 @@ export async function ofFixture<T>(
     const fixture = await theirFixture(gameweek, fixtureCode);
     return fixture === null ? absent : read(fixture);
   };
+  // Only a provider's failure is caught: a bug in `read` still throws.
   return orDegraded(both(), () => absent);
 }
 
