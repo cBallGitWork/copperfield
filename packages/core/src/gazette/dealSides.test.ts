@@ -57,8 +57,22 @@ describe("movement", () => {
 });
 
 describe("kindOf", () => {
-  it("calls a claim with a drop beside it a Waiver", () => {
+  it("calls a claim with a drop beside it a Waiver when it came off waivers", () => {
+    expect(kindOf(deal({ kind: "claim", via: "waivers" }), 1, 1)).toBe("Waiver");
+  });
+
+  it("calls a free agent signed for a drop a Free agent, as Waivers' Last run counts it (Craig, 20 Oct 2026)", () => {
+    expect(kindOf(deal({ kind: "claim", via: "free agency" }), 1, 1)).toBe("Free agent");
+  });
+
+  it("keeps Waiver when the feed never said which, rather than a blank or a confident Free agent", () => {
     expect(kindOf(deal({ kind: "claim" }), 1, 1)).toBe("Waiver");
+    expect(kindOf(deal({ kind: "claim", via: null }), 1, 1)).toBe("Waiver");
+  });
+
+  it("leaves Bin Pick Up and To The Bin alone whichever way the claim came", () => {
+    expect(kindOf(deal({ kind: "claim", via: "free agency" }), 1, 0)).toBe("Bin Pick Up");
+    expect(kindOf(deal({ kind: "claim", via: "free agency" }), 0, 1)).toBe("To The Bin");
   });
 
   it("calls a claim that cost nobody a Bin Pick Up", () => {

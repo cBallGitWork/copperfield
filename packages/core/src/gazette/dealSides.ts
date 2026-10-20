@@ -25,8 +25,8 @@ export function moverOf(deal: Deal): string | null {
   return deal.inbound.find(named)?.teamId ?? deal.outbound.find(named)?.teamId ?? null;
 }
 
-/** What a deal is called in this league's words. Fantrax's one "claim" is three: Waiver (both sides),
- *  Bin Pick Up (only an arrival) and To The Bin (only a departure). */
+/** What a deal is called in this league's words. Fantrax's one "claim" is four: Waiver or Free agent (both sides,
+ *  by `via`; Waiver when unsaid), Bin Pick Up (only an arrival) and To The Bin (only a departure). */
 export function kindOf(deal: Deal, arrived: number, left: number): string {
   if (deal.kind === "trade") return "Trade";
   if (deal.kind === "lineup") return "Line-up";
@@ -34,5 +34,6 @@ export function kindOf(deal: Deal, arrived: number, left: number): string {
 
   // Only for a claim: on a trade, `movement` files a partner's gain under `out`.
   if (arrived === 0 && left > 0) return "To The Bin";
-  return left === 0 ? "Bin Pick Up" : "Waiver";
+  if (left === 0) return "Bin Pick Up";
+  return deal.via === "free agency" ? "Free agent" : "Waiver";
 }
