@@ -14,8 +14,10 @@ const NAME = "font-chrome text-lg font-bold lg:text-3xl";
 const SCORER_FIGURE = "numeric shrink-0 font-bold text-accent text-lg lg:text-3xl";
 /** The assister's minutes: the scorer's ink and column, at the assister's size. */
 const ASSIST_FIGURE = "numeric shrink-0 font-bold text-accent text-sm lg:text-xl";
+/** The name keeps its width and cuts only when it alone overruns the row; a weighted shrink still drew 'A. Iwo…'. */
+const KEEPS_WIDTH = "max-w-full shrink-0 truncate";
 /** The owner's bracket, cut to nothing before the name loses a letter: a phone drew 'R. Sessegn…' for '(Dome)'. */
-const GIVES_WAY = "min-w-0 shrink-[999] truncate";
+const GIVES_WAY = "min-w-0 truncate";
 
 /** One scorer with all his minutes, and under him the men who made them, in the order the goals came. */
 export function Goal({
@@ -58,7 +60,7 @@ export function Goal({
           >
             <span className={`${SMALL_CAPS} shrink-0 text-faint`}>A</span>
             <span className="flex min-w-0 flex-1 items-baseline font-chrome text-sm font-bold text-muted lg:text-xl">
-              <span className="min-w-0 truncate">
+              <span className={KEEPS_WIDTH}>
                 <PlayerName name={assister.name} short={fullFootballerName(assister)} />
               </span>
               <OwnedBy owner={owner} size="scoresheet" className={`ml-1 ${GIVES_WAY}`} />
@@ -111,7 +113,7 @@ export function Man({
         </span>
       )}
       <span className="flex min-w-0 flex-1 items-baseline">
-        <span className={`min-w-0 truncate group-hover:underline ${NAME}`}>
+        <span className={`${KEEPS_WIDTH} group-hover:underline ${NAME}`}>
           <PlayerName name={name} short={short} />
         </span>
         {note === null ? null : <span className={`${SMALL_CAPS} ml-1.5 shrink-0 text-bad`}>{note}</span>}

@@ -17,14 +17,27 @@ function classOf(html: string, text: string): string {
   return html.slice(html.lastIndexOf("<span", at), at).match(/class="([^"]*)"/)?.[1] ?? "";
 }
 
+/** The class of the span holding a phone's initialled name. */
+function nameClassOf(html: string, short: string): string {
+  return html.match(new RegExp(`<span class="([^"]*)"><span class="lg:hidden">${short}<`))?.[1] ?? "";
+}
+
+/** The name keeps its width and the owner gives it all: shrink weighted 999:1 still cut 'A. Iwo…' (review, 20 Oct). */
+function expectOwnerYieldsFirst(html: string, short: string) {
+  const name = nameClassOf(html, short).split(" ");
+  const owner = classOf(html, "(Glengarry)").split(" ");
+  expect(name).toEqual(expect.arrayContaining(["shrink-0", "max-w-full", "truncate"]));
+  expect(owner).toEqual(expect.arrayContaining(["min-w-0", "truncate"]));
+  expect(owner).not.toContain("shrink-0");
+}
+
 describe("a scoresheet line on a phone", () => {
   // Review: at 390 'R. Sessegnon (Dome)' drew as 'R. Sessegn…', the man's own surname cut for his owner's.
   it("cuts the owner before the scorer's name", () => {
     const html = renderToStaticMarkup(
       createElement(Man, { code: 7, card: undefined, name: "Ryan Sessegnon", short: "Ryan Sessegnon", owners, figure: "90'" }),
     );
-    expect(classOf(html, "(Glengarry)")).toContain("truncate");
-    expect(classOf(html, "(Glengarry)")).toMatch(/shrink-\[/);
+    expectOwnerYieldsFirst(html, "R. Sessegnon");
   });
 
   it("cuts the owner before the assister's name", () => {
@@ -35,7 +48,6 @@ describe("a scoresheet line on a phone", () => {
         owners, byCode: new Map([[7, assister]]), cards: new Map(),
       }),
     );
-    expect(classOf(html, "(Glengarry)")).toContain("truncate");
-    expect(classOf(html, "(Glengarry)")).toMatch(/shrink-\[/);
+    expectOwnerYieldsFirst(html, "A. Iwobi");
   });
 });
