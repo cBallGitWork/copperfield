@@ -47,7 +47,7 @@ export interface BoardColumn<Row> {
 
 /** Which column the board runs by, and how a head changes it: a link the server orders by, a tap the client does, or
  *  neither when something else (a picker, the model) sets the order and the head is pressed only. */
-export type BoardOrder = { key: string | null; descending: boolean } & (
+type BoardOrder = { key: string | null; descending: boolean } & (
   | { href: (key: string) => string; onSort?: never }
   | { onSort: (key: string) => void; href?: never }
   | { href?: never; onSort?: never }
@@ -55,7 +55,7 @@ export type BoardOrder = { key: string | null; descending: boolean } & (
 
 /** What leads each row: his Fantrax position on a tile (shown under a thumb, or carried by the name there) or a word
  *  in CM's index block; then the name. */
-export interface BoardLead<Row> {
+interface BoardLead<Row> {
   tile?: { positions: (row: Row) => readonly string[]; free?: (row: Row) => boolean; deskOnly?: boolean };
   /** `wide`: a season or a date, wider than the block, so the lead scrolls with the board rather than pinning. */
   index?: { label: string; of: (row: Row, at: number) => ReactNode; className?: string; wide?: boolean };

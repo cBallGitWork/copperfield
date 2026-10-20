@@ -4,7 +4,7 @@ import type { LeagueOpinion } from "../../leagueOpinions";
 // The order a club's squad reads in: our league's position, then the sister's depth chart, then what each has done.
 
 /** Our league's position for a man as a sort key; a man it has no opinion about sorts last. */
-export function fantasyDepth(opinion: LeagueOpinion | undefined): number {
+function fantasyDepth(opinion: LeagueOpinion | undefined): number {
   const first = [...(opinion?.positions ?? [])].sort(byPositionDepth)[0];
   return first === undefined ? Number.MAX_SAFE_INTEGER : positionDepth(first);
 }

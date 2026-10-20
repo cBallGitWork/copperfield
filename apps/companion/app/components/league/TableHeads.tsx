@@ -118,7 +118,7 @@ export function sortedAs(here: boolean, descending: boolean): "ascending" | "des
 }
 
 /** The order's direction beside a head's word. */
-export function SortArrow({ down, className = "" }: { down: boolean; className?: string }) {
+function SortArrow({ down, className = "" }: { down: boolean; className?: string }) {
   return (
     <span aria-hidden className={`text-[0.5rem] leading-none ${className}`}>
       {down ? "▼" : "▲"}

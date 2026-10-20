@@ -21,7 +21,7 @@ export interface BoardView {
 export const STATS_SORT = "xg";
 
 /** Whether a column is Players': the league's points, and a count the league scores; an unread league scores every one. */
-export function onPlayers(column: PoolColumn, categories: Record<string, ScoringCategory>): boolean {
+function onPlayers(column: PoolColumn, categories: Record<string, ScoringCategory>): boolean {
   if (column.fantasy) return true;
   if (column.scores === undefined) return false;
   return Object.keys(categories).length === 0 || firstScored(categories, column.also ? [column.scores, column.also] : [column.scores]) !== null;

@@ -6,7 +6,7 @@ import DialogHead from "../components/shell/DialogHead";
 
 // The board's key in one tap (Craig, 19 Oct 2026: "and a glossary"): each head and what it counts, in the house dialog.
 
-export interface KeyEntry {
+interface KeyEntry {
   label: string;
   title: string;
   means?: string;

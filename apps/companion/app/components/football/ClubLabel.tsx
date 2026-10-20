@@ -4,7 +4,7 @@ import { ROW_NAME } from "@/app/desk";
 
 /** The crest in a table row's badge slot. `max-w-none` lifts preflight's `max-width: 100%`, under which
  *  WebKit sizes a table column as if the crest were not there. */
-export const ROW_CREST = {
+const ROW_CREST = {
   px: 26,
   className: "h-[var(--row-badge)] w-[var(--row-badge)] max-w-none shrink-0 object-contain",
 };

@@ -5,7 +5,7 @@ import { reloadsHeld } from "./unsaved";
 // unpinned route which deployment is live, and reloading onto it, is what a hard open did.
 
 /** The address that names the live deployment; a plain fetch is never pinned. */
-export const DEPLOYMENT_ROUTE = "/api/deployment";
+const DEPLOYMENT_ROUTE = "/api/deployment";
 /** The fewest milliseconds between two asks, outside a pull. */
 const ASK_EVERY_MS = 60_000;
 
