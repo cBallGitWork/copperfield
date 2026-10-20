@@ -76,7 +76,7 @@ export default function Ledger({
                   className={`cm-row grid ${groupByDay ? "grid-cols-[5.25rem_minmax(0,1fr)]" : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5`}
                 >
                   <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
-                    <Day stamp={deal.processedAt} weekday={!everyone} deskOnly={groupByDay} />
+                    <Day at={instant} weekday={!everyone} deskOnly={groupByDay} />
                     {/* The league's list, or a grouped one, sets the type beside In, leaving the row below to whose move. */}
                     {everyone || groupByDay ? kind : null}
                   </span>
@@ -181,8 +181,7 @@ function Side({
 
 /** The London day, as Mail spells it and never cut; the league's list drops the weekday under a thumb, for the type's room.
  *  `deskOnly` when a day heading says it under a thumb. */
-function Day({ stamp, weekday, deskOnly }: { stamp: string | null; weekday: boolean; deskOnly: boolean }) {
-  const at = fantraxInstant(stamp ?? "");
+function Day({ at, weekday, deskOnly }: { at: string | null; weekday: boolean; deskOnly: boolean }) {
   return (
     <span className={`cm-index numeric shrink-0 whitespace-nowrap px-1.5 py-0.5 lg:w-24 ${deskOnly ? "hidden lg:block" : weekday ? "w-24" : ""}`}>
       {at === null ? (
