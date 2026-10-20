@@ -5,10 +5,10 @@ import { INDEX_WIDTH, MINOR_LABEL } from "@/app/desk";
 // No crest-and-name cell: its callers differ in size, fallback and alignment.
 
 /** The ordinal in CM's index block, in the colour a team's or club's shell gives `--cm-index`. */
-export function IndexCell({ children, className = "" }: { children: ReactNode; className?: string }) {
-  // The span holds the width: an overflowing table shrinks a cell to its content, and a pinned name sits at `left-8`.
+export function IndexCell({ children, className = "", wide }: { children: ReactNode; className?: string; wide?: boolean }) {
+  // The span holds the width (a pinned name sits at `left-8`); unpadded so "=10th" fits. A `wide` index keeps its edge.
   return (
-    <td className={`cm-index ${INDEX_WIDTH} numeric px-1.5 text-center ${className}`}>
+    <td className={`cm-index ${INDEX_WIDTH} numeric ${wide ? "px-1.5" : "px-0"} text-center ${className}`}>
       <span className="inline-block min-w-5 lg:min-w-6">{children}</span>
     </td>
   );
