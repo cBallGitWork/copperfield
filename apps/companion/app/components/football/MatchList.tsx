@@ -18,7 +18,7 @@ import {
   DASH,
 } from "@epl/core";
 import { chipsFor } from "../league/Chips";
-import { yoursBorder } from "../../mine";
+import { yoursBorder, yoursEdge } from "../../mine";
 import { ROW_NAME } from "@/app/desk";
 import PlayerName from "../shell/PlayerName";
 import PlayerPortrait from "./PlayerPortrait";
@@ -59,6 +59,7 @@ export default function MatchList({
             fixture={f}
             clubs={clubs}
             snapshot={snapshot}
+            reader={mine !== undefined}
             yours={mine?.get(f.id)}
             owners={owners}
             now={now}
@@ -69,10 +70,14 @@ export default function MatchList({
   );
 }
 
+/** The count's column, held on every row of a reader's list so the scores stay in line, as Prem's is. */
+const COUNT = "numeric flex w-12 shrink-0 justify-end text-2xs font-semibold text-accent";
+
 function MatchRow({
   fixture,
   clubs,
   snapshot,
+  reader,
   yours,
   owners,
   now,
@@ -80,6 +85,8 @@ function MatchRow({
   fixture: Fixture;
   clubs: Map<number, Club>;
   snapshot: FootballSnapshot;
+  /** A reader holding anyone, so every row keeps the count's column and an edge's width. */
+  reader: boolean;
   /** His players in this match, or undefined when there are none. */
   yours?: FootballPlayer[];
   owners?: Map<number, PlayerOwner>;
@@ -93,7 +100,9 @@ function MatchRow({
 
   return (
     <details
-      className={`group overflow-hidden ${yoursBorder(yours !== undefined)}`}
+      className={`group overflow-hidden ${
+        reader ? `border-line ${yoursEdge(yours !== undefined)}` : yoursBorder(false)
+      }`}
     >
       <summary
         className="flex cursor-pointer list-none items-center gap-3 px-3 py-2.5 transition-colors duration-150 hover:bg-raised [&::-webkit-details-marker]:hidden"
@@ -103,11 +112,7 @@ function MatchRow({
         <ScoreBlock fixture={fixture} now={now} />
         <ClubSide club={away} align="end" />
         {/* Counted rather than tinted: a wash on every row marks no row. */}
-        {yours ? (
-          <span className="numeric shrink-0 text-2xs font-semibold text-accent">
-            {yours.length} yours
-          </span>
-        ) : null}
+        {reader ? <span className={COUNT}>{yours ? `${yours.length} yours` : null}</span> : null}
         <svg
           aria-hidden
           viewBox="0 0 24 24"
