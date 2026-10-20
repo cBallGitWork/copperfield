@@ -21,13 +21,13 @@ const CREST = "size-5 shrink-0 object-contain lg:size-6";
 export default function Ledger({
   deals,
   teamId,
-  names,
+  nameOf,
 }: {
   deals: readonly Deal[];
   /** Whose business; none is the whole league's, every row naming its mover. */
   teamId?: string;
-  /** Every team's name by id; the transaction row's own copy goes stale when a manager renames. */
-  names: Record<string, string>;
+  /** A team's name by id, `—` for one the league no longer lists; the row's own copy goes stale on a rename. */
+  nameOf: (teamId: string) => string;
 }) {
   const everyone = teamId === undefined;
   const rows = deals.map((deal) => {
@@ -71,7 +71,7 @@ export default function Ledger({
                 <span className="col-start-1 row-start-2 flex flex-col gap-0.5 lg:contents">
                   {everyone ? (
                     <span className="shrink-0 lg:order-1 lg:w-32">
-                      {mover === null ? DASH : <TeamPlate teamId={mover} name={names[mover]} />}
+                      {mover === null ? DASH : <TeamPlate teamId={mover} name={nameOf(mover)} />}
                     </span>
                   ) : (
                     kind
@@ -83,7 +83,7 @@ export default function Ledger({
                         <span className="flex flex-col items-stretch gap-0.5">
                           {/* The desk's With head, said on the phone: two plates flush read as one side (UX-8). */}
                           <span className={`text-center ${LABEL} lg:hidden`}>With</span>
-                          <TeamPlate teamId={partners[0]} name={names[partners[0]]} />
+                          <TeamPlate teamId={partners[0]} name={nameOf(partners[0])} />
                           {partners.length > 1 ? (
                             <span className="text-center text-2xs text-faint">+{partners.length - 1}</span>
                           ) : null}
@@ -183,7 +183,7 @@ function Day({ stamp, weekday }: { stamp: string | null; weekday: boolean }) {
 }
 
 /** A team as a plate in its own colour, keyed on the id the deal carries: a trade's other side, or the league's mover. */
-function TeamPlate({ teamId, name }: { teamId: string; name: string | undefined }) {
+function TeamPlate({ teamId, name }: { teamId: string; name: string }) {
   const colours = teamColours(teamId);
   return (
     <span
@@ -192,7 +192,7 @@ function TeamPlate({ teamId, name }: { teamId: string; name: string | undefined 
     >
       {/* A manager who has left the league still has an id on the row. The league's short name under a thumb, where
           the full one ran out of plate ("DOMEITALYC…"); the desk has the room. */}
-      {name === undefined ? "Unknown" : <TeamName teamId={teamId} name={name} />}
+      {name === DASH ? "Unknown" : <TeamName teamId={teamId} name={name} />}
     </span>
   );
 }

@@ -11,6 +11,7 @@ import { BLOCK_PLATE, QUIET_NOTE } from "../../desk";
 import { readDeals } from "../../business";
 import { fantraxPage } from "../../fantraxPages";
 import { leagueInfo } from "../../round";
+import { named } from "../../components/gazette/named";
 import { teamHref } from "../../squad/routes";
 import { LEAGUE_CAPTION, titled } from "../../titles";
 import { readWaivers } from "../../waivers";
@@ -39,7 +40,7 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
   const [{ show }, waivers, info, feed] = await Promise.all([searchParams, readWaivers(), leagueInfo(), readDeals()]);
   const shown = show === "last" ? "last" : "order";
   // Every team's name by id: a deal's own copy goes stale when a manager renames.
-  const names: Record<string, string> = Object.fromEntries((info?.teams ?? []).map((team) => [team.teamId, team.name]));
+  const nameOf = named(info?.teams ?? []);
   const run = lastWaiverRun(deals(feed.rows));
   const ranAt = run[0]?.processedAt ?? null;
 
@@ -74,7 +75,7 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
                 place: ordinal(place),
                 name: (
                   <StandingsName>
-                    <TeamName teamId={teamId} name={names[teamId] ?? ""} />
+                    <TeamName teamId={teamId} name={nameOf(teamId)} />
                   </StandingsName>
                 ),
                 href: teamHref(teamId),
@@ -90,7 +91,7 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
           {run.length === 0 ? (
             <p className={`${QUIET_NOTE} p-2`}>No claims off waivers yet</p>
           ) : (
-            <Ledger deals={run} names={names} />
+            <Ledger deals={run} nameOf={nameOf} />
           )}
         </section>
       </div>

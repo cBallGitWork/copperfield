@@ -1,5 +1,5 @@
 import TabEmpty from "../../../components/league/TabEmpty";
-import { deals } from "@epl/core";
+import { deals, DASH } from "@epl/core";
 import TeamShell from "../Shell";
 import { leagueTeams } from "../team";
 import { readDeals } from "../../../business";
@@ -39,7 +39,7 @@ export default async function TransfersPage({
       {his.length === 0 ? (
         <TabEmpty>{team.teamName} has made no moves this season.</TabEmpty>
       ) : (
-        <Ledger deals={his} teamId={teamId} names={names} />
+        <Ledger deals={his} teamId={teamId} nameOf={(id) => names[id] ?? DASH} />
       )}
     </TeamShell>
   );

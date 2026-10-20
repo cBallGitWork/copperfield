@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { Deal, DealSide } from "@epl/core";
 import Ledger from "./Ledger";
+import { named } from "../gazette/named";
 
 vi.mock("next/image", () => ({ default: (props: object) => createElement("img", props) }));
 vi.mock("@/app/desk", () => import("../../desk"));
@@ -28,7 +29,7 @@ const WAIVER: Deal = {
 };
 
 const render = (teamId?: string) =>
-  renderToStaticMarkup(createElement(Ledger, { deals: [WAIVER], names: { [BEEF]: "Cowthenbeef" }, ...(teamId ? { teamId } : {}) }));
+  renderToStaticMarkup(createElement(Ledger, { deals: [WAIVER], nameOf: named([{ teamId: BEEF, name: "Cowthenbeef" }]), ...(teamId ? { teamId } : {}) }));
 
 /** The words in the phone's two cells left of the names: row one beside In, row two beside Out. */
 function cells(html: string): string[] {
@@ -49,8 +50,12 @@ describe("a transfer under a thumb (Craig, 19 Oct 2026: two rows, not three)", (
   it("names a trade's partner as who he dealt with, apart from the mover's plate (UX-8)", () => {
     const TRUFFLES = "aekx2715mtzgcl3f";
     const trade: Deal = { ...WAIVER, setId: "t1", kind: "trade", inbound: [man("Jeremy Doku", BEEF), man("Eberechi Eze", TRUFFLES)], outbound: [] };
-    const html = renderToStaticMarkup(createElement(Ledger, { deals: [trade], names: { [BEEF]: "Cowthenbeef", [TRUFFLES]: "The Truffle Pigs" } }));
+    const html = renderToStaticMarkup(createElement(Ledger, { deals: [trade], nameOf: named([{ teamId: BEEF, name: "Cowthenbeef" }, { teamId: TRUFFLES, name: "The Truffle Pigs" }]) }));
     expect(cells(html)[1]).toBe("Beef Cowthenbeef With Truffles The Truffle Pigs");
+  });
+
+  it("still says Unknown for a manager the league no longer lists", () => {
+    expect(renderToStaticMarkup(createElement(Ledger, { deals: [WAIVER], nameOf: named([]) }))).toContain(">Unknown<");
   });
 
   it("keeps a team's own date over its type, weekday and all", () => {

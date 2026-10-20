@@ -29,6 +29,7 @@ import { MINOR_LABEL, ROW_NAME } from "@/app/desk";
 import { teamHref } from "@/app/squad/routes";
 import FantraxSilent from "../../components/shell/FantraxSilent";
 import TeamName from "../../components/league/TeamName";
+import { named } from "../../components/gazette/named";
 import { LEAGUE_CAPTION, titled } from "../../titles";
 
 // Every team against one group of scoring categories, ordered by the head pressed: CM's stat board on fantasy data.
@@ -74,7 +75,7 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
   const board = rankBy(columns, lines, category, measure);
   const places = printedPlaces(board);
   // The league's own names, which stand when the standings do not.
-  const named = new Map(info.teams.map((team) => [team.teamId, team.name]));
+  const nameOf = named(info.teams);
   const groupLabel = columns.map((entry) => entry.label).join(", ");
 
   return (
@@ -108,7 +109,7 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
               of: (row) => (
                 <Link href={teamHref(row.teamId)} className={`${TIGHT_ROW} px-1.5 hover:underline ${yoursInk(row.teamId === mine)}`}>
                   <span className={`min-w-0 truncate ${ROW_NAME}`}>
-                    <TeamName teamId={row.teamId} name={named.get(row.teamId) ?? row.teamId} />
+                    <TeamName teamId={row.teamId} name={nameOf(row.teamId)} />
                   </span>
                 </Link>
               ),
