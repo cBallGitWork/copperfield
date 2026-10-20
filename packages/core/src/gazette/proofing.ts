@@ -1,3 +1,4 @@
+import { banned } from "./banned";
 import type { Fault, Report } from "./fault";
 import { masked, numbersIn } from "./predictions/prose";
 
@@ -5,6 +6,11 @@ import { masked, numbersIn } from "./predictions/prose";
 
 /** Where a fact came from stays off the page: every desk refuses these names, run on blanked text. */
 export const SOURCE_NAMES: readonly string[] = ["Fantrax", "FPL", "SofaScore", "Understat", "Opta", "our model"];
+
+/** A hard fault for each source `blankedText` names. */
+export function sourceFaults(fault: Report, section: string, blankedText: string): void {
+  for (const word of banned(blankedText, SOURCE_NAMES)) fault(section, "names a source or a percentage", "hard", word);
+}
 
 /** Faults `text` on the first match of `pattern`, quoting it; nothing when it does not match. */
 export function faultOn(fault: Report, section: string, check: string, severity: Fault["severity"], pattern: RegExp, text: string): void {
