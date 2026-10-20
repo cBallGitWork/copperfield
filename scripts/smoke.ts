@@ -122,7 +122,8 @@ async function main() {
     console.log(`✓ served league  ${name}\n`);
   }
 
-  const failures: string[] = [];
+  // Routes with any problem, counted once each however many problems they have.
+  let failed = 0;
 
   for (const [at, path] of paths.entries()) {
     if (at > 0 && PACE_MS > 0) await new Promise((resolve) => setTimeout(resolve, PACE_MS));
@@ -141,7 +142,7 @@ async function main() {
     }
 
     if (!res.ok) {
-      failures.push(`${path} → ${res.status}`);
+      failed++;
       console.log(`✗ ${path}  ${res.status}`);
       continue;
     }
@@ -179,7 +180,7 @@ async function main() {
       console.log(`✓ ${path}`);
       continue;
     }
-    for (const problem of problems) failures.push(`${path} — ${problem}`);
+    failed++;
     console.log(`✗ ${path}`);
     for (const problem of problems) console.log(`    ${problem}`);
   }
@@ -189,13 +190,13 @@ async function main() {
     const res = await fetch(`${BASE}${feed.path}`, { redirect: "follow" });
     await res.body?.cancel();
     const problems = feedProblems(feed, res.status, res.headers.get("content-type"));
-    for (const problem of problems) failures.push(`${feed.path} — ${problem}`);
+    if (problems.length > 0) failed++;
     console.log(problems.length === 0 ? `✓ ${feed.path}  ${res.status}` : `✗ ${feed.path}  ${problems.join("; ")}`);
   }
 
   const walked = paths.length + FEEDS.length;
-  console.log(`\n${walked - failures.length}/${walked} routes clean.`);
-  if (failures.length > 0) process.exitCode = 1;
+  console.log(`\n${walked - failed}/${walked} routes clean.`);
+  if (failed > 0) process.exitCode = 1;
 }
 
 // Not awaited: these scripts transpile to CJS, and a rejection should crash the run loudly.
