@@ -12,18 +12,25 @@ import {
 } from "@epl/core";
 import { now } from "./clock";
 import { leagueCache } from "./leagueCache";
-import { refusedAs } from "./refusals";
+import { type Unavailable, refusedAs, unavailable } from "./refusals";
 import { seasonKickoffs } from "./football";
 
 // The competition's own description of itself, and which round of it a screen is about.
 // Nothing here reads a roster: `squads.ts` imports this module, never the reverse.
 
-/** The competition's own description of itself, or null when Fantrax refuses: no calendar then,
- *  so squads only, never an XI we cannot prove may be shown. */
-export const leagueInfo = leagueCache("league-info",
-  (): Promise<LeagueInfo | null> => refusedAs(fetchLeagueInfo(FANTRAX_LEAGUE_ID), () => null, mapLeagueInfo),
-  () => null,
+/** The competition's own description of itself, or its refusal with the tell: one read for every reader of the served
+ *  league. Its key is new, as "league-info" and "schedule-info" held other shapes. */
+export const leagueOrRefusal = leagueCache("league-described",
+  (): Promise<LeagueInfo | Unavailable> => refusedAs(fetchLeagueInfo(FANTRAX_LEAGUE_ID), unavailable, mapLeagueInfo),
+  unavailable,
 );
+
+/** The same, or null when Fantrax refuses: no calendar then, so squads only, never an XI we cannot prove may be shown.
+ *  No cache of its own, so it nests in none. */
+export async function leagueInfo(): Promise<LeagueInfo | null> {
+  const info = await leagueOrRefusal();
+  return "unavailable" in info ? null : info;
+}
 
 /** A round other than Fantrax's current one: the gameweek asks FPL, the period asks Fantrax. */
 export interface Round {
