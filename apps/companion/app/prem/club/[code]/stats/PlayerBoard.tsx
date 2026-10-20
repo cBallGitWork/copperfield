@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import NameLink from "../NameLink";
-import { fullFootballerName, type FootballPlayer } from "@epl/core";
+import { DASH, fullFootballerName, type FootballPlayer } from "@epl/core";
 import { SELECT } from "../../../../components/shell/ButtonLink";
 import { VIEWS, reading } from "./measures";
 import { MINOR_LABEL, PANEL_FLUSH } from "@/app/desk";
@@ -23,6 +23,19 @@ export interface Row {
   href: string | null;
 }
 
+/** A man with no minutes, whose noughts are no reading: a dash, and under the rest whichever way a column sorts. */
+const unplayed = (row: Row) => row.player.season.minutes <= 0;
+
+/** A column's order, most first or least, with the men who have not played always last. */
+export function unplayedLast(key: keyof FootballPlayer["season"], descending: boolean) {
+  return (a: Row, b: Row): number => {
+    const gap = Number(unplayed(a)) - Number(unplayed(b));
+    if (gap !== 0) return gap;
+    const [x, y] = [a.player.season[key], b.player.season[key]];
+    return descending ? y - x : x - y;
+  };
+}
+
 export default function PlayerBoard({ rows }: { rows: readonly Row[] }) {
   const [view, setView] = useState(VIEWS[0]?.key ?? "attack");
   // Null keeps the page's order, keeper first by our league's position, rather than a default sort.
@@ -33,7 +46,7 @@ export default function PlayerBoard({ rows }: { rows: readonly Row[] }) {
   const shown = VIEWS.find((entry) => entry.key === view);
   const measures = shown?.measures ?? [];
   // Each column's standouts among the men who have played, as a match board lights them.
-  const played = rows.filter((row) => row.player.season.minutes > 0).length;
+  const played = rows.filter((row) => !unplayed(row)).length;
   const cuts = new Map(
     measures.map((measure) => [
       measure.key,
@@ -43,10 +56,7 @@ export default function PlayerBoard({ rows }: { rows: readonly Row[] }) {
 
   const ordered = useMemo(() => {
     if (sort === null) return [...rows];
-    return [...rows].sort((a, b) => {
-      const [x, y] = [a.player.season[sort.key], b.player.season[sort.key]];
-      return sort.descending ? y - x : x - y;
-    });
+    return [...rows].sort(unplayedLast(sort.key, sort.descending));
   }, [rows, sort]);
 
   /** Tapping a head sorts by it, most first; tapping the sorted one turns it round. */
@@ -103,7 +113,10 @@ export default function PlayerBoard({ rows }: { rows: readonly Row[] }) {
           key: measure.key,
           head: measure.head,
           title: measure.label,
-          cell: ({ player }: Row) => {
+          cell: (row: Row) => {
+            // His minutes are the one reading a man who has not played has: a nought there is the fact itself.
+            if (measure.key !== "minutes" && unplayed(row)) return { value: DASH, className: "text-faint" };
+            const { player } = row;
             const value = player.season[measure.key];
             const ink = standoutInk(value, cuts.get(measure.key), measure.worse ? "low" : "high");
             return { value: reading(measure, value), className: ink || (value === 0 ? "text-muted" : "text-ink") };
