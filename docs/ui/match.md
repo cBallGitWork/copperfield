@@ -51,20 +51,23 @@ for every shape decision below.
 2. **The strip** — `Overview · Stats · Line-ups · Highlights`. Four, and the reason is below. **Line-ups, the house spelling** (16 Oct 2026, review N30: the app printed Line Ups, LINE-UPS and lineup). **Highlights greys on
    a match with no video** (`TabStrip`'s `dim`, off `matchVideo`, the read the tab plays), and stays in its place:
    46 of 60 played matches had none on 16 Oct 2026, each a tap to "No highlights".
-3. **The caption — the GROUND, on the Overview only.** `cm9900/21.jpg` runs
-   "Goodison Park, Liverpool" along the foot of every match screen and
-   `cm0102/02.jpg` puts "St.James's Park, Newcastle" in the yellow caption at the
-   top. The strip already names the view, so a caption repeating it said nothing.
-   It was under all five tabs until 11 Sep 2026 (Craig: *"stadium name and ref
-   row only show on overview page"*) — the other four are TABLES, and a table
-   pushed down by a ground it did not ask for has paid a row of a phone's screen
-   for a fact already read. **The referee and attendance line under the panel is
-   gone altogether** (Craig, 23 Sep 2026: *"remove that ref row and attendance"*).
-4. **The panel** — the date in full at the left, the round, the tense and the
+3. **The ground, on the Overview only, on the dated line.** The panel's head reads
+   `MON 19 OCT · Tottenham Hotspur Stadium` at the left, the ground in its own case and
+   without its town, where it once had a yellow caption of its own (Craig, 4 Sep 2026: the
+   Overview names the ground). Merged on 20 Oct 2026 (review M-LIVE-10): two strips said where
+   and when, and the caption cost 44px above the first scorer. Too long for one line, the
+   ground drops whole under the date. With no ground known the date stands alone; the right
+   half already names the gameweek. It was under all five tabs until 11 Sep 2026 (Craig:
+   *"stadium name and ref row only show on overview page"*) — the other four are TABLES, and a
+   table pushed down by a ground it did not ask for has paid a row of a phone's screen for a
+   fact already read. **The referee and attendance line under the panel is gone altogether**
+   (Craig, 23 Sep 2026: *"remove that ref row and attendance"*).
+4. **The panel** — the date and the ground at the left, the round, the tense and the
    half-time score at the right **in cyan**, then either the scoresheet or the
    preview. Under it, the **Match Report** — the commentary under a blue bar, run
    the page's full length rather than in a box of its own (Craig, 23 Sep 2026: *"we
-   have a browser scroll AND a match report scroll"*).
+   have a browser scroll AND a match report scroll"*). On a phone a plate row,
+   `Key moments · Full commentary`, stands where the bar was; see the report section.
 5. **The foot row** — CM's related-screens strip (`cm0102/02.jpg`), under the
    panel on Stats (`Brentford · Match · Chelsea · Fantasy`; club codes under a thumb, `BRE · MATCH · CHE ·
    FANTASY`, as `ClubLabel` picks, so no plate wraps at 320–430; review, 20 Oct 2026) and Line-ups (`Team Sheet ·
@@ -346,6 +349,13 @@ It was a second line under every name — two rows of chrome for one man, on the
 screen with the fewest facts in the app — and a league team name is a gloss on
 the name it follows rather than a fact of its own.
 
+**On a phone the bracket gives way first, then the name wraps.** At 390 `R. Sessegnon (Dome)` drew as
+`R. Sessegn…`, and with the bracket cut it still drew `R. Sesseg…` at 320. Type never shrinks (DESIGN §8), so a
+name too long for its half takes a second line below `lg`; the desk still cuts it (20 Oct 2026). The minute
+wraps first: below `lg` the row wraps and the name block is sized by the name alone, so `90+4'` drops under
+`R. Sessegnon` rather than squeeze it to `R.` / `Sesseg` / `non`. A name breaks only at a space, and a lone
+word wider than the half ends `…`.
+
 **The assister carries a minute only when a second assister makes it say
 something.** This went round the houses in one afternoon and the landing place is
 the rule, not the history: one assister and POSITION already answers it — he sits
@@ -502,7 +512,7 @@ answered honestly before they all went. The one slow read is Fantrax, so it stre
 |---|---|---|
 | `/prem/match/[id]` | `page.tsx` | the scoresheet or the preview, and the league panel |
 | `…/players` | `players/page.tsx` | both team sheets, by bps |
-| — | `Shell.tsx` | the back plate, the bar, the strip, the foot row slot, and — on the Overview alone — the ground caption |
+| — | `Shell.tsx` | the back plate, the bar, the strip and the foot row slot |
 | — | `MatchBar.tsx` | the two-plate header |
 | — | `MatchTabs.tsx` | the strip |
 | — | `Scoresheet.tsx` | who was named |
@@ -609,6 +619,17 @@ its fouls with a match between them.
 The emptiness test on the Report tab is asked of the WHOLE feed, not the filtered
 one: a match with commentary but no incident outside the fouls still has
 commentary, and "no commentary" would be the wrong sentence.
+
+**A phone opens on the key moments** (review M-LIVE-1, 20 Oct 2026). Tottenham 3-1 Coventry's report was
+63 rows over four screens at 390: 24 shots, which Action Zones lists with their xG, 8 corners, 6 delays and 2
+added-time notices, against the 4 goals, 4 bookings, 10 changes and the whistles a reader came for. `keyMoments`
+(core, beside `worthReading`) keeps goals, penalties, cards, VAR, changes, injuries and the whistles, 23 rows there.
+A plate row, `Key moments · Full commentary` (`?report=full`, replacing history), takes the bar's place on a
+phone; both views run the page's length. The desk keeps the one list without fouls, under the bar.
+
+**The feed sorts by period, then the clock.** Opta's clock restarts at 45:00, so 45+4 (2,910s) outranked
+46' (2,700s), and it stamps `Match ends` at the first minute; `plCommentary` reads the period off the label and
+gives `Match ends` the clock of the last whistle under it (`90+7′`, not `1′`).
 
 `Commentary.tsx` is the row both screens draw. Two callers rather than three, so
 CODE_RULES §1 would leave it duplicated — and would, if what was duplicated were

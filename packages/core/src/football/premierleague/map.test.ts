@@ -3,7 +3,10 @@ import recordedFixture from "../__fixtures__/plFixture.json";
 import recordedRound from "../__fixtures__/plRound.json";
 import recordedStats from "../__fixtures__/plMatchStats.json";
 import recordedStreams from "../__fixtures__/plTextstream.json";
+import assistStreams from "../__fixtures__/plTextstreamAssists.json";
+import spursVillaStream from "../__fixtures__/plTextstreamSpursVilla.json";
 import {
+  keyMoments,
   mapRoundGoals,
   plFixtureCode,
   plCommentary,
@@ -45,9 +48,37 @@ describe("plCommentary", () => {
     expect(kinds.has("goal")).toBe(true);
   });
 
-  it("runs newest first", () => {
-    const seconds = lines.map((line) => line.seconds);
-    expect([...seconds].sort((a, b) => b - a)).toEqual(seconds);
+  it("runs newest first within each half", () => {
+    const split = lines.findIndex((line) => line.text.startsWith("Second Half begins"));
+    for (const half of [lines.slice(1, split + 1), lines.slice(split + 1)]) {
+      const seconds = half.map((line) => line.seconds);
+      expect([...seconds].sort((a, b) => b - a)).toEqual(seconds);
+    }
+  });
+
+  it("puts the second half above the first half's added time, though its clock reads less", () => {
+    // Opta's clock restarts at 45:00 for the second half, so 45+4 (2910s) outranks 46' (2700s).
+    const at = (text: string) => lines.findIndex((line) => line.text.startsWith(text));
+    expect(at("Second Half begins")).toBeGreaterThan(-1);
+    expect(at("Second Half begins")).toBeLessThan(at("First Half ends"));
+  });
+
+  it("tops the feed with 'Match ends' at the last whistle's minute, not Opta's first-minute stamp", () => {
+    expect(lines[0].type).toBe("end 14");
+    expect(lines[1].text.startsWith("Second Half ends")).toBe(true);
+    expect(lines[0].minute).toBe(lines[1].minute);
+    expect(lines[0].seconds).toBe(lines[1].seconds);
+  });
+
+  it("leaves a lone 'Match ends' as Opta stamped it", () => {
+    const [end] = plCommentary([{ id: 1, type: "end 14", text: "Match ends", time: { label: "1", secs: 0 } }]);
+    expect(end.minute).toBe("1");
+  });
+
+  it("orders extra time after the second half", () => {
+    const at = (label: string, secs: number, id: number) => ({ id, type: "x", text: "t", time: { label, secs } });
+    const order = plCommentary([at("90+3", 5580, 1), at("91", 5400, 2), at("105+1", 6360, 3), at("106", 6300, 4)]);
+    expect(order.map((line) => line.id)).toEqual([4, 3, 2, 1]);
   });
 
   it("drops an event it cannot place in the match", () => {
@@ -194,3 +225,32 @@ describe("worthReading, against the recorded match", () => {
     expect(worthReading([])).toEqual([]);
   });
 });
+
+describe("keyMoments, against every recorded match", () => {
+  const feeds = [recordedStreams, assistStreams, spursVillaStream].flatMap(
+    (recorded) => recorded as unknown as RawPlTextstream[],
+  );
+
+  it("never drops a goal, a card, a change, a penalty or a whistle", () => {
+    const loud = /goal|card|substitution|penalty|^start$|^end \d+$/;
+    for (const feed of feeds) {
+      const lines = plCommentary(feed.events.content);
+      expect(keyMoments(lines)).toEqual(lines.filter((line) => loud.test(line.type) || KEPT_ELSE.has(line.type)));
+    }
+  });
+
+  it("leaves out the shots, corners, delays and added time", () => {
+    const kept = new Set(feeds.flatMap((feed) => keyMoments(plCommentary(feed.events.content))).map((line) => line.type));
+    for (const type of ["miss", "attempt saved", "attempt blocked", "corner", "start delay", "end delay", "added time"]) {
+      expect(kept.has(type)).toBe(false);
+    }
+  });
+
+  it("keeps a penalty missed, which Opta files as a plain miss", () => {
+    const line = { id: 1, type: "miss", minute: "30", seconds: 1800, text: "Penalty missed! Bad penalty by X." };
+    expect(keyMoments([line])).toEqual([line]);
+  });
+});
+
+/** The two key types whose name says nothing loud: a VAR review and a man retired hurt. */
+const KEPT_ELSE: ReadonlySet<string> = new Set(["contentious referee decisions", "player retired"]);

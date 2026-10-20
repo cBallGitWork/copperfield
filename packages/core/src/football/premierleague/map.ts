@@ -38,7 +38,7 @@ export function worthReading(lines: readonly PlCommentaryLine[]): PlCommentaryLi
   return lines.filter((line) => !SKIPPED_TYPES.has(line.type));
 }
 
-/** Opta's whole commentary for one match, newest first; an event with no time or no text is dropped. */
+/** Opta's whole commentary for one match, newest first by period then clock; a line with no time or text is dropped. */
 export function plCommentary(events: readonly RawPlEvent[]): PlCommentaryLine[] {
   const lines: PlCommentaryLine[] = [];
   for (const event of events) {
@@ -48,7 +48,11 @@ export function plCommentary(events: readonly RawPlEvent[]): PlCommentaryLine[] 
     if (event.text.trim().length === 0) continue;
     lines.push({ id: event.id, type: event.type, minute, seconds, text: event.text });
   }
-  return lines.sort((a, b) => b.seconds - a.seconds);
+  const sorted = lines.sort((a, b) => period(b) - period(a) || b.seconds - a.seconds);
+  // Opta stamps the final whistle at the first minute; it takes the clock of the last line before it.
+  const [end, last] = sorted;
+  if (end?.type === MATCH_ENDS && last !== undefined) sorted[0] = { ...end, minute: last.minute, seconds: last.seconds };
+  return sorted;
 }
 
 /** Every goal in a gameweek from the one read that carries them all, as `MatchEvent` with a synthesised id.
@@ -116,4 +120,36 @@ export function plMatchMetrics(
 /** A moment `secs` into a match as epoch ms, the only order across fixtures; null without a kick-off time. */
 function wallClock(kickoffMillis: number | null | undefined, secs: number): number | null {
   return kickoffMillis == null ? null : kickoffMillis + secs * 1000;
+}
+
+/** Opta's code for the final whistle. */
+const MATCH_ENDS = "end 14";
+
+/** The last minute of each period before its added time: football's, so a constant. */
+const PERIOD_ENDS = [45, 90, 105, 120];
+
+/** Which period a line falls in, off its label: `45+4` is the first half, `46` the second; `Match ends` is last. */
+function period(line: PlCommentaryLine): number {
+  if (line.type === MATCH_ENDS) return Infinity;
+  const minute = Number.parseInt(line.minute, 10);
+  const at = PERIOD_ENDS.findIndex((end) => minute <= end);
+  return at === -1 ? PERIOD_ENDS.length : at;
+}
+
+/** What a reader opens a report for: goals, penalties, cards, VAR, changes and injuries, and the whistles.
+ *  Shots, corners, delays and added time stay out: Action Zones owns the shots. */
+const KEY_TYPES: ReadonlySet<string> = new Set([
+  "goal", "penalty goal", "own goal", "VAR cancelled goal", "contentious referee decisions",
+  "penalty won", "penalty lost", "penalty saved",
+  "yellow card", "secondyellow card", "red card",
+  "substitution", "player retired",
+  "start", "end 1", "end 2", "end 14",
+]);
+
+/** Opta files a penalty miss as `miss` or `post`; only its sentence says so. */
+const PENALTY_MISSED = /^Penalty missed!/;
+
+/** The key moments of a match, in the feed's order; a phone opens its report on these. */
+export function keyMoments(lines: readonly PlCommentaryLine[]): PlCommentaryLine[] {
+  return lines.filter((line) => KEY_TYPES.has(line.type) || PENALTY_MISSED.test(line.text));
 }
