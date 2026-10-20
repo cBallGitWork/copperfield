@@ -6,9 +6,7 @@ import Nothing from "./components/shell/Nothing";
 export default function NotFound() {
   return (
     <div className="cm-panel flex flex-col items-center px-6 pb-10">
-      <Nothing title="Nothing at that address" code="404" page>
-        No club, player, gameweek or team goes by that name here.
-      </Nothing>
+      <Nothing title="Nothing at that address" code="404" page />
       <ButtonLink href="/">The front page</ButtonLink>
     </div>
   );
