@@ -61,8 +61,7 @@ describe("plManMatches", () => {
   });
 
   it("drops the added-time half of a minute", () => {
-    // On at "90+2'00". A 92nd-minute substitution is a 90th-minute one on any
-    // teleprinter, and `Number.parseInt` stopping at the `+` is the whole rule.
+    // On at "90+2'00". The minute arithmetic reads stays 90; the 2 rides beside it in `added`.
     expect(of(DOMINGUEZ)?.onAt).toBe(90);
   });
 
@@ -85,6 +84,23 @@ describe("plManMatches", () => {
     ]);
     expect(map.get(NDOYE + 1_000_000)?.sentOff).toBe(40);
     expect(map.get(NDOYE + 1_000_000)?.booked).toBeNull();
+  });
+
+  it("keeps a sending off's added time beside its minute", () => {
+    // Review: /prem/match/65 printed a 90+4'00 red at 90' under a report saying 90+4'.
+    const map = synthetic([
+      { type: "B", description: "R", personId: NDOYE, clock: { secs: 5640, label: "90+4'00" } },
+    ]);
+    expect(map.get(NDOYE + 1_000_000)?.sentOff).toBe(90);
+    expect(map.get(NDOYE + 1_000_000)?.added).toEqual({ sentOff: 4 });
+  });
+
+  it("carries no added time for a minute inside the ninety", () => {
+    expect(of(ARAUJO)?.added).toBeUndefined();
+  });
+
+  it("keeps a substitution's added time beside its minute", () => {
+    expect(of(DOMINGUEZ)?.added).toEqual({ onAt: 2 });
   });
 
   it("keeps both when a man is booked and later sent off", () => {

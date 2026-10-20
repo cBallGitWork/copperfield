@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "@/app/components/shell/Link";
 import {
   type Club,
   type Fixture,
@@ -18,10 +19,13 @@ import {
   DASH,
 } from "@epl/core";
 import { chipsFor } from "../league/Chips";
-import { yoursBorder } from "../../mine";
+import { yoursBorder, yoursEdge } from "../../mine";
 import { ROW_NAME } from "@/app/desk";
 import PlayerName from "../shell/PlayerName";
+import Scoreline from "../shell/Scoreline";
+import LiveMark from "../shell/LiveMark";
 import PlayerPortrait from "./PlayerPortrait";
+import { matchHref } from "../../prem/match/[id]/matchRoutes";
 
 // The matchday list: each fixture is a native <details>, so the drop-down needs no JavaScript.
 
@@ -59,6 +63,7 @@ export default function MatchList({
             fixture={f}
             clubs={clubs}
             snapshot={snapshot}
+            reader={mine !== undefined}
             yours={mine?.get(f.id)}
             owners={owners}
             now={now}
@@ -69,10 +74,14 @@ export default function MatchList({
   );
 }
 
+/** The count's column, held on every row of a reader's list so the scores stay in line, as Prem's is. */
+const COUNT = "numeric flex w-12 shrink-0 justify-end text-2xs font-semibold text-accent";
+
 function MatchRow({
   fixture,
   clubs,
   snapshot,
+  reader,
   yours,
   owners,
   now,
@@ -80,6 +89,8 @@ function MatchRow({
   fixture: Fixture;
   clubs: Map<number, Club>;
   snapshot: FootballSnapshot;
+  /** A reader holding anyone, so every row keeps the count's column and an edge's width. */
+  reader: boolean;
   /** His players in this match, or undefined when there are none. */
   yours?: FootballPlayer[];
   owners?: Map<number, PlayerOwner>;
@@ -93,7 +104,9 @@ function MatchRow({
 
   return (
     <details
-      className={`group overflow-hidden ${yoursBorder(yours !== undefined)}`}
+      className={`group overflow-hidden ${
+        reader ? `border-line ${yoursEdge(yours !== undefined)}` : yoursBorder(false)
+      }`}
     >
       <summary
         className="flex cursor-pointer list-none items-center gap-3 px-3 py-2.5 transition-colors duration-150 hover:bg-raised [&::-webkit-details-marker]:hidden"
@@ -103,11 +116,7 @@ function MatchRow({
         <ScoreBlock fixture={fixture} now={now} />
         <ClubSide club={away} align="end" />
         {/* Counted rather than tinted: a wash on every row marks no row. */}
-        {yours ? (
-          <span className="numeric shrink-0 text-2xs font-semibold text-accent">
-            {yours.length} yours
-          </span>
-        ) : null}
+        {reader ? <span className={COUNT}>{yours ? `${yours.length} yours` : null}</span> : null}
         <svg
           aria-hidden
           viewBox="0 0 24 24"
@@ -166,6 +175,16 @@ function MatchRow({
             })}
           </ul>
         )}
+        {/* In the body, not the summary, so a tap on the row still only opens it. */}
+        <Link
+          href={matchHref(fixture.id, "overview")}
+          className="mt-1 flex min-h-11 items-center justify-end gap-1 text-xs font-semibold text-muted hover:text-ink lg:min-h-9"
+        >
+          Match
+          <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
       </div>
     </details>
   );
@@ -203,15 +222,17 @@ function ScoreBlock({ fixture, now }: { fixture: Fixture; now: boolean }) {
 
   return (
     <span className="flex shrink-0 flex-col items-center gap-0.5">
-      <span className={`numeric text-lg font-bold leading-none ${live ? "text-ink" : ""}`}>
-        {played ? `${fixture.homeScore}–${fixture.awayScore}` : kickoffAt(fixture.kickoff)}
+      {/* The score in the reading cyan and CM's colon, as Prem's results row prints it. */}
+      <span className={`numeric text-lg font-bold leading-none ${played ? "text-info" : live ? "text-ink" : ""}`}>
+        {played ? (
+          <Scoreline home={fixture.homeScore} away={fixture.awayScore} rule="px-px text-muted" />
+        ) : (
+          kickoffAt(fixture.kickoff)
+        )}
       </span>
       {/* State never rides on colour alone — the dot is always paired with a word. */}
       {live ? (
-        <span className={`${STATE} flex items-center gap-1 text-live`}>
-          <span className="live-dot" />
-          Live {fixture.minutes}′
-        </span>
+        <LiveMark className={`${STATE} gap-1 text-live`}> {fixture.minutes}′</LiveMark>
       ) : fixture.status === "finished" ? (
         <span className={`${STATE} text-faint`}>FT</span>
       ) : fixture.kickoff !== null ? (

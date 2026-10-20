@@ -1,10 +1,12 @@
-import Link from "@/app/components/shell/Link";
 import ButtonLink from "../shell/ButtonLink";
 import PageHeader from "../shell/PageHeader";
+import RoundHead from "../shell/RoundHead";
+import LiveMark from "../shell/LiveMark";
 import {
   type FootballPlayer,
   type FootballSnapshot,
   type PlayerOwner,
+  COMPETITION_NAME,
   adjacentGameweeks,
   isMatchdayLive,
   londonDayAndTime,
@@ -38,21 +40,19 @@ export default function GameweekView({
   const { previous, next } = adjacentGameweeks(snapshot);
   return (
     <div className="flex flex-col gap-2">
-      <PageHeader
-        title={`Gameweek ${snapshot.gameweek}`}
-        competition
-        back={premFixturesHref(snapshot.gameweek)}
-        sub={
-          live ? (
-            <span className="flex items-center gap-1.5 text-live">
-              <span className="live-dot" />
-              LIVE
-            </span>
-          ) : locksAt ? (
-            `Line-ups lock ${londonDayAndTime(locksAt)}`
-          ) : undefined
-        }
-      />
+      {/* The competition's plate, as Prem's screens wear it; the gameweek is the plate's below. */}
+      <PageHeader title={COMPETITION_NAME} competition back={premFixturesHref(snapshot.gameweek)} />
+
+      <RoundHead gameweek={snapshot.gameweek} step={{ previous, next, href: gameweekHref }}>
+        {/* No `--color-live` on the light plate (1.39:1), as RoundHeader: the dot carries the colour. */}
+        {live ? (
+          <LiveMark className="shrink-0 gap-1.5" />
+        ) : locksAt ? (
+          <span className="truncate">
+            Line-ups lock <span className="numeric font-normal normal-case">{londonDayAndTime(locksAt)}</span>
+          </span>
+        ) : null}
+      </RoundHead>
 
       <section className={PANEL}>
         <MatchList snapshot={snapshot} mine={mine} owners={owners} now={speaksForNow(snapshot)} />
@@ -62,47 +62,7 @@ export default function GameweekView({
         </p>
       </section>
 
-      <nav aria-label="Gameweeks" className="flex items-center justify-between gap-3 text-sm">
-        <GameweekLink gameweek={previous} label="Previous" />
-        <GameweekLink gameweek={next} label="Next" align="end" />
-      </nav>
-
       <ButtonLink href={SQUAD}>Squads</ButtonLink>
-
     </div>
   );
 }
-
-/** A gameweek's link, or an inert placeholder at either end of the season so the other keeps its place. */
-function GameweekLink({
-  gameweek,
-  label,
-  align = "start",
-}: {
-  gameweek: number | null;
-  label: string;
-  align?: "start" | "end";
-}) {
-  const classes = `min-h-11 flex-1 px-3 py-2.5 lg:min-h-9 ${
-    align === "end" ? "text-right" : ""
-  }`;
-
-  // A flat outline, not a plate: only a gameweek you can reach looks pressable.
-  if (gameweek === null) {
-    return (
-      <span className={`${classes} border border-line text-faint opacity-40`}>{label}</span>
-    );
-  }
-
-  // The bevel owns its ink, so no `text-*` here: `--muted` on the grey plate is 1.5:1.
-  return (
-    <Link
-      href={gameweekHref(gameweek)}
-      className={`cm-bevel ${classes} font-medium hover:brightness-110`}
-    >
-      {label}
-      <span className="numeric"> · GW{gameweek}</span>
-    </Link>
-  );
-}
-

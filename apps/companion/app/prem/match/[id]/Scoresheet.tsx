@@ -3,6 +3,7 @@ import type { FootballPlayer, PlGoal, PlManMatch, PlayerOwner, SheetRow, SquadPl
 import { Goal, Man } from "./ScoreRows";
 import { MATCH_ROW } from "./matchRow";
 import { forCode } from "./sheetJoin";
+import { minuteMark } from "./minuteMark";
 
 // Who scored, when and who made it — CM's `cm0102/02.jpg`, home down the left and away down the right.
 // One line per SCORER with all his minutes (`goalGroups`), his assisters quieter under him; an assister carries a
@@ -81,8 +82,8 @@ function SheetSide({
         />
       ))}
       {rest.map(({ player, line }) => {
-        // A sending off outranks an injury, an injury a missed penalty. The fixture feed times the injury, so this
-        // sheet and Line Ups agree; the commentary only says he was hurt.
+        // A sending off outranks an injury, an injury a missed penalty. The fixture feed times the injury, added time
+        // and all, so this sheet and Line Ups agree; the commentary only says he was hurt.
         const man = forCode(did, player.code);
         const hurtAt =
           player.code === null || !injured.has(player.code)
@@ -96,7 +97,8 @@ function SheetSide({
               name={player.name}
               short={fullFootballerName(player)}
               owners={owners}
-              figure={marks(line, man, hurtAt)}
+              // The fixture feed's off minute carries its added time; the commentary's fallback does not.
+              figure={marks(line, man, hurtAt, man?.offAt == null ? undefined : man.added?.offAt)}
               glyph={line.redCards > 0 ? "card" : hurtAt === undefined ? null : "cross"}
               glyphTone="text-bad"
             />
@@ -112,11 +114,12 @@ function marks(
   line: SheetRow["line"],
   did: PlManMatch | undefined,
   hurtAt: number | undefined,
+  hurtAdded: number | undefined,
 ): string {
   const said: string[] = [];
   if (line.penaltiesSaved > 0) said.push("pen saved");
   if (line.penaltiesMissed > 0) said.push("pen missed");
-  if (line.redCards > 0) said.push(did?.sentOff == null ? "red" : `${did.sentOff}'`);
-  if (hurtAt !== undefined) said.push(`${hurtAt}'`);
+  if (line.redCards > 0) said.push(did?.sentOff == null ? "red" : minuteMark(did.sentOff, did.added?.sentOff));
+  if (hurtAt !== undefined) said.push(minuteMark(hurtAt, hurtAdded));
   return said.join(" · ");
 }

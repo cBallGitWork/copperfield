@@ -98,7 +98,7 @@ export default function ClubStats({
                     after={
                       <>
                         {man.captain ? <span className="shrink-0 text-2xs text-faint">(c)</span> : null}
-                        <SubNote onAt={did?.onAt} offAt={did?.offAt} hurt={hurt} className="hidden lg:inline" />
+                        <SubNote onAt={did?.onAt} offAt={did?.offAt} added={did?.added} hurt={hurt} className="hidden lg:inline" />
                       </>
                     }
                   />

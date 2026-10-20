@@ -70,7 +70,7 @@ export default function SheetRow({
               <>
                 {man.captain ? <span className="shrink-0 text-2xs text-faint">(c)</span> : null}
                 <OwnedBy owner={owner} className="shrink-0 truncate" />
-                <SubNote onAt={did?.onAt} offAt={did?.offAt} hurt={hurt} />
+                <SubNote onAt={did?.onAt} offAt={did?.offAt} added={did?.added} hurt={hurt} />
               </>
             }
           />
