@@ -77,3 +77,55 @@ describe("a transfer on a desk", () => {
     expect(render()).toContain("lg:line-clamp-2 lg:whitespace-normal");
   });
 });
+
+// Review M-LEAGUE-2 and M-SQUADS-5 (20 Oct 2026): the same date printed on every row, and names cut at 320.
+describe("a ledger grouped by day under a thumb", () => {
+  const THURSDAY: Deal = { ...WAIVER, setId: "w0", via: "free agency", processedAt: "Thu Oct 15, 2026, 3:00AM" };
+  const SECOND: Deal = { ...WAIVER, setId: "w2", processedAt: "Fri Oct 16, 2026, 1:00PM" };
+  const grouped = (teamId?: string) =>
+    renderToStaticMarkup(
+      createElement(Ledger, { deals: [SECOND, WAIVER, THURSDAY], groupByDay: true, nameOf: named([{ teamId: BEEF, name: "Cowthenbeef" }]), ...(teamId ? { teamId } : {}) }),
+    );
+  const headings = (html: string) => [...html.matchAll(/<li class="[^"]*lg:hidden[^"]*">([^<]*)<\/li>/g)].map((m) => m[1]);
+
+  it("heads each London day once, weekday and all, below the desk only", () => {
+    expect(headings(grouped())).toEqual(["Fri 16 Oct", "Thu 15 Oct"]);
+    expect(headings(grouped(BEEF))).toEqual(["Fri 16 Oct", "Thu 15 Oct"]);
+  });
+
+  it("sets the league's type alone beside In, and whose move beside Out", () => {
+    expect(cells(grouped())).toEqual(["Fri 16 Oct Waiver", "Beef Cowthenbeef"]);
+    expect(grouped()).toMatch(/<span class="cm-index[^"]*hidden lg:block/);
+  });
+
+  it("sets a team's own type beside In, with nothing beside Out on a claim", () => {
+    expect(cells(grouped(BEEF))).toEqual(["Fri 16 Oct Waiver", ""]);
+  });
+
+  // Integration review (20 Oct 2026): at 5.25rem 77 of 86 names wrapped at 320; 4.5rem took it to 20.
+  it("narrows the left column to the type and the plate, and a team's to the type alone", () => {
+    expect(grouped()).toContain("grid-cols-[4.5rem_minmax(0,1fr)]");
+    expect(grouped(BEEF)).toContain("grid-cols-[4rem_minmax(0,1fr)]");
+    expect(render()).toContain("grid-cols-[6rem_minmax(0,1fr)]");
+  });
+
+  it("leaves an ungrouped ledger (Waivers' Last run) its per-row stamp and no headings", () => {
+    expect(headings(render())).toEqual([]);
+    expect(render()).not.toMatch(/<span class="cm-index[^"]*hidden lg:block/);
+  });
+});
+
+describe("a name under a thumb", () => {
+  it("wraps rather than cuts, and truncates only on a desk", () => {
+    const html = render();
+    expect(html).toContain('<span class="lg:truncate">Levi Colwill</span>');
+    expect(html).not.toContain('<span class="truncate">Levi Colwill');
+  });
+
+  // Integration review (20 Oct 2026): 'Gudmundsson' painted over '(D)' at 320, and wrapped names left the tag at the edge.
+  it("breaks a word too long for its box, and keeps the position after the last word", () => {
+    expect(render()).toContain(
+      '<span class="min-w-0 [overflow-wrap:anywhere] lg:flex lg:items-center lg:gap-1.5"><span class="lg:truncate">Levi Colwill</span> <span class="whitespace-nowrap text-2xs font-bold text-mid lg:shrink-0 lg:text-xs">(D)</span></span>',
+    );
+  });
+});
