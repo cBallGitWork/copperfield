@@ -1,5 +1,5 @@
 import { codeOf, plPlayerCodes } from "./teamSheet";
-import { GOAL, OWN_GOAL, PENALTY, minuteOf } from "./fixtureEvents";
+import { GOAL, OWN_GOAL, PENALTY, addedOf, minuteOf } from "./fixtureEvents";
 import type { RawPlFixture } from "./raw";
 
 // A side's GOALS off the fixture detail's own events; `sheetEvents.ts` answers what happened to one man.
@@ -28,10 +28,10 @@ export function plGoals(fixture: RawPlFixture, optaToCode: Map<string, number>):
     if (event.type !== GOAL && event.type !== PENALTY && event.type !== OWN_GOAL) continue;
     const minute = minuteOf(event);
     if (minute === null || event.teamId === undefined) continue;
-    const added = Number(/^\d+\+(\d+)/u.exec(event.clock?.label ?? "")?.[1] ?? 0);
+    const added = addedOf(event);
     goals.push({
       minute,
-      ...(added > 0 ? { added } : {}),
+      ...(added === undefined ? {} : { added }),
       teamId: event.teamId,
       scorer: codeOf(codes, event.personId),
       assister: codeOf(codes, event.assistId),

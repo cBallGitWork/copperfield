@@ -14,6 +14,12 @@ export function minuteOf(event: RawPlFixtureEvent): number | null {
   return clockMinute(event.clock?.label);
 }
 
+/** An event's added time (`"90+4'00"` is 4); undefined inside the ninety or with no clock. */
+export function addedOf(event: RawPlFixtureEvent): number | undefined {
+  const added = Number(/^\d+\+(\d+)/u.exec(event.clock?.label ?? "")?.[1] ?? 0);
+  return added > 0 ? added : undefined;
+}
+
 /** A printed clock's minute, added time dropped: `"56'00"` and `"56"` are 56, `"90+1"` is 90. */
 export function clockMinute(label: string | undefined): number | null {
   if (label === undefined) return null;

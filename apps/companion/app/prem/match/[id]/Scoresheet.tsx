@@ -96,7 +96,8 @@ function SheetSide({
               name={player.name}
               short={fullFootballerName(player)}
               owners={owners}
-              figure={marks(line, man, hurtAt)}
+              // The fixture feed's off minute carries its added time; the commentary's fallback does not.
+              figure={marks(line, man, hurtAt, man?.offAt == null ? undefined : man.added?.offAt)}
               glyph={line.redCards > 0 ? "card" : hurtAt === undefined ? null : "cross"}
               glyphTone="text-bad"
             />
@@ -112,11 +113,17 @@ function marks(
   line: SheetRow["line"],
   did: PlManMatch | undefined,
   hurtAt: number | undefined,
+  hurtAdded: number | undefined,
 ): string {
   const said: string[] = [];
   if (line.penaltiesSaved > 0) said.push("pen saved");
   if (line.penaltiesMissed > 0) said.push("pen missed");
-  if (line.redCards > 0) said.push(did?.sentOff == null ? "red" : `${did.sentOff}'`);
-  if (hurtAt !== undefined) said.push(`${hurtAt}'`);
+  if (line.redCards > 0) said.push(did?.sentOff == null ? "red" : minuteMark(did.sentOff, did.added?.sentOff));
+  if (hurtAt !== undefined) said.push(minuteMark(hurtAt, hurtAdded));
   return said.join(" · ");
+}
+
+/** A minute as the sheet prints it, with its added time as the report does: `56'`, `90+4'`. */
+function minuteMark(minute: number, added: number | undefined): string {
+  return added === undefined ? `${minute}'` : `${minute}+${added}'`;
 }

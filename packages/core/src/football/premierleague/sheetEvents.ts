@@ -1,5 +1,5 @@
 import { plPlayerCodes } from "./teamSheet";
-import { BOOKING, GOAL, OWN_GOAL, PENALTY, SUBSTITUTION, minuteOf } from "./fixtureEvents";
+import { BOOKING, GOAL, OWN_GOAL, PENALTY, SUBSTITUTION, addedOf, minuteOf } from "./fixtureEvents";
 import type { RawPlFixture } from "./raw";
 
 // What each man did in one match, from the fixture DETAIL read's own events.
@@ -21,7 +21,12 @@ export interface PlManMatch {
   assists: number[];
   /** Minutes he put one in his own net, kept apart from `goals` so no man is credited with one. */
   ownGoals: number[];
+  /** The added time beside each of those minutes that has some (`90+4` is `sentOff: 90`, `added.sentOff: 4`). */
+  added?: Partial<Record<Timed, number>>;
 }
+
+/** The one-off minutes whose added time is kept; arithmetic reads the bare minute, only a print adds it. */
+type Timed = "onAt" | "offAt" | "booked" | "sentOff";
 
 function blank(): PlManMatch {
   return {
@@ -65,6 +70,13 @@ export function plManMatches(
       forCode(event.assistId)?.assists.push(at);
     }
     if (man === null) continue;
+    /** Files a one-off minute and its added time, the first of each kind winning. */
+    const mark = (field: Timed) => {
+      if (man[field] !== null) return;
+      man[field] = at;
+      const added = addedOf(event);
+      if (added !== undefined) man.added = { ...man.added, [field]: added };
+    };
 
     switch (event.type) {
       case GOAL:
@@ -76,12 +88,11 @@ export function plManMatches(
         break;
       case BOOKING:
         // `R` sending off, `Y` booking; a second yellow is its own `R` row, so a man may carry both. First wins.
-        if (event.description === "R") man.sentOff ??= at;
-        else man.booked ??= at;
+        mark(event.description === "R" ? "sentOff" : "booked");
         break;
       case SUBSTITUTION:
-        if (event.description === "ON") man.onAt ??= at;
-        else if (event.description === "OFF") man.offAt ??= at;
+        if (event.description === "ON") mark("onAt");
+        else if (event.description === "OFF") mark("offAt");
         break;
     }
   }
