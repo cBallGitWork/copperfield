@@ -2,7 +2,7 @@ import type { FootballSnapshot } from "@epl/core";
 import ButtonLink from "../components/shell/ButtonLink";
 import Section from "../components/shell/Section";
 import { londonDayAndTime } from "@epl/core";
-import { MATCHUPS } from "@/app/league/routes";
+import { leagueFixturesHref } from "@/app/league/SectionNav";
 import { gameweekHref } from "../components/shell/sections";
 
 // What the Live tab draws without live football: the card held while the scoreboard loads, and the between-rounds screen.
@@ -25,16 +25,13 @@ export function BetweenGameweeks({
   return (
     <div className="flex flex-col gap-3">
       {/* A section, not a second title bar: the page's one h1 is the gameweek's (DESIGN.md, the title bar). */}
-      <Section
-        title="No football today"
-        aside={over ? `Gameweek ${snapshot.gameweek} is done` : `Gameweek ${snapshot.gameweek} next`}
-      >
+      <Section title="No football today">
         {up === null ? (
           <p className="p-2 text-sm text-muted">Every match of the season has been played.</p>
         ) : (
           <p className="p-2 text-sm text-muted">
             {lead(over ? up.gameweek : null, locksAt !== null)}
-            <span className="numeric font-semibold text-ink">{londonDayAndTime(locksAt ?? up.kickoff)}</span>.
+            <span className="numeric font-semibold text-ink">{londonDayAndTime(locksAt ?? up.kickoff)}</span>
           </p>
         )}
       </Section>
@@ -49,7 +46,7 @@ export function BetweenGameweeks({
             {`GW${up.gameweek} fixtures`}
           </ButtonLink>
         ) : (
-          <ButtonLink href={MATCHUPS} fill>
+          <ButtonLink href={leagueFixturesHref(snapshot.gameweek)} fill>
             Who plays whom
           </ButtonLink>
         )}

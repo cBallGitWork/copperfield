@@ -75,8 +75,11 @@ Fantrax points, the DefCon count (defenders, then midfielders and forwards toget
 as the league counts no keeper DefCon), xG and xA, each man with whoever holds him. Craig, 11 Oct
 2026: *"show top 10 and free agents too. Remove rating tab, replace with top mid/forward/def
 defcon"*, then *"Just group defcon mid and forward together. Use the actual value, not the points."*
-The phone picks one list from a strip (`Points · DefCon D · DefCon M/F · xG · xA`, `&stat=`; DefCon is its one name on every screen, with the slots it counts, 16 Oct 2026, review N30); a desk shows
-all five, three across.
+The phone picks one list from a strip (`Points · DefCon D · DefCon M/F · xG · xA`, `&stat=`; DefCon is its one name on every screen, with the slots it counts, 16 Oct 2026, review N30), docked
+in the foot above the thumb rail (`FootFrame`, 20 Oct 2026: a sub-view switches from the foot, while
+`Scores · Top stats` stays the one strip on top). The frame is only as tall as its board, because the bar and
+`Matchups on Fantrax` sit outside it: under a short board the strip sits straight below the ten men with the exit
+under it and nothing scrolls, and it docks on the rail only when a list runs past the screen. A desk shows all five, three across.
 
 - **Each list is a `matchday/LeaderBoard`**, Prem › Data's own until that page went (19 Oct 2026): the
   same head, places shared by men level on the figure printed, crest, name linking to his page,
@@ -105,7 +108,10 @@ Between rounds, the football half is replaced by a panel naming the coming gamew
 lineup lock while it is ahead (`lockAhead`, off the league's roster periods, handed to the
 panel as plain data), and the first kickoff when the league gives no lock. FPL's deadline
 went on 12 Oct 2026; the lock took its place on 16 Oct (the review: Friday's Live said
-"starts Sat 12:30" and never "lock 12:15").
+"starts Sat 12:30" and never "lock 12:15"). The panel's head is only "No football today": the
+sub line already says `Final`, so it does not say the week is done a second time, and the line
+ends on the time with no full stop, keeping "Gameweek N" when it names the next week (20 Oct 2026).
+Before a gameweek, "Who plays whom" opens League › Fixtures for that gameweek.
 
 **Every draft score counts the auto subs** (`liveScores`; Craig, 19 Oct 2026: GW7's Raccoons read 34, not
 Fantrax's 31, with Kerkez on for Sarr): one figure per side, the one the head-to-head prints ([matchup.md](matchup.md#auto-subs)).
