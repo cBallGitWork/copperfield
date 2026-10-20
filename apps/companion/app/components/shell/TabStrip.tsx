@@ -4,7 +4,7 @@ import { STANDING_CAPS } from "../gazette/heads";
 import { headWord } from "../league/TableHeads";
 
 // Championship Manager's blue tab strip: one row of plates, edge to edge under a title bar, picking one of a set.
-// Callers keep their own tab lists; `components/league/GroupNav` wraps and is shorter, so it is not one of these.
+// Callers keep their own tab lists; `components/league/GroupNav` swaps its words at `lg`, so it is not one of these.
 
 export interface Tab {
   href: string;
@@ -67,7 +67,7 @@ export default function TabStrip<K extends string>({
 /** A tab on the paper: tracked small capitals in muted ink, the current or tapped one in the print red over a rule. */
 const PAPER_TAB = `flex min-h-11 flex-1 items-center justify-center border-b-2 border-transparent ${STANDING_CAPS} text-muted aria-[current=page]:border-current aria-[current=page]:text-accent has-[>[data-pending]]:text-accent`;
 
-const LABELS = {
-  phrase: "px-3 text-2xs",
-  word: "whitespace-nowrap px-1.5 text-2xs max-lg:flex-auto max-[374px]:px-1 max-[374px]:text-3xs lg:px-2",
-} as const;
+/** The main strip's label ladder: each plate its word's width, 2xs and 3xs under 375, so a strip never wraps. */
+export const WORD_PLATE = "whitespace-nowrap px-1.5 text-2xs max-lg:flex-auto max-[374px]:px-1 max-[374px]:text-3xs lg:px-2";
+
+const LABELS = { phrase: "px-3 text-2xs", word: WORD_PLATE } as const;
