@@ -167,6 +167,11 @@ export const COLUMNS: PoolColumn[] = [
 /** Fantrax's own default, FPts highest first; named so reordering `COLUMNS` cannot change it. */
 export const DEFAULT_SORT = "fpts";
 
+/** The Per 90 toggle over the columns drawn: null hides it where none divides by minutes, as on the Attributes plate. */
+export function ratedOn(columns: readonly PoolColumn[], per90: boolean): boolean | null {
+  return columns.some((column) => column.rate === true) ? per90 : null;
+}
+
 export function columnFor(key: string | undefined): PoolColumn | undefined {
   return COLUMNS.find((column) => column.key === key);
 }

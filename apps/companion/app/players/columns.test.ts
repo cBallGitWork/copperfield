@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ATTRIBUTE_ROWS, GOALS_AGAINST_OUTFIELD } from "@epl/core";
-import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor } from "./columns";
+import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor, ratedOn } from "./columns";
 import { attributeStats } from "./attributeColumns";
 import { columnsIn } from "./groups";
 import { figureOf } from "./figure";
@@ -163,5 +163,20 @@ describe("the attribute columns", () => {
     const plate = columnsIn(COLUMNS, "attributes", "wor", new Set()).map((column) => column.key);
     expect(plate.slice(0, 2)).toEqual(["name", "wor"]);
     expect(plate.filter((key) => key === "wor")).toHaveLength(1);
+  });
+});
+
+describe("ratedOn", () => {
+  const read = new Set(["Min", "G", "GA"]);
+
+  it("hides Per 90 on a plate where no drawn column divides by minutes, so it is never lit doing nothing", () => {
+    // The Attributes plate is 1-20 ratings: per=90 lit the toggle and counted as a filter, and changed no figure.
+    expect(ratedOn(columnsIn(COLUMNS, "attributes", "acc", read), true)).toBeNull();
+    expect(ratedOn(columnsIn(COLUMNS, "attributes", "acc", read), false)).toBeNull();
+  });
+
+  it("keeps it where one does, the sorted xG beside the attributes included", () => {
+    expect(ratedOn(columnsIn(COLUMNS, "attributes", "xg", read), true)).toBe(true);
+    expect(ratedOn(columnsIn(COLUMNS, "defensive", "fpts", read), false)).toBe(false);
   });
 });
