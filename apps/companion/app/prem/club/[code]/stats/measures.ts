@@ -21,7 +21,8 @@ export interface View {
   measures: readonly Measure[];
 }
 
-export const VIEWS: readonly View[] = [
+/** The first is the board's opening view. */
+export const VIEWS: readonly [View, ...View[]] = [
   {
     key: "attack",
     label: "Attacking",
@@ -54,6 +55,11 @@ export const VIEWS: readonly View[] = [
     ],
   },
 ];
+
+/** The view a `?view=` names, or the first for none or a stale one. */
+export function viewOf(key: string | undefined): View {
+  return VIEWS.find((view) => view.key === key) ?? VIEWS[0];
+}
 
 /** A measure's figure at its kind's places: every xG in a column to two, so a whole 2 reads 2.00 beside 1.35. */
 export function reading(measure: Measure, value: number): string {

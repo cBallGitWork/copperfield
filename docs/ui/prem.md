@@ -56,6 +56,8 @@ reproduction in the app and sets most of its decisions:
   is made of are the pair a phone can spare. The visibility rides in each
   column's `width` string in `prem/Columns.tsx`, so the heads and the rows read it
   from one place.
+- **36px rows under a thumb**, as the league table's (20 Oct 2026, PRODUCT's exceptions): twenty clubs in
+  about 790px at 390 rather than 953. CM's 28 on the desk.
 - **`For` and `Ag` are ink**, not amber: DESIGN §3's slot means a figure standing
   alone beside a name, never a column of a standings table.
 - **A dashed rule under the cut**, in yellow.
@@ -165,11 +167,11 @@ the reference for both, and it is a strip over a panel rather than one page.
 
 | Tab | Route | What | Source |
 |---|---|---|---|
-| Squad | `/prem/club/[code]` | Every man on the books, ordered by our position; no faces, a doubt washes his row (25 Sep 2026) | FPL bootstrap; Fantrax for eligibility |
-| Depth | `…/depth` | Who is in line for each shirt, headed *Pecking order* (16 Oct 2026; "Depth chart" is American football's): the sister's depth chart on CM's pitch (a plate per place, no kits or faces), three deep for a lone shirt and a pair dealt like a snake (1st and 4th, 2nd and 3rd); the list behind the toggle on a phone; a doubt's name washed; each plate one tap to its first choice's page, the list one to every man (8 Oct 2026) | The sister repo's chart, `intel/depth` |
+| Squad | `/prem/club/[code]` | Every man on the books, ordered by our position; no faces, a doubt washes his row (25 Sep 2026); the predicted XI behind Pitch \| List links (`?view=`) in the club shell's foot on a phone, as Stats' views are. It may differ from Depth's first names, rightly: the pecking order can lag a recent change or a knock (Craig, 20 Oct 2026) | FPL bootstrap; Fantrax for eligibility |
+| Depth | `…/depth` | Who is in line for each shirt, headed *Pecking order* (16 Oct 2026; "Depth chart" is American football's): the sister's depth chart on CM's pitch (a plate per place, no kits or faces), three deep for a lone shirt and a pair dealt like a snake (1st and 4th, 2nd and 3rd); dated by its export and never by a gameweek, which it outlives (20 Oct 2026); the list behind Pitch \| List links (`?view=`) in the club shell's foot on a phone; a doubt's name washed; each plate one tap to its first choice's page, the list one to every man (8 Oct 2026) | The sister repo's chart, `intel/depth` |
 | Pieces | `…/set-pieces` | Who takes the penalties, free kicks and corners | FFScout, via the sister repo |
 | Fixtures | `…/fixtures` | The club's season, oldest first | FPL fixtures |
-| Stats | `…/stats` | Every player, by one group of measures, sortable: our position in the index tile, no Pos column, each column's standouts in orange and yellow (red for goals conceded), a doubt's row washed (25 Sep 2026) | FPL |
+| Stats | `…/stats` | Every player, by one group of measures, sortable: `Attacking · Defensive · Playing time` on a strip docked at the foot (`?view=`, 20 Oct 2026); our position in the index tile on a desk and under the name on a phone, no Pos column; 36px rows under a thumb, inside the panel's padding as the Squad tab's; each column's standouts in orange and yellow (red for goals conceded), a doubt's row washed (25 Sep 2026) | FPL |
 
 **Match puts the home side first, and the fantasy screen does not.** A fantasy
 fixture has no ground, so `squad/[teamId]/next` leads with whoever's page you
