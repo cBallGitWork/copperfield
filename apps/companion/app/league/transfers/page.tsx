@@ -23,7 +23,7 @@ export default async function LeagueTransfersPage() {
 
   return (
     <LeagueShell current="transfers" teams={info?.teams.length}>
-      {all.length === 0 ? <Nothing title="No moves yet" code="0 deals" /> : <Ledger deals={all} nameOf={nameOf} />}
+      {all.length === 0 ? <Nothing title="No moves yet" code="0 deals" /> : <Ledger deals={all} nameOf={nameOf} groupByDay />}
     </LeagueShell>
   );
 }
