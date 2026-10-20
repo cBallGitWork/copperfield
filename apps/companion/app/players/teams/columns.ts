@@ -5,12 +5,13 @@ import type { TeamRow } from "./teamRows";
 
 // The board's measures as data, so the heads, the cells, the sort, the standouts and the plates cannot disagree.
 
-/** The groups, in the board's order: a plate each under a thumb, a head over its run on the desk; Attack rests. */
+/** The groups, in the board's order: a plate each under a thumb, a head over its run on the desk; Attack rests.
+ *  `lead` is the column a plate orders by when no sort is asked. */
 export const TEAM_GROUPS = [
-  { key: "attack", label: "Attack" },
-  { key: "chances", label: "Chances" },
-  { key: "defence", label: "Defence" },
-  { key: "discipline", label: "Discipline" },
+  { key: "attack", label: "Attack", lead: "g" },
+  { key: "chances", label: "Chances", lead: "xa" },
+  { key: "defence", label: "Defence", lead: "gc" },
+  { key: "discipline", label: "Discipline", lead: "fls" },
 ] as const;
 
 export type TeamGroup = (typeof TEAM_GROUPS)[number];
@@ -70,7 +71,7 @@ export function teamsView(asked: { group?: string; sort?: string; dir?: string }
   const named = TEAM_COLUMNS.find((column) => column.key === asked.sort);
   const group = TEAM_GROUPS.find((entry) => entry.key === (named?.group ?? asked.group)) ?? TEAM_GROUPS[0];
   const columns = TEAM_COLUMNS.filter((column) => column.group === group.key);
-  const sort = named ?? columns[0];
+  const sort = named ?? columns.find((column) => column.key === group.lead) ?? columns[0];
   return { group, sort, descending: (asked.dir ?? (sort.rank === "high" ? "desc" : "asc")) === "desc", columns };
 }
 
@@ -84,8 +85,7 @@ export function plateHref(group: TeamGroup): string {
 export function sortHref(column: TeamColumn, sort: TeamColumn, descending: boolean): string {
   const next = column.key === sort.key ? !descending : column.rank === "high";
   const group = TEAM_GROUPS.find((entry) => entry.key === column.group) ?? TEAM_GROUPS[0];
-  const lead = TEAM_COLUMNS.find((entry) => entry.group === column.group);
-  if (column === lead && next === (column.rank === "high")) return plateHref(group);
+  if (column.key === group.lead && next === (column.rank === "high")) return plateHref(group);
   return `${TEAMS}?sort=${column.key}&dir=${next ? "desc" : "asc"}`;
 }
 

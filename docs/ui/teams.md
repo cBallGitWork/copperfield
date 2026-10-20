@@ -25,7 +25,7 @@ fit one line at 320 in WebKit.
 
 Each head carries its meaning in a `title`. Standouts are lit in ink over the twenty (a fifth yellow, a tenth
 orange); where more is worse (GC xGC ShA ErS ErG Fls YC RC) the top of the column is red. A played nought is white.
-Sort is a link (`?sort=&dir=`), a column opening at its good end. A plate orders by its lead column (G, A, GC, ErS)
+Sort is a link (`?sort=&dir=`), a column opening at its good end. A plate orders by its lead column (G, xA, GC, Fls)
 and clears the reader's sort; a `?sort=` names its column's plate, so the order is never hidden. Ties fall to the
 name. A club opens the Players board at that club.
 
