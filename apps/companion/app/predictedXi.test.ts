@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 // A page reads the elevens off the branch, ahead of the deploy each of their commits starts.
@@ -36,9 +38,11 @@ describe("the predicted elevens", { timeout: 20_000 }, () => {
     onVercel();
     const newer = { ...held, fetchedAt: "2026-10-16T11:07:00Z", clubs: { ARS: { formation: "4-3-3", slots: null, starters: [] } } };
     answer = json(newer);
-    const { predictedElevens } = await import("./predictedXi");
+    const { predictedElevens, XI_FILE } = await import("./predictedXi");
     expect(await predictedElevens()).toEqual(newer);
     expect(asked).toEqual(["https://raw.githubusercontent.com/owner/repo/main/data/intel/xi/26-27.json"]);
+    // The branch's file and the build's copy are one season's: a roll that changes one changes both.
+    expect(readFileSync(join(import.meta.dirname, "intel.ts"), "utf8")).toContain(`from "../../../${XI_FILE}"`);
   });
 
   it("are the build's when the branch will not answer, or answers with something else", async () => {

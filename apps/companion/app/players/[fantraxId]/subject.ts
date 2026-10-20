@@ -5,11 +5,11 @@ import {
   isFantraxPlayerId,
   mapPlayerProfile,
 } from "@epl/core";
-import { leagueCache } from "../../leagueCache";
+import { leagueRead } from "../../leagueCache";
 import type { Club, FootballPlayer, PlayerIntel } from "@epl/core";
-import { refusedAs, unavailable } from "../../refusals";
+import { unavailable } from "../../refusals";
 import type { Unavailable } from "../../refusals";
-import { getLeagueSquads } from "../../squads";
+import { getLeagueSquads, readable } from "../../squads";
 import { getLeaguePool } from "../pool";
 import { footballSelf } from "./footballSelf";
 import { unknownToPool } from "./unknown";
@@ -27,8 +27,8 @@ export interface Subject {
 
 /** One profile per player for everybody: four tabs and every phone ask Fantrax once. The
  *  refusal is caught inside, because a `FantraxError` thrown through the cache need not arrive as one. */
-const readProfile = leagueCache("player-profile", (fantraxId: string) =>
-  refusedAs(fetchPlayerProfile(FANTRAX_LEAGUE_ID, fantraxId), unavailable, (raw) => raw), unavailable);
+const readProfile = leagueRead("player-profile", (fantraxId: string) => fetchPlayerProfile(FANTRAX_LEAGUE_ID, fantraxId),
+  (raw) => raw, unavailable);
 
 /** An id not in Fantrax's shape, or one the pool answered without, is a 404. A man the pool holds whose profile
  *  read was refused keeps the tell on screen. */
@@ -51,7 +51,7 @@ export async function subject(fantraxId: string): Promise<Subject | Unavailable>
 /** The owning side's name off the rosters, never parsed out of the profile's wording; null on any ordinary failure. */
 async function teamName(ownerTeamId: string | null): Promise<string | null> {
   if (ownerTeamId === null) return null;
-  const squads = await getLeagueSquads();
-  if (!("period" in squads)) return null;
+  const squads = readable(await getLeagueSquads());
+  if (squads === null) return null;
   return squads.period.teams.find((team) => team.teamId === ownerTeamId)?.teamName ?? null;
 }

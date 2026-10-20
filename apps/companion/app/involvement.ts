@@ -1,6 +1,6 @@
 import type { Fixture, FootballPlayer, PlayerOwner } from "@epl/core";
 import { fixtureInvolvement, owners } from "@epl/core";
-import { getLeagueSquads } from "./squads";
+import { getLeagueSquads, readable } from "./squads";
 import type { ReadableSquads } from "./squads";
 import { myTeamId } from "./session";
 
@@ -29,6 +29,6 @@ export async function marksFor(
 
 /** For a page that does not; a signed-out reader still gets `owners`. */
 export async function marks(fixtures: readonly Fixture[]): Promise<Marks> {
-  const squads = await getLeagueSquads();
-  return "period" in squads ? marksFor(squads, fixtures) : {};
+  const squads = readable(await getLeagueSquads());
+  return squads === null ? {} : marksFor(squads, fixtures);
 }

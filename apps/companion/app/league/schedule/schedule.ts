@@ -1,19 +1,17 @@
 import {
   FANTRAX_LEAGUE_ID,
-  FantraxError,
   type FixtureStatus,
   type LeagueInfo,
   type StandingsRow,
   type PeriodResult,
-  fetchLeagueInfo,
   fetchSeasonResults,
-  mapLeagueInfo,
   mapSeasonResults,
 } from "@epl/core";
 import { leagueCache } from "../../leagueCache";
 import { leagueTable } from "../../standings";
 import { seasonFixtures } from "../../football";
-import { orRefusal, refusedAs, unavailable } from "../../refusals";
+import { leagueOrRefusal } from "../../round";
+import { refusedAs } from "../../refusals";
 import type { Unavailable } from "../../refusals";
 import { scheduleRounds } from "./rounds";
 
@@ -42,19 +40,9 @@ export interface Schedule {
   table: StandingsRow[];
 }
 
-/** The league's own description, or its refusal. Fantrax alone: a cached read nested in here skips its own cache, so
- *  one FPL refusal would read as Fantrax silent. A new key, as the old one held the whole schedule. */
-const readInfo = leagueCache("schedule-info",
-  async (): Promise<LeagueInfo | Unavailable> => {
-    const raw = await orRefusal(fetchLeagueInfo(FANTRAX_LEAGUE_ID));
-    return raw instanceof FantraxError ? unavailable(raw) : mapLeagueInfo(raw);
-  },
-  unavailable,
-);
-
 /** The league, its rounds and its table, each read from its own cache; only the league's own description is fatal. */
 export async function getSchedule(): Promise<Schedule | Unavailable> {
-  const [info, season, standings] = await Promise.all([readInfo(), seasonFixtures(), leagueTable()]);
+  const [info, season, standings] = await Promise.all([leagueOrRefusal(), seasonFixtures(), leagueTable()]);
   if ("unavailable" in info) return info;
   return {
     info,

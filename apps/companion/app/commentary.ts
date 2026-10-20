@@ -40,15 +40,15 @@ export async function roundGoals(
 }
 
 /** Each kicked-off fixture's commentary this round, keyed by FPL's fixture code, never its id, which
- *  the Premier League numbers differently. Up to ten reads a window; empty, never a throw. */
+ *  the Premier League numbers differently. Up to ten reads a window; empty when their API fails. */
 export async function roundStreams(gameweek: number): Promise<Map<number, FixtureStream>> {
-  const round = await plRound(gameweek).catch(() => null);
+  const round = await orDegraded(plRound(gameweek), () => null);
   if (round === null) return new Map();
   const entries = await Promise.all(
     round.content.map(async (fixture) => {
       const code = plFixtureCode(fixture);
       if (code === null || fixture.status === "U") return null;
-      const stream = await plStream(fixture).catch(() => null);
+      const stream = await orDegraded(plStream(fixture), () => null);
       if (stream === null) return null;
       return [code, { events: stream.events.content, kickoffMillis: fixture.kickoff?.millis ?? null }] as const;
     }),

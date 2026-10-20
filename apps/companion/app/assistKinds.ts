@@ -12,12 +12,12 @@ import {
 } from "@epl/core";
 import { ASSIST_KINDS_REVALIDATE } from "./config";
 import { seasonKickoffs } from "./football";
-import { refusedAs } from "./refusals";
+import { orDegraded, refusedAs } from "./refusals";
 import { bridge } from "./squads";
 import { STATS_LEAGUE, periodsOf } from "./statsLeague";
 
 // The stats league's typed fantasy assists for a gameweek, keyed by FPL code. Outfield only: the
-// keepers' table carries no kinds. Nothing, never a throw, when the league is unnamed or silent.
+// keepers' table carries no kinds. Nothing when the league is unnamed or silent; a bug of ours still throws.
 
 /** One period's kinds in a league, as entries, since a Map does not survive the cache. */
 const kindsOf = unstable_cache(
@@ -34,11 +34,10 @@ const kindsOf = unstable_cache(
 
 export async function roundAssistKinds(gameweek: number | null): Promise<Map<number, AssistKinds>> {
   if (gameweek === null || STATS_LEAGUE === null) return new Map();
-  try {
-    const [periods, kickoffs] = await Promise.all([periodsOf(STATS_LEAGUE), seasonKickoffs()]);
+  const kinds = async (league: string) => {
+    const [periods, kickoffs] = await Promise.all([periodsOf(league), seasonKickoffs()]);
     const period = periodOfGameweek(periodGameweeks(periods, kickoffs), gameweek)?.period;
-    return new Map(period === undefined ? [] : await kindsOf(STATS_LEAGUE, period));
-  } catch {
-    return new Map();
-  }
+    return new Map(period === undefined ? [] : await kindsOf(league, period));
+  };
+  return orDegraded(kinds(STATS_LEAGUE), () => new Map<number, AssistKinds>());
 }

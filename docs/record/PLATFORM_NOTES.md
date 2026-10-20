@@ -1384,7 +1384,8 @@ At 0-0-0 the app had put one co-leader alone over the £30 line.
   | `football.ts` `offerLive` | Live offered | Fail open: navigation must not hide Live mid-match |
   | `football.ts` `groundFaces` | no faces | Decoration |
   | `layout.tsx` `round` | idle poll rate | Polling hard at a provider that just failed makes a wobble an outage |
-  | `matchDetail.ts`, `matchFeed.ts` ×4, `commentary.ts` ×2 | that block absent | Optional Premier League detail; the page stands without it |
+  | `plFeed.ts` `ofFixture` (every `matchDetail.ts` and `matchFeed.ts` block), `commentary.ts` ×3, `assistKinds.ts` | that block absent; a bug of ours rethrown (20 Oct) | Optional Premier League detail; the page stands without it |
+  | `matchFeed.ts` `matchHighlight` | no video, any error | The feed is untrusted XML and its parse can throw a plain error |
   | `session.ts` `codeHashes` | nobody signs in | A half-parsed code map must not let somebody in |
   | `teamStats.ts`, `refusals.ts` | the refusal, others rethrown | Only Fantrax's refusal is caught |
 

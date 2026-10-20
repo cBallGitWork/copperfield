@@ -1,7 +1,7 @@
 import { revalidateTag, unstable_cache } from "next/cache";
 import { FANTRAX_LEAGUE_ID, type ProviderError } from "@epl/core";
 import { PAGE_REVALIDATE } from "./config";
-import { orDegraded } from "./refusals";
+import { orDegraded, refusedAs } from "./refusals";
 import { singleFlight } from "./singleFlight";
 
 // One league read, cached for everybody. The key and the tag both carry the league id, so the swap
@@ -23,6 +23,19 @@ export function leagueCache<A extends unknown[], R>(
     tags: [leagueTag(key)],
   });
   return (...args) => orDegraded(cached(...args), (error) => degrade(error, ...args));
+}
+
+/** A Fantrax read with its empty answer given once: a refusal is answered inside the cache, so it is stored; an outage
+ *  is answered only on a cold key, so it never is. */
+export function leagueRead<A extends unknown[], T, R, E>(
+  key: string,
+  ask: (...args: A) => Promise<T>,
+  map: (raw: T) => R,
+  empty: (error: ProviderError) => E,
+  revalidate?: number,
+): (...args: A) => Promise<R | E> {
+  const read = (...args: A) => refusedAs(ask(...args), empty, map);
+  return leagueCache(key, read, (...[error]: [ProviderError, ...A]) => empty(error), revalidate);
 }
 
 /** The tag a `leagueCache` read is filed under, which `markStale` marks. */

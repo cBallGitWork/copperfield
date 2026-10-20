@@ -5,8 +5,7 @@ import {
   fetchSeasonStats,
   mapSeasonStats,
 } from "@epl/core";
-import { leagueCache } from "../../leagueCache";
-import { refusedAs } from "../../refusals";
+import { leagueRead } from "../../leagueCache";
 
 // The league's own season's category totals, every category in one cached request; a failure is an empty board.
 // An ARRAY crosses the cache and a Map is built after it: `unstable_cache` round-trips JSON, and a Map comes back `{}`.
@@ -17,11 +16,11 @@ interface CategoryEntry {
   lines: CategoryLine[];
 }
 
-const readSeasonStats = leagueCache(
+const readSeasonStats = leagueRead(
   "season-stats",
-  (startDate: string, endDate: string): Promise<CategoryEntry[]> =>
-    refusedAs(fetchSeasonStats(FANTRAX_LEAGUE_ID, { startDate, endDate }), () => [], (raw) => [...mapSeasonStats(raw)].map(([category, lines]) => ({ category, lines }))),
-  () => [],
+  (startDate: string, endDate: string) => fetchSeasonStats(FANTRAX_LEAGUE_ID, { startDate, endDate }),
+  (raw): CategoryEntry[] => [...mapSeasonStats(raw)].map(([category, lines]) => ({ category, lines })),
+  (): CategoryEntry[] => [],
 );
 
 /** The categories over the league's own days, never the calendar's earlier weeks; none before the league has a season. */
