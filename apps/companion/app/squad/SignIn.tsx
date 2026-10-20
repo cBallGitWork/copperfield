@@ -22,7 +22,7 @@ export default function SignIn() {
         Code from the commissioner
       </label>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 lg:max-w-md">
         <input
           ref={box}
           id="code"
