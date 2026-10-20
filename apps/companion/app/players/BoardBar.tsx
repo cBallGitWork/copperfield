@@ -1,19 +1,20 @@
-import { sortableIn, type PoolGroupKey, type PoolPlate } from "./groups";
-import { PAGE_ROWS, activeSort } from "./query";
+import { sortableIn } from "./groups";
+import { activeSort } from "./query";
+import { drawnCount } from "./pageRows";
 import type { BoardChange } from "./boardChange";
 import BoardLink from "./BoardLink";
 import Search from "./Search";
 import type { PlayersQuery } from "./query";
 import type { BoardView } from "./views";
 import { LABEL } from "@/app/desk";
-import { Carried, clubOptions, Count, Figures, PRESSABLE, Plates, Positions } from "./BoardControls";
+import { Carried, clubOptions, Count, Figures, PRESSABLE, Positions } from "./BoardControls";
 import { LoneStatuses, Statuses, loneCount, splitsBin } from "./StatusChips";
 import QuerySelect from "../components/shell/QuerySelect";
 import FilterSheet from "./FilterSheet";
 
-// Every control on a Data board. Under a thumb two fixed lines: the search and Filter, then position and who holds
-// him (Craig, 16 Oct 2026), Adv Stats adding its Key beside Filter and its plates as a third (19 Oct 2026); on a desk
-// one row from `xl`, with Per 90. The rest is in the filters, URL state (`?panel=1`), so a filtered board can be
+// Every control at the top of a Data board. Under a thumb two fixed lines: the search and Filter, then position and
+// who holds him (Craig, 16 Oct 2026), Adv Stats adding its Key beside Filter (its plates dock at the foot, `Plates`);
+// on a desk one row from `xl`, with Per 90. The rest is in the filters, URL state (`?panel=1`), so a filtered board can be
 // shared; while they are open a tap replaces the history entry, so one Back leaves them.
 
 /** Reset: everything off and the sheet shut; a comparison's picker stays one. */
@@ -24,8 +25,6 @@ const FILTER: BoardChange = { toggle: ["panel", "1"] };
 export default function BoardBar({
   query,
   view,
-  plates,
-  group,
   positions,
   clubs,
   counted,
@@ -36,9 +35,6 @@ export default function BoardBar({
 }: {
   query: PlayersQuery;
   view: BoardView;
-  /** The stat-group plates this board offers; none on Players. */
-  plates: readonly PoolPlate[];
-  group: PoolGroupKey;
   /** The league's own position vocabulary, in pitch order. */
   positions: readonly string[];
   /** Every club with a player in the pool, in the order they are offered. */
@@ -58,8 +54,8 @@ export default function BoardBar({
   const route = view.route;
   const held = (query.club ? 1 : 0) + loneCount(query);
   const narrow = rated ? 1 : 0;
-  // The board draws a page of rows unless asked for all; the button promises no more than that.
-  const drawn = query.all === "1" ? shown : Math.min(shown, PAGE_ROWS);
+  // The button promises what the board draws.
+  const drawn = drawnCount(shown, query);
 
   return (
     <>
@@ -75,17 +71,6 @@ export default function BoardBar({
           <Statuses query={query} counted={counted} route={route} replace={open} />
         </div>
 
-        {/* A line of their own below `xl`: one tap from any plate to the next. */}
-        {plates.length === 0 ? null : (
-          <Plates
-            query={query}
-            plates={plates}
-            group={group}
-            route={route}
-            replace={open}
-            className="flex flex-wrap gap-1.5 max-xl:order-last max-xl:basis-full"
-          />
-        )}
         {rated === null ? null : (
           <div className="hidden xl:flex">
             <Figures query={query} rated={rated} route={route} replace={open} />

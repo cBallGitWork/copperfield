@@ -7,7 +7,7 @@ import BoardLink from "./BoardLink";
 import type { QueryOption } from "../components/shell/QuerySelect";
 import type { PlayersQuery } from "./query";
 import { leaguePositionLabel } from "../positions";
-import { SMALL_CAPS, heldPlate } from "@/app/desk";
+import { SMALL_CAPS, TAB, heldPlate } from "@/app/desk";
 
 // The pieces `BoardBar` arranges: the stat-group strip, the position chips, the figure chip, the badge that counts
 // what is on, and the shapes they are drawn in. `BoardBar` decides where a control goes at a width; each here decides
@@ -23,13 +23,15 @@ const FIELDS = [
   "sort",
   "dir",
   "all",
+  "rows",
   "group",
   "per",
   "club",
   "panel",
 ] as const;
 
-/** The rest of the query as hidden inputs for a GET form; `except` is the form's own field. */
+/** The rest of the query as hidden inputs for a GET form; `except` is the form's own field, and a page's rows go
+ *  wherever Show all does. */
 export function Carried({
   query,
   except,
@@ -37,9 +39,10 @@ export function Carried({
   query: PlayersQuery;
   except: readonly (typeof FIELDS)[number][];
 }) {
+  const dropped: readonly string[] = except.includes("all") ? [...except, "rows"] : except;
   return (
     <>
-      {FIELDS.filter((field) => !except.includes(field)).map((field) =>
+      {FIELDS.filter((field) => !dropped.includes(field)).map((field) =>
         query[field] ? <input key={field} type="hidden" name={field} value={query[field]} /> : null,
       )}
     </>
@@ -55,14 +58,16 @@ const PLATE =
 /** A plate you press, at rest: the `Filter` link, an unpressed `Chip` and the pick field's button. */
 export const PRESSABLE = `${heldPlate(false)} ${PLATE}`;
 
-/** Which columns are on the board: the one strip that stays blue, at the control floor (`cm-tab-quiet`). */
+/** The word strip's label ladder, as `TabStrip`'s `word` plates: 2xs, 3xs under 375, one row at 320. */
+const WORD_PLATE = "whitespace-nowrap px-1.5 text-2xs max-lg:flex-auto max-[374px]:px-1 max-[374px]:text-3xs lg:px-2";
+
+/** Which columns are on the board: a sub-view, so docked at the screen's foot (M-CONSIST-1, 20 Oct 2026). */
 export function Plates({
   query,
   plates,
   group,
   route,
   replace,
-  className,
 }: {
   query: PlayersQuery;
   /** The plates this board offers, the resting one first. */
@@ -71,12 +76,9 @@ export function Plates({
   route: string;
   /** Whether a tap replaces the history entry: while the sheet is open, so Back leaves it. */
   replace: boolean;
-  /** The strip's layout: a row inline, a grid in the sheet. */
-  className: string;
 }) {
   return (
-    // The `<nav>` is the landmark that names the strip; it travels with it.
-    <nav aria-label="Stat groups" className={className}>
+    <nav aria-label="Stat groups" className="flex">
       {plates.map((entry, at) => {
         // Each plate sets its own order, so a sort chosen on another plate does not follow the reader here.
         const change = { set: { group: at === 0 ? "" : entry.key, sort: "", dir: "" } };
@@ -88,7 +90,7 @@ export function Plates({
             route={route}
             replace={replace}
             aria-current={entry.key === group ? "page" : undefined}
-            className={`cm-tab cm-tab-quiet ${PLATE}`}
+            className={`${TAB} ${WORD_PLATE}`}
           >
             {entry.label}
           </BoardLink>
