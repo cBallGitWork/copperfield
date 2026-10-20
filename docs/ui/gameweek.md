@@ -4,6 +4,8 @@ Any round of the season, addressable. Last week's results on Monday morning is
 the second thing anyone wants after this week's score.
 
 Drawn by `GameweekView`, which only this route uses. Linked from each "N yours" on Prem › Fixtures and from Live's between-rounds panel.
+The rail lights Live here while football is on and Prem otherwise (`outsideGameweek` in `sections.ts`), so the page
+is never left with every tab dark.
 
 ## On the page
 

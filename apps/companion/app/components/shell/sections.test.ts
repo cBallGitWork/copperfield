@@ -128,6 +128,16 @@ describe("which phone tab lights", () => {
   it("lights Live on the Live pages while football is on", () => {
     expect(litOnPhone(true, LIVE)).toEqual(["Live"]);
     expect(litOnPhone(true, "/gw/7")).toEqual(["Live"]);
+    expect(litOnDesk(true, "/gw/7")).toEqual(["Live"]);
+  });
+
+  it("hands a gameweek's page to Prem once Live is gone, as its frame is Prem's", () => {
+    expect(litOnPhone(false, "/gw/7")).toEqual(["Prem"]);
+    expect(litOnDesk(false, "/gw/7")).toEqual(["Prem"]);
+  });
+
+  it("leaves Live's own page unowned outside a gameweek", () => {
+    expect(litOnPhone(false, LIVE)).toEqual([]);
   });
 
   it("lights nothing on a rival's squad, which is reached through the league", () => {
