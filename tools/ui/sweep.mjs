@@ -1,9 +1,10 @@
 // Contrast and overflow on every route at both audit widths: text under WCAG AA on its ground, and a sideways scroll.
-// Text on an SVG ground is "not auditable here", a work list to check by eye and never a pass.
+// Text on an SVG ground, or on a gradient with no colour declared under it, is "not auditable here", a work list to
+// check by eye and never a pass.
 //   node tools/ui/sweep.mjs [--base http://localhost:3000] [--team-cookie <file>]
 
 import { AUDIT_WIDTHS, BASE_URL, DESK, PHONE, connect, discover, parseArgs, teamCookie } from "./cdp.mjs";
-import { ALL_ROUTES, FRONT_PAGE, playedMatchRoutes, playerRoutes } from "./routes.mjs";
+import { ALL_ROUTES, FRONT_PAGE, clubRoutes, playedMatchRoutes, playerRoutes, teamRoutes } from "./routes.mjs";
 
 /** This run's routes: the shared list plus the ids discovered below; a copy, so `routes.mjs` stays a declaration. */
 const ROUTES = [...ALL_ROUTES];
@@ -32,6 +33,8 @@ const AUDIT = `(function(){
     while(n&&n.nodeType===1){var t=toRGBA(getComputedStyle(n).backgroundColor);
       if(t[1]>0.002)stack.push(t);n=n.parentElement}
     for(var i=stack.length-1;i>=0;i--)acc=over(stack[i][0],acc,stack[i][1]);return acc}
+  function gradientOnly(el){for(var n=el;n&&n.nodeType===1;n=n.parentElement){var s=getComputedStyle(n);
+      if(toRGBA(s.backgroundColor)[1]>0.998)return false;if(s.backgroundImage.indexOf("gradient(")>=0)return true}return false}
   var out=[],blind=[];
   Array.prototype.forEach.call(document.querySelectorAll("*"),function(el){
     var txt="";
@@ -52,7 +55,7 @@ const AUDIT = `(function(){
     var px=parseFloat(cs.fontSize),bold=parseInt(cs.fontWeight,10)>=700;
     var need=(px>=24||(px>=18.66&&bold))?3:4.5;
     if(ratio>=need-0.02)return;
-    var opaque=isSvg||el.closest(".pitch");
+    var opaque=isSvg||el.closest(".pitch")||gradientOnly(el);
     (opaque?blind:out).push({t:txt.slice(0,26),px:Math.round(px*10)/10,r:Math.round(ratio*100)/100,need:need});
   });
   return JSON.stringify({fail:out.slice(0,6),blind:blind.length});
@@ -68,14 +71,12 @@ await cdp.setCookie(teamCookie(flags));
 // Per-record routes are discovered, never written down: their ids are the league's, FPL's or a story's, and move.
 // The team, club and match bars are the app's only per-team and per-club colours, the pairs this exists to measure.
 await cdp.setViewport(PHONE.width, DESK.height);
-const team = await discover(cdp, "/squad", 'a[href^="/squad/"]');
-if (team) ROUTES.push(team, ...["transfers", "next", "fixtures", "stats"].map((tab) => `${team}/${tab}`));
+ROUTES.push(...(await teamRoutes(cdp)));
 
 const article = await discover(cdp, FRONT_PAGE, 'a[href^="/paper/"]');
 if (article) ROUTES.push(article);
 
-const club = await discover(cdp, "/prem", 'a[href^="/prem/club/"]');
-if (club) ROUTES.push(club, ...["depth", "set-pieces", "fixtures", "stats"].map((tab) => `${club}/${tab}`));
+ROUTES.push(...(await clubRoutes(cdp)));
 
 ROUTES.push(...(await playerRoutes(cdp)));
 
@@ -99,7 +100,7 @@ for (const width of AUDIT_WIDTHS) {
     );
     failures += fail.length + (sideways ? 1 : 0);
     const flag = [fail.length ? `${fail.length} AA` : "", sideways ? "H-SCROLL" : ""].filter(Boolean).join(" ") || "ok";
-    const note = blind ? `  (${blind} on SVG ground — not auditable here, check by hand)` : "";
+    const note = blind ? `  (${blind} on SVG or gradient ground — not auditable here, check by hand)` : "";
     console.log(`${width} ${route.padEnd(20)} ${flag}${note}`);
     for (const bad of fail) console.log(`      ${bad.r}:1 need ${bad.need} @${bad.px}px  "${bad.t}"`);
   }
