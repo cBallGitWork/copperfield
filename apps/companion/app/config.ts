@@ -130,10 +130,6 @@ export const LIVE_REVALIDATE = 20;
  *  with news, not the match; on the live clock it was 39 MB in four minutes of three pages polling (11 Oct 2026). */
 export const BASE_REVALIDATE = 300;
 
-/** Lifetime of the season list's standby entry, in seconds, read only when the hour's is refused: the list is the
- *  hour's reading in a match window too, since the round in view rides on its own (19 Oct 2026). */
-export const SEASON_FIXTURES_REVALIDATE = 300;
-
 /** When FPL is read on the live clock: from `leadMinutes` before a London day's first kickoff to `tailMinutes` after
  *  its last (a match plus stoppages and the whistle's settling). Outside it nothing is in play (Craig, 11 Oct 2026). */
 export const MATCH_WINDOW = { leadMinutes: 15, tailMinutes: 135 } as const;

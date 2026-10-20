@@ -29,8 +29,9 @@ import {
 } from "@epl/core";
 import { now, replayAt } from "./clock";
 import { roundGoals } from "./commentary";
-import { hourly, onTheClock } from "./fplClock";
+import { onTheClock } from "./fplClock";
 import { restAfterFailure } from "./restAfterFailure";
+import { singleFlight } from "./singleFlight";
 import {
   BASE_REVALIDATE,
   FPL_REST_MAX_MS,
@@ -39,8 +40,8 @@ import {
   LIVE_REVALIDATE,
   MATCH_WINDOW,
   POLL,
+  QUIET_REVALIDATE,
   SEASON_CODE_LIFE,
-  SEASON_FIXTURES_REVALIDATE,
 } from "./config";
 
 // One football snapshot per window, shared by every reader, from caches on the football clock (`fplClock.ts`): FPL's
@@ -60,13 +61,14 @@ const readSeason = async (): Promise<{ fixtures: Fixture[]; fetchedAt: string }>
   fetchedAt: new Date().toISOString(),
 });
 
-/** The season's list as held this quiet hour: the clock's kickoffs, so deciding the clock costs no read of its own. */
-const seasonThisHour = hourly("fpl-season-list", readSeason);
+/** The season's list, one reading an hour that a refused refresh leaves in place: the clock's kickoffs too. The round
+ *  in view comes from its own reading, so this carries only dates and finished rounds. */
+const seasonList = unstable_cache(singleFlight(readSeason), ["fpl-season-list"], { revalidate: QUIET_REVALIDATE });
 
-/** Whether FPL is read on the live clock: inside a match window, or when no kickoffs can be read. Once per request. */
+/** Whether FPL is read on the live clock: inside a match window, or when no list was ever held. Once per request. */
 export const matchOn = cache(async (): Promise<boolean> => {
   try {
-    const kickoffs = (await seasonThisHour()).fixtures.filter(isDated).map((fixture) => fixture.kickoff);
+    const kickoffs = (await seasonList()).fixtures.filter(isDated).map((fixture) => fixture.kickoff);
     return inMatchWindow(kickoffs, now().toISOString(), MATCH_WINDOW);
   } catch {
     return true;
@@ -155,10 +157,6 @@ export async function gameweekSnapshot(gameweek: number): Promise<FootballSnapsh
   const [base, round] = await Promise.all([footballBase(), roundOf(gameweek, true)]);
   return roundSnapshot(base, gameweek, round);
 }
-
-/** The whole season's list, the hour's reading in a match window too: the round in view comes from its own reading,
- *  so this carries only dates and finished rounds. The slow clock's entry stands in when the hour's is refused. */
-const seasonList = onTheClock("fpl-season-list", readSeason, SEASON_FIXTURES_REVALIDATE, async () => false, seasonThisHour);
 
 /** Every fixture in the season, as FPL dates them (a snapshot holds one gameweek), the round in focus as fresh as its
  *  own reading; once per request. Without a round to lay over it, the season list alone. */
