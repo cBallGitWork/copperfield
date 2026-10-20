@@ -45,9 +45,29 @@ describe("plCommentary", () => {
     expect(kinds.has("goal")).toBe(true);
   });
 
-  it("runs newest first", () => {
-    const seconds = lines.map((line) => line.seconds);
-    expect([...seconds].sort((a, b) => b - a)).toEqual(seconds);
+  it("runs newest first within each half", () => {
+    const split = lines.findIndex((line) => line.text.startsWith("Second Half begins"));
+    for (const half of [lines.slice(1, split + 1), lines.slice(split + 1)]) {
+      const seconds = half.map((line) => line.seconds);
+      expect([...seconds].sort((a, b) => b - a)).toEqual(seconds);
+    }
+  });
+
+  it("puts the second half above the first half's added time, though its clock reads less", () => {
+    // Opta's clock restarts at 45:00 for the second half, so 45+4 (2910s) outranks 46' (2700s).
+    const at = (text: string) => lines.findIndex((line) => line.text.startsWith(text));
+    expect(at("Second Half begins")).toBeGreaterThan(-1);
+    expect(at("Second Half begins")).toBeLessThan(at("First Half ends"));
+  });
+
+  it("tops the feed with 'Match ends', which Opta stamps at the first minute", () => {
+    expect(lines[0].type).toBe("end 14");
+  });
+
+  it("orders extra time after the second half", () => {
+    const at = (label: string, secs: number, id: number) => ({ id, type: "x", text: "t", time: { label, secs } });
+    const order = plCommentary([at("90+3", 5580, 1), at("91", 5400, 2), at("105+1", 6360, 3), at("106", 6300, 4)]);
+    expect(order.map((line) => line.id)).toEqual([4, 3, 2, 1]);
   });
 
   it("drops an event it cannot place in the match", () => {
