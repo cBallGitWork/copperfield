@@ -1,7 +1,7 @@
 import type { Club, PlManMatch, PlTeamSheet, PlayerOwner, SquadPlayerDetail } from "@epl/core";
 import { TILE_WIDTH } from "../../../components/league/PositionTile";
 import { clubIndex } from "../../../components/football/clubIndex";
-import { BOARD, PANEL_FLUSH, phoneShows } from "@/app/desk";
+import { BOARD, PANEL, phoneShows } from "@/app/desk";
 import { Head, HeadRow, MUTE } from "../../../components/league/TableHeads";
 import type { Match } from "./match";
 import SheetRow from "./SheetRow";
@@ -59,7 +59,7 @@ function Side({
   return (
     // The club's colour on every index block; `cm-index-scoped` keeps the contrast `desk.css` measured.
     <section
-      className={`${PANEL_FLUSH} cm-index-scoped min-w-0 ${phoneShows(phonePicked)}`}
+      className={`${PANEL} cm-index-scoped min-w-0 ${phoneShows(phonePicked)}`}
       style={clubIndex(club)}
     >
       {/* `table-fixed` so the name truncates; the widths go on the HEAD row, which is the one a fixed table reads. */}
