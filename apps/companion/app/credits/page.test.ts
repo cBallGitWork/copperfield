@@ -38,3 +38,21 @@ describe("the credits", () => {
     expect(bbc).toContain(lawro.author);
   });
 });
+
+// At 320 a wrapped credit cost a whole 44px line, and the dots in the author's span were stranded at the wrap.
+describe("a credit's second row", () => {
+  it("has no separator dots to strand: the gap alone parts title, author and licence", () => {
+    for (const entry of entries) expect(entry.slice(entry.indexOf("<div"))).not.toContain("·");
+  });
+
+  it("wraps a line at the text's own height, the links' 44px reach held in by a negative margin", () => {
+    for (const entry of entries) {
+      const row = entry.slice(entry.indexOf("<div"));
+      expect(row).toMatch(/<div class="[^"]*\bflex-wrap\b[^"]*\bleading-5\b/);
+      for (const link of row.match(/<a [^>]*>/g)!) {
+        expect(link).toMatch(/class="[^"]*-my-3 [^"]*\bpy-3\b/);
+        expect(link).not.toContain("min-h-11");
+      }
+    }
+  });
+});

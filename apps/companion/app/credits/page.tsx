@@ -9,8 +9,8 @@ import { CREDITS_TITLE, titled } from "../titles";
 // Who took the photographs: each Creative Commons licence requires the author and a link to the terms.
 // Prints `football/grounds.ts` and `data/leagues/venues.json`, so an uncredited picture shows here.
 
-/** A credit's outbound link at the tap floor; twice in one row and nowhere else, so it stays here (CODE_RULES §1). */
-const CREDIT_LINK = "flex min-h-11 min-w-0 items-center break-words underline lg:min-h-9";
+/** A credit's outbound link: 44px to a thumb, its padding cancelled by margin so a wrap costs one text line. */
+const CREDIT_LINK = "-my-3 min-w-0 break-words py-3 underline lg:-my-2 lg:py-2";
 
 export const metadata = titled(CREDITS_TITLE);
 
@@ -42,11 +42,11 @@ export default function CreditsPage() {
             <li key={place} className={`flex flex-col pt-2 ${ROW_RULE}`}>
               <span className="font-chrome text-sm font-bold text-ink">{place}</span>
               {/* What the licences ask for: the title linked to its source, the author, the licence linked to its terms. */}
-              <div className="flex flex-wrap items-center gap-x-1.5 text-xs text-muted">
+              <div className="flex flex-wrap items-center gap-x-3 pb-2 text-xs leading-5 text-muted">
                 <a className={CREDIT_LINK} href={photo.source} rel="noreferrer" target="_blank">
                   {photo.title}
                 </a>
-                <span>· {photo.author} ·</span>
+                <span>{photo.author}</span>
                 <a className={CREDIT_LINK} href={photo.licenceUrl} rel="noreferrer" target="_blank">
                   {photo.licence}
                 </a>
