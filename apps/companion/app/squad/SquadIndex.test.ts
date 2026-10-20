@@ -65,6 +65,13 @@ describe("the index's order", () => {
     expect(page.slice(page.lastIndexOf("<form", signOut), signOut)).toMatch(/cm-panel[\s\S]*min-h-11/);
   });
 
+  it("gives every row the same 4px left edge, so his name starts in the column with the rest", async () => {
+    const page = await html();
+    const tag = (name: string) => row(page, name).slice(0, row(page, name).indexOf(">"));
+    expect(tag("Raccoons")).toContain("border-l-4 border-l-accent");
+    for (const name of ["Glengarry", "Short FC", "Over FC"]) expect(tag(name)).toContain("border-l-4 border-l-transparent");
+  });
+
   it("keeps the sign-in at the head for a reader with no code", async () => {
     Object.assign(state, { holder: false, mine: null });
     const page = await html();

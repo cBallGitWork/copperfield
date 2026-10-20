@@ -7,7 +7,7 @@ import { forgetTeam } from "./actions";
 import { getLeagueSquads } from "../squads";
 import { planningRound } from "../round";
 import { myTeamId, signedIn } from "../session";
-import { yoursBorder } from "../mine";
+import { yoursEdge } from "../mine";
 import { MY_TEAM, teamHref } from "./routes";
 import { PANEL, ROW_NAME } from "@/app/desk";
 import FantraxSilent from "../components/shell/FantraxSilent";
@@ -123,7 +123,7 @@ function Squad({
       href={lead ? MY_TEAM : teamHref(team.teamId)}
       className={`cm-row flex min-h-14 items-center gap-3 px-3 py-2.5 hover:bg-raised ${
         lead ? "bg-raised" : "bg-surface"
-      } ${yoursBorder(lead)}`}
+      } border-line ${yoursEdge(lead)}`}
     >
       <span className="flex min-w-0 flex-1 flex-col lg:flex-row lg:items-baseline lg:gap-2">
         <span className={`min-w-0 truncate ${ROW_NAME}`}>{team.teamName}</span>
