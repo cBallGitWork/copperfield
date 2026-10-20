@@ -147,7 +147,9 @@ sheet, a club's stats board, Action Zones' shot list, the Overview's scorer and 
 the phone's club and view switches (`TabStrip compact`) on `/prem/match/[id]`. **So are a squad list's**
 (Craig, 6 Oct 2026: *"mobile, list view, rows are quite thick still, room to make shorter"*): `SquadRow`, on
 your own planner's list, a rival's squad and the head-to-head's list. **So are the Draft tab's tables** (Craig, 6 Oct 2026, yes to 36px): the
-league table, Team Stats and the cup groups (`TIGHT_ROW`).
+league table, Team Stats and the cup groups (`TIGHT_ROW`). **So are the Premier League table (`/prem`), a club's Stats
+board (`/prem/club/[code]/stats`) and a team's Stats board (`/squad/[id]/stats`)** (20 Oct 2026, the mobile review:
+siblings of the Draft tab's tables, read rather than tapped row by row).
 
 *It was three until 11 Sep 2026. The third was the **Pitch/List toggle** at
 `min-h-9`, and it is gone because the control is: `ViewToggle` became a blue

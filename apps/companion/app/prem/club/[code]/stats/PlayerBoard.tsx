@@ -3,17 +3,20 @@
 import { useMemo, useState } from "react";
 import NameLink from "../NameLink";
 import { DASH, fullFootballerName, type FootballPlayer } from "@epl/core";
-import { SELECT } from "../../../../components/shell/ButtonLink";
-import { VIEWS, reading } from "./measures";
-import { MINOR_LABEL, PANEL_FLUSH } from "@/app/desk";
+import { viewOf, reading } from "./measures";
+import { PANEL } from "@/app/desk";
 import Board from "../../../../components/league/Board";
-import LeadFace, { LEAD_LINK } from "../../../../components/league/LeadFace";
+import LeadFace from "../../../../components/league/LeadFace";
+import { TIGHT_ROW } from "../../../../components/league/TableCells";
 import { SIDE_SHARES, standoutCuts, standoutInk } from "../../../../components/league/standout";
 import StateBox from "../../../../components/football/StateBox";
 import { doubtRow } from "../../../../components/football/doubtRow";
 
 // A club's season, player by player: our position in the tile, standouts lit, doubts washed.
-// Client only because sorting is a tap here: a shared query string would have to carry the club too.
+// Client only because sorting is a tap here; the view is the page's, from its foot strip (`?view=`).
+
+/** The lead's link at PRODUCT's 36px under a thumb, as `LEAD_LINK` is wide. */
+const TIGHT_LEAD = `${TIGHT_ROW} w-40 px-1.5 text-left lg:w-64`;
 
 export interface Row {
   player: FootballPlayer;
@@ -36,15 +39,14 @@ export function unplayedLast(key: keyof FootballPlayer["season"], descending: bo
   };
 }
 
-export default function PlayerBoard({ rows }: { rows: readonly Row[] }) {
-  const [view, setView] = useState(VIEWS[0]?.key ?? "attack");
+export default function PlayerBoard({ rows, view }: { rows: readonly Row[]; view: string }) {
   // Null keeps the page's order, keeper first by our league's position, rather than a default sort.
   const [sort, setSort] = useState<{ key: keyof FootballPlayer["season"]; descending: boolean } | null>(
     null,
   );
 
-  const shown = VIEWS.find((entry) => entry.key === view);
-  const measures = shown?.measures ?? [];
+  const shown = viewOf(view);
+  const { measures } = shown;
   // Each column's standouts among the men who have played, as a match board lights them.
   const played = rows.filter((row) => !unplayed(row)).length;
   const cuts = new Map(
@@ -66,29 +68,9 @@ export default function PlayerBoard({ rows }: { rows: readonly Row[] }) {
     );
 
   return (
-    <section className={PANEL_FLUSH}>
-      {/* CM's grey bevelled control, on its own strip above the table, which is
-          where the game puts it (`21.jpg`, `25.jpg`). */}
-      <div className="flex items-center gap-2 border-b border-line px-2 py-1.5">
-        <label className={`${MINOR_LABEL}`} htmlFor="club-stat-view">
-          View
-        </label>
-        <select
-          id="club-stat-view"
-          value={view}
-          onChange={(event) => setView(event.target.value)}
-          className={`${SELECT} min-w-0 flex-1 lg:max-w-52`}
-        >
-          {VIEWS.map((entry) => (
-            <option key={entry.key} value={entry.key}>
-              {entry.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
+    <section className={PANEL}>
       <Board
-        caption={`Every player's ${shown?.label.toLowerCase()} figures`}
+        caption={`Every player's ${shown.label.toLowerCase()} figures`}
         rows={ordered}
         keyOf={(row) => String(row.player.id)}
         rowClass={(row) => doubtRow(row.player)}
@@ -98,7 +80,7 @@ export default function PlayerBoard({ rows }: { rows: readonly Row[] }) {
             label: "Player",
             className: (row) => doubtRow(row.player),
             of: ({ player, positions, href }) => (
-              <NameLink href={href} className={LEAD_LINK}>
+              <NameLink href={href} className={TIGHT_LEAD}>
                 <LeadFace name={fullFootballerName(player)} positions={positions} after={<StateBox player={player} />} />
               </NameLink>
             ),

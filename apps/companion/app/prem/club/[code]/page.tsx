@@ -11,9 +11,11 @@ import {
 import TabEmpty from "../../../components/league/TabEmpty";
 import ButtonLink from "../../../components/shell/ButtonLink";
 import ClubShell from "./Shell";
-import Squad from "./Squad";
+import Squad, { drawsEleven } from "./Squad";
+import PitchListStrip, { pitchListOf } from "./PitchList";
 import { squadOrder } from "./squadOrder";
 import { TABLE } from "../../PremNav";
+import { clubHref } from "../../routes";
 import { intelSquads } from "../../../intel";
 import { predictedElevens } from "../../../predictedXi";
 import { PANEL } from "@/app/desk";
@@ -31,8 +33,16 @@ export const revalidate = 30;
 
 export const generateMetadata = clubTitle("squad");
 
-export default async function ClubSquadPage({ params }: { params: Promise<{ code: string }> }) {
-  const { code } = await params;
+export default async function ClubSquadPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ code: string }>;
+  searchParams: Promise<{ view?: string }>;
+}) {
+  const [{ code }, query] = await Promise.all([params, searchParams]);
+  // The list opens first: the squad is a fact and the eleven a prediction (DESIGN §9).
+  const view = pitchListOf(query.view, "list");
   const [{ club, snapshot, fixtures }, league, xi] = await Promise.all([clubOr404(code), leagueOpinions(), predictedElevens()]);
 
   const place = clubPlaces(fixtures, snapshot.clubs).get(club.id);
@@ -57,21 +67,24 @@ export default async function ClubSquadPage({ params }: { params: Promise<{ code
   const predicted = xi.clubs[club.shortName];
   const eleven = xiFault(predicted) === null ? predictedEleven(predicted) : [];
   const updated = xi.fetchedAt === null ? null : londonMoment(xi.fetchedAt);
+  const formation = predicted?.formation ?? null;
+  const picks = squad.length > 0 && drawsEleven(eleven, formation);
 
   return (
-    <ClubShell club={club} current="squad">
+    <ClubShell club={club} current="squad" foot={picks ? <PitchListStrip href={clubHref(club.code)} view={view} /> : undefined}>
       <section className={PANEL}>
         {squad.length === 0 ? (
           <TabEmpty>No squad listed.</TabEmpty>
         ) : (
           <>
             <Squad
+              view={view}
               players={squad}
               league={league}
               minutes={gameweek === null || minutes === null ? null : { gameweek, byCode: minutes, asOf: XMINS_AS_OF }}
               club={club}
               eleven={eleven}
-              formation={predicted?.formation ?? null}
+              formation={formation}
               against={against}
               updated={updated}
             />
