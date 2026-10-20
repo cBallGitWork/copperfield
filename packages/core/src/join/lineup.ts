@@ -34,6 +34,11 @@ export function isGoalkeeper(position: string | null): boolean {
   return position === PITCH_ORDER[0];
 }
 
+/** Whether this position is in goal or the back line: the first two letters of `PITCH_ORDER`. */
+export function isBack(position: string | null): boolean {
+  return position !== null && PITCH_ORDER.slice(0, 2).includes(position);
+}
+
 /** How far up the pitch a position stands, for ordering. */
 export function positionDepth(position: string): number {
   const at = PITCH_ORDER.indexOf(position);

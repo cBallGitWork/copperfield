@@ -54,9 +54,6 @@ export function fullPrintName(player: FootballPlayer): string {
   return `${words[0]} ${known}`;
 }
 
-/** A keeper or defender's slot. */
-export const isBack = (slot: string) => slot === "G" || slot === "D";
-
 export function startsFor(sheet: Sheet, fantraxId: string): boolean {
   return sheet.starters.some((man) => man.fantraxId === fantraxId);
 }

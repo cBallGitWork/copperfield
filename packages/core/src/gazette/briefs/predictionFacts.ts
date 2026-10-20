@@ -4,7 +4,7 @@ import { ordinal } from "../../league/ordinal";
 import { groupedBy } from "../../grouped";
 import type { PredictionCall } from "../predictions/pick";
 import type { PredictionSide, SquadMan } from "../predictions/sides";
-import { isBack } from "../sheets/sheet";
+import { isBack } from "../../join/lineup";
 
 // One tie's facts for Lawro, worded and ranked. Squad-level only, and no figure of ours: the
 // order of a side's men is our model's reading and is never printed.

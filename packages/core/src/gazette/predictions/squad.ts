@@ -3,8 +3,8 @@ import { projectedTotal, type ProjectedPlayer } from "../../football/intel/proje
 import type { PlannerRow, StrengthPlaces } from "../../football/intel/strength";
 import { availabilityOf } from "../../football/playerState";
 import type { Club } from "../../football/types";
+import { isBack, isGoalkeeper, PITCH_ORDER } from "../../join/lineup";
 import { isResolved, type RosteredTeam } from "../../join/roster";
-import { isBack } from "../sheets/sheet";
 import type { RecentGame, SquadMan } from "./sides";
 
 // A manager's squad joined for Lawro: every man he holds, whatever slot he fills. The slot is the
@@ -48,7 +48,7 @@ export function squadMen(team: RosteredTeam, join: SquadJoin): SquadMan[] {
       ease: easeOf(row, join.standing.attack.size > 0),
       liverpool: club?.code === PREDICTIONS.liverpoolCode,
       recent: join.recent.get(player.id) ?? [],
-      face: { code: player.code, name: player.name, clubId: player.clubId, position: positions.includes("G") ? "G" : null },
+      face: { code: player.code, name: player.name, clubId: player.clubId, position: positions.some(isGoalkeeper) ? PITCH_ORDER[0] : null },
     };
   });
 }
