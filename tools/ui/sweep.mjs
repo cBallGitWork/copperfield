@@ -3,7 +3,7 @@
 //   node tools/ui/sweep.mjs [--base http://localhost:3000] [--team-cookie <file>]
 
 import { AUDIT_WIDTHS, BASE_URL, DESK, PHONE, connect, discover, parseArgs, teamCookie } from "./cdp.mjs";
-import { ALL_ROUTES, FRONT_PAGE, playedMatchRoutes, playerRoutes } from "./routes.mjs";
+import { ALL_ROUTES, FRONT_PAGE, clubRoutes, playedMatchRoutes, playerRoutes, teamRoutes } from "./routes.mjs";
 
 /** This run's routes: the shared list plus the ids discovered below; a copy, so `routes.mjs` stays a declaration. */
 const ROUTES = [...ALL_ROUTES];
@@ -68,14 +68,12 @@ await cdp.setCookie(teamCookie(flags));
 // Per-record routes are discovered, never written down: their ids are the league's, FPL's or a story's, and move.
 // The team, club and match bars are the app's only per-team and per-club colours, the pairs this exists to measure.
 await cdp.setViewport(PHONE.width, DESK.height);
-const team = await discover(cdp, "/squad", 'a[href^="/squad/"]');
-if (team) ROUTES.push(team, ...["transfers", "next", "fixtures", "stats"].map((tab) => `${team}/${tab}`));
+ROUTES.push(...(await teamRoutes(cdp)));
 
 const article = await discover(cdp, FRONT_PAGE, 'a[href^="/paper/"]');
 if (article) ROUTES.push(article);
 
-const club = await discover(cdp, "/prem", 'a[href^="/prem/club/"]');
-if (club) ROUTES.push(club, ...["depth", "set-pieces", "fixtures", "stats"].map((tab) => `${club}/${tab}`));
+ROUTES.push(...(await clubRoutes(cdp)));
 
 ROUTES.push(...(await playerRoutes(cdp)));
 

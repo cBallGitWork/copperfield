@@ -16,6 +16,7 @@ export const DESK_ROUTES = [
   "/league",
   "/league/fixtures",
   "/league/transfers",
+  "/league/waivers",
   "/league/team-stats",
   "/league/cups",
   "/scoring",
@@ -33,12 +34,13 @@ export const DESK_ROUTES = [
   "/matchday?view=stats",
   "/fpl",
   "/news",
-  // Not a section: reachable only from the rail's foot and the phone's drawer.
+  // Not sections: reachable only from the rail's foot, the phone's drawer and the end of Read's strip.
+  "/more",
   "/credits",
 ];
 
-/** The competition's front page: on `sweep` and `tapfit`, not yet on `groundfit`. */
-const PREM_ROUTE = "/prem";
+/** The competition's pages: on `sweep` and `tapfit`, not yet on `groundfit`. Gameweek 1 always exists, as smoke says. */
+const PREM_ROUTES = ["/prem", "/prem/fixtures", "/gw/1"];
 
 /** The front page as an instrument opens it: a signed-in cold open of a bare `/` lands on Mail or Live. */
 export const FRONT_PAGE = "/?paper";
@@ -47,14 +49,20 @@ export const FRONT_PAGE = "/?paper";
 const PAPER_ROUTES = [FRONT_PAGE];
 
 /** Every route worth measuring for contrast, overflow and tap targets. */
-export const ALL_ROUTES = [...PAPER_ROUTES, ...DESK_ROUTES, PREM_ROUTE];
+export const ALL_ROUTES = [...PAPER_ROUTES, ...DESK_ROUTES, ...PREM_ROUTES];
 
-/** A match's tabs, read off the app's own `prem/match/[id]/` folders so the list cannot drift. */
-const MATCH_DIR = new URL("../../apps/companion/app/prem/match/[id]/", import.meta.url);
-const MATCH_TABS = readdirSync(MATCH_DIR, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && existsSync(new URL(`${entry.name}/page.tsx`, MATCH_DIR)))
-  .map((entry) => entry.name)
-  .sort();
+/** A dynamic route's tabs, read off the app's own folders under `dir` so the list cannot drift. */
+function tabsOf(dir) {
+  const at = new URL(`../../apps/companion/app/${dir}/`, import.meta.url);
+  return readdirSync(at, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && existsSync(new URL(`${entry.name}/page.tsx`, at)))
+    .map((entry) => entry.name)
+    .sort();
+}
+
+const MATCH_TABS = tabsOf("prem/match/[id]");
+const TEAM_TABS = tabsOf("squad/[teamId]");
+const CLUB_TABS = tabsOf("prem/club/[code]");
 
 /** The views a tab switches with a query, which no folder shows: each club's board, the Fantasy Report, the pitch. */
 const MATCH_VIEWS = ["stats?view=home", "stats?view=fantasy", "players?view=pitch"];
@@ -62,6 +70,18 @@ const MATCH_VIEWS = ["stats?view=home", "stats?view=fantasy", "players?view=pitc
 /** One match's overview, every tab under it, and the views its foot rows switch to. */
 function matchRoutes(match) {
   return [match, ...[...MATCH_TABS, ...MATCH_VIEWS].map((tab) => `${match}/${tab}`)];
+}
+
+/** One team's board, every tab under it and its head-to-head, discovered off the squads list. */
+export async function teamRoutes(cdp) {
+  const team = await discover(cdp, "/squad", 'a[href^="/squad/"]');
+  return team ? [team, ...TEAM_TABS.map((tab) => `${team}/${tab}`), `/league/matchups/${team.split("/").pop()}`] : [];
+}
+
+/** One club's page and every tab under it, discovered off the competition's front page. */
+export async function clubRoutes(cdp) {
+  const club = await discover(cdp, "/prem", 'a[href^="/prem/club/"]');
+  return club ? [club, ...CLUB_TABS.map((tab) => `${club}/${tab}`)] : [];
 }
 
 /** A played match's screens, discovered off the results list: a fixture id is per-season, so none is written down. */

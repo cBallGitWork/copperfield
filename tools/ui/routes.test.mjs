@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { readdirSync } from "node:fs";
 import { CUPS } from "@epl/core";
-import { DESK_ROUTES, playerRoutes } from "./routes.mjs";
+import { ANALYSIS } from "../../apps/companion/app/players/routes";
+import { walkPaths } from "../../scripts/smoke/routes";
+import { ALL_ROUTES, DESK_ROUTES, clubRoutes, playerRoutes, teamRoutes } from "./routes.mjs";
 
 // The instruments' route list, and the routes they discover, against a browser written here: no Chrome.
 
@@ -32,5 +35,26 @@ describe("the instruments' routes", () => {
       "/players?compare=p1": { 'tbody a[href^="/players/analysis?"]': "/players/analysis?a=p1&b=p2" },
     });
     expect(await playerRoutes(cdp)).toContain("/players/analysis?a=p1&b=p2");
+  });
+
+  it("measure every page the smoke walk visits without an id; Compare is the player's, discovered", () => {
+    const measured = new Set(ALL_ROUTES.map((route) => route.split("?")[0]));
+    const free = walkPaths({ teamId: null, playerId: null, rivalId: null, club: null, match: null }).map((path) => path.split("?")[0]);
+    expect([...new Set(free)].filter((path) => path !== ANALYSIS && !measured.has(path))).toEqual([]);
+  });
+
+  it("walk a team's every tab, read off its folders, and its head-to-head", async () => {
+    const tabs = readdirSync(new URL("../../apps/companion/app/squad/[teamId]/", import.meta.url), { withFileTypes: true }).filter((entry) => entry.isDirectory());
+    const routes = await teamRoutes(browser({ "/squad": { 'a[href^="/squad/"]': "/squad/t1" } }));
+    expect(routes).toEqual(["/squad/t1", ...tabs.map((tab) => `/squad/t1/${tab.name}`).sort(), "/league/matchups/t1"]);
+  });
+
+  it("walk a club's every tab, read off its folders", async () => {
+    const routes = await clubRoutes(browser({ "/prem": { 'a[href^="/prem/club/"]': "/prem/club/3" } }));
+    expect(routes).toEqual(["/prem/club/3", "/prem/club/3/depth", "/prem/club/3/fixtures", "/prem/club/3/set-pieces", "/prem/club/3/stats"]);
+  });
+
+  it("walk no team or club when none is linked", async () => {
+    expect([...(await teamRoutes(browser({}))), ...(await clubRoutes(browser({})))]).toEqual([]);
   });
 });
