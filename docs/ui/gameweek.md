@@ -7,12 +7,15 @@ Drawn by `GameweekView`, which only this route uses. Linked from each "N yours" 
 
 ## On the page
 
-- Header: the Premiership's cream competition bar titled **Gameweek N**, with the `←` back plate (to Prem ›
-  Fixtures at that gameweek), and the line under it: **LIVE** with the pulsing dot while a match is on, otherwise,
-  while it is ahead, **Line-ups lock** and the league's own time. The route reads the lock (`lockAhead`) and
-  `GameweekView` takes it as plain data. Framed like the Prem screens since 16 Oct 2026 (Craig: "3 yours goes to a
-  bugged screen" once #526 linked it): the list sits in the desk's panel, never on the bare photograph, and the
-  "Updated" line sits inside it.
+- Header: the Premiership's cream competition bar, titled with the competition's name as every Prem screen is,
+  with the `←` back plate (to Prem › Fixtures at that gameweek). Under it the house gameweek plate (`RoundHead`):
+  ◀ **Gameweek N** ▶, the arrows replacing the page in history as Prem › Fixtures' do, so Back leaves /gw rather
+  than walking through every week, and an inert outline at either end of the season FPL published. On the plate:
+  **Live** with the pulsing dot while a match is on (the dot carries the colour; `--color-live` is unreadable on the
+  light plate), otherwise, while it is ahead, **Line-ups lock** and the league's own time. The route reads the lock
+  (`lockAhead`) and `GameweekView` takes it as plain data. Framed like the Prem screens since 16 Oct 2026 (Craig: "3
+  yours goes to a bugged screen" once #526 linked it): the list sits in the desk's panel, never on the bare
+  photograph, and the "Updated" line sits inside it.
 - **The day under the kickoff time** — `Sat`, `Sun`, `Mon`, in the small line
   that carries `FT` once the match is over and is empty until it starts. Without
   it the list is sorted by instant and reads as scrambled: 17:30 above 14:00
@@ -48,9 +51,6 @@ Drawn by `GameweekView`, which only this route uses. Linked from each "N yours" 
 
   Independent of the marks above. A **signed-out** reader gets the tags and no
   `n yours` — whose player that was is not a question about him.
-- Previous / Next round links, bounded by the season FPL actually published, not
-  a hardcoded 38. Each end renders an inert placeholder so the other link does
-  not slide across the screen.
 - One line at the foot: `Updated 11:08.`, or `Scorers not available right now.`
   when the player stats are missing, **so the goals below read as missing rather
   than nil**. It names no source.
