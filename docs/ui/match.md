@@ -261,7 +261,9 @@ underneath were perfectly clear.
 `labels.ts` is the arithmetic and it is unit-tested, because two names that clear
 each other by a pixel at 390 and collide at 1440 look identical in a diff. A name
 takes the slot under its own disc, then the one over it, then a row further out
-each way to three; **the disc itself never moves**, because it is a measurement
+each way to three, and it takes none that sits on a disc, its own or another man's
+(a name is measured at 1.8% of the pitch a character, the real width of bold 9px
+type at 390; review, 20 Oct 2026). **The disc itself never moves**, because it is a measurement
 and nudging it draws a picture that lies about where a man played. Past eight
 co-located men the arithmetic gives up NEAR the man rather than flying his name
 across the pitch — an overlap is unreadable, a name closer to somebody else's disc
