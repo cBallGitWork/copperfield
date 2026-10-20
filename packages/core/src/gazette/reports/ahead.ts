@@ -1,4 +1,4 @@
-import { byKickoffUndatedFirst } from "../../football/selectors";
+import { byKickoffUndatedFirst, involves } from "../../football/selectors";
 import type { Club, Fixture } from "../../football/types";
 import { londonDayOf } from "../../time";
 import { fullClubName } from "../clubNames";
@@ -15,7 +15,7 @@ export function nextMatch(season: readonly Fixture[], clubs: readonly Club[], cl
   const club = clubs.find((c) => c.code === clubCode);
   if (club === undefined) return null;
   const byId = new Map(clubs.map((c) => [c.id, c]));
-  const upcoming = season.filter((f) => (f.homeClubId === club.id || f.awayClubId === club.id) && (londonDayOf(f.kickoff) ?? "") > day).sort(byKickoffUndatedFirst);
+  const upcoming = season.filter((f) => involves(f, club.id) && (londonDayOf(f.kickoff) ?? "") > day).sort(byKickoffUndatedFirst);
   for (const f of upcoming) {
     const home = f.homeClubId === club.id;
     const opponent = byId.get(home ? f.awayClubId : f.homeClubId);

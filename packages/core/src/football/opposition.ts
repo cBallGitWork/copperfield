@@ -1,4 +1,4 @@
-import { clubById, fixturesInOrder, kickoffOrder } from "./selectors";
+import { clubById, fixturesInOrder, involves, kickoffOrder } from "./selectors";
 import type { Club, Fixture, FootballSnapshot } from "./types";
 
 // Who each club plays in the round a snapshot describes: a football fact, never inferred from the league layer.
@@ -62,10 +62,7 @@ export function nextFixtures(
   clubId: number,
   count: number,
 ): Opposition[] {
-  const mine = fixtures.filter(
-    (f) =>
-      f.status === "upcoming" && (f.homeClubId === clubId || f.awayClubId === clubId),
-  );
+  const mine = fixtures.filter((f) => f.status === "upcoming" && involves(f, clubId));
 
   mine.sort(kickoffOrder);
 

@@ -83,12 +83,20 @@ function byImpact(a: MatchContribution, b: MatchContribution): number {
   return score(b) - score(a) || b.minutes - a.minutes;
 }
 
+/** Oldest first; an undated match last, which is where one the television has not picked belongs. */
+export function byKickoff(a: string | null, b: string | null): number {
+  if (a === null || b === null) return a === null ? (b === null ? 0 : 1) : -1;
+  return a.localeCompare(b);
+}
+
+/** Whether a club plays in a fixture, home or away. Club ids are FPL's per-season ids. */
+export function involves(fixture: Pick<Fixture, "homeClubId" | "awayClubId">, clubId: number): boolean {
+  return fixture.homeClubId === clubId || fixture.awayClubId === clubId;
+}
+
 /** Kickoff order, an undated TV pick last and a tie by id: a match with no time must not sort to the top. */
 export function kickoffOrder(a: Fixture, b: Fixture): number {
-  if (a.kickoff === b.kickoff) return a.id - b.id;
-  if (!a.kickoff) return 1;
-  if (!b.kickoff) return -1;
-  return a.kickoff.localeCompare(b.kickoff);
+  return byKickoff(a.kickoff, b.kickoff) || a.id - b.id;
 }
 
 /** Fixtures for a gameweek in kickoff order, undated last. */

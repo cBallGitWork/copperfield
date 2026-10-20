@@ -45,7 +45,7 @@ import { fitnessAfter, leagueJoin } from "./matchdayLeague";
 import { dayPoints, dayReads, marksFrom } from "./matchdayRatings";
 import type { Say } from "./newsroom";
 import { codesByOpta } from "./opta";
-import { involves } from "./round";
+import { involves } from "@epl/core";
 
 // The reads behind one match-day report: the Premier League's own account of each match, FPL's per-man figures, the league's,
 // and our marks. Script-side: about four requests a match, one per past gameweek and six for the marks, made only when a

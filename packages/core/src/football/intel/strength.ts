@@ -1,5 +1,6 @@
 import { mean } from "../../mean";
 import { sharedPlaces } from "../../places";
+import { involves } from "../selectors";
 import type { Club, Fixture } from "../types";
 import { byCode } from "./byCode";
 import type { IntelManifest } from "./types";
@@ -135,7 +136,7 @@ export function plannerRows(
     .map((club) => {
       const cells = gameweeks.map((gameweek) =>
         fixtures
-          .filter((f) => f.gameweek === gameweek && (f.homeClubId === club.id || f.awayClubId === club.id))
+          .filter((f) => f.gameweek === gameweek && involves(f, club.id))
           .flatMap((f): PlannerCell[] => {
             const home = f.homeClubId === club.id;
             const opponent = byId.get(home ? f.awayClubId : f.homeClubId);

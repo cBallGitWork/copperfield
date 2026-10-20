@@ -4,11 +4,14 @@ import { NOTABLE_SAVES } from "../config";
 import type { Fixture, FootballSnapshot, PlayerMatchStats } from "./types";
 import {
   adjacentGameweeks,
+  byKickoff,
   contributions,
   datedKickoffs,
   fixturesInOrder,
   hasGameweek,
+  involves,
   isDated,
+  kickoffOrder,
   playerByCode,
   squadOf,
   withRoundFixtures,
@@ -190,5 +193,28 @@ describe("withRoundFixtures", () => {
 
   it("adds nothing the season does not list", () => {
     expect(withRoundFixtures([later], [base])).toEqual([later]);
+  });
+});
+
+describe("byKickoff", () => {
+  it("puts the oldest first and an undated match last", () => {
+    const times = ["2026-10-24T14:00:00Z", null, "2026-10-24T11:30:00Z", null];
+    expect([...times].sort(byKickoff)).toEqual(["2026-10-24T11:30:00Z", "2026-10-24T14:00:00Z", null, null]);
+    expect([byKickoff(null, "2026-10-24T14:00:00Z"), byKickoff("2026-10-24T14:00:00Z", null), byKickoff(null, null)]).toEqual([1, -1, 0]);
+  });
+});
+
+describe("kickoffOrder", () => {
+  const at = (id: number, kickoff: string | null) => ({ id, kickoff }) as Fixture;
+  it("breaks a level kickoff by id, an undated pair too", () => {
+    const sorted = [at(4, null), at(3, "2026-10-24T14:00:00Z"), at(2, null), at(1, "2026-10-24T14:00:00Z")].sort(kickoffOrder);
+    expect(sorted.map((f) => f.id)).toEqual([1, 3, 2, 4]);
+  });
+});
+
+describe("involves", () => {
+  it("is true for either side and false for a club not playing", () => {
+    const f = { homeClubId: 1, awayClubId: 2 };
+    expect([involves(f, 1), involves(f, 2), involves(f, 3)]).toEqual([true, true, false]);
   });
 });

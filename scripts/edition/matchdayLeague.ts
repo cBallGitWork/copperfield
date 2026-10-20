@@ -19,7 +19,7 @@ import {
 } from "@epl/core";
 import { BRIDGE } from "./bridge";
 import type { DeskFacts } from "./facts";
-import { involves } from "./round";
+import { involves } from "@epl/core";
 
 // The league's side of a match report: who has each footballer at the match's period, his points, the club's word on
 // him, and this gameweek's claims and drops.
