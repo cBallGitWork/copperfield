@@ -14,7 +14,7 @@ import {
   shownRows,
   type PlayersSearchParams,
 } from "./query";
-import { ALL_ROWS, nextStep, pageRows } from "./pageRows";
+import { ALL_ROWS, litRows, nextStep, pageRows } from "./pageRows";
 import { wayOut } from "./wayOut";
 import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
 import { boardView, onPlate, type BoardName } from "./views";
@@ -106,11 +106,11 @@ export default async function PoolBoard({
   // Plain data, since the key is a client component: a column carries functions.
   const heads = columns.filter((column) => column.key !== "name").map(({ label, title, means }) => ({ label, title, means }));
 
-  // Cut over the rows drawn, so a mark means the top of what is in front of you.
+  // Cut over the first hundred rows the query chose, so a short page keeps its inks as Show N more pages in.
   const cuts = cutsFor(
     columns.filter((column) => column.mark !== undefined),
     (column) =>
-      capped.map((row) => {
+      litRows(shown, capped).map((row) => {
         const value = figureOf(column, row, raw.get(row.entry.player.fantraxId), rated === true);
         return typeof value === "number" ? value : null;
       }),

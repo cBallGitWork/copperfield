@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { drawnCount, nextStep, pageRows } from "./pageRows";
+import { drawnCount, litRows, nextStep, pageRows } from "./pageRows";
+import { cutsFor } from "./standout";
 import { PAGE_ROWS } from "./query";
 
 describe("pageRows", () => {
@@ -52,5 +53,27 @@ describe("nextStep", () => {
     expect(nextStep(12, {})).toBeNull();
     expect(nextStep(100, { rows: "100" })).toBeNull();
     expect(nextStep(100, { all: "1" })).toBeNull();
+  });
+});
+
+describe("litRows", () => {
+  // Integration review, 20 Oct 2026: a 30-row page lit 11 orange where main's 100 lit 67, and its three 20s went yellow.
+  const board = [20, 20, 20, ...Array.from({ length: 97 }, (_, at) => 19 - (at % 19))];
+  const cut = (query: object) =>
+    cutsFor([{ key: "acc" }], () => litRows(board, pageRows(board, query))).get("acc");
+
+  it("cuts a short page over the first hundred, so its top three still wear the best ink", () => {
+    expect(cut({})).toEqual(cut({ rows: "100" }));
+    expect(cut({})?.best).toBe(20);
+  });
+
+  it("keeps a lit figure lit as Show N more pages in", () => {
+    expect(cut({ rows: "60" })).toEqual(cut({}));
+  });
+
+  it("cuts over every row drawn past the hundred", () => {
+    expect(litRows(board, pageRows(board, { all: "1" }))).toHaveLength(board.length);
+    const long = Array.from({ length: 250 }, (_, at) => at);
+    expect(litRows(long, pageRows(long, { all: "1" }))).toHaveLength(250);
   });
 });

@@ -20,6 +20,14 @@ export function pageRows<Row>(shown: Row[], query: PlayersQuery): Row[] {
   return shown.slice(0, drawnCount(shown.length, query));
 }
 
+/** The standout shares are tuned on a hundred men, so a shorter page is still judged against the first hundred. */
+const LIT_ROWS = 100;
+
+/** The rows a page's lit figures are cut over: the first hundred the query chose, or every row drawn past that. */
+export function litRows<Row>(shown: Row[], drawn: Row[]): Row[] {
+  return shown.slice(0, Math.max(drawn.length, LIT_ROWS));
+}
+
 /** The foot's next step: how many more it draws and the `?rows=` that draws them, or null once all are drawn. */
 export function nextStep(shown: number, query: PlayersQuery): { more: number; rows: string } | null {
   const drawn = drawnCount(shown, query);

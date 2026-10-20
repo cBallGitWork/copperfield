@@ -329,8 +329,10 @@ use better colours for us too"*. So a cell is lit or it is not.
 - **The rule**: the highest figures, taken whole values at a time, for as long as
   that stays inside a sixth of the men who have a figure at all. A column whose
   top value is common lights nothing — `GP`, `Min` in August, `YC`.
-- **The population is the rows drawn**, so a mark means "the top of this column,
-  among what is in front of you" and re-reads on every filter.
+- **The population is the first hundred rows the query chose** (or every row drawn
+  past that), so a mark re-reads on every filter but holds while Show N more pages
+  in: the shares are tuned on a hundred men, and a 30-row page cut over itself lit
+  a sixth as much and lost a tied top's orange (20 Oct 2026).
 
 **The board is opaque**, and it is the only table in the app that is (Craig:
 *"also it needs to be opaque too"*). `.cm-panel` is deliberately 88%, which is
