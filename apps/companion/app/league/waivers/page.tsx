@@ -61,7 +61,8 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
         <TabStrip label="Waiver views" tabs={BLOCKS} current={shown} labels="word" compact />
       </div>
 
-      <div className="grid gap-2 lg:grid-cols-2">
+      {/* The last run takes two thirds: its ledger holds a date, a team, a type and two names to the order's one. */}
+      <div className="grid gap-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <section className={`flex flex-col gap-1 ${shown === "order" ? "" : "max-lg:hidden"}`}>
           <h2 className={`${BLOCK_PLATE} max-lg:sr-only`}>Claim order</h2>
           {waivers.order.length === 0 ? (
