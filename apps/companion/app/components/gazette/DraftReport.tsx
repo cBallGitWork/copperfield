@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { clubById, type FootballSnapshot, type PublishedStory } from "@epl/core";
 import DraftMatchup from "./DraftMatchup";
 import { STANDING_HEAD } from "./heads";
@@ -12,6 +13,7 @@ export default function DraftReport({ story, snapshot }: { story: PublishedStory
   if (draft === undefined) return null;
   // The clubs dress each match-up's photograph in its kit; without them it prints the man alone.
   const clubs = snapshot === null ? undefined : clubById(snapshot);
+  const listed = draft.matchups.length >= 2;
   const marked = listMarks(
     "dft",
     draft.matchups.map((_, i) => `d-${i + 1}`),
@@ -20,7 +22,7 @@ export default function DraftReport({ story, snapshot }: { story: PublishedStory
   return (
     <div className="dft flex flex-col pt-4">
       <style>{marked}</style>
-      {draft.matchups.length < 2 ? null : (
+      {!listed ? null : (
         <nav aria-label="The gameweek's match-ups" className={`dft-list flex flex-col border-t ${RULE}`}>
           <h2 className={`${STANDING_HEAD} py-2`}>The match-ups</h2>
           {draft.matchups.map((m, i) => (
@@ -35,7 +37,11 @@ export default function DraftReport({ story, snapshot }: { story: PublishedStory
         </nav>
       )}
       {/* On a phone one match-up shows: the one the list's anchor targets, or the lead. A desk shows every match-up. */}
-      <div className={`flex flex-col ${HAIRLINES} max-lg:[&:has(>section:target)>section:not(:target)]:hidden max-lg:[&:not(:has(>section:target))>section:not(:first-child)]:hidden`}>
+      <div
+        className={`flex flex-col ${HAIRLINES} max-lg:[&:has(>section:target)>section:not(:target)]:hidden max-lg:[&:not(:has(>section:target))>section:not(:first-child)]:hidden${listed ? " max-lg:[&>section]:scroll-mt-(--list-h)" : ""}`}
+        // A tapped row lands its section under the list, so the next switch is one tap: rows of 2.75rem, the head and air.
+        style={listed ? ({ "--list-h": `calc(${draft.matchups.length} * 2.75rem + 3rem)` } as CSSProperties) : undefined}
+      >
         {draft.matchups.map((m, i) => (
           <DraftMatchup key={i} matchup={m} n={i + 1} saturday={draft.cutoff === "saturday"} clubs={clubs} />
         ))}

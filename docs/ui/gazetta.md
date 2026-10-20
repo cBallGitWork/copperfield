@@ -401,6 +401,12 @@ line the gameweek's Prem Reports printed as already told, and a sentence giving 
 (`matchups/told.ts`). A starter off early is timed by the match clock the Prem Report reads ("went off in the 52nd
 minute"), not Fantrax's minutes, which put Schade off after 51 in one paper and 52 in the other.
 
+**A report's contents list stays in view on a phone** (20 Oct 2026). The draft report and the Prem Report show one
+block at a time, chosen from the list by its anchor; each section's phone-only `scroll-margin-top` is the list's height
+(`--list-h`, its rows at 2.75rem plus the head), so a tapped row lands its block under the list and the next switch is
+one tap, not a scroll back. A long team name in the full-time header wraps in its own column (`wrap-anywhere`), as
+the paper's headlines break a long word (`wrap-anywhere hyphens-auto`) rather than push a 320px page sideways.
+
 **A piece that breaks a hard rule twice keeps what it can** (16 Oct 2026). A draft report's match-up and a Prem Report's
 match each keep the attempt with fewer hard faults, less every sentence carrying one; a lede (or standfirst) that
 carries one, or an account that goes whole, prints the bare result instead. **A written headline never stands over a
