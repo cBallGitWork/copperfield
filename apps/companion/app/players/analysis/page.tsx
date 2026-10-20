@@ -23,7 +23,7 @@ import PlayerMap from "./PlayerMap";
 import Points from "./Points";
 import type { Scored } from "./pointsLines";
 import { manOver } from "./overWindow";
-import { sides } from "./pick";
+import { knownSides } from "./pick";
 import { windowWords } from "./window";
 import { Chip } from "../BoardControls";
 import { StackWaiting } from "../[fantraxId]/Waiting";
@@ -60,16 +60,16 @@ export default async function ComparePage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const asked = await searchParams;
-  const { a, b, qa, qb } = sides({
+  const view: View = VIEWS.find((entry) => entry.key === lastValue(asked.view))?.key ?? "figures";
+  const recent = lastValue(asked.range) === String(RECENT);
+
+  const [pool, fixtures, lines] = await Promise.all([getLeaguePool(), seasonFixtures(), getPlayerStats()]);
+  const { a, b, qa, qb } = knownSides(pool, {
     a: lastValue(asked.a),
     b: lastValue(asked.b),
     qa: lastValue(asked.qa) ?? "",
     qb: lastValue(asked.qb) ?? "",
   });
-  const view: View = VIEWS.find((entry) => entry.key === lastValue(asked.view))?.key ?? "figures";
-  const recent = lastValue(asked.range) === String(RECENT);
-
-  const [pool, fixtures, lines] = await Promise.all([getLeaguePool(), seasonFixtures(), getPlayerStats()]);
   const rows = "unavailable" in pool ? [] : pool.rows;
   // As the board reads him: the pool row and the counts that say whether he has played.
   const scored = (id: string | undefined): Scored => ({
@@ -117,7 +117,7 @@ export default async function ComparePage({
     return (
       <ScoutShell current="analysis">
         {picker}
-        <Nothing title="A player, or two">Pick one or two players.</Nothing>
+        <Nothing title="Pick one or two players" />
       </ScoutShell>
     );
   }
