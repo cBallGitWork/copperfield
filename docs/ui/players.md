@@ -164,7 +164,7 @@ above does, that one is.
   panel from `lg`, headed "Filter players" (*16 Oct 2026: Position moved to the row, the sheet's Status is FA and WW
   alone at every width, and the plates and Per 90 are Adv Stats' only; above*): Position as CM's index tiles (chosen: an accent edge and a tick, the word stays white), Status
   chips between `lg` and `xl` (the row carries them at every other width), Club and **Sort by** selects side by side (`QuerySelect`, one component for every Data
-  select), the stat groups (on the row since 19 Oct 2026), Per 90, then Reset and `Show N`, pinned at the foot. A tap outside, Escape or the cross closes it.
+  select), the stat groups (docked at the screen's foot since 20 Oct 2026), Per 90, then Reset and `Show N`, pinned at the foot. A tap outside, Escape or the cross closes it.
   **Reset** turns everything off (search, sort and Show all with the filters) and shuts the sheet; only a comparison's
   `compare` stays, so a picker stays one. **`Show N` promises what the board draws**: `Show 100 of 145` while it
   draws a page (16 Oct 2026; no count line above the board, Craig's call), `Show 30 of 145` since 20 Oct. While the sheet is open every tap in it
