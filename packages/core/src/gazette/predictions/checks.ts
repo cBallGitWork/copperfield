@@ -3,6 +3,7 @@ import { excerpt, faultLog, faultOnMatch, type Fault, type Report } from "../fau
 import { LAWRO_LIMITS as LIMITS } from "../../config";
 import { mean } from "../../mean";
 import { escapeRegExp } from "../../regExp";
+import { sourceFaults } from "../proofing";
 import { strangers } from "../strangers";
 import { CORE_MARK, type PastLine } from "./past";
 import { fallEchoes } from "./opening";
@@ -141,6 +142,7 @@ export function lawroProse(ctx: CheckContext, sides: ReadonlySet<string>, fault:
     for (const name of strangers(text, ctx.facts).filter((word) => !/^I['’]/u.test(word) && !alone.has(word))) fault(section, "a name not in the brief", "hard", name);
     for (const figure of numbersIn(text)) if (!known.has(figure)) fault(section, "a figure not in the brief", "hard", String(figure));
     const plain = masked(text, ctx.names);
+    sourceFaults(fault, section, plain);
     for (const word of [...banned(plain, BANNED), ...banned(plain, words)]) fault(section, "banned", "send-back", word);
   };
 

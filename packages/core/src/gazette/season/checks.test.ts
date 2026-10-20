@@ -31,6 +31,11 @@ describe("checkSeason", () => {
     expect(faults(clean)).toEqual([]);
   });
 
+  it("refuses a source named in the rankings", () => {
+    const named = faults(line("a", "SofaScore rates Haaland the best man in the league.")).map((fault) => `${fault.severity}: ${fault.check} (${fault.evidence})`);
+    expect(named).toContain("hard: names a source or a percentage (SofaScore)");
+  });
+
   it("refuses a number the desk did not give a side, and lets the right one stand", () => {
     expect(faults(line("a", "Ranked second, with Haaland, and still short of a goalkeeper."))).toContainEqual(expect.objectContaining({ section: lineKey("a"), check: "a place the desk did not give", severity: "hard" }));
     expect(faults({ ...clean, opening: "Twenty-two years on the BBC, and now this. Rovers are top of the pile, somehow." })).toContainEqual(expect.objectContaining({ check: "a place the desk did not give", evidence: "Rovers: top of the pile" }));

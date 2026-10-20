@@ -21,6 +21,11 @@ describe("checkLawro", () => {
     }
   });
 
+  it("refuses a source named in his column", () => {
+    const named = checkLawro(draft(SAMPLE, { intro: "SofaScore rates Oduya the best man in the league." }), ctx()).map((each) => `${each.severity}: ${each.check} (${each.evidence})`);
+    expect(named).toContain("hard: names a source or a percentage (SofaScore)");
+  });
+
   it("refuses a tie the writer backed the wrong way, or argued for the other side", () => {
     const turned = draft(SAMPLE, {});
     (turned.ties as Map<string, { line: string; backs: string | null }>).set("rs-bn", { line: SAMPLE[0][1], backs: "bn" });
