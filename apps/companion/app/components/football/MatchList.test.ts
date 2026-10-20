@@ -83,4 +83,10 @@ describe("a match with nothing to list", () => {
     expect(out).toMatch(/>Yours<\/span> · Saka · Raya</);
     expect(out).not.toContain("Nothing to report");
   });
+
+  it("leaves no margin under his men when nothing follows them", () => {
+    const out = list("upcoming", { lines: "none" });
+    expect(out).toMatch(/<div class="flex flex-col gap-2 border-t/);
+    expect(out).not.toContain("mb-2");
+  });
 });

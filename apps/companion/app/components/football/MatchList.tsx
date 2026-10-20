@@ -39,8 +39,8 @@ export default function MatchList({
   const mine = new Set(yours.map((p) => p.code));
 
   return (
-    <div className="border-t border-line bg-bg/40 px-3 py-2.5">
-      <p className="mb-2 truncate text-xs text-accent">
+    <div className="flex flex-col gap-2 border-t border-line bg-bg/40 px-3 py-2.5">
+      <p className="truncate text-xs text-accent">
         <span className="font-semibold uppercase">Yours</span>
         {yours.map((p) => ` · ${p.name}`).join("")}
       </p>
