@@ -6,9 +6,9 @@ import { HeadRow, NameHead, PlateHead } from "../components/league/TableHeads";
 import { leagueScoring } from "@/app/scoring";
 import { backToFront, leaguePositionLabel } from "../positions";
 import PageHeader from "../components/shell/PageHeader";
-import ReadViews from "../components/shell/ReadViews";
+import { MORE } from "../components/shell/sections";
 import { SCORING_TITLE } from "../titles";
-import { BOARD, FIGURE, LABEL, PANEL_FLUSH, ROW_NAME, ROW_RULE } from "@/app/desk";
+import { BOARD, FIGURE, LABEL, PANEL, ROW_NAME, ROW_RULE } from "@/app/desk";
 
 // What every category pays each roster slot, read from getLeagueInfo: a line once where every slot is paid alike.
 // Listed on More since 13 Oct 2026, not a Draft tab: reference read once, not weekly.
@@ -67,13 +67,12 @@ export default async function ScoringPage() {
   );
 }
 
-/** More's strip over the page's own bar, as Credits and More wear it, then the cups' tie-break. */
+/** The page's bar with a way back to More, as Credits and FPL, then the cups' tie-break. */
 function Frame({ children }: { children: ReactNode }) {
   return (
     <>
-      <ReadViews current="more" />
-      <PageHeader title={SCORING_TITLE} competition />
-      <section className={PANEL_FLUSH}>{children}</section>
+      <PageHeader title={SCORING_TITLE} competition back={MORE} />
+      <section className={PANEL}>{children}</section>
       <CupTies />
     </>
   );
@@ -82,7 +81,7 @@ function Frame({ children }: { children: ReactNode }) {
 /** How a level cup tie is settled, in the order the decider walks (Craig, 19 Oct 2026). */
 function CupTies() {
   return (
-    <section aria-labelledby="scoring-cup-ties" className={`${PANEL_FLUSH} gap-2 px-3.5 pb-3 pt-2`}>
+    <section aria-labelledby="scoring-cup-ties" className={PANEL}>
       <h2 id="scoring-cup-ties" className={LABEL}>
         Cup ties
       </h2>
