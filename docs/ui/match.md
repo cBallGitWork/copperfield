@@ -344,7 +344,10 @@ the name it follows rather than a fact of its own.
 
 **On a phone the bracket gives way first, then the name wraps.** At 390 `R. Sessegnon (Dome)` drew as
 `R. Sessegn…`, and with the bracket cut it still drew `R. Sesseg…` at 320. Type never shrinks (DESIGN §8), so a
-name too long for its half takes a second line below `lg`; the desk still cuts it (20 Oct 2026).
+name too long for its half takes a second line below `lg`; the desk still cuts it (20 Oct 2026). The minute
+wraps first: below `lg` the row wraps and the name block is sized by the name alone, so `90+4'` drops under
+`R. Sessegnon` rather than squeeze it to `R.` / `Sesseg` / `non`. A name breaks only at a space, and a lone
+word wider than the half ends `…`.
 
 **The assister carries a minute only when a second assister makes it say
 something.** This went round the houses in one afternoon and the landing place is
@@ -608,7 +611,8 @@ A plate row, `Key moments · Full commentary` (`?report=full`, replacing history
 phone; both views run the page's length. The desk keeps the one list without fouls, under the bar.
 
 **The feed sorts by period, then the clock.** Opta's clock restarts at 45:00, so 45+4 (2,910s) outranked
-46' (2,700s), and it stamps `Match ends` at the first minute; `plCommentary` reads the period off the label.
+46' (2,700s), and it stamps `Match ends` at the first minute; `plCommentary` reads the period off the label and
+gives `Match ends` the clock of the last whistle under it (`90+7′`, not `1′`).
 
 `Commentary.tsx` is the row both screens draw. Two callers rather than three, so
 CODE_RULES §1 would leave it duplicated — and would, if what was duplicated were
