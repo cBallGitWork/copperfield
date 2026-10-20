@@ -1,19 +1,16 @@
 import { clubGround, groundPhotoCredits } from "@epl/core";
 import PageHeader from "../components/shell/PageHeader";
 import { MORE } from "../components/shell/sections";
-import { LABEL, PANEL, ROW_RULE } from "@/app/desk";
+import { PANEL, ROW_RULE } from "@/app/desk";
 import { COLUMNISTS, DESK_GROUND_CREDIT } from "../config";
 import { venueCredits } from "../venues";
-import { sourceLabel } from "./sourceLabel";
 import { CREDITS_TITLE, titled } from "../titles";
 
 // Who took the photographs: each Creative Commons licence requires the author and a link to the terms.
 // Prints `football/grounds.ts` and `data/leagues/venues.json`, so an uncredited picture shows here.
 
-/** A credit's outbound link. Twice in one row and nowhere else, so it is named
- *  here rather than in `desk.ts` — CODE_RULES §1 wants three call sites before a
- *  recipe leaves the file that uses it. */
-const CREDIT_LINK = "flex min-h-11 items-center text-xs underline lg:min-h-9";
+/** A credit's outbound link: 44px to a thumb, its padding cancelled by margin so a wrap costs one text line. */
+const CREDIT_LINK = "-my-3 min-w-0 break-words py-3 underline lg:-my-2 lg:py-2";
 
 export const metadata = titled(CREDITS_TITLE);
 
@@ -40,42 +37,24 @@ export default function CreditsPage() {
         back={MORE}
       />
       <section className={PANEL}>
-        <p className="text-sm text-muted">
-          The photographs behind the desk, behind each club&rsquo;s screens, behind each
-          team&rsquo;s own screens and home head-to-heads and beside Lawro&rsquo;s column are somebody else&rsquo;s
-          work, used under the licence named beside each. Crests, kits and player portraits are the Premier League&rsquo;s own.
-        </p>
         <ul className="flex flex-col">
           {credits.map(({ place, photo }) => (
-            <li
-              key={place}
-              className={`flex flex-col gap-0.5 py-2 ${ROW_RULE}`}
-            >
+            <li key={place} className={`flex flex-col pt-2 ${ROW_RULE}`}>
               <span className="font-chrome text-sm font-bold text-ink">{place}</span>
-              <span className={LABEL}>{photo.title}</span>
-              <span className="text-xs text-muted">{photo.author}</span>
-              {/* Both links the licence requires, as controls at the tap floor. */}
-              <div className="flex flex-wrap items-center gap-x-4">
-                <a
-                  className={CREDIT_LINK}
-                  href={photo.licenceUrl}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {photo.licence}
+              {/* What the licences ask for: the title linked to its source, the author, the licence linked to its terms. */}
+              <div className="flex flex-wrap items-center gap-x-3 pb-2 text-xs leading-5 text-muted">
+                <a className={CREDIT_LINK} href={photo.source} rel="noreferrer" target="_blank">
+                  {photo.title}
                 </a>
-                <a
-                  className={CREDIT_LINK}
-                  href={photo.source}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {sourceLabel(photo.source)}
+                <span>{photo.author}</span>
+                <a className={CREDIT_LINK} href={photo.licenceUrl} rel="noreferrer" target="_blank">
+                  {photo.licence}
                 </a>
               </div>
             </li>
           ))}
         </ul>
+        <p className="text-xs text-muted">Crests, kits and player portraits are the Premier League&rsquo;s own.</p>
       </section>
     </>
   );

@@ -7,7 +7,6 @@ import { feedAddresses } from "../calendar.ics/locks";
 import { fantraxPage } from "../fantraxPages";
 import { BUTTON } from "../components/shell/ButtonLink";
 import OutLink from "../components/shell/OutLink";
-import PageHeader from "../components/shell/PageHeader";
 import ReadViews from "../components/shell/ReadViews";
 import { CREDITS, SCORING, SECTIONS, overflowSections } from "../components/shell/sections";
 import { LABEL, PANEL, PANEL_FLUSH, ROW_HOVER } from "@/app/desk";
@@ -16,7 +15,7 @@ import { leagueInfo } from "../round";
 import { readerTeamId } from "../squads";
 import { MORE_TITLE, SCORING_TITLE } from "../titles";
 
-// The page at the end of Read's strip: the sections with no tab of their own, the squads, the scoring, Fantrax, how to install, and the credits.
+// The page at the end of Read's strip: the sections with no tab of their own, the squads, the scoring, the credits, Fantrax and how to install.
 
 export const metadata: Metadata = { title: MORE_TITLE };
 
@@ -45,7 +44,8 @@ export default async function MorePage() {
   return (
     <>
       <ReadViews current="more" />
-      <PageHeader title={MORE_TITLE} competition />
+      {/* No bar under Read's strip, as Mail: the strip names the view. */}
+      <h1 className="sr-only">{MORE_TITLE}</h1>
       <nav aria-label={MORE_TITLE} className={PANEL_FLUSH}>
         {overflowSections(SECTIONS).map((section) => (
           <Row key={section.href} href={section.href}>
@@ -56,22 +56,24 @@ export default async function MorePage() {
           Squads
         </Row>
         <Row href={SCORING}>{SCORING_TITLE}</Row>
+        <Row href={CREDITS}>Credits</Row>
       </nav>
+      {/* The two ways out, as button plates (ButtonLink is the one way out of a page). */}
       <div className={PANEL}>
         <OutLink href={fantraxPage(FANTRAX_HOME_PATH)} className={`${BUTTON} lg:self-start`}>
           Open the league on Fantrax
         </OutLink>
+        {feed === null ? null : (
+          <>
+            <a href={feed.webcal} className={`${BUTTON} lg:self-start`}>
+              Add the lock times to your calendar
+            </a>
+            <a href={feed.https} className="flex min-h-11 items-center px-1 text-sm text-muted underline lg:min-h-9">
+              Or subscribe by address
+            </a>
+          </>
+        )}
       </div>
-      {feed === null ? null : (
-        <div className={PANEL}>
-          <a href={feed.webcal} className={`${BUTTON} lg:self-start`}>
-            Add the lock times to your calendar
-          </a>
-          <a href={feed.https} className="flex min-h-11 items-center px-1 text-sm text-muted underline lg:min-h-9">
-            Or subscribe by address
-          </a>
-        </div>
-      )}
       {/* Gone once installed: the app then opens in its own window. */}
       <section
         aria-labelledby="more-install"
@@ -91,12 +93,6 @@ export default async function MorePage() {
           </div>
         ))}
       </section>
-      <nav aria-labelledby="more-about" className={PANEL_FLUSH}>
-        <h2 id="more-about" className={`px-3.5 pt-2 ${LABEL}`}>
-          About
-        </h2>
-        <Row href={CREDITS}>Credits</Row>
-      </nav>
     </>
   );
 }

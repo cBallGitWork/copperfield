@@ -8,9 +8,10 @@ that has the league points rules in it, maybe in draft section?"* (#293).
 
 ## On the page
 
-- Listed on More since 13 Oct 2026 (Craig: *"6 is too many"* Draft tabs); Read's strip over its bar, More lit.
+- Listed on More since 13 Oct 2026 (Craig: *"6 is too many"* Draft tabs). ~~Read's strip over its bar, More lit.~~
+  Since 20 Oct 2026, a `←` back plate (fallback `/more`) at its bar's left, as Credits and FPL; Read still lights.
   `/league/scoring` redirects here.
-- One table. Its head is the slots the rules price, back to front (GK, DEF, MID, FWD): `scoredSlots` in core
+- One table, inset by the panel's padding as every other board (20 Oct 2026). Its head is the slots the rules price, back to front (GK, DEF, MID, FWD): `scoredSlots` in core
   takes the keeper's letter and every outfield letter a rule names, never Fantrax's `Default` row, and
   `backToFront` orders them. The name column carries no plate, as on every board (DESIGN §2).
 - One row per category, in plain words (`wordsOf`, so GA and GAO are one line, "Goals conceded"). Its `title`
@@ -21,7 +22,7 @@ that has the league points rules in it, maybe in draft section?"* (#293).
 - **Said once where every slot is paid alike.** Minutes, assists, cards and own goals span the row in one cell
   rather than printing the same price four times.
 - A category that pays no slot anything (CLRA, Pen in the real league) is left off.
-- **Cup ties**, a panel under the table, printed in every state: how a level cup tie is settled, its list
+- **Cup ties**, a panel under the table with the same padding, printed in every state: how a level cup tie is settled, its list
   read from core's `CUP_TIE_STEPS` (Craig, 19 Oct 2026: *"… but in rules section in more"*; `league-cups.md`).
 
 ## Whose rules
