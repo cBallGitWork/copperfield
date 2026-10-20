@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import type { PresserLine, PresserQuote } from "@epl/core";
+import type { Club, Fixture, PresserLine, PresserQuote } from "@epl/core";
 import shortNames from "../../data/leagues/short-names.json";
-import { display, isNews, ownerShort, tagOf, type PresserSquadMan } from "./pressers";
+import { display, isNews, ownerShort, presserFixtures, tagOf, type PresserSquadMan } from "./pressers";
 import { presserDays, presserEdition, withStillOut } from "./presserWeek";
 
 // Every row is a real 26/27 player, read out of the FPL snapshot on 18 Sep 2026.
@@ -207,5 +207,28 @@ describe("ownerShort", () => {
   it("reads the league's own file by default", () => {
     const [teamId, entry] = Object.entries(shortNames.shortNames)[0];
     expect(ownerShort({ teamId, teamName: entry.team })).toBe(entry.short);
+  });
+});
+
+describe("presserFixtures", () => {
+  // A double gameweek: Arsenal play Chelsea on Tuesday, then Spurs on Saturday.
+  const club = (id: number, code: number, name: string): Club => ({ id, code, name, shortName: name.slice(0, 3).toUpperCase() });
+  const clubs = new Map([[3, club(1, 3, "Arsenal")], [8, club(2, 8, "Chelsea")], [6, club(3, 6, "Tottenham Hotspur")]]);
+  const fixture = (id: number, home: number, away: number, kickoff: string): Fixture => ({
+    id, code: id, gameweek: 9, homeClubId: home, awayClubId: away, kickoff, homeScore: null, awayScore: null,
+    status: "upcoming", settled: false, minutes: 0, homeDifficulty: null, awayDifficulty: null,
+  });
+  const season = [fixture(1, 1, 2, "2026-10-20T19:00:00Z"), fixture(2, 3, 1, "2026-10-24T14:00:00Z")];
+
+  it("gives a club its first match of a double, in either order", () => {
+    for (const order of [season, [...season].reverse()]) {
+      expect(presserFixtures(9, clubs, order).get(3)).toEqual({ opponent: "Chelsea", home: true, kickoff: "2026-10-20T19:00:00Z" });
+    }
+  });
+
+  it("gives a club with one match that match, and leaves a club with none out", () => {
+    const one = presserFixtures(9, clubs, season.slice(1));
+    expect(one.get(6)).toEqual({ opponent: "Arsenal", home: true, kickoff: "2026-10-24T14:00:00Z" });
+    expect(one.has(8)).toBe(false);
   });
 });

@@ -144,7 +144,7 @@ export function presserSpoke(
   });
 }
 
-/** Who each club plays in the round the pressers preview, by FPL club code. Not `snapshot.fixtures`: FPL keeps
+/** Who each club plays next in the round the pressers preview, by FPL club code. Not `snapshot.fixtures`: FPL keeps
  *  `is_current` on a round until the next deadline, so between rounds that is football already played. */
 export function presserFixtures(
   gameweek: number,
@@ -152,9 +152,14 @@ export function presserFixtures(
   season: readonly Fixture[],
 ): Map<number, StoryFixture> {
   const out = new Map<number, StoryFixture>();
+  // A double gameweek keeps a club's earliest tie; an unreadable kickoff never displaces a readable one.
+  const keep = (code: number, tie: StoryFixture) => {
+    const held = out.get(code);
+    if (held === undefined || Date.parse(tie.kickoff) < Date.parse(held.kickoff) || Number.isNaN(Date.parse(held.kickoff))) out.set(code, tie);
+  };
   for (const { home, away, kickoff } of roundTies(gameweek, clubs, season)) {
-    out.set(home.code, { opponent: fullClubName(away.name), home: true, kickoff });
-    out.set(away.code, { opponent: fullClubName(home.name), home: false, kickoff });
+    keep(home.code, { opponent: fullClubName(away.name), home: true, kickoff });
+    keep(away.code, { opponent: fullClubName(home.name), home: false, kickoff });
   }
   return out;
 }
