@@ -21,8 +21,8 @@ import {
 
 
 // What ONE match's screen asks the Premier League; the round's questions are in `commentary.ts`.
-// Every function answers empty or null and never throws, since each adds a block to a page FPL can
-// already draw; a null `gameweek` (a postponement loses its round) answers the same.
+// Every function answers empty or null when their API fails, since each adds a block to a page FPL can
+// already draw; a null `gameweek` (a postponement loses its round) answers the same. A bug still throws.
 
 /** Opta's minute-stamped commentary for one of our fixtures, newest first. */
 export async function matchReport(
@@ -53,21 +53,18 @@ export async function matchGoalMinutes(
 ): Promise<Map<number, number[]>> {
   const minutes = new Map(logged);
   if (gameweek === null) return minutes;
-  try {
-    for (const goal of await roundGoals(gameweek, players)) {
-      if (goal.fixtureCode !== fixtureCode) continue;
-      // An own goal's minute belongs to the man who scored it, printed with `og` on his own side.
-      const code = goal.players[0];
-      // Test `logged`, not `minutes`: the growing map would skip a scorer's second goal.
-      if (code === null || code === undefined || logged.has(code)) continue;
-      // "45+2" parses as 45: the scoresheet takes numbers, so added time is dropped.
-      const at = Number.parseInt(goal.minute, 10);
-      if (Number.isNaN(at)) continue;
-      // Ascending: `roundGoals` is newest first and a scoresheet reads forwards.
-      minutes.set(code, [...(minutes.get(code) ?? []), at].sort((a, b) => a - b));
-    }
-  } catch {
-    // Their API refusing costs the minutes and never the scoresheet.
+  // Their API refusing costs the minutes and never the scoresheet: `roundGoals` answers none.
+  for (const goal of await roundGoals(gameweek, players)) {
+    if (goal.fixtureCode !== fixtureCode) continue;
+    // An own goal's minute belongs to the man who scored it, printed with `og` on his own side.
+    const code = goal.players[0];
+    // Test `logged`, not `minutes`: the growing map would skip a scorer's second goal.
+    if (code === null || code === undefined || logged.has(code)) continue;
+    // "45+2" parses as 45: the scoresheet takes numbers, so added time is dropped.
+    const at = Number.parseInt(goal.minute, 10);
+    if (Number.isNaN(at)) continue;
+    // Ascending: `roundGoals` is newest first and a scoresheet reads forwards.
+    minutes.set(code, [...(minutes.get(code) ?? []), at].sort((a, b) => a - b));
   }
   return minutes;
 }

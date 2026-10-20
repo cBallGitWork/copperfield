@@ -14,6 +14,7 @@ import {
   plFixtureCode,
 } from "@epl/core";
 import bridge from "../../../data/mappings/premierleague.json";
+import { orDegraded } from "./refusals";
 import { singleFlight } from "./singleFlight";
 import { COMMENTARY_REVALIDATE, LIVE_REVALIDATE, PAGE_REVALIDATE } from "./config";
 
@@ -98,7 +99,7 @@ export async function theirFixture(
 }
 
 /** Their fixture for one of ours, read through `read`, answering `absent` at every step that can fail: a null
- *  gameweek (a postponement loses its round), no such fixture, or their API down. */
+ *  gameweek (a postponement loses its round), no such fixture, or their API down on either hop. A bug still throws. */
 export async function ofFixture<T>(
   gameweek: number | null,
   fixtureCode: number,
@@ -106,12 +107,11 @@ export async function ofFixture<T>(
   read: (fixture: RawPlFixture) => Promise<T>,
 ): Promise<T> {
   if (gameweek === null) return absent;
-  try {
+  const both = async () => {
     const fixture = await theirFixture(gameweek, fixtureCode);
-    return fixture === null ? absent : await read(fixture);
-  } catch {
-    return absent;
-  }
+    return fixture === null ? absent : read(fixture);
+  };
+  return orDegraded(both(), () => absent);
 }
 
 /** The highlights playlist as raw XML, one cache key for every match page; throws on a bad response. */
