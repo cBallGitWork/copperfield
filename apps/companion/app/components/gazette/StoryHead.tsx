@@ -19,7 +19,7 @@ export default function StoryHead({
   return (
     <>
       {/* A long single word hyphenates, else breaks, inside the measure rather than running off a 320px page. */}
-      <Head className={`paper-display text-balance wrap-anywhere hyphens-auto pt-2.5 text-4xl font-black leading-[1.02] text-ink ${STEP[rank]}`}>
+      <Head className={`paper-display text-balance wrap-anywhere max-lg:hyphens-auto pt-2.5 text-4xl font-black leading-[1.02] text-ink ${STEP[rank]}`}>
         {headline}
       </Head>
       {standfirst ? <p className="pt-2 text-lg italic leading-snug text-muted">{standfirst}</p> : null}

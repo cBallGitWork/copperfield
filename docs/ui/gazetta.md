@@ -405,7 +405,7 @@ minute"), not Fantrax's minutes, which put Schade off after 51 in one paper and 
 block at a time, chosen from the list by its anchor; each section's phone-only `scroll-margin-top` is the list's height
 (`--list-h`, its rows at 2.75rem plus the head), so a tapped row lands its block under the list and the next switch is
 one tap, not a scroll back. A long team name in the full-time header wraps in its own column (`wrap-anywhere`), as
-the paper's headlines break a long word (`wrap-anywhere hyphens-auto`) rather than push a 320px page sideways.
+the paper's headlines break a long word (`wrap-anywhere`, hyphenated on a phone only: `max-lg:hyphens-auto`) rather than push a 320px page sideways.
 
 **A piece that breaks a hard rule twice keeps what it can** (16 Oct 2026). A draft report's match-up and a Prem Report's
 match each keep the attempt with fewer hard faults, less every sentence carrying one; a lede (or standfirst) that

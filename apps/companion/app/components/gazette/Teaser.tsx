@@ -29,7 +29,7 @@ export default function Teaser({
           </span>
         ) : null}
         {/* A long word ('domeitalycoach') hyphenates or breaks inside a 138px shoulder rather than off the page. */}
-        <h3 className="paper-display text-balance wrap-anywhere hyphens-auto text-xl font-black leading-[1.08] text-ink @md/stories:text-2xl">
+        <h3 className="paper-display text-balance wrap-anywhere max-lg:hyphens-auto text-xl font-black leading-[1.08] text-ink @md/stories:text-2xl">
           {story.headline}
         </h3>
         {story.deck !== "" ? (
