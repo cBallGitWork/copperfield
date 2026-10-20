@@ -68,10 +68,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Started, not awaited: one read for the desk strip and the Live plate's score, each behind its own
   // boundary, so Fantrax never holds up every page.
   const tie = liveTie();
-  // The inbox's ids for the Mail tab's badge, started like the tie; a failed read is no badge.
+  // The inbox's ids for the Mail tab's badge, started like the tie; a failed read is null: no badge, nothing stored.
   const mail = readInbox()
     .then((inbox) => inbox.items.map((item) => item.id))
-    .catch(() => []);
+    .catch(() => null);
   // The only read the shell waits for: whether the rail offers Live. The poller and the ground stream in after.
   const matchday = await offerLive();
 
