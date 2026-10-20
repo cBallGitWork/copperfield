@@ -43,9 +43,14 @@ export default async function MatchPlayersPage({
     <MatchShell
       match={match}
       current="players"
-      foot={played ? <Views id={match.fixture.id} side={side} view={view} className="max-lg:hidden" /> : undefined}
+      foot={
+        <>
+          <ClubSwitch match={match} side={side} view={played ? view : "sheet"} />
+          {played ? <Views id={match.fixture.id} side={side} view={view} className="max-lg:hidden" /> : null}
+        </>
+      }
     >
-      <PhoneControls match={match} side={side} view={played ? view : null} />
+      {played ? <Views id={match.fixture.id} side={side} view={view} className="flex lg:hidden [&>nav]:flex-1" compact /> : null}
       <Suspense fallback={<BoardWaiting />}>
         {played ? <Board match={match} view={view} side={side} /> : <BothSquads match={match} side={side} />}
       </Suspense>
@@ -60,7 +65,7 @@ function lineupsHref(id: number, side: Side, view: View): string {
   });
 }
 
-/** CM's foot row (`cm0102/02.jpg`): the same elevens as a list or on the grass. */
+/** The same elevens as a list or on the grass: CM's foot row (`cm0102/02.jpg`) on a desk, the top row under a thumb. */
 function Views({
   id,
   side,
@@ -75,7 +80,8 @@ function Views({
   compact?: boolean;
 }) {
   return (
-    <div className={className}>
+    // The 36px compact strip under a thumb sits under the match rows' tap exception.
+    <div className={className} {...(compact ? MATCH_ROW : {})}>
       <TabStrip
         label="Line-up views"
         tabs={[
@@ -90,22 +96,20 @@ function Views({
   );
 }
 
-/** Under a thumb, one club at a time: pick the club, then — once there are elevens — the list or the pitch. */
-function PhoneControls({ match, side, view }: { match: Match; side: Side; view: View | null }) {
+/** Under a thumb, one club at a time, picked from the foot (the 24 Sep rule); a desk shows both. */
+function ClubSwitch({ match, side, view }: { match: Match; side: Side; view: View }) {
   const id = match.fixture.id;
   return (
-    <div className={`grid gap-2 lg:hidden ${view === null ? "" : "grid-cols-2"}`} {...MATCH_ROW}>
+    <div className="lg:hidden">
       <TabStrip
         label="Club"
         tabs={[
-          { key: "home", label: match.home?.shortName ?? "Home", href: lineupsHref(id, "home", view ?? "sheet") },
-          { key: "away", label: match.away?.shortName ?? "Away", href: lineupsHref(id, "away", view ?? "sheet") },
+          { key: "home", label: match.home?.shortName ?? "Home", href: lineupsHref(id, "home", view) },
+          { key: "away", label: match.away?.shortName ?? "Away", href: lineupsHref(id, "away", view) },
         ]}
         current={side}
         labels="word"
-        compact
       />
-      {view === null ? null : <Views id={id} side={side} view={view} className="flex [&>nav]:flex-1" compact />}
     </div>
   );
 }

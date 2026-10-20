@@ -66,8 +66,9 @@ for every shape decision below.
    the page's full length rather than in a box of its own (Craig, 23 Sep 2026: *"we
    have a browser scroll AND a match report scroll"*).
 5. **The foot row** — CM's related-screens strip (`cm0102/02.jpg`), under the
-   panel on Stats (`Brentford · Match · Chelsea`) and Line-ups (`Team Sheet ·
-   Pitch`). The shell's `foot` slot draws it with `TabStrip`. **It is docked at every width**, so a long page
+   panel on Stats (`Brentford · Match · Chelsea · Fantasy`; club codes under a thumb, `BRE · MATCH · CHE ·
+   FANTASY`, as `ClubLabel` picks, so no plate wraps at 320–430; review, 20 Oct 2026) and Line-ups (`Team Sheet ·
+   Pitch` on a desk, the club switch `BRE · CHE` under a thumb). The shell's `foot` slot draws it with `TabStrip`. **It is docked at every width**, so a long page
    keeps it in view (Craig, 24 Sep 2026: *"i need to be able to see the footer row"*): at the window's foot on a
    desk, above the thumb rail on a phone, as `SaveBar` is (`FootFrame`). A phone's sat at y=1,216 of 1,332 on
    Stats, under the rail, until 16 Oct 2026 (review M7).
@@ -261,7 +262,9 @@ underneath were perfectly clear.
 `labels.ts` is the arithmetic and it is unit-tested, because two names that clear
 each other by a pixel at 390 and collide at 1440 look identical in a diff. A name
 takes the slot under its own disc, then the one over it, then a row further out
-each way to three; **the disc itself never moves**, because it is a measurement
+each way to three, and it takes none that sits on a disc, its own or another man's
+(a name is measured at 1.8% of the pitch a character, the real width of bold 9px
+type at 390; review, 20 Oct 2026). **The disc itself never moves**, because it is a measurement
 and nudging it draws a picture that lies about where a man played. Past eight
 co-located men the arithmetic gives up NEAR the man rather than flying his name
 across the pitch — an overlap is unreadable, a name closer to somebody else's disc
@@ -298,8 +301,11 @@ crap, remove them all except for PTS"*; the `Pts` column itself, FPL's points, c
 carries no formation line and no figure under a man's name.
 
 **Under a thumb it is one club at a time** (Craig, 23 Sep 2026: *"a button for
-each team, THEN for list/pitch, rather than a big scroll"*): a row of `BRE · CHE`
-and `Team Sheet · Pitch` above the board (`?side=away`), and a desk shows both.
+each team, THEN for list/pitch, rather than a big scroll"*): `Team Sheet · Pitch` above the board and `BRE · CHE`
+docked at the foot (`?side=away`; the club switch moved there on 20 Oct 2026, the 24 Sep sub-views rule), and a desk
+shows both. A book's club-colour bar is a desk's, naming each of the two side by side; under a thumb the lit club
+plate names the side, so the bar is `sr-only`. The sheet and the books sit in `PANEL`'s padding; the pitch and the
+report keep `PANEL_FLUSH`.
 
 **The Pitch** is the foot row's other plate (`?view=pitch`): each eleven in
 `sheet.shape`, the shape its manager drew, in **faces** (Craig, 1 Oct 2026: *"this
@@ -308,7 +314,8 @@ in his club's kit, the score
 under each name, and an amber `▼ 69′` on a man taken off. The men who came on
 stand in a strip under the grass with `▲ 69′`. `pitch-match`
 budgets the grass so the strip clears the nav at 390×844 (767 against 798 with the
-phone's control row, measured 23 Sep). One `widest` across both pitches, so the halves are drawn to
+phone's control row, measured 23 Sep). The club switch docked at the foot on 20 Oct 2026 adds one 44px plate over the
+nav, so the phone's budget rose by that plate, 23rem to 25.75rem (`pitchBudget.test.ts` pins the sum). One `widest` across both pitches, so the halves are drawn to
 one scale. No doubt colour on the plates: today's injury flag has no business on
 a match already played.
 
@@ -469,6 +476,16 @@ that is about a player rather than about a tally.
 | No round | `gameweek === null` | no sheet; the fixture still renders | `TabEmpty` |
 | Fantrax silent | `marks()` empty | the owner lines vanish; the football renders | same |
 | id is not an integer, or names no fixture | — | `notFound()` | `notFound()` |
+
+**An empty Stats, Action Zones or Highlights tab is a `TabEmpty`**, one muted line in a panel under the strip, as a
+club's or a team's tab is (review, 20 Oct 2026; it was `Nothing`'s crest and headline, with three phrases for one
+state). One line before kick-off on all three, and each tab's own after it:
+
+| Tab | `status === "upcoming"` | after kick-off |
+|---|---|---|
+| Stats (no team sheet, or no match stats) | Not kicked off | No team sheet yet · No stats yet |
+| Action Zones (no shots, no touches) | Not kicked off | No shot data yet |
+| Highlights (no video; `data-code` names the fixture) | Not kicked off | No highlights |
 
 **Full time is `FT`, whether or not FPL has settled its bonus** (Craig, 6 Oct
 2026: bonus is the FPL tab's alone, so nothing outside it waits on it). The sister repo's day-long lag is a

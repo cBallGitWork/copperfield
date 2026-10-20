@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Fixture } from "@epl/core";
-import { stateLine } from "./matchState";
+import { beforeKickOff, stateLine } from "./matchState";
 
 const fixture = (over: Partial<Fixture>): Fixture => ({
   id: 51,
@@ -36,5 +36,13 @@ describe("stateLine", () => {
     expect(stateLine({ fixture: live, live: true, finished: false }, null)).toBe("Gameweek 6 · Live 67′");
     const undated = fixture({ gameweek: null, kickoff: null });
     expect(stateLine({ fixture: undated, live: false, finished: false }, null)).toBe("Gameweek TBC · Kick-off TBC");
+  });
+});
+
+describe("beforeKickOff", () => {
+  it("is the empty tabs' one line until the match starts, and null after", () => {
+    expect(beforeKickOff({ fixture: fixture({ status: "upcoming" }) })).toBe("Not kicked off");
+    expect(beforeKickOff({ fixture: fixture({ status: "live" }) })).toBeNull();
+    expect(beforeKickOff({ fixture: fixture({ status: "finished" }) })).toBeNull();
   });
 });

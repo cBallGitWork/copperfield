@@ -22,11 +22,14 @@ export interface Labelled extends Placed {
 /** A label's height, as a percentage of the pitch's height; set for 9px type at 390. */
 const ROW = 5;
 
-/** One character's width, as a percentage of the pitch's width; too low and names overlap. */
-const CHAR = 1.4;
+/** One bold 9px character on a 345px pitch, as a percentage of its width; too low and names overlap. */
+const CHAR = 1.8;
 
-/** The gap between a disc's centre and its own name's: half the disc plus the space under it. */
-const CLEAR = 4.5;
+/** A disc's box, as percentages of the pitch: no name may sit on one, its own included. */
+const DOT = { x: 3, y: 5 };
+
+/** The gap between a disc's centre and its own name's: half the disc plus half the name. */
+const CLEAR = (DOT.y + ROW) / 2;
 
 /** Rows a label may travel either way before it gives up and sits under its man. */
 const REACH = 3;
@@ -41,7 +44,9 @@ export function placeLabels(men: readonly Placed[]): Labelled[] {
     const labelX = Math.min(Math.max(man.x, half + 1), 99 - half);
 
     const free = offsets().find(
-      (dy) => !placed.some((other) => collides(other, labelX, man.y + dy, half)),
+      (dy) =>
+        !placed.some((other) => collides(other, labelX, man.y + dy, half)) &&
+        !men.some((disc) => onDisc(disc, labelX, man.y + dy, half)),
     );
 
     placed.push({
@@ -66,6 +71,11 @@ function collides(other: Labelled, x: number, y: number, half: number): boolean 
   return (
     Math.abs(other.labelY - y) < ROW && Math.abs(other.labelX - x) < half + width(other.name) / 2
   );
+}
+
+/** Whether a label at this centre would sit on a man's disc. */
+function onDisc(disc: Placed, x: number, y: number, half: number): boolean {
+  return Math.abs(disc.y - y) < (ROW + DOT.y) / 2 && Math.abs(disc.x - x) < half + DOT.x / 2;
 }
 
 function width(name: string): number {

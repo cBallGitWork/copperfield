@@ -19,3 +19,8 @@ export function stateLine(
   if (half !== null) parts.push(half);
   return parts.join(" · ");
 }
+
+/** An empty match tab's one line for a match not yet started (Stats, Action Zones, Highlights); null once it has. */
+export function beforeKickOff({ fixture }: Pick<Match, "fixture">): string | null {
+  return fixture.status === "upcoming" ? "Not kicked off" : null;
+}

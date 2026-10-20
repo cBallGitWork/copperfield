@@ -1,5 +1,5 @@
 import { londonDayOf } from "@epl/core";
-import Nothing from "../../../../components/shell/Nothing";
+import TabEmpty from "../../../../components/league/TabEmpty";
 import TabStrip from "../../../../components/shell/TabStrip";
 import MatchShell from "../Shell";
 import MatchStats from "../MatchStats";
@@ -15,6 +15,7 @@ import { teamSheets } from "../../../../matchDetail";
 import { leagueScoring } from "../../../../scoring";
 import { scoringDay } from "../../../../scoringDay";
 import { matchTitle } from "../title";
+import { beforeKickOff } from "../matchState";
 
 // Both sides against each other, one club's men, or the Fantasy Report — CM 01/02's Match Stats with its foot row.
 
@@ -52,20 +53,28 @@ export default async function MatchStatsPage({
   );
 }
 
-/** `Brentford · Match · Chelsea` the way `cm0102/02.jpg` puts a club's stats either side of the match, then Fantasy. */
+/** `Brentford · Match · Chelsea` the way `cm0102/02.jpg` puts a club's stats either side of the match, then Fantasy.
+ *  Club codes under a thumb, as `ClubLabel` picks, so no plate wraps; full names from lg. */
 function Foot({ match, view }: { match: Match; view: StatsView }) {
   const id = match.fixture.id;
-  return (
+  const strip = (home: string | undefined, away: string | undefined, labels: "phrase" | "word") => (
     <TabStrip
       label="Stats views"
       tabs={[
-        { key: "home", label: match.home?.name ?? "Home", href: viewHref(id, "home") },
+        { key: "home", label: home ?? "Home", href: viewHref(id, "home") },
         { key: "match", label: "Match", href: viewHref(id, "match") },
-        { key: "away", label: match.away?.name ?? "Away", href: viewHref(id, "away") },
+        { key: "away", label: away ?? "Away", href: viewHref(id, "away") },
         { key: "fantasy", label: "Fantasy", href: viewHref(id, "fantasy") },
       ]}
       current={view}
+      labels={labels}
     />
+  );
+  return (
+    <>
+      <div className="lg:hidden">{strip(match.home?.shortName, match.away?.shortName, "word")}</div>
+      <div className="max-lg:hidden">{strip(match.home?.name, match.away?.name, "phrase")}</div>
+    </>
   );
 }
 
@@ -77,7 +86,7 @@ async function FantasyReport({ match }: { match: Match }) {
     leagueScoring(),
     day === null ? null : scoringDay(day),
   ]);
-  return sheets === null ? <NoSheet /> : <Fantasy match={match} sheets={sheets} scoring={scoring} day={counts} />;
+  return sheets === null ? <NoSheet match={match} /> : <Fantasy match={match} sheets={sheets} scoring={scoring} day={counts} />;
 }
 
 async function OneClub({
@@ -92,7 +101,7 @@ async function OneClub({
   descending: boolean;
 }) {
   const { sheets, events, injured, league, cards } = await sheetReads(match);
-  if (sheets === null) return <NoSheet />;
+  if (sheets === null) return <NoSheet match={match} />;
   return (
     <ClubStats
       match={match}
@@ -112,10 +121,11 @@ async function OneClub({
 /** Both sides against each other; where they shot from is on Action Zones. */
 async function BothSides({ match }: { match: Match }) {
   const rows = await matchStatsBoard(match.fixture.gameweek, match.fixture.code);
+  if (rows === null || rows.length === 0) return <TabEmpty>{beforeKickOff(match) ?? "No stats yet"}</TabEmpty>;
   return <MatchStats rows={rows} home={match.home} away={match.away} />;
 }
 
 /** A club's board and the Fantasy Report both read the team sheet, which a match has only once its sides are named. */
-function NoSheet() {
-  return <Nothing title="No team sheet yet" />;
+function NoSheet({ match }: { match: Match }) {
+  return <TabEmpty>{beforeKickOff(match) ?? "No team sheet yet"}</TabEmpty>;
 }

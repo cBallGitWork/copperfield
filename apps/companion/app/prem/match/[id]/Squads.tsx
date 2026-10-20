@@ -4,7 +4,7 @@ import LeadFace from "../../../components/league/LeadFace";
 import PositionTile from "../../../components/league/PositionTile";
 import { clubIndex } from "../../../components/football/clubIndex";
 import { intelSquads } from "../../../intel";
-import { BOARD, PANEL_FLUSH, QUIET_FIGURE, ROW_RULE, phoneShows, SMALL_CAPS } from "@/app/desk";
+import { BOARD, PANEL, QUIET_FIGURE, ROW_RULE, phoneShows, SMALL_CAPS } from "@/app/desk";
 import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
 import { MaybeCard } from "./PlayerCardButton";
 import OwnedBy from "./OwnedBy";
@@ -72,9 +72,10 @@ function Side({
           .sort((a, b) => depth(a) - depth(b) || a.name.localeCompare(b.name));
 
   return (
-    <section className={`${PANEL_FLUSH} cm-index-scoped min-w-0 ${phoneShows(phonePicked)}`} style={clubIndex(club)}>
+    <section className={`${PANEL} cm-index-scoped min-w-0 ${phoneShows(phonePicked)}`} style={clubIndex(club)}>
+      {/* Names each book of two on a desk; under a thumb the lit club plate already does, so it is read, not drawn. */}
       <h2
-        className={`flex min-h-7 items-center px-1.5 ${SMALL_CAPS}`}
+        className={`flex min-h-7 items-center px-1.5 max-lg:sr-only ${SMALL_CAPS}`}
         style={{ background: colours.primary, color: inkOn(colours) }}
       >
         {club?.name ?? DASH}

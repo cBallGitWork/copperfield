@@ -4,6 +4,23 @@ import { placeLabels } from "./labels";
 
 const man = (code: number, name: string, x: number, y: number): Placed => ({ code, name, x, y });
 
+/** A bold 9px character on a 345px pitch, and a disc's box, both in percent of the pitch. */
+const CHAR = 1.8;
+const DOT = { x: 3, y: 5 };
+
+/** Labels sitting on any man's disc, his own included. */
+function onDiscs(placed: ReturnType<typeof placeLabels>): string[] {
+  return placed.flatMap((label) =>
+    placed
+      .filter(
+        (disc) =>
+          Math.abs(disc.y - label.labelY) < (5 + DOT.y) / 2 &&
+          Math.abs(disc.x - label.labelX) < (label.name.length * CHAR + DOT.x) / 2,
+      )
+      .map((disc) => `${label.name} on ${disc.name}`),
+  );
+}
+
 /** Whether any two labels in a placed set overlap, by the same rule the module
  *  places them with — written out here rather than imported so a change to the
  *  arithmetic has to satisfy a second reader. */
@@ -11,7 +28,7 @@ function overlapping(placed: ReturnType<typeof placeLabels>): number {
   let count = 0;
   for (let a = 0; a < placed.length; a += 1) {
     for (let b = a + 1; b < placed.length; b += 1) {
-      const room = ((placed[a].name.length + placed[b].name.length) / 2) * 1.4;
+      const room = ((placed[a].name.length + placed[b].name.length) / 2) * CHAR;
       if (
         Math.abs(placed[a].labelY - placed[b].labelY) < 5 &&
         Math.abs(placed[a].labelX - placed[b].labelX) < room
@@ -83,6 +100,26 @@ describe("placeLabels", () => {
     const one = placeLabels(eleven);
     const other = placeLabels([...eleven].reverse());
     expect(one).toEqual(other);
+  });
+
+  it("clears match 70's Spurs eleven, names off each other and off every disc", () => {
+    // Van Hecke over Kudus, and Solanke's disc under Maddison, at 390 (review, 20 Oct 2026).
+    const spurs = [
+      man(469142, "Van Hecke", 46.4, 70.7),
+      man(491279, "Van de Ven", 42.2, 30.7),
+      man(432422, "Tonali", 49.4, 47.6),
+      man(109646, "Tosin", 39.8, 52.9),
+      man(172780, "Maddison", 58.5, 52.1),
+      man(460842, "Kudus", 56.4, 80.5),
+      man(547701, "Gray", 52.1, 76.5),
+      man(154566, "Solanke", 57.5, 60.2),
+      man(438234, "Marmoush", 57.5, 25.5),
+      man(122798, "Robertson", 61.9, 14.1),
+      man(485055, "Kinsky", 11.0, 50.4),
+    ];
+    const placed = placeLabels(spurs);
+    expect(overlapping(placed)).toBe(0);
+    expect(onDiscs(placed)).toEqual([]);
   });
 
   it("answers nothing for nobody", () => {

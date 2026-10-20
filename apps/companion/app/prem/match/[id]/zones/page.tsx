@@ -1,7 +1,7 @@
 import { averageTouchPosition, clubColoursOf, inkOn, shotsInFixture, touchesOf, DASH } from "@epl/core";
 import { clubIndex } from "../../../../components/football/clubIndex";
 import type { Club, PlTeamSheet, Shot } from "@epl/core";
-import Nothing from "../../../../components/shell/Nothing";
+import TabEmpty from "../../../../components/league/TabEmpty";
 import TabStrip from "../../../../components/shell/TabStrip";
 import { PANEL, phoneShows } from "@/app/desk";
 import MatchShell from "../Shell";
@@ -14,6 +14,7 @@ import { teamSheets } from "../../../../matchDetail";
 import { matchHref } from "../matchRoutes";
 import { MATCH_ROW } from "../matchRow";
 import { matchTitle } from "../title";
+import { beforeKickOff } from "../matchState";
 
 // CM's Action Zones (`cm9900/22.jpg`): where both sides shot from and who took them, then where the eleven stood.
 
@@ -53,11 +54,7 @@ export default async function MatchZonesPage({
   if (shots.length === 0 && homeMen.length === 0 && awayMen.length === 0) {
     return (
       <MatchShell match={match} current="zones">
-        {match.fixture.status === "upcoming" ? (
-          <Nothing title="Not played yet" />
-        ) : (
-          <Nothing title="No shot data yet" />
-        )}
+        <TabEmpty>{beforeKickOff(match) ?? "No shot data yet"}</TabEmpty>
       </MatchShell>
     );
   }
