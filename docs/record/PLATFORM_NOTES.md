@@ -679,6 +679,9 @@ changed in each name, as Pro Evolution printed its unlicensed players, and never
   manage 0.80 and 0.81 (Wolves' defence read average while conceding 1.79 a game).
 - **No Underlying**: a second mark for the chances behind a match predicted the next five better than points
   (0.356 against 0.337), but Craig ruled it out: what a man will do next is the projections' job.
+- **No won penalty in `extras`** (20 Oct 2026): the league's assists (AT) already pay a won penalty that is scored, so
+  its +1 counted it twice; dropped, and 10 stored marks fell 0.3 to 1.0. A won penalty then missed earns nothing now.
+  The −1 for a missed penalty in `mistakes` stays, on top of the league's PKM, as a judgement until Craig rules on it.
 
 ## Projections print our league's points, repriced from FPL's — decided 2 Oct 2026
 

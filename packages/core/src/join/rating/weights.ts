@@ -48,8 +48,8 @@ export const RATING_WEIGHTS: RatingWeights = {
       name: "extras",
       label: "What the league does not score",
       terms: [
+        // No won penalty: the league's assists (AT) already pay a scored one.
         { stat: "goalsOutsideBox", points: 1 },
-        { stat: "penaltiesWon", points: 1 },
         { stat: "clearancesOffLine", points: 1.5 },
         { stat: "goalsPrevented", points: 1 },
       ],

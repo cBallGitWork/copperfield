@@ -55,6 +55,11 @@ describe("rateMatch", () => {
     expect(rating(match({ stats: { bigChancesMissed: 2 } }))).toBeLessThan(rating(match()));
   });
 
+  it("does not pay a won penalty again: the league's assists already count it", () => {
+    const assist = { total: 5, attacking: 3, cleanSheet: 0 };
+    expect(rating(match({ points: assist, stats: { penaltiesWon: 1 } }))).toBe(rating(match({ points: assist, stats: { penaltiesWon: 0 } })));
+  });
+
   it("does not rate a cameo with nothing in it, nor a man the league did not score", () => {
     expect(rate(match({ minutes: 4, points: { total: 1, attacking: 0, cleanSheet: 0 } })).rating).toBeNull();
     expect(rate(match({ points: null })).rating).toBeNull();
