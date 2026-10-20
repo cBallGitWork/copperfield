@@ -61,7 +61,7 @@ export default async function Reports({ story, snapshot }: { story: PublishedSto
       )}
       {/* On a phone one match shows: the one the list's anchor targets, or the lead. A desk shows every match. */}
       <div
-        className={`flex flex-col ${HAIRLINES} max-lg:[&:has(>section:target)>section:not(:target)]:hidden max-lg:[&:not(:has(>section:target))>section:not(:first-child)]:hidden${listed ? " max-lg:[&>section]:scroll-mt-(--list-h)" : ""}`}
+        className={`flex flex-col ${HAIRLINES} max-lg:[&:has(>section:target)>section:not(:target)]:hidden max-lg:[&:not(:has(>section:target))>section:not(:first-child)]:hidden ${listed ? "max-lg:[&>section]:scroll-mt-(--list-h)" : ""}`}
         // A tapped row lands its section under the list, so the next switch is one tap: rows of 2.75rem, the head and air.
         style={listed ? ({ "--list-h": `calc(${reports.length} * 2.75rem + 3rem)` } as CSSProperties) : undefined}
       >

@@ -72,7 +72,7 @@ export default function Written({
         // A phone reads head, picture, prose; a desk gives the picture a column of its own beside both.
         <div className="grid gap-x-6 @3xl:grid-cols-[minmax(0,42rem)_16rem] @3xl:grid-rows-[auto_1fr] @3xl:justify-between">
           {head}
-          <figure className={`pt-4 @3xl:col-start-2 @3xl:row-span-2 @3xl:row-start-1 @3xl:pt-0${deskOnly ? " hidden @3xl:block" : ""}`}>
+          <figure className={`pt-4 @3xl:col-start-2 @3xl:row-span-2 @3xl:row-start-1 @3xl:pt-0 ${deskOnly ? "hidden @3xl:block" : ""}`}>
             {/* Cropped to the frame's ratio under a phone's head, his head kept; whole in the desk's column. A trade's
                 plate is printed whole: its words are at the foot. */}
             <div className={story.kind === "trade" ? "" : "aspect-video overflow-hidden @3xl:aspect-auto"}>
