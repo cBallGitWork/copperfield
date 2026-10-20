@@ -3,6 +3,7 @@ import type { FootballPlayer, PlGoal, PlManMatch, PlayerOwner, SheetRow, SquadPl
 import { Goal, Man } from "./ScoreRows";
 import { MATCH_ROW } from "./matchRow";
 import { forCode } from "./sheetJoin";
+import { minuteMark } from "./minuteMark";
 
 // Who scored, when and who made it — CM's `cm0102/02.jpg`, home down the left and away down the right.
 // One line per SCORER with all his minutes (`goalGroups`), his assisters quieter under him; an assister carries a
@@ -81,8 +82,8 @@ function SheetSide({
         />
       ))}
       {rest.map(({ player, line }) => {
-        // A sending off outranks an injury, an injury a missed penalty. The fixture feed times the injury, so this
-        // sheet and Line Ups agree; the commentary only says he was hurt.
+        // A sending off outranks an injury, an injury a missed penalty. The fixture feed times the injury, added time
+        // and all, so this sheet and Line Ups agree; the commentary only says he was hurt.
         const man = forCode(did, player.code);
         const hurtAt =
           player.code === null || !injured.has(player.code)
@@ -121,9 +122,4 @@ function marks(
   if (line.redCards > 0) said.push(did?.sentOff == null ? "red" : minuteMark(did.sentOff, did.added?.sentOff));
   if (hurtAt !== undefined) said.push(minuteMark(hurtAt, hurtAdded));
   return said.join(" · ");
-}
-
-/** A minute as the sheet prints it, with its added time as the report does: `56'`, `90+4'`. */
-function minuteMark(minute: number, added: number | undefined): string {
-  return added === undefined ? `${minute}'` : `${minute}+${added}'`;
 }
