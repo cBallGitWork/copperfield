@@ -1,4 +1,4 @@
-import { leagueTable as footballTable, signed } from "@epl/core";
+import { leagueTable as footballTable, sharedPlaces, signed } from "@epl/core";
 import type { PaperTableRow } from "./components/gazette/PaperTable";
 import { footballNow, seasonFixtures } from "./football";
 import { leagueTable as draftTable } from "./standings";
@@ -33,7 +33,7 @@ export async function scorerRows(): Promise<PaperTableRow[]> {
   if ("unavailable" in pool) return [];
 
   const names = new Map(pool.teamNames);
-  return pool.rows
+  const top = pool.rows
     .flatMap((row) => {
       const points = row.stats?.points ?? null;
       // A player Fantrax has no season figure for is left out rather than
@@ -41,18 +41,20 @@ export async function scorerRows(): Promise<PaperTableRow[]> {
       return points === null || points <= 0 ? [] : [{ row, points }];
     })
     .sort((a, b) => b.points - a.points || a.row.entry.player.displayName.localeCompare(b.row.entry.player.displayName))
-    .slice(0, SCORERS_SHOWN)
-    .map(({ row, points }, at) => ({
-      key: row.entry.player.fantraxId,
-      rank: at + 1,
-      name: row.entry.player.displayName,
-      played: null,
-      detail:
-        row.entry.ownerTeamId === null
-          ? UNOWNED
-          : shortName(row.entry.ownerTeamId, names.get(row.entry.ownerTeamId) ?? UNOWNED),
-      points,
-    }));
+    .slice(0, SCORERS_SHOWN);
+  // Level men share a place; a tie across the tenth is still cut by spelling, as the Live leaders' is.
+  const ranks = sharedPlaces(top, (above, row) => above.points === row.points);
+  return top.map(({ row, points }, at) => ({
+    key: row.entry.player.fantraxId,
+    rank: ranks[at],
+    name: row.entry.player.displayName,
+    played: null,
+    detail:
+      row.entry.ownerTeamId === null
+        ? UNOWNED
+        : shortName(row.entry.ownerTeamId, names.get(row.entry.ownerTeamId) ?? UNOWNED),
+    points,
+  }));
 }
 
 /** The Premier League, computed from finished fixtures: FPL's alone, so a silent Fantrax costs it nothing. */

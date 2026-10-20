@@ -37,7 +37,10 @@ export interface Edition {
   /** Null when there is something to print. */
   silence: Silence | null;
   snapshot: FootballSnapshot | null;
+  /** The season's deals: the desk's stories pick their own week, and silence counts them all. */
   deals: Deal[];
+  /** The sidebar's week: the newest period that has deals, plus any Fantrax gave no period. */
+  business: Deal[];
   deadline: Deadline | null;
   teams: LeagueTeam[];
   /** Null until somebody has actually played. */
@@ -82,6 +85,7 @@ export async function edition(mine: string | null): Promise<Edition> {
   const paper = {
     snapshot: drafted?.snapshot ?? null,
     deals: business,
+    business: weekOfBusiness(business),
     deadline: drafted?.info ? nextDeadline(drafted.info.rosterPeriods, kickoffs, at) : null,
     teams: drafted?.info?.teams ?? [],
     eleven: picked,
@@ -95,6 +99,13 @@ export async function edition(mine: string | null): Promise<Edition> {
   };
 
   return { ...paper, silence: silenceOf(squads, paper) };
+}
+
+/** Not the round's period: a claim run after the deadline lands in the next one, and Tuesday's open period has none yet. */
+export function weekOfBusiness(all: Deal[]): Deal[] {
+  const periods = all.flatMap((deal) => (deal.period === null ? [] : [deal.period]));
+  const newest = periods.length === 0 ? null : Math.max(...periods);
+  return all.filter((deal) => deal.period === null || deal.period === newest);
 }
 
 /** What the paper is short of, only when there is nothing at all to print; a quiet week is not an outage. */

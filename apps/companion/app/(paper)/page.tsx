@@ -20,6 +20,7 @@ import { readerTeamId } from "../squads";
 import { readCalendar } from "../round";
 import { draftRows, footballRows, scorerRows } from "../tables";
 import { titled } from "../titles";
+import { shortName } from "../teamNames";
 
 // The Gazetta's front page: the stories, the eleven, the tables, the business and the lock.
 // A section with nothing to say does not appear; the register is `(paper)/layout.tsx`'s.
@@ -43,6 +44,8 @@ export default async function GazettePage() {
   // A deal with no other side came off the wire.
   const byId = named(paper.teams);
   const who = (teamId: string | null) => (teamId === null ? "the wire" : byId(teamId));
+  // A sidebar list names a team short, as the tables beside it do; a story's prose keeps the full name.
+  const dealWho = (teamId: string | null) => (teamId === null ? "the wire" : shortName(teamId, byId(teamId)));
 
   // The ranks under the splash, sliced together so the two boundaries cannot drift.
   const shoulders = paper.filed.slice(1, SHOULDER_STORIES + 1);
@@ -137,8 +140,8 @@ export default async function GazettePage() {
           <PaperTable title="The draft table" rows={draft} />
           <PaperTable title="The Premier League" aside="P · GD · Pts" rows={football} />
 
-          {paper.deals.length > 0 ? (
-            <Deals deals={paper.deals} who={who} />
+          {paper.business.length > 0 ? (
+            <Deals deals={paper.business} who={dealWho} />
           ) : null}
 
           {paper.deadline ? (
