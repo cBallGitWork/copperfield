@@ -82,7 +82,6 @@ const NAMED = [
   "PlManMatch.ownGoals",
   "MatchEvent.kind",
   "mapRoundGoals()",
-  "mapMatchEvents()",
   "PlTeamSheet.formation",
   "IntelPlayer.position",
   "IntelPlayer.secondaryPositions",

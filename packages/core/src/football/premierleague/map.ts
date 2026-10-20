@@ -5,19 +5,6 @@ import { codeOf } from "./teamSheet";
 
 // Pure raw → domain, joined to FPL on ids only: `altIds.opta` is FPL's `opta_code`, or `g` + its `fixture.code`.
 
-/** Opta's vocabulary reduced to our seven kinds; a type missing here is dropped. */
-const KINDS: Record<string, MatchEventKind> = {
-  goal: "goal",
-  "penalty goal": "penalty-goal",
-  "own goal": "own-goal",
-  "VAR cancelled goal": "disallowed-goal",
-  "yellow card": "yellow-card",
-  "red card": "red-card",
-  // Opta's spelling, no space, and a sending-off: without this line a third of the reds vanish.
-  "secondyellow card": "red-card",
-  substitution: "substitution",
-};
-
 /** The fixture's FPL code from `{opta: "g2645221"}`; null without `altIds`, which needs `altIds=true` on the read. */
 export function plFixtureCode(fixture: RawPlFixture): number | null {
   const opta = fixture.altIds?.opta;
@@ -62,37 +49,6 @@ export function plCommentary(events: readonly RawPlEvent[]): PlCommentaryLine[] 
     lines.push({ id: event.id, type: event.type, minute, seconds, text: event.text });
   }
   return lines.sort((a, b) => b.seconds - a.seconds);
-}
-
-/** The commentary reduced to our seven kinds and joined to FPL, oldest first as it arrived.
- *  `fixtureCode` is passed in because the textstream's header carries no `altIds`; `codes` is `plPlayerCodes`. */
-export function mapMatchEvents(
-  events: readonly RawPlEvent[],
-  fixtureCode: number,
-  codes: Map<number, number>,
-  /** Kick-off in epoch ms, from the gameweek read; null leaves `absolute` null so a gameweek sort skips them. */
-  kickoffMillis: number | null = null,
-): MatchEvent[] {
-  const mapped: MatchEvent[] = [];
-  for (const event of events) {
-    const kind = KINDS[event.type];
-    // An event we cannot place in the match cannot go in a timeline.
-    const minute = event.time?.label;
-    const seconds = event.time?.secs;
-    if (kind === undefined || minute === undefined || seconds === undefined) continue;
-
-    mapped.push({
-      id: event.id,
-      fixtureCode,
-      kind,
-      minute,
-      seconds,
-      absolute: wallClock(kickoffMillis, seconds),
-      text: event.text,
-      players: (event.playerIds ?? []).map((id) => codes.get(id) ?? null),
-    });
-  }
-  return mapped;
 }
 
 /** Every goal in a gameweek from the one read that carries them all, as `MatchEvent` with a synthesised id.

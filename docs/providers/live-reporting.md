@@ -202,9 +202,9 @@ a project:
 - **Match stats.** `fetchPlMatchStats` + `plMatchMetrics`, inside the adapter's 25 tests. Makes 12 of
   CM's 13 Match Stats rows shippable (`cm9900/22.jpg`); the only one missing is
   Action Zones.
-- **Match report.** `fetchPlTextstream` + `mapMatchEvents`, answering 200 on
+- **Match report.** `fetchPlTextstream` + `plCommentary`, answering 200 on
   **30 of 30** fixtures across GW1–3, 2,215 events. This is `docs/rules/DESIGN.md` §2's
-  named absence — *"a text-commentary matchday"* — and the mapper is done.
+  named absence — *"a text-commentary matchday"*; the paper reads its moments through `moments.ts`.
 - **Lineups, formation, shirt numbers, captain.** On `/fixtures/{id}`, unread.
 - **The real match clock.** `clock.label` beats FPL's `minutes` and the Live
   tab still prints FPL's.

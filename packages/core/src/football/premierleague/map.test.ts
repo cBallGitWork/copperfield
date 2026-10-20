@@ -1,18 +1,15 @@
 import { describe, expect, it } from "vitest";
 import recordedFixture from "../__fixtures__/plFixture.json";
-import { OPTA_TO_CODE as optaToCode } from "../__fixtures__/plFixtureCodes";
 import recordedRound from "../__fixtures__/plRound.json";
 import recordedStats from "../__fixtures__/plMatchStats.json";
 import recordedStreams from "../__fixtures__/plTextstream.json";
 import {
-  mapMatchEvents,
   mapRoundGoals,
   plFixtureCode,
   plCommentary,
   plMatchMetrics,
   worthReading,
 } from "./map";
-import { plPlayerCodes } from "./teamSheet";
 import type {
   RawPlFixture,
   RawPlFixturePage,
@@ -21,12 +18,8 @@ import type {
 import type { RawPlMatchStats } from "./rawStats";
 
 // Liverpool 2-2 Nottingham Forest (GW2): an assisted goal, a penalty, a VAR-cancelled goal and nine changes.
-// The second stream is an unstarted fixture.
-const [PLAYED, UNSTARTED] = recordedStreams as unknown as RawPlTextstream[];
+const [PLAYED] = recordedStreams as unknown as RawPlTextstream[];
 const DETAIL = recordedFixture as unknown as RawPlFixture;
-
-const codes = plPlayerCodes(DETAIL, optaToCode);
-const events = mapMatchEvents(PLAYED.events.content, 2_645_211, codes);
 
 describe("plFixtureCode", () => {
   it("reads FPL's fixture code off the provider's own id for the match", () => {
@@ -39,111 +32,13 @@ describe("plFixtureCode", () => {
   });
 });
 
-describe("mapMatchEvents", () => {
-  it("keeps the seven kinds that matter and drops the rest", () => {
-    // 107 events in the match, 20 worth printing; the rest are corners, throw-ins and free kicks.
-    expect(PLAYED.events.content).toHaveLength(107);
-    expect(events).toHaveLength(20);
-  });
-
-  // A second yellow is a sending-off, and Opta spells its type with no space.
-  it("reads a second yellow as a red card", () => {
-    const sent = mapMatchEvents(
-      [
-        {
-          id: 1,
-          type: "secondyellow card",
-          text: "Second yellow card to Abdul Fatawu (Ipswich Town).",
-          time: { label: "67", secs: 4020 },
-          playerIds: [],
-        },
-      ],
-      1,
-      codes,
-    );
-    expect(sent.map((event) => event.kind)).toEqual(["red-card"]);
-  });
-
-  it("reads a fixture nobody has played as empty rather than throwing", () => {
-    expect(UNSTARTED.events.content).toHaveLength(0);
-    expect(mapMatchEvents(UNSTARTED.events.content, 1, codes)).toEqual([]);
-  });
-
-  it("puts the scorer first and the assister second", () => {
-    const goal = events.find((e) => e.id === 2_790_296);
-    expect(goal?.kind).toBe("goal");
-    expect(goal?.minute).toBe("60");
-    // Isak, assisted by Gakpo.
-    expect(goal?.players).toEqual([21_737 + 1_000_000, 32_894 + 1_000_000]);
-  });
-
-  it("puts the man coming on first and the man going off second", () => {
-    const sub = events.find((e) => e.id === 2_790_351);
-    expect(sub?.kind).toBe("substitution");
-    expect(sub?.players).toEqual([51_813 + 1_000_000, 50_623 + 1_000_000]);
-  });
-
-  it("keeps stoppage time as it is printed rather than rounding it to a number", () => {
-    expect(events.find((e) => e.id === 2_790_543)?.minute).toBe("90+2");
-  });
-
-  it("drops the period-boundary types whose seconds run backwards", () => {
-    // `end 1` carries 2910 and the second half's `start` 2700; none is a kind we keep, so `seconds` orders the rest.
-    const boundaries = PLAYED.events.content.filter((e) =>
-      ["start", "end 1", "end 2", "end 14"].includes(e.type),
-    );
-    expect(boundaries.length).toBeGreaterThan(0);
-    expect(mapMatchEvents(boundaries, 1, codes)).toEqual([]);
-  });
-
-  it("carries a clock that orders THIS match, and says so", () => {
-    // As a string "90+2" sorts before "9", and as a number it equals 90.
-    const stoppage = events.find((e) => e.id === 2_790_543);
-    const ninth = events.find((e) => e.id === 2_789_801);
-    expect(stoppage?.minute).toBe("90+2");
-    expect(stoppage?.seconds).toBeGreaterThan(ninth?.seconds ?? 0);
-    expect([...events].sort((a, b) => a.seconds - b.seconds).map((e) => e.id)).toEqual(
-      events.map((e) => e.id),
-    );
-  });
-
-  it("calls a penalty its own kind, so a goals feed reading only `goal` cannot miss it", () => {
-    expect(events.find((e) => e.id === 2_790_385)?.kind).toBe("penalty-goal");
-  });
-
-  it("holds an unresolved man's PLACE rather than closing the array around him", () => {
-    // The position is the meaning: compacting would promote Gakpo to scorer.
-    const partial = new Map([[21_737, 99]]);
-    const goal = mapMatchEvents(PLAYED.events.content, 1, partial).find(
-      (e) => e.id === 2_790_296,
-    );
-    expect(goal?.players).toEqual([99, null]);
-  });
-
-  it("never publishes a cancelled goal as a goal, so the feed reconciles to the score", () => {
-    // Wirtz's 32nd minute: Opta emits the cancellation and no `goal` beside it, so nothing is un-printed.
-    const cancelled = events.filter((e) => e.kind === "disallowed-goal");
-    expect(cancelled).toHaveLength(1);
-    expect(cancelled[0].minute).toBe("32");
-
-    const scored = events.filter(
-      (e) => e.kind === "goal" || e.kind === "penalty-goal" || e.kind === "own-goal",
-    );
-    expect(scored).toHaveLength(4);
-    const [home, away] = PLAYED.fixture.teams;
-    expect((home.score ?? 0) + (away.score ?? 0)).toBe(scored.length);
-  });
-});
-
 // Gameweek 2's ten fixtures, recorded WITH `altIds=true`, without which there is no join key.
 const ROUND = recordedRound as unknown as RawPlFixturePage;
 
 describe("plCommentary", () => {
   const lines = plCommentary(PLAYED.events.content);
 
-  it("keeps the WHOLE vocabulary, which is the difference from mapMatchEvents", () => {
-    // The wire keeps seven kinds; a report wants everything in one match.
-    expect(lines.length).toBeGreaterThan(events.length);
+  it("keeps the WHOLE vocabulary: a report wants everything in one match", () => {
     const kinds = new Set(lines.map((line) => line.type));
     expect(kinds.has("attempt saved")).toBe(true);
     expect(kinds.has("corner")).toBe(true);

@@ -1,5 +1,5 @@
 export type { InboxItem, Mention } from "./types";
-export { type BodySpan, bodySpans } from "./mentions";
+export { bodySpans } from "./mentions";
 export { availabilityNews } from "./doubts";
 export { blockNews } from "./block";
 export { inboxItems, roundNews } from "./items";

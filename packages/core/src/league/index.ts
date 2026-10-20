@@ -31,7 +31,6 @@ export type { PoolStatRow, StatSeason, TeamStats } from "./stats";
 export {
   bandCategories,
   liveBreakdown,
-  liveMinutes,
   minutesByMan,
 } from "./breakdown";
 export type { BreakdownLine, CategoryBand, CategoryMan } from "./breakdown";
@@ -92,7 +91,7 @@ export { rulesCard, scoredSlots } from "./rulesCard";
 export { autoSubs, blank } from "./autoSubs";
 export type { AutoSub, PositionLimits, SubMan } from "./autoSubs";
 export { awaitsSub, withAutoSubs } from "./afterSubs";
-export type { AutoSubPair, SubsReading } from "./afterSubs";
+export type { AutoSubPair } from "./afterSubs";
 export {
   mapBenchPlayerPoints,
   mapLivePlayerPoints,
@@ -130,7 +129,6 @@ export { fetchLineupState, sendBenchOrder, sendLineup } from "./fantrax/lineupCl
 export {
   benchOrderMap,
   benchToWrite,
-  changesBenchOrder,
   changesLineup,
   fieldMapFor,
   lineupChanges,
