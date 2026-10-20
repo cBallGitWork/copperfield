@@ -35,11 +35,16 @@ describe("a fantasy tie's results row", () => {
 
 // Review LEAGUE-2: the reader's row stepped 4px right of the column, its accent edge the only border on the list.
 describe("the reader's row in a column of rows", () => {
-  const row = (mine: boolean) =>
-    renderToStaticMarkup(createElement(ScoreRow, { home: { name: "Home", mine }, away: { name: "Away" }, score: null }));
+  const row = (mine: boolean, marks?: boolean) =>
+    renderToStaticMarkup(createElement(ScoreRow, { home: { name: "Home", mine }, away: { name: "Away" }, score: null, marks }));
 
-  it("gives every row the same 4px left edge, so names and scores keep one column", () => {
-    expect(row(true)).toContain("border-l-4 border-l-accent");
-    expect(row(false)).toContain("border-l-4 border-l-transparent");
+  it("gives every row of a fantasy list the same 4px left edge, so names and scores keep one column", () => {
+    expect(row(true, true)).toContain("border-l-4 border-l-accent");
+    expect(row(false, true)).toContain("border-l-4 border-l-transparent");
+  });
+
+  // Review: the transparent edge sat every football row 4px in on Prem, Live and the matchup's Fixtures tab.
+  it("leaves a football row, which is never the reader's, flush at both ends", () => {
+    expect(row(false)).not.toContain("border-l-4");
   });
 });

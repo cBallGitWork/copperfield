@@ -49,6 +49,7 @@ function DraftRow({
       away={tieSide(tie.away, places, mine, left(tie.away.team?.teamId))}
       // A missing total prints the dash; Fantrax answers 0 for an unplayed week, so one is never asked for then.
       score={{ home: pointsOf(tie.home.team?.teamId, scores), away: pointsOf(tie.away.team?.teamId, scores) }}
+      marks
       // No tail: a fantasy tie has no minute, and the accent edge and name already mark yours.
       href={opens ? tieHref(on, gameweek, tie.home.team?.teamId, tie.away.team?.teamId) : undefined}
     />
