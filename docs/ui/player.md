@@ -64,7 +64,8 @@ already drawn on both, and now draws only there. `tabs.test.ts` holds which bloc
    *"just remove the chip row and email style preview, just put the text in, with date/time and
    make text bigger"*): for a man who may miss out, FPL's note as one sentence with his chance
    said once (`Muscular injury, 75% chance of playing`); then when Fantrax's newest note was
-   filed and the whole of it with its analysis, at `base`/`lg:text-lg`. A fit man gets no
+   filed and the whole of it with its analysis, at `base`/`lg:text-lg`. **A phone gets only its first paragraph**
+   (Craig, 20 Oct 2026: the News tab has the rest; no link or "more"); the desk keeps all of it. A fit man gets no
    fitness line. Only the newest: the list is News's. No source caption. With neither, no panel.
    **Set pieces** under that, a duty at his club rather than a count: his place in his club's
    penalty, direct free-kick and corner orders (Craig, 30 Sep 2026: "their fk/pk/corner rank for the club"), the same order the
@@ -88,7 +89,9 @@ together, shows current season by default with other seasons on a dropdown"). **
 is gone as a tab** and `/history` redirects to `?season=all`; the strip is four plates.
 
 - A **Season** picker: this season (the default), each season
-  FPL's history lists, and **All seasons**. It is `?season=`, so a shared link keeps it.
+  FPL's history lists, and **All seasons**. It is `?season=`, so a shared link keeps it. Over a past season or
+  All seasons it drops its visible label (review M-CONSIST-4, 20 Oct 2026): the table's own head names the block, and
+  the select keeps the accessible name "Season".
 - **This season**, in this order: Rankings, the season maps, Every match. The Season table and Attacking were
   removed on 11 Oct 2026 (Craig: *"remove these two sections in data"*); the Data board still lists the stats
   league's counts.

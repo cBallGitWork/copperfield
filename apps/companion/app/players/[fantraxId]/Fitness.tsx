@@ -23,8 +23,8 @@ export default async function Fitness({ fantraxId, player }: { fantraxId: string
   );
 }
 
-/** Fantrax's newest note on him: when it was filed, then all of it. */
-function Story({ story }: { story: NewsItem }) {
+/** Fantrax's newest note on him: when it was filed, then all of it; a phone gets the first paragraph (Craig, 20 Oct 2026). */
+export function Story({ story }: { story: NewsItem }) {
   const iso = filedAt(story);
   return (
     <div className="flex flex-col gap-1.5">
@@ -33,8 +33,8 @@ function Story({ story }: { story: NewsItem }) {
           {londonMoment(iso)}
         </time>
       )}
-      {storyText(story).map((paragraph) => (
-        <p key={paragraph} className={PROSE}>
+      {storyText(story).map((paragraph, index) => (
+        <p key={paragraph} className={index === 0 ? PROSE : `${PROSE} max-lg:hidden`}>
           {paragraph}
         </p>
       ))}

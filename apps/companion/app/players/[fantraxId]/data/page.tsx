@@ -122,7 +122,8 @@ async function Record({
   return (
     <>
       <section className={`${PANEL} lg:flex-row lg:items-center`}>
-        <span className={LABEL}>Season</span>
+        {/* A past season's table heads itself, so the select's aria-label names it there. */}
+        {value === "" ? <span className={LABEL}>Season</span> : null}
         <div className="lg:w-64">
           <QuerySelect name="season" label="Season" value={value} options={options} action={playerDataHref(fantraxId)} />
         </div>
