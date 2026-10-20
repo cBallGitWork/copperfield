@@ -55,4 +55,9 @@ describe("a table whose only head is its place", () => {
   it("leaves a head row with figures in it drawn, as /league's is", () => {
     expect(html(COLUMNS)).toContain("<thead>");
   });
+
+  it("keeps its place column's width with the head hidden", () => {
+    // Integration review: an sr-only head took the th's w-8 with it, and the Order column grew to 116px at 390.
+    expect(html(ORDER)).toMatch(/<td class="cm-index[^"]* w-8[ "]/);
+  });
 });
