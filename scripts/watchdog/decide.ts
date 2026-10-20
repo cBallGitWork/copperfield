@@ -93,18 +93,29 @@ function dayIn(at: number, zone: string): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: zone, year: "numeric", month: "2-digit", day: "2-digit" }).format(at);
 }
 
-/** The slot whose deadline passed most recently, looking back a week. */
-function lastDue(slots: readonly Slot[], now: number): { start: number; due: number; slot: Slot } | null {
-  let last: { start: number; due: number; slot: Slot } | null = null;
+interface Opened {
+  start: number;
+  due: number;
+  slot: Slot;
+}
+
+/** Every slot opened in the last week, latest first. */
+function opened(slots: readonly Slot[], now: number): Opened[] {
+  const out: Opened[] = [];
   for (let back = 0; back <= 7; back++) {
     for (const slot of slots) {
       const day = dayIn(now - back * MS_PER_DAY, slot.zone);
       if (!slot.weekdays.includes(new Date(`${day}T12:00:00Z`).getUTCDay())) continue;
-      const due = wallClock(day, slot.due, slot.zone);
-      if (due <= now && (last === null || due > last.due)) last = { start: wallClock(day, slot.start, slot.zone), due, slot };
+      const start = wallClock(day, slot.start, slot.zone);
+      if (start <= now) out.push({ start, due: wallClock(day, slot.due, slot.zone), slot });
     }
   }
-  return last;
+  return out.sort((a, b) => b.start - a.start);
+}
+
+/** The slot whose deadline passed most recently, looking back a week. */
+function lastDue(slots: readonly Slot[], now: number): Opened | null {
+  return opened(slots, now).filter((one) => one.due <= now).sort((a, b) => b.due - a.due)[0] ?? null;
 }
 
 function utc(at: number): string {
@@ -138,14 +149,23 @@ function workflowFindings(rule: WorkflowRule, runs: readonly Run[], now: number)
   return found;
 }
 
+/** How far back a missed Mac slot is still told, beyond the latest one: a watchdog run GitHub drops or delays loses none. */
+const MAC_LOOK_BACK = 24 * HOUR;
+
 function macFindings(rule: MacRule, reports: readonly Run[], now: number): Finding[] {
-  const due = lastDue(rule.slots, now);
-  if (due === null) return [];
   const name = new RegExp(`^alert ${rule.source} (ok|fail)$`);
-  const reported = reports.some((run) => name.test(run.displayTitle) && Date.parse(run.createdAt) >= due.start && Date.parse(run.createdAt) <= now);
-  if (reported) return [];
-  const slot = `${due.slot.start} ${due.slot.zone} slot (${utc(due.start)})`;
-  return [{ source: rule.source, message: `The Mac's ${rule.source} job sent no report for its ${slot} by ${due.slot.due}. Asleep, offline, or launchd unloaded?` }];
+  const times = reports.filter((run) => name.test(run.displayTitle) && Date.parse(run.createdAt) <= now).map((run) => Date.parse(run.createdAt)).sort((a, b) => b - a);
+  const latest = lastDue(rule.slots, now);
+  // Latest slot first, each takes the latest report since it opened, so one report never covers two slots.
+  const missed: Opened[] = [];
+  for (const one of opened(rule.slots, now)) {
+    const taken = times.findIndex((at) => at >= one.start);
+    if (taken >= 0) times.splice(taken, 1);
+    else if (one.due <= now && (one.due > now - MAC_LOOK_BACK || one.start === latest?.start)) missed.unshift(one);
+  }
+  if (missed.length === 0) return [];
+  const slots = missed.map((one) => `${one.slot.start} ${one.slot.zone} slot (${utc(one.start)}) by ${one.slot.due}`).join(" and its ");
+  return [{ source: rule.source, message: `The Mac's ${rule.source} job sent no report for its ${slots}. Asleep, offline, or launchd unloaded?` }];
 }
 
 /** Every finding at `now`. A workflow missing from `listed` was not listed, which the caller reports itself. */

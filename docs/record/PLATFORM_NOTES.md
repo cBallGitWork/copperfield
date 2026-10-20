@@ -338,7 +338,8 @@ two hours 06–22 UTC (hourly until 17 Oct 2026) against the rules in `scripts/w
   A latest run that ended `startup_failure` is a finding too.
 - **The Mac's jobs owe a report**: an `alert.yml` run named `alert intel-<mode> ok|fail`, created after the slot
   opened. Deadlines, London: weekly Tue 12:00; pressers Thu 18:00 and 18:15, Fri 14:00, 15:00, 16:30 and 18:30. A fail counts as ran,
-  because it has been reported.
+  because it has been reported. One report covers one slot, so a later run's cannot hide a missed one, and every slot
+  missed in the last 24h is told, with the latest, in one finding per source (the two-hourly cron skipped some until 20 Oct).
 - **A finding files under the late job's own source**, so the job's next green run closes it. A `gh` error turns
   the watchdog red rather than skipping, and no shared setup action stands between it and its own alert.
 - **`capture-status.yml` checks the watchdog** succeeded in the last 3h (`--watchdog`).
