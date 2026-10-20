@@ -7,3 +7,8 @@ export function unreadCount(ids: readonly string[], seen: ReadonlySet<string> | 
 export function unreadText(count: number): string {
   return count > 9 ? "9+" : String(count);
 }
+
+/** Whether to store the inbox as seen: on Mail or a first visit, and never from a failed read (`null`). */
+export function shouldRecord(ids: readonly string[] | null, reading: boolean, firstVisit: boolean): ids is readonly string[] {
+  return ids !== null && (reading || firstVisit);
+}

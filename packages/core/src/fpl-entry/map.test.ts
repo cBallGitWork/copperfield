@@ -36,6 +36,22 @@ describe("mapEntry", () => {
     expect(entry.leagues[0].lastRank).toBeNull();
   });
 
+  it("drops FPL's global Overall league, whose rank is the entry's own overall rank", () => {
+    // Matched on FPL's fixed id, never the name: a league somebody made may be called "Overall" too.
+    const entry = mapEntry({
+      summary_overall_rank: 1757253,
+      leagues: {
+        classic: [
+          { id: 276, name: "Gameweek 1", entry_rank: 1756454, league_type: "s" },
+          { id: 314, name: "Overall", entry_rank: 1757253, league_type: "s" },
+          { id: 5508, name: "Overall", entry_rank: 14, league_type: "x" },
+        ],
+      },
+    });
+    expect(entry.leagues.map((league) => league.id)).toEqual([276, 5508]);
+    expect(entry.overallRank).toBe(1757253);
+  });
+
   it("survives an entry stripped of everything", () => {
     expect(mapEntry({}).leagues).toEqual([]);
     expect(mapEntry({}).managerName).toBe("");

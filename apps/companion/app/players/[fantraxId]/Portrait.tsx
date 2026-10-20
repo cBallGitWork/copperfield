@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { type Club, type FootballPlayer, clubColoursOf, crestUrl, isGoalkeeper } from "@epl/core";
 import PlayerImage from "../../components/league/PlayerImage";
+import { LG } from "../../breakpoints";
 
 // The masthead of a page about one footballer: the cut-out on his club's colour, crest top-left.
 // A banner across a phone; on a desk a column as tall as the grid beside it, filled to the edge
 // (Craig, 25 Sep 2026: "not using all the thumbnail so its cut off mid box").
 
 /** What the optimizer may serve: the whole phone's width, or the desk column's. */
-const SIZES = "(min-width: 1024px) 13rem, 100vw";
+const SIZES = `${LG} 13rem, 100vw`;
 
 export default function Portrait({
   player,

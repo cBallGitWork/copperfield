@@ -3,7 +3,7 @@
 import { use, useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { MAIL, owns } from "./sections";
-import { unreadCount, unreadText } from "./unread";
+import { shouldRecord, unreadCount, unreadText } from "./unread";
 
 // Unread mail on the Read tab, against the ids this device saw on its last visit; the visit is the read.
 
@@ -47,18 +47,18 @@ function writeSeen(ids: readonly string[]): void {
   for (const listener of listeners) listener();
 }
 
-/** Takes the layout's un-awaited inbox read, so the rail never waits on it. */
-export default function UnreadBadge({ inbox }: { inbox: Promise<readonly string[]> }) {
+/** Takes the layout's un-awaited inbox read, so the rail never waits on it; `null` is a read that failed. */
+export default function UnreadBadge({ inbox }: { inbox: Promise<readonly string[] | null> }) {
   const ids = use(inbox);
   const reading = owns([MAIL], usePathname());
   // Undefined on the server and in hydration, so a count already there never pulses on load.
   const stored = useSyncExternalStore(subscribe, readSeen, () => undefined);
   const seenIds = stored === undefined ? undefined : parseSeen(stored);
   const firstVisit = seenIds === null;
-  const count = reading || !seenIds ? 0 : unreadCount(ids, seenIds);
+  const count = reading || !seenIds || ids === null ? 0 : unreadCount(ids, seenIds);
 
   useEffect(() => {
-    if (reading || firstVisit) writeSeen(ids);
+    if (shouldRecord(ids, reading, firstVisit)) writeSeen(ids);
   }, [ids, reading, firstVisit]);
 
   const [lastCount, setLastCount] = useState<number | null>(null);

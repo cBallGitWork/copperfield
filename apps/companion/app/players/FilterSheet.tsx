@@ -7,14 +7,13 @@ import DialogHead from "../components/shell/DialogHead";
 import { PANEL, SECTION_BAR } from "@/app/desk";
 import type { BoardChange } from "./boardChange";
 import { ask } from "./liveQuery";
+import { BELOW_LG } from "../breakpoints";
 
 // The board's filters: the house dialog under a thumb, an inline panel from `lg`. Open is URL state, so closing
 // replaces it with the board `close` makes; the server's first paint is the panel, which a phone swaps for the dialog.
 
-const PHONE = "(width < 64rem)";
-
 function subscribe(changed: () => void): () => void {
-  const query = matchMedia(PHONE);
+  const query = matchMedia(BELOW_LG);
   query.addEventListener("change", changed);
   return () => query.removeEventListener("change", changed);
 }
@@ -32,7 +31,7 @@ export default function FilterSheet({
   children: ReactNode;
 }) {
   const router = useRouter();
-  const phone = useSyncExternalStore(subscribe, () => matchMedia(PHONE).matches, () => false);
+  const phone = useSyncExternalStore(subscribe, () => matchMedia(BELOW_LG).matches, () => false);
 
   if (!phone) {
     return (

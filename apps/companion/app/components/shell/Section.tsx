@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { PANEL, QUIET_NOTE, SMALL_CAPS } from "@/app/desk";
+import { PANEL, QUIET_NOTE, SECTION_HEAD, SMALL_CAPS } from "@/app/desk";
 
 // A headed block on a plate, with a rule under the head: the shape every tab uses for "this part is about that".
 // The plate wraps the head too, so neither title nor aside prints bare on the photograph.
@@ -19,7 +19,7 @@ export default function Section({
   return (
     <section className={PANEL}>
       {!heads ? null : (
-        <div className="flex items-baseline justify-between gap-3 border-b border-line pb-1">
+        <div className={SECTION_HEAD}>
           {/* `font-chrome`, not `font-display`, which is reserved for figures. */}
           {title === undefined ? (
             <span />

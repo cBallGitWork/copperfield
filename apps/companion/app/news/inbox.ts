@@ -23,6 +23,7 @@ import {
   presserNews,
   roundNews,
 } from "@epl/core";
+import { cache } from "react";
 import { now } from "../clock";
 import { readBoard } from "../board";
 import { readDeals } from "../business";
@@ -60,7 +61,8 @@ function nextOpponents(
   return headToHeads(matchups, teams, period, mine).map((tie) => tie.opponent.teamId);
 }
 
-export async function readInbox(): Promise<Inbox> {
+/** One build per request, shared by the layout's badge and the Mail page: `cache()` never outlives the request. */
+export const readInbox = cache(async (): Promise<Inbox> => {
   const [squads, feed, mine, kickoffs, blocks, proposals] = await Promise.all([
     getLeagueSquads(),
     readDeals(),
@@ -151,7 +153,7 @@ export async function readInbox(): Promise<Inbox> {
     names,
     mine,
   };
-}
+});
 
 /** The reader's own tie once both sides have none to play; `points` is a nought before kickoff, and a null `toPlay` is open. */
 function finishedTie(
