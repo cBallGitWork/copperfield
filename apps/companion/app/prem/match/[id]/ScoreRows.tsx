@@ -14,8 +14,8 @@ const NAME = "font-chrome text-lg font-bold lg:text-3xl";
 const SCORER_FIGURE = "numeric shrink-0 font-bold text-accent text-lg lg:text-3xl";
 /** The assister's minutes: the scorer's ink and column, at the assister's size. */
 const ASSIST_FIGURE = "numeric shrink-0 font-bold text-accent text-sm lg:text-xl";
-/** The name keeps its width and cuts only when it alone overruns the row; a weighted shrink still drew 'A. Iwo…'. */
-const KEEPS_WIDTH = "max-w-full shrink-0 truncate";
+/** The name keeps its width; alone too long for the row, a phone wraps it (never 'R. Sesseg…') and a desk cuts it. */
+const KEEPS_WIDTH = "max-w-full shrink-0 wrap-break-word lg:truncate";
 /** The owner's bracket, cut to nothing before the name loses a letter: a phone drew 'R. Sessegn…' for '(Dome)'. */
 const GIVES_WAY = "min-w-0 truncate";
 

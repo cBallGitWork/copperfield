@@ -342,6 +342,10 @@ It was a second line under every name — two rows of chrome for one man, on the
 screen with the fewest facts in the app — and a league team name is a gloss on
 the name it follows rather than a fact of its own.
 
+**On a phone the bracket gives way first, then the name wraps.** At 390 `R. Sessegnon (Dome)` drew as
+`R. Sessegn…`, and with the bracket cut it still drew `R. Sesseg…` at 320. Type never shrinks (DESIGN §8), so a
+name too long for its half takes a second line below `lg`; the desk still cuts it (20 Oct 2026).
+
 **The assister carries a minute only when a second assister makes it say
 something.** This went round the houses in one afternoon and the landing place is
 the rule, not the history: one assister and POSITION already answers it — he sits

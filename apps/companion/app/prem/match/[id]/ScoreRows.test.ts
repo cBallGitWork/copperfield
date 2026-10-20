@@ -26,7 +26,7 @@ function nameClassOf(html: string, short: string): string {
 function expectOwnerYieldsFirst(html: string, short: string) {
   const name = nameClassOf(html, short).split(" ");
   const owner = classOf(html, "(Glengarry)").split(" ");
-  expect(name).toEqual(expect.arrayContaining(["shrink-0", "max-w-full", "truncate"]));
+  expect(name).toEqual(expect.arrayContaining(["shrink-0", "max-w-full", "lg:truncate"]));
   expect(owner).toEqual(expect.arrayContaining(["min-w-0", "truncate"]));
   expect(owner).not.toContain("shrink-0");
 }
@@ -38,6 +38,17 @@ describe("a scoresheet line on a phone", () => {
       createElement(Man, { code: 7, card: undefined, name: "Ryan Sessegnon", short: "Ryan Sessegnon", owners, figure: "90'" }),
     );
     expectOwnerYieldsFirst(html, "R. Sessegnon");
+  });
+
+  // Review: 'R. Sesseg…' at text-lg on a 320 phone; type never shrinks (DESIGN 8), so the name takes a second line.
+  it("wraps a scorer's long name rather than cutting it, and cuts it only on a desk", () => {
+    const html = renderToStaticMarkup(
+      createElement(Man, { code: 7, card: undefined, name: "Ryan Sessegnon", short: "Ryan Sessegnon", owners, figure: "90'" }),
+    );
+    const name = nameClassOf(html, "R. Sessegnon").split(" ");
+    expect(name).not.toContain("truncate");
+    expect(name).toContain("lg:truncate");
+    expect(name).toContain("text-lg");
   });
 
   it("cuts the owner before the assister's name", () => {
