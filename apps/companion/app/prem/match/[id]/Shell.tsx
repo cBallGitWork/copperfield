@@ -1,8 +1,5 @@
 import type { ReactNode } from "react";
-import { clubGround } from "@epl/core";
-import { matchFacts } from "../../../matchDetail";
 import PhotoGround from "../../../components/football/PhotoGround";
-import Caption from "../../../components/shell/Caption";
 import { FootFrame } from "../../../components/shell/FootFrame";
 import BackPlate from "../../../components/shell/BackPlate";
 import { premFixturesHref } from "../../routes";
@@ -11,8 +8,8 @@ import MatchTabs from "./MatchTabs";
 import type { MatchTab } from "./matchRoutes";
 import { matchVideo, type Match } from "./match";
 
-// The frame every match tab wears: the home ground behind it, both clubs on one bar (`cm9900/21.jpg`), the tabs,
-// and on the Overview alone the ground caption — CM names the ground there, not the view (Craig, 4 Sep 2026).
+// The frame every match tab wears: the home ground behind it, both clubs on one bar and the tabs. The Overview
+// names the ground on its own dated line (page.tsx), so the frame carries no caption.
 
 export default async function MatchShell({
   match,
@@ -27,19 +24,7 @@ export default async function MatchShell({
   children: ReactNode;
 }) {
   const { fixture, home, away } = match;
-  const overview = current === "overview";
-  // The ground it was played on, off a read the wire already caches; the hand-written table is the fallback.
-  const [facts, video] = await Promise.all([
-    overview ? matchFacts(fixture.gameweek, fixture.code) : null,
-    matchVideo(match),
-  ]);
-  // The ground and its town (`St.Andrews, Birmingham`); the fallback table has no town to give.
-  const ground =
-    facts?.ground === null || facts?.ground === undefined
-      ? home === undefined
-        ? null
-        : clubGround(home.shortName)
-      : [facts.ground, facts.city].filter((part) => part !== null).join(", ");
+  const video = await matchVideo(match);
 
   return (
     // A screen tall, so the foot row sits at the foot of a short match and follows a long one.
@@ -60,14 +45,8 @@ export default async function MatchShell({
         </div>
       </div>
       <MatchTabs id={fixture.id} current={current} dim={video === null ? ["highlights"] : []} />
-      {overview ? <Caption>{ground ?? roundName(match)}</Caption> : null}
       {/* A panel ends where its content does, and blocks keep a gap between them. */}
       <div className="flex flex-col gap-2">{children}</div>
     </FootFrame>
   );
-}
-
-/** The caption for a ground nobody has written down — `clubGround` returns null rather than invent one. */
-function roundName({ fixture }: Match): string {
-  return fixture.gameweek === null ? "Gameweek TBC" : `Gameweek ${fixture.gameweek}`;
 }

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { goalMinutes, sheetSides, londonDayAndDate } from "@epl/core";
-import type { SheetRow } from "@epl/core";
+import { clubGround, goalMinutes, sheetSides, londonDayAndDate } from "@epl/core";
+import type { PlMatchFacts, SheetRow } from "@epl/core";
 import Skeleton from "../../../components/shell/Skeleton";
 import { PANEL } from "@/app/desk";
 import MatchShell from "./Shell";
@@ -17,7 +17,7 @@ import { matchGoalMinutes } from "../../../matchFeed";
 import { matchFacts, matchGoals, matchStreamCredits } from "../../../matchDetail";
 import { matchTitle } from "./title";
 
-// One match on CM's Match Overview (`cm0102/02.jpg`): a dated strip, who scored and when, then the report.
+// One match's Overview: a dated line with the ground, who scored and when, then the report.
 
 export const revalidate = 30;
 
@@ -34,17 +34,28 @@ export default async function MatchPage({
   const view = reportView((await searchParams).report);
   const match = await readMatch(id);
   const { fixture } = match;
-  // The detail read the shell's ground caption makes too; the half-time score rides on it.
+  // The detail read the wire already caches: the ground and the half-time score ride on it.
   const facts = await matchFacts(fixture.gameweek, fixture.code);
+  const ground = groundOf(facts, match);
 
   return (
     <MatchShell match={match} current="overview">
       {/* Padding rather than a height, so the last scorer breathes the same on a 0-0 and a 5-2. */}
       <section className={`${PANEL} pb-6 lg:pb-8`}>
-        {/* `02.jpg`'s dated head: the date at the left, the round and the tense at the right, both in cyan. */}
+        {/* The date and the ground at the left, the round and the tense at the right, all in cyan; the Overview
+            alone names the ground (Craig, 4 and 11 Sep 2026). */}
         <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-line pb-1">
-          <span className="numeric text-sm font-bold uppercase text-info lg:text-xl">
-            {fixture.kickoff === null ? "Date TBC" : londonDayAndDate(fixture.kickoff)}
+          <span className="text-sm font-bold text-info lg:text-xl">
+            <span className="numeric whitespace-nowrap uppercase">
+              {fixture.kickoff === null ? "Date TBC" : londonDayAndDate(fixture.kickoff)}
+            </span>
+            {/* Too long for one line, the ground drops whole under the date, never a separator alone. */}
+            {ground === null ? null : (
+              <>
+                {"\u00a0· "}
+                <span className="whitespace-nowrap">{ground}</span>
+              </>
+            )}
           </span>
           <span className="numeric text-sm font-bold text-info lg:text-xl">{stateLine(match, facts)}</span>
         </div>
@@ -109,6 +120,11 @@ function SheetWaiting() {
       ))}
     </div>
   );
+}
+
+/** The ground it was played on, without its town; the hand-written table when the read has none, else null. */
+function groundOf(facts: PlMatchFacts | null, { home }: Match): string | null {
+  return facts?.ground ?? (home === undefined ? null : clubGround(home.shortName));
 }
 
 /** Both team sheets, or two empty ones for a match FPL has filed nothing for. */

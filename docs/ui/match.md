@@ -51,16 +51,18 @@ for every shape decision below.
 2. **The strip** — `Overview · Stats · Line-ups · Highlights`. Four, and the reason is below. **Line-ups, the house spelling** (16 Oct 2026, review N30: the app printed Line Ups, LINE-UPS and lineup). **Highlights greys on
    a match with no video** (`TabStrip`'s `dim`, off `matchVideo`, the read the tab plays), and stays in its place:
    46 of 60 played matches had none on 16 Oct 2026, each a tap to "No highlights".
-3. **The caption — the GROUND, on the Overview only.** `cm9900/21.jpg` runs
-   "Goodison Park, Liverpool" along the foot of every match screen and
-   `cm0102/02.jpg` puts "St.James's Park, Newcastle" in the yellow caption at the
-   top. The strip already names the view, so a caption repeating it said nothing.
-   It was under all five tabs until 11 Sep 2026 (Craig: *"stadium name and ref
-   row only show on overview page"*) — the other four are TABLES, and a table
-   pushed down by a ground it did not ask for has paid a row of a phone's screen
-   for a fact already read. **The referee and attendance line under the panel is
-   gone altogether** (Craig, 23 Sep 2026: *"remove that ref row and attendance"*).
-4. **The panel** — the date in full at the left, the round, the tense and the
+3. **The ground, on the Overview only, on the dated line.** The panel's head reads
+   `MON 19 OCT · Tottenham Hotspur Stadium` at the left, the ground in its own case and
+   without its town, where it once had a yellow caption of its own (Craig, 4 Sep 2026: the
+   Overview names the ground). Merged on 20 Oct 2026 (review M-LIVE-10): two strips said where
+   and when, and the caption cost 44px above the first scorer. Too long for one line, the
+   ground drops whole under the date. With no ground known the date stands alone; the right
+   half already names the gameweek. It was under all five tabs until 11 Sep 2026 (Craig:
+   *"stadium name and ref row only show on overview page"*) — the other four are TABLES, and a
+   table pushed down by a ground it did not ask for has paid a row of a phone's screen for a
+   fact already read. **The referee and attendance line under the panel is gone altogether**
+   (Craig, 23 Sep 2026: *"remove that ref row and attendance"*).
+4. **The panel** — the date and the ground at the left, the round, the tense and the
    half-time score at the right **in cyan**, then either the scoresheet or the
    preview. Under it, the **Match Report** — the commentary under a blue bar, run
    the page's full length rather than in a box of its own (Craig, 23 Sep 2026: *"we
@@ -486,7 +488,7 @@ answered honestly before they all went. The one slow read is Fantrax, so it stre
 |---|---|---|
 | `/prem/match/[id]` | `page.tsx` | the scoresheet or the preview, and the league panel |
 | `…/players` | `players/page.tsx` | both team sheets, by bps |
-| — | `Shell.tsx` | the back plate, the bar, the strip, the foot row slot, and — on the Overview alone — the ground caption |
+| — | `Shell.tsx` | the back plate, the bar, the strip and the foot row slot |
 | — | `MatchBar.tsx` | the two-plate header |
 | — | `MatchTabs.tsx` | the strip |
 | — | `Scoresheet.tsx` | who was named |
