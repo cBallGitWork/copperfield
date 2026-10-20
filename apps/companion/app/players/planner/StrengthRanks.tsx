@@ -39,7 +39,7 @@ function rank(row: StrengthRank): BoardFigure {
     row.home === row.away ? [{ at: row.home }] : [{ at: row.home, home: true }, { at: row.away, home: false }];
   return {
     value: (
-      <span className="flex">
+      <span className="flex gap-px">
         {places.map(({ at, home }) => (
           <Place key={String(home)} at={at} mark={home === undefined ? null : venueMark(home)} />
         ))}
@@ -50,16 +50,16 @@ function rank(row: StrengthRank): BoardFigure {
   };
 }
 
-/** One rank on its ground, its venue under it on a phone and beside it on a desk. */
+/** One rank on its ground, its venue under it at every width. */
 function Place({ at, mark }: { at: number; mark: string | null }) {
   const { ground, ink } = easeGround(at);
   return (
     <span
-      className={`flex min-h-9 flex-1 flex-col items-center justify-center leading-none lg:min-h-7 lg:flex-row lg:gap-1 ${ink}`}
+      className={`flex min-h-9 flex-1 flex-col items-center justify-center leading-none lg:min-h-7 ${ink}`}
       style={{ background: ground }}
     >
       {ordinal(at)}
-      {mark === null ? null : <span className="text-3xs font-normal lg:text-2xs">{mark}</span>}
+      {mark === null ? null : <span className="text-3xs font-normal">{mark}</span>}
     </span>
   );
 }

@@ -38,4 +38,11 @@ describe("the planner's rankings", () => {
     expect(row).toMatch(/16th<span[^>]*>\(H\)<\/span>/);
     expect(row).toMatch(/17th<span[^>]*>\(A\)<\/span>/);
   });
+
+  // Integration review, 20 Oct 2026: side by side at the desk, '17th (H)16th (A)' filled two 40px halves edge to edge.
+  it("stacks the venue under the rank at every width, the halves a hairline apart", () => {
+    expect(html).not.toContain("lg:flex-row");
+    expect(html).not.toContain("lg:text-2xs");
+    expect(html).toContain('<span class="flex gap-px">');
+  });
 });

@@ -30,7 +30,8 @@ rankings switcher"*, *"rankings - best at top"*, and remove the rows that explai
 - **One rank column** (Craig, 20 Oct 2026, SQUADS-5; it was an index block, Home and Away from 30 Sep): home and away
   printed the same rank in 38 of 40 rows, since the model's one home advantage keeps the order. A club's cell is its
   one rank on the ramp; where home and away differ (in defence, MCI and BHA today) the cell splits, each rank on its
-  own ground with `(H)` or `(A)`, so no cell is blank. `strengthTable` keeps both ranks: the paper's strength words
+  own ground with `(H)` or `(A)` under the rank at every width (side by side, a desk's 40px halves ran
+  `17th (H)16th (A)` together), so no cell is blank. `strengthTable` keeps both ranks: the paper's strength words
   (`strengthPlaces`) read it, and the boards still rate an opponent at his venue.
 - **A club's name** opens the Players board filtered to that club and the positions the view is about
   (`F,M` for Attack, `D,G` for Defence), respelled for Fantrax (`toFantraxClubCode`).
