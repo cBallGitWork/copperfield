@@ -1,4 +1,4 @@
-import type { Fault } from "../predictions/checks";
+import type { Fault } from "../fault";
 import { correct, particles, readHeadlines } from "../reports/draft";
 import { stringOrEmpty } from "../../untrusted";
 import { numbersIn, sentences } from "../predictions/prose";

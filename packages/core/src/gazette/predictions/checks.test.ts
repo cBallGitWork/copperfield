@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { checkLawro, pencil } from "./checks";
+import { pencil } from "../fault";
+import { checkLawro } from "./checks";
 import { CALLS, SAMPLE, TEAMS, call, ctx, draft } from "./__fixtures__/column";
 
 const serious = (faults: ReturnType<typeof checkLawro>) => faults.filter((each) => each.severity !== "warn");

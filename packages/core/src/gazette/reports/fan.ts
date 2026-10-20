@@ -1,4 +1,4 @@
-import type { Fault } from "../predictions/checks";
+import type { Fault } from "../fault";
 import type { MatchDesk } from "./desk";
 import type { ReportsDraft } from "./draft";
 import { stringOrEmpty } from "../../untrusted";

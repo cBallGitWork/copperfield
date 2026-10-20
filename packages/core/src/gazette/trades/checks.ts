@@ -1,6 +1,6 @@
 import { HERE_WE_GO } from "../editorial";
 import { BANNED, americanisms, banned } from "../banned";
-import { faultLog, type Fault } from "../predictions/checks";
+import { faultLog, type Fault } from "../fault";
 import { lengthOf, masked, numbersIn, sentences, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
 import { faultOn, strayFigures } from "../proofing";

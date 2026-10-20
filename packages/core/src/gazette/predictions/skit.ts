@@ -1,7 +1,8 @@
 import { LAWRO_LIMITS } from "../../config";
 import { strangers } from "../strangers";
 import { textOrNull } from "../../untrusted";
-import { checkLawro, tieKey, type CheckContext, type Fault, type LawroDraft } from "./checks";
+import type { Fault } from "../fault";
+import { checkLawro, tieKey, type CheckContext, type LawroDraft } from "./checks";
 import { CORE_MARK, PAST } from "./past";
 import { ngrams, numbersIn, sentences, wordCount } from "./prose";
 

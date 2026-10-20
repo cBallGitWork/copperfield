@@ -1,6 +1,6 @@
 import { DRAFT_WRITING } from "../../config";
 import { escapeRegExp } from "../../regExp";
-import type { Fault } from "../predictions/checks";
+import type { Fault } from "../fault";
 import { mentionAt, ngrams, numbersIn, sentences } from "../predictions/prose";
 import { blanked } from "../proofing";
 import { surname } from "../../names";

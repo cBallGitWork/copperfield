@@ -1,4 +1,4 @@
-import type { Fault, Report } from "./predictions/checks";
+import type { Fault, Report } from "./fault";
 import { masked, numbersIn } from "./predictions/prose";
 
 // The sub-editor's small tools, shared by every desk's checks.

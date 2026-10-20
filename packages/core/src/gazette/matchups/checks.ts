@@ -2,7 +2,7 @@ import { DRAFT_WRITING } from "../../config";
 import { everyMan } from "./state";
 import { derbyNames } from "../../league/derbies";
 import { QUOTE_MARKS, americanisms, banned } from "../banned";
-import { faultLog, type Fault } from "../predictions/checks";
+import { faultLog, type Fault } from "../fault";
 import { mentionAt, numbersIn, sentences, wordCount } from "../predictions/prose";
 import { blanked, faultOn, strayFigures } from "../proofing";
 import { repeatsIn } from "../reports/repeats";

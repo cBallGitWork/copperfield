@@ -1,6 +1,6 @@
 import { REPORTS } from "../../config";
 import { FILLER, GROUNDS, QUOTE_MARKS, REGISTER, americanisms, banned, overused } from "../banned";
-import type { Report } from "../predictions/checks";
+import type { Report } from "../fault";
 import { masked, ngrams, sentences, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
 import { blanked, faultOn } from "../proofing";

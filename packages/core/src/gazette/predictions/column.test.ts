@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { normalizeStory } from "../story";
 import { CALLS, SAMPLE, draft } from "./__fixtures__/column";
-import type { Fault } from "./checks";
+import type { Fault } from "../fault";
 import { assembleLawro, featured, mergeAttempts, readDraft } from "./column";
 import type { SquadMan } from "./sides";
 

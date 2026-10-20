@@ -1,6 +1,6 @@
 import { BIN_XI } from "../../config";
 import { BANNED, americanisms, banned } from "../banned";
-import { faultLog, type Fault } from "../predictions/checks";
+import { faultLog, type Fault } from "../fault";
 import { masked, numbersIn, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
 import { faultOn, strayFigures } from "../proofing";

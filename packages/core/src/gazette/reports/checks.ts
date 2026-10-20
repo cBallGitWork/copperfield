@@ -1,7 +1,7 @@
 import { REPORTS } from "../../config";
 import { capital, spelled, withoutAccents } from "../../format";
 import { ON_THE_PITCH } from "../../football/types";
-import { faultLog, type Fault, type Report } from "../predictions/checks";
+import { faultLog, type Fault, type Report } from "../fault";
 import { mentionAt as mentionExact, numbersIn, sentences, wordCount } from "../predictions/prose";
 import { blanked, faultOn, strayFigures } from "../proofing";
 import type { MatchDesk } from "./desk";
