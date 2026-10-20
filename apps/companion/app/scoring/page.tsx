@@ -51,7 +51,8 @@ export default async function ScoringPage() {
                 <span className={`cm-row flex min-h-11 items-center ${ROW_NAME}`}>{line.name}</span>
               </td>
               {(line.same ? line.prices.slice(0, 1) : line.prices).map((cell, at) => (
-                <td key={slots[at]} colSpan={line.same ? slots.length : 1} className={`${FIGURE} text-ink`}>
+                // Below 375 the four slots' padding would push the board through the panel's right inset.
+                <td key={slots[at]} colSpan={line.same ? slots.length : 1} className={`${FIGURE} text-ink max-[374px]:px-0.5`}>
                   {cell.map((band) => (
                     <span key={band} className="block whitespace-nowrap">
                       {band}
