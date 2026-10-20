@@ -74,7 +74,10 @@ export default async function GazettePage() {
     <>
       {/* Read's strip, in the paper's own small capitals, over a masthead it leaves alone. */}
       <ReadViews current="gazetta" register="paper" />
-      <Masthead at={paper.snapshot?.fetchedAt ?? null} />
+      <Masthead
+        at={paper.snapshot?.fetchedAt ?? null}
+        lock={paper.deadline ? { gameweek: lockGameweek, at: paper.deadline.locksAt } : null}
+      />
 
       <div className="grid gap-5 @3xl:grid-cols-[1fr_19rem] @3xl:gap-x-10">
         {/* The lead column: no gutter beside the sidebar, so a full-bleed picture stops at its edge. */}
@@ -124,7 +127,7 @@ export default async function GazettePage() {
         </div>
 
         {/* The sidebar: the week's eleven, the three tables, who signed whom and
-            when the lock is. On a phone it follows the lead, in `docs/ui/gazetta.md`'s order. */}
+            when the lock is. On a phone it follows the lead with the eleven and two tables. */}
         <div className="flex flex-col gap-5 @3xl:border-l @3xl:border-line @3xl:pl-6">
           {paper.eleven ? (
             <TeamOfTheWeek
@@ -138,20 +141,23 @@ export default async function GazettePage() {
           {/* Printed copies, not links: the sortable versions live on their own tabs. */}
           <PaperTable title="Top points" rows={scorers} />
           <PaperTable title="The draft table" rows={draft} />
-          <PaperTable title="The Premier League" aside="P · GD · Pts" rows={football} />
+          {/* Desk only: a phone has the Prem tab for the table, Mail for the deals and the masthead for the lock. */}
+          <div className="hidden flex-col gap-5 @3xl:flex">
+            <PaperTable title="The Premier League" aside="P · GD · Pts" rows={football} />
 
-          {paper.business.length > 0 ? (
-            <Deals deals={paper.business} who={dealWho} />
-          ) : null}
+            {paper.business.length > 0 ? (
+              <Deals deals={paper.business} who={dealWho} />
+            ) : null}
 
-          {paper.deadline ? (
-            <Column title="Next deadline">
-              <p className="text-sm text-muted">
-                {lockGameweek === undefined ? "Line-ups" : `Gameweek ${lockGameweek} line-ups`} lock{" "}
-                <span className="numeric font-semibold text-ink">{londonDayAndTime(paper.deadline.locksAt)}</span>.
-              </p>
-            </Column>
-          ) : null}
+            {paper.deadline ? (
+              <Column title="Next deadline">
+                <p className="text-sm text-muted">
+                  {lockGameweek === undefined ? "Line-ups" : `Gameweek ${lockGameweek} line-ups`} lock{" "}
+                  <span className="numeric font-semibold text-ink">{londonDayAndTime(paper.deadline.locksAt)}</span>.
+                </p>
+              </Column>
+            ) : null}
+          </div>
         </div>
       </div>
     </>

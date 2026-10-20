@@ -20,9 +20,13 @@ business, and when lineups lock.
    which app you are in; a masthead names the publication and puts the publisher
    in small capitals over the top. `PAPER_NAME` in `app/config.ts` is the title.
 
-   Between rules, in ink, with a **dateline** under it: date at the left, season
-   at the right, small capitals and letterspaced. That row is the whole
-   difference between a masthead and an `<h1>`, and no app has one.
+   Between rules, in ink, with a **dateline** under it: date at the left, the
+   next line-up lock at the right (`GW8 LOCKS FRI 19:45`, the gameweek dropped
+   under 375px; the season, `2026/27`, when no lock is known), small capitals and
+   letterspaced. That row is the whole difference between a masthead and an
+   `<h1>`, and no app has one. The lock is `paper.deadline`, the league's own
+   calendar's first kickoff less the house lead (`LINEUP_LOCK_LEAD_MINUTES`),
+   named by the gameweek it opens.
 
    The date is the **edition's** instant, not the reader's clock: two managers
    opening the same cached edition either side of midnight must not be shown
@@ -44,6 +48,11 @@ business, and when lineups lock.
      Live tab says football is on, and *Next deadline*
      in the sidebar carries the lock to the minute. A masthead that repeats the
      page pays for itself twice.
+
+     *The lock came back on 20 Oct 2026* (Craig), into the dateline's right-hand
+     slot rather than a row of its own: a phone no longer prints *Next deadline*
+     (item 10), so the reason for the cut stopped holding, and the season it
+     displaced told a reader nothing new. It costs no height.
 2. *(The scoreboard, removed 11 Oct 2026: see* The scoreboard, removed *below.)*
 3. **The lead** — a full-bleed picture band, then a headline set larger
    than anything but the masthead, and a standfirst. See *The lead* below.
@@ -88,8 +97,7 @@ business, and when lineups lock.
    stretch"*). From 28rem of the stories' own width (`@container/stories`) the
    lead spans two columns, picture over headline; from 42rem the grid is three
    wide, the lead takes two rows as well, the shoulders run down the third column
-   beside it and the briefs follow as cards: picture, standing head, headline,
-   dateline. 1280 and 1440 both get three: the sheet is capped at 72rem, so the
+   beside it and the briefs follow as cards: picture, headline, dateline. 1280 and 1440 both get three: the sheet is capped at 72rem, so the
    stories measure 774 and 776px. The wrappers below are `display: contents`
    there, so phone and desk are one markup.
 
@@ -105,9 +113,14 @@ business, and when lineups lock.
    one.
 
    **The briefs** (`gazette/Brief`) take the rest: on a phone a row of
-   thumbnail, standing head and headline, with no deck and no dateline —
-   dropping them is what keeps the third rank visibly third. On a desk each is a
-   card and carries its dateline, the grid's meta line.
+   thumbnail, headline and the filing day alone (`SUN 11 OCT`) in the dateline's
+   quiet capitals, with no deck. On a desk each is a card and carries its full
+   dateline, the grid's meta line. *This reverses "no dateline" on a phone's row*
+   (Craig, 20 Oct 2026): the ordering below promises an old opinion prints under
+   its own filed date, and a phone printed none, so a 15-day-old story read as
+   this week's. The day is set solid and pushed right under the headline, so a
+   two-line head and its day fit the thumbnail's height and the row gains none;
+   the headline stays the only line in ink.
 
    **Every rank carries a picture, all in one frame** — `.paper-frame`, 16:9,
    cropped and never scaled to fit: full-bleed over the splash on a phone, the
@@ -216,15 +229,20 @@ business, and when lineups lock.
    None of the three is a link or a tap target — the sortable, tappable
    versions are on the League and Players tabs, where a manager goes to USE
    them, and these are the printed copies.
+
+   **The Premier League table is desk-only** (Craig, 20 Oct 2026): at 20 rows it
+   was the deepest block on a phone's single scroll, and the Prem tab is a tap
+   away in the bottom bar. A phone prints Top points and the draft table.
 9. **The week's business** — trades and claims, grouped so both halves of a trade
    read as one deal. Fantrax's US Eastern timestamps are printed in London time
    (`fantraxTime`), with no zone in the heading (Craig, 2 Oct 2026: *"Times need
    to be local time"*). The week is the newest period that has deals, not the round's: a claim run after the
    deadline lands in the next period, and Tuesday's open one has none yet (20 Oct 2026: the head counted the
    season's 43). A team is its short name here too, as in the tables.
-10. **Next deadline** — the period boundary, with an explicit note that the
-   commissioner's real lock is fifteen minutes before the first fixture and is
-   not something Fantrax publishes.
+   **Desk-only** (Craig, 20 Oct 2026): on a phone Mail, one tap away, lists the same deals.
+10. **Next deadline** — the gameweek it opens and the line-up lock to the minute, fifteen minutes before the period's first kickoff (`locksAt`, a house rule held in `LINEUP_LOCK_LEAD_MINUTES`).
+   **Desk-only** (Craig, 20 Oct 2026): a phone reads the lock in the masthead's dateline (item 1),
+   so it is not printed twice there.
 
 Your own team is marked in the accent: your men in
 the eleven, your row in the draft table.
@@ -489,7 +507,8 @@ small-capital position label over each group. The head no longer prints the
 formation (Craig, 1 Oct 2026: *"dont have formation in text"*); the lines show it. That
 also puts it where it belongs in the reading order: the eleven is the one block
 in the rail anybody reads for pleasure, so it leads the rail and the tables,
-the business and the deadline follow.
+the business and the deadline follow. A phone stops after Top points and the
+draft table (items 8-10, 20 Oct 2026).
 
 **The lines come from core, not from a second sort here.** `TeamOfTheWeek.lines`
 is the same men as `picks` in a second order — one is how they rank, the other is

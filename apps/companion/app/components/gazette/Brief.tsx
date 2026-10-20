@@ -4,7 +4,7 @@ import Dateline from "./Dateline";
 import type { Club, PublishedStory } from "@epl/core";
 import { storyHref } from "./paperPages";
 
-// A story in the tail, the sheet's third rank. On a phone, a row: thumbnail and headline.
+// A story in the tail, the sheet's third rank. On a phone, a row: thumbnail, headline and filing day.
 // On a desk, a card in the grid: the same picture full width over the headline, and its dateline.
 
 export default function Brief({
@@ -25,11 +25,12 @@ export default function Brief({
             <StoryFace story={story} clubs={clubs} rank="card" />
           </span>
         ) : null}
-        <span className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 @md/stories:gap-1">
+        <span className="flex min-w-0 flex-1 flex-col justify-center gap-0 @md/stories:gap-1">
           <h3 className="paper-display text-pretty text-base font-bold leading-snug text-ink @md/stories:text-lg">
             {story.headline}
           </h3>
-          {/* No dateline in a phone's row, which is what keeps the third rank visibly third there. */}
+          {/* A phone's row prints the day alone, set solid and pushed right, so the row fits its thumbnail's height. */}
+          <Dateline story={story} as="span" byline={false} day className="self-end leading-none @md/stories:hidden" />
           <Dateline story={story} as="span" byline={false} className="hidden @md/stories:block" />
         </span>
       </TurnLink>
