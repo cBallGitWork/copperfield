@@ -3,7 +3,7 @@ import type { PoolRow } from "./pool";
 import { POOL, lastValue } from "./routes";
 import { figureOf } from "./figure";
 import { byFigure } from "../components/league/order";
-import { atRoute, changed, chosen, statusOn, statusesShown } from "./boardChange";
+import { changeHref, chosen, statusOn, statusesShown } from "./boardChange";
 import type { PoolColumn } from "./columns";
 import type { BoardView } from "./views";
 
@@ -26,6 +26,8 @@ export interface PlayersSearchParams {
   sort?: string | string[];
   dir?: string | string[];
   all?: string | string[];
+  /** How many rows the board draws short of all, a page at a time. */
+  rows?: string | string[];
 }
 
 /** The same query, narrowed. */
@@ -38,6 +40,7 @@ export interface PlayersQuery {
   sort?: string;
   dir?: string;
   all?: string;
+  rows?: string;
   group?: string;
   per?: string;
   club?: string;
@@ -59,6 +62,7 @@ export function playersQuery(raw: PlayersSearchParams): PlayersQuery {
     sort: renamed(lastValue(raw.sort)),
     dir: lastValue(raw.dir),
     all: lastValue(raw.all),
+    rows: lastValue(raw.rows),
     group: lastValue(raw.group),
     per: lastValue(raw.per),
     club: lastValue(raw.club),
@@ -71,8 +75,8 @@ export function isPer90(query: PlayersQuery): boolean {
   return query.per === "90";
 }
 
-/** Rows a page carries before it offers the rest: the whole pool is megabytes on a phone. */
-export const PAGE_ROWS = 100;
+/** Rows a page carries before it offers more, at every width (Craig, 20 Oct 2026): a hundred ran eight phone screens. */
+export const PAGE_ROWS = 30;
 
 /** Which of a board's columns it is ordered by and which way, resolved once for the order, the arrow and the reverse
  *  link; a sort the board does not draw falls to its own default. */
@@ -130,9 +134,8 @@ export function shownRows(
 /** A Data board again with part of the query changed; an undefined value drops the key, so a link can undo itself.
  *  The server's own links (the sort heads, Show all) come through here; a control is a `BoardLink`. */
 export function boardHref(query: PlayersQuery, changes: Partial<PlayersQuery>, route: string = POOL): string {
-  return atRoute(route, changed("", { set: { ...query, ...changes } }));
+  return changeHref(query, { set: changes }, route);
 }
-
 
 /** The link that sorts by a board's column, or reverses it if it is already the one. */
 export function sortHref(query: PlayersQuery, key: string, view: BoardView): string {

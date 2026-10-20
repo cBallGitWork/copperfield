@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { activeSort, isChosen, isFiltered, shownRows as shownOn } from "./query";
+import { activeSort, boardHref, isChosen, isFiltered, playersQuery, shownRows as shownOn } from "./query";
+import { wayOut } from "./wayOut";
 import type { PoolRow } from "./pool";
 import { boardView } from "./views";
 
@@ -136,5 +137,17 @@ describe("activeSort", () => {
     expect(activeSort({ sort: "fin" }, PLAYERS).column.key).toBe("fpts");
     expect(activeSort({ sort: "fpts" }, boardView("stats", {})).column.key).toBe("xg");
     expect(activeSort({ sort: "fin" }, boardView("stats", {})).column.key).toBe("fin");
+  });
+});
+
+describe("a page's rows in the query", () => {
+  it("reads ?rows= as the last value given, as every field is", () => {
+    expect(playersQuery({ rows: ["30", "60"] }).rows).toBe("60");
+  });
+
+  it("keeps a step for a sort and drops it for Show all and for a way off an emptied board", () => {
+    expect(boardHref({ rows: "60" }, { sort: "g", dir: "desc" })).toBe("/players?rows=60&sort=g&dir=desc");
+    expect(boardHref({ rows: "60" }, { all: "1" })).toBe("/players?all=1");
+    expect(wayOut({ rows: "60", pos: "D" })?.href).toBe("/players?status=all");
   });
 });

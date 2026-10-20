@@ -155,3 +155,24 @@ describe("statusOn", () => {
     expect(on("status=all", ["T"])).toBe(false);
   });
 });
+
+describe("a page's rows (?rows=) ride with Show all", () => {
+  // M-SQUADS-1: a filter, a search, a club or Reset leaves a new list, so a step kept past it could promise rows it lacks.
+  it("goes with any change that drops Show all: a chip, a status, a search, a club, Reset", () => {
+    expect(changed("rows=60&sort=g", filterChange("pos", "M"))).toBe("sort=g&pos=M");
+    expect(changed("rows=60", statusChange(["T"], true))).toBe("status=T");
+    expect(changed("rows=60&q=sa", { set: { q: "saka", all: "" } })).toBe("q=saka");
+    expect(changed("rows=60", { set: { all: "", club: "ARS" } })).toBe("club=ARS");
+    expect(changed("rows=60&compare=1", { keep: ["compare"] })).toBe("compare=1");
+  });
+
+  it("stays for a sort, a plate or Per 90, which reorder or re-column the same rows", () => {
+    expect(changed("rows=60", { set: { sort: "g", dir: "desc" } })).toBe("rows=60&sort=g&dir=desc");
+    expect(changed("rows=60", { set: { group: "creating", sort: "", dir: "" } })).toBe("rows=60&group=creating");
+    expect(changed("rows=60", { toggle: ["per", "90"] })).toBe("rows=60&per=90");
+  });
+
+  it("is what a step sets, Show all untouched", () => {
+    expect(changeHref({ rows: "60", sort: "g" }, { set: { rows: "90" } })).toBe("/players?rows=90&sort=g");
+  });
+});
