@@ -42,6 +42,7 @@ export default function Tie({
       away={tieSide(tie.away, places, mine, { lost: settled && leads(home, away) })}
       score={round.started ? { home, away } : null}
       pending={<span className={LABEL}>{tie.code ?? "v"}</span>}
+      marks
       href={opens && on !== undefined ? tieHref(on, round.gameweek, tie.home.team?.teamId, tie.away.team?.teamId) : undefined}
     />
   );

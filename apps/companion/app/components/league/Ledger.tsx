@@ -21,13 +21,13 @@ const CREST = "size-5 shrink-0 object-contain lg:size-6";
 export default function Ledger({
   deals,
   teamId,
-  names,
+  nameOf,
 }: {
   deals: readonly Deal[];
   /** Whose business; none is the whole league's, every row naming its mover. */
   teamId?: string;
-  /** Every team's name by id; the transaction row's own copy goes stale when a manager renames. */
-  names: Record<string, string>;
+  /** A team's name by id, `—` for one the league no longer lists; the row's own copy goes stale on a rename. */
+  nameOf: (teamId: string) => string;
 }) {
   const everyone = teamId === undefined;
   const rows = deals.map((deal) => {
@@ -71,7 +71,7 @@ export default function Ledger({
                 <span className="col-start-1 row-start-2 flex flex-col gap-0.5 lg:contents">
                   {everyone ? (
                     <span className="shrink-0 lg:order-1 lg:w-32">
-                      {mover === null ? DASH : <TeamPlate teamId={mover} name={names[mover]} />}
+                      {mover === null ? DASH : <TeamPlate teamId={mover} name={nameOf(mover)} />}
                     </span>
                   ) : (
                     kind
@@ -83,7 +83,7 @@ export default function Ledger({
                         <span className="flex flex-col items-stretch gap-0.5">
                           {/* The desk's With head, said on the phone: two plates flush read as one side (UX-8). */}
                           <span className={`text-center ${LABEL} lg:hidden`}>With</span>
-                          <TeamPlate teamId={partners[0]} name={names[partners[0]]} />
+                          <TeamPlate teamId={partners[0]} name={nameOf(partners[0])} />
                           {partners.length > 1 ? (
                             <span className="text-center text-2xs text-faint">+{partners.length - 1}</span>
                           ) : null}
@@ -132,7 +132,8 @@ function Side({
           players.map((player) => {
             // His real club as its crest; an unknown club leaves the slot empty rather than guess.
             const crest = player.club ? crestForShortName(toFplClubCode(player.club)) : null;
-            const line = `flex min-w-0 items-center gap-1.5 ${NAME}`;
+            // The desk row's 28 floor on every name, linked or not, so stacked names keep one rhythm.
+            const line = `flex min-w-0 items-center gap-1.5 lg:min-h-7 ${NAME}`;
             const body = (
               <>
                 {crest ? (
@@ -183,16 +184,16 @@ function Day({ stamp, weekday }: { stamp: string | null; weekday: boolean }) {
 }
 
 /** A team as a plate in its own colour, keyed on the id the deal carries: a trade's other side, or the league's mover. */
-function TeamPlate({ teamId, name }: { teamId: string; name: string | undefined }) {
+function TeamPlate({ teamId, name }: { teamId: string; name: string }) {
   const colours = teamColours(teamId);
   return (
     <span
-      className={`block truncate px-1.5 py-0.5 text-center ${SMALL_CAPS}`}
+      className={`block truncate px-1.5 py-0.5 text-center lg:line-clamp-2 lg:whitespace-normal ${SMALL_CAPS}`}
       style={{ background: colours.primary, color: inkOn(colours) }}
     >
       {/* A manager who has left the league still has an id on the row. The league's short name under a thumb, where
-          the full one ran out of plate ("DOMEITALYC…"); the desk has the room. */}
-      {name === undefined ? "Unknown" : <TeamName teamId={teamId} name={name} />}
+          the full one ran out of plate ("DOMEITALYC…"); the desk's full name wraps to two lines in the plate. */}
+      {name === DASH ? "Unknown" : <TeamName teamId={teamId} name={name} />}
     </span>
   );
 }

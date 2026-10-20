@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { crestUrl, ordinal, printed, type Club } from "@epl/core";
+import { crestUrl, printed, printedPlaces, DASH, type Club } from "@epl/core";
 import Board from "../components/league/Board";
 import LeadFace, { LEAD_BOX } from "../components/league/LeadFace";
 import NameLink from "../prem/club/[code]/NameLink";
@@ -25,6 +25,7 @@ export default function LeaderBoard({
   rows: readonly Row[];
   className?: string;
 }) {
+  const places = printedPlaces(rows, (row) => String(row.code));
   return (
     <section className={`${PANEL_FLUSH} ${className}`}>
       {/* On a phone the picker above already names the one list it shows. */}
@@ -38,7 +39,7 @@ export default function LeaderBoard({
           rows={rows}
           keyOf={(row) => String(row.code)}
           lead={{
-            index: { label: "Place", of: (row) => ordinal(row.rank) },
+            index: { label: "Place", of: (row) => places.get(String(row.code)) ?? DASH },
             name: {
               label: "Player",
               of: (row) => (

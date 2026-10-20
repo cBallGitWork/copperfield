@@ -135,7 +135,7 @@ export default function Board<Row>({
           className={`${pins.first} ${lead.tile.free?.(entry) ? FREE_TILE : ""}`}
         />
       ) : null}
-      {lead.index ? <IndexCell className={`${pins.first} whitespace-nowrap ${lead.index.className ?? ""}`}>{lead.index.of(entry, at)}</IndexCell> : null}
+      {lead.index ? <IndexCell wide={lead.index.wide} className={`${pins.first} whitespace-nowrap ${lead.index.className ?? ""}`}>{lead.index.of(entry, at)}</IndexCell> : null}
       {lead.name ? (
         <th scope="row" className={`${ROW_HEAD_CELL} ${pins.name} ${lead.name.className?.(entry) ?? ""}`}>
           {lead.name.of(entry)}

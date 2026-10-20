@@ -11,6 +11,7 @@ import { BLOCK_PLATE, QUIET_NOTE } from "../../desk";
 import { readDeals } from "../../business";
 import { fantraxPage } from "../../fantraxPages";
 import { leagueInfo } from "../../round";
+import { named } from "../../components/gazette/named";
 import { teamHref } from "../../squad/routes";
 import { LEAGUE_CAPTION, titled } from "../../titles";
 import { readWaivers } from "../../waivers";
@@ -39,7 +40,7 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
   const [{ show }, waivers, info, feed] = await Promise.all([searchParams, readWaivers(), leagueInfo(), readDeals()]);
   const shown = show === "last" ? "last" : "order";
   // Every team's name by id: a deal's own copy goes stale when a manager renames.
-  const names: Record<string, string> = Object.fromEntries((info?.teams ?? []).map((team) => [team.teamId, team.name]));
+  const nameOf = named(info?.teams ?? []);
   const run = lastWaiverRun(deals(feed.rows));
   const ranAt = run[0]?.processedAt ?? null;
 
@@ -60,7 +61,8 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
         <TabStrip label="Waiver views" tabs={BLOCKS} current={shown} labels="word" compact />
       </div>
 
-      <div className="grid gap-2 lg:grid-cols-2">
+      {/* The last run takes two thirds: its ledger holds a date, a team, a type and two names to the order's one. */}
+      <div className="grid gap-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <section className={`flex flex-col gap-1 ${shown === "order" ? "" : "max-lg:hidden"}`}>
           <h2 className={`${BLOCK_PLATE} max-lg:sr-only`}>Claim order</h2>
           {waivers.order.length === 0 ? (
@@ -74,7 +76,7 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
                 place: ordinal(place),
                 name: (
                   <StandingsName>
-                    <TeamName teamId={teamId} name={names[teamId] ?? ""} />
+                    <TeamName teamId={teamId} name={nameOf(teamId)} />
                   </StandingsName>
                 ),
                 href: teamHref(teamId),
@@ -90,7 +92,7 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
           {run.length === 0 ? (
             <p className={`${QUIET_NOTE} p-2`}>No claims off waivers yet</p>
           ) : (
-            <Ledger deals={run} names={names} />
+            <Ledger deals={run} nameOf={nameOf} />
           )}
         </section>
       </div>

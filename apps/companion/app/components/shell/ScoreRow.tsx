@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "@/app/components/shell/Link";
 import type { ReactNode } from "react";
 import { INDEX_WIDTH, ROW_NAME } from "@/app/desk";
-import { yoursMark } from "@/app/mine";
+import { yoursEdge, yoursMark } from "@/app/mine";
 import Absent from "./Absent";
 import Scoreline from "./Scoreline";
 
@@ -38,6 +38,7 @@ export default function ScoreRow({
   pending,
   clock,
   href,
+  marks,
 }: {
   home: ScoreSide;
   away: ScoreSide;
@@ -49,11 +50,13 @@ export default function ScoreRow({
   clock?: ReactNode;
   /** Where the whole row leads; a row without one is not a control and takes no tap floor. */
   href?: string;
+  /** A list that can hold the reader's row: every row takes the 4px edge so his keeps the column; football's stay flush. */
+  marks?: boolean;
 }) {
   const yours = home.mine === true || away.mine === true;
   const row = (
     <div
-      className={`grid min-h-11 items-stretch lg:min-h-7 ${GRID} ${yoursMark(yours)}`}
+      className={`grid min-h-11 items-stretch lg:min-h-7 ${GRID} ${marks === true ? yoursEdge(yours) : yoursMark(yours)}`}
     >
       <Block side={home} />
       <Name side={home} at="home" />
