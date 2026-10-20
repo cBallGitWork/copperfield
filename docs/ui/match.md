@@ -314,7 +314,8 @@ in his club's kit, the score
 under each name, and an amber `▼ 69′` on a man taken off. The men who came on
 stand in a strip under the grass with `▲ 69′`. `pitch-match`
 budgets the grass so the strip clears the nav at 390×844 (767 against 798 with the
-phone's control row, measured 23 Sep, before the club switch docked at the foot). One `widest` across both pitches, so the halves are drawn to
+phone's control row, measured 23 Sep). The club switch docked at the foot on 20 Oct 2026 adds one 44px plate over the
+nav, so the phone's budget rose by that plate, 23rem to 25.75rem (`pitchBudget.test.ts` pins the sum). One `widest` across both pitches, so the halves are drawn to
 one scale. No doubt colour on the plates: today's injury flag has no business on
 a match already played.
 

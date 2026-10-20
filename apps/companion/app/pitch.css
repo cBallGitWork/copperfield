@@ -109,10 +109,10 @@
   }
 }
 
-/* The match line-up: the bar, the tabs and the shape above the grass, the used subs and the phone's nav below.
-   A phone also spends a row on picking the club and the view. */
+/* The match line-up: the bar, the tabs and the view row above the grass, the used subs and the phone's nav below.
+   A phone also docks the club switch (one 44px plate) over the nav, so its budget is 23rem plus that plate. */
 .pitch-match {
-  --pitch-page: 23rem;
+  --pitch-page: 25.75rem;
 }
 
 @media (min-width: 64rem) {
