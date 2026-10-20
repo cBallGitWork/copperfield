@@ -1070,11 +1070,19 @@ gameweek for every player, but only in a league whose scoring lists those column
 
 - **`components/shell/FootFrame.tsx`**: a viewport-tall column whose foot sits at the bottom of the screen when
   the body is short (lifted from `MatchShell`), and docked when it is long, above the thumb rail on a phone since
-  16 Oct 2026 (review M7); the foot is a `TabStrip`.
+  16 Oct 2026 (review M7); the foot is a `TabStrip`, a `GroupNav` or a `QuerySelect`.
   (`FootSwitcher`, a wrapper that only forwarded to `TabStrip`, went in the day's refactor.) Craig: *"footswitcher as shared code to be used on other pages… it stops rows of blue buttons"*.
 - The top of a screen keeps one strip of blue plates: its own views. Anything that picks a sub-view of one of
   those (a club's stats, a manager's board, Fantasy) goes in the foot. First users: the Prem match (byte-identical
   DOM on 14 route×width pairs) and the head-to-head's Stats.
+- **Extended 20 Oct 2026 (mobile review, M-CONSIST-1)** to every second top strip: Cups, Waivers, a match's
+  Line-ups, the planner's views, Adv Stats' and Team Stats' groups, the team and club Stats views, and Pitch|List
+  on a club's squad and depth and a rival's squad sheet (`ListAndPitch`'s opt-in `foot`, docked by `FOOT_DOCK`).
+  Foot strips take the main strip's ladder (`WORD_PLATE`: 2xs, 3xs under 375), so none wraps; `GroupNav` is one
+  44px row at 320. Each screen moves in its own lane. **Exceptions**: Matchday's `Scores · Top stats` is Live's
+  own strip and stays on top (its stat picker moves); the own-squad planner keeps its toggle, its foot being
+  `SaveBar`'s; a squad's gameweek picker stays at the top, alone; Team Stats' grey `FPts · Total · Squad`
+  toggle stays at the top (Craig, 11 Sep).
 
 ## Safari drew every pitch differently from Chrome, and nothing we run is Safari — measured 24 Sep 2026
 

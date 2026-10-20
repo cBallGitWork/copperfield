@@ -632,7 +632,7 @@ select.cm-bevel {
   }
 }
 
-/* The Draft tab's tables run 36px rows under a thumb (PRODUCT.md), so their panels reserve that. */
+/* PRODUCT.md's 36px tables under a thumb (the Draft tab's, the Prem table, the club and team Stats boards) reserve that. */
 .cm-tight {
   --table-row: 2.3125rem;
 }
