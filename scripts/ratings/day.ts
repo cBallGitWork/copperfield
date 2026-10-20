@@ -1,4 +1,4 @@
-import { MS_PER_DAY, type Fixture, type PlayerMatchStats } from "@epl/core";
+import { involves, MS_PER_DAY, type Fixture, type PlayerMatchStats } from "@epl/core";
 
 // Whether a match day's ratings are whole: the men FPL says played it, against the men we marked.
 
@@ -19,7 +19,7 @@ export function menOwed(
     const fixture = on.find((f) => f.id === row.fixtureId);
     const player = byId.get(row.playerId);
     if (fixture === undefined || player === undefined || row.minutes <= 0 || !bridged.has(player.code)) continue;
-    if (player.clubId === fixture.homeClubId || player.clubId === fixture.awayClubId) owed.add(player.code);
+    if (involves(fixture, player.clubId)) owed.add(player.code);
   }
   return owed;
 }

@@ -1,4 +1,4 @@
-import { clubById, seasonRun } from "@epl/core";
+import { clubById, involves, seasonRun } from "@epl/core";
 import TabEmpty from "../../../../components/league/TabEmpty";
 import { PANEL_ROWS } from "../../../Shell";
 import ClubShell from "../Shell";
@@ -20,7 +20,7 @@ export default async function ClubFixturesPage({ params }: { params: Promise<{ c
   const { club, snapshot, fixtures } = await clubOr404(code);
 
   const run = seasonRun(
-    fixtures.filter((fixture) => fixture.homeClubId === club.id || fixture.awayClubId === club.id),
+    fixtures.filter((fixture) => involves(fixture, club.id)),
     intelCups.get(club.code) ?? [],
   );
 

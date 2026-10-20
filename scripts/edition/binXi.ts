@@ -48,7 +48,7 @@ import { BRIDGE } from "./bridge";
 import type { DeskFacts } from "./facts";
 import type { Say } from "./newsroom";
 import { readArchive } from "./persist";
-import { involves } from "./round";
+import { involves } from "@epl/core";
 
 // The reads behind the Bin XI, made only when it is assigned: the league's free agents and their
 // points over the period's days, the stats league's shots and chances over the same days, and FPL's

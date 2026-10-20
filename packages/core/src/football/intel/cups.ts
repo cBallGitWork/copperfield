@@ -1,3 +1,4 @@
+import { byKickoff } from "../selectors";
 import type { Fixture } from "../types";
 import type { IntelManifest } from "./types";
 
@@ -126,12 +127,6 @@ export function seasonRun(fixtures: readonly Fixture[], ties: readonly CupTie[])
 
 function kickoffOf(entry: RunEntry): string | null {
   return entry.kind === "league" ? entry.fixture.kickoff : entry.tie.kickoff;
-}
-
-/** Oldest first; an undated match last, which is where one the television has not picked belongs. */
-function byKickoff(a: string | null, b: string | null): number {
-  if (a === null || b === null) return a === null ? (b === null ? 0 : 1) : -1;
-  return a.localeCompare(b);
 }
 
 function readable(tie: CupTie): boolean {

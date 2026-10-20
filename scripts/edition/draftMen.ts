@@ -1,6 +1,6 @@
 import { DRAFT_DESK, debuts, fullPrintName, ukSpelling, londonDayOf, priceOf, resultLabel, type Club, type DatedFixture, type DraftMan, type ProjectedPlayer, type Sheet, type SheetMan, type SlotWorth } from "@epl/core";
 import { startedOf, timeOf, type ClubGoal, type Tally } from "./draftReads";
-import { involves } from "./round";
+import { involves } from "@epl/core";
 
 // One man as the draft desk sees him at a cut-off: his points, minutes and returns from Fantrax's day reads, his matches
 // played and to come from FPL's fixtures, whether he started from the PL team sheet, and his goals' minutes.

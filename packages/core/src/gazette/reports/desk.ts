@@ -1,4 +1,5 @@
 import { LATE_GOAL_MINUTE, REPORTS } from "../../config";
+import { byKickoffUndatedFirst } from "../../football/selectors";
 import { nextMatch, type NextMatch } from "./ahead";
 import { derivedFacts } from "./derived";
 import { bestMarked, starMan, type StarMan } from "./star";
@@ -69,7 +70,7 @@ export function deskDay(input: ReportDayInput): MatchDesk[] {
     return { match, events, facts: derivedFacts(match, events), standing, score };
   });
   const leadIndex = drafts.reduce((best, d, i) => (d.score > drafts[best].score ? i : best), 0);
-  const rest = drafts.filter((_, i) => i !== leadIndex).sort((a, b) => (a.match.fixture.kickoff ?? "").localeCompare(b.match.fixture.kickoff ?? ""));
+  const rest = drafts.filter((_, i) => i !== leadIndex).sort((a, b) => byKickoffUndatedFirst(a.match.fixture, b.match.fixture));
 
   // Every match's sections are chosen before any stake is written: a head-to-head is told once on the page.
   const planned = [drafts[leadIndex], ...rest].map((d, i) => {

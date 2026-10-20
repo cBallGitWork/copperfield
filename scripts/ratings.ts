@@ -6,6 +6,7 @@ import {
   fetchLive,
   getFootballSnapshot,
   groupedBy,
+  involves,
   londonDayOf,
   mapFixtures,
   mapLiveStats,
@@ -75,7 +76,7 @@ async function main(): Promise<void> {
       const fixture = row === undefined ? undefined : on.find((f) => f.id === row.fixtureId);
       const club = snapshot.players.find((p) => p.code === code)?.clubId;
       // A man whose club now is neither side moved since; his opponent is unknown, so he is left unrated.
-      if (code == null || fixture === undefined || fixture.kickoff === null || (club !== fixture.homeClubId && club !== fixture.awayClubId)) continue;
+      if (code == null || fixture === undefined || fixture.kickoff === null || club === undefined || !involves(fixture, club)) continue;
       const mark = markOf(figures, scoring.rules, fantraxId, {
         minutes: figures.shorts.get(fantraxId)?.Min ?? 0,
         opponentClubId: club === fixture.homeClubId ? fixture.awayClubId : fixture.homeClubId,

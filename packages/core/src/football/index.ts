@@ -143,11 +143,13 @@ export type { Ranked, Tallied } from "./rankings";
 export { countryOf, mapFixtures } from "./fpl/map";
 export {
   adjacentGameweeks,
+  byKickoff,
   clubById,
   contributions,
   datedKickoffs,
   fixturesInOrder,
   hasGameweek,
+  involves,
   isDated,
   kickoffOrder,
   playerByCode,

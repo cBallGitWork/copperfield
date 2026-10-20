@@ -1,5 +1,5 @@
 import { PREMIERSHIP_CUTS } from "../../config";
-import { byKickoffUndatedFirst } from "../../football/selectors";
+import { byKickoffUndatedFirst, involves } from "../../football/selectors";
 import { leagueTable } from "../../football/table";
 import type { Club, Fixture } from "../../football/types";
 import { londonDayOf } from "../../time";
@@ -30,7 +30,7 @@ const playedBy = (season: readonly Fixture[], day: string, inclusive: boolean) =
 
 function results(fixtures: readonly Fixture[], clubId: number): { result: Result; home: boolean; conceded: number }[] {
   return fixtures
-    .filter((f) => f.homeClubId === clubId || f.awayClubId === clubId)
+    .filter((f) => involves(f, clubId))
     .sort(byKickoffUndatedFirst)
     .map((f) => {
       const home = f.homeClubId === clubId;
