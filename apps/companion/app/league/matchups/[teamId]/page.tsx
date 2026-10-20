@@ -28,6 +28,7 @@ import { headToHeadTitle } from "./title";
 import { liveScores, squadLivePoints } from "../../../scoreboard";
 import { newsFor, readPoolNews } from "../../../poolNews";
 import { myTeamId } from "../../../session";
+import { now } from "../../../clock";
 import { MATCHUPS, matchupHref } from "../../routes";
 import { wholeNumber } from "../../../wholeNumber";
 import { sheetEvents } from "./events";
@@ -111,7 +112,7 @@ export default async function HeadToHeadPage({
   // Under way, gaps between kickoffs included: "all played" says something only then.
   const underway = roundUnderway(squads.snapshot);
   // A finished week says so under each name, and wears none of today's fitness (review N9).
-  const state = roundState(squads.snapshot);
+  const state = roundState(squads.snapshot, now().toISOString());
   const over = state === null || state === "live" ? null : <RoundWord state={state} />;
   // The league's own names for its categories.
   const categories = squads.info.scoringCategories;

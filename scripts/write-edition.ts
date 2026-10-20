@@ -74,7 +74,7 @@ async function main(): Promise<void> {
   if (pinned !== undefined && process.env.CI) throw new Error("GAZETTA_GAMEWEEK is a local rehearsal and never runs in CI.");
   const snapshot = await getFootballSnapshot(pinned);
   // `roundState`, which can say "live": the guard keeps a report off a round still being played.
-  const state = roundState(snapshot);
+  const state = roundState(snapshot, now);
   const finished = state !== null && state !== "live";
 
   const raw = await fetchLeagueInfo(FANTRAX_LEAGUE_ID).catch(() => null);

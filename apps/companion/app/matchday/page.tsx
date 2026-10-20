@@ -131,7 +131,7 @@ export default async function MatchdayPage({
   const lock = drafted?.info == null ? null : nextDeadline(drafted.info.rosterPeriods, datedKickoffs(season), now().toISOString());
   const locksAt = lock !== null && first !== null && Date.parse(lock.locksAt) < Date.parse(first) ? lock.locksAt : null;
   const buildUp = toGo > 0 ? <BuildUp ms={toGo} locksAt={locksAt} /> : null;
-  const state = roundState(snapshot);
+  const state = roundState(snapshot, now().toISOString());
   // Between gameweeks, the coming one's lock, the time that matters before its kickoff.
   const nextLock = !during && up !== null ? await lockAhead(up.gameweek) : null;
 

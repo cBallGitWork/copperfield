@@ -8,6 +8,7 @@ import { myTeamId } from "../../session";
 import { liveScores, pendingByTeam } from "../../scoreboard";
 import { leagueScoring } from "../../scoring";
 import { roundUnderway } from "../../football";
+import { now } from "../../clock";
 import { yoursFirst } from "../../mine";
 import FantraxSilent from "../../components/shell/FantraxSilent";
 import ScoreboardDown from "../ScoreboardDown";
@@ -56,7 +57,7 @@ export default async function MatchupPage() {
     );
   }
 
-  const state = roundState(squads.snapshot);
+  const state = roundState(squads.snapshot, now().toISOString());
   // Under way, gaps between kickoffs included: "all played" is worth saying whenever the round is running.
   const underway = roundUnderway(squads.snapshot);
 

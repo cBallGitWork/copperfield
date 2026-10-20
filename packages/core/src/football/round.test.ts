@@ -32,6 +32,9 @@ const fixture = (over: Partial<Fixture> & { id: number }): Fixture => ({
 const played = (over: Partial<Fixture> & { id: number }): Fixture =>
   fixture({ status: "finished", settled: true, minutes: 90, kickoff: "2026-08-22T14:00:00Z", ...over });
 
+/** Two hours after `played`'s kickoff: inside the window that lets go of a called-off match. */
+const AT = "2026-08-22T16:00:00Z";
+
 describe("isMatchdayLive", () => {
   it("is true only while a match is actually in play", () => {
     const one = (status: Fixture["status"]) => snap({ fixtures: [fixture({ id: 1, status })] });
@@ -119,7 +122,7 @@ describe("duringGameweek", () => {
 describe("roundFinished", () => {
   it("says nothing about a round still being played", () => {
     const s = snap({ fixtures: [played({ id: 1 }), played({ id: 2, status: "live", settled: false })] });
-    expect(roundFinished(s)).toBeNull();
+    expect(roundFinished(s, AT)).toBeNull();
   });
 
   it("says nothing about a round nobody has kicked off", () => {
@@ -127,23 +130,23 @@ describe("roundFinished", () => {
     // `isMatchdayLive`, not by this growing a fourth state it would have to
     // invent from the same evidence.
     const s = snap({ fixtures: [played({ id: 1, status: "upcoming", settled: false })] });
-    expect(roundFinished(s)).toBeNull();
+    expect(roundFinished(s, AT)).toBeNull();
   });
 
   it("holds at bonus-settling between the whistle and the bonus points", () => {
     // The provisional whistle: `status` reads finished, raw `finished` has not
     // flipped, and Fantrax's total is still going to move.
     const s = snap({ fixtures: [played({ id: 1 }), played({ id: 2, settled: false })] });
-    expect(roundFinished(s)).toBe("bonus-settling");
+    expect(roundFinished(s, AT)).toBe("bonus-settling");
   });
 
   it("is provisional once bonus has landed but FPL has not signed the round off", () => {
-    expect(roundFinished(snap({ fixtures: [played({ id: 1 })] }))).toBe("provisional");
+    expect(roundFinished(snap({ fixtures: [played({ id: 1 })] }), AT)).toBe("provisional");
   });
 
   it("claims final only at data_checked", () => {
     const s = snap({ fixtures: [played({ id: 1 })], dataChecked: true });
-    expect(roundFinished(s)).toBe("final");
+    expect(roundFinished(s, AT)).toBe("final");
   });
 
   it("will not call a round final on FPL's sign-off alone while a match is unplayed", () => {
@@ -154,7 +157,7 @@ describe("roundFinished", () => {
       fixtures: [played({ id: 1 }), played({ id: 2, status: "upcoming", settled: false })],
       dataChecked: true,
     });
-    expect(roundFinished(s)).toBeNull();
+    expect(roundFinished(s, AT)).toBeNull();
   });
 
   it("ignores undated fixtures at both ends", () => {
@@ -163,14 +166,14 @@ describe("roundFinished", () => {
     const s = snap({
       fixtures: [played({ id: 1 }), played({ id: 2, kickoff: null, status: "upcoming", settled: false })],
     });
-    expect(roundFinished(s)).toBe("provisional");
+    expect(roundFinished(s, AT)).toBe("provisional");
   });
 
   it("says nothing about a round with no dated fixtures at all", () => {
     // Not finished — unscheduled. "Every match has ended" is vacuously true of
     // none, and a full-time label on a week nobody has arranged is a lie.
-    expect(roundFinished(snap({ fixtures: [] }))).toBeNull();
-    expect(roundFinished(snap({ fixtures: [played({ id: 1, kickoff: null })] }))).toBeNull();
+    expect(roundFinished(snap({ fixtures: [] }), AT)).toBeNull();
+    expect(roundFinished(snap({ fixtures: [played({ id: 1, kickoff: null })] }), AT)).toBeNull();
   });
 });
 
@@ -180,18 +183,32 @@ describe("roundState", () => {
     // is a round that is both mostly finished and live, and live is what a
     // screen has to say about it.
     const s = snap({ fixtures: [played({ id: 1 }), played({ id: 2, status: "live", settled: false })] });
-    expect(roundState(s)).toBe("live");
+    expect(roundState(s, AT)).toBe("live");
   });
 
   it("falls through to the finished ladder once nothing is in play", () => {
-    expect(roundState(snap({ fixtures: [played({ id: 1 })] }))).toBe("provisional");
-    expect(roundState(snap({ fixtures: [played({ id: 1 })], dataChecked: true }))).toBe("final");
-    expect(roundState(snap({ fixtures: [played({ id: 1 }), played({ id: 2, settled: false })] }))).toBe(
+    expect(roundState(snap({ fixtures: [played({ id: 1 })] }), AT)).toBe("provisional");
+    expect(roundState(snap({ fixtures: [played({ id: 1 })], dataChecked: true }), AT)).toBe("final");
+    expect(roundState(snap({ fixtures: [played({ id: 1 }), played({ id: 2, settled: false })] }), AT)).toBe(
       "bonus-settling",
     );
   });
 
   it("says nothing about a round nobody has kicked off", () => {
-    expect(roundState(snap({ fixtures: [played({ id: 1, status: "upcoming", settled: false })] }))).toBeNull();
+    expect(roundState(snap({ fixtures: [played({ id: 1, status: "upcoming", settled: false })] }), AT)).toBeNull();
+  });
+
+  it("lets go of a match called off days ago, as `duringGameweek` does, and settles on the rest", () => {
+    const calledOff = played({ id: 2, kickoff: "2026-08-22T16:30:00Z", status: "upcoming", settled: false });
+    const s = snap({ fixtures: [played({ id: 1 }), calledOff], dataChecked: true });
+    expect(roundState(s, "2026-08-25T12:00:00Z")).toBe("final");
+    expect(roundState(snap({ fixtures: [played({ id: 1 }), calledOff] }), "2026-08-25T12:00:00Z")).toBe("provisional");
+    // Inside the window it still holds the round open.
+    expect(roundState(s, "2026-08-22T19:30:00Z")).toBeNull();
+  });
+
+  it("says nothing when every dated match was called off", () => {
+    const s = snap({ fixtures: [played({ id: 1, status: "upcoming", settled: false })], dataChecked: true });
+    expect(roundState(s, "2026-08-25T12:00:00Z")).toBeNull();
   });
 });

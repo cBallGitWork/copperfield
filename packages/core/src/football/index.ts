@@ -161,7 +161,9 @@ export type { Availability, DoubtBand, PlayerState } from "./playerState";
 
 // Where a round stands in time, as against what a snapshot contains.
 export {
+  anyStarted,
   duringGameweek,
+  fixturesStatus,
   gameweekStarted,
   gameweekStatus,
   isMatchdayLive,
