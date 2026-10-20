@@ -25,7 +25,8 @@ business, and when lineups lock.
    under 375px; the season, `2026/27`, when no lock is known), small capitals and
    letterspaced. That row is the whole difference between a masthead and an
    `<h1>`, and no app has one. The lock is `paper.deadline`, the league's own
-   calendar, named by the gameweek it opens.
+   calendar's first kickoff less the house lead (`LINEUP_LOCK_LEAD_MINUTES`),
+   named by the gameweek it opens.
 
    The date is the **edition's** instant, not the reader's clock: two managers
    opening the same cached edition either side of midnight must not be shown
@@ -238,7 +239,7 @@ business, and when lineups lock.
    deadline lands in the next period, and Tuesday's open one has none yet (20 Oct 2026: the head counted the
    season's 43). A team is its short name here too, as in the tables.
    **Desk-only** (Craig, 20 Oct 2026): on a phone Mail, one tap away, lists the same deals.
-10. **Next deadline** — the gameweek it opens and the period boundary, to the minute.
+10. **Next deadline** — the gameweek it opens and the line-up lock to the minute, fifteen minutes before the period's first kickoff (`locksAt`, a house rule held in `LINEUP_LOCK_LEAD_MINUTES`).
    **Desk-only** (Craig, 20 Oct 2026): a phone reads the lock in the masthead's dateline (item 1),
    so it is not printed twice there.
 
