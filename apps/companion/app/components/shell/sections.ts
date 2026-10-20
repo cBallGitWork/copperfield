@@ -3,7 +3,7 @@
 
 import { LEAGUE, MATCHUPS } from "../../league/routes";
 import { POOL } from "../../players/routes";
-import { CLUB, MATCH, PREM, PREM_FIXTURES } from "../../prem/routes";
+import { CLUB, MATCH, PREM, PREM_FIXTURES, premFixturesHref } from "../../prem/routes";
 import { MY_TEAM, SQUAD } from "../../squad/routes";
 import type { GlyphName } from "./glyphs";
 
@@ -24,12 +24,9 @@ export const SCORING = "/scoring";
 /** The Live section, there from an hour before a gameweek's first kickoff to its last whistle. */
 export const LIVE = "/matchday";
 
-/** A gameweek's own page, `/gw/[n]`: Live's while football is on, Prem's (its frame) once Live is gone. */
-export const GAMEWEEK = "/gw";
-
-/** One gameweek's page. */
+/** One gameweek's page: Prem's Fixtures at that round, where `/gw/N` now redirects (20 Oct 2026). */
 export function gameweekHref(gameweek: number): string {
-  return `${GAMEWEEK}/${gameweek}`;
+  return premFixturesHref(gameweek);
 }
 
 /** The FPL tab. */
@@ -44,8 +41,6 @@ export interface Section {
   pages?: string[];
   /** Only while football is on, from an hour before the first kickoff. The Live section and nothing else. */
   onlyDuringGameweek?: boolean;
-  /** Routes it owns too while Live is away, so a page Live lends out still lights one tab. */
-  outsideGameweek?: string[];
   /** The glyph over its word on the phone's rail; a section with no phone tab has none. */
   glyph?: GlyphName;
   /** Its full name where a row has room for it, as More's page does. */
@@ -64,11 +59,11 @@ export const SECTIONS: Section[] = [
   // One route, not a prefix, so it lights on the reader's own five tabs and stays dark on a rival's.
   // `Team` because `My Team` renders at 51px against a tab's 49px at 320; `fullLabel` says it where rows have room.
   { href: MY_TEAM, label: "Team", fullLabel: "My Team", glyph: "team", routes: [MY_TEAM] },
-  { href: LIVE, label: "Live", glyph: "live", routes: [LIVE, GAMEWEEK], onlyDuringGameweek: true },
+  { href: LIVE, label: "Live", glyph: "live", routes: [LIVE], onlyDuringGameweek: true },
   // "Draft" on the bar; the URL stays `/league`. The squad index lists the league's teams, so it is Draft's too.
   { href: LEAGUE, label: "Draft", glyph: "league", routes: [LEAGUE], pages: [SQUAD] },
   // Opens on the gameweek under way, or the next once it is done (`openGameweek`); lit across the section, table included.
-  { href: PREM_FIXTURES, label: "Prem", glyph: "prem", routes: [PREM], outsideGameweek: [GAMEWEEK] },
+  { href: PREM_FIXTURES, label: "Prem", glyph: "prem", routes: [PREM] },
   // "Data" on the bar; the URL stays `/players`, because a shared URL outlives a label.
   { href: POOL, label: "Data", glyph: "data", routes: [POOL], heavy: true },
   { href: FPL, label: "FPL", routes: [FPL], overflow: true },
@@ -83,12 +78,9 @@ export const READ_VIEWS = [
 
 export type ReadView = (typeof READ_VIEWS)[number]["key"];
 
-/** The sections this gameweek has: Live only while football is on, its lent pages someone else's after. */
+/** The sections this gameweek has: Live only while football is on. */
 export function sectionsFor(matchday: boolean): Section[] {
-  if (matchday) return SECTIONS;
-  return SECTIONS.filter((section) => !section.onlyDuringGameweek).map((section) =>
-    section.outsideGameweek === undefined ? section : { ...section, routes: [...section.routes, ...section.outsideGameweek] },
-  );
+  return matchday ? SECTIONS : SECTIONS.filter((section) => !section.onlyDuringGameweek);
 }
 
 /** The tabs a phone's rail draws, in order. */

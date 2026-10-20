@@ -137,17 +137,19 @@ One read, one round on screen, opening on the latest under way (`openGameweek`),
 match of it is finished (Craig, 16 Oct 2026, as Draft's Fixtures), with arrows either side of its head to step a
 round (`beside`); `?gw=` names any. A round in play shows its scores as they stand, as Live does.
 
-They deliberately do **not** use `components/football/MatchList`. That component
-expands a match into who did what, off the per-player stats a snapshot carries
-for its own gameweek — and there is one live feed, not thirty-eight. A row that
-opened onto "Nothing to report." over a 3–0 win would be a confident wrong
-statement about a match that happened. So `prem/Match` says the one thing the
-season's fixture list actually knows, and the richer screen stays with the round
-in view.
+Since 20 Oct 2026 this is the one gameweek screen: `/gw/[n]` redirects here (`?gw=n`, not permanently) and its
+`GameweekView` is gone, because the same round was drawn twice, two ways. The old reason to keep `MatchList` off
+these rows (one live feed, not thirty-eight) went when Fixtures began showing one round at a time: the round in view
+is one `gameweekSnapshot` read, made only for a reader with a team once the round has started.
 
-**A match with the reader's men in it says how many** (16 Oct 2026): `3 yours` in the accent at the row's end, as
-`/gw/[n]` counts them, off today's squads. The count is a tap to `/gw/[n]`, which names them; with no team, no
-column is held. This is the one owner mark in the section: the table still carries none (below).
+**A match with the reader's men in it says how many** (16 Oct 2026): `3 yours` in the accent at the row's end, off
+today's squads, and the row takes the accent edge (`yoursEdge`; a clear one on the rest, so every row keeps the
+column). The count is a button beside the row's link, never inside it, 44px under a thumb; it opens
+`components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
+too, then every scorer and assister tagged with the squad holding him (his own in the accent, a rival's faint, an
+unheld man untagged), or *Scorers not available right now.* when FPL's lines are missing. The row itself still opens
+the match. A row with none of his men holds the column empty; with no team, no column and no edge. The table carries
+no owner mark (below).
 
 A fixture FPL has not assigned to a gameweek is left out rather than filed under
 nought. One it has not dated reads **TBC** rather than a guessed kickoff.
@@ -335,7 +337,7 @@ has one since 7 Oct 2026, so the group now only groups.
   football layer in the first place.
 - **FPL's `position` field on a club.** See above — it orders nothing anybody
   has played.
-- **Anything about who owns whom**, but Fixtures' count of the reader's own men. That is `/league`'s question. No accent edge,
+- **Anything about who owns whom**, but Fixtures' count, edge and drop-down of the reader's own men. That is `/league`'s question. No accent edge,
   no YOURS chip, no `yoursInk` on this table: the three marks that say "this one
   is yours" have nothing to say about Arsenal, and spending them here would cost
   a reading aid five other screens depend on.

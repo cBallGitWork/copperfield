@@ -12,6 +12,7 @@ import {
   aheadOf,
   barSections,
   drawsOwnGround,
+  gameweekHref,
   overflowSections,
   owns,
   sectionOwns,
@@ -20,7 +21,8 @@ import {
 } from "./sections";
 import { LEAGUE } from "../../league/routes";
 import { POOL } from "../../players/routes";
-import { PREM, PREM_FIXTURES } from "../../prem/routes";
+import { PREM, PREM_FIXTURES, premFixturesHref } from "../../prem/routes";
+import config from "../../../next.config";
 import { MY_TEAM, SQUAD } from "../../squad/routes";
 
 // A rival's squad and the reader's own share a folder and differ by one segment,
@@ -125,15 +127,13 @@ describe("which phone tab lights", () => {
     });
   }
 
-  it("lights Live on the Live pages while football is on", () => {
+  it("lights Live on the Live page while football is on", () => {
     expect(litOnPhone(true, LIVE)).toEqual(["Live"]);
-    expect(litOnPhone(true, "/gw/7")).toEqual(["Live"]);
-    expect(litOnDesk(true, "/gw/7")).toEqual(["Live"]);
+    expect(litOnDesk(true, LIVE)).toEqual(["Live"]);
   });
 
-  it("hands a gameweek's page to Prem once Live is gone, as its frame is Prem's", () => {
-    expect(litOnPhone(false, "/gw/7")).toEqual(["Prem"]);
-    expect(litOnDesk(false, "/gw/7")).toEqual(["Prem"]);
+  it("lights Prem on a gameweek's page, during a gameweek and after", () => {
+    for (const matchday of [false, true]) expect(litOnPhone(matchday, PREM_FIXTURES)).toEqual(["Prem"]);
   });
 
   it("leaves Live's own page unowned outside a gameweek", () => {
@@ -226,5 +226,17 @@ describe("the Prem entry", () => {
     for (const path of [PREM, PREM_FIXTURES, `${PREM}/club/43`]) {
       expect(owns(prem?.routes ?? [], path)).toBe(true);
     }
+  });
+});
+
+describe("a gameweek's page", () => {
+  it("is Prem's Fixtures at that gameweek", () => {
+    expect(gameweekHref(7)).toBe(premFixturesHref(7));
+  });
+
+  it("answers an old /gw/N link there, not permanently", async () => {
+    const rule = (await config.redirects?.())?.find((each) => each.source.startsWith("/gw/"));
+    expect(rule?.permanent).toBe(false);
+    expect(rule?.destination.replace(":gameweek", "7")).toBe(gameweekHref(7));
   });
 });

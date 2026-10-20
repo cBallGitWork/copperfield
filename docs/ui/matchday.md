@@ -64,10 +64,9 @@ hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers print
    longer needed"*). Sky's teleprinter with the ownership on it, behind its own tab since 5 Sep;
    Scores has carried the goals under each match since 16 Oct, so the tab, the component and the
    full-time and red-card reads that fed only it are gone. Live's strip is `Scores · Top stats`.
-4. **`GameweekView`** — the round's fixtures (see [gameweek.md](gameweek.md)),
-   now with **your players marked and every scorer tagged with the squad holding
-   him**. The two halves of the page finally share both grammars: the scoreline,
-   and the accent mark that means "yours".
+4. ~~**`GameweekView`**~~ — **gone 20 Oct 2026**: Live had stopped embedding it, and `/gw/N`, its one
+   user, now redirects to Prem › Fixtures at that gameweek ([prem.md](prem.md#fixtures)). Between rounds,
+   Live's two buttons lead there through `gameweekHref`.
 
 **Top stats**, the second view (`?view=stats`; Craig, 1 Oct 2026: *"match day have 3rd tab, that
 shows top stats for just this gameweek, like xg, fpts, ratings etc"*): the gameweek's ten leaders in

@@ -41,7 +41,7 @@ export const DESK_ROUTES = [
 ];
 
 /** The competition's pages: on `sweep` and `tapfit`, not yet on `groundfit`. Gameweek 1 always exists, as smoke says. */
-const PREM_ROUTES = ["/prem", "/prem/fixtures", "/gw/1"];
+const PREM_ROUTES = ["/prem", "/prem/fixtures", "/prem/fixtures?gw=1"];
 
 /** The front page as an instrument opens it: a signed-in cold open of a bare `/` lands on Mail or Live. */
 export const FRONT_PAGE = "/?paper";
