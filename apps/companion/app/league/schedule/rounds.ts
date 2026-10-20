@@ -1,17 +1,19 @@
 import {
   type Fixture,
   type LeagueInfo,
+  anyStarted,
   datedKickoffs,
   firstKickoff,
-  gameweekStarted,
-  gameweekStatus,
+  fixturesStatus,
+  periodFixtures,
   periodGameweeks,
   periodLock,
 } from "@epl/core";
 import type { ScheduleRound } from "./schedule";
 
 /** The league's rounds, ascending: one per period, for the gameweek it is for (`own`), so a period's ties are listed
- *  once and a rearranged match never moves its gameweek; a break, which holds none, is not on it. */
+ *  once and a rearranged match never moves its gameweek; a break, which holds none, is not on it. Status and
+ *  `started` read the period's own matches, as Fantrax scores it: a match replayed weeks later never holds it open. */
 export function scheduleRounds(info: LeagueInfo, season: readonly Fixture[]): ScheduleRound[] {
   const kickoffs = datedKickoffs(season);
 
@@ -21,17 +23,17 @@ export function scheduleRounds(info: LeagueInfo, season: readonly Fixture[]): Sc
   );
 
   return periodGameweeks(info.scoringPeriods, kickoffs)
-    .flatMap(({ period, own }) =>
-      own === null
-        ? []
-        : [{
-            gameweek: own,
-            period,
-            deadline: opens.get(period)?.deadline ?? null,
-            kickoff: opens.get(period)?.kickoff ?? null,
-            status: gameweekStatus(season, own),
-            started: gameweekStarted(season, own),
-          }],
-    )
+    .flatMap(({ period, own }) => {
+      if (own === null) return [];
+      const scored = periodFixtures(info.scoringPeriods.find((each) => each.number === period), season);
+      return [{
+        gameweek: own,
+        period,
+        deadline: opens.get(period)?.deadline ?? null,
+        kickoff: opens.get(period)?.kickoff ?? null,
+        status: fixturesStatus(scored),
+        started: anyStarted(scored),
+      }];
+    })
     .sort((a, b) => a.gameweek - b.gameweek);
 }

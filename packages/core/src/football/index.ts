@@ -161,7 +161,9 @@ export type { Availability, DoubtBand, PlayerState } from "./playerState";
 
 // Where a round stands in time, as against what a snapshot contains.
 export {
+  anyStarted,
   duringGameweek,
+  fixturesStatus,
   gameweekStarted,
   gameweekStatus,
   isMatchdayLive,
@@ -169,7 +171,6 @@ export {
   roundState,
 } from "./round";
 export { inMatchWindow, secondsToWindow } from "./matchWindow";
-export type { MatchWindow } from "./matchWindow";
 // `roundFinished` is not exported: it cannot say "live", and `roundState` is the pairing callers want.
 export type { RoundState } from "./round";
 // A played round rewound to a moment inside it, for rehearsing the Live tab; `app/clock.ts` is the only caller.

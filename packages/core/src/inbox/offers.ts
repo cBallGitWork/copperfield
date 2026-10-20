@@ -1,15 +1,11 @@
 import { listed } from "../format";
-import type { ProposedMove, TradeProposal } from "../league/proposals";
+import type { TradeProposal } from "../league/proposals";
+import { spoken } from "./messages";
 import type { InboxItem } from "./types";
 import { proposedInstant } from "./when";
 
 // A trade on the table, as a letter to the managers in it and nobody else: Fantrax keeps a proposal between its
 // parties. The one it waits on reads it as an offer, urgently; the one who made it, as his offer.
-
-/** `Arsenal's Bukayo Saka`, for a letter. */
-function spoken(move: ProposedMove): string {
-  return move.clubName ? `${move.clubName}'s ${move.playerName}` : move.playerName;
-}
 
 export function offerNews(
   proposals: readonly TradeProposal[],

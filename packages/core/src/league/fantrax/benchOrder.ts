@@ -1,4 +1,5 @@
 import { keyed } from "./stats";
+import type { RawScorer } from "./raw";
 
 // The reserves Fantrax may bring on at the end of a period, in order, off the roster page: the manager's own numbers in
 // `autoSubOrderMap` when he set them, else the deadline's order, by total fantasy points, highest first.
@@ -19,7 +20,7 @@ export interface RawRosterRow {
   /** The slot he is filed at, one of his `posIds`. */
   posId?: string;
   /** `posIds` and `posShortNames` name the same positions in the same order: `["702", "701"]`, `"M,F"`. */
-  scorer?: { scorerId?: string; shortName?: string; posIds?: string[]; posShortNames?: string };
+  scorer?: RawScorer;
   cells?: { content?: string }[];
 }
 

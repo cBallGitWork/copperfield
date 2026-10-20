@@ -1,4 +1,5 @@
 import { numeric } from "./stats";
+import type { RawScorer } from "./raw";
 
 // Per-player RAW stats (goals, assists, clean sheets, saves, cards) from `getPlayerStats`, asked by position group.
 // Two calls cover the pool, keepers and outfielders, with different columns; each man is in one, so append, never sum.
@@ -19,20 +20,6 @@ interface RawStatCell {
   content?: string;
   /** Present on the STATUS cell when a team holds him: his owner, with no second read or name match. */
   teamId?: string;
-}
-
-interface RawScorer {
-  scorerId?: string;
-  name?: string;
-  shortName?: string;
-  /** The Premier League club, spelled out — "Arsenal". */
-  teamName?: string;
-  /** And abbreviated — "ARS". */
-  teamShortName?: string;
-  /** Fantrax's position letters for him, e.g. "F" or "F,M". */
-  posShortNames?: string;
-  /** The position his points are priced at, as an id into `posOrGroupList`: "702". */
-  defaultPosId?: string;
 }
 
 export interface RawPlayerStats {

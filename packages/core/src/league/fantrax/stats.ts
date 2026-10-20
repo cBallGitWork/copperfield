@@ -8,6 +8,7 @@ import type {
   TeamStats,
 } from "../stats";
 import { plainText } from "./markup";
+import type { RawScorer } from "./raw";
 
 // Fantrax's public stat tables, one squad (`getTeamRosterInfo`) and the whole pool (`getPlayerStats`), read, never scored.
 // Every stat endpoint defaults to a PROJECTION, so `StatSeason` travels with the numbers; the columns are the league's
@@ -40,13 +41,6 @@ export interface RawStatRow {
   /** Absent on an empty roster slot: a real row of blank cells with no player. */
   scorer?: RawScorer;
   cells?: RawCell[];
-}
-
-/** The player a row is about; only the id is read, as every caller names him from the pool. */
-export interface RawScorer {
-  scorerId?: string;
-  /** "D", or "M,F" for a man eligible at both; the pool's points score him at the last. */
-  posShortNames?: string;
 }
 
 export interface RawCell {

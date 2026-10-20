@@ -14,6 +14,7 @@ import { liveScores, pendingByTeam, squadLivePoints } from "../../scoreboard";
 import { leagueScoring } from "../../scoring";
 import { squadSeason } from "../../teamStats";
 import { myTeamId } from "../../session";
+import { now } from "../../clock";
 import { OWN, SQUAD } from "../routes";
 import { wholeNumber } from "../../wholeNumber";
 import { plannable } from "./plannable";
@@ -122,6 +123,6 @@ export async function squadView(slug: string, gw: string | undefined) {
  *  read, as `getLeagueSquads` makes it, so the request reads one snapshot. */
 async function playing(): Promise<number | null> {
   const snapshot = await footballLinesNow();
-  const state = roundState(snapshot);
+  const state = roundState(snapshot, now().toISOString());
   return state === null || state === "live" ? snapshot.gameweek : null;
 }

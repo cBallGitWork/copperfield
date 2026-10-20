@@ -1,4 +1,5 @@
 import type { ProposedMove, TradeProposal } from "../proposals";
+import type { RawScorer } from "./raw";
 
 // Fantrax's pending page, `getPendingTransactions {txType: "TRADE"}`: the trades waiting on an answer that one of the
 // session's own teams is in. Proposals never reach the transaction log, even with "executed only" off. Pure.
@@ -8,7 +9,7 @@ interface RawTeamRef {
 }
 
 interface RawPendingMove {
-  scorer?: { scorerId?: string; name?: string; teamShortName?: string; teamName?: string };
+  scorer?: RawScorer;
   from?: RawTeamRef;
   to?: RawTeamRef;
 }

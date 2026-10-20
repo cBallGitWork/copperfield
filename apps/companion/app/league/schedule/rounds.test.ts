@@ -62,4 +62,24 @@ describe("scheduleRounds", () => {
       { gameweek: 3, period: 3 },
     ]);
   });
+
+  it("settles a round on its period's matches, so one rearranged weeks later does not hold it open", () => {
+    const done = (fixture: Fixture): Fixture => ({ ...fixture, status: "finished", settled: true });
+    const fixtures = [
+      done(match(1, 1)), done(match(1, 1, 11)),
+      done(match(2, 2)), match(2, 4, 21),
+      match(3, 3), match(3, 3, 31),
+      match(4, 4), match(4, 4, 41),
+    ];
+    const rounds = scheduleRounds(info(periods(4)), fixtures);
+    const of = (gameweek: number) => rounds.find((round) => round.gameweek === gameweek);
+    expect(of(2)).toMatchObject({ period: 2, status: "finished", started: true });
+    expect(of(3)).toMatchObject({ status: "upcoming", started: false });
+  });
+
+  it("does not start a round on a match of its gameweek brought forward into an earlier period", () => {
+    const fixtures = [...season(3), { ...match(3, 1, 77), status: "finished" as const }];
+    const rounds = scheduleRounds(info(periods(3)), fixtures);
+    expect(rounds.find((round) => round.gameweek === 3)).toMatchObject({ status: "upcoming", started: false });
+  });
 });

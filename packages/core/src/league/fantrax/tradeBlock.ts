@@ -1,20 +1,13 @@
 import type { BlockPlayer, TradeBlock } from "../types";
+import type { RawScorer } from "./raw";
+import { scorerPlayer } from "./scorer";
 
 // `getTradeBlocks` → each team's trade block. Members only, so it is read with the commissioner's session.
 // Shape off the trade-block page's own template (`chunk-IJUVPJCK.js`, 7 Oct 2026); stats are not read.
 
-/** A footballer as the block lists him; `teamId` is his CLUB's Fantrax id, never a fantasy team. */
-interface RawBlockScorer {
-  scorerId?: string;
-  name?: string;
-  posShortNames?: string;
-  teamShortName?: string;
-  teamName?: string;
-}
-
 /** One list on a block, filed under the position ids it covers. */
 interface RawBlockScorers {
-  scorers?: Record<string, RawBlockScorer[] | undefined>;
+  scorers?: Record<string, RawScorer[] | undefined>;
 }
 
 interface RawBlockPositions {
@@ -79,13 +72,7 @@ function players(list: RawBlockScorers | undefined): BlockPlayer[] {
   const seen = new Map<string, BlockPlayer>();
   for (const scorer of Object.values(list?.scorers ?? {}).flatMap((group) => group ?? [])) {
     if (!scorer.scorerId || seen.has(scorer.scorerId)) continue;
-    seen.set(scorer.scorerId, {
-      fantraxId: scorer.scorerId,
-      playerName: scorer.name ?? "",
-      position: scorer.posShortNames ?? null,
-      club: scorer.teamShortName ?? null,
-      clubName: scorer.teamName ?? null,
-    });
+    seen.set(scorer.scorerId, scorerPlayer(scorer.scorerId, scorer));
   }
   return [...seen.values()];
 }

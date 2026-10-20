@@ -32,7 +32,7 @@ export async function GET(): Promise<Response> {
     scores,
     places: placings(table),
     gameweek: snapshot.gameweek,
-    state: roundState(snapshot),
+    state: roundState(snapshot, now().toISOString()),
     takenAt: fetchedAt ?? now().toISOString(),
   });
   const png = await (await shareListCard(list)).arrayBuffer();

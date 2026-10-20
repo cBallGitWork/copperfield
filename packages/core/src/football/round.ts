@@ -22,10 +22,8 @@ export function duringGameweek(snapshot: FootballSnapshot, at: string, lead = 0)
   let anyDated = false;
 
   for (const fixture of snapshot.fixtures) {
-    if (fixture.kickoff === null) continue;
-    const kickoff = Date.parse(fixture.kickoff);
-    if (Number.isNaN(kickoff)) continue;
-    if (fixture.status === "upcoming" && now - kickoff > POSTPONED_AFTER_MINUTES * MS_PER_MINUTE) continue;
+    const kickoff = countedKickoff(fixture, now);
+    if (kickoff === null) continue;
     anyDated = true;
     if (kickoff < firstKickoff) firstKickoff = kickoff;
     if (fixture.status !== "finished") everythingFinished = false;
@@ -33,11 +31,23 @@ export function duringGameweek(snapshot: FootballSnapshot, at: string, lead = 0)
 
   return anyDated && now >= firstKickoff - lead * MS_PER_MINUTE && !everythingFinished;
 }
+
+/** A fixture's kickoff instant when it counts in its round at `now`; null when undated, or unstarted
+ *  `POSTPONED_AFTER_MINUTES` past kickoff (called off). A NaN `now` lets nothing go. */
+function countedKickoff(fixture: Fixture, now: number): number | null {
+  const kickoff = fixture.kickoff === null ? NaN : Date.parse(fixture.kickoff);
+  if (Number.isNaN(kickoff)) return null;
+  return fixture.status === "upcoming" && now - kickoff > POSTPONED_AFTER_MINUTES * MS_PER_MINUTE ? null : kickoff;
+}
+
 /** Whether any match in this gameweek has kicked off; `gameweekStatus` reads "upcoming" with nine results in. */
 export function gameweekStarted(fixtures: readonly Fixture[], gameweek: number): boolean {
-  return fixtures.some(
-    (fixture) => fixture.gameweek === gameweek && fixture.status !== "upcoming",
-  );
+  return anyStarted(fixtures.filter((fixture) => fixture.gameweek === gameweek));
+}
+
+/** Whether any of these matches has kicked off; a league period asks it of the fixtures it scores. */
+export function anyStarted(fixtures: readonly Fixture[]): boolean {
+  return fixtures.some((fixture) => fixture.status !== "upcoming");
 }
 
 /** A gameweek's status: live while any match is, finished once all are, else upcoming (also with no fixtures).
@@ -46,10 +56,14 @@ export function gameweekStatus(
   fixtures: readonly Fixture[],
   gameweek: number,
 ): FixtureStatus {
-  const round = fixtures.filter((fixture) => fixture.gameweek === gameweek);
-  if (round.length === 0) return "upcoming";
-  if (round.some((fixture) => fixture.status === "live")) return "live";
-  return round.every((fixture) => fixture.status === "finished") ? "finished" : "upcoming";
+  return fixturesStatus(fixtures.filter((fixture) => fixture.gameweek === gameweek));
+}
+
+/** These matches' status, as `gameweekStatus` reads a gameweek's; empty is upcoming. A league period asks it of its own. */
+export function fixturesStatus(fixtures: readonly Fixture[]): FixtureStatus {
+  if (fixtures.length === 0) return "upcoming";
+  if (fixtures.some((fixture) => fixture.status === "live")) return "live";
+  return fixtures.every((fixture) => fixture.status === "finished") ? "finished" : "upcoming";
 }
 /** The gameweek and kickoff of the next match to start, or null; not the round in view, which is `focusGameweek`.
  *  Ordered by kickoff, never by lowest unfinished gameweek: FPL leaves a postponed fixture in its original `event`.
@@ -79,14 +93,15 @@ export function nextRound(
 type FinishedState = "bonus-settling" | "provisional" | "final";
 
 /** A finished round's rung: `finished_provisional` is bonus-settling, bonus in is provisional, `data_checked` is final.
- *  Null while in play and before kickoff alike; `isMatchdayLive` tells them apart. Undated fixtures are ignored. */
-export function roundFinished(snapshot: FootballSnapshot): FinishedState | null {
+ *  Null while in play and before kickoff alike; `isMatchdayLive` tells them apart. Skips what `duringGameweek` skips. */
+export function roundFinished(snapshot: FootballSnapshot, at: string): FinishedState | null {
+  const now = Date.parse(at);
   let anyDated = false;
   let allFinished = true;
   let allSettled = true;
 
   for (const fixture of snapshot.fixtures) {
-    if (fixture.kickoff === null) continue;
+    if (countedKickoff(fixture, now) === null) continue;
     anyDated = true;
     if (fixture.status !== "finished") allFinished = false;
     if (!fixture.settled) allSettled = false;
@@ -101,6 +116,6 @@ export function roundFinished(snapshot: FootballSnapshot): FinishedState | null 
  *  Pairs `isMatchdayLive` with `roundFinished`: neither alone answers both "live" and "final". */
 export type RoundState = "live" | FinishedState | null;
 
-export function roundState(snapshot: FootballSnapshot): RoundState {
-  return isMatchdayLive(snapshot) ? "live" : roundFinished(snapshot);
+export function roundState(snapshot: FootballSnapshot, at: string): RoundState {
+  return isMatchdayLive(snapshot) ? "live" : roundFinished(snapshot, at);
 }

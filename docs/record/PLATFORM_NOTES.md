@@ -685,6 +685,9 @@ changed in each name, as Pro Evolution printed its unlicensed players, and never
   manage 0.80 and 0.81 (Wolves' defence read average while conceding 1.79 a game).
 - **No Underlying**: a second mark for the chances behind a match predicted the next five better than points
   (0.356 against 0.337), but Craig ruled it out: what a man will do next is the projections' job.
+- **No won penalty in `extras`** (20 Oct 2026): the league's assists (AT) already pay a won penalty that is scored, so
+  its +1 counted it twice; dropped, and 10 stored marks fell 0.3 to 1.0. A won penalty then missed earns nothing now.
+  The −1 for a missed penalty in `mistakes` stays, on top of the league's PKM, as a judgement until Craig rules on it.
 
 ## Projections print our league's points, repriced from FPL's — decided 2 Oct 2026
 
@@ -794,9 +797,10 @@ The own-goal line has no space after the score (`…Town 1.Goal confirmed follow
 lists `role: "Manager"` with `active: true` and no dates, and Forest, Chelsea, Palace and Ipswich each
 carry two active managers. A club with two is given none, because nothing says which one picked the side.
 
-**Opta's type strings are now read in five places, and the shared table waits.** `moments.ts` joins
-`map.ts` `KINDS`, `assists.ts`, `injuries.ts` and `wire.ts`. It is past the rule of three, but #149
-rewrites three of those four, so the extraction lands after #149 merges rather than colliding with it.
+**Opta's type strings are now read in four places, and the shared table waits.** `moments.ts`,
+`assists.ts`, `injuries.ts` and `wire.ts`; `map.ts`'s `KINDS` went with the unread `mapMatchEvents` on 20 Oct
+2026. It is past the rule of three, but #149 rewrites three of them, so the extraction lands after #149 merges
+rather than colliding with it.
 ## The cups are declared as ours; the playoff is Fantrax's — decided 27 Sep 2026
 
 Craig set the formats on 27 Sep. The cups are declared in `packages/core/src/league/cups/declared.ts`, and
