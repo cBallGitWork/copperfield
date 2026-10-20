@@ -65,10 +65,12 @@ export default function StandingsTable<K extends string>({
   sortHref?: (key: K) => string;
   rows?: keyof typeof ROWS;
 }) {
+  // A head row whose only plate is the muted place would draw one empty plate; it stays for a screen reader.
+  const unread = columns.every((column) => column.kind === "place" || column.kind === "name");
   return (
     <ScrollBoard>
       <table className={BOARD}>
-        <thead>
+        <thead className={unread ? "sr-only" : undefined}>
           <HeadRow>
             {columns.map((column) => (
               <ColumnHead key={column.key} column={column} sort={sort} descending={descending} sortHref={sortHref} />

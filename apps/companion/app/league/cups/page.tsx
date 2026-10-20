@@ -7,6 +7,7 @@ import { cupHref } from "../SectionNav";
 import Bracket from "./Bracket";
 import Groups from "./Groups";
 import TabStrip from "../../components/shell/TabStrip";
+import { FootFrame } from "../../components/shell/FootFrame";
 import { LEAGUE_CAPTION, titled } from "../../titles";
 
 // Each cup's draw; its fixtures are on the schedule. Every side is a placeholder until the draws are made.
@@ -37,27 +38,32 @@ export default async function CupsPage({
   const stages = cupPlan(cup, teams);
 
   return (
-    <LeagueShell current="cups" teams={teams}>
-      <TabStrip
-        label="Cups"
-        tabs={CUPS.map((each) => ({ key: each.id, label: each.name, href: cupHref(each.id) }))}
-        current={cup.id}
-      />
-
-      {stages.length === 0 ? (
-        <Nothing title="No draw yet" code={`${teams} teams`} />
-      ) : (
-        <div className="flex flex-col gap-4">
-          {cup.seeding.from === "groups" ? (
-            <Groups groups={cupGroups(cup, teams)} stage={cup.seeding.stage} />
-          ) : null}
-          <Bracket
-            title={cup.knockout.elimination === "double" ? "Winners' side" : "Knockout"}
-            stages={stages.filter((stage) => stage.side === "winners")}
-          />
-          <Bracket title="Losers' side" stages={stages.filter((stage) => stage.side === "losers")} />
-        </div>
-      )}
-    </LeagueShell>
+    // The cup is picked from the foot, above the thumb rail: the top keeps Draft's own strip alone.
+    <FootFrame
+      foot={
+        <TabStrip
+          label="Cups"
+          tabs={CUPS.map((each) => ({ key: each.id, label: each.name, href: cupHref(each.id) }))}
+          current={cup.id}
+        />
+      }
+    >
+      <LeagueShell current="cups" teams={teams}>
+        {stages.length === 0 ? (
+          <Nothing title="No draw yet" code={`${teams} teams`} />
+        ) : (
+          <div className="flex flex-col gap-4">
+            {cup.seeding.from === "groups" ? (
+              <Groups groups={cupGroups(cup, teams)} stage={cup.seeding.stage} />
+            ) : null}
+            <Bracket
+              title={cup.knockout.elimination === "double" ? "Winners' side" : "Knockout"}
+              stages={stages.filter((stage) => stage.side === "winners")}
+            />
+            <Bracket title="Losers' side" stages={stages.filter((stage) => stage.side === "losers")} />
+          </div>
+        )}
+      </LeagueShell>
+    </FootFrame>
   );
 }

@@ -8,7 +8,8 @@ rules (27 Sep 2026). Their fixtures are on Fixtures (`/league/fixtures`), not he
 
 ## On the page
 
-- One picker: the cup (Timbeibs Cup, Davy Propper Cup; `?cup=`), the first by default. Craig, 1 Oct
+- One picker: the cup (Timbeibs Cup, Davy Propper Cup; `?cup=`), the first by default, docked in `FootFrame`'s
+  foot above the thumb rail so the top keeps Draft's own strip alone (20 Oct 2026). Craig, 1 Oct
   2026: *"just put fixtures in fixtures section, too many buttons, leave brackets here"*. The Fixtures
   view went, and with it the view picker; an old `?view=` link is ignored.
 - **The Timbeibs Cup** is two brackets, each side of the draw as columns of ties, first round on the
