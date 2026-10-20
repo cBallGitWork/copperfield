@@ -3,6 +3,9 @@ import type { RawClassicLeague, RawEntry, RawLiveExplain, RawPicks } from "./raw
 import type { FplEntry, FplMiniLeague, FplPick, FplScoreLine, FplSquad } from "./types";
 // A manager's entry, cleaned but not interpreted: a pre-season null stays null, since it is not "scored nothing".
 
+/** FPL's global Overall league: a fixed FPL id, whose rank is the entry's own `overallRank`, so it is not listed twice. */
+const OVERALL_LEAGUE = 314;
+
 export function mapEntry(raw: RawEntry): FplEntry {
   return {
     id: raw.id ?? 0,
@@ -17,7 +20,7 @@ export function mapEntry(raw: RawEntry): FplEntry {
 }
 
 function mapLeague(raw: RawClassicLeague): FplMiniLeague[] {
-  if (raw.id === undefined) return [];
+  if (raw.id === undefined || raw.id === OVERALL_LEAGUE) return [];
   return [
     {
       id: raw.id,
