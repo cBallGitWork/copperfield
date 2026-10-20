@@ -39,7 +39,7 @@ export default async function TransfersPage({
       {his.length === 0 ? (
         <TabEmpty>{team.teamName} has made no moves this season.</TabEmpty>
       ) : (
-        <Ledger deals={his} teamId={teamId} nameOf={(id) => names[id] ?? DASH} />
+        <Ledger deals={his} teamId={teamId} nameOf={(id) => names[id] ?? DASH} groupByDay />
       )}
     </TeamShell>
   );

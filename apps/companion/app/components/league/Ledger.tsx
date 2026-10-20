@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import Link from "@/app/components/shell/Link";
 import ScrollBoard from "./ScrollBoard";
 import type { Deal, DealSide } from "@epl/core";
-import { crestForShortName, fantraxInstant, inkOn, kindOf, londonDayMonth, londonWeekday, moverOf, movement, toFplClubCode, DASH } from "@epl/core";
+import { crestForShortName, fantraxInstant, inkOn, kindOf, londonDayAndDate, londonDayMonth, londonDayOf, londonWeekday, moverOf, movement, toFplClubCode, DASH } from "@epl/core";
 import { LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
 import TeamName from "./TeamName";
 import { teamColours } from "@/app/teamColours";
@@ -10,7 +11,8 @@ import { playerHref } from "@/app/players/routes";
 
 // One manager's business as CM's Transfers screen (`cm0102/23.jpg`): a blue date block, the type in
 // yellow, who came in white, who went out faint, and a trade's partner on his own colour. With no team, the
-// league's: each row from the side of the team whose move it was, named on its own colour.
+// league's: each row from the side of the team whose move it was, named on its own colour. Grouped, a phone heads each
+// day once instead of a date block on every row.
 
 /** A name a step above `ROW_NAME`: a date, a type and two names are this screen's whole content (DESIGN §6). */
 const NAME = "font-chrome text-base font-bold lg:text-lg";
@@ -22,17 +24,23 @@ export default function Ledger({
   deals,
   teamId,
   nameOf,
+  groupByDay = false,
 }: {
   deals: readonly Deal[];
   /** Whose business; none is the whole league's, every row naming its mover. */
   teamId?: string;
   /** A team's name by id, `—` for one the league no longer lists; the row's own copy goes stale on a rename. */
   nameOf: (teamId: string) => string;
+  /** Below `lg`, one day heading over each London day's deals in place of every row's date block. */
+  groupByDay?: boolean;
 }) {
   const everyone = teamId === undefined;
-  const rows = deals.map((deal) => {
+  const instants = deals.map((deal) => fantraxInstant(deal.processedAt ?? ""));
+  const rows = deals.map((deal, at) => {
     const mover = teamId ?? moverOf(deal);
-    return { deal, mover, ...movement(deal, mover ?? "") };
+    // The feed is newest first, so a day's deals run together and a heading opens each run.
+    const opens = groupByDay && (at === 0 || londonDayOf(instants[at - 1]) !== londonDayOf(instants[at]));
+    return { deal, mover, instant: instants[at], opens, ...movement(deal, mover ?? "") };
   });
   // A claim is with nobody, so the With column is drawn only when a trade is listed.
   const traded = rows.some((row) => row.partners.length > 0);
@@ -49,54 +57,59 @@ export default function Ledger({
 
       <ScrollBoard>
         <ul className="cm-rows flex flex-col">
-          {rows.map(({ deal, mover, in: arrived, out: left, partners }) => {
+          {rows.map(({ deal, mover, instant, opens, in: arrived, out: left, partners }) => {
             const kind = (
               <span
-                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${everyone ? "min-w-0 text-right" : "w-24"}`}
+                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${groupByDay ? "min-w-0" : everyone ? "min-w-0 text-right" : "w-24"}`}
               >
                 {kindOf(deal, arrived.length, left.length)}
               </span>
             );
+            const key = deal.setId || `${deal.processedAt}-${deal.period}`;
             return (
-              // Two rows under a thumb, In beside the date and Out beside whose move; one row on a desk, in the strip's order.
-              <li
-                key={deal.setId || `${deal.processedAt}-${deal.period}`}
-                className="cm-row grid grid-cols-[6rem_minmax(0,1fr)] items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5"
-              >
-                <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
-                  <Day stamp={deal.processedAt} weekday={!everyone} />
-                  {/* The league's list sets the type beside the date, leaving the row below to whose move it was. */}
-                  {everyone ? kind : null}
-                </span>
-                <span className="col-start-1 row-start-2 flex flex-col gap-0.5 lg:contents">
-                  {everyone ? (
-                    <span className="shrink-0 lg:order-1 lg:w-32">
-                      {mover === null ? DASH : <TeamPlate teamId={mover} name={nameOf(mover)} />}
-                    </span>
-                  ) : (
-                    kind
-                  )}
-                  {/* Who he traded with: under whose move on a phone, the last column on a desk. */}
-                  {traded ? (
-                    <span className={`shrink-0 lg:order-last lg:w-32 ${partners.length === 0 ? "hidden lg:block" : ""}`}>
-                      {partners.length === 0 ? null : (
-                        <span className="flex flex-col items-stretch gap-0.5">
-                          {/* The desk's With head, said on the phone: two plates flush read as one side (UX-8). */}
-                          <span className={`text-center ${LABEL} lg:hidden`}>With</span>
-                          <TeamPlate teamId={partners[0]} name={nameOf(partners[0])} />
-                          {partners.length > 1 ? (
-                            <span className="text-center text-2xs text-faint">+{partners.length - 1}</span>
-                          ) : null}
-                        </span>
-                      )}
-                    </span>
-                  ) : null}
-                </span>
+              <Fragment key={key}>
+                {opens ? (
+                  <li className="px-1.5 pb-0.5 pt-2 text-xs font-bold text-mid lg:hidden">{instant === null ? DASH : londonDayAndDate(instant)}</li>
+                ) : null}
+                {/* Two rows under a thumb, In beside the date or type and Out beside whose move; one row on a desk. */}
+                <li
+                  className={`cm-row grid ${groupByDay ? "grid-cols-[5.25rem_minmax(0,1fr)]" : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5`}
+                >
+                  <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
+                    <Day stamp={deal.processedAt} weekday={!everyone} deskOnly={groupByDay} />
+                    {/* The league's list, or a grouped one, sets the type beside In, leaving the row below to whose move. */}
+                    {everyone || groupByDay ? kind : null}
+                  </span>
+                  <span className="col-start-1 row-start-2 flex flex-col gap-0.5 lg:contents">
+                    {everyone ? (
+                      <span className="shrink-0 lg:order-1 lg:w-32">
+                        {mover === null ? DASH : <TeamPlate teamId={mover} name={nameOf(mover)} />}
+                      </span>
+                    ) : groupByDay ? null : (
+                      kind
+                    )}
+                    {/* Who he traded with: under whose move on a phone, the last column on a desk. */}
+                    {traded ? (
+                      <span className={`shrink-0 lg:order-last lg:w-32 ${partners.length === 0 ? "hidden lg:block" : ""}`}>
+                        {partners.length === 0 ? null : (
+                          <span className="flex flex-col items-stretch gap-0.5">
+                            {/* The desk's With head, said on the phone: two plates flush read as one side (UX-8). */}
+                            <span className={`text-center ${LABEL} lg:hidden`}>With</span>
+                            <TeamPlate teamId={partners[0]} name={nameOf(partners[0])} />
+                            {partners.length > 1 ? (
+                              <span className="text-center text-2xs text-faint">+{partners.length - 1}</span>
+                            ) : null}
+                          </span>
+                        )}
+                      </span>
+                    ) : null}
+                  </span>
 
-                {/* Both sides always drawn, so a claim's empty side is a dash rather than a reflow. */}
-                <Side players={arrived} tone="text-ink" label="In" className="col-start-2 row-start-1 lg:order-3" />
-                <Side players={left} tone="text-faint" label="Out" className="col-start-2 row-start-2 lg:order-4" />
-              </li>
+                  {/* Both sides always drawn, so a claim's empty side is a dash rather than a reflow. */}
+                  <Side players={arrived} tone="text-ink" label="In" className="col-start-2 row-start-1 lg:order-3" />
+                  <Side players={left} tone="text-faint" label="Out" className="col-start-2 row-start-2 lg:order-4" />
+                </li>
+              </Fragment>
             );
           })}
         </ul>
@@ -141,7 +154,7 @@ function Side({
                 ) : (
                   <span className={CREST} />
                 )}
-                <span className="truncate">{player.playerName}</span>
+                <span className="min-w-0 lg:truncate">{player.playerName}</span>
                 {player.position ? (
                   <span className="shrink-0 text-2xs font-bold text-mid lg:text-xs">({player.position})</span>
                 ) : null}
@@ -166,11 +179,12 @@ function Side({
   );
 }
 
-/** The London day, as Mail spells it and never cut; the league's list drops the weekday under a thumb, for the type's room. */
-function Day({ stamp, weekday }: { stamp: string | null; weekday: boolean }) {
+/** The London day, as Mail spells it and never cut; the league's list drops the weekday under a thumb, for the type's room.
+ *  `deskOnly` when a day heading says it under a thumb. */
+function Day({ stamp, weekday, deskOnly }: { stamp: string | null; weekday: boolean; deskOnly: boolean }) {
   const at = fantraxInstant(stamp ?? "");
   return (
-    <span className={`cm-index numeric shrink-0 whitespace-nowrap px-1.5 py-0.5 lg:w-24 ${weekday ? "w-24" : ""}`}>
+    <span className={`cm-index numeric shrink-0 whitespace-nowrap px-1.5 py-0.5 lg:w-24 ${deskOnly ? "hidden lg:block" : weekday ? "w-24" : ""}`}>
       {at === null ? (
         DASH
       ) : (

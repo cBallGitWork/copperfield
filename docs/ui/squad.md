@@ -425,7 +425,7 @@ this section, and it goes on doing it — `owns()` prefix-matches `/squad/`.
 | Tab | Route | What it is | Where the data comes from |
 |---|---|---|---|
 | Squad | `/squad/[teamId]` | The list and the pitch, side by side on the desk | the rosters read this page already makes |
-| Transfers | `…/transfers` | His business, as `cm0102/23.jpg`'s ledger: one row a deal, a With column only once he has traded; on his own team, the waiver line over it all week (`league-waivers.md`, 19 Oct 2026) | `readDeals`, filtered to him — the same feed the paper's business column reads |
+| Transfers | `…/transfers` | His business, as `cm0102/23.jpg`'s ledger: one row a deal, a With column only once he has traded; under a thumb a day heading over each day's deals and the type beside In (`groupByDay`, 20 Oct 2026); on his own team, the waiver line over it all week (`league-waivers.md`, 19 Oct 2026) | `readDeals`, filtered to him — the same feed the paper's business column reads |
 | Match | `…/next` | Who he plays, both sides on their own colours (`21.jpg`); the whole plate opens that tie's head-to-head at the gameweek, where both squads are listed (19 Oct 2026; it linked only the opponent's squad, and the box itself was a dead end) | `headToHeads`, already on the page; two panels for a double header, each opening its own tie |
 | Fixtures | `…/fixtures` | The whole season, played and to come | `seasonRows` + `Season`, imported from `/league/schedule` rather than copied |
 | Stats | `…/stats` | Every man he owns, filtered by category | `getPlayerStats` filtered on `ownerTeamId`, off a warm cache; the stats league's season beneath each group (`statsLeague.ts`); DefCon points of ours on Scoring, off its periods |
