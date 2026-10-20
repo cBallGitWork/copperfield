@@ -6,7 +6,7 @@ import type { ElevenLine } from "./Eleven";
 import SquadTable, { type SquadMinutes } from "./SquadTable";
 import type { LeagueOpinion } from "../../leagueOpinions";
 
-// A club's squad and its predicted eleven: side by side on a desk, a toggle below `lg` (Craig, 3 Sep 2026).
+// A club's squad and its predicted eleven: side by side on a desk, a toggle at the foot below `lg` (Craig, 3 Sep 2026).
 // The list opens first: the squad is a fact and the eleven a prediction (DESIGN §9).
 
 export default function Squad({
@@ -41,6 +41,7 @@ export default function Squad({
   return (
     <ListAndPitch
       opens="list"
+      foot
       list={list}
       pitch={
         <Eleven

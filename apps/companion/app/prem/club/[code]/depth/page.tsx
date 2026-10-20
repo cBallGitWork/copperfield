@@ -11,8 +11,7 @@ import ListAndPitch from "../../../../components/league/ListAndPitch";
 import { PANEL, PITCH_CAPTION } from "@/app/desk";
 import { clubTitle } from "../title";
 
-// Who is in line for each shirt at a club: the sister repo's depth chart (Craig, 25 Sep 2026),
-// dealt for the round it names.
+// Who is in line for each shirt at a club: the sister repo's depth chart (Craig, 25 Sep 2026), dated by its export.
 
 export const revalidate = 30;
 
@@ -35,11 +34,12 @@ export default async function DepthPage({ params }: { params: Promise<{ code: st
         <section className={PANEL}>
           {/* Not "Depth chart", American football's term, nor "Likely XI": nobody here forecasts who starts. */}
           <p className={`cm-title ${PITCH_CAPTION}`}>
-            Pecking order{intelDepthManifest.gameweek === null ? "" : ` for GW${intelDepthManifest.gameweek}`} · {chart.formation}{" "}
+            Pecking order · {chart.formation}{" "}
             (last updated {londonMoment(intelDepthManifest.exportedAt)})
           </p>
           <ListAndPitch
             opens="pitch"
+            foot
             list={<DepthList lines={lines} playerOf={playerOf} hrefOf={hrefOf} />}
             pitch={<DepthPitch lines={lines} playerOf={playerOf} hrefOf={hrefOf} />}
           />
