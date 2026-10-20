@@ -9,9 +9,11 @@ export function ordinal(place: number): string {
   return `${place}${SUFFIX[place % 10] ?? "th"}`;
 }
 
-/** Each team's place as a table prints it, by team id: `=1st` for a place two or more teams share. */
-export function printedPlaces(rows: readonly { teamId: string; rank: number }[]): Map<string, string> {
+/** Each row's place as a table prints it, `=1st` for a place two or more share; keyed by team id unless told otherwise. */
+export function printedPlaces(rows: readonly { teamId: string; rank: number }[]): Map<string, string>;
+export function printedPlaces<T extends { rank: number }>(rows: readonly T[], keyOf: (row: T) => string): Map<string, string>;
+export function printedPlaces<T extends { rank: number }>(rows: readonly T[], keyOf = (row: T) => (row as T & { teamId: string }).teamId): Map<string, string> {
   const holders = new Map<number, number>();
   for (const row of rows) holders.set(row.rank, (holders.get(row.rank) ?? 0) + 1);
-  return new Map(rows.map((row) => [row.teamId, `${(holders.get(row.rank) ?? 0) > 1 ? "=" : ""}${ordinal(row.rank)}`]));
+  return new Map(rows.map((row) => [keyOf(row), `${(holders.get(row.rank) ?? 0) > 1 ? "=" : ""}${ordinal(row.rank)}`]));
 }

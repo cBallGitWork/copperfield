@@ -21,4 +21,9 @@ describe("printedPlaces", () => {
       new Map([["a", "=1st"], ["b", "=1st"], ["c", "3rd"], ["d", "=4th"], ["e", "=4th"], ["f", "=4th"]]),
     );
   });
+
+  it("keys a list of men by what the caller names, so a leader list shares the notation", () => {
+    const men = [{ code: 7, rank: 1 }, { code: 9, rank: 2 }, { code: 4, rank: 2 }];
+    expect(printedPlaces(men, (man) => String(man.code))).toEqual(new Map([["7", "1st"], ["9", "=2nd"], ["4", "=2nd"]]));
+  });
 });

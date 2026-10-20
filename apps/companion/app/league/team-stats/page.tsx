@@ -5,7 +5,7 @@ import {
   groupFor,
   leagueSeason,
   offeredIn,
-  ordinal,
+  printedPlaces,
   rankBy,
   type Measure,
   type StatCategory,
@@ -72,6 +72,7 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
   const category = columns.find((entry) => entry.key === query.cat) ?? columns[0] ?? categoryFor(undefined);
 
   const board = rankBy(columns, lines, category, measure);
+  const places = printedPlaces(board);
   // The league's own names, which stand when the standings do not.
   const named = new Map(info.teams.map((team) => [team.teamId, team.name]));
   const groupLabel = columns.map((entry) => entry.label).join(", ");
@@ -101,7 +102,7 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
           keyOf={(row) => row.teamId}
           rowClass={(row) => (row.teamId === mine ? "bg-raised" : "")}
           lead={{
-            index: { label: "Place", of: (row) => ordinal(row.rank) },
+            index: { label: "Place", of: (row) => places.get(row.teamId) ?? DASH },
             name: {
               label: "Team",
               of: (row) => (
