@@ -34,7 +34,7 @@ const ROUTES = [
   "/matchday",
   "/prem",
   "/prem/fixtures",
-  "/gw/1",
+  "/prem/fixtures?gw=1",
   "/fpl",
   "/more",
   "/credits",

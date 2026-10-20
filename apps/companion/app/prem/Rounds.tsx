@@ -1,5 +1,6 @@
-import type { Club, Fixture, FootballPlayer } from "@epl/core";
+import { type Club, type Fixture, type FootballPlayer, type FootballSnapshot, type PlayerOwner } from "@epl/core";
 import Match from "./Match";
+import MatchList from "../components/football/MatchList";
 import RoundHead, { type RoundStep } from "../components/shell/RoundHead";
 
 // One round of the season under its head; Fixtures picks it and steps between them.
@@ -9,12 +10,21 @@ export interface Round {
   fixtures: Fixture[];
 }
 
+/** What a signed-in reader's rows open onto: his men per match, who holds whom, and the round's lines once it starts. */
+export interface RoundMen {
+  mine: Map<number, FootballPlayer[]>;
+  owners?: Map<number, PlayerOwner>;
+  lines: FootballSnapshot | null;
+  /** Whether `lines` may call a match in play live. */
+  now: boolean;
+}
+
 export default function RoundMatches({
   round,
   clubs,
   places,
   step,
-  yours,
+  men,
 }: {
   round: Round;
   clubs: Map<number, Club>;
@@ -23,22 +33,30 @@ export default function RoundMatches({
   places: Map<number, number>;
   /** The arrows either side of the head. */
   step: RoundStep;
-  /** The reader's men in each match; undefined with no reader, so no row holds a count. */
-  yours?: Map<number, FootballPlayer[]>;
+  /** Undefined with no reader, so no row holds a count. */
+  men?: RoundMen;
 }) {
   return (
     <section className="flex flex-col">
       <RoundHead gameweek={round.gameweek} step={step} />
       <div className="cm-rows flex flex-col">
-        {round.fixtures.map((fixture) => (
-          <Match
-            key={fixture.id}
-            fixture={fixture}
-            clubs={clubs}
-            places={places}
-            yours={yours === undefined ? undefined : (yours.get(fixture.id)?.length ?? 0)}
-          />
-        ))}
+        {round.fixtures.map((fixture) => {
+          const yours = men?.mine.get(fixture.id) ?? [];
+          return (
+            <Match
+              key={fixture.id}
+              fixture={fixture}
+              clubs={clubs}
+              places={places}
+              yours={men === undefined ? undefined : yours.length}
+              men={
+                men === undefined || yours.length === 0 ? undefined : (
+                  <MatchList fixture={fixture} clubs={clubs} lines={men.lines} now={men.now} yours={yours} owners={men.owners} />
+                )
+              }
+            />
+          );
+        })}
       </div>
     </section>
   );

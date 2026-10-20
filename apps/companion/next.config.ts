@@ -105,6 +105,8 @@ const nextConfig: NextConfig = {
       // Prem's Team Stats and Data repeated Data's Clubs and Players (19 Oct 2026).
       { source: "/prem/team-stats", destination: "/players/teams", permanent: false },
       { source: "/prem/data", destination: "/players", permanent: false },
+      // A gameweek's own page became Prem's Fixtures at that round (20 Oct 2026); an unknown one 404s there.
+      { source: "/gw/:gameweek([1-9]\\d*)", destination: "/prem/fixtures?gw=:gameweek", permanent: false },
     ];
   },
 

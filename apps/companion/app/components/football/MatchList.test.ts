@@ -1,71 +1,86 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { FixtureStatus, FootballPlayer, FootballSnapshot } from "@epl/core";
+import type { Fixture, FixtureStatus, FootballPlayer, FootballSnapshot, PlayerOwner } from "@epl/core";
 import MatchList from "./MatchList";
 
 vi.mock("next/image", () => ({ default: () => null }));
 vi.mock("@/app/desk", () => ({ ROW_NAME: "" }));
-vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 
-/** One match and nobody in it yet, as the gameweek list draws it. */
-function list(status: FixtureStatus, now: boolean, mine?: Map<number, FootballPlayer[]>): string {
-  const fixture = {
-    id: 1, code: 1, gameweek: 7, homeClubId: 1, awayClubId: 2, kickoff: "2026-10-10T14:00:00Z",
-    homeScore: status === "upcoming" ? null : 0, awayScore: status === "upcoming" ? null : 0,
-    status, settled: false, minutes: 12, homeDifficulty: null, awayDifficulty: null,
-  };
-  const snapshot = { clubs: [], players: [], fixtures: [fixture], stats: [] } as unknown as FootballSnapshot;
-  return renderToStaticMarkup(createElement(MatchList, { snapshot, now, mine }));
+const saka = { id: 1, code: 11, name: "Saka", fullName: "Bukayo Saka", clubId: 1 } as FootballPlayer;
+const raya = { id: 2, code: 22, name: "Raya", fullName: "David Raya", clubId: 1 } as FootballPlayer;
+const watkins = { id: 3, code: 33, name: "Watkins", fullName: "Ollie Watkins", clubId: 2 } as FootballPlayer;
+const nobody = { id: 4, code: 44, name: "Nobody", fullName: "No Body", clubId: 2 } as FootballPlayer;
+
+const owners = new Map<number, PlayerOwner>([
+  [11, { teamId: "a", teamName: "Raccoons" }],
+  [22, { teamId: "a", teamName: "Raccoons" }],
+  [33, { teamId: "b", teamName: "Badgers" }],
+]);
+
+/** One stat line: a goal for a scorer, nothing for a man who only turned out. */
+function line(player: FootballPlayer, goals: number) {
+  return { playerId: player.id, fixtureId: 1, goals, assists: 0, yellowCards: 0, redCards: 0, saves: 0, minutes: 90 };
 }
 
-describe("a match with nothing to report", () => {
-  it("never says a match our copy has in play is still to kick off, however old the copy", () => {
-    expect(list("live", false)).not.toContain("Kicks off");
+/** Saka and Raya his, Saka and Watkins scoring and Nobody, unheld, scoring too. */
+function list(status: FixtureStatus, opts: { lines?: "none" | "unavailable" | "quiet"; now?: boolean } = {}): string {
+  const fixture = {
+    id: 1, code: 1, gameweek: 7, homeClubId: 1, awayClubId: 2, kickoff: "2026-10-10T14:00:00Z",
+    homeScore: 2, awayScore: 1, status, settled: false, minutes: 12, homeDifficulty: null, awayDifficulty: null,
+  } as Fixture;
+  const stats = opts.lines === "quiet" ? [] : [line(saka, 1), line(watkins, 1), line(nobody, 1)];
+  const snapshot = {
+    clubs: [], players: [saka, raya, watkins, nobody], fixtures: [fixture], stats,
+    statsUnavailable: opts.lines === "unavailable",
+  } as unknown as FootballSnapshot;
+  return renderToStaticMarkup(
+    createElement(MatchList, {
+      fixture,
+      clubs: new Map(),
+      lines: opts.lines === "none" ? null : snapshot,
+      now: opts.now ?? true,
+      yours: [saka, raya],
+      owners,
+    }),
+  );
+}
+
+describe("his men in a match", () => {
+  it("names every one of them, the man who did nothing too", () => {
+    expect(list("finished")).toMatch(/>Yours<\/span> · Saka · Raya</);
+  });
+
+  it("tags each scorer with his holder: his own in the accent, a rival's faint, an unheld man untagged", () => {
+    const out = list("finished");
+    expect(out).toMatch(/text-accent">Raccoons</);
+    expect(out).toMatch(/text-faint">Badgers</);
+    expect(out.match(/text-2xs (text-accent|text-faint)">/g)).toHaveLength(2);
+  });
+});
+
+describe("a match with nothing to list", () => {
+  it("says the scorers are missing rather than letting a score read as nobody scoring", () => {
+    const out = list("finished", { lines: "unavailable" });
+    expect(out).toContain("Scorers not available right now.");
+    expect(out).not.toContain("Badgers");
+  });
+
+  it("says the same of a played match with no lines to read", () => {
+    expect(list("finished", { lines: "none" })).toContain("Scorers not available right now.");
   });
 
   it("says nothing yet while a fresh copy has it in play", () => {
-    expect(list("live", true)).toContain("Nothing to report yet.");
+    expect(list("live", { lines: "quiet" })).toContain("Nothing to report yet.");
   });
 
-  it("says when a match to come kicks off", () => {
-    expect(list("upcoming", true)).toContain("Kicks off Sat 15:00");
-  });
-});
-
-describe("a signed-in reader's rows", () => {
-  const others = new Map<number, FootballPlayer[]>([[2, []]]);
-
-  it("holds the count's column on a row with none of his men, so every score sits on one line", () => {
-    expect(list("finished", true, others)).toContain("w-12");
+  it("never says yet of a match a stale copy has in play", () => {
+    expect(list("live", { lines: "quiet", now: false })).toContain("Nothing to report.");
   });
 
-  it("gives a row with none of his men a clear edge as wide as the marked one's", () => {
-    expect(list("finished", true, others)).toContain("border-l-transparent");
-  });
-
-  it("holds no column for a signed-out reader", () => {
-    const out = list("finished", true);
-    expect(out).not.toContain("w-12");
-    expect(out).not.toContain("border-l-transparent");
-  });
-});
-
-describe("a played match's score", () => {
-  it("prints CM's colon in the reading cyan, never an en dash", () => {
-    const out = list("finished", true);
-    expect(out).not.toContain("0–0");
-    expect(out).toMatch(/text-info[^>]*>0<span aria-hidden="true"[^>]*>:<\/span>0</);
-  });
-});
-
-describe("the way through to the match", () => {
-  it.each(["finished", "live", "upcoming"] as const)("leads an opened %s row to its match page", (status) => {
-    expect(list(status, true)).toContain('href="/prem/match/1"');
-  });
-
-  it("keeps the link out of the summary, so tapping the row still only opens it", () => {
-    const summary = list("finished", true).split("</summary>")[0];
-    expect(summary).not.toContain("/prem/match/");
+  it("lists only his men before a ball is kicked, when there are no lines to read", () => {
+    const out = list("upcoming", { lines: "none" });
+    expect(out).toMatch(/>Yours<\/span> · Saka · Raya</);
+    expect(out).not.toContain("Nothing to report");
   });
 });

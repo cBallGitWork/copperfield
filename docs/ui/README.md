@@ -35,7 +35,7 @@ nothing.**
 | `/more` | here | The sections with no tab, the squads, the scoring, Fantrax's exit, **"Add the lock times to your calendar"** (a `webcal:` button, then "Or subscribe by address" as the `https:` fallback for Android and desktop; added 19 Oct 2026 after Craig's "nothing in the app reaches the phone"), how to install, the credits. |
 | `/calendar.ics` | here | No screen: the line-up locks still ahead as an iCalendar feed, one event per gameweek from lock to first ball, alarms an hour before and at 09:00 London on lock day, the morning one dropped for a lock before 10:00 (`calendar.ics/locks.ts`). UID per period and league, so a re-fetch moves an event. Waiver runs join it once their schedule is read. |
 | `/prem` | [prem.md](prem.md) | **The real Premier League table, computed from finished fixtures.** |
-| `/prem/fixtures` | [prem.md](prem.md) | One round of football at a time, played or to come. |
+| `/prem/fixtures` | [prem.md](prem.md) | One round of football at a time, played or to come; your men in each match a tap away. `/gw/[n]` redirects here. |
 | `/prem/club/[code]` | [prem.md](prem.md) | One club's squad, with the real position and Fantrax's eligibility side by side. |
 | `/prem/club/[code]/set-pieces` | [prem.md](prem.md) | Who takes that club's penalties, free kicks and corners. |
 | `/prem/club/[code]/fixtures` | [prem.md](prem.md) | That club's season, oldest first. Premier League only. |
@@ -50,7 +50,6 @@ nothing.**
 | `/squad/[teamId]/fixtures` | [squad.md](squad.md) | His whole season, played and to come. |
 | `/squad/[teamId]/stats` | [squad.md](squad.md) | Every man he owns, by scoring category, with the stats league's counts beneath each group. |
 | `/matchday` | [matchday.md](matchday.md) | Live: your head-to-head, then the real football. |
-| `/gw/[gameweek]` | [gameweek.md](gameweek.md) | Any round of football, addressable. |
 | `/players` | [players.md](players.md) | **Data** — Players: the pool under the league's own scoring, resting on the free men, sortable, filterable, lit in ink. |
 | `/players/stats` | [players.md](players.md#adv-stats-16-oct-2026) | Adv Stats: the same pool under every figure the league does not score, with the stat-group plates and Per 90. |
 | `/players/analysis` | [analysis.md](analysis.md) | Compare: two players' figures, shots, key passes, touches and attributes, season or last 6. |

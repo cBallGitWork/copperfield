@@ -52,9 +52,9 @@ function seen(body: string): string {
 const DRAFTED_MUST_NOT = Object.values(UNDRAFTED);
 
 /** What a route must never say, whatever the league. An absence, because React splits positive copy
- *  into text nodes. `/gw/1` must render with no Fantrax at all. */
+ *  into text nodes. Gameweek 1 must render with no Fantrax at all. */
 const NEVER: Record<string, string> = {
-  "/gw/1": "No fixtures scheduled for this gameweek yet.",
+  "/prem/fixtures?gw=1": "No fixtures yet",
 };
 
 /** The served league's state, or no teams when Fantrax refuses the roster read. */

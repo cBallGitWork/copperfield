@@ -1,5 +1,11 @@
 # `/gw/[gameweek]` — one round of football
 
+> **Superseded 20 Oct 2026.** `/gw/N` redirects, not permanently, to Prem › Fixtures at `?gw=N`, and
+> `GameweekView` is gone: the same round was drawn twice, two ways, and Craig's ask (16 Oct, *"3 yours goes to a
+> bugged screen"*) was for the count to land somewhere that names his men. Fixtures' `N yours` now opens them under
+> the row, with everything below that this page existed for: the `Yours ·` line, the holder tags and the missing
+> scorers line. The current account is [prem.md](prem.md#fixtures); what follows is the page as it was.
+
 Any round of the season, addressable. Last week's results on Monday morning is
 the second thing anyone wants after this week's score.
 
