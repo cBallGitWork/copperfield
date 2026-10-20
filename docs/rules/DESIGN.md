@@ -307,10 +307,11 @@ Team's. The Live tab puts your score where the glyph sits, a rung smaller per ex
 
 **Read is Mail and the Gazetta under one tab, opening on Mail** (Craig, 11 Oct 2026: *"both should show"*).
 Its pages carry Read's strip at their head, `Mail · Gazetta · More`, drawn by `TabStrip` (`shell/ReadViews`),
-so each is a tap from the other: over Mail's list on `/news`, over More's bar on `/more`,
+so each is a tap from the other: over Mail's list on `/news`, over More's list on `/more`,
 and on the front page `/` in the paper's register, tracked small capitals with the current one in the print red
 over a rule, above a masthead it leaves untouched. Read lights on Mail, the paper and its stories, More, the
-credits, and on a phone FPL too, which More lists.
+credits, and on a phone FPL too, which More lists. More's children (FPL, Scoring, Credits, Squads) wear no strip:
+each opens on its own bar with a `←` back plate (Scoring since 20 Oct 2026, as the other three).
 
 **More has no tab; it is the third plate of Read's strip.** A header link was the other offer. The strip won
 because navigation here is three objects and a link in a page's head would be a fourth, while the strip is
@@ -321,10 +322,11 @@ count is a square cyan plate on Read's envelope, capped at `9+`: the inbox's ids
 none before a first visit, and cleared by opening Mail. It pulses three times when mail arrives while the
 app is open and never for a count already there.
 
-**More opens a page, `/more`, not a drawer.** The sections with no tab (FPL), the squad index with your team's
-name or `Sign in`, and the credits, as rows in a panel with CM's small filled triangle; between them, a button
-to the league's home on Fantrax and how to add the app to a home screen, which stands down once it is
-installed (Craig, 1 Oct 2026). **The desk rail lists every section flat**, FPL included: a 1440 screen has
+**More opens a page, `/more`, not a drawer.** One list of rows with CM's small filled triangle: the sections
+with no tab (FPL), the squad index with your team's name or `Sign in`, the scoring and the credits; then one panel
+holding both ways out as button plates, the league's home on Fantrax and the lock-times calendar with its
+address on its own line; then how to add the app to a home screen, which stands down once it is installed
+(Craig, 1 Oct 2026; one list and one exits panel since 20 Oct 2026, when the About panel went). **The desk rail lists every section flat**, FPL included: a 1440 screen has
 room for every section.
 
 **A plate owns its ink.** Dark ink on the grey plate is 7.52:1 and `--color-ink`
@@ -350,9 +352,14 @@ caption repeated it and cost a row on a phone. **Data draws none either** (Craig
 24 Sep 2026: *"remove the yellow title for space"*): its strip names the view.
 The competition screens keep theirs.
 
-**Mail draws no bar at all** (Craig, 19 Oct 2026: *"remove the 'raccoons mail section' already too many
-buttons"*): Read's strip already names the view, so `/news` keeps its heading for a screen reader only. The exception
-below is superseded and kept as the record.
+~~**Mail draws no bar at all**~~ *Widened 20 Oct 2026, below.* (Craig, 19 Oct 2026: *"remove the 'raccoons mail
+section' already too many buttons"*): Read's strip already names the view, so `/news` keeps its heading for a
+screen reader only. The exception below is superseded and kept as the record.
+
+**Mail, More and Data draw no bar** (20 Oct 2026, Mail's reason applied where the same word printed twice): on
+`/more` Read's lit More plate sat over a "More" bar, and on Data's boards a "Data" bar sat over the strip beside the
+rail's lit Data plate. Each keeps its heading for a screen reader only. League and Prem keep their competition
+plates, which name a subject.
 
 ~~**The one exception is CM's own news screen, and it is granted.**~~ *Superseded 19 Oct 2026.* Its bar reads
 `Mike Paul News` — subject and view in one line, with no caption — and it is the

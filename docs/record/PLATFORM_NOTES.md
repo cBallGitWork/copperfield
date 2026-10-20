@@ -3770,8 +3770,8 @@ printing on the photograph because it had nothing to be inside.
 
 **What is left is two.** `/matchday/desk` at the cap is the `≥lg` wall, which is
 a whole screen built to be read across a room and has never had a plate under any
-of it; `/squad` is a sign-out button and an "Around the league" heading. Neither
-is fixed here and both are now the whole of the list, which is a different
+of it; `/squad` is a sign-out button and an "Around the league" heading (both gone from the bare ground
+20 Oct 2026: the heading went and the sign-out sits on a panel). Neither was fixed here and both are now the whole of the list, which is a different
 statement from the app-wide pattern the next paragraph describes.
 
 **`components/shell/Section` was the offender, and it was everywhere.** Its

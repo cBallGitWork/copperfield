@@ -13,7 +13,9 @@ route is the same route — only its frame and its place in the app changed.
 - **"Data", the fantasy deep dive, since 24 Sep 2026** (Craig: *"FIND is now DATA"*). It was CM's
   **"Find"** from 10 Sep (the rail in `cm9900/12.jpg` reads `… Competitions · Nations & Clubs · Find`), and
   **"Scout"** before that. The URL stays `/players`, and `titles.ts` keeps the constant's name `SCOUT`.
-- **The royal-blue bar, not the cream competition plate.** `PageHeader` draws two
+- ~~**The royal-blue bar, not the cream competition plate.**~~ *Superseded 20 Oct 2026: Data draws no bar.* Its
+  strip names the view and the rail's lit Data plate the section, so the bar said "Data" a third time; the page
+  keeps an sr-only `h1`, as Mail. The record: `PageHeader` draws two
   and which one a screen gets says what KIND of thing it is about (`cm9900/24.jpg`
   is a competition, `25.jpg` a club or a person). The cream plate is spoken for
   by `/league` and `/prem`; Data is not a competition, it is the activity, so it

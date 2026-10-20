@@ -7,9 +7,9 @@ import { forgetTeam } from "./actions";
 import { getLeagueSquads } from "../squads";
 import { planningRound } from "../round";
 import { myTeamId, signedIn } from "../session";
-import { yoursBorder } from "../mine";
+import { yoursEdge } from "../mine";
 import { MY_TEAM, teamHref } from "./routes";
-import { PANEL, ROW_NAME, HEADING_PLATE } from "@/app/desk";
+import { PANEL, ROW_NAME } from "@/app/desk";
 import FantraxSilent from "../components/shell/FantraxSilent";
 import { shortName } from "../teamNames";
 import { SQUADS, YOUR_SQUAD } from "../titles";
@@ -66,33 +66,36 @@ export default async function SquadIndex({
     return ties.length === 0 ? null : ties.map((tie) => shortName(tie.opponent.teamId, tie.opponent.name)).join(" & ");
   };
 
+  // The league's own cap from the info already fetched; none named, no size is printed.
+  const cap = squads.info?.roster.maxTotalPlayers ?? null;
+
   return (
     <div className="flex flex-col gap-3">
       <PageHeader title={yours ? YOUR_SQUAD : SQUADS} back={back} />
 
-      {yours ? <Squad team={yours} opponent={opponentName(yours.teamId)} lead /> : null}
-
       {/* The sign-in follows the code, not the team on screen; signing out is offered only to a real code. */}
+      {holder ? null : <SignIn />}
+
+      <ul className="cm-rows flex flex-col">
+        {yours ? (
+          <li>
+            <Squad team={yours} opponent={opponentName(yours.teamId)} cap={cap} lead />
+          </li>
+        ) : null}
+        {others.map((team) => (
+          <li key={team.teamId}>
+            <Squad team={team} opponent={opponentName(team.teamId)} cap={cap} />
+          </li>
+        ))}
+      </ul>
+
       {holder ? (
         <form action={forgetTeam} className="cm-panel px-3">
           <button type="submit" className="min-h-11 text-2xs text-faint hover:text-muted">
             Not you? Sign out
           </button>
         </form>
-      ) : (
-        <SignIn />
-      )}
-
-      {/* A plate of its own: nothing prints on the bare ground (DESIGN §2). */}
-      {yours ? <h2 className={HEADING_PLATE}>Around the league</h2> : null}
-
-      <ul className="cm-rows flex flex-col">
-        {others.map((team) => (
-          <li key={team.teamId}>
-            <Squad team={team} opponent={opponentName(team.teamId)} />
-          </li>
-        ))}
-      </ul>
+      ) : null}
     </div>
   );
 }
@@ -102,11 +105,14 @@ export default async function SquadIndex({
 function Squad({
   team,
   opponent,
+  cap,
   lead = false,
 }: {
   team: RosteredTeam;
   /** Who he plays this period, or null when the schedule does not say. */
   opponent: string | null;
+  /** The league's roster limit, or null when it names none. */
+  cap: number | null;
   lead?: boolean;
 }) {
   const unresolved = team.players.filter((player) => !isResolved(player)).length;
@@ -117,19 +123,22 @@ function Squad({
       href={lead ? MY_TEAM : teamHref(team.teamId)}
       className={`cm-row flex min-h-14 items-center gap-3 px-3 py-2.5 hover:bg-raised ${
         lead ? "bg-raised" : "bg-surface"
-      } ${yoursBorder(lead)}`}
+      } border-line ${yoursEdge(lead)}`}
     >
       <span className="flex min-w-0 flex-1 flex-col lg:flex-row lg:items-baseline lg:gap-2">
         <span className={`min-w-0 truncate ${ROW_NAME}`}>{team.teamName}</span>
         {/* Who he plays this week. */}
         {opponent ? (
-          <span className="shrink-0 truncate text-2xs text-faint">
-            <span className="uppercase">v</span> {opponent}
-          </span>
+          <span className="shrink-0 truncate text-2xs text-faint">v {opponent}</span>
         ) : null}
       </span>
       {/* No YOU chip (Craig, 5 Sep 2026): the accent edge and the top place pair with the colour. */}
-      <span className="numeric shrink-0 text-sm text-muted">{team.players.length}</span>
+      {/* A size only off the league's limit: short after a drop, or over it. */}
+      {cap === null || team.players.length === cap ? null : (
+        <span className="numeric shrink-0 text-sm text-muted" aria-label={`${team.players.length} of ${cap} players`}>
+          {team.players.length}/{cap}
+        </span>
+      )}
       {/* Never silently short: a squad we cannot fully identify says so. */}
       {unresolved > 0 ? (
         <span className="numeric shrink-0 bg-bg px-1.5 py-0.5 text-2xs font-bold text-mid">

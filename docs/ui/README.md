@@ -32,7 +32,7 @@ nothing.**
 | `/league/team-stats` | [league-table.md](league-table.md) | The league ranked by one scoring category at a time. |
 | `/league/cups` | [league-cups.md](league-cups.md) | Each cup's whole draw, round by round, before anyone is drawn. |
 | `/scoring` | [scoring.md](scoring.md) | Listed on More: what the league pays each roster slot for each category, read from Fantrax. |
-| `/more` | here | The sections with no tab, the squads, the scoring, Fantrax's exit, **"Add the lock times to your calendar"** (a `webcal:` button, then "Or subscribe by address" as the `https:` fallback for Android and desktop; added 19 Oct 2026 after Craig's "nothing in the app reaches the phone"), how to install, the credits. |
+| `/more` | here | One list (the sections with no tab, the squads, the scoring, the credits), then one panel of exits: Fantrax's, **"Add the lock times to your calendar"** (a `webcal:` button, then "Or subscribe by address" as the `https:` fallback for Android and desktop; added 19 Oct 2026 after Craig's "nothing in the app reaches the phone"), then how to install. No title bar (20 Oct 2026). |
 | `/calendar.ics` | here | No screen: the line-up locks still ahead as an iCalendar feed, one event per gameweek from lock to first ball, alarms an hour before and at 09:00 London on lock day, the morning one dropped for a lock before 10:00 (`calendar.ics/locks.ts`). UID per period and league, so a re-fetch moves an event. Waiver runs join it once their schedule is read. |
 | `/prem` | [prem.md](prem.md) | **The real Premier League table, computed from finished fixtures.** |
 | `/prem/fixtures` | [prem.md](prem.md) | One round of football at a time, played or to come. |
