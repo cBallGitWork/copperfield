@@ -28,7 +28,7 @@ prints a football match.
 **Your tie first** in each block (`fixtureTies`), and in the gameweek in play a `+n` beside a side's name for the
 clean sheets Fantrax has not credited yet (`league/Pending`, through `ScoreSide.pending`), with one key line above
 the head while any is owed. League ties only, never a cup's. Both came from Matchups, which folded into this page on
-20 Oct 2026 (Craig); `/league/matchups` 308s here with its `?gw=`. The panel reserves the gameweek's own ties and its
+20 Oct 2026 (Craig); `/league/matchups` 308s here with its `?gw=`, and 307s a bare link to the gameweek in focus. The panel reserves the gameweek's own ties and its
 head, not the table's ten rows.
 
 A round still to come shows **`test4 v test2`, never `0 – 0`**. Fantrax answers 0

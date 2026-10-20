@@ -14,6 +14,8 @@ const ROUTES = [
   "/league/fixtures",
   "/league/transfers",
   "/league/waivers",
+  // Retired into Fixtures; a bare old link must still land on a named gameweek.
+  "/league/matchups",
   "/league/team-stats",
   "/league/cups",
   "/scoring",

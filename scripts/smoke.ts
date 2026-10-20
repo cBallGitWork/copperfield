@@ -170,6 +170,11 @@ async function main() {
 
     if (path === "/") problems.push(...launchScreenProblems(body));
 
+    // Fixtures' default is the next gameweek once one is done; an old Matchups link meant the one in focus.
+    if (path === "/league/matchups" && state === "drafted" && !/[?&]gw=\d+/.test(res.url)) {
+      problems.push(`landed on ${res.url}, not a named gameweek`);
+    }
+
     const never = NEVER[path];
     if (never !== undefined && body.includes(never)) {
       problems.push(`says "${never}" on a page that needs no Fantrax`);

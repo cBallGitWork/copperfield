@@ -21,6 +21,8 @@ export const DESK_ROUTES = [
   "/league/cups",
   "/scoring",
   ...CUP_ROUTES,
+  // Retired into Fixtures; lands on the gameweek in focus, a played week's results between deadlines.
+  "/league/matchups",
   "/squad",
   "/players",
   "/players/stats",

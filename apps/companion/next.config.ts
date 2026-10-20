@@ -86,9 +86,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/standings", destination: "/league", permanent: true },
-      { source: "/matchup", destination: "/league/fixtures", permanent: true },
-      // Matchups folded into Fixtures (Craig, 20 Oct 2026); `?gw=` rides along, so a shared week opens on itself.
-      { source: "/league/matchups", destination: "/league/fixtures", permanent: true },
+      { source: "/matchup", destination: "/league/matchups", permanent: true },
+      // Matchups folded into Fixtures (Craig, 20 Oct 2026); a shared week opens on itself, a bare link 307s from its page.
+      { source: "/league/matchups", has: [{ type: "query", key: "gw" }], destination: "/league/fixtures", permanent: true },
       { source: "/team", destination: "/squad", permanent: true },
       { source: "/team/:teamId", destination: "/squad/:teamId", permanent: true },
       // A prefix is not a page: `/paper` is where the paper's articles live,
