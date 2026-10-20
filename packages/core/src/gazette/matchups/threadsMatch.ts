@@ -64,8 +64,8 @@ export function matchThreads(ctx: MatchupContext, worth: SlotWorth): Thread[] {
   const [w, l]: [Side, Side] = margin > 0 ? ["home", "away"] : ["away", "home"];
   const [W, L, m] = [ctx.state[w], ctx.state[l], Math.abs(margin)];
   const out = [...oneManShows(ctx), ...sameMatch(ctx)];
-  // Turned by the bench: the side that lost led on the eleven's points alone.
-  if ((L.side.total ?? 0) > (W.side.total ?? 0)) {
+  // Turned by the bench: without the winner's own certain substitutions, the other side would have won.
+  if (W.brought > m) {
     const on = W.subs.filter((s) => !s.provisional);
     // The reserves' own points are the cast's, given once there.
     const who = listed(on.map((s) => `${s.in.name} in for ${s.out.name}`), "and");
