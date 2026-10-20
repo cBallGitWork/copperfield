@@ -14,6 +14,7 @@ import {
   stories,
   teamOfTheWeek,
   wasFielded,
+  weekOfBusiness,
   withReportFace,
 } from "@epl/core";
 import { now } from "./clock";
@@ -99,13 +100,6 @@ export async function edition(mine: string | null): Promise<Edition> {
   };
 
   return { ...paper, silence: silenceOf(squads, paper) };
-}
-
-/** Not the round's period: a claim run after the deadline lands in the next one, and Tuesday's open period has none yet. */
-export function weekOfBusiness(all: Deal[]): Deal[] {
-  const periods = all.flatMap((deal) => (deal.period === null ? [] : [deal.period]));
-  const newest = periods.length === 0 ? null : Math.max(...periods);
-  return all.filter((deal) => deal.period === null || deal.period === newest);
 }
 
 /** What the paper is short of, only when there is nothing at all to print; a quiet week is not an outage. */
