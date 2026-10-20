@@ -41,4 +41,23 @@ describe("the team news thread", () => {
     const out = { extras: { teamNews: [{ club: "Spurs", code: null, stillOut: [{ name: "Porro" }] }] } } as PublishedStory;
     expect(renderToStaticMarkup(createElement(TeamNews, { story: out }))).not.toContain("text-base leading-snug text-muted\"></p>");
   });
+
+  it("marks the reader's own men and their owner tag in the print red, a peer's in plain ink", () => {
+    const out = {
+      extras: {
+        teamNews: [{ club: "Spurs", code: null, men: [{ name: "Porro", owner: "Raccoons", status: "Doubt", note: "" }, { name: "Romero", owner: "Hazza", status: "OUT", note: "" }], stillOut: [{ name: "Maddison", owner: "Raccoons" }, { name: "Kulusevski", owner: "Hazza" }] }],
+      },
+    } as PublishedStory;
+    const html = renderToStaticMarkup(createElement(TeamNews, { story: out, myName: "Raccoons" }));
+    expect(html.match(/text-accent[^>]*>(?:<[^>]+>)*Porro/)).not.toBeNull();
+    expect(html.match(/text-accent[^>]*>(?:<[^>]+>)*Maddison/)).not.toBeNull();
+    expect(html.match(/text-accent[^>]*>[^<]*\(<em>Raccoons/g)?.length).toBe(2);
+    expect(html).not.toMatch(/text-accent[^>]*>(?:<[^>]+>)*(?:Romero|Kulusevski)/);
+    expect(html).not.toMatch(/text-accent[^>]*>[^<]*\(<em>Hazza/);
+  });
+
+  it("marks nobody when the reader is unknown", () => {
+    const out = { extras: { teamNews: [{ club: "Spurs", code: null, men: [{ name: "Porro", owner: "Raccoons", status: "Doubt", note: "" }] }] } } as PublishedStory;
+    expect(renderToStaticMarkup(createElement(TeamNews, { story: out, myName: null }))).not.toContain("text-accent");
+  });
 });

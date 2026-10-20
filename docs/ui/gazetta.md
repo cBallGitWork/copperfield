@@ -531,7 +531,9 @@ about him and not about the team sheet.
 Sheet's rule, and for a reason the Team Sheet does not have: a bracket on every
 one of two hundred and twenty names is noise, and the question this list answers
 is which of them are already owned. The mark is `yoursInk`, so the reader's own
-men are in the sheet's one print red.
+men are in the sheet's one print red. **The Team Sheet marks the reader's men the same way** (20 Oct 2026):
+a man and his owner tag take `yoursInk`, in his row and in Still out, when the tag is the reader's short name
+(`teamNames.shortName`, the form the desk filed it in); no reader, no mark, and no reordering.
 
 **A tie prints both elevens or neither.** `predictedLineups` refuses rather than
 repairs: a side `xiFault` rejects, or one naming a man the snapshot cannot, is
