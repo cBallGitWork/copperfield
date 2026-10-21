@@ -1,4 +1,4 @@
-import { clubById, involves, seasonRun } from "@epl/core";
+import { clubById, involves, runOrder, seasonRun } from "@epl/core";
 import TabEmpty from "../../../../components/league/TabEmpty";
 import { PANEL_ROWS } from "../../../Shell";
 import ClubShell from "../Shell";
@@ -7,8 +7,9 @@ import { clubOr404 } from "../club";
 import { intelCups } from "@/app/intel";
 import { PANEL } from "@/app/desk";
 import { clubTitle } from "../title";
+import { now } from "@/app/clock";
 
-// The club's season on one screen, league and cups, played and to come: oldest first, the way it was played.
+// The club's season on one screen, league and cups: the next match first, then the rest to come, then the played, newest first.
 
 // Must equal PAGE_REVALIDATE in config.ts: Next reads it statically, so it cannot be imported.
 export const revalidate = 30;
@@ -38,7 +39,7 @@ export default async function ClubFixturesPage({ params }: { params: Promise<{ c
           <TabEmpty>No fixtures.</TabEmpty>
         ) : (
           <Run
-            entries={run}
+            order={runOrder(run, now().toISOString())}
             club={club}
             clubs={clubById(snapshot)}
             byCode={new Map(snapshot.clubs.map((entry) => [entry.code, entry]))}

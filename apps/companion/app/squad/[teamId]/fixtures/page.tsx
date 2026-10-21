@@ -1,5 +1,5 @@
 import TabEmpty from "../../../components/league/TabEmpty";
-import { type CompetitionTie, leagueTies, periodPairings } from "@epl/core";
+import { type CompetitionTie, leagueTies, periodPairings, seasonOrder } from "@epl/core";
 import TeamShell from "../Shell";
 import { leagueTeams } from "../team";
 import Season from "../../../league/schedule/Season";
@@ -9,7 +9,8 @@ import { PANEL } from "@/app/desk";
 import { UNAVAILABLE } from "../../../config";
 import { teamTitle } from "../title";
 
-// Every gameweek this side plays, played and to come: the only view of one team's whole season.
+// Every gameweek this side plays, the next first, then the rest to come, then the played, newest first: the only
+// view of one team's whole season.
 // Cup ties are not here: nobody is drawn into one yet, so no cup fixture can name this team.
 
 export const revalidate = 30;
@@ -51,7 +52,11 @@ export default async function FixturesPage({
         {rows.length === 0 ? (
           <p className="px-1 py-6 text-center text-2xs text-muted">No fixtures.</p>
         ) : (
-          <Season rows={rows} teamId={teamId} />
+          <Season
+            // A gameweek under way is still to come; `seasonRows` is in gameweek order already.
+            order={seasonOrder(rows, (row) => row.round.status === "finished", (a, b) => a.round.gameweek - b.round.gameweek)}
+            teamId={teamId}
+          />
         )}
       </section>
     </TeamShell>

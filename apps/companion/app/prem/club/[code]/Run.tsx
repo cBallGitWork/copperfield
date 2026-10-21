@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import ScrollBoard from "../../../components/league/ScrollBoard";
 import Link from "@/app/components/shell/Link";
-import type { Club, CupTie, Fixture, RunEntry } from "@epl/core";
+import type { Club, CupTie, Fixture, RunEntry, SeasonOrder } from "@epl/core";
 import { COMPETITION_NAME, cupName, kickoffAt, londonDayAndDate, londonTime, DASH } from "@epl/core";
 import { clubHref } from "../../routes";
-import { BOARD, DESK_ONLY, FIGURE, MINOR_CAPS, ROW_HOVER, ROW_NAME } from "@/app/desk";
+import { BOARD, DESK_ONLY, FIGURE, MINOR_CAPS, MINOR_LABEL, ROW_HOVER, ROW_NAME } from "@/app/desk";
 import { ROW_LINK } from "../../../components/league/TableCells";
 import Absent from "@/app/components/shell/Absent";
 import ClubLabel from "@/app/components/football/ClubLabel";
@@ -12,7 +12,7 @@ import Scoreline from "../../../components/shell/Scoreline";
 import { matchHref } from "../../match/[id]/matchRoutes";
 import { hasScore } from "../../score";
 
-// One club's season, league and cups, in the order it runs: a date, the opponent once, H/A, the competition, the score.
+// One club's season, league and cups, opened on the next match (`runOrder`): a date, the opponent once, H/A, the competition, the score.
 // A live score keeps its ink: a running score with no tense reads as a final one.
 
 interface Cells {
@@ -25,12 +25,13 @@ interface Cells {
 }
 
 export default function Run({
-  entries,
+  order,
   club,
   clubs,
   byCode,
 }: {
-  entries: readonly RunEntry[];
+  /** To come, then played under one "Played" row. */
+  order: SeasonOrder<RunEntry>;
   /** Whose season this is — the side that is NOT named on each row. */
   club: Club;
   clubs: Map<number, Club>;
@@ -40,29 +41,37 @@ export default function Run({
   return (
     <ScrollBoard>
       <table className={BOARD}>
-        <caption className="sr-only">{club.name}&apos;s season, oldest first</caption>
+        <caption className="sr-only">{club.name}&apos;s season, the next match first, then the played, newest first</caption>
         <tbody>
-          {entries.map((entry) => {
-            const row = entry.kind === "league" ? leagueCells(entry.fixture, club, clubs) : cupCells(entry.tie, byCode);
-            return (
-              <tr key={row.key} className={`cm-row ${ROW_HOVER}`}>
-                {/* The date in the club's own colour: `ClubShell` scopes `--cm-index` to this club. */}
-                <td className="cm-index numeric whitespace-nowrap px-1.5 text-center">
-                  {kickoffAt(row.kickoff, londonDayAndDate)}
-                </td>
-                <td className="numeric whitespace-nowrap px-1 text-3xs text-faint lg:text-2xs">
-                  {row.kickoff === null ? "" : londonTime(row.kickoff)}
-                </td>
-                <td className="w-full max-w-0 px-1">{row.opponent}</td>
-                <td className="px-1 text-center text-2xs font-bold text-muted">{row.venue}</td>
-                <td className={`${DESK_ONLY} whitespace-nowrap px-1.5 text-2xs text-faint`}>{row.competition}</td>
-                <td className={`${FIGURE} w-14 whitespace-nowrap`}>{row.score}</td>
-              </tr>
-            );
-          })}
+          {order.toCome.map((entry) => runRow(entry, club, clubs, byCode))}
+          {order.played.length === 0 ? null : (
+            <tr>
+              <td colSpan={6} className={`${MINOR_LABEL} px-1.5 pb-1 pt-3`}>
+                Played
+              </td>
+            </tr>
+          )}
+          {order.played.map((entry) => runRow(entry, club, clubs, byCode))}
         </tbody>
       </table>
     </ScrollBoard>
+  );
+}
+
+function runRow(entry: RunEntry, club: Club, clubs: Map<number, Club>, byCode: Map<number, Club>) {
+  const row = entry.kind === "league" ? leagueCells(entry.fixture, club, clubs) : cupCells(entry.tie, byCode);
+  return (
+    <tr key={row.key} className={`cm-row ${ROW_HOVER}`}>
+      {/* The date in the club's own colour: `ClubShell` scopes `--cm-index` to this club. */}
+      <td className="cm-index numeric whitespace-nowrap px-1.5 text-center">{kickoffAt(row.kickoff, londonDayAndDate)}</td>
+      <td className="numeric whitespace-nowrap px-1 text-3xs text-faint lg:text-2xs">
+        {row.kickoff === null ? "" : londonTime(row.kickoff)}
+      </td>
+      <td className="w-full max-w-0 px-1">{row.opponent}</td>
+      <td className="px-1 text-center text-2xs font-bold text-muted">{row.venue}</td>
+      <td className={`${DESK_ONLY} whitespace-nowrap px-1.5 text-2xs text-faint`}>{row.competition}</td>
+      <td className={`${FIGURE} w-14 whitespace-nowrap`}>{row.score}</td>
+    </tr>
   );
 }
 
