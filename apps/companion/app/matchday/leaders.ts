@@ -13,6 +13,8 @@ export interface TopRow extends Ranked {
   href: string | null;
   /** Who holds him; null for a man nobody holds, as Live prints an owner only where there is one. */
   held: Held | null;
+  /** The footballer behind the code, for his name in full and his fitness. */
+  footballer: FootballPlayer | undefined;
 }
 
 /** One list: its key in the address, the word on its tab, the list it is drawn as, and its men. */
@@ -123,6 +125,7 @@ export function gameweekLeaders(opts: {
         club: player === undefined ? undefined : clubs.get(player.clubId),
         href: listed === undefined ? null : opts.hrefOf(listed.fantraxId),
         held: listed?.held.ownerTeamId == null ? null : listed.held,
+        footballer: player,
       };
     });
 

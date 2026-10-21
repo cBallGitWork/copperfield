@@ -63,10 +63,12 @@ draws none.
      with one name ("Goals conceded" in goal and on the pitch) are titled by the slots their men stood in,
      "Goals conceded · GK" (`bandTitles`; review M42, 16 Oct 2026).
    - **A side** — `SideStats`, the match page's club board for one manager: his
-     colours on the position tiles, each man's club crest, Fantrax's points, then
-     what he did in each league category (counts, noughts included), in Fantrax's
-     own row order. A figure is green where Fantrax paid him for it and red where it
-     docked him (`gainOrLoss`), at his roster slot. No sub notes: the pitch has them.
+     colours on the position tiles, each man's club crest, I. Surname and CM's mark with
+     his doubt wash (`fitnessOf`, the bench included), Fantrax's points cyan under "FPts"
+     (the one cyan figure column, never lit), then what he did in each league category
+     (counts, noughts included), in Fantrax's own row order. A category figure is green
+     where Fantrax paid him for it and red where it docked him (`gainOrLoss`), at his roster
+     slot (21 Oct 2026, D-6/D-15: the FPts column was green/red and headed "PTS"). No sub notes: the pitch has them.
      Sortable (`?sort=`, `?dir=asc`); the bench below the eleven, dimmed and "not counted".
    - **Minutes played is on neither** (Craig, 1 Oct 2026), found by Fantrax's long
      code (`MINUTES`), so the bands no longer sum to the scoreline. Both read the

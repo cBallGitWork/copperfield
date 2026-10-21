@@ -1,6 +1,6 @@
 import Link from "@/app/components/shell/Link";
 import { crestForShortName, fixed, toFplClubCode, DASH } from "@epl/core";
-import type { FootballPlayer } from "@epl/core";
+import type { Availability } from "@epl/core";
 import type { PoolRow } from "./pool";
 import type { PoolColumn, RawStats } from "./columns";
 import { figureOf } from "./figure";
@@ -11,7 +11,7 @@ import { statusesOf, type PlayersQuery } from "./query";
 import type { BoardFigure } from "../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../components/league/LeadFace";
 import { Holder } from "./BoardRow";
-import StateBox from "../components/football/StateBox";
+import FitnessMark from "../components/football/FitnessMark";
 
 // One row of the pool board: the lead (crest, name, and who holds him) and the figures beside it, lit in ink (DESIGN §3).
 
@@ -22,15 +22,15 @@ export function Lead({
   query,
   teamNames,
   reader,
-  footballer,
+  mark,
   line = false,
 }: {
   row: PoolRow;
   query: PlayersQuery;
   teamNames: Map<string, string>;
   reader: string | null;
-  /** The footballer behind him, for his status tile; null where the bridge has not settled him. */
-  footballer: FootballPlayer | null;
+  /** His fitness mark from the row's one `fitnessOf`; null for a fit man and one the bridge has not settled. */
+  mark: Availability | null;
   line?: boolean;
 }) {
   const { player } = row.entry;
@@ -44,9 +44,9 @@ export function Lead({
   const holder = (className: string) => (
     <Holder held={row.entry} teamNames={teamNames} reader={reader} className={className} filtered={filtered} />
   );
-  const state = <StateBox player={footballer} />;
+  const state = <FitnessMark mark={mark} />;
 
-  // The holder after the name on a desk (Craig, 24 Sep 2026), after the position under a thumb (1 Oct 2026).
+  // The holder after the name and its mark on a desk (Craig, 24 Sep 2026), after the position under a thumb (1 Oct 2026).
   const face = (
     <LeadFace
       line={line}
@@ -54,7 +54,7 @@ export function Lead({
       name={player.displayName}
       short={player.rawName || player.displayName}
       positions={row.entry.eligiblePositions}
-      after={line ? state : <>{holder("max-lg:hidden")}{state}</>}
+      after={line ? state : <>{state}{holder("max-lg:hidden")}</>}
       under={holder(line ? "" : "lg:hidden")}
     />
   );

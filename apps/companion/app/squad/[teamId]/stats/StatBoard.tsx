@@ -10,14 +10,14 @@ import { SELECT } from "../../../components/shell/ButtonLink";
 import BoardKey from "../../../components/league/BoardKey";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
-import StateBox from "../../../components/football/StateBox";
-import { doubtRow } from "../../../components/football/doubtRow";
+import FitnessMark from "../../../components/football/FitnessMark";
+import { fitnessOf } from "../../../components/football/doubtRow";
 import { byFigure } from "../../../components/league/order";
 import { SIDE_SHARES, standoutCuts, unlessSorted } from "../../../components/league/standout";
 import { MINOR_LABEL, PANEL_FLUSH } from "@/app/desk";
 
-// One squad's season on the house board, as a club's stat board draws it: our position in the index tile, the crest
-// before the pinned name, a view picked above, a tap on a head to sort, and each column's standouts lit in ink.
+// One squad's season on the house board: our position in the index tile at every width, the crest before the pinned
+// name, a view picked above, a tap on a head to sort, and each column's standouts lit in ink.
 
 /** One width for every figure column, so the name takes the slack and a long head does not. */
 const FIGURE_WIDTH = "w-10 lg:w-14";
@@ -76,7 +76,12 @@ export default function StatBoard({
     setSort((current) =>
       current?.key === key ? { key, descending: !current.descending } : { key, descending: true },
     );
-  const wash = (line: PlayerStatLine) => doubtRow(footballers[line.fantraxId] ?? null);
+  // Each man's fitness asked once, for his wash and his mark.
+  const fitness = useMemo(
+    () => new Map(lines.map((line) => [line.fantraxId, fitnessOf(footballers[line.fantraxId] ?? null)])),
+    [lines, footballers],
+  );
+  const wash = (line: PlayerStatLine) => fitness.get(line.fantraxId)?.wash ?? "";
 
   return (
     <section className={PANEL_FLUSH}>
@@ -103,7 +108,7 @@ export default function StatBoard({
         keyOf={(line) => line.fantraxId}
         rowClass={wash}
         lead={{
-          tile: { positions: (line) => positionsFromList(line.position), deskOnly: true },
+          tile: { positions: (line) => positionsFromList(line.position) },
           name: {
             label: "Player",
             className: wash,
@@ -112,8 +117,7 @@ export default function StatBoard({
                 <LeadFace
                   crest={line.clubShort ? crestForShortName(toFplClubCode(line.clubShort)) : null}
                   name={names[line.fantraxId] ?? line.name}
-                  positions={positionsFromList(line.position)}
-                  after={<StateBox player={footballers[line.fantraxId] ?? null} />}
+                  after={<FitnessMark mark={fitness.get(line.fantraxId)?.mark ?? null} />}
                 />
               </Link>
             ),

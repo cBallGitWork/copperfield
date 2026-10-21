@@ -49,9 +49,8 @@ capture season-specific tradeoffs.
 
 ## Lists move to StateMark, with one fitness helper and one xMins ink — decided 21 Oct 2026
 
-Craig, 21 Oct 2026: *"Huge problem in this app where similar tables/rows etc are using different layouts"*. A player
-row marks fitness with `StateMark` (the squad row since 21 Oct 2026; the rest move to it); `StateBox` will stay only
-beside the Profile's fitness line (DESIGN §3). A row
+Craig, 21 Oct 2026: *"Huge problem in this app where similar tables/rows etc are using different layouts"*. Every list
+prints `StateMark`; `StateBox` survives only beside the Profile's fitness line (DESIGN §3). A row
 asks `fitnessOf(player)` (`components/football/doubtRow.ts`) once for `{ wash, mark }`, so it cannot draw one and
 forget the other, and inks xMins with `minutesInk` (`components/football/xminsInk.ts`: red under
 `START_DOUBT_MINUTES`, else cyan) rather than a cyan of its own. `StateMark` paints each shape's `fill`/`stroke` from
