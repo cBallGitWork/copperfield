@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { PlayerStatLine } from "@epl/core";
-import { VIEWS, measuresFor, readingOf } from "./statViews";
+import { VIEWS, measureInk, measuresFor, readingOf } from "./statViews";
 
 const line = (stats: Record<string, number | null>): PlayerStatLine => ({
   fantraxId: "x",
@@ -99,12 +99,33 @@ describe("the squad board's DefCon points", () => {
     expect(measuresFor("defensive", realKeys, statsKeys, true).map((measure) => measure.head)).not.toContain("DCP");
   });
 
-  it("reads our figure, inks it as ours, keys it in plain words, and never heads it FPts", () => {
+  it("reads our figure, keys it in plain words, and never heads it FPts", () => {
     const ours = measuresFor("scoring", realKeys, statsKeys, true).find((measure) => measure.key === "DCP");
-    expect(ours?.derived).toBe(true);
     expect(ours?.head).not.toBe("FPts");
     expect(ours?.label).toBe("DefCon points, worked out per match");
     expect(readingOf(realGross, { defcon: 3 }, "DCP")).toBe(3);
     expect(readingOf(realGross, {}, "DCP")).toBeNull();
+  });
+});
+
+describe("measureInk", () => {
+  // Craig, 21 Oct 2026: cyan on a board is the league's points alone, so DCP takes the board's lights like any figure.
+  const dcp = measuresFor("scoring", realKeys, statsKeys, true).find((measure) => measure.key === "DCP")!;
+  const cut = { good: 4, best: 8 };
+
+  it("lights DCP's standouts and leaves the rest in ink, never cyan", () => {
+    expect(measureInk(dcp, 9, cut)).toBe("cm-lit-best font-bold text-peak");
+    expect(measureInk(dcp, 5, cut)).toBe("cm-lit-good font-bold text-accent");
+    expect(measureInk(dcp, 2, cut)).toBe("text-ink");
+    expect(measureInk(dcp, 0, cut)).toBe("text-ink");
+  });
+
+  it("dashes a man with no reading in the faint ink", () => {
+    expect(measureInk(dcp, null, cut)).toBe("text-faint");
+  });
+
+  it("lights a column whose top is the bad end in red", () => {
+    const ga = measuresFor("scoring", realKeys, statsKeys, true).find((measure) => measure.key === "GA")!;
+    expect(measureInk(ga, 9, cut)).toBe("cm-lit-bad font-bold text-bad");
   });
 });

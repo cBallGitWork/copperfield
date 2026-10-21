@@ -3,7 +3,7 @@
 import Link from "@/app/components/shell/Link";
 import { useMemo, useState } from "react";
 import { type FootballPlayer, type PlayerStatLine, DASH, crestForShortName, toFplClubCode } from "@epl/core";
-import { type Beside, type Counts, VIEWS, type ViewKey, measuresFor, readingOf } from "./statViews";
+import { type Beside, type Counts, VIEWS, type ViewKey, measureInk, measuresFor, readingOf } from "./statViews";
 import { playerHref } from "../../../players/routes";
 import { positionsFromList } from "../../../positions";
 import { SELECT } from "../../../components/shell/ButtonLink";
@@ -13,7 +13,7 @@ import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import StateBox from "../../../components/football/StateBox";
 import { doubtRow } from "../../../components/football/doubtRow";
 import { byFigure } from "../../../components/league/order";
-import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted } from "../../../components/league/standout";
+import { SIDE_SHARES, standoutCuts, unlessSorted } from "../../../components/league/standout";
 import { MINOR_LABEL, PANEL_FLUSH } from "@/app/desk";
 
 // One squad's season on the house board, as a club's stat board draws it: our position in the index tile, the crest
@@ -127,14 +127,8 @@ export default function StatBoard({
           width: FIGURE_WIDTH,
           cell: (line: PlayerStatLine) => {
             const value = measure.read(line, besideOf(line, statsLeague, defcon));
-            // A dash where he has no reading; a played nought is a figure like any other, in ink, ours in cyan.
-            const ink =
-              value === null
-                ? "text-faint"
-                : measure.derived
-                  ? "text-info"
-                  : standoutInk(value, cuts.get(measure.key), measure.worse ? "low" : "high") || "text-ink";
-            return { value: value === null ? DASH : value, className: ink };
+            // A dash where he has no reading; a played nought is a figure like any other, in ink.
+            return { value: value === null ? DASH : value, className: measureInk(measure, value, cuts.get(measure.key)) };
           },
         }))}
       />
