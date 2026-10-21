@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { StandingsRow } from "@epl/core";
-import { placings } from "./placings";
+import { cutRules, placings } from "./placings";
 
 const row = (teamId: string, rank: number): StandingsRow => ({
   teamId,
@@ -26,5 +26,17 @@ describe("placings", () => {
 
   it("places nobody when the table could not be read", () => {
     expect(placings({ unavailable: "getStandings → 503" }).size).toBe(0);
+  });
+});
+
+// DESIGN §9: the playoff cut stays red; a yellow rule is the accent's second claim on the table the reader's row is on.
+describe("cutRules", () => {
+  it("rules each of a team's cuts dashed in the league's red, never the accent", () => {
+    const rules = cutRules([{ label: "Playoffs" }, { label: "Plate" }]);
+    expect(rules.map((rule) => rule.label)).toEqual(["Playoffs", "Plate"]);
+    for (const rule of rules) {
+      expect(rule.tone).toBe("border-league/80");
+      expect(rule.tone).not.toContain("accent");
+    }
   });
 });

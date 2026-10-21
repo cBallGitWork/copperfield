@@ -1,5 +1,6 @@
 import { defaultDescending, isSortKey, linesAfter, printedPlaces, seasonForm, sortRows, tableLines } from "@epl/core";
 import { COLUMNS, leagueLine, leagueSortHref } from "./Columns";
+import { cutRules } from "./placings";
 import StandingsTable from "../components/league/StandingsTable";
 import { getSeasonResults } from "./schedule/schedule";
 import { leagueTable } from "../standings";
@@ -72,11 +73,8 @@ export default async function StandingsPage({ searchParams }: { searchParams: Se
         sortHref={leagueSortHref(sort, descending)}
         lines={sortRows(rows, sort, descending).map((row) => ({
           ...leagueLine(row, { places, mine, form, calendar }),
-          // Dashed yellow rules after `cm9900/24.jpg` (Craig, 31 Aug), only in Fantrax's order.
-          cuts:
-            sort === "rank" && !descending
-              ? (lines.get(row.teamId) ?? []).map((line) => ({ label: line.label, tone: "border-accent/80" }))
-              : [],
+          // Dashed rules after `cm9900/24.jpg` (Craig, 31 Aug), red not CM's yellow (DESIGN §9), only in Fantrax's order.
+          cuts: sort === "rank" && !descending ? cutRules(lines.get(row.teamId) ?? []) : [],
         }))}
       />
     </LeagueShell>

@@ -1,13 +1,12 @@
 import Link from "@/app/components/shell/Link";
-import type { CSSProperties } from "react";
-import { type RosteredTeam, headToHeads, inPairingOrder, inkOn, isResolved, printedPlaces } from "@epl/core";
+import { type RosteredTeam, headToHeads, inPairingOrder, isResolved } from "@epl/core";
 import Nothing from "../components/shell/Nothing";
 import PageHeader from "../components/shell/PageHeader";
 import SignIn from "./SignIn";
 import { forgetTeam } from "./actions";
 import { getLeagueSquads } from "../squads";
 import { leagueTable } from "../standings";
-import { teamColours } from "../teamColours";
+import { placings } from "../league/placings";
 import { planningRound } from "../round";
 import { myTeamId, signedIn } from "../session";
 import { yoursEdge } from "../mine";
@@ -70,7 +69,7 @@ export default async function SquadIndex({
   };
 
   // Each team's place as the table prints it; no table, no places, and the blocks stand empty.
-  const places = printedPlaces("unavailable" in table ? [] : table);
+  const places = placings(table);
 
   // The league's own cap from the info already fetched; none named, no size is printed.
   const cap = squads.info?.roster.maxTotalPlayers ?? null;
@@ -82,7 +81,7 @@ export default async function SquadIndex({
       {/* The sign-in follows the code, not the team on screen; signing out is offered only to a real code. */}
       {holder ? null : <SignIn />}
 
-      <ul className={`${PANEL_FLUSH} cm-rows cm-index-scoped`}>
+      <ul className={`${PANEL_FLUSH} cm-rows`}>
         {yours ? (
           <li>
             <Squad team={yours} place={places.get(yours.teamId)} opponent={opponentName(yours.teamId)} cap={cap} lead />
@@ -132,8 +131,8 @@ function Squad({
       href={lead ? MY_TEAM : teamHref(team.teamId)}
       className={`cm-row flex min-h-9 items-center gap-3 pr-3 hover:bg-raised ${lead ? "bg-raised" : "bg-surface"}`}
     >
-      {/* The place in CM's block, in the manager's colours; the edge rides the block, as the table's does. */}
-      <span className={`${INDEX_BLOCK} numeric w-11 px-1 lg:w-14 ${yoursEdge(lead)}`} style={managerIndex(team.teamId)}>
+      {/* The place in CM's blue block, as every place column; the edge rides the block, as the table's does. */}
+      <span className={`${INDEX_BLOCK} numeric w-8 px-0 lg:w-14 ${yoursEdge(lead)}`}>
         {place ?? ""}
       </span>
       <span className="flex min-w-0 flex-1 flex-col lg:flex-row lg:items-baseline lg:gap-2">
@@ -160,8 +159,3 @@ function Squad({
   );
 }
 
-/** CM's index block in the manager's colours, with the ink that reads on them (`cm-index-scoped` keeps the contrast). */
-function managerIndex(teamId: string): CSSProperties {
-  const colours = teamColours(teamId);
-  return { "--cm-index": colours.primary, "--cm-index-ink": inkOn(colours) } as CSSProperties;
-}

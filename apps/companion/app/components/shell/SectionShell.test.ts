@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { type ComponentProps, createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import { PANEL, PANEL_FLUSH } from "../../desk";
@@ -8,7 +8,7 @@ vi.mock("@/app/desk", () => import("../../desk"));
 import SectionShell from "./SectionShell";
 
 const panel = (flush?: boolean) => {
-  const page = renderToStaticMarkup(createElement(SectionShell, { header: null, nav: null, rows: 10, flush, children: "x" }));
+  const page = renderToStaticMarkup(createElement(SectionShell, { header: null, nav: null, rows: 10, flush } as ComponentProps<typeof SectionShell>, "x"));
   return page.slice(page.indexOf("<section"), page.indexOf(">", page.indexOf("<section")));
 };
 

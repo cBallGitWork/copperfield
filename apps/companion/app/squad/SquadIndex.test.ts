@@ -31,7 +31,6 @@ vi.mock("./SignIn", () => ({ default: () => createElement("form", { id: "sign-in
 vi.mock("./actions", () => ({ forgetTeam: "/forget" }));
 vi.mock("../teamNames", () => ({ shortName: (_: string, name: string) => name }));
 vi.mock("../standings", () => ({ leagueTable: async () => state.table }));
-vi.mock("../teamColours", () => ({ teamColours: (teamId: string) => ({ primary: `#${teamId}0000`, secondary: "#ffffff" }) }));
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({}) }));
@@ -114,10 +113,11 @@ describe("each row's index block", () => {
     expect(block(page, "Short FC")).toMatch(/>=3rd$/);
   });
 
-  it("wears the manager's own colour, scoped so the block keeps its contrast", async () => {
+  it("stays on the index blue at the table's width, as every place column does", async () => {
     const page = await html();
-    expect(block(page, "Glengarry")).toContain("--cm-index:#t20000");
-    expect(list(page)).toContain("cm-index-scoped");
+    expect(block(page, "Glengarry")).not.toContain("--cm-index");
+    expect(list(page)).not.toContain("cm-index-scoped");
+    expect(block(page, "Glengarry")).toMatch(/\bw-8 px-0 lg:w-14\b/);
   });
 
   it("stays, empty, when there is no table, so the names keep their column", async () => {
