@@ -8,13 +8,12 @@ import { doubtRow } from "../../../../components/football/doubtRow";
 import { SET_PIECES, intelSetPieces } from "../../../../intel";
 import { leagueOpinions } from "../../../leagueOpinions";
 import { readerTeamId } from "../../../../squads";
-import { Holder } from "../../../../players/BoardRow";
+import TakerName from "./TakerName";
 import { teamNamesOf } from "./holders";
 import { poolHref } from "../../../poolHref";
-import NameLink from "../NameLink";
 import ClubShell from "../Shell";
 import { clubOr404 } from "../club";
-import { INDEX_BLOCK, INDEX_WIDTH, PANEL, ROW_NAME } from "@/app/desk";
+import { INDEX_BLOCK, INDEX_WIDTH, PANEL } from "@/app/desk";
 import { clubTitle } from "../title";
 
 // Who steps up: corners, free kicks and penalties, in the order they take them.
@@ -55,7 +54,6 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                   const player = byCode.get(taker.code);
                   if (player === undefined) return null;
                   const out = availabilityOf(player).out;
-                  const held = league.get(player.code);
                   return (
                     <li key={taker.code} className={`flex min-h-9 items-center gap-2 pr-2 ${out ? "cm-out" : ""} ${doubtRow(player)}`}>
                       {/* The rank in CM's index block, in the club's colour (`ClubShell` scopes it). */}
@@ -66,17 +64,9 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                         player={{ code: player.code, name: player.name }}
                         colours={colours}
                       />
-                      <NameLink
-                        href={poolHref(league, player.code)}
-                        // The row's floor restated on the link, which `tapfit` measures; `self-stretch` lands one short.
-                        className={`flex min-h-9 min-w-0 flex-1 items-center truncate text-ink ${ROW_NAME}`}
-                      >
+                      <TakerName href={poolHref(league, player.code)} held={league.get(player.code)} teamNames={teamNames} reader={reader}>
                         <PlayerName name={player.fullName} short={fullFootballerName(player)} />
-                      </NameLink>
-                      {/* Who holds him, bracketed as the boards print it: (FA)/(WW) free, a team's short name, (Yours). */}
-                      {held === undefined ? null : (
-                        <Holder held={held} teamNames={teamNames} reader={reader} className="max-w-28 shrink-0" />
-                      )}
+                      </TakerName>
                       <StateBox player={player} />
                     </li>
                   );
