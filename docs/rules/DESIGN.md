@@ -43,9 +43,8 @@ the app.
 44px taps or CM's proportions. Two more are used, each in one place: `xl` on
 Data's boards, where Adv Stats' plates and Per 90 join the row and the Filter tally changes with them (five
 sites, counted 16 Oct 2026), and `2xl`, where `--page-frame` widens from 72rem to
-96rem. Under `lg`, `390px` is used in one place: Prem Fixtures signed in, where under 390 the "N yours"
-count drops beneath its match and the owner edge hangs in the gutter, because beside the row it took the club
-codes to 0px at 320 and clipped them at 360 and 375 (measured 21 Oct 2026). A new breakpoint is recorded here
+96rem. Under `lg`, `390px` is used in one place: Prem Fixtures signed in, where the owner edge hangs in the
+gutter below 390 (`max-[389px]:-ml-1`, `prem/Match.tsx`). A new breakpoint is recorded here
 in the commit that adds it.
 
 **The count is deliberately not written down here.** This paragraph said "six"

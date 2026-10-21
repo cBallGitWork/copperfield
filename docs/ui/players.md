@@ -46,8 +46,8 @@ Where a section below disagrees with this one, this one is current.
   is everyone, the only way the address bar can say it now. A typed search ignores the resting choice and looks
   through everyone, so "who holds Saka" finds him, as Fantrax's does; a status the reader pressed still applies.
   Reset returns to the resting board; the way off an emptied board (*Clear filters*, *Search all players*) shows
-  everyone. Both boards rest the same way, so a query means the same on either. The Clubs and Planner rows, and
-  Compare with…, land on it too: the free men at that club, or to compare with.
+  everyone. Both boards rest the same way, so a query means the same on either. The Clubs and Planner rows land on it
+  too: the free men at that club.
 - **The row under a thumb is two fixed lines**: the search and Filter, then `GK DEF MID FWD` and `Free Owned`
   (4 × 44 + 50 + 57 and gaps: it fits 346 at 390 and 316 at 360; at 320 the status pair takes a third line). Nothing
   on it moves when pressed, so the 16 Oct "row jumps 50px" is gone. **On a desk it is one row**: search, positions,
@@ -65,7 +65,8 @@ Where a section below disagrees with this one, this one is current.
   club, a lone half of the bin, and on Adv Stats below `xl`, Per 90 (its plate too until 19 Oct 2026). Per 90
   stands down on a plate where no drawn column divides by minutes, as Attributes unless a rated column is sorted
   (`ratedOn` in `columns.ts`, 20 Oct 2026): there `?per=90` neither lights the toggle nor counts on the badge.
-- **Clubs** is the label of `/players/teams` (teams.md); its key and route stay `teams`.
+- **Clubs** is the label of `/players/teams` (teams.md); its key and route stay `teams`. Its goals conceded are
+  headed `GA`, as on Adv Stats (21 Oct 2026); its `Tk` and `BC` are different counts from Adv Stats' `Tkl` and `BCM`.
 
 ### Adv Stats: Attack, Creating, Defence and a key (19 Oct 2026) — current
 
@@ -117,7 +118,9 @@ every figure Players does not draw.
   plate's order, as one Players does not draw falls to FPts.
 - ~~**Its plates are the ones its columns fill** (`groups.platesFor`): `All`, then each group with a column in it, less
   a lone group of counts that would only repeat `All`. Today that is `All · Attributes`.~~ **Per 90 lives here only.**
-  From `xl` it sits on the row; below it, in the sheet.
+  From `xl` it sits on the row; below it, in the sheet. **Under Per 90 each divided head carries `/90`** (`xG/90`),
+  in the Key too (`headedFor` in `columns.ts`, 21 Oct 2026), since 0.82 could be a season's total; `Min`, `GP`,
+  `FP/G` and the ratings never divide and stay bare.
 - The quiet "Season to …" line follows the board here, under a plate drawing the daily file's counts.
 
 ## The board as redesigned, 24 Sep 2026
@@ -476,7 +479,8 @@ without it; `?rows=` below thirty or not a whole number is the first thirty.
 
 **A picker.** With `?compare=` naming a first man the board's rows lead to the
 comparison instead of to a player, and a banner says so: a table whose rows have
-quietly changed destination is a screen that lies about what a tap does.
+quietly changed destination is a screen that lies about what a tap does. Since 21 Oct 2026 nothing links to it: the
+player page's Compare with… button went when Compare became his tab (player.md), so it is reached by address alone.
 
 ## Known gaps
 

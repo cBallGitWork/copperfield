@@ -135,7 +135,8 @@ the `leagueCache` entry the match page shares), and a reader without one costs n
 
 One read, one round on screen, opening on the latest under way (`openGameweek`), or on the next once every
 match of it is finished (Craig, 16 Oct 2026, as Draft's Fixtures), with arrows either side of its head to step a
-round (`beside`); `?gw=` names any. A round in play shows its scores as they stand, as Live does.
+round (`beside`); `?gw=` names any. The gameweek head has nothing beside its title, so the title centres on its plate
+(`shell/StepHead`, 21 Oct 2026); the schedule's, with its deadline beside it, reads from the left. A round in play shows its scores as they stand, as Live does.
 
 Since 20 Oct 2026 this is the one gameweek screen: `/gw/[n]` redirects here (`?gw=n`, not permanently) and its
 `GameweekView` is gone, because the same round was drawn twice, two ways. The old reason to keep `MatchList` off
@@ -146,13 +147,16 @@ is one `gameweekSnapshot` read, made only for a reader with a team once the roun
 kickoff between them opens the match (`ScoreRow`'s `scoreHref`, each a 44px link under a thumb); the row was one link
 to the match before. The place blocks at either end stay plain.
 
-**A match with the reader's men in it says how many** (16 Oct 2026): `3 yours` in the accent at the row's end, off
-today's squads, and the row takes the accent edge (`yoursEdge`; a clear one on the rest, so every row keeps the
-column). The count is a button beside the row's link, never inside it, 44px under a thumb; it opens
-`components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
+**A match with the reader's men in it says how many, by side** (16 Oct 2026; under the names since 21 Oct): `2 yours`
+in the accent under each club's name that has his men, beside it from `lg` (`ScoreRow`'s `under`, `prem/Yours.tsx`),
+off today's squads, and the row takes the accent edge (`yoursEdge`; a clear one on the rest, so every name keeps its
+column). There is no count column (Craig, 21 Oct 2026). Each count is a toggle beside the name's link, never inside
+it, and both open the same list. **On a phone the name's link and its count are 24px each, so a row with his men
+stands 48px, not 88** (Craig, 21 Oct 2026: *"waaaaay too tall"*), an exception to the 44 floor recorded in
+PRODUCT.md. The list is `components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
 too, then every scorer and assister tagged with the squad holding him (his own in the accent, a rival's faint, an
 unheld man untagged), or *Scorers not available right now.* when FPL's lines are missing. The score still opens
-the match. A row with none of his men holds the column empty; with no team, no column and no edge. The table carries
+the match. A row with none of his men draws no count; with no team, no edge either. The table carries
 no owner mark (below).
 
 A fixture FPL has not assigned to a gameweek is left out rather than filed under
