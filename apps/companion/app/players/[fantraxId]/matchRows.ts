@@ -33,6 +33,9 @@ export function joinMatches(
   });
 }
 
+/** He was on the pitch: a match he was not is no reading, never a row of noughts. */
+export const played = (row: MatchRow): boolean => row.fpl.match.minutes > 0;
+
 const key = (opponent: string, home: boolean) => `${opponent}|${home ? "H" : "A"}`;
 
 /** What his season adds up to, FPL's account: CM's appearances columns (`cm9900/11.jpg`) and FPL's points. */
@@ -61,7 +64,7 @@ export function totalsOf(rows: readonly MatchRow[]): MatchTotals {
     goals: sum((r) => r.fpl.match.goals),
     assists: sum((r) => r.fpl.match.assists),
     fplPoints: sum((r) => r.fpl.match.fplPoints),
-    apps: rows.filter((row) => row.fpl.match.minutes > 0).length,
+    apps: rows.filter(played).length,
     // FPL's count while he was on, never the club's score: a match he sat out adds nothing.
     conceded: sum((r) => r.fpl.match.goalsConceded),
     cleanSheets: rows.filter((row) => row.fpl.match.cleanSheet).length,

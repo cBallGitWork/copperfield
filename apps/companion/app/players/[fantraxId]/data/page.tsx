@@ -108,7 +108,9 @@ async function Record({
       </>
     );
   }
-  const joined = joinMatches(log.rows, paid, clubById(snapshot), playerMarks(player.code, fixtures));
+  const byId = clubById(snapshot);
+  const joined = joinMatches(log.rows, paid, byId, playerMarks(player.code, fixtures));
+  const league = [...byId.values()];
   const clubs = intelCareers.get(player.code) ?? new Map<string, string>();
   const label = season ?? "This season";
   const options = [
@@ -129,9 +131,9 @@ async function Record({
         </div>
       </section>
       {value === ALL_SEASONS ? (
-        <PastSeasons seasons={past} current={thisSeason(joined, label)} clubs={clubs} />
+        <PastSeasons seasons={past} current={thisSeason(joined, label)} clubs={clubs} league={league} />
       ) : picked ? (
-        <PastSeasons seasons={[picked]} clubs={clubs} />
+        <PastSeasons seasons={[picked]} clubs={clubs} league={league} />
       ) : (
         <>
           {log.heldAt === null ? null : <HeldNote at={log.heldAt} />}
