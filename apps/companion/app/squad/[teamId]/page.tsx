@@ -8,7 +8,7 @@ import LineupPlanner from "../../components/league/LineupPlanner";
 import SquadBoard from "../../components/league/SquadBoard";
 import Sheet from "./Sheet";
 import QuerySelect from "../../components/shell/QuerySelect";
-import { OWN, teamHref } from "../routes";
+import { OWN, SQUAD, teamHref } from "../routes";
 import SquadIndex from "../SquadIndex";
 import { readerTeamId } from "../../squads";
 import TeamShell from "./Shell";
@@ -17,6 +17,8 @@ import { identify } from "./team";
 import { squadView } from "./squadView";
 import { commissionerSession } from "./saving";
 import { teamTitle } from "./title";
+import { teamOptions } from "./teamOptions";
+import { leagueTable } from "../../standings";
 import { autoSubbed } from "../../components/league/autoSubbed";
 
 // One manager's squad, laid out on a pitch. The screen the league opens on a
@@ -40,7 +42,9 @@ export default async function TeamPage({
   const [{ teamId: slug }, { gw }] = await Promise.all([params, searchParams]);
   // No team yet: the index and its sign-in in place, so the Team tab that led here stays lit.
   if (slug === OWN && (await readerTeamId()) === null) return <SquadIndex />;
-  const { team, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = await squadView(slug, gw);
+  // The table orders the team picker, read beside the squad rather than after it.
+  const [view, table] = await Promise.all([squadView(slug, gw), leagueTable()]);
+  const { team, league, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = view;
   // Fantrax's period selector, on every branch: an earlier week shows its scores, a later one its opponents.
   const picker =
     weeks === null ? null : (
@@ -53,38 +57,57 @@ export default async function TeamPage({
       />
     );
 
+  // Quick access to another squad at the same week; `/squad` turns the pick into his route.
+  const teams = (
+    <QuerySelect
+      name="team"
+      label="Team"
+      value={team.teamId}
+      options={teamOptions(league, "unavailable" in table ? null : table)}
+      action={SQUAD}
+      fill
+    >
+      {weeks === null ? null : <input type="hidden" name="gw" value={weeks.shown} />}
+    </QuerySelect>
+  );
+
   return (
     <TeamShell
       team={identify(team, slug)}
       current="squad"
     >
       {planning !== null ? (
-        <LineupPlanner
-          // A new week remounts it on that week's lineup: edits made for a week that has since locked do not carry over.
-          key={open?.period ?? "none"}
-          team={team}
-          // The whole squad's detail, flat and with points: the planner rearranges it in the browser.
-          details={team.players.map((rostered) =>
-            playerDetail(rostered, clubs, opposition, points, minutes),
-          )}
-          // His fifteen's eligibility, not the pool's: this crosses to the browser.
-          players={planning.players.filter((p) => squadIds.has(p.fantraxId))}
-          // The floors join the caps here: no JSON endpoint publishes a minimum, so `scripts/roster-limits.ts` reads
-          // the commissioner's setup page into a file.
-          limits={{ ...planning.roster, minActiveByPosition: rosterMinimums() }}
-          // The same week the planner shows, never Fantrax's open one.
-          fantraxUrl={`${FANTRAX_LEAGUE_PAGE}${open === null ? "" : `/${FANTRAX_ROSTER_PATH};period=${open.period}`}`}
-          pending={pending}
-          period={open?.period ?? 0}
-          benchRanks={benchRanks}
-          canSave={commissionerSession(team.teamId) !== null}
-          picker={picker}
-          locks={locks}
-        />
+        <Above row={teams}>
+          <LineupPlanner
+            // A new week remounts it on that week's lineup: edits made for a week that has since locked do not carry over.
+            key={open?.period ?? "none"}
+            team={team}
+            // The whole squad's detail, flat and with points: the planner rearranges it in the browser.
+            details={team.players.map((rostered) =>
+              playerDetail(rostered, clubs, opposition, points, minutes),
+            )}
+            // His fifteen's eligibility, not the pool's: this crosses to the browser.
+            players={planning.players.filter((p) => squadIds.has(p.fantraxId))}
+            // The floors join the caps here: no JSON endpoint publishes a minimum, so `scripts/roster-limits.ts` reads
+            // the commissioner's setup page into a file.
+            limits={{ ...planning.roster, minActiveByPosition: rosterMinimums() }}
+            // The same week the planner shows, never Fantrax's open one.
+            fantraxUrl={`${FANTRAX_LEAGUE_PAGE}${open === null ? "" : `/${FANTRAX_ROSTER_PATH};period=${open.period}`}`}
+            pending={pending}
+            period={open?.period ?? 0}
+            benchRanks={benchRanks}
+            canSave={commissionerSession(team.teamId) !== null}
+            picker={picker}
+            locks={locks}
+          />
+        </Above>
       ) : board !== null ? (
         /* The gate: before a rival's lineups lock, his fifteen as a list alone; a pitch would draw the shape it withholds. */
         <div className="flex flex-col gap-2">
-          {picker === null ? null : <div className="flex justify-end px-1">{picker}</div>}
+          <div className="flex gap-2 px-1 lg:justify-end">
+            {teams}
+            {picker}
+          </div>
           <SquadBoard
             lines={board.lines}
             because={board.because}
@@ -94,21 +117,33 @@ export default async function TeamPage({
         </div>
       ) : (
         /* An eleven nobody may change here: a rival's once locked, or your own in any week but the open one. */
-        <Sheet
-          {...afterSubs(lineupDetail(team, clubs, opposition, points, minutes, bench), autoSubs)}
-          breakdown={live?.breakdown ?? {}}
-          played={live?.played}
-          news={news}
-          pending={pending}
-          eligibility={eligibility}
-          picker={picker}
-          show={standing === "locked" ? "points" : "fixture"}
-          // Your own opens on the pitch, as the planner does, so changing week keeps the reading.
-          opens={mine ? "pitch" : "list"}
-          gameweek={weeks?.shown ?? null}
-        />
+        <Above row={teams}>
+          <Sheet
+            {...afterSubs(lineupDetail(team, clubs, opposition, points, minutes, bench), autoSubs)}
+            breakdown={live?.breakdown ?? {}}
+            played={live?.played}
+            news={news}
+            pending={pending}
+            eligibility={eligibility}
+            picker={picker}
+            show={standing === "locked" ? "points" : "fixture"}
+            // Your own opens on the pitch, as the planner does, so changing week keeps the reading.
+            opens={mine ? "pitch" : "list"}
+            gameweek={weeks?.shown ?? null}
+          />
+        </Above>
       )}
     </TeamShell>
+  );
+}
+
+/** The team picker on a line of its own, where the Pitch/List toggle already shares the week's row. */
+function Above({ row, children }: { row: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex px-1 lg:justify-end">{row}</div>
+      {children}
+    </div>
   );
 }
 
