@@ -316,15 +316,12 @@ Two things it must not do, both of which it did for an hour:
 - `GP` and `Min` are **never** rated: minutes per ninety minutes is ninety on
   every row.
 
-*A minutes floor shipped alongside it and was deleted the same day* (Craig:
-*"per 90 is just a toggle, remove the minutes thing"*). It was two chips, a
-derivation, a narrowing and a filter clause to answer "hide men who barely play"
-— a question a reader answers by looking at the `Min` column. It also spent an
-hour hardcoded as `[0, 90, 450]`, where the `450+` chip emptied the board to
-"0 of 672" because this is gameweek 3 and nobody can have more than 270 minutes;
-deriving the floors from the largest `Min` in the pool fixed that, and then the
-whole control went. `per90`'s own one-match floor is the guard that mattered,
-and it is arithmetic rather than a control.
+**Floors (Craig, 21 Oct 2026, reversing "remove the minutes thing").** Under 270 minutes a man's per-90 figures, and
+under 3 games his FP/G, still list, but they sort after everyone above the floor in either direction (still above a
+dash) and print in the faint ink. They never set a standout cut. The constants live in `players/floors.ts`. `per90`'s
+one-match dash stays below that. *A minutes floor had shipped with the toggle as chips and was deleted the same day*
+(Craig: *"per 90 is just a toggle, remove the minutes thing"*): it hid men rather than sinking them, and spent an hour
+hardcoded as `[0, 90, 450]`, where the `450+` chip emptied the board to "0 of 672" in gameweek 3.
 
 **Standout marks**, which are the part that is ours rather than Opta's. Their
 grid shades every numeric cell on a continuous brown-to-purple ramp; DESIGN §3

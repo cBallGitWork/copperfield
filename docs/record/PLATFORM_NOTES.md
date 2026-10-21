@@ -47,11 +47,37 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## Craig's calls from the player review — decided 21 Oct 2026
+
+Craig, 21 Oct 2026: *"ok use the yourcalls advice"* (#76–#80). Each reverses a recorded decision; `docs/ui/player.md`
+and `docs/ui/players.md` carry the detail.
+
+- **Profile order and the portrait** (#79, #80): born line, Fitness and transfer, Next up, then portrait and grid, so a
+  phone's first screen answers can he play, is he free, what is coming. The portrait is a 120px band showing the whole
+  cut-out, reversing 25 Sep's banner and 4 Sep's portrait first. The fitness note is row-sized and Next up one 28px
+  line per fixture.
+- **Transfer folded into the Profile** (#79, N-12): the tab is gone and `/transfer` redirects; reverses 25 Sep's "more
+  CM like" tab. The status line, Business and the way out moved; the draft row and "Dropped by" went.
+- **The app no longer reads `getDraftResults`** (#79): the draft row was its one screen. Capture and the paper still
+  read it. `pedigreeOf` (core:league/pedigree.ts) has no caller left.
+- **Match-log columns by role** (#77, N-14): a keeper never draws G, A, xG, xA, Def, KP, Sh, SoT or Off, an outfielder
+  never Sv or Prv; reverses 16 Oct's "a column stands down only when nothing measured it".
+- **Rankings folded into Every match** (#77, N-13): a Season foot of Total and Rank closes the match log, and Data opens
+  on it; reverses 11 Oct's Rankings table. The foot is the ranked figure, not the column sum, for FPts, Sh and KP, so
+  where the Fantrax window or the shot map differs from the rows it is the season figure his rank is of. FPts prints
+  in the reading cyan (#80, its own `cyan` flag; the Total still sums).
+- **Rate floors on the pool boards** (#76): under 270 minutes for per-90 and 3 GP for FP/G a man sinks and goes faint,
+  never hidden (`players/floors.ts`); reverses the minutes floor deleted on its first day.
+- **Attributes pass the star test** (#78): Anticipation is the best of three placings (recoveries; clearances, blocks
+  and interceptions; box touches); a nought set-piece share is `—` (counts keep "a block of noughts sits at 1");
+  keepers lose Influence; the scale is twenty equal slices. Position-group cohorts were measured and rejected:
+  Haaland still read Anticipation 2 / Work Rate 2 among forwards.
+
 ## Compare is a tab on the player page — decided 21 Oct 2026
 
 Craig, 21 Oct 2026: *"maybe we put compare in the player section too"*. This reverses "Compare is an action on the man
 on screen, not a tab" (the Profile's Compare with… button, which made the board the picker): his strip is now Profile ·
-Data · News · Transfer · Compare (`players/[fantraxId]/tabs.ts`), Compare opening beside his position group's nearest
+Data · News · Compare (`players/[fantraxId]/tabs.ts`; Transfer folded into the Profile the same day, above), Compare opening beside his position group's nearest
 man in season league points (`analysis/rival.ts`). The Profile's button is gone; Compare stays in the Data section's nav
 (`PoolNav`). The board's `?compare=` picker survives, reached by address alone.
 
@@ -3049,6 +3075,9 @@ guard that mattered survives as arithmetic rather than a control — `per90`
 refuses anybody under one match, which is what stops four minutes and a goal
 reading as 22.5 per 90.
 
+21 Oct 2026: rate floors on the pool boards, 270 min for per-90 and 3 GP for FP/G (`players/floors.ts`). This reverses
+the deleted minutes floor; a floored man sinks and goes faint, he is not hidden.
+
 **Two traps found while wiring it, both recorded in code:**
 
 - The per-90 toggle changes what a column PRINTS, so it has to change what the
@@ -5365,7 +5394,7 @@ against all outfielders who actually play"*. Counted first (Fernandes Work Rate 
 Finishing 16), and the cohort alone moved neither: the measures were the fault.
 
 - **Cohort by role:** keepers against keepers, outfielders against every outfielder who
-  plays; a third of the season's most minutes counts as playing. Rankings and the fixture
+  plays; a third of the season's most minutes counts as playing. Every match's Rank (Rankings until 21 Oct) and the fixture
   run's places stay within the position group.
 - **Sample:** 25/26 when he played that third of it, else 26/27. Running is 26/27's only.
 - **Source:** the sister's `lines/{season}.json`, off its player log, which holds both
@@ -5375,6 +5404,9 @@ Finishing 16), and the cohort alone moved neither: the measures were the fault.
 - **What reads wrong gets changed, not kept:** Consistency, Teamwork, Handling and Technique
   each put a star at or near the bottom on its first measure; three were re-sourced and Technique dropped.
   `docs/ui/player.md` names each row's source.
+- **21 Oct 2026, the star test again (Craig's calls):** Anticipation re-sourced to the best of three placings; a nought
+  set-piece share is `—` (this reverses "a block of noughts sits at 1" for shares only; counts keep it); keepers lose
+  Influence; the scale is twenty equal slices. Position-group cohorts were measured and rejected. Tables: #78's body.
 
 ## The dummy league is the stats league, and its counts are a capture (26 Sep 2026)
 
