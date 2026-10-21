@@ -2,6 +2,7 @@ import { nameMatches } from "@epl/core";
 import type { PoolRow } from "./pool";
 import { POOL, lastValue } from "./routes";
 import { figureOf } from "./figure";
+import { underFloor } from "./floors";
 import { byFigure } from "../components/league/order";
 import { changeHref, chosen, statusOn, statusesShown } from "./boardChange";
 import type { PoolColumn } from "./columns";
@@ -125,9 +126,13 @@ export function shownRows(
   const { column: read, descending } = activeSort(query, view);
 
   return filtered.sort((left, right) => {
-    const a = figureOf(read, left, raw.get(left.entry.player.fantraxId), rated);
-    const b = figureOf(read, right, raw.get(right.entry.player.fantraxId), rated);
-    return byFigure(a, b, descending);
+    const ours = raw.get(left.entry.player.fantraxId);
+    const theirs = raw.get(right.entry.player.fantraxId);
+    const a = figureOf(read, left, ours, rated);
+    const b = figureOf(read, right, theirs, rated);
+    // A man under his floor sinks below everyone above it, but above a dash.
+    const sunk = a === null || b === null ? 0 : Number(underFloor(read, ours, rated)) - Number(underFloor(read, theirs, rated));
+    return sunk || byFigure(a, b, descending);
   });
 }
 
