@@ -452,7 +452,7 @@ all. Where the reference already has a mark, the reference wins; where a provide
 has one, as the lion is, the provider's wins.
 
 `StateMark` is the same exception for a man's fitness: CM draws the cross and the card itself, so the squad row
-prints them instead of the word and fills them in the doubt ramp rather than `currentColor` (Craig, 21 Oct 2026; §3).
+prints them instead of the word and fills each shape from the doubt ramp, never `currentColor` (Craig, 21 Oct 2026; §3).
 
 ## 3. The Desk's palette
 
@@ -515,8 +515,10 @@ injured/doubt to match row. Red card for suspension"*). `StateMark` is a solid s
 the card for a ban, a barred circle for a man who has gone — in his band's colour, so the mark and the wash say the
 same thing. Such a shape is a ground in this sense, never text: it carries no letters, and as a graphic it needs 3:1,
 which each step clears on its own wash (3.9 · 4.9 · 6.2). The word rides in its label and title. It is the Profile's
-fitness line's mark too, where `StateBox` still stands beside it. Every other list keeps `StateBox`, printing `Inj` ·
-`Sus` · `Unav` · `Dbt` beside the name, because the colour says how likely and only the box says why. The pitch carries the colour alone: the box rode after the surname
+fitness line's mark too. **Every list prints `StateMark`; `StateBox` survives only beside the Profile's fitness line**
+(Craig, 21 Oct 2026: one kind of row, one look), and a row asks `fitnessOf` once for its wash and its mark together.
+The mark keeps its band on a greyed reserve row: its shapes paint their own fill and stroke, which `.cm-out` never
+reaches. The pitch carries the colour alone: the box rode after the surname
 from 30 Sep 2026 and came off on 1 Oct (Craig: *"pitch view, remove the chip, we
 already have coloured tiles"*), so the plate and the card say how likely and a
 tap on the man says why. The row carries the band

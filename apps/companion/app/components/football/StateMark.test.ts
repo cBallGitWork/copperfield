@@ -16,27 +16,27 @@ const CROSS = '<path d="M6 2h4';
 describe("StateMark", () => {
   it("crosses a slight doubt in the ramp's yellow", () => {
     const html = mark("d", 75);
-    expect(html).toContain("color:var(--color-doubt-slight)");
+    expect(html).toContain("fill:var(--color-doubt-slight)");
     expect(html).toContain(CROSS);
     expect(html).toContain('aria-label="Doubtful"');
   });
 
   it("crosses a major doubt in the ramp's orange", () => {
     const html = mark("d", 25);
-    expect(html).toContain("color:var(--color-doubt-major)");
+    expect(html).toContain("fill:var(--color-doubt-major)");
     expect(html).toContain(CROSS);
   });
 
   it("crosses an injured man in the ramp's red", () => {
     const html = mark("i", 0);
-    expect(html).toContain("color:var(--color-doubt-out)");
+    expect(html).toContain("fill:var(--color-doubt-out)");
     expect(html).toContain(CROSS);
     expect(html).toContain('aria-label="Injured"');
   });
 
   it("gives a ban a red card, not a cross", () => {
     const html = mark("s", null, "Suspended until 25 Oct");
-    expect(html).toContain("color:var(--color-doubt-out)");
+    expect(html).toContain("fill:var(--color-doubt-out)");
     expect(html).toMatch(/<rect /);
     expect(html).not.toContain(CROSS);
   });
@@ -60,6 +60,13 @@ describe("StateMark", () => {
     );
     expect(html).toContain('aria-hidden="true"');
     expect(html).not.toContain("aria-label");
+  });
+
+  it("keeps its band on a reserve row: each shape fills from the band, never currentColor", () => {
+    for (const html of [mark("i", 0), mark("s", null, "Suspended"), mark("u", 0, "Left the club")]) {
+      expect(html).not.toContain("currentColor");
+      expect(html).toMatch(/(fill|stroke):var\(--color-doubt-out\)/);
+    }
   });
 
   it("draws nothing for a fit man", () => {

@@ -25,29 +25,29 @@ export default function StateMark({
   const { state, chance } = availability;
   const word = state === "fit" ? "" : WORD[state];
 
+  // Each shape paints from the band itself: `.cm-out *` greys `color`, so a `currentColor` fill would follow it (D-5).
+  const ink = DOUBT_FILL[band];
   const shape =
     state === "suspended" ? (
-      <rect x="4" y="2" width="8" height="12" rx="1" fill="currentColor" />
+      <rect x="4" y="2" width="8" height="12" rx="1" style={{ fill: ink }} />
     ) : state === "unavailable" ? (
       <>
-        <circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M4 12L12 4" stroke="currentColor" strokeWidth="2" />
+        <circle cx="8" cy="8" r="6" fill="none" strokeWidth="2" style={{ stroke: ink }} />
+        <path d="M4 12L12 4" strokeWidth="2" style={{ stroke: ink }} />
       </>
     ) : (
-      <path d="M6 2h4v4h4v4h-4v4H6v-4H2V6h4z" fill="currentColor" />
+      <path d="M6 2h4v4h4v4h-4v4H6v-4H2V6h4z" style={{ fill: ink }} />
     );
   // The word the mark stands in for, and the chance and news a box used to carry in its title.
   const detail = [word, chance === null ? null : `${chance}% chance of playing`, noteBesideChance(availability.news, chance) || null]
     .filter(Boolean)
     .join(" · ");
 
-  // Inline, so a greyed row's `.cm-out *` cannot take the band's colour off it.
   return (
     <svg
       {...(worded ? { "aria-hidden": true } : { role: "img", "aria-label": word })}
       viewBox="0 0 16 16"
       className="h-[1em] w-[1em] shrink-0"
-      style={{ color: DOUBT_FILL[band] }}
     >
       {worded ? null : <title>{detail}</title>}
       {shape}

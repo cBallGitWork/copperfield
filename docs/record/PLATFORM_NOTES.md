@@ -47,6 +47,16 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## Every list prints StateMark, from one fitness helper and one xMins ink — decided 21 Oct 2026
+
+Craig, 21 Oct 2026: *"Huge problem in this app where similar tables/rows etc are using different layouts"*. A player
+row marks fitness with `StateMark` alone; `StateBox` stays only beside the Profile's fitness line (DESIGN §3). A row
+asks `fitnessOf(player)` (`components/football/doubtRow.ts`) once for `{ wash, mark }`, so it cannot draw one and
+forget the other, and inks xMins with `minutesInk` (`components/football/xminsInk.ts`: red under
+`START_DOUBT_MINUTES`, else cyan) rather than a cyan of its own. `StateMark` paints each shape's `fill`/`stroke` from
+the band inline: `.cm-out *` greys the `<path>` itself, so an inline `color` on the `<svg>` never reached it and a benched man's cross went grey
+(measured on the GW7 rival sheet). The Prem, stats and set-piece lists move to these in the lanes that follow.
+
 ## Craig's calls from the player review — decided 21 Oct 2026
 
 Craig, 21 Oct 2026: *"ok use the yourcalls advice"* (#76–#80). Each reverses a recorded decision; `docs/ui/player.md`

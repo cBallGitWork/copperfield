@@ -1,4 +1,4 @@
-import { type DoubtBand, type FootballPlayer, availabilityOf, doubtBand } from "@epl/core";
+import { type Availability, type DoubtBand, type FootballPlayer, availabilityOf, doubtBand } from "@epl/core";
 
 /** The wash across a row for how likely its man is to miss (DESIGN §3's doubt ramp). Class names
  *  written out, because Tailwind and `desk.css` read them literally. */
@@ -18,5 +18,12 @@ export function doubtWash(band: DoubtBand | null): string {
 
 /** The row's wash, or "" for a fit man and one the bridge has not settled. */
 export function doubtRow(player: FootballPlayer | null): string {
-  return doubtWash(doubtBand(availabilityOf(player)));
+  return fitnessOf(player).wash;
+}
+
+/** A row's fitness, asked once: its wash and the availability `StateMark` draws, null for a fit or unsettled man. */
+export function fitnessOf(player: FootballPlayer | null): { wash: string; mark: Availability | null } {
+  const availability = availabilityOf(player);
+  const band = doubtBand(availability);
+  return { wash: doubtWash(band), mark: band === null ? null : availability };
 }
