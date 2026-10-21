@@ -11,6 +11,7 @@ const man = (code: number, season: Partial<SeasonTotals>): Tallied => ({
     season: { ...NO_SEASON, ...season },
   },
   shots: null,
+  keyPasses: null,
 });
 
 const place = (ranked: ReturnType<typeof rankings>, head: string) => ranked.find((r) => r.head === head);
@@ -47,6 +48,13 @@ describe("rankings", () => {
 
   it("has no place for a figure the map does not carry", () => {
     expect(place(rankings(cohort[0], cohort, OUTFIELD_RANKINGS), "Sh")).toMatchObject({ value: null, rank: null, of: 0 });
+  });
+
+  it("ranks his key passes on the league's count, the one Adv Stats prints", () => {
+    const mapped = (code: number, keyPasses: number | null): Tallied => ({ ...man(code, { minutes: 450 }), keyPasses });
+    const field = [mapped(1, 2), mapped(2, 1), mapped(3, null)];
+    expect(place(rankings(field[0], field, OUTFIELD_RANKINGS), "KP")).toMatchObject({ value: 2, rank: 1, of: 2 });
+    expect(place(rankings(field[2], field, OUTFIELD_RANKINGS), "KP")).toMatchObject({ value: null, rank: null });
   });
 
   it("ranks a keeper on goals prevented", () => {

@@ -22,6 +22,16 @@ describe("the season maps' labels", () => {
     expect(html).toContain("The 1 shot he set up");
     expect(html).not.toContain("1 shots");
   });
+
+  // The map draws the shots it can place; Rankings' KP is the league's count, which can run one higher.
+  it("captions the chances map by the shots it draws, never as the chances Rankings counts", () => {
+    const html = renderToStaticMarkup(
+      createElement(SeasonMaps, { maps: { shots: [], chances: [shot, shot], touches: [] }, club: undefined }),
+    );
+    expect(html).toContain("Shots set up");
+    expect(html).not.toContain("Chances created");
+    expect(html).toMatch(/Shots set up<\/span><span[^>]*>2</);
+  });
 });
 
 describe("a past season's maps", () => {
@@ -36,7 +46,7 @@ describe("a past season's maps", () => {
     expect(html).toContain("His 1 shot in 2023/24");
     expect(html).toContain("Where he touched the ball in 2023/24");
     expect(html).toContain(">7<");
-    expect(html).not.toContain("Chances created");
+    expect(html).not.toContain("Shots set up");
   });
 
   it("draws nothing for a season with no rows for him", () => {

@@ -1,21 +1,18 @@
 import type { Shot } from "./intel/shots";
 
-// A man's season on the sister repo's shot map: his Rankings' shots and chances, and CM's Preferred Foot.
+// A man's season on the sister repo's shot map: his Rankings' shots and CM's Preferred Foot.
 
 /** One man's season on the sister repo's shot map. */
 export interface ShotLine {
   struck: number;
-  /** Shots he set up: Understat's last touch before somebody else's shot. */
-  created: number;
   left: number;
   right: number;
 }
 
-/** His line on the shot map: his own shots, and how many he set up for others. */
-export function shotLine(own: readonly Shot[], created: number): ShotLine {
+/** His line on the shot map: his own shots and the feet he struck them with. */
+export function shotLine(own: readonly Shot[]): ShotLine {
   return {
     struck: own.length,
-    created,
     left: own.filter((shot) => shot.bodyPart === "left-foot").length,
     right: own.filter((shot) => shot.bodyPart === "right-foot").length,
   };
