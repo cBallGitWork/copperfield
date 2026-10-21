@@ -2,12 +2,12 @@
  "manifest": {
   "season": "26-27",
   "gameweek": null,
-  "exportedAt": "2026-10-13T11:12:24.466Z",
-  "rows": 105,
+  "exportedAt": "2026-10-21T11:38:02.161Z",
+  "rows": 106,
   "sources": [
    {
     "path": "data/match_logs/team_match_log/season=26-27/team_match_log.parquet",
-    "mtime": "2026-10-13T11:12:08.452Z"
+    "mtime": "2026-10-20T23:54:03.696Z"
    }
   ]
  },
@@ -44,7 +44,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Atlético Madrid",
-    "score": null
+    "score": {
+     "for": 0,
+     "against": 2
+    }
    },
    {
     "competition": "champions_league",
@@ -171,7 +174,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Lille",
-    "score": null
+    "score": {
+     "for": 3,
+     "against": 0
+    }
    },
    {
     "competition": "champions_league",
@@ -180,6 +186,15 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Bayern München",
+    "score": null
+   },
+   {
+    "competition": "efl_cup",
+    "kickoff": "2026-10-27T20:00:00Z",
+    "home": false,
+    "neutral": false,
+    "opponentCode": null,
+    "opponentName": "Fleetwood Town",
     "score": null
    },
    {
@@ -324,7 +339,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Fenerbahçe",
-    "score": null
+    "score": {
+     "for": 6,
+     "against": 0
+    }
    },
    {
     "competition": "champions_league",
@@ -491,7 +509,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "LASK",
-    "score": null
+    "score": {
+     "for": 6,
+     "against": 3
+    }
    },
    {
     "competition": "champions_league",
@@ -500,7 +521,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Villarreal",
-    "score": null
+    "score": {
+     "for": 4,
+     "against": 3
+    }
    },
    {
     "competition": "champions_league",
@@ -594,7 +618,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Lyon",
-    "score": null
+    "score": {
+     "for": 2,
+     "against": 3
+    }
    },
    {
     "competition": "europa_league",
@@ -695,7 +722,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "FK Kauno Žalgiris",
-    "score": null
+    "score": {
+     "for": 4,
+     "against": 0
+    }
    },
    {
     "competition": "conference_league",
@@ -813,7 +843,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Paris Saint-Germain",
-    "score": null
+    "score": {
+     "for": 2,
+     "against": 4
+    }
    },
    {
     "competition": "champions_league",
@@ -822,7 +855,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "AEK Athens",
-    "score": null
+    "score": {
+     "for": 5,
+     "against": 1
+    }
    },
    {
     "competition": "champions_league",
@@ -928,7 +964,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Torreense",
-    "score": null
+    "score": {
+     "for": 2,
+     "against": 1
+    }
    },
    {
     "competition": "europa_league",
@@ -1043,7 +1082,10 @@
     "neutral": false,
     "opponentCode": null,
     "opponentName": "Sturm Graz",
-    "score": null
+    "score": {
+     "for": 3,
+     "against": 0
+    }
    },
    {
     "competition": "europa_league",

@@ -2,16 +2,16 @@
  "manifest": {
   "season": "26-27",
   "gameweek": null,
-  "exportedAt": "2026-10-13T11:12:19.077498+00:00",
-  "rows": 60,
+  "exportedAt": "2026-10-21T11:37:57.460029+00:00",
+  "rows": 70,
   "sources": [
    {
     "path": "data/match_logs/player_match_log/season=26-27/player_match_log.parquet",
-    "mtime": "2026-10-13T11:12:08.457110+00:00"
+    "mtime": "2026-10-20T23:54:03.916614+00:00"
    },
    {
     "path": "data/match_logs/team_match_log/season=26-27/team_match_log.parquet",
-    "mtime": "2026-10-13T11:12:08.451795+00:00"
+    "mtime": "2026-10-20T23:54:03.695713+00:00"
    }
   ],
   "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/"
@@ -29619,7 +29619,7 @@
      "code": 616077,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 9,
      "onAt": 81,
      "offAt": null,
@@ -36263,7 +36263,7 @@
      "code": 427637,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "AM",
      "minutes": 19,
      "onAt": 71,
      "offAt": null,
@@ -36323,7 +36323,7 @@
      "code": 434752,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 4,
      "onAt": 86,
      "offAt": null,
@@ -36483,7 +36483,7 @@
      "code": 208706,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "DM",
      "minutes": 27,
      "onAt": 63,
      "offAt": null,
@@ -36493,7 +36493,7 @@
      "code": 224117,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 27,
      "onAt": 63,
      "offAt": null,
@@ -36523,7 +36523,7 @@
      "code": 448104,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 8,
      "onAt": 82,
      "offAt": null,
@@ -36623,7 +36623,7 @@
      "code": 195384,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 1,
      "onAt": 90,
      "offAt": null,
@@ -36673,7 +36673,7 @@
      "code": 174594,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 11,
      "onAt": 79,
      "offAt": null,
@@ -36783,7 +36783,7 @@
      "code": 445122,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 27,
      "onAt": 63,
      "offAt": null,
@@ -36823,7 +36823,7 @@
      "code": 153682,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 19,
      "onAt": 71,
      "offAt": null,
@@ -36963,7 +36963,7 @@
      "code": 88894,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 4,
      "onAt": 86,
      "offAt": null,
@@ -37033,7 +37033,7 @@
      "code": 653481,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 4,
      "onAt": 86,
      "offAt": null,
@@ -37183,7 +37183,7 @@
      "code": 472713,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "LB",
      "minutes": 45,
      "onAt": 46,
      "offAt": null,
@@ -37223,7 +37223,7 @@
      "code": 207283,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 23,
      "onAt": 67,
      "offAt": null,
@@ -37413,7 +37413,7 @@
      "code": 533463,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 23,
      "onAt": 67,
      "offAt": null,
@@ -37443,7 +37443,7 @@
      "code": 513545,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 38,
      "onAt": 52,
      "offAt": null,
@@ -37513,7 +37513,7 @@
      "code": 214590,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "LB",
      "minutes": 45,
      "onAt": 46,
      "offAt": null,
@@ -37533,7 +37533,7 @@
      "code": 75115,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 5,
      "onAt": 85,
      "offAt": null,
@@ -37643,7 +37643,7 @@
      "code": 624773,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 6,
      "onAt": 84,
      "offAt": null,
@@ -37753,7 +37753,7 @@
      "code": 155408,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 17,
      "onAt": 73,
      "offAt": null,
@@ -37833,7 +37833,7 @@
      "code": 496208,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 45,
      "onAt": 46,
      "offAt": null,
@@ -37853,7 +37853,7 @@
      "code": 482609,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "RB",
      "minutes": 2,
      "onAt": 88,
      "offAt": null,
@@ -37963,7 +37963,7 @@
      "code": 514356,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "DM",
      "minutes": 18,
      "onAt": 72,
      "offAt": null,
@@ -38043,7 +38043,7 @@
      "code": 620109,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "RB",
      "minutes": 18,
      "onAt": 72,
      "offAt": null,
@@ -38103,7 +38103,7 @@
      "code": 561245,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 18,
      "onAt": 72,
      "offAt": null,
@@ -38133,7 +38133,7 @@
      "code": 494928,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "RB",
      "minutes": 18,
      "onAt": 72,
      "offAt": null,
@@ -38183,7 +38183,7 @@
      "code": 575901,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "LB",
      "minutes": 6,
      "onAt": 84,
      "offAt": null,
@@ -38233,7 +38233,7 @@
      "code": 50175,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 7,
      "onAt": 83,
      "offAt": null,
@@ -38313,7 +38313,7 @@
      "code": 180974,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 31,
      "onAt": 59,
      "offAt": null,
@@ -38413,7 +38413,7 @@
      "code": 78916,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 1,
      "onAt": 90,
      "offAt": null,
@@ -38443,7 +38443,7 @@
      "code": 463726,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "RB",
      "minutes": 31,
      "onAt": 59,
      "offAt": null,
@@ -38633,7 +38633,7 @@
      "code": 566213,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 7,
      "onAt": 83,
      "offAt": null,
@@ -38703,7 +38703,7 @@
      "code": 428580,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 12,
      "onAt": 78,
      "offAt": null,
@@ -38713,7 +38713,7 @@
      "code": 538207,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 12,
      "onAt": 78,
      "offAt": null,
@@ -38783,7 +38783,7 @@
      "code": 501459,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 29,
      "onAt": 61,
      "offAt": null,
@@ -38833,7 +38833,7 @@
      "code": 218997,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 12,
      "onAt": 78,
      "offAt": null,
@@ -38903,7 +38903,7 @@
      "code": 226965,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 7,
      "onAt": 83,
      "offAt": null,
@@ -38913,7 +38913,7 @@
      "code": 611665,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "LW",
      "minutes": 31,
      "onAt": 59,
      "offAt": 90,
@@ -40493,7 +40493,7 @@
      "code": 147675,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 19,
      "onAt": 71,
      "offAt": null,
@@ -40603,7 +40603,7 @@
      "code": 443261,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "LW",
      "minutes": 27,
      "onAt": 63,
      "offAt": null,
@@ -40683,7 +40683,7 @@
      "code": 431639,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 19,
      "onAt": 71,
      "offAt": null,
@@ -40963,7 +40963,7 @@
      "code": 218543,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 27,
      "onAt": 63,
      "offAt": null,
@@ -41093,7 +41093,7 @@
      "code": 557012,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "AM",
      "minutes": 9,
      "onAt": 81,
      "offAt": null,
@@ -41263,7 +41263,7 @@
      "code": 637238,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "DM",
      "minutes": 10,
      "onAt": 80,
      "offAt": null,
@@ -41303,7 +41303,7 @@
      "code": 223541,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 2,
      "onAt": 88,
      "offAt": null,
@@ -41343,7 +41343,7 @@
      "code": 248875,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "LW",
      "minutes": 34,
      "onAt": 56,
      "offAt": null,
@@ -41423,7 +41423,7 @@
      "code": 216094,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "RB",
      "minutes": 15,
      "onAt": 75,
      "offAt": null,
@@ -41443,7 +41443,7 @@
      "code": 171287,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 2,
      "onAt": 88,
      "offAt": null,
@@ -41473,7 +41473,7 @@
      "code": 477424,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 24,
      "onAt": 66,
      "offAt": null,
@@ -41693,7 +41693,7 @@
      "code": 611922,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "LW",
      "minutes": 15,
      "onAt": 75,
      "offAt": null,
@@ -41713,7 +41713,7 @@
      "code": 591386,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 24,
      "onAt": 66,
      "offAt": null,
@@ -41963,7 +41963,7 @@
      "code": 202993,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "DM",
      "minutes": 11,
      "onAt": 66,
      "offAt": 78,
@@ -42793,7 +42793,7 @@
      "code": 699989,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "RW",
      "minutes": 17,
      "onAt": 73,
      "offAt": null,
@@ -42903,7 +42903,7 @@
      "code": 83299,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CB",
      "minutes": 30,
      "onAt": 60,
      "offAt": null,
@@ -42963,7 +42963,7 @@
      "code": 512123,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "LB",
      "minutes": 2,
      "onAt": 88,
      "offAt": null,
@@ -43073,7 +43073,7 @@
      "code": 451490,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "RB",
      "minutes": 22,
      "onAt": 68,
      "offAt": null,
@@ -43103,7 +43103,7 @@
      "code": 638411,
      "side": "home",
      "started": false,
-     "position": null,
+     "position": "LB",
      "minutes": 17,
      "onAt": 73,
      "offAt": null,
@@ -43223,7 +43223,7 @@
      "code": 463067,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "ST",
      "minutes": 2,
      "onAt": 88,
      "offAt": null,
@@ -43353,7 +43353,7 @@
      "code": 611695,
      "side": "away",
      "started": false,
-     "position": null,
+     "position": "CM",
      "minutes": 22,
      "onAt": 68,
      "offAt": null,
@@ -43368,6 +43368,7176 @@
      "onAt": null,
      "offAt": null,
      "rating": null
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 61,
+   "matchId": "26-27_premier_league_bournemouth_sunderland",
+   "halfTime": {
+    "home": 1,
+    "away": 0
+   },
+   "referee": null,
+   "home": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 65,
+     "shots": 29,
+     "shotsOnTarget": 6,
+     "shotsInsideBox": 21,
+     "corners": 5,
+     "fouls": 16,
+     "tackles": 10,
+     "interceptions": 4,
+     "clearances": 34,
+     "saves": 0,
+     "yellowCards": 3,
+     "redCards": 0,
+     "bigChances": 6,
+     "xg": 4.419
+    }
+   },
+   "away": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 35,
+     "shots": 3,
+     "shotsOnTarget": 0,
+     "shotsInsideBox": 2,
+     "corners": 3,
+     "fouls": 7,
+     "tackles": 11,
+     "interceptions": 7,
+     "clearances": 38,
+     "saves": 4,
+     "yellowCards": 2,
+     "redCards": 1,
+     "bigChances": 0,
+     "xg": 0.094
+    }
+   },
+   "players": [
+    {
+     "code": 200785,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 88,
+     "onAt": null,
+     "offAt": 89,
+     "rating": 7.6
+    },
+    {
+     "code": 535818,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 489888,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 11,
+     "onAt": 79,
+     "offAt": null,
+     "rating": 6.1
+    },
+    {
+     "code": 696104,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 25,
+     "onAt": 65,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 201895,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 58,
+     "onAt": null,
+     "offAt": 59,
+     "rating": 5.7
+    },
+    {
+     "code": 661313,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 536661,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 436893,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 223827,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 699989,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 441264,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 111317,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 158499,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 155408,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 61,
+     "onAt": null,
+     "offAt": 62,
+     "rating": 7.7
+    },
+    {
+     "code": 135720,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 16,
+     "onAt": null,
+     "offAt": 17,
+     "rating": 3
+    },
+    {
+     "code": 444102,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 78,
+     "onAt": null,
+     "offAt": 79,
+     "rating": 8.9
+    },
+    {
+     "code": 444172,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 230650,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 242882,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 1,
+     "onAt": 89,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 547027,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 31,
+     "onAt": 59,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 515046,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 549940,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 40383,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 496208,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 1,
+     "onAt": 89,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 463981,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 8.6
+    },
+    {
+     "code": 477547,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 487676,
+     "side": "away",
+     "started": true,
+     "position": "AMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 437505,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 523700,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 222683,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 28,
+     "onAt": 62,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 560262,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 484420,
+     "side": "away",
+     "started": true,
+     "position": "AML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 434399,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 105717,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 638411,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 93605,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 620487,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 200834,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 461199,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 167512,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 31,
+     "onAt": 59,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 232571,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 483067,
+     "side": "home",
+     "started": true,
+     "position": "CB",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.8
+    },
+    {
+     "code": 457569,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 554197,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 64,
+     "onAt": null,
+     "offAt": 65,
+     "rating": 6.6
+    },
+    {
+     "code": 561245,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 11,
+     "onAt": 79,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 498016,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 577669,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 494928,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 503139,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 519634,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 499604,
+     "side": "home",
+     "started": true,
+     "position": "MR",
+     "minutes": 88,
+     "onAt": null,
+     "offAt": 89,
+     "rating": 7.9
+    },
+    {
+     "code": 54469,
+     "side": "home",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 575901,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 549912,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 201658,
+     "side": "home",
+     "started": true,
+     "position": "ML",
+     "minutes": 78,
+     "onAt": null,
+     "offAt": 79,
+     "rating": 6.8
+    },
+    {
+     "code": 614574,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 494521,
+     "side": "home",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 604211,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 58,
+     "onAt": null,
+     "offAt": 59,
+     "rating": 6.4
+    },
+    {
+     "code": 168636,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 84450,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.4
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 62,
+   "matchId": "26-27_premier_league_brentford_liverpool",
+   "halfTime": {
+    "home": 1,
+    "away": 0
+   },
+   "referee": "John Brooks",
+   "home": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 40,
+     "shots": 10,
+     "shotsOnTarget": 2,
+     "shotsInsideBox": 10,
+     "corners": 3,
+     "fouls": 7,
+     "tackles": 16,
+     "interceptions": 15,
+     "clearances": 32,
+     "saves": 3,
+     "yellowCards": 2,
+     "redCards": 2,
+     "bigChances": 2,
+     "xg": 0.859
+    }
+   },
+   "away": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 60,
+     "shots": 21,
+     "shotsOnTarget": 5,
+     "shotsInsideBox": 10,
+     "corners": 9,
+     "fouls": 13,
+     "tackles": 14,
+     "interceptions": 9,
+     "clearances": 32,
+     "saves": 1,
+     "yellowCards": 3,
+     "redCards": 0,
+     "bigChances": 1,
+     "xg": 1.549
+    }
+   },
+   "players": [
+    {
+     "code": 191866,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 444180,
+     "side": "home",
+     "started": true,
+     "position": "AML",
+     "minutes": 76,
+     "onAt": null,
+     "offAt": 77,
+     "rating": 6.6
+    },
+    {
+     "code": 445087,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.4
+    },
+    {
+     "code": 535928,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 235448,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 482616,
+     "side": "away",
+     "started": true,
+     "position": "AML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 116535,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 492777,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 223541,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 432830,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 440089,
+     "side": "home",
+     "started": false,
+     "position": "AM",
+     "minutes": 13,
+     "onAt": 77,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 500058,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 183656,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 464353,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 613804,
+     "side": "home",
+     "started": false,
+     "position": "CB",
+     "minutes": 13,
+     "onAt": 77,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 510663,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 444884,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 612534,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 244858,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 216094,
+     "side": "away",
+     "started": false,
+     "position": "RB",
+     "minutes": 6,
+     "onAt": 46,
+     "offAt": 52,
+     "rating": null
+    },
+    {
+     "code": 593174,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 243298,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 171287,
+     "side": "away",
+     "started": false,
+     "position": "CB",
+     "minutes": 11,
+     "onAt": 79,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 441266,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 194010,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 472713,
+     "side": "home",
+     "started": false,
+     "position": "LB",
+     "minutes": 19,
+     "onAt": 71,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 219168,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 78,
+     "onAt": null,
+     "offAt": 79,
+     "rating": 7.7
+    },
+    {
+     "code": 606702,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 204580,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 6.5
+    },
+    {
+     "code": 432987,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 207283,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.8
+    },
+    {
+     "code": 570241,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 206915,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 607464,
+     "side": "home",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 200720,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6
+    },
+    {
+     "code": 544877,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 514514,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 11,
+     "onAt": 79,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 647681,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 249231,
+     "side": "home",
+     "started": true,
+     "position": "DL",
+     "minutes": 76,
+     "onAt": null,
+     "offAt": 77,
+     "rating": 7.5
+    },
+    {
+     "code": 519440,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 243016,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 8
+    },
+    {
+     "code": 449027,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 491501,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 543295,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 551499,
+     "side": "away",
+     "started": true,
+     "position": "AMR",
+     "minutes": 78,
+     "onAt": null,
+     "offAt": 79,
+     "rating": 7.7
+    },
+    {
+     "code": 502500,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 5.6
+    },
+    {
+     "code": 611922,
+     "side": "away",
+     "started": false,
+     "position": "LW",
+     "minutes": 38,
+     "onAt": 52,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 626464,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 591386,
+     "side": "away",
+     "started": false,
+     "position": "CM",
+     "minutes": 58,
+     "onAt": 32,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 533463,
+     "side": "home",
+     "started": true,
+     "position": "AMR",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.9
+    },
+    {
+     "code": 586268,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 489580,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 513545,
+     "side": "home",
+     "started": false,
+     "position": "CM",
+     "minutes": 45,
+     "onAt": 46,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 513418,
+     "side": "home",
+     "started": false,
+     "position": "LW",
+     "minutes": 45,
+     "onAt": 46,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 513086,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 424876,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 31,
+     "onAt": null,
+     "offAt": 32,
+     "rating": 6.9
+    },
+    {
+     "code": 214285,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 507433,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 444765,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 70,
+     "onAt": null,
+     "offAt": 71,
+     "rating": 6.3
+    },
+    {
+     "code": 97032,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 158983,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 75115,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 494595,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 155503,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 508395,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 52,
+     "onAt": null,
+     "offAt": 53,
+     "rating": 5.6
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 63,
+   "matchId": "26-27_premier_league_brighton_hove_albion_crystal_palace",
+   "halfTime": {
+    "home": 3,
+    "away": 0
+   },
+   "referee": "Robert Jones",
+   "home": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 57,
+     "shots": 17,
+     "shotsOnTarget": 9,
+     "shotsInsideBox": 8,
+     "corners": 8,
+     "fouls": 13,
+     "tackles": 12,
+     "interceptions": 10,
+     "clearances": 30,
+     "saves": 1,
+     "yellowCards": 2,
+     "redCards": 0,
+     "bigChances": 3,
+     "xg": 2.588
+    }
+   },
+   "away": {
+    "formation": "3-4-2-1",
+    "stats": {
+     "possession": 43,
+     "shots": 5,
+     "shotsOnTarget": 1,
+     "shotsInsideBox": 4,
+     "corners": 5,
+     "fouls": 11,
+     "tackles": 12,
+     "interceptions": 9,
+     "clearances": 31,
+     "saves": 5,
+     "yellowCards": 1,
+     "redCards": 0,
+     "bigChances": 1,
+     "xg": 0.628
+    }
+   },
+   "players": [
+    {
+     "code": 605972,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 52,
+     "onAt": null,
+     "offAt": 53,
+     "rating": null
+    },
+    {
+     "code": 592984,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 509416,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 80,
+     "onAt": null,
+     "offAt": 81,
+     "rating": 7.4
+    },
+    {
+     "code": 471551,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 121709,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 5.5
+    },
+    {
+     "code": 204120,
+     "side": "home",
+     "started": true,
+     "position": "DL",
+     "minutes": 80,
+     "onAt": null,
+     "offAt": 81,
+     "rating": 8.2
+    },
+    {
+     "code": 536916,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 651426,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 5.2
+    },
+    {
+     "code": 590014,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 172850,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 550090,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 519324,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 538007,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 465730,
+     "side": "home",
+     "started": true,
+     "position": "AML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 489706,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 220362,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 223434,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 438464,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 672492,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 83299,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 89,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 7.6
+    },
+    {
+     "code": 606921,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 487117,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 536694,
+     "side": "away",
+     "started": false,
+     "position": "LW",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 514254,
+     "side": "home",
+     "started": true,
+     "position": "AMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.7
+    },
+    {
+     "code": 559152,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 60307,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 70,
+     "onAt": null,
+     "offAt": 71,
+     "rating": 6.6
+    },
+    {
+     "code": 485337,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 512123,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 9,
+     "onAt": 81,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 172649,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 532529,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 19,
+     "onAt": 71,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 597320,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 108413,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 9,
+     "onAt": 81,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 661016,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 231416,
+     "side": "home",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 209400,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 80,
+     "onAt": null,
+     "offAt": 81,
+     "rating": 7.1
+    },
+    {
+     "code": 451340,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 570794,
+     "side": "away",
+     "started": true,
+     "position": "DMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 647850,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 70,
+     "onAt": null,
+     "offAt": 71,
+     "rating": 7.8
+    },
+    {
+     "code": 152551,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 37,
+     "onAt": 53,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 451490,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 231747,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 29,
+     "onAt": 61,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 169593,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 433154,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 45,
+     "onAt": 46,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 242313,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 592031,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 244723,
+     "side": "away",
+     "started": true,
+     "position": "DML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 205533,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 29,
+     "onAt": 61,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 219249,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 556637,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 612855,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 533646,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 488024,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 60,
+     "onAt": null,
+     "offAt": 61,
+     "rating": 6.6
+    },
+    {
+     "code": 450542,
+     "side": "away",
+     "started": false,
+     "position": "RW",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 515621,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 427623,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.1
+    },
+    {
+     "code": 463067,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 19,
+     "onAt": 71,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 232185,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 218364,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 49262,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 247412,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 60,
+     "onAt": null,
+     "offAt": 61,
+     "rating": 6.2
+    },
+    {
+     "code": 222694,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 454490,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 1,
+     "onAt": 90,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 450063,
+     "side": "away",
+     "started": true,
+     "position": "MC",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.2
+    },
+    {
+     "code": 223723,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 608181,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 489639,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 610799,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.9
+    },
+    {
+     "code": 549074,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 496221,
+     "side": "away",
+     "started": true,
+     "position": "MC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 467779,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 611695,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 9,
+     "onAt": 81,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 700308,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 64,
+   "matchId": "26-27_premier_league_everton_chelsea",
+   "halfTime": {
+    "home": 0,
+    "away": 0
+   },
+   "referee": "Paul Tierney",
+   "home": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 47,
+     "shots": 6,
+     "shotsOnTarget": 5,
+     "shotsInsideBox": 6,
+     "corners": 5,
+     "fouls": 8,
+     "tackles": 7,
+     "interceptions": 7,
+     "clearances": 23,
+     "saves": 4,
+     "yellowCards": 3,
+     "redCards": 0,
+     "bigChances": 2,
+     "xg": 0.571
+    }
+   },
+   "away": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 53,
+     "shots": 18,
+     "shotsOnTarget": 7,
+     "shotsInsideBox": 10,
+     "corners": 7,
+     "fouls": 15,
+     "tackles": 14,
+     "interceptions": 4,
+     "clearances": 29,
+     "saves": 5,
+     "yellowCards": 4,
+     "redCards": 0,
+     "bigChances": 3,
+     "xg": 1.613
+    }
+   },
+   "players": [
+    {
+     "code": 577016,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 502697,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 624773,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 622758,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 609873,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 84,
+     "onAt": null,
+     "offAt": 85,
+     "rating": 7
+    },
+    {
+     "code": 499300,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 242880,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 543158,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 586309,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 480455,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 463936,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 486672,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 6.9
+    },
+    {
+     "code": 180736,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 498444,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 215413,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 496661,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 503037,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 444463,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 232928,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 550615,
+     "side": "home",
+     "started": false,
+     "position": "LW",
+     "minutes": 35,
+     "onAt": 55,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 486385,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 629068,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 114283,
+     "side": "home",
+     "started": true,
+     "position": "AML",
+     "minutes": 84,
+     "onAt": null,
+     "offAt": 85,
+     "rating": 6.5
+    },
+    {
+     "code": 499309,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 482609,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 244860,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 551210,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 7.2
+    },
+    {
+     "code": 56979,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 225796,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 242898,
+     "side": "home",
+     "started": false,
+     "position": "RW",
+     "minutes": 5,
+     "onAt": 85,
+     "offAt": null,
+     "rating": 5.8
+    },
+    {
+     "code": 508479,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 475168,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 7
+    },
+    {
+     "code": 106611,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 138001,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 437499,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 514356,
+     "side": "away",
+     "started": false,
+     "position": "DM",
+     "minutes": 1,
+     "onAt": 90,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 247632,
+     "side": "away",
+     "started": true,
+     "position": "AMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 9.7
+    },
+    {
+     "code": 491007,
+     "side": "away",
+     "started": false,
+     "position": "DM",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 215059,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 154043,
+     "side": "home",
+     "started": true,
+     "position": "DR",
+     "minutes": 54,
+     "onAt": null,
+     "offAt": 55,
+     "rating": 6.2
+    },
+    {
+     "code": 98980,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 74,
+     "onAt": null,
+     "offAt": 75,
+     "rating": 7.5
+    },
+    {
+     "code": 567119,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 224967,
+     "side": "home",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 636846,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 128295,
+     "side": "home",
+     "started": false,
+     "position": "DM",
+     "minutes": 5,
+     "onAt": 85,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 512462,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 620109,
+     "side": "away",
+     "started": false,
+     "position": "RB",
+     "minutes": 1,
+     "onAt": 90,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 244851,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 243571,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 549939,
+     "side": "away",
+     "started": false,
+     "position": "GK",
+     "minutes": 15,
+     "onAt": 75,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 111234,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 593117,
+     "side": "away",
+     "started": false,
+     "position": "RW",
+     "minutes": 1,
+     "onAt": 90,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 244850,
+     "side": "away",
+     "started": true,
+     "position": "AML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 513466,
+     "side": "home",
+     "started": true,
+     "position": "AMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 460028,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 574458,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 17761,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 229600,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 50175,
+     "side": "away",
+     "started": false,
+     "position": "ST",
+     "minutes": 1,
+     "onAt": 90,
+     "offAt": null,
+     "rating": 6.4
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 65,
+   "matchId": "26-27_premier_league_fulham_hull_city",
+   "halfTime": {
+    "home": 1,
+    "away": 0
+   },
+   "referee": "Chris Kavanagh",
+   "home": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 76,
+     "shots": 18,
+     "shotsOnTarget": 6,
+     "shotsInsideBox": 13,
+     "corners": 10,
+     "fouls": 13,
+     "tackles": 16,
+     "interceptions": 6,
+     "clearances": 23,
+     "saves": 0,
+     "yellowCards": 2,
+     "redCards": 1,
+     "bigChances": 4,
+     "xg": 2.314
+    }
+   },
+   "away": {
+    "formation": "5-4-1",
+    "stats": {
+     "possession": 24,
+     "shots": 5,
+     "shotsOnTarget": 0,
+     "shotsInsideBox": 1,
+     "corners": 2,
+     "fouls": 11,
+     "tackles": 19,
+     "interceptions": 4,
+     "clearances": 33,
+     "saves": 5,
+     "yellowCards": 2,
+     "redCards": 0,
+     "bigChances": 0,
+     "xg": 0.131
+    }
+   },
+   "players": [
+    {
+     "code": 442299,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 146426,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 213292,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 174874,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 626751,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 232892,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.8
+    },
+    {
+     "code": 540324,
+     "side": "away",
+     "started": true,
+     "position": "MR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 207189,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 477555,
+     "side": "home",
+     "started": true,
+     "position": "AMR",
+     "minutes": 77,
+     "onAt": null,
+     "offAt": 78,
+     "rating": 7
+    },
+    {
+     "code": 534392,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 105666,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 76357,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 12,
+     "onAt": 78,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 494950,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 166477,
+     "side": "home",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 463210,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.7
+    },
+    {
+     "code": 490884,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 193278,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 101282,
+     "side": "away",
+     "started": true,
+     "position": "MC",
+     "minutes": 67,
+     "onAt": null,
+     "offAt": 68,
+     "rating": 6.5
+    },
+    {
+     "code": 246301,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 547686,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 500957,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 171270,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 433590,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 108416,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 551466,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 84,
+     "onAt": null,
+     "offAt": 85,
+     "rating": 6.2
+    },
+    {
+     "code": 462635,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 22,
+     "onAt": 68,
+     "offAt": null,
+     "rating": 6.1
+    },
+    {
+     "code": 232351,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 22,
+     "onAt": 68,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 469266,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 470294,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 597462,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.8
+    },
+    {
+     "code": 552946,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 501902,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 490094,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 45,
+     "onAt": 46,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 153133,
+     "side": "home",
+     "started": true,
+     "position": "AML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 9.8
+    },
+    {
+     "code": 449428,
+     "side": "away",
+     "started": false,
+     "position": "LB",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 490161,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 577725,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 77,
+     "onAt": null,
+     "offAt": 78,
+     "rating": 7.5
+    },
+    {
+     "code": 631786,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 551050,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 86873,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 80201,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 444307,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 465525,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 169432,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 661800,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 160817,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 505079,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 606930,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 232905,
+     "side": "away",
+     "started": false,
+     "position": "LW",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 500033,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 445028,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 15,
+     "onAt": 75,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 647839,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 244042,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 496181,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 67,
+     "onAt": null,
+     "offAt": 68,
+     "rating": null
+    },
+    {
+     "code": 208481,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 571779,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 5,
+     "onAt": 85,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 167825,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 153366,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 169528,
+     "side": "home",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 560552,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 184349,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 12,
+     "onAt": 78,
+     "offAt": 90,
+     "rating": 6.6
+    },
+    {
+     "code": 243413,
+     "side": "away",
+     "started": true,
+     "position": "MC",
+     "minutes": 74,
+     "onAt": null,
+     "offAt": 75,
+     "rating": 6.7
+    },
+    {
+     "code": 209289,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 608227,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 169359,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 167074,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 243951,
+     "side": "away",
+     "started": true,
+     "position": "ML",
+     "minutes": 67,
+     "onAt": null,
+     "offAt": 68,
+     "rating": 6.6
+    },
+    {
+     "code": 473284,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 5.8
+    },
+    {
+     "code": 631000,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 22,
+     "onAt": 68,
+     "offAt": 90,
+     "rating": 6.5
+    },
+    {
+     "code": 553783,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 616069,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 66,
+   "matchId": "26-27_premier_league_leeds_united_manchester_united",
+   "halfTime": {
+    "home": 0,
+    "away": 1
+   },
+   "referee": "Darren England",
+   "home": {
+    "formation": "3-4-2-1",
+    "stats": {
+     "possession": 61,
+     "shots": 12,
+     "shotsOnTarget": 5,
+     "shotsInsideBox": 10,
+     "corners": 2,
+     "fouls": 16,
+     "tackles": 11,
+     "interceptions": 2,
+     "clearances": 19,
+     "saves": 2,
+     "yellowCards": 2,
+     "redCards": 0,
+     "bigChances": 2,
+     "xg": 1.43
+    }
+   },
+   "away": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 39,
+     "shots": 13,
+     "shotsOnTarget": 3,
+     "shotsInsideBox": 6,
+     "corners": 3,
+     "fouls": 5,
+     "tackles": 20,
+     "interceptions": 14,
+     "clearances": 33,
+     "saves": 3,
+     "yellowCards": 2,
+     "redCards": 0,
+     "bigChances": 2,
+     "xg": 1.081
+    }
+   },
+   "players": [
+    {
+     "code": 427637,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 577974,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 199598,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 248056,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 80,
+     "onAt": null,
+     "offAt": 81,
+     "rating": 6.6
+    },
+    {
+     "code": 587982,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 535301,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 73,
+     "onAt": null,
+     "offAt": 74,
+     "rating": 6.6
+    },
+    {
+     "code": 437497,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 451302,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 434752,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 226182,
+     "side": "home",
+     "started": true,
+     "position": "DMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 141746,
+     "side": "away",
+     "started": true,
+     "position": "AML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6
+    },
+    {
+     "code": 437738,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 97846,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 177815,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 490881,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 592740,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 216051,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 59735,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 209365,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 493250,
+     "side": "away",
+     "started": true,
+     "position": "AMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 596777,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 173774,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 547037,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 519913,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 547676,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 492859,
+     "side": "home",
+     "started": false,
+     "position": "RW",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 486520,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 243526,
+     "side": "home",
+     "started": true,
+     "position": "DML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 221399,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 21205,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 606745,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 200617,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 565297,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 220627,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 576628,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 465247,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 643970,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 180135,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 9,
+     "onAt": 81,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 95658,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 516895,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 576620,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 221820,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.6
+    },
+    {
+     "code": 230001,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 45,
+     "onAt": 46,
+     "offAt": null,
+     "rating": 7.4
+    },
+    {
+     "code": 446008,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 184341,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 16,
+     "onAt": 74,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 522047,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 532605,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 174594,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 16,
+     "onAt": 74,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 596047,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 435997,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 73,
+     "onAt": null,
+     "offAt": 74,
+     "rating": 6.5
+    },
+    {
+     "code": 201595,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 235826,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 176297,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 214225,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 430871,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 6,
+     "onAt": 84,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 485711,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 106760,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 466525,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 166989,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 83,
+     "onAt": null,
+     "offAt": 84,
+     "rating": 7.5
+    },
+    {
+     "code": 432720,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 232112,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 153682,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 550864,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 155465,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 458249,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 67,
+   "matchId": "26-27_premier_league_manchester_city_ipswich_town",
+   "halfTime": {
+    "home": 2,
+    "away": 1
+   },
+   "referee": "Farai Hallam",
+   "home": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 70,
+     "shots": 19,
+     "shotsOnTarget": 6,
+     "shotsInsideBox": 15,
+     "corners": 2,
+     "fouls": 8,
+     "tackles": 16,
+     "interceptions": 6,
+     "clearances": 12,
+     "saves": 1,
+     "yellowCards": 1,
+     "redCards": 0,
+     "bigChances": 6,
+     "xg": 4.012
+    }
+   },
+   "away": {
+    "formation": "3-4-2-1",
+    "stats": {
+     "possession": 30,
+     "shots": 8,
+     "shotsOnTarget": 3,
+     "shotsInsideBox": 7,
+     "corners": 3,
+     "fouls": 16,
+     "tackles": 28,
+     "interceptions": 12,
+     "clearances": 26,
+     "saves": 4,
+     "yellowCards": 2,
+     "redCards": 0,
+     "bigChances": 3,
+     "xg": 1.372
+    }
+   },
+   "players": [
+    {
+     "code": 448514,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 147675,
+     "side": "away",
+     "started": false,
+     "position": "ST",
+     "minutes": 12,
+     "onAt": 78,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 462387,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 494307,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 215379,
+     "side": "home",
+     "started": false,
+     "position": "DM",
+     "minutes": 13,
+     "onAt": 77,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 624777,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 122074,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 637238,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 554054,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 149929,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 50093,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 466052,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 443261,
+     "side": "away",
+     "started": false,
+     "position": "LW",
+     "minutes": 1,
+     "onAt": 90,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 543968,
+     "side": "away",
+     "started": true,
+     "position": "ST",
+     "minutes": 77,
+     "onAt": null,
+     "offAt": 78,
+     "rating": 6.6
+    },
+    {
+     "code": 455084,
+     "side": "away",
+     "started": true,
+     "position": "DML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 616222,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 219924,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 248875,
+     "side": "home",
+     "started": true,
+     "position": "AML",
+     "minutes": 76,
+     "onAt": null,
+     "offAt": 77,
+     "rating": 7.2
+    },
+    {
+     "code": 204936,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 171314,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 575204,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 474120,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 77,
+     "onAt": null,
+     "offAt": 78,
+     "rating": 6.2
+    },
+    {
+     "code": 531442,
+     "side": "away",
+     "started": false,
+     "position": "RW",
+     "minutes": 19,
+     "onAt": 71,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 448047,
+     "side": "home",
+     "started": false,
+     "position": "CM",
+     "minutes": 40,
+     "onAt": 50,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 431639,
+     "side": "away",
+     "started": false,
+     "position": "ST",
+     "minutes": 12,
+     "onAt": 78,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 209244,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 76,
+     "onAt": null,
+     "offAt": 77,
+     "rating": 8.2
+    },
+    {
+     "code": 176420,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 449429,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 6.5
+    },
+    {
+     "code": 209036,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 477424,
+     "side": "home",
+     "started": false,
+     "position": "CB",
+     "minutes": 29,
+     "onAt": 61,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 223094,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 9.9
+    },
+    {
+     "code": 220566,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 222625,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 524180,
+     "side": "away",
+     "started": false,
+     "position": "DM",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 222018,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 578153,
+     "side": "home",
+     "started": false,
+     "position": "CB",
+     "minutes": 14,
+     "onAt": 76,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 183015,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 91651,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 49,
+     "onAt": null,
+     "offAt": 50,
+     "rating": 7.3
+    },
+    {
+     "code": 477064,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 212314,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 442967,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 70,
+     "onAt": null,
+     "offAt": 71,
+     "rating": 7.2
+    },
+    {
+     "code": 241117,
+     "side": "away",
+     "started": false,
+     "position": "DM",
+     "minutes": 19,
+     "onAt": 71,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 616288,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 461587,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 232457,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 649208,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 216055,
+     "side": "away",
+     "started": true,
+     "position": "MC",
+     "minutes": 70,
+     "onAt": null,
+     "offAt": 71,
+     "rating": 6.5
+    },
+    {
+     "code": 590039,
+     "side": "home",
+     "started": false,
+     "position": "DM",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 440993,
+     "side": "home",
+     "started": true,
+     "position": "AMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 465351,
+     "side": "home",
+     "started": true,
+     "position": "DR",
+     "minutes": 75,
+     "onAt": null,
+     "offAt": 76,
+     "rating": 6.9
+    },
+    {
+     "code": 501390,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 472769,
+     "side": "home",
+     "started": true,
+     "position": "DL",
+     "minutes": 60,
+     "onAt": null,
+     "offAt": 61,
+     "rating": 6.1
+    },
+    {
+     "code": 216616,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 229164,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 572584,
+     "side": "away",
+     "started": true,
+     "position": "RW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 218543,
+     "side": "away",
+     "started": true,
+     "position": "MC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 112520,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 155405,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 481624,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 433036,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 106921,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 595480,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 240514,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 437730,
+     "side": "home",
+     "started": false,
+     "position": "LW",
+     "minutes": 13,
+     "onAt": 77,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 172453,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 231899,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 546600,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 557012,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 108813,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.3
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 68,
+   "matchId": "26-27_premier_league_newcastle_united_aston_villa",
+   "halfTime": {
+    "home": 0,
+    "away": 1
+   },
+   "referee": "Jarred Gillett",
+   "home": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 50,
+     "shots": 16,
+     "shotsOnTarget": 1,
+     "shotsInsideBox": 11,
+     "corners": 4,
+     "fouls": 14,
+     "tackles": 13,
+     "interceptions": 12,
+     "clearances": 16,
+     "saves": 2,
+     "yellowCards": 6,
+     "redCards": 0,
+     "bigChances": 0,
+     "xg": 0.92
+    }
+   },
+   "away": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 50,
+     "shots": 15,
+     "shotsOnTarget": 3,
+     "shotsInsideBox": 11,
+     "corners": 5,
+     "fouls": 11,
+     "tackles": 24,
+     "interceptions": 11,
+     "clearances": 37,
+     "saves": 1,
+     "yellowCards": 2,
+     "redCards": 0,
+     "bigChances": 3,
+     "xg": 2.092
+    }
+   },
+   "players": [
+    {
+     "code": 173879,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 180974,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 89,
+     "onAt": null,
+     "offAt": 90,
+     "rating": 6.5
+    },
+    {
+     "code": 215711,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 632794,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 88894,
+     "side": "away",
+     "started": false,
+     "position": "CM",
+     "minutes": 18,
+     "onAt": 72,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 201666,
+     "side": "home",
+     "started": true,
+     "position": "AML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 72147,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 515597,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 220237,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 195546,
+     "side": "away",
+     "started": true,
+     "position": "AML",
+     "minutes": 71,
+     "onAt": null,
+     "offAt": 72,
+     "rating": 7.1
+    },
+    {
+     "code": 78916,
+     "side": "home",
+     "started": false,
+     "position": "CB",
+     "minutes": 1,
+     "onAt": 90,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 645618,
+     "side": "away",
+     "started": false,
+     "position": "LW",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 199796,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 653481,
+     "side": "away",
+     "started": true,
+     "position": "AMR",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.6
+    },
+    {
+     "code": 463726,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 101188,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 449434,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 613221,
+     "side": "home",
+     "started": true,
+     "position": "AMR",
+     "minutes": 55,
+     "onAt": null,
+     "offAt": 56,
+     "rating": 6.7
+    },
+    {
+     "code": 606798,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 493105,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 81441,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 448089,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 71,
+     "onAt": null,
+     "offAt": 72,
+     "rating": 7.2
+    },
+    {
+     "code": 465694,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 119090,
+     "side": "away",
+     "started": false,
+     "position": "CM",
+     "minutes": 18,
+     "onAt": 72,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 487838,
+     "side": "home",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 245719,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 577285,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 470551,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 469247,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 517052,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 554578,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 226944,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.7
+    },
+    {
+     "code": 184667,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.8
+    },
+    {
+     "code": 441191,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 571380,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 441302,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 690838,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 614071,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 71,
+     "onAt": null,
+     "offAt": 72,
+     "rating": 8
+    },
+    {
+     "code": 638987,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 18,
+     "onAt": 72,
+     "offAt": null,
+     "rating": 7.4
+    },
+    {
+     "code": 122806,
+     "side": "away",
+     "started": false,
+     "position": "CM",
+     "minutes": 45,
+     "onAt": 46,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 547719,
+     "side": "home",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 665243,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 655585,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 149484,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 545477,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 114243,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 599303,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 578545,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 449871,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 538207,
+     "side": "home",
+     "started": false,
+     "position": "ST",
+     "minutes": 34,
+     "onAt": 56,
+     "offAt": null,
+     "rating": 6.1
+    },
+    {
+     "code": 578512,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 98747,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 232653,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 569577,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 487992,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 601767,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 119471,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 553746,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 636852,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 433969,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 465642,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 671875,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 244954,
+     "side": "away",
+     "started": false,
+     "position": "CB",
+     "minutes": 13,
+     "onAt": 77,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 611665,
+     "side": "home",
+     "started": false,
+     "position": "RW",
+     "minutes": 34,
+     "onAt": 56,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 214590,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 76,
+     "onAt": null,
+     "offAt": 77,
+     "rating": 6.8
+    },
+    {
+     "code": 178301,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 200089,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 55,
+     "onAt": null,
+     "offAt": 56,
+     "rating": 6.7
+    },
+    {
+     "code": 216646,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 470313,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 481283,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 69,
+   "matchId": "26-27_premier_league_nottingham_forest_arsenal",
+   "halfTime": {
+    "home": 0,
+    "away": 0
+   },
+   "referee": "Michael Oliver",
+   "home": {
+    "formation": "3-4-2-1",
+    "stats": {
+     "possession": 26,
+     "shots": 14,
+     "shotsOnTarget": 2,
+     "shotsInsideBox": 8,
+     "corners": 8,
+     "fouls": 14,
+     "tackles": 22,
+     "interceptions": 7,
+     "clearances": 30,
+     "saves": 0,
+     "yellowCards": 1,
+     "redCards": 0,
+     "bigChances": 0,
+     "xg": 0.748
+    }
+   },
+   "away": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 74,
+     "shots": 9,
+     "shotsOnTarget": 1,
+     "shotsInsideBox": 7,
+     "corners": 6,
+     "fouls": 8,
+     "tackles": 9,
+     "interceptions": 8,
+     "clearances": 12,
+     "saves": 2,
+     "yellowCards": 1,
+     "redCards": 0,
+     "bigChances": 1,
+     "xg": 0.915
+    }
+   },
+   "players": [
+    {
+     "code": 549067,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 159506,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 109745,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 476887,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 428971,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 538638,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 466075,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 575476,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.3
+    },
+    {
+     "code": 463034,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 568420,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 250199,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 73,
+     "onAt": null,
+     "offAt": 74,
+     "rating": 6.7
+    },
+    {
+     "code": 226597,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 8
+    },
+    {
+     "code": 616077,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 232413,
+     "side": "away",
+     "started": true,
+     "position": "AML",
+     "minutes": 45,
+     "onAt": null,
+     "offAt": 46,
+     "rating": 6.4
+    },
+    {
+     "code": 205651,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 438098,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 222531,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 208706,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 65,
+     "onAt": null,
+     "offAt": 66,
+     "rating": 7.6
+    },
+    {
+     "code": 224117,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 24,
+     "onAt": 66,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 219847,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 65,
+     "onAt": null,
+     "offAt": 66,
+     "rating": 6.3
+    },
+    {
+     "code": 448104,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 209046,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 5,
+     "onAt": 85,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 503301,
+     "side": "home",
+     "started": false,
+     "position": "RW",
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 465680,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 17,
+     "onAt": 73,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 199798,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.4
+    },
+    {
+     "code": 499169,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 482973,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 221389,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 248857,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 45,
+     "onAt": 46,
+     "offAt": null,
+     "rating": 7.4
+    },
+    {
+     "code": 444145,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 432714,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 84,
+     "onAt": null,
+     "offAt": 85,
+     "rating": 7.1
+    },
+    {
+     "code": 195384,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 24,
+     "onAt": 66,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 437495,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 227444,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 500040,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 247348,
+     "side": "home",
+     "started": true,
+     "position": "DMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 456512,
+     "side": "home",
+     "started": true,
+     "position": "AMC",
+     "minutes": 72,
+     "onAt": null,
+     "offAt": 73,
+     "rating": 6.3
+    },
+    {
+     "code": 200641,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 470315,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 499175,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 575458,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 84,
+     "onAt": null,
+     "offAt": 85,
+     "rating": 6.7
+    },
+    {
+     "code": 154561,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.4
+    },
+    {
+     "code": 204480,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.7
+    },
+    {
+     "code": 204822,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 485047,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 223340,
+     "side": "away",
+     "started": true,
+     "position": "AMR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 462424,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 210462,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 16,
+     "onAt": 74,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 500151,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 204561,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 85633,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.2
+    },
+    {
+     "code": 445122,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 24,
+     "onAt": 66,
+     "offAt": null,
+     "rating": 7.2
+    },
+    {
+     "code": 439509,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 198869,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 65,
+     "onAt": null,
+     "offAt": 66,
+     "rating": 6.9
+    },
+    {
+     "code": 215136,
+     "side": "home",
+     "started": true,
+     "position": "DML",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.4
+    },
+    {
+     "code": 60689,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 5,
+     "onAt": 85,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 204968,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 481655,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 184029,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    }
+   ],
+   "events": []
+  },
+  {
+   "fplFixtureId": 70,
+   "matchId": "26-27_premier_league_tottenham_hotspur_coventry_city",
+   "halfTime": {
+    "home": 1,
+    "away": 0
+   },
+   "referee": "Andy Madley",
+   "home": {
+    "formation": "4-1-2-3",
+    "stats": {
+     "possession": 65,
+     "shots": 16,
+     "shotsOnTarget": 5,
+     "shotsInsideBox": 10,
+     "corners": 4,
+     "fouls": 15,
+     "tackles": 13,
+     "interceptions": 6,
+     "clearances": 30,
+     "saves": 0,
+     "yellowCards": 1,
+     "redCards": 0,
+     "bigChances": 0,
+     "xg": 0.975
+    }
+   },
+   "away": {
+    "formation": "4-2-3-1",
+    "stats": {
+     "possession": 35,
+     "shots": 12,
+     "shotsOnTarget": 1,
+     "shotsInsideBox": 11,
+     "corners": 4,
+     "fouls": 14,
+     "tackles": 17,
+     "interceptions": 12,
+     "clearances": 23,
+     "saves": 2,
+     "yellowCards": 3,
+     "redCards": 0,
+     "bigChances": 1,
+     "xg": 1.144
+    }
+   },
+   "players": [
+    {
+     "code": 109646,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 70,
+     "onAt": null,
+     "offAt": 71,
+     "rating": 7.3
+    },
+    {
+     "code": 539142,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 629397,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 214572,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 210156,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 30,
+     "onAt": 60,
+     "offAt": null,
+     "rating": 6.1
+    },
+    {
+     "code": 549653,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 202993,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 79602,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 570526,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 80178,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 492498,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 577411,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 640419,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 627221,
+     "side": "away",
+     "started": true,
+     "position": "FW",
+     "minutes": 59,
+     "onAt": null,
+     "offAt": 60,
+     "rating": null
+    },
+    {
+     "code": 173878,
+     "side": "away",
+     "started": true,
+     "position": "DL",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 5.8
+    },
+    {
+     "code": 115556,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 21,
+     "onAt": 69,
+     "offAt": null,
+     "rating": 7.9
+    },
+    {
+     "code": 212319,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 616221,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 484389,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 67089,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 439668,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 551226,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 19,
+     "onAt": 71,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 232787,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 21,
+     "onAt": 69,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 242893,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 547701,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 168144,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 196100,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 12,
+     "onAt": 78,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 465390,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 3,
+     "onAt": 87,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 485055,
+     "side": "home",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.5
+    },
+    {
+     "code": 436761,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 460842,
+     "side": "home",
+     "started": true,
+     "position": "MR",
+     "minutes": 86,
+     "onAt": null,
+     "offAt": 87,
+     "rating": 7.4
+    },
+    {
+     "code": 445044,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 3,
+     "onAt": 87,
+     "offAt": null,
+     "rating": 6.6
+    },
+    {
+     "code": 204813,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 172780,
+     "side": "home",
+     "started": true,
+     "position": "MC",
+     "minutes": 68,
+     "onAt": null,
+     "offAt": 69,
+     "rating": 8
+    },
+    {
+     "code": 551262,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 438234,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 86,
+     "onAt": null,
+     "offAt": 87,
+     "rating": 7.2
+    },
+    {
+     "code": 241293,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 12,
+     "onAt": 78,
+     "offAt": null,
+     "rating": 6.9
+    },
+    {
+     "code": 566213,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 499721,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 510281,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 465920,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 550839,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 499726,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 428580,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 30,
+     "onAt": 60,
+     "offAt": null,
+     "rating": 7.1
+    },
+    {
+     "code": 548308,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 231065,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.5
+    },
+    {
+     "code": 441164,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 122798,
+     "side": "home",
+     "started": true,
+     "position": "ML",
+     "minutes": 68,
+     "onAt": null,
+     "offAt": 69,
+     "rating": 6.8
+    },
+    {
+     "code": 221632,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 499716,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 480457,
+     "side": "away",
+     "started": true,
+     "position": "AMC",
+     "minutes": 86,
+     "onAt": null,
+     "offAt": 87,
+     "rating": 6.8
+    },
+    {
+     "code": 472739,
+     "side": "away",
+     "started": true,
+     "position": "GK",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 4.4
+    },
+    {
+     "code": 501459,
+     "side": "away",
+     "started": true,
+     "position": "AMR",
+     "minutes": 77,
+     "onAt": null,
+     "offAt": 78,
+     "rating": 7.2
+    },
+    {
+     "code": 482442,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 490145,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 221466,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 684268,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 218997,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 493362,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 154566,
+     "side": "home",
+     "started": true,
+     "position": "FW",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.7
+    },
+    {
+     "code": 232859,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 469272,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 511499,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 3,
+     "onAt": 87,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 230730,
+     "side": "away",
+     "started": true,
+     "position": "AML",
+     "minutes": 77,
+     "onAt": null,
+     "offAt": 78,
+     "rating": 6.6
+    },
+    {
+     "code": 461102,
+     "side": "away",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.3
+    },
+    {
+     "code": 432422,
+     "side": "home",
+     "started": true,
+     "position": "DMC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7.6
+    },
+    {
+     "code": 226965,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 487053,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 491279,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 7
+    },
+    {
+     "code": 451284,
+     "side": "away",
+     "started": true,
+     "position": "DR",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 6.8
+    },
+    {
+     "code": 469142,
+     "side": "home",
+     "started": true,
+     "position": "DC",
+     "minutes": 90,
+     "onAt": null,
+     "offAt": null,
+     "rating": 8.2
+    },
+    {
+     "code": 184254,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 611917,
+     "side": "home",
+     "started": false,
+     "position": null,
+     "minutes": 0,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 110690,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 220583,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 176412,
+     "side": "away",
+     "started": false,
+     "position": null,
+     "minutes": null,
+     "onAt": null,
+     "offAt": null,
+     "rating": null
+    },
+    {
+     "code": 661888,
+     "side": "away",
+     "started": true,
+     "position": "DMC",
+     "minutes": 59,
+     "onAt": null,
+     "offAt": 60,
+     "rating": 6.1
     }
    ],
    "events": []
