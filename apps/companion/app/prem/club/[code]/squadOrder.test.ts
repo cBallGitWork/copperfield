@@ -6,7 +6,7 @@ import { squadOrder } from "./squadOrder";
 const man = (code: number, name: string, minutes: number): FootballPlayer =>
   ({ code, name, season: { minutes, starts: 0 } }) as unknown as FootballPlayer;
 
-const defender = (fantraxId: string): LeagueOpinion => ({ fantraxId, positions: ["D"], status: "T", owner: null });
+const defender = (fantraxId: string): LeagueOpinion => ({ fantraxId, positions: ["D"], status: "T", ownerTeamId: null, owner: null });
 
 describe("a club's squad order", () => {
   it("puts the depth chart's first choice ahead of a man with more minutes, back from injury or not", () => {

@@ -7,11 +7,13 @@ import PlayerName from "../../../../components/shell/PlayerName";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import { SET_PIECES, intelSetPieces } from "../../../../intel";
 import { leagueOpinions } from "../../../leagueOpinions";
+import { readerTeamId } from "../../../../squads";
+import TakerName from "./TakerName";
+import { teamNamesOf } from "./holders";
 import { poolHref } from "../../../poolHref";
-import NameLink from "../NameLink";
 import ClubShell from "../Shell";
 import { clubOr404 } from "../club";
-import { INDEX_BLOCK, INDEX_WIDTH, PANEL, ROW_NAME } from "@/app/desk";
+import { INDEX_BLOCK, INDEX_WIDTH, PANEL } from "@/app/desk";
 import { clubTitle } from "../title";
 
 // Who steps up: corners, free kicks and penalties, in the order they take them.
@@ -25,8 +27,9 @@ export const generateMetadata = clubTitle("setPieces");
 
 export default async function SetPiecesPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
-  const [{ club, snapshot }, league] = await Promise.all([clubOr404(code), leagueOpinions()]);
+  const [{ club, snapshot }, league, reader] = await Promise.all([clubOr404(code), leagueOpinions(), readerTeamId()]);
   const colours = clubColours(club.shortName);
+  const teamNames = teamNamesOf(league);
 
   const byCode = new Map(squadOf(snapshot, club.id).map((p) => [p.code, p]));
   // Departed takers drop before numbering, so the order still counts from 1.
@@ -61,13 +64,9 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                         player={{ code: player.code, name: player.name }}
                         colours={colours}
                       />
-                      <NameLink
-                        href={poolHref(league, player.code)}
-                        // The row's floor restated on the link, which `tapfit` measures; `self-stretch` lands one short.
-                        className={`flex min-h-9 min-w-0 flex-1 items-center truncate text-ink ${ROW_NAME}`}
-                      >
+                      <TakerName href={poolHref(league, player.code)} held={league.get(player.code)} teamNames={teamNames} reader={reader}>
                         <PlayerName name={player.fullName} short={fullFootballerName(player)} />
-                      </NameLink>
+                      </TakerName>
                       <StateBox player={player} />
                     </li>
                   );
