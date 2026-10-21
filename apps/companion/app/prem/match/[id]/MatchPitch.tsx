@@ -11,7 +11,7 @@ import PitchMarker from "../../../components/league/PitchMarker";
 import BenchStrip from "../../../components/league/BenchStrip";
 import PitchRows, { widestLine } from "../../../components/league/PitchRows";
 import { PANEL_FLUSH, phoneShows } from "@/app/desk";
-import { MaybeCard } from "./PlayerCardButton";
+import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import type { Match } from "./match";
 import { forCode } from "./sheetJoin";
 import SideBySide from "./SideBySide";

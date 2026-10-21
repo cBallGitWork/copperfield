@@ -5,7 +5,7 @@ import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
 import Section from "../../../components/shell/Section";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
-import { MaybeCard } from "./PlayerCardButton";
+import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import SubNote from "./SubNote";
 import { COLUMNS, sorted, type StatLine, type StatSort } from "./statColumns";
 import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted } from "../../../components/league/standout";

@@ -92,7 +92,7 @@ draws none.
    chip and name (Craig, 19 Oct 2026: split by manager, Cunha sat under Chelsea). A reserve is dimmed and
    uncounted, and a double's period figure prints under the later match only (`fixtureMen.ts`). A side whose eleven
    is not public names nobody; before kickoff a rival's squad is public, so his men are named, with no figures. It replaced Scores on 24 Sep (Craig: *"scores is pointless"*).
-7. **A live player card** (`LivePlayerCard`) over the top, when one is tapped.
+7. **The player card** (`PlayerCard`, handed his breakdown) over the top, when one is tapped.
 
 ## What the round is doing
 
@@ -172,15 +172,15 @@ or it does not, so a side never mixes the two.
 
 ## What a tap answers
 
-`LivePlayerCard` — a second card, distinct from the squad screen's `PlayerCard`,
-because they answer different questions on different days. `PlayerCard` is "who
-is this, and is he fit", read midweek. This one is read at ten past four, and the
-only question is *why* he is on the number he is on.
+`PlayerCard`, the app's one player card (21 Oct 2026, UI-AUDIT D-4), handed this
+gameweek's breakdown, his minutes and whether he is on the bench. Read at ten past
+four, the question is *why* he is on the number he is on; his fitness line, xMins and
+Fantrax's latest sit round it as on every other screen's card.
 
 - **An itemised points table** (`league/Breakdown`), one row per scoring
   category that moved his total, largest contribution first, each carrying the
   count Fantrax states beside the points it paid — gains green and deductions
-  red, DESIGN §3's direction pair — and the total under them. Every figure is
+  red, DESIGN §3's direction pair — and the total under them in the reading's cyan, never lit. Every figure is
   **Fantrax's**, under our league's own scoring, read from the scoreboard's
   own `getLiveScoringStats` payload, and they sum to the total exactly. A
   reserve's card says he is on the bench and not counted. Nothing is computed here — our own engine could only ever

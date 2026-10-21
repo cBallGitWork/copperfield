@@ -107,7 +107,8 @@ export default function Modal({
         className="m-auto max-h-[calc(100dvh-var(--safe-top)-var(--safe-bottom)-2rem)] w-[min(var(--modal-width),92vw)] flex-col overflow-hidden border border-line bg-surface p-0 text-ink backdrop:bg-black/70 open:flex"
       >
         {head}
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
+        {/* Sized to its content with a floor: a 0% basis in a dialog of no set height drew 0px in WebKit (D-4). */}
+        <div className="min-h-24 flex-auto overflow-y-auto overscroll-contain">{children}</div>
         {foot === undefined ? null : <div className="shrink-0 border-t border-line p-3">{foot}</div>}
       </dialog>
     </ModalContext>

@@ -1,4 +1,4 @@
-import { fullFootballerName, isFplKeeper, kickedOff, matchesOver, pitchName, DASH } from "@epl/core";
+import { fullFootballerName, isFplKeeper, pitchName, DASH } from "@epl/core";
 import type { Club, FootballPlayer, FplLine, FplPick, Opposition } from "@epl/core";
 import PitchMarker from "../components/league/PitchMarker";
 import SubMarker, { type SubMark } from "../components/football/SubMarker";
@@ -38,9 +38,9 @@ export default function FplPitch({
         <PickPoints
           pick={pick}
           name={player === null ? DASH : fullFootballerName(player)}
-          club={club?.shortName ?? null}
-          started={kickedOff(fixtures)}
-          over={matchesOver(fixtures)}
+          player={player}
+          club={club}
+          opposition={fixtures}
         >
           <Pick
             pick={pick}

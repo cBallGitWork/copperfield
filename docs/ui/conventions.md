@@ -100,7 +100,7 @@ No fluid clamps except inside the masthead.
 | `league/LineupPitch` | Your own XI plus the bench, one target per player: tap to pick, tap again to put him down. Draws `SquadMarker`, same as the head-to-head — it had a sticker of its own until 21 Sep 2026. |
 | `league/SquadMarker` | A fantasy roster slot as a `PitchMarker`: the league layer's vocabulary translated into football's, in one place. **Three sites** — the planner's pitch, and the head-to-head's grass and bench. The BUTTON round it stays with each caller, because they disagree about what a tap does. |
 | `league/BenchStrip` | The reserves under the grass, numbered from the left and on the pitch's own inset and row budget. Two callers, extracted because the next change was going to be made twice — and because the two had already drifted once over card width (see `PitchRows`). |
-| `league/TeamSheet` | A live XI plus bench, or the same squad as rows, every player opening `LivePlayerCard`. Both boards that show a lineup that counts draw it. |
+| `league/TeamSheet` | A live XI plus bench, or the same squad as rows, every player opening `PlayerCard` with his breakdown. Both boards that show a lineup that counts draw it. |
 | `league/Pending` | Points Fantrax has not credited yet — a clean sheet is settled at the final whistle and FPL has been paying it since the hour mark. Four screens print it; before this they were four spellings of one rule, two of which could reach a `+0`. |
 | `league/PlayerImage` | The cut-out photograph, with its fallback ladder. Client-only, and has to be — see below. The player profile, the paper's face and picture, the live card, and **two pitches**: a club's predicted XI and the match line-up, through `PitchMarker`'s `face`. |
 | `league/PlayerShirt` | The club's kit, and the only place it is drawn. What every pitch but a club's predicted XI and the match line-up draws. Server component — it has no ladder to walk. |
@@ -137,9 +137,10 @@ No fluid clamps except inside the masthead.
 | `league/PositionTile` | Our league's position in the index block, as a table cell or a list tile. `SquadRows` and the club squad table. |
 | `league/MatchupBoard` | The head-to-head: the scoreline, a five-plate strip, and one of five views. Only `Lineups` belongs to a side; the other four are the join of both squads and are drawn once at both widths. |
 | `league/LineupPlanner` | Picking an XI. |
-| `league/PlayerCard` · `league/LivePlayerCard` | One player, tapped open — settled and live. |
+| `league/PlayerCard` | The one player card, tapped open from any list or pitch: identity (club · every eligible position, as the row prints them), the fitness line (`FitnessLine` unboxed: wash and `StateMark` via `fitnessOf`, silent for a fit man), FPts in cyan (handed a `breakdown`, the gameweek's `Breakdown` instead), full match stats once on, xMins, Fantrax's latest. Optional `breakdown`, `played`, `reserve`, `story`, `autoSub`, `eligible` (21 Oct 2026, UI-AUDIT D-4). |
+| `league/PlayerCardButton` | The one trigger: `PlayerCardButton` opens the card, `MaybeCard` falls back to plain text for a man our league does not list; the card's props ride through. |
 | `league/MinutesRun` | Both cards' xMins over the next five gameweeks from the screen's own (`XMINS_WEEKS`), in the derived reading's cyan; silent when the model knows nothing of him. The run rides on `SquadPlayerDetail.minutes`, built per screen by `xmins.ts` `minutesFrom`, which gives no run at all for a week the export starts after, so no screen draws a column of dashes. |
-| `league/Breakdown` | The itemised table on the live card: one row per league scoring category that moved his total, then the total. **Three columns, not two** (Craig, 21 Sep 2026: *"points breakdown needs the value and the points"*) — the label, the count Fantrax states, the points it paid. "Minutes Played +2" is a price with the thing it priced left out. Split out of `LivePlayerCard` when that file crossed CODE_RULES §4's ceiling. The FPL tab's pick card (`fpl/PickPoints`) draws it too, over FPL's own scoring lines (1 Oct 2026). |
+| `league/Breakdown` | The itemised table on the live card: one row per league scoring category that moved his total, then the total. **Three columns, not two** (Craig, 21 Sep 2026: *"points breakdown needs the value and the points"*) — the label, the count Fantrax states, the points it paid. "Minutes Played +2" is a price with the thing it priced left out. Split out of the live card when that file crossed CODE_RULES §4's ceiling. The FPL tab's pick card (`fpl/PickPoints`) draws it too, over FPL's own scoring lines (1 Oct 2026). The total prints in the reading's cyan, never lit; the lines keep the direction pair (21 Oct 2026). |
 | `league/FullMatchStats` | What he did in the match or gameweek shown, on both player cards once his match has kicked off, as a native `<details>`. Closed it is the words "Full match stats" and a chevron, nothing else (Craig, 21 Sep 2026: *"Not fpl records, FULL MATCH STATS (ditch the number and labels)"*). Open it is two columns of label and figure, read downwards, all Opta's and never FPL's: the parts of a category Fantrax counts whole, penalties won and a keeper's saves, smothers, punches and high claims, each only where the scoring league prices its category at his slot (`core:join/fullMatchStats.ts`; Craig, 11 Oct 2026: *"Why wouldn't the player card in live games just use Fantrax data?"*). Fantrax's own counts are the live card's *This gameweek*, never repeated here. Noughts print once Opta has a line for him; before that it says "No match figures for him yet.", without the "yet" once his matches are over, and the live card draws none under the breakdown's "Did not play." (16 Oct 2026). Under them, on a `BLOCK_PLATE` headed "Attacking", Opta's shots, shots on target, big chances missed and touches in the box down the left, chances created, big chances created, accurate crosses and dribbles won down the right, the last two as made of tried ("1/4"); priced or not, for every outfielder Opta has a line for, and never for a keeper (Craig, 9 Oct 2026: *"shots, chances created, maybe even big chances … maybe even the mid gameweek player card"*). Then one headed "Defensive": tackles won, interceptions and blocks down the left, clearances, recoveries and aerials won down the right, on the same terms (Craig, 11 Oct 2026: *"we have an attacking section but no defensive section"*). |
 | `football/StateBox` | The box beside a name saying why he is not playing; the lists move to `StateMark` and it will survive only beside the Profile's fitness line (DESIGN §3). Silent for a fit player. |
 | `football/StateMark` | CM's cross, card or barred circle after a name, each shape filled from his doubt band so a greyed reserve row keeps it. |
@@ -470,15 +471,12 @@ fixed height — a line whose cards stand at different heights stops reading as 
 line — and "he has not played" is said by dimming the **kit** alone. Dimming the
 whole card said it too, and took the fixture colour and the name with it.
 
-**Two player cards, and they are not one card with a flag.** `PlayerCard` answers
-*who is this and is he fit* — read midweek, going through somebody's fifteen: the
-fixture, the kickoff, FPL's fitness note, why a slot is unresolved, and once his
-match has kicked off what he did in it (`league/FullMatchStats`).
-`LivePlayerCard` answers *what is he scoring and why* — read at ten past four:
-Fantrax's own category breakdown, summing to the total exactly, with the same
-full match stats under it. Same dialog skeleton, different
-questions, opened on different days. A third card is a sign one of these two has
-lost its question.
+**One player card** (Craig, 21 Oct 2026, UI-AUDIT D-4: the live card had no fitness line and the FPL card no
+identity). `PlayerCard` answers *who is this and is he fit* on every screen — the fixture, the kickoff, the fitness
+line, why a slot is unresolved, his FPts, xMins and Fantrax's latest — and a scoring screen hands it the gameweek's
+breakdown, which answers *what is he scoring and why* in place of the FPts line. The FPL tab's `PickCard` borrows the
+identity, head and foot (Close alone: FPL's man has no profile here). Its body is `flex-auto` with a 96px floor
+(`Modal`): a 0% basis drew a 0px body in WebKit.
 
 **No pitch is drawn in perspective since 21 Sep 2026.** Every one stands on
 `CmGround`'s flat diagram; `PitchTurf`, which drew the trapezoid, is gone. The

@@ -1,56 +1,79 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
+  type BreakdownLine,
+  type PlayerStory,
   type SquadPlayerDetail,
-  isDoubtful,
   isResolved,
   fullPlayerName,
   kickedOff,
   londonDayAndDate,
   londonTime,
   matchesOver,
-  noteBesideChance,
+  DASH,
 } from "@epl/core";
 import DialogFoot from "../shell/DialogFoot";
 import DialogHead from "../shell/DialogHead";
 import PlayerName from "../shell/PlayerName";
 import Modal from "../shell/Modal";
+import Breakdown from "./Breakdown";
 import CardBlock from "./CardBlock";
 import FullMatchStats from "./FullMatchStats";
 import MinutesRun from "./MinutesRun";
 import Note from "./Note";
 import PlayerIdentity from "./PlayerIdentity";
+import { underway } from "./underway";
+import { fitnessOf } from "../football/doubtRow";
+import FitnessLine from "../../players/[fantraxId]/FitnessLine";
 import { unresolvedReason } from "../../unresolved";
 import { playerHref } from "../../players/routes";
 import { latestNews } from "../../players/[fantraxId]/latestNews";
-import { filedAt, noteBody, type NewsItem } from "../../players/[fantraxId]/newsItems";
-import { SMALL_CAPS } from "@/app/desk";
+import { filedAt, inbox, noteBody, type NewsItem } from "../../players/[fantraxId]/newsItems";
+import { LABEL } from "@/app/desk";
 
-// One player over the squad or match he was tapped from: who he is, whether he is fit, and what he did once his match
-// has kicked off. `LivePlayerCard` is the same dialog with Fantrax's breakdown in the middle.
+// The app's one player card, over whatever list or pitch he was tapped on: who he is, whether he is fit, his FPts,
+// his xMins and Fantrax's latest. Handed a gameweek's breakdown, it itemises his points there instead.
+
+/** A gameweek's scoring, from a screen that has it: the table, his minutes, and whether he is on the bench. */
+export interface CardScore {
+  /** His categories, largest first; empty both on nought and where the table omits him, which `points` tells apart. */
+  breakdown: BreakdownLine[];
+  /** Fantrax's count of his minutes this gameweek; null where it stated none. */
+  played?: number | null;
+  /** Priced, but not counted: the live table lists only the active eleven. */
+  reserve?: boolean;
+}
 
 export default function PlayerCard({
-  player: { rostered, club, opposition, minutes },
+  player: { rostered, club, opposition, points, minutes },
+  eligible,
+  breakdown,
+  played = null,
+  reserve = false,
+  story = null,
+  autoSub = null,
   onClose,
-}: {
+}: Partial<CardScore> & {
   player: SquadPlayerDetail;
+  /** Every position he may play, as the row he came from prints them; absent, his slot. */
+  eligible?: readonly string[];
+  /** Fantrax's latest on him, handed in by a screen that read it; null, the card reads it on open. */
+  story?: PlayerStory | null;
+  /** What his auto sub is, in one line; null when he has none. */
+  autoSub?: string | null;
   onClose: () => void;
 }) {
-  const footballer = isResolved(rostered) ? rostered.player : null;
   const fantraxId = rostered.slot.fantraxId;
-  // His newest Fantrax note, read on open. A read that fails costs the card the block, as on his News tab.
-  const [story, setStory] = useState<NewsItem | null>(null);
-  useEffect(() => {
-    let open = true;
-    latestNews(fantraxId).then(
-      (item) => open && setStory(item),
-      () => undefined,
-    );
-    return () => {
-      open = false;
-    };
-  }, [fantraxId]);
+  const footballer = isResolved(rostered) ? rostered.player : null;
+  const router = useRouter();
+  const news = useLatest(fantraxId, story);
+  const over = matchesOver(opposition);
+  // Fantrax crediting him says his match is on even while FPL's fixtures are held from before kickoff (19 Oct 2026).
+  const started = breakdown === undefined ? kickedOff(opposition) : underway(opposition, { breakdown, played });
+  // The breakdown says "Did not play."; an empty drop-down under it would say it again.
+  const satOut = over && breakdown?.length === 0 && (points === 0 || points === null) && !played;
 
   return (
     <Modal
@@ -67,38 +90,76 @@ export default function PlayerCard({
       foot={<DialogFoot href={playerHref(fantraxId)} onClose={onClose} />}
     >
       <div className="flex flex-col gap-2 p-3">
-        <PlayerIdentity rostered={rostered} club={club} opposition={opposition} />
+        <PlayerIdentity rostered={rostered} eligible={eligible} club={club} opposition={opposition} started={started} />
 
-        {/* Silent for a fit player: a "no news" panel on every card is noise. One red edge for every doubt. */}
-        {footballer && isDoubtful(footballer) ? (
-          <div className="cm-panel cm-edge-bad flex flex-col gap-0.5 px-3 py-2">
-            <span className={`${SMALL_CAPS} text-muted`}>
-              {footballer.chanceOfPlaying === null
-                ? "Doubt"
-                : `${footballer.chanceOfPlaying}% chance of playing`}
-            </span>
-            {footballer.news ? (
-              <p className="text-sm">{noteBesideChance(footballer.news, footballer.chanceOfPlaying)}</p>
-            ) : null}
+        {autoSub === null ? null : <p className="cm-panel px-3 py-2 text-2xs text-info">{autoSub}</p>}
+
+        {/* Silent for a fit man: a "no news" panel on every card is noise. */}
+        {fitnessOf(footballer).mark === null || footballer === null ? null : (
+          <div className="cm-panel">
+            <FitnessLine player={footballer} boxed={false} />
           </div>
+        )}
+
+        {isResolved(rostered) ? null : <Note>{unresolvedReason(rostered.unresolved)}</Note>}
+
+        {/* Nothing before he has been on: an empty table under a live score reads as a nought. */}
+        {breakdown === undefined ? (
+          <Points points={points} />
+        ) : started ? (
+          <Breakdown
+            breakdown={breakdown}
+            points={points}
+            reserve={reserve}
+            minutes={played}
+            over={over}
+            onRetry={() => router.refresh()}
+          />
         ) : null}
 
-        {isResolved(rostered) && kickedOff(opposition) ? (
+        {isResolved(rostered) && started && !satOut ? (
           <FullMatchStats
             opta={rostered.player.optaCode}
             position={rostered.slot.position}
             opposition={opposition}
-            over={matchesOver(opposition)}
+            over={over}
+            open={breakdown !== undefined}
           />
         ) : null}
 
         <MinutesRun weeks={minutes} />
 
-        {story ? <Story story={story} /> : null}
-
-        {isResolved(rostered) ? null : <Note>{unresolvedReason(rostered.unresolved)}</Note>}
+        {news ? <Story story={news} /> : null}
       </div>
     </Modal>
+  );
+}
+
+/** The story handed in, or his newest Fantrax note read on open; a read that fails costs the card the block. */
+function useLatest(fantraxId: string, handed: PlayerStory | null): NewsItem | null {
+  const [read, setRead] = useState<NewsItem | null>(null);
+  useEffect(() => {
+    if (handed !== null) return;
+    let open = true;
+    latestNews(fantraxId).then(
+      (item) => open && setRead(item),
+      () => undefined,
+    );
+    return () => {
+      open = false;
+    };
+  }, [fantraxId, handed]);
+  return handed === null ? read : (inbox([handed])[0] ?? null);
+}
+
+/** His FPts as the row he came from prints them, in the reading's cyan; nothing where the screen had no table. */
+function Points({ points }: { points: number | null | undefined }) {
+  if (points === undefined) return null;
+  return (
+    <p className="cm-panel flex items-baseline justify-between gap-2 px-3 py-2">
+      <span className={LABEL}>FPts</span>
+      <span className="numeric text-base font-bold text-info">{points ?? DASH}</span>
+    </p>
   );
 }
 

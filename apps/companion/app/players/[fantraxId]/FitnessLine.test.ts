@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import { availabilityOf, type FootballPlayer } from "@epl/core";
+import type { FootballPlayer } from "@epl/core";
 import FitnessLine from "./FitnessLine";
 
 vi.mock("@/app/desk", () => import("../../desk"));
@@ -10,7 +10,7 @@ const man = (status: string, chanceOfPlaying: number | null, news: string) =>
   ({ status, chanceOfPlaying, news }) as unknown as FootballPlayer;
 
 const render = (player: FootballPlayer) =>
-  renderToStaticMarkup(createElement(FitnessLine, { player, availability: availabilityOf(player), note: "Calf injury" }));
+  renderToStaticMarkup(createElement(FitnessLine, { player }));
 
 /** The quarter blocks filled in his band, out of four. */
 const filled = (html: string) => (html.match(/background-color:var\(--color-doubt-/g) ?? []).length;

@@ -77,7 +77,8 @@ export default function Breakdown({
           <span className={`min-w-0 flex-1 ${LABEL}`}>Total</span>
           <span
             className={`numeric ${PTS_COLUMN} shrink-0 text-center text-xl font-bold leading-none ${
-              points === null ? "text-faint" : tone(points)
+              // The reading the card is for, so cyan and never lit (DESIGN §3); the lines keep the direction pair.
+              points === null ? "text-faint" : "text-info"
             }`}
           >
             {points ?? DASH}

@@ -72,6 +72,11 @@ export const FPL_LINES: readonly { line: number; name: string }[] = [
   { line: 4, name: "FWD" },
 ];
 
+/** One of FPL's lines by its number (`GK` for 1); the number itself for a line FPL adds later. */
+export function fplLineName(line: number): string {
+  return FPL_LINES.find((known) => known.line === line)?.name ?? String(line);
+}
+
 /** FPL's scoring identifiers in FPL's own words. */
 const FPL_SCORE_NAMES: Readonly<Record<string, string>> = {
   minutes: "Minutes played",
