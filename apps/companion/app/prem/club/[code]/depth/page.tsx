@@ -1,4 +1,4 @@
-import { depthLines, londonMoment, squadOf } from "@epl/core";
+import { clubById, depthLines, londonMoment, nextFixtures, squadOf } from "@epl/core";
 import TabEmpty from "../../../../components/league/TabEmpty";
 import { intelDepth, intelDepthManifest } from "../../../../intel";
 import ClubShell from "../Shell";
@@ -12,6 +12,7 @@ import PitchListStrip, { pitchListOf } from "../PitchList";
 import { clubHref } from "../../../routes";
 import { PANEL, PITCH_CAPTION } from "@/app/desk";
 import { clubTitle } from "../title";
+import { weekMinutes } from "../../../../xmins";
 
 // Who is in line for each shirt at a club: the sister repo's depth chart (Craig, 25 Sep 2026), dated by its export.
 
@@ -28,13 +29,19 @@ export default async function DepthPage({
 }) {
   const [{ code }, query] = await Promise.all([params, searchParams]);
   const view = pitchListOf(query.view, "pitch");
-  const [{ club, snapshot }, league] = await Promise.all([clubOr404(code), leagueOpinions()]);
+  const [{ club, snapshot, fixtures }, league] = await Promise.all([clubOr404(code), leagueOpinions()]);
   const chart = intelDepth.get(club.shortName);
   const players = new Map(squadOf(snapshot, club.id).map((player) => [player.code, player]));
   const playerOf = (code: number) => players.get(code) ?? null;
   const hrefOf = (code: number) => poolHref(league, code);
   const lines = chart === undefined ? [] : depthLines(chart);
   const empty = chart === undefined || lines.length === 0;
+
+  // xMins for the club's next match week, not the round in view.
+  const [next] = nextFixtures(fixtures, clubById(snapshot), club.id, 1);
+  const gameweek = next?.fixture.gameweek ?? null;
+  const byCode = weekMinutes(gameweek, [...players.keys()]);
+  const minutes = gameweek === null || byCode === null ? null : { gameweek, byCode };
 
   return (
     <ClubShell
@@ -54,8 +61,8 @@ export default async function DepthPage({
           </p>
           <BothReadings
             view={view}
-            list={<DepthList lines={lines} playerOf={playerOf} hrefOf={hrefOf} />}
-            pitch={<DepthPitch lines={lines} playerOf={playerOf} hrefOf={hrefOf} />}
+            list={<DepthList lines={lines} playerOf={playerOf} hrefOf={hrefOf} minutes={minutes} />}
+            pitch={<DepthPitch lines={lines} playerOf={playerOf} hrefOf={hrefOf} minutes={minutes} />}
           />
         </section>
       )}
