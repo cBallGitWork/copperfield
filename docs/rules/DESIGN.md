@@ -451,6 +451,9 @@ as a small filled rectangle rather than as a glyph, because CM draws exactly tha
 all. Where the reference already has a mark, the reference wins; where a provider
 has one, as the lion is, the provider's wins.
 
+`StateMark` is the same exception for a man's fitness: CM draws the cross and the card itself, so the squad row
+prints them instead of the word and fills them in the doubt ramp rather than `currentColor` (Craig, 21 Oct 2026; §3).
+
 ## 3. The Desk's palette
 
 Each colour is a **slot with one meaning**. This is CM's actual grammar and it
@@ -473,7 +476,7 @@ is more specific than a palette; it is the reason the token names in
 | Cream | `--color-cream` | ink on a colour plate | — |
 | Quiet on a plate | `--color-faint-plate` | the same **quiet** as `--color-faint`, on the blue plate that will not carry it | — |
 | Red on a wash | `--color-bad-wash` | the same **loss** as `--color-bad`, on a doubt wash that will not carry it (3.6:1); a quiet figure there greys to `muted` | 4.9 on the palest wash |
-| Doubt | `--color-doubt-out` `-major` `-slight` | **how likely he is to MISS**, as a ramp of three. A ground, never ink | ink 5.5 · 7.1 · 9.5 |
+| Doubt | `--color-doubt-out` `-major` `-slight` | **how likely he is to MISS**, as a ramp of three. A ground, never ink; the one shape it fills is `StateMark` | ink 5.5 · 7.1 · 9.5 · the mark on its own wash 3.9 · 4.9 · 6.2 |
 | Ease | `--color-ease-1` … `-10` | **how kind an opponent is, by OUR strength model**: the planner's 1–20 rank, two a step, green easiest to dark red hardest. A ground, never ink; FPL's difficulty keeps the FDR steps | black 4.8–11.7 · cream 4.9–8.6 |
 | Free | `--color-index-free` | **a man on no roster**, anybody's to claim: the index block's ground in place of its blue. A ground, never ink | ink 4.8 at the ramp's top · 8.4 on the face |
 
@@ -507,9 +510,13 @@ name. Hue-locked like the FDR scale — `out` is `--color-bad`'s red, `slight` i
 alike — so no new colour family enters the app. The lightnesses run 0.66 · 0.72 ·
 0.79, which is a ramp a reader who cannot separate the hues can still separate.
 
-**It never replaces the word in a list.** `StateBox` still prints `Inj` · `Sus` · `Unav` ·
-`Dbt` beside the name in a list, because the colour says how likely and only the
-box says why. The pitch carries the colour alone: the box rode after the surname
+**The squad row says why with CM's mark, not the word** (Craig, 21 Oct 2026: *"Use a yellow and Red Cross when
+injured/doubt to match row. Red card for suspension"*). `StateMark` is a filled shape — the cross for a knock, the
+card for a ban, a barred circle for a man who has gone — and its fill is his band, so the mark and the wash say the
+same thing. A filled shape is a ground in this sense, never ink: it carries no text, and as a graphic it needs 3:1,
+which each step clears on its own wash (3.9 · 4.9 · 6.2). The word rides in its label and title. It is the Profile's
+fitness line's mark too, where `StateBox` still stands beside it. Every other list keeps `StateBox`, printing `Inj` ·
+`Sus` · `Unav` · `Dbt` beside the name, because the colour says how likely and only the box says why. The pitch carries the colour alone: the box rode after the surname
 from 30 Sep 2026 and came off on 1 Oct (Craig: *"pitch view, remove the chip, we
 already have coloured tiles"*), so the plate and the card say how likely and a
 tap on the man says why. The list carries both

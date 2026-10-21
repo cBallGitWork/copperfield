@@ -93,14 +93,14 @@ export function usePlanner(
 
   // What is wrong with the XI as it stands; no offered move creates any, so anything here came from Fantrax.
   const broken = violations(slots, eligibility, limits);
-  // Starters short on xMins for the planned week whom a sub could legally replace, as the pitch draws them.
+  // Starters short on xMins for the planned week whom a sub could legally replace, by id, as the pitch draws them.
   const doubts = mightNotStart(
     slots,
     eligibility,
     limits,
     (id) => detailOf.get(id)?.minutes[0]?.minutes ?? null,
     rows.flatMap((row) => row.players.map((p) => p.rostered.slot.fantraxId)),
-  ).map(nameOf);
+  );
   // Null where the league publishes no XI size (`RosterLimits.maxActivePlayers`): no shortfall to measure.
   const empty =
     limits.maxActivePlayers === null

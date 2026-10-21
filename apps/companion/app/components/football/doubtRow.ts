@@ -4,6 +4,13 @@ import { type DoubtBand, type FootballPlayer, availabilityOf, doubtBand } from "
  *  written out, because Tailwind and `desk.css` read them literally. */
 const WASH = { out: "cm-doubt-out", major: "cm-doubt-major", slight: "cm-doubt-slight" } as const;
 
+/** A band's full colour, for a shape it fills (`StateMark`, the Profile's quarter blocks); written out for Tailwind. */
+export const DOUBT_FILL: Record<DoubtBand, string> = {
+  out: "var(--color-doubt-out)",
+  major: "var(--color-doubt-major)",
+  slight: "var(--color-doubt-slight)",
+};
+
 /** The wash for a band, or "" for none: for a row that holds a band rather than a footballer. */
 export function doubtWash(band: DoubtBand | null): string {
   return band === null ? "" : WASH[band];

@@ -61,6 +61,9 @@ export const XMINS_WEEKS = 5;
 /** xMins under which the planner says a starter might not start, when a sub could play in his place (19 Oct 2026). */
 export const START_DOUBT_MINUTES = 50;
 
+/** xMins from which a squad row prints a man's minutes as safe, not amber: 70 is a starter the model expects to see out most of the match. */
+export const SAFE_MINUTES = 70;
+
 /** How many results a form guide shows, oldest first: both tables' Form column and a match preview's. */
 export const FORM_GAMES = 5;
 

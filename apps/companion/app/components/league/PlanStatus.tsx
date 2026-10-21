@@ -25,7 +25,7 @@ export default function PlanStatus({
   nameOf,
 }: {
   broken: Violation[];
-  /** Starters' names, short on minutes with a sub who could play instead (`mightNotStart`). */
+  /** Starters' Fantrax ids, short on minutes with a sub who could play instead (`mightNotStart`). */
   doubts: readonly string[];
   /** Places left in the XI, or null when the league sets no cap. */
   empty: number | null;
@@ -44,7 +44,7 @@ export default function PlanStatus({
           {empty} empty {empty === 1 ? "place" : "places"} in the XI — allowed, and nothing scores from them.
         </li>
       ) : null}
-      {doubts.length > 0 ? <li className="text-2xs text-bad">Might not start: {doubts.join(", ")}</li> : null}
+      {doubts.length > 0 ? <li className="text-2xs text-bad">Might not start: {doubts.map(nameOf).join(", ")}</li> : null}
     </ul>
   ) : null;
 }

@@ -16,11 +16,11 @@ const render = (player: FootballPlayer) =>
 const filled = (html: string) => (html.match(/background-color:var\(--color-doubt-/g) ?? []).length;
 
 describe("FitnessLine", () => {
-  it("washes a slight doubt amber, boxes it Dbt, crosses it in the loss red and fills three quarters at 75%", () => {
+  it("washes a slight doubt amber, boxes it Dbt, crosses it in the same yellow and fills three quarters at 75%", () => {
     const html = render(man("d", 75, "Calf injury - 75% chance of playing"));
     expect(html).toContain("cm-doubt-slight");
     expect(html).toContain(">Dbt<");
-    expect(html).toMatch(/<svg[^>]*text-bad[^>]*><path d="M6 2h4/);
+    expect(html).toMatch(/<svg[^>]*color:var\(--color-doubt-slight\)[^>]*>.*<path d="M6 2h4/);
     expect(filled(html)).toBe(3);
     expect(html).toContain(">75%<");
   });

@@ -119,6 +119,7 @@ export default function LineupPlanner({
                 projected={false}
                 eligibility={eligibleBy}
                 onOpen={setCard}
+                doubted={doubts}
               />
               {bench.length === 0 ? null : (
                 <>

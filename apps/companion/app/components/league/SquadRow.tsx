@@ -1,17 +1,19 @@
 import Image from "next/image";
 import {
   type SquadPlayerDetail,
+  availabilityOf,
   crestUrl,
   isResolved,
   fullPlayerName,
   DASH,
 } from "@epl/core";
-import StateBox from "../football/StateBox";
+import StateMark from "../football/StateMark";
 import { doubtRow } from "../football/doubtRow";
 import PositionTile from "./PositionTile";
 import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
-import { QUIET_NOTE, ROW_NAME } from "@/app/desk";
+import { MINOR_LABEL, QUIET_NOTE, ROW_NAME } from "@/app/desk";
+import { SAFE_MINUTES, START_DOUBT_MINUTES } from "../../config";
 import { returnDate } from "./returnDate";
 import type { AutoSubMark } from "./autoSubbed";
 
@@ -25,12 +27,19 @@ export const SQUAD_CREST = "w-6 lg:w-7";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
 export const SQUAD_POINTS = "w-9";
 
+/** xMins inked by risk: red under the planner's floor, amber short of safe, the derived cyan from there. */
+export function minutesInk(minutes: number | null): string {
+  if (minutes === null || minutes >= SAFE_MINUTES) return "text-info";
+  return minutes < START_DOUBT_MINUTES ? "text-bad" : "text-mid";
+}
+
 export default function SquadRow({
   player,
   eligible,
   onOpen,
   reserve,
   autoSub,
+  doubted = false,
 }: {
   player: SquadPlayerDetail;
   eligible: string[] | undefined;
@@ -38,6 +47,8 @@ export default function SquadRow({
   reserve: boolean;
   /** His auto sub, if he has one: on for a man who did not play, or off for a reserve. */
   autoSub?: AutoSubMark;
+  /** The planner names him under "Might not start" (`mightNotStart`); a status mark outranks it. */
+  doubted?: boolean;
 }) {
   const { club, points } = player;
   const resolved = isResolved(player.rostered) ? player.rostered : null;
@@ -47,6 +58,8 @@ export default function SquadRow({
   // Who his club plays, in the app's one spelling of a fixture — `BRE (H)`.
   const fixture = rowFixture(player);
   const back = footballer?.news ? returnDate(footballer.news) : null;
+  const availability = availabilityOf(footballer);
+  const xMins = player.minutes[0]?.minutes ?? null;
 
   const inside = (
     <>
@@ -77,12 +90,16 @@ export default function SquadRow({
       </span>
 
       {/* `ROW_NAME`, not a size of its own; the `flex-` is this screen's, as it decides what gives way.
-          Why he is not playing follows his name; silent for a fit man. The day he is due back goes under it on a
-          phone, where the name column has 7px to spare, and beside it on a desk. */}
+          CM's mark for why he may miss follows his name, else the planner's doubt; silent for a fit starter. The day he
+          is due back goes under it on a phone, where the name column has 7px to spare, and beside it on a desk. */}
       <span className="flex min-w-0 flex-[1_1_5rem] flex-col lg:flex-row lg:items-center lg:gap-1.5">
         <span className="flex min-w-0 items-center gap-1.5">
           <span className={`min-w-0 truncate ${ROW_NAME}`}><PlayerName name={fullPlayerName(player.rostered)} /></span>
-          <StateBox player={footballer} />
+          {availability.state !== "fit" ? (
+            <StateMark availability={availability} />
+          ) : doubted ? (
+            <abbr title="Might not start" className={`numeric shrink-0 no-underline ${MINOR_LABEL}`}>MNS</abbr>
+          ) : null}
         </span>
         {back === null ? null : <span className={`${QUIET_NOTE} shrink-0 leading-tight`}>{back}</span>}
         {autoSub === undefined ? null : (
@@ -97,10 +114,10 @@ export default function SquadRow({
         {fixture.text}
       </span>
 
-      {/* The model's xMins for the gameweek on screen, in the derived reading's cyan; no run, no cell. */}
+      {/* The model's xMins for the gameweek on screen, inked by risk (`minutesInk`); no run, no cell. */}
       {player.minutes.length === 0 ? null : (
-        <span className="numeric w-9 shrink-0 text-center text-sm font-bold text-info">
-          {player.minutes[0]?.minutes ?? DASH}
+        <span className={`numeric w-9 shrink-0 text-center text-sm font-bold ${minutesInk(xMins)}`}>
+          {xMins ?? DASH}
         </span>
       )}
 
