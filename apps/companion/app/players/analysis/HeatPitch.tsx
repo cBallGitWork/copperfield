@@ -28,7 +28,8 @@ export default function HeatPitch({
   id,
   label,
 }: {
-  touches: readonly Touch[];
+  /** His touches as points, or counted by cell on `heat.ts`'s grid. */
+  touches: readonly Touch[] | ReadonlyMap<number, number>;
   /** Unique per pitch on the page: an SVG filter id is global to the document. */
   id: string;
   /** What a screen reader is told the pitch shows. */

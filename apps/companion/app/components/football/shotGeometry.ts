@@ -4,7 +4,7 @@ import { toBoxY } from "./pitchBox";
 // A shot mark's size, tier and reach, and where its key pass is drawn, in pitch units: pure, so tested.
 
 /** What a mark is drawn from: where the shot was struck, the chance behind it and what became of it. */
-type Mark = Pick<Shot, "x" | "y" | "xg" | "outcome">;
+export type Mark = Pick<Shot, "x" | "y" | "xg" | "outcome">;
 
 /** The cream edge every mark wears, so a club colour close to the grass still reads. */
 export const HALO = 0.15;
@@ -19,7 +19,7 @@ export const DRAWN = {
   off: { fill: "none", width: 0.28, opacity: 0.55 },
 } as const;
 
-type Tier = keyof typeof DRAWN;
+export type Tier = keyof typeof DRAWN;
 
 /** Which tier a shot is drawn in, by what became of it. */
 export const TIER: Record<Shot["outcome"], Tier> = {

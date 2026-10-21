@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import type { Shot } from "@epl/core";
 import { toBoxY } from "./pitchBox";
 import { DRAWN, HALO, TIER, drawOrder, markRadius } from "./shotGeometry";
+import type { Mark, Tier } from "./shotGeometry";
 
 // Shots as marks on the grass: size is the chance (by area), fill and weight the outcome, never a new hue.
 
@@ -18,7 +18,7 @@ export default function Marks({
   shots,
   ink = "var(--color-cream)",
 }: {
-  shots: readonly Shot[];
+  shots: readonly Mark[];
   /** Cream by default; a map with two sets of marks gives each its club colour. */
   ink?: string;
 }) {
@@ -63,15 +63,7 @@ export function MarksKey({ children }: { children?: ReactNode }) {
     <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 text-3xs text-faint">
       {TIER_LABEL.map(([tier, label]) => (
         <li key={tier} className="flex items-center gap-1">
-          <svg width="11" height="11" viewBox="-1.6 -1.6 3.2 3.2" aria-hidden className="shrink-0">
-            <circle
-              r="1.2"
-              fill={DRAWN[tier].fill}
-              stroke="var(--color-cream)"
-              strokeWidth={DRAWN[tier].width}
-              opacity={DRAWN[tier].opacity}
-            />
-          </svg>
+          <TierGlyph tier={tier} />
           {label}
         </li>
       ))}
@@ -79,5 +71,20 @@ export function MarksKey({ children }: { children?: ReactNode }) {
       {children}
       <li className="text-faint">Size is the chance behind it</li>
     </ul>
+  );
+}
+
+/** One tier's mark at text size, as the key draws it. */
+export function TierGlyph({ tier }: { tier: Tier }) {
+  return (
+    <svg width="11" height="11" viewBox="-1.6 -1.6 3.2 3.2" aria-hidden className="shrink-0">
+      <circle
+        r="1.2"
+        fill={DRAWN[tier].fill}
+        stroke="var(--color-cream)"
+        strokeWidth={DRAWN[tier].width}
+        opacity={DRAWN[tier].opacity}
+      />
+    </svg>
   );
 }

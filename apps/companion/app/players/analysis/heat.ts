@@ -1,11 +1,12 @@
-import type { Touch } from "@epl/core";
+import type { HeatGrid, Touch } from "@epl/core";
 
 // A man's touches as shaded cells for a pitch, which the component blurs (Craig, 10 Sep 2026: "heatmaps are rough
 // squares"). Scaled to his own crowded cells, so the map shows shape and the caption carries volume.
 
-/** Cells across and down: near-square on the 100x64 pitch, so the blur does not smear a direction. */
-const COLS = 24;
-const ROWS = 16;
+/** Cells across and down: near-square on the 100x64 pitch, so the blur does not smear a direction. A past season's
+ *  file is binned on this grid (`scripts/intel-past-maps.py`). */
+export const GRID: HeatGrid = { cols: 24, rows: 16 };
+const { cols: COLS, rows: ROWS } = GRID;
 
 /** One shaded cell, in fractions of the pitch: the component owns the geometry. */
 interface HeatCell {
@@ -20,11 +21,8 @@ interface HeatCell {
 /** The cell size, as a fraction of the pitch, for the component's rectangles. */
 export const CELL = { width: 1 / COLS, height: 1 / ROWS };
 
-/** A man's touches as shaded cells, his crowded ones at 1, empty ones left out. Not flipped: SofaScore already runs
- *  from his own goal to the one he attacks. */
-export function heatCells(points: readonly Touch[]): HeatCell[] {
-  if (points.length === 0) return [];
-
+/** Touches counted by cell, `row * COLS + col`, in the order first touched. */
+export function binned(points: readonly Touch[]): Map<number, number> {
   const counts = new Map<number, number>();
   for (const point of points) {
     // Clamped: a touch on the line x=100 belongs in the last column, not one never drawn.
@@ -33,6 +31,15 @@ export function heatCells(points: readonly Touch[]): HeatCell[] {
     const key = row * COLS + col;
     counts.set(key, (counts.get(key) ?? 0) + 1);
   }
+  return counts;
+}
+
+/** A man's touches, as points or already counted by `binned`'s cells, as shaded cells, his crowded ones at 1, empty
+ *  ones left out. Not flipped: SofaScore already runs from his own goal to the one he attacks. */
+export function heatCells(touches: readonly Touch[] | ReadonlyMap<number, number>): HeatCell[] {
+  const counts = "size" in touches ? touches : binned(touches);
+  if (counts.size === 0) return [];
+
   // Scaled to his crowded cells rather than his one busiest, so a lone spike cannot wash the map out.
   const ranked = [...counts.values()].sort((a, b) => a - b);
   const full = ranked[Math.min(ranked.length - 1, Math.floor(ranked.length * SATURATE))];

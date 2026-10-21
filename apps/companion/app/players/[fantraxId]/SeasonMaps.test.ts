@@ -23,3 +23,43 @@ describe("the season maps' labels", () => {
     expect(html).not.toContain("1 shots");
   });
 });
+
+describe("a past season's maps", () => {
+  it("names the season and counts the touches its cells hold", () => {
+    const html = renderToStaticMarkup(
+      createElement(SeasonMaps, {
+        maps: { shots: [{ x: 90, y: 50, xg: 0.3, outcome: "goal" }], chances: [], touches: new Map([[10, 4], [11, 3]]) },
+        club: undefined,
+        season: "2023/24",
+      }),
+    );
+    expect(html).toContain("His 1 shot in 2023/24");
+    expect(html).toContain("Where he touched the ball in 2023/24");
+    expect(html).toContain(">7<");
+    expect(html).not.toContain("Chances created");
+  });
+
+  it("draws nothing for a season with no rows for him", () => {
+    const html = renderToStaticMarkup(
+      createElement(SeasonMaps, { maps: { shots: [], chances: [], touches: new Map() }, club: undefined, season: "2023/24" }),
+    );
+    expect(html).toBe("");
+  });
+});
+
+describe("the season maps without chances", () => {
+  const touches = new Map([[10, 4]]);
+  it("runs three columns on a desk and puts the outcomes beside the shots on a phone", () => {
+    const html = renderToStaticMarkup(createElement(SeasonMaps, { maps: { shots: [shot], chances: [], touches }, club: undefined }));
+    expect(html).toContain("lg:grid-cols-3");
+    expect(html).toContain("Outcomes");
+    expect(html).toContain("Missed");
+    expect(html).toContain("0.20");
+  });
+
+  it("keeps four columns and no outcomes when he set chances up", () => {
+    const html = renderToStaticMarkup(createElement(SeasonMaps, { maps: { shots: [shot], chances: [shot], touches }, club: undefined }));
+    expect(html).toContain("lg:grid-cols-4");
+    expect(html).not.toContain("Outcomes");
+  });
+});

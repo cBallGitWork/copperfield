@@ -1,4 +1,5 @@
 import { groupedBy } from "../../grouped";
+import { onPitch } from "./onPitch";
 import type { IntelManifest } from "./types";
 
 // Every shot and where it was struck from. The exporter already flips x to the touch clouds' convention: never again.
@@ -36,12 +37,12 @@ export function shotIntel(shots: IntelShots | null): Map<number, Shot[]> {
   for (const shot of shots.shots ?? []) {
     if (!Number.isInteger(shot?.code)) continue;
     if (!Number.isInteger(shot.fplFixtureId)) continue;
-    if (!inside(shot.x) || !inside(shot.y)) continue;
+    if (!onPitch(shot.x) || !onPitch(shot.y)) continue;
     // An older export has neither field; a pass off the pitch is a mark that looks real, so it goes.
     read.push({
       ...shot,
       assistCode: Number.isInteger(shot.assistCode) ? shot.assistCode : null,
-      pass: shot.pass != null && inside(shot.pass.x) && inside(shot.pass.y) ? shot.pass : null,
+      pass: shot.pass != null && onPitch(shot.pass.x) && onPitch(shot.pass.y) ? shot.pass : null,
     });
   }
   return groupedBy(read, (shot) => shot.code);
@@ -56,10 +57,6 @@ export function assistsOf(shots: ReadonlyMap<number, readonly Shot[]>, code: num
   return made;
 }
 
-function inside(value: number): boolean {
-  return typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 100;
-}
-
 /** Every shot in one fixture by the taker's code, earliest first; keyed because the export carries no team and the
  *  caller decides each code's side. */
 export function shotsInFixture(shots: Map<number, Shot[]>, fixture: number): Map<number, Shot[]> {
@@ -70,4 +67,3 @@ export function shotsInFixture(shots: Map<number, Shot[]>, fixture: number): Map
   }
   return here;
 }
-

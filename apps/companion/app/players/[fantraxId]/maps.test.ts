@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Shot, TouchPlayer } from "@epl/core";
-import { attackingSpan, seasonMaps } from "./maps";
+import { attackingSpan, pastSeasonMaps, seasonMaps, shotBreakdown, touchCount } from "./maps";
 
 const HIM = 1;
 const MATE = 2;
@@ -44,8 +44,7 @@ const touches = new Map<number, TouchPlayer>([
 describe("seasonMaps", () => {
   it("takes his own shots, and none of a teammate's", () => {
     const maps = seasonMaps(HIM, shots, touches, false);
-    expect(maps.shots).toHaveLength(2);
-    expect(maps.shots.every((each) => each.code === HIM)).toBe(true);
+    expect(maps.shots).toEqual(shots.get(HIM));
   });
 
   it("takes every shot he set up as his chances, with or without a pass to draw", () => {
@@ -87,5 +86,40 @@ describe("attackingSpan", () => {
 
   it("never reaches past his own goal line", () => {
     expect(attackingSpan([{ x: 1 }])).toEqual({ x: 0, width: 100 });
+  });
+});
+
+describe("pastSeasonMaps", () => {
+  const past = { counts: new Map([[0, 3], [5, 2]]), shots: [{ x: 90, y: 50, xg: 0.2, outcome: "miss" as const }] };
+
+  it("draws his shots and touches, and no chances, which the file does not carry", () => {
+    expect(pastSeasonMaps(past, false)).toEqual({ shots: past.shots, chances: [], touches: past.counts });
+  });
+
+  it("keeps a keeper's touches only", () => {
+    expect(pastSeasonMaps(past, true).shots).toEqual([]);
+  });
+
+  it("counts touches off points or cells alike", () => {
+    expect(touchCount(past.counts)).toBe(5);
+    expect(touchCount([{ x: 1, y: 1 }])).toBe(1);
+  });
+});
+
+describe("shotBreakdown", () => {
+  it("counts every outcome, noughts kept, and sums the xG the shots carry", () => {
+    const { rows, xg } = shotBreakdown([
+      { x: 90, y: 50, xg: 0.5, outcome: "goal" },
+      { x: 90, y: 50, xg: 0.25, outcome: "miss" },
+      { x: 90, y: 50, xg: null, outcome: "miss" },
+    ]);
+    expect(rows.map((row) => [row.label, row.count])).toEqual([
+      ["Goals", 1], ["Saved", 0], ["Post", 0], ["Missed", 2], ["Blocked", 0],
+    ]);
+    expect(xg).toBe(0.75);
+  });
+
+  it("has no xG when no shot carries one", () => {
+    expect(shotBreakdown([{ x: 90, y: 50, xg: null, outcome: "save" }]).xg).toBeNull();
   });
 });

@@ -103,6 +103,9 @@ export { averageTouchPosition, touchFixtures, touchIntel, touchesOf } from "./in
 export type { IntelTouches, Touch, TouchPlayer } from "./intel/touches";
 // Every shot, flipped onto the touch clouds' orientation.
 export { assistsOf, shotIntel, shotsInFixture } from "./intel/shots";
+// A past season's maps, one file a season, touches already counted on the heat grid.
+export { pastMapsOf } from "./intel/pastMaps";
+export type { HeatGrid, IntelPastMaps, PastMaps, PastShot } from "./intel/pastMaps";
 export { careerIntel, seasonKey } from "./intel/careers";
 export type { IntelCareers } from "./intel/careers";
 export { cupIntel, cupName, tmlCupTies, seasonRun } from "./intel/cups";
