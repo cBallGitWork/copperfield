@@ -59,7 +59,7 @@ and `docs/ui/players.md` carry the detail.
 - **Transfer folded into the Profile** (#79, N-12): the tab is gone and `/transfer` redirects; reverses 25 Sep's "more
   CM like" tab. The status line, Business and the way out moved; the draft row and "Dropped by" went.
 - **The app no longer reads `getDraftResults`** (#79): the draft row was its one screen. Capture and the paper still
-  read it. `pedigreeOf` (core:league/pedigree.ts) has no caller left.
+  read it; `pedigreeOf` and `againstPick` went with it.
 - **Match-log columns by role** (#77, N-14): a keeper never draws G, A, xG, xA, Def, KP, Sh, SoT or Off, an outfielder
   never Sv or Prv; reverses 16 Oct's "a column stands down only when nothing measured it".
 - **Rankings folded into Every match** (#77, N-13): a Season foot of Total and Rank closes the match log, and Data opens

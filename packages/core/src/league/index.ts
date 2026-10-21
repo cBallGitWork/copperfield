@@ -43,8 +43,6 @@ export { defaultDescending, isSortKey, sortRows } from "./standingsOrder";
 export { linesAfter, tableLines } from "./tableLines";
 export type { SortKey } from "./standingsOrder";
 
-export { pedigreeOf } from "./pedigree";
-export type { Pedigree } from "./pedigree";
 
 export { firstKickoff, gameweekLock, locksAt, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodLock, periodOfGameweek, saveOpen } from "./calendar";
 export type { GameweekKickoff, PeriodGameweeks } from "./calendar";

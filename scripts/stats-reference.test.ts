@@ -96,7 +96,6 @@ const NAMED = [
   "LiveSquadPoints.players",
   "injuryMinutes()",
   "playerCodes()",
-  "againstPick()",
   "PlMatchFacts.halfTime",
   "PlMatchFacts.referee",
   "IntelMatch.halfTime",
