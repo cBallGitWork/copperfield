@@ -5,6 +5,7 @@ import { Story } from "./Fitness";
 
 vi.mock("@/app/desk", () => import("../../desk"));
 vi.mock("./latestNews", () => ({ latestNews: async () => null }));
+vi.mock("./TransferStatus", () => ({ default: () => null }));
 
 const story = {
   id: "1",

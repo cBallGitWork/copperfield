@@ -1,24 +1,39 @@
-import type { FootballPlayer } from "@epl/core";
+import { Suspense } from "react";
 import { availabilityOf, londonMoment } from "@epl/core";
 import Section from "../../components/shell/Section";
+import TransferStatus from "./TransferStatus";
 import { fitnessNote } from "./condition";
 import { latestNews } from "./latestNews";
 import { filedAt, storyText, type NewsItem } from "./newsItems";
+import type { Subject } from "./subject";
 
-// Whether he may miss out and the newest thing written about him, as plain text (Craig, 1 Oct 2026); the rest is on News.
+// Whether he may miss out and whether he is free, at the top of his Profile (Craig, 21 Oct 2026); the newest story
+// on him is a block of its own lower down, and the rest is on News.
 
 /** Prose a step above a row's name, so a paragraph reads at arm's length. */
 const PROSE = "text-base leading-relaxed text-ink lg:text-lg";
 
-export default async function Fitness({ fantraxId, player }: { fantraxId: string; player: FootballPlayer | null }) {
-  const story = await latestNews(fantraxId);
-  const note = player === null ? null : fitnessNote(availabilityOf(player));
-  if (note === null && story === null) return null;
+export default function Fitness({ found, fantraxId }: { found: Subject; fantraxId: string }) {
+  const note = found.football === null ? null : fitnessNote(availabilityOf(found.football.player));
 
   return (
-    <Section title={[note && "Fitness", story && "News"].filter(Boolean).join(" and ")}>
+    <Section title={note === null ? "Transfer" : "Fitness and transfer"}>
       {note === null ? null : <p className={PROSE}>{note}</p>}
-      {story === null ? null : <Story story={story} />}
+      {/* Streamed: the line reads the league's transaction feed; the slot holds the button's height meanwhile. */}
+      <Suspense fallback={<div aria-busy className="min-h-11" />}>
+        <TransferStatus found={found} fantraxId={fantraxId} />
+      </Suspense>
+    </Section>
+  );
+}
+
+/** Fantrax's newest note on him, under who he is; none, no block. */
+export async function LatestStory({ fantraxId }: { fantraxId: string }) {
+  const story = await latestNews(fantraxId);
+  if (story === null) return null;
+  return (
+    <Section title="News">
+      <Story story={story} />
     </Section>
   );
 }
