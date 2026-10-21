@@ -73,28 +73,30 @@ export default async function TeamPage({
       current="squad"
     >
       {planning !== null ? (
-        <LineupPlanner
-          // A new week remounts it on that week's lineup: edits made for a week that has since locked do not carry over.
-          key={open?.period ?? "none"}
-          team={team}
-          // The whole squad's detail, flat and with points: the planner rearranges it in the browser.
-          details={team.players.map((rostered) =>
-            playerDetail(rostered, clubs, opposition, points, minutes),
-          )}
-          // His fifteen's eligibility, not the pool's: this crosses to the browser.
-          players={planning.players.filter((p) => squadIds.has(p.fantraxId))}
-          // The floors join the caps here: no JSON endpoint publishes a minimum, so `scripts/roster-limits.ts` reads
-          // the commissioner's setup page into a file.
-          limits={{ ...planning.roster, minActiveByPosition: rosterMinimums() }}
-          // The same week the planner shows, never Fantrax's open one.
-          fantraxUrl={`${FANTRAX_LEAGUE_PAGE}${open === null ? "" : `/${FANTRAX_ROSTER_PATH};period=${open.period}`}`}
-          pending={pending}
-          period={open?.period ?? 0}
-          benchRanks={benchRanks}
-          canSave={commissionerSession(team.teamId) !== null}
-          picker={picker}
-          locks={locks}
-        />
+        <Above row={teams}>
+          <LineupPlanner
+            // A new week remounts it on that week's lineup: edits made for a week that has since locked do not carry over.
+            key={open?.period ?? "none"}
+            team={team}
+            // The whole squad's detail, flat and with points: the planner rearranges it in the browser.
+            details={team.players.map((rostered) =>
+              playerDetail(rostered, clubs, opposition, points, minutes),
+            )}
+            // His fifteen's eligibility, not the pool's: this crosses to the browser.
+            players={planning.players.filter((p) => squadIds.has(p.fantraxId))}
+            // The floors join the caps here: no JSON endpoint publishes a minimum, so `scripts/roster-limits.ts` reads
+            // the commissioner's setup page into a file.
+            limits={{ ...planning.roster, minActiveByPosition: rosterMinimums() }}
+            // The same week the planner shows, never Fantrax's open one.
+            fantraxUrl={`${FANTRAX_LEAGUE_PAGE}${open === null ? "" : `/${FANTRAX_ROSTER_PATH};period=${open.period}`}`}
+            pending={pending}
+            period={open?.period ?? 0}
+            benchRanks={benchRanks}
+            canSave={commissionerSession(team.teamId) !== null}
+            picker={picker}
+            locks={locks}
+          />
+        </Above>
       ) : board !== null ? (
         /* The gate: before a rival's lineups lock, his fifteen as a list alone; a pitch would draw the shape it withholds. */
         <div className="flex flex-col gap-2">
@@ -111,21 +113,33 @@ export default async function TeamPage({
         </div>
       ) : (
         /* An eleven nobody may change here: a rival's once locked, or your own in any week but the open one. */
-        <Sheet
-          {...afterSubs(lineupDetail(team, clubs, opposition, points, minutes, bench), autoSubs)}
-          breakdown={live?.breakdown ?? {}}
-          played={live?.played}
-          news={news}
-          pending={pending}
-          eligibility={eligibility}
-          picker={picker}
-          show={standing === "locked" ? "points" : "fixture"}
-          // Your own opens on the pitch, as the planner does, so changing week keeps the reading.
-          opens={mine ? "pitch" : "list"}
-          gameweek={weeks?.shown ?? null}
-        />
+        <Above row={teams}>
+          <Sheet
+            {...afterSubs(lineupDetail(team, clubs, opposition, points, minutes, bench), autoSubs)}
+            breakdown={live?.breakdown ?? {}}
+            played={live?.played}
+            news={news}
+            pending={pending}
+            eligibility={eligibility}
+            picker={picker}
+            show={standing === "locked" ? "points" : "fixture"}
+            // Your own opens on the pitch, as the planner does, so changing week keeps the reading.
+            opens={mine ? "pitch" : "list"}
+            gameweek={weeks?.shown ?? null}
+          />
+        </Above>
       )}
     </TeamShell>
+  );
+}
+
+/** The team picker on a line of its own, where the Pitch/List toggle already shares the week's row. */
+function Above({ row, children }: { row: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex px-1 lg:justify-end">{row}</div>
+      {children}
+    </div>
   );
 }
 
