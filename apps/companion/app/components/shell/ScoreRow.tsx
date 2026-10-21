@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "@/app/components/shell/Link";
 import type { ReactNode } from "react";
-import { INDEX_WIDTH, ROW_NAME } from "@/app/desk";
+import { INDEX_BLOCK, INDEX_WIDTH, ROW_NAME } from "@/app/desk";
 import { yoursEdge, yoursMark } from "@/app/mine";
 import Pending from "../league/Pending";
 import Absent from "./Absent";
@@ -107,13 +107,10 @@ const GRID = "grid-cols-[auto_1fr_auto_1fr_auto] gap-x-0.5 lg:gap-x-2";
 /** Which way a side reads: the away half mirrors the home, so both crests sit against their own block. */
 const READS = { home: "", away: "flex-row-reverse" } as const;
 
-/** CM's blue block at each end of the row, stretched to the row's full height. */
+/** CM's blue block at each end of the row, one spine down the list. */
 function Block({ side }: { side: ScoreSide }) {
   return (
-    // The negative margin gives back `.cm-row`'s padding on the desk, so a column of blocks meets as one spine.
-    <span
-      className={`cm-index numeric ${INDEX_WIDTH} flex shrink-0 items-center justify-center lg:-my-0.5`}
-    >
+    <span className={`${INDEX_BLOCK} numeric ${INDEX_WIDTH}`}>
       {/* An ordinal, as CM prints; empty, not a dash, for a side with no place, as a dash would read as a figure. */}
       {side.place ?? ""}
     </span>

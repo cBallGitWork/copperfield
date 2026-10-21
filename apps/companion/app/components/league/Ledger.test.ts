@@ -95,7 +95,7 @@ describe("a ledger grouped by day under a thumb", () => {
 
   it("sets the league's type alone beside In, and whose move beside Out", () => {
     expect(cells(grouped())).toEqual(["Fri 16 Oct Waiver", "Beef Cowthenbeef"]);
-    expect(grouped()).toMatch(/<span class="cm-index[^"]*hidden lg:block/);
+    expect(grouped()).toMatch(/<span class="cm-index[^"]* hidden"/);
   });
 
   // Final review (21 Oct 2026): grouping left-aligned the league's type, which sat right before the day heads.
@@ -119,7 +119,7 @@ describe("a ledger grouped by day under a thumb", () => {
 
   it("leaves an ungrouped ledger (Waivers' Last run) its per-row stamp and no headings", () => {
     expect(headings(render())).toEqual([]);
-    expect(render()).not.toMatch(/<span class="cm-index[^"]*hidden lg:block/);
+    expect(render()).not.toMatch(/<span class="cm-index[^"]* hidden"/);
   });
 });
 

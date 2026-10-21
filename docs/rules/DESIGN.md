@@ -214,6 +214,15 @@ EVERY point on the ramp rather than against one flat face: measured down
 `/league` at 390 on 7 Sep 2026, the ten chips run `rgb(53 84 169)` at 1st to
 `rgb(22 46 124)` at 10th, and `--color-ink` on them is 6.4:1 to 11.2:1.
 
+**One spine, no gap, every list** (Craig, 21 Oct 2026, on a squad list whose tiles sat inset in their rows: *"our
+standard is to not have a gap between the pills now, repo wide"*). Every index column, a table's cell or a flex
+row's block, takes its row's full height and meets the next across the 1px rule alone, so the column's one gradient
+reads as one bar. It is one recipe: `INDEX_SPINE` (`cm-index cm-spine`) or `INDEX_BLOCK` in `desk.ts`, through
+`IndexCell`, `PositionTile` and `DateChip` where a component draws it. `.cm-spine` stretches the block and gives back
+`.cm-row`'s 2px desk padding; the row pads its far edge only, so the block meets the panel's. A block that is a
+plate rather than a column (a pitch card's slot, a stat bar's figure, a bench number) keeps its own size;
+`indexSpine.test.ts` names those three and fails on a fourth.
+
 A blue plate (`cm-tab`, `cm-titlebar`) is the same mechanism in chrome rather
 than grey: the title bar every screen opens with, and any strip where you pick
 one of a set — the League's three views, the pool's filters. The one you are on

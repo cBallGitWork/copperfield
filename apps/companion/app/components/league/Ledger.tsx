@@ -4,7 +4,7 @@ import Link from "@/app/components/shell/Link";
 import ScrollBoard from "./ScrollBoard";
 import type { Deal, DealSide } from "@epl/core";
 import { crestForShortName, fantraxInstant, inkOn, kindOf, londonDayAndDate, londonDayMonth, londonDayOf, londonWeekday, moverOf, movement, toFplClubCode, DASH } from "@epl/core";
-import { LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
+import { INDEX_SPINE, LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
 import TeamName from "./TeamName";
 import { teamColours } from "@/app/teamColours";
 import { playerHref } from "@/app/players/routes";
@@ -46,8 +46,8 @@ export default function Ledger({
   const traded = rows.some((row) => row.partners.length > 0);
   return (
     <section className={PANEL_FLUSH}>
-      <div className={`cm-bevel hidden h-6 items-center gap-2 px-1.5 ${SMALL_CAPS} lg:flex`}>
-        <span className="w-24 shrink-0">Date</span>
+      <div className={`cm-bevel hidden h-6 items-center gap-2 pr-1.5 ${SMALL_CAPS} lg:flex`}>
+        <span className="w-24 shrink-0 px-1.5">Date</span>
         {everyone ? <span className="w-32 shrink-0">Team</span> : null}
         <span className="w-24 shrink-0">Type</span>
         <span className="min-w-0 flex-1">In</span>
@@ -73,7 +73,7 @@ export default function Ledger({
                 ) : null}
                 {/* Two rows under a thumb, In beside the date or type and Out beside whose move; one row on a desk. */}
                 <li
-                  className={`cm-row grid ${groupByDay ? (everyone ? "grid-cols-[5.25rem_minmax(0,1fr)]" : "grid-cols-[4rem_minmax(0,1fr)]") : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5`}
+                  className={`cm-row grid ${groupByDay ? (everyone ? "grid-cols-[5.25rem_minmax(0,1fr)]" : "grid-cols-[4rem_minmax(0,1fr)]") : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5 lg:pl-0`}
                 >
                   <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
                     <Day at={instant} weekday={!everyone} deskOnly={groupByDay} />
@@ -202,7 +202,7 @@ function Named({ name, position }: { name: string; position?: string | null }) {
  *  `deskOnly` when a day heading says it under a thumb. */
 function Day({ at, weekday, deskOnly }: { at: string | null; weekday: boolean; deskOnly: boolean }) {
   return (
-    <span className={`cm-index numeric shrink-0 whitespace-nowrap px-1.5 py-0.5 lg:w-24 ${deskOnly ? "hidden lg:block" : weekday ? "w-24" : ""}`}>
+    <span className={`${INDEX_SPINE} numeric shrink-0 whitespace-nowrap px-1.5 py-0.5 lg:flex lg:w-24 lg:items-center ${deskOnly ? "hidden" : weekday ? "w-24" : ""}`}>
       {at === null ? (
         DASH
       ) : (

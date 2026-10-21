@@ -1,3 +1,5 @@
+import { INDEX_SPINE } from "@/app/desk";
+
 // CM's blue index block holding a date, set on two lines so the fold lands in the same place on every row.
 
 export default function DateChip({
@@ -14,7 +16,7 @@ export default function DateChip({
 }) {
   return (
     <span
-      className={`cm-index numeric flex shrink-0 flex-col items-center justify-center px-1 text-center leading-tight ${className}`}
+      className={`${INDEX_SPINE} numeric flex shrink-0 flex-col items-center justify-center px-1 text-center leading-tight ${className}`}
     >
       <span>{day}</span>
       {time === null || time === undefined ? null : <span>{time}</span>}

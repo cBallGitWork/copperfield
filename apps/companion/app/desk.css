@@ -277,6 +277,17 @@ select.cm-bevel {
   text-shadow: 0.04em 0.05em 0.05em rgb(0 0 0 / 0.55);
 }
 
+/* The index column is one spine (Craig, 21 Oct 2026): each block takes its row's full height and meets the next.
+   From `lg` a `.cm-row` pads 2px top and bottom, which the block gives back; a table cell ignores both. */
+.cm-spine {
+  align-self: stretch;
+}
+@media (min-width: 64rem) {
+  .cm-row .cm-spine {
+    margin-block: -0.125rem;
+  }
+}
+
 /* The size is layered so a `text-*` utility can override it (`news/page.tsx` does); the unlayered weight cannot be. */
 @layer components {
   .cm-index {

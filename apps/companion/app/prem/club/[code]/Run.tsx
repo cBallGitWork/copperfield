@@ -5,7 +5,7 @@ import type { Club, CupTie, Fixture, RunEntry, SeasonOrder } from "@epl/core";
 import { COMPETITION_NAME, cupName, kickoffAt, londonDayAndDate, londonTime, DASH } from "@epl/core";
 import { clubHref } from "../../routes";
 import { BOARD, DESK_ONLY, FIGURE, MINOR_CAPS, MINOR_LABEL, ROW_HOVER, ROW_NAME, TAP_ROW } from "@/app/desk";
-import { ROW_LINK } from "../../../components/league/TableCells";
+import { IndexCell, ROW_LINK } from "../../../components/league/TableCells";
 import Absent from "@/app/components/shell/Absent";
 import ClubLabel from "@/app/components/football/ClubLabel";
 import Scoreline from "../../../components/shell/Scoreline";
@@ -63,7 +63,7 @@ function runRow(entry: RunEntry, club: Club, clubs: Map<number, Club>, byCode: M
   return (
     <tr key={row.key} className={`cm-row ${ROW_HOVER}`}>
       {/* The date in the club's own colour: `ClubShell` scopes `--cm-index` to this club. */}
-      <td className="cm-index numeric whitespace-nowrap px-1.5 text-center">{kickoffAt(row.kickoff, londonDayAndDate)}</td>
+      <IndexCell wide width="" className="whitespace-nowrap">{kickoffAt(row.kickoff, londonDayAndDate)}</IndexCell>
       <td className="numeric whitespace-nowrap px-1 text-3xs text-faint lg:text-2xs">
         {row.kickoff === null ? "" : londonTime(row.kickoff)}
       </td>

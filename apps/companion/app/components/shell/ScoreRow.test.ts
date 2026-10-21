@@ -5,7 +5,7 @@ import ScoreRow from "./ScoreRow";
 import { tieSide } from "../league/tieSide";
 
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
-vi.mock("@/app/desk", () => ({ INDEX_WIDTH: "", ROW_NAME: "" }));
+vi.mock("@/app/desk", async () => ({ INDEX_BLOCK: (await import("../../desk")).INDEX_BLOCK, INDEX_WIDTH: "", ROW_NAME: "" }));
 vi.mock("@/app/mine", () => import("../../mine"));
 
 const places = new Map<string, string>();
