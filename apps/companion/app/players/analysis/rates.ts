@@ -1,4 +1,4 @@
-import type { PastMaps, PastSeason, RateTotals } from "@epl/core";
+import type { PastMaps, PastSeason, RateTotals, SeasonTotals } from "@epl/core";
 import { per90 } from "../standout";
 import { touchCount } from "../[fantraxId]/maps";
 
@@ -12,10 +12,10 @@ export type Played = { [Key in keyof RateTotals]: number | null } & {
   touches: number | null;
   shots: number | null;
   keyPasses: number | null;
-  goals?: number | null;
-  assists?: number | null;
-  cleanSheets?: number | null;
-  goalsConceded?: number | null;
+  goals: number | null;
+  assists: number | null;
+  cleanSheets: number | null;
+  goalsConceded: number | null;
 };
 
 /** One measure, and how to read it off a season. */
@@ -38,8 +38,8 @@ const RATES: readonly Rate[] = [
   { name: "Touches", from: "Touches per 90", perNinety: true, of: (s) => s.touches, on: "both" },
   { name: "Shots", from: "Shots per 90", perNinety: true, of: (s) => s.shots, on: "both" },
   { name: "Key passes", from: "Key passes per 90", perNinety: true, of: (s) => s.keyPasses, on: "now" },
-  { name: "Goals", from: "Goals per 90", perNinety: true, of: (s) => s.goals ?? null, on: "past" },
-  { name: "Assists", from: "Assists per 90", perNinety: true, of: (s) => s.assists ?? null, on: "past" },
+  { name: "Goals", from: "Goals per 90", perNinety: true, of: (s) => s.goals, on: "past" },
+  { name: "Assists", from: "Assists per 90", perNinety: true, of: (s) => s.assists, on: "past" },
   { name: "xG", from: "Expected goals per 90", perNinety: true, of: (s) => s.expectedGoals, on: "now" },
   { name: "xA", from: "Expected assists per 90", perNinety: true, of: (s) => s.expectedAssists, on: "now" },
   { name: "Tackles", from: "Tackles per 90", perNinety: true, of: (s) => s.tackles, on: "now" },
@@ -51,13 +51,13 @@ const RATES: readonly Rate[] = [
     on: "now",
   },
   { name: "Recoveries", from: "Recoveries per 90", perNinety: true, of: (s) => s.recoveries, on: "now" },
-  { name: "CS", from: "Clean sheets per 90", perNinety: true, of: (s) => s.cleanSheets ?? null, on: "past" },
+  { name: "CS", from: "Clean sheets per 90", perNinety: true, of: (s) => s.cleanSheets, on: "past" },
   { name: "Saves", from: "Saves per 90", perNinety: true, of: (s) => s.saves, on: "both" },
   {
     name: "Conceded",
     from: "Goals conceded per 90, lower is better",
     perNinety: true,
-    of: (s) => s.goalsConceded ?? null,
+    of: (s) => s.goalsConceded,
     on: "past",
   },
   {
@@ -95,6 +95,16 @@ export function rateRows(a: Played | null, b: Played | null, past = false): Rate
     rows.push({ name: rate.name, from: rate.from, perNinety: rate.perNinety, a: left, b: right });
   }
   return rows;
+}
+
+/** The four counts a past ledger sets against him this season; a window of gameweeks (null) carries none. */
+export function seasonCounts(season: SeasonTotals | null): Pick<Played, "goals" | "assists" | "cleanSheets" | "goalsConceded"> {
+  return {
+    goals: season?.goals ?? null,
+    assists: season?.assists ?? null,
+    cleanSheets: season?.cleanSheets ?? null,
+    goalsConceded: season?.goalsConceded ?? null,
+  };
 }
 
 /** A completed season as the ledger reads it: its line, and the touches and shots its maps hold. A season with no map

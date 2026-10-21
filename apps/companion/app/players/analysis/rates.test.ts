@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SeasonTotals } from "@epl/core";
-import { measuresFor, pastPlayed, rateRows, type Played } from "./rates";
+import { measuresFor, pastPlayed, rateRows, seasonCounts, type Played } from "./rates";
 
 /** A season with everything at nought, so each case sets only what it is about.
  *  Every field on `SeasonTotals` is present on all 651 elements, so a plain
@@ -163,6 +163,11 @@ describe("a ledger with a past season in it", () => {
     expect(row(rows, "Shots")?.b).toBeNull();
     const empty = pastPlayed(line, { counts: new Map(), shots: [] });
     expect([empty.touches, empty.shots]).toEqual([null, null]);
+  });
+
+  it("reads this season's four counts off the season, and none off a window of gameweeks", () => {
+    expect(seasonCounts(season({ goals: 6, assists: 3, cleanSheets: 1, goalsConceded: 12 }))).toEqual({ goals: 6, assists: 3, cleanSheets: 1, goalsConceded: 12 });
+    expect(seasonCounts(null)).toEqual({ goals: null, assists: null, cleanSheets: null, goalsConceded: null });
   });
 
   it("never prints a measure a past season lacks", () => {

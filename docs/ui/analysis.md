@@ -40,7 +40,10 @@ completed season, so a man can be set against himself or the rival in an earlier
   so those rows go; goals, assists and clean sheets appear only beside a past season, never in this season's own
   ledger. Per 90 throughout, so a part season compares fairly. Touches and shots come from that season's map file;
   a season with no file is `—`, never 0.
-- **No points for a past side**: FPts and FP/G print `—` there, and two past sides draw no points ledger.
+- **No points ledger while a past season is on screen.** The past ledger carries goals, assists and clean sheets,
+  FPL's counts of what the league scores, so the 10 Sep "none of the three" rule (below) now holds by hiding FPts and
+  FP/G whenever either side is past, rather than by keeping the three out (DESIGN §7: FPL's count never beside a
+  Fantrax figure). A past season has no league points in any case.
 - **Season / Last 6 is hidden**, and so are **Key passes** (no past file carries them) and **Attributes** (percentiles
   over this season's division).
 - **Maps**: Shots and Touches read `data/intel/past-maps` (21/22 to 25/26) through `pastMaps.ts`; touches are the

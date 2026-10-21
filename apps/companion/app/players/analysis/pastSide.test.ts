@@ -6,7 +6,7 @@ import type { PastSeason } from "@epl/core";
 import CompareMap from "./CompareMap";
 import Figures from "./Figures";
 import PlayerMap from "./PlayerMap";
-import { manIn } from "./overWindow";
+import { manIn, manOver, type Found } from "./overWindow";
 import type { Played } from "./rates";
 
 // The app's `@/` alias is Next's, not vitest's.
@@ -43,6 +43,33 @@ describe("a past side on Compare", () => {
     expect(lines.find((line) => line.includes("Goals/90"))).toBe("0.50 Goals/90 0.50");
     expect(html).not.toContain("xG/90");
     expect(html).not.toContain("Starts");
+  });
+
+  it("sets this season's goals, assists and clean sheets against a past season's, per 90", async () => {
+    const season = {
+      goals: 6, assists: 3, cleanSheets: 1, minutes: 900, starts: 10, expectedGoals: 4, expectedAssists: 1,
+      expectedGoalsConceded: 9, influence: 0, creativity: 0, threat: 0, tackles: 5, clearancesBlocksInterceptions: 3,
+      recoveries: 20, saves: 0, goalsConceded: 12,
+    };
+    const side = { football: { player: { code: 1, season }, club: undefined } } as unknown as Found;
+    const window = { inWindow: new Set<number>(), gameweekOf: new Map<number, number>() };
+    const current = await manOver(side, "Haaland 26/27", { ...window, recent: false });
+    const html = renderToStaticMarkup(
+      createElement(Figures, {
+        a: current.played,
+        b: manIn("Haaland 24/25", LINE, null).played,
+        names: { a: "Haaland 26/27", b: "Haaland 24/25" },
+        window: "in the seasons named",
+        past: true,
+      }),
+    );
+    const lines = ledger(html);
+    expect(lines.find((line) => line.includes("Goals/90"))).toBe("0.60 Goals/90 0.50");
+    expect(lines.find((line) => line.includes("Assists/90"))).toBe("0.30 Assists/90 0.20");
+    expect(lines.find((line) => line.includes("CS/90"))).toBe("0.10 CS/90 0.10");
+    expect(lines.find((line) => line.includes("Conceded/90"))).toBe("1.20 Conceded/90 1.00");
+    // A window of gameweeks carries no such counts: they are absent there, never nought.
+    expect((await manOver(side, "Haaland", { ...window, recent: true })).played).toBeNull();
   });
 
   it("prints a dash, never a nought, over the shots of a season with no map", () => {

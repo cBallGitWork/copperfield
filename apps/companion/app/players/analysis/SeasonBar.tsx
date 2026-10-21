@@ -1,6 +1,6 @@
 import type { PastSeason } from "@epl/core";
 import QuerySelect from "../../components/shell/QuerySelect";
-import { Chip } from "../BoardControls";
+import ButtonLink from "../../components/shell/ButtonLink";
 import { ANALYSIS, compareHref, seasonValue, type CompareField } from "../routes";
 import { Carried } from "./PickBar";
 import { SEASON_PARAM } from "./season";
@@ -40,9 +40,9 @@ export default function SeasonBar({
       <div className="flex min-w-0 flex-col gap-1.5">
         {b === null ? null : <Pick side="b" offer={b} query={query} />}
         {versus === null ? null : (
-          <Chip on={false} href={versus}>
+          <ButtonLink href={versus}>
             vs his last season
-          </Chip>
+          </ButtonLink>
         )}
       </div>
     </div>

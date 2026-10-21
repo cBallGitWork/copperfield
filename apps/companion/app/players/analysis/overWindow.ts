@@ -1,6 +1,6 @@
 import { assistsOf, inGameweeks, totalsOver, touchFixtures, touchesOf } from "@epl/core";
-import type { Club, PastMaps, PastSeason, Shot, Touch } from "@epl/core";
-import { pastPlayed, type Played } from "./rates";
+import type { Club, PastMaps, PastSeason, RateTotals, Shot, Touch } from "@epl/core";
+import { pastPlayed, seasonCounts, type Played } from "./rates";
 import type { subject } from "../[fantraxId]/subject";
 import { gameLog } from "../[fantraxId]/scouting";
 import type { PassMark } from "../../components/football/shotGeometry";
@@ -44,7 +44,7 @@ export async function manOver(side: Found, name: string, { recent, inWindow, gam
   const keyPasses = keep(assistsOf(intelShots, code));
   // The window is his game log: with FPL not answering it has no figures, rather than a window of noughts.
   const log = player !== undefined && recent ? await gameLog(player) : null;
-  const totals =
+  const totals: RateTotals | null =
     player === undefined
       ? null
       : recent
@@ -55,6 +55,7 @@ export async function manOver(side: Found, name: string, { recent, inWindow, gam
       ? null
       : {
           ...totals,
+          ...seasonCounts(recent ? null : (player?.season ?? null)),
           touches: touches === undefined ? null : touchesOf(touches, null).length,
           shots: touches === undefined ? null : shots.length,
           keyPasses: touches === undefined ? null : keyPasses.length,

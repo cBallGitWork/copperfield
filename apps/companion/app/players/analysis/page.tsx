@@ -6,7 +6,6 @@ import {
   gameweekSpan,
   lastPlayed,
 } from "@epl/core";
-import type { PastSeason } from "@epl/core";
 import ScoutShell from "../Shell";
 import Nothing from "../../components/shell/Nothing";
 import FantraxSilent from "../../components/shell/FantraxSilent";
@@ -158,11 +157,11 @@ export default async function ComparePage({
     ].map(({ side, name, season }) => sideOf(side, name, season, { recent, inWindow, gameweekOf })),
   );
   const [first, second] = [men[0], men[1] ?? null];
-  // As the board reads him: the pool row and the counts that say whether he has played. A past season has no points.
-  const scored = (id: string | undefined, season: PastSeason | null): Scored =>
-    season !== null
-      ? { row: undefined, stats: undefined }
-      : { row: rows.find((row) => row.entry.player.fantraxId === id), stats: lines.find((line) => line.fantraxId === id)?.stats };
+  // As the board reads him: the pool row and the counts that say whether he has played.
+  const scored = (id: string | undefined): Scored => ({
+    row: rows.find((row) => row.entry.player.fantraxId === id),
+    stats: lines.find((line) => line.fantraxId === id)?.stats,
+  });
 
   const href = (changes: { view?: View; range?: string }) => {
     const nextView = changes.view ?? view;
@@ -193,12 +192,15 @@ export default async function ComparePage({
         }
       />
 
-      <Points
-        a={scored(a, seasonA)}
-        b={solo ? null : scored(b, seasonB)}
-        names={{ a: names.a, b: solo ? null : names.b }}
-        season={"unavailable" in pool ? null : pool.season}
-      />
+      {/* No league points beside a past ledger's goals, assists and clean sheets, which are FPL's counts (DESIGN §7). */}
+      {past ? null : (
+        <Points
+          a={scored(a)}
+          b={solo ? null : scored(b)}
+          names={{ a: names.a, b: solo ? null : names.b }}
+          season={"unavailable" in pool ? null : pool.season}
+        />
+      )}
 
       {/* One category at a time at every width (Craig, 24 Sep 2026: "desktop like mobile"). */}
       <TabStrip
