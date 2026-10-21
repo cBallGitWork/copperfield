@@ -6,6 +6,7 @@ import StateBox from "../../../../components/football/StateBox";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import { BOARD, ROW_NAME, ROW_RULE } from "@/app/desk";
 import NameLink from "../NameLink";
+import XMins, { type WeekMinutes } from "./XMins";
 
 // The same chart as a list, for a phone (Craig, 25 Sep 2026): a row per place, its shirt in the
 // index block and the men in line across it, each washed by his doubt and boxed by why.
@@ -17,10 +18,13 @@ export default function DepthList({
   lines,
   playerOf,
   hrefOf,
+  minutes,
 }: {
   lines: readonly (readonly DepthSpot[])[];
   playerOf: (code: number) => FootballPlayer | null;
   hrefOf: (code: number) => string | null;
+  /** Null draws no figure. */
+  minutes: WeekMinutes | null;
 }) {
   const spots = lines.flat();
   const depth = Math.max(1, ...spots.map((spot) => spot.holders.length));
@@ -56,6 +60,7 @@ export default function DepthList({
                           <PlayerName name={player.name} />
                         </span>
                         <StateBox player={player} />
+                        {minutes === null ? null : <XMins code={player.code} minutes={minutes} />}
                       </NameLink>
                     )}
                   </td>

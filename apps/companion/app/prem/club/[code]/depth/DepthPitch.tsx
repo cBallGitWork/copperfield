@@ -2,6 +2,7 @@ import { DASH, pitchName, type DepthSpot, type FootballPlayer } from "@epl/core"
 import PitchRows from "../../../../components/league/PitchRows";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import NameLink from "../NameLink";
+import XMins, { type WeekMinutes } from "./XMins";
 
 // The depth chart on CM's pitch (Craig, 25 Sep 2026): each place a plate with its shirt on top and
 // the men in line under it, first choice loudest, a doubt's name washed in the doubt ramp.
@@ -16,10 +17,13 @@ export default function DepthPitch({
   lines,
   playerOf,
   hrefOf,
+  minutes,
 }: {
   lines: readonly (readonly DepthSpot[])[];
   playerOf: (code: number) => FootballPlayer | null;
   hrefOf: (code: number) => string | null;
+  /** Null draws no figure. */
+  minutes: WeekMinutes | null;
 }) {
   return (
     <PitchRows
@@ -27,7 +31,7 @@ export default function DepthPitch({
       keyOf={({ spot, at }: Placed) => `${spot.slot}-${at}`}
       inColumn
     >
-      {({ spot }) => <Plate spot={spot} playerOf={playerOf} hrefOf={hrefOf} />}
+      {({ spot }) => <Plate spot={spot} playerOf={playerOf} hrefOf={hrefOf} minutes={minutes} />}
     </PitchRows>
   );
 }
@@ -38,10 +42,12 @@ function Plate({
   spot,
   playerOf,
   hrefOf,
+  minutes,
 }: {
   spot: DepthSpot;
   playerOf: (code: number) => FootballPlayer | null;
   hrefOf: (code: number) => string | null;
+  minutes: WeekMinutes | null;
 }) {
   const men = spot.holders.flatMap((holder) => {
     const player = playerOf(holder.code);
@@ -62,11 +68,13 @@ function Plate({
         men.map((player, rank) => (
           <span
             key={player.code}
-            className={`truncate border-t border-bg px-1 py-0.5 text-center font-chrome lg:text-xs ${
+            className={`flex gap-1 border-t border-bg px-1 py-0.5 font-chrome lg:text-xs ${
               rank === 0 ? "text-2xs font-bold text-ink" : "text-2xs text-muted"
             } ${doubtRow(player)}`}
           >
-            {pitchName(player)}
+            {/* The name gives way so the figure keeps its line and the plate its height (DESIGN §9). */}
+            <span className={`min-w-0 flex-1 truncate ${minutes === null ? "text-center" : "text-left"}`}>{pitchName(player)}</span>
+            {minutes === null ? null : <XMins code={player.code} minutes={minutes} />}
           </span>
         ))
       )}

@@ -4748,7 +4748,8 @@ draft squads' list "by gameweek", and the player card "for future weeks too". Th
 `data/intel/projections` (`players[].gameweeks[].minutes`, FPL code, GW6–17, all 666 men; the export contract's
 `xMins` is called `minutes`), a football reading, so not from the league join's `minutesPerGw` (537 men). Only the
 minutes cross: `minutesIntel` drops the points. The player page's "Next up" prints xMins only; its projected points
-and the projections page were deleted on 19 Oct 2026 (Craig: *"ok"*).
+and the projections page were deleted on 19 Oct 2026 (Craig: *"ok"*). The club Depth tab prints each man's
+xMins beside his name since 21 Oct 2026 (Craig: *"depth chart should show their xmins too"*).
 
 - **Flat after next week**: GW7–17 are one repeated figure for 289 of 537 men (Haaland 85, then 85.7 to GW17).
   The card prints them as they are; it is the model saying it knows nothing new, not a fault.
