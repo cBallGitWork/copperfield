@@ -107,6 +107,8 @@ export { careerIntel, seasonKey } from "./intel/careers";
 export type { IntelCareers } from "./intel/careers";
 export { cupIntel, cupName, tmlCupTies, seasonRun } from "./intel/cups";
 export type { CupTie, IntelCups, RunEntry, TmlRow } from "./intel/cups";
+export { runOrder, seasonOrder } from "./intel/seasonOrder";
+export type { SeasonOrder } from "./intel/seasonOrder";
 export { depthIntel, depthLines } from "./intel/depth";
 export type { ClubDepth, DepthSpot, IntelDepth } from "./intel/depth";
 // Season-to-date event counts off the stats league, in football terms and keyed on FPL code.

@@ -1,7 +1,7 @@
 import { createElement, Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { Club, Fixture } from "@epl/core";
+import type { Club, Fixture, RunEntry } from "@epl/core";
 import Run from "./Run";
 
 // The app's `@/` alias is Next's, not vitest's: each is the real module by its relative path, or a stand-in.
@@ -22,11 +22,21 @@ const fixture = (over: Partial<Fixture>): Fixture => ({
   homeDifficulty: null, awayDifficulty: null, ...over,
 });
 
+const league = (id: number, over: Partial<Fixture> = {}): RunEntry => ({ kind: "league", fixture: fixture({ id, ...over }) });
+
+/** Each row's cells' text, in the order drawn. */
+function rows(order: { toCome: RunEntry[]; played: RunEntry[] }): string[] {
+  const html = renderToStaticMarkup(
+    createElement(Run, { order, club: arsenal, clubs: new Map([[1, arsenal], [2, villa]]), byCode: new Map() }),
+  );
+  return [...html.matchAll(/<tr[^>]*>(.*?)<\/tr>/g)].map((row) => (row[1] ?? "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+}
+
 /** The score cell's text, the row's last. */
 function score(over: Partial<Fixture>): string {
   const html = renderToStaticMarkup(
     createElement(Run, {
-      entries: [{ kind: "league", fixture: fixture(over) }],
+      order: { toCome: [{ kind: "league", fixture: fixture(over) }], played: [] },
       club: arsenal,
       clubs: new Map([[1, arsenal], [2, villa]]),
       byCode: new Map(),
@@ -47,5 +57,18 @@ describe("a club's run of fixtures", () => {
 
   it("prints a dash for a match not yet played", () => {
     expect(score({})).toBe("—");
+  });
+
+  it("draws the matches to come first, then one Played row, then the played", () => {
+    const drawn = rows({
+      toCome: [league(3, { kickoff: "2026-10-25T14:00:00Z" })],
+      played: [league(2, { kickoff: "2026-10-04T14:00:00Z", status: "finished", homeScore: 1, awayScore: 0 })],
+    });
+    expect(drawn.map((row) => row.match(/Played|\d+ (Oct)/)?.[0])).toEqual(["25 Oct", "Played", "4 Oct"]);
+    expect(drawn.filter((row) => row === "Played")).toHaveLength(1);
+  });
+
+  it("draws no Played row before anything is played", () => {
+    expect(rows({ toCome: [league(3)], played: [] }).includes("Played")).toBe(false);
   });
 });
