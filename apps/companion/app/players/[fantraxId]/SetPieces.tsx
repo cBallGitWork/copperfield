@@ -12,6 +12,7 @@ export default function SetPieces({ pieces, club }: { pieces: readonly SetPieceR
   return (
     <Section title="Set pieces" aside={club === null ? undefined : `At ${club}`}>
       <Board
+        fit
         rows={["Rank"]}
         keyOf={(row) => row}
         lead={{ index: { label: "Row", of: (row) => row, wide: true } }}

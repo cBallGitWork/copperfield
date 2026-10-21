@@ -5,6 +5,7 @@ import { HeadRow, MUTE, PlateHead, SortHead, sortedAs } from "./TableHeads";
 import { IndexCell } from "./TableCells";
 import {
   BOARD,
+  BOARD_FIT,
   FIGURE_CELL,
   HEAD_CELL,
   INDEX_WIDTH,
@@ -96,6 +97,7 @@ export default function Board<Row>({
   order,
   compact = false,
   fixed = false,
+  fit = false,
   caption,
   rowClass,
   rowAttrs,
@@ -112,6 +114,8 @@ export default function Board<Row>({
   compact?: boolean;
   /** `table-fixed`: each figure holds its width and the name gives. */
   fixed?: boolean;
+  /** Sized to its figures on a desk rather than filling the panel: a short table of a few columns. */
+  fit?: boolean;
   caption?: string;
   rowClass?: (row: Row) => string;
   rowAttrs?: Readonly<Record<string, string>>;
@@ -167,7 +171,7 @@ export default function Board<Row>({
 
   return (
     <ScrollBoard className={`bg-surface ${line === undefined ? "" : "max-lg:@container"} ${className}`} style={style}>
-      <table className={`${BOARD} whitespace-nowrap ${fixed ? "table-fixed" : ""}`}>
+      <table className={`${fit ? BOARD_FIT : BOARD} whitespace-nowrap ${fixed ? "table-fixed" : ""}`}>
         {caption === undefined ? null : <caption className="sr-only">{caption}</caption>}
         <thead>
           {groups === null ? null : (

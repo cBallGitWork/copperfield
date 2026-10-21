@@ -25,6 +25,8 @@ export default function Rankings({
   return (
     <Section title="Rankings" aside={`Among ${field} ${group ?? "players"}`}>
       <Board
+        fit
+        compact
         rows={ROWS}
         keyOf={(row) => row}
         lead={{ index: { label: "Row", of: (row) => row, wide: true } }}

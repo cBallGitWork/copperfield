@@ -59,6 +59,9 @@ export const TEXT = {
 /** A table that fills its panel. `border-collapse`, or the row rule doubles to 2px. */
 export const BOARD = "w-full border-collapse text-sm";
 
+/** `BOARD` sized to its figures on a desk: a short table that would otherwise stretch three-letter cells to 300px. */
+export const BOARD_FIT = `${BOARD} lg:w-auto`;
+
 /** The rule between table rows, in `border-bg`: the darker step reads as one ruled table. */
 export const ROW_RULE = "border-b border-bg";
 
