@@ -1,5 +1,5 @@
-import { sortableIn } from "./groups";
 import { activeSort } from "./query";
+import { sortOptions } from "./sortOptions";
 import { drawnCount } from "./pageRows";
 import type { BoardChange } from "./boardChange";
 import BoardLink from "./BoardLink";
@@ -128,7 +128,7 @@ export default function BoardBar({
                 name="sort"
                 label="Sort by"
                 value={activeSort(query, view).column.key}
-                options={sortableIn(view.columns, scored).map((c) => ({ value: c.key, label: c.label }))}
+                options={sortOptions(view, scored, rated)}
                 action={route}
                 clears={["dir"]}
                 replace
