@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { Club, PlClubSeason, SeasonTotals } from "@epl/core";
+import { ASSISTS_OFFICIAL, GOALS, GOALS_AGAINST, type Club, type PlClubSeason, type SeasonTotals } from "@epl/core";
+import { COLUMNS } from "../columns";
 import { TEAM_COLUMNS, TEAM_GROUPS, plateHref, sortHref, sortedTeams, teamsView } from "./columns";
 import type { TeamRow } from "./teamRows";
 
@@ -29,6 +30,13 @@ describe("sortedTeams", () => {
 });
 
 describe("the columns", () => {
+  it("head a fact the Data boards also count by the boards' own head", () => {
+    // DATA-6, 21 Oct 2026: goals conceded went by GC here and GA on Adv Stats.
+    const pool = (short: string) => COLUMNS.find((column) => column.stat === short)?.label;
+    const team = (key: string) => teamColumn(key).head;
+    expect([team("g"), team("a"), team("gc")]).toEqual([GOALS, ASSISTS_OFFICIAL, GOALS_AGAINST].map((c) => pool(c.short)));
+  });
+
   it("carry no fantasy figure and no fixture run", () => {
     const heads = TEAM_COLUMNS.map((column) => column.head);
     for (const gone of ["FPts", "FA", "Attack", "Defence", "GK", "Bonus", "BPS"]) expect(heads).not.toContain(gone);
@@ -88,7 +96,7 @@ describe("teamsView", () => {
     expect([view.group.key, view.sort.key, view.descending]).toEqual(["defence", "gc", false]);
   });
 
-  it("leads each plate with its named column: G, xA, GC, Fls", () => {
+  it("leads each plate with its named column: G, xA, GA, Fls", () => {
     const leads = TEAM_GROUPS.map((group) => teamsView({ group: group.key }).sort.key);
     expect(leads).toEqual(["g", "xa", "gc", "fls"]);
     const discipline = teamsView({ group: "discipline" });

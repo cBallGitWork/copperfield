@@ -44,7 +44,7 @@ export const TEAM_COLUMNS: readonly TeamColumn[] = [
   { key: "kp", group: "chances", head: "KP", title: "Chances created: passes that led to a shot", of: opta("chancesCreated"), rank: "high" },
   { key: "bcc", group: "chances", head: "BCC", title: "Big chances created", of: opta("bigChancesCreated"), rank: "high" },
   { key: "xa", group: "chances", head: "xA", title: "Expected assists, the squad's", of: squad("expectedAssists"), kind: "expected", rank: "high" },
-  { key: "gc", group: "defence", head: "GC", title: "Goals conceded", of: opta("goalsConceded"), rank: "low" },
+  { key: "gc", group: "defence", head: "GA", title: "Goals conceded", of: opta("goalsConceded"), rank: "low" },
   // FPL counts each chance against once per man on the pitch, so eleven share one.
   { key: "xgc", group: "defence", head: "xGC", title: "Expected goals conceded", of: squad("expectedGoalsConceded", ON_THE_PITCH), kind: "expected", rank: "low" },
   { key: "cs", group: "defence", head: "CS", title: "Clean sheets", of: opta("cleanSheets"), rank: "high" },

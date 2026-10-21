@@ -172,6 +172,11 @@ export function ratedOn(columns: readonly PoolColumn[], per90: boolean): boolean
   return columns.some((column) => column.rate === true) ? per90 : null;
 }
 
+/** The heads as drawn: each rated one marked /90 under Per 90, since 0.82 could also be a season's total. */
+export function headedFor(columns: readonly PoolColumn[], rated: boolean | null): PoolColumn[] {
+  return columns.map((column) => (rated === true && column.rate === true ? { ...column, label: `${column.label}/90` } : column));
+}
+
 export function columnFor(key: string | undefined): PoolColumn | undefined {
   return COLUMNS.find((column) => column.key === key);
 }
