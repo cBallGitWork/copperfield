@@ -335,9 +335,8 @@ use better colours for us too"*. So a cell is lit or it is not.
   top value is common lights nothing — `YC` in August.
 - **`GP` and `Min` are never lit** (`denominator()` in `columns.ts`, 21 Oct 2026): how much a man played is not how
   well, and the rehearsal league lit Min wherever 630 was not common.
-- **The column the board is sorted by is never lit** (`litColumns` in `standout.ts`, 21 Oct 2026): its top rows are
-  its top sixth by construction, so Craig's FREE board by `FPts` lit `FPts` on 13 of 13 rows. The order already says
-  who leads; every other column still lights.
+- **The column the board is sorted by is never lit** (DESIGN §3, `unlessSorted`, 21 Oct 2026): its top rows are its
+  top sixth by construction, so Craig's FREE board by `FPts` lit `FPts` on 13 of 13 rows. Every other column lights.
 - **The population is the first hundred rows the query chose** (or every row drawn
   past that), so a mark re-reads on every filter but holds while Show N more pages
   in: the shares are tuned on a hundred men, and a 30-row page cut over itself lit

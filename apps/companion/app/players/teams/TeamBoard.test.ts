@@ -1,8 +1,8 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import { ClubsBoards } from "./TeamBoard";
-import { sortedTeams, teamsView } from "./columns";
+import TeamBoard, { ClubsBoards } from "./TeamBoard";
+import { TEAM_COLUMNS, sortedTeams, teamsView } from "./columns";
 import type { TeamRow } from "./teamRows";
 
 vi.mock("@/app/desk", () => import("../../desk"));
@@ -45,5 +45,26 @@ describe("Clubs under a thumb", () => {
     const place = html.match(/<td class="cm-index[^"]*"/g) ?? [];
     expect(place.length).toBeGreaterThan(0);
     for (const cell of place) expect(cell).toMatch(/\bmin-w-8\b.*\blg:min-w-9\b/);
+  });
+});
+
+describe("Clubs' standouts", () => {
+  // Craig, 21 Oct 2026: the sorted column was lit down its top rows, which the order already says.
+  const goals = TEAM_COLUMNS.filter((column) => column.key === "g" || column.key === "sh");
+  const clubs: TeamRow[] = Array.from({ length: 10 }, (_, at) => ({
+    club: { id: at + 1, code: at + 1, name: `C${at}`, shortName: `C${at}` },
+    season: { clubCode: at + 1, goals: 30 - at, shots: 300 - at * 10 } as unknown as TeamRow["season"],
+    squad: null,
+  }));
+  const litIn = (sortKey: string) => {
+    const sort = goals.find((column) => column.key === sortKey)!;
+    const html = renderToStaticMarkup(createElement(TeamBoard, { rows: clubs, columns: goals, grouped: false, sort, descending: true }));
+    // Each row's figures run G then Sh, so the lit cells' order says which column they sit in.
+    return [...html.matchAll(/<td[^>]*>([^<]*)<\/td>/g)].filter((cell) => cell[0].includes("cm-lit")).map((cell) => cell[1]);
+  };
+
+  it("never lights the column it is sorted by, and still lights the others", () => {
+    expect(litIn("g")).toEqual(["300", "290"]);
+    expect(litIn("sh")).toEqual(["30", "29"]);
   });
 });

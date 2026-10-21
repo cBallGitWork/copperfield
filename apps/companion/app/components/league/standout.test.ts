@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { standoutCut, standoutCuts, standoutInk } from "./standout";
+import { standoutCut, standoutCuts, standoutInk, unlessSorted } from "./standout";
 
 const repeat = (count: number, value: number) => Array.from({ length: count }, () => value);
 
@@ -81,5 +81,19 @@ describe("standoutInk", () => {
   it("lights nothing in a column with no cut", () => {
     expect(standoutInk(99, { good: null, best: null }, "high")).toBe("");
     expect(standoutInk(99, undefined, "high")).toBe("");
+  });
+});
+
+describe("unlessSorted", () => {
+  const lit = { good: 3, best: 5 };
+  const cuts = new Map([["g", lit], ["sh", lit]]);
+
+  it("drops the sorted column's cut, so its top rows are not lit just for being on top", () => {
+    expect([...unlessSorted(cuts, "g").keys()]).toEqual(["sh"]);
+  });
+
+  it("keeps every cut on a board in its own order, and leaves the map it was given alone", () => {
+    expect([...unlessSorted(cuts, null).keys()]).toEqual(["g", "sh"]);
+    expect(cuts.size).toBe(2);
   });
 });

@@ -31,7 +31,8 @@ import BoardLink from "./BoardLink";
 import { FootFrame } from "../components/shell/FootFrame";
 import { intelStats, intelStatsDay } from "../intel";
 import { divisionGrids } from "./[fantraxId]/grid";
-import { cutsFor, litColumns } from "./standout";
+import { cutsFor } from "./standout";
+import { unlessSorted } from "../components/league/standout";
 import { FANTRAX_PLAYERS_PATH, playerByCode } from "@epl/core";
 import { footballNow } from "../football";
 import OutLink from "../components/shell/OutLink";
@@ -110,15 +111,18 @@ export default async function PoolBoard({
   const heads = columns.filter((column) => column.key !== "name").map(({ label, title, means }) => ({ label, title, means }));
 
   // Cut over the first hundred rows the query chose, so a short page keeps its inks as Show N more pages in.
-  const cuts = cutsFor(
-    litColumns(columns, sorted),
-    (column) =>
-      litRows(shown, capped).map((row) => {
-        const stats = raw.get(row.entry.player.fantraxId);
-        const value = figureOf(column, row, stats, rated === true);
-        // A figure under its floor is never lit, so it never sets the cut either.
-        return typeof value === "number" && !underFloor(column, stats, rated === true) ? value : null;
-      }),
+  const cuts = unlessSorted(
+    cutsFor(
+      columns.filter((column) => column.mark !== undefined),
+      (column) =>
+        litRows(shown, capped).map((row) => {
+          const stats = raw.get(row.entry.player.fantraxId);
+          const value = figureOf(column, row, stats, rated === true);
+          // A figure under its floor is never lit, so it never sets the cut either.
+          return typeof value === "number" && !underFloor(column, stats, rated === true) ? value : null;
+        }),
+    ),
+    sorted,
   );
 
   // Every club with a man in the pool, so no option empties the board.

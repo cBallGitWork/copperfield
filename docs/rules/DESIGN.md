@@ -617,6 +617,8 @@ numbers in yellow/orange like in the prem page, not squares with background colo
 The threshold itself is unchanged and shared, in `components/league/standout.ts`: a column's top values, whole
 values at a time, while they stay rare. Each board sets its own shares (the pool: a sixth in yellow, a
 twentieth in orange, and nothing under ten scored figures; a match: a fifth and a tenth of the men who played).
+**A board never lights the column it is sorted by** (Craig, 21 Oct 2026): its top rows are its top values by
+construction, and the order already says who leads (`unlessSorted` in `components/league/standout.ts`).
 
 **And the pool board is OPAQUE, which no other table is** (Craig, same
 day: *"also it needs to be opaque too"*). `.cm-panel` is deliberately 88% and its

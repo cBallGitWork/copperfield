@@ -54,6 +54,14 @@ export function standoutCuts(
   return { good: standoutCut(values, shares.good, population), best: standoutCut(values, shares.best, population) };
 }
 
+/** The cuts less the sorted column's: a board never lights the column it is sorted by, whose top rows are its top by
+ *  construction (Craig, 21 Oct 2026). */
+export function unlessSorted<Key>(cuts: ReadonlyMap<Key, StandoutCut>, sorted: Key | null): Map<Key, StandoutCut> {
+  const kept = new Map(cuts);
+  if (sorted !== null) kept.delete(sorted);
+  return kept;
+}
+
 /** The classes a figure wears: a lit class for the instruments, a weight, and the ink. Empty when unlit. */
 export function standoutInk(value: number, cut: StandoutCut | undefined, rank: "high" | "low"): string {
   if (cut?.good == null || value < cut.good) return "";

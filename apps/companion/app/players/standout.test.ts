@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cutsFor, litColumns, per90 } from "./standout";
+import { cutsFor, per90 } from "./standout";
 
 describe("cutsFor", () => {
   it("files one cut per column and asks each for its own figures", () => {
@@ -12,14 +12,6 @@ describe("cutsFor", () => {
     expect(cuts.get("g")).toEqual({ good: 3, best: null });
     // Present and dark, not absent: a column that lights nothing is an answer.
     expect(cuts.get("gp")).toEqual({ good: null, best: null });
-  });
-});
-
-describe("litColumns", () => {
-  it("lights the marked columns but never the one the board is sorted by, which would light every top row", () => {
-    const columns = [{ key: "name" }, { key: "fpts", mark: "high" }, { key: "fpg", mark: "high" }, { key: "yc", mark: "low" }];
-    expect(litColumns(columns, "fpts").map((column) => column.key)).toEqual(["fpg", "yc"]);
-    expect(litColumns(columns, "name").map((column) => column.key)).toEqual(["fpts", "fpg", "yc"]);
   });
 });
 

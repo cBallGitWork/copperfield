@@ -3,7 +3,7 @@ import { DASH, fixed, toFantraxClubCode } from "@epl/core";
 import ClubLabel from "../../components/football/ClubLabel";
 import Board from "../../components/league/Board";
 import { LEAD_BOX } from "../../components/league/LeadFace";
-import { SIDE_SHARES, standoutCuts, standoutInk, type StandoutCut } from "../../components/league/standout";
+import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted, type StandoutCut } from "../../components/league/standout";
 import { POOL } from "../routes";
 import TabStrip from "../../components/shell/TabStrip";
 import { FootFrame } from "../../components/shell/FootFrame";
@@ -30,11 +30,11 @@ export default function TeamBoard({
   sort: TeamColumn;
   descending: boolean;
 }) {
-  const cuts = new Map<string, StandoutCut>(
-    columns.map((column) => [
-      column.key,
-      standoutCuts(rows.map(column.of), SIDE_SHARES, { of: rows.length }),
-    ]),
+  const cuts = unlessSorted(
+    new Map<string, StandoutCut>(
+      columns.map((column) => [column.key, standoutCuts(rows.map(column.of), SIDE_SHARES, { of: rows.length })]),
+    ),
+    sort.key,
   );
 
   return (

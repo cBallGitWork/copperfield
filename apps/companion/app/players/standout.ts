@@ -17,11 +17,6 @@ export function cutsFor<Column extends { key: string }>(
   return new Map(columns.map((column) => [column.key, poolCut(values(column))]));
 }
 
-/** The columns that light: the marked ones, less the sorted one, whose top rows are its top sixth by construction. */
-export function litColumns<Column extends { key: string; mark?: unknown }>(columns: readonly Column[], sorted: string): Column[] {
-  return columns.filter((column) => column.mark !== undefined && column.key !== sorted);
-}
-
 /** One column's cuts on the pool's shares. */
 function poolCut(values: Iterable<number | null>): StandoutCut {
   return standoutCuts([...values], SHARES, { floor: FLOOR });
