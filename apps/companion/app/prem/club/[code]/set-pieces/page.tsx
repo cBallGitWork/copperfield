@@ -7,6 +7,9 @@ import PlayerName from "../../../../components/shell/PlayerName";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import { SET_PIECES, intelSetPieces } from "../../../../intel";
 import { leagueOpinions } from "../../../leagueOpinions";
+import { readerTeamId } from "../../../../squads";
+import { Holder } from "../../../../players/BoardRow";
+import { teamNamesOf } from "./holders";
 import { poolHref } from "../../../poolHref";
 import NameLink from "../NameLink";
 import ClubShell from "../Shell";
@@ -25,8 +28,9 @@ export const generateMetadata = clubTitle("setPieces");
 
 export default async function SetPiecesPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
-  const [{ club, snapshot }, league] = await Promise.all([clubOr404(code), leagueOpinions()]);
+  const [{ club, snapshot }, league, reader] = await Promise.all([clubOr404(code), leagueOpinions(), readerTeamId()]);
   const colours = clubColours(club.shortName);
+  const teamNames = teamNamesOf(league);
 
   const byCode = new Map(squadOf(snapshot, club.id).map((p) => [p.code, p]));
   // Departed takers drop before numbering, so the order still counts from 1.
@@ -51,6 +55,7 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                   const player = byCode.get(taker.code);
                   if (player === undefined) return null;
                   const out = availabilityOf(player).out;
+                  const held = league.get(player.code);
                   return (
                     <li key={taker.code} className={`flex min-h-9 items-center gap-2 pr-2 ${out ? "cm-out" : ""} ${doubtRow(player)}`}>
                       {/* The rank in CM's index block, in the club's colour (`ClubShell` scopes it). */}
@@ -68,6 +73,10 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                       >
                         <PlayerName name={player.fullName} short={fullFootballerName(player)} />
                       </NameLink>
+                      {/* Who holds him, bracketed as the boards print it: (FA)/(WW) free, a team's short name, (Yours). */}
+                      {held === undefined ? null : (
+                        <Holder held={held} teamNames={teamNames} reader={reader} className="max-w-28 shrink-0" />
+                      )}
                       <StateBox player={player} />
                     </li>
                   );

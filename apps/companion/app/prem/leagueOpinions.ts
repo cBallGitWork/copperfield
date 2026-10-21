@@ -12,6 +12,8 @@ export interface LeagueOpinion {
   positions: string[];
   /** Fantrax's own code, raw: "T" taken, "WW" waivers, "FA" free agent. */
   status: string;
+  /** The team holding him, by id, or null when nobody does. */
+  ownerTeamId: string | null;
   /** The team holding him, by name, or null when nobody does. */
   owner: string | null;
 }
@@ -37,6 +39,7 @@ export async function leagueOpinions(): Promise<Map<number, LeagueOpinion>> {
       fantraxId: player.fantraxId,
       positions: player.eligiblePositions,
       status: player.status,
+      ownerTeamId: held.get(code)?.teamId ?? null,
       owner: held.get(code)?.teamName ?? null,
     });
   }
