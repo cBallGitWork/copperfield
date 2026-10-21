@@ -51,7 +51,7 @@ export default async function TablePage({ searchParams }: { searchParams: Search
   const relegation = table.length - PREMIERSHIP_CUTS.relegate;
 
   return (
-    <PremShell current="table" rows={table.length}>
+    <PremShell current="table" rows={table.length} flush>
       {/* A table wider than the phone scrolls inside its own box, not the page. */}
       <StandingsTable
         columns={COLUMNS}

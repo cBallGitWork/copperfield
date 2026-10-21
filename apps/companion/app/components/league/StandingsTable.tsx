@@ -1,11 +1,11 @@
-import { Fragment, type ReactNode } from "react";
+import { type CSSProperties, Fragment, type ReactNode } from "react";
 import { signed } from "@epl/core";
 import Link from "@/app/components/shell/Link";
 import Absent from "@/app/components/shell/Absent";
 import ScrollBoard from "./ScrollBoard";
 import { Head, HeadRow, MUTE, NameHead, PLATE, SortHead, sortedAs } from "./TableHeads";
 import { CutRow, IndexCell, PointsCell } from "./TableCells";
-import { yoursEdge, yoursInk } from "@/app/mine";
+import { yoursInk } from "@/app/mine";
 import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TAP_ROW, TONE, standDown } from "@/app/desk";
 import { FORM_GAMES } from "@/app/config";
 
@@ -155,12 +155,7 @@ function Cell<K extends string>({
     case "place":
       return (
         // The width rides the cell too, so an sr-only head keeps the column narrow; a `<tr>` border never paints through the index ground.
-        <IndexCell
-          wide
-          width={column.width ?? ""}
-          className={edge(line)}
-          style={line.mine || line.tint === undefined ? undefined : { borderLeftColor: line.tint }}
-        >
+        <IndexCell wide width={column.width ?? ""} style={edge(line)}>
           {line.place}
         </IndexCell>
       );
@@ -196,10 +191,11 @@ function Cell<K extends string>({
   }
 }
 
-/** The index block's edge: the accent for yours, a side's colour for a tint, transparent beside them, none where nobody owns a line. */
-function edge(line: StandingsLine): string {
-  if (line.mine === undefined && line.tint === undefined) return "";
-  return line.mine || line.tint === undefined ? yoursEdge(line.mine === true) : "border-l-4";
+/** The index block's edge, painted inside the cell: a collapsed table splits a border across the grid line, 2px out.
+ *  The accent for yours, a side's colour for a tint, none beside them; the second shadow is `.cm-index`'s own rule. */
+function edge(line: StandingsLine): CSSProperties | undefined {
+  const colour = line.mine ? "var(--color-accent)" : line.tint;
+  return colour === undefined ? undefined : { boxShadow: `inset 4px 0 0 ${colour}, inset -1px 0 0 var(--color-bg)` };
 }
 
 function swing(difference: number): string {

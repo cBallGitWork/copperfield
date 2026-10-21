@@ -5,11 +5,13 @@ import PageHeader from "../components/shell/PageHeader";
 import SignIn from "./SignIn";
 import { forgetTeam } from "./actions";
 import { getLeagueSquads } from "../squads";
+import { leagueTable } from "../standings";
+import { placings } from "../league/placings";
 import { planningRound } from "../round";
 import { myTeamId, signedIn } from "../session";
 import { yoursEdge } from "../mine";
 import { MY_TEAM, teamHref } from "./routes";
-import { PANEL, ROW_NAME } from "@/app/desk";
+import { INDEX_BLOCK, PANEL, PANEL_FLUSH, ROW_NAME } from "@/app/desk";
 import FantraxSilent from "../components/shell/FantraxSilent";
 import { shortName } from "../teamNames";
 import { SQUADS, YOUR_SQUAD } from "../titles";
@@ -24,7 +26,7 @@ export default async function SquadIndex({
   back?: string;
 }) {
   // The week a manager can still change: from Friday teatime that is next week, not the one in play.
-  const squads = await getLeagueSquads(await planningRound());
+  const [squads, table] = await Promise.all([getLeagueSquads(await planningRound()), leagueTable()]);
 
   // Both empty states keep the sign-in form: this is the only place a code goes in, and signing in needs no Fantrax.
   if ("unavailable" in squads) {
@@ -66,6 +68,9 @@ export default async function SquadIndex({
     return ties.length === 0 ? null : ties.map((tie) => shortName(tie.opponent.teamId, tie.opponent.name)).join(" & ");
   };
 
+  // Each team's place as the table prints it; no table, no places, and the blocks stand empty.
+  const places = placings(table);
+
   // The league's own cap from the info already fetched; none named, no size is printed.
   const cap = squads.info?.roster.maxTotalPlayers ?? null;
 
@@ -76,15 +81,15 @@ export default async function SquadIndex({
       {/* The sign-in follows the code, not the team on screen; signing out is offered only to a real code. */}
       {holder ? null : <SignIn />}
 
-      <ul className="cm-rows flex flex-col">
+      <ul className={`${PANEL_FLUSH} cm-rows`}>
         {yours ? (
           <li>
-            <Squad team={yours} opponent={opponentName(yours.teamId)} cap={cap} lead />
+            <Squad team={yours} place={places.get(yours.teamId)} opponent={opponentName(yours.teamId)} cap={cap} lead />
           </li>
         ) : null}
         {others.map((team) => (
           <li key={team.teamId}>
-            <Squad team={team} opponent={opponentName(team.teamId)} cap={cap} />
+            <Squad team={team} place={places.get(team.teamId)} opponent={opponentName(team.teamId)} cap={cap} />
           </li>
         ))}
       </ul>
@@ -104,11 +109,14 @@ export default async function SquadIndex({
  *  rest, framed, because this app is meant to know whose team you are. */
 function Squad({
   team,
+  place,
   opponent,
   cap,
   lead = false,
 }: {
   team: RosteredTeam;
+  /** His place in the table (`3rd`, `=1st`), or undefined with no table. */
+  place: string | undefined;
   /** Who he plays this period, or null when the schedule does not say. */
   opponent: string | null;
   /** The league's roster limit, or null when it names none. */
@@ -121,10 +129,12 @@ function Squad({
     <Link
       // Your own row goes through the front door, so the rail's plate stays lit.
       href={lead ? MY_TEAM : teamHref(team.teamId)}
-      className={`cm-row flex min-h-9 items-center gap-3 px-3 py-0.5 hover:bg-raised ${
-        lead ? "bg-raised" : "bg-surface"
-      } border-line ${yoursEdge(lead)}`}
+      className={`cm-row flex min-h-9 items-center gap-3 pr-3 hover:bg-raised ${lead ? "bg-raised" : "bg-surface"}`}
     >
+      {/* The place in CM's blue block, as every place column; the edge rides the block, as the table's does. */}
+      <span className={`${INDEX_BLOCK} numeric w-8 px-0 lg:w-14 ${yoursEdge(lead)}`}>
+        {place ?? ""}
+      </span>
       <span className="flex min-w-0 flex-1 flex-col lg:flex-row lg:items-baseline lg:gap-2">
         <span className={`min-w-0 truncate ${ROW_NAME}`}>{team.teamName}</span>
         {/* Who he plays this week. */}
@@ -148,3 +158,4 @@ function Squad({
     </Link>
   );
 }
+

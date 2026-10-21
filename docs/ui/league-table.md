@@ -88,6 +88,10 @@ is quiet, a loss is the red slot — which DESIGN §3 defines as "a loss, a doub
 negative". There is no green because `--color-up` / `--color-down` are still
 deferred (§8), and the accent yellow is already spoken for twice on this row.
 
+**The table sits flush in its panel** (21 Oct 2026): the section's panel drops its padding (`SectionShell flush`,
+`PANEL_FLUSH`), so the index spine meets the panel edge as every list's does; it sat 12px in. `/prem` and the
+head-to-head's Table tab follow.
+
 **The reader's own row takes the raised ground as well as the accent edge.** On
 ten near-identical rows a 4px bar at the margin is easy to scroll straight
 past, and this is the row a manager opened the page to find. The `You` chip sits
@@ -199,7 +203,9 @@ places above it reach: `£30 · picks semi opponent` under 1st, `Playoffs` under
 two either side of Fantrax's last semi place, so they move if `numPlayoffTeams`
 does; the prize, the play-in and the Plate are declared. A league with no
 playoff draws none, and none is drawn under the last row — a line beneath the
-bottom of a table announces a cut nobody missed.
+bottom of a table announces a cut nobody missed. **Dashed in the league's red**
+(`cutRules`, 21 Oct 2026), as DESIGN §9 rules: CM's yellow would be the accent's second claim on the table the
+reader's own row is on.
 
 **Teams level on points and points for share a place** (8 Oct 2026). `placeTable`
 gives them one rank (1, 1, 3) and lists them by name, and the blue block prints

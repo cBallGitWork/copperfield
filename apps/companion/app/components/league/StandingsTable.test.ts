@@ -61,3 +61,32 @@ describe("a table whose only head is its place", () => {
     expect(html(ORDER)).toMatch(/<td class="cm-index[^"]* w-8[ "]/);
   });
 });
+
+// Verifier, 21 Oct 2026: /league's place column sat 2px inside the table (16 vs 14 at 390) where /prem's is flush. A
+// collapsed table splits a cell's 4px left border across the grid line, so the edge is painted inside the cell.
+describe("the index cell's edge", () => {
+  const PLACE: readonly StandingsColumn<"place">[] = [
+    { key: "place", kind: "place", label: "#", title: undefined, width: "w-8" },
+    { key: "name", kind: "name", label: "Team", title: undefined, width: "" },
+  ];
+  const cell = (line: object) => {
+    const page = renderToStaticMarkup(
+      createElement(StandingsTable, { columns: PLACE, lines: [{ key: "t1", place: "1st", name: "test1", values: {}, ...line }] }),
+    );
+    return page.slice(page.indexOf('<td class="cm-index'), page.indexOf(">", page.indexOf('<td class="cm-index')));
+  };
+
+  it("draws no border on any line, owned or not, so the column starts at the table's edge", () => {
+    for (const line of [{ mine: true }, { mine: false }, { tint: "#123456" }, {}]) expect(cell(line)).not.toContain("border-l");
+  });
+
+  it("paints the reader's edge in the accent and a side's in its colour, inside the cell", () => {
+    expect(cell({ mine: true })).toMatch(/box-shadow:inset 4px 0 0 var\(--color-accent\)/);
+    expect(cell({ mine: false, tint: "#123456" })).toMatch(/box-shadow:inset 4px 0 0 #123456/);
+  });
+
+  it("paints none on a line nobody owns", () => {
+    expect(cell({ mine: false })).not.toContain("box-shadow");
+    expect(cell({})).not.toContain("box-shadow");
+  });
+});
