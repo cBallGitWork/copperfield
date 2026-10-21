@@ -149,9 +149,7 @@ the phone's club and view switches (`TabStrip compact`) on `/prem/match/[id]`. *
 your own planner's list, a rival's squad and the head-to-head's list. **So are the Draft tab's tables** (Craig, 6 Oct 2026, yes to 36px): the
 league table, Team Stats and the cup groups (`TIGHT_ROW`). **So are the Premier League table (`/prem`), a club's Stats
 board (`/prem/club/[code]/stats`) and a team's Stats board (`/squad/[id]/stats`)** (20 Oct 2026, the mobile review:
-siblings of the Draft tab's tables, read rather than tapped row by row). **And Prem Fixtures' name over its
-"N yours" count is 24px each under a thumb** (Craig, 21 Oct 2026: *"waaaaay too tall"*), so a row with the reader's men
-stands 48px, not 88 (`ScoreRow`'s `FLOOR.half`, prem.md).
+siblings of the Draft tab's tables, read rather than tapped row by row).
 
 *It was three until 11 Sep 2026. The third was the **Pitch/List toggle** at
 `min-h-9`, and it is gone because the control is: `ViewToggle` became a blue

@@ -147,13 +147,12 @@ is one `gameweekSnapshot` read, made only for a reader with a team once the roun
 kickoff between them opens the match (`ScoreRow`'s `scoreHref`, each a 44px link under a thumb); the row was one link
 to the match before. The place blocks at either end stay plain.
 
-**A match with the reader's men in it says how many, by side** (16 Oct 2026; under the names since 21 Oct): `2 yours`
-in the accent under each club's name that has his men, beside it from `lg` (`ScoreRow`'s `under`, `prem/Yours.tsx`),
-off today's squads, and the row takes the accent edge (`yoursEdge`; a clear one on the rest, so every name keeps its
-column). There is no count column (Craig, 21 Oct 2026). Each count is a toggle beside the name's link, never inside
-it, and both open the same list. **On a phone the name's link and its count are 24px each, so a row with his men
-stands 48px, not 88** (Craig, 21 Oct 2026: *"waaaaay too tall"*), an exception to the 44 floor recorded in
-PRODUCT.md. The list is `components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
+**A match with the reader's men in it says how many, by side** (16 Oct 2026; beside the names since 21 Oct): a yours
+pill with the count beside each club's name that has his men, toward the score, `2 yours` in words from `lg`
+(`ScoreRow`'s `under`, `prem/Yours.tsx`), off today's squads. No owner edge: the pill says it, and an edge pushed every place block off the
+step arrows' column (Craig, 21 Oct 2026: *"More ew"*). There is no count column, and the count never stacks under the name
+(Craig, 21 Oct 2026: *"waaaaay too tall"*, then *"Ew"* at the stacked count), so every row stands 44px under a thumb.
+Each count is a 44px toggle beside the name's link, never inside it, and both open the same list. The list is `components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
 too, then every scorer and assister tagged with the squad holding him (his own in the accent, a rival's faint, an
 unheld man untagged), or *Scorers not available right now.* when FPL's lines are missing. The score still opens
 the match. A row with none of his men draws no count; with no team, no edge either. The table carries
@@ -345,7 +344,7 @@ has one since 7 Oct 2026, so the group now only groups.
   football layer in the first place.
 - **FPL's `position` field on a club.** See above — it orders nothing anybody
   has played.
-- **Anything about who owns whom**, but Fixtures' count, edge and drop-down of the reader's own men. That is `/league`'s question. No accent edge,
+- **Anything about who owns whom**, but Fixtures' count and drop-down of the reader's own men. That is `/league`'s question. No accent edge,
   no YOURS chip, no `yoursInk` on this table: the three marks that say "this one
   is yours" have nothing to say about Arsenal, and spending them here would cost
   a reading aid five other screens depend on.

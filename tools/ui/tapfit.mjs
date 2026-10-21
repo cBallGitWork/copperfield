@@ -14,13 +14,10 @@ const DESK_ROW = 28;
 const DESK_CONTROL = 36;
 /** PRODUCT.md's rows at 36 under a thumb: the match screens, `SquadRow` and the Draft tab's tables (`TIGHT_ROW`). */
 const THUMB_TIGHT = 36;
-/** PRODUCT.md's halves at 24: a Fixtures name stacked over its "N yours" toggle, one 48px row between them. */
-const THUMB_HALF = 24;
 
 // Recorded exceptions, detected by structure and never by label (a label prefix once exempted "FPL" as "FP"):
 // a column head is whatever sits inside a `<th>`; an inline link inside a sentence is a link in a `<p>` with text beside it.
-// A tight row declares its 36 on itself, `min-h-9` or `max-lg:min-h-9` under a thumb or `.cm-tab-compact`, and must clear 36;
-// a half declares its 24 with `min-h-6` and must clear 24.
+// A tight row declares its 36 on itself, `min-h-9` or `max-lg:min-h-9` under a thumb or `.cm-tab-compact`, and must clear 36.
 
 /** Runs in the page. No backticks inside: it is a template literal. */
 const MEASURE = `(function(){
@@ -36,9 +33,8 @@ const MEASURE = `(function(){
     var head=!!n.closest('th');
     var cls=' '+(n.getAttribute('class')||'')+' ';
     var tight=cls.indexOf(' min-h-9 ')>=0||cls.indexOf(' max-lg:min-h-9 ')>=0||cls.indexOf(' cm-tab-compact ')>=0;
-    var half=cls.indexOf(' min-h-6 ')>=0;
     return [{t:label.slice(0,24), h:Math.round(r.height),
-             known:prose||head, tight:tight, half:half,
+             known:prose||head, tight:tight,
              // Either side of the element: a schedule tie wraps its row in the link, and a table row IS the link.
              row:String(n.className||"").indexOf('cm-row')>=0
                  || !!n.closest('.cm-row') || !!n.querySelector('.cm-row'),
@@ -76,16 +72,15 @@ for (const width of AUDIT_WIDTHS) {
     const all = JSON.parse(await cdp.js(MEASURE));
     const phone = width < 1024;
     const floor = (item) =>
-      phone ? (item.half ? THUMB_HALF : item.tight ? THUMB_TIGHT : THUMB) : item.row ? DESK_ROW : DESK_CONTROL;
+      phone ? (item.tight ? THUMB_TIGHT : THUMB) : item.row ? DESK_ROW : DESK_CONTROL;
     const under = all.filter((item) => item.h < floor(item));
     const known = under.filter((item) => item.known);
     const news = under.filter((item) => !item.known);
     const tight = phone ? all.filter((item) => item.tight && !item.known && item.h >= THUMB_TIGHT && item.h < THUMB) : [];
-    const halves = phone ? all.filter((item) => item.half && !item.known && item.h >= THUMB_HALF && item.h < THUMB) : [];
     failures += news.length;
 
     const note = news.length ? `${news.length} UNDER FLOOR` : "ok";
-    const recorded = [known.length ? `${known.length} recorded exceptions` : "", tight.length ? `${tight.length} rows at 36` : "", halves.length ? `${halves.length} halves at 24` : ""];
+    const recorded = [known.length ? `${known.length} recorded exceptions` : "", tight.length ? `${tight.length} rows at 36` : ""];
     const aside = recorded.some(Boolean) ? `  (${recorded.filter(Boolean).join(", ")})` : "";
     console.log(`${width} ${route.padEnd(20)} ${note}${aside}`);
     for (const item of news) console.log(`      ${item.h}px ${item.tag} "${item.t}"`);

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "@/app/components/shell/Link";
-import { SMALL_CAPS } from "@/app/desk";
+import { INDEX_WIDTH, SMALL_CAPS } from "@/app/desk";
 
 // A plate naming where you are in a run (a gameweek, a match day), with CM's arrows either side under a thumb.
 // No ink colour or font family here: unlayered `.cm-bevel` sets both, and `--color-ink` on the plate would be 2.27:1.
@@ -47,7 +47,8 @@ export default function StepHead({
 
 /** CM's small filled triangle on a plate, or an inert outline at either end so the head keeps its place. */
 function Arrow({ step, back = false }: { step: Step | null; back?: boolean }) {
-  const box = "flex size-11 shrink-0 items-center justify-center lg:size-9";
+  // As wide as the index blocks below (Craig, 21 Oct 2026: "the arrow button not aligned with the blue chip"); a thumb's height.
+  const box = `flex h-11 ${INDEX_WIDTH} shrink-0 items-center justify-center lg:h-9`;
   const mark = (
     <span
       aria-hidden

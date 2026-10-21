@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import ScoreRow from "../components/shell/ScoreRow";
 import { scoreSide } from "../components/football/scoreSide";
 import { SMALL_CAPS } from "@/app/desk";
-import { yoursEdge } from "@/app/mine";
 import { matchHref } from "./match/[id]/matchRoutes";
 import { clubHref } from "./routes";
 import { hasScore } from "./score";
@@ -55,15 +54,9 @@ export default function Match({
       under={yours === undefined ? undefined : { home: count(yours.home), away: count(yours.away) }}
     />
   );
-  if (yours === undefined) return row;
-
-  // The accent edge on a match with his men, a clear one on the rest, so every name keeps its column; in the gutter under 390.
-  const any = yours.home + yours.away > 0;
-  return (
-    <div className={`${yoursEdge(any)} max-[389px]:-ml-1`}>
-      {any && men !== undefined ? <Yours row={row}>{men}</Yours> : row}
-    </div>
-  );
+  // No owner edge: the pill says the match is his, and an edge pushed every block off the arrows' column (Craig: "More ew").
+  if (yours === undefined || yours.home + yours.away === 0 || men === undefined) return row;
+  return <Yours row={row}>{men}</Yours>;
 }
 
 /** A side whose name leads to its club's page; an unknown club stays a plain dash. */
