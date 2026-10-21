@@ -1,11 +1,12 @@
 import { Suspense } from "react";
-import { clubById } from "@epl/core";
+import { clubById, seasonKey } from "@epl/core";
 import type { Club, FootballPlayer, PastSeason, PlayerMatch } from "@epl/core";
 import Nothing from "../../../components/shell/Nothing";
 import { LABEL, PANEL } from "@/app/desk";
 import { footballNow, seasonFixtures } from "../../../football";
 import { playerMarks } from "../../../ratings";
 import { intelCareers, intelShots, intelTouches } from "../../../intel";
+import { pastMaps } from "../../../pastMaps";
 import { UNAVAILABLE } from "../../../config";
 import QuerySelect from "../../../components/shell/QuerySelect";
 import { ALL_SEASONS, playerDataHref } from "../../routes";
@@ -18,7 +19,7 @@ import NoProfile from "../NoProfile";
 import PlayerShell from "../PlayerShell";
 import { TableWaiting } from "../Waiting";
 import { pastSeasons, playerStanding } from "../grid";
-import { seasonMaps } from "../maps";
+import { pastSeasonMaps, seasonMaps } from "../maps";
 import { joinMatches, totalsOf } from "../matchRows";
 import type { MatchRow } from "../matchRows";
 import { gameLog } from "../scouting";
@@ -28,7 +29,7 @@ import { poolPoints } from "../poolPoints";
 import { playerTitle } from "../title";
 
 // His record a season at a time (Craig, 25 Sep 2026): this season's tables, rankings, maps and every match by default,
-// a past season's line, or every season with his club. The old History route sends a reader to "All seasons".
+// a past season's line and maps, or every season with his club. The old History route sends a reader to "All seasons".
 
 export const revalidate = 30;
 
@@ -120,6 +121,8 @@ async function Record({
   ];
   const value = options.some((option) => option.value === chosen) ? chosen : "";
   const picked = past.find((row) => row.season.replace("/", "-") === value);
+  // Only the picked season's file is read; a season with none, or nothing for him, draws no maps.
+  const before = picked ? await pastMaps(seasonKey(picked.season), player.code) : null;
 
   return (
     <>
@@ -133,7 +136,13 @@ async function Record({
       {value === ALL_SEASONS ? (
         <PastSeasons seasons={past} current={thisSeason(joined, label)} clubs={clubs} league={league} />
       ) : picked ? (
-        <PastSeasons seasons={[picked]} clubs={clubs} league={league} />
+        <>
+          <PastSeasons seasons={[picked]} clubs={clubs} league={league} />
+          {before === null ? null : (
+            // A plain plate: the season's own club is a name in the table above, and his club now may not be it.
+            <SeasonMaps maps={pastSeasonMaps(before, standing.keeper)} club={undefined} season={picked.season} />
+          )}
+        </>
       ) : (
         <>
           {log.heldAt === null ? null : <HeldNote at={log.heldAt} />}

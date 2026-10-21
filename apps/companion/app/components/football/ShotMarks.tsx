@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import type { Shot } from "@epl/core";
 import { toBoxY } from "./pitchBox";
 import { DRAWN, HALO, TIER, drawOrder, markRadius } from "./shotGeometry";
+import type { Mark } from "./shotGeometry";
 
 // Shots as marks on the grass: size is the chance (by area), fill and weight the outcome, never a new hue.
 
@@ -18,7 +18,7 @@ export default function Marks({
   shots,
   ink = "var(--color-cream)",
 }: {
-  shots: readonly Shot[];
+  shots: readonly Mark[];
   /** Cream by default; a map with two sets of marks gives each its club colour. */
   ink?: string;
 }) {

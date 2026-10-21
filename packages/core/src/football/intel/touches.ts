@@ -1,4 +1,5 @@
 import { byCode } from "./byCode";
+import { onPitch } from "./onPitch";
 import type { IntelManifest } from "./types";
 
 // Where a man played, as the raw cloud of touch points; untrusted provider data, parsed rather than asserted.
@@ -53,7 +54,7 @@ export function touchesOf(player: TouchPlayer | undefined, fixture: number | nul
       const x = each.p[n];
       const y = each.p[n + 1];
       // Refused per point, not per row: one stray coordinate must not cost the match's other touches.
-      if (!inside(x) || !inside(y)) continue;
+      if (!onPitch(x) || !onPitch(y)) continue;
       points.push({ x, y });
     }
   }
@@ -78,11 +79,6 @@ export function averageTouchPosition(points: Touch[]): TouchCentre | null {
     y += point.y;
   }
   return { x: x / points.length, y: y / points.length, touches: points.length };
-}
-
-/** Whether a coordinate is on the pitch SofaScore says it is on. */
-function inside(value: number): boolean {
-  return typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 100;
 }
 
 /** The fixtures a man has touches in, by FPL fixture id; read off the file, so none is offered with nothing behind it. */
