@@ -65,7 +65,7 @@ export default function QuerySelect({
   return (
     <form method="get" action={action} className={`flex gap-1.5 ${fill ? "min-w-0 flex-1 lg:flex-none" : "shrink-0"}`}>
       {children}
-      <select name={name} aria-label={label} value={shown} onChange={pick} className={`${SELECT} w-full`}>
+      <select name={name} aria-label={label} value={shown} onChange={pick} className={`${SELECT} w-full ${fill ? "min-w-0" : ""}`}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

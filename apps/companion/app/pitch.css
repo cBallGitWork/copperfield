@@ -53,14 +53,14 @@
     --pitch-page: 16rem;
   }
 
-  /* Your own planner: the week's bar, the pending figure, the toggle and the panel's edge. */
+  /* Your own planner: the week's bar, the team picker's row, the pending figure, the toggle and the panel's edge. */
   .pitch-with-bench.pitch-own {
-    --pitch-page: 16.125rem;
+    --pitch-page: 19.375rem;
   }
 
-  /* A rival's squad: its header, the toggle, the panel's edges and the caption over the grass. */
+  /* A rival's squad: its header, the team picker's row, the toggle, the panel's edges and the caption over the grass. */
   .pitch-squad .pitch-with-bench {
-    --pitch-page: 17.125rem;
+    --pitch-page: 20.375rem;
   }
 
   /* The match line-up: bar, tabs and views strip over the sheet, the docked club switch and `--page-foot` under it.
