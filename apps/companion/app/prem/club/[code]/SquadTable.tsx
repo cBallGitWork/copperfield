@@ -2,18 +2,18 @@ import type { FootballPlayer } from "@epl/core";
 import { availabilityOf, fullFootballerName, DASH } from "@epl/core";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_BOX } from "../../../components/league/LeadFace";
-import StateBox from "../../../components/football/StateBox";
+import FitnessMark from "../../../components/football/FitnessMark";
 import { doubtRow } from "../../../components/football/doubtRow";
+import { minutesInk } from "../../../components/football/xminsInk";
 import { poolHref } from "../../poolHref";
 import NameLink from "./NameLink";
 import type { LeagueOpinion } from "../../leagueOpinions";
-import { DESK_ONLY, QUIET_NOTE } from "@/app/desk";
+import { holdersOf } from "../../holders";
+import LeagueHolder from "../../LeagueHolder";
+import { DESK_ONLY, NAME_SLACK, QUIET_NOTE } from "@/app/desk";
 
-// Every man on the club's books, ordered by the position our league files him at (Craig, 3 Sep 2026).
-// The owner column is a name, never a figure: FPL's counts may not stand beside a Fantrax figure.
-
-/** The name column takes whatever the figures leave. */
-const NAME_SLACK = "w-full max-w-0";
+// Every man on the club's books, ordered by the position our league files him at (Craig, 3 Sep 2026): his name, his
+// mark and who holds him as the Data boards tag it, then his season and his xMins.
 
 /** The model's xMins for one gameweek, by FPL code, and the day of the export they came from. */
 export interface SquadMinutes {
@@ -25,17 +25,21 @@ export interface SquadMinutes {
 export default function SquadTable({
   players,
   league,
+  reader,
   minutes,
 }: {
   /** Already ordered by the page. This draws; it does not rank. */
   players: readonly FootballPlayer[];
   /** Our league's opinion by FPL code, empty when Fantrax would not say. */
   league: ReadonlyMap<number, LeagueOpinion>;
+  /** The reader's own team, whose men tag "Yours". */
+  reader: string | null;
   /** Null drops the column. */
   minutes: SquadMinutes | null;
 }) {
   // `cm-out` greys the row as a colour rule, which `desk.css` pairs with the doubt wash; a tile owns its ink.
   const shade = (player: FootballPlayer) => `${availabilityOf(player).out ? "cm-out" : ""} ${doubtRow(player)}`;
+  const holders = holdersOf(league, reader);
   return (
     <>
       <Board
@@ -52,24 +56,20 @@ export default function SquadTable({
             className: (player) => `${NAME_SLACK} ${doubtRow(player)}`,
             of: (player) => (
               <NameLink href={poolHref(league, player.code)} className={LEAD_BOX}>
-                <LeadFace name={fullFootballerName(player)} after={<StateBox player={player} />} />
+                <LeadFace
+                  name={fullFootballerName(player)}
+                  after={
+                    <>
+                      <FitnessMark player={player} />
+                      <LeagueHolder code={player.code} holders={holders} className="" />
+                    </>
+                  }
+                />
               </NameLink>
             ),
           },
         }}
         columns={[
-          {
-            key: "owner",
-            head: "Owner",
-            title: "Owner",
-            width: "w-20 lg:w-32",
-            bare: true,
-            // The owner, or Fantrax's own letters: "WW" on waivers, "FA" a free agent.
-            cell: (player) => ({
-              value: <span className="block truncate">{owner(league.get(player.code)) ?? DASH}</span>,
-              className: "px-1.5 text-center text-2xs text-ink",
-            }),
-          },
           {
             key: "minutes",
             head: "Min",
@@ -77,7 +77,7 @@ export default function SquadTable({
             width: "w-12 lg:w-20",
             cell: (player) => ({ value: player.season.minutes, className: "font-bold text-ink" }),
           },
-          // Ours, so the derived reading's cyan beside FPL's minutes in ink.
+          // Ours, inked by risk (`minutesInk`) beside FPL's minutes in ink.
           ...(minutes === null
             ? []
             : [
@@ -86,10 +86,10 @@ export default function SquadTable({
                   head: "xMins",
                   title: `Expected minutes, gameweek ${minutes.gameweek}`,
                   width: "w-12 lg:w-20",
-                  cell: (player: FootballPlayer) => ({
-                    value: minutes.byCode.get(player.code) ?? DASH,
-                    className: "font-bold text-info",
-                  }),
+                  cell: (player: FootballPlayer) => {
+                    const value = minutes.byCode.get(player.code) ?? null;
+                    return { value: value ?? DASH, className: `font-bold ${minutesInk(value)}` };
+                  },
                 },
               ]),
           {
@@ -118,10 +118,4 @@ export default function SquadTable({
       {minutes === null ? null : <p className={`${QUIET_NOTE} px-1.5 py-1`}>xMins as of {minutes.asOf}</p>}
     </>
   );
-}
-
-/** Who holds him, or the state our league puts him in instead. */
-function owner(opinion: LeagueOpinion | undefined): string | null {
-  if (opinion === undefined) return null;
-  return opinion.owner ?? (opinion.status || null);
 }

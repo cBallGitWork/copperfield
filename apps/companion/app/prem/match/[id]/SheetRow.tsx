@@ -1,14 +1,17 @@
-import type { PlayerOwner, SquadPlayerDetail } from "@epl/core";
+import type { FootballPlayer, SquadPlayerDetail } from "@epl/core";
 import PositionTile from "../../../components/league/PositionTile";
 import { chipsFor } from "../../../components/league/Chips";
+import FitnessMark from "../../../components/football/FitnessMark";
+import { doubtRow } from "../../../components/football/doubtRow";
 import { MaybeCard } from "../../../components/league/PlayerCardButton";
-import OwnedBy from "./OwnedBy";
 import SubNote from "./SubNote";
 import LeadFace from "../../../components/league/LeadFace";
+import LeagueHolder from "../../LeagueHolder";
+import type { Holders } from "../../holders";
 import { ROW_RULE } from "@/app/desk";
 import { appeared, type Join, type Named } from "./sheetJoin";
 
-// One man's row on the team sheet, and the card it opens.
+// One man's row on the team sheet, and the card it opens: a Draft row's mark, wash and holder tag after his name.
 
 /** Chips a row shows before it stops; the second only on a desk. */
 const MARKS = 2;
@@ -21,7 +24,8 @@ const CARDED = new Set(["YC", "RC"]);
 
 export default function SheetRow({
   row,
-  owner,
+  player,
+  holders,
   positions,
   join,
   card,
@@ -29,7 +33,9 @@ export default function SheetRow({
   opensBench,
 }: {
   row: Named;
-  owner: PlayerOwner | undefined;
+  /** FPL's footballer behind him, for his mark and wash; undefined where the bridge gave no code. */
+  player: FootballPlayer | undefined;
+  holders: Holders;
   /** The positions the league fields him at; empty when it does not know him. */
   positions: readonly string[];
   join: Join;
@@ -45,7 +51,7 @@ export default function SheetRow({
 
   return (
     <tr
-      className={`${ROW_RULE} ${finished ? "" : "cm-out"} ${
+      className={`${ROW_RULE} ${finished ? "" : "cm-out"} ${doubtRow(player ?? null)} ${
         opensBench ? "border-t-4 border-t-bg" : ""
       }`}
     >
@@ -67,7 +73,8 @@ export default function SheetRow({
             after={
               <>
                 {man.captain ? <span className="shrink-0 text-2xs text-faint">(c)</span> : null}
-                <OwnedBy owner={owner} className="shrink-0 truncate" />
+                <FitnessMark player={player ?? null} />
+                <LeagueHolder code={man.code} holders={holders} className="" />
                 <SubNote onAt={did?.onAt} offAt={did?.offAt} added={did?.added} hurt={hurt} />
               </>
             }

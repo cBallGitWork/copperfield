@@ -1,18 +1,21 @@
-import type { Club, FootballPlayer, PlayerOwner, SquadPlayerDetail } from "@epl/core";
+import type { Club, FootballPlayer, SquadPlayerDetail } from "@epl/core";
 import { clubColoursOf, fullFootballerName, inkOn, onTheBooks, DASH } from "@epl/core";
-import LeadFace from "../../../components/league/LeadFace";
-import PositionTile from "../../../components/league/PositionTile";
+import Board, { type BoardColumn } from "../../../components/league/Board";
+import LeadFace, { LEAD_BOX } from "../../../components/league/LeadFace";
+import FitnessMark from "../../../components/football/FitnessMark";
 import { clubIndex } from "../../../components/football/clubIndex";
+import { doubtRow } from "../../../components/football/doubtRow";
+import { minutesInk } from "../../../components/football/xminsInk";
 import { intelSquads } from "../../../intel";
-import { BOARD, PANEL, PLATE_FRAME, QUIET_FIGURE, ROW_RULE, phoneShows, SMALL_CAPS } from "@/app/desk";
+import { NAME_SLACK, PANEL, PLATE_FRAME, QUIET_FIGURE, phoneShows, SMALL_CAPS } from "@/app/desk";
 import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
+import { holdersOf, type Holders } from "../../holders";
+import LeagueHolder from "../../LeagueHolder";
 import { MaybeCard } from "../../../components/league/PlayerCardButton";
-import OwnedBy from "./OwnedBy";
 import SideBySide from "./SideBySide";
-import { NAME_CELL } from "./SheetRow";
 
-// Both clubs' books before a ball is kicked, to the team sheet's standards: the Fantrax tile in the club's colour,
-// the name opening his card, who holds him, and his real position.
+// Both clubs' books before a ball is kicked, as a Draft row reads: the Fantrax tile in the club's colour, the name
+// opening his card, his mark and wash, who holds him, his real position and his xMins for the match's gameweek.
 
 /** Keeper to attack, in the squad export's own lines (`CB`, `FB`, `WF`), not the match log's. */
 const LINES = ["GK", "CB", "FB", "DM", "CM", "AM", "WF", "CF"] as const;
@@ -21,23 +24,28 @@ export default function Squads({
   home,
   away,
   players,
-  owners,
   league,
   cards,
   phoneSide,
+  reader,
+  minutes,
 }: {
   home: Club | undefined;
   away: Club | undefined;
   /** Every footballer in the snapshot; each side is filtered here. */
   players: readonly FootballPlayer[];
-  owners: Map<number, PlayerOwner>;
   league: ReadonlyMap<number, LeagueOpinion>;
   cards: ReadonlyMap<number, SquadPlayerDetail>;
   /** The one club a phone shows; a desk shows both. */
   phoneSide: "home" | "away";
+  /** The reader's own team, whose men tag "Yours". */
+  reader: string | null;
+  /** xMins for the match's gameweek by FPL code; null drops the column. */
+  minutes: ReadonlyMap<number, number | null> | null;
 }) {
+  const holders = holdersOf(league, reader);
   const side = (club: Club | undefined, picked: boolean) => (
-    <Side club={club} players={players} owners={owners} league={league} cards={cards} phonePicked={picked} />
+    <Side club={club} players={players} holders={holders} cards={cards} minutes={minutes} phonePicked={picked} />
   );
   return (
     <SideBySide>
@@ -50,16 +58,16 @@ export default function Squads({
 function Side({
   club,
   players,
-  owners,
-  league,
+  holders,
   cards,
+  minutes,
   phonePicked,
 }: {
   club: Club | undefined;
   players: readonly FootballPlayer[];
-  owners: Map<number, PlayerOwner>;
-  league: ReadonlyMap<number, LeagueOpinion>;
+  holders: Holders;
   cards: ReadonlyMap<number, SquadPlayerDetail>;
+  minutes: ReadonlyMap<number, number | null> | null;
   phonePicked: boolean;
 }) {
   const colours = clubColoursOf(club);
@@ -79,32 +87,62 @@ function Side({
       >
         {club?.name ?? DASH}
       </h2>
-      <table className={`${BOARD} table-fixed`}>
-        <tbody>
-          {squad.map((player) => {
-            const intel = intelSquads.get(player.code);
-            const owner = owners.get(player.code);
-            return (
-              <tr key={player.id} className={ROW_RULE}>
-                <PositionTile positions={fantraxPositions(league, player.code)} cell />
-                <td className="min-w-0 p-0">
-                  {/* Centred in the row, the name and its owner on one baseline — the team sheet's own cell. */}
-                  <MaybeCard
-                    player={cards.get(player.code)}
-                    className={NAME_CELL}
-                  >
-                    <LeadFace name={fullFootballerName(player)} after={<OwnedBy owner={owner} className="shrink-0 truncate" />} />
-                  </MaybeCard>
-                </td>
-                {/* His real position; a dash for the men the exporter sends as null rather than take FPL's. */}
-                <td className={`${QUIET_FIGURE} w-10 px-1.5 text-right`}>{intel?.position ?? DASH}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <Board
+        caption={`${club?.name ?? "The club"}'s squad`}
+        rows={squad}
+        keyOf={(player) => String(player.id)}
+        fixed
+        rowClass={doubtRow}
+        lead={{
+          tile: { positions: (player) => fantraxPositions(holders.league, player.code) },
+          name: {
+            label: "Player",
+            width: NAME_SLACK,
+            className: (player) => `${NAME_SLACK} ${doubtRow(player)}`,
+            of: (player) => (
+              <MaybeCard player={cards.get(player.code)} className={`${LEAD_BOX} w-full`}>
+                <LeadFace
+                  name={fullFootballerName(player)}
+                  after={
+                    <>
+                      <FitnessMark player={player} />
+                      <LeagueHolder code={player.code} holders={holders} className="" />
+                    </>
+                  }
+                />
+              </MaybeCard>
+            ),
+          },
+        }}
+        columns={columnsFor(minutes)}
+      />
     </section>
   );
+}
+
+/** His real position, a dash for the men the exporter sends as null rather than take FPL's; then his xMins. */
+function columnsFor(minutes: ReadonlyMap<number, number | null> | null): BoardColumn<FootballPlayer>[] {
+  const position: BoardColumn<FootballPlayer> = {
+    key: "position",
+    head: "Pos",
+    title: "Position on the pitch",
+    width: "w-10 lg:w-12",
+    cell: (player) => ({ value: intelSquads.get(player.code)?.position ?? DASH, className: QUIET_FIGURE }),
+  };
+  if (minutes === null) return [position];
+  return [
+    position,
+    {
+      key: "xmins",
+      head: "xMins",
+      title: "Expected minutes, this gameweek",
+      width: "w-12 lg:w-16",
+      cell: (player) => {
+        const value = minutes.get(player.code) ?? null;
+        return { value: value ?? DASH, className: `font-bold ${minutesInk(value)}` };
+      },
+    },
+  ];
 }
 
 /** Where a man sits in the reading order; a line nobody has settled sorts last. */

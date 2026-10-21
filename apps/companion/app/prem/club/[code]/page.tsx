@@ -22,6 +22,7 @@ import { PANEL } from "@/app/desk";
 import { clubOr404 } from "./club";
 import { clubPlaces } from "../../places";
 import { leagueOpinions } from "../../leagueOpinions";
+import { readerTeamId } from "../../../squads";
 import { XMINS_AS_OF, weekMinutes } from "../../../xmins";
 import { clubTitle } from "./title";
 
@@ -43,7 +44,12 @@ export default async function ClubSquadPage({
   const [{ code }, query] = await Promise.all([params, searchParams]);
   // The list opens first: the squad is a fact and the eleven a prediction (DESIGN §9).
   const view = pitchListOf(query.view, "list");
-  const [{ club, snapshot, fixtures }, league, xi] = await Promise.all([clubOr404(code), leagueOpinions(), predictedElevens()]);
+  const [{ club, snapshot, fixtures }, league, xi, reader] = await Promise.all([
+    clubOr404(code),
+    leagueOpinions(),
+    predictedElevens(),
+    readerTeamId(),
+  ]);
 
   const place = clubPlaces(fixtures, snapshot.clubs).get(club.id);
 
@@ -81,6 +87,7 @@ export default async function ClubSquadPage({
               view={view}
               players={squad}
               league={league}
+              reader={reader}
               minutes={gameweek === null || minutes === null ? null : { gameweek, byCode: minutes, asOf: XMINS_AS_OF }}
               club={club}
               eleven={eleven}

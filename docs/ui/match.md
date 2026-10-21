@@ -300,7 +300,15 @@ was pushed out of its panel and clipped. The document never overflowed and no
 element reported a right edge past the viewport — only the screenshot caught it.
 
 **No column is headed on the sheet and no formation line sits over it** (Craig, 23 Sep 2026: *"column headers look
-crap, remove them all except for PTS"*; the `Pts` column itself, FPL's points, came off on 12 Oct 2026). The pitch
+crap, remove them all except for PTS"*; the `Pts` column itself, FPL's points, came off on 12 Oct 2026). The sheet has
+no `<thead>` at all since 21 Oct 2026: a head row of `sr-only` words drew nothing (UI audit D-25), so the widths ride on
+a `<colgroup>` and a caption names the columns.
+
+**A row carries the Draft row's parts** (UI audit D-3, 21 Oct 2026): each unfit man's `StateMark` after his name and
+his doubt wash on the row (`fitnessOf`), then the Data boards' holder tag (`players/BoardRow` `Holder`: `(Yours)`, a
+rival quiet, `FA`/`WW` loud) where `OwnedBy`'s faint `(Bannan)` stood. Before kickoff the books are a `Board`: the
+tile, the name, a butted `Pos` and `xMins` head (the match's own gameweek, `minutesInk`'s red under the planner's
+floor), so an injured man at 0% (Saliba) prints the red cross rather than clean. The pitch
 carries no formation line and no figure under a man's name.
 
 **Under a thumb it is one club at a time** (Craig, 23 Sep 2026: *"a button for
@@ -484,7 +492,7 @@ that is about a player rather than about a tally.
 
 | State | Test | Overview | Players |
 |---|---|---|---|
-| Upcoming | `status === "upcoming"` | `Preview` — each side's **home record against the other's away**, its place, its last five | **both clubs' squads**, keeper to attack, to the team sheet's standards — the Fantrax tile, the name opening his card, the owner; one club at a time on a phone |
+| Upcoming | `status === "upcoming"` | `Preview` — each side's **home record against the other's away**, its place, its last five | **both clubs' squads**, keeper to attack, to the team sheet's standards — the Fantrax tile, the name opening his card, his `StateMark` and wash, the holder tag, his real position and xMins; one club at a time on a phone |
 | Live | `status === "live"` **and** `speaksForNow` | the scoresheet so far, `Live 45′` | who has appeared so far |
 | Finished | `finished` | `FT` | the appearance list |
 | No round | `gameweek === null` | no sheet; the fixture still renders | `TabEmpty` |

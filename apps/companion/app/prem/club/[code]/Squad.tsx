@@ -19,6 +19,7 @@ export default function Squad({
   view,
   players,
   league,
+  reader,
   minutes,
   club,
   eleven,
@@ -30,6 +31,8 @@ export default function Squad({
   view: View;
   players: readonly FootballPlayer[];
   league: ReadonlyMap<number, LeagueOpinion>;
+  /** The reader's own team, whose men tag "Yours". */
+  reader: string | null;
   /** One gameweek's xMins by FPL code, or null when the export does not cover the club's next week. */
   minutes: SquadMinutes | null;
   club: Club;
@@ -42,7 +45,7 @@ export default function Squad({
   /** When Scout last updated the eleven — "Fri 4 Sept, 17:52". */
   updated: string | null;
 }) {
-  const list = <SquadTable players={players} league={league} minutes={minutes} />;
+  const list = <SquadTable players={players} league={league} reader={reader} minutes={minutes} />;
   // No eleven, no toggle: it would be a control with nothing to decide.
   if (!drawsEleven(eleven, formation)) return <div className="flex flex-col gap-2">{list}</div>;
 

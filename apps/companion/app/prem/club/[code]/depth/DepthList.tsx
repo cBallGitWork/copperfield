@@ -2,14 +2,14 @@ import type { DepthSpot, FootballPlayer } from "@epl/core";
 import { DASH } from "@epl/core";
 import PlayerName from "../../../../components/shell/PlayerName";
 import { IndexCell } from "../../../../components/league/TableCells";
-import StateBox from "../../../../components/football/StateBox";
+import FitnessMark from "../../../../components/football/FitnessMark";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import { BOARD, ROW_NAME, ROW_RULE, TAP_ROW } from "@/app/desk";
 import NameLink from "../NameLink";
 import XMins, { type WeekMinutes } from "./XMins";
 
 // The same chart as a list, for a phone (Craig, 25 Sep 2026): a row per place, its shirt in the
-// index block and the men in line across it, each washed by his doubt and boxed by why.
+// index block and the men in line across it, each washed by his doubt and marked by why.
 
 /** A man behind the first choice: `ROW_NAME`'s face and size, unbolded and quiet. */
 const BEHIND = "font-chrome text-sm font-normal text-muted lg:text-base";
@@ -59,7 +59,7 @@ export default function DepthList({
                         <span className="truncate">
                           <PlayerName name={player.name} />
                         </span>
-                        <StateBox player={player} />
+                        <FitnessMark player={player} />
                         {minutes === null ? null : <XMins code={player.code} minutes={minutes} />}
                       </NameLink>
                     )}

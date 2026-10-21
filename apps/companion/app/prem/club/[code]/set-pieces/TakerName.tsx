@@ -4,12 +4,13 @@ import { Holder } from "../../../../players/BoardRow";
 import type { Held } from "../../../../players/holder";
 import NameLink from "../NameLink";
 
-/** A taker's name then his holder tag, as the boards print it: the name truncates first and the pair fills the row. */
+/** A taker's name, his mark, then his holder tag, as the boards print it: the name truncates first and the row fills. */
 export default function TakerName({
   href,
   held,
   teamNames,
   reader,
+  mark,
   children,
 }: {
   href: string | null;
@@ -17,6 +18,8 @@ export default function TakerName({
   held: Held | undefined;
   teamNames: ReadonlyMap<string, string>;
   reader: string | null;
+  /** His `StateMark`, straight after the name; null for a fit man. */
+  mark?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -28,6 +31,7 @@ export default function TakerName({
       >
         {children}
       </NameLink>
+      {mark}
       {held === undefined ? null : (
         <Holder held={held} teamNames={teamNames} reader={reader} className="max-w-28 shrink-0" />
       )}

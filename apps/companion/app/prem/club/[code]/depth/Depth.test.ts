@@ -10,7 +10,7 @@ vi.mock("@/app/desk", () => import("../../../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 
 const man = (code: number, name: string) =>
-  ({ id: code, code, name, fullName: name, firstName: "", secondName: name, status: "a", news: "", chanceThisRound: null }) as unknown as FootballPlayer;
+  ({ id: code, code, name, fullName: name, firstName: "", secondName: name, status: "a", news: "", chanceOfPlaying: null }) as unknown as FootballPlayer;
 const men = new Map([1, 2, 3].map((code) => [code, man(code, ["Saka", "Nwaneri", "Sterling"][code - 1])]));
 // Saka holds two shirts; Nwaneri's reading is nought; Sterling has none.
 const lines: DepthSpot[][] = [

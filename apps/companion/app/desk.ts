@@ -161,6 +161,9 @@ export const HEAD_CELL = "p-0 text-left font-bold";
 /** A row's own `<th scope="row">`: unpadded and unbolded, so the link or name inside it sets both. */
 export const ROW_HEAD_CELL = "p-0 text-left font-normal";
 
+/** A fixed board's name column: it takes whatever the figures leave, and truncates. */
+export const NAME_SLACK = "w-full max-w-0";
+
 /** A fact row's label: takes the spare room and truncates, because a Fantrax label can be a sentence. */
 export const FACT_LABEL = "min-w-0 flex-1 truncate text-sm text-muted";
 
