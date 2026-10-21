@@ -4,6 +4,7 @@ import type { FootballPlayer } from "@epl/core";
 import type { PoolRow } from "./pool";
 import type { PoolColumn, RawStats } from "./columns";
 import { figureOf } from "./figure";
+import { underFloor } from "./floors";
 import { standoutInk, type StandoutCut } from "../components/league/standout";
 import { compareHref, playerHref } from "./routes";
 import { statusesOf, type PlayersQuery } from "./query";
@@ -86,7 +87,7 @@ export function figureCell(
   if (value === null) return { value: DASH, className: "text-faint" };
   const figure = Number(value);
   const printed = rated && column.rate === true ? fixed(figure, "perNinety") : column.places ? fixed(figure, column.places) : String(value);
-  // Zero is a stat, and a quiet one.
-  if (figure === 0) return { value: printed, className: "text-faint" };
+  // Zero is a stat, and a quiet one; so is a rate under its floor.
+  if (figure === 0 || underFloor(column, stats, rated)) return { value: printed, className: "text-faint" };
   return { value: printed, className: column.derived ? "text-info" : column.mark ? standoutInk(figure, cut, column.mark) : "" };
 }

@@ -20,6 +20,7 @@ import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
 import { boardView, onPlate, type BoardName } from "./views";
 import { leagueInfo } from "../round";
 import { figureOf } from "./figure";
+import { underFloor } from "./floors";
 import { DEFCON_POINTS, headedFor, ratedOn } from "./columns";
 import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
@@ -112,8 +113,10 @@ export default async function PoolBoard({
     columns.filter((column) => column.mark !== undefined),
     (column) =>
       litRows(shown, capped).map((row) => {
-        const value = figureOf(column, row, raw.get(row.entry.player.fantraxId), rated === true);
-        return typeof value === "number" ? value : null;
+        const stats = raw.get(row.entry.player.fantraxId);
+        const value = figureOf(column, row, stats, rated === true);
+        // A figure under its floor is never lit, so it never sets the cut either.
+        return typeof value === "number" && !underFloor(column, stats, rated === true) ? value : null;
       }),
   );
 

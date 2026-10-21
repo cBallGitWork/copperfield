@@ -151,3 +151,33 @@ describe("a page's rows in the query", () => {
     expect(wayOut({ rows: "60", pos: "D" })?.href).toBe("/players?status=all");
   });
 });
+
+describe("shownRows floors", () => {
+  const free = (id: string, perGame: number) => ({ ...player(id, ["M"], "FA"), stats: { perGame } }) as unknown as PoolRow;
+  const order = (query: Parameters<typeof shownOn>[1], rows: PoolRow[], raw: Map<string, Record<string, number | null>>, board = PLAYERS) =>
+    shownOn(rows, query, raw, board).map((row) => row.entry.player.fantraxId);
+
+  it("sinks a 9.50 on two games below every man past three, either way the column runs (21 Oct 2026)", () => {
+    const rows = [free("cameo", 9.5), free("regular", 6), free("steady", 4)];
+    const raw = new Map([
+      ["cameo", { GP: 2 }],
+      ["regular", { GP: 7 }],
+      ["steady", { GP: 7 }],
+    ]);
+    expect(order({ sort: "fpg" }, rows, raw)).toEqual(["regular", "steady", "cameo"]);
+    expect(order({ sort: "fpg", dir: "asc" }, rows, raw)).toEqual(["steady", "regular", "cameo"]);
+  });
+
+  it("sinks a per-90 under 270 minutes, but above a man with no reading", () => {
+    const rows = [free("cameo", 0), free("regular", 0), free("none", 0)];
+    const raw = new Map<string, Record<string, number | null>>([
+      ["cameo", { Min: 120, G: 2 }],
+      ["regular", { Min: 900, G: 3 }],
+      ["none", { Min: 900, G: null }],
+    ]);
+    expect(order({ sort: "g", per: "90" }, rows, raw)).toEqual(["regular", "cameo", "none"]);
+    // Off the toggle the counts sort as counts, his two goals under three.
+    expect(order({ sort: "g" }, rows, raw)).toEqual(["regular", "cameo", "none"]);
+    expect(order({ sort: "g", dir: "asc" }, rows, raw)).toEqual(["cameo", "regular", "none"]);
+  });
+});

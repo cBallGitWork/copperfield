@@ -48,6 +48,8 @@ export interface PoolColumn {
   rate?: true;
   /** The bag key of the minutes a rate divides by, where not the served league's `Min`. */
   minutes?: string;
+  /** A figure per game played, held under the games floor (`floors.ts`). */
+  perGame?: true;
   /** Which way it runs when first tapped. */
   ascending: boolean;
   value: (row: PoolRow, stats: RawStats) => number | string | null;
@@ -64,6 +66,9 @@ export interface PoolColumn {
   /** On Players whatever the league scores: its points, and the games and DefCon they are read against. */
   fantasy?: true;
 }
+
+/** Games played in the stats bag, under Fantrax's abbreviation. */
+export const GAMES = "GP";
 
 /** Our DefCon points in the stats bag, beside Fantrax's counts. */
 export const DEFCON_POINTS = "DCP";
@@ -119,15 +124,16 @@ export const COLUMNS: PoolColumn[] = [
     label: "FP/G",
     title: "Fantasy points per game",
     places: "perGame",
+    perGame: true,
     group: "scoring",
     mark: "high",
     ascending: false,
     fantasy: true,
     // No game is no reading: Fantrax prints 0.00 for it.
-    value: (row, stats) => (stats?.GP === 0 ? null : (row.stats?.perGame ?? null)),
+    value: (row, stats) => (stats?.[GAMES] === 0 ? null : (row.stats?.perGame ?? null)),
   },
   denominator(count(MINUTES, "scoring")),
-  { ...denominator(byAbbreviation("GP", "Games played", "scoring")), fantasy: true },
+  { ...denominator(byAbbreviation(GAMES, "Games played", "scoring")), fantasy: true },
   count(GOALS, "attacking"),
   count(ASSISTS_TOTAL, "creating"),
   count(ASSISTS_OFFICIAL, "creating"),
