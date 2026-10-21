@@ -98,13 +98,21 @@ describe("a ledger grouped by day under a thumb", () => {
     expect(grouped()).toMatch(/<span class="cm-index[^"]*hidden lg:block/);
   });
 
+  // Final review (21 Oct 2026): grouping left-aligned the league's type, which sat right before the day heads.
+  it("keeps the league's type at the right of its cell, and a team's at the left", () => {
+    const kind = (html: string) => html.match(/<span class="([^"]*text-info[^"]*)">Waiver/)?.[1] ?? "";
+    expect(kind(grouped())).toContain("ml-auto min-w-0 text-right lg:ml-0");
+    expect(kind(render())).toContain("ml-auto min-w-0 text-right lg:ml-0");
+    expect(kind(grouped(BEEF))).not.toContain("text-right");
+  });
+
   it("sets a team's own type beside In, with nothing beside Out on a claim", () => {
     expect(cells(grouped(BEEF))).toEqual(["Fri 16 Oct Waiver", ""]);
   });
 
-  // Integration review (20 Oct 2026): at 5.25rem 77 of 86 names wrapped at 320; 4.5rem took it to 20.
-  it("narrows the left column to the type and the plate, and a team's to the type alone", () => {
-    expect(grouped()).toContain("grid-cols-[4.5rem_minmax(0,1fr)]");
+  // Final review (21 Oct 2026): 4.5rem cut RACCOONS to "RACCOO…" (plate 76px in 72); 5.25rem holds the longest short name.
+  it("gives the league's left column the plate's room, and a team's the type alone", () => {
+    expect(grouped()).toContain("grid-cols-[5.25rem_minmax(0,1fr)]");
     expect(grouped(BEEF)).toContain("grid-cols-[4rem_minmax(0,1fr)]");
     expect(render()).toContain("grid-cols-[6rem_minmax(0,1fr)]");
   });
@@ -116,16 +124,26 @@ describe("a ledger grouped by day under a thumb", () => {
 });
 
 describe("a name under a thumb", () => {
+  const phone = (html: string) => html.match(/<span class="min-w-0 \[overflow-wrap:anywhere\] lg:hidden">(.*?)<\/span><span class="hidden/)?.[1] ?? "";
+
   it("wraps rather than cuts, and truncates only on a desk", () => {
     const html = render();
-    expect(html).toContain('<span class="lg:truncate">Levi Colwill</span>');
-    expect(html).not.toContain('<span class="truncate">Levi Colwill');
+    expect(phone(html)).toMatch(/^Levi Colwil</);
+    expect(html).toContain('<span class="hidden min-w-0 items-center gap-1.5 lg:flex"><span class="truncate">Levi Colwill</span>');
   });
 
-  // Integration review (20 Oct 2026): 'Gudmundsson' painted over '(D)' at 320, and wrapped names left the tag at the edge.
-  it("breaks a word too long for its box, and keeps the position after the last word", () => {
-    expect(render()).toContain(
-      '<span class="min-w-0 [overflow-wrap:anywhere] lg:flex lg:items-center lg:gap-1.5"><span class="lg:truncate">Levi Colwill</span> <span class="whitespace-nowrap text-2xs font-bold text-mid lg:shrink-0 lg:text-xs">(D)</span></span>',
-    );
+  // Final review (21 Oct 2026): a plain space let '(D)' drop alone under the name, 40 of 86 at 320; an nbsp alone left
+  // 'Gudmundsson (D)', wider than any 320 line, broken before the tag.
+  it("ties the position to the name's last letter, so it never starts a line alone", () => {
+    expect(phone(render())).toBe('Levi Colwil<span class="whitespace-nowrap">l\u00a0<span class="text-2xs font-bold text-mid lg:text-xs">(D)</span></span>');
+    const accented: Deal = { ...WAIVER, inbound: [{ ...man("Mamadou Sangare\u0301", BEEF), position: "M" }] };
+    const html = renderToStaticMarkup(createElement(Ledger, { deals: [accented], nameOf: named([]) }));
+    expect(phone(html)).toMatch(/^Mamadou Sangar<span class="whitespace-nowrap">e\u0301\u00a0/);
+  });
+
+  it("leaves a name with no position whole, wrapping under a thumb and cut on a desk", () => {
+    const bare: Deal = { ...WAIVER, inbound: [{ ...man("Levi Colwill", BEEF), position: null }] };
+    const html = renderToStaticMarkup(createElement(Ledger, { deals: [bare], nameOf: named([]) }));
+    expect(html).toContain('<span class="min-w-0 [overflow-wrap:anywhere] lg:truncate">Levi Colwill</span>');
   });
 });
