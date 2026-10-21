@@ -7,7 +7,8 @@ import AttributeGrid from "./AttributeGrid";
 import BornLine from "./BornLine";
 import type { GridWord } from "./AttributeGrid";
 import FixtureRun from "./FixtureRun";
-import Fitness from "./Fitness";
+import Fitness, { LatestStory } from "./Fitness";
+import Moves from "./Moves";
 import NoProfile from "./NoProfile";
 import PlayerShell from "./PlayerShell";
 import Portrait from "./Portrait";
@@ -18,8 +19,8 @@ import { scouting } from "./scouting";
 import { subject } from "./subject";
 import { playerTitle } from "./title";
 
-// Who he is, on Championship Manager's profile screen (`cm9900/11.jpg`): birth line, attribute grid, fitness, set
-// pieces, the run to come and the cyan line saying what he plays. His figures are Data's. One Fantrax read per tap.
+// Who he is, on Championship Manager's profile screen (`cm9900/11.jpg`): birth line, fitness and transfer, the run to
+// come, portrait and grid, business, set pieces, news, and the cyan line saying what he plays. His figures are Data's.
 
 // Must match `PAGE_REVALIDATE` in the app's config: Next reads it statically, so it cannot be imported.
 export const revalidate = 30;
@@ -52,6 +53,11 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
       current="profile"
     >
       {football === null ? null : <BornLine player={football.player} />}
+
+      {/* Whether he can play and whether he is free, then the run to come, on a phone's first screen (Craig, 21 Oct 2026). */}
+      <Fitness found={found} fantraxId={fantraxId} />
+      {run === null ? null : <FixtureRun run={run} minutes={minutes} asOf={XMINS_AS_OF} />}
+
       {/* Portrait above the grid on a phone, beside it on a desk and as tall as it (Craig, 4 Sep 2026). */}
       <div className="flex flex-col gap-2 lg:flex-row lg:items-stretch">
         {/* No portrait, and nothing in its place, for a man FPL has never listed. */}
@@ -78,15 +84,16 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
         </div>
       </div>
 
-      {/* Whether he can play and what is being said about him, under who he is (Craig, 26 Sep 2026). */}
+      {/* Streamed: his business reads the league's transaction feed, his news Fantrax's stories. */}
       <Suspense fallback={null}>
-        <Fitness fantraxId={fantraxId} player={football?.player ?? null} />
+        <Moves fantraxId={fantraxId} />
       </Suspense>
 
       {pieces === null ? null : <SetPieces pieces={pieces} club={football?.club?.name ?? null} />}
 
-      {/* The run to come, not the round just gone (Craig, 4 Sep 2026). */}
-      {run === null ? null : <FixtureRun run={run} minutes={minutes} asOf={XMINS_AS_OF} />}
+      <Suspense fallback={null}>
+        <LatestStory fantraxId={fantraxId} />
+      </Suspense>
 
       {/* What he actually plays, last and loudest, where CM puts it (Craig, 4 Sep 2026). */}
       <RealPosition position={position} />

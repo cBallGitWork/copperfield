@@ -1,75 +1,28 @@
-import type { ReactNode } from "react";
-import type { Pedigree } from "@epl/core";
-import { DASH, fantraxDay } from "@epl/core";
-import Section from "../../components/shell/Section";
 import Absent from "@/app/components/shell/Absent";
+import OutLink from "@/app/components/shell/OutLink";
 import { READ_LINE, ROW_NAME } from "@/app/desk";
-import { Value, draftPick } from "./Pedigree";
-import type { Arrival, PlayerMove } from "./dossier";
+import { readerTeamId } from "../../squads";
+import { arrival, playerMoves } from "./dossier";
+import { fantraxExit } from "./fantraxExit";
+import { holding } from "./holding";
+import type { Subject } from "./subject";
 
-// CM's transfer status panel (Craig, 25 Sep 2026: "improve this page so its more CM like"): who holds him, how and
-// when he got there, and what his draft pick cost.
+// CM's transfer status, folded into the Profile beside his fitness (Craig, 21 Oct 2026): one line and the way out.
 
-const HOW: Readonly<Record<string, string>> = { claim: "Claimed", trade: "Traded" };
-
-export default function TransferStatus({
-  holder,
-  arrival,
-  pedigree,
-  drafterName,
-}: {
-  /** "Held by" the team holding him, or his "Status" in words ("Free agent", "On waivers"); `holding.ts`. */
-  holder: { label: string; value: string | null };
-  arrival: Arrival;
-  pedigree: Pedigree;
-  drafterName: string | null;
-}) {
-  const drafted = pedigree.origin === "draft" ? pedigree : null;
+export default async function TransferStatus({ found, fantraxId }: { found: Subject; fantraxId: string }) {
+  const [{ moves, whole }, reader] = await Promise.all([playerMoves(fantraxId), readerTeamId()]);
+  const owner = found.intel.ownerTeamId;
+  const status = found.intel.league.find((row) => row.label === "Status/Team")?.value?.trim() ?? "";
+  const line = holding(owner, status, arrival(moves, owner, whole));
+  const exit = fantraxExit(fantraxId, owner, reader);
 
   return (
-    <Section title="Transfer status">
-      <dl className="grid gap-x-6 lg:grid-cols-3">
-        <Fact label={holder.label}>{holder.value}</Fact>
-        <ArrivalLine arrival={arrival} drafted={drafted !== null} />
-        <Fact label="Draft">
-          {drafted === null ? (
-            pedigree.origin === "unknown" ? null : "Undrafted"
-          ) : (
-            <span className="flex items-baseline gap-2">
-              {draftPick(drafted, drafterName)}
-              <Value against={drafted.against} />
-            </span>
-          )}
-        </Fact>
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+      <dl className={`flex flex-1 items-baseline gap-3 ${READ_LINE}`}>
+        <dt className="text-sm text-muted">{line.label}</dt>
+        <dd className={`${ROW_NAME} text-ink`}>{line.value ?? <Absent />}</dd>
       </dl>
-    </Section>
-  );
-}
-
-/** How he joined his holder, a dash when the log is partial; for a man nobody holds, who let him go, or nothing. */
-function ArrivalLine({ arrival, drafted }: { arrival: Arrival; drafted: boolean }) {
-  if (arrival === "unknown") return <Fact label="Joined">{null}</Fact>;
-  if ("dropped" in arrival) {
-    const { dropped } = arrival;
-    if (dropped === null) return null;
-    return <Fact label="Dropped by">{dated(dropped.fromName ?? DASH, dropped)}</Fact>;
-  }
-  const { joined } = arrival;
-  const how = joined === null ? null : dated(HOW[joined.transaction.kind] ?? joined.transaction.kind, joined);
-  return <Fact label="Joined">{how ?? (drafted ? "In the draft" : null)}</Fact>;
-}
-
-/** "Claimed, Wed 7 Oct": what, then the London day, which is left off when Fantrax gave none. */
-function dated(what: string, move: PlayerMove): string {
-  return [what, fantraxDay(move.transaction.processedAt ?? "")].filter(Boolean).join(", ");
-}
-
-/** One of CM's label-and-value lines: the label quiet, the value loud. */
-function Fact({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className={`flex items-baseline justify-between gap-3 border-b border-bg py-0.5 lg:flex-col lg:justify-start lg:gap-0.5 lg:border-b-0 ${READ_LINE}`}>
-      <dt className="text-sm text-muted">{label}</dt>
-      <dd className={`${ROW_NAME} text-ink`}>{children ?? <Absent />}</dd>
+      <OutLink href={exit.href}>{exit.label}</OutLink>
     </div>
   );
 }

@@ -3,9 +3,9 @@ import { type Club, type FootballPlayer, clubColoursOf, crestUrl, isGoalkeeper }
 import PlayerImage from "../../components/league/PlayerImage";
 import { LG } from "../../breakpoints";
 
-// The masthead of a page about one footballer: the cut-out on his club's colour, crest top-left.
-// A banner across a phone; on a desk a column as tall as the grid beside it, filled to the edge
-// (Craig, 25 Sep 2026: "not using all the thumbnail so its cut off mid box").
+// The cut-out on his club's colour, crest top-left. On a phone a 120px band, the whole cut-out shown, so fitness
+// and the run above it stay on the first screen (Craig, 21 Oct 2026); on a desk a column as tall as the grid beside
+// it, filled to the edge (Craig, 25 Sep 2026: "not using all the thumbnail so its cut off mid box").
 
 /** What the optimizer may serve: the whole phone's width, or the desk column's. */
 const SIZES = `${LG} 13rem, 100vw`;
@@ -24,7 +24,7 @@ export default function Portrait({
 
   return (
     <div
-      className="relative shrink-0 overflow-hidden [--pitch-figure:1.8] max-lg:[&_img]:object-contain max-lg:[&_img]:object-bottom lg:w-52 lg:[&_.pitch-figure]:h-full"
+      className="relative shrink-0 overflow-hidden [--pitch-figure:1.8] max-lg:[&_img]:object-contain max-lg:[&_img]:object-bottom max-lg:[&_.pitch-figure]:h-30 lg:w-52 lg:[&_.pitch-figure]:h-full"
       style={{ backgroundColor: colours.primary }}
     >
       {/* `kickedOff`: a profile has no Saturday, so he is never drawn back. */}

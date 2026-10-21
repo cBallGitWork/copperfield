@@ -7,7 +7,7 @@ import type { PlayerTab } from "./PlayerTabs";
 import type { Subject } from "./subject";
 
 // The frame every player screen wears: CM's plated bar in his club's colours (`cm9900/11.jpg`), grey for a man FPL
-// has never listed, over his four tabs.
+// has never listed, over his tabs.
 
 export default function PlayerShell({
   subject,
@@ -15,7 +15,7 @@ export default function PlayerShell({
   current,
   children,
 }: {
-  /** Who the screen is about, whole, so the four views read him one way. */
+  /** Who the screen is about, whole, so every view reads him one way. */
   subject: Subject;
   fantraxId: string;
   current: PlayerTab;

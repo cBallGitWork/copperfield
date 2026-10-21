@@ -13,7 +13,7 @@ const drawn = (page: string) => {
 const profile = drawn("page.tsx");
 const data = drawn("data/page.tsx");
 
-const WHO_HE_IS = ["BornLine", "Portrait", "AttributeGrid", "Fitness", "SetPieces", "FixtureRun", "RealPosition"];
+const WHO_HE_IS = ["BornLine", "Fitness", "FixtureRun", "Portrait", "AttributeGrid", "Moves", "SetPieces", "LatestStory", "RealPosition"];
 const FIGURES = ["SeasonMaps", "MatchLog", "PastSeasons"];
 
 describe("the player's Profile and Data tabs", () => {
@@ -32,10 +32,20 @@ describe("the player's Profile and Data tabs", () => {
   });
 });
 
+describe("the player's Profile", () => {
+  // Craig, 21 Oct 2026: fitness, his status and the run to come on a phone's first screen, the portrait under them.
+  it("draws who he is in order, fitness and the run before the portrait", () => {
+    const source = readFileSync(join(__dirname, "page.tsx"), "utf8");
+    const at = WHO_HE_IS.map((block) => source.search(new RegExp(`<${block}[\\s/>]`)));
+    expect(at.every((offset) => offset >= 0)).toBe(true);
+    expect(at).toEqual([...at].sort((a, b) => a - b));
+  });
+});
+
 describe("the player's tab strip", () => {
   it("ends on Compare, opened with him as A and the rival as B", () => {
     const tabs = playerTabs("abc12", "xyz34");
-    expect(tabs.map((tab) => tab.label)).toEqual(["Profile", "Data", "News", "Transfer", "Compare"]);
+    expect(tabs.map((tab) => tab.label)).toEqual(["Profile", "Data", "News", "Compare"]);
     expect(tabs.at(-1)?.href).toBe("/players/analysis?a=abc12&b=xyz34");
   });
 

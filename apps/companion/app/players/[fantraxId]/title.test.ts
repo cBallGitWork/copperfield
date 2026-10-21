@@ -3,7 +3,7 @@ import type { FootballPlayer } from "@epl/core";
 
 const read = vi.hoisted(() => ({ subject: vi.fn() }));
 vi.mock("./subject", () => ({ subject: read.subject }));
-vi.mock("./PlayerTabs", () => ({ PLAYER_TAB_LABEL: { profile: "Profile", data: "Data", news: "News", transfer: "Transfer" } }));
+vi.mock("./PlayerTabs", () => ({ PLAYER_TAB_LABEL: { profile: "Profile", data: "Data", news: "News" } }));
 
 import { playerTitle } from "./title";
 
