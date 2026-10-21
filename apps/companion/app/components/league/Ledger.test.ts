@@ -31,16 +31,30 @@ const WAIVER: Deal = {
 const render = (teamId?: string) =>
   renderToStaticMarkup(createElement(Ledger, { deals: [WAIVER], nameOf: named([{ teamId: BEEF, name: "Cowthenbeef" }]), ...(teamId ? { teamId } : {}) }));
 
-/** The words in the phone's two cells left of the names: row one beside In, row two beside Out. */
+/** The words in the phone's two cells between the date and the names: row one beside In, row two beside Out. */
 function cells(html: string): string[] {
   const at = (cell: string) => html.indexOf(`<span class="${cell}`);
   const words = (from: number, to: number) => html.slice(from, to).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-  return [words(at("col-start-1 row-start-1"), at("col-start-1 row-start-2")), words(at("col-start-1 row-start-2"), html.lastIndexOf("<", html.indexOf("col-start-2 row-start-1")))];
+  return [words(at("row-start-1 flex"), at("row-start-2 flex")), words(at("row-start-2 flex"), html.lastIndexOf("<", html.indexOf("lg:order-3")))];
 }
 
+/** The date block's classes, the first index block in the markup. */
+const dateBlock = (html: string) => html.match(/<span class="(cm-index [^"]*)"/)?.[1] ?? "";
+
 describe("a transfer under a thumb (Craig, 19 Oct 2026: two rows, not three)", () => {
-  it("sets the league's date and type beside In, and whose move beside Out", () => {
-    expect(cells(render())).toEqual(["Fri 16 Oct Waiver", "Beef Cowthenbeef"]);
+  it("sets the league's type beside In and whose move beside Out, the date down the left of both", () => {
+    expect(cells(render())).toEqual(["Waiver", "Beef Cowthenbeef"]);
+  });
+
+  // Design review (21 Oct 2026): the date sat 6px in and 4px off each rule, and filled row one only.
+  it("runs the date block rule to rule against the row's left edge, its breathing room on the cells", () => {
+    const html = render();
+    expect(dateBlock(html).split(/\s+/)).toEqual(expect.arrayContaining(["cm-spine", "col-start-1", "row-start-1", "row-span-2"]));
+    const row = html.match(/<li class="(cm-row [^"]*)"/)?.[1].split(/\s+/) ?? [];
+    expect(row).toContain("grid-cols-[auto_5.25rem_minmax(0,1fr)]");
+    expect(row.filter((name) => /^(px|pl|py|pt|pb)-/.test(name))).toEqual([]);
+    expect(html.match(/max-lg:pt-1/g)).toHaveLength(2);
+    expect(html.match(/max-lg:pb-1/g)).toHaveLength(2);
   });
 
   it("hides the weekday on the league's list, below the desk", () => {
@@ -59,7 +73,7 @@ describe("a transfer under a thumb (Craig, 19 Oct 2026: two rows, not three)", (
   });
 
   it("keeps a team's own date over its type, weekday and all", () => {
-    expect(cells(render(BEEF))).toEqual(["Fri 16 Oct", "Waiver"]);
+    expect(cells(render(BEEF))).toEqual(["Waiver", ""]);
     expect(render(BEEF)).toContain('<span class="">Fri </span>16 Oct');
   });
 });
@@ -94,8 +108,8 @@ describe("a ledger grouped by day under a thumb", () => {
   });
 
   it("sets the league's type alone beside In, and whose move beside Out", () => {
-    expect(cells(grouped())).toEqual(["Fri 16 Oct Waiver", "Beef Cowthenbeef"]);
-    expect(grouped()).toMatch(/<span class="cm-index[^"]* hidden"/);
+    expect(cells(grouped())).toEqual(["Waiver", "Beef Cowthenbeef"]);
+    expect(dateBlock(grouped())).toContain("hidden lg:flex");
   });
 
   // Final review (21 Oct 2026): grouping left-aligned the league's type, which sat right before the day heads.
@@ -107,19 +121,20 @@ describe("a ledger grouped by day under a thumb", () => {
   });
 
   it("sets a team's own type beside In, with nothing beside Out on a claim", () => {
-    expect(cells(grouped(BEEF))).toEqual(["Fri 16 Oct Waiver", ""]);
+    expect(cells(grouped(BEEF))).toEqual(["Waiver", ""]);
   });
 
   // Final review (21 Oct 2026): 4.5rem cut RACCOONS to "RACCOO…" (plate 76px in 72); 5.25rem holds the longest short name.
   it("gives the league's left column the plate's room, and a team's the type alone", () => {
     expect(grouped()).toContain("grid-cols-[5.25rem_minmax(0,1fr)]");
     expect(grouped(BEEF)).toContain("grid-cols-[4rem_minmax(0,1fr)]");
-    expect(render()).toContain("grid-cols-[6rem_minmax(0,1fr)]");
+    expect(render()).toContain("grid-cols-[auto_5.25rem_minmax(0,1fr)]");
+    expect(grouped()).toContain("pl-1.5");
   });
 
   it("leaves an ungrouped ledger (Waivers' Last run) its per-row stamp and no headings", () => {
     expect(headings(render())).toEqual([]);
-    expect(render()).not.toMatch(/<span class="cm-index[^"]* hidden"/);
+    expect(dateBlock(render())).not.toContain("hidden");
   });
 });
 

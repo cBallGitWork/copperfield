@@ -17,6 +17,17 @@ import { playerHref } from "@/app/players/routes";
 /** A name a step above `ROW_NAME`: a date, a type and two names are this screen's whole content (DESIGN §6). */
 const NAME = "font-chrome text-base font-bold lg:text-lg";
 
+/** The phone's grid: a dated row leads with its date block's column, then the type's, sized to the mover's plate or
+ *  a team's own type. Written out, as Tailwind reads a class only whole. */
+const COLUMNS = {
+  grouped: { everyone: "grid-cols-[5.25rem_minmax(0,1fr)]", team: "grid-cols-[4rem_minmax(0,1fr)]" },
+  dated: { everyone: "grid-cols-[auto_5.25rem_minmax(0,1fr)]", team: "grid-cols-[auto_4rem_minmax(0,1fr)]" },
+} as const;
+
+/** A row's breathing room under a thumb, on its cells, so the date block beside them runs rule to rule. */
+const ROW_TOP = "max-lg:pt-1";
+const ROW_FOOT = "max-lg:pb-1";
+
 /** A club crest, or the empty slot that keeps the names in line when there is none. */
 const CREST = "size-5 shrink-0 object-contain lg:size-6";
 
@@ -60,7 +71,7 @@ export default function Ledger({
           {rows.map(({ deal, mover, instant, opens, in: arrived, out: left, partners }) => {
             const kind = (
               <span
-                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${everyone ? "ml-auto min-w-0 text-right lg:ml-0" : groupByDay ? "min-w-0" : "w-24"}`}
+                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${everyone ? "ml-auto min-w-0 text-right lg:ml-0" : "min-w-0"}`}
               >
                 {kindOf(deal, arrived.length, left.length)}
               </span>
@@ -71,23 +82,19 @@ export default function Ledger({
                 {opens ? (
                   <li className="px-1.5 pb-0.5 pt-2 text-xs font-bold text-mid lg:hidden">{instant === null ? DASH : londonDayAndDate(instant)}</li>
                 ) : null}
-                {/* Two rows under a thumb, In beside the date or type and Out beside whose move; one row on a desk. */}
+                {/* Two rows under a thumb, In beside the type and Out beside whose move; one row on a desk. A dated row's
+                    date block spans both down the left, and the cells take the columns after it. */}
                 <li
-                  className={`cm-row grid ${groupByDay ? (everyone ? "grid-cols-[5.25rem_minmax(0,1fr)]" : "grid-cols-[4rem_minmax(0,1fr)]") : "grid-cols-[6rem_minmax(0,1fr)]"} items-center gap-x-2 px-1.5 py-1 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5 lg:pl-0`}
+                  className={`cm-row grid ${COLUMNS[groupByDay ? "grouped" : "dated"][everyone ? "everyone" : "team"]} items-center gap-x-2 pr-1.5 lg:flex lg:min-h-14 lg:gap-2 lg:py-1.5 lg:pl-0 ${groupByDay ? "pl-1.5" : ""}`}
                 >
-                  <span className="col-start-1 row-start-1 flex items-center justify-between gap-1 lg:contents">
-                    <Day at={instant} weekday={!everyone} deskOnly={groupByDay} />
-                    {/* The league's list, or a grouped one, sets the type beside In, leaving the row below to whose move. */}
-                    {everyone || groupByDay ? kind : null}
-                  </span>
-                  <span className="col-start-1 row-start-2 flex flex-col gap-0.5 lg:contents">
+                  <Day at={instant} weekday={!everyone} deskOnly={groupByDay} />
+                  <span className={`row-start-1 flex items-center gap-1 ${ROW_TOP} lg:contents`}>{kind}</span>
+                  <span className={`row-start-2 flex flex-col gap-0.5 ${ROW_FOOT} lg:contents`}>
                     {everyone ? (
                       <span className="shrink-0 lg:order-1 lg:w-32">
                         {mover === null ? DASH : <TeamPlate teamId={mover} name={nameOf(mover)} />}
                       </span>
-                    ) : groupByDay ? null : (
-                      kind
-                    )}
+                    ) : null}
                     {/* Who he traded with: under whose move on a phone, the last column on a desk. */}
                     {traded ? (
                       <span className={`shrink-0 lg:order-last lg:w-32 ${partners.length === 0 ? "hidden lg:block" : ""}`}>
@@ -106,8 +113,8 @@ export default function Ledger({
                   </span>
 
                   {/* Both sides always drawn, so a claim's empty side is a dash rather than a reflow. */}
-                  <Side players={arrived} tone="text-ink" label="In" className="col-start-2 row-start-1 lg:order-3" />
-                  <Side players={left} tone="text-faint" label="Out" className="col-start-2 row-start-2 lg:order-4" />
+                  <Side players={arrived} tone="text-ink" label="In" className={`row-start-1 ${ROW_TOP} lg:order-3`} />
+                  <Side players={left} tone="text-faint" label="Out" className={`row-start-2 ${ROW_FOOT} lg:order-4`} />
                 </li>
               </Fragment>
             );
@@ -202,7 +209,7 @@ function Named({ name, position }: { name: string; position?: string | null }) {
  *  `deskOnly` when a day heading says it under a thumb. */
 function Day({ at, weekday, deskOnly }: { at: string | null; weekday: boolean; deskOnly: boolean }) {
   return (
-    <span className={`${INDEX_SPINE} numeric shrink-0 whitespace-nowrap px-1.5 py-0.5 lg:flex lg:w-24 lg:items-center ${deskOnly ? "hidden" : weekday ? "w-24" : ""}`}>
+    <span className={`${INDEX_SPINE} numeric col-start-1 row-span-2 row-start-1 shrink-0 items-center whitespace-nowrap px-1.5 py-0.5 lg:w-24 ${deskOnly ? "hidden lg:flex" : weekday ? "flex w-24" : "flex"}`}>
       {at === null ? (
         DASH
       ) : (
