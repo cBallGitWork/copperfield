@@ -29,11 +29,14 @@ Craig: *"in the compare section, can we compare to previous seasons (player sect
 completed season, so a man can be set against himself or the rival in an earlier year.
 
 - **The URL** carries a season per side, `?as=` and `?bs=`, as `2024-25`; absent is this season, and a season the
-  man has no minutes in is this season too (`season.ts`, `pickedSeason`). `compareHref` carries both. The player
-  page's Compare tab is unchanged: him against his nearest rival, this season.
+  man has no minutes in is this season too (`season.ts`, `pickedSeason`). `compareHref` carries both.
+- **The player page's Compare tab draws this same body** (`CompareBody.tsx`, 21 Oct 2026) at `/players/<id>/compare`,
+  inside his shell with him fixed as A (`compareRoute.ts`: the route's `base` and `fixed`; links never carry `a`).
+  There B opens on his last season, and `v <rival>` sits under B's select beside `v his last season` (`player.md`).
+  This page keeps both boxes and its one button.
 - **A season select over each half** (`SeasonBar`), under the search boxes, lists this season by its name and every
   completed season he played, off the same history the Data tab's season picker reads (`pastSeasons`, through
-  `pastSides.ts`). **`vs his last season`** sits under B's half when B is empty or A again in A's season: one tap sets
+  `pastSides.ts`). **`v his last season`** sits under B's half when B is empty or A again in A's season: one tap sets
   B to A in his most recent other season. Swapping either man keeps the other side's season and resets his own.
 - **The ledger keeps to what both seasons carry** (`rates.ts`, `measuresFor`): Min, Touches/90, Shots/90, Goals/90,
   Assists/90, CS/90, Saves/90 and Conceded/90. A completed season has no starts, expected goals or defensive actions,

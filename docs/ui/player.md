@@ -1,7 +1,7 @@
 # `/players/[fantraxId]` — one player
 
 Championship Manager's player profile (`reference/cm9900/11.jpg`), for a Fantrax
-draft league. A plated bar in his club's colour, three tabs and Compare (Profile, Data, News), and one cyan line saying
+draft league. A plated bar in his club's colour, four tabs (Profile, Data, News, Compare), and one cyan line saying
 what he actually is.
 
 One profile per tap, never a sweep of the 697 — that is the whole politeness
@@ -28,11 +28,15 @@ derived the same four from the same object.
   sections except profile"). It had been in every tab's shell, then on Data alone from 25 Sep.
 - **The tabs** — Profile · Data · News · Compare (`tabs.ts`). **Transfer folded into the Profile on 21 Oct 2026**
   (Craig, N-12); `/transfer` redirects to the Profile. **Compare since 21 Oct 2026** (Craig:
-  *"maybe we put compare in the player section too"*; PLATFORM_NOTES): it leaves the shell for
-  `/players/analysis?a=<him>&b=<rival>`, the rival the man in his position group with the nearest season league points,
-  ties to a free agent (`analysis/rival.ts`, `defaultRival`); with no points, or the pool silent, Compare opens with him
-  alone. On Compare a season select over each half sets either man in a completed season, with one tap for "vs his
-  last season" (`analysis.md`, Past seasons). *Known:* the strip replaces history (`TabStrip`), so Back from Compare skips the player page. **Five until
+  *"maybe we put compare in the player section too"*; PLATFORM_NOTES). **Inside his shell since 21 Oct 2026** (Craig:
+  *"it needs to be housed in player section, and allow the ability to compare themselves to previous seasons too"*):
+  `/players/<id>/compare` draws Data's Compare body (`analysis/CompareBody.tsx`) with him fixed as A, no A search box,
+  B's box, a season select per side and the same views. **B opens on his own last season** (his most recent completed
+  season with minutes, `compareRoute.ts`, `openingB`), or for a man with none on the rival: the man in his position
+  group with the nearest season league points, ties to a free agent (`analysis/rival.ts`, `defaultRival`); with no
+  points, or the pool silent, he stands alone. Under B's select, `v his last season` and `v <rival>` (I. Surname) are
+  each one tap whenever B is not already that. A query naming only `bs` is him in that season. Old
+  `/players/analysis?a=<id>` links still open Data's Compare. *Known:* the strip replaces history (`TabStrip`). **Five until
   25 Sep 2026**, CM's own count, when History folded into Data. Fitness folded into News on 4 Sep 2026
   (Craig: "Fitness could be doubled in with news") — they were two tabs asking
   one question with half an answer each. Which of them is hollow is decided from

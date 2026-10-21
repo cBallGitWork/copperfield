@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { compareHref, seasonValue } from "./routes";
+import { compareHref, playerCompareHref, seasonValue } from "./routes";
 
 describe("compareHref", () => {
   it("carries the board's pair as the board always linked it", () => {
@@ -22,5 +22,10 @@ describe("compareHref", () => {
 
   it("is the bare screen with nothing to carry", () => {
     expect(compareHref({})).toBe("/players/analysis");
+  });
+
+  it("hangs a player's own Compare off his page", () => {
+    expect(playerCompareHref("061vq")).toBe("/players/061vq/compare");
+    expect(compareHref({ b: "04ab1" }, playerCompareHref("061vq"))).toBe("/players/061vq/compare?b=04ab1");
   });
 });

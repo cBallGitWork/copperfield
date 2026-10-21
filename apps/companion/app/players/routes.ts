@@ -38,12 +38,17 @@ export const ANALYSIS = `${POOL}/analysis`;
 /** Compare's query: the men, the boxes' searches, the view and range, and each side's completed season ("2024-25"). */
 export type CompareField = "a" | "b" | "qa" | "qb" | "view" | "range" | "as" | "bs";
 
-/** Compare, carrying each field given a value in the order given. */
-export function compareHref(fields: Partial<Record<CompareField, string>>): string {
+/** Compare, carrying each field given a value in the order given; `base` is a player's own Compare instead of Data's. */
+export function compareHref(fields: Partial<Record<CompareField, string>>, base = ANALYSIS): string {
   const query = new URLSearchParams();
   for (const [name, value] of Object.entries(fields)) if (value !== undefined && value !== "") query.set(name, value);
   const search = query.toString();
-  return search === "" ? ANALYSIS : `${ANALYSIS}?${search}`;
+  return search === "" ? base : `${base}?${search}`;
+}
+
+/** One player's own Compare, him as A in his shell. */
+export function playerCompareHref(fantraxId: string): string {
+  return `${playerHref(fantraxId)}/compare`;
 }
 
 /** Adv Stats: the same pool under every figure the league does not score (Craig, 16 Oct 2026). */

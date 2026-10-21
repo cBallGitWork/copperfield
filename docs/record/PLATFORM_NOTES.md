@@ -102,7 +102,10 @@ Craig, 21 Oct 2026: *"maybe we put compare in the player section too"*. This rev
 on screen, not a tab" (the Profile's Compare with… button, which made the board the picker): his strip is now Profile ·
 Data · News · Compare (`players/[fantraxId]/tabs.ts`; Transfer folded into the Profile the same day, above), Compare opening beside his position group's nearest
 man in season league points (`analysis/rival.ts`). The Profile's button is gone; Compare stays in the Data section's nav
-(`PoolNav`). The board's `?compare=` picker survives, reached by address alone.
+(`PoolNav`). The board's `?compare=` picker survives, reached by address alone. Later the same day (*"it needs to be
+housed in player section, and allow the ability to compare themselves to previous seasons too"*) the tab stopped
+leaving his shell: `/players/<id>/compare` renders Data's Compare body with him fixed as A, opening against his own
+last season and the rival one tap away; one body serves both routes (`analysis/CompareBody.tsx`, `compareRoute.ts`).
 
 ## Tap rows are 36 under a thumb — decided 21 Oct 2026
 
