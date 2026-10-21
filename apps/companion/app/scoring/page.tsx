@@ -8,7 +8,7 @@ import { backToFront, leaguePositionLabel } from "../positions";
 import PageHeader from "../components/shell/PageHeader";
 import { MORE } from "../components/shell/sections";
 import { SCORING_TITLE } from "../titles";
-import { BOARD, FIGURE, LABEL, PANEL, ROW_NAME, ROW_RULE } from "@/app/desk";
+import { BOARD, FIGURE, LABEL, PANEL, READ_ROW, ROW_NAME, ROW_RULE } from "@/app/desk";
 
 // What every category pays each roster slot, read from getLeagueInfo: a line once where every slot is paid alike.
 // Listed on More since 13 Oct 2026, not a Draft tab: reference read once, not weekly.
@@ -46,9 +46,9 @@ export default async function ScoringPage() {
         </thead>
         <tbody>
           {lines.map((line) => (
-            <tr key={line.name} className={ROW_RULE}>
+            <tr key={line.name} className={`${ROW_RULE} ${READ_ROW}`}>
               <td className="pl-2" title={line.key}>
-                <span className={`cm-row flex min-h-11 items-center ${ROW_NAME}`}>{line.name}</span>
+                <span className={`flex items-center ${ROW_NAME}`}>{line.name}</span>
               </td>
               {(line.same ? line.prices.slice(0, 1) : line.prices).map((cell, at) => (
                 // Below 375 the four slots' padding would push the board through the panel's right inset.

@@ -7,7 +7,7 @@ import { PITCH_BOX, toBoxY } from "@/app/components/football/pitchBox";
 import { drawOrder } from "@/app/components/football/shotGeometry";
 import ShotMarks, { MarksKey } from "../../../components/football/ShotMarks";
 import { KeyPassKey, KeyPassLines, KeyPassOrigins, Pitch } from "../../../components/football/ShotPitch";
-import { BOARD, PINNED_ON_PHONE, ROW_RULE, SECTION_BAR, SMALL_CAPS } from "@/app/desk";
+import { BOARD, FIGURE_CELL, PINNED_ON_PHONE, ROW_RULE, SECTION_BAR, SMALL_CAPS } from "@/app/desk";
 import {
   Head,
   HeadRow,
@@ -234,7 +234,7 @@ export default function ShotMap({
                   {OUTCOME[shot.outcome]}
                 </td>
                 {/* The provider's xG, in amber as every board prints it: not a reading of ours (DESIGN §3). */}
-                <td className="numeric text-center text-sm text-mid">
+                <td className={`${FIGURE_CELL} text-mid`}>
                   {shot.xg === null ? DASH : fixed(shot.xg, "expected")}
                 </td>
               </tr>
