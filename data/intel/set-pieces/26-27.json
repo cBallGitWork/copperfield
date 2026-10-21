@@ -2,12 +2,12 @@
  "manifest": {
   "season": "26-27",
   "gameweek": null,
-  "exportedAt": "2026-10-13T11:12:18.843960+00:00",
+  "exportedAt": "2026-10-21T11:37:57.181295+00:00",
   "rows": 20,
   "sources": [
    {
     "path": "data/reference/set_piece_takers.json",
-    "mtime": "2026-10-08T15:49:42.679792+00:00"
+    "mtime": "2026-10-20T23:54:12.983935+00:00"
    }
   ],
   "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/"
@@ -294,19 +294,15 @@
    "penalties": [
     {
      "code": 176412,
-     "share": 0.6158
+     "share": 0.641
     },
     {
      "code": 226965,
-     "share": 0.2463
+     "share": 0.2564
     },
     {
-     "code": 230730,
-     "share": 0.0985
-    },
-    {
-     "code": 168144,
-     "share": 0.0394
+     "code": 480457,
+     "share": 0.1026
     }
    ],
    "freeKicks": [
