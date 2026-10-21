@@ -5,7 +5,7 @@ import ListAndPitch from "./ListAndPitch";
 import ViewToggle from "./ViewToggle";
 
 // The test run has no `@/` alias; the plate's classes are not under test.
-vi.mock("@/app/desk", () => ({ TAB: "cm-tab", PANEL: "cm-panel flex flex-col gap-2 p-2" }));
+vi.mock("@/app/desk", () => ({ TAB: "cm-tab", PANEL_FLUSH: "cm-panel flex flex-col" }));
 
 describe("Pitch/List", () => {
   // 16 Oct 2026: the view you were on was announced as the "current page".

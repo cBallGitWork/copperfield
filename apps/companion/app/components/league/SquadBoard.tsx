@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { SquadDetailLine, SquadPlayerDetail, SquadReason } from "@epl/core";
 import PlayerCard from "./PlayerCard";
 import SquadRows from "./SquadRows";
+import { PANEL_FLUSH } from "@/app/desk";
 
 // A squad with no gameweek to report: all fifteen as a list, no pitch, since the gate withholds the shape.
 // It arrives joined on the server (`squadDetail`); the client boundary is here for the list and card's one selection.
@@ -34,7 +35,9 @@ export default function SquadBoard({
         </p>
       ) : null}
 
-      <SquadRows lines={lines} projected={projected} onOpen={setOpen} eligibility={eligibility} />
+      <section className={PANEL_FLUSH}>
+        <SquadRows lines={lines} figure={projected ? "projected" : "season"} onOpen={setOpen} eligibility={eligibility} />
+      </section>
 
       {open ? (
         <PlayerCard

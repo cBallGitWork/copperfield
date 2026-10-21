@@ -59,7 +59,7 @@ export default function Sheet({
         </>
       }
       list={
-        // One panel round list and pitch (Craig, 2-3 Sep 2026), so `bare` stops the list drawing a second.
+        // One panel round list and pitch (Craig, 2-3 Sep 2026): `ListAndPitch` draws it, the list never a second.
         <TeamSheet
           rows={rows}
           bench={bench}
@@ -68,7 +68,6 @@ export default function Sheet({
           news={news}
           mode="list"
           eligibility={eligibility}
-          bare
           autoSubs={marks}
         />
       }

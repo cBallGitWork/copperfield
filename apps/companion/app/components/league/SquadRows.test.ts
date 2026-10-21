@@ -24,7 +24,7 @@ const man: SquadPlayerDetail = {
 };
 
 const html = renderToStaticMarkup(
-  createElement(SquadRows, { lines: [{ position: "M", players: [man] }], projected: false }),
+  createElement(SquadRows, { lines: [{ position: "M", players: [man] }] }),
 );
 
 /** Tailwind's phone width in px for a class list, `lg:` ignored: `w-11` is 44, `w-[1.875rem]` 30. */
@@ -39,22 +39,25 @@ const gapOf = (classes: string) => Number(classes.match(/(?:^| )gap-(\d+(?:\.\d+
 
 describe("the squad list at 390", () => {
   const head = html.match(/<div class="(flex items-center[^"]*)">([\s\S]*?)<\/div>/);
-  const cells = [...(head?.[2] ?? "").matchAll(/<span class="([^"]*shrink-0[^"]*)"/g)].map((match) => match[1]);
+  // The fixed columns: a width and no give. The figures' group carries no width of its own.
+  const cells = [...(head?.[2] ?? "").matchAll(/<span class="([^"]*shrink-0[^"]*)"/g)]
+    .map((match) => match[1] ?? "")
+    .filter((classes) => phoneWidth(classes) > 0);
 
   it("leaves the name column room for the widest name in Craig's squad", () => {
-    // Pos, crest, opponent, xMins and FPts, the gaps between all six columns, and the row's 6px either side.
+    // Pos, crest, opponent, xMins and FPts; a gap between tile, crest, name and figures, which butt; 6px either side.
     const fixed = cells.reduce((sum, classes) => sum + phoneWidth(classes), 0);
-    const room = ROW_AT_390 - fixed - 5 * gapOf(head?.[1] ?? "") - 12;
+    const room = ROW_AT_390 - fixed - 3 * gapOf(head?.[1] ?? "") - 12;
     expect(cells).toHaveLength(5);
     expect(room).toBeGreaterThanOrEqual(WIDEST_NAME);
   });
 
-  it("dates the xMins column once, under the list (review M23)", () => {
+  it("dates the xMins column once, under the whole list, the bench included (review M23)", () => {
     expect(html.match(/Thu 15 Oct/g)).toHaveLength(1);
-    const bench = renderToStaticMarkup(
-      createElement(SquadRows, { lines: [{ position: "M", players: [man] }], projected: false, head: false }),
-    );
-    expect(bench).not.toContain("Thu 15 Oct");
+    const benched = { ...man, rostered: { ...man.rostered, slot: { ...man.rostered.slot, fantraxId: "z" } } } as SquadPlayerDetail;
+    const both = renderToStaticMarkup(createElement(SquadRows, { lines: [{ position: "M", players: [man] }], bench: [benched] }));
+    expect(both.match(/Thu 15 Oct/g)).toHaveLength(1);
+    expect(both.indexOf("Thu 15 Oct")).toBeGreaterThan(both.indexOf(">Bench<"));
   });
 
   it("heads the opponent Opp under a thumb and Opponent on the desk", () => {
@@ -79,7 +82,7 @@ describe("a man FPL expects back on a date", () => {
       stats: [],
     },
   } as unknown as SquadPlayerDetail;
-  const row = renderToStaticMarkup(createElement(SquadRows, { lines: [{ position: "D", players: [out] }], projected: false }));
+  const row = renderToStaticMarkup(createElement(SquadRows, { lines: [{ position: "D", players: [out] }] }));
 
   // A phone never shows a title, and the date was in one alone (review M30, UX-5).
   it("prints the date under his name, not in a title", () => {
@@ -99,7 +102,7 @@ describe("a squad row's status and minutes (Craig, 21 Oct 2026)", () => {
       minutes: [{ gameweek: 7, minutes, asOf: "Thu 15 Oct" }],
     }) as unknown as SquadPlayerDetail;
   const rows = (players: SquadPlayerDetail[], doubted?: string[]) =>
-    renderToStaticMarkup(createElement(SquadRows, { lines: [{ position: "M", players }], projected: false, doubted }));
+    renderToStaticMarkup(createElement(SquadRows, { lines: [{ position: "M", players }], doubted }));
   /** One man's row, from his name to the end of his row. */
   const rowOf = (html: string, id: string) => html.slice(html.indexOf(`>${id}<`)).split("</li>")[0];
 

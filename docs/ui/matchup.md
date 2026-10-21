@@ -49,8 +49,8 @@ draws none.
 
    **The list went, and it was a whole tab** (Craig, 11 Sep 2026: *"pitch and
    list dont need to be two screens, come on, should just be Scores for that
-   view"*, then *"just pitch i think"*). `SquadRows` keeps its two remaining
-   callers on the squad and club boards.
+   view"*, then *"just pitch i think"*). `SquadRows` stays on the squad
+   page and on a tie's unplayed side.
 4. **Stats** — three sub-views switched from the **foot row** (`StatsViews`, a `TabStrip`,
    `?of=`): *side A · side B · Fantasy*, opening on Fantasy (Craig, 24 Sep 2026). **Docked at every width**: above
    the thumb rail on a phone, at the screen's foot on the desk, as `SaveBar` is: `FootFrame`'s `foot`. A phone's sat

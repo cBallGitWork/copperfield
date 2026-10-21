@@ -18,11 +18,15 @@ import type { AutoSubMark } from "./autoSubbed";
 
 // One man's row in a squad list: our position, his club's crest, his name, his fixture and his figure.
 
-/** The columns `SquadRows` heads too, phone width first: "WOL (A)" is 39px, the FPts head about 33, a crest 24. */
+/** The columns `SquadRows` heads too, phone width first: "WOL (A)" is 39px, the FPts head about 33, a crest 24.
+ *  The gap parts the tile, crest, name and figures; the figures butt, as their head plates do (`SQUAD_FIGURES`). */
 export const SQUAD_GAP = "gap-1 lg:gap-1.5";
 /** The row's padding: its right edge alone, so the position block meets the panel's left as a spine. */
 export const SQUAD_EDGE = "pr-1.5";
-export const SQUAD_CREST = "w-6 lg:w-7";
+/** `LeadFace`'s crest cell: 24px holding a 20px crest. */
+export const SQUAD_CREST = "w-6";
+/** The figure columns, butted: each is exactly its head plate's width. */
+export const SQUAD_FIGURES = "flex shrink-0 items-center";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
 export const SQUAD_POINTS = "w-9";
 
@@ -62,16 +66,10 @@ export default function SquadRow({
       />
 
       {/* The club crest on the bare row, not his face: a portrait at this size is a smudge. */}
-      <span className={`grid h-7 ${SQUAD_CREST} shrink-0 place-items-center`}>
+      <span className={`grid h-6 ${SQUAD_CREST} shrink-0 place-items-center`}>
         {club ? (
           /* Sized in both axes: `h-full` resolves to auto in an auto-sized grid row and the crest overhangs. */
-          <Image
-            src={crestUrl(club)}
-            alt=""
-            width={22}
-            height={22}
-            className="h-6 w-6 object-contain"
-          />
+          <Image src={crestUrl(club)} alt="" width={20} height={20} className="size-5 object-contain" />
         ) : (
           <span
             aria-hidden
@@ -105,25 +103,27 @@ export default function SquadRow({
         )}
       </span>
 
-      {/* His fixture this week; his own club is not repeated beside it, or it reads as two unrelated clubs. */}
-      <span className={`numeric ${SQUAD_OPPONENT} shrink-0 truncate text-xs ${fixture.quiet ? "text-faint" : "text-muted"}`}>
-        {fixture.text}
+      <span className={SQUAD_FIGURES}>
+        {/* His fixture this week; his own club is not repeated beside it, or it reads as two unrelated clubs. */}
+        <span className={`numeric ${SQUAD_OPPONENT} shrink-0 truncate text-xs ${fixture.quiet ? "text-faint" : "text-muted"}`}>
+          {fixture.text}
+        </span>
+
+        {/* The model's xMins for the gameweek on screen, inked by risk (`minutesInk`); no run, no cell. */}
+        {player.minutes.length === 0 ? null : (
+          <span className={`numeric w-9 shrink-0 text-center text-sm font-bold ${minutesInk(xMins)}`}>
+            {xMins ?? DASH}
+          </span>
+        )}
+
+        {/* The league's points in the reading cyan (DESIGN §3). Undefined is no table and drops the cell; null, a dash.
+            A step above §6's row figure (DESIGN §6 records why). */}
+        {points === undefined ? null : (
+          <span className={`numeric ${SQUAD_POINTS} shrink-0 text-center text-base font-bold text-info lg:text-lg`}>
+            {points ?? DASH}
+          </span>
+        )}
       </span>
-
-      {/* The model's xMins for the gameweek on screen, inked by risk (`minutesInk`); no run, no cell. */}
-      {player.minutes.length === 0 ? null : (
-        <span className={`numeric w-9 shrink-0 text-center text-sm font-bold ${minutesInk(xMins)}`}>
-          {xMins ?? DASH}
-        </span>
-      )}
-
-      {/* The league's points in the reading cyan (DESIGN §3). Undefined is no table and drops the cell; null, a dash.
-          A step above §6's row figure (DESIGN §6 records why). */}
-      {points === undefined ? null : (
-        <span className={`numeric ${SQUAD_POINTS} shrink-0 text-center text-base font-bold text-info lg:text-lg`}>
-          {points ?? DASH}
-        </span>
-      )}
     </>
   );
 

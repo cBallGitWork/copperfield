@@ -44,7 +44,7 @@ export default async function TeamPage({
   if (slug === OWN && (await readerTeamId()) === null) return <SquadIndex />;
   // The table orders the team picker, read beside the squad rather than after it.
   const [view, table] = await Promise.all([squadView(slug, gw), leagueTable()]);
-  const { team, league, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = view;
+  const { team, league, mine, planning, open, standing, weeks, benchRanks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = view;
   // Fantrax's period selector, on every branch: an earlier week shows its scores, a later one its opponents.
   const picker =
     weeks === null ? null : (
@@ -98,7 +98,6 @@ export default async function TeamPage({
             benchRanks={benchRanks}
             canSave={commissionerSession(team.teamId) !== null}
             picker={picker}
-            locks={locks}
           />
         </Above>
       ) : board !== null ? (

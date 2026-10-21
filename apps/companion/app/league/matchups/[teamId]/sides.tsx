@@ -15,7 +15,7 @@ import Nothing from "../../../components/shell/Nothing";
 import SquadRows from "../../../components/league/SquadRows";
 import TeamSheet from "../../../components/league/TeamSheet";
 import { teamHref } from "@/app/squad/routes";
-import { SMALL_CAPS } from "@/app/desk";
+import { PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
 
 // The head-to-head's per-side pieces: why a side is withheld, both sides' arrangements, and the squad list a side
 // shows before kickoff. The shared boards are `tabs.tsx`'s.
@@ -63,10 +63,14 @@ function lockOf(gameweek: number | undefined): string {
  *  (always your own) is its eleven, then its bench; any other is unarranged, so not even the order leaks who starts. */
 export function SquadList({ listed, teamId }: { listed: UnplayedSide | undefined; teamId: string }) {
   if (listed === undefined) return <Nothing title="No squad" code={teamId} />;
-  return "sheet" in listed ? (
-    <TeamSheet rows={listed.sheet.rows} bench={listed.sheet.bench} breakdown={{}} mode="list" />
-  ) : (
-    <SquadRows lines={listed.lines} projected={false} />
+  return (
+    <section className={PANEL_FLUSH}>
+      {"sheet" in listed ? (
+        <TeamSheet rows={listed.sheet.rows} bench={listed.sheet.bench} breakdown={{}} mode="list" />
+      ) : (
+        <SquadRows lines={listed.lines} />
+      )}
+    </section>
   );
 }
 

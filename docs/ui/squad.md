@@ -73,7 +73,7 @@ picker (`askedWeek`). `weekStanding` (`weeks.ts`, tested) says where the week on
 
 | Week | Your own | Each man shows |
 |---|---|---|
-| Locked (played or in play) | read-only `Sheet`, captioned `Gameweek 6 · 43` (the XI's total, `sheetCaption`) | his score that week, on the grass and under FPts |
+| Locked (played or in play) | read-only `Sheet`, captioned `Gameweek 6 · 43` (the XI's total, `sheetCaption`) | his score that week, on the grass and under GW |
 | Open | `LineupPlanner`, the only week Save touches | his opponent; FPts is the season |
 | Ahead | read-only `Sheet` | his opponent; no FPts column, because Fantrax answers a future week with noughts |
 
@@ -142,13 +142,22 @@ no longer describes this one.
    list prints them, and his **xMins** for the week on screen and the four after (`MinutesRun`, inked by risk as the
    list is). The gameweek sheet hands it his breakdown instead of the FPts line.
 
+**One list on every branch** (Craig, 21 Oct 2026: *"my team is the one that's wrong"*). The gate's `SquadBoard`, a
+sheet's List (`TeamSheet` in `ListAndPitch`), your own planner and the head-to-head's unplayed side all print the same
+`SquadRows` in one flush panel (`PANEL_FLUSH`), so the position tiles meet the panel's edge as a spine; `SquadRows`
+never draws a panel of its own, and its caller frames it. The head strip is the house's (`TableHeads`): minor caps,
+nothing over the tile, crest and name, and the figure plates butted with no gap, as on every board. The **bench**
+sits in the same list under a `Bench` plate (`PLATE_START`, as a board's tail), never in a box of its own with a
+second list. The points head says whose points: **FPts** for the season (the gate and the planner), **GW** for the
+gameweek on screen (any sheet), **Proj** for a projected season. The crest is `LeadFace`'s, 20px in a 24px cell.
+
 Every list of the squad carries an **xMins** column for the gameweek the picker shows, between the
 opponent and FPts (Craig, 7 Oct 2026: *"assign the xmins by gameweek"*). **Inked by risk** (Craig, 21 Oct 2026:
 *"could change the xmins colour too, Red bad etc"*; `minutesInk`): under `START_DOUBT_MINUTES` (50) in the loss red,
 otherwise the derived cyan, a dash included. A greyed bench row greys it as before. A week the export starts after (the
 gameweeks already played) has no column at all rather than a column of dashes; the head-to-head board has none.
-**Dated once** (16 Oct 2026): "xMins as of Thu 15 Oct", quiet, under the list that heads the column and not again under
-the bench, and on the player card beside its xMins label. The day is the export's (`XMINS_AS_OF`); undated, Friday's
+**Dated once** (16 Oct 2026): "xMins as of Thu 15 Oct", quiet, under the whole list (the bench included, 21 Oct), and
+on the player card beside its xMins label. The day is the export's (`XMINS_AS_OF`); undated, Friday's
 figure passed for Monday's.
 
 **FPts prints in the reading cyan** (Craig, 21 Oct 2026: *"put fpts in cyan too"*; DESIGN §3's Cyan row): the column
@@ -158,9 +167,10 @@ its cyan** the same day (`statViews.measureInk`): our DefCon points take the boa
 since cyan on a board is the league's points alone.
 
 Under a thumb the name takes the room (Craig, 11 Oct 2026: *"opponent should be further to the right on mobile
-as it cuts off names"*): the opponent is headed Opp and is 44px, FPts 30, the gaps 4. Counted on his squad at 390,
-4 of 14 names truncated (S. Lammens, Matheus N., K. Dewsbury-Hall, J. Hinshelwood beside his DBT) in a 75px
-column; the column is 139px now and the widest, Hinshelwood with his box, is 131.5 (`SquadRows.test.ts`).
+as it cuts off names"*): the opponent is headed Opp and is 44px, xMins and FPts 36, the figures butted and a 4px gap
+between tile, crest, name and figures. Counted on his squad at 390, 4 of 14 names truncated (S. Lammens, Matheus N.,
+K. Dewsbury-Hall, J. Hinshelwood beside his DBT) in a 75px column; the column is 141px now and the widest, Hinshelwood
+with his box, is 131.5 (`SquadRows.test.ts`).
 **The day FPL expects him back** ("Back 28 Nov", or the day a ban ends) prints in quiet ink under the name on a phone
 and beside it on a desk (16 Oct 2026): it lived in the box's title, which a phone never shows, and the 7px the name
 column spares could not take it beside the box. Two lines fit the row's 36px; no date, no second line.
@@ -349,10 +359,11 @@ unresolved when it is, and a way out to the full profile.
   all fifteen on the grass because the active/reserve split is withheld there. On
   your own team that split is the decision being made, so it is the thing you are
   looking at.
-- **The lock is on the planner** (16 Oct 2026: Team never said when the lineup locks; only Mail did): "Locks Sat
-  12:15" on a plate in the row above the toggle, on Pitch and List alike, from `periodLock` on the planned period
-  (the league's own calendar and the round's first kickoff). A note from a tap on a dimmed card takes its place
-  until the next tap.
+- **One toolbar, a rival's** (21 Oct 2026): the planner draws through `ListAndPitch`, so the Pitch/List toggle,
+  the pending figure and the week share one row, and list and pitch one flush panel, exactly as on a sheet. It
+  still opens on the pitch. **No lock plate** (Craig: *"it hogs the page"*): the "Locks Sat 12:15" row it carried
+  from 16 Oct is gone, and the lock prints on Matchday and the schedule. A note from a tap on a dimmed card shows
+  on a plate above the toolbar until the next tap; silent, it is out of the flow.
 - **Its kits load at once** (`eager`, 16 Oct 2026): the 14 lazy kits put this pitch's largest paint at 4.2 s on a
   throttled phone against about 2 s for the other key screens. Every other pitch stays lazy, because a phone keeps
   the head-to-head's desk pair and a rival's list-first pitch in the page hidden, and eager kits there are fetched

@@ -53,9 +53,9 @@
     --pitch-page: 16rem;
   }
 
-  /* Your own planner: the week's bar, the team picker's row, the pending figure, the toggle and the panel's edge. */
+  /* Your own planner: the team picker's row, the toggle's (pending and week beside it) and the panel's edges. */
   .pitch-with-bench.pitch-own {
-    --pitch-page: 19.375rem;
+    --pitch-page: 17.25rem;
   }
 
   /* A rival's squad: its header, the team picker's row, the toggle, the panel's edges and the caption over the grass. */
