@@ -51,32 +51,28 @@ export default async function TablePage({ searchParams }: { searchParams: Search
   const relegation = table.length - PREMIERSHIP_CUTS.relegate;
 
   return (
-    // PRODUCT's 36px rows, as the league table's; `.cm-tight` sizes the shell's panel to them.
-    <div className="cm-tight contents">
-      <PremShell current="table" rows={table.length}>
-        {/* A table wider than the phone scrolls inside its own box, not the page. */}
-        <StandingsTable
-          columns={COLUMNS}
-          rows="tight"
-          sort={sort}
-          descending={descending}
-          sortHref={premSortHref(sort, descending)}
-          lines={sortTable(placed(table), sort, descending).map(({ row, place }) => ({
-            ...clubLine(row, place, form.get(row.clubId) ?? []),
-            // Labelled cut lines, never a shaded band (a tint reads as "yours"); accent is free here as nobody owns
-            // a club. Only in the competition's own order.
-            cuts: [
-              ...(ordered(sort, descending) && place === PREMIERSHIP_CUTS.qualify && place < table.length
-                ? [{ label: "Champions League", tone: "border-accent/80" }]
-                : []),
-              ...(ordered(sort, descending) && place === relegation && place < table.length
-                ? [{ label: "Relegation", tone: "border-bad/80" }]
-                : []),
-            ],
-          }))}
-        />
-      </PremShell>
-    </div>
+    <PremShell current="table" rows={table.length}>
+      {/* A table wider than the phone scrolls inside its own box, not the page. */}
+      <StandingsTable
+        columns={COLUMNS}
+        sort={sort}
+        descending={descending}
+        sortHref={premSortHref(sort, descending)}
+        lines={sortTable(placed(table), sort, descending).map(({ row, place }) => ({
+          ...clubLine(row, place, form.get(row.clubId) ?? []),
+          // Labelled cut lines, never a shaded band (a tint reads as "yours"); accent is free here as nobody owns
+          // a club. Only in the competition's own order.
+          cuts: [
+            ...(ordered(sort, descending) && place === PREMIERSHIP_CUTS.qualify && place < table.length
+              ? [{ label: "Champions League", tone: "border-accent/80" }]
+              : []),
+            ...(ordered(sort, descending) && place === relegation && place < table.length
+              ? [{ label: "Relegation", tone: "border-bad/80" }]
+              : []),
+          ],
+        }))}
+      />
+    </PremShell>
   );
 }
 

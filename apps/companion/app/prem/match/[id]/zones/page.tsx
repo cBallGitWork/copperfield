@@ -12,7 +12,6 @@ import { readMatch, sheetName, type Match } from "../match";
 import { intelShots, intelTouches } from "../../../../intel";
 import { teamSheets } from "../../../../matchDetail";
 import { matchHref } from "../matchRoutes";
-import { MATCH_ROW } from "../matchRow";
 import { matchTitle } from "../title";
 import { beforeKickOff } from "../matchState";
 
@@ -62,7 +61,7 @@ export default async function MatchZonesPage({
   return (
     <MatchShell match={match} current="zones">
       {/* One section at a time under a thumb; a desk shows both (Craig, 23 Sep 2026). */}
-      <div className="lg:hidden" {...MATCH_ROW}>
+      <div className="lg:hidden">
         <TabStrip
           label="Action zones views"
           tabs={[

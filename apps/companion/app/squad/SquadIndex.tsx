@@ -121,7 +121,7 @@ function Squad({
     <Link
       // Your own row goes through the front door, so the rail's plate stays lit.
       href={lead ? MY_TEAM : teamHref(team.teamId)}
-      className={`cm-row flex min-h-14 items-center gap-3 px-3 py-2.5 hover:bg-raised ${
+      className={`cm-row flex min-h-9 items-center gap-3 px-3 py-0.5 hover:bg-raised ${
         lead ? "bg-raised" : "bg-surface"
       } border-line ${yoursEdge(lead)}`}
     >

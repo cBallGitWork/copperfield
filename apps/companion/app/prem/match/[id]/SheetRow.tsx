@@ -7,14 +7,13 @@ import SubNote from "./SubNote";
 import LeadFace from "../../../components/league/LeadFace";
 import { ROW_RULE } from "@/app/desk";
 import { appeared, type Join, type Named } from "./sheetJoin";
-import { MATCH_ROW } from "./matchRow";
 
 // One man's row on the team sheet, and the card it opens.
 
 /** Chips a row shows before it stops; the second only on a desk. */
 const MARKS = 2;
 
-/** The trigger's box, centred in the row; 36px under a thumb by PRODUCT's recorded exception. */
+/** The trigger's box, centred in the row: a tap row's 36 under a thumb. */
 export const NAME_CELL = "flex min-h-9 w-full items-center px-1.5 text-left hover:underline";
 
 /** Chips the card block already draws, so the row does not say them twice. */
@@ -49,7 +48,6 @@ export default function SheetRow({
       className={`${ROW_RULE} ${finished ? "" : "cm-out"} ${
         opensBench ? "border-t-4 border-t-bg" : ""
       }`}
-      {...MATCH_ROW}
     >
       <PositionTile positions={positions} cell />
       {/* CM's card block between the index and the name. */}

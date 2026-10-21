@@ -127,7 +127,7 @@ function score(row: MatchRow["fpl"]): BoardFigure {
   return {
     className: `font-bold ${ink}`,
     value: (
-      // A tappable score makes its row a tap row: 44 under a thumb, the desk's 28.
+      // A tappable score makes its row a tap row: 36 under a thumb, the desk's 28.
       <Link href={matchHref(match.fixtureId, "overview")} className={`${TAP_ROW} justify-center hover:underline`}>
         <span className="sr-only">{`${result} `}</span>
         {match.scored}–{match.conceded}

@@ -52,7 +52,7 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                   if (player === undefined) return null;
                   const out = availabilityOf(player).out;
                   return (
-                    <li key={taker.code} className={`flex min-h-11 items-center gap-2 px-2 lg:min-h-9 ${out ? "cm-out" : ""} ${doubtRow(player)}`}>
+                    <li key={taker.code} className={`flex min-h-9 items-center gap-2 px-2 ${out ? "cm-out" : ""} ${doubtRow(player)}`}>
                       {/* The rank in CM's index block, in the club's colour (`ClubShell` scopes it). */}
                       <span className="cm-index numeric flex h-6 w-6 shrink-0 items-center justify-center">
                         {at + 1}
@@ -64,7 +64,7 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                       <NameLink
                         href={poolHref(league, player.code)}
                         // The row's floor restated on the link, which `tapfit` measures; `self-stretch` lands one short.
-                        className={`flex min-h-11 min-w-0 flex-1 items-center truncate text-ink lg:min-h-9 ${ROW_NAME}`}
+                        className={`flex min-h-9 min-w-0 flex-1 items-center truncate text-ink ${ROW_NAME}`}
                       >
                         <PlayerName name={player.fullName} short={fullFootballerName(player)} />
                       </NameLink>

@@ -455,7 +455,7 @@ is `--color-mid`, because the thing being printed is a minute.
 line up though (strikers at bottom etc)"*), which is the order `cm9900/25.jpg`
 runs its slot strip. The bench sits under the eleven.
 
-**Every row is a link and is therefore a CONTROL** — 44 under a thumb and 36 on
+**Every row is a link** — a tap row's 36 under a thumb (21 Oct 2026) and a control's 36 on
 the desk, not `.cm-row`'s 28. `tapfit` failed all 32 names on the first build at
 18px, which is what an inline anchor round a word measures. The cost is the one
 `players/[fantraxId]/MatchLog` already recorded: this board is less dense than the

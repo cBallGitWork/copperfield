@@ -69,11 +69,11 @@ export function Lead({
   );
 }
 
-/** The name line's link (`Board`'s `line`): 44px for a thumb, hanging past Board's 24px line over the figures row. */
-const LINE_LINK = "block min-h-11 w-full px-1.5 text-left hover:underline";
+/** The name line's link (`Board`'s `line`): a row's 36 for a thumb, hanging past Board's 20px line over the figures row. */
+const LINE_LINK = "block min-h-9 w-full px-1.5 text-left hover:underline";
 
-/** Its face, in the line's own 24px. */
-const LINE_BAND = "flex h-6 items-center gap-2";
+/** Its face, in the line's own 20px. */
+const LINE_BAND = "flex h-5 items-center gap-2";
 
 /** One figure, lit in ink when it stands out; a nought quiet, an absence a dash. */
 export function figureCell(

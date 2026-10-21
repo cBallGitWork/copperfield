@@ -56,7 +56,7 @@ reproduction in the app and sets most of its decisions:
   is made of are the pair a phone can spare. The visibility rides in each
   column's `width` string in `prem/Columns.tsx`, so the heads and the rows read it
   from one place.
-- **36px rows under a thumb**, as the league table's (20 Oct 2026, PRODUCT's exceptions): twenty clubs in
+- **36px rows under a thumb**, as every tap row's (20 Oct 2026; the rule since 21 Oct): twenty clubs in
   about 790px at 390 rather than 953. CM's 28 on the desk.
 - **`For` and `Ag` are ink**, not amber: DESIGN §3's slot means a figure standing
   alone beside a name, never a column of a standings table.
@@ -144,15 +144,15 @@ these rows (one live feed, not thirty-eight) went when Fixtures began showing on
 is one `gameweekSnapshot` read, made only for a reader with a team once the round has started.
 
 **Each row has three ways in** (Craig, 21 Oct 2026): a club's crest and name open its club page, and the score or
-kickoff between them opens the match (`ScoreRow`'s `scoreHref`, each a 44px link under a thumb); the row was one link
+kickoff between them opens the match (`ScoreRow`'s `scoreHref`, each a 36px link under a thumb); the row was one link
 to the match before. The place blocks at either end stay plain.
 
 **A match with the reader's men in it says how many, by side** (16 Oct 2026; beside the names since 21 Oct): a yours
 pill with the count beside each club's name that has his men, toward the score, `2 yours` in words from `lg`
 (`ScoreRow`'s `under`, `prem/Yours.tsx`), off today's squads. No owner edge: the pill says it, and an edge pushed every place block off the
 step arrows' column (Craig, 21 Oct 2026: *"More ew"*). There is no count column, and the count never stacks under the name
-(Craig, 21 Oct 2026: *"waaaaay too tall"*, then *"Ew"* at the stacked count), so every row stands 44px under a thumb.
-Each count is a 44px toggle beside the name's link, never inside it, and both open the same list. The list is `components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
+(Craig, 21 Oct 2026: *"waaaaay too tall"*, then *"Ew"* at the stacked count), so every row stands 36px under a thumb.
+Each count is a 36px toggle beside the name's link, never inside it, and both open the same list. The list is `components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
 too, then every scorer and assister tagged with the squad holding him (his own in the accent, a rival's faint, an
 unheld man untagged), or *Scorers not available right now.* when FPL's lines are missing. The score still opens
 the match. A row with none of his men draws no count; with no team, no edge either. The table carries

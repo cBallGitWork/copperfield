@@ -4,7 +4,7 @@ import Link from "@/app/components/shell/Link";
 import Absent from "@/app/components/shell/Absent";
 import ScrollBoard from "./ScrollBoard";
 import { Head, HeadRow, MUTE, NameHead, PLATE, SortHead, sortedAs } from "./TableHeads";
-import { CutRow, PointsCell, TIGHT_ROW } from "./TableCells";
+import { CutRow, PointsCell } from "./TableCells";
 import { yoursEdge, yoursInk } from "@/app/mine";
 import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TAP_ROW, TONE, standDown } from "@/app/desk";
 import { FORM_GAMES } from "@/app/config";
@@ -26,8 +26,8 @@ export type StandingsColumn<K extends string> = {
   deskOnly?: true;
 };
 
-/** A row's height under a thumb: the tap floor, or the Draft tab's 36px (PRODUCT.md's exceptions). */
-const ROWS = { tap: `${TAP_ROW} gap-2`, tight: TIGHT_ROW } as const;
+/** The name cell's row: one tap target, `TAP_ROW`'s heights. */
+const NAME_ROW = `${TAP_ROW} gap-2`;
 
 /** One result in a form guide, oldest first; `title` is its gameweek and score where the caller knows them. */
 export type FormMark = { result: keyof typeof TONE; title?: string };
@@ -54,7 +54,6 @@ export default function StandingsTable<K extends string>({
   sort,
   descending = false,
   sortHref,
-  rows = "tap",
 }: {
   columns: readonly StandingsColumn<K>[];
   lines: readonly StandingsLine[];
@@ -63,7 +62,6 @@ export default function StandingsTable<K extends string>({
   descending?: boolean;
   /** Where a head links to reorder; without one no head sorts. */
   sortHref?: (key: K) => string;
-  rows?: keyof typeof ROWS;
 }) {
   // A head row whose only plate is the muted place would draw one empty plate; it stays for a screen reader.
   const unread = columns.every((column) => column.kind === "place" || column.kind === "name");
@@ -82,7 +80,7 @@ export default function StandingsTable<K extends string>({
             <Fragment key={line.key}>
               <tr className={`${ROW_RULE} ${line.mine ? "bg-raised" : line.href === undefined ? "" : "hover:bg-surface"}`}>
                 {columns.map((column) => (
-                  <Cell key={column.key} column={column} line={line} sort={sort} row={ROWS[rows]} />
+                  <Cell key={column.key} column={column} line={line} sort={sort} />
                 ))}
               </tr>
               {(line.cuts ?? []).map((cut) => (
@@ -146,13 +144,10 @@ function Cell<K extends string>({
   column,
   line,
   sort,
-  row,
 }: {
   column: StandingsColumn<K>;
   line: StandingsLine;
   sort: K | undefined;
-  /** The name cell's row class. */
-  row: string;
 }) {
   const shown = shownAt(column, sort);
   const value = line.values[column.key];
@@ -171,9 +166,9 @@ function Cell<K extends string>({
       return (
         <td className="pl-2">
           {line.href === undefined ? (
-            <span className={`${row} ${yoursInk(line.mine === true)}`}>{line.name}</span>
+            <span className={`${NAME_ROW} ${yoursInk(line.mine === true)}`}>{line.name}</span>
           ) : (
-            <Link href={line.href} className={`${row} hover:underline ${yoursInk(line.mine === true)}`}>
+            <Link href={line.href} className={`${NAME_ROW} hover:underline ${yoursInk(line.mine === true)}`}>
               {line.name}
             </Link>
           )}

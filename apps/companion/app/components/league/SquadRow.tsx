@@ -112,7 +112,7 @@ export default function SquadRow({
     </>
   );
 
-  // 36px under a thumb, PRODUCT.md's squad-list exception to the 44 floor; `.cm-row` takes it to 28 above `lg`.
+  // A tap row's 36 under a thumb; `.cm-row` takes it to 28 above `lg`.
   // `cm-out` greys the ink and the doubt wash is a ground, so an injured reserve keeps both.
   const shell = [
     `cm-row flex min-h-9 w-full items-center ${SQUAD_GAP} px-1.5 text-left`,

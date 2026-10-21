@@ -47,7 +47,7 @@ function SeasonLine({ row, teamId, current }: { row: SeasonRow; teamId: string; 
   const cup = row.tie.competition.id === LEAGUE_COMPETITION.id ? null : row.tie;
   return (
     <li>
-      <div className={`cm-row flex min-h-11 items-center gap-2 px-1.5 ${yoursEdge(current)}`}>
+      <div className={`cm-row flex min-h-9 items-center gap-2 px-1.5 ${yoursEdge(current)}`}>
         {/* The gameweek always; its date only on a desk, where the opponent still has room. The floor holds the widest label
             (GW10, "GW15 Saturday 12 December") so every opponent starts on one line. */}
         <span className="cm-index numeric flex min-w-11 shrink-0 items-baseline gap-1 px-1.5 py-0.5 lg:min-w-48">
@@ -79,7 +79,7 @@ function SeasonLine({ row, teamId, current }: { row: SeasonRow; teamId: string; 
         {/* The score opens the matchup and the name opens his squad: a link cannot hold a link. */}
         <Link
           href={matchupHref(teamId, row.round.gameweek, undefined, row.opponent.team?.teamId)}
-          className="cm-row inline-flex min-h-11 shrink-0 items-center hover:underline"
+          className="cm-row inline-flex min-h-9 shrink-0 items-center hover:underline"
         >
           <Score row={row} />
         </Link>
@@ -130,8 +130,8 @@ function Opponent({
   ) : (
     <Link
       href={teamHref(opponent.team.teamId, gameweek)}
-      // `.cm-row` gives a phone 44px, the desk 28. A name is white (DESIGN §3), in a week to come as in one played.
-      className={`cm-row flex min-h-11 min-w-0 items-center text-ink hover:underline ${ROW_NAME}`}
+      // `.cm-row` gives a phone 36px, the desk 28. A name is white (DESIGN §3), in a week to come as in one played.
+      className={`cm-row flex min-h-9 min-w-0 items-center text-ink hover:underline ${ROW_NAME}`}
     >
       {v}
       <span className="truncate">

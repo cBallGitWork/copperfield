@@ -4,7 +4,7 @@ import type { Club, PlManMatch, PlTeamSheet, SquadPlayerDetail } from "@epl/core
 import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
 import Section from "../../../components/shell/Section";
 import Board from "../../../components/league/Board";
-import LeadFace, { LEAD_LINK_TIGHT } from "../../../components/league/LeadFace";
+import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import { MaybeCard } from "./PlayerCardButton";
 import SubNote from "./SubNote";
 import { COLUMNS, sorted, type StatLine, type StatSort } from "./statColumns";
@@ -12,7 +12,6 @@ import { SIDE_SHARES, standoutCuts, standoutInk } from "../../../components/leag
 import { statsHref } from "./statsSort";
 import { appeared, cameOn, forCode, ordered, type Named } from "./sheetJoin";
 import type { Match } from "./match";
-import { MATCH_ROW } from "./matchRow";
 import Absent from "@/app/components/shell/Absent";
 
 // One club's men and what each did — CM 01/02's `Roma Stats` foot screen, ranked by fantasy points.
@@ -82,7 +81,6 @@ export default function ClubStats({
         rows={rows}
         keyOf={(row, at) => `${row.named.man.code ?? row.named.man.name}-${at}`}
         rowClass={(row) => (finished(row) ? "" : "cm-out")}
-        rowAttrs={MATCH_ROW}
         lead={{
           tile: { positions: (row) => fantraxPositions(league, row.named.man.code) },
           name: {
@@ -92,7 +90,7 @@ export default function ClubStats({
               const hurt = man.code !== null && injured.has(man.code);
               return (
                 // His card, not his page: every name on a match screen opens the same card (Craig, 23 Sep 2026).
-                <MaybeCard player={forCode(cards, man.code)} className={`${LEAD_LINK_TIGHT} gap-1.5`}>
+                <MaybeCard player={forCode(cards, man.code)} className={`${LEAD_LINK} gap-1.5`}>
                   <LeadFace
                     name={footballerName(match, man)}
                     after={

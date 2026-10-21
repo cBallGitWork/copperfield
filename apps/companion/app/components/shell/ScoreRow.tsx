@@ -68,7 +68,7 @@ export default function ScoreRow({
   const split = scoreHref !== undefined;
   const row = (
     <div
-      className={`grid min-h-11 items-stretch lg:min-h-7 ${GRID} ${marks === true ? yoursEdge(yours) : yoursMark(yours)}`}
+      className={`grid min-h-9 items-stretch lg:min-h-7 ${GRID} ${marks === true ? yoursEdge(yours) : yoursMark(yours)}`}
     >
       <Block side={home} />
       <Name side={home} at="home" split={split} under={under?.home} />
@@ -120,12 +120,12 @@ function Block({ side }: { side: ScoreSide }) {
   );
 }
 
-/** A cell of a split row: a link at the thumb floor when it leads somewhere, else the plain span. */
+/** A cell of a split row: a link at a row's 36 when it leads somewhere, else the plain span. */
 function Cell({ href, className, children }: { href?: string; className: string; children: ReactNode }) {
   return href === undefined ? (
     <span className={className}>{children}</span>
   ) : (
-    <Link href={href} className={`${className} min-h-11 hover:brightness-110 lg:min-h-7`}>
+    <Link href={href} className={`${className} min-h-9 hover:brightness-110 lg:min-h-7`}>
       {children}
     </Link>
   );

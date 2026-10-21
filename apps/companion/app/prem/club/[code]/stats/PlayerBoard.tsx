@@ -6,7 +6,7 @@ import { DASH, fullFootballerName, type FootballPlayer } from "@epl/core";
 import { viewOf, reading } from "./measures";
 import { PANEL } from "@/app/desk";
 import Board from "../../../../components/league/Board";
-import LeadFace, { LEAD_LINK_TIGHT } from "../../../../components/league/LeadFace";
+import LeadFace, { LEAD_LINK } from "../../../../components/league/LeadFace";
 import { SIDE_SHARES, standoutCuts, standoutInk } from "../../../../components/league/standout";
 import StateBox from "../../../../components/football/StateBox";
 import { doubtRow } from "../../../../components/football/doubtRow";
@@ -76,7 +76,7 @@ export default function PlayerBoard({ rows, view }: { rows: readonly Row[]; view
             label: "Player",
             className: (row) => doubtRow(row.player),
             of: ({ player, positions, href }) => (
-              <NameLink href={href} className={LEAD_LINK_TIGHT}>
+              <NameLink href={href} className={LEAD_LINK}>
                 <LeadFace name={fullFootballerName(player)} positions={positions} after={<StateBox player={player} />} />
               </NameLink>
             ),

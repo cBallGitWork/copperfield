@@ -192,7 +192,7 @@ says `NOT` where FPL says `NFO`. Fantrax's table is captioned "Recent Games" and
 they do not publish how far back it reaches, so a match beyond it dashes on all
 six columns and a line under the table says how many of the matches they covered.
 
-**The rows are tap rows, not CM's 18px.** A tappable score is a control, so its row is `TAP_ROW`: 44 under a thumb,
+**The rows are tap rows, not CM's 18px.** A tappable score makes its row a tap row, `TAP_ROW`: 36 under a thumb,
 the desk's 28 (the one table spec, 21 Oct 2026). CM's appearances table could be
 dense because nothing in it was clickable. That is the price of the link and it
 was paid deliberately.

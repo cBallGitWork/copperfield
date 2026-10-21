@@ -67,7 +67,6 @@ export default async function StandingsPage({ searchParams }: { searchParams: Se
       {/* A table wider than the phone scrolls sideways inside its own box. */}
       <StandingsTable
         columns={COLUMNS}
-        rows="tight"
         sort={sort}
         descending={descending}
         sortHref={leagueSortHref(sort, descending)}

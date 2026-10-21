@@ -48,7 +48,6 @@ export async function TableTab({ tie, mine }: { tie: readonly string[]; mine: st
     <section className={PANEL}>
       <StandingsTable
         columns={COLUMNS}
-        rows="tight"
         sort="rank"
         sortHref={leagueSortHref("rank", false)}
         lines={sortRows(rows, "rank", false).map((row) =>

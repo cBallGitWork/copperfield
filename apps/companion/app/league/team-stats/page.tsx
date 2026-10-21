@@ -13,7 +13,7 @@ import {
   thousands,
 } from "@epl/core";
 import Nothing from "../../components/shell/Nothing";
-import { TIGHT_ROW } from "../../components/league/TableCells";
+import { ROW_LINK } from "../../components/league/TableCells";
 import GroupNav from "../../components/league/GroupNav";
 import { FootFrame } from "../../components/shell/FootFrame";
 import LeagueShell from "../Shell";
@@ -112,7 +112,7 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
                 // The edge on the pinned cell, not the row: a `<tr>` border never paints through a pinned cell's ground.
                 className: (row) => yoursInset(row.teamId === mine),
                 of: (row) => (
-                  <Link href={teamHref(row.teamId)} className={`${TIGHT_ROW} px-1.5 hover:underline ${yoursInk(row.teamId === mine)}`}>
+                  <Link href={teamHref(row.teamId)} className={`${ROW_LINK} px-1.5 ${yoursInk(row.teamId === mine)}`}>
                     <span className={`min-w-0 truncate ${ROW_NAME}`}>
                       <TeamName teamId={row.teamId} name={nameOf(row.teamId)} />
                     </span>

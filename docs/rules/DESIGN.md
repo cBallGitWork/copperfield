@@ -768,7 +768,7 @@ step declared. §8 records why 3xs is the last step rather than a floor.
 **The three smallest steps are one pixel bigger from `lg`** — 10/13 · 12/15 ·
 13/17 — and that is the one place in this scale with a breakpoint. Craig, 5 Sep
 2026: *"on desktop, the fonts on rows are quite small and hard to read at
-times."* The density table below relaxes a repeating ROW from 44px to 28 above
+times."* The density table below relaxes a repeating ROW from the phone's tap height to 28 above
 `lg`, on CM's own proportions, and nothing in that argument said the TYPE inside
 the row had to come down with it: the row got denser and the label stayed at the
 phone's 11px, which on a 1440 screen at arm's length is a smaller angular size
@@ -866,11 +866,10 @@ apart silently.
 |---|---|---|---|---|
 | Plated title bar | 44 | 96 | `lg`–`3xl`, `.cm-title` | `PageHeader` |
 | The caption under it | 28, and only where no tab names the view | 40 | `sm`–`2xl`, `.cm-title` | `shell/Caption` |
-| A row that needs two lines | 56 | 28 | `sm` | `.cm-row` + `min-h-14` |
 | **A control** — button, select, input, a dialog's way out | **44** | **36** | `sm` | `BUTTON` `SELECT` `SUBMIT` |
 | **A tab** — one plate of a strip | **44**, painting 36 | **56** | `2xs`–`sm` | `.cm-tab` + `TAB` |
 | A thumb-rail tab | 56 + inset | — | `xs`/600 under a 24px glyph | `.cm-thumbrail` |
-| **A row of a list**, or a table row that is one tap target | **44** | **28** | `sm`/`lg:base` name in the CHROME face, `sm` figures at both widths | `.cm-row` + `TAP_ROW` (`ROW_LINK`) + `ROW_NAME` + `FIGURE` |
+| **A row of a list**, or a table row that is one tap target | **36**, more only for a second line | **28** | `sm`/`lg:base` name in the CHROME face, `sm` figures at both widths | `.cm-row` + `TAP_ROW` (`ROW_LINK`) + `ROW_NAME` + `FIGURE` |
 | **A table row nobody taps** | **24** | **28** | `sm` figures | `READ_ROW` on the `<tr>` |
 | A column head over any table or board, and a caption plate | 24 | 24 | `3xs` bold caps (`HeadRow` = `MINOR_CAPS`) | `PLATE_FRAME` (`h-6`): `TableHeads.PLATE` through `SortHead` or `PlateHead`; `HEAD_PLATE` |
 | A figure in a row | — | — | `sm`, `.numeric` | `ROW_FIGURE`, worn by `FIGURE_CELL` and `FIGURE` (bold), centred on every table |
@@ -919,8 +918,9 @@ without saying so: its ledgers (`Figures`, `Measures`) are two men's figures eit
 and nothing else, so they take TeamSheet's step, `base`/`lg:text-lg`. #144 had read it as cells falling back to 16px
 for want of `BOARD`; it is a choice, and the screen can say what earns it.
 
-**Three of these are rules and the rest are consequences.** 44 is docs/rules/PRODUCT.md's
-tap floor and is not negotiable under a thumb; 36 is a control on the desk; 28 is
+**Four of these are rules and the rest are consequences.** 44 is docs/rules/PRODUCT.md's
+tap floor for a control and is not negotiable under a thumb; 36 is a tappable row under a thumb (Craig, 21 Oct 2026)
+and a control on the desk; 28 is
 a repeating row on the desk, which is `.cm-row` and is the number that makes a
 division fit on a screen. `desk.css` carries the long argument for the pair and
 `tools/ui/tapfit.mjs` measures it.
@@ -979,8 +979,9 @@ every figure in it at 14px, and the table still does not scroll sideways.
 styles and three figure sizes"*). The head plate is **24px** at both widths, `2xs` bold caps, one frame
 (`PLATE_FRAME`) shared with every caption plate; it had been settled at 28 on 2 Oct, which stood a 28px head over
 19px rows on every read-only table. A row nobody taps is **24** under a thumb and **28** on a desk (`READ_ROW`); a
-row that is one tap target is **44** and **28** (`TAP_ROW`), PRODUCT's 36px list (`TIGHT_TAP_ROW`) aside. A two-line
-pool row is one target: a 24px name line over 20px of figures, the name's link hanging over both. Every figure is
+row that is one tap target is **36** and **28** (`TAP_ROW`; Craig, 21 Oct 2026: *"These rows can be smaller no?"*,
+which folded PRODUCT's 36px list into the rule). A two-line pool row is one target: a 20px name line over 16px of
+figures, the name's 36px link hanging over both. Every figure is
 `ROW_FIGURE`, `FIGURE_CELL_TIGHT` only tightening the padding of a board of a dozen columns or more. A table fills
 its panel unless its call site says `fit`: a board whose name takes the slack cannot be told from a short record
 by its column count. A one-row table is a label and figure line (Set pieces). Only many-column boards scroll.

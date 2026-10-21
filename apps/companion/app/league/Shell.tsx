@@ -40,7 +40,6 @@ export default function LeagueShell({
       caption={sub === undefined ? named : <>{named} · {sub}</>}
       captionOnPhone={current === "matchups"}
       rows={rows ?? Math.max(teams ?? 0, PANEL_FLOOR)}
-      tight
     >
       {children}
     </SectionShell>
