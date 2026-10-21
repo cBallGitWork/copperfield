@@ -47,6 +47,14 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## Compare is a tab on the player page — decided 21 Oct 2026
+
+Craig, 21 Oct 2026: *"maybe we put compare in the player section too"*. This reverses "Compare is an action on the man
+on screen, not a tab" (the Profile's Compare with… button, which made the board the picker): his strip is now Profile ·
+Data · News · Transfer · Compare (`players/[fantraxId]/tabs.ts`), Compare opening beside his position group's nearest
+man in season league points (`analysis/rival.ts`). The Profile's button is gone; Compare stays in the Data section's nav
+(`PoolNav`). The board's `?compare=` picker survives, reached by address alone.
+
 ## One table spec — decided 21 Oct 2026
 
 Craig, 21 Oct 2026: *"seven table styles on one page: six different row heights, three header styles and three

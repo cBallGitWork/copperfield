@@ -1,7 +1,7 @@
 # `/players/[fantraxId]` — one player
 
 Championship Manager's player profile (`reference/cm9900/11.jpg`), for a Fantrax
-draft league. A plated bar in his club's colour, four tabs, and one cyan line saying
+draft league. A plated bar in his club's colour, five tabs, and one cyan line saying
 what he actually is.
 
 One profile per tap, never a sweep of the 697 — that is the whole politeness
@@ -26,8 +26,12 @@ derived the same four from the same object.
   Fantrax's birthplace (which put Haaland, born in Leeds, down as England). **On the
   Profile only**, above the portrait (Craig, 1 Oct 2026, on Data: "remove the dob from all
   sections except profile"). It had been in every tab's shell, then on Data alone from 25 Sep.
-- **The tabs** — Profile · Data · News · Transfer. **Five until 25 Sep 2026**, CM's own
-  count, when History folded into Data. Fitness folded into News on 4 Sep 2026
+- **The tabs** — Profile · Data · News · Transfer · Compare (`tabs.ts`). **Compare since 21 Oct 2026** (Craig:
+  *"maybe we put compare in the player section too"*; PLATFORM_NOTES): it leaves the shell for
+  `/players/analysis?a=<him>&b=<rival>`, the rival the man in his position group with the nearest season league points,
+  ties to a free agent (`analysis/rival.ts`, `defaultRival`); with no points, or the pool silent, Compare opens with him
+  alone. *Known:* the strip replaces history (`TabStrip`), so Back from Compare skips the player page. **Five until
+  25 Sep 2026**, CM's own count, when History folded into Data. Fitness folded into News on 4 Sep 2026
   (Craig: "Fitness could be doubled in with news") — they were two tabs asking
   one question with half an answer each. Which of them is hollow is decided from
   the SUBJECT, not from the page you are on; each route used to pass its own
@@ -81,13 +85,16 @@ already drawn on both, and now draws only there. `tabs.test.ts` holds which bloc
    fielded, so it could not fill a run; the round just gone went on 4 Sep.
 4. **The real position**, in cyan — the first thing in the app entitled to that
    slot (see below).
-5. **Compare with…**, the board as the picker for a second man.
+
+The **Compare with…** button that closed the Profile went on 21 Oct 2026, when Compare became a tab.
+**A man with no season to rate gets no reading on any row** (21 Oct 2026), the set-piece shares (Penalty Taking, Set
+Pieces) included: they had printed a rating off his club's orders alone (`core:football/attributes.ts`, `share`).
 
 ## Data
 
 His record, one season at a time (Craig, 25 Sep 2026: "maybe we merge data and history
 together, shows current season by default with other seasons on a dropdown"). **History
-is gone as a tab** and `/history` redirects to `?season=all`; the strip is four plates.
+is gone as a tab** and `/history` redirects to `?season=all`.
 
 - A **Season** picker: this season (the default), each season
   FPL's history lists, and **All seasons**. It is `?season=`, so a shared link keeps it. Over a past season or
@@ -100,14 +107,19 @@ is gone as a tab** and `/history` redirects to `?season=all`; the strip is four 
   the Profile until 11 Oct 2026. **`FPts` leads it since 16 Oct 2026** (review M28; the sceptic's "a season FPts
   figure on Data: yes"): the Data board's season points off the cached pool, placed among the same men, ruled off from
   FPL's figures as the match log rules its accounts apart. Absent while the pool is silent or holds a projection.
+  An outfielder's figures are `Min G xG A xA Sh KP Def`, a keeper's `Min Sv CS Prv` (`core:football/rankings.ts`).
+  **`KP` is the stats league's key passes** (`data/intel/stats`, `keyPasses`), the figure Adv Stats prints; until
+  21 Oct 2026 it was `Ch`, counted off the shot file's passers, which ran one under for 64 of 448 men. **A man who has
+  not played has no place on any figure**: his totals print and every place is `—`.
 - **Season maps** (Craig, 9 Oct 2026: *"Put shot map and pass map and touch map into the player profile section"*;
   moved here on 11 Oct with the rest of his figures), each map under a strip in his club's colours carrying a word
   and a count and nothing else:
    - **Shots** — every shot this season on the attacking half, the house's marks (`ShotMarks`): size is the xG by
      its square root, a goal filled, on target a ring, off target or blocked a faint ring.
-   - **Chances created** — every shot in the file whose `assistCode` is his, drawn where it was struck, with Compare's
-     dashed key-pass line from where his pass began (a square); an assist is the filled mark. A chance the file
-     places no pass for is the mark alone.
+   - **Shots set up** (captioned "Chances created" until 21 Oct 2026) — every shot in the file whose `assistCode` is
+     his, drawn where it was struck, with Compare's dashed key-pass line from where his pass began (a square); an
+     assist is the filled mark. A chance the file places no pass for is the mark alone. Its count is the marks drawn,
+     so it can differ from Rankings' `KP`.
    - **Touches** — every touch this season, merged across fixtures, as Compare's heat (`analysis/HeatPitch`).
 
    A half pitch is drawn reaching back only for a shot or pass that began in his own half (5 of 1,363 shots and 8 of
@@ -120,11 +132,19 @@ is gone as a tab** and `/history` redirects to `?season=all`; the strip is four 
   crest pinned beside it, and each column's best in CM's orange and its top quarter in
   yellow, as the pool board lights them. **`FPts` is the first column** (Craig, 12 Oct 2026: "this needs to have fpts in
   the first column"), then the score, which links to `/prem/match/[id]`.
-- **A past season** — FPL's line for that season, with the club.
+- **A past season** — FPL's line for that season, with the club, then the same season maps for that season
+  (21 Oct 2026) off `data/intel/past-maps/<season>.json` (`scripts/intel-past-maps.py`, a one-off for 21-22 to
+  25-26): Shots and Touches, no chances map, on a plain plate, since his club now may not be that season's. Only the
+  chosen season's file loads (`app/pastMaps.ts`). **Wherever there is no chances map** a desk runs the two maps
+  across three columns and a phone fills the cell beside Shots with **Outcomes**: goals, saved, post, missed and
+  blocked, each by its mark, and the xG (`SeasonMaps.tsx`). *Known gap:* SofaScore's 2023/24 shot maps miss 42 goals
+  in 35 player-matches.
 - **All seasons** — every season with the **club he was at** ("mention what clubs he
   played for"), from the sister's identity store (`intel/careers`). A club is printed only
   against a season FPL lists: the store has Haaland at City in 21-22, when he was not in
-  the league.
+  the league. No maps. The heads are `Min G A CS GA Sv Yel Red` (`PastSeasons.tsx`); the club prints as this
+  season's code under a thumb, as the match log does, and its full name from `lg` (`seasonClub.ts`); a club no longer
+  in the league keeps its name, clipped.
 
 **After the points and the score, two provenances on one row, with a rule between them.** Left of it is FPL's
 measurement of the play — minutes, goals, xG, xA and defensive contribution (FPL's
@@ -134,7 +154,8 @@ board carries no source caption ("FPL's own · Fantrax's own remove"). Right of 
 the five things FPL does not publish at all: shots, shots on target, fouls
 committed, fouls suffered, offsides.
 
-**Zero is a stat on this board** (16 Oct 2026). `CS` prints `1` or `0` for a match he played and dashes one he was
+**A match he was not on for dashes every figure but `Min`** (21 Oct 2026, `MatchLog.tsx`); `FPts` prints what the
+league paid, and a column only his sat-out matches filled drops out. **Zero is a stat on this board** (16 Oct 2026). `CS` prints `1` or `0` for a match he played and dashes one he was
 not on for; it printed `Y` or a dash until then, so a keeper who conceded read as unmeasured. **A column none of his
 matches measured stands down**, its rule passing to the next: Fantrax's keeper table carries no shots, shots on target
 or offsides (Tzolakis and Raya, probed 16 Oct), which drew a column of dashes on every full 90.
