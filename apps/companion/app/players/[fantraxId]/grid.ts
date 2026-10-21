@@ -62,12 +62,6 @@ const isKeeper = (code: number) => intelSquads.get(code)?.line === "GK";
 const division = cache(async (): Promise<{ rated: Scouted[]; tallied: Tallied[] }> => {
   const snapshot = await footballNow();
   const clubs = clubById(snapshot);
-  const created = new Map<number, number>();
-  for (const shots of intelShots.values()) {
-    for (const shot of shots) {
-      if (shot.assistCode !== null) created.set(shot.assistCode, (created.get(shot.assistCode) ?? 0) + 1);
-    }
-  }
   const players = snapshot.players.filter(onTheBooks);
   return {
     rated: players.map((player) => {
@@ -88,7 +82,7 @@ const division = cache(async (): Promise<{ rated: Scouted[]; tallied: Tallied[] 
     }),
     tallied: players.map((player) => ({
       player,
-      shots: intelShots.size === 0 ? null : shotLine(intelShots.get(player.code) ?? [], created.get(player.code) ?? 0),
+      shots: intelShots.size === 0 ? null : shotLine(intelShots.get(player.code) ?? []),
       keyPasses: stat(intelStats.get(player.code), "keyPasses"),
     })),
   };

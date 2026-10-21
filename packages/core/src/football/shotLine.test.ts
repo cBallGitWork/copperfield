@@ -9,14 +9,14 @@ describe("shotLine", () => {
     situation: null, bodyPart: "right-foot", assistCode: null, pass: null, ...over,
   });
 
-  it("counts his shots and each foot, and carries the chances he made", () => {
-    const counted = shotLine([shot({ bodyPart: "head" }), shot({ bodyPart: "left-foot" }), shot({})], 4);
-    expect(counted).toEqual({ struck: 3, created: 4, left: 1, right: 1 });
+  it("counts his shots and each foot", () => {
+    const counted = shotLine([shot({ bodyPart: "head" }), shot({ bodyPart: "left-foot" }), shot({})]);
+    expect(counted).toEqual({ struck: 3, left: 1, right: 1 });
   });
 });
 
 describe("preferredFoot", () => {
-  const feet = (left: number, right: number): ShotLine => ({ struck: left + right, created: 0, left, right });
+  const feet = (left: number, right: number): ShotLine => ({ struck: left + right, left, right });
 
   it("names the foot he shoots with", () => {
     expect(preferredFoot(feet(1, 9))).toBe("Right");
