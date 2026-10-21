@@ -132,6 +132,53 @@ describe("attributes", () => {
     expect(ratingOf(attributes(untold, [untold, ...league]), "Set Pieces")).toBeNull();
   });
 
+  it("says nothing of penalties or set pieces he does not take, and rates a taker among takers", () => {
+    const none = man({}, { code: 1, penaltyShare: 0, setPieceShare: 0 });
+    const second = man({}, { code: 2, penaltyShare: 0.2, setPieceShare: 0.3 });
+    const first = man({}, { code: 3, penaltyShare: 0.8, setPieceShare: 1.2 });
+    const cohort = [none, second, first, ...Array.from({ length: 30 }, () => none)];
+    expect(ratingOf(attributes(none, cohort), "Penalty Taking")).toBeNull();
+    expect(ratingOf(attributes(none, cohort), "Set Pieces")).toBeNull();
+    expect(ratingOf(attributes(second, cohort), "Penalty Taking")).toBe(1);
+    expect(ratingOf(attributes(first, cohort), "Penalty Taking")).toBe(11);
+  });
+
+  it("reads anticipation at either end, so a striker who lives in their box rates as high as a ball-winner", () => {
+    const ballWinners = Array.from({ length: 10 }, (_, i) => man({ recoveries: i, boxTouches: 0 }));
+    const striker = man({ recoveries: 0, boxTouches: 50 });
+    const centreHalf = man({ recoveries: 0, boxTouches: 0, interceptions: 40 });
+    const cohort = [striker, centreHalf, ...ballWinners];
+    const anticipation = (subject: Scouted) => ratingOf(attributes(subject, cohort), "Anticipation") ?? 0;
+    const top = Math.max(...cohort.map(anticipation));
+    expect(anticipation(striker)).toBe(top);
+    expect(anticipation(centreHalf)).toBe(top);
+    expect(anticipation(ballWinners[9])).toBeGreaterThan(anticipation(ballWinners[8]));
+    expect(anticipation(ballWinners[0])).toBe(1);
+  });
+
+  it("reads a keeper's anticipation on his recoveries alone, never on his clearances", () => {
+    const sweeper = man({ recoveries: 30, clearances: 0 }, { keeper: true });
+    const clearer = man({ recoveries: 5, clearances: 60 }, { keeper: true });
+    const cohort = [sweeper, clearer];
+    expect(ratingOf(attributes(sweeper, cohort), "Anticipation")).toBeGreaterThan(ratingOf(attributes(clearer, cohort), "Anticipation") ?? 0);
+  });
+
+  it("gives a keeper no Influence, which reads his defence's quiet afternoons as his own", () => {
+    const keeper = man({ saves: 40, conceded: 10 }, { keeper: true });
+    expect(attributes(keeper, [keeper]).some((a) => a.name === "Influence")).toBe(false);
+    expect(attributes(league[0], league).some((a) => a.name === "Influence")).toBe(true);
+  });
+
+  it("gives each of the twenty ratings an equal slice of the cohort, the ends included", () => {
+    const big = Array.from({ length: 200 }, (_, i) => man({ tackles: i }));
+    const counts = new Map<number | null, number>();
+    for (const subject of big) {
+      const rating = ratingOf(attributes(subject, big), "Tackling");
+      counts.set(rating, (counts.get(rating) ?? 0) + 1);
+    }
+    expect([...counts.values()]).toEqual(Array.from({ length: 20 }, () => 10));
+  });
+
   it("rates the whole division exactly as it rates one man at a time", () => {
     const keeper = man({ saves: 40, conceded: 10 }, { code: 99, keeper: true });
     const cohort = [...league.map((m, i) => ({ ...m, code: i })), keeper];

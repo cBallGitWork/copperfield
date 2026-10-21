@@ -52,13 +52,18 @@ export function ratedRunning(now: PlayerLine | undefined, floors: Floors): Runni
 const BEST = 20;
 const WORST = 1;
 
+type Of = (man: Scouted) => number | null;
+
 interface Measure {
   name: string;
   from: string;
   /** Whose row it is. */
   for: "keeper" | "outfield" | "both";
-  of: (man: Scouted) => number | null;
+  /** One figure, or several: each placed on its own, his best placing ranked against everyone's best. */
+  of: Of | readonly Of[];
 }
+
+const partsOf = (measure: Measure): readonly Of[] => (typeof measure.of === "function" ? [measure.of] : measure.of);
 
 /** His counts added up, or null when any is missing. */
 function total(line: PlayerLine, keys: readonly LineCount[]): number | null {
@@ -81,15 +86,22 @@ const per90 =
     man.line === null ? null : rate90(total(man.line, keys), man.line.minutes);
 /** FPL's figure per 90 of the minutes FPL covered. */
 const fpl90 = (key: LineCount) => (man: Scouted) => (man.line === null ? null : rate90(man.line[key], man.line.fplMinutes));
-/** His share of his club's set pieces, once he has a season to rate. */
-const share = (key: "penaltyShare" | "setPieceShare") => (man: Scouted) => (man.line === null ? null : man[key]);
+/** His share of his club's set pieces, once he has a season to rate; none taken is no reading, so takers rank among takers. */
+const share = (key: "penaltyShare" | "setPieceShare") => (man: Scouted) => (man.line === null || !man[key] ? null : man[key]);
+/** An outfielder's figure only: a keeper's clearances and box touches say nothing of how he reads a game. */
+const outfield = (of: Of): Of => (man) => (man.keeper ? null : of(man));
 const ran90 = (key: "km" | "sprints") => (man: Scouted) => (man.running === null ? null : rate90(man.running[key], man.running.minutes));
 
 /** The grid, alphabetical down the columns as CM 01/02 sets it. */
 const MEASURES: readonly Measure[] = [
   { name: "Acceleration", from: "sprints per 90, this season", for: "outfield", of: ran90("sprints") },
   { name: "Aggression", from: "fouls committed per 90", for: "outfield", of: per90("fouls") },
-  { name: "Anticipation", from: "recoveries per 90", for: "both", of: per90("recoveries") },
+  {
+    name: "Anticipation",
+    from: "the best of his recoveries, his clearances, blocks and interceptions, and his touches in the opposition box, per 90",
+    for: "both",
+    of: [per90("recoveries"), outfield(per90("clearances", "blocks", "interceptions")), outfield(per90("boxTouches"))],
+  },
   { name: "Consistency", from: "his average match rating in his worst quarter of starts", for: "both", of: consistency },
   { name: "Creativity", from: "chances created per 90", for: "outfield", of: per90("chancesCreated") },
   { name: "Crossing", from: "accurate crosses per 90", for: "outfield", of: per90("crosses") },
@@ -97,7 +109,7 @@ const MEASURES: readonly Measure[] = [
   { name: "Finishing", from: "expected goals on target per 90", for: "outfield", of: per90("xgot") },
   { name: "Handling", from: "share of the shots on target he faced that he saved", for: "keeper", of: saveShare },
   { name: "Heading", from: "aerial duels won per 90", for: "outfield", of: per90("aerialsWon") },
-  { name: "Influence", from: "how much he decides his matches, per 90", for: "both", of: fpl90("influence") },
+  { name: "Influence", from: "how much he decides his matches, per 90", for: "outfield", of: fpl90("influence") },
   { name: "Long Shots", from: "shots from outside the box per 90", for: "outfield", of: per90("outsideBox") },
   { name: "Marking", from: "clearances, blocks and interceptions per 90", for: "outfield", of: per90("clearances", "blocks", "interceptions") },
   { name: "Off The Ball", from: "touches in the opposition box per 90", for: "outfield", of: per90("boxTouches") },
@@ -115,22 +127,30 @@ const MEASURES: readonly Measure[] = [
 
 const forRole = (keeper: boolean) => (measure: Measure) => measure.for === "both" || (measure.for === "keeper") === keeper;
 
-/** Each of a role's measures with the cohort's figures on it, sorted, so a man is placed by search. */
-type Scale = readonly { measure: Measure; figures: readonly number[] }[];
+/** Each of a role's measures, with the cohort's figures on each part and its scores, sorted, so a man is placed by search. */
+type Scale = readonly { measure: Measure; parts: readonly (readonly number[])[]; scores: readonly number[] }[];
+
+const sorted = (values: readonly (number | null)[]) => values.filter((value): value is number => value !== null).sort((a, b) => a - b);
+
+/** His best part as the share of the cohort he is strictly better than; null when no part reads him. */
+function scoreOf(man: Scouted, measure: Measure, parts: readonly (readonly number[])[]): number | null {
+  const shares = partsOf(measure).flatMap((of, i) => {
+    const figure = of(man);
+    return figure === null || parts[i].length === 0 ? [] : [below(parts[i], figure) / parts[i].length];
+  });
+  return shares.length === 0 ? null : Math.max(...shares);
+}
 
 function scaleOf(keeper: boolean, cohort: readonly Scouted[]): Scale {
   const peers = cohort.filter((other) => other.keeper === keeper);
-  return MEASURES.filter(forRole(keeper)).map((measure) => ({
-    measure,
-    figures: peers
-      .map(measure.of)
-      .filter((value): value is number => value !== null)
-      .sort((a, b) => a - b),
-  }));
+  return MEASURES.filter(forRole(keeper)).map((measure) => {
+    const parts = partsOf(measure).map((of) => sorted(peers.map(of)));
+    return { measure, parts, scores: sorted(peers.map((peer) => scoreOf(peer, measure, parts))) };
+  });
 }
 
 function gridOn(man: Scouted, scale: Scale): Attribute[] {
-  return scale.map(({ measure, figures }) => ({ name: measure.name, from: measure.from, rating: rate(measure.of(man), figures) }));
+  return scale.map(({ measure, parts, scores }) => ({ name: measure.name, from: measure.from, rating: rate(scoreOf(man, measure, parts), scores) }));
 }
 
 /** His grid, rated against the men of his role in `cohort`. Pure. */
@@ -147,11 +167,11 @@ export function divisionAttributes(cohort: readonly Scouted[]): Map<number, Attr
 /** Every row of the grid: its name, what it is made of, and whose it is. */
 export const ATTRIBUTE_ROWS: readonly Omit<Measure, "of">[] = MEASURES.map(({ name, from, for: role }) => ({ name, from, for: role }));
 
-/** Where a figure sits on a sorted scale as a 1–20: the share of it he is STRICTLY better than, so a
- *  block of noughts sits at 1 rather than at the midpoint of its tie. */
+/** Where a figure sits on a sorted scale as a 1–20, each a twentieth of the cohort: the share of it he is STRICTLY
+ *  better than, so a block of noughts sits at 1 rather than at the midpoint of its tie. */
 function rate(figure: number | null, figures: readonly number[]): number | null {
   if (figure === null || figures.length === 0) return null;
-  return WORST + Math.round((below(figures, figure) / figures.length) * (BEST - WORST));
+  return WORST + Math.floor((below(figures, figure) / figures.length) * (BEST - WORST + 1));
 }
 
 /** How many of the sorted figures are strictly less than `figure`. */
