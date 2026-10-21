@@ -13,12 +13,15 @@ import type { Subject } from "./subject";
 /** Prose a step above a row's name, so a paragraph reads at arm's length. */
 const PROSE = "text-base leading-relaxed text-ink lg:text-lg";
 
+/** His fitness in one line at a row's size: a status, not a story (Craig, 21 Oct 2026: "why do we make these so big?"). */
+const NOTE = "text-sm leading-snug text-ink lg:text-base";
+
 export default function Fitness({ found, fantraxId }: { found: Subject; fantraxId: string }) {
   const note = found.football === null ? null : fitnessNote(availabilityOf(found.football.player));
 
   return (
     <Section title={note === null ? "Transfer" : "Fitness and transfer"}>
-      {note === null ? null : <p className={PROSE}>{note}</p>}
+      {note === null ? null : <p className={NOTE}>{note}</p>}
       {/* Streamed: the line reads the league's transaction feed; the slot holds the button's height meanwhile. */}
       <Suspense fallback={<div aria-busy className="min-h-11" />}>
         <TransferStatus found={found} fantraxId={fantraxId} />

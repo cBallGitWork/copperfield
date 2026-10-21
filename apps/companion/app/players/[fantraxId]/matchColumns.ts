@@ -18,11 +18,13 @@ export interface MatchColumn {
   rule?: boolean;
   /** Ours rather than recorded: cyan, and never lit as a standout. */
   derived?: boolean;
+  /** Printed in the reading cyan though it sums as a count: his league points (Craig, 21 Oct 2026). */
+  cyan?: boolean;
   /** Drawn for this role alone; omitted, for both. */
   role?: Role;
 }
 
-export const POINTS: MatchColumn = { head: "FPts", title: "Points", of: (r) => r.paid?.points ?? null };
+export const POINTS: MatchColumn = { head: "FPts", title: "Points", of: (r) => r.paid?.points ?? null, cyan: true };
 
 /** The sum of some figures; null when any of them is missing. */
 const sumOf = (...parts: (number | null)[]): number | null =>
