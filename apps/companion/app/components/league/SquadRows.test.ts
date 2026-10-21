@@ -5,7 +5,7 @@ import type { SquadPlayerDetail } from "@epl/core";
 import SquadRows from "./SquadRows";
 
 vi.mock("next/image", () => ({ default: () => null }));
-vi.mock("@/app/desk", () => ({ SMALL_CAPS: "", MINOR_CAPS: "", ROW_NAME: "", SCROLL: "", QUIET_NOTE: "", QUIET_FIGURE: "" }));
+vi.mock("@/app/desk", () => import("../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: () => null }));
 
 /** A list row's width at 390 on the Team tab, off Craig's 11 Oct shot: "M. Sangaré" (73.7px) fit the name column and

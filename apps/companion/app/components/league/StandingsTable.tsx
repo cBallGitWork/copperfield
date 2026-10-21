@@ -6,7 +6,7 @@ import ScrollBoard from "./ScrollBoard";
 import { Head, HeadRow, MUTE, NameHead, PLATE, SortHead, sortedAs } from "./TableHeads";
 import { CutRow, PointsCell, TIGHT_ROW } from "./TableCells";
 import { yoursEdge, yoursInk } from "@/app/mine";
-import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TONE, standDown } from "@/app/desk";
+import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TAP_ROW, TONE, standDown } from "@/app/desk";
 import { FORM_GAMES } from "@/app/config";
 
 // Every league table in the app (`cm9900/24.jpg`): the fantasy league's, the Premier League's and a cup's groups.
@@ -27,7 +27,7 @@ export type StandingsColumn<K extends string> = {
 };
 
 /** A row's height under a thumb: the tap floor, or the Draft tab's 36px (PRODUCT.md's exceptions). */
-const ROWS = { tap: "cm-row flex min-h-11 items-center gap-2", tight: TIGHT_ROW } as const;
+const ROWS = { tap: `${TAP_ROW} gap-2`, tight: TIGHT_ROW } as const;
 
 /** One result in a form guide, oldest first; `title` is its gameweek and score where the caller knows them. */
 export type FormMark = { result: keyof typeof TONE; title?: string };

@@ -17,11 +17,11 @@ import type { AutoSubMark } from "./autoSubbed";
 
 // One man's row in a squad list: our position, his club's crest, his name, his fixture and his figure.
 
-/** The columns `SquadRows` heads too, phone width first: "WOL (A)" is 39px, the FPts head 27, a crest 24. */
+/** The columns `SquadRows` heads too, phone width first: "WOL (A)" is 39px, the FPts head about 33, a crest 24. */
 export const SQUAD_GAP = "gap-1 lg:gap-1.5";
 export const SQUAD_CREST = "w-6 lg:w-7";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
-export const SQUAD_POINTS = "w-[1.875rem] lg:w-9";
+export const SQUAD_POINTS = "w-9";
 
 export default function SquadRow({
   player,

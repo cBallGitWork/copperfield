@@ -6,7 +6,7 @@ import StatsViews from "./StatsViews";
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/league/matchups/a" }));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
-vi.mock("@/app/desk", () => ({ TAB: "" }));
+vi.mock("@/app/desk", () => import("../../../desk"));
 
 const team = (teamId: string, name: string) => ({ teamId, name }) as LeagueTeam;
 const html = renderToStaticMarkup(

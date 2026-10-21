@@ -25,6 +25,9 @@ export const ROW_FIGURE = "text-sm";
 /** A row's figure cell, centred under a centred head. `.numeric` already tracks: never add `tracking-*`. */
 export const FIGURE_CELL = `numeric px-1.5 text-center ${ROW_FIGURE}`;
 
+/** `FIGURE_CELL` a little tighter under a thumb, for a board of a dozen columns or more. */
+export const FIGURE_CELL_TIGHT = `numeric px-1 text-center lg:px-1.5 ${ROW_FIGURE}`;
+
 /** A standings figure: `FIGURE_CELL`, bold. */
 export const FIGURE = `${FIGURE_CELL} font-bold`;
 
@@ -61,6 +64,17 @@ export const BOARD = "w-full border-collapse text-sm";
 
 /** `BOARD` sized to its figures on a desk: a short table that would otherwise stretch three-letter cells to 300px. */
 export const BOARD_FIT = `${BOARD} lg:w-auto`;
+
+/* ---- Table rows: DESIGN §6's three heights ------------------------------- */
+
+/** A table row nobody taps: 24px under a thumb, 28 on a desk. On the `<tr>`, whose height is a floor. */
+export const READ_ROW = "h-6 lg:h-7";
+
+/** The row that is one tap target, on the link or button filling its cell: the thumb's 44, `.cm-row`'s 28 from `lg`. */
+export const TAP_ROW = "cm-row flex min-h-11 items-center";
+
+/** `TAP_ROW` at 36 under a thumb: PRODUCT's recorded exceptions (match screens, squad lists, the read-mostly tables). */
+export const TIGHT_TAP_ROW = "cm-row flex min-h-9 items-center";
 
 /** The rule between table rows, in `border-bg`: the darker step reads as one ruled table. */
 export const ROW_RULE = "border-b border-bg";
@@ -109,8 +123,11 @@ export const SECTION_BAR =
 /** A section's head row: title left, aside right, ruled under. */
 export const SECTION_HEAD = "flex items-baseline justify-between gap-3 border-b border-line pb-1";
 
-/** A 24px caption plate, left: a block's or a card's strip. A table's column head is `TableHeads.PLATE`, 28. */
-export const HEAD_PLATE = "cm-bevel flex h-6 items-center px-1.5";
+/** The 24px every plate is cut to, ground and padding the caller's: a table's column head, a block's or a card's strip. */
+export const PLATE_FRAME = "flex h-6 items-center";
+
+/** The one 24px plate, left: a block's or a card's strip; `TableHeads` cuts a column head from the same frame. */
+export const HEAD_PLATE = `cm-bevel ${PLATE_FRAME} px-1.5`;
 /** The same plate centred, over a group of columns or a card's figure. */
 export const HEAD_PLATE_CENTRE = `${HEAD_PLATE} justify-center`;
 

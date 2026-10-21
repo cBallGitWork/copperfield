@@ -8,7 +8,7 @@ import { standoutInk, type StandoutCut } from "../components/league/standout";
 import { compareHref, playerHref } from "./routes";
 import { statusesOf, type PlayersQuery } from "./query";
 import type { BoardFigure } from "../components/league/Board";
-import LeadFace, { LEAD_BOX, LEAD_LINK } from "../components/league/LeadFace";
+import LeadFace, { LEAD_LINK } from "../components/league/LeadFace";
 import { Holder } from "./BoardRow";
 import StateBox from "../components/football/StateBox";
 
@@ -45,21 +45,34 @@ export function Lead({
   );
   const state = <StateBox player={footballer} />;
 
-  return (
-    <Link href={href} className={line ? `${LEAD_BOX} w-full` : LEAD_LINK}>
-      {/* The holder after the name on a desk (Craig, 24 Sep 2026), after the position under a thumb (1 Oct 2026). */}
-      <LeadFace
-        line={line}
-        crest={crestForShortName(toFplClubCode(player.clubCode ?? ""))}
-        name={player.displayName}
-        short={player.rawName || player.displayName}
-        positions={row.entry.eligiblePositions}
-        after={line ? state : <>{holder("max-lg:hidden")}{state}</>}
-        under={holder(line ? "" : "lg:hidden")}
-      />
+  // The holder after the name on a desk (Craig, 24 Sep 2026), after the position under a thumb (1 Oct 2026).
+  const face = (
+    <LeadFace
+      line={line}
+      crest={crestForShortName(toFplClubCode(player.clubCode ?? ""))}
+      name={player.displayName}
+      short={player.rawName || player.displayName}
+      positions={row.entry.eligiblePositions}
+      after={line ? state : <>{holder("max-lg:hidden")}{state}</>}
+      under={holder(line ? "" : "lg:hidden")}
+    />
+  );
+  return line ? (
+    <Link href={href} className={LINE_LINK}>
+      <span className={LINE_BAND}>{face}</span>
+    </Link>
+  ) : (
+    <Link href={href} className={LEAD_LINK}>
+      {face}
     </Link>
   );
 }
+
+/** The name line's link (`Board`'s `line`): 44px for a thumb, hanging past Board's 24px line over the figures row. */
+const LINE_LINK = "block min-h-11 w-full px-1.5 text-left hover:underline";
+
+/** Its face, in the line's own 24px. */
+const LINE_BAND = "flex h-6 items-center gap-2";
 
 /** One figure, lit in ink when it stands out; a nought quiet, an absence a dash. */
 export function figureCell(

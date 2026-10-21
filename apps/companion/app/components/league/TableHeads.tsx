@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import Link from "@/app/components/shell/Link";
-import { HEAD_CELL, heldPlate } from "@/app/desk";
+import { HEAD_CELL, PLATE_FRAME, SMALL_CAPS, heldPlate } from "@/app/desk";
 
-// The one head strip every table in the app prints: `HeadRow`'s type, 28px bevelled plates, a centred word over
+// The one head strip every table in the app prints: `HeadRow`'s small caps, 24px bevelled plates, a centred word over
 // a figure and a bare cell over a name. The column LISTS stay with their tables; the mechanics live here.
 
-/** The head row; its cells inherit `text-3xs uppercase`. */
+/** The head row; its cells inherit `SMALL_CAPS`. */
 export function HeadRow({ children }: { children: ReactNode }) {
-  return <tr className="text-3xs uppercase">{children}</tr>;
+  return <tr className={SMALL_CAPS}>{children}</tr>;
 }
 
 /** A head's or tab's word in capitals, unless a lower-case prefix runs into a capital: `xG` is not `XG`. */
@@ -41,14 +41,17 @@ export function Head({
   );
 }
 
+/** A head plate's frame: `PLATE_FRAME`'s 24px, its word never wrapped. */
+const FRAME = `${PLATE_FRAME} whitespace-nowrap`;
+
 /** The bevelled plate, centred over centred figures. */
-export const PLATE = "cm-bevel flex h-7 items-center justify-center whitespace-nowrap px-1.5";
+export const PLATE = `cm-bevel ${FRAME} justify-center px-1.5`;
 
 /** `PLATE` held down: the one column a board is ordered by when its head is not a control. */
-const PRESSED_PLATE = "cm-bevel-pressed flex h-7 items-center justify-center whitespace-nowrap px-1.5";
+const PRESSED_PLATE = `cm-bevel-pressed ${FRAME} justify-center gap-0.5 px-1.5`;
 
-/** `PLATE` over a name: the same 28px, its word at the start. */
-const PLATE_START = "cm-bevel flex h-7 items-center whitespace-nowrap px-1.5";
+/** `PLATE` over a name, its word at the start. */
+const PLATE_START = `cm-bevel ${FRAME} px-1.5`;
 
 /** A head the column does not need: the word leaves the strip but stays as the header (and a
  *  sortable head's link name) for a screen reader. The plate, sized by the `<th>`, keeps its place. */
@@ -85,8 +88,7 @@ export function SortHead({
   /** Nearly unpadded under a thumb, so a narrow column is set by its figures, not its head. */
   compact?: boolean;
 } & ({ href: string; onSort?: never } | { onSort: () => void; href?: never })) {
-  const size = compact ? COMPACT : "h-7 px-1.5";
-  const plate = `flex items-center gap-0.5 whitespace-nowrap ${size} ${JUSTIFY[align]} ${heldPlate(sorted !== undefined)}`;
+  const plate = `${FRAME} gap-0.5 ${compact ? COMPACT : "px-1.5"} ${JUSTIFY[align]} ${heldPlate(sorted !== undefined)}`;
   const face = (
     <>
       {mute ? <span className={MUTE}>{label}</span> : headWord(label)}
@@ -110,7 +112,7 @@ export function SortHead({
   );
 }
 
-const COMPACT = "h-7 min-w-6 px-0.5 lg:px-1.5";
+const COMPACT = "min-w-6 px-0.5 lg:px-1.5";
 
 /** A `SortHead`'s `sorted`: which way the table runs by this column, or undefined when another is in force. */
 export function sortedAs(here: boolean, descending: boolean): "ascending" | "descending" | undefined {
@@ -130,7 +132,7 @@ function SortArrow({ down, className = "" }: { down: boolean; className?: string
 export function NameHead({ label }: { label: string }) {
   return (
     <Head>
-      <span className="flex h-7 items-center px-1.5">
+      <span className={`${FRAME} px-1.5`}>
         <span className={MUTE}>{label}</span>
       </span>
     </Head>
@@ -140,7 +142,7 @@ export function NameHead({ label }: { label: string }) {
 /** Where a head sits in its plate: a name's at the start, a figure's centred. */
 const PLATE_AT = { start: PLATE_START, centre: PLATE } as const;
 
-/** A head the reader cannot reorder by: the cell and the 28px bevelled plate inside it, pressed with its arrow when
+/** A head the reader cannot reorder by: the cell and the bevelled plate inside it, pressed with its arrow when
  *  something else (a picker, the model) orders the table by it. */
 export function PlateHead({
   at = "start",
@@ -160,7 +162,7 @@ export function PlateHead({
   colSpan?: number;
   children: ReactNode;
 }) {
-  const plate = sorted === undefined ? PLATE_AT[at] : `${PRESSED_PLATE} gap-0.5`;
+  const plate = sorted === undefined ? PLATE_AT[at] : PRESSED_PLATE;
   return (
     <th scope={scope} colSpan={colSpan} title={title} aria-sort={sorted} className={`${HEAD_CELL} ${className}`}>
       <div className={plate}>
