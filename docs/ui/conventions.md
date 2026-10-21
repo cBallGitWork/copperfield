@@ -476,7 +476,7 @@ identity). `PlayerCard` answers *who is this and is he fit* on every screen — 
 line, why a slot is unresolved, his FPts, xMins and Fantrax's latest — and a scoring screen hands it the gameweek's
 breakdown, which answers *what is he scoring and why* in place of the FPts line. The FPL tab's `PickCard` borrows the
 identity, head and foot (Close alone: FPL's man has no profile here). Its body is `flex-auto` with a 96px floor
-(`Modal`): a 0% basis drew a 0px body in WebKit.
+(`Modal`): a 0% basis drew a 0px body in WebKit. Every `Modal` portals to `body` (`whitespace-normal` too), so a row it opens from (`whitespace-nowrap`, `.cm-out` grey, a doubt wash) never cascades into it.
 
 **No pitch is drawn in perspective since 21 Sep 2026.** Every one stands on
 `CmGround`'s flat diagram; `PitchTurf`, which drew the trapezoid, is gone. The

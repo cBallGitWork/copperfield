@@ -9,6 +9,8 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { createPortal } from "react-dom";
+import { useOnClient } from "./onClient";
 
 // A panel over the page: a native `<dialog>`, so Escape, the focus trap and the inert background are the browser's.
 // Never wider than 92vw, nor taller than the screen between its safe areas: the body scrolls, the head and foot stay.
@@ -68,7 +70,11 @@ export default function Modal({
   // Every way out but Back steps back off the card's entry, and the `popstate` that follows closes it.
   const shut = () => (entry.current !== null && history.state?.modal === entry.current ? history.back() : onClose());
 
+  const client = useOnClient();
+
+  // Keyed on `client`: a sheet the server drew open moves to its portal after hydration, and that dialog is shown.
   useEffect(() => {
+    if (!client) return;
     returnTo.current ??= opener();
     dialog.current?.showModal();
     // The page behind holds still: a drag beside the card scrolled it.
@@ -79,7 +85,7 @@ export default function Modal({
       root.style.overflow = overflow;
       if (returnTo.current?.isConnected) returnTo.current.focus({ preventScroll: true });
     };
-  }, []);
+  }, [client]);
 
   useEffect(() => {
     if (!closesOnBack) return;
@@ -92,7 +98,7 @@ export default function Modal({
     return () => window.removeEventListener("popstate", back);
   }, [closesOnBack]);
 
-  return (
+  const panel = (
     <ModalContext value={{ titleId, close: closesOnBack ? shut : undefined }}>
       <dialog
         ref={dialog}
@@ -104,7 +110,7 @@ export default function Modal({
         }}
         style={{ "--modal-width": width } as CSSProperties}
         // `open:flex`, never `flex`: a bare display would show the dialog shut.
-        className="m-auto max-h-[calc(100dvh-var(--safe-top)-var(--safe-bottom)-2rem)] w-[min(var(--modal-width),92vw)] flex-col overflow-hidden border border-line bg-surface p-0 text-ink backdrop:bg-black/70 open:flex"
+        className="m-auto whitespace-normal max-h-[calc(100dvh-var(--safe-top)-var(--safe-bottom)-2rem)] w-[min(var(--modal-width),92vw)] flex-col overflow-hidden border border-line bg-surface p-0 text-ink backdrop:bg-black/70 open:flex"
       >
         {head}
         {/* Sized to its content with a floor: a 0% basis in a dialog of no set height drew 0px in WebKit (D-4). */}
@@ -113,4 +119,6 @@ export default function Modal({
       </dialog>
     </ModalContext>
   );
+  // On `body`, so no row it was opened from (`whitespace-nowrap`, `.cm-out`'s grey, a doubt wash) cascades into it.
+  return client ? createPortal(panel, document.body) : panel;
 }
