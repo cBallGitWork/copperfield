@@ -4,7 +4,7 @@ import Link from "@/app/components/shell/Link";
 import Absent from "@/app/components/shell/Absent";
 import ScrollBoard from "./ScrollBoard";
 import { Head, HeadRow, MUTE, NameHead, PLATE, SortHead, sortedAs } from "./TableHeads";
-import { CutRow, PointsCell } from "./TableCells";
+import { CutRow, IndexCell, PointsCell } from "./TableCells";
 import { yoursEdge, yoursInk } from "@/app/mine";
 import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TAP_ROW, TONE, standDown } from "@/app/desk";
 import { FORM_GAMES } from "@/app/config";
@@ -154,13 +154,15 @@ function Cell<K extends string>({
   switch (column.kind) {
     case "place":
       return (
-        <td
-          className={`cm-index numeric px-1.5 text-center ${column.width} ${edge(line)}`}
-          // The width rides the cell too, so an sr-only head keeps the column narrow; a `<tr>` border never paints through the index ground.
+        // The width rides the cell too, so an sr-only head keeps the column narrow; a `<tr>` border never paints through the index ground.
+        <IndexCell
+          wide
+          width={column.width ?? ""}
+          className={edge(line)}
           style={line.mine || line.tint === undefined ? undefined : { borderLeftColor: line.tint }}
         >
           {line.place}
-        </td>
+        </IndexCell>
       );
     case "name":
       return (

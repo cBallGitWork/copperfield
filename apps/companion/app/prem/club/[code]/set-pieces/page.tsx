@@ -11,7 +11,7 @@ import { poolHref } from "../../../poolHref";
 import NameLink from "../NameLink";
 import ClubShell from "../Shell";
 import { clubOr404 } from "../club";
-import { PANEL, ROW_NAME } from "@/app/desk";
+import { INDEX_BLOCK, INDEX_WIDTH, PANEL, ROW_NAME } from "@/app/desk";
 import { clubTitle } from "../title";
 
 // Who steps up: corners, free kicks and penalties, in the order they take them.
@@ -52,9 +52,9 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                   if (player === undefined) return null;
                   const out = availabilityOf(player).out;
                   return (
-                    <li key={taker.code} className={`flex min-h-9 items-center gap-2 px-2 ${out ? "cm-out" : ""} ${doubtRow(player)}`}>
+                    <li key={taker.code} className={`flex min-h-9 items-center gap-2 pr-2 ${out ? "cm-out" : ""} ${doubtRow(player)}`}>
                       {/* The rank in CM's index block, in the club's colour (`ClubShell` scopes it). */}
-                      <span className="cm-index numeric flex h-6 w-6 shrink-0 items-center justify-center">
+                      <span className={`${INDEX_BLOCK} numeric ${INDEX_WIDTH}`}>
                         {at + 1}
                       </span>
                       <PlayerPortrait

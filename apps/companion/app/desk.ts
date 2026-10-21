@@ -34,6 +34,13 @@ export const FIGURE = `${FIGURE_CELL} font-bold`;
 /** CM's index block width, fixed so a column of blocks is one shape; here so `shell/` need not import upward. */
 export const INDEX_WIDTH = "w-8 lg:w-9";
 
+/** CM's index block as one spine down a list: its row's full height, meeting the next (`.cm-spine`, Craig 21 Oct 2026).
+ *  Every index column wears it, a table cell or a flex row's block alike; width and padding are the caller's. */
+export const INDEX_SPINE = "cm-index cm-spine";
+
+/** `INDEX_SPINE` as a flex row's block, its word centred. */
+export const INDEX_BLOCK = `${INDEX_SPINE} flex shrink-0 items-center justify-center`;
+
 /** A figure to scan past: a club's letters beside a name, a record under a heading. */
 export const QUIET_FIGURE = "numeric text-2xs text-faint";
 

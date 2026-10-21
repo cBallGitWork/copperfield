@@ -8,6 +8,7 @@ import { drawOrder } from "@/app/components/football/shotGeometry";
 import ShotMarks, { MarksKey } from "../../../components/football/ShotMarks";
 import { KeyPassKey, KeyPassLines, KeyPassOrigins, Pitch } from "../../../components/football/ShotPitch";
 import { BOARD, FIGURE_CELL, PINNED_ON_PHONE, ROW_RULE, SECTION_BAR, SMALL_CAPS } from "@/app/desk";
+import { IndexCell } from "../../../components/league/TableCells";
 import {
   Head,
   HeadRow,
@@ -200,12 +201,9 @@ export default function ShotMap({
                 onClick={() => pick(at)}
                 className={`${ROW_RULE} cursor-pointer ${picked === at ? "bg-raised outline outline-1 -outline-offset-1 outline-accent" : ""}`}
               >
-                <td
-                  className="cm-index numeric px-0 text-center text-2xs lg:text-xs"
-                  style={sideOf(shot).index}
-                >
+                <IndexCell width="" className="text-2xs lg:text-xs" style={sideOf(shot).index}>
                   {shot.minute === null ? DASH : `${shot.minute}′`}
-                </td>
+                </IndexCell>
                 <td className="min-w-0 p-0">
                   <button
                     type="button"

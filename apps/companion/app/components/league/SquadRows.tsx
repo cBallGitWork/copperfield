@@ -1,7 +1,7 @@
 import type { SquadDetailLine, SquadPlayerDetail } from "@epl/core";
 import type { AutoSubMark } from "./autoSubbed";
 import ScrollBoard from "./ScrollBoard";
-import SquadRow, { SQUAD_CREST, SQUAD_GAP, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
+import SquadRow, { SQUAD_CREST, SQUAD_EDGE, SQUAD_GAP, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
 import { MUTE, headWord } from "./TableHeads";
 import { PLATE_FRAME, QUIET_NOTE, SMALL_CAPS } from "@/app/desk";
 
@@ -53,7 +53,7 @@ export default function SquadRows({
         {head ? (
           // The house's head (`TableHeads`): bare over the tile, the crest and the name, a plate over each figure. Under
           // a thumb the figures take only their own width and the name the rest (Craig, 11 Oct 2026: names cut at 390).
-          <div className={`flex items-center ${SQUAD_GAP} px-1.5 ${SMALL_CAPS}`}>
+          <div className={`flex items-center ${SQUAD_GAP} ${SQUAD_EDGE} ${SMALL_CAPS}`}>
             <span className="w-10 shrink-0">
               <span className={MUTE}>Pos</span>
             </span>

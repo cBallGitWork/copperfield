@@ -19,6 +19,8 @@ import type { AutoSubMark } from "./autoSubbed";
 
 /** The columns `SquadRows` heads too, phone width first: "WOL (A)" is 39px, the FPts head about 33, a crest 24. */
 export const SQUAD_GAP = "gap-1 lg:gap-1.5";
+/** The row's padding: its right edge alone, so the position block meets the panel's left as a spine. */
+export const SQUAD_EDGE = "pr-1.5";
 export const SQUAD_CREST = "w-6 lg:w-7";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
 export const SQUAD_POINTS = "w-9";
@@ -115,7 +117,7 @@ export default function SquadRow({
   // A tap row's 36 under a thumb; `.cm-row` takes it to 28 above `lg`.
   // `cm-out` greys the ink and the doubt wash is a ground, so an injured reserve keeps both.
   const shell = [
-    `cm-row flex min-h-9 w-full items-center ${SQUAD_GAP} px-1.5 text-left`,
+    `cm-row flex min-h-9 w-full items-center ${SQUAD_GAP} ${SQUAD_EDGE} text-left`,
     reserve ? "cm-out" : "",
     doubtRow(footballer),
   ]

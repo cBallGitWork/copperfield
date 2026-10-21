@@ -1,7 +1,7 @@
 import Link from "@/app/components/shell/Link";
 import { LEAGUE_COMPETITION, leads, londonDate, DASH, type SeasonOrder } from "@epl/core";
 import type { SeasonRow } from "./teamSeason";
-import { MINOR_CAPS, MINOR_LABEL, ROW_NAME, SMALL_CAPS } from "@/app/desk";
+import { INDEX_BLOCK, INDEX_SPINE, MINOR_CAPS, MINOR_LABEL, ROW_NAME, SMALL_CAPS } from "@/app/desk";
 import { yoursEdge } from "@/app/mine";
 import { matchupHref } from "../routes";
 import { teamHref } from "@/app/squad/routes";
@@ -47,14 +47,16 @@ function SeasonLine({ row, teamId, current }: { row: SeasonRow; teamId: string; 
   const cup = row.tie.competition.id === LEAGUE_COMPETITION.id ? null : row.tie;
   return (
     <li>
-      <div className={`cm-row flex min-h-9 items-center gap-2 px-1.5 ${yoursEdge(current)}`}>
+      <div className={`cm-row flex min-h-9 items-center gap-2 pr-1.5 ${yoursEdge(current)}`}>
         {/* The gameweek always; its date only on a desk, where the opponent still has room. The floor holds the widest label
             (GW10, "GW15 Saturday 12 December") so every opponent starts on one line. */}
-        <span className="cm-index numeric flex min-w-11 shrink-0 items-baseline gap-1 px-1.5 py-0.5 lg:min-w-48">
-          <span>GW{row.round.gameweek}</span>
-          {row.round.deadline === null ? null : (
-            <span className="hidden font-normal opacity-90 lg:inline">{londonDate(row.round.deadline)}</span>
-          )}
+        <span className={`${INDEX_SPINE} numeric flex min-w-11 shrink-0 items-center px-1.5 lg:min-w-48`}>
+          <span className="flex items-baseline gap-1">
+            <span>GW{row.round.gameweek}</span>
+            {row.round.deadline === null ? null : (
+              <span className="hidden font-normal opacity-90 lg:inline">{londonDate(row.round.deadline)}</span>
+            )}
+          </span>
         </span>
 
         <span className="flex min-w-0 flex-1 flex-col">
@@ -79,7 +81,8 @@ function SeasonLine({ row, teamId, current }: { row: SeasonRow; teamId: string; 
         {/* The score opens the matchup and the name opens his squad: a link cannot hold a link. */}
         <Link
           href={matchupHref(teamId, row.round.gameweek, undefined, row.opponent.team?.teamId)}
-          className="cm-row inline-flex min-h-9 shrink-0 items-center hover:underline"
+          // `cm-spine` stretches the link to the row's full height, so the plate inside it can meet the next.
+          className="cm-row cm-spine inline-flex min-h-9 shrink-0 items-center hover:underline"
         >
           <Score row={row} />
         </Link>
@@ -99,7 +102,7 @@ function Score({ row }: { row: SeasonRow }) {
     row.round.status === "finished" && leads(row.pointsFor, row.pointsAgainst);
 
   return (
-    <span className="cm-index numeric flex h-6 w-12 shrink-0 items-center justify-center">
+    <span className={`${INDEX_BLOCK} numeric w-12`}>
       {/* A win is underlined, not coloured: the plate takes the manager's colour and owns its ink. */}
       <Scoreline
         home={<span className={won ? "underline decoration-2 underline-offset-2" : ""}>{row.pointsFor ?? DASH}</span>}

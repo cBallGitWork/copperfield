@@ -1,14 +1,29 @@
-import type { ReactNode } from "react";
-import { INDEX_WIDTH, MINOR_LABEL, TAP_ROW } from "@/app/desk";
+import type { CSSProperties, ReactNode } from "react";
+import { INDEX_SPINE, INDEX_WIDTH, MINOR_LABEL, TAP_ROW } from "@/app/desk";
 
 // The two cells a CM board's rows are built from, opposite `TableHeads`.
 // No crest-and-name cell: its callers differ in size, fallback and alignment.
 
 /** The ordinal in CM's index block, in the colour a team's or club's shell gives `--cm-index`. */
-export function IndexCell({ children, className = "", wide }: { children: ReactNode; className?: string; wide?: boolean }) {
+export function IndexCell({
+  children,
+  className = "",
+  wide,
+  width = INDEX_WIDTH,
+  style,
+}: {
+  children: ReactNode;
+  className?: string;
+  /** A date, a season or a score: padded at its edges. */
+  wide?: boolean;
+  /** `INDEX_WIDTH` unless the column's head sizes it. */
+  width?: string;
+  /** A side's colours, re-pointing `--cm-index` on this cell alone. */
+  style?: CSSProperties;
+}) {
   // The span holds the width (a pinned name sits at `left-8`); unpadded so "=10th" fits. A `wide` index keeps its edge.
   return (
-    <td className={`cm-index ${INDEX_WIDTH} numeric ${wide ? "px-1.5" : "px-0"} text-center ${className}`}>
+    <td className={`${INDEX_SPINE} ${width} numeric ${wide ? "px-1.5" : "px-0"} text-center ${className}`} style={style}>
       <span className="inline-block min-w-5 lg:min-w-6">{children}</span>
     </td>
   );
@@ -20,9 +35,9 @@ export const ROW_LINK = `${TAP_ROW} gap-2 hover:underline`;
 /** The points in a block of their own, the way CM ends its table: the eye runs down the column to find them. */
 export function PointsCell({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <td className={`p-0 ${className}`}>
-      <span className="cm-index numeric flex min-h-7 items-center justify-center px-1.5">{children}</span>
-    </td>
+    <IndexCell wide width="" className={className}>
+      {children}
+    </IndexCell>
   );
 }
 
