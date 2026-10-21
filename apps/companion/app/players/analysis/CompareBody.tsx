@@ -1,16 +1,11 @@
-import { Suspense } from "react";
-import {
-  FANTRAX_LEAGUE_ID,
-  FANTRAX_PLAYER_BASE,
-  fixtureGameweeks,
-  gameweekSpan,
-  lastPlayed,
-} from "@epl/core";
+import { Suspense, type ReactNode } from "react";
+import { fixtureGameweeks, gameweekSpan, lastPlayed } from "@epl/core";
 import Nothing from "../../components/shell/Nothing";
 import FantraxSilent from "../../components/shell/FantraxSilent";
 import TabStrip from "../../components/shell/TabStrip";
-import OutLink from "../../components/shell/OutLink";
+import { FootFrame } from "../../components/shell/FootFrame";
 import CompareBar from "./CompareBar";
+import CompareExits from "./CompareExits";
 import CompareMap from "./CompareMap";
 import Figures from "./Figures";
 import Grids from "./Grids";
@@ -55,7 +50,16 @@ const THIS_SEASON_ONLY: ReadonlySet<View> = new Set(["passes", "attributes"]);
 /** "Last 6" is the last six gameweeks with a match played (Craig, 24 Sep 2026). */
 const RECENT = 6;
 
-export default async function CompareBody({ asked, route }: { asked: Asked; route: CompareRoute }) {
+export default async function CompareBody({
+  asked,
+  route,
+  shell,
+}: {
+  asked: Asked;
+  route: CompareRoute;
+  /** The page's own frame (Data's strip or his plated bar), inside the foot frame that docks the views. */
+  shell: (body: ReactNode) => ReactNode;
+}) {
   const [pool, fixtures, lines] = await Promise.all([getLeaguePool(), seasonFixtures(), getPlayerStats()]);
   const rows = "unavailable" in pool ? [] : pool.rows;
   const rival = route.fixed === undefined ? undefined : rivalIn(pool, route.fixed, groupOf);
@@ -120,20 +124,20 @@ export default async function CompareBody({ asked, route }: { asked: Asked; rout
   // A profile that refused is not a man not yet chosen, and the screen says which.
   const refused = refusal(left) ?? refusal(right);
   if (refused !== null) {
-    return (
+    return shell(
       <>
         {picker}
         <FantraxSilent code={refused} />
-      </>
+      </>,
     );
   }
 
   if (one_ === null || names.a === null) {
-    return (
+    return shell(
       <>
         {picker}
         <Nothing title="Pick one or two players" />
-      </>
+      </>,
     );
   }
 
@@ -174,7 +178,20 @@ export default async function CompareBody({ asked, route }: { asked: Asked; rout
   };
   const dim = shown.filter((entry) => entry.key in has && !has[entry.key as keyof typeof has]).map((entry) => entry.key);
 
+  // One category at a time at every width (Craig, 24 Sep 2026: "desktop like mobile"), switched from the foot (DESIGN §2).
+  const views = (
+    <TabStrip
+      label="Compare views"
+      tabs={shown.map((entry) => ({ ...entry, href: href({ view: entry.key }) }))}
+      current={view}
+      dim={dim}
+      labels="word"
+    />
+  );
+
   return (
+    <FootFrame foot={views}>
+      {shell(
     <>
       {picker}
 
@@ -196,15 +213,6 @@ export default async function CompareBody({ asked, route }: { asked: Asked; rout
           season={"unavailable" in pool ? null : pool.season}
         />
       )}
-
-      {/* One category at a time at every width (Craig, 24 Sep 2026: "desktop like mobile"). */}
-      <TabStrip
-        label="Compare views"
-        tabs={shown.map((entry) => ({ ...entry, href: href({ view: entry.key }) }))}
-        current={view}
-        dim={dim}
-        labels="word"
-      />
 
       {/* The range governs the figures and every map; the attributes are a season's percentiles, and a past season
           is the whole of it. */}
@@ -265,17 +273,11 @@ export default async function CompareBody({ asked, route }: { asked: Asked; rout
         </Suspense>
       ) : null}
 
-      <div className="flex flex-wrap gap-1.5">
-        {/* One way out per man: a man set against his own past is one Fantrax page. */}
-        {[
-          { id: a, name: shirtOf(one_) },
-          ...(second === null || b === a ? [] : [{ id: b, name: shirtOf(two) }]),
-        ].map((each) => (
-          <OutLink key={each.id} href={`${FANTRAX_PLAYER_BASE}/${each.id}/${FANTRAX_LEAGUE_ID}`}>
-            {each.name} on Fantrax
-          </OutLink>
-        ))}
-      </div>
-    </>
+      <CompareExits
+        men={[{ id: a, name: shirtOf(one_) }, ...(second === null || b === a ? [] : [{ id: b, name: shirtOf(two) }])]}
+      />
+    </>,
+      )}
+    </FootFrame>
   );
 }

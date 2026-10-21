@@ -35,12 +35,11 @@ export default function PickBar({
   b: Side;
   route: CompareRoute;
 }) {
-  if (route.fixed !== undefined) return <Box side="b" mine={b} other={a} rows={rows} route={route} />;
   return (
-    // One row at every width, each box over the half of the bar it would change (Craig, 24 Sep 2026).
+    // One row at every width, each box over the half of the bar it would change (Craig, 24 Sep 2026); a fixed A has none.
     <div className="grid grid-cols-2 gap-1.5 lg:gap-3">
-      <Box side="a" mine={a} other={b} rows={rows} route={route} />
-      <Box side="b" mine={b} other={a} rows={rows} route={route} />
+      {route.fixed === undefined ? <Box side="a" mine={a} other={b} rows={rows} route={route} /> : null}
+      <Box side="b" mine={b} other={a} rows={rows} route={route} className="col-start-2" />
     </div>
   );
 }
@@ -52,17 +51,19 @@ function Box({
   other,
   rows,
   route,
+  className = "",
 }: {
   side: "a" | "b";
   mine: Side;
   other: Side;
   rows: readonly PoolRow[];
   route: CompareRoute;
+  className?: string;
 }) {
   const found = candidates(rows, mine.typed, other.chosen);
 
   return (
-    <div className="flex min-w-0 flex-col gap-1.5">
+    <div className={`flex min-w-0 flex-col gap-1.5 ${className}`}>
       <PickField
         side={side}
         query={mine.typed}

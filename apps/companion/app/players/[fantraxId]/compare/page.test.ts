@@ -14,8 +14,8 @@ vi.mock("../PlayerShell", () => ({
     createElement("section", { "data-shell": fantraxId, "data-current": current }, children),
 }));
 vi.mock("../../analysis/CompareBody", () => ({
-  default: ({ route, asked }: { route: CompareRoute; asked: Record<string, string> }) =>
-    createElement("div", { "data-fixed": route.fixed, "data-base": route.base, "data-bs": asked.bs }),
+  default: ({ route, asked, shell }: { route: CompareRoute; asked: Record<string, string>; shell: (body: ReactNode) => ReactNode }) =>
+    shell(createElement("div", { "data-fixed": route.fixed, "data-base": route.base, "data-bs": asked.bs })),
 }));
 
 import PlayerCompare from "./page";

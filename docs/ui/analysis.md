@@ -62,9 +62,11 @@ page too … filter by last 6 gameweeks"*. Designed first (option A, "Action Zon
 phone strip and no tie band. Where the sections below disagree with this one, this one is current.
 
 - **The pickers** share one row at every width, each box over the half of the bar it would change; the labels
-  above them went (the bar names both men). Each box's accessible name says whom it would swap.
+  above them went (the bar names both men). Each box's accessible name says whom it would swap. On a player's own
+  Compare A has no box, and B's sits alone at `col-start-2`, over B's half (21 Oct 2026).
 - **One block at a time at every width**: a 44px strip, Figures · Shots · Key passes · Touches · Attributes
-  (`?view=`). The desk showed every block until Craig's *"just have the categories in sections like mobile"*
+  (`?view=`), **docked in the foot** (`FootFrame`, DESIGN §2, 21 Oct 2026) on both routes, so the top keeps one row of
+  plates (Data's strip, or his tabs); `CompareBody` takes the page's shell as a function and wraps it in the frame. The desk showed every block until Craig's *"just have the categories in sections like mobile"*
   (24 Sep 2026); a map is centred at 768px at most. A view neither man has is dimmed. Season/Last 6 is hidden
   on Attributes, which it never governed.
 - **Season or Last 6** (`?range=6`), with the window beside it as `GW1–5`. It governs the figures and every map;

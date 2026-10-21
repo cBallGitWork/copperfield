@@ -16,8 +16,10 @@ export default async function ComparePage({
   searchParams: Promise<Asked>;
 }) {
   return (
-    <ScoutShell current="analysis">
-      <CompareBody asked={await searchParams} route={DATA_COMPARE} />
-    </ScoutShell>
+    <CompareBody
+      asked={await searchParams}
+      route={DATA_COMPARE}
+      shell={(body) => <ScoutShell current="analysis">{body}</ScoutShell>}
+    />
   );
 }

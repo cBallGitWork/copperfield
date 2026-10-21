@@ -25,8 +25,14 @@ export default async function PlayerCompare({
   if ("unavailable" in found) return <NoProfile code={found.unavailable} />;
 
   return (
-    <PlayerShell subject={found} fantraxId={fantraxId} current="compare">
-      <CompareBody asked={asked} route={playerCompare(fantraxId)} />
-    </PlayerShell>
+    <CompareBody
+      asked={asked}
+      route={playerCompare(fantraxId)}
+      shell={(body) => (
+        <PlayerShell subject={found} fantraxId={fantraxId} current="compare">
+          {body}
+        </PlayerShell>
+      )}
+    />
   );
 }

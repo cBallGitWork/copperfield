@@ -24,6 +24,8 @@ describe("Compare's search boxes", () => {
     expect([...html.matchAll(/data-side="(\w)"/g)].map((side) => side[1])).toEqual(["b"]);
     expect(html).toContain('action="/players/061vq/compare"');
     expect(html).not.toContain('name="a"');
+    // Over B's half of the bar, as it is with both boxes.
+    expect(html).toMatch(/^<div class="grid grid-cols-2[^"]*"><div class="[^"]*col-start-2"><form data-side="b"/);
   });
 
   it("keeps both boxes on Data's Compare, each carrying the other man", () => {
