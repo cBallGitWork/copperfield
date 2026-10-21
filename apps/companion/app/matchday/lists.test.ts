@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { printed } from "@epl/core";
-import { LISTS, asPrinted, ranked } from "./lists";
+import { LISTS, asPrinted, figureInk, ranked } from "./lists";
 
 const man = (code: number, name: string, figure: number) => ({ code, name, figure });
 const list = (key: string) => LISTS.find((each) => each.key === key)!;
@@ -27,5 +27,14 @@ describe("the lists' figures", () => {
     const xg = list("xg");
     const top = ranked([man(1, "Scott", asPrinted(xg, 0.274)), man(2, "Bogle", asPrinted(xg, 0.271))], 10);
     expect(top.map((row) => [row.rank, row.name])).toEqual([[1, "Bogle"], [1, "Scott"]]);
+  });
+});
+
+describe("figureInk", () => {
+  // Craig, 21 Oct 2026: FPts is the league's reading, in cyan wherever it is a column; xG and xA stay the one amber measure.
+  it("prints FPts cyan and the football lists amber", () => {
+    expect(figureInk(list("points"))).toBe("text-info");
+    expect(figureInk(list("xg"))).toBe("text-mid");
+    expect(figureInk(list("xa"))).toBe("text-mid");
   });
 });

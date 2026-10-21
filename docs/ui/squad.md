@@ -142,6 +142,10 @@ gameweeks already played) has no column at all rather than a column of dashes; t
 the bench, and on the player card beside its xMins label. The day is the export's (`XMINS_AS_OF`); undated, Friday's
 figure passed for Monday's.
 
+**FPts prints in the reading cyan** (Craig, 21 Oct 2026: *"put fpts in cyan too"*; DESIGN §3's Cyan row): the column
+was amber on every row, the standout slot lit for nobody in particular. "Proj" takes the same ink. Live's Top stats
+FPts list follows (`lists.figureInk`); its xG and xA lists keep the lone figure's amber.
+
 Under a thumb the name takes the room (Craig, 11 Oct 2026: *"opponent should be further to the right on mobile
 as it cuts off names"*): the opponent is headed Opp and is 44px, FPts 30, the gaps 4. Counted on his squad at 390,
 4 of 14 names truncated (S. Lammens, Matheus N., K. Dewsbury-Hall, J. Hinshelwood beside his DBT) in a 75px

@@ -134,3 +134,12 @@ describe("a squad row's status and minutes (Craig, 21 Oct 2026)", () => {
     expect(rowOf(rows([held("Him", "a", 100, null)]), "Him")).toMatch(/font-bold text-info">—</);
   });
 });
+
+describe("the squad list's FPts", () => {
+  // Craig, 21 Oct 2026: "put fpts in cyan too": the league's points in the reading cyan, never lit, on every row.
+  it("prints his points in the reading cyan, not the standout amber", () => {
+    const cell = html.match(/<span class="([^"]*)">13<\/span>/)?.[1] ?? "";
+    expect(cell).toContain("text-info");
+    expect(cell).not.toContain("text-mid");
+  });
+});
