@@ -86,9 +86,9 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
   Attack by `xG`, Creating by `xA`, Defence by `Tkl`, Attributes by `Acc`, its first rating.
   `?group=all` and any group the board lacks land on Attack. Sort by in the sheet still reaches every plate's columns (less any a
   position chip hides), and the sorted column is drawn under any plate.
-- **Attack** `xG xGI Sh SoT BCM`; **Creating** `xA KP BCC Crs AC`, with `AT A AF` first in a league that carries them
+- **Attack** `xG npxG xGI npxGI Sh SoT BCM`; **Creating** `xA KP BCC Crs AC`, with `AT A AF` first in a league that carries them
   unscored; **Defence** `Tkl Int Blk Clr Rec AW xGC`, with `Sv` last where carried unscored (`seasonColumns.ts`).
-  Five, five and seven figures at 390 in the real league, where `All` drew seven of seven at 390 before (counted off the
+  Seven, five and seven figures at 390 in the real league (Attack five until npxG, 21 Oct 2026), where `All` drew seven of seven at 390 before (counted off the
   columns; the lead measures the shot). `Blk` is the stats league's DefCon count less tackles won and interceptions
   (`core:blocks`; DFP3 is DFP + Clr + Rec on 445 of 445 rows, 19 Oct 2026). `DFP` is the league's own DefCon count,
   tackles won + interceptions + blocks (282/282 against Opta, 6 Oct), not the CBIT/CBIRT of the other game; the
@@ -96,6 +96,14 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
   0.65 a 90 for defenders, 0.24 midfielders, 0.14 forwards (Gabriel 1.00, Tarkowski 0.86, Haaland 0.15). `xG xA xGI xGC` are the football
   snapshot's season figures, which have no league twin to disagree with; a man with no minutes dashes, and Per 90
   divides them by the same snapshot's minutes.
+- **`npxG` and `npxGI`** (Craig, 21 Oct 2026: "Need npxg and npxa per 90 too"): FPL's xG less the xg of his shots
+  the shot file marks `situation: "penalty"` (`core:nonPenaltyXg`), and that plus xA. The shot file's xG is the
+  same model as FPL's: 11/11 penalty fixtures matched FPL's per-match xG to 0.01 with the penalty in (each 0.7884),
+  and the season's sums differ by a median 0.001 over 329/329 men with shots, 21 Oct 2026. No `npxA`: xA values
+  the pass, a penalty has none, and all 11 penalty shots carry no assister, so it would repeat `xA`. Both dash
+  where the file lacks a kicked-off fixture of his club (FPL's season list against `shotFixtures`; 70/70 held on
+  21 Oct 2026), since that match's penalty would stand; and for a man with xG and no shot in the file, or a penalty
+  with no xg. A man who took none reads his xG.
 - **The plates dock at the screen's foot** (M-CONSIST-1, 20 Oct 2026, the 24 Sep rule: a screen's sub-views switch
   from its foot): `FootFrame`, above the thumb rail on a phone and at the screen's foot on a desk, on the main strip's
   label ladder (`TabStrip`'s `word` plates, 3xs under 375), so the four hold one row at 320 where they wrapped to 94px.
@@ -110,8 +118,8 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
   season."); an expected figure's head keeps its lower-case x (`TableHeads.headWord`), as the Key prints it.
 - **Not held, so not drawn**: touches in the box (Opta's per-man match read has it, one request per man per match;
   a season total is one request per man, a new cron; the touch cloud's box count ran 25 to 60% over Opta's on three
-  men, 19 Oct 2026), successful dribbles (the stats league holds take-ons tried, not won), npxG (the shot file's xG
-  is another model's, and two xGs on one board would disagree).
+  men, 19 Oct 2026), successful dribbles (the stats league holds take-ons tried, not won). ~~npxG (the shot file's
+  xG is another model's)~~: it is FPL's own, counted 21 Oct 2026, so npxG is drawn (above).
 
 ### Adv Stats (16 Oct 2026)
 

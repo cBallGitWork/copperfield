@@ -9,7 +9,7 @@ import { STATS_SORT, boardView } from "./views";
 const realCategories = mapLeagueInfo(real).scoringCategories;
 const rehearsalCategories = mapLeagueInfo(rehearsal).scoringCategories;
 // The season's figures, Attack, Chances and Defence in turn (Craig, 19 Oct 2026).
-const ADV = ["xG", "xGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC"];
+const ADV = ["xG", "npxG", "xGI", "npxGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC"];
 const labels = (key: "pool" | "stats", categories: typeof realCategories) =>
   boardView(key, categories).columns.filter((column) => column.group !== "attributes").map((column) => column.label);
 

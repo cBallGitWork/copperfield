@@ -74,7 +74,9 @@ phone strip and no tie band. Where the sections below disagree with this one, th
   match finished, so until GW7 it is the season, and the readout says so. The figures over a window are his
   FPL game log added up (`totalsOver`), so the log now carries starts, tackles, CBI, recoveries and xGC.
 - **The ledger** is centred, each pair of figures either side of its label, and gains Touches/90, Shots/90 and
-  Key passes/90 from the exports. The better figure is amber; the higher lights however small the lead.
+  Key passes/90 from the exports, and npxG/90 and npxGI/90 (FPL xG less his penalty shots, `core:nonPenaltyXg`;
+  21 Oct 2026), this season and Last 6, never beside a past season: xG · npxG · xA · npxGI. Both dash where the shot
+  file lacks a fixture of his club the window counts. The better figure is amber; the higher lights however small the lead.
 - **Shots and key passes share one pitch**, each man at his own end as the bar reads them (the left man turned,
   as the match map turns the home side), in club colours with a plate over each end. A key pass is a
   teammate's shot from his pass (`assistsOf`): a dashed line from where the pass began to the shot. The pitch
@@ -476,8 +478,8 @@ buildup-to-goal map (4,127 rows in 24-25) with **0 rows for 26-27**.
 - ~~**The fixture filter**~~: Season / Last 6 (24 Sep 2026).
 - **The ramp has no docs/rules/DESIGN.md ruling.** See "The maps" above; it is the app's
   first sequential scale and it is confined to a colour plate until it is judged.
-- **Understat's xG family** — npxG, xGChain, xGBuildup, key passes — is a second
-  block under "This season" once `eye-test/26-27.json` lands. FPL publishes none
-  of it.
+- **Understat's xG family** — ~~npxG~~ (on the ledger since 21 Oct 2026, off FPL's xG and the shot file),
+  xGChain, xGBuildup, key passes — is a second block under "This season" once
+  `eye-test/26-27.json` lands. FPL publishes none of it.
 - ~~**The two figures sit far apart at 1440.**~~ The ledger is centred and narrow (24 Sep 2026); the attribute
   grid still spans its column.

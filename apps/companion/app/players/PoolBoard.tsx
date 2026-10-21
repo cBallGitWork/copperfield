@@ -30,12 +30,12 @@ import { offeredFor } from "./sortOptions";
 import { PRESSABLE, Plates } from "./BoardControls";
 import BoardLink from "./BoardLink";
 import { FootFrame } from "../components/shell/FootFrame";
-import { intelStats, intelStatsDay } from "../intel";
+import { heldShots, intelStats, intelStatsDay, shotCover } from "../intel";
 import { divisionGrids } from "./[fantraxId]/grid";
 import { cutsFor } from "./standout";
 import { unlessSorted } from "../components/league/standout";
 import { FANTRAX_PLAYERS_PATH, playerByCode } from "@epl/core";
-import { footballNow } from "../football";
+import { footballNow, seasonFixtures } from "../football";
 import OutLink from "../components/shell/OutLink";
 import FantraxSilent from "../components/shell/FantraxSilent";
 import { NOTE_LINK, QUIET_NOTE } from "@/app/desk";
@@ -51,7 +51,7 @@ export default async function PoolBoard({
   board: BoardName;
   searchParams: Promise<PlayersSearchParams>;
 }) {
-  const [pool, asked, lines, reader, grids, pricing, info, football] = await Promise.all([
+  const [pool, asked, lines, reader, grids, pricing, info, football, fixtures] = await Promise.all([
     getLeaguePool(),
     searchParams,
     getPlayerStats(),
@@ -60,6 +60,8 @@ export default async function PoolBoard({
     defconPricing(),
     leagueInfo(),
     footballNow(),
+    // Without the season's fixtures nobody's shots can vouch for an npxG, which dashes.
+    seasonFixtures().catch(() => null),
   ]);
   const query = playersQuery(asked);
   const footballers = playerByCode(football);
@@ -81,11 +83,14 @@ export default async function PoolBoard({
     const id = row.entry.player.fantraxId;
     const code = row.fplCode;
     const grid = code === null ? undefined : grids.get(code);
+    const footballer = code === null ? undefined : footballers.get(code);
     const ours = {
       ...(grid === undefined ? {} : attributeStats(grid)),
       ...(defcon === undefined ? {} : { [DEFCON_POINTS]: defcon[id] }),
       ...seasonStats(code === null ? undefined : intelStats.get(code)),
-      ...expectedStats(code === null ? undefined : footballers.get(code)),
+      ...(code === null || footballer === undefined
+        ? {}
+        : expectedStats(footballer, heldShots(code), shotCover(fixtures, footballer.clubId))),
     };
     if (Object.keys(ours).length > 0) raw.set(id, { ...raw.get(id), ...ours });
   }

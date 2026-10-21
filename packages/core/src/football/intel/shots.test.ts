@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { IntelShots, Shot } from "./shots";
-import { assistsOf, shotIntel, shotsInFixture } from "./shots";
+import { assistsOf, clubKickedOff, nonPenaltyXg, shotFixtures, shotIntel, shotsInFixture } from "./shots";
+import type { Fixture } from "../types";
 
 const MANIFEST = { season: "26-27", gameweek: null, exportedAt: "", rows: 0, sources: [] };
 
@@ -110,5 +111,53 @@ describe("assistsOf", () => {
     );
     expect(assistsOf(byCode, 7).map((each) => each.minute)).toEqual([5, 40]);
     expect(assistsOf(byCode, 99)).toEqual([]);
+  });
+});
+
+describe("nonPenaltyXg", () => {
+  // The shot helper's fixture is 8: a file holding it, for a man whose xG counts it alone.
+  const COVERED = { counted: [8], held: new Set([8]) };
+
+  it("takes what his penalties were worth off his expected goals", () => {
+    const his = [shot({ xg: 0.7884 }), shot({ xg: 0.7884, minute: 80 }), shot({ situation: "assisted", xg: 0.2 })];
+    expect(nonPenaltyXg(2.09, his, COVERED)).toBeCloseTo(0.5132);
+  });
+
+  it("leaves a man who took none at his expected goals", () => {
+    expect(nonPenaltyXg(1.2, [shot({ situation: "assisted", xg: 1.2 })], COVERED)).toBe(1.2);
+    expect(nonPenaltyXg(0, [], COVERED)).toBe(0);
+  });
+
+  it("is absent, not nought, where the file cannot vouch for his shots", () => {
+    expect(nonPenaltyXg(null, [], COVERED)).toBeNull();
+    expect(nonPenaltyXg(1.5, null, COVERED)).toBeNull();
+    expect(nonPenaltyXg(1.5, [shot()], null)).toBeNull();
+    // Expected goals but no shot held: the file has not got his matches.
+    expect(nonPenaltyXg(1.5, [], COVERED)).toBeNull();
+    expect(nonPenaltyXg(1.5, [shot({ xg: null })], COVERED)).toBeNull();
+  });
+
+  it("dashes a man whose xG counts a match the file lacks, whose penalty would stand at full value", () => {
+    // FPL has fixture 9 and its penalty; the file holds only 8, so xG less 8's penalty would be 0.79 too high.
+    const his = [shot({ xg: 0.7884 })];
+    expect(nonPenaltyXg(2.37, his, { counted: [8, 9], held: new Set([8]) })).toBeNull();
+  });
+
+  it("never goes below nought on FPL's rounding", () => {
+    expect(nonPenaltyXg(0.78, [shot({ xg: 0.7884 })], COVERED)).toBe(0);
+  });
+});
+
+describe("shotFixtures and clubKickedOff", () => {
+  it("names every fixture the file holds a shot from", () => {
+    const byCode = shotIntel(file([shot({ fplFixtureId: 3 }), shot({ code: 2, fplFixtureId: 5 }), shot({ fplFixtureId: 5 })]));
+    expect([...shotFixtures(byCode)].sort()).toEqual([3, 5]);
+  });
+
+  it("counts a club's fixtures once kicked off, live ones included, and no other club's", () => {
+    const fixture = (id: number, home: number, away: number, status: Fixture["status"]) =>
+      ({ id, homeClubId: home, awayClubId: away, status }) as Fixture;
+    const fixtures = [fixture(1, 7, 2, "finished"), fixture(2, 3, 7, "live"), fixture(3, 7, 4, "upcoming"), fixture(4, 2, 3, "finished")];
+    expect(clubKickedOff(fixtures, 7)).toEqual([1, 2]);
   });
 });

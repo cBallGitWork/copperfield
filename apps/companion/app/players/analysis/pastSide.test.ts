@@ -13,7 +13,8 @@ import type { Played } from "./rates";
 vi.mock("@/app/desk", () => import("../../desk"));
 vi.mock("@/app/components/football/pitchBox", () => import("../../components/football/pitchBox"));
 // The live season's files are not under test: a past side reads none of them.
-vi.mock("../../intel", () => ({ intelShots: new Map(), intelTouches: new Map() }));
+vi.mock("../../intel", () => ({ heldShots: () => null, shotCover: () => null, intelShots: new Map(), intelTouches: new Map() }));
+vi.mock("../../football", () => ({ seasonFixtures: async () => [] }));
 vi.mock("../[fantraxId]/scouting", () => ({ gameLog: async () => null }));
 
 const LINE: PastSeason = {
@@ -22,7 +23,7 @@ const LINE: PastSeason = {
 };
 
 const now: Played = {
-  minutes: 900, starts: 10, expectedGoals: 4, expectedAssists: 1, tackles: 5, clearancesBlocksInterceptions: 3,
+  minutes: 900, starts: 10, expectedGoals: 4, nonPenaltyExpectedGoals: 3.2, expectedAssists: 1, tackles: 5, clearancesBlocksInterceptions: 3,
   recoveries: 20, saves: 0, expectedGoalsConceded: 9, touches: 400, shots: 20, keyPasses: 8,
   goals: 5, assists: 2, cleanSheets: 1, goalsConceded: 10,
 };
@@ -47,7 +48,7 @@ describe("a past side on Compare", () => {
 
   it("sets this season's goals, assists and clean sheets against a past season's, per 90", async () => {
     const season = {
-      goals: 6, assists: 3, cleanSheets: 1, minutes: 900, starts: 10, expectedGoals: 4, expectedAssists: 1,
+      goals: 6, assists: 3, cleanSheets: 1, minutes: 900, starts: 10, expectedGoals: 4, nonPenaltyExpectedGoals: 3.2, expectedAssists: 1,
       expectedGoalsConceded: 9, influence: 0, creativity: 0, threat: 0, tackles: 5, clearancesBlocksInterceptions: 3,
       recoveries: 20, saves: 0, goalsConceded: 12,
     };

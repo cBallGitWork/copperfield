@@ -24,10 +24,12 @@ import type {
   IntelLines,
   PlayerLine,
   StatsRow,
+  Fixture,
   Shot,
+  ShotCover,
   TouchPlayer,
 } from "@epl/core";
-import { londonDayAndDate, careerIntel, cupIntel, depthIntel, lineIntel, matchIntel, minuteMovesIntel, minutesIntel, playedFloor, shotIntel, squadIntel, statIntel, strengthIntel, touchIntel } from "@epl/core";
+import { londonDayAndDate, careerIntel, cupIntel, depthIntel, lineIntel, matchIntel, minuteMovesIntel, minutesIntel, playedFloor, clubKickedOff, shotFixtures, shotIntel, squadIntel, statIntel, strengthIntel, touchIntel } from "@epl/core";
 import squadsFile from "../../../data/intel/squads/26-27.json";
 import xiFile from "../../../data/intel/xi/26-27.json";
 import piecesFile from "../../../data/intel/set-pieces/26-27.json";
@@ -80,6 +82,17 @@ export const intelTouches: Map<number, TouchPlayer> = touchIntel(
 
 /** Every man's shots, by FPL code, on the touches' convention: the exporter flips SofaScore's shots to match. */
 export const intelShots: Map<number, Shot[]> = shotIntel(shotsFile as unknown as IntelShots);
+
+/** One man's shots, none for a man the file holds none of; null when the file holds nothing, which is no reading. */
+export const heldShots = (code: number): Shot[] | null => (intelShots.size === 0 ? null : (intelShots.get(code) ?? []));
+
+const shotsHeldFrom = shotFixtures(intelShots);
+
+/** What a man's shots must cover for his npxG: his club's kicked-off fixtures (those `counts` keeps), against the
+ *  file's. None without FPL's fixture list, which dashes npxG rather than trusting the file. */
+export function shotCover(fixtures: readonly Fixture[] | null, clubId: number, counts = (_fixture: number) => true): ShotCover | null {
+  return fixtures === null ? null : { counted: clubKickedOff(fixtures, clubId).filter(counts), held: shotsHeldFrom };
+}
 
 /** Each club's Dixon-Coles attack and defence by FPL club code. */
 export const intelStrength: Map<number, ClubStrength> = strengthIntel(strengthFile as unknown as IntelStrength);
