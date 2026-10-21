@@ -29,6 +29,8 @@ export interface ScoreSide {
   left?: string | null;
   /** The clean sheets Fantrax has not credited, beside `left`; nought and null print nothing. */
   pending?: number | null;
+  /** Where the side's name leads in a split row (`scoreHref`); ignored by a row that is one link. */
+  href?: string;
 }
 
 /** The crest beside the name, 20px under a thumb and 26 on the desk; fetched at the larger so it is never soft. */
@@ -41,6 +43,7 @@ export default function ScoreRow({
   pending,
   clock,
   href,
+  scoreHref,
   marks,
 }: {
   home: ScoreSide;
@@ -53,19 +56,22 @@ export default function ScoreRow({
   clock?: ReactNode;
   /** Where the whole row leads; a row without one is not a control and takes no tap floor. */
   href?: string;
+  /** Splits the row into three links instead: each side's `href` from its name, this from the score. */
+  scoreHref?: string;
   /** A list that can hold the reader's row: every row takes the 4px edge so his keeps the column; football's stay flush. */
   marks?: boolean;
 }) {
   const yours = home.mine === true || away.mine === true;
+  const split = scoreHref !== undefined;
   const row = (
     <div
       className={`grid min-h-11 items-stretch lg:min-h-7 ${GRID} ${marks === true ? yoursEdge(yours) : yoursMark(yours)}`}
     >
       <Block side={home} />
-      <Name side={home} at="home" />
+      <Name side={home} at="home" split={split} />
       {/* The score: CM's colon, in the derived-reading cyan, a step above the names; the column's fixed
           width keeps a `12:0` on the same vertical as a `4:2`. */}
-      <span className="numeric flex w-[5.5rem] shrink-0 items-center justify-center gap-1 text-lg font-bold text-info lg:w-36 lg:text-2xl">
+      <Cell href={scoreHref} className="numeric flex w-[5.5rem] shrink-0 items-center justify-center gap-1 text-lg font-bold text-info lg:w-36 lg:text-2xl">
         {score === null ? (
           // A kickoff time stands where a score would, a step under the score's size.
           <span className="text-sm font-normal text-faint lg:text-base">{pending}</span>
@@ -75,13 +81,14 @@ export default function ScoreRow({
           </>
         )}
         {clock}
-      </span>
-      <Name side={away} at="away" />
+      </Cell>
+      <Name side={away} at="away" split={split} />
       <Block side={away} />
     </div>
   );
 
   // `.cm-row` rides on the link when there is one, or `tapfit` measures it against the control floor and fails.
+  if (split) return <div className="cm-row block">{row}</div>;
   return href === undefined ? (
     row
   ) : (
@@ -110,11 +117,23 @@ function Block({ side }: { side: ScoreSide }) {
   );
 }
 
+/** A cell of a split row: a link at the thumb floor when it leads somewhere, else the plain span. */
+function Cell({ href, className, children }: { href?: string; className: string; children: ReactNode }) {
+  return href === undefined ? (
+    <span className={className}>{children}</span>
+  ) : (
+    <Link href={href} className={`${className} min-h-11 hover:brightness-110 lg:min-h-7`}>
+      {children}
+    </Link>
+  );
+}
+
 /** A name in white, yellow when it is yours: the short form under a thumb and the full one from `lg`,
  *  both rendered for a media query to pick, since a server component cannot know the width. */
-function Name({ side, at }: { side: ScoreSide; at: "home" | "away" }) {
+function Name({ side, at, split }: { side: ScoreSide; at: "home" | "away"; split: boolean }) {
   return (
-    <span
+    <Cell
+      href={split ? side.href : undefined}
       className={`flex min-w-0 items-center gap-1 lg:gap-1.5 ${ROW_NAME} ${READS[at]} ${
         side.mine === true ? "text-accent" : side.lost === true ? "text-muted" : "text-ink"
       }`}
@@ -140,6 +159,6 @@ function Name({ side, at }: { side: ScoreSide; at: "home" | "away" }) {
           <span className="shrink-0 font-sans text-2xs font-normal text-faint">{side.left}</span>
         ) : null}
       </span>
-    </span>
+    </Cell>
   );
 }

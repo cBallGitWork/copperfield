@@ -71,3 +71,26 @@ describe("the reader's row in a column of rows", () => {
     expect(row(false)).not.toContain("border-l-4");
   });
 });
+
+describe("a football row split into its three ways in", () => {
+  const side = (name: string, href: string) => ({ name, short: name.slice(0, 3).toUpperCase(), href });
+  const html = renderToStaticMarkup(
+    createElement(ScoreRow, {
+      home: side("Everton", "/prem/club/11"),
+      away: side("Chelsea", "/prem/club/8"),
+      score: { home: 0, away: 2 },
+      scoreHref: "/prem/match/61",
+    }),
+  );
+  const hrefs = [...html.matchAll(/<a [^>]*href="([^"]+)"/g)].map((m) => m[1]);
+
+  it("links each name to its club and the score to the match, in reading order", () => {
+    expect(hrefs).toEqual(["/prem/club/11", "/prem/match/61", "/prem/club/8"]);
+  });
+
+  it("keeps every link at the thumb floor and wraps no link around the row", () => {
+    expect(html).not.toMatch(/<a [^>]*class="cm-row/);
+    expect(html).toMatch(/^<div class="cm-row block">/);
+    for (const a of html.match(/<a [^>]*>/g) ?? []) expect(a).toMatch(/min-h-11/);
+  });
+});

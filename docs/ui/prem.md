@@ -142,12 +142,16 @@ Since 20 Oct 2026 this is the one gameweek screen: `/gw/[n]` redirects here (`?g
 these rows (one live feed, not thirty-eight) went when Fixtures began showing one round at a time: the round in view
 is one `gameweekSnapshot` read, made only for a reader with a team once the round has started.
 
+**Each row has three ways in** (Craig, 21 Oct 2026): a club's crest and name open its club page, and the score or
+kickoff between them opens the match (`ScoreRow`'s `scoreHref`, each a 44px link under a thumb); the row was one link
+to the match before. The place blocks at either end stay plain.
+
 **A match with the reader's men in it says how many** (16 Oct 2026): `3 yours` in the accent at the row's end, off
 today's squads, and the row takes the accent edge (`yoursEdge`; a clear one on the rest, so every row keeps the
 column). The count is a button beside the row's link, never inside it, 44px under a thumb; it opens
 `components/football/MatchList` under the row: `Yours · Saka · Gabriel` naming every man, the one who did nothing
 too, then every scorer and assister tagged with the squad holding him (his own in the accent, a rival's faint, an
-unheld man untagged), or *Scorers not available right now.* when FPL's lines are missing. The row itself still opens
+unheld man untagged), or *Scorers not available right now.* when FPL's lines are missing. The score still opens
 the match. A row with none of his men holds the column empty; with no team, no column and no edge. The table carries
 no owner mark (below).
 
