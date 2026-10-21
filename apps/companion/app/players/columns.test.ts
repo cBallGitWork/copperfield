@@ -79,10 +79,10 @@ describe("COLUMNS", () => {
     // 124 of 543 rows printed 0.00 with GP 0 on 16 Oct 2026, padding the foot of an FP/G sort.
     const perGame = columnFor("fpg");
     const row = (value: number) => ({ stats: { perGame: value } }) as never;
-    expect(perGame?.value(row(0), { GP: 0 })).toBeNull();
-    expect(perGame?.value(row(0), { GP: 3 })).toBe(0);
-    expect(perGame?.value(row(4.5), { GP: 2 })).toBe(4.5);
-    expect(perGame?.value(row(4.5), undefined)).toBe(4.5);
+    expect(figureOf(perGame!, row(0), { GP: 0 }, false)).toBeNull();
+    expect(figureOf(perGame!, row(0), { GP: 3 }, false)).toBe(0);
+    expect(figureOf(perGame!, row(4.5), { GP: 2 }, false)).toBe(4.5);
+    expect(figureOf(perGame!, row(4.5), undefined, false)).toBe(4.5);
   });
 });
 

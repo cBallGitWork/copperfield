@@ -14,9 +14,9 @@ describe("pointsLines", () => {
     expect([lines[0].a, lines[0].b]).toEqual([45.5, 30]);
   });
 
-  it("prints a played man's noughts and dashes points per game for a man with no game", () => {
+  it("prints a played man's noughts and dashes a man with no game, as the board does", () => {
     const [fpts, fpg] = pointsLines({ row: row(0, 0), stats: { GP: 0 } }, { row: row(0, 0), stats: { GP: 2 } });
-    expect([fpts.shown.a, fpts.shown.b]).toEqual(["0", "0"]);
+    expect([fpts.shown.a, fpts.shown.b]).toEqual(["—", "0"]);
     expect([fpg.shown.a, fpg.shown.b]).toEqual(["—", "0.00"]);
   });
 

@@ -1,6 +1,7 @@
 import { DASH, fixed } from "@epl/core";
 import { columnFor, type PoolColumn, type RawStats } from "../columns";
 import type { PoolRow } from "../pool";
+import { figureOf } from "../figure";
 import type { LedgerLine } from "./PairLedger";
 
 // The league's own two figures for each man, read through the board's columns so Compare and the board never disagree.
@@ -37,7 +38,7 @@ export function pointsLines(a: Scored, b: Scored | null): LedgerLine[] {
 /** His figure under a column, or null for a man the pool does not hold. */
 function figure(column: PoolColumn, man: Scored): number | null {
   if (man.row === undefined) return null;
-  const value = column.value(man.row, man.stats);
+  const value = figureOf(column, man.row, man.stats, false);
   return typeof value === "number" ? value : null;
 }
 
