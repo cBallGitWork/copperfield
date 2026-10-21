@@ -120,6 +120,13 @@ describe("attributes", () => {
     expect(grid.length).toBeGreaterThan(0);
   });
 
+  it("says nothing of his club's set pieces when he has no season to rate", () => {
+    const unseen = man({}, { line: null, penaltyShare: 0, setPieceShare: 0 });
+    const grid = attributes(unseen, [unseen, ...league]);
+    expect(ratingOf(grid, "Penalty Taking")).toBeNull();
+    expect(ratingOf(grid, "Set Pieces")).toBeNull();
+  });
+
   it("leaves set pieces blank when the sister repo has no file for his club", () => {
     const untold = man({}, { setPieceShare: null });
     expect(ratingOf(attributes(untold, [untold, ...league]), "Set Pieces")).toBeNull();
