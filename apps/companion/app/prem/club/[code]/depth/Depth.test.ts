@@ -22,7 +22,7 @@ const lines: DepthSpot[][] = [
 const week: WeekMinutes = { gameweek: 8, byCode: new Map([[1, 84], [2, 0], [3, null]]) };
 
 const draw = (view: typeof DepthList | typeof DepthPitch, minutes: WeekMinutes | null) =>
-  renderToStaticMarkup(createElement(view, { lines, playerOf: (code: number) => men.get(code) ?? null, hrefOf: () => null, minutes }));
+  renderToStaticMarkup(createElement(view, { lines, playerOf: (code: number) => men.get(code) ?? null, cardOf: () => undefined, minutes }));
 
 describe.each([
   ["pitch", DepthPitch],

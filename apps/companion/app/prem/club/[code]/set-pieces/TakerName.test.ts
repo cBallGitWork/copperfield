@@ -9,15 +9,15 @@ vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => crea
 
 const render = (held: Held | undefined) =>
   renderToStaticMarkup(
-    TakerName({ href: "/players/x", held, teamNames: new Map([["t2", "Second XI"]]), reader: "t1", children: "McGinn" }),
+    TakerName({ card: undefined, held, teamNames: new Map([["t2", "Second XI"]]), reader: "t1", children: "McGinn" }),
   );
 
 describe("a set-piece taker's name", () => {
   // Review: the tag sat at the row's right edge; the boards print it straight after the name.
   it("prints the holder straight after the name, the name the one that grows no wider than it needs", () => {
     const html = render({ ownerTeamId: null, status: "FA" });
-    expect(html).toMatch(/McGinn<\/a><span[^>]*>\(FA\)<\/span><\/span>$/);
-    expect(html).not.toMatch(/<a[^>]*flex-1/);
+    expect(html).toMatch(/McGinn<\/span><span[^>]*>\(FA\)<\/span><\/span>$/);
+    expect(html).not.toMatch(/<span class="[^"]*flex-1[^"]*">McGinn/);
   });
 
   it("tags the reader's own man Yours in the accent, a rival by his team", () => {

@@ -1,8 +1,8 @@
-import { DASH, pitchName, type DepthSpot, type FootballPlayer } from "@epl/core";
+import { DASH, pitchName, type DepthSpot, type FootballPlayer, type SquadPlayerDetail } from "@epl/core";
 import PitchRows from "../../../../components/league/PitchRows";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import FitnessMark from "../../../../components/football/FitnessMark";
-import NameLink from "../NameLink";
+import { MaybeCard } from "../../../../components/league/PlayerCardButton";
 import XMins, { type WeekMinutes } from "./XMins";
 
 // The depth chart on CM's pitch (Craig, 25 Sep 2026): each place a plate with its shirt on top and
@@ -17,12 +17,12 @@ interface Placed {
 export default function DepthPitch({
   lines,
   playerOf,
-  hrefOf,
+  cardOf,
   minutes,
 }: {
   lines: readonly (readonly DepthSpot[])[];
   playerOf: (code: number) => FootballPlayer | null;
-  hrefOf: (code: number) => string | null;
+  cardOf: (code: number) => SquadPlayerDetail | undefined;
   /** Null draws no figure. */
   minutes: WeekMinutes | null;
 }) {
@@ -32,22 +32,22 @@ export default function DepthPitch({
       keyOf={({ spot, at }: Placed) => `${spot.slot}-${at}`}
       inColumn
     >
-      {({ spot }) => <Plate spot={spot} playerOf={playerOf} hrefOf={hrefOf} minutes={minutes} />}
+      {({ spot }) => <Plate spot={spot} playerOf={playerOf} cardOf={cardOf} minutes={minutes} />}
     </PitchRows>
   );
 }
 
 /** One place on the pitch: the shirt in the club's index block, then the men in line for it. The plate is one 44px
- *  target, opening its first choice's page; the list links every man. */
+ *  target, opening its first choice's card; the list opens every man's. */
 function Plate({
   spot,
   playerOf,
-  hrefOf,
+  cardOf,
   minutes,
 }: {
   spot: DepthSpot;
   playerOf: (code: number) => FootballPlayer | null;
-  hrefOf: (code: number) => string | null;
+  cardOf: (code: number) => SquadPlayerDetail | undefined;
   minutes: WeekMinutes | null;
 }) {
   const men = spot.holders.flatMap((holder) => {
@@ -56,8 +56,8 @@ function Plate({
   });
   const first = men[0];
   return (
-    <NameLink
-      href={first === undefined ? null : hrefOf(first.code)}
+    <MaybeCard
+      player={first === undefined ? undefined : cardOf(first.code)}
       className="flex min-h-11 w-full min-w-0 flex-col overflow-hidden border border-bg bg-surface/90 shadow-[0_2px_4px_oklch(0_0_0/0.45)]"
     >
       <span className="cm-index flex h-5 items-center justify-center text-3xs" title={spot.label}>
@@ -80,6 +80,6 @@ function Plate({
           </span>
         ))
       )}
-    </NameLink>
+    </MaybeCard>
   );
 }

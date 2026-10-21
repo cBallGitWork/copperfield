@@ -1,12 +1,11 @@
-import type { FootballPlayer } from "@epl/core";
+import type { FootballPlayer, SquadPlayerDetail } from "@epl/core";
 import { availabilityOf, fullFootballerName, DASH } from "@epl/core";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_BOX } from "../../../components/league/LeadFace";
 import FitnessMark from "../../../components/football/FitnessMark";
 import { doubtRow } from "../../../components/football/doubtRow";
 import { minutesInk } from "../../../components/football/xminsInk";
-import { poolHref } from "../../poolHref";
-import NameLink from "./NameLink";
+import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import type { LeagueOpinion } from "../../leagueOpinions";
 import { holdersOf } from "../../holders";
 import LeagueHolder from "../../LeagueHolder";
@@ -26,6 +25,7 @@ export default function SquadTable({
   players,
   league,
   reader,
+  cards,
   minutes,
 }: {
   /** Already ordered by the page. This draws; it does not rank. */
@@ -34,6 +34,8 @@ export default function SquadTable({
   league: ReadonlyMap<number, LeagueOpinion>;
   /** The reader's own team, whose men tag "Yours". */
   reader: string | null;
+  /** Each man's player card by FPL code, which his name opens; none for a man our league does not list. */
+  cards: ReadonlyMap<number, SquadPlayerDetail>;
   /** Null drops the column. */
   minutes: SquadMinutes | null;
 }) {
@@ -55,7 +57,7 @@ export default function SquadTable({
             width: NAME_SLACK,
             className: (player) => `${NAME_SLACK} ${doubtRow(player)}`,
             of: (player) => (
-              <NameLink href={poolHref(league, player.code)} className={LEAD_BOX}>
+              <MaybeCard player={cards.get(player.code)} className={`${LEAD_BOX} w-full`}>
                 <LeadFace
                   name={fullFootballerName(player)}
                   after={
@@ -65,7 +67,7 @@ export default function SquadTable({
                     </>
                   }
                 />
-              </NameLink>
+              </MaybeCard>
             ),
           },
         }}

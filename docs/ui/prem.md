@@ -177,7 +177,7 @@ the reference for both, and it is a strip over a panel rather than one page.
 | Tab | Route | What | Source |
 |---|---|---|---|
 | Squad | `/prem/club/[code]` | Every man on the books, ordered by our position; no faces, a doubt washes his row (25 Sep 2026) and his `StateMark` and holder tag follow his name (21 Oct 2026); the predicted XI behind Pitch \| List links (`?view=`) in the club shell's foot on a phone, as Stats' views are. It may differ from Depth's first names, rightly: the pecking order can lag a recent change or a knock (Craig, 20 Oct 2026) | FPL bootstrap; Fantrax for eligibility |
-| Depth | `…/depth` | Who is in line for each shirt, headed *Pecking order* (16 Oct 2026; "Depth chart" is American football's): the sister's depth chart on CM's pitch (a plate per place, no kits or faces), three deep for a lone shirt and a pair dealt like a snake (1st and 4th, 2nd and 3rd); a back three's full-backs headed LWB and RWB (Craig, 21 Oct 2026); dated by its export and never by a gameweek, which it outlives (20 Oct 2026); the list behind Pitch \| List links (`?view=`) in the club shell's foot on a phone; a doubt's name washed and marked (`StateMark`, 21 Oct 2026); each plate one tap to its first choice's page, the list one to every man (8 Oct 2026); each man's xMins for the club's next match week pinned right of his name, red under the planner's floor and cyan above it (`minutesInk`, 21 Oct 2026), again at a second shirt, `0` a reading and `—` none, no figure at all when the export misses the week, the name truncating first so the plate keeps its height (Craig, 21 Oct 2026) | The sister repo's chart, `intel/depth` |
+| Depth | `…/depth` | Who is in line for each shirt, headed *Pecking order* (16 Oct 2026; "Depth chart" is American football's): the sister's depth chart on CM's pitch (a plate per place, no kits or faces), three deep for a lone shirt and a pair dealt like a snake (1st and 4th, 2nd and 3rd); a back three's full-backs headed LWB and RWB (Craig, 21 Oct 2026); dated by its export and never by a gameweek, which it outlives (20 Oct 2026); the list behind Pitch \| List links (`?view=`) in the club shell's foot on a phone; a doubt's name washed and marked (`StateMark`, 21 Oct 2026); each plate one tap to its first choice's card, the list one to every man's (8 Oct 2026; the card since 21 Oct); each man's xMins for the club's next match week pinned right of his name, red under the planner's floor and cyan above it (`minutesInk`, 21 Oct 2026), again at a second shirt, `0` a reading and `—` none, no figure at all when the export misses the week, the name truncating first so the plate keeps its height (Craig, 21 Oct 2026) | The sister repo's chart, `intel/depth` |
 | Pieces | `…/set-pieces` | Who takes the penalties, free kicks and corners; each taker's `StateMark` straight after his name, then his holder tag (21 Oct 2026) | FFScout, via the sister repo |
 | Fixtures | `…/fixtures` | The club's season: to come first, the next match on top, then the played under one quiet "Played" row, newest first (21 Oct 2026, `runOrder`) | FPL fixtures |
 | Stats | `…/stats` | Every player, by one group of measures, sortable: `Attacking · Defensive · Playing time` on a strip docked at the foot (`?view=`, 20 Oct 2026); our position in the index tile at both widths, as the squad Stats board leads (21 Oct 2026), no Pos column; each unfit man's `StateMark` after his name; 36px rows under a thumb, inside the panel's padding as the Squad tab's; each column's standouts in orange and yellow (red for goals conceded), a doubt's row washed (25 Sep 2026) | FPL |
@@ -199,13 +199,14 @@ optional for exactly that reason, and `cm9900/22.jpg` is the shape.
 the panel. It arrives there when there is a real XI to draw, and it is the
 second entry the foot row has been waiting for since this section shipped.
 
-### A name opens the player page
+### A name opens the player card, or the player page
 
-Every name on a club's tabs links to `/players/[fantraxId]` (Craig, 26 Sep 2026:
-*"clicking on a player takes them to their proper player page"*). The club tabs
-hold FPL codes, so `poolHref` reads the Fantrax id off `leagueOpinions`, which is
-the bridge inverted. A man our league does not list prints unlinked: 51 of the 562
-on the books on 26 Sep. `/prem/player/[code]`, the stub footballer page these
+On Squad, Depth and Pieces a name opens the app's one player card (21 Oct 2026, UI audit Lane 3), the card the match
+screens and every squad open, against the club's next match and with xMins from that week (`nextAndCards`,
+`premCards.ts`); its "Full profile" goes on to the page. Stats still links each name to `/players/[fantraxId]` (Craig,
+26 Sep 2026: *"clicking on a player takes them to their proper player page"*). The club tabs hold FPL codes, so
+`poolHref` and the card both read the Fantrax id off `leagueOpinions`, which is the bridge inverted. A man our league
+does not list prints plain, with no card and no link: 51 of the 562 on the books on 26 Sep. `/prem/player/[code]`, the stub footballer page these
 names used to open, is gone.
 
 `/prem/match/[id]` has its own file, [match.md](match.md).

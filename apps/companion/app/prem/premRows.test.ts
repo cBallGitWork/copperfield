@@ -12,6 +12,7 @@ import DepthPitch from "./club/[code]/depth/DepthPitch";
 import PlayerBoard from "./club/[code]/stats/PlayerBoard";
 import TakerName from "./club/[code]/set-pieces/TakerName";
 import FitnessMark from "../components/football/FitnessMark";
+import { clubCards } from "./premCards";
 
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Absent", () => import("../components/shell/Absent"));
@@ -63,6 +64,9 @@ const league = new Map<number, LeagueOpinion>([
   [3, opinion("t2", "Rival", "T")],
 ]);
 const minutes = new Map<number, number | null>([[1, 0], [2, 49], [3, 0], [4, 90], [5, 80]]);
+// Cards for the three men our league lists; Raya and Ødegaard have none and print plain.
+const cards = clubCards(MEN, league, { club: CLUB, next: undefined, minutes: () => [] });
+const buttons = (html: string) => html.match(/<button type="button"/g)?.length ?? 0;
 
 const marks = (html: string) => html.match(/<svg role="img"/g)?.length ?? 0;
 
@@ -81,7 +85,10 @@ describe.each([
         minutes,
       }),
   ],
-  ["a club's squad", () => createElement(SquadTable, { players: MEN, league, reader: "t1", minutes: { gameweek: 8, byCode: minutes, asOf: "Thu" } })],
+  [
+    "a club's squad",
+    () => createElement(SquadTable, { players: MEN, league, reader: "t1", cards, minutes: { gameweek: 8, byCode: minutes, asOf: "Thu" } }),
+  ],
   [
     "a club's stats",
     () => createElement(PlayerBoard, { rows: MEN.map((player) => ({ player, positions: [], href: null })), view: "attack" }),
@@ -139,7 +146,7 @@ describe("the depth chart", () => {
   const lines: DepthSpot[][] = [MEN.map((player, at) => ({ slot: `S${at}`, label: "Slot", holders: [{ code: player.code, share: 1 }] }))];
   const draw = (view: typeof DepthList | typeof DepthPitch) =>
     renderToStaticMarkup(
-      createElement(view, { lines, playerOf: (code: number) => byCode.get(code) ?? null, hrefOf: () => null, minutes: { gameweek: 8, byCode: minutes } }),
+      createElement(view, { lines, playerOf: (code: number) => byCode.get(code) ?? null, cardOf: (code: number) => cards.get(code), minutes: { gameweek: 8, byCode: minutes } }),
     );
 
   it("marks every unfit man in the list", () => {
@@ -166,7 +173,7 @@ describe("holder tags in place of the owner's name", () => {
   });
 
   it("drops the club squad's Owner column for the tag after the name", () => {
-    const html = renderToStaticMarkup(createElement(SquadTable, { players: MEN, league, reader: null, minutes: null }));
+    const html = renderToStaticMarkup(createElement(SquadTable, { players: MEN, league, reader: null, cards, minutes: null }));
     expect(html).not.toContain(">Owner<");
     expect(html).toContain(">(FA)<");
     expect(html).not.toMatch(/>T</);
@@ -179,7 +186,7 @@ describe("a set-piece taker", () => {
       createElement(
         TakerName,
         {
-          href: null,
+          card: cards.get(1),
           held: league.get(1),
           teamNames: new Map([["t1", "Bannan"]]),
           reader: null,
@@ -190,6 +197,28 @@ describe("a set-piece taker", () => {
     );
     expect(html.indexOf("W. Saliba")).toBeLessThan(html.indexOf('<svg role="img"'));
     expect(html.indexOf('<svg role="img"')).toBeLessThan(html.indexOf("(Ban"));
+  });
+});
+
+describe("a club's taps open the one player card", () => {
+  // The audit's Lane 3: club squad, depth and set pieces open the card the match screens and every squad open.
+  const lines: DepthSpot[][] = [MEN.map((player, at) => ({ slot: `S${at}`, label: "Slot", holders: [{ code: player.code, share: 1 }] }))];
+  const depth = (view: typeof DepthList | typeof DepthPitch) =>
+    renderToStaticMarkup(createElement(view, { lines, playerOf: (code: number) => byCode.get(code) ?? null, cardOf: (code: number) => cards.get(code), minutes: null }));
+
+  it("gives each man our league lists a card button, and the rest a plain name", () => {
+    expect(buttons(renderToStaticMarkup(createElement(SquadTable, { players: MEN, league, reader: null, cards, minutes: null })))).toBe(cards.size);
+    expect(buttons(depth(DepthList))).toBe(cards.size);
+    expect(buttons(depth(DepthPitch))).toBe(cards.size);
+  });
+
+  it("links to no profile page in place of the card", () => {
+    expect(depth(DepthList)).not.toContain("<a ");
+  });
+
+  it("builds a card with our league's position for each listed man only", () => {
+    expect([...cards.keys()]).toEqual([1, 2, 3]);
+    expect(cards.get(1)?.rostered.slot.position).toBe("D");
   });
 });
 

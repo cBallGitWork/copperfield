@@ -10,9 +10,8 @@ import { leagueOpinions } from "../../../leagueOpinions";
 import { readerTeamId } from "../../../../squads";
 import TakerName from "./TakerName";
 import { teamNamesOf } from "../../../holders";
-import { poolHref } from "../../../poolHref";
 import ClubShell from "../Shell";
-import { clubOr404 } from "../club";
+import { clubOr404, nextAndCards } from "../club";
 import { INDEX_BLOCK, INDEX_WIDTH, PANEL } from "@/app/desk";
 import { clubTitle } from "../title";
 
@@ -27,7 +26,9 @@ export const generateMetadata = clubTitle("setPieces");
 
 export default async function SetPiecesPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
-  const [{ club, snapshot }, league, reader] = await Promise.all([clubOr404(code), leagueOpinions(), readerTeamId()]);
+  const [found, league, reader] = await Promise.all([clubOr404(code), leagueOpinions(), readerTeamId()]);
+  const { club, snapshot } = found;
+  const { cards } = nextAndCards(found, league);
   const colours = clubColours(club.shortName);
   const teamNames = teamNamesOf(league);
 
@@ -65,7 +66,7 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                         colours={colours}
                       />
                       <TakerName
-                        href={poolHref(league, player.code)}
+                        card={cards.get(player.code)}
                         held={league.get(player.code)}
                         teamNames={teamNames}
                         reader={reader}
