@@ -100,8 +100,10 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
   the shot file marks `situation: "penalty"` (`core:nonPenaltyXg`), and that plus xA. The shot file's xG is the
   same model as FPL's: 11/11 penalty fixtures matched FPL's per-match xG to 0.01 with the penalty in (each 0.7884),
   and the season's sums differ by a median 0.001 over 329/329 men with shots, 21 Oct 2026. No `npxA`: xA values
-  the pass, a penalty has none, and all 11 penalty shots carry no assister, so it would repeat `xA`. A man with xG
-  and no shot in the file, or a penalty with no xg, dashes both; a man who took none reads his xG.
+  the pass, a penalty has none, and all 11 penalty shots carry no assister, so it would repeat `xA`. Both dash
+  where the file lacks a kicked-off fixture of his club (FPL's season list against `shotFixtures`; 70/70 held on
+  21 Oct 2026), since that match's penalty would stand; and for a man with xG and no shot in the file, or a penalty
+  with no xg. A man who took none reads his xG.
 - **The plates dock at the screen's foot** (M-CONSIST-1, 20 Oct 2026, the 24 Sep rule: a screen's sub-views switch
   from its foot): `FootFrame`, above the thumb rail on a phone and at the screen's foot on a desk, on the main strip's
   label ladder (`TabStrip`'s `word` plates, 3xs under 375), so the four hold one row at 320 where they wrapped to 94px.

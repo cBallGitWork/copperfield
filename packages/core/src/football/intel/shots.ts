@@ -1,6 +1,7 @@
 import { groupedBy } from "../../grouped";
 import { onPitch } from "./onPitch";
 import type { IntelManifest } from "./types";
+import type { Fixture } from "../types";
 
 // Every shot and where it was struck from. The exporter already flips x to the touch clouds' convention: never again.
 
@@ -57,10 +58,30 @@ export function assistsOf(shots: ReadonlyMap<number, readonly Shot[]>, code: num
   return made;
 }
 
-/** His expected goals less what his penalties were worth; null where his shots cannot vouch for it (none held, a man
- *  with expected goals and no shot in the file, or a penalty with no value). Never below nought on FPL's rounding. */
-export function nonPenaltyXg(xg: number | null, shots: readonly Shot[] | null): number | null {
-  if (xg === null || shots === null || (shots.length === 0 && xg > 0)) return null;
+/** Every fixture the file holds a shot from: the matches it has taken in. */
+export function shotFixtures(shots: ReadonlyMap<number, readonly Shot[]>): Set<number> {
+  return new Set([...shots.values()].flatMap((his) => his.map((shot) => shot.fplFixtureId)));
+}
+
+/** The fixtures FPL's figures for a club's man already count: every one kicked off, live ones included. */
+export function clubKickedOff(fixtures: readonly Fixture[], clubId: number): number[] {
+  return fixtures
+    .filter((fixture) => fixture.status !== "upcoming" && (fixture.homeClubId === clubId || fixture.awayClubId === clubId))
+    .map((fixture) => fixture.id);
+}
+
+/** What his shots must cover: the fixtures his xG counts (`clubKickedOff`), against those the file holds. */
+export interface ShotCover {
+  counted: readonly number[];
+  held: ReadonlySet<number>;
+}
+
+/** His expected goals less what his penalties were worth; null where his shots cannot vouch for it: none held, a
+ *  match his xG counts that the file lacks (its penalty would stand), expected goals and no shot, or a penalty with no
+ *  value. Never below nought on FPL's rounding. */
+export function nonPenaltyXg(xg: number | null, shots: readonly Shot[] | null, cover: ShotCover | null): number | null {
+  if (xg === null || shots === null || cover === null || (shots.length === 0 && xg > 0)) return null;
+  if (cover.counted.some((fixture) => !cover.held.has(fixture))) return null;
   let penalties = 0;
   for (const shot of shots) {
     if (shot.situation !== "penalty") continue;

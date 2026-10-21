@@ -102,7 +102,7 @@ export { goalMinutes, loggedPlayers, matchIntel } from "./intel/matches";
 export { averageTouchPosition, touchFixtures, touchIntel, touchesOf } from "./intel/touches";
 export type { IntelTouches, Touch, TouchPlayer } from "./intel/touches";
 // Every shot, flipped onto the touch clouds' orientation.
-export { assistsOf, nonPenaltyXg, shotIntel, shotsInFixture } from "./intel/shots";
+export { assistsOf, clubKickedOff, nonPenaltyXg, shotFixtures, shotIntel, shotsInFixture } from "./intel/shots";
 // A past season's maps, one file a season, touches already counted on the heat grid.
 export { pastMapsOf } from "./intel/pastMaps";
 export type { HeatGrid, IntelPastMaps, PastMaps, PastShot } from "./intel/pastMaps";
@@ -121,7 +121,7 @@ export { blocks, columnDrift, stat, statIntel } from "./intel/stats";
 export type { IntelStats, StatsRow } from "./intel/stats";
 // A window of recent gameweeks, for narrowing the intel to recent form.
 export { fixtureGameweeks, gameweekSpan, inGameweeks, lastPlayed } from "./intel/window";
-export type { IntelShots, Shot } from "./intel/shots";
+export type { IntelShots, Shot, ShotCover } from "./intel/shots";
 // Each club's Dixon-Coles strength from the sister repo, ranked 1–20 as an opponent for the fixture planner.
 export { easeStep, plannerGameweeks, plannerRows, strengthIntel, strengthPlaces, strengthTable } from "./intel/strength";
 export type { ClubStrength, IntelStrength, PlannerCell, PlannerRow, PlannerView, StrengthRank } from "./intel/strength";

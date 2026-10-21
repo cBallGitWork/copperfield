@@ -13,7 +13,8 @@ import type { Played } from "./rates";
 vi.mock("@/app/desk", () => import("../../desk"));
 vi.mock("@/app/components/football/pitchBox", () => import("../../components/football/pitchBox"));
 // The live season's files are not under test: a past side reads none of them.
-vi.mock("../../intel", () => ({ heldShots: () => null, intelShots: new Map(), intelTouches: new Map() }));
+vi.mock("../../intel", () => ({ heldShots: () => null, shotCover: () => null, intelShots: new Map(), intelTouches: new Map() }));
+vi.mock("../../football", () => ({ seasonFixtures: async () => [] }));
 vi.mock("../[fantraxId]/scouting", () => ({ gameLog: async () => null }));
 
 const LINE: PastSeason = {

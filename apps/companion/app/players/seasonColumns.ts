@@ -1,4 +1,4 @@
-import { blocks, nonPenaltyXg, stat, type FootballPlayer, type Shot, type StatKey, type StatsRow } from "@epl/core";
+import { blocks, nonPenaltyXg, stat, type FootballPlayer, type Shot, type ShotCover, type StatKey, type StatsRow } from "@epl/core";
 import type { PoolColumn } from "./columns";
 import type { PoolGroup } from "./groups";
 
@@ -78,11 +78,15 @@ export function seasonStats(row: StatsRow | undefined): Record<string, number | 
 }
 
 /** His expected figures keyed for the bag; nothing for a man who has not played, whose noughts are no reading. His
- *  shots (null when the file holds none) take his penalties off; a man they cannot vouch for has no npxG. */
-export function expectedStats(player: FootballPlayer | undefined, shots: readonly Shot[] | null): Record<string, number | null> {
+ *  shots (null when the file holds none) take his penalties off where they cover his xG; else he has no npxG. */
+export function expectedStats(
+  player: FootballPlayer | undefined,
+  shots: readonly Shot[] | null,
+  cover: ShotCover | null,
+): Record<string, number | null> {
   if (player === undefined || player.season.minutes <= 0) return {};
   const { expectedGoals: xg, expectedAssists: xa, expectedGoalsConceded: xgc, minutes } = player.season;
-  const npxg = nonPenaltyXg(xg, shots);
+  const npxg = nonPenaltyXg(xg, shots, cover);
   const figures = { xg, npxg, xa, xgi: xg + xa, npxgi: npxg === null ? null : npxg + xa, xgc };
   return {
     ...Object.fromEntries(Object.entries(figures).map(([key, value]) => [`expected ${key}`, value])),

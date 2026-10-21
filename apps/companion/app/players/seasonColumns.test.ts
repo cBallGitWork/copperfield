@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { FootballPlayer, Shot, StatsRow } from "@epl/core";
+import type { FootballPlayer, Shot, ShotCover, StatsRow } from "@epl/core";
 import type { PoolRow } from "./pool";
 import { COLUMNS, columnFor } from "./columns";
 import { columnsIn, sortableIn } from "./groups";
@@ -135,9 +135,11 @@ describe("Adv Stats' season columns", () => {
 
 describe("expectedStats", () => {
   const haaland = footballer({ minutes: 540, expectedGoals: 6.12, expectedAssists: 0.75, expectedGoalsConceded: 4.5 });
+  // His club's two kicked-off fixtures, both in the shot file.
+  const COVERED = { counted: [8, 9], held: new Set([8, 9]) };
 
   it("reads his xG, xA and xGC, and xGI as the two together, at two places", () => {
-    const bag = expectedStats(haaland, []);
+    const bag = expectedStats(haaland, [], COVERED);
     expect(["xg", "xa", "xgc"].map((key) => read(key, bag))).toEqual([6.12, 0.75, 4.5]);
     expect(read("xgi", bag)).toBeCloseTo(6.87);
     expect(columnFor("xg")?.places).toBe("expected");
@@ -145,18 +147,18 @@ describe("expectedStats", () => {
 
   it("rates per 90 over his own minutes, never the stats league's", () => {
     const xg = columnFor("xg");
-    const bag = { ...seasonStats({ minutes: 450 }), ...expectedStats(haaland, []) };
+    const bag = { ...seasonStats({ minutes: 450 }), ...expectedStats(haaland, [], COVERED) };
     expect(xg && figureOf(xg, row("haaland"), bag, true)).toBeCloseTo(1.02);
   });
 
   it("dashes a man who has not played, and one the bridge has not settled", () => {
-    expect(expectedStats(footballer({ minutes: 0 }), [])).toEqual({});
-    expect(expectedStats(undefined, null)).toEqual({});
+    expect(expectedStats(footballer({ minutes: 0 }), [], COVERED)).toEqual({});
+    expect(expectedStats(undefined, null, null)).toEqual({});
   });
 
   it("takes his penalties off npxG and npxGI, and rates them per 90 like xG", () => {
     const penalty = { situation: "penalty", xg: 0.7884 } as Shot;
-    const bag = expectedStats(haaland, [penalty, penalty, { situation: "assisted", xg: 0.4 } as Shot]);
+    const bag = expectedStats(haaland, [penalty, penalty, { situation: "assisted", xg: 0.4 } as Shot], COVERED);
     expect(read("npxg", bag)).toBeCloseTo(4.5432);
     expect(read("npxgi", bag)).toBeCloseTo(5.2932);
     const npxg = columnFor("npxg");
@@ -164,13 +166,21 @@ describe("expectedStats", () => {
   });
 
   it("dashes npxG and npxGI where his shots cannot vouch for it, keeping xG", () => {
-    for (const shots of [null, []]) {
-      const bag = expectedStats(haaland, shots);
+    const penalty = { situation: "penalty", xg: 0.7884 } as Shot;
+    const cases: [readonly Shot[] | null, ShotCover | null][] = [
+      [null, COVERED],
+      [[], COVERED],
+      [[penalty], null],
+      // FPL counts fixture 9, with a penalty in it; the file has only 8.
+      [[penalty], { counted: [8, 9], held: new Set([8]) }],
+    ];
+    for (const [shots, cover] of cases) {
+      const bag = expectedStats(haaland, shots, cover);
       expect([read("npxg", bag), read("npxgi", bag), read("xg", bag)]).toEqual([null, null, 6.12]);
     }
   });
 
   it("prints a played man's nought", () => {
-    expect(read("xg", expectedStats(footballer({ minutes: 90 }), []))).toBe(0);
+    expect(read("xg", expectedStats(footballer({ minutes: 90 }), [], COVERED))).toBe(0);
   });
 });
