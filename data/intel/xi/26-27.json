@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-20T07:20:12.915Z",
+    "exportedAt": "2026-10-21T07:22:44.708Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-20T07:20:12.915Z",
+  "fetchedAt": "2026-10-21T07:22:44.708Z",
   "source": "rotowire",
   "clubs": {
     "IPS": {
@@ -100,11 +100,11 @@
           "prob": 0.9
         },
         {
-          "code": 568420,
+          "code": 575458,
           "prob": 0.9
         },
         {
-          "code": 575458,
+          "code": 227444,
           "prob": 0.9
         },
         {
@@ -211,7 +211,7 @@
       "absent": [
         {
           "code": 614071,
-          "status": "QUES"
+          "status": "OUT"
         },
         {
           "code": 577285,
@@ -222,15 +222,15 @@
           "status": "QUES"
         },
         {
-          "code": 214590,
-          "status": "QUES"
-        },
-        {
           "code": 449871,
           "status": "OUT"
         },
         {
           "code": 487992,
+          "status": "OUT"
+        },
+        {
+          "code": 214590,
           "status": "OUT"
         }
       ]
@@ -298,10 +298,6 @@
         },
         {
           "code": 465351,
-          "status": "QUES"
-        },
-        {
-          "code": 223094,
           "status": "QUES"
         },
         {
@@ -826,19 +822,7 @@
       "absent": [
         {
           "code": 221820,
-          "status": "QUES"
-        },
-        {
-          "code": 606745,
-          "status": "QUES"
-        },
-        {
-          "code": 516895,
-          "status": "QUES"
-        },
-        {
-          "code": 106760,
-          "status": "QUES"
+          "status": "OUT"
         },
         {
           "code": 596777,
@@ -849,7 +833,23 @@
           "status": "OUT"
         },
         {
+          "code": 606745,
+          "status": "OUT"
+        },
+        {
+          "code": 516895,
+          "status": "OUT"
+        },
+        {
+          "code": 176297,
+          "status": "OUT"
+        },
+        {
           "code": 485711,
+          "status": "OUT"
+        },
+        {
+          "code": 106760,
           "status": "OUT"
         },
         {
@@ -1315,11 +1315,11 @@
           "prob": 0.9
         },
         {
-          "code": 450063,
+          "code": 496221,
           "prob": 0.9
         },
         {
-          "code": 496221,
+          "code": 450063,
           "prob": 0.9
         },
         {
@@ -1560,11 +1560,11 @@
           "prob": 0.9
         },
         {
-          "code": 435997,
+          "code": 466525,
           "prob": 0.9
         },
         {
-          "code": 466525,
+          "code": 435997,
           "prob": 0.9
         },
         {
