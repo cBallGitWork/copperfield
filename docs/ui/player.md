@@ -1,7 +1,7 @@
 # `/players/[fantraxId]` — one player
 
 Championship Manager's player profile (`reference/cm9900/11.jpg`), for a Fantrax
-draft league. A plated bar in his club's colour, five tabs, and one cyan line saying
+draft league. A plated bar in his club's colour, three tabs and Compare (Profile, Data, News), and one cyan line saying
 what he actually is.
 
 One profile per tap, never a sweep of the 697 — that is the whole politeness
@@ -24,9 +24,10 @@ derived the same four from the same object.
 - **The born line** — `Born 21.7.00 (Age 26). Norway.`, from FPL's `birth_date` in CM's own
   unpadded `d.m.yy`, then his country: FPL's `region`, named by `/api/regions/`, never
   Fantrax's birthplace (which put Haaland, born in Leeds, down as England). **On the
-  Profile only**, above the portrait (Craig, 1 Oct 2026, on Data: "remove the dob from all
+  Profile only**, its first line (Craig, 1 Oct 2026, on Data: "remove the dob from all
   sections except profile"). It had been in every tab's shell, then on Data alone from 25 Sep.
-- **The tabs** — Profile · Data · News · Transfer · Compare (`tabs.ts`). **Compare since 21 Oct 2026** (Craig:
+- **The tabs** — Profile · Data · News · Compare (`tabs.ts`). **Transfer folded into the Profile on 21 Oct 2026**
+  (Craig, N-12); `/transfer` redirects to the Profile. **Compare since 21 Oct 2026** (Craig:
   *"maybe we put compare in the player section too"*; PLATFORM_NOTES): it leaves the shell for
   `/players/analysis?a=<him>&b=<rival>`, the rival the man in his position group with the nearest season league points,
   ties to a free agent (`analysis/rival.ts`, `defaultRival`); with no points, or the pool silent, Compare opens with him
@@ -48,34 +49,22 @@ derived the same four from the same object.
 ## Profile
 
 **Who he is, not what he has done** (Craig, 11 Oct 2026: *"Profile section, lots of 'data' in this section, move to
-data section?"*). Rankings, the Season table and the season maps moved to Data that day; the Season table was
-already drawn on both, and now draws only there. `tabs.test.ts` holds which blocks each tab draws.
+data section?"*). His season figures and the season maps moved to Data that day. **Whether he can play, whether he
+is free and the run to come are the first screen** (Craig, 21 Oct 2026), so the order is: born line, Fitness and
+transfer, Next up, portrait and grid, Business, set pieces, News, real position (`page.tsx`).
 
-1. **The born line**, then **the portrait**, his club's colour behind the cut-out, crest top-left: a banner across a
-   phone showing the whole cut-out, and on a desk a 208px column as tall as the grid, filled
-   to its foot (Craig, 25 Sep 2026: "cut off mid box").
-2. **The attribute grid** — CM 01/02's: alphabetical down three columns on the desk and two
-   on a phone, 16–20 in CM's orange and 11–15 in amber, with **Preferred Foot** (off the shot
-   map) as its worded row. Every rating is OURS,
-   per 90, against **every man of his role** (Craig, 30 Sep 2026: "judge against all
-   outfielders who actually play"): keepers against keepers, the rest against all
-   outfielders, so a centre-half's Finishing is low as CM's is. The sample is **last
-   season's** when he played a third of the most minutes anyone did (1,140 in 25/26), else
-   this season's against the same third ("new players get this season"); the heading says
-   which, `25/26 · against outfielders`. A keeper gets eight rows, an outfielder twenty-two.
-   **Fitness and News** sits under it (Craig, 26 Sep 2026: *"this page should contain the
-   latest player news, and their fitness conditions"*), as **plain text** (Craig, 1 Oct 2026:
-   *"just remove the chip row and email style preview, just put the text in, with date/time and
-   make text bigger"*): for a man who may miss out, FPL's note as one sentence with his chance
-   said once (`Muscular injury, 75% chance of playing`); then when Fantrax's newest note was
-   filed and the whole of it with its analysis, at `base`/`lg:text-lg`. **A phone gets only its first paragraph**
-   (Craig, 20 Oct 2026: the News tab has the rest; no link or "more"); the desk keeps all of it. A fit man gets no
-   fitness line. Only the newest: the list is News's. No source caption. With neither, no panel.
-   **Set pieces** under that, one line of label and figure (`Penalties 1st · Free kicks — · Corners —`, 21 Oct
-   2026; a one-row table before), a duty at his club rather than a count: his place in his club's
-   penalty, direct free-kick and corner orders (Craig, 30 Sep 2026: "their fk/pk/corner rank for the club"), the same order the
-   club's Set Pieces tab draws, counted among the men still there; a dash beside an order he is not in; no panel when he takes none.
-3. **The run to come**, the next eight across the row, in FPL's difficulty, and under each
+1. **The born line**, then **Fitness and transfer**: FPL's note for a man who may miss out, as one sentence with his
+   chance said once (`Muscular injury, 75% chance of playing`), at a row's size (`text-sm`/`lg:text-base`, Craig,
+   21 Oct 2026: *"why do we make these so big?"*); a fit man gets no note and the panel heads itself "Transfer".
+   Under it the **transfer line** (`TransferStatus.tsx`, `holding.ts`): a free man's **Status**, "Free agent" or "On
+   waivers"; a held man's **Joined**, how and when (`Claimed, Wed 7 Oct`, or "In the draft"), never his holder, since
+   the bar has him. Beside it **the way out**, worded for what the reader can do (`fantraxExit.ts`): "Claim him on
+   Fantrax" for a man nobody holds and "Open on Fantrax" for his own, both to his Fantrax page in the league; "Offer a
+   trade on Fantrax" for a rival's, to the owner's roster with Fantrax's trade panel up
+   (`team/roster;teamId={owner}?tx=true`, Craig, 1 Oct 2026). The draft row and "Dropped by" went with the Transfer tab.
+2. **Next up**, the run to come: the next eight across the row, each fixture one 28px line in FPL's difficulty, the
+   club with its venue a step down beside it (`3xs`), under the table's 24px plates in their 9px caps (Craig, 21 Oct
+   2026: *"next up can be smaller"*), and under each
    gameweek the sister model's xMins in cyan (Craig, 7 Oct 2026: *"we have confidence of our xmins more"*). The
    projected points and rank under it, off since 7 Oct, went with the projections page on 19 Oct 2026 (Craig: *"ok"*).
    No source caption on the panel
@@ -83,7 +72,33 @@ already drawn on both, and now draws only there. `tabs.test.ts` holds which bloc
    titles never reach a phone, and the heading's aside dates them, "xMins as of Thu 15 Oct" (16 Oct 2026). *Fantrax's projection for the
    round was here and is gone* (25 Sep: "remove row"): it covered one period and only the men
    fielded, so it could not fill a run; the round just gone went on 4 Sep.
-4. **The real position**, in cyan — the first thing in the app entitled to that
+3. **The portrait**, his club's colour behind the cut-out, crest top-left: on a phone a 120px band showing the whole
+   cut-out (`object-contain`), so fitness and the run stay on the first screen (Craig, 21 Oct 2026, reversing 25 Sep's
+   banner and 4 Sep's portrait-first order); on a desk a 208px column as tall as the grid, filled to its foot (Craig,
+   25 Sep 2026: "cut off mid box").
+4. **The attribute grid** — CM 01/02's: alphabetical down three columns on the desk and two
+   on a phone, 16–20 in CM's orange and 11–15 in amber, with **Preferred Foot** (off the shot
+   map) as its worded row. Every rating is OURS,
+   per 90, against **every man of his role** (Craig, 30 Sep 2026: "judge against all
+   outfielders who actually play"): keepers against keepers, the rest against all
+   outfielders, so a centre-half's Finishing is low as CM's is. The sample is **last
+   season's** when he played a third of the most minutes anyone did (1,140 in 25/26), else
+   this season's against the same third ("new players get this season"); the heading says
+   which, `25/26 · against outfielders`. A keeper gets six rated rows, an outfielder twenty-one and Preferred Foot.
+5. **Business** — every claim, drop and trade the league has made with him, newest first, on the house table
+   (`Moves.tsx`): the date in the index block, then the move, from and to ("The pool" for no team), a step above a
+   row's type (Craig, 1 Oct 2026: "make text bigger in business"; DESIGN §6's third exception), sized to its columns
+   on a desk. A man the league has never moved gets no panel.
+6. **Set pieces**, one line of label and figure (`Penalties 1st · Free kicks — · Corners —`, 21 Oct
+   2026; a one-row table before), a duty at his club rather than a count: his place in his club's
+   penalty, direct free-kick and corner orders (Craig, 30 Sep 2026: "their fk/pk/corner rank for the club"), the same order the
+   club's Set Pieces tab draws, counted among the men still there; a dash beside an order he is not in; no panel when he takes none.
+7. **News** — Fantrax's newest note on him, its own block under set pieces (`Fitness.tsx`, `LatestStory`), as
+   **plain text** (Craig, 1 Oct 2026: *"just remove the chip row and email style preview, just put the text in, with
+   date/time and make text bigger"*): when it was filed, then the whole of it with its analysis, at `base`/`lg:text-lg`.
+   **A phone gets only its first paragraph** (Craig, 20 Oct 2026: the News tab has the rest; no link or "more"); the
+   desk keeps all of it. Only the newest: the list is News's. No source caption. With none, no panel.
+8. **The real position**, in cyan — the first thing in the app entitled to that
    slot (see below).
 
 The **Compare with…** button that closed the Profile went on 21 Oct 2026, when Compare became a tab.
@@ -100,17 +115,9 @@ is gone as a tab** and `/history` redirects to `?season=all`.
   FPL's history lists, and **All seasons**. It is `?season=`, so a shared link keeps it. Over a past season or
   All seasons it drops its visible label (review M-CONSIST-4, 20 Oct 2026): the table's own head names the block, and
   the select keeps the accessible name "Season".
-- **This season**, in this order: Rankings, the season maps, Every match. The Season table and Attacking were
-  removed on 11 Oct 2026 (Craig: *"remove these two sections in data"*); the Data board still lists the stats
-  league's counts.
-- **Rankings** — his season totals and his place among his position group ("rankings for data such as xg"). On
-  the Profile until 11 Oct 2026. **`FPts` leads it since 16 Oct 2026** (review M28; the sceptic's "a season FPts
-  figure on Data: yes"): the Data board's season points off the cached pool, placed among the same men, ruled off from
-  FPL's figures as the match log rules its accounts apart. Absent while the pool is silent or holds a projection.
-  An outfielder's figures are `Min G xG A xA Sh KP Def`, a keeper's `Min Sv CS Prv` (`core:football/rankings.ts`).
-  **`KP` is the stats league's key passes** (`data/intel/stats`, `keyPasses`), the figure Adv Stats prints; until
-  21 Oct 2026 it was `Ch`, counted off the shot file's passers, which ran one under for 64 of 448 men. **A man who has
-  not played has no place on any figure**: his totals print and every place is `—`.
+- **This season**, in this order: Every match (with its season foot), then the season maps (Craig, 21 Oct 2026, N-13;
+  reverses 25 Sep). The Season table and Attacking were removed on 11 Oct 2026 (Craig: *"remove these two sections in
+  data"*); the Data board still lists the stats league's counts.
 - **Season maps** (Craig, 9 Oct 2026: *"Put shot map and pass map and touch map into the player profile section"*;
   moved here on 11 Oct with the rest of his figures), each map under a strip in his club's colours carrying a word
   and a count and nothing else:
@@ -119,19 +126,28 @@ is gone as a tab** and `/history` redirects to `?season=all`.
    - **Shots set up** (captioned "Chances created" until 21 Oct 2026) — every shot in the file whose `assistCode` is
      his, drawn where it was struck, with Compare's dashed key-pass line from where his pass began (a square); an
      assist is the filled mark. A chance the file places no pass for is the mark alone. Its count is the marks drawn,
-     so it can differ from Rankings' `KP`.
+     so it can differ from the `KP` in Every match's Total.
    - **Touches** — every touch this season, merged across fixtures, as Compare's heat (`analysis/HeatPitch`).
 
    A half pitch is drawn reaching back only for a shot or pass that began in his own half (5 of 1,363 shots and 8 of
    695 passes in the export of 7 Oct). Two halves and one whole pitch share one height: on a phone the halves pair across
    the row and the touch map takes the next, ~520px for all three; on a desk the three run across in 1:1:2. A map with
    no rows is not drawn, no rows at all is no panel, and a keeper gets the touch map only. Picked in `maps.ts`
-   (`seasonMaps`, `attackingSpan`), tested. Rankings and the maps read no FPL, so they still draw when FPL is silent.
+   (`seasonMaps`, `attackingSpan`), tested. The maps and Every match's season foot read no FPL, so they still draw when FPL is silent.
 - **Every match** — the house board (Craig: "not like our normal CM standards, use the shared code") —
   bevelled plates over the figures, the round in CM's blue index block and the opponent's
   crest pinned beside it, and each column's best in CM's orange and its top quarter in
   yellow, as the pool board lights them. **`FPts` is the first column** (Craig, 12 Oct 2026: "this needs to have fpts in
-  the first column"), then the score, which links to `/prem/match/[id]`.
+  the first column"), printed in the reading cyan, match by match and in its Total, which still sums (its own `cyan`
+  flag in `matchColumns.ts`, not `derived`; Craig, 21 Oct 2026); then the score, which links to `/prem/match/[id]`.
+- **The season foot** — Every match closes on a Season plate, a Total row and a Rank row. Total is the ranked season
+  figure where the column is ranked, otherwise the sum of the matches he played, dashed if any lacks it; Rtg shows his
+  average (`totalOf`). Rank is his place in his position group (`core:football/rankings.ts`), `—` with no minutes;
+  top in CM's orange, its top tenth (at least the top three) in amber. "Ranked among N <group>" heads the board. `FPts`' Total and Rank are the
+  Data board's season points off the cached pool, absent while the pool is silent or holds a projection. **`KP` is the
+  stats league's key passes** (`data/intel/stats`, `keyPasses`), a foot under a column of dashes, since the league
+  counts them for the season only. Rankings as its own table is gone (N-13; it led Data from 11 Oct, `FPts` first from
+  16 Oct).
 - **A past season** — FPL's line for that season, with the club, then the same season maps for that season
   (21 Oct 2026) off `data/intel/past-maps/<season>.json` (`scripts/intel-past-maps.py`, a one-off for 21-22 to
   25-26): Shots and Touches, no chances map, on a plain plate, since his club now may not be that season's. Only the
@@ -147,7 +163,8 @@ is gone as a tab** and `/history` redirects to `?season=all`.
   in the league keeps its name, clipped.
 
 **After the points and the score, two provenances on one row, with a rule between them.** Left of it is FPL's
-measurement of the play — minutes, goals, xG, xA and defensive contribution (FPL's
+measurement of the play — minutes, goals, assists, xG, xA, clean sheet, a keeper's saves and goals prevented, and
+`Def` (tackles + CBI + recoveries); FPL's DefCon column is gone from it, so one idea prints once per screen (DATA-1). (FPL's
 bonus and BPS came off on 6 Oct 2026, the FPL tab's alone); FPL's own points came off on 30 Sep 2026 so they never sit beside `FPts`, and the
 board carries no source caption ("FPL's own · Fantrax's own remove"). Right of it is Fantrax's account of the same match
 (its `FPts`, the only per-match source of this league's points anywhere, leads the row instead):
@@ -158,7 +175,10 @@ committed, fouls suffered, offsides.
 league paid, and a column only his sat-out matches filled drops out. **Zero is a stat on this board** (16 Oct 2026). `CS` prints `1` or `0` for a match he played and dashes one he was
 not on for; it printed `Y` or a dash until then, so a keeper who conceded read as unmeasured. **A column none of his
 matches measured stands down**, its rule passing to the next: Fantrax's keeper table carries no shots, shots on target
-or offsides (Tzolakis and Raya, probed 16 Oct), which drew a column of dashes on every full 90.
+or offsides (Tzolakis and Raya, probed 16 Oct), which drew a column of dashes on every full 90. **Columns are picked
+by role first** (Craig, 21 Oct 2026, N-14): a keeper never draws G, A, xG, xA, Def, KP, Sh, SoT or Off, and an
+outfielder never draws Sv or Prv (`columnsFor`). Within a role a column still stands down only when nothing measured it
+and nothing ranks it.
 
 **Our mark closes the row, behind a third rule** (Craig, 1 Oct 2026: "put ratings into the player/data section too").
 `Rtg` is our rating out of ten for the match, in the derived reading's cyan and never lit as a standout, from
@@ -172,8 +192,8 @@ says `NOT` where FPL says `NFO`. Fantrax's table is captioned "Recent Games" and
 they do not publish how far back it reaches, so a match beyond it dashes on all
 six columns and a line under the table says how many of the matches they covered.
 
-**The rows are 36px, not CM's 18.** A tappable score is a control and takes the
-control floor; one cell at 36 makes the row 36. CM's appearances table could be
+**The rows are tap rows, not CM's 18px.** A tappable score is a control, so its row is `TAP_ROW`: 44 under a thumb,
+the desk's 28 (the one table spec, 21 Oct 2026). CM's appearances table could be
 dense because nothing in it was clickable. That is the price of the link and it
 was paid deliberately.
 
@@ -208,28 +228,10 @@ one line twice under itself. A transfer story has a longer body and gets both.
 
 ## Transfer
 
-CM's Transfer tab for our league (Craig, 25 Sep 2026: "improve this page so its more CM
-like"), in four blocks:
-
-1. **Transfer status** — CM's label-and-value lines: who holds him ("Held by" a team), or
-   for a man nobody holds his "Status", "Free agent" or "On waivers" (19 Oct 2026: it had
-   read "Held by Waivers"), how and when he joined that team (the latest
-   executed move that put him there, or "In the draft"), and his draft pick with what it
-   is worth against Fantrax's ranking (`+15 on his pick`). A man nobody holds has joined
-   nobody: his line is "Dropped by" the team that let him go, and when, or no line at all.
-2. **Business** — every claim, drop and trade with him, newest first, on the house table:
-   the date in the index block, then the move, from and to ("The pool" for no team), a step above a
-   row's type (Craig, 1 Oct 2026: "make text bigger in business"; DESIGN §6's third exception), sized to its columns
-   on a desk (21 Oct 2026). Neither panel says
-   "This league" any more (Craig: "remove 'This league' twice"); the tab is only ever ours.
-3. **How he arrived** is the status panel's Draft row, `13th pick, by Atletico +12 on his pick`: the pick and
-   the drafter, never the round (12 Oct 2026; the cyan closing sentence went).
-4. **The way out**, worded for what the reader can do: "Claim him on Fantrax" for a man
-   nobody holds and "Open on Fantrax" for his own, both to his Fantrax page in the league;
-   "Offer a trade on Fantrax" for a rival's, to the owner's roster with Fantrax's trade panel
-   up (`team/roster;teamId={owner}?tx=true`, Craig, 1 Oct 2026).
-
-The whole-of-Fantrax block (drafted %, ADP, rostered %) stays gone (4 Sep 2026).
+Folded into the Profile on 21 Oct 2026 (Craig, N-12; reverses 25 Sep's "more CM like" tab); `/transfer` redirects to
+the Profile. The status line, Business and the way out are the Profile's (above); the draft row, its `+N on his pick`
+and "Dropped by" are gone, so the app makes no `getDraftResults` read. The whole-of-Fantrax block (drafted %, ADP,
+rostered %) stays gone (4 Sep 2026).
 
 ## History
 
@@ -256,8 +258,14 @@ striker at the bottom; **Teamwork** is xGBuildup per 90, because touches did the
 **Handling** is the share of shots on target he saved, because saves per 90 put Raya at 1.
 The counts are the sister's `lines/{season}.json` (`docs/providers/intel-export.md` §9).
 
-It is the fraction of the cohort he is strictly better than, not the midpoint of his tie,
-so a block of noughts sits at 1.
+**Anticipation** is the best of three placings: recoveries; clearances, blocks and interceptions; touches in the
+opposition box, each per 90. Each man's best is ranked again against everyone's best, so it stays a flat 1–20. A
+keeper's is his recoveries alone. (Craig, 21 Oct 2026: recoveries alone put Haaland at 1 and Virgil at 3.)
+**Penalty Taking and Set Pieces** rate only the men who take them: a man who takes none reads `—`, not 1. **Keepers
+have no Influence**: FPL's is mostly saves, which put Raya at 1 behind a quiet defence.
+
+It is the fraction of the cohort he is strictly better than, not the midpoint of his tie, in twenty equal slices, so a
+block of noughts in a count sits at 1.
 
 The ratings are set in CM's orange (`--color-peak`) from 16 and amber (`--color-mid`) from 11,
 never CM's yellow: yellow is `--color-accent` and means *yours · selected · active*.
@@ -299,7 +307,7 @@ from FPL's fantasy classification.
   code on the element (`data-code`), not on the screen (12 Oct 2026), and an `Every player` button back to Data.
 - **A man the bridge has never settled** — 88 of 694. No portrait, no grid, no
   position and no history, each saying why. Fantrax's own blocks still draw, so
-  Profile, News and Transfer are not empty; Data and History are.
+  Profile and News are not empty; Data is.
 
 ## Known gaps
 
@@ -310,21 +318,17 @@ from FPL's fantasy classification.
   and worthless as a reading. It settles as the season fills, and it is left
   undamped deliberately: damping needs a confidence model nobody asked for, and
   turns a number that is honest-but-thin into one that cannot be explained.
-- **The grid is sixteen attributes against CM's thirty-one.** Shots, shots on
-  target, fouls committed, fouls suffered and offsides are Fantrax-only and would
-  buy five more — Aggression, Dribbling, Technique among them. They are not in
-  yet because a percentile needs the whole division and `getPlayerProfile` answers
-  one player at a time; the pool-wide table that would carry them
-  (`getPlayerStats` with `positionOrGroup`) needs its own probe first. **The Data
-  tab shows those five numbers already** — displaying one man's needs only his own
-  profile. It is the RANKING that needs a population.
+- **Tackling counts volume**: the centre-backs of sides that keep the ball make few tackles (Virgil 2, 21 Oct 2026).
+  A possession-adjusted count would come from the sister repo.
+- **The grid is twenty-one attributes against CM's thirty-one** (`core:football/attributes.ts`, 21 Oct 2026): the
+  rest have no measure we hold, so they get no row (above).
 - **`getPlayerProfile`'s deeper sections are open, and three are unread.** The
   parameter is **`tab`**, taking the `code` off the payload's own `sections` list —
   found on 4 Sep 2026 after eleven other names were tried and ignored. `NEWS_NOTES`
   is read. **`TEAM_SERVICE_TIME`** (a row per gameweek: team, status, position),
   **`TRANSACTIONS_FANTASY`** (richer than the league-wide feed — it names what was
   dropped in the same move) and **`GAME_LOG_FANTASY`** are not. Service time is
-  what CM's Transfer tab would really want.
+  what a CM transfer history would really want.
 
 ## Rebuilt against the reference, 4 Sep 2026
 
@@ -374,8 +378,8 @@ one table, the completed ones under it. Two tables with the same heads, one abov
 the other, is a reader checking whether they agree.
 
 **Transfer says how he arrived once**, in the status panel's Draft row (`13th pick, by Atletico`),
-never with the round; the closing cyan sentence that repeated it went on 12 Oct 2026. The
-whole-of-Fantrax demand block is gone.
+never with the round; the closing cyan sentence that repeated it went on 12 Oct 2026, and the Draft row with the tab
+on 21 Oct. The whole-of-Fantrax demand block is gone.
 
 **News opens any item.** `?story=` in the URL rather than client state, so a
 story can be linked and the tab stays one server read. Rows carry the time as
