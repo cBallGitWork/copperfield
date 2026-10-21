@@ -45,6 +45,7 @@ export default function ScoreRow({
   href,
   scoreHref,
   marks,
+  under,
 }: {
   home: ScoreSide;
   away: ScoreSide;
@@ -60,6 +61,8 @@ export default function ScoreRow({
   scoreHref?: string;
   /** A list that can hold the reader's row: every row takes the 4px edge so his keeps the column; football's stay flush. */
   marks?: boolean;
+  /** A control under each side's name (beside it from `lg`), a sibling of the name's link; never on a row that is one link. */
+  under?: { home?: ReactNode; away?: ReactNode };
 }) {
   const yours = home.mine === true || away.mine === true;
   const split = scoreHref !== undefined;
@@ -68,7 +71,7 @@ export default function ScoreRow({
       className={`grid min-h-11 items-stretch lg:min-h-7 ${GRID} ${marks === true ? yoursEdge(yours) : yoursMark(yours)}`}
     >
       <Block side={home} />
-      <Name side={home} at="home" split={split} />
+      <Name side={home} at="home" split={split} under={under?.home} />
       {/* The score: CM's colon, in the derived-reading cyan, a step above the names; the column's fixed
           width keeps a `12:0` on the same vertical as a `4:2`. */}
       <Cell href={scoreHref} className="numeric flex w-[5.5rem] shrink-0 items-center justify-center gap-1 text-lg font-bold text-info lg:w-36 lg:text-2xl">
@@ -82,7 +85,7 @@ export default function ScoreRow({
         )}
         {clock}
       </Cell>
-      <Name side={away} at="away" split={split} />
+      <Name side={away} at="away" split={split} under={under?.away} />
       <Block side={away} />
     </div>
   );
@@ -100,6 +103,9 @@ export default function ScoreRow({
 
 /** Block, name, score, name, block: the two `1fr`s hold every name in the panel at one x. */
 const GRID = "grid-cols-[auto_1fr_auto_1fr_auto] gap-x-0.5 lg:gap-x-2";
+
+/** A name over its control under a thumb: the name sits low in its 44 and the control high in its own, so they read as one. */
+const STACKED = "items-end lg:items-center";
 
 /** Which way a side reads: the away half mirrors the home, so both crests sit against their own block. */
 const READS = { home: "", away: "flex-row-reverse" } as const;
@@ -130,11 +136,11 @@ function Cell({ href, className, children }: { href?: string; className: string;
 
 /** A name in white, yellow when it is yours: the short form under a thumb and the full one from `lg`,
  *  both rendered for a media query to pick, since a server component cannot know the width. */
-function Name({ side, at, split }: { side: ScoreSide; at: "home" | "away"; split: boolean }) {
-  return (
+function Name({ side, at, split, under }: { side: ScoreSide; at: "home" | "away"; split: boolean; under?: ReactNode }) {
+  const name = (
     <Cell
       href={split ? side.href : undefined}
-      className={`flex min-w-0 items-center gap-1 lg:gap-1.5 ${ROW_NAME} ${READS[at]} ${
+      className={`flex min-w-0 ${under === undefined ? "items-center" : STACKED} gap-1 lg:gap-1.5 ${ROW_NAME} ${READS[at]} ${
         side.mine === true ? "text-accent" : side.lost === true ? "text-muted" : "text-ink"
       }`}
     >
@@ -160,5 +166,13 @@ function Name({ side, at, split }: { side: ScoreSide; at: "home" | "away"; split
         ) : null}
       </span>
     </Cell>
+  );
+  if (under === undefined) return name;
+  // The name's link over its control, side by side from `lg`; the away pair mirrors, so the control sits toward the score.
+  return (
+    <span className={`flex min-w-0 flex-col lg:items-center lg:gap-1.5 ${at === "away" ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+      {name}
+      <span className={`flex ${at === "away" ? "justify-end" : ""}`}>{under}</span>
+    </span>
   );
 }

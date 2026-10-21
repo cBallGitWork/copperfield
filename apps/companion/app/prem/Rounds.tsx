@@ -1,5 +1,5 @@
 import { type Club, type Fixture, type FootballPlayer, type FootballSnapshot, type PlayerOwner, kickoffOrder } from "@epl/core";
-import Match from "./Match";
+import Match, { type SideCounts } from "./Match";
 import MatchList from "../components/football/MatchList";
 import RoundHead, { type RoundStep } from "../components/shell/RoundHead";
 
@@ -33,7 +33,7 @@ export default function RoundMatches({
   places: Map<number, number>;
   /** The arrows either side of the head. */
   step: RoundStep;
-  /** Undefined with no reader, so no row holds a count. */
+  /** Undefined with no reader, so no row holds an edge or a count. */
   men?: RoundMen;
 }) {
   return (
@@ -48,7 +48,7 @@ export default function RoundMatches({
               fixture={fixture}
               clubs={clubs}
               places={places}
-              yours={men === undefined ? undefined : yours.length}
+              yours={men === undefined ? undefined : sideCounts(fixture, yours)}
               men={
                 men === undefined || yours.length === 0 ? undefined : (
                   <MatchList fixture={fixture} clubs={clubs} lines={men.lines} now={men.now} yours={yours} owners={men.owners} />
@@ -60,6 +60,12 @@ export default function RoundMatches({
       </div>
     </section>
   );
+}
+
+/** His men in a match counted by the club they play for, so each count sits under its own club's name. */
+export function sideCounts(fixture: Fixture, men: readonly FootballPlayer[]): SideCounts {
+  const at = (clubId: number) => men.filter((man) => man.clubId === clubId).length;
+  return { home: at(fixture.homeClubId), away: at(fixture.awayClubId) };
 }
 
 /** Groups fixtures into ascending rounds; one with no gameweek yet is left out, not filed under nought. */
