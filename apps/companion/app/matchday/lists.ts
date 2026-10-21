@@ -22,13 +22,20 @@ export interface LeaderList {
   explain: string;
   /** The kind of figure, which sets its places: a list ranks on the figure it prints, so two who read alike share a place. */
   kind: FigureKind;
+  /** The league's points, printed in the reading cyan rather than the lone figure's amber (DESIGN §3). */
+  cyan?: true;
 }
 
 export const LISTS: readonly LeaderList[] = [
   { key: "xg", title: "Expected goals", head: "xG", explain: "Expected goals", kind: "expected" },
   { key: "xa", title: "Expected assists", head: "xA", explain: "Expected assists", kind: "expected" },
-  { key: "points", title: "Fantasy points", head: "FPts", explain: "Fantasy points, under this league's scoring", kind: "count" },
+  { key: "points", title: "Fantasy points", head: "FPts", explain: "Fantasy points, under this league's scoring", kind: "count", cyan: true },
 ];
+
+/** A list's figure ink: FPts the reading cyan, a football figure the amber of one figure beside a name. */
+export function figureInk(list: LeaderList): string {
+  return list.cyan ? "text-info" : "text-mid";
+}
 
 /** A figure held to the places its list prints, so the ranking agrees with what the reader sees. */
 export function asPrinted(list: LeaderList, figure: number): number {

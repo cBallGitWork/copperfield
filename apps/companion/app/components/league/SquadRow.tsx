@@ -123,10 +123,10 @@ export default function SquadRow({
         </span>
       )}
 
-      {/* Undefined is no table and drops the cell; null, a table that omits him, is a dash.
+      {/* The league's points in the reading cyan (DESIGN §3). Undefined is no table and drops the cell; null, a dash.
           A step above §6's row figure (DESIGN §6 records why). */}
       {points === undefined ? null : (
-        <span className={`numeric ${SQUAD_POINTS} shrink-0 text-center text-base font-bold text-mid lg:text-lg`}>
+        <span className={`numeric ${SQUAD_POINTS} shrink-0 text-center text-base font-bold text-info lg:text-lg`}>
           {points ?? DASH}
         </span>
       )}

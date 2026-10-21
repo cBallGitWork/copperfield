@@ -4,9 +4,9 @@ import Board from "../components/league/Board";
 import LeadFace, { LEAD_BOX } from "../components/league/LeadFace";
 import NameLink from "../prem/club/[code]/NameLink";
 import { PANEL_FLUSH, SECTION_BAR } from "@/app/desk";
-import type { LeaderList, Ranked } from "./lists";
+import { figureInk, type LeaderList, type Ranked } from "./lists";
 
-// One list: the men in order, his club's crest and his name, the one figure in amber, every one of them recorded.
+// One list: the men in order, his club's crest and his name, the one figure in amber (FPts cyan), every one recorded.
 
 export interface Row extends Ranked {
   club: Club | undefined;
@@ -56,7 +56,7 @@ export default function LeaderBoard({
               head: list.head,
               title: list.explain,
               width: "w-16",
-              cell: (row: Row) => ({ value: printed(list, row.figure), className: "text-mid" }),
+              cell: (row: Row) => ({ value: printed(list, row.figure), className: figureInk(list) }),
             },
           ]}
         />

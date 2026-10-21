@@ -59,8 +59,6 @@ export interface PoolColumn {
   stat?: string;
   /** The kind of figure, where it prints at fixed places rather than as it arrives. */
   places?: FigureKind;
-  /** Ours rather than recorded, in the derived reading's ink and never marked. */
-  derived?: true;
   /** Recorded, but printed in the reading cyan and never marked: his league points (Craig, 21 Oct 2026). */
   cyan?: true;
   /** The categories whose prices say which positions it is drawn for, where not `scores` and `also`. */
@@ -135,8 +133,7 @@ export const COLUMNS: PoolColumn[] = [
     mark: "high",
     ascending: false,
     fantasy: true,
-    // No game is no reading: Fantrax prints 0.00 for it.
-    value: (row, stats) => (stats?.[GAMES] === 0 ? null : (row.stats?.perGame ?? null)),
+    value: (row) => row.stats?.perGame ?? null,
   },
   denominator(count(MINUTES, "scoring")),
   { ...denominator(byAbbreviation(GAMES, "Games played", "scoring")), fantasy: true },
@@ -152,7 +149,7 @@ export const COLUMNS: PoolColumn[] = [
     label: "DCP",
     title: "DefCon points, worked out per match, at his slot or a free agent's best position",
     group: "defensive",
-    derived: true,
+    mark: "high",
     rate: true,
     ascending: false,
     fantasy: true,

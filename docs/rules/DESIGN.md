@@ -465,8 +465,8 @@ is more specific than a palette; it is the reason the token names in
 | Ground | `--color-bg` `surface` `raised` `line` | depth, never meaning | — |
 | Ink | `--color-ink` `muted` `faint` | how loud | 17.0 · 8.6 · 5.7 |
 | Yellow | `--color-accent` | **yours · selected · active · primary** | 13.1 |
-| Cyan | `--color-info` | **a derived reading** — ours rather than recorded; and a row's kind on a ledger: the competition on a team's Fixtures, the deal on its Transfers (Craig, 7 Oct 2026, over the accent); and the league's points where they are the reading a screen is for — a scoreline, FPts on the player page and the Players board — never lit as a standout (Craig, 4 Sep and 21 Oct 2026). There cyan says "the reading", not "ours": the FPts head says whose | 11.2 |
-| Amber | `--color-mid` | **a figure standing alone beside a name** — never a column of a standings table | 9.8 |
+| Cyan | `--color-info` | **a derived reading** — ours rather than recorded; and a row's kind on a ledger: the competition on a team's Fixtures, the deal on its Transfers (Craig, 7 Oct 2026, over the accent); and the league's points where they are the reading a screen is for — a scoreline, and FPts wherever it prints — the player page, the Players board, the squad list (and its Proj) and Live's Top stats (Craig, 4 Sep and 21 Oct 2026) — never lit as a standout; FPts is the only cyan figure column on any board, DCP taking each board's standout lights like any figure (21 Oct 2026). There cyan says "the reading", not "ours": the FPts head says whose | 11.2 |
+| Amber | `--color-mid` | **a figure standing alone beside a name** — never a column of a standings table, and never the league's points, which are cyan | 9.8 |
 | Red | `--color-bad` | **a loss, a doubt, a negative**; a derived figure takes it when it is a doubt (xMins under `START_DOUBT_MINUTES`, Craig 21 Oct 2026: *"Red bad"*) | 5.6 |
 | Green | `--color-up` | **a gain** — the other half of the direction pair | 9.9 |
 | Live red | `--color-live` | **a match in play**, and nothing else | 5.4 |
@@ -539,7 +539,9 @@ and the colour is how it makes it wherever no head says whose. Seven sites inked
 name cyan and none do; the slot is deliberately near-empty until a derived
 figure claims it, which is better than it meaning two things. The Mail tab's unread count
 claims it (23 Sep 2026): no provider tracks reads, so the count is ours, derived from
-this device's last visit.
+this device's last visit. **DefCon points are no longer cyan anywhere**: they are lit as a figure on every board (Craig,
+21 Oct 2026: *"DCP yes lose it"*), so the derived slot now holds our match mark (Rtg) and readings like xMins, plus the
+league's points where a head says whose.
 
 **Amber narrowed on 5 Sep 2026** (Craig), and the wording is the whole change:
 *a figure standing alone beside a name — a fact, a ledger line, a board's value —
@@ -928,8 +930,8 @@ business"*): its whole content is one man's handful of moves in four columns, so
 `components/league/SquadRow`'s points are the fourth (Craig, 6 Oct 2026: *"make fpts row bigger, harder to read"*),
 and the figure alone: `base`/`lg:text-lg` against a `ROW_NAME` that stays put. Every squad list a manager reads
 fifteen of carries one figure per man, and since the season grid came off a rival's squad (the same day) that list
-is the whole screen. The figure is the board's one value, so it is amber rather than the accent, which said
-"yours" on every rival's squad.
+is the whole screen. The figure is the board's one value, so it is the reading cyan (§3: FPts, Craig 21 Oct 2026), never the accent,
+which said "yours" on every rival's squad.
 
 `players/analysis`, Compare, is the fifth, recorded 8 Oct 2026 (#144) for a step it had taken since 24 Sep (#66)
 without saying so: its ledgers (`Figures`, `Measures`) are two men's figures either side of one label, a dozen rows

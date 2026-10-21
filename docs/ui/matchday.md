@@ -82,7 +82,7 @@ under it and nothing scrolls, and it docks on the rail only when a list runs pas
 
 - **Each list is a `matchday/LeaderBoard`**, Prem › Data's own until that page went (19 Oct 2026): the
   same head, places shared by men level on the figure printed, crest, name linking to his page,
-  amber for every figure, all of them recorded.
+  amber for every figure but FPts, which is the reading cyan, all of them recorded.
 - **Who holds him is the Data boards' `Holder`**: `(Yours)` in the accent, a rival's short name quiet,
   and nothing for a man on no roster: an owner prints only where there is one (16 Oct 2026, the review's
   "Henderson (FA)"). The name keeps whole and the bracket truncates.

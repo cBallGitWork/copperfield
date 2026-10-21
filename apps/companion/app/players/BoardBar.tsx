@@ -6,6 +6,7 @@ import BoardLink from "./BoardLink";
 import Search from "./Search";
 import type { PlayersQuery } from "./query";
 import type { BoardView } from "./views";
+import type { PoolColumn } from "./columns";
 import { LABEL } from "@/app/desk";
 import { Carried, clubOptions, Count, Figures, PRESSABLE, Positions } from "./BoardControls";
 import { LoneStatuses, Statuses, loneCount, splitsBin } from "./StatusChips";
@@ -30,7 +31,7 @@ export default function BoardBar({
   counted,
   rated,
   shown,
-  scored,
+  offered,
   glossary = null,
 }: {
   query: PlayersQuery;
@@ -45,8 +46,8 @@ export default function BoardBar({
   rated: boolean | null;
   /** How many rows the filters leave, for the sheet's way back to the board. */
   shown: number;
-  /** Every column the league's stat read carries, so the sort offers no count it does not score. */
-  scored: ReadonlySet<string>;
+  /** The columns Sort by offers (`offeredFor`): none the league does not score or the position chips hide. */
+  offered: readonly PoolColumn[];
   /** The board's key, beside Filter, where the board has one. */
   glossary?: React.ReactNode;
 }) {
@@ -128,7 +129,7 @@ export default function BoardBar({
                 name="sort"
                 label="Sort by"
                 value={activeSort(query, view).column.key}
-                options={sortOptions(view, scored, rated)}
+                options={sortOptions(view, offered, rated)}
                 action={route}
                 clears={["dir"]}
                 replace

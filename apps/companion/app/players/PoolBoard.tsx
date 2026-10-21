@@ -26,6 +26,7 @@ import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
 import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
 import ColumnKey from "./ColumnKey";
+import { offeredFor } from "./sortOptions";
 import { PRESSABLE, Plates } from "./BoardControls";
 import BoardLink from "./BoardLink";
 import { FootFrame } from "../components/shell/FootFrame";
@@ -157,7 +158,7 @@ export default async function PoolBoard({
         counted={counted}
         rated={rated}
         shown={shown.length}
-        scored={scored}
+        offered={offeredFor(view, scored, info?.scoring ?? null, chosen(query.pos), sorted)}
         glossary={<ColumnKey entries={heads} className={`${PRESSABLE} min-w-11`} />}
       />
 

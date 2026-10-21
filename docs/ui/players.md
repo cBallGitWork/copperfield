@@ -47,7 +47,8 @@ Where a section below disagrees with this one, this one is current.
   for one of them, so in the real league `GK` drops `DC DC+ DCP`, `DEF` drops `DC+ GKP PKS`, `MID` and `FWD` drop
   `DC GA GKP PKS`, and `FWD` drops `CS` (priced 0). Several chips draw the union; no chip draws every column, as
   before. `DCP` follows `DC` and `DC+`; a figure no category prices (FPts, FP/G, GP) is drawn under every chip, a price
-  that cannot be read keeps its column, and the sorted column stays. The Key lists what is drawn.
+  that cannot be read keeps its column, and the sorted column stays. The Key lists what is drawn, and **Sort by offers
+  the same** (`sortOptions.offeredFor`, Craig 21 Oct 2026): no column a chip hides, the sorted one kept.
 - **Players rests on the free men** (`boardChange.statusesShown`): an absent `status` is FA and WW, and `status=all`
   is everyone, the only way the address bar can say it now. A typed search ignores the resting choice and looks
   through everyone, so "who holds Saka" finds him, as Fantrax's does; a status the reader pressed still applies.
@@ -83,8 +84,8 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
 - **Plates, no `All`**: `Attack · Creating · Defence · Attributes` (`groups.POOL_GROUPS`), resting on Attack. Each
   plate orders the board by its own column and clears the reader's sort, so a plate always opens on its own order:
   Attack by `xG`, Creating by `xA`, Defence by `Tkl`, Attributes by `Acc`, its first rating.
-  `?group=all` and any group the board lacks land on Attack. Sort by in the sheet still reaches every column, and the
-  sorted column is drawn under any plate.
+  `?group=all` and any group the board lacks land on Attack. Sort by in the sheet still reaches every plate's columns (less any a
+  position chip hides), and the sorted column is drawn under any plate.
 - **Attack** `xG xGI Sh SoT BCM`; **Creating** `xA KP BCC Crs AC`, with `AT A AF` first in a league that carries them
   unscored; **Defence** `Tkl Int Blk Clr Rec AW xGC`, with `Sv` last where carried unscored (`seasonColumns.ts`).
   Five, five and seven figures at 390 in the real league, where `All` drew seven of seven at 390 before (counted off the
@@ -142,8 +143,8 @@ above does, that one is.
   (`Sh` to `AC` are the stats league's season, below; `Ros` and `+/-`, the share of every Fantrax league
   rostering him, went on 12 Oct 2026 under DESIGN §7). `DC` and `DC+`
   are the league's DefCon counts, Fantrax's `DFP` and `DFP3` (Craig, 6 Oct 2026: *"data page needs our dfp and dfp3
-  stats"*); `DCP` is our DefCon points beside them, in cyan and never marked, drawn only where the league prices DefCon
-  (Craig, 8 Oct 2026). **`FPts` prints in the same reading cyan and is never lit** (`PoolColumn.cyan`, Craig 21 Oct
+  stats"*); `DCP` is our DefCon points beside them, drawn only where the league prices DefCon (Craig, 8 Oct 2026), and
+  **lit like any figure** since 21 Oct 2026 (*"DCP yes lose it"*): it lost the cyan, which on Players is `FPts` alone. **`FPts` prints in the same reading cyan and is never lit** (`PoolColumn.cyan`, Craig 21 Oct
   2026, as on the Profile since #80): it was lit on 13 of 13 rows of his FREE board. It still sorts and sums as
   Fantrax's count; only its ink changed. Six figures sit
   beside a name at 390 (FPts to AT), five at 360, since the lead widened for the name on 1 Oct 2026 (it was
@@ -484,8 +485,10 @@ when there is not. A bare search that finds nobody says so and offers nothing, s
 
 **Show all is `?all=1` and only that** (16 Oct 2026, review N22): `?all=0` or any other value draws what `?rows=` asks, the first thirty
 without it; `?rows=` below thirty or not a whole number is the first thirty.
-**FP/G is a dash for a man with no game**: Fantrax prints `0.00` for him, which is no reading (124 of 543 rows, 16 Oct
-2026); a man who played prints his nought.
+**A man with no minutes dashes in every figure** (`figure.ts`, Craig 21 Oct 2026, *"yes dashes"*): `Min 0` or `GP 0`
+in the league's read is no reading at all, so FPts, FP/G and every count print `—` and sort after every reading either
+way; Compare's FPts and FP/G follow. A man who played prints his noughts. His ratings stay, being no season's reading.
+FP/G had dashed alone since 16 Oct 2026, when Fantrax's `0.00` padded 124 of 543 rows.
 
 **A picker.** With `?compare=` naming a first man the board's rows lead to the
 comparison instead of to a player, and a banner says so: a table whose rows have

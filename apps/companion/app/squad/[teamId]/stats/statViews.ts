@@ -1,4 +1,5 @@
 import { DEFCON, PLAYER_CATEGORIES, carries, type GroupKey, type PlayerStatLine } from "@epl/core";
+import { standoutInk, type StandoutCut } from "../../../components/league/standout";
 
 // The squad board's views and the columns in each: the league's categories off the served league's read, then the
 // counts beneath them that only the stats league carries. Pure, so heads, cells, key, cuts and sort read one list.
@@ -44,8 +45,6 @@ export type Measure = {
   read: (line: PlayerStatLine, beside: Beside) => number | null;
   /** A column whose top is the bad end, lit red rather than yellow and orange. */
   worse: boolean;
-  /** Ours rather than recorded, in the derived reading's ink. */
-  derived?: boolean;
 };
 
 /** A measure with what places it: its group, every name a read may file it under, and whose it is: a league's
@@ -82,7 +81,6 @@ const DEFCON_POINTS: Column = {
     head: "DCP",
     label: "DefCon points, worked out per match",
     worse: false,
-    derived: true,
     read: (_line, beside) => beside.defcon ?? null,
   },
 };
@@ -123,4 +121,10 @@ const SORTABLE = new Map(COLUMNS.map((each) => [each.measure.key, each.measure])
 /** One reading by column key: the sort's way in, and the same read the cell prints. */
 export function readingOf(line: PlayerStatLine, beside: Beside, key: string): number | null {
   return SORTABLE.get(key)?.read(line, beside) ?? null;
+}
+
+/** A cell's ink: a dash faint, a standout lit (red where the top is the bad end), the rest ink. Cyan is FPts' alone. */
+export function measureInk(measure: Measure, value: number | null, cut: StandoutCut | undefined): string {
+  if (value === null) return "text-faint";
+  return standoutInk(value, cut, measure.worse ? "low" : "high") || "text-ink";
 }
