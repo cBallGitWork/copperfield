@@ -1,4 +1,4 @@
-import type { Club, FootballPlayer, PlManMatch, PlTeamSheet, SquadPlayerDetail } from "@epl/core";
+import type { Club, PlManMatch, PlTeamSheet, SquadPlayerDetail } from "@epl/core";
 import { TILE_WIDTH } from "../../../components/league/PositionTile";
 import { clubIndex } from "../../../components/football/clubIndex";
 import { BOARD, PANEL, phoneShows } from "@/app/desk";
@@ -29,7 +29,7 @@ interface SheetProps {
 
 export default function TeamSheet({ match, sheets, phoneSide, league, reader, ...rest }: SheetProps) {
   const join = joinOf(match);
-  const shared = { join, byCode: match.byCode, holders: holdersOf(league, reader), ...rest };
+  const shared = { join, holders: holdersOf(league, reader), ...rest };
   // `min-w-0` down the chain, or a nowrap plate sets a floor that overflows 390.
   return (
     <SideBySide>
@@ -44,7 +44,6 @@ function Side({
   sheet,
   events,
   join,
-  byCode,
   holders,
   injured,
   cards,
@@ -53,7 +52,6 @@ function Side({
   club: Club | undefined;
   sheet: PlTeamSheet;
   join: Join;
-  byCode: ReadonlyMap<number, FootballPlayer>;
   holders: Holders;
   phonePicked: boolean;
 }) {
@@ -81,7 +79,6 @@ function Side({
             <SheetRow
               key={`${row.man.code ?? row.man.name}-${row.man.shirt ?? at}`}
               row={row}
-              player={forCode(byCode, row.man.code)}
               holders={holders}
               positions={fantraxPositions(holders.league, row.man.code)}
               join={join}

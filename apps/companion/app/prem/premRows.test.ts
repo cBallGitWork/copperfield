@@ -81,26 +81,6 @@ describe.each([
         minutes,
       }),
   ],
-  [
-    "a match's team sheet",
-    () => {
-      const sheet = {
-        lineup: MEN.map((player) => ({ code: player.code, name: player.name, position: "D", shirt: player.code, captain: false })),
-        substitutes: [],
-      } as unknown as PlTeamSheet;
-      const match = { home: CLUB, away: undefined, sheet: null, byCode } as unknown as Match;
-      return createElement(TeamSheet, {
-        match,
-        sheets: { home: sheet, away: { lineup: [], substitutes: [] } as unknown as PlTeamSheet },
-        events: new Map(),
-        injured: new Map(),
-        league,
-        cards: new Map(),
-        phoneSide: "home",
-        reader: "t1",
-      });
-    },
-  ],
   ["a club's squad", () => createElement(SquadTable, { players: MEN, league, reader: "t1", minutes: { gameweek: 8, byCode: minutes, asOf: "Thu" } })],
   [
     "a club's stats",
@@ -118,6 +98,40 @@ describe.each([
     const html = renderToStaticMarkup(draw());
     expect(html).toContain("cm-doubt-out");
     expect(html).toContain("cm-doubt-major");
+  });
+});
+
+describe("a match's team sheet, once played", () => {
+  // Craig's standing rule (docs/ui/match.md): today's injury flag has no business on a match already played.
+  const draw = () => {
+    const sheet = {
+      lineup: MEN.map((player) => ({ code: player.code, name: player.name, position: "D", shirt: player.code, captain: false })),
+      substitutes: [],
+    } as unknown as PlTeamSheet;
+    const match = { home: CLUB, away: undefined, sheet: null, byCode } as unknown as Match;
+    return createElement(TeamSheet, {
+      match,
+      sheets: { home: sheet, away: { lineup: [], substitutes: [] } as unknown as PlTeamSheet },
+      events: new Map(),
+      injured: new Map(),
+      league,
+      cards: new Map(),
+      phoneSide: "home",
+      reader: "t1",
+    });
+  };
+
+  it("draws no doubt mark or wash, but keeps the holder tag", () => {
+    const html = renderToStaticMarkup(draw());
+    expect(marks(html)).toBe(0);
+    expect(html).not.toContain("cm-doubt-");
+    expect(html).toContain(">(Yours)<");
+  });
+
+  it("prints no head strip, its widths on a colgroup", () => {
+    const html = renderToStaticMarkup(draw());
+    expect(html).not.toContain("<thead");
+    expect(html).toContain("<colgroup");
   });
 });
 
