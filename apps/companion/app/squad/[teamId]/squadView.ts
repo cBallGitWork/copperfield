@@ -1,7 +1,6 @@
 import {
   clubById,
   oppositionByClub,
-  periodLock,
   roundState,
   squadDetail,
   squadUnarranged,
@@ -58,11 +57,6 @@ export async function squadView(slug: string, gw: string | undefined) {
     mine && plannable(round, open) && display.show === "lineup" && squads.info !== null ? squads.info : null;
   const squadIds = new Set(team.players.map((p) => p.slot.fantraxId));
   const benchRanks = planning === null || open === null ? {} : await benchRanksOf(teamId, open.period);
-  // When the planned week's lineups lock, from the league's own calendar; null with no planner or no dated kickoff.
-  const locks =
-    planning === null || open === null
-      ? null
-      : periodLock(planning.rosterPeriods.find((p) => p.number === open.period), squads.kickoffs);
 
   // What each is eligible at, not his filed slot (they differ for 48 of 607): fifteen entries, as a record, since it
   // crosses to the browser.
@@ -118,7 +112,7 @@ export async function squadView(slug: string, gw: string | undefined) {
 
   // Every team by id and name, for the squad's team picker.
   const league = squads.period.teams.map(({ teamId, teamName }) => ({ teamId, teamName }));
-  return { team, league, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes };
+  return { team, league, mine, planning, open, standing, weeks, benchRanks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes };
 }
 
 /** The gameweek whose football is still to finish (in play, or not kicked off), or null once it is done; the lines

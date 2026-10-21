@@ -14,7 +14,6 @@ import SubMarker, { type SubMark } from "../football/SubMarker";
 import { underway } from "./underway";
 import AutoSubChip from "./AutoSubChip";
 import { autoSubLine, type AutoSubMark } from "./autoSubbed";
-import { HEADING_PLATE } from "@/app/desk";
 
 // A team on a scoring day: the eleven on the grass, the reserves under them, each tappable for his points.
 // One mode per instance: the head-to-head board owns the Pitch/List control for both sides.
@@ -29,7 +28,6 @@ export default function TeamSheet({
   widest: agreed,
   eligibility,
   inColumn = false,
-  bare = false,
   show,
   subs = {},
   autoSubs = {},
@@ -46,8 +44,6 @@ export default function TeamSheet({
   mode: "pitch" | "list";
   /** The pitch stands beside a list rather than alone — see `CmGround`. */
   inColumn?: boolean;
-  /** The caller has boxed this already, so the list draws no box of its own. */
-  bare?: boolean;
   /** What the line under each name carries — see `PitchMarker`. */
   show?: "points" | "fixture";
   /** Eligible positions by Fantrax id; a record, not a `Map`, because it crosses to the browser. */
@@ -116,35 +112,9 @@ export default function TeamSheet({
           </BenchStrip>
         </div>
       ) : (
-        // The eleven, then the bench: a withheld side never reaches here, so the list shows the arrangement too.
-        <div className="flex flex-col gap-2">
-          <SquadRows
-            lines={rows}
-            projected={false}
-            onOpen={setOpen}
-            eligibility={eligibility}
-            bare={bare}
-            notes={autoSubs}
-          />
-          {bench.length === 0 ? null : (
-            <>
-              {/* On a plate: nothing prints on the bare ground (DESIGN §2). */}
-              <p className={HEADING_PLATE}>Bench</p>
-              <SquadRows
-                // One unlabelled line: `SquadRows` prints a man's position on his row.
-                lines={[{ position: "", players: bench }]}
-                reserve
-                // No second header: the plate names the group and the columns are the eleven's.
-                head={false}
-                projected={false}
-                onOpen={setOpen}
-                eligibility={eligibility}
-                bare={bare}
-                notes={autoSubs}
-              />
-            </>
-          )}
-        </div>
+        // The eleven, then the bench under its plate in the same list; the caller frames it. A withheld side never
+        // reaches here, so the list shows the arrangement too.
+        <SquadRows lines={rows} bench={bench} figure="gameweek" onOpen={setOpen} eligibility={eligibility} notes={autoSubs} />
       )}
 
       {open ? (

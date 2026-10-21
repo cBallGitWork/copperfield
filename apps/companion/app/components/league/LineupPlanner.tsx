@@ -1,25 +1,24 @@
 "use client";
 
-import { type ReactNode, useState } from "react";
+import type { ReactNode } from "react";
 import type { LeaguePlayerState, RosterLimits, RosteredTeam, SquadPlayerDetail } from "@epl/core";
-import { londonDayAndTime } from "@epl/core";
 import LineupPitch from "./LineupPitch";
+import ListAndPitch from "./ListAndPitch";
+import type { View } from "./ViewToggle";
 import PlayerCard from "./PlayerCard";
 import Pending from "./Pending";
 import SquadRows from "./SquadRows";
-import ViewToggle, { type View } from "./ViewToggle";
 import PlanStatus from "./PlanStatus";
 import SaveBar from "./SaveBar";
 import LeaveGuard from "./LeaveGuard";
 import { useSave } from "./useSave";
 import { usePlanner } from "./usePlanner";
-import { PANEL, HEADING_PLATE } from "@/app/desk";
 import OutLink from "../shell/OutLink";
-import BothReadings from "./BothReadings";
 
 // Planning a lineup and saving it: the shape lives in browser state until Save sends it to Fantrax
 // (`squad/[teamId]/save.ts`); where saving is off, the link at the bottom hands the manager over.
-// Every rule is the commissioner's, from `getLeagueInfo` via `moves.ts`; no shape is assumed here.
+// Every rule is the commissioner's, from `getLeagueInfo` via `moves.ts`; no shape is assumed here. List and pitch are a
+// rival's sheet's (`ListAndPitch`, `SquadRows`), so your own list looks exactly like everyone else's.
 
 export default function LineupPlanner({
   team,
@@ -32,7 +31,7 @@ export default function LineupPlanner({
   benchRanks,
   canSave,
   picker,
-  locks,
+  opens = "pitch",
 }: {
   team: RosteredTeam;
   /** The squad's football detail, flat; arranged here, move by move. */
@@ -51,8 +50,8 @@ export default function LineupPlanner({
   canSave: boolean;
   /** The gameweek picker, beside the toggle; a tap away goes through `LeaveGuard` like any link. */
   picker: ReactNode;
-  /** When the planned week's lineups lock (ISO), or null when the league's calendar cannot date it. */
-  locks: string | null;
+  /** The view a phone opens on: the pitch, unless the page's `?view=` names the list. */
+  opens?: View;
 }) {
   const {
     rows,
@@ -75,86 +74,50 @@ export default function LineupPlanner({
     plan,
   } = usePlanner(team, details, players, limits, benchRanks);
   const { saving, answer, save, clear } = useSave(period, plan, markSaved);
-  const [view, setView] = useState<View>("pitch");
 
   return (
     <div className="flex flex-col gap-3">
-      {/* The Pitch/List toggle spans the page on a phone and keeps the 44px tap floor. */}
-      <div className="flex flex-col gap-2 px-1 text-2xs lg:flex-row lg:items-center lg:justify-end lg:gap-3">
-        {/* Above the strip on a phone and beside it on the desk, so a pending
-            figure never pushes the control off the fold. */}
-        <div className="flex items-center justify-between gap-2 lg:order-2 lg:flex-1">
-          {/* One box at the left, so the lock never centres: the week's lock on a plate, giving way to why a tap on
-              a dimmed card did nothing. The status is always in the page, so a screen reader hears it change. */}
-          <div className="min-w-0">
-            <p role="status" className={note === null ? undefined : "cm-panel px-2 py-0.5 text-ink"}>
-              {note}
-            </p>
-            {note === null && locks !== null ? (
-              <p className="cm-panel px-2 py-0.5 text-muted">
-                Locks <span className="numeric font-semibold text-ink">{londonDayAndTime(locks)}</span>
-              </p>
-            ) : null}
-          </div>
-          <Pending points={pending} />
-        </div>
-        {/* The toggle is phone only, as above `lg` list and pitch stand side by side. The week sits beside it
-            on a phone, so the grass loses no height to it; alone at the right above `lg`. */}
-        <div className="flex gap-2 lg:order-3">
-          <div className="flex flex-1 lg:hidden">
-            <ViewToggle view={view} onPick={setView} />
-          </div>
-          {picker}
-        </div>
-      </div>
+      {/* Why a tap on a dimmed card did nothing, on a plate while it says so; always in the page, so a screen reader
+          hears it change, and out of the flow while silent. */}
+      <p role="status" className={note === null ? "sr-only" : "cm-panel px-2 py-0.5 text-2xs text-ink"}>
+        {note}
+      </p>
 
-      {/* One panel round list and pitch, as on a rival's squad. */}
-      <section className={PANEL}>
-        <BothReadings
-          view={view}
-          list={
-            <div className="flex flex-col gap-2">
-              <SquadRows
-                lines={rows.map((line) => ({ position: line.label, players: line.players }))}
-                projected={false}
-                eligibility={eligibleBy}
-                onOpen={setCard}
-                doubted={doubts}
-              />
-              {bench.length === 0 ? null : (
-                <>
-                  {/* Nothing prints on the bare ground (DESIGN §2), so the heading draws its own plate. */}
-                  <p className={HEADING_PLATE}>Bench</p>
-                  <SquadRows
-                    lines={[{ position: "", players: bench }]}
-                    projected={false}
-                    eligibility={eligibleBy}
-                    head={false}
-                    reserve
-                    onOpen={setCard}
-                  />
-                </>
-              )}
-            </div>
-          }
-          pitch={
-            <LineupPitch
-              inColumn
-              rows={rows}
-              bench={bench}
-              pickStateOf={pickStateOf}
-              onPick={pick}
-              openings={openings}
-              onPlace={place}
-            />
-          }
-        />
-      </section>
+      <ListAndPitch
+        opens={opens}
+        beside={
+          <>
+            <Pending points={pending} />
+            {picker}
+          </>
+        }
+        list={
+          <SquadRows
+            lines={rows.map((line) => ({ position: line.label, players: line.players }))}
+            bench={bench}
+            eligibility={eligibleBy}
+            onOpen={setCard}
+            doubted={doubts}
+          />
+        }
+        pitch={
+          <LineupPitch
+            inColumn
+            rows={rows}
+            bench={bench}
+            pickStateOf={pickStateOf}
+            onPick={pick}
+            openings={openings}
+            onPlace={place}
+          />
+        }
+      />
 
       {card !== null ? (
         <PlayerCard
           key={card.rostered.slot.fantraxId}
           player={card}
+          eligible={eligibleBy[card.rostered.slot.fantraxId]}
           onClose={() => setCard(null)}
         />
       ) : null}

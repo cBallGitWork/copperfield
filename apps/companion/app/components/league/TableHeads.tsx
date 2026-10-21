@@ -51,7 +51,7 @@ export const PLATE = `cm-bevel ${FRAME} justify-center px-1.5`;
 const PRESSED_PLATE = `cm-bevel-pressed ${FRAME} justify-center gap-0.5 px-1.5`;
 
 /** `PLATE` over a name, its word at the start. */
-const PLATE_START = `cm-bevel ${FRAME} px-1.5`;
+export const PLATE_START = `cm-bevel ${FRAME} px-1.5`;
 
 /** A head the column does not need: the word leaves the strip but stays as the header (and a
  *  sortable head's link name) for a screen reader. The plate, sized by the `<th>`, keeps its place. */

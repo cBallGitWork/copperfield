@@ -1,13 +1,14 @@
 "use client";
 
 import { type ReactNode, useState } from "react";
-import { PANEL } from "@/app/desk";
+import { PANEL_FLUSH } from "@/app/desk";
 import { FOOT_DOCK } from "../shell/FootFrame";
 import BothReadings from "./BothReadings";
 import ViewToggle, { type View } from "./ViewToggle";
 
 /** A squad's list and pitch: both above `lg`, one at a time behind the toggle below it, `opens` first. Given `beside`,
- *  the toggle shares its row and one panel frames the two, as a squad's sheet sets them. Given `foot`, the toggle
+ *  the toggle shares its row and one flush panel frames the two: the list's spine meets its edge and the pitch keeps
+ *  its margin. Given `foot`, the toggle
  *  docks above the thumb rail instead and `beside` keeps the top row alone. */
 export default function ListAndPitch({
   opens,
@@ -27,8 +28,14 @@ export default function ListAndPitch({
   // Phone only — above `lg` both are drawn and the control is hidden.
   const [view, setView] = useState<View>(opens);
   const toggle = <ViewToggle view={view} onPick={setView} />;
-  const both = <BothReadings view={view} list={list} pitch={pitch} />;
-  const framed = beside === undefined ? both : <section className={PANEL}>{both}</section>;
+  const framed =
+    beside === undefined ? (
+      <BothReadings view={view} list={list} pitch={pitch} />
+    ) : (
+      <section className={PANEL_FLUSH}>
+        <BothReadings view={view} list={list} pitch={<div className="p-2">{pitch}</div>} />
+      </section>
+    );
 
   if (foot)
     return (

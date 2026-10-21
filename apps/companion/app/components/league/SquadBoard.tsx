@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { SquadDetailLine, SquadPlayerDetail, SquadReason } from "@epl/core";
 import PlayerCard from "./PlayerCard";
 import SquadRows from "./SquadRows";
+import { PANEL_FLUSH } from "@/app/desk";
 
 // A squad with no gameweek to report: all fifteen as a list, no pitch, since the gate withholds the shape.
 // It arrives joined on the server (`squadDetail`); the client boundary is here for the list and card's one selection.
@@ -25,6 +26,8 @@ export default function SquadBoard({
   eligibility?: Record<string, string[]>;
 }) {
   const [open, setOpen] = useState<SquadPlayerDetail | null>(null);
+  // The list's head and the card it opens print the same word.
+  const figure = projected ? "projected" : "season";
 
   return (
     <div className="flex flex-col gap-2">
@@ -34,7 +37,9 @@ export default function SquadBoard({
         </p>
       ) : null}
 
-      <SquadRows lines={lines} projected={projected} onOpen={setOpen} eligibility={eligibility} />
+      <section className={PANEL_FLUSH}>
+        <SquadRows lines={lines} figure={figure} onOpen={setOpen} eligibility={eligibility} />
+      </section>
 
       {open ? (
         <PlayerCard
@@ -42,7 +47,7 @@ export default function SquadBoard({
           key={open.rostered.slot.fantraxId}
           player={open}
           eligible={eligibility?.[open.rostered.slot.fantraxId]}
-          figure={projected ? "projected" : "season"}
+          figure={figure}
           onClose={() => setOpen(null)}
         />
       ) : null}

@@ -37,7 +37,8 @@ draws none.
    (Craig, 19 Oct 2026: the bare two lists had "no page template"). A side the lineup gate has opened, your
    own always, is its eleven then a plated Bench in Fantrax's bench order (`TeamSheet` as a list); a rival before
    his lock stays unarranged, alphabetical within a line, so nothing leaks who starts (`unplayedLists`; review N6,
-   16 Oct 2026: your GW7 preview was two 14-man lists).
+   16 Oct 2026: your GW7 preview was two 14-man lists). That list is the squad page's gate board (`SquadBoard`), so a
+   tap opens the player card as on every squad list (21 Oct 2026).
 2. **A four-plate blue tab strip** — `Line-ups · Stats · Fixtures · Table`, each a link
    (`?view=`, Line-ups the default; `views.ts`), so a refresh or a shared link keeps
    the tab. One word per label: the strip has to fit 390.
@@ -49,8 +50,8 @@ draws none.
 
    **The list went, and it was a whole tab** (Craig, 11 Sep 2026: *"pitch and
    list dont need to be two screens, come on, should just be Scores for that
-   view"*, then *"just pitch i think"*). `SquadRows` keeps its two remaining
-   callers on the squad and club boards.
+   view"*, then *"just pitch i think"*). `SquadRows` stays on the squad
+   page and on a tie's unplayed side.
 4. **Stats** — three sub-views switched from the **foot row** (`StatsViews`, a `TabStrip`,
    `?of=`): *side A · side B · Fantasy*, opening on Fantasy (Craig, 24 Sep 2026). **Docked at every width**: above
    the thumb rail on a phone, at the screen's foot on the desk, as `SaveBar` is: `FootFrame`'s `foot`. A phone's sat
