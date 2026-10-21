@@ -48,6 +48,24 @@ describe("the match log", () => {
     expect(column(html, "CS")).toEqual(["0", "1", "—"]);
   });
 
+  // N-1: seven noughts a row for a match he sat out read as a game he played and did nothing in.
+  it("dashes every figure but his minutes for a match he was not on for, and keeps a played man's noughts", () => {
+    const html = render([
+      row({ saves: 0, defensiveContribution: 0 }, { shots: 0 }),
+      row({ minutes: 0, saves: 0, defensiveContribution: 0, fixtureId: 61 }, { shots: 0 }),
+    ]);
+    expect(column(html, "Min")).toEqual(["90", "0"]);
+    for (const head of ["G", "A", "Sv", "xG", "xA", "DC", "Sh", "FC", "FS"]) expect(column(html, head)).toEqual([head.startsWith("x") ? "0.00" : "0", "—"]);
+    expect(column(html, "FPts")).toEqual(["2", "2"]);
+  });
+
+  it("stands down a column only matches he sat out would have filled", () => {
+    const html = render([row({ minutes: 0 }, {}), row({ minutes: 0, fixtureId: 61 }, {})]);
+    expect(column(html, "Min")).toEqual(["0", "0"]);
+    expect(column(html, "G")).toEqual([]);
+    expect(column(html, "xG")).toEqual([]);
+  });
+
   it("stands down a column no match of his measured, as Fantrax's keeper table has no shots", () => {
     const html = render([row({}, {}), row({ fixtureId: 61 }, {})]);
     expect(column(html, "Sh")).toEqual([]);

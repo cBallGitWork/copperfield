@@ -6,7 +6,7 @@ import { standoutCuts, standoutInk, type StandoutCut } from "../../components/le
 import Section from "../../components/shell/Section";
 import { matchHref } from "../../prem/match/[id]/matchRoutes";
 import { RATING_TITLE } from "../../ratings";
-import type { MatchRow } from "./matchRows";
+import { played, type MatchRow } from "./matchRows";
 
 // Every match of his season on the house board (Craig, 25 Sep 2026): his points first (Craig, 12 Oct 2026), then the
 // score, FPL's account, Fantrax's right of the rule, our mark last in the derived cyan.
@@ -25,12 +25,11 @@ interface Column {
 
 const POINTS: Column = { head: "FPts", title: "Points", of: (r) => r.paid?.points ?? null };
 
-const COLUMNS: readonly Column[] = [
-  { head: "Min", title: "Minutes played", of: (r) => r.fpl.match.minutes },
+/** A match he was not on for is no reading: every figure but his minutes dashes (zero is a stat only where he played). */
+const ON: readonly Column[] = [
   { head: "G", title: "Goals", of: (r) => r.fpl.match.goals },
   { head: "A", title: "Assists", of: (r) => r.fpl.match.assists },
-  // 1 or 0 where he played: a keeper who conceded has a reading (zero is a stat), a man not on has none.
-  { head: "CS", title: "Clean sheet", of: (r) => (r.fpl.match.minutes > 0 ? Number(r.fpl.match.cleanSheet) : null) },
+  { head: "CS", title: "Clean sheet", of: (r) => Number(r.fpl.match.cleanSheet) },
   { head: "Sv", title: "Saves", of: (r) => r.fpl.match.saves },
   { head: "xG", title: "Expected goals", of: (r) => r.fpl.match.expectedGoals, kind: "expected" },
   { head: "xA", title: "Expected assists", of: (r) => r.fpl.match.expectedAssists, kind: "expected" },
@@ -41,6 +40,11 @@ const COLUMNS: readonly Column[] = [
   { head: "FS", title: "Fouls suffered", of: (r) => r.paid?.foulsSuffered ?? null },
   { head: "Off", title: "Offsides", of: (r) => r.paid?.offsides ?? null },
   { head: "Rtg", title: RATING_TITLE, of: (r) => r.mark, kind: "rating", rule: true, derived: true },
+];
+
+const COLUMNS: readonly Column[] = [
+  { head: "Min", title: "Minutes played", of: (r) => r.fpl.match.minutes },
+  ...ON.map((column) => ({ ...column, of: (r: MatchRow) => (played(r) ? column.of(r) : null) })),
 ];
 
 /** A column's standouts over his matches: its best in orange, its top quarter in yellow. */
