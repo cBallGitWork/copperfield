@@ -124,9 +124,9 @@ function Side({
   );
 
   return (
-    // `pitch-match` budgets the grass so the used subs clear a phone's fold (Craig, 23 Sep 2026).
+    // `pitch-with-bench` fills a phone with the grass and the used subs; `pitch-match` is this page's chrome (`pitch.css`).
     <section
-      className={`${PANEL_FLUSH} pitch-match min-w-0 ${phoneShows(phonePicked)}`}
+      className={`${PANEL_FLUSH} pitch-with-bench pitch-match min-w-0 ${phoneShows(phonePicked)}`}
     >
       {/* No formation line over the grass: the shape is the picture (Craig, 23 Sep 2026: *"ditch the formation line to save space"*). */}
       <PitchRows

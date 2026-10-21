@@ -37,7 +37,7 @@ export const GROWS = "flex flex-col *:grow";
 export const BENCH_KIT = { "--pitch-card-scale": "var(--pitch-bench-kit)" } as CSSProperties;
 
 /** One line of a pitch card: a fixed band height, centred, truncating rather than wrapping.
- *  The height is load-bearing: `.pitch-figure` subtracts exactly `2 * --pitch-band` from a row's room. */
+ *  The height is load-bearing: `.pitch-figure` subtracts `--pitch-bands` of them (two by default) from a row's room. */
 export const PITCH_BAND =
   "flex h-[var(--pitch-band)] w-full items-center justify-center overflow-hidden px-0.5 text-center font-bold leading-none";
 

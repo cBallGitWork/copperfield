@@ -315,10 +315,13 @@ report keep `PANEL_FLUSH`.
 pitch view, use portraits"*; kits from 26 Sep to 1 Oct), a man with no photograph
 in his club's kit, the score
 under each name, and an amber `▼ 69′` on a man taken off. The men who came on
-stand in a strip under the grass with `▲ 69′`. `pitch-match`
-budgets the grass so the strip clears the nav at 390×844 (767 against 798 with the
-phone's control row, measured 23 Sep). The club switch docked at the foot on 20 Oct 2026 adds one 44px plate over the
-nav, so the phone's budget rose by that plate, 23rem to 25.75rem (`pitchBudget.test.ts` pins the sum). One `widest` across both pitches, so the halves are drawn to
+stand in a strip under the grass with `▲ 69′`. **Under a thumb the grass and the strip fill the screen** (Craig, 21 Oct
+2026: *"heads basically only show, looks weird, use space more"*): the sheet joined the head-to-head's
+`.pitch-with-bench`, and `.pitch-match` gives it this page's chrome, 18.75rem (the bar, the match tabs, the views strip,
+the docked club switch, `--page-foot` and four gaps; `pitchBudget.test.ts` sums it). The card draws one band and the
+strip no number line, so `--pitch-bands: 1` and `--pitch-strip-head: 0` stop reserving them, and a face stands at the
+portrait file's 110×140, narrowed rather than cropped when its line's height binds, so the chest shows, not just the
+head. The desk keeps its 19.5rem and two-band sums. One `widest` across both pitches, so the halves are drawn to
 one scale. No doubt colour on the plates: today's injury flag has no business on
 a match already played.
 

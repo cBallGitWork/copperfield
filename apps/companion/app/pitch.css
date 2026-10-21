@@ -63,6 +63,14 @@
     --pitch-page: 17.125rem;
   }
 
+  /* The match line-up: bar, tabs and views strip over the sheet, the docked club switch and `--page-foot` under it.
+     Its card draws one band, and its strip no number line (`MatchPitch`), so neither is reserved. */
+  .pitch-with-bench.pitch-match {
+    --pitch-page: 18.75rem;
+    --pitch-bands: 1;
+    --pitch-strip-head: 0rem;
+  }
+
   .pitch-with-bench .pitch {
     flex: 1 1 0;
     min-height: 0;
@@ -76,13 +84,14 @@
   }
 
   /* Each card's share of the sheet (`100cqh`), once its fixed parts are paid for: the grass's padding (`CmGround`),
-     the strip's border, padding and number line (`BenchStrip`), each card's two bands and 4px of gaps (`PitchMarker`),
-     and one band spare for a name plate on two lines. Read by `.pitch-figure` below. */
+     the strip's border, padding and number line (`BenchStrip`), each card's bands with a 1px gap each and its 2px top
+     (`PitchMarker`), and one band spare for a name plate on two lines. Read by `.pitch-figure` below. */
   .pitch-with-bench .pitch-figure {
     --pitch-share: calc(
       (
-          100cqh - 0.25rem - 7cqw - var(--pitch-benched, 0) * (1px + 0.875rem + 1rem) - var(--pitch-band) -
-            (var(--pitch-rows, 1) + var(--pitch-benched, 0)) * (2 * var(--pitch-band) + 4px)
+          100cqh - 0.25rem - 7cqw - var(--pitch-benched, 0) * (1px + 0.875rem + var(--pitch-strip-head, 1rem)) -
+            var(--pitch-band) -
+            (var(--pitch-rows, 1) + var(--pitch-benched, 0)) * (var(--pitch-bands, 2) * (var(--pitch-band) + 1px) + 2px)
         ) /
         (var(--pitch-kit, 1) * (var(--pitch-rows, 1) + var(--pitch-benched, 0) * var(--pitch-bench-kit)))
     );
@@ -109,12 +118,16 @@
   }
 }
 
-/* The match line-up: the bar, the tabs and the view row above the grass, the used subs and the phone's nav below.
-   A phone also docks the club switch (one 44px plate) over the nav, so its budget is 23rem plus that plate. */
+/* The match line-up's faces stand upright at the portrait file's shape (110x140), narrowed, not cropped, under the cap. */
 .pitch-match {
-  --pitch-page: 25.75rem;
+  --pitch-figure: 110 / 140;
 }
 
+.pitch-match .pitch-figure {
+  width: min(100%, var(--pitch-cap) * (var(--pitch-figure)));
+}
+
+/* On the desk: the bar, the tabs and the view row above the grass, the used subs and the foot row below. */
 @media (min-width: 64rem) {
   .pitch-match {
     --pitch-page: 19.5rem;
@@ -173,23 +186,23 @@
 .pitch-figure {
   aspect-ratio: var(--pitch-figure, 1.32);
   /* Named so `PlayerShirt` sizes the kit against it: the tighter of the screen's and the grass's ceilings, in one
-     `min` so they cannot change apart, floored at two bands, as a negative `max-height` deletes the picture.
-     `--pitch-card-scale` (the bench strip) shrinks the picture only; the name plate and fixture band keep theirs. */
+     `min` so they cannot change apart, floored at the card's bands (`--pitch-bands`, two unless a caller draws one), as
+     a negative `max-height` deletes the picture. `--pitch-card-scale` (the bench strip) shrinks the picture only. */
   --pitch-cap: calc(
     var(--pitch-kit, 1) * var(--pitch-card-scale, 1) *
       max(
-    calc(2 * var(--pitch-band)),
+    calc(var(--pitch-bands, 2) * var(--pitch-band)),
     min(
       var(
         --pitch-share,
         calc(
           (var(--pitch-screen) - var(--pitch-page) - (var(--pitch-rows, 1) - 1) * 1rem) /
-            var(--pitch-rows, 1) - 2 * var(--pitch-band)
+            var(--pitch-rows, 1) - var(--pitch-bands, 2) * var(--pitch-band)
         )
       ),
       calc(
         (100cqw / var(--pitch-ratio) - (var(--pitch-rows, 1) - 1) * 1rem) /
-          var(--pitch-rows, 1) - 2 * var(--pitch-band)
+          var(--pitch-rows, 1) - var(--pitch-bands, 2) * var(--pitch-band)
       )
     )
       )
