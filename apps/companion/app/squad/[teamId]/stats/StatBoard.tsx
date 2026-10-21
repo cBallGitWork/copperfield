@@ -11,7 +11,7 @@ import BoardKey from "../../../components/league/BoardKey";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import FitnessMark from "../../../components/football/FitnessMark";
-import { doubtRow } from "../../../components/football/doubtRow";
+import { fitnessOf } from "../../../components/football/doubtRow";
 import { byFigure } from "../../../components/league/order";
 import { SIDE_SHARES, standoutCuts, unlessSorted } from "../../../components/league/standout";
 import { MINOR_LABEL, PANEL_FLUSH } from "@/app/desk";
@@ -76,7 +76,12 @@ export default function StatBoard({
     setSort((current) =>
       current?.key === key ? { key, descending: !current.descending } : { key, descending: true },
     );
-  const wash = (line: PlayerStatLine) => doubtRow(footballers[line.fantraxId] ?? null);
+  // Each man's fitness asked once, for his wash and his mark.
+  const fitness = useMemo(
+    () => new Map(lines.map((line) => [line.fantraxId, fitnessOf(footballers[line.fantraxId] ?? null)])),
+    [lines, footballers],
+  );
+  const wash = (line: PlayerStatLine) => fitness.get(line.fantraxId)?.wash ?? "";
 
   return (
     <section className={PANEL_FLUSH}>
@@ -112,7 +117,7 @@ export default function StatBoard({
                 <LeadFace
                   crest={line.clubShort ? crestForShortName(toFplClubCode(line.clubShort)) : null}
                   name={names[line.fantraxId] ?? line.name}
-                  after={<FitnessMark player={footballers[line.fantraxId] ?? null} />}
+                  after={<FitnessMark mark={fitness.get(line.fantraxId)?.mark ?? null} />}
                 />
               </Link>
             ),

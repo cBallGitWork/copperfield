@@ -10,7 +10,7 @@ import { figureOf, paidIn, sideRows, type Breakdowns, type Counts } from "./side
 import { DEFAULT_SIDE_SORT } from "./views";
 import Absent from "@/app/components/shell/Absent";
 import { fitnessOf } from "../../../components/football/doubtRow";
-import StateMark from "../../../components/football/StateMark";
+import FitnessMark from "../../../components/football/FitnessMark";
 
 // One manager's fifteen in the match page's club board (`prem/match/[id]/ClubStats`): his colours on the
 // position tiles, each man's club crest and CM's mark, Fantrax's points in cyan, then what he did in each category.
@@ -70,7 +70,7 @@ export default function SideStats({
                 <LeadFace
                   crest={player.club ? crestUrl(player.club) : null}
                   name={fullPlayerName(player.rostered)}
-                  after={fitness.mark === null ? null : <StateMark availability={fitness.mark} />}
+                  after={<FitnessMark mark={fitness.mark} />}
                 />
               </MaybeCard>
             ),

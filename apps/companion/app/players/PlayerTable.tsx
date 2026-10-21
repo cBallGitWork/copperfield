@@ -7,7 +7,7 @@ import type { PlayersQuery } from "./query";
 import type { BoardView } from "./views";
 import Board from "../components/league/Board";
 import { figureCell, Lead } from "./Cell";
-import { doubtRow } from "../components/football/doubtRow";
+import { fitnessOf } from "../components/football/doubtRow";
 
 // The pool as one sortable board: every column, phone-first, each sort a link so the server orders and the URL keeps it.
 // Under a thumb each man is two lines, his name held still over figures that scroll sideways with the head (Fantrax's
@@ -43,8 +43,12 @@ export default function PlayerTable({
   footballers: ReadonlyMap<number, FootballPlayer>;
 }) {
   const current = activeSort(query, view);
-  const footballer = (row: PoolRow) => (row.fplCode === null ? null : (footballers.get(row.fplCode) ?? null));
-  const wash = (row: PoolRow) => doubtRow(footballer(row));
+  // Each row's fitness asked once, for its wash and its mark.
+  const fitness = new Map(
+    rows.map((row) => [row, fitnessOf(row.fplCode === null ? null : (footballers.get(row.fplCode) ?? null))]),
+  );
+  const wash = (row: PoolRow) => fitness.get(row)?.wash ?? "";
+  const mark = (row: PoolRow) => fitness.get(row)?.mark ?? null;
   return (
     <Board
       compact
@@ -56,8 +60,8 @@ export default function PlayerTable({
         name: {
           label: "Player",
           className: wash,
-          of: (row) => <Lead row={row} query={query} teamNames={teamNames} reader={reader} footballer={footballer(row)} />,
-          line: (row) => <Lead row={row} query={query} teamNames={teamNames} reader={reader} footballer={footballer(row)} line />,
+          of: (row) => <Lead row={row} query={query} teamNames={teamNames} reader={reader} mark={mark(row)} />,
+          line: (row) => <Lead row={row} query={query} teamNames={teamNames} reader={reader} mark={mark(row)} line />,
         },
       }}
       order={{ key: current.column.key, descending: current.descending, href: (key) => sortHref(query, key, view) }}

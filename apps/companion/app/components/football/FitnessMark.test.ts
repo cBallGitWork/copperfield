@@ -14,6 +14,12 @@ describe("FitnessMark", () => {
     expect(html).not.toContain("cm-state");
   });
 
+  it("draws the mark a row's own fitnessOf already gave, without a footballer", () => {
+    const html = renderToStaticMarkup(createElement(FitnessMark, { mark: { state: "suspended", chance: 0, news: "Ban", out: true, label: "SUS" } as never }));
+    expect(html).toContain("<rect");
+    expect(renderToStaticMarkup(createElement(FitnessMark, { mark: null, player: man("i", 0) }))).toBe("");
+  });
+
   it("is silent for a fit man and one the bridge has not settled", () => {
     expect(renderToStaticMarkup(createElement(FitnessMark, { player: man("a", 100, "") }))).toBe("");
     expect(renderToStaticMarkup(createElement(FitnessMark, { player: null }))).toBe("");
