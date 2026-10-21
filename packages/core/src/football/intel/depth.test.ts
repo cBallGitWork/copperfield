@@ -46,7 +46,7 @@ describe("depthLines", () => {
     expect(codes(lines[2])).toEqual([[6], [8]]);
   });
 
-  it("sends the full-backs up in a back three, and the wingers up beside a lone striker", () => {
+  it("sends the full-backs up as wing-backs in a back three, and the wingers up beside a lone striker", () => {
     const lines = depthLines(
       club([slot("GK", 1, [1]), slot("LCB", 1, [2]), slot("CCB", 1, [3]), slot("RCB", 1, [4]), slot("LB", 1, [5]), slot("RB", 1, [6]),
         slot("CM", 2, [7, 8]), slot("LW", 1, [9]), slot("ST", 1, [10]), slot("RW", 1, [11])]),
@@ -54,7 +54,7 @@ describe("depthLines", () => {
     expect(lines.map((line) => line.map((spot) => spot.slot))).toEqual([
       ["GK"],
       ["RCB", "CCB", "LCB"],
-      ["RB", "CM", "CM", "LB"],
+      ["RWB", "CM", "CM", "LWB"],
       ["RW", "ST", "LW"],
     ]);
   });
