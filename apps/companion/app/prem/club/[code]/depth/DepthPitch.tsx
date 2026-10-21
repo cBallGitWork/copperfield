@@ -1,12 +1,12 @@
 import { DASH, pitchName, type DepthSpot, type FootballPlayer, type SquadPlayerDetail } from "@epl/core";
 import PitchRows from "../../../../components/league/PitchRows";
 import { doubtRow } from "../../../../components/football/doubtRow";
-import FitnessMark from "../../../../components/football/FitnessMark";
 import { MaybeCard } from "../../../../components/league/PlayerCardButton";
 import XMins, { type WeekMinutes } from "./XMins";
 
 // The depth chart on CM's pitch (Craig, 25 Sep 2026): each place a plate with its shirt on top and
-// the men in line under it, first choice loudest, a doubt's name washed in the doubt ramp and marked by why.
+// the men in line under it, first choice loudest, a doubt's name washed in the doubt ramp: the pitch carries the colour
+// alone, no mark (DESIGN §3; Craig, 1 Oct 2026).
 
 /** A spot and its place in its line: a shared shirt deals two spots of one `slot`. */
 interface Placed {
@@ -75,7 +75,6 @@ function Plate({
           >
             {/* The name gives way so the figure keeps its line and the plate its height (DESIGN §9). */}
             <span className={`min-w-0 flex-1 truncate ${minutes === null ? "text-center" : "text-left"}`}>{pitchName(player)}</span>
-            <FitnessMark player={player} />
             {minutes === null ? null : <XMins code={player.code} minutes={minutes} />}
           </span>
         ))

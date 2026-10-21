@@ -9,7 +9,7 @@ import DepthPitch from "./DepthPitch";
 import BothReadings from "../../../../components/league/BothReadings";
 import PitchListStrip, { pitchListOf } from "../PitchList";
 import { clubHref } from "../../../routes";
-import { PANEL, PITCH_CAPTION } from "@/app/desk";
+import { PANEL_FLUSH, PITCH_CAPTION } from "@/app/desk";
 import { clubTitle } from "../title";
 import { weekMinutes } from "../../../../xmins";
 
@@ -53,7 +53,7 @@ export default async function DepthPage({
       {empty ? (
         <TabEmpty>There is no pecking order for {club.name} yet.</TabEmpty>
       ) : (
-        <section className={PANEL}>
+        <section className={PANEL_FLUSH}>
           {/* Not "Depth chart", American football's term, nor "Likely XI": nobody here forecasts who starts. */}
           <p className={`cm-title ${PITCH_CAPTION}`}>
             Pecking order · {chart.formation}{" "}

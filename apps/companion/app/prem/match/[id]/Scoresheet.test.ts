@@ -15,7 +15,7 @@ describe("the scoresheet", () => {
     const goals = [{} as PlGoal];
     const sheet = Scoresheet({
       home: goals, away: [], homeElse: [], awayElse: [],
-      owners: new Map(), byCode: new Map(), did: new Map(), injured: new Map(), cards: new Map(),
+      holders: { league: new Map(), teamNames: new Map(), reader: null }, byCode: new Map(), did: new Map(), injured: new Map(), cards: new Map(),
     });
     expect(repeatedKeys(sheet)).toEqual([]);
   });
@@ -28,7 +28,7 @@ describe("the scoresheet", () => {
     const man = { offAt: 90, added: { offAt: 2 } } as PlManMatch;
     const sheet = Scoresheet({
       home: [], away: [], homeElse: [{ player, line }], awayElse: [],
-      owners: new Map(), byCode: new Map(), did: new Map([[9, man]]), injured: new Map([[9, 90]]), cards: new Map(),
+      holders: { league: new Map(), teamNames: new Map(), reader: null }, byCode: new Map(), did: new Map([[9, man]]), injured: new Map([[9, 90]]), cards: new Map(),
     });
     renderToStaticMarkup(sheet);
     expect(figures).toEqual(["90+2'"]);

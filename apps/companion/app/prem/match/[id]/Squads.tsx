@@ -7,7 +7,7 @@ import { clubIndex } from "../../../components/football/clubIndex";
 import { doubtRow } from "../../../components/football/doubtRow";
 import { minutesInk } from "../../../components/football/xminsInk";
 import { intelSquads } from "../../../intel";
-import { NAME_SLACK, PANEL, PLATE_FRAME, QUIET_FIGURE, phoneShows, SMALL_CAPS } from "@/app/desk";
+import { NAME_SLACK, PANEL_FLUSH, PLATE_FRAME, QUIET_FIGURE, phoneShows, SMALL_CAPS } from "@/app/desk";
 import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
 import { holdersOf, type Holders } from "../../holders";
 import LeagueHolder from "../../LeagueHolder";
@@ -79,7 +79,7 @@ function Side({
           .sort((a, b) => depth(a) - depth(b) || a.name.localeCompare(b.name));
 
   return (
-    <section className={`${PANEL} cm-index-scoped min-w-0 ${phoneShows(phonePicked)}`} style={clubIndex(club)}>
+    <section className={`${PANEL_FLUSH} cm-index-scoped min-w-0 ${phoneShows(phonePicked)}`} style={clubIndex(club)}>
       {/* Names each book of two on a desk; under a thumb the lit club plate already does, so it is read, not drawn. */}
       <h2
         className={`${PLATE_FRAME} px-1.5 max-lg:sr-only ${SMALL_CAPS}`}

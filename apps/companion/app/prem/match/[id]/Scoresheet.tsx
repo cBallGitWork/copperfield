@@ -1,5 +1,6 @@
 import { fullFootballerName, goalGroups } from "@epl/core";
-import type { FootballPlayer, PlGoal, PlManMatch, PlayerOwner, SheetRow, SquadPlayerDetail } from "@epl/core";
+import type { FootballPlayer, PlGoal, PlManMatch, SheetRow, SquadPlayerDetail } from "@epl/core";
+import type { Holders } from "../../holders";
 import { Goal, Man } from "./ScoreRows";
 import { forCode } from "./sheetJoin";
 import { minuteMark } from "./minuteMark";
@@ -13,7 +14,7 @@ export default function Scoresheet({
   away,
   homeElse,
   awayElse,
-  owners,
+  holders,
   byCode,
   did,
   injured,
@@ -25,7 +26,8 @@ export default function Scoresheet({
   /** Men named for something that is not a goal — a sending off, a penalty missed, a man carried off. */
   homeElse: readonly SheetRow[];
   awayElse: readonly SheetRow[];
-  owners: Map<number, PlayerOwner>;
+  /** Who holds each man, for the tag after his name. */
+  holders: Holders;
   byCode: Map<number, FootballPlayer>;
   /** The Premier League's events per man, for the minute of a sending off FPL's line does not carry. */
   did: Map<number, PlManMatch>;
@@ -44,8 +46,8 @@ export default function Scoresheet({
 
   return (
     <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-      <SheetSide goals={home} rest={homeElse} owners={owners} byCode={byCode} did={did} injured={injured} cards={cards} />
-      <SheetSide goals={away} rest={awayElse} owners={owners} byCode={byCode} did={did} injured={injured} cards={cards} />
+      <SheetSide goals={home} rest={homeElse} holders={holders} byCode={byCode} did={did} injured={injured} cards={cards} />
+      <SheetSide goals={away} rest={awayElse} holders={holders} byCode={byCode} did={did} injured={injured} cards={cards} />
     </div>
   );
 }
@@ -54,7 +56,7 @@ export default function Scoresheet({
 function SheetSide({
   goals,
   rest,
-  owners,
+  holders,
   byCode,
   did,
   injured,
@@ -62,7 +64,7 @@ function SheetSide({
 }: {
   goals: readonly PlGoal[];
   rest: readonly SheetRow[];
-  owners: Map<number, PlayerOwner>;
+  holders: Holders;
   byCode: Map<number, FootballPlayer>;
   did: Map<number, PlManMatch>;
   injured: ReadonlyMap<number, number>;
@@ -75,7 +77,7 @@ function SheetSide({
           // The index too: two goals nobody can place, in one minute, are two rows.
           key={`${group.scorer ?? "?"}-${group.own}-${group.minutes[0]}-${at}`}
           group={group}
-          owners={owners}
+          holders={holders}
           byCode={byCode}
           cards={cards}
         />
@@ -95,7 +97,7 @@ function SheetSide({
               card={forCode(cards, player.code)}
               name={player.name}
               short={fullFootballerName(player)}
-              owners={owners}
+              holders={holders}
               // The fixture feed's off minute carries its added time; the commentary's fallback does not.
               figure={marks(line, man, hurtAt, man?.offAt == null ? undefined : man.added?.offAt)}
               glyph={line.redCards > 0 ? "card" : hurtAt === undefined ? null : "cross"}

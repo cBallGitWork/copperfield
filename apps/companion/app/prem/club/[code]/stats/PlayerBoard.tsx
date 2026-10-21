@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import NameLink from "../NameLink";
 import { DASH, fullFootballerName, type FootballPlayer } from "@epl/core";
 import { viewOf, reading } from "./measures";
-import { PANEL } from "@/app/desk";
+import { PANEL_FLUSH } from "@/app/desk";
 import Board from "../../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../../components/league/LeadFace";
 import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted } from "../../../../components/league/standout";
@@ -67,7 +67,7 @@ export default function PlayerBoard({ rows, view }: { rows: readonly Row[]; view
     );
 
   return (
-    <section className={PANEL}>
+    <section className={PANEL_FLUSH}>
       <Board
         caption={`Every player's ${shown.label.toLowerCase()} figures`}
         rows={ordered}

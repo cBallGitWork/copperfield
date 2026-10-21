@@ -16,7 +16,7 @@ import { TABLE } from "../../PremNav";
 import { clubHref } from "../../routes";
 import { intelSquads } from "../../../intel";
 import { predictedElevens } from "../../../predictedXi";
-import { PANEL } from "@/app/desk";
+import { PANEL_FLUSH } from "@/app/desk";
 import { clubOr404, nextAndCards } from "./club";
 import { clubPlaces } from "../../places";
 import { leagueOpinions } from "../../leagueOpinions";
@@ -76,7 +76,7 @@ export default async function ClubSquadPage({
 
   return (
     <ClubShell club={club} current="squad" foot={picks ? <PitchListStrip href={clubHref(club.code)} view={view} /> : undefined}>
-      <section className={PANEL}>
+      <section className={PANEL_FLUSH}>
         {squad.length === 0 ? (
           <TabEmpty>No squad listed.</TabEmpty>
         ) : (

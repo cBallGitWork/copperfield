@@ -12,7 +12,7 @@ import TakerName from "./TakerName";
 import { teamNamesOf } from "../../../holders";
 import ClubShell from "../Shell";
 import { clubOr404, nextAndCards } from "../club";
-import { INDEX_BLOCK, INDEX_WIDTH, PANEL } from "@/app/desk";
+import { INDEX_BLOCK, INDEX_WIDTH, PANEL_FLUSH } from "@/app/desk";
 import { clubTitle } from "../title";
 
 // Who steps up: corners, free kicks and penalties, in the order they take them.
@@ -47,7 +47,7 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
       {orders.length === 0 ? (
         <TabEmpty>Nobody at {club.name} has been ranked for a set piece yet.</TabEmpty>
       ) : (
-        <section className={PANEL}>
+        <section className={PANEL_FLUSH}>
           {orders.map((order) => (
             <Section key={order.piece} title={order.label}>
               <ul className="cm-rows flex flex-col">

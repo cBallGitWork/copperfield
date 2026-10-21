@@ -1,8 +1,7 @@
 import { createElement, Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { Club, DepthSpot, FootballPlayer, PlTeamSheet } from "@epl/core";
-import type { LeagueOpinion } from "./leagueOpinions";
+import type { DepthSpot, PlTeamSheet } from "@epl/core";
 import Squads from "./match/[id]/Squads";
 import TeamSheet from "./match/[id]/TeamSheet";
 import type { Match } from "./match/[id]/match";
@@ -10,9 +9,7 @@ import SquadTable from "./club/[code]/SquadTable";
 import DepthList from "./club/[code]/depth/DepthList";
 import DepthPitch from "./club/[code]/depth/DepthPitch";
 import PlayerBoard from "./club/[code]/stats/PlayerBoard";
-import TakerName from "./club/[code]/set-pieces/TakerName";
-import FitnessMark from "../components/football/FitnessMark";
-import { clubCards } from "./premCards";
+import { CLUB, MEN, UNFIT, byCode, cards, league, marks, minutes } from "./premRows.fixture";
 
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Absent", () => import("../components/shell/Absent"));
@@ -23,52 +20,6 @@ vi.mock("../components/league/ScrollBoard", () => ({
 }));
 
 // Every Prem player row carries the Draft row's parts (UI audit D-3, D-7): each unfit man's StateMark and wash.
-
-const CLUB = { id: 1, code: 3, name: "Arsenal", shortName: "ARS" } as unknown as Club;
-const season = new Proxy({ minutes: 900 } as Record<string, number>, { get: (t, k: string) => t[k] ?? 0 });
-const man = (code: number, name: string, status: string, chanceOfPlaying: number | null, news: string) =>
-  ({
-    id: code,
-    code,
-    clubId: 1,
-    name,
-    fullName: name,
-    firstName: "",
-    secondName: name,
-    status,
-    news,
-    chanceOfPlaying,
-    season,
-  }) as unknown as FootballPlayer;
-
-// Saliba out at 0%, a major doubt, a ban, and two fit men.
-const MEN = [
-  man(1, "Saliba", "i", 0, "Hamstring injury - Expected back 1 Nov"),
-  man(2, "Saka", "d", 25, "Knock - 25% chance of playing"),
-  man(3, "Rice", "s", 0, "Suspended until 25 Oct"),
-  man(4, "Raya", "a", 100, ""),
-  man(5, "Ødegaard", "a", null, ""),
-];
-const UNFIT = 3;
-const byCode = new Map(MEN.map((player) => [player.code, player]));
-const opinion = (ownerTeamId: string | null, owner: string | null, status: string): LeagueOpinion => ({
-  fantraxId: "x",
-  positions: ["D"],
-  status,
-  ownerTeamId,
-  owner,
-});
-const league = new Map<number, LeagueOpinion>([
-  [1, opinion("t1", "Bannan", "T")],
-  [2, opinion(null, null, "FA")],
-  [3, opinion("t2", "Rival", "T")],
-]);
-const minutes = new Map<number, number | null>([[1, 0], [2, 49], [3, 0], [4, 90], [5, 80]]);
-// Cards for the three men our league lists; Raya and Ødegaard have none and print plain.
-const cards = clubCards(MEN, league, { club: CLUB, next: undefined, minutes: () => [] });
-const buttons = (html: string) => html.match(/<button type="button"/g)?.length ?? 0;
-
-const marks = (html: string) => html.match(/<svg role="img"/g)?.length ?? 0;
 
 describe.each([
   [
@@ -153,6 +104,13 @@ describe("the depth chart", () => {
     expect(marks(draw(DepthList))).toBe(UNFIT);
   });
 
+  // DESIGN §3: the pitch carries the colour alone (Craig, 1 Oct 2026: "pitch view, remove the chip").
+  it("washes a doubt on the pitch but draws no mark there", () => {
+    const html = draw(DepthPitch);
+    expect(marks(html)).toBe(0);
+    expect(html).toContain("cm-doubt-out");
+  });
+
   it.each([
     ["list", DepthList],
     ["pitch", DepthPitch],
@@ -160,75 +118,5 @@ describe("the depth chart", () => {
     const html = draw(view);
     expect(html).toMatch(/text-bad"[^>]*>0</);
     expect(html).toMatch(/text-info"[^>]*>90</);
-  });
-});
-
-describe("holder tags in place of the owner's name", () => {
-  it("prints the Holder tag after the name on a match's squads, a free man loud", () => {
-    const html = renderToStaticMarkup(
-      createElement(Squads, { home: CLUB, away: undefined, players: MEN, league, cards: new Map(), phoneSide: "home", reader: "t1", minutes: null }),
-    );
-    expect(html).toContain(">(Yours)<");
-    expect(html).toMatch(/font-bold text-ink[^"]*"[^>]*>\(FA\)</);
-  });
-
-  it("drops the club squad's Owner column for the tag after the name", () => {
-    const html = renderToStaticMarkup(createElement(SquadTable, { players: MEN, league, reader: null, cards, minutes: null }));
-    expect(html).not.toContain(">Owner<");
-    expect(html).toContain(">(FA)<");
-    expect(html).not.toMatch(/>T</);
-  });
-});
-
-describe("a set-piece taker", () => {
-  it("carries his mark straight after his name, before the holder tag", () => {
-    const html = renderToStaticMarkup(
-      createElement(
-        TakerName,
-        {
-          card: cards.get(1),
-          held: league.get(1),
-          teamNames: new Map([["t1", "Bannan"]]),
-          reader: null,
-          mark: createElement(FitnessMark, { player: MEN[0] ?? null }),
-        } as unknown as Parameters<typeof TakerName>[0],
-        "W. Saliba",
-      ),
-    );
-    expect(html.indexOf("W. Saliba")).toBeLessThan(html.indexOf('<svg role="img"'));
-    expect(html.indexOf('<svg role="img"')).toBeLessThan(html.indexOf("(Ban"));
-  });
-});
-
-describe("a club's taps open the one player card", () => {
-  // The audit's Lane 3: club squad, depth and set pieces open the card the match screens and every squad open.
-  const lines: DepthSpot[][] = [MEN.map((player, at) => ({ slot: `S${at}`, label: "Slot", holders: [{ code: player.code, share: 1 }] }))];
-  const depth = (view: typeof DepthList | typeof DepthPitch) =>
-    renderToStaticMarkup(createElement(view, { lines, playerOf: (code: number) => byCode.get(code) ?? null, cardOf: (code: number) => cards.get(code), minutes: null }));
-
-  it("gives each man our league lists a card button, and the rest a plain name", () => {
-    expect(buttons(renderToStaticMarkup(createElement(SquadTable, { players: MEN, league, reader: null, cards, minutes: null })))).toBe(cards.size);
-    expect(buttons(depth(DepthList))).toBe(cards.size);
-    expect(buttons(depth(DepthPitch))).toBe(cards.size);
-  });
-
-  it("links to no profile page in place of the card", () => {
-    expect(depth(DepthList)).not.toContain("<a ");
-  });
-
-  it("builds a card with our league's position for each listed man only", () => {
-    expect([...cards.keys()]).toEqual([1, 2, 3]);
-    expect(cards.get(1)?.rostered.slot.position).toBe("D");
-  });
-});
-
-describe("a club's stats lead", () => {
-  // D-14: the tile at both widths, as the squad and the squad Stats board lead, not a label under the name on a phone.
-  it("shows the position tile under a thumb too", () => {
-    const html = renderToStaticMarkup(
-      createElement(PlayerBoard, { rows: MEN.map((player) => ({ player, positions: ["D"], href: null })), view: "attack" }),
-    );
-    expect(html).not.toContain("hidden lg:table-cell");
-    expect(html).not.toMatch(/class="[^"]*lg:hidden[^"]*"><span[^>]*>DEF</);
   });
 });
