@@ -39,6 +39,7 @@ const words = (name: string, key = name, head?: string) => ({ name, key, head })
 const WORDS: ReadonlyMap<FantraxCategory, ReturnType<typeof words>> = new Map([
   [MINUTES, words("Minutes", "Minutes played")],
   [GOALS, words("Goals")],
+  // Headed AT, never A: a squad's Stats board draws it beside the stats league's official A.
   [ASSISTS_TOTAL, words("Assists", "Assists, official and extra")],
   [ASSISTS_OFFICIAL, words("Assists", "Official assists")],
   [ASSISTS_FANTASY, words("Extra assists", "Extra assists: rebounds, penalties won, own goals forced")],

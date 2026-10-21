@@ -57,8 +57,13 @@ describe("the columns", () => {
     // Each group in one run, so its plate spans it; five did not fit one line at 320 in WebKit.
     const runs = TEAM_COLUMNS.map((column) => column.group).filter((group, at, all) => group !== all[at - 1]);
     expect(runs).toEqual(TEAM_GROUPS.map((group) => group.key));
-    expect(TEAM_GROUPS.map((group) => group.label)).toEqual(["Attack", "Chances", "Defence", "Discipline"]);
-    expect(TEAM_COLUMNS.filter((column) => column.group === "discipline").map((column) => column.head)).toEqual(["ErS", "ErG", "Fls", "YC", "RC"]);
+    expect(TEAM_GROUPS.map((group) => group.label)).toEqual(["Attack", "Creating", "Defence", "Discipline"]);
+    expect(TEAM_COLUMNS.filter((column) => column.group === "discipline").map((column) => column.head)).toEqual(["ErS", "ErG", "FC", "YC", "RC"]);
+  });
+
+  it("names its heads as Adv Stats and the match log do: Key passes, FC", () => {
+    expect(TEAM_COLUMNS.find((column) => column.key === "kp")?.title).toMatch(/^Key passes: /);
+    expect(TEAM_COLUMNS.map((column) => column.head)).not.toContain("Fls");
   });
 
   it("light the bad end red where more is worse", () => {
@@ -96,7 +101,7 @@ describe("teamsView", () => {
     expect([view.group.key, view.sort.key, view.descending]).toEqual(["defence", "gc", false]);
   });
 
-  it("leads each plate with its named column: G, xA, GA, Fls", () => {
+  it("leads each plate with its named column: G, xA, GA, FC", () => {
     const leads = TEAM_GROUPS.map((group) => teamsView({ group: group.key }).sort.key);
     expect(leads).toEqual(["g", "xa", "gc", "fls"]);
     const discipline = teamsView({ group: "discipline" });
