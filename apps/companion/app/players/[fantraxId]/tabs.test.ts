@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { playerTabs } from "./tabs";
 
 // Profile says who he is and Data carries his figures (Craig, 11 Oct 2026): each block draws on one tab, never both.
 
@@ -28,5 +29,21 @@ describe("the player's Profile and Data tabs", () => {
       expect(data.has(block), block).toBe(true);
       expect(profile.has(block), block).toBe(false);
     }
+  });
+});
+
+describe("the player's tab strip", () => {
+  it("ends on Compare, opened with him as A and the rival as B", () => {
+    const tabs = playerTabs("abc12", "xyz34");
+    expect(tabs.map((tab) => tab.label)).toEqual(["Profile", "Data", "News", "Transfer", "Compare"]);
+    expect(tabs.at(-1)?.href).toBe("/players/analysis?a=abc12&b=xyz34");
+  });
+
+  it("opens Compare with him alone when no rival was found", () => {
+    expect(playerTabs("abc12", undefined).at(-1)?.href).toBe("/players/analysis?a=abc12");
+  });
+
+  it("leaves no second way into Compare on the Profile", () => {
+    expect(readFileSync(join(__dirname, "page.tsx"), "utf8")).not.toMatch(/compare/i);
   });
 });

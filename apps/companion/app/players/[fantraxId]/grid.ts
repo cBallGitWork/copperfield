@@ -49,7 +49,7 @@ const GROUP: Readonly<Record<string, string>> = {
 };
 
 /** His position group, or null where the sister has no line for him. */
-function groupOf(code: number): string | null {
+export function groupOf(code: number): string | null {
   const line = intelSquads.get(code)?.line;
   return line ? (GROUP[line] ?? null) : null;
 }

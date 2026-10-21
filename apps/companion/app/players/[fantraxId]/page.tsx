@@ -1,8 +1,6 @@
 import { Suspense } from "react";
 import Nothing from "../../components/shell/Nothing";
 import { PANEL } from "@/app/desk";
-import ButtonLink from "../../components/shell/ButtonLink";
-import { POOL } from "../routes";
 import { intelMinutes, intelSquads } from "../../intel";
 import { XMINS_AS_OF } from "../../xmins";
 import AttributeGrid from "./AttributeGrid";
@@ -92,9 +90,6 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
 
       {/* What he actually plays, last and loudest, where CM puts it (Craig, 4 Sep 2026). */}
       <RealPosition position={position} />
-
-      {/* An action on the man on screen, not a tab: the board becomes the picker for the second. */}
-      <ButtonLink href={`${POOL}?compare=${fantraxId}`}>Compare with…</ButtonLink>
     </PlayerShell>
   );
 }
