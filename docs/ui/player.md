@@ -50,18 +50,18 @@ derived the same four from the same object.
 
 **Who he is, not what he has done** (Craig, 11 Oct 2026: *"Profile section, lots of 'data' in this section, move to
 data section?"*). His season figures and the season maps moved to Data that day. **Whether he can play, whether he
-is free and the run to come are the first screen** (Craig, 21 Oct 2026), so the order is: born line, Fitness and
-transfer, Next up, portrait and grid, Business, set pieces, News, real position (`page.tsx`).
+is free and the run to come are the first screen** (Craig, 21 Oct 2026), so the order is: born line with the way out,
+Fitness, Next up, portrait and grid, Business, set pieces, News, real position (`page.tsx`).
 
-1. **The born line**, then **Fitness and transfer**: FPL's note for a man who may miss out, as one sentence with his
-   chance said once (`Muscular injury, 75% chance of playing`), at a row's size (`text-sm`/`lg:text-base`, Craig,
-   21 Oct 2026: *"why do we make these so big?"*); a fit man gets no note and the panel heads itself "Transfer".
-   Under it the **transfer line** (`TransferStatus.tsx`, `holding.ts`): a free man's **Status**, "Free agent" or "On
-   waivers"; a held man's **Joined**, how and when (`Claimed, Wed 7 Oct`, or "In the draft"), never his holder, since
-   the bar has him. Beside it **the way out**, worded for what the reader can do (`fantraxExit.ts`): "Claim him on
-   Fantrax" for a man nobody holds and "Open on Fantrax" for his own, both to his Fantrax page in the league; "Offer a
-   trade on Fantrax" for a rival's, to the owner's roster with Fantrax's trade panel up
-   (`team/roster;teamId={owner}?tx=true`, Craig, 1 Oct 2026). The draft row and "Dropped by" went with the Transfer tab.
+1. **The born line** with **the way out** beside it, in a word for what the reader can do (`fantraxExit.ts`): "Claim"
+   for a man nobody holds and "Fantrax" for his own, both to his Fantrax page in the league; "Trade" for a rival's, to
+   the owner's roster with Fantrax's trade panel up (`team/roster;teamId={owner}?tx=true`, Craig, 1 Oct 2026). Who
+   holds him is the title bar's brackets, a free man's `(FA)` or `(WW)` (`bracket.ts`, Craig, 21 Oct 2026: *"we don't
+   need status row, that goes in player row title at top"*). Then **Fitness**, for a man who may miss out only: CM's
+   injury line (`FitnessLine.tsx`, Craig, 21 Oct 2026: *"fitness needs more colour and CM like symbols"*) on his doubt
+   band's wash (out, major, slight), CM's mark in the loss red (a cross for a knock, a card for a ban, a barred circle
+   for a man who has gone), the state box, FPL's words at a row's size, and his chance as four quarter blocks filled in
+   his band with the figure beside them (FPL publishes only 0, 25, 50, 75, 100). A fit man gets no block.
 2. **Next up**, the run to come: the next eight across the row, each fixture one 28px line in FPL's difficulty, the
    club with its venue a step down beside it (`3xs`), under the table's 24px plates in their 9px caps (Craig, 21 Oct
    2026: *"next up can be smaller"*), and under each
