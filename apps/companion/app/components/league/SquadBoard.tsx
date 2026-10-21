@@ -26,6 +26,8 @@ export default function SquadBoard({
   eligibility?: Record<string, string[]>;
 }) {
   const [open, setOpen] = useState<SquadPlayerDetail | null>(null);
+  // The list's head and the card it opens print the same word.
+  const figure = projected ? "projected" : "season";
 
   return (
     <div className="flex flex-col gap-2">
@@ -36,7 +38,7 @@ export default function SquadBoard({
       ) : null}
 
       <section className={PANEL_FLUSH}>
-        <SquadRows lines={lines} figure={projected ? "projected" : "season"} onOpen={setOpen} eligibility={eligibility} />
+        <SquadRows lines={lines} figure={figure} onOpen={setOpen} eligibility={eligibility} />
       </section>
 
       {open ? (
@@ -45,7 +47,7 @@ export default function SquadBoard({
           key={open.rostered.slot.fantraxId}
           player={open}
           eligible={eligibility?.[open.rostered.slot.fantraxId]}
-          figure={projected ? "projected" : "season"}
+          figure={figure}
           onClose={() => setOpen(null)}
         />
       ) : null}

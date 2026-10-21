@@ -113,6 +113,7 @@ export default function LineupPlanner({
         <PlayerCard
           key={card.rostered.slot.fantraxId}
           player={card}
+          eligible={eligibleBy[card.rostered.slot.fantraxId]}
           onClose={() => setCard(null)}
         />
       ) : null}

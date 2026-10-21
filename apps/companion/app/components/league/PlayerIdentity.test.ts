@@ -77,3 +77,12 @@ describe("the player card's fixture line", () => {
     expect(html).not.toContain("Kicks off");
   });
 });
+
+describe("the player card's positions", () => {
+  // Lane 1 review, 21 Oct 2026: your own card printed his slot while the row beside it printed D/M.
+  it("prints every position he may play when the caller knows them, else his slot", () => {
+    const both = renderToStaticMarkup(createElement(PlayerIdentity, { rostered, eligible: ["D", "M"], club: undefined, opposition: [] }));
+    expect(both).toContain("D/M");
+    expect(card([])).not.toContain("D/M");
+  });
+});

@@ -12,7 +12,7 @@ import { NO_MINUTES, lineupDetail, openingGameweek } from "@epl/core";
 import type { UnplayedSide } from "./unplayed";
 import { widestLine } from "../../../components/league/PitchRows";
 import Nothing from "../../../components/shell/Nothing";
-import SquadRows from "../../../components/league/SquadRows";
+import SquadBoard from "../../../components/league/SquadBoard";
 import TeamSheet from "../../../components/league/TeamSheet";
 import { teamHref } from "@/app/squad/routes";
 import { PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
@@ -63,14 +63,13 @@ function lockOf(gameweek: number | undefined): string {
  *  (always your own) is its eleven, then its bench; any other is unarranged, so not even the order leaks who starts. */
 export function SquadList({ listed, teamId }: { listed: UnplayedSide | undefined; teamId: string }) {
   if (listed === undefined) return <Nothing title="No squad" code={teamId} />;
-  return (
+  // Unarranged is the gate shut, which is `SquadBoard`'s case: the same list, the same card on a tap.
+  return "sheet" in listed ? (
     <section className={PANEL_FLUSH}>
-      {"sheet" in listed ? (
-        <TeamSheet rows={listed.sheet.rows} bench={listed.sheet.bench} breakdown={{}} mode="list" />
-      ) : (
-        <SquadRows lines={listed.lines} />
-      )}
+      <TeamSheet rows={listed.sheet.rows} bench={listed.sheet.bench} breakdown={{}} mode="list" />
     </section>
+  ) : (
+    <SquadBoard lines={listed.lines} because="not-locked" projected={false} />
   );
 }
 

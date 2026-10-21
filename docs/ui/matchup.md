@@ -37,7 +37,8 @@ draws none.
    (Craig, 19 Oct 2026: the bare two lists had "no page template"). A side the lineup gate has opened, your
    own always, is its eleven then a plated Bench in Fantrax's bench order (`TeamSheet` as a list); a rival before
    his lock stays unarranged, alphabetical within a line, so nothing leaks who starts (`unplayedLists`; review N6,
-   16 Oct 2026: your GW7 preview was two 14-man lists).
+   16 Oct 2026: your GW7 preview was two 14-man lists). That list is the squad page's gate board (`SquadBoard`), so a
+   tap opens the player card as on every squad list (21 Oct 2026).
 2. **A four-plate blue tab strip** — `Line-ups · Stats · Fixtures · Table`, each a link
    (`?view=`, Line-ups the default; `views.ts`), so a refresh or a shared link keeps
    the tab. One word per label: the strip has to fit 390.

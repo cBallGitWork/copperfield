@@ -3,6 +3,7 @@ import type { AutoSubMark } from "./autoSubbed";
 import ScrollBoard from "./ScrollBoard";
 import SquadRow, { SQUAD_CREST, SQUAD_EDGE, SQUAD_FIGURES, SQUAD_GAP, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
 import { MUTE, PLATE_START, headWord } from "./TableHeads";
+import { FIGURE_HEADS, type SquadFigure } from "./squadFigure";
 import { MINOR_CAPS, PLATE_FRAME, QUIET_NOTE, SMALL_CAPS } from "@/app/desk";
 
 // The squad as a list: one run of rows, each man's positions a column, since a heading cannot hold two. The caller
@@ -10,15 +11,6 @@ import { MINOR_CAPS, PLATE_FRAME, QUIET_NOTE, SMALL_CAPS } from "@/app/desk";
 
 /** `TableHeads.PLATE` without its padding: a 36px column cannot spare 12 of it. */
 const FIGURE_HEAD = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap`;
-
-/** What the points column holds, and its head: a season's, Fantrax's projection, or the gameweek on screen. */
-export type SquadFigure = "season" | "projected" | "gameweek";
-
-const FIGURE_HEADS: Record<SquadFigure, { word: string; title: string }> = {
-  season: { word: "FPts", title: "Points this season" },
-  projected: { word: "Proj", title: "Projected points this season" },
-  gameweek: { word: "GW", title: "Points this gameweek" },
-};
 
 export default function SquadRows({
   lines,
