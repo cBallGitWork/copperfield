@@ -11,7 +11,7 @@ anybody's, and no fixture run: the Planner owns that.
 ## On the page
 
 Twenty clubs, twenty-two measures in four groups. Under a thumb a row of plates docked at the foot (Attack,
-Chances, Defence, Discipline; `?group=`, an absent or unknown one Attack) draws one group's columns, as Adv Stats
+Creating, Defence, Discipline; `?group=`, an absent or unknown one Attack) draws one group's columns, as Adv Stats
 does, with the Key at the top listing that group's heads alone; Defence's eight still scroll sideways inside it, the
 Place block held at its width so the pinned Club never covers GA. From `lg` there are no plates: every
 column side by side under its group's head. Errors folded into Discipline on 20 Oct 2026, since five plates did not
@@ -20,19 +20,24 @@ fit one line at 320 in WebKit.
 | Group | Heads | Whose, and how |
 |---|---|---|
 | Attack | G Sh SoT BC xG | Opta's goals, shots, on target, big chances scored or missed; FPL's squad xG |
-| Chances | A KP BCC xA | Opta's assists, key passes (passes that led to a shot), big chances created; FPL's squad xA |
+| Creating | A KP BCC xA | Opta's assists, key passes (passes that led to a shot), big chances created; FPL's squad xA |
 | Defence | GA xGC CS ShA Tk Int Rec Blk | Opta's conceded, clean sheets, shots conceded, tackles, interceptions, ball recoveries, blocks; FPL's squad xGC over eleven |
-| Discipline | ErS ErG Fls YC RC | Opta's errors leading to a shot and to a goal, fouls committed, yellow and red cards |
+| Discipline | ErS ErG FC YC RC | Opta's errors leading to a shot and to a goal, fouls committed, yellow and red cards |
 
 Each head carries its meaning in a `title`. Standouts are lit in ink over the twenty (a fifth yellow, a tenth
-orange); where more is worse (GA xGC ShA ErS ErG Fls YC RC) the top of the column is red. A played nought is white.
-Sort is a link (`?sort=&dir=`), a column opening at its good end. A plate orders by its lead column (G, xA, GA, Fls)
+orange); where more is worse (GA xGC ShA ErS ErG FC YC RC) the top of the column is red. A played nought is white.
+Sort is a link (`?sort=&dir=`), a column opening at its good end. A plate orders by its lead column (G, xA, GA, FC)
 and clears the reader's sort; a `?sort=` names its column's plate, so the order is never hidden. Ties fall to the
 name. A club opens the Players board at that club.
 
 Goals conceded is headed `GA` as on Adv Stats and the Data boards since 21 Oct 2026 (`GC` before; its key and
 `?sort=gc` stay). `Tk` and `BC` are not Adv Stats' `Tkl` and `BCM`: Opta's tackles against tackles won, big chances
 scored or missed against missed alone.
+
+Its words follow Adv Stats' and the match log's since 21 Oct 2026: the plate is `Creating` (`Chances` before; its key
+and `?group=chances` stay), KP is titled "Key passes", and fouls are headed `FC` (`Fls` before; `?sort=fls` stays).
+Assists stay `A` here, Opta's official count; the Players board heads the league's total `AT`, because the squad
+Stats board draws it beside the stats league's official `A`.
 
 ## States
 

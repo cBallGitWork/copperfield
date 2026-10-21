@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ASSIST, ASSISTS_TOTAL, DEFENSIVE_POINTS, DEFENSIVE_POINTS_3, GOALS, KEEPER_POINTS, firstScored } from "./categoryNames";
+import { ASSIST, ASSISTS_OFFICIAL, ASSISTS_TOTAL, DEFENSIVE_POINTS, DEFENSIVE_POINTS_3, GOALS, KEEPER_POINTS, firstScored } from "./categoryNames";
 import { wordsFor, wordsOf } from "./categoryWords";
 import { mapLeagueInfo } from "./fantrax/map";
 import real from "./fantrax/__fixtures__/leagueInfoScoringReal.json";
@@ -57,6 +57,10 @@ describe("wordsFor", () => {
     expect(wordsFor(DEFENSIVE_POINTS)).toEqual({ name: "DefCon", key: "DefCon: tackles won, interceptions and blocks", head: "DC" });
     expect(wordsFor(DEFENSIVE_POINTS_3)).toMatchObject({ name: "DefCon+", head: "DC+" });
     expect(wordsFor(DEFENSIVE_POINTS_3).key).toMatch(/^DefCon\+: .*clearances and recoveries$/);
+  });
+
+  it("heads the total AT and the official count A, as one board can draw both", () => {
+    expect([wordsFor(ASSISTS_TOTAL).head, wordsFor(ASSISTS_OFFICIAL).head]).toEqual(["AT", "A"]);
   });
 
   it("heads every other category by Fantrax's code", () => {
