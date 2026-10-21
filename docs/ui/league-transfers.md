@@ -23,7 +23,7 @@ Transfers tab's ledger with each row's mover named, read off the same feed, so t
   slim day heading** (*Fri 16 Oct*) opens each London day's deals instead of a date block on every row (review
   M-LEAGUE-2, 20 Oct 2026: seven dates printed 43 times), so the left column is only as wide as the type and the
   plate (72px; a team's own tab, the type alone, 64px) and the names have the date's room. A name too long for its
-  line wraps rather than cuts (at 320, 84 of 86 were cut), its position following the last word, and a single word
+  line wraps rather than cuts (at 320, 84 of 86 were cut), its position tied to the last letter, and a single word
   too long for the box breaks inside it (integration review, 20 Oct: *Gudmundsson* painted over its tag). Words the type cannot fit break onto a second line inside row one. A trade's partner plate
   sits under the mover's behind a faint `With`, the desk's head said on the phone (review UX-8, 19 Oct: two
   plates flush, both green, read as one side), so a trade is the one transfer whose left side runs past two
@@ -31,6 +31,9 @@ Transfers tab's ledger with each row's mover named, read off the same feed, so t
   order with `lg:order-*`; the headings are `lg:hidden` and the desk keeps its Date column, so the desk is
   unchanged. The team Transfers tab groups the same way, its type beside In. Waivers' Last run is one stamp and
   keeps a date block on each row.
+- **A man is named as on every list** (UI audit D-12, D-13, 21 Oct 2026): `PlayerName`'s rule, *L. Colwill* under a
+  thumb and *Levi Colwill* on a desk, and his positions as the board leads' faint caps label (`positionsLabel`:
+  *DEF*, *M/F*), not a bracketed letter, *(D)*, in its own ink.
 - **Every name opens his page** (`/players/[fantraxId]`, the id the feed's own row carries), at a tap row's 36px
   under a thumb (16 Oct 2026: 66 names and not one could be tapped). The team Transfers tab draws the same ledger,
   so its names link too.

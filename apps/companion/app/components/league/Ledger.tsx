@@ -3,9 +3,11 @@ import { Fragment } from "react";
 import Link from "@/app/components/shell/Link";
 import ScrollBoard from "./ScrollBoard";
 import type { Deal, DealSide } from "@epl/core";
-import { crestForShortName, fantraxInstant, inkOn, kindOf, londonDayAndDate, londonDayMonth, londonDayOf, londonWeekday, moverOf, movement, toFplClubCode, DASH } from "@epl/core";
+import { crestForShortName, fantraxInstant, inkOn, kindOf, londonDayAndDate, londonDayMonth, londonDayOf, londonWeekday, moverOf, movement, toFplClubCode, initialled, DASH } from "@epl/core";
 import { INDEX_SPINE, LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
 import TeamName from "./TeamName";
+import PlayerName from "../shell/PlayerName";
+import { positionsFromList, positionsLabel } from "../../positions";
 import { teamColours } from "@/app/teamColours";
 import { playerHref } from "@/app/players/routes";
 
@@ -125,7 +127,7 @@ export default function Ledger({
   );
 }
 
-/** One side of a deal: each man's club crest, name and position (a defender for a forward is a different deal). */
+/** One side of a deal: each man's club crest, name and positions (a defender for a forward is a different deal). */
 function Side({
   players,
   tone,
@@ -183,23 +185,31 @@ function Side({
   );
 }
 
-/** Under a thumb one run of text whose last letter carries the position, so the tag never starts a line alone; a desk
- *  cuts the name, never the tag. Both render and CSS picks, as `TeamName` does. */
+/** A man by the one list rule (`PlayerName`: I. Surname under a thumb, in full on a desk) and his positions as the board
+ *  leads' caps label. Under a thumb the label is tied to the name's last letter, so it never starts a line alone. */
 function Named({ name, position }: { name: string; position?: string | null }) {
-  if (!position) return <span className="min-w-0 [overflow-wrap:anywhere] lg:truncate">{name}</span>;
-  const tag = "text-2xs font-bold text-mid lg:text-xs";
-  const last = [...new Intl.Segmenter("en", { granularity: "grapheme" }).segment(name)].pop()?.segment ?? "";
+  const label = positionsLabel(positionsFromList(position));
+  if (label === null) {
+    return (
+      <span className="min-w-0 [overflow-wrap:anywhere] lg:truncate">
+        <PlayerName name={name} />
+      </span>
+    );
+  }
+  const tag = <span className={`${LABEL} shrink-0`}>{label}</span>;
+  const short = initialled(name);
+  const last = [...new Intl.Segmenter("en", { granularity: "grapheme" }).segment(short)].pop()?.segment ?? "";
   return (
     <>
       <span className="min-w-0 [overflow-wrap:anywhere] lg:hidden">
-        {name.slice(0, name.length - last.length)}
+        {short.slice(0, short.length - last.length)}
         <span className="whitespace-nowrap">
-          {last}{"\u00a0"}<span className={tag}>({position})</span>
+          {last}{"\u00a0"}{tag}
         </span>
       </span>
-      <span className="hidden min-w-0 items-center gap-1.5 lg:flex">
+      <span className="hidden min-w-0 items-baseline gap-1.5 lg:flex">
         <span className="truncate">{name}</span>
-        <span className={`shrink-0 ${tag}`}>({position})</span>
+        {tag}
       </span>
     </>
   );
