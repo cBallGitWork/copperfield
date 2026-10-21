@@ -1,31 +1,27 @@
-import { Suspense } from "react";
 import { availabilityOf, londonMoment } from "@epl/core";
 import Section from "../../components/shell/Section";
-import TransferStatus from "./TransferStatus";
+import FitnessLine from "./FitnessLine";
 import { fitnessNote } from "./condition";
 import { latestNews } from "./latestNews";
 import { filedAt, storyText, type NewsItem } from "./newsItems";
 import type { Subject } from "./subject";
 
-// Whether he may miss out and whether he is free, at the top of his Profile (Craig, 21 Oct 2026); the newest story
+// Whether he may miss out, at the top of his Profile (Craig, 21 Oct 2026); the newest story
 // on him is a block of its own lower down, and the rest is on News.
 
 /** Prose a step above a row's name, so a paragraph reads at arm's length. */
 const PROSE = "text-base leading-relaxed text-ink lg:text-lg";
 
-/** His fitness in one line at a row's size: a status, not a story (Craig, 21 Oct 2026: "why do we make these so big?"). */
-const NOTE = "text-sm leading-snug text-ink lg:text-base";
+export default function Fitness({ found }: { found: Subject }) {
+  const player = found.football?.player ?? null;
+  const availability = availabilityOf(player);
+  const note = fitnessNote(availability);
 
-export default function Fitness({ found, fantraxId }: { found: Subject; fantraxId: string }) {
-  const note = found.football === null ? null : fitnessNote(availabilityOf(found.football.player));
-
+  // A fit man gets no block: CM prints nothing for a fit player (Craig, 1 Oct 2026: "just remove the chip row").
+  if (note === null || player === null) return null;
   return (
-    <Section title={note === null ? "Transfer" : "Fitness and transfer"}>
-      {note === null ? null : <p className={NOTE}>{note}</p>}
-      {/* Streamed: the line reads the league's transaction feed; the slot holds the button's height meanwhile. */}
-      <Suspense fallback={<div aria-busy className="min-h-11" />}>
-        <TransferStatus found={found} fantraxId={fantraxId} />
-      </Suspense>
+    <Section title="Fitness">
+      <FitnessLine player={player} availability={availability} note={note} />
     </Section>
   );
 }

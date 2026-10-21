@@ -4,6 +4,7 @@ import PlateShell from "../../components/shell/PlateShell";
 import { POOL } from "../routes";
 import PlayerTabs from "./PlayerTabs";
 import type { PlayerTab } from "./PlayerTabs";
+import { bracket } from "./bracket";
 import type { Subject } from "./subject";
 
 // The frame every player screen wears: CM's plated bar in his club's colours (`cm9900/11.jpg`), grey for a man FPL
@@ -21,12 +22,12 @@ export default function PlayerShell({
   current: PlayerTab;
   children: ReactNode;
 }) {
-  const { intel, football, ownerName } = subject;
+  const { intel, football } = subject;
   const club = football?.club;
   return (
     <PlateShell
       colours={clubColoursOf(club)}
-      title={heading((football ? spelt(intel.name, football.player) : intel.name) || fantraxId, ownerName)}
+      title={heading((football ? spelt(intel.name, football.player) : intel.name) || fantraxId, bracket(subject))}
       back={POOL}
       tabs={<PlayerTabs fantraxId={fantraxId} current={current} empty={hollow(subject)} />}
     >
@@ -35,10 +36,10 @@ export default function PlayerShell({
   );
 }
 
-/** `Pascal Groß (Atletico)`, in the spelling every list prints: the fantasy side in CM's brackets, no shirt number (Craig, 4 Sep 2026); a free
- *  agent has no brackets. */
-function heading(name: string, ownerName: string | null): string {
-  return ownerName === null ? name : `${name} (${ownerName})`;
+/** `Pascal Groß (Atletico)`, in the spelling every list prints: the fantasy side in CM's brackets, no shirt number (Craig, 4 Sep 2026);
+ *  a free man's status in them instead (`(FA)`, Craig, 21 Oct 2026: "that goes in player row title at top"). */
+function heading(name: string, held: string | null): string {
+  return held === null ? name : `${name} (${held})`;
 }
 
 /** The views with nothing behind them for this man, decided from him rather than from the tab you

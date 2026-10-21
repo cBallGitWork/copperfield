@@ -8,6 +8,7 @@ import BornLine from "./BornLine";
 import type { GridWord } from "./AttributeGrid";
 import FixtureRun from "./FixtureRun";
 import Fitness, { LatestStory } from "./Fitness";
+import TransferStatus from "./TransferStatus";
 import Moves from "./Moves";
 import NoProfile from "./NoProfile";
 import PlayerShell from "./PlayerShell";
@@ -19,7 +20,7 @@ import { scouting } from "./scouting";
 import { subject } from "./subject";
 import { playerTitle } from "./title";
 
-// Who he is, on Championship Manager's profile screen (`cm9900/11.jpg`): birth line, fitness and transfer, the run to
+// Who he is, on Championship Manager's profile screen (`cm9900/11.jpg`): birth line and the way out, fitness, the run to
 // come, portrait and grid, business, set pieces, news, and the cyan line saying what he plays. His figures are Data's.
 
 // Must match `PAGE_REVALIDATE` in the app's config: Next reads it statically, so it cannot be imported.
@@ -52,10 +53,18 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
       fantraxId={fantraxId}
       current="profile"
     >
-      {football === null ? null : <BornLine player={football.player} />}
+      {/* Streamed: the button reads who is signed in; the slot holds its height meanwhile. */}
+      <BornLine
+        player={football?.player ?? null}
+        exit={
+          <Suspense fallback={<span aria-busy className="min-h-11 w-20" />}>
+            <TransferStatus found={found} fantraxId={fantraxId} />
+          </Suspense>
+        }
+      />
 
-      {/* Whether he can play and whether he is free, then the run to come, on a phone's first screen (Craig, 21 Oct 2026). */}
-      <Fitness found={found} fantraxId={fantraxId} />
+      {/* Whether he can play, then the run to come, on a phone's first screen (Craig, 21 Oct 2026). */}
+      <Fitness found={found} />
       {run === null ? null : <FixtureRun run={run} minutes={minutes} asOf={XMINS_AS_OF} />}
 
       {/* Portrait above the grid on a phone, beside it on a desk and as tall as it (Craig, 4 Sep 2026). */}
