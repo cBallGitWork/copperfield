@@ -5,6 +5,7 @@ import { scoreSide } from "../components/football/scoreSide";
 import { SMALL_CAPS } from "@/app/desk";
 import { yoursEdge } from "@/app/mine";
 import { matchHref } from "./match/[id]/matchRoutes";
+import { clubHref } from "./routes";
 import { hasScore } from "./score";
 import Yours from "./Yours";
 
@@ -39,8 +40,8 @@ export default function Match({
 
   const row = (
     <ScoreRow
-      home={scoreSide(home, places)}
-      away={scoreSide(away, places)}
+      home={linked(home, places)}
+      away={linked(away, places)}
       score={played ? { home: fixture.homeScore, away: fixture.awayScore } : null}
       // FPL leaves `kickoff_time` null until television picks the match; never guess a date (DESIGN §7).
       pending={kickoffAt(fixture.kickoff, londonDayAndTime)}
@@ -49,7 +50,7 @@ export default function Match({
           <span className={`${SMALL_CAPS} text-faint`}>FT</span>
         ) : null
       }
-      href={matchHref(fixture.id, "overview")}
+      scoreHref={matchHref(fixture.id, "overview")}
     />
   );
   if (yours === undefined) return row;
@@ -69,4 +70,9 @@ export default function Match({
       )}
     </div>
   );
+}
+
+/** A side whose name leads to its club's page; an unknown club stays a plain dash. */
+function linked(club: Club | undefined, places: Map<number, number>) {
+  return club === undefined ? scoreSide(club, places) : { ...scoreSide(club, places), href: clubHref(club.code) };
 }

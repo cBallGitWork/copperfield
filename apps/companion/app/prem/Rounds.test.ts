@@ -105,3 +105,11 @@ describe("a signed-out reader", () => {
     expect(html).not.toContain("<button");
   });
 });
+
+describe("a match row's ways in", () => {
+  // Craig, 21 Oct 2026: a team name goes to its club, the score or kickoff to the match; the row was one link.
+  it("links each club's name to its page and the middle to the match", () => {
+    const hrefs = [...round().matchAll(/<a [^>]*href="(\/prem\/(?:club|match)\/[^"]+)"/g)].map((m) => m[1]);
+    expect(hrefs).toEqual(["/prem/club/1", "/prem/match/1", "/prem/club/2", "/prem/club/1", "/prem/match/2", "/prem/club/2"]);
+  });
+});
