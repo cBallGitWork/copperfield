@@ -349,12 +349,13 @@ It was a second line under every name — two rows of chrome for one man, on the
 screen with the fewest facts in the app — and a league team name is a gloss on
 the name it follows rather than a fact of its own.
 
-**On a phone the bracket gives way first, then the name wraps.** At 390 `R. Sessegnon (Dome)` drew as
-`R. Sessegn…`, and with the bracket cut it still drew `R. Sesseg…` at 320. Type never shrinks (DESIGN §8), so a
-name too long for its half takes a second line below `lg`; the desk still cuts it (20 Oct 2026). The minute
-wraps first: below `lg` the row wraps and the name block is sized by the name alone, so `90+4'` drops under
-`R. Sessegnon` rather than squeeze it to `R.` / `Sesseg` / `non`. A name breaks only at a space, and a lone
-word wider than the half ends `…`.
+**On a phone a row is at most two lines, and the bracket gives way first.** At 390 `R. Sessegnon (Dome)` drew
+as `R. Sessegn…`; type never shrinks (DESIGN §8), so a name too long for its half wraps below `lg`, at a space
+only, never `Sesseg` / `non`; the desk still cuts it (20 Oct 2026). Wrapping the whole row left the red card
+alone on line 1, the name on line 2 and `90+4'` on line 3 at 320 (final review, 21 Oct), so the row never wraps:
+the glyph sits beside the name's first line, the minute floats at the head of the name's block, and the name's
+second line runs under the minute. The bracket goes whole to whichever line has room and is clipped with
+anything past line two, so it never prints as a `(D…` stub.
 
 **The assister carries a minute only when a second assister makes it say
 something.** This went round the houses in one afternoon and the landing place is
@@ -629,7 +630,9 @@ phone; both views run the page's length. The desk keeps the one list without fou
 
 **The feed sorts by period, then the clock.** Opta's clock restarts at 45:00, so 45+4 (2,910s) outranked
 46' (2,700s), and it stamps `Match ends` at the first minute; `plCommentary` reads the period off the label and
-gives `Match ends` the clock of the last whistle under it (`90+7′`, not `1′`).
+gives `Match ends` the clock of the last whistle under it (`90+7′`, not `1′`). Key moments then keeps
+`Match ends` alone: `Second Half ends` at the same minute and score said it twice at the top of a phone's list
+(21 Oct); the full commentary keeps both.
 
 `Commentary.tsx` is the row both screens draw. Two callers rather than three, so
 CODE_RULES §1 would leave it duplicated — and would, if what was duplicated were

@@ -11,17 +11,17 @@ import { SMALL_CAPS } from "@/app/desk";
 // One scorer's line and one other man's line on the scoresheet, set at CM's size (see `Scoresheet`).
 
 const NAME = "font-chrome text-lg font-bold lg:text-3xl";
-const SCORER_FIGURE = "numeric ml-auto shrink-0 font-bold text-accent text-lg lg:text-3xl";
+/** A phone floats the minute at the head of the name's block, so a long name's second line runs under it; a desk sets it last. */
+const FIGURE = "numeric shrink-0 font-bold text-accent max-lg:float-right max-lg:ml-1.5 lg:order-last lg:ml-auto lg:pl-3";
+const SCORER_FIGURE = `${FIGURE} text-lg lg:text-3xl`;
 /** The assister's minutes: the scorer's ink and column, at the assister's size. */
-const ASSIST_FIGURE = "numeric ml-auto shrink-0 font-bold text-accent text-sm lg:text-xl";
-/** The name keeps its width; a phone wraps it at a space (never 'Sesseg/non'), ends a lone overlong word '…', a desk cuts it. */
-const KEEPS_WIDTH = "max-w-full shrink-0 overflow-hidden text-ellipsis lg:truncate";
-/** The owner's bracket, cut to nothing before the name loses a letter; on a phone it takes only the room left over. */
-const GIVES_WAY = "min-w-0 truncate max-lg:w-0 max-lg:grow";
-/** A phone drops the minute to the next line when the name will not fit beside it, rather than squeeze the name. */
-const WRAPS = "max-lg:flex-wrap";
-/** The name and its bracket, sized on a phone by the name alone, so the minute wraps before the name does. */
-const NAME_BLOCK = "flex min-w-0 flex-1 items-baseline max-lg:basis-auto";
+const ASSIST_FIGURE = `${FIGURE} text-sm lg:text-xl`;
+/** A phone wraps the name at a space only (never 'Sesseg/non'); a desk keeps its width and cuts it. */
+const KEEPS_WIDTH = "lg:max-w-full lg:shrink-0 lg:truncate";
+/** The owner's bracket, whole on whichever line has room for it on a phone, cut first on a desk. */
+const GIVES_WAY = "whitespace-nowrap lg:min-w-0 lg:truncate";
+/** The name, its bracket and the minute; at most two lines on a phone, so the owner drops out before a third. */
+const NAME_BLOCK = "min-w-0 flex-1 max-lg:max-h-[2lh] max-lg:overflow-hidden lg:flex lg:items-baseline";
 
 /** One scorer with all his minutes, and under him the men who made them, in the order the goals came. */
 export function Goal({
@@ -60,16 +60,16 @@ export function Goal({
             key={code}
             player={cards.get(code)}
             // On its row's top edge, under the scorer; the rest of its 36px falls below, before the next goal.
-            className={`flex min-h-9 w-full items-baseline gap-1.5 pl-3 text-left hover:underline lg:pl-4 ${WRAPS}`}
+            className="flex min-h-9 w-full items-baseline gap-1.5 pl-3 text-left hover:underline lg:pl-4"
           >
             <span className={`${SMALL_CAPS} shrink-0 text-faint`}>A</span>
             <span className={`${NAME_BLOCK} font-chrome text-sm font-bold text-muted lg:text-xl`}>
+              {paired ? <span className={ASSIST_FIGURE}>{minutes(his)}</span> : null}
               <span className={KEEPS_WIDTH}>
                 <PlayerName name={assister.name} short={fullFootballerName(assister)} />
-              </span>
-              <OwnedBy owner={owner} size="scoresheet" className={`ml-1 ${GIVES_WAY}`} />
+              </span>{" "}
+              <OwnedBy owner={owner} size="scoresheet" className={`lg:ml-1 ${GIVES_WAY}`} />
             </span>
-            {paired ? <span className={ASSIST_FIGURE}>{minutes(his)}</span> : null}
           </MaybeCard>
         );
       })}
@@ -107,23 +107,23 @@ export function Man({
   return (
     <MaybeCard
       player={card}
-      // One centre line for the glyph and the name; a baseline row set the ball four pixels low.
-      className={`group flex min-h-9 w-full items-center gap-1.5 text-left lg:min-h-11 lg:gap-3 ${WRAPS}`}
+      // A phone tops the glyph on the name's first line (a baseline row set the ball four pixels low); a desk centres it.
+      className="group flex min-h-9 w-full gap-1.5 text-left max-lg:items-start max-lg:py-1 lg:min-h-11 lg:items-center lg:gap-3"
     >
       {glyph === null ? null : (
         // `EventIcon` is 1.1em, so it states its own size: level with the name on a phone, a step up on the desk.
-        <span className={`flex shrink-0 items-center text-lg lg:text-4xl ${glyphTone}`}>
+        <span className={`flex shrink-0 items-center text-lg max-lg:h-[1lh] lg:text-4xl ${glyphTone}`}>
           <EventIcon glyph={glyph} />
         </span>
       )}
-      <span className={NAME_BLOCK}>
+      <span className={`${NAME_BLOCK} max-lg:text-lg`}>
+        <span className={SCORER_FIGURE}>{figure}</span>
         <span className={`${KEEPS_WIDTH} group-hover:underline ${NAME}`}>
           <PlayerName name={name} short={short} />
         </span>
-        {note === null ? null : <span className={`${SMALL_CAPS} ml-1.5 shrink-0 text-bad`}>{note}</span>}
-        <OwnedBy owner={owner} size="scoresheet" className={`ml-1.5 ${GIVES_WAY}`} />
+        {note === null ? null : <> <span className={`${SMALL_CAPS} shrink-0 text-bad lg:ml-1.5`}>{note}</span></>}{" "}
+        <OwnedBy owner={owner} size="scoresheet" className={`lg:ml-1.5 ${GIVES_WAY}`} />
       </span>
-      <span className={SCORER_FIGURE}>{figure}</span>
     </MaybeCard>
   );
 }

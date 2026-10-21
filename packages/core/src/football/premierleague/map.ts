@@ -151,5 +151,9 @@ const PENALTY_MISSED = /^Penalty missed!/;
 
 /** The key moments of a match, in the feed's order; a phone opens its report on these. */
 export function keyMoments(lines: readonly PlCommentaryLine[]): PlCommentaryLine[] {
-  return lines.filter((line) => KEY_TYPES.has(line.type) || PENALTY_MISSED.test(line.text));
+  const final = lines.find((line) => line.type === MATCH_ENDS);
+  // The period's end at the final whistle's minute repeats it, score and all; the whistle stands for both.
+  const echoes = (line: PlCommentaryLine) =>
+    final !== undefined && line !== final && line.type.startsWith("end ") && line.minute === final.minute;
+  return lines.filter((line) => (KEY_TYPES.has(line.type) || PENALTY_MISSED.test(line.text)) && !echoes(line));
 }
