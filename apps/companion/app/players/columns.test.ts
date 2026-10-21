@@ -55,6 +55,11 @@ describe("COLUMNS", () => {
     expect(COLUMNS.every((column) => !("deskOnly" in column))).toBe(true);
   });
 
+  it("never lights minutes or games: a denominator is how much he played, not how well", () => {
+    expect(columnFor("min")?.mark).toBeUndefined();
+    expect(columnFor("gp")?.mark).toBeUndefined();
+  });
+
   it("reads a raw count out of the grouped payload and dashes an absent one", () => {
     const goals = columnFor("g");
     expect(goals).toBeDefined();

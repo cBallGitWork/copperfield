@@ -31,7 +31,7 @@ import BoardLink from "./BoardLink";
 import { FootFrame } from "../components/shell/FootFrame";
 import { intelStats, intelStatsDay } from "../intel";
 import { divisionGrids } from "./[fantraxId]/grid";
-import { cutsFor } from "./standout";
+import { cutsFor, litColumns } from "./standout";
 import { FANTRAX_PLAYERS_PATH, playerByCode } from "@epl/core";
 import { footballNow } from "../football";
 import OutLink from "../components/shell/OutLink";
@@ -102,7 +102,8 @@ export default async function PoolBoard({
   const capped = pageRows(shown, query);
   const step = nextStep(shown.length, query);
   const way = wayOut(query, view.route);
-  const drawn = columnsIn(view.columns, group, activeSort(query, view).column.key, scored);
+  const sorted = activeSort(query, view).column.key;
+  const drawn = columnsIn(view.columns, group, sorted, scored);
   const rated = players ? null : ratedOn(drawn, isPer90(query));
   const columns = headedFor(drawn, rated);
   // Plain data, since the key is a client component: a column carries functions.
@@ -110,7 +111,7 @@ export default async function PoolBoard({
 
   // Cut over the first hundred rows the query chose, so a short page keeps its inks as Show N more pages in.
   const cuts = cutsFor(
-    columns.filter((column) => column.mark !== undefined),
+    litColumns(columns, sorted),
     (column) =>
       litRows(shown, capped).map((row) => {
         const stats = raw.get(row.entry.player.fantraxId);

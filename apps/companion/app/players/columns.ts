@@ -94,9 +94,9 @@ function count(category: FantraxCategory, group: PoolGroup, mark: Mark = "high")
   return { ...byAbbreviation(category.short, words.key, group, mark), label: words.head, scores: category };
 }
 
-/** Minutes and games, never rated: ninety minutes' worth of minutes is ninety on every row. */
+/** Minutes and games, never rated (ninety minutes' worth is ninety on every row) and never lit: how much he played, not how well. */
 function denominator(column: PoolColumn): PoolColumn {
-  return { ...column, rate: undefined };
+  return { ...column, rate: undefined, mark: undefined };
 }
 
 /** Position, club and status sit beside the name (Craig, 10 Sep 2026), filtered in the drawer rather than sorted. */
