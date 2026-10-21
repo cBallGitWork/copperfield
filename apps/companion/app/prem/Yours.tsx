@@ -29,7 +29,7 @@ export function YoursToggle({ count }: { count: number }) {
       aria-expanded={state.open}
       aria-controls={state.id}
       onClick={state.flip}
-      className="numeric flex min-h-11 shrink-0 cursor-pointer items-start gap-0.5 lg:items-center text-2xs font-semibold text-accent hover:brightness-110 lg:min-h-7"
+      className="numeric flex min-h-6 shrink-0 cursor-pointer items-start gap-0.5 lg:items-center text-2xs font-semibold text-accent hover:brightness-110 lg:min-h-7"
     >
       {count} yours
       <svg

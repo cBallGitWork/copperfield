@@ -33,7 +33,10 @@ export default function StepHead({
   return (
     <nav aria-label={label} className="flex gap-0.5">
       <Arrow step={previous} back />
-      <Heading className={`cm-bevel flex h-11 min-w-0 flex-1 items-center justify-between gap-3 px-1.5 lg:h-9 ${SMALL_CAPS}`}>
+      {/* A title alone centres on its plate; one with something beside it reads from the left. */}
+      <Heading
+        className={`cm-bevel flex h-11 min-w-0 flex-1 items-center ${children == null ? "justify-center" : "justify-between"} gap-3 px-1.5 lg:h-9 ${SMALL_CAPS}`}
+      >
         <span className="shrink-0">{title}</span>
         {children}
       </Heading>
