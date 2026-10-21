@@ -140,25 +140,36 @@ describe("a ledger grouped by day under a thumb", () => {
 
 describe("a name under a thumb", () => {
   const phone = (html: string) => html.match(/<span class="min-w-0 \[overflow-wrap:anywhere\] lg:hidden">(.*?)<\/span><span class="hidden/)?.[1] ?? "";
+  const TAG = 'text-2xs font-bold uppercase text-faint shrink-0';
 
-  it("wraps rather than cuts, and truncates only on a desk", () => {
+  // UI audit D-12 (21 Oct 2026): the one list name, I. Surname under a thumb and in full on a desk, as PlayerName.
+  it("initials the forename under a thumb, wraps rather than cuts, and truncates the full name only on a desk", () => {
     const html = render();
-    expect(phone(html)).toMatch(/^Levi Colwil</);
-    expect(html).toContain('<span class="hidden min-w-0 items-center gap-1.5 lg:flex"><span class="truncate">Levi Colwill</span>');
+    expect(phone(html)).toMatch(/^L\. Colwil</);
+    expect(html).toContain('<span class="hidden min-w-0 items-baseline gap-1.5 lg:flex"><span class="truncate">Levi Colwill</span>');
   });
 
-  // Final review (21 Oct 2026): a plain space let '(D)' drop alone under the name, 40 of 86 at 320; an nbsp alone left
+  // UI audit D-13 (21 Oct 2026): "(D)" in its own ink beside DEF on every board lead; one caps label, one vocabulary.
+  it("prints the position as the board leads' caps label, DEF or M/F, never a bracketed letter", () => {
+    const html = render();
+    expect(html).toContain(`<span class="${TAG}">DEF</span>`);
+    expect(html).not.toContain("(D)");
+    const dual: Deal = { ...WAIVER, inbound: [{ ...man("Bukayo Saka", BEEF), position: "F,M" }] };
+    expect(renderToStaticMarkup(createElement(Ledger, { deals: [dual], nameOf: named([]) }))).toContain(`<span class="${TAG}">M/F</span>`);
+  });
+
+  // Final review (21 Oct 2026): a plain space let the tag drop alone under the name, 40 of 86 at 320; an nbsp alone left
   // 'Gudmundsson (D)', wider than any 320 line, broken before the tag.
   it("ties the position to the name's last letter, so it never starts a line alone", () => {
-    expect(phone(render())).toBe('Levi Colwil<span class="whitespace-nowrap">l\u00a0<span class="text-2xs font-bold text-mid lg:text-xs">(D)</span></span>');
+    expect(phone(render())).toBe(`L. Colwil<span class="whitespace-nowrap">l\u00a0<span class="${TAG}">DEF</span></span>`);
     const accented: Deal = { ...WAIVER, inbound: [{ ...man("Mamadou Sangare\u0301", BEEF), position: "M" }] };
     const html = renderToStaticMarkup(createElement(Ledger, { deals: [accented], nameOf: named([]) }));
-    expect(phone(html)).toMatch(/^Mamadou Sangar<span class="whitespace-nowrap">e\u0301\u00a0/);
+    expect(phone(html)).toMatch(/^M\. Sangar<span class="whitespace-nowrap">e\u0301\u00a0/);
   });
 
-  it("leaves a name with no position whole, wrapping under a thumb and cut on a desk", () => {
+  it("leaves a name with no position whole, initialled under a thumb and cut on a desk", () => {
     const bare: Deal = { ...WAIVER, inbound: [{ ...man("Levi Colwill", BEEF), position: null }] };
     const html = renderToStaticMarkup(createElement(Ledger, { deals: [bare], nameOf: named([]) }));
-    expect(html).toContain('<span class="min-w-0 [overflow-wrap:anywhere] lg:truncate">Levi Colwill</span>');
+    expect(html).toContain('<span class="min-w-0 [overflow-wrap:anywhere] lg:truncate"><span class="lg:hidden">L. Colwill</span><span class="hidden lg:inline">Levi Colwill</span></span>');
   });
 });
