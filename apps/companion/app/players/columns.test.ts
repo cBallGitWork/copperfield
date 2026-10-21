@@ -1,12 +1,17 @@
-import { describe, expect, it } from "vitest";
-import { ATTRIBUTE_ROWS, GOALS_AGAINST_OUTFIELD } from "@epl/core";
-import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor, headedFor, ratedOn } from "./columns";
+import { createElement } from "react";
+import { describe, expect, it, vi } from "vitest";
+import { ATTRIBUTE_ROWS, GOALS_AGAINST_OUTFIELD, type ScoringRules } from "@epl/core";
+import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor, headedFor, paidFor, ratedOn } from "./columns";
+import { figureCell } from "./Cell";
 import { attributeStats } from "./attributeColumns";
 import { columnsIn } from "./groups";
 import { figureOf } from "./figure";
 import { activeSort, playersQuery } from "./query";
 import { boardView } from "./views";
 
+
+vi.mock("@/app/desk", () => import("../desk"));
+vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 describe("COLUMNS", () => {
   it("gives every column a unique key", () => {
     // `columnFor` returns the FIRST match, so a duplicate key is a sort that
@@ -53,6 +58,11 @@ describe("COLUMNS", () => {
     // column earns the flag back, the plumbing in `PlayerTable` and `Cell` has
     // to come back with it, and this fails first.
     expect(COLUMNS.every((column) => !("deskOnly" in column))).toBe(true);
+  });
+
+  it("never lights minutes or games: a denominator is how much he played, not how well", () => {
+    expect(columnFor("min")?.mark).toBeUndefined();
+    expect(columnFor("gp")?.mark).toBeUndefined();
   });
 
   it("reads a raw count out of the grouped payload and dashes an absent one", () => {
@@ -198,5 +208,71 @@ describe("headedFor", () => {
   it("leaves every head bare with the toggle off or hidden", () => {
     expect(heads(false)).toEqual(drawn.map((column) => column.label));
     expect(heads(null)).toEqual(drawn.map((column) => column.label));
+  });
+});
+
+describe("FPts in the reading cyan", () => {
+  // Craig, 21 Oct 2026: "put fpts in cyan too", as on the Profile since #80; cyan is never lit.
+  const fpts = columnFor("fpts")!;
+  const row = (points: number) => ({ stats: { points } }) as never;
+
+  it("prints his points cyan, never lit, and his nought quiet", () => {
+    expect(fpts.mark).toBeUndefined();
+    expect(figureCell(fpts, row(49), {}, false, { good: 1, best: 2 }).className).toBe("text-info");
+    expect(figureCell(fpts, row(0), {}, false, undefined).className).toBe("text-faint");
+  });
+
+  it("still sorts the board highest first, as Fantrax does", () => {
+    expect(activeSort(playersQuery({}), boardView("pool", {})).column.key).toBe("fpts");
+    expect(fpts.ascending).toBe(false);
+  });
+});
+
+describe("paidFor: a position chip draws what that position scores", () => {
+  // The real league's prices on 21 Oct 2026, by hand: DC pays defenders, DC+ midfielders and forwards, CS D4 M1 F0.
+  const band = (points: number) => ({ bands: [{ from: 3, to: 99, points, every: null }], cumulative: false });
+  const rules: ScoringRules = {
+    goaliePosition: "G",
+    goalie: { CS: { Default: 4 }, GA: { Default: band(-1) }, GKP: { Default: band(1) }, PKS: { Default: 5 }, Min: { Default: band(1) } },
+    outfield: {
+      CS: { D: 4, M: 1, Default: 0 },
+      GAO: { D: band(-1), Default: 0 },
+      DFP: { D: band(1), Default: 0 },
+      DFP3: { M: band(1), F: band(1), Default: 0 },
+      Min: { Default: band(1) },
+      G: { D: 6, M: 5, F: 4, Default: 0 },
+    },
+  };
+  const real = new Set(["GP", "Min", "G", "AT", "YC", "RC", "DFP", "DFP3", "PKM", "OG", "GAO", "CS", "GA", "PKS", "GKP", DEFCON_POINTS]);
+  const all = columnsIn(boardView("pool", {}).columns, "all", "fpts", real);
+  const drawn = (positions: string[]) => paidFor(all, rules, positions).map((column) => column.label);
+  const among = (positions: string[], labels: string[]) => drawn(positions).filter((label) => labels.includes(label));
+
+  it("draws a keeper no DefCon and an outfielder no keeper's figures", () => {
+    expect(among(["G"], ["DC", "DC+", "DCP"])).toEqual([]);
+    expect(drawn(["G"])).toEqual(expect.arrayContaining(["GA", "GKP", "PKS", "CS"]));
+    for (const position of ["D", "M", "F"]) expect(among([position], ["GKP", "PKS"])).toEqual([]);
+  });
+
+  it("draws DC and its points for defenders, DC+ and its points for midfielders and forwards", () => {
+    expect(drawn(["D"])).toEqual(expect.arrayContaining(["DC", "DCP", "GA", "CS"]));
+    expect(drawn(["D"])).not.toContain("DC+");
+    expect(drawn(["M"])).toEqual(expect.arrayContaining(["DC+", "DCP", "CS"]));
+    expect(among(["M"], ["DC", "GA"])).toEqual([]);
+    expect(drawn(["F"])).not.toContain("CS");
+  });
+
+  it("draws the union for several chips, everything for none, and always the figures no category prices", () => {
+    expect(drawn(["D", "M"])).toEqual(expect.arrayContaining(["DC", "DC+"]));
+    expect(drawn([])).toEqual(all.map((column) => column.label));
+    expect(drawn(["F"])).toEqual(expect.arrayContaining(["Player", "FPts", "FP/G", "Min", "GP", "G"]));
+  });
+
+  it("keeps the column the board is sorted by, so a chip never hides the order", () => {
+    expect(paidFor(all, rules, ["G"], "dfp").map((column) => column.label)).toContain("DC");
+  });
+
+  it("draws everything where the league's prices were not read", () => {
+    expect(paidFor(all, null, ["G"])).toEqual(all);
   });
 });

@@ -8,7 +8,7 @@ import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import { MaybeCard } from "./PlayerCardButton";
 import SubNote from "./SubNote";
 import { COLUMNS, sorted, type StatLine, type StatSort } from "./statColumns";
-import { SIDE_SHARES, standoutCuts, standoutInk } from "../../../components/league/standout";
+import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted } from "../../../components/league/standout";
 import { statsHref } from "./statsSort";
 import { appeared, cameOn, forCode, ordered, type Named } from "./sheetJoin";
 import type { Match } from "./match";
@@ -64,11 +64,14 @@ export default function ClubStats({
   });
   const rows = sorted(inSheetOrder, sort, descending);
   const appearances = inSheetOrder.filter((row) => appeared(row.named));
-  const cuts = new Map(
-    COLUMNS.filter((column) => "rank" in column).map((column) => {
-      const values = appearances.map((row) => column.of(row));
-      return [column.head, standoutCuts(values, SIDE_SHARES, { of: appearances.length })];
-    }),
+  const cuts = unlessSorted(
+    new Map(
+      COLUMNS.filter((column) => "rank" in column).map((column) => {
+        const values = appearances.map((row) => column.of(row));
+        return [column.head, standoutCuts(values, SIDE_SHARES, { of: appearances.length })];
+      }),
+    ),
+    sort,
   );
   // Grey is "not on the pitch at the whistle", the team sheet's own rule.
   const finished = (row: Row) => appeared(row.named) && row.named.did?.offAt == null;

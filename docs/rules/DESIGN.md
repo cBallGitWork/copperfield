@@ -257,7 +257,7 @@ instead under a thumb**, Adv Stats and Clubs: a row of group plates draws one
 group's columns at a time, a plate orders by its own lead column, and a `?sort=`
 outside it opens that column's plate, so the order is never hidden (Craig, 19 Oct
 2026: *"split into attack/defending"*; Clubs since 20 Oct 2026). Both dock the
-plates at the foot with the Key at the top. Clubs keeps every column from `lg`.
+plates at the foot with the Key at the top. Clubs keeps every column from `lg`. Players draws only the figures the league scores, and under a position chip only those the league pays that position, off getLeagueInfo's prices; the sorted column always stays (Craig, 21 Oct 2026).
 
 **Under a thumb that bar is drawn, because iOS draws none** (27 Sep 2026: Craig, *"scrollbars not obvious"*).
 `::-webkit-scrollbar` never reaches iOS Safari, and on Chrome the bar sat at the board's foot, under row 100 on
@@ -462,7 +462,7 @@ is more specific than a palette; it is the reason the token names in
 | Ground | `--color-bg` `surface` `raised` `line` | depth, never meaning | — |
 | Ink | `--color-ink` `muted` `faint` | how loud | 17.0 · 8.6 · 5.7 |
 | Yellow | `--color-accent` | **yours · selected · active · primary** | 13.1 |
-| Cyan | `--color-info` | **a derived reading** — ours rather than recorded; and a row's kind on a ledger: the competition on a team's Fixtures, the deal on its Transfers (Craig, 7 Oct 2026, over the accent) | 11.2 |
+| Cyan | `--color-info` | **a derived reading** — ours rather than recorded; and a row's kind on a ledger: the competition on a team's Fixtures, the deal on its Transfers (Craig, 7 Oct 2026, over the accent); and the league's points where they are the reading a screen is for — a scoreline, FPts on the player page and the Players board — never lit as a standout (Craig, 4 Sep and 21 Oct 2026). There cyan says "the reading", not "ours": the FPts head says whose | 11.2 |
 | Amber | `--color-mid` | **a figure standing alone beside a name** — never a column of a standings table | 9.8 |
 | Red | `--color-bad` | **a loss, a doubt, a negative** | 5.6 |
 | Green | `--color-up` | **a gain** — the other half of the direction pair | 9.9 |
@@ -528,7 +528,7 @@ man is unavailable — and the cyan is the column beside it: the rating in
 So the slot is **a reading we DERIVED**, against white for a fact somebody
 recorded. That is a distinction this app has to make without words (§7: no
 screen names its source, and nothing of ours sits in a column headed `FPts`),
-and the colour is how it makes it. Seven sites inked a player's
+and the colour is how it makes it wherever no head says whose. Seven sites inked a player's
 name cyan and none do; the slot is deliberately near-empty until a derived
 figure claims it, which is better than it meaning two things. The Mail tab's unread count
 claims it (23 Sep 2026): no provider tracks reads, so the count is ours, derived from
@@ -626,6 +626,8 @@ numbers in yellow/orange like in the prem page, not squares with background colo
 The threshold itself is unchanged and shared, in `components/league/standout.ts`: a column's top values, whole
 values at a time, while they stay rare. Each board sets its own shares (the pool: a sixth in yellow, a
 twentieth in orange, and nothing under ten scored figures; a match: a fifth and a tenth of the men who played).
+**A board never lights the column it is sorted by** (Craig, 21 Oct 2026): its top rows are its top values by
+construction, and the order already says who leads (`unlessSorted` in `components/league/standout.ts`).
 
 **And the pool board is OPAQUE, which no other table is** (Craig, same
 day: *"also it needs to be opaque too"*). `.cm-panel` is deliberately 88% and its

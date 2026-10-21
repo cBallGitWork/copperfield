@@ -81,7 +81,7 @@ export type { CupStage } from "./cups/plan";
 export { CUP_TIE_STEPS } from "./cups/tieBreak";
 
 export { FantraxError } from "./fantrax/errors";
-export { categoryPoints, keeperRung, pointsFor, returnPoints } from "./scoring";
+export { categoryPoints, keeperRung, paidAt, pointsFor, returnPoints } from "./scoring";
 export type { LeagueScoring, ScoringCategory, ScoringRules } from "./scoring";
 export { orphaned, unacknowledged } from "./fantrax/baseline";
 export type { AcknowledgedDifference } from "./fantrax/baseline";

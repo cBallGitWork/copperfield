@@ -13,7 +13,7 @@ import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import StateBox from "../../../components/football/StateBox";
 import { doubtRow } from "../../../components/football/doubtRow";
 import { byFigure } from "../../../components/league/order";
-import { SIDE_SHARES, standoutCuts, standoutInk } from "../../../components/league/standout";
+import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted } from "../../../components/league/standout";
 import { MINOR_LABEL, PANEL_FLUSH } from "@/app/desk";
 
 // One squad's season on the house board, as a club's stat board draws it: our position in the index tile, the crest
@@ -55,11 +55,14 @@ export default function StatBoard({
   const [sort, setSort] = useState<{ key: string; descending: boolean } | null>(null);
 
   const measures = measuresFor(view, new Set(served), new Set(statsColumns), defcon !== null);
-  const cuts = new Map(
-    measures.map((measure) => [
-      measure.key,
-      standoutCuts(lines.map((line) => measure.read(line, besideOf(line, statsLeague, defcon))), SIDE_SHARES, { of: lines.length }),
-    ]),
+  const cuts = unlessSorted(
+    new Map(
+      measures.map((measure) => [
+        measure.key,
+        standoutCuts(lines.map((line) => measure.read(line, besideOf(line, statsLeague, defcon))), SIDE_SHARES, { of: lines.length }),
+      ]),
+    ),
+    sort?.key ?? null,
   );
 
   const rows = useMemo(() => {

@@ -89,5 +89,5 @@ export function figureCell(
   const printed = rated && column.rate === true ? fixed(figure, "perNinety") : column.places ? fixed(figure, column.places) : String(value);
   // Zero is a stat, and a quiet one; so is a rate under its floor.
   if (figure === 0 || underFloor(column, stats, rated)) return { value: printed, className: "text-faint" };
-  return { value: printed, className: column.derived ? "text-info" : column.mark ? standoutInk(figure, cut, column.mark) : "" };
+  return { value: printed, className: column.derived || column.cyan ? "text-info" : column.mark ? standoutInk(figure, cut, column.mark) : "" };
 }

@@ -7,7 +7,7 @@ import { viewOf, reading } from "./measures";
 import { PANEL } from "@/app/desk";
 import Board from "../../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../../components/league/LeadFace";
-import { SIDE_SHARES, standoutCuts, standoutInk } from "../../../../components/league/standout";
+import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted } from "../../../../components/league/standout";
 import StateBox from "../../../../components/football/StateBox";
 import { doubtRow } from "../../../../components/football/doubtRow";
 
@@ -45,11 +45,14 @@ export default function PlayerBoard({ rows, view }: { rows: readonly Row[]; view
   const { measures } = shown;
   // Each column's standouts among the men who have played, as a match board lights them.
   const played = rows.filter((row) => !unplayed(row)).length;
-  const cuts = new Map(
-    measures.map((measure) => [
-      measure.key,
-      standoutCuts(rows.map((row) => row.player.season[measure.key]), SIDE_SHARES, { of: played }),
-    ]),
+  const cuts = unlessSorted(
+    new Map(
+      measures.map((measure) => [
+        measure.key,
+        standoutCuts(rows.map((row) => row.player.season[measure.key]), SIDE_SHARES, { of: played }),
+      ]),
+    ),
+    sort?.key ?? null,
   );
 
   const ordered = useMemo(() => {
