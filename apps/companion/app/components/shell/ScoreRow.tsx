@@ -104,8 +104,11 @@ export default function ScoreRow({
 /** Block, name, score, name, block: the two `1fr`s hold every name in the panel at one x. */
 const GRID = "grid-cols-[auto_1fr_auto_1fr_auto] gap-x-0.5 lg:gap-x-2";
 
-/** A name over its control under a thumb: the name sits low in its 44 and the control high in its own, so they read as one. */
+/** A name over its control under a thumb: the name sits low in its half and the control high in its own, so they read as one. */
 const STACKED = "items-end lg:items-center";
+
+/** A cell's tap floor under a thumb (28 from `lg`): the 44, or 24 for each half of a name stacked over its control (Craig, 21 Oct 2026: "waaaaay too tall"). */
+const FLOOR = { whole: "min-h-11", half: "min-h-6" } as const;
 
 /** Which way a side reads: the away half mirrors the home, so both crests sit against their own block. */
 const READS = { home: "", away: "flex-row-reverse" } as const;
@@ -124,11 +127,21 @@ function Block({ side }: { side: ScoreSide }) {
 }
 
 /** A cell of a split row: a link at the thumb floor when it leads somewhere, else the plain span. */
-function Cell({ href, className, children }: { href?: string; className: string; children: ReactNode }) {
+function Cell({
+  href,
+  className,
+  floor = FLOOR.whole,
+  children,
+}: {
+  href?: string;
+  className: string;
+  floor?: string;
+  children: ReactNode;
+}) {
   return href === undefined ? (
     <span className={className}>{children}</span>
   ) : (
-    <Link href={href} className={`${className} min-h-11 hover:brightness-110 lg:min-h-7`}>
+    <Link href={href} className={`${className} ${floor} hover:brightness-110 lg:min-h-7`}>
       {children}
     </Link>
   );
@@ -140,6 +153,7 @@ function Name({ side, at, split, under }: { side: ScoreSide; at: "home" | "away"
   const name = (
     <Cell
       href={split ? side.href : undefined}
+      floor={under === undefined ? FLOOR.whole : FLOOR.half}
       className={`flex min-w-0 ${under === undefined ? "items-center" : STACKED} gap-1 lg:gap-1.5 ${ROW_NAME} ${READS[at]} ${
         side.mine === true ? "text-accent" : side.lost === true ? "text-muted" : "text-ink"
       }`}

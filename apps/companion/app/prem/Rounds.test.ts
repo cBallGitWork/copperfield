@@ -86,10 +86,12 @@ describe("a signed-in reader's count", () => {
     expect(html).toMatch(new RegExp(`<div id="${controls[0]}" hidden="">[\\s\\S]*Saka`));
   });
 
-  it("sits beside the names' links, never inside one, and keeps a thumb's height", () => {
+  it("sits beside the names' links, never inside one, the pair one thumb's row: 24 each under lg", () => {
     const html = round(new Map([[1, [saka, palmer]]]));
     for (const a of html.match(/<a [\s\S]*?<\/a>/g) ?? []) expect(a).not.toContain("<button");
-    for (const b of html.match(/<button[^>]*>/g) ?? []) expect(b).toMatch(/min-h-11/);
+    for (const b of html.match(/<button[^>]*>/g) ?? []) expect(b).toMatch(/min-h-6 /);
+    const names = (html.match(/<a [^>]*href="\/prem\/club[^"]*"[^>]*>/g) ?? []).filter((a) => a.includes("min-h-6"));
+    expect(names.length).toBeGreaterThan(0);
   });
 
   it("marks the count as one that opens, with a closed chevron inside its button", () => {
