@@ -29,11 +29,14 @@ Craig: *"in the compare section, can we compare to previous seasons (player sect
 completed season, so a man can be set against himself or the rival in an earlier year.
 
 - **The URL** carries a season per side, `?as=` and `?bs=`, as `2024-25`; absent is this season, and a season the
-  man has no minutes in is this season too (`season.ts`, `pickedSeason`). `compareHref` carries both. The player
-  page's Compare tab is unchanged: him against his nearest rival, this season.
+  man has no minutes in is this season too (`season.ts`, `pickedSeason`). `compareHref` carries both.
+- **The player page's Compare tab draws this same body** (`CompareBody.tsx`, 21 Oct 2026) at `/players/<id>/compare`,
+  inside his shell with him fixed as A (`compareRoute.ts`: the route's `base` and `fixed`; links never carry `a`).
+  There B opens on his last season, and `v <rival>` sits under B's select beside `v his last season` (`player.md`).
+  This page keeps both boxes and its one button.
 - **A season select over each half** (`SeasonBar`), under the search boxes, lists this season by its name and every
   completed season he played, off the same history the Data tab's season picker reads (`pastSeasons`, through
-  `pastSides.ts`). **`vs his last season`** sits under B's half when B is empty or A again in A's season: one tap sets
+  `pastSides.ts`). **`v his last season`** sits under B's half when B is empty or A again in A's season: one tap sets
   B to A in his most recent other season. Swapping either man keeps the other side's season and resets his own.
 - **The ledger keeps to what both seasons carry** (`rates.ts`, `measuresFor`): Min, Touches/90, Shots/90, Goals/90,
   Assists/90, CS/90, Saves/90 and Conceded/90. A completed season has no starts, expected goals or defensive actions,
@@ -59,9 +62,11 @@ page too … filter by last 6 gameweeks"*. Designed first (option A, "Action Zon
 phone strip and no tie band. Where the sections below disagree with this one, this one is current.
 
 - **The pickers** share one row at every width, each box over the half of the bar it would change; the labels
-  above them went (the bar names both men). Each box's accessible name says whom it would swap.
+  above them went (the bar names both men). Each box's accessible name says whom it would swap. On a player's own
+  Compare A has no box, and B's sits alone at `col-start-2`, over B's half (21 Oct 2026).
 - **One block at a time at every width**: a 44px strip, Figures · Shots · Key passes · Touches · Attributes
-  (`?view=`). The desk showed every block until Craig's *"just have the categories in sections like mobile"*
+  (`?view=`), **docked in the foot** (`FootFrame`, DESIGN §2, 21 Oct 2026) on both routes, so the top keeps one row of
+  plates (Data's strip, or his tabs); `CompareBody` takes the page's shell as a function and wraps it in the frame. The desk showed every block until Craig's *"just have the categories in sections like mobile"*
   (24 Sep 2026); a map is centred at 768px at most. A view neither man has is dimmed. Season/Last 6 is hidden
   on Attributes, which it never governed.
 - **Season or Last 6** (`?range=6`), with the window beside it as `GW1–5`. It governs the figures and every map;

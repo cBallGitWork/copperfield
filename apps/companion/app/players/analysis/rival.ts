@@ -1,6 +1,7 @@
-import type { PoolRow } from "../pool";
+import type { LeaguePool, PoolRow } from "../pool";
+import { poolPoints } from "../[fantraxId]/poolPoints";
 
-// Who Compare opens beside a man from his own page: the nearest in league points among his position group.
+// Who his own Compare offers beside him: the nearest in league points among his position group.
 
 /** The man in his group with the nearest season league points, ties to a free agent and then pool order; never
  *  himself, and undefined when he has no group or no points to measure from. */
@@ -28,4 +29,10 @@ export function defaultRival(
     }
   }
   return best?.row.entry.player.fantraxId;
+}
+
+/** The rival off the cached pool; undefined while it is silent or projected, which a points measure must not read. */
+export function rivalIn(pool: LeaguePool, fantraxId: string, groupOf: (code: number) => string | null): string | undefined {
+  const points = poolPoints(pool);
+  return points === undefined || "unavailable" in pool ? undefined : defaultRival(pool.rows, fantraxId, points, groupOf);
 }

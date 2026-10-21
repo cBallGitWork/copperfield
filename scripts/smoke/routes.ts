@@ -78,7 +78,7 @@ const FAMILIES: readonly Family[] = [
     id: "playerId",
     route: "/players/[fantraxId]",
     unnamed: "nobody holds a player yet",
-    paths: (id) => [`/players/${id}`, `/players/${id}/data`, `/players/${id}/history`, `/players/${id}/news`, `/players/${id}/transfer`],
+    paths: (id) => [`/players/${id}`, `/players/${id}/data`, `/players/${id}/history`, `/players/${id}/news`, `/players/${id}/compare`, `/players/${id}/transfer`],
   },
   {
     // Data's Compare: its ids are in the query, so no link off the board reaches it.

@@ -25,7 +25,7 @@ const ALLOWED: Record<string, true | readonly string[]> = {
   "news/page.tsx": ["Pending claims and trades on Fantrax"],
   "players/PoolBoard.tsx": ["Claim on Fantrax"],
   "league/waivers/page.tsx": ["Claim on Fantrax"],
-  "players/analysis/page.tsx": ["on Fantrax"],
+  "players/analysis/CompareExits.tsx": ["on Fantrax"],
   // The FPL tab: its nav item, its pages and its team-id form.
   "components/shell/sections.ts": ["FPL"],
 };

@@ -43,14 +43,10 @@ describe("the player's Profile", () => {
 });
 
 describe("the player's tab strip", () => {
-  it("ends on Compare, opened with him as A and the rival as B", () => {
-    const tabs = playerTabs("abc12", "xyz34");
+  it("ends on Compare, his own inside his shell", () => {
+    const tabs = playerTabs("abc12");
     expect(tabs.map((tab) => tab.label)).toEqual(["Profile", "Data", "News", "Compare"]);
-    expect(tabs.at(-1)?.href).toBe("/players/analysis?a=abc12&b=xyz34");
-  });
-
-  it("opens Compare with him alone when no rival was found", () => {
-    expect(playerTabs("abc12", undefined).at(-1)?.href).toBe("/players/analysis?a=abc12");
+    expect(tabs.at(-1)?.href).toBe("/players/abc12/compare");
   });
 
   it("leaves no second way into Compare on the Profile", () => {
