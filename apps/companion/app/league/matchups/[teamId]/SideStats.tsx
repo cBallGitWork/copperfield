@@ -3,7 +3,7 @@ import { type LeagueTeam, type LineupDetail, type ScoringCategory, type SquadPla
 import { teamColours } from "@/app/teamColours";
 import Section from "../../../components/shell/Section";
 import Board from "../../../components/league/Board";
-import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
+import LeadFace, { LEAD_LINK_TIGHT } from "../../../components/league/LeadFace";
 import { gainOrLoss } from "@/app/desk";
 import { MaybeCard } from "../../../prem/match/[id]/PlayerCardButton";
 import { MATCH_ROW } from "../../../prem/match/[id]/matchRow";
@@ -57,7 +57,7 @@ export default function SideStats({
           name: {
             label: "Player",
             of: ({ player }) => (
-              <MaybeCard player={player} className={`${LEAD_LINK} ${PHONE_ROW} gap-1.5`}>
+              <MaybeCard player={player} className={`${LEAD_LINK_TIGHT} gap-1.5`}>
                 <LeadFace crest={player.club ? crestUrl(player.club) : null} name={fullPlayerName(player.rostered)} />
               </MaybeCard>
             ),
@@ -86,6 +86,3 @@ function managerIndex(team: LeagueTeam): CSSProperties {
   const colours = teamColours(team.teamId);
   return { "--cm-index": colours.primary, "--cm-index-ink": inkOn(colours) } as CSSProperties;
 }
-
-/** 36px under a thumb, not 44: PRODUCT's match-screen exception, which `MATCH_ROW` marks. */
-const PHONE_ROW = "max-lg:min-h-9";

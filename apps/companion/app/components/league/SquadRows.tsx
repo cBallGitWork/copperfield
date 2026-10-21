@@ -2,13 +2,13 @@ import type { SquadDetailLine, SquadPlayerDetail } from "@epl/core";
 import type { AutoSubMark } from "./autoSubbed";
 import ScrollBoard from "./ScrollBoard";
 import SquadRow, { SQUAD_CREST, SQUAD_GAP, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
-import { MUTE } from "./TableHeads";
-import { MINOR_CAPS, QUIET_NOTE } from "@/app/desk";
+import { MUTE, headWord } from "./TableHeads";
+import { PLATE_FRAME, QUIET_NOTE, SMALL_CAPS } from "@/app/desk";
 
 // The squad as a list: one run of rows, each man's positions a column, since a heading cannot hold two.
 
 /** `TableHeads.PLATE` without its padding: a 30px column cannot spare 12 of it. */
-const FIGURE_HEAD = "cm-bevel flex h-7 items-center justify-center whitespace-nowrap";
+const FIGURE_HEAD = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap`;
 
 export default function SquadRows({
   lines,
@@ -53,13 +53,13 @@ export default function SquadRows({
         {head ? (
           // The house's head (`TableHeads`): bare over the tile, the crest and the name, a plate over each figure. Under
           // a thumb the figures take only their own width and the name the rest (Craig, 11 Oct 2026: names cut at 390).
-          <div className={`flex items-center ${SQUAD_GAP} px-1.5 ${MINOR_CAPS}`}>
+          <div className={`flex items-center ${SQUAD_GAP} px-1.5 ${SMALL_CAPS}`}>
             <span className="w-10 shrink-0">
               <span className={MUTE}>Pos</span>
             </span>
             <span className={`${SQUAD_CREST} shrink-0`} />
             {/* A basis, not a min-width: the name is the elastic column, and without a floor it renders 0px wide. */}
-            <span className="flex h-7 min-w-0 flex-[1_1_5rem] items-center">
+            <span className={`${PLATE_FRAME} min-w-0 flex-[1_1_5rem]`}>
               <span className={MUTE}>Player</span>
             </span>
 
@@ -70,7 +70,7 @@ export default function SquadRows({
             </span>
             {xMins ? (
               <span className={`${FIGURE_HEAD} w-9 shrink-0`} title="Expected minutes this gameweek">
-                xMins
+                {headWord("xMins")}
               </span>
             ) : null}
             {scored ? (

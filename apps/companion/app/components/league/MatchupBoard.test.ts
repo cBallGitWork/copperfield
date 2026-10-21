@@ -7,7 +7,7 @@ import shortNames from "../../../../../data/leagues/short-names.json";
 
 vi.mock("next/navigation", () => ({ useRouter: () => ({}) }));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
-vi.mock("@/app/desk", () => ({ BAR_TITLE: "", TAB: "" }));
+vi.mock("@/app/desk", () => import("../../desk"));
 vi.mock("@/app/mine", () => ({ yoursMark: () => "" }));
 vi.mock("@/app/teamColours", () => ({ teamColours: () => ({ primary: "#123456", secondary: "#ffffff" }) }));
 vi.mock("@/app/teamNames", async () => await import("../../teamNames"));

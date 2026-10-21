@@ -7,13 +7,14 @@ import {
   BOARD,
   BOARD_FIT,
   FIGURE_CELL,
+  FIGURE_CELL_TIGHT,
   HEAD_CELL,
   INDEX_WIDTH,
   PINNED_BESIDE_INDEX,
   PINNED_BESIDE_TILE,
   PINNED_NAME,
   PINNED_TILE,
-  ROW_FIGURE,
+  READ_ROW,
   ROW_HEAD_CELL,
   ROW_HOVER_ON_SURFACE,
   SMALL_CAPS,
@@ -77,17 +78,17 @@ const DESK_TILE = `hidden lg:table-cell ${PINNED_TILE}`;
 /** The tile of a man nobody holds, green where a held man's is blue (DESIGN §3, `--color-index-free`). */
 const FREE_TILE = "[--cm-index:var(--color-index-free)]";
 
-/** One figure a little tighter under a thumb, for a board of two dozen columns. */
-const TIGHT_FIGURE = `numeric px-1 text-center lg:px-1.5 ${ROW_FIGURE}`;
-
 const RULE = "border-l border-line";
 
 /** A row's name line under a thumb: no rule under it, so the line and its figures read as one row. */
-const NAME_LINE = "lg:hidden border-b-0";
+const NAME_LINE = "h-6 lg:hidden border-b-0";
 
 /** The name line's face, as wide as the scroller (`@container` on it) and held at its left edge while the board
- *  scrolls under it. */
-const LINE_FACE = "sticky left-0 w-[100cqw]";
+ *  scrolls under it; 24px tall, so the 44px link inside (`players/Cell`) hangs over the figures and the pair is one target. */
+const LINE_FACE = "sticky left-0 h-6 w-[100cqw]";
+
+/** The figures under a name line: 20px, so the pair is 44 under a thumb. */
+const UNDER_LINE = "max-lg:h-5 lg:h-7";
 
 export default function Board<Row>({
   columns,
@@ -131,7 +132,7 @@ export default function Board<Row>({
   const ruled = groups === null ? columns : columns.map((column, at) => ({ ...column, rule: column.rule === true || column.group !== columns[at - 1]?.group }));
   const span = columns.length + (lead.tile || lead.index ? 1 : 0) + (lead.name ? 1 : 0);
   const figures = (entry: Row, at: number) => (
-    <tr className={`${ROW_HOVER_ON_SURFACE} ${rowClass?.(entry) ?? ""}`} {...rowAttrs}>
+    <tr className={`${ROW_HOVER_ON_SURFACE} ${line === undefined ? READ_ROW : UNDER_LINE} ${rowClass?.(entry) ?? ""}`} {...rowAttrs}>
       {lead.tile ? (
         <PositionTile
           positions={lead.tile.positions(entry)}
@@ -147,7 +148,7 @@ export default function Board<Row>({
       ) : null}
       {ruled.map((column) => {
         const figure = column.cell(entry);
-        const base = column.bare ? "" : `${compact ? TIGHT_FIGURE : FIGURE_CELL} ${column.left ? "text-left" : ""}`;
+        const base = column.bare ? "" : `${compact ? FIGURE_CELL_TIGHT : FIGURE_CELL} ${column.left ? "text-left" : ""}`;
         return (
           <td key={column.key} title={figure.title} className={`${base} ${column.rule ? RULE : ""} ${figure.className ?? ""}`}>
             {figure.value}

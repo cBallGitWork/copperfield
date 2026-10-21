@@ -47,6 +47,19 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## One table spec — decided 21 Oct 2026
+
+Craig, 21 Oct 2026: *"seven table styles on one page: six different row heights, three header styles and three
+figure sizes"*. The spec lives in `app/desk.ts` and DESIGN §6 ("One table"): a 24px head plate in `3xs` bold caps (9px, the size it had; the complaint was the plate's height)
+(`PLATE_FRAME`, reversing 2 Oct's 28), read-only rows 24/28 (`READ_ROW`), tap rows 44/28 (`TAP_ROW`), PRODUCT's
+36px list kept (`TIGHT_TAP_ROW`), one figure size (`ROW_FIGURE`). Width stays an explicit `fit` at the call site,
+not a column count: a board whose name takes the slack (SquadTable, LeaderBoard) cannot be told from a short record
+by counting. Kept off `Board`, each for its own reason: `StandingsTable` (place block, Pts block, cut rows, form),
+`Ledger` and `SquadRows` (lists, not tables), scoring (merged cells for a category paid alike), a club's Run (no
+head, a "Played" break), Depth (names across, no figures), the shot map (a row picks a shot), the match Squads and
+team sheet, and Compare's `PairLedger` (DESIGN §6's exception). They wear the same tokens. DESIGN §6's five
+recorded figure exceptions stand, Business's 1 Oct step up to `base` among them (Craig's ruling).
+
 ## Matchups folds into League › Fixtures — decided 20 Oct 2026
 
 Craig, 20 Oct 2026: retire `/league/matchups` into Fixtures. Both drew the same gameweek's pairings with the same

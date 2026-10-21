@@ -4,7 +4,7 @@ import PlayerName from "../../../../components/shell/PlayerName";
 import { IndexCell } from "../../../../components/league/TableCells";
 import StateBox from "../../../../components/football/StateBox";
 import { doubtRow } from "../../../../components/football/doubtRow";
-import { BOARD, ROW_NAME, ROW_RULE } from "@/app/desk";
+import { BOARD, ROW_NAME, ROW_RULE, TAP_ROW } from "@/app/desk";
 import NameLink from "../NameLink";
 import XMins, { type WeekMinutes } from "./XMins";
 
@@ -51,7 +51,7 @@ export default function DepthList({
                     ) : (
                       <NameLink
                         href={hrefOf(player.code)}
-                        className={`cm-row flex min-h-11 items-center gap-1 ${
+                        className={`${TAP_ROW} gap-1 ${
                           rank === 0 ? `${ROW_NAME} text-ink` : BEHIND
                         }`}
                       >

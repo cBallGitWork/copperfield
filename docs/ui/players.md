@@ -154,8 +154,10 @@ above does, that one is.
   need short manager names"*), and Fantrax's own `(FA)` / `(WW)` loud, because that is the man a reader can act
   on; the word is its title. This reverses 10 Sep's "owner loud, status quiet". A board filtered to one status
   drops that code (16 Oct 2026): "(WW)" on 100 of 100 rows of `?status=WW` said what the pressed chip says.
-- **Heads** are 24px with 2px padding under a thumb (`SortHead compact`), so a narrow column is as wide as its
-  figures; the desk keeps 28px.
+- **Heads** are the one 24px plate at both widths, with 2px padding under a thumb (`SortHead compact`), so a
+  narrow column is as wide as its figures (21 Oct 2026).
+- **A man's row under a thumb is one 44px target**: his name line is 24px and his figures 20 under it, and the
+  name's link hangs over both (21 Oct 2026; 44 + 19 before). The desk keeps one 28px row.
 - **Figures** are centred, in ink. Standouts are lit in ink, never on a ground: orange for a column's best
   (a twentieth of the scored figures), yellow for the rest of its top sixth, red at the bad end
   (`components/league/standout.ts`, shared with the match board). A nought prints, quietly; an absence is `—`.

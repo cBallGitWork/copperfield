@@ -19,6 +19,7 @@ export default function Moves({ moves }: { moves: readonly PlayerMove[] }) {
         <p className={`text-muted ${TYPE}`}>No claim, drop or trade involving him.</p>
       ) : (
         <Board
+          fit
           rows={moves}
           keyOf={({ transaction }) => `${transaction.setId}-${transaction.kind}-${transaction.processedAt ?? ""}`}
           rowClass={({ transaction }) => (transaction.executed ? "" : "text-faint")}

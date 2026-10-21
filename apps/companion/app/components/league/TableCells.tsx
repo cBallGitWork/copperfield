@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { INDEX_WIDTH, MINOR_LABEL } from "@/app/desk";
+import { INDEX_WIDTH, MINOR_LABEL, TAP_ROW, TIGHT_TAP_ROW } from "@/app/desk";
 
 // The two cells a CM board's rows are built from, opposite `TableHeads`.
 // No crest-and-name cell: its callers differ in size, fallback and alignment.
@@ -14,12 +14,11 @@ export function IndexCell({ children, className = "", wide }: { children: ReactN
   );
 }
 
-/** The name cell's link on a board row. `min-h-11` is the phone's tap floor and `.cm-row` only takes the row to 28
- *  from `lg`, so both are needed. */
-export const ROW_LINK = "cm-row flex min-h-11 items-center gap-2 hover:underline";
+/** The name cell's link on a board row: `TAP_ROW`'s 44 under a thumb and 28 on a desk. */
+export const ROW_LINK = `${TAP_ROW} gap-2 hover:underline`;
 
-/** A Draft-tab table row: 36px under a thumb (PRODUCT.md), CM's 28 from `lg`. */
-export const TIGHT_ROW = "cm-row flex min-h-9 items-center gap-2";
+/** A read-mostly table's row: `TIGHT_TAP_ROW`'s 36 under a thumb (PRODUCT.md), 28 from `lg`. */
+export const TIGHT_ROW = `${TIGHT_TAP_ROW} gap-2`;
 
 /** The points in a block of their own, the way CM ends its table: the eye runs down the column to find them. */
 export function PointsCell({ children, className = "" }: { children: ReactNode; className?: string }) {

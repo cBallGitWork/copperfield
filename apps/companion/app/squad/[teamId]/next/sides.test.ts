@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
-vi.mock("@/app/desk", () => ({ TAB: "" }));
+vi.mock("@/app/desk", () => import("../../../desk"));
 vi.mock("next/navigation", () => ({ useRouter: () => ({}) }));
 vi.mock("../../../teamNames", () => ({ shortName: (_id: string, full: string) => full.split(" ")[0] }));
 

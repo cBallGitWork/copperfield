@@ -46,7 +46,7 @@ export default function Ledger({
   const traded = rows.some((row) => row.partners.length > 0);
   return (
     <section className={PANEL_FLUSH}>
-      <div className={`cm-bevel hidden min-h-7 items-center gap-2 px-1.5 ${SMALL_CAPS} lg:flex`}>
+      <div className={`cm-bevel hidden h-6 items-center gap-2 px-1.5 ${SMALL_CAPS} lg:flex`}>
         <span className="w-24 shrink-0">Date</span>
         {everyone ? <span className="w-32 shrink-0">Team</span> : null}
         <span className="w-24 shrink-0">Type</span>

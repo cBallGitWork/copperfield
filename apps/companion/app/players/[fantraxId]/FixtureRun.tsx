@@ -2,7 +2,7 @@ import type { Opposition } from "@epl/core";
 import Section from "../../components/shell/Section";
 import { fdrStep } from "../../components/football/fdr";
 import { DASH, venueMark } from "@epl/core";
-import { MINOR_LABEL, QUIET_FIGURE } from "@/app/desk";
+import { MINOR_LABEL, PLATE_FRAME, ROW_FIGURE, SMALL_CAPS } from "@/app/desk";
 
 // What is coming, as a run: FPL's difficulty on each block, under it the sister model's xMins for that gameweek.
 // No source caption (Craig, 30 Sep 2026); each figure's title says whose it is.
@@ -26,11 +26,9 @@ export default function FixtureRun({
       <ol className="flex items-stretch gap-1">
         {/* Each row's word, in the lines' own heights, so the cyan run is named on a phone (review M30). */}
         <li className="flex shrink-0 flex-col gap-1">
-          <span className={`${QUIET_FIGURE} invisible`} aria-hidden>
-            GW
-          </span>
+          <span className="h-6" aria-hidden />
           <span className="min-h-11" />
-          <span className="block text-xs">
+          <span className={`block ${ROW_FIGURE}`}>
             <span className={MINOR_LABEL}>xMins</span>
           </span>
         </li>
@@ -41,7 +39,7 @@ export default function FixtureRun({
           const step = fdrStep(against.difficulty);
           return (
             <li key={against.fixture.id} className="flex min-w-0 flex-1 flex-col gap-1">
-              <span className={`${QUIET_FIGURE} text-center`}>
+              <span className={GW_PLATE}>
                 {/* A rearranged match can lose its round; it keeps its place in the run and says so. */}
                 {gw === null ? DASH : `GW${gw}`}
               </span>
@@ -53,7 +51,7 @@ export default function FixtureRun({
                 <span className="text-2xs font-normal opacity-80">{venueMark(against.home)}</span>
               </span>
               {repeat || gw === null ? null : (
-                <span className="numeric text-center text-xs font-bold text-info" title={`Expected minutes, gameweek ${gw}`}>
+                <span className={`numeric text-center font-bold text-info ${ROW_FIGURE}`} title={`Expected minutes, gameweek ${gw}`}>
                   {minutes.get(gw) ?? DASH}
                 </span>
               )}
@@ -65,3 +63,5 @@ export default function FixtureRun({
   );
 }
 
+/** A gameweek's head: a table's 24px plate and small caps, unpadded so "GW10" fits an eighth of a phone. */
+const GW_PLATE = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap ${SMALL_CAPS}`;

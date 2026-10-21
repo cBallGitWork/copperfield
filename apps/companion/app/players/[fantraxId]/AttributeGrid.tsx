@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { Attribute } from "@epl/core";
 import { DASH } from "@epl/core";
 import Section from "../../components/shell/Section";
+import { READ_LINE, ROW_FIGURE } from "@/app/desk";
 
 // Championship Manager 01/02's attribute grid (Craig, 25 Sep 2026: "more cm like"): alphabetical
 // down three columns on a desk and two on a phone, CM's orange on the best, and its worded row
@@ -41,12 +42,12 @@ export default function AttributeGrid({
         {cells.map((cell) => (
           <div
             key={cell.name}
-            className="flex min-h-7 items-baseline justify-between gap-2 border-b border-bg py-0.5"
+            className={`flex items-baseline justify-between gap-2 border-b border-bg py-0.5 ${READ_LINE}`}
           >
             <dt className="truncate text-sm text-ink lg:text-base" title={cell.title}>
               {cell.name}
             </dt>
-            <dd className={`numeric text-sm font-bold lg:text-base ${cell.ink}`}>{cell.value ?? DASH}</dd>
+            <dd className={`numeric font-bold ${ROW_FIGURE} ${cell.ink}`}>{cell.value ?? DASH}</dd>
           </div>
         ))}
       </dl>

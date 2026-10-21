@@ -2,6 +2,7 @@ import { ordinal, venueMark, type Club, type StrengthRank } from "@epl/core";
 import ClubLabel from "../../components/football/ClubLabel";
 import { easeGround } from "../../components/football/ease";
 import Board, { type BoardFigure } from "../../components/league/Board";
+import { READ_LINE } from "@/app/desk";
 
 // The planner's rankings: every club's own attack or defence, the weakest first, so 1 is the easiest to face and green
 // means easy, as on the Attack and Defence boards (Craig, 30 Sep 2026). One rank a club, home and away apart only where
@@ -24,7 +25,7 @@ export default function StrengthRanks({
           label: "Club",
           of: (row) => {
             const club = clubs.get(row.code);
-            return <span className="cm-row flex min-h-9 items-center gap-1.5 px-1.5 lg:min-h-7">{club ? <ClubLabel club={club} /> : row.club}</span>;
+            return <span className="cm-row flex items-center gap-1.5 px-1.5">{club ? <ClubLabel club={club} /> : row.club}</span>;
           },
         },
       }}
@@ -55,7 +56,7 @@ function Place({ at, mark }: { at: number; mark: string | null }) {
   const { ground, ink } = easeGround(at);
   return (
     <span
-      className={`flex min-h-9 flex-1 flex-col items-center justify-center leading-none lg:min-h-7 ${ink}`}
+      className={`flex flex-1 flex-col items-center justify-center leading-none ${READ_LINE} ${ink}`}
       style={{ background: ground }}
     >
       {ordinal(at)}

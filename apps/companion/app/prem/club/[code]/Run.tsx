@@ -4,7 +4,7 @@ import Link from "@/app/components/shell/Link";
 import type { Club, CupTie, Fixture, RunEntry, SeasonOrder } from "@epl/core";
 import { COMPETITION_NAME, cupName, kickoffAt, londonDayAndDate, londonTime, DASH } from "@epl/core";
 import { clubHref } from "../../routes";
-import { BOARD, DESK_ONLY, FIGURE, MINOR_CAPS, MINOR_LABEL, ROW_HOVER, ROW_NAME } from "@/app/desk";
+import { BOARD, DESK_ONLY, FIGURE, MINOR_CAPS, MINOR_LABEL, ROW_HOVER, ROW_NAME, TAP_ROW } from "@/app/desk";
 import { ROW_LINK } from "../../../components/league/TableCells";
 import Absent from "@/app/components/shell/Absent";
 import ClubLabel from "@/app/components/football/ClubLabel";
@@ -99,7 +99,7 @@ function leagueCells(fixture: Fixture, club: Club, clubs: Map<number, Club>): Ce
     score: (
       <Link
         href={matchHref(fixture.id, "overview")}
-        className="cm-row flex min-h-11 items-center justify-center hover:underline"
+        className={`${TAP_ROW} justify-center hover:underline`}
       >
         {!played ? (
           <Absent />
@@ -124,7 +124,7 @@ function cupCells(tie: CupTie, byCode: Map<number, Club>): Cells {
     opponent:
       opponent === undefined ? (
         // No crest to draw, so its room is kept and the names stay in one column.
-        <span className="cm-row flex min-h-11 items-center gap-2">
+        <span className={`${TAP_ROW} gap-2`}>
           <span className={CREST} aria-hidden />
           <span className="flex min-w-0 flex-col">
             <span className={`min-w-0 truncate ${ROW_NAME}`}>{tie.opponentName ?? DASH}</span>

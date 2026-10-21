@@ -67,7 +67,8 @@ already drawn on both, and now draws only there. `tabs.test.ts` holds which bloc
    filed and the whole of it with its analysis, at `base`/`lg:text-lg`. **A phone gets only its first paragraph**
    (Craig, 20 Oct 2026: the News tab has the rest; no link or "more"); the desk keeps all of it. A fit man gets no
    fitness line. Only the newest: the list is News's. No source caption. With neither, no panel.
-   **Set pieces** under that, a duty at his club rather than a count: his place in his club's
+   **Set pieces** under that, one line of label and figure (`Penalties 1st · Free kicks — · Corners —`, 21 Oct
+   2026; a one-row table before), a duty at his club rather than a count: his place in his club's
    penalty, direct free-kick and corner orders (Craig, 30 Sep 2026: "their fk/pk/corner rank for the club"), the same order the
    club's Set Pieces tab draws, counted among the men still there; a dash beside an order he is not in; no panel when he takes none.
 3. **The run to come**, the next eight across the row, in FPL's difficulty, and under each
@@ -196,8 +197,9 @@ like"), in four blocks:
    is worth against Fantrax's ranking (`+15 on his pick`). A man nobody holds has joined
    nobody: his line is "Dropped by" the team that let him go, and when, or no line at all.
 2. **Business** — every claim, drop and trade with him, newest first, on the house table:
-   the date in the index block, then the move, from and to ("The pool" for no team), a step
-   above a row's type (Craig, 1 Oct 2026: "make text bigger in business"). Neither panel says
+   the date in the index block, then the move, from and to ("The pool" for no team), a step above a
+   row's type (Craig, 1 Oct 2026: "make text bigger in business"; DESIGN §6's third exception), sized to its columns
+   on a desk (21 Oct 2026). Neither panel says
    "This league" any more (Craig: "remove 'This league' twice"); the tab is only ever ours.
 3. **How he arrived** is the status panel's Draft row, `13th pick, by Atletico +12 on his pick`: the pick and
    the drafter, never the round (12 Oct 2026; the cyan closing sentence went).
