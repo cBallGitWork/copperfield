@@ -1,7 +1,9 @@
 import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { FootballPlayer, PlayerOwner } from "@epl/core";
+import type { FootballPlayer } from "@epl/core";
+import { holdersOf } from "../../holders";
+import type { LeagueOpinion } from "../../leagueOpinions";
 import { Goal, Man } from "./ScoreRows";
 
 vi.mock("@/app/desk", () => ({ SMALL_CAPS: "" }));
@@ -9,7 +11,9 @@ vi.mock("../../../components/league/PlayerCardButton", () => ({
   MaybeCard: ({ className, children }: { className: string; children: ReactNode }) => createElement("span", { className }, children),
 }));
 
-const owners = new Map<number, PlayerOwner>([[7, { teamName: "Glengarry" } as PlayerOwner]]);
+const opinion = (ownerTeamId: string | null, owner: string | null, status: string): LeagueOpinion =>
+  ({ fantraxId: "x", positions: ["M"], status, ownerTeamId, owner });
+const holders = holdersOf(new Map([[7, opinion("t9", "Glengarry", "T")], [8, opinion(null, null, "FA")]]), "t1");
 
 /** The class of the element whose text opens with `text`. */
 function classOf(html: string, text: string): string {
@@ -30,13 +34,28 @@ function expectOwnerYieldsFirst(html: string, short: string) {
   expect(owner).toEqual(expect.arrayContaining(["lg:min-w-0", "lg:truncate", "whitespace-nowrap"]));
   expect(owner.some((cls) => cls.endsWith("shrink-0"))).toBe(false);
   // A phone breaks before the bracket whole, so it takes the next line or none, never a '(D…' stub beside the name.
-  expect(html).toMatch(/ <span class="[^"]*">\(Glengarry\)/);
+  expect(html).toMatch(/ <span class="[^"]*"[^>]*>\(Glengarry\)/);
 }
 
 const sessegnon = (figure: string) =>
   renderToStaticMarkup(
-    createElement(Man, { code: 7, card: undefined, name: "Ryan Sessegnon", short: "Ryan Sessegnon", owners, figure, glyph: "card" }),
+    createElement(Man, { code: 7, card: undefined, name: "Ryan Sessegnon", short: "Ryan Sessegnon", holders, figure, glyph: "card" }),
   );
+
+describe("a scoresheet's holder", () => {
+  // The Data boards' one tag (players/BoardRow Holder), not OwnedBy's faint bracket: a free man loud, at the sheet's size.
+  it("tags a free man with Fantrax's code, loud, at the scoresheet's size on a desk", () => {
+    const html = renderToStaticMarkup(
+      createElement(Man, { code: 8, card: undefined, name: "Free Man", holders, figure: "9'", glyph: "ball" }),
+    );
+    expect(html).toMatch(/font-bold text-ink[^"]*lg:text-base[^"]*"[^>]*>\(FA\)</);
+  });
+
+  it("tags nobody our league does not list", () => {
+    const html = renderToStaticMarkup(createElement(Man, { code: 99, card: undefined, name: "Nobody", holders, figure: "9'" }));
+    expect(html).not.toContain("(");
+  });
+});
 
 describe("a scoresheet line on a phone", () => {
   // Review: at 390 'R. Sessegnon (Dome)' drew as 'R. Sessegn…', the man's own surname cut for his owner's.
@@ -84,7 +103,7 @@ describe("a scoresheet line on a phone", () => {
     const html = renderToStaticMarkup(
       createElement(Goal, {
         group: { scorer: null, own: false, minutes: [10, 20], assisters: [{ code: 7, minutes: [10] }] },
-        owners, byCode: new Map([[7, assister]]), cards: new Map(),
+        holders, byCode: new Map([[7, assister]]), cards: new Map(),
       }),
     );
     expectOwnerYieldsFirst(html, "A. Iwobi");

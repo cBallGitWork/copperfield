@@ -4,11 +4,11 @@ import { useMemo, useState } from "react";
 import NameLink from "../NameLink";
 import { DASH, fullFootballerName, type FootballPlayer } from "@epl/core";
 import { viewOf, reading } from "./measures";
-import { PANEL } from "@/app/desk";
+import { PANEL_FLUSH } from "@/app/desk";
 import Board from "../../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../../components/league/LeadFace";
 import { SIDE_SHARES, standoutCuts, standoutInk, unlessSorted } from "../../../../components/league/standout";
-import StateBox from "../../../../components/football/StateBox";
+import FitnessMark from "../../../../components/football/FitnessMark";
 import { doubtRow } from "../../../../components/football/doubtRow";
 
 // A club's season, player by player: our position in the tile, standouts lit, doubts washed.
@@ -67,20 +67,20 @@ export default function PlayerBoard({ rows, view }: { rows: readonly Row[]; view
     );
 
   return (
-    <section className={PANEL}>
+    <section className={PANEL_FLUSH}>
       <Board
         caption={`Every player's ${shown.label.toLowerCase()} figures`}
         rows={ordered}
         keyOf={(row) => String(row.player.id)}
         rowClass={(row) => doubtRow(row.player)}
         lead={{
-          tile: { positions: (row) => row.positions, deskOnly: true },
+          tile: { positions: (row) => row.positions },
           name: {
             label: "Player",
             className: (row) => doubtRow(row.player),
-            of: ({ player, positions, href }) => (
+            of: ({ player, href }) => (
               <NameLink href={href} className={LEAD_LINK}>
-                <LeadFace name={fullFootballerName(player)} positions={positions} after={<StateBox player={player} />} />
+                <LeadFace name={fullFootballerName(player)} after={<FitnessMark player={player} />} />
               </NameLink>
             ),
           },

@@ -2,18 +2,17 @@ import { availabilityOf, clubColours, fullFootballerName, setPieceOrder, squadOf
 import TabEmpty from "../../../../components/league/TabEmpty";
 import Section from "../../../../components/shell/Section";
 import PlayerPortrait from "../../../../components/football/PlayerPortrait";
-import StateBox from "../../../../components/football/StateBox";
+import FitnessMark from "../../../../components/football/FitnessMark";
 import PlayerName from "../../../../components/shell/PlayerName";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import { SET_PIECES, intelSetPieces } from "../../../../intel";
 import { leagueOpinions } from "../../../leagueOpinions";
 import { readerTeamId } from "../../../../squads";
 import TakerName from "./TakerName";
-import { teamNamesOf } from "./holders";
-import { poolHref } from "../../../poolHref";
+import { teamNamesOf } from "../../../holders";
 import ClubShell from "../Shell";
-import { clubOr404 } from "../club";
-import { INDEX_BLOCK, INDEX_WIDTH, PANEL } from "@/app/desk";
+import { clubOr404, nextAndCards } from "../club";
+import { INDEX_BLOCK, INDEX_WIDTH, PANEL_FLUSH } from "@/app/desk";
 import { clubTitle } from "../title";
 
 // Who steps up: corners, free kicks and penalties, in the order they take them.
@@ -27,7 +26,9 @@ export const generateMetadata = clubTitle("setPieces");
 
 export default async function SetPiecesPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
-  const [{ club, snapshot }, league, reader] = await Promise.all([clubOr404(code), leagueOpinions(), readerTeamId()]);
+  const [found, league, reader] = await Promise.all([clubOr404(code), leagueOpinions(), readerTeamId()]);
+  const { club, snapshot } = found;
+  const { cards } = nextAndCards(found, league);
   const colours = clubColours(club.shortName);
   const teamNames = teamNamesOf(league);
 
@@ -46,7 +47,7 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
       {orders.length === 0 ? (
         <TabEmpty>Nobody at {club.name} has been ranked for a set piece yet.</TabEmpty>
       ) : (
-        <section className={PANEL}>
+        <section className={PANEL_FLUSH}>
           {orders.map((order) => (
             <Section key={order.piece} title={order.label}>
               <ul className="cm-rows flex flex-col">
@@ -64,10 +65,15 @@ export default async function SetPiecesPage({ params }: { params: Promise<{ code
                         player={{ code: player.code, name: player.name }}
                         colours={colours}
                       />
-                      <TakerName href={poolHref(league, player.code)} held={league.get(player.code)} teamNames={teamNames} reader={reader}>
+                      <TakerName
+                        card={cards.get(player.code)}
+                        held={league.get(player.code)}
+                        teamNames={teamNames}
+                        reader={reader}
+                        mark={<FitnessMark player={player} />}
+                      >
                         <PlayerName name={player.fullName} short={fullFootballerName(player)} />
                       </TakerName>
-                      <StateBox player={player} />
                     </li>
                   );
                 })}

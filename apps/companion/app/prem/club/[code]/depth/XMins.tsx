@@ -1,4 +1,5 @@
 import { DASH } from "@epl/core";
+import { minutesInk } from "../../../../components/football/xminsInk";
 
 /** One gameweek's xMins by FPL code: a number, 0 included, or null for no reading. */
 export interface WeekMinutes {
@@ -6,11 +7,12 @@ export interface WeekMinutes {
   byCode: ReadonlyMap<number, number | null>;
 }
 
-/** A man's xMins pinned to the right of his name, in the derived reading's cyan. */
+/** A man's xMins pinned to the right of his name, inked by risk (`minutesInk`). */
 export default function XMins({ code, minutes }: { code: number; minutes: WeekMinutes }) {
+  const value = minutes.byCode.get(code) ?? null;
   return (
-    <span className="numeric ml-auto shrink-0 font-bold text-info" title={`Expected minutes, gameweek ${minutes.gameweek}`}>
-      {minutes.byCode.get(code) ?? DASH}
+    <span className={`numeric ml-auto shrink-0 font-bold ${minutesInk(value)}`} title={`Expected minutes, gameweek ${minutes.gameweek}`}>
+      {value ?? DASH}
     </span>
   );
 }

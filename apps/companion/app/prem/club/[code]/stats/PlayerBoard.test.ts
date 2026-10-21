@@ -46,12 +46,12 @@ describe("the board's view", () => {
     expect(html).not.toContain(">xG<");
   });
 
-  // Review M-CONSIST-3 and M-CONSIST-9: 36px rows like the Draft tab's, inside the panel's padding like the Squad tab.
-  it("runs 36px rows inside the panel's padding", () => {
+  // Review M-CONSIST-3: 36px rows like the Draft tab's; the panel flush, so the tile meets its edge as the Squad tab's (D-9).
+  it("runs 36px rows in a flush panel", () => {
     const html = board("attack");
     expect(html).toContain("min-h-9");
     expect(html).not.toContain("min-h-11");
-    expect(html).toMatch(/<section class="cm-panel[^"]*p-2/);
+    expect(html).toContain('<section class="cm-panel flex flex-col">');
   });
 });
 

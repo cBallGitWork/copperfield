@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { holderOf } from "../../../../players/holder";
-import type { LeagueOpinion } from "../../../leagueOpinions";
+import { holderOf } from "../players/holder";
+import type { LeagueOpinion } from "./leagueOpinions";
 import { teamNamesOf } from "./holders";
 
 const man = (ownerTeamId: string | null, owner: string | null, status: string): LeagueOpinion => ({
@@ -11,7 +11,7 @@ const man = (ownerTeamId: string | null, owner: string | null, status: string): 
   owner,
 });
 
-describe("set-piece holder tags", () => {
+describe("Prem holder tags", () => {
   const league = new Map([
     [1, man("t1", "Ctrl Alt Defeat", "T")],
     [2, man("t2", "Second XI", "T")],

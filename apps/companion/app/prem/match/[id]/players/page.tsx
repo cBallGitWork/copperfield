@@ -5,8 +5,10 @@ import TabStrip from "../../../../components/shell/TabStrip";
 import MatchShell from "../Shell";
 import MatchPitch from "../MatchPitch";
 import TeamSheet from "../TeamSheet";
-import { matchOwners, readMatch } from "../match";
+import { readMatch } from "../match";
 import { leagueOpinions } from "../../../leagueOpinions";
+import { readerTeamId } from "../../../../squads";
+import { weekMinutes } from "../../../../xmins";
 import { matchCards, squadsOf } from "../matchCards";
 import { sheetReads } from "../sheetReads";
 import { matchHref } from "../matchRoutes";
@@ -115,22 +117,25 @@ function ClubSwitch({ match, side, view }: { match: Match; side: Side; view: Vie
 
 /** Both clubs' books, for a match nobody has named a side for. */
 async function BothSquads({ match, side }: { match: Match; side: Side }) {
-  const [owners, league] = await Promise.all([matchOwners(match.fixture), leagueOpinions()]);
+  const [league, reader] = await Promise.all([leagueOpinions(), readerTeamId()]);
+  const sides = new Set([match.home?.id, match.away?.id]);
+  const codes = match.snapshot.players.filter((player) => sides.has(player.clubId)).map((player) => player.code);
   return (
     <Squads
       home={match.home}
       away={match.away}
       players={match.snapshot.players}
-      owners={owners}
       league={league}
       cards={matchCards(match, squadsOf(match), league)}
       phoneSide={side}
+      reader={reader}
+      minutes={weekMinutes(match.fixture.gameweek, codes)}
     />
   );
 }
 
 async function Board({ match, view, side }: { match: Match; view: View; side: Side }) {
-  const [owners, { sheets, events, injured, league, cards }] = await Promise.all([matchOwners(match.fixture), sheetReads(match)]);
+  const [reader, { sheets, events, injured, league, cards }] = await Promise.all([readerTeamId(), sheetReads(match)]);
 
   // Their sheet is the only source of a bench; without it, both squads is the honest fallback.
   if (sheets === null) return <BothSquads match={match} side={side} />;
@@ -149,11 +154,11 @@ async function Board({ match, view, side }: { match: Match; view: View; side: Si
       match={match}
       sheets={sheets}
       events={events}
-      owners={owners}
       injured={injured}
       league={league}
       cards={cards}
       phoneSide={side}
+      reader={reader}
     />
   );
 }

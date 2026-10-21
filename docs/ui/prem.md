@@ -176,11 +176,11 @@ the reference for both, and it is a strip over a panel rather than one page.
 
 | Tab | Route | What | Source |
 |---|---|---|---|
-| Squad | `/prem/club/[code]` | Every man on the books, ordered by our position; no faces, a doubt washes his row (25 Sep 2026); the predicted XI behind Pitch \| List links (`?view=`) in the club shell's foot on a phone, as Stats' views are. It may differ from Depth's first names, rightly: the pecking order can lag a recent change or a knock (Craig, 20 Oct 2026) | FPL bootstrap; Fantrax for eligibility |
-| Depth | `…/depth` | Who is in line for each shirt, headed *Pecking order* (16 Oct 2026; "Depth chart" is American football's): the sister's depth chart on CM's pitch (a plate per place, no kits or faces), three deep for a lone shirt and a pair dealt like a snake (1st and 4th, 2nd and 3rd); a back three's full-backs headed LWB and RWB (Craig, 21 Oct 2026); dated by its export and never by a gameweek, which it outlives (20 Oct 2026); the list behind Pitch \| List links (`?view=`) in the club shell's foot on a phone; a doubt's name washed; each plate one tap to its first choice's page, the list one to every man (8 Oct 2026); each man's xMins for the club's next match week pinned right of his name in cyan, again at a second shirt, `0` a reading and `—` none, no figure at all when the export misses the week, the name truncating first so the plate keeps its height (Craig, 21 Oct 2026) | The sister repo's chart, `intel/depth` |
-| Pieces | `…/set-pieces` | Who takes the penalties, free kicks and corners | FFScout, via the sister repo |
+| Squad | `/prem/club/[code]` | Every man on the books, ordered by our position; no faces, a doubt washes his row (25 Sep 2026) and his `StateMark` and holder tag follow his name (21 Oct 2026); the predicted XI behind Pitch \| List links (`?view=`) in the club shell's foot on a phone, as Stats' views are. It may differ from Depth's first names, rightly: the pecking order can lag a recent change or a knock (Craig, 20 Oct 2026) | FPL bootstrap; Fantrax for eligibility |
+| Depth | `…/depth` | Who is in line for each shirt, headed *Pecking order* (16 Oct 2026; "Depth chart" is American football's): the sister's depth chart on CM's pitch (a plate per place, no kits or faces), three deep for a lone shirt and a pair dealt like a snake (1st and 4th, 2nd and 3rd); a back three's full-backs headed LWB and RWB (Craig, 21 Oct 2026); dated by its export and never by a gameweek, which it outlives (20 Oct 2026); the list behind Pitch \| List links (`?view=`) in the club shell's foot on a phone; a doubt's name washed on the pitch, the colour alone (DESIGN §3), and marked with `StateMark` in the list (21 Oct 2026); each plate one tap to its first choice's card, the list one to every man's (8 Oct 2026; the card since 21 Oct); each man's xMins for the club's next match week pinned right of his name, red under the planner's floor and cyan above it (`minutesInk`, 21 Oct 2026), again at a second shirt, `0` a reading and `—` none, no figure at all when the export misses the week, the name truncating first so the plate keeps its height (Craig, 21 Oct 2026) | The sister repo's chart, `intel/depth` |
+| Pieces | `…/set-pieces` | Who takes the penalties, free kicks and corners; each taker's `StateMark` straight after his name, then his holder tag (21 Oct 2026) | FFScout, via the sister repo |
 | Fixtures | `…/fixtures` | The club's season: to come first, the next match on top, then the played under one quiet "Played" row, newest first (21 Oct 2026, `runOrder`) | FPL fixtures |
-| Stats | `…/stats` | Every player, by one group of measures, sortable: `Attacking · Defensive · Playing time` on a strip docked at the foot (`?view=`, 20 Oct 2026); our position in the index tile on a desk and under the name on a phone, no Pos column; 36px rows under a thumb, inside the panel's padding as the Squad tab's; each column's standouts in orange and yellow (red for goals conceded), a doubt's row washed (25 Sep 2026) | FPL |
+| Stats | `…/stats` | Every player, by one group of measures, sortable: `Attacking · Defensive · Playing time` on a strip docked at the foot (`?view=`, 20 Oct 2026); our position in the index tile at both widths, as the squad Stats board leads (21 Oct 2026), no Pos column; each unfit man's `StateMark` after his name; 36px rows under a thumb in a flush panel, the tile at its edge as on every Prem and Draft list (21 Oct 2026, D-9); each column's standouts in orange and yellow (red for goals conceded), a doubt's row washed (25 Sep 2026) | FPL |
 
 **Match puts the home side first, and the fantasy screen does not.** A fantasy
 fixture has no ground, so `squad/[teamId]/next` leads with whoever's page you
@@ -199,13 +199,14 @@ optional for exactly that reason, and `cm9900/22.jpg` is the shape.
 the panel. It arrives there when there is a real XI to draw, and it is the
 second entry the foot row has been waiting for since this section shipped.
 
-### A name opens the player page
+### A name opens the player card, or the player page
 
-Every name on a club's tabs links to `/players/[fantraxId]` (Craig, 26 Sep 2026:
-*"clicking on a player takes them to their proper player page"*). The club tabs
-hold FPL codes, so `poolHref` reads the Fantrax id off `leagueOpinions`, which is
-the bridge inverted. A man our league does not list prints unlinked: 51 of the 562
-on the books on 26 Sep. `/prem/player/[code]`, the stub footballer page these
+On Squad, Depth and Pieces a name opens the app's one player card (21 Oct 2026, UI audit Lane 3), the card the match
+screens and every squad open, against the club's next match and with xMins from that week (`nextAndCards`,
+`premCards.ts`); its "Full profile" goes on to the page. Stats still links each name to `/players/[fantraxId]` (Craig,
+26 Sep 2026: *"clicking on a player takes them to their proper player page"*). The club tabs hold FPL codes, so
+`poolHref` and the card both read the Fantrax id off `leagueOpinions`, which is the bridge inverted. A man our league
+does not list prints plain, with no card and no link: 51 of the 562 on the books on 26 Sep. `/prem/player/[code]`, the stub footballer page these
 names used to open, is gone.
 
 `/prem/match/[id]` has its own file, [match.md](match.md).
@@ -234,15 +235,15 @@ column (Craig, 23 Sep 2026: "Put the Fantrax position into those tiles, and then
 remove the position columns"). It replaced the shirt number, which the match
 squads and team sheet still carry.
 
-`xMins`, after `Min`, is the sister model's expected minutes in the club's NEXT match week, in cyan beside
-FPL's minutes in ink; the head's title names the gameweek. No column when the export does not cover that week.
+`xMins`, after `Min`, is the sister model's expected minutes in the club's NEXT match week, inked by risk as the
+Draft row inks it (`minutesInk`: red under the planner's floor, cyan above) beside FPL's minutes in ink; the head's title names the gameweek. No column when the export does not cover that week.
 Under the table, once, `xMins as of Thu 15 Oct`: the export's day (`XMINS_AS_OF`), as the player page and a squad date theirs.
 
-`Owner` is who holds him in our league, or Fantrax's own letter instead — `WW`
-on waivers, `FA` a free agent. A NAME and never a figure, which is what keeps it
-clear of `SeasonTotals`' bound: the bound forbids FPL's counts standing beside a
-Fantrax FIGURE, and this is a fact about our league rather than a second count
-of a Premier League goal.
+Who holds him is the Data boards' holder tag after his name and his `StateMark` (`players/BoardRow` `Holder`, 21 Oct
+2026), not a column: `(Yours)` in the accent, a rival's short name quiet, Fantrax's `WW` or `FA` loud for a man anybody
+can claim. The Owner column it replaced printed Fantrax's raw `T` for a held man the league named no team for. A NAME
+and never a figure, which keeps it clear of `SeasonTotals`' bound: the bound forbids FPL's counts standing beside a
+Fantrax FIGURE, and this is a fact about our league rather than a second count of a Premier League goal.
 
 **Players FPL marks unavailable are dropped, and only that state** (Craig:
 "remove UNAV players, they are out of the game"). FPL's `u` is not a knock — it

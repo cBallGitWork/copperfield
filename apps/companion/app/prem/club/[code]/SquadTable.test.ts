@@ -11,7 +11,7 @@ vi.mock("../../../components/league/ScrollBoard", () => ({
 }));
 
 const render = (minutes: SquadMinutes | null) =>
-  renderToStaticMarkup(createElement(SquadTable, { players: [], league: new Map(), minutes }));
+  renderToStaticMarkup(createElement(SquadTable, { players: [], league: new Map(), reader: null, cards: new Map(), minutes }));
 
 describe("a club's squad", () => {
   // Review: the xMins column printed no date, where the player page and a squad say "xMins as of".

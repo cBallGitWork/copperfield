@@ -1,4 +1,4 @@
-import type { Club, FootballPlayer } from "@epl/core";
+import type { Club, FootballPlayer, SquadPlayerDetail } from "@epl/core";
 import BothReadings from "@/app/components/league/BothReadings";
 import type { View } from "@/app/components/league/ViewToggle";
 import { positionsLabel } from "../../../positions";
@@ -19,6 +19,8 @@ export default function Squad({
   view,
   players,
   league,
+  reader,
+  cards,
   minutes,
   club,
   eleven,
@@ -30,6 +32,10 @@ export default function Squad({
   view: View;
   players: readonly FootballPlayer[];
   league: ReadonlyMap<number, LeagueOpinion>;
+  /** The reader's own team, whose men tag "Yours". */
+  reader: string | null;
+  /** Each man's player card by FPL code; none for a man our league does not list. */
+  cards: ReadonlyMap<number, SquadPlayerDetail>;
   /** One gameweek's xMins by FPL code, or null when the export does not cover the club's next week. */
   minutes: SquadMinutes | null;
   club: Club;
@@ -42,7 +48,7 @@ export default function Squad({
   /** When Scout last updated the eleven — "Fri 4 Sept, 17:52". */
   updated: string | null;
 }) {
-  const list = <SquadTable players={players} league={league} minutes={minutes} />;
+  const list = <SquadTable players={players} league={league} reader={reader} cards={cards} minutes={minutes} />;
   // No eleven, no toggle: it would be a control with nothing to decide.
   if (!drawsEleven(eleven, formation)) return <div className="flex flex-col gap-2">{list}</div>;
 

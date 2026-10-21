@@ -300,14 +300,23 @@ was pushed out of its panel and clipped. The document never overflowed and no
 element reported a right edge past the viewport — only the screenshot caught it.
 
 **No column is headed on the sheet and no formation line sits over it** (Craig, 23 Sep 2026: *"column headers look
-crap, remove them all except for PTS"*; the `Pts` column itself, FPL's points, came off on 12 Oct 2026). The pitch
+crap, remove them all except for PTS"*; the `Pts` column itself, FPL's points, came off on 12 Oct 2026). The sheet has
+no `<thead>` at all since 21 Oct 2026: a head row of `sr-only` words drew nothing (UI audit D-25), so the widths ride on
+a `<colgroup>` and a caption names the columns.
+
+**A sheet row's holder is the Data boards' tag** (`players/BoardRow` `Holder`: `(Yours)`, a rival quiet, `FA`/`WW`
+loud) where `OwnedBy`'s faint `(Bannan)` stood (21 Oct 2026). The played sheet draws **no doubt mark or wash**, as the
+pitch draws none: today's flag has no business on a match already played. **The books before kickoff carry the Draft
+row's parts** (UI audit D-3, D-7): a `Board` of the tile, the name, each unfit man's `StateMark` and doubt wash
+(`fitnessOf`), the holder tag, then a butted `Pos` and `xMins` head (the match's own gameweek, `minutesInk`'s red under
+the planner's floor), so an injured man at 0% (Saliba) prints the red cross rather than clean. The pitch
 carries no formation line and no figure under a man's name.
 
 **Under a thumb it is one club at a time** (Craig, 23 Sep 2026: *"a button for
 each team, THEN for list/pitch, rather than a big scroll"*): `Team Sheet · Pitch` above the board and `BRE · CHE`
 docked at the foot (`?side=away`; the club switch moved there on 20 Oct 2026, the 24 Sep sub-views rule), and a desk
 shows both. A book's club-colour bar is a desk's, naming each of the two side by side; under a thumb the lit club
-plate names the side, so the bar is `sr-only`. The sheet and the books sit in `PANEL`'s padding; the pitch and the
+plate names the side, so the bar is `sr-only`. The sheet and the books sit in `PANEL_FLUSH`, the index tile at the panel's edge as on the Draft lists (21 Oct 2026, D-9); the pitch and the
 report keep `PANEL_FLUSH`.
 
 **The Pitch** is the foot row's other plate (`?view=pitch`): each eleven in
@@ -463,7 +472,8 @@ reference, because CM's could be dense when nothing in it was clickable.
 
 ## The fantasy layer, and how far it goes
 
-Every name carries the squad holding him, from `owners()` — a **NAME and never a
+Every name carries the Data boards' holder tag (`LeagueHolder` over `holdersOf`, from our league's view; since 21 Oct
+2026 on the scoresheet too, where `OwnedBy` is gone): the squad holding him, or Fantrax's `FA`/`WW` — a **NAME and never a
 figure**, which is the rule the club page's Owner column set and what keeps this
 clear of `SeasonTotals`' bound. Fantrax publishes points per PERIOD and not per
 fixture; a number here would be a period total wearing a match's clothes.
@@ -484,7 +494,7 @@ that is about a player rather than about a tally.
 
 | State | Test | Overview | Players |
 |---|---|---|---|
-| Upcoming | `status === "upcoming"` | `Preview` — each side's **home record against the other's away**, its place, its last five | **both clubs' squads**, keeper to attack, to the team sheet's standards — the Fantrax tile, the name opening his card, the owner; one club at a time on a phone |
+| Upcoming | `status === "upcoming"` | `Preview` — each side's **home record against the other's away**, its place, its last five | **both clubs' squads**, keeper to attack, to the team sheet's standards — the Fantrax tile, the name opening his card, his `StateMark` and wash, the holder tag, his real position and xMins; one club at a time on a phone |
 | Live | `status === "live"` **and** `speaksForNow` | the scoresheet so far, `Live 45′` | who has appeared so far |
 | Finished | `finished` | `FT` | the appearance list |
 | No round | `gameweek === null` | no sheet; the fixture still renders | `TabEmpty` |

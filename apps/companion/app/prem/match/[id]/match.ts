@@ -8,13 +8,11 @@ import type {
   IntelMatch,
   MatchSheet,
   PlayerMatchStats,
-  PlayerOwner,
 } from "@epl/core";
 import { clubById, playerByCode, withPlState } from "@epl/core";
 import { footballNow, gameweekSheets, roundFigures, seasonFixtures, speaksForNow, takenLately } from "../../../football";
 import { ofFixture, plMatch } from "../../../plFeed";
 import { intelMatches } from "../../../intel";
-import { marks } from "../../../involvement";
 import { matchHighlight } from "../../../matchFeed";
 import { forCode } from "./sheetJoin";
 import { wholeNumber } from "../../../wholeNumber";
@@ -77,12 +75,6 @@ export async function readMatch(id: string): Promise<Match> {
     live: fixture.status === "live" && recent,
     finished: fixture.status === "finished",
   };
-}
-
-/** Who in our league holds each man in this match; empty, not an error, when Fantrax will not say. */
-export async function matchOwners(fixture: Fixture): Promise<Map<number, PlayerOwner>> {
-  const { owners } = await marks([fixture]);
-  return owners ?? new Map();
 }
 
 /** Its highlights video, or null: what the Highlights tab plays, and why the strip greys it when there is none. */

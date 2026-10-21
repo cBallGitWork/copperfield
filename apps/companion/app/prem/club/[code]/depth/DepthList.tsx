@@ -1,15 +1,15 @@
-import type { DepthSpot, FootballPlayer } from "@epl/core";
+import type { DepthSpot, FootballPlayer, SquadPlayerDetail } from "@epl/core";
 import { DASH } from "@epl/core";
 import PlayerName from "../../../../components/shell/PlayerName";
 import { IndexCell } from "../../../../components/league/TableCells";
-import StateBox from "../../../../components/football/StateBox";
+import FitnessMark from "../../../../components/football/FitnessMark";
 import { doubtRow } from "../../../../components/football/doubtRow";
 import { BOARD, ROW_NAME, ROW_RULE, TAP_ROW } from "@/app/desk";
-import NameLink from "../NameLink";
+import { MaybeCard } from "../../../../components/league/PlayerCardButton";
 import XMins, { type WeekMinutes } from "./XMins";
 
 // The same chart as a list, for a phone (Craig, 25 Sep 2026): a row per place, its shirt in the
-// index block and the men in line across it, each washed by his doubt and boxed by why.
+// index block and the men in line across it, each washed by his doubt and marked by why.
 
 /** A man behind the first choice: `ROW_NAME`'s face and size, unbolded and quiet. */
 const BEHIND = "font-chrome text-sm font-normal text-muted lg:text-base";
@@ -17,12 +17,12 @@ const BEHIND = "font-chrome text-sm font-normal text-muted lg:text-base";
 export default function DepthList({
   lines,
   playerOf,
-  hrefOf,
+  cardOf,
   minutes,
 }: {
   lines: readonly (readonly DepthSpot[])[];
   playerOf: (code: number) => FootballPlayer | null;
-  hrefOf: (code: number) => string | null;
+  cardOf: (code: number) => SquadPlayerDetail | undefined;
   /** Null draws no figure. */
   minutes: WeekMinutes | null;
 }) {
@@ -49,9 +49,9 @@ export default function DepthList({
                     {player === null ? (
                       <span className="text-faint">{holder === undefined ? "" : DASH}</span>
                     ) : (
-                      <NameLink
-                        href={hrefOf(player.code)}
-                        className={`${TAP_ROW} gap-1 ${
+                      <MaybeCard
+                        player={cardOf(player.code)}
+                        className={`${TAP_ROW} w-full gap-1 text-left ${
                           rank === 0 ? `${ROW_NAME} text-ink` : BEHIND
                         }`}
                       >
@@ -59,9 +59,9 @@ export default function DepthList({
                         <span className="truncate">
                           <PlayerName name={player.name} />
                         </span>
-                        <StateBox player={player} />
+                        <FitnessMark player={player} />
                         {minutes === null ? null : <XMins code={player.code} minutes={minutes} />}
-                      </NameLink>
+                      </MaybeCard>
                     )}
                   </td>
                 );

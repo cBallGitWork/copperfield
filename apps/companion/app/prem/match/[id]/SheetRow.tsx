@@ -1,27 +1,29 @@
-import type { PlayerOwner, SquadPlayerDetail } from "@epl/core";
+import type { SquadPlayerDetail } from "@epl/core";
 import PositionTile from "../../../components/league/PositionTile";
 import { chipsFor } from "../../../components/league/Chips";
 import { MaybeCard } from "../../../components/league/PlayerCardButton";
-import OwnedBy from "./OwnedBy";
 import SubNote from "./SubNote";
 import LeadFace from "../../../components/league/LeadFace";
+import LeagueHolder from "../../LeagueHolder";
+import type { Holders } from "../../holders";
 import { ROW_RULE } from "@/app/desk";
 import { appeared, type Join, type Named } from "./sheetJoin";
 
-// One man's row on the team sheet, and the card it opens.
+// One man's row on the team sheet, and the card it opens, his holder tag after his name. No doubt mark or wash: today's
+// flag has no business on a match already played (docs/ui/match.md).
 
 /** Chips a row shows before it stops; the second only on a desk. */
 const MARKS = 2;
 
 /** The trigger's box, centred in the row: a tap row's 36 under a thumb. */
-export const NAME_CELL = "flex min-h-9 w-full items-center px-1.5 text-left hover:underline";
+export const NAME_CELL = "flex min-h-9 w-full items-center px-1.5 text-left";
 
 /** Chips the card block already draws, so the row does not say them twice. */
 const CARDED = new Set(["YC", "RC"]);
 
 export default function SheetRow({
   row,
-  owner,
+  holders,
   positions,
   join,
   card,
@@ -29,7 +31,7 @@ export default function SheetRow({
   opensBench,
 }: {
   row: Named;
-  owner: PlayerOwner | undefined;
+  holders: Holders;
   /** The positions the league fields him at; empty when it does not know him. */
   positions: readonly string[];
   join: Join;
@@ -67,7 +69,7 @@ export default function SheetRow({
             after={
               <>
                 {man.captain ? <span className="shrink-0 text-2xs text-faint">(c)</span> : null}
-                <OwnedBy owner={owner} className="shrink-0 truncate" />
+                <LeagueHolder code={man.code} holders={holders} className="" />
                 <SubNote onAt={did?.onAt} offAt={did?.offAt} added={did?.added} hurt={hurt} />
               </>
             }

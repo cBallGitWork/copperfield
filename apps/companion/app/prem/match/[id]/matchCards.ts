@@ -1,6 +1,6 @@
 import { squadOf, type Club, type Opposition, type PlTeamSheet, type SquadPlayerDetail } from "@epl/core";
 import type { LeagueOpinion } from "../../leagueOpinions";
-import { backToFront } from "../../../positions";
+import { premCard } from "../../premCards";
 import type { Match } from "./match";
 import { minutesFrom } from "../../../xmins";
 
@@ -46,18 +46,7 @@ export function matchCards(
       const opinion = league.get(code);
       if (player === undefined || opinion === undefined) continue;
       const stats = match.figures.get(player.id);
-      cards.set(code, {
-        rostered: {
-          // Our league's letters in pitch order, `M/F` for two, as the tile prints them; the card only prints it.
-          slot: { fantraxId: opinion.fantraxId, position: backToFront(opinion.positions).join("/") || null, status: "" },
-          player,
-          stats: stats === undefined ? [] : [stats],
-        },
-        club,
-        opposition,
-        points: undefined,
-        minutes: minutes(code),
-      });
+      cards.set(code, premCard(player, opinion, { club, opposition, minutes, stats: stats === undefined ? [] : [stats] }));
     }
   }
   return cards;

@@ -7,7 +7,9 @@ import MatchShell from "./Shell";
 import Scoresheet from "./Scoresheet";
 import Preview from "./Preview";
 import MatchReport, { reportView } from "./MatchReport";
-import { matchOwners, readMatch } from "./match";
+import { readMatch } from "./match";
+import { readerTeamId } from "../../../squads";
+import { holdersOf } from "../../holders";
 import { sheetReads } from "./sheetReads";
 import { side } from "./scoreLines";
 import { stateLine } from "./matchState";
@@ -83,8 +85,8 @@ export default async function MatchPage({
 async function Sheet({ match }: { match: Match }) {
   const { gameweek, code } = match.fixture;
   const players = match.snapshot.players;
-  const [owners, minutes, goals, credits, { events: did, injured, cards }, kinds] = await Promise.all([
-    matchOwners(match.fixture),
+  const [reader, minutes, goals, credits, { events: did, injured, cards, league }, kinds] = await Promise.all([
+    readerTeamId(),
     matchGoalMinutes(gameweek, code, players, goalMinutes(match.logged)),
     matchGoals(gameweek, code, players),
     // The commentary's word on the assists Opta does not place; `side` uses it only where FPL's counts agree.
@@ -103,7 +105,7 @@ async function Sheet({ match }: { match: Match }) {
       away={theirs.goals}
       homeElse={ours.rest}
       awayElse={theirs.rest}
-      owners={owners}
+      holders={holdersOf(league, reader)}
       byCode={match.byCode}
       did={did}
       injured={injured}
