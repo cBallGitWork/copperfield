@@ -269,7 +269,7 @@ column spares could not take it beside the box. Two lines fit the row's 36px; no
 - **Below `lg` a pitch with a bench fills the screen** (Craig, 11 Oct 2026: *"better use of space?"*, over 145px of
   empty ground between a head-to-head's bench and the rail). `.pitch-with-bench` is a size container as tall as
   `--pitch-screen` less its page's chrome (`--pitch-page` there is the chrome alone: the head-to-head's, a double
-  header's, the planner's `pitch-own`, a rival's `pitch-squad`), the grass takes what the strip leaves, and each card
+  header's, the planner's `pitch-own`, a rival's `pitch-squad`, a match line-up's `pitch-match`), the grass takes what the strip leaves, and each card
   sizes off the sheet's `100cqh`, so the bench ends 16px above the rail at every phone in Chrome and WebKit. A line
   stretches to its tallest card, which lets a name with a space or hyphen take a second line on its plate
   (`pitch-name-breaks`): across the ten sides at 393 the cut plates went from 18 to 11, the rest single words.

@@ -210,7 +210,7 @@ of the fullest line, so *fewer* per row means a *wider* card, and an upright
 figure makes a wider card a taller one. Left unbounded, the slackest formation in
 the league drew the tallest card and overflowed the phone by 199px while the
 crowded one fitted. `.pitch-figure` caps the height at the room one row has —
-`(100svh - --pitch-page) / --pitch-rows` less the two bands — where
+`(100svh - --pitch-page) / --pitch-rows` less the card's bands (`--pitch-bands`, two, one on a match line-up) — where
 `--pitch-rows` is set by `PitchRows` and by both bench strips, so a reserve
 matches the man he would replace in height as well as width. `--pitch-page` lives in
 `pitch.css` beside the cap that reads it, and is **one value at every width**: it
