@@ -116,7 +116,9 @@ export async function squadView(slug: string, gw: string | undefined) {
   )?.points;
   const pending = owed ? owed : null;
 
-  return { team, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes };
+  // Every team by id and name, for the squad's team picker.
+  const league = squads.period.teams.map(({ teamId, teamName }) => ({ teamId, teamName }));
+  return { team, league, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes };
 }
 
 /** The gameweek whose football is still to finish (in play, or not kicked off), or null once it is done; the lines
