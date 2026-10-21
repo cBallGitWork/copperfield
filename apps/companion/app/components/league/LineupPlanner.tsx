@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import type { LeaguePlayerState, RosterLimits, RosteredTeam, SquadPlayerDetail } from "@epl/core";
 import LineupPitch from "./LineupPitch";
 import ListAndPitch from "./ListAndPitch";
+import type { View } from "./ViewToggle";
 import PlayerCard from "./PlayerCard";
 import Pending from "./Pending";
 import SquadRows from "./SquadRows";
@@ -30,6 +31,7 @@ export default function LineupPlanner({
   benchRanks,
   canSave,
   picker,
+  opens = "pitch",
 }: {
   team: RosteredTeam;
   /** The squad's football detail, flat; arranged here, move by move. */
@@ -48,6 +50,8 @@ export default function LineupPlanner({
   canSave: boolean;
   /** The gameweek picker, beside the toggle; a tap away goes through `LeaveGuard` like any link. */
   picker: ReactNode;
+  /** The view a phone opens on: the pitch, unless the page's `?view=` names the list. */
+  opens?: View;
 }) {
   const {
     rows,
@@ -80,7 +84,7 @@ export default function LineupPlanner({
       </p>
 
       <ListAndPitch
-        opens="pitch"
+        opens={opens}
         beside={
           <>
             <Pending points={pending} />

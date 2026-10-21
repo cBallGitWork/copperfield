@@ -9,10 +9,7 @@ const TABS: readonly { key: View; label: string }[] = [
   { key: "list", label: "List" },
 ];
 
-/** The view a query names, or the tab's own opening one. */
-export function pitchListOf(raw: string | undefined, opens: View): View {
-  return TABS.find((tab) => tab.key === raw)?.key ?? opens;
-}
+export { pitchListOf } from "../../../components/league/pitchListOf";
 
 /** Hidden from `lg` up, where both readings are drawn side by side. */
 export default function PitchListStrip({ href, view }: { href: string; view: View }) {

@@ -7,6 +7,7 @@ import {
 import LineupPlanner from "../../components/league/LineupPlanner";
 import SquadBoard from "../../components/league/SquadBoard";
 import Sheet from "./Sheet";
+import { pitchListOf } from "../../components/league/pitchListOf";
 import QuerySelect from "../../components/shell/QuerySelect";
 import { OWN, SQUAD, teamHref } from "../routes";
 import SquadIndex from "../SquadIndex";
@@ -36,10 +37,10 @@ export default async function TeamPage({
 }: {
   params: Promise<{ teamId: string }>;
   /** Which gameweek; absent is `squadView`'s choice. The fixture list sends one, so a March fixture opens March's squad. */
-  searchParams: Promise<{ gw?: string }>;
+  searchParams: Promise<{ gw?: string; view?: string }>;
 }) {
   // `slug` is what the URL says: `me` on the front door (`squad/routes.ts`).
-  const [{ teamId: slug }, { gw }] = await Promise.all([params, searchParams]);
+  const [{ teamId: slug }, { gw, view: asked }] = await Promise.all([params, searchParams]);
   // No team yet: the index and its sign-in in place, so the Team tab that led here stays lit.
   if (slug === OWN && (await readerTeamId()) === null) return <SquadIndex />;
   // The table orders the team picker, read beside the squad rather than after it.
@@ -98,6 +99,7 @@ export default async function TeamPage({
             benchRanks={benchRanks}
             canSave={commissionerSession(team.teamId) !== null}
             picker={picker}
+            opens={pitchListOf(asked, "pitch")}
           />
         </Above>
       ) : board !== null ? (
@@ -127,7 +129,7 @@ export default async function TeamPage({
             picker={picker}
             show={standing === "locked" ? "points" : "fixture"}
             // Your own opens on the pitch, as the planner does, so changing week keeps the reading.
-            opens={mine ? "pitch" : "list"}
+            opens={pitchListOf(asked, mine ? "pitch" : "list")}
             gameweek={weeks?.shown ?? null}
           />
         </Above>

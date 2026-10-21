@@ -361,7 +361,8 @@ unresolved when it is, and a way out to the full profile.
   looking at.
 - **One toolbar, a rival's** (21 Oct 2026): the planner draws through `ListAndPitch`, so the Pitch/List toggle,
   the pending figure and the week share one row, and list and pitch one flush panel, exactly as on a sheet. It
-  still opens on the pitch. **No lock plate** (Craig: *"it hogs the page"*): the "Locks Sat 12:15" row it carried
+  still opens on the pitch; `?view=list` or `?view=pitch` opens a phone on that reading, on the planner and any
+  sheet alike (`pitchListOf`, shared with a club's squad). **No lock plate** (Craig: *"it hogs the page"*): the "Locks Sat 12:15" row it carried
   from 16 Oct is gone, and the lock prints on Matchday and the schedule. A note from a tap on a dimmed card shows
   on a plate above the toolbar until the next tap; silent, it is out of the flow.
 - **Its kits load at once** (`eager`, 16 Oct 2026): the 14 lazy kits put this pitch's largest paint at 4.2 s on a

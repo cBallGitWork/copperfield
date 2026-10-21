@@ -30,20 +30,19 @@ const details = [keeper, mid, sub];
 const team: RosteredTeam = { teamId: "t", teamName: "Mine", players: details.map((d) => d.rostered) };
 const players: LeaguePlayerState[] = details.map((d) => ({ fantraxId: d.rostered.slot.fantraxId, eligiblePositions: [d.rostered.slot.position ?? ""], status: "" }));
 
-const planner = renderToStaticMarkup(
-  createElement(LineupPlanner, {
-    team,
-    details,
-    players,
-    limits: { maxTotalPlayers: 3, maxActivePlayers: 2, maxReservePlayers: 1, maxActiveByPosition: { G: 1, D: 1, M: 1 }, minActiveByPosition: {} },
-    fantraxUrl: "https://example.test",
-    pending: null,
-    period: 8,
-    benchRanks: {},
-    canSave: false,
-    picker: createElement("i", null, "WEEK"),
-  }),
-);
+const props = {
+  team,
+  details,
+  players,
+  limits: { maxTotalPlayers: 3, maxActivePlayers: 2, maxReservePlayers: 1, maxActiveByPosition: { G: 1, D: 1, M: 1 }, minActiveByPosition: {} },
+  fantraxUrl: "https://example.test",
+  pending: null,
+  period: 8,
+  benchRanks: {},
+  canSave: false,
+  picker: createElement("i", null, "WEEK"),
+};
+const planner = renderToStaticMarkup(createElement(LineupPlanner, props));
 const gate = renderToStaticMarkup(
   createElement(SquadBoard, { lines: [{ position: "", players: details }], because: "not-locked", projected: false }),
 );
@@ -92,5 +91,19 @@ describe("the head strip", () => {
   it("butts its figure plates, as every table's head does", () => {
     const figures = headOf(gate).match(/<span class="(flex shrink-0 items-center)">/);
     expect(figures?.[1]).not.toMatch(/\bgap-/);
+  });
+});
+
+describe("the planner's opening view", () => {
+  // Lane 1 review, 21 Oct 2026: `/squad/me?view=list` opened Pitch while a rival's honoured it.
+  /** Which of list and pitch a phone shows: the one whose cell is not `hidden`. */
+  const shown = (html: string) => ({
+    list: !/<div class="hidden lg:block"><div class="cm-board/.test(html),
+    pitch: !/<div class="hidden lg:block"><div class="p-2">/.test(html),
+  });
+  it("opens on the pitch by default and on the list when the page asks", () => {
+    expect(shown(planner)).toEqual({ list: false, pitch: true });
+    const list = renderToStaticMarkup(createElement(LineupPlanner, { ...props, opens: "list" }));
+    expect(shown(list)).toEqual({ list: true, pitch: false });
   });
 });
