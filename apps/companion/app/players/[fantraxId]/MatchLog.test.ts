@@ -1,8 +1,10 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { Club, GameLogEntry, PlayerMatch } from "@epl/core";
-import MatchLog from "./MatchLog";
+import type { Club, GameLogEntry, PlayerMatch, Ranked } from "@epl/core";
+import MatchLog, { type Standing } from "./MatchLog";
 import type { MatchRow } from "./matchRows";
 
 vi.mock("@/app/desk", () => import("../../desk"));
@@ -28,7 +30,24 @@ const row = (match: Partial<GameLogEntry>, paid: Partial<PlayerMatch> | null): M
   mark: null,
 });
 
-/** The cells under one head, in row order. */
+const ranked = (head: string, value: number | null, rank: number | null): Ranked => ({
+  head, title: head, value, kind: head.startsWith("x") || head === "Prv" ? "expected" : "count", rank, of: 23,
+});
+const UNRANKED: Standing = { ranked: [], fpts: null, group: null, keeper: false };
+const FORWARD: Standing = {
+  ranked: [ranked("Min", 180, 4), ranked("G", 2, 1), ranked("xG", 1.4, 9), ranked("A", 0, 12), ranked("xA", 0.2, 15), ranked("Sh", 6, 3), ranked("KP", 4, 7), ranked("Def", 9, 20)],
+  fpts: ranked("FPts", 30, 2),
+  group: "forwards",
+  keeper: false,
+};
+const KEEPER: Standing = {
+  ranked: [ranked("Min", 180, 1), ranked("Sv", 8, 2), ranked("CS", 1, 3), ranked("Prv", 0.5, 4)],
+  fpts: null,
+  group: "goalkeepers",
+  keeper: true,
+};
+
+/** The cells under one head, in row order: the matches, the foot's plate, then Total and Rank. */
 function column(html: string, head: string): string[] {
   const text = (cell: string) => cell.replace(/<[^>]+>/g, "").trim();
   const thead = html.match(/<thead>([\s\S]*?)<\/thead>/)?.[1] ?? "";
@@ -40,43 +59,116 @@ function column(html: string, head: string): string[] {
   );
 }
 
-const render = (rows: MatchRow[]) => renderToStaticMarkup(createElement(MatchLog, { rows }));
+/** The matches alone, the foot's plate and its two rows off. */
+const matches = (html: string, head: string) => column(html, head).slice(0, -3);
+/** The foot alone: [Total, Rank]. */
+const foot = (html: string, head: string) => column(html, head).slice(-2);
+
+const render = (rows: MatchRow[], standing: Standing = UNRANKED) => renderToStaticMarkup(createElement(MatchLog, { rows, standing }));
 
 describe("the match log", () => {
   it("prints a clean sheet he did not keep as 0, and dashes one he was not on for", () => {
     const html = render([row({ cleanSheet: false }, {}), row({ cleanSheet: true, conceded: 0, fixtureId: 61 }, {}), row({ minutes: 0, fixtureId: 62 }, {})]);
-    expect(column(html, "CS")).toEqual(["0", "1", "—"]);
+    expect(matches(html, "CS")).toEqual(["0", "1", "—"]);
   });
 
   // N-1: seven noughts a row for a match he sat out read as a game he played and did nothing in.
   it("dashes every figure but his minutes for a match he was not on for, and keeps a played man's noughts", () => {
     const html = render([
-      row({ saves: 0, defensiveContribution: 0 }, { shots: 0 }),
-      row({ minutes: 0, saves: 0, defensiveContribution: 0, fixtureId: 61 }, { shots: 0 }),
+      row({ tackles: 0, clearancesBlocksInterceptions: 0, recoveries: 0 }, { shots: 0 }),
+      row({ minutes: 0, tackles: 0, clearancesBlocksInterceptions: 0, recoveries: 0, fixtureId: 61 }, { shots: 0 }),
     ]);
-    expect(column(html, "Min")).toEqual(["90", "0"]);
-    for (const head of ["G", "A", "Sv", "xG", "xA", "DC", "Sh", "FC", "FS"]) expect(column(html, head)).toEqual([head.startsWith("x") ? "0.00" : "0", "—"]);
-    expect(column(html, "FPts")).toEqual(["2", "2"]);
+    expect(matches(html, "Min")).toEqual(["90", "0"]);
+    for (const head of ["G", "A", "xG", "xA", "Def", "Sh", "FC", "FS"]) expect(matches(html, head)).toEqual([head.startsWith("x") ? "0.00" : "0", "—"]);
+    expect(matches(html, "FPts")).toEqual(["2", "2"]);
   });
 
   it("stands down a column only matches he sat out would have filled", () => {
     const html = render([row({ minutes: 0 }, {}), row({ minutes: 0, fixtureId: 61 }, {})]);
-    expect(column(html, "Min")).toEqual(["0", "0"]);
-    expect(column(html, "G")).toEqual([]);
-    expect(column(html, "xG")).toEqual([]);
+    expect(matches(html, "Min")).toEqual(["0", "0"]);
+    expect(matches(html, "G")).toEqual([]);
+    expect(matches(html, "xG")).toEqual([]);
   });
 
   it("stands down a column no match of his measured, as Fantrax's keeper table has no shots", () => {
     const html = render([row({}, {}), row({ fixtureId: 61 }, {})]);
-    expect(column(html, "Sh")).toEqual([]);
-    expect(column(html, "Off")).toEqual([]);
-    expect(column(html, "FC")).toEqual(["0", "0"]);
+    expect(matches(html, "Sh")).toEqual([]);
+    expect(matches(html, "Off")).toEqual([]);
+    expect(matches(html, "FC")).toEqual(["0", "0"]);
     // The rule that starts Fantrax's account moves to its first column drawn.
     expect(html).toMatch(/<th[^>]*title="Fouls committed"[^>]*border-l/);
   });
 
   it("keeps a column one match measured, dashing the match Fantrax's window does not reach", () => {
     const html = render([row({}, { shots: 0 }), row({ fixtureId: 61 }, null)]);
-    expect(column(html, "Sh")).toEqual(["0", "—"]);
+    expect(matches(html, "Sh")).toEqual(["0", "—"]);
+  });
+});
+
+describe("the match log's columns by role (N-14)", () => {
+  const heads = (html: string) => [...html.matchAll(/<th[^>]*title="[^"]*"[^>]*>([\s\S]*?)<\/th>/g)].map((m) => m[1].replace(/<[^>]+>/g, ""));
+
+  it("never draws a keeper's goals, assists or expected figures, even the odd 0.01", () => {
+    const html = render([row({ expectedAssists: 0.01, expectedGoalsConceded: 1.2, goalsConceded: 1 }, {})], KEEPER);
+    for (const head of ["G", "A", "xG", "xA", "Def", "KP", "Sh"]) expect(heads(html), head).not.toContain(head);
+    expect(matches(html, "Sv")).toEqual(["4"]);
+    expect(matches(html, "Prv")).toEqual(["0.20"]);
+  });
+
+  it("never draws an outfielder's saves", () => {
+    expect(heads(render([row({ saves: 0 }, {})]))).not.toContain("Sv");
+  });
+
+  it("counts his defending per match as Rankings counted it, and drops FPL's DefCon beside it", () => {
+    const html = render([row({ tackles: 2, clearancesBlocksInterceptions: 3, recoveries: 4, defensiveContribution: 5 }, {})]);
+    expect(matches(html, "Def")).toEqual(["9"]);
+    expect(heads(html)).not.toContain("DC");
+  });
+});
+
+describe("the match log's foot (N-13)", () => {
+  const rows = [row({ goals: 2, expectedGoals: 1.4 }, { shots: 4, points: 20 }), row({ fixtureId: 61 }, { shots: 2, points: 10 })];
+
+  it("closes on his season's Total and his Rank among his group, every old Rankings column among them", () => {
+    const html = render(rows, FORWARD);
+    expect(foot(html, "FPts")).toEqual(["30", "2nd"]);
+    expect(foot(html, "G")).toEqual(["2", "1st"]);
+    expect(foot(html, "xG")).toEqual(["1.40", "9th"]);
+    for (const head of ["Min", "A", "xA", "Sh", "KP", "Def"]) expect(foot(html, head)[1], head).toMatch(/^\d+(st|nd|rd|th)$/);
+    expect(matches(html, "KP")).toEqual(["—", "—"]);
+    expect(html).toContain("Ranked among 23 forwards");
+    expect(html).toContain('title="9th of 23"');
+  });
+
+  it("totals a column Rankings never had from his matches, and ranks it nowhere", () => {
+    const html = render(rows, FORWARD);
+    expect(foot(html, "FC")).toEqual(["0", "—"]);
+    expect(foot(html, "CS")).toEqual(["0", "—"]);
+  });
+
+  it("dashes the total of a figure some match he played lacks, rather than print a short sum", () => {
+    const html = render([row({}, { shots: 3 }), row({ fixtureId: 61 }, null)]);
+    expect(foot(html, "Sh")).toEqual(["—", "—"]);
+  });
+
+  // #66: a man with no minutes has totals but no place.
+  it("prints a man without minutes his totals and dashes his ranks", () => {
+    const standing: Standing = { ...FORWARD, ranked: FORWARD.ranked.map((r) => ({ ...r, value: 0, rank: null })), fpts: null };
+    const html = render([row({ minutes: 0 }, {})], standing);
+    expect(foot(html, "Min")).toEqual(["0", "—"]);
+    expect(foot(html, "G")).toEqual(["0", "—"]);
+  });
+
+  it("stands as a foot alone when FPL's game log is silent", () => {
+    const html = render([], KEEPER);
+    expect(foot(html, "Sv")).toEqual(["8", "2nd"]);
+    expect(html).not.toContain("No match he has played");
+  });
+
+  it("puts Every match before the season maps on the Data tab", () => {
+    const page = readFileSync(join(__dirname, "data/page.tsx"), "utf8");
+    const season = page.slice(page.indexOf("<HeldNote"));
+    expect(season.indexOf("<MatchLog")).toBeGreaterThan(-1);
+    expect(season.indexOf("<MatchLog")).toBeLessThan(season.indexOf("{maps}"));
   });
 });

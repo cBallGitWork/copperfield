@@ -1,9 +1,8 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { PastSeason, Ranked } from "@epl/core";
+import type { PastSeason } from "@epl/core";
 import PastSeasons from "./PastSeasons";
-import Rankings from "./Rankings";
 import SetPieces from "./SetPieces";
 import Board from "../../components/league/Board";
 
@@ -17,7 +16,6 @@ const season = (label: string): PastSeason => ({
 });
 const clubs = new Map([["25-26", "Manchester City"], ["24-25", "Watford"]]);
 const league = [{ name: "Man City", shortName: "MCI" }];
-const ranked: Ranked[] = [{ head: "Min", title: "Minutes played", value: 540, kind: "count", rank: 1, of: 23 }];
 const seasons = () => renderToStaticMarkup(createElement(PastSeasons, { seasons: [season("2025/26"), season("2024/25"), season("2023/24")], clubs, league }));
 
 /** The table's own classes. */
@@ -39,9 +37,8 @@ describe("the player's short tables", () => {
   });
 
   // N-16: a short table stretched to 1100px on a desk.
-  it("sizes Seasons and Rankings to their figures on a desk, and leaves every other board full width", () => {
-    const rankings = renderToStaticMarkup(createElement(Rankings, { ranked, fpts: null, group: "forwards" }));
-    for (const html of [seasons(), rankings]) expect(table(html)).toMatch(/\bw-full\b.*\blg:w-auto\b/);
+  it("sizes Seasons to its figures on a desk, and leaves every other board full width", () => {
+    expect(table(seasons())).toMatch(/\bw-full\b.*\blg:w-auto\b/);
     const board = createElement(Board<string>, { rows: ["a"], keyOf: (row) => row, lead: {}, columns: [{ key: "x", head: "X", cell: () => ({ value: 1 }) }] });
     expect(table(renderToStaticMarkup(board))).not.toContain("lg:w-auto");
   });
@@ -56,10 +53,5 @@ describe("the player's short tables", () => {
     expect(html).not.toContain("<table");
     expect(html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ")).toContain("Penalties 1st Free kicks —");
     expect(html).toContain('title="Not among the 2 takers"');
-  });
-
-  it("tightens the Rankings figures under a thumb", () => {
-    const html = renderToStaticMarkup(createElement(Rankings, { ranked, fpts: null, group: "forwards" }));
-    expect(html).toMatch(/<td[^>]*class="[^"]*px-1 text-center lg:px-1\.5/);
   });
 });

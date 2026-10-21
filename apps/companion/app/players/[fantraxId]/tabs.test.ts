@@ -14,7 +14,7 @@ const profile = drawn("page.tsx");
 const data = drawn("data/page.tsx");
 
 const WHO_HE_IS = ["BornLine", "Portrait", "AttributeGrid", "Fitness", "SetPieces", "FixtureRun", "RealPosition"];
-const FIGURES = ["Rankings", "SeasonMaps", "MatchLog", "PastSeasons"];
+const FIGURES = ["SeasonMaps", "MatchLog", "PastSeasons"];
 
 describe("the player's Profile and Data tabs", () => {
   it("keeps who he is on the Profile and off Data", () => {
