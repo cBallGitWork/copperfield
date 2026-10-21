@@ -63,7 +63,7 @@ export default async function StandingsPage({ searchParams }: { searchParams: Se
   const places = printedPlaces(rows);
 
   return (
-    <LeagueShell current="table" teams={info?.teams.length}>
+    <LeagueShell current="table" teams={info?.teams.length} flush>
       {/* A table wider than the phone scrolls sideways inside its own box. */}
       <StandingsTable
         columns={COLUMNS}

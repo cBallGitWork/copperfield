@@ -14,7 +14,7 @@ import { getSeasonResults } from "../../schedule/schedule";
 import { leagueTable } from "../../../standings";
 import { leagueInfo, readCalendar } from "../../../round";
 import Nothing from "../../../components/shell/Nothing";
-import { PANEL } from "@/app/desk";
+import { PANEL, PANEL_FLUSH } from "@/app/desk";
 import { matchHref } from "../../../prem/match/[id]/matchRoutes";
 import { clubPlaces } from "../../../prem/places";
 
@@ -45,7 +45,7 @@ export async function TableTab({ tie, mine }: { tie: readonly string[]; mine: st
   const places = printedPlaces(rows);
 
   return (
-    <section className={PANEL}>
+    <section className={PANEL_FLUSH}>
       <StandingsTable
         columns={COLUMNS}
         sort="rank"

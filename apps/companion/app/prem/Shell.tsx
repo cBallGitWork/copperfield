@@ -13,11 +13,14 @@ export const PANEL_ROWS = 20;
 export default function PremShell({
   current,
   rows,
+  flush,
   children,
 }: {
   current: PremSection;
   /** The view's own rows, which win: a gameweek of ten matches in a twenty-club panel scrolled into empty ground. */
   rows?: number;
+  /** A table alone in the panel, flush to its edge. */
+  flush?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -26,6 +29,7 @@ export default function PremShell({
       nav={<PremNav current={current} />}
       caption={PREM_CAPTION[current]}
       rows={rows ?? PANEL_ROWS}
+      flush={flush}
     >
       {children}
     </SectionShell>

@@ -8,6 +8,10 @@ Your squad, then everyone else's.
   `/squad/me`, which draws this index for a reader with no team: that is the Team tab's own page.
 - One list. Your own squad first, its row on the raised surface with the accent edge; no "You" chip (Craig,
   5 Sep 2026): the edge and the top place carry it. No "Around the league" heading since 20 Oct 2026.
+- Every row leads with **his table place in CM's index block, in the manager's colours** (21 Oct 2026: the
+  waiver order, the Team picker and the standings all lead with the place; this list was the odd one out). The
+  accent edge rides the block, as the table's does, and the list sits flush in one panel so the spine meets its
+  edge. No table, no places: the blocks stand empty and the names keep their column.
 - Every row: name, **who he plays this week** (`v Glengarry`, a lowercase `v` as every other screen), a squad size
   (`13/14`) only when short of or over the league's limit (`maxTotalPlayers` from the `getLeagueInfo` the page
   already holds; none named, none printed), and an `n unmapped` badge when we cannot fully identify a squad.

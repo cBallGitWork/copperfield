@@ -19,6 +19,7 @@ export default function LeagueShell({
   sub,
   teams,
   rows,
+  flush,
   children,
 }: {
   current: LeagueSection;
@@ -28,6 +29,8 @@ export default function LeagueShell({
   teams?: number;
   /** The view's own rows, which win: five ties in a ten-team panel left a box with a hole in it. */
   rows?: number;
+  /** A table alone in the panel, flush to its edge. */
+  flush?: boolean;
   children: React.ReactNode;
 }) {
   const named = title ?? LEAGUE_CAPTION[current];
@@ -40,6 +43,7 @@ export default function LeagueShell({
       caption={sub === undefined ? named : <>{named} · {sub}</>}
       captionOnPhone={current === "matchups"}
       rows={rows ?? Math.max(teams ?? 0, PANEL_FLOOR)}
+      flush={flush}
     >
       {children}
     </SectionShell>
