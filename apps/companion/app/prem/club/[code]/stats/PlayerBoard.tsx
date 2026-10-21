@@ -6,17 +6,13 @@ import { DASH, fullFootballerName, type FootballPlayer } from "@epl/core";
 import { viewOf, reading } from "./measures";
 import { PANEL } from "@/app/desk";
 import Board from "../../../../components/league/Board";
-import LeadFace from "../../../../components/league/LeadFace";
-import { TIGHT_ROW } from "../../../../components/league/TableCells";
+import LeadFace, { LEAD_LINK_TIGHT } from "../../../../components/league/LeadFace";
 import { SIDE_SHARES, standoutCuts, standoutInk } from "../../../../components/league/standout";
 import StateBox from "../../../../components/football/StateBox";
 import { doubtRow } from "../../../../components/football/doubtRow";
 
 // A club's season, player by player: our position in the tile, standouts lit, doubts washed.
 // Client only because sorting is a tap here; the view is the page's, from its foot strip (`?view=`).
-
-/** The lead's link at PRODUCT's 36px under a thumb, as `LEAD_LINK` is wide. */
-const TIGHT_LEAD = `${TIGHT_ROW} w-40 px-1.5 text-left lg:w-64`;
 
 export interface Row {
   player: FootballPlayer;
@@ -80,7 +76,7 @@ export default function PlayerBoard({ rows, view }: { rows: readonly Row[]; view
             label: "Player",
             className: (row) => doubtRow(row.player),
             of: ({ player, positions, href }) => (
-              <NameLink href={href} className={TIGHT_LEAD}>
+              <NameLink href={href} className={LEAD_LINK_TIGHT}>
                 <LeadFace name={fullFootballerName(player)} positions={positions} after={<StateBox player={player} />} />
               </NameLink>
             ),

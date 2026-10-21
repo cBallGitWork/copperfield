@@ -4,7 +4,7 @@ import type { Club, PlManMatch, PlTeamSheet, SquadPlayerDetail } from "@epl/core
 import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
 import Section from "../../../components/shell/Section";
 import Board from "../../../components/league/Board";
-import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
+import LeadFace, { LEAD_LINK_TIGHT } from "../../../components/league/LeadFace";
 import { MaybeCard } from "./PlayerCardButton";
 import SubNote from "./SubNote";
 import { COLUMNS, sorted, type StatLine, type StatSort } from "./statColumns";
@@ -92,7 +92,7 @@ export default function ClubStats({
               const hurt = man.code !== null && injured.has(man.code);
               return (
                 // His card, not his page: every name on a match screen opens the same card (Craig, 23 Sep 2026).
-                <MaybeCard player={forCode(cards, man.code)} className={`${LEAD_LINK} ${PHONE_ROW} gap-1.5`}>
+                <MaybeCard player={forCode(cards, man.code)} className={`${LEAD_LINK_TIGHT} gap-1.5`}>
                   <LeadFace
                     name={footballerName(match, man)}
                     after={
@@ -135,9 +135,6 @@ export default function ClubStats({
     </Section>
   );
 }
-
-/** 36px under a thumb, not 44: PRODUCT's match-screen exception, which `MATCH_ROW` marks. */
-const PHONE_ROW = "max-lg:min-h-9";
 
 /** His name in full by the one rule, or the team sheet's where FPL does not know him. */
 function footballerName(match: Match, man: { code: number | null; name: string }): string {
