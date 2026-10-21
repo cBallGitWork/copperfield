@@ -10,7 +10,6 @@ import { leagueOpinions } from "../../../leagueOpinions";
 import { matchCards, squadsOf } from "../matchCards";
 import { sheetReads } from "../sheetReads";
 import { matchHref } from "../matchRoutes";
-import { MATCH_ROW } from "../matchRow";
 import type { Match } from "../match";
 import { matchTitle } from "../title";
 
@@ -80,8 +79,8 @@ function Views({
   compact?: boolean;
 }) {
   return (
-    // The 36px compact strip under a thumb sits under the match rows' tap exception.
-    <div className={className} {...(compact ? MATCH_ROW : {})}>
+    // The 36px compact strip under a thumb: PRODUCT's match-screen switch exception.
+    <div className={className}>
       <TabStrip
         label="Line-up views"
         tabs={[

@@ -135,7 +135,7 @@ function cupCells(tie: CupTie, byCode: Map<number, Club>): Cells {
         // On a phone the crest stands beside both lines, the name over the competition.
         <Link
           href={clubHref(opponent.code)}
-          className="cm-row grid min-h-11 grid-cols-[auto_minmax(0,1fr)] content-center items-center gap-x-2 hover:underline lg:flex lg:gap-2"
+          className="cm-row grid min-h-9 grid-cols-[auto_minmax(0,1fr)] content-center items-center gap-x-2 hover:underline lg:flex lg:gap-2"
         >
           <ClubLabel club={opponent} crest={{ px: CREST_PX, className: `${CREST} row-span-2 object-contain` }} />
           {marker}

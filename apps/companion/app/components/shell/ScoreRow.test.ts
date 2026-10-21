@@ -91,7 +91,7 @@ describe("a football row split into its three ways in", () => {
   it("keeps every link at the thumb floor and wraps no link around the row", () => {
     expect(html).not.toMatch(/<a [^>]*class="cm-row/);
     expect(html).toMatch(/^<div class="cm-row block">/);
-    for (const a of html.match(/<a [^>]*>/g) ?? []) expect(a).toMatch(/min-h-11/);
+    for (const a of html.match(/<a [^>]*>/g) ?? []) expect(a).toMatch(/min-h-9/);
   });
 });
 

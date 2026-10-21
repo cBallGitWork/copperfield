@@ -42,7 +42,7 @@ export default async function Reports({ story, snapshot }: { story: PublishedSto
             <a
               key={r.fixtureCode}
               href={`#m-${r.fixtureCode}`}
-              className={`grid min-h-11 grid-cols-[1fr_auto_1fr] items-center gap-2 border-b px-2 text-sm text-ink ${RULE}`}
+              className={`grid min-h-9 grid-cols-[1fr_auto_1fr] items-center gap-2 border-b px-2 text-sm text-ink ${RULE}`}
             >
               <span className="flex min-w-0 items-center justify-end gap-2 text-right">
                 <span className="truncate">{names(r.home.code)}</span>
@@ -62,8 +62,8 @@ export default async function Reports({ story, snapshot }: { story: PublishedSto
       {/* On a phone one match shows: the one the list's anchor targets, or the lead. A desk shows every match. */}
       <div
         className={`flex flex-col ${HAIRLINES} max-lg:[&:has(>section:target)>section:not(:target)]:hidden max-lg:[&:not(:has(>section:target))>section:not(:first-child)]:hidden ${listed ? "max-lg:[&>section]:scroll-mt-(--list-h)" : ""}`}
-        // A tapped row lands its section under the list, so the next switch is one tap: rows of 2.75rem, the head and air.
-        style={listed ? ({ "--list-h": `calc(${reports.length} * 2.75rem + 3rem)` } as CSSProperties) : undefined}
+        // A tapped row lands its section under the list, so the next switch is one tap: rows of 2.25rem, the head and air.
+        style={listed ? ({ "--list-h": `calc(${reports.length} * 2.25rem + 3rem)` } as CSSProperties) : undefined}
       >
         {reports.map((r, i) => {
           const id = idOf(r.fixtureCode);

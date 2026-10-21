@@ -86,10 +86,10 @@ describe("a signed-in reader's count", () => {
     expect(html).toMatch(new RegExp(`<div id="${controls[0]}" hidden="">[\\s\\S]*Saka`));
   });
 
-  it("sits beside the names' links on one line, never inside one, each at a thumb's 44, a pill under lg", () => {
+  it("sits beside the names' links on one line, never inside one, each at a row's 36, a pill under lg", () => {
     const html = round(new Map([[1, [saka, palmer]]]));
     for (const a of html.match(/<a [\s\S]*?<\/a>/g) ?? []) expect(a).not.toContain("<button");
-    for (const b of html.match(/<button[^>]*>/g) ?? []) expect(b).toMatch(/min-h-11 /);
+    for (const b of html.match(/<button[^>]*>/g) ?? []) expect(b).toMatch(/min-h-9 /);
     expect(html).not.toContain("min-h-6");
     expect(html).toMatch(/<button[^>]*aria-label="1 yours"[^>]*><span aria-hidden="true" class="[^"]*bg-accent[^"]*lg:hidden">1<\/span>/);
   });

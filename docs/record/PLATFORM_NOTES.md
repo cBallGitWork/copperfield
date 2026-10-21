@@ -81,12 +81,21 @@ Data · News · Compare (`players/[fantraxId]/tabs.ts`; Transfer folded into the
 man in season league points (`analysis/rival.ts`). The Profile's button is gone; Compare stays in the Data section's nav
 (`PoolNav`). The board's `?compare=` picker survives, reached by address alone.
 
+## Tap rows are 36 under a thumb — decided 21 Oct 2026
+
+Craig, 21 Oct 2026, on the club squad list at 390: *"These rows can be smaller no?"*, then *"Repo wise issue too I
+imagine"*. Every tappable list row is 36px under `lg` and 28 from it (`TAP_ROW`, `min-h-9`); a control (button, tab,
+chip, stepper, select, input) keeps 44 and 36; a row nobody taps keeps 24 and 28. The 36px exceptions PRODUCT.md
+listed became the rule, so `TIGHT_TAP_ROW`, `TIGHT_ROW`, `LEAD_LINK_TIGHT`, `StandingsTable`'s `rows`, `.cm-tight`,
+`SectionShell`'s `tight` and the match screens' `data-tap-exception` mark are gone; `--table-row` is 37px under a
+thumb everywhere. `tools/ui/tapfit.mjs` holds a `.cm-row` row to 36 under a thumb and a control to 44.
+
 ## One table spec — decided 21 Oct 2026
 
 Craig, 21 Oct 2026: *"seven table styles on one page: six different row heights, three header styles and three
 figure sizes"*. The spec lives in `app/desk.ts` and DESIGN §6 ("One table"): a 24px head plate in `3xs` bold caps (9px, the size it had; the complaint was the plate's height)
-(`PLATE_FRAME`, reversing 2 Oct's 28), read-only rows 24/28 (`READ_ROW`), tap rows 44/28 (`TAP_ROW`), PRODUCT's
-36px list kept (`TIGHT_TAP_ROW`), one figure size (`ROW_FIGURE`). Width stays an explicit `fit` at the call site,
+(`PLATE_FRAME`, reversing 2 Oct's 28), read-only rows 24/28 (`READ_ROW`), tap rows 36/28 (`TAP_ROW`, below), one
+figure size (`ROW_FIGURE`). Width stays an explicit `fit` at the call site,
 not a column count: a board whose name takes the slack (SquadTable, LeaderBoard) cannot be told from a short record
 by counting. Kept off `Board`, each for its own reason: `StandingsTable` (place block, Pts block, cut rows, form),
 `Ledger` and `SquadRows` (lists, not tables), scoring (merged cells for a category paid alike), a club's Run (no

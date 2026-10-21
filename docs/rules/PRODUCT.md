@@ -115,41 +115,33 @@ instead.
 ## Accessibility & Inclusion
 
 WCAG 2.1 AA. Body text ≥4.5:1, large text and numerals ≥3:1, visible focus states,
-tap targets ≥44px.
+tap targets ≥44px for a control and 36 for a row.
 
 **The 44px is ours and not the standard's** — WCAG 2.1 AA has no tap-target
 requirement at all — and since 31 Aug 2026 it is a rule about a THUMB rather than
-about a screen. Under a thumb everything is 44. Above `lg`, where the pointer is
-a mouse and the reference viewing condition above does not apply, the desk keeps
-its own proportions instead:
+about a screen. Under a thumb a **control** is 44 and a tappable **row** of a list is 36 (Craig, 21 Oct 2026, on the
+club squad list: *"These rows can be smaller no?"*). Above `lg`, where the pointer is a mouse and the reference viewing
+condition above does not apply, the desk keeps its own proportions:
 
-| | Above `lg` | Where |
-|---|---|---|
-| A repeating **row** of a list | 28px | `.cm-row`, `desk.css` |
-| A **control** — button, input, tab, way out | 36px | `lg:min-h-9` |
-| A **column head** | 24px, with its strip | see the exception below |
+| | Under `lg` | Above `lg` | Where |
+|---|---|---|---|
+| A tappable **row** of a list | 36px | 28px | `TAP_ROW` (`min-h-9`), `.cm-row` in `desk.css` |
+| A **control** — button, input, select, tab, chip, stepper, way out | 44px | 36px | `min-h-11 lg:min-h-9` |
+| A **row nobody taps** | 24px | 28px | `READ_ROW` |
+| A **column head** | 24px, with its strip | 24px | see the exceptions below |
 
-Craig's call, and the phone keeps 44 at every size. The target is 44 and a grey plate paints 32 of it
-(DESIGN §6): what a thumb can hit and what the eye sees are two measurements, and only the first is the floor. One rule rather than a
-judgement per component: `.cm-row` says nothing below `lg`, so adding it to a row
-cannot change what a phone sees. What it bought is ten teams on one screen
-where the game showed a division on one — `/league`'s rows are 29px against
-Championship Manager's own 18.
+The row's 36 replaced a string of 36px exceptions (the match screens' rows, 23 Sep; a squad list, 6 Oct; the Draft
+tab's tables, 6 Oct; the Prem and Stats boards, 20 Oct), each a row someone found too thick: the rule is now what the
+exceptions were. A control keeps 44, and a grey plate paints 32 of it (DESIGN §6): what a thumb can hit and what the
+eye sees are two measurements, and only the first is the floor. `.cm-row` says nothing below `lg` beyond marking a
+list row, so adding it to a row cannot change what a phone sees. What it bought is ten teams on one screen where the
+game showed a division on one — `/league`'s rows are 29px against Championship Manager's own 18.
 
-**Three exceptions, all deliberate and all measured.** A **column head** belongs
-to the head strip it is cut from and is as wide as its column, so it is a short
-wide target rather than a small one; it was 28px from the tables' start and is 24 since 21 Oct 2026 (DESIGN §6,
-"One table"). A table row that is read and never tapped is no target at all, so it is 24px (`READ_ROW`). An **inline text link inside a
-sentence** — "or show all 638" — is prose and never was a control. And **the match
-screens' rows are 36px under a thumb** (Craig, 23 Sep 2026: *"the mobile rows are
-too big"*, *"too big of a gap between a goal scorer and assister"*): the team
-sheet, a club's stats board, Action Zones' shot list, the Overview's scorer and assister lines, and
-the phone's club and view switches (`TabStrip compact`) on `/prem/match/[id]`. **So are a squad list's**
-(Craig, 6 Oct 2026: *"mobile, list view, rows are quite thick still, room to make shorter"*): `SquadRow`, on
-your own planner's list, a rival's squad and the head-to-head's list. **So are the Draft tab's tables** (Craig, 6 Oct 2026, yes to 36px): the
-league table, Team Stats and the cup groups (`TIGHT_ROW`). **So are the Premier League table (`/prem`), a club's Stats
-board (`/prem/club/[code]/stats`) and a team's Stats board (`/squad/[id]/stats`)** (20 Oct 2026, the mobile review:
-siblings of the Draft tab's tables, read rather than tapped row by row).
+**Three exceptions, all deliberate and all measured.** A **column head** belongs to the head strip it is cut from and
+is as wide as its column, so it is a short wide target rather than a small one; it was 28px from the tables' start and
+is 24 since 21 Oct 2026 (DESIGN §6, "One table"). An **inline text link inside a sentence** — "or show all 638" — is
+prose and never was a control. **The match screens' club and view switches** (`TabStrip compact`, `.cm-tab-compact`)
+are 36px under a thumb (Craig, 23 Sep 2026: *"the mobile rows are too big"*).
 
 *It was three until 11 Sep 2026. The third was the **Pitch/List toggle** at
 `min-h-9`, and it is gone because the control is: `ViewToggle` became a blue

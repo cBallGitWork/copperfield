@@ -3,10 +3,9 @@ import { type LeagueTeam, type LineupDetail, type ScoringCategory, type SquadPla
 import { teamColours } from "@/app/teamColours";
 import Section from "../../../components/shell/Section";
 import Board from "../../../components/league/Board";
-import LeadFace, { LEAD_LINK_TIGHT } from "../../../components/league/LeadFace";
+import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import { gainOrLoss } from "@/app/desk";
 import { MaybeCard } from "../../../prem/match/[id]/PlayerCardButton";
-import { MATCH_ROW } from "../../../prem/match/[id]/matchRow";
 import { figureOf, paidIn, sideRows, type Breakdowns, type Counts } from "./sideRows";
 import { DEFAULT_SIDE_SORT } from "./views";
 import Absent from "@/app/components/shell/Absent";
@@ -51,13 +50,12 @@ export default function SideStats({
         tail={{ label: "Bench · not counted", rows: bench.map((player) => ({ player, reserve: true })) }}
         keyOf={({ player }) => player.rostered.slot.fantraxId}
         rowClass={({ reserve }) => (reserve ? "cm-out" : "")}
-        rowAttrs={MATCH_ROW}
         lead={{
           tile: { positions: ({ player }) => (player.rostered.slot.position ? [player.rostered.slot.position] : []) },
           name: {
             label: "Player",
             of: ({ player }) => (
-              <MaybeCard player={player} className={`${LEAD_LINK_TIGHT} gap-1.5`}>
+              <MaybeCard player={player} className={`${LEAD_LINK} gap-1.5`}>
                 <LeadFace crest={player.club ? crestUrl(player.club) : null} name={fullPlayerName(player.rostered)} />
               </MaybeCard>
             ),

@@ -9,7 +9,7 @@ import { positionsFromList } from "../../../positions";
 import { SELECT } from "../../../components/shell/ButtonLink";
 import BoardKey from "../../../components/league/BoardKey";
 import Board from "../../../components/league/Board";
-import LeadFace, { LEAD_LINK_TIGHT } from "../../../components/league/LeadFace";
+import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import StateBox from "../../../components/football/StateBox";
 import { doubtRow } from "../../../components/football/doubtRow";
 import { byFigure } from "../../../components/league/order";
@@ -105,7 +105,7 @@ export default function StatBoard({
             label: "Player",
             className: wash,
             of: (line) => (
-              <Link href={playerHref(line.fantraxId)} className={LEAD_LINK_TIGHT}>
+              <Link href={playerHref(line.fantraxId)} className={LEAD_LINK}>
                 <LeadFace
                   crest={line.clubShort ? crestForShortName(toFplClubCode(line.clubShort)) : null}
                   name={names[line.fantraxId] ?? line.name}

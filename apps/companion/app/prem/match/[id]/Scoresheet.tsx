@@ -1,7 +1,6 @@
 import { fullFootballerName, goalGroups } from "@epl/core";
 import type { FootballPlayer, PlGoal, PlManMatch, PlayerOwner, SheetRow, SquadPlayerDetail } from "@epl/core";
 import { Goal, Man } from "./ScoreRows";
-import { MATCH_ROW } from "./matchRow";
 import { forCode } from "./sheetJoin";
 import { minuteMark } from "./minuteMark";
 
@@ -44,7 +43,7 @@ export default function Scoresheet({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-x-3 gap-y-1" {...MATCH_ROW}>
+    <div className="grid grid-cols-2 gap-x-3 gap-y-1">
       <SheetSide goals={home} rest={homeElse} owners={owners} byCode={byCode} did={did} injured={injured} cards={cards} />
       <SheetSide goals={away} rest={awayElse} owners={owners} byCode={byCode} did={did} injured={injured} cards={cards} />
     </div>

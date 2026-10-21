@@ -84,7 +84,7 @@ function Fixture({ view, cell }: { view: PlannerView; cell: PlannerCell | null }
   const { ground, ink } = easeGround(cell?.rank ?? null);
   if (cell === null) {
     return (
-      <div className={`flex min-h-11 items-center justify-center text-2xs lg:min-h-7 ${ink}`} style={{ background: ground }} title="No match this gameweek">
+      <div className={`flex min-h-9 items-center justify-center text-2xs lg:min-h-7 ${ink}`} style={{ background: ground }} title="No match this gameweek">
         {DASH}
       </div>
     );
@@ -93,7 +93,7 @@ function Fixture({ view, cell }: { view: PlannerView; cell: PlannerCell | null }
   const rank = cell.rank === null ? DASH : ordinal(cell.rank);
   return (
     <div
-      className={`numeric grid min-h-11 grid-cols-[auto_auto] content-center items-baseline justify-center gap-0.5 whitespace-nowrap text-2xs leading-none lg:flex lg:min-h-7 lg:items-center lg:gap-1 lg:px-1.5 lg:text-xs ${ink}`}
+      className={`numeric grid min-h-9 grid-cols-[auto_auto] content-center items-baseline justify-center gap-0.5 whitespace-nowrap text-2xs leading-none lg:flex lg:min-h-7 lg:items-center lg:gap-1 lg:px-1.5 lg:text-xs ${ink}`}
       style={{ background: ground }}
       title={`${cell.opponent.name} ${cell.home ? "at home" : "away"}${cell.rank === null ? "" : `: ${rank}-easiest ${THEIR[view]}`}`}
     >

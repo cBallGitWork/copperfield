@@ -157,7 +157,7 @@ function Side({
                 <Named name={player.playerName} position={player.position} />
               </>
             );
-            // His page, at the tight row's 36 under a thumb; a deal from another feed carries no id and stays text.
+            // His page, at a tap row's 36 under a thumb; a deal from another feed carries no id and stays text.
             return player.fantraxId === undefined ? (
               <span key={player.playerName} className={line}>{body}</span>
             ) : (

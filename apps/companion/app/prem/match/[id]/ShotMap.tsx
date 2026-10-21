@@ -14,7 +14,6 @@ import {
   MUTE,
   SortHead,
 } from "../../../components/league/TableHeads";
-import { MATCH_ROW } from "./matchRow";
 
 // Both sides' shots on one pitch, each at its own end, and every shot in one list under it, or beside it
 // on a desk (Craig, 23 Sep 2026). Tapping either picks a shot; every key pass is drawn from where it started.
@@ -168,7 +167,6 @@ export default function ShotMap({
         {/* The board standard: `BOARD` and `SortHead`, the heads every sortable table wears. */}
         <table
           className={`${BOARD} table-fixed cm-index-scoped bg-surface max-lg:mt-1 lg:col-start-2 lg:row-span-2 lg:row-start-1`}
-          {...MATCH_ROW}
         >
           <thead>
             <HeadRow>

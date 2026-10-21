@@ -124,9 +124,8 @@ Break these and the app is wrong, however good it looks.
 
    What has NOT changed, and must not be confused with the above: One column,
    thumb-reachable, readable at arm's length.
-   `min-h-11` is the standard touch target and the Pitch/List toggle is the one
-   deliberate exception at `min-h-9` — on the head-to-head board and on a locked
-   squad, the two screens that still draw an eleven two ways. Above `lg` the desk keeps its own
+   Under a thumb a control is `min-h-11` (44) and a tappable list row `min-h-9` (36, `TAP_ROW`; Craig, 21 Oct
+   2026). Above `lg` the desk keeps its own
    proportions, because the rule is about a thumb and there is no thumb there:
    a row is 28px (`.cm-row`), a control 36, a column head 24 with its strip; a table row nobody taps
    is 24 under a thumb and 28 on a desk (`READ_ROW`).

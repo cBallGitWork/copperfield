@@ -2,6 +2,8 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import Board, { type BoardColumn } from "./Board";
+import { LEAD_LINK } from "./LeadFace";
+import { BUTTON, SELECT } from "../shell/ButtonLink";
 
 vi.mock("@/app/desk", () => import("../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
@@ -30,16 +32,25 @@ describe("the one board", () => {
     expect(html.match(/<thead>[\s\S]*<\/thead>/)?.[0]).not.toContain("h-7");
   });
 
-  // Two lines under a thumb make one 44px target: a 24px name line over 20px of figures.
-  it("splits a two-line row 24 over 20 under a thumb, and keeps the desk's one 28px row", () => {
+  // Two lines under a thumb make one 36px tap row (Craig, 21 Oct 2026): a 20px name line over 16px of figures.
+  it("splits a two-line row 20 over 16 under a thumb, and keeps the desk's one 28px row", () => {
     const [line, figures] = bodyRows(render({ name: { label: "Player", of: (row: string) => row, line: (row: string) => row } }));
-    expect(line).toEqual(expect.arrayContaining(["h-6", "lg:hidden"]));
-    expect(figures).toEqual(expect.arrayContaining(["max-lg:h-5", "lg:h-7"]));
+    expect(line).toEqual(expect.arrayContaining(["h-5", "lg:hidden"]));
+    expect(figures).toEqual(expect.arrayContaining(["max-lg:h-4", "lg:h-7"]));
     expect(figures).not.toContain("h-6");
   });
 
   it("fills its panel unless asked to fit its figures", () => {
     expect(render({})).not.toContain("lg:w-auto");
     expect(render({}, { fit: true })).toContain("lg:w-auto");
+  });
+
+  // Craig, 21 Oct 2026: "These rows can be smaller no?" A tappable row is 36 under a thumb; a control keeps 44.
+  it("draws a tappable row at 36 under a thumb and leaves a button at the thumb's 44", () => {
+    const html = render({ name: { label: "Player", of: (row: string) => createElement("a", { href: `/p/${row}`, className: LEAD_LINK }, row) } });
+    const link = html.match(/<a [^>]*class="([^"]*)"/)?.[1].split(/\s+/) ?? [];
+    expect(link).toEqual(expect.arrayContaining(["cm-row", "min-h-9"]));
+    expect(link).not.toContain("min-h-11");
+    for (const control of [BUTTON, SELECT]) expect(control.split(" ")).toEqual(expect.arrayContaining(["min-h-11", "lg:min-h-9"]));
   });
 });

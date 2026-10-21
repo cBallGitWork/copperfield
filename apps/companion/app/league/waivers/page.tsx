@@ -71,7 +71,6 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
             ) : (
               <StandingsTable
                 columns={ORDER}
-                rows="tight"
                 lines={waivers.order.map(({ teamId, place }) => ({
                   key: teamId,
                   place: ordinal(place),

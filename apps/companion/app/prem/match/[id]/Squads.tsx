@@ -9,7 +9,6 @@ import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
 import { MaybeCard } from "./PlayerCardButton";
 import OwnedBy from "./OwnedBy";
 import SideBySide from "./SideBySide";
-import { MATCH_ROW } from "./matchRow";
 import { NAME_CELL } from "./SheetRow";
 
 // Both clubs' books before a ball is kicked, to the team sheet's standards: the Fantrax tile in the club's colour,
@@ -86,7 +85,7 @@ function Side({
             const intel = intelSquads.get(player.code);
             const owner = owners.get(player.code);
             return (
-              <tr key={player.id} className={ROW_RULE} {...MATCH_ROW}>
+              <tr key={player.id} className={ROW_RULE}>
                 <PositionTile positions={fantraxPositions(league, player.code)} cell />
                 <td className="min-w-0 p-0">
                   {/* Centred in the row, the name and its owner on one baseline — the team sheet's own cell. */}

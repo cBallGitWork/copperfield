@@ -22,6 +22,6 @@ describe("a draft report on a phone", () => {
   it("lands a tapped match-up below its contents list, the list's height set off its rows", () => {
     const out = html(5);
     expect(out).toContain("max-lg:[&amp;&gt;section]:scroll-mt-(--list-h)");
-    expect(out).toContain("--list-h:calc(5 * 2.75rem + 3rem)");
+    expect(out).toContain("--list-h:calc(5 * 2.25rem + 3rem)");
   });
 });

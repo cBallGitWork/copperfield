@@ -32,7 +32,7 @@ export default function MailRow({
     <Link
       href={href}
       aria-current={open ? "true" : undefined}
-      className={`cm-row flex min-h-11 items-stretch gap-1.5 ${open ? "bg-league-deep" : `hover:bg-surface ${wash}`}`}
+      className={`cm-row flex min-h-9 items-stretch gap-1.5 ${open ? "bg-league-deep" : `hover:bg-surface ${wash}`}`}
     >
       <DateChip day={day} time={time} className="w-[5.5rem] lg:w-28" />
       <span className={`flex min-w-0 flex-1 items-center py-1 pr-1.5 ${ROW_NAME} ${ink}`}>

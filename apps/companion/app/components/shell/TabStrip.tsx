@@ -30,7 +30,7 @@ export default function TabStrip<K extends string>({
   dim?: readonly K[];
   /** `phrase` pads multi-word entries; `word` sizes each plate to its one word under a thumb. */
   labels?: "phrase" | "word";
-  /** 36px under a thumb rather than 44, under PRODUCT's recorded 36px exception. */
+  /** 36px under a thumb rather than a control's 44: PRODUCT's match-screen switch exception. */
   compact?: boolean;
   /** `paper` sets the strip in the paper's small capitals on its stock, the current tab in the print red. */
   register?: "desk" | "paper";

@@ -81,14 +81,14 @@ const FREE_TILE = "[--cm-index:var(--color-index-free)]";
 const RULE = "border-l border-line";
 
 /** A row's name line under a thumb: no rule under it, so the line and its figures read as one row. */
-const NAME_LINE = "h-6 lg:hidden border-b-0";
+const NAME_LINE = "h-5 lg:hidden border-b-0";
 
 /** The name line's face, as wide as the scroller (`@container` on it) and held at its left edge while the board
- *  scrolls under it; 24px tall, so the 44px link inside (`players/Cell`) hangs over the figures and the pair is one target. */
-const LINE_FACE = "sticky left-0 h-6 w-[100cqw]";
+ *  scrolls under it; 20px tall, so the 36px link inside (`players/Cell`) hangs over the figures and the pair is one target. */
+const LINE_FACE = "sticky left-0 h-5 w-[100cqw]";
 
-/** The figures under a name line: 20px, so the pair is 44 under a thumb. */
-const UNDER_LINE = "max-lg:h-5 lg:h-7";
+/** The figures under a name line: 16px on a tight leading, so the pair is a tap row's 36 under a thumb. */
+const UNDER_LINE = "max-lg:h-4 max-lg:leading-4 lg:h-7";
 
 export default function Board<Row>({
   columns,

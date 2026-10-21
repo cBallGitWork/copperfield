@@ -614,7 +614,7 @@ select.cm-bevel {
   color: var(--cm-index-ink, var(--color-ink));
 }
 
-/* Row height: a 44px tap target under a thumb, a 28px line on the desk; a control never relaxes.
+/* Row height: a 36px tap target under a thumb, a 28px line on the desk; a control keeps 44 and 36.
    `.cm-row` marks a LIST row only, never a control or a panel; unlayered, it beats `min-h-*` and `py-*` from `lg`.
    The marks' sizes live here because an inline `style` has no breakpoint. */
 :root {
@@ -622,23 +622,12 @@ select.cm-bevel {
   --row-portrait: 2rem;
   /* A table row's measured height, so a panel can be sized in rows. `--table-chrome` is a table's cost before its
      first row, and leaves empty ground under the last, since its readers measure different boxes. */
-  --table-row: 2.8125rem;
+  --table-row: 2.3125rem;
   --table-chrome: 4.75rem;
 }
 
 @media (min-width: 64rem) {
   :root {
-    --table-row: 1.8125rem;
-  }
-}
-
-/* PRODUCT.md's 36px tables under a thumb (the Draft tab's, the Prem table, the club and team Stats boards) reserve that. */
-.cm-tight {
-  --table-row: 2.3125rem;
-}
-
-@media (min-width: 64rem) {
-  .cm-tight {
     --table-row: 1.8125rem;
   }
 }

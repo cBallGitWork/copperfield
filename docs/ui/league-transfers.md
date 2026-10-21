@@ -31,7 +31,7 @@ Transfers tab's ledger with each row's mover named, read off the same feed, so t
   order with `lg:order-*`; the headings are `lg:hidden` and the desk keeps its Date column, so the desk is
   unchanged. The team Transfers tab groups the same way, its type beside In. Waivers' Last run is one stamp and
   keeps a date block on each row.
-- **Every name opens his page** (`/players/[fantraxId]`, the id the feed's own row carries), at the tight row's 36px
+- **Every name opens his page** (`/players/[fantraxId]`, the id the feed's own row carries), at a tap row's 36px
   under a thumb (16 Oct 2026: 66 names and not one could be tapped). The team Transfers tab draws the same ledger,
   so its names link too.
 - No moves: *Nothing* says so, coded `0 deals`.

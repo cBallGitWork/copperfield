@@ -11,7 +11,6 @@ export default function Groups({ groups, stage }: { groups: readonly string[][];
           <h2 className={BLOCK_PLATE}>Group {slots[0]?.charAt(0)}</h2>
           <StandingsTable
             columns={COLUMNS}
-            rows="tight"
             lines={groupTable(slots, [], stage.points).map((row, place) => ({
               key: row.teamId,
               place: ordinal(place + 1),

@@ -31,7 +31,7 @@ export function YoursToggle({ count }: { count: number }) {
       aria-controls={state.id}
       onClick={state.flip}
       aria-label={`${count} yours`}
-      className="numeric flex min-h-11 shrink-0 cursor-pointer items-center gap-0.5 px-1 text-2xs font-bold text-accent hover:brightness-110 max-[359px]:px-0 lg:min-h-7 lg:px-0"
+      className="numeric flex min-h-9 shrink-0 cursor-pointer items-center gap-0.5 px-1 text-2xs font-bold text-accent hover:brightness-110 max-[359px]:px-0 lg:min-h-7 lg:px-0"
     >
       <span aria-hidden className="min-w-4 bg-accent px-1 text-center leading-4 text-bg max-[359px]:px-0.5 lg:hidden">
         {count}

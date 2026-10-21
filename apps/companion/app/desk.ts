@@ -73,11 +73,8 @@ export const READ_ROW = "h-6 lg:h-7";
 /** `READ_ROW`'s heights as a floor, for a row drawn outside a table: a label and value line, a ranked block. */
 export const READ_LINE = "min-h-6 lg:min-h-7";
 
-/** The row that is one tap target, on the link or button filling its cell: the thumb's 44, `.cm-row`'s 28 from `lg`. */
-export const TAP_ROW = "cm-row flex min-h-11 items-center";
-
-/** `TAP_ROW` at 36 under a thumb: PRODUCT's recorded exceptions (match screens, squad lists, the read-mostly tables). */
-export const TIGHT_TAP_ROW = "cm-row flex min-h-9 items-center";
+/** The row that is one tap target, on the link or button filling its cell: 36 under a thumb, `.cm-row`'s 28 from `lg`. */
+export const TAP_ROW = "cm-row flex min-h-9 items-center";
 
 /** The rule between table rows, in `border-bg`: the darker step reads as one ruled table. */
 export const ROW_RULE = "border-b border-bg";

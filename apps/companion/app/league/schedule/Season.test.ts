@@ -59,7 +59,7 @@ describe("a team's season", () => {
 
   it("prints a gameweek to come as a faint dash, off the plate, still opening the matchup", () => {
     const [row] = items(draw({ toCome: [tie("a", 8)], played: [] }));
-    expect(row).toMatch(/<a href="[^"]*gw=8&amp;vs=a" class="[^"]*min-h-11/);
+    expect(row).toMatch(/<a href="[^"]*gw=8&amp;vs=a" class="[^"]*min-h-9/);
     expect(row).toMatch(/<span class="[^"]*h-6 w-12[^"]*text-faint[^"]*">—<\/span>/);
     expect(row).not.toMatch(/cm-index[^"]*h-6 w-12[^"]*">—/);
   });

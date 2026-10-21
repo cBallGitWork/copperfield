@@ -4,16 +4,13 @@ import { DASH } from "@epl/core";
 import { positionsLabel } from "../../positions";
 import { LABEL, ROW_NAME } from "@/app/desk";
 import PlayerName from "../shell/PlayerName";
-import { ROW_LINK, TIGHT_ROW } from "./TableCells";
+import { ROW_LINK } from "./TableCells";
 
 /** A board lead's link or button at the width its column gives it: a fixed table's name takes the slack. */
 export const LEAD_BOX = `${ROW_LINK} px-1.5 text-left`;
 
 /** `LEAD_BOX` with room for a "Surname, I" of fifteen letters under a thumb, on a board that scrolls. */
 export const LEAD_LINK = `${LEAD_BOX} w-40 lg:w-64`;
-
-/** `LEAD_LINK` at PRODUCT's 36px under a thumb: the match screens' boards and the read-mostly Stats boards. */
-export const LEAD_LINK_TIGHT = `${TIGHT_ROW} w-40 px-1.5 text-left hover:underline lg:w-64`;
 
 /** A man at the head of a board row: his crest, his name by the one rule (`PlayerName`), `after` straight after it,
  *  and, when the board's tile is the desk's alone, his position under it on a phone with `under` beside that.
