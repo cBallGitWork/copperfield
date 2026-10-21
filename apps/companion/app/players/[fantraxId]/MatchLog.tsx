@@ -102,12 +102,12 @@ function figureColumn(column: MatchColumn, rows: readonly MatchRow[], cut: Stand
 
 /** One figure, centred, lit when it stands out; a dash where nobody measured it. */
 function figure(column: MatchColumn, value: number | null, cut: StandoutCut | undefined): BoardFigure {
-  const ink = value === null ? "" : column.derived ? "text-info" : standoutInk(value, cut, "high") || (value === 0 ? "text-muted" : "");
+  const ink = value === null ? "" : column.derived || column.cyan ? "text-info" : standoutInk(value, cut, "high") || (value === 0 ? "text-muted" : "");
   return total(column, value, ink);
 }
 
 /** A figure as its column prints it, never lit: the season's line reads in ink, ours in cyan. */
-function total(column: MatchColumn, value: number | null, ink = column.derived ? "text-info" : ""): BoardFigure {
+function total(column: MatchColumn, value: number | null, ink = column.derived || column.cyan ? "text-info" : ""): BoardFigure {
   if (value === null) return { value: DASH, className: "font-bold text-faint" };
   return { value: column.kind ? fixed(value, column.kind) : value, className: `font-bold ${ink}` };
 }

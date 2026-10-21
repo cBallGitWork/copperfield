@@ -2,7 +2,7 @@ import type { Opposition } from "@epl/core";
 import Section from "../../components/shell/Section";
 import { fdrStep } from "../../components/football/fdr";
 import { DASH, venueMark } from "@epl/core";
-import { MINOR_LABEL, PLATE_FRAME, ROW_FIGURE, SMALL_CAPS } from "@/app/desk";
+import { MINOR_CAPS, MINOR_LABEL, PLATE_FRAME, ROW_FIGURE } from "@/app/desk";
 
 // What is coming, as a run: FPL's difficulty on each block, under it the sister model's xMins for that gameweek.
 // No source caption (Craig, 30 Sep 2026); each figure's title says whose it is.
@@ -27,7 +27,7 @@ export default function FixtureRun({
         {/* Each row's word, in the lines' own heights, so the cyan run is named on a phone (review M30). */}
         <li className="flex shrink-0 flex-col gap-1">
           <span className="h-6" aria-hidden />
-          <span className="min-h-11" />
+          <span className="min-h-7" />
           <span className={`block ${ROW_FIGURE}`}>
             <span className={MINOR_LABEL}>xMins</span>
           </span>
@@ -43,12 +43,13 @@ export default function FixtureRun({
                 {/* A rearranged match can lose its round; it keeps its place in the run and says so. */}
                 {gw === null ? DASH : `GW${gw}`}
               </span>
+              {/* One 28px line, the venue a step down beside the club (Craig, 21 Oct 2026: "next up can be smaller"). */}
               <span
-                className={`numeric flex min-h-11 flex-col items-center justify-center px-1 text-xs font-bold leading-tight ${step.ink}`}
+                className={`numeric flex min-h-7 items-baseline justify-center gap-px px-0.5 pt-1.5 text-xs font-bold leading-none ${step.ink}`}
                 style={{ backgroundColor: step.ground }}
               >
                 <span className="truncate">{against.club.shortName}</span>
-                <span className="text-2xs font-normal opacity-80">{venueMark(against.home)}</span>
+                <span className="text-3xs font-normal opacity-80">{venueMark(against.home).replace(/[()]/g, "")}</span>
               </span>
               {repeat || gw === null ? null : (
                 <span className={`numeric text-center font-bold text-info ${ROW_FIGURE}`} title={`Expected minutes, gameweek ${gw}`}>
@@ -63,5 +64,5 @@ export default function FixtureRun({
   );
 }
 
-/** A gameweek's head: a table's 24px plate and small caps, unpadded so "GW10" fits an eighth of a phone. */
-const GW_PLATE = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap ${SMALL_CAPS}`;
+/** A gameweek's head: a table's 24px plate in its minor caps, unpadded so "GW10" fits an eighth of a phone. */
+const GW_PLATE = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap ${MINOR_CAPS}`;

@@ -28,8 +28,10 @@ describe("Next up", () => {
   });
 
   // LAYOUT-10: a table drawn without the table's head, its figures a step under every board's.
-  it("heads each gameweek on the table's plate and sets xMins at the row figure's size", () => {
-    expect(html).toMatch(/<span class="cm-bevel flex h-6 items-center[^"]*text-2xs font-bold uppercase">GW7</);
+  it("heads each gameweek on the table's plate, each fixture one 28px line, xMins at the row figure's size", () => {
+    expect(html).toMatch(/<span class="cm-bevel flex h-6 items-center[^"]*text-3xs font-bold uppercase">GW7</);
+    expect(html).toMatch(/class="numeric flex min-h-7 items-baseline[^"]*"/);
+    expect(html).not.toMatch(/min-h-11/);
     expect(html).toMatch(/<span class="numeric text-center font-bold text-info text-sm"[^>]*>83</);
   });
 

@@ -83,6 +83,12 @@ describe("the match log", () => {
     expect(matches(html, "FPts")).toEqual(["2", "2"]);
   });
 
+  it("prints his points in the reading cyan, match by match and in the Total, which still sums", () => {
+    const html = render([row({}, {}), row({ fixtureId: 61 }, {})]);
+    expect(html.match(/font-bold text-info[^"]*"[^>]*>2</g)?.length ?? 0).toBeGreaterThanOrEqual(2);
+    expect(foot(html, "FPts")[0]).toBe("4");
+  });
+
   it("stands down a column only matches he sat out would have filled", () => {
     const html = render([row({ minutes: 0 }, {}), row({ minutes: 0, fixtureId: 61 }, {})]);
     expect(matches(html, "Min")).toEqual(["0", "0"]);
