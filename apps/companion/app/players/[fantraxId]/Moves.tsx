@@ -9,8 +9,8 @@ import type { PlayerMove } from "./dossier";
 /** Fantrax's own words for what happened, in ours. */
 const KIND: Readonly<Record<string, string>> = { claim: "Claimed", drop: "Dropped", trade: "Traded" };
 
-/** A step above a row's type, on every cell: DESIGN §6's third exception. */
-const TYPE = "text-base lg:text-lg";
+/** The row's type on every cell, the date's block included: one size with every other table. */
+const TYPE = "text-sm";
 
 export default function Moves({ moves }: { moves: readonly PlayerMove[] }) {
   return (
@@ -19,6 +19,7 @@ export default function Moves({ moves }: { moves: readonly PlayerMove[] }) {
         <p className={`text-muted ${TYPE}`}>No claim, drop or trade involving him.</p>
       ) : (
         <Board
+          fit
           rows={moves}
           keyOf={({ transaction }) => `${transaction.setId}-${transaction.kind}-${transaction.processedAt ?? ""}`}
           rowClass={({ transaction }) => (transaction.executed ? "" : "text-faint")}

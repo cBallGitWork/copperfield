@@ -39,12 +39,23 @@ describe("the player's short tables", () => {
   });
 
   // N-16: a short table stretched to 1100px on a desk.
-  it("sizes Seasons, Rankings and Set pieces to their figures on a desk, and leaves every other board full width", () => {
+  it("sizes Seasons and Rankings to their figures on a desk, and leaves every other board full width", () => {
     const rankings = renderToStaticMarkup(createElement(Rankings, { ranked, fpts: null, group: "forwards" }));
-    const pieces = renderToStaticMarkup(createElement(SetPieces, { pieces: [{ piece: "pens", label: "Penalties", rank: 1, of: 3 }], club: null }));
-    for (const html of [seasons(), rankings, pieces]) expect(table(html)).toMatch(/\bw-full\b.*\blg:w-auto\b/);
+    for (const html of [seasons(), rankings]) expect(table(html)).toMatch(/\bw-full\b.*\blg:w-auto\b/);
     const board = createElement(Board<string>, { rows: ["a"], keyOf: (row) => row, lead: {}, columns: [{ key: "x", head: "X", cell: () => ({ value: 1 }) }] });
     expect(table(renderToStaticMarkup(board))).not.toContain("lg:w-auto");
+  });
+
+  // LAYOUT-7: three ranks were a one-row table under 28px of heads; they are one line of label and figure.
+  it("prints the set pieces as one line, not a table", () => {
+    const pieces = [
+      { piece: "pens", label: "Penalties", rank: 1, of: 3 },
+      { piece: "fks", label: "Free kicks", rank: null, of: 2 },
+    ] as const;
+    const html = renderToStaticMarkup(createElement(SetPieces, { pieces, club: "Man City" }));
+    expect(html).not.toContain("<table");
+    expect(html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ")).toContain("Penalties 1st Free kicks —");
+    expect(html).toContain('title="Not among the 2 takers"');
   });
 
   it("tightens the Rankings figures under a thumb", () => {

@@ -7,6 +7,7 @@ import Section from "../../components/shell/Section";
 import { matchHref } from "../../prem/match/[id]/matchRoutes";
 import { RATING_TITLE } from "../../ratings";
 import { played, type MatchRow } from "./matchRows";
+import { TAP_ROW } from "@/app/desk";
 
 // Every match of his season on the house board (Craig, 25 Sep 2026): his points first (Craig, 12 Oct 2026), then the
 // score, FPL's account, Fantrax's right of the rule, our mark last in the derived cyan.
@@ -131,8 +132,8 @@ function score(row: MatchRow["fpl"]): BoardFigure {
   return {
     className: `font-bold ${ink}`,
     value: (
-      // A tappable score is a control, so it takes the control floor: 44 under a thumb, 36 on a desk.
-      <Link href={matchHref(match.fixtureId, "overview")} className="flex min-h-11 items-center justify-center hover:underline lg:min-h-9">
+      // A tappable score makes its row a tap row: 44 under a thumb, the desk's 28.
+      <Link href={matchHref(match.fixtureId, "overview")} className={`${TAP_ROW} justify-center hover:underline`}>
         <span className="sr-only">{`${result} `}</span>
         {match.scored}–{match.conceded}
       </Link>
