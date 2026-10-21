@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { type ReactNode, createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import ScoreRow from "./ScoreRow";
@@ -92,5 +92,55 @@ describe("a football row split into its three ways in", () => {
     expect(html).not.toMatch(/<a [^>]*class="cm-row/);
     expect(html).toMatch(/^<div class="cm-row block">/);
     for (const a of html.match(/<a [^>]*>/g) ?? []) expect(a).toMatch(/min-h-11/);
+  });
+});
+
+// Craig, 21 Oct 2026: the reader's count in its own column "looks crap"; it goes under the club's name.
+describe("a control under a side's name", () => {
+  const side = (name: string, href: string) => ({ name, short: name.slice(0, 3).toUpperCase(), href });
+  const control = (label: string) => createElement("button", { type: "button" }, label);
+  const render = (under?: { home?: ReactNode; away?: ReactNode }) =>
+    renderToStaticMarkup(
+      createElement(ScoreRow, {
+        home: side("Everton", "/prem/club/11"),
+        away: side("Chelsea", "/prem/club/8"),
+        score: { home: 0, away: 2 },
+        scoreHref: "/prem/match/61",
+        under,
+      }),
+    );
+
+  it("draws each side's control after its own name, home before the score and away after it", () => {
+    expect(render({ home: control("2 yours"), away: control("1 yours") })).toMatch(
+      /Everton[\s\S]*2 yours[\s\S]*\/prem\/match\/61[\s\S]*Chelsea[\s\S]*1 yours/,
+    );
+  });
+
+  it("keeps each control a sibling of the name's link, never inside it", () => {
+    const html = render({ home: control("2 yours"), away: control("1 yours") });
+    for (const a of html.match(/<a [\s\S]*?<\/a>/g) ?? []) expect(a).not.toContain("<button");
+  });
+
+  it("stacks only the side that has a control", () => {
+    const html = render({ away: control("1 yours") });
+    expect(html.match(/<button/g)).toHaveLength(1);
+    expect(html.match(/flex min-w-0 flex-col lg:items-center/g)).toHaveLength(1);
+    expect(html.indexOf("<button")).toBeGreaterThan(html.indexOf("Chelsea"));
+  });
+
+  it("draws sides with no control exactly as a row without the prop", () => {
+    expect(render({})).toBe(render());
+  });
+});
+
+// Every other caller passes no `under`: their markup is pinned to what it was before the prop existed.
+describe("a row without a control under its names", () => {
+  const sides = { home: { name: "Everton", short: "EVE", place: "3rd", href: "/prem/club/11" }, away: { name: "Chelsea", lost: true } };
+  it.each([
+    ["split", { ...sides, score: { home: 0, away: 2 }, scoreHref: "/prem/match/61", clock: "FT" }],
+    ["one link", { ...sides, score: null, pending: "15:00", href: "/league/tie/4" }],
+    ["plain, marked", { home: { name: "Mine", mine: true, left: "2 to play", pending: 3 }, away: { name: "Theirs", left: "all played" }, score: { home: null, away: 41 }, marks: true }],
+  ])("%s", (_, props) => {
+    expect(renderToStaticMarkup(createElement(ScoreRow, props as Parameters<typeof ScoreRow>[0]))).toMatchSnapshot();
   });
 });
