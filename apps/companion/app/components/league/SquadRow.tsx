@@ -1,19 +1,18 @@
 import Image from "next/image";
 import {
   type SquadPlayerDetail,
-  availabilityOf,
   crestUrl,
   isResolved,
   fullPlayerName,
   DASH,
 } from "@epl/core";
 import StateMark from "../football/StateMark";
-import { doubtRow } from "../football/doubtRow";
+import { fitnessOf } from "../football/doubtRow";
+import { minutesInk } from "../football/xminsInk";
 import PositionTile from "./PositionTile";
 import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
 import { MINOR_LABEL, QUIET_NOTE, ROW_NAME } from "@/app/desk";
-import { START_DOUBT_MINUTES } from "../../config";
 import { returnDate } from "./returnDate";
 import type { AutoSubMark } from "./autoSubbed";
 
@@ -26,11 +25,6 @@ export const SQUAD_EDGE = "pr-1.5";
 export const SQUAD_CREST = "w-6 lg:w-7";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
 export const SQUAD_POINTS = "w-9";
-
-/** xMins in the loss red under the planner's floor, a doubt; the derived cyan otherwise, a dash included. */
-export function minutesInk(minutes: number | null): string {
-  return minutes !== null && minutes < START_DOUBT_MINUTES ? "text-bad" : "text-info";
-}
 
 export default function SquadRow({
   player,
@@ -57,7 +51,7 @@ export default function SquadRow({
   // Who his club plays, in the app's one spelling of a fixture — `BRE (H)`.
   const fixture = rowFixture(player);
   const back = footballer?.news ? returnDate(footballer.news) : null;
-  const availability = availabilityOf(footballer);
+  const { wash, mark } = fitnessOf(footballer);
   const xMins = player.minutes[0]?.minutes ?? null;
 
   const inside = (
@@ -94,8 +88,8 @@ export default function SquadRow({
       <span className="flex min-w-0 flex-[1_1_5rem] flex-col lg:flex-row lg:items-center lg:gap-1.5">
         <span className="flex min-w-0 items-center gap-1.5">
           <span className={`min-w-0 truncate ${ROW_NAME}`}><PlayerName name={fullPlayerName(player.rostered)} /></span>
-          {availability.state !== "fit" ? (
-            <StateMark availability={availability} />
+          {mark ? (
+            <StateMark availability={mark} />
           ) : doubted ? (
             <span title="Might not start" className={`numeric shrink-0 ${MINOR_LABEL}`}>
               <span aria-hidden>MNS</span>
@@ -138,7 +132,7 @@ export default function SquadRow({
   const shell = [
     `cm-row flex min-h-9 w-full items-center ${SQUAD_GAP} ${SQUAD_EDGE} text-left`,
     reserve ? "cm-out" : "",
-    doubtRow(footballer),
+    wash,
   ]
     .filter(Boolean)
     .join(" ");

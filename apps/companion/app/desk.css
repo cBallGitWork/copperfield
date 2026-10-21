@@ -545,7 +545,8 @@ select.cm-bevel {
   color: var(--color-bad);
 }
 
-/* A man who cannot be picked greys to `--color-faint`; not an opacity, which would sink his figures under the floor. */
+/* A man who cannot be picked greys to `--color-faint`; not an opacity, which would sink his figures under the floor.
+   `StateMark` paints its shapes' fill and stroke from the band, so his cross keeps its colour here. */
 .cm-out,
 .cm-out * {
   color: var(--color-faint);

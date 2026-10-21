@@ -20,7 +20,7 @@ describe("FitnessLine", () => {
     const html = render(man("d", 75, "Calf injury - 75% chance of playing"));
     expect(html).toContain("cm-doubt-slight");
     expect(html).toContain(">Dbt<");
-    expect(html).toMatch(/<svg[^>]*color:var\(--color-doubt-slight\)[^>]*>.*<path d="M6 2h4/);
+    expect(html).toMatch(/<path d="M6 2h4[^>]*fill:var\(--color-doubt-slight\)/);
     expect(filled(html)).toBe(3);
     expect(html).toContain(">75%<");
   });

@@ -105,9 +105,9 @@ describe("a squad row's status and minutes (Craig, 21 Oct 2026)", () => {
 
   it("marks every man who is not fit in his band's colour, and drops the word box", () => {
     const html = rows([held("Slight", "d", 75, 80), held("Major", "d", 25, 80), held("Out", "i", 0, 0)]);
-    expect(rowOf(html, "Slight")).toContain("color:var(--color-doubt-slight)");
-    expect(rowOf(html, "Major")).toContain("color:var(--color-doubt-major)");
-    expect(rowOf(html, "Out")).toContain("color:var(--color-doubt-out)");
+    expect(rowOf(html, "Slight")).toContain("fill:var(--color-doubt-slight)");
+    expect(rowOf(html, "Major")).toContain("fill:var(--color-doubt-major)");
+    expect(rowOf(html, "Out")).toContain("fill:var(--color-doubt-out)");
     expect(html).not.toContain(">Dbt<");
     expect(html).not.toContain(">Inj<");
   });
