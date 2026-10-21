@@ -136,7 +136,7 @@ no longer describes this one.
 Every list of the squad carries an **xMins** column for the gameweek the picker shows, between the
 opponent and FPts (Craig, 7 Oct 2026: *"assign the xmins by gameweek"*). **Inked by risk** (Craig, 21 Oct 2026:
 *"could change the xmins colour too, Red bad etc"*; `minutesInk`): under `START_DOUBT_MINUTES` (50) in the loss red,
-50–69 amber, and from `SAFE_MINUTES` (70) the derived cyan; a dash stays cyan. A greyed bench row greys it as before. A week the export starts after (the
+otherwise the derived cyan, a dash included. A greyed bench row greys it as before. A week the export starts after (the
 gameweeks already played) has no column at all rather than a column of dashes; the head-to-head board has none.
 **Dated once** (16 Oct 2026): "xMins as of Thu 15 Oct", quiet, under the list that heads the column and not again under
 the bench, and on the player card beside its xMins label. The day is the export's (`XMINS_AS_OF`); undated, Friday's
@@ -152,9 +152,9 @@ column spares could not take it beside the box. Two lines fit the row's 36px; no
 
 **CM's mark, not the box, beside every man who is not fit** (Craig, 21 Oct 2026: *"Use a yellow and Red Cross when
 injured/doubt to match row. Red card for suspension"*). `StateMark` draws the cross for a knock, a card for a ban and a
-barred circle for a man who has left, filled in his doubt band so it matches the row's wash (DESIGN §3); the word moves
-to its label and title. Every man whose `availabilityOf` is not fit gets one, so no row carries the wash alone. On the
-planner, a fit starter it names under "Might not start" prints a quiet **MNS** (an `abbr`, titled in full) in the same
+barred circle for a man who has left, filled in his doubt band so it matches the row's wash (DESIGN §3); the word moves,
+in full ("Doubtful", not "Dbt"), to its label and title. Every man whose `availabilityOf` is not fit gets one, so no row carries the wash alone. On the
+planner, a fit starter it names under "Might not start" prints a quiet **MNS** (hidden from a screen reader, which hears "Might not start") in the same
 place; the status mark outranks it, so a row never carries both. Off the planner nobody is named, as the rule needs
 the legal moves only the planner holds. The row stays 36 under a thumb.
 

@@ -1,5 +1,13 @@
-import { type Availability, doubtBand, noteBesideChance } from "@epl/core";
+import { type Availability, type PlayerState, doubtBand, noteBesideChance } from "@epl/core";
 import { DOUBT_FILL } from "./doubtRow";
+
+/** The word in full, where the box abbreviates it: a screen reader says "Doubtful", not "D-B-T". */
+const WORD: Record<Exclude<PlayerState, "fit">, string> = {
+  doubt: "Doubtful",
+  injured: "Injured",
+  suspended: "Suspended",
+  unavailable: "Unavailable",
+};
 
 // CM's mark for why he may miss, filled in his doubt band so it matches the row's wash (Craig, 21 Oct 2026): the
 // cross for a knock, the card for a ban, a bar through a man who has gone. Silent for a fit man.
@@ -14,7 +22,8 @@ export default function StateMark({
 }) {
   const band = doubtBand(availability);
   if (band === null) return null;
-  const { state, label, chance } = availability;
+  const { state, chance } = availability;
+  const word = state === "fit" ? "" : WORD[state];
 
   const shape =
     state === "suspended" ? (
@@ -28,16 +37,16 @@ export default function StateMark({
       <path d="M6 2h4v4h4v4h-4v4H6v-4H2V6h4z" fill="currentColor" />
     );
   // The word the mark stands in for, and the chance and news a box used to carry in its title.
-  const detail = [label, chance === null ? null : `${chance}% chance of playing`, noteBesideChance(availability.news, chance) || null]
+  const detail = [word, chance === null ? null : `${chance}% chance of playing`, noteBesideChance(availability.news, chance) || null]
     .filter(Boolean)
     .join(" · ");
 
   // Inline, so a greyed row's `.cm-out *` cannot take the band's colour off it.
   return (
     <svg
-      {...(worded ? { "aria-hidden": true } : { role: "img", "aria-label": label })}
+      {...(worded ? { "aria-hidden": true } : { role: "img", "aria-label": word })}
       viewBox="0 0 16 16"
-      className="h-4 w-4 shrink-0"
+      className="h-[1em] w-[1em] shrink-0"
       style={{ color: DOUBT_FILL[band] }}
     >
       {worded ? null : <title>{detail}</title>}

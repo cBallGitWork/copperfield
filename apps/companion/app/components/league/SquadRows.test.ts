@@ -118,16 +118,14 @@ describe("a squad row's status and minutes (Craig, 21 Oct 2026)", () => {
 
   it("prints MNS on the planner's men only, and never over a status mark", () => {
     const html = rows([held("Named", "a", 100, 30), held("Other", "a", 100, 30), held("Hurt", "d", 75, 30)], ["Named", "Hurt"]);
-    expect(rowOf(html, "Named")).toContain(">MNS</abbr>");
+    expect(rowOf(html, "Named")).toContain('<span aria-hidden="true">MNS</span><span class="sr-only">Might not start</span>');
     expect(rowOf(html, "Other")).not.toContain("MNS");
     expect(rowOf(html, "Hurt")).not.toContain("MNS");
   });
 
   it.each([
     [49, "text-bad"],
-    [50, "text-mid"],
-    [69, "text-mid"],
-    [70, "text-info"],
+    [50, "text-info"],
   ])("inks %i xMins %s", (minutes, ink) => {
     expect(rowOf(rows([held("Him", "a", 100, minutes)]), "Him")).toContain(`font-bold ${ink}">${minutes}<`);
   });

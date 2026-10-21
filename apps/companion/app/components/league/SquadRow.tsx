@@ -13,7 +13,7 @@ import PositionTile from "./PositionTile";
 import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
 import { MINOR_LABEL, QUIET_NOTE, ROW_NAME } from "@/app/desk";
-import { SAFE_MINUTES, START_DOUBT_MINUTES } from "../../config";
+import { START_DOUBT_MINUTES } from "../../config";
 import { returnDate } from "./returnDate";
 import type { AutoSubMark } from "./autoSubbed";
 
@@ -27,10 +27,9 @@ export const SQUAD_CREST = "w-6 lg:w-7";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
 export const SQUAD_POINTS = "w-9";
 
-/** xMins inked by risk: red under the planner's floor, amber short of safe, the derived cyan from there. */
+/** xMins in the loss red under the planner's floor, a doubt; the derived cyan otherwise, a dash included. */
 export function minutesInk(minutes: number | null): string {
-  if (minutes === null || minutes >= SAFE_MINUTES) return "text-info";
-  return minutes < START_DOUBT_MINUTES ? "text-bad" : "text-mid";
+  return minutes !== null && minutes < START_DOUBT_MINUTES ? "text-bad" : "text-info";
 }
 
 export default function SquadRow({
@@ -98,7 +97,10 @@ export default function SquadRow({
           {availability.state !== "fit" ? (
             <StateMark availability={availability} />
           ) : doubted ? (
-            <abbr title="Might not start" className={`numeric shrink-0 no-underline ${MINOR_LABEL}`}>MNS</abbr>
+            <span title="Might not start" className={`numeric shrink-0 ${MINOR_LABEL}`}>
+              <span aria-hidden>MNS</span>
+              <span className="sr-only">Might not start</span>
+            </span>
           ) : null}
         </span>
         {back === null ? null : <span className={`${QUIET_NOTE} shrink-0 leading-tight`}>{back}</span>}

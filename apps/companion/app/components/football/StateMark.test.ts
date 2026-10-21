@@ -18,7 +18,7 @@ describe("StateMark", () => {
     const html = mark("d", 75);
     expect(html).toContain("color:var(--color-doubt-slight)");
     expect(html).toContain(CROSS);
-    expect(html).toContain('aria-label="Dbt"');
+    expect(html).toContain('aria-label="Doubtful"');
   });
 
   it("crosses a major doubt in the ramp's orange", () => {
@@ -31,7 +31,7 @@ describe("StateMark", () => {
     const html = mark("i", 0);
     expect(html).toContain("color:var(--color-doubt-out)");
     expect(html).toContain(CROSS);
-    expect(html).toContain('aria-label="Inj"');
+    expect(html).toContain('aria-label="Injured"');
   });
 
   it("gives a ban a red card, not a cross", () => {
