@@ -1,7 +1,6 @@
-import type { Shot } from "@epl/core";
 import type { ReactNode } from "react";
 import { PITCH_BOX, toBoxY } from "./pitchBox";
-import { HALO, passLine } from "./shotGeometry";
+import { HALO, passLine, type PassMark } from "./shotGeometry";
 
 // A landscape pitch and a key pass, in pitch units: the match page's shot map and Compare's maps.
 
@@ -16,7 +15,7 @@ const PASS_OPACITY = 0.85;
 
 /** Each key pass's line, drawn under the marks: dashed in the side's colour over a faint cream underlay, from where
  *  it started to the edge of the shot's mark. */
-export function KeyPassLines({ shots, colour }: { shots: readonly Shot[]; colour: string }) {
+export function KeyPassLines({ shots, colour }: { shots: readonly PassMark[]; colour: string }) {
   return (
     <g>
       {shots.map((shot, at) => {
@@ -33,7 +32,7 @@ export function KeyPassLines({ shots, colour }: { shots: readonly Shot[]; colour
 }
 
 /** Where each key pass started: a square, so it never reads as a shot, drawn over the marks so none can hide it. */
-export function KeyPassOrigins({ shots, colour }: { shots: readonly Shot[]; colour: string }) {
+export function KeyPassOrigins({ shots, colour }: { shots: readonly PassMark[]; colour: string }) {
   return (
     <g>
       {shots.map((shot, at) =>

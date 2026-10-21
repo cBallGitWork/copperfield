@@ -1,6 +1,7 @@
-import type { Club, Shot } from "@epl/core";
-import { clubColoursOf, plateOn } from "@epl/core";
+import type { Club } from "@epl/core";
+import { DASH, clubColoursOf, plateOn } from "@epl/core";
 import { PITCH_BOX } from "../../components/football/pitchBox";
+import type { PassMark } from "../../components/football/shotGeometry";
 import Marks, { MarksKey } from "../../components/football/ShotMarks";
 import { KeyPassKey, KeyPassLines, KeyPassOrigins, Pitch } from "../../components/football/ShotPitch";
 import { SMALL_CAPS } from "@/app/desk";
@@ -12,8 +13,8 @@ import { SMALL_CAPS } from "@/app/desk";
 interface MapMan {
   name: string;
   club: Club | undefined;
-  /** His shots, or the shots he set up. */
-  shots: readonly Shot[];
+  /** His shots, or the shots he set up; null for a past season with no map, whose count is a dash. */
+  shots: readonly PassMark[] | null;
 }
 
 export default function CompareMap({
@@ -34,8 +35,10 @@ export default function CompareMap({
     const turned = men.length === 2 && index === 0;
     // Keyed by side, never by name: web names repeat.
     const side = index === 0 ? "a" : "b";
-    return { ...man, side, colour: plate.background, ink: plate.ink, shots: turned ? man.shots.map(turn) : man.shots };
+    const shots = man.shots ?? [];
+    return { ...man, side, colour: plate.background, ink: plate.ink, mapped: man.shots !== null, shots: turned ? shots.map(turn) : shots };
   });
+  const count = (side: (typeof sides)[number]) => (side.mapped ? String(side.shots.length) : DASH);
   const noun = passes ? "key passes" : "shots";
 
   return (
@@ -48,7 +51,7 @@ export default function CompareMap({
             style={{ background: side.colour, color: side.ink }}
           >
             <span className="min-w-0 truncate">{side.name}</span>
-            <span className="numeric">{side.shots.length}</span>
+            <span className="numeric">{count(side)}</span>
           </span>
         ))}
       </div>
@@ -56,7 +59,7 @@ export default function CompareMap({
         viewBox={`0 0 ${PITCH_BOX.width} ${PITCH_BOX.height}`}
         className="w-full"
         role="img"
-        aria-label={sides.map((side, index) => `${side.name}: ${side.shots.length} ${noun}, attacking ${sides.length === 2 && index === 0 ? "left" : "right"}`).join("; ") + `, ${window}.`}
+        aria-label={sides.map((side, index) => `${side.name}: ${side.mapped ? side.shots.length : "no map of"} ${noun}, attacking ${sides.length === 2 && index === 0 ? "left" : "right"}`).join("; ") + `, ${window}.`}
       >
         <Pitch />
         {/* Pass lines under the marks, their origins over them. */}
@@ -72,7 +75,7 @@ export default function CompareMap({
 }
 
 /** A shot seen from the other end: the pitch turned half round, so the left man attacks the left goal. */
-function turn(shot: Shot): Shot {
+function turn(shot: PassMark): PassMark {
   return {
     ...shot,
     x: 100 - shot.x,

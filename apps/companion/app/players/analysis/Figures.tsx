@@ -11,6 +11,7 @@ export default function Figures({
   b,
   names,
   window,
+  past = false,
 }: {
   a: Played | null;
   /** Null when only one man is being looked at. */
@@ -18,9 +19,11 @@ export default function Figures({
   names: { a: string; b: string | null };
   /** What the figures cover, for a screen reader: "this season" or "gameweeks 1 to 5". */
   window: string;
+  /** Whether either side is a completed season, which keeps the ledger to what both seasons carry. */
+  past?: boolean;
 }) {
   const alone = names.b === null;
-  const rows = rateRows(a, alone ? null : b);
+  const rows = rateRows(a, alone ? null : b, past);
   if (rows.length === 0) return null;
 
   return (
@@ -45,7 +48,7 @@ export default function Figures({
 }
 
 /** The measures where the lower figure is the better one: a defender wants his xGC low. */
-const LOWER_IS_BETTER = new Set(["xGC"]);
+const LOWER_IS_BETTER = new Set(["xGC", "Conceded"]);
 
 /** The measure's name, carrying its rate: `xG/90`, since 0.82 could also be a season's total. */
 function label(row: RateRow): string {

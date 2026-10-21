@@ -23,6 +23,35 @@ a sweep of the 697". Two per view is inside it; a board of them never would be,
 which is why comparison is a ROUTE you arrive at with two ids rather than a
 column on the directory.
 
+## Past seasons, 21 Oct 2026
+
+Craig: *"in the compare section, can we compare to previous seasons (player section only?"*. Either side may be a
+completed season, so a man can be set against himself or the rival in an earlier year.
+
+- **The URL** carries a season per side, `?as=` and `?bs=`, as `2024-25`; absent is this season, and a season the
+  man has no minutes in is this season too (`season.ts`, `pickedSeason`). `compareHref` carries both. The player
+  page's Compare tab is unchanged: him against his nearest rival, this season.
+- **A season select over each half** (`SeasonBar`), under the search boxes, lists this season by its name and every
+  completed season he played, off the same history the Data tab's season picker reads (`pastSeasons`, through
+  `pastSides.ts`). **`vs his last season`** sits under B's half when B is empty or A again in A's season: one tap sets
+  B to A in his most recent other season. Swapping either man keeps the other side's season and resets his own.
+- **The ledger keeps to what both seasons carry** (`rates.ts`, `measuresFor`): Min, Touches/90, Shots/90, Goals/90,
+  Assists/90, CS/90, Saves/90 and Conceded/90. A completed season has no starts, expected goals or defensive actions,
+  so those rows go; goals, assists and clean sheets appear only beside a past season, never in this season's own
+  ledger. Per 90 throughout, so a part season compares fairly. Touches and shots come from that season's map file;
+  a season with no file is `—`, never 0.
+- **No points ledger while a past season is on screen.** The past ledger carries goals, assists and clean sheets,
+  FPL's counts of what the league scores, so the 10 Sep "none of the three" rule (below) now holds by hiding FPts and
+  FP/G whenever either side is past, rather than by keeping the three out (DESIGN §7: FPL's count never beside a
+  Fantrax figure). A past season has no league points in any case.
+- **Season / Last 6 is hidden**, and so are **Key passes** (no past file carries them) and **Attributes** (percentiles
+  over this season's division).
+- **Maps**: Shots and Touches read `data/intel/past-maps` (21/22 to 25/26) through `pastMaps.ts`; touches are the
+  file's pre-binned counts on `HeatPitch`, and the caption gives the touch count without a match count. A past side's
+  plate is plain, since his club then need not be his club now.
+- **Labels** name each side's season once any side is past, "Haaland 26/27" against "Haaland 24/25", in the bar, the
+  pitch captions and the ledgers' screen-reader captions. A man set against himself has one way out to Fantrax.
+
 ## Compare as redesigned, 24 Sep 2026
 
 Craig: *"numbers for stats should be centralised … use updated shot map like in prem page … have a key pass

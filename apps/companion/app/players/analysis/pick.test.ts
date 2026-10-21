@@ -82,8 +82,17 @@ describe("sides", () => {
     expect(sides(link({ b: "2", qa: "sal" }))).toEqual(link({ a: "2", qb: "sal" }));
   });
 
-  it("never sets a man against himself", () => {
+  it("never sets a man against himself in the same season", () => {
     expect(sides(link({ a: "1", b: "1" }))).toEqual(link({ a: "1" }));
+    expect(sides(link({ a: "1", b: "1", as: "2024-25", bs: "2024-25" }))).toEqual(link({ a: "1", as: "2024-25", bs: "2024-25" }));
+  });
+
+  it("sets a man against himself in another season", () => {
+    expect(sides(link({ a: "1", b: "1", bs: "2024-25" }))).toEqual(link({ a: "1", b: "1", bs: "2024-25" }));
+  });
+
+  it("moves a lone man's season with him into box A", () => {
+    expect(sides(link({ b: "2", bs: "2024-25" }))).toEqual(link({ a: "2", as: "2024-25" }));
   });
 
   it("leaves a search where it was typed while nobody is chosen", () => {

@@ -9,7 +9,7 @@ import { intelCareers, intelShots, intelTouches } from "../../../intel";
 import { pastMaps } from "../../../pastMaps";
 import { UNAVAILABLE } from "../../../config";
 import QuerySelect from "../../../components/shell/QuerySelect";
-import { ALL_SEASONS, playerDataHref } from "../../routes";
+import { ALL_SEASONS, playerDataHref, seasonValue } from "../../routes";
 import MatchLog from "../MatchLog";
 import PastSeasons from "../PastSeasons";
 import SeasonMaps from "../SeasonMaps";
@@ -115,11 +115,11 @@ async function Record({
   const label = season ?? "This season";
   const options = [
     { value: "", label },
-    ...past.map((row) => ({ value: row.season.replace("/", "-"), label: row.season })),
+    ...past.map((row) => ({ value: seasonValue(row.season), label: row.season })),
     { value: ALL_SEASONS, label: "All seasons" },
   ];
   const value = options.some((option) => option.value === chosen) ? chosen : "";
-  const picked = past.find((row) => row.season.replace("/", "-") === value);
+  const picked = past.find((row) => seasonValue(row.season) === value);
   // Only the picked season's file is read; a season with none, or nothing for him, draws no maps.
   const before = picked ? await pastMaps(seasonKey(picked.season), player.code) : null;
 

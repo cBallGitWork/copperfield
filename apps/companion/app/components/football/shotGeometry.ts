@@ -6,6 +6,9 @@ import { toBoxY } from "./pitchBox";
 /** What a mark is drawn from: where the shot was struck, the chance behind it and what became of it. */
 export type Mark = Pick<Shot, "x" | "y" | "xg" | "outcome">;
 
+/** A mark with the key pass behind it, which a past season's shot never carries. */
+export type PassMark = Mark & Pick<Shot, "pass">;
+
 /** The cream edge every mark wears, so a club colour close to the grass still reads. */
 export const HALO = 0.15;
 

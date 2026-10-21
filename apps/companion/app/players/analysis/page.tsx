@@ -5,9 +5,6 @@ import {
   fixtureGameweeks,
   gameweekSpan,
   lastPlayed,
-  shirtName,
-  touchFixtures,
-  touchesOf,
 } from "@epl/core";
 import ScoutShell from "../Shell";
 import Nothing from "../../components/shell/Nothing";
@@ -21,21 +18,24 @@ import Grids from "./Grids";
 import PickBar from "./PickBar";
 import PlayerMap from "./PlayerMap";
 import Points from "./Points";
+import SeasonBar from "./SeasonBar";
 import type { Scored } from "./pointsLines";
-import { manOver } from "./overWindow";
+import { careerOf, offerOf, shirtOf, sideName, sideOf } from "./pastSides";
 import { knownSides } from "./pick";
+import { lastSeason, pickedSeason } from "./season";
 import { windowWords } from "./window";
 import { Chip } from "../BoardControls";
 import { StackWaiting } from "../[fantraxId]/Waiting";
 import { subject } from "../[fantraxId]/subject";
 import { getLeaguePool } from "../pool";
 import { getPlayerStats } from "../playerStats";
-import { compareHref, lastValue } from "../routes";
+import { compareHref, lastValue, seasonValue } from "../routes";
 import { seasonFixtures } from "../../football";
 import { scoutTitle } from "../title";
 
 // Two players side by side (Craig, 6 Sep 2026). Two profile reads a view and never more; the search boxes read the
 // cached pool, so a keystroke is never a Fantrax call. The grids stream, each a percentile over every man of his role.
+// Either side may be a completed season (Craig, 21 Oct 2026): then the ledger keeps to what both seasons carry.
 
 export const revalidate = 30;
 
@@ -49,6 +49,9 @@ const VIEWS = [
 ] as const;
 type View = (typeof VIEWS)[number]["key"];
 
+/** What no completed season carries: no file holds key passes, and the attributes rank this season's division. */
+const THIS_SEASON_ONLY: ReadonlySet<View> = new Set(["passes", "attributes"]);
+
 /** "Last 6" is the last six gameweeks with a match played (Craig, 24 Sep 2026). */
 const RECENT = 6;
 
@@ -60,22 +63,17 @@ export default async function ComparePage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const asked = await searchParams;
-  const view: View = VIEWS.find((entry) => entry.key === lastValue(asked.view))?.key ?? "figures";
-  const recent = lastValue(asked.range) === String(RECENT);
 
   const [pool, fixtures, lines] = await Promise.all([getLeaguePool(), seasonFixtures(), getPlayerStats()]);
-  const { a, b, qa, qb } = knownSides(pool, {
+  const { a, b, qa, qb, ...seasons } = knownSides(pool, {
     a: lastValue(asked.a),
     b: lastValue(asked.b),
     qa: lastValue(asked.qa) ?? "",
     qb: lastValue(asked.qb) ?? "",
+    as: lastValue(asked.as),
+    bs: lastValue(asked.bs),
   });
   const rows = "unavailable" in pool ? [] : pool.rows;
-  // As the board reads him: the pool row and the counts that say whether he has played.
-  const scored = (id: string | undefined): Scored => ({
-    row: rows.find((row) => row.entry.player.fantraxId === id),
-    stats: lines.find((line) => line.fantraxId === id)?.stats,
-  });
 
   // Both men are read before anything draws: the boxes are named after whoever is chosen.
   const [left, right] = await Promise.all([
@@ -88,18 +86,40 @@ export default async function ComparePage({
   const one_ = found(left);
   const two = found(right);
 
-  // FPL's web name where we have it; Fantrax's full registration is too long for the bar.
-  const names = {
-    a: one_ ? (one_.football ? shirtName(one_.football.player.name) : one_.intel.name) : null,
-    b: two ? (two.football ? shirtName(two.football.player.name) : two.intel.name) : null,
+  // His completed seasons, for the selects and the side a URL names; a season he never played is this one.
+  const [careerA, careerB] = await Promise.all([careerOf(one_), careerOf(two)]);
+  const seasonA = pickedSeason(seasons.as, careerA);
+  const seasonB = pickedSeason(seasons.bs, careerB);
+  const past = seasonA !== null || seasonB !== null;
+  const shown = VIEWS.filter((entry) => !past || !THIS_SEASON_ONLY.has(entry.key));
+  const view: View = shown.find((entry) => entry.key === lastValue(asked.view))?.key ?? "figures";
+  const recent = !past && lastValue(asked.range) === String(RECENT);
+  const query = {
+    a,
+    b,
+    as: seasonA === null ? undefined : seasonValue(seasonA.season),
+    bs: seasonB === null ? undefined : seasonValue(seasonB.season),
+    view: view === "figures" ? undefined : view,
   };
 
+  const names = { a: sideName(one_, seasonA, past), b: sideName(two, seasonB, past) };
+  // "vs his last season" while B is empty or A over again.
+  const self = b === undefined || (b === a && seasonA === seasonB) ? lastSeason(careerA, seasonA?.season ?? null) : null;
+
   const picker = (
-    <PickBar
-      rows={rows}
-      a={{ chosen: a, typed: qa, name: names.a }}
-      b={{ chosen: b, typed: qb, name: names.b }}
-    />
+    <>
+      <PickBar
+        rows={rows}
+        a={{ chosen: a, typed: qa, name: names.a, season: query.as }}
+        b={{ chosen: b, typed: qb, name: names.b, season: query.bs }}
+      />
+      <SeasonBar
+        query={query}
+        a={offerOf(one_, shirtOf(one_), careerA)}
+        b={offerOf(two, shirtOf(two), careerB)}
+        self={self}
+      />
+    </>
   );
 
   // A profile that refused is not a man not yet chosen, and the screen says which.
@@ -126,65 +146,74 @@ export default async function ComparePage({
   const played = lastPlayed(fixtures, Number.POSITIVE_INFINITY);
   const window = recent ? lastPlayed(fixtures, RECENT) : played;
   const span = gameweekSpan(window) || "no gameweeks yet";
-  const told = windowWords(recent, window);
+  const told = past ? "in the seasons named" : windowWords(recent, window);
   const gameweekOf = fixtureGameweeks(fixtures);
   const inWindow = new Set(window);
 
   const men = await Promise.all(
     [
-      { side: one_, name: names.a },
-      ...(solo || two === null || names.b === null ? [] : [{ side: two, name: names.b }]),
-    ].map(({ side, name }) => manOver(side, name, { recent, inWindow, gameweekOf })),
+      { side: one_, name: names.a, season: seasonA },
+      ...(solo || two === null || names.b === null ? [] : [{ side: two, name: names.b, season: seasonB }]),
+    ].map(({ side, name, season }) => sideOf(side, name, season, { recent, inWindow, gameweekOf })),
   );
   const [first, second] = [men[0], men[1] ?? null];
+  // As the board reads him: the pool row and the counts that say whether he has played.
+  const scored = (id: string | undefined): Scored => ({
+    row: rows.find((row) => row.entry.player.fantraxId === id),
+    stats: lines.find((line) => line.fantraxId === id)?.stats,
+  });
 
   const href = (changes: { view?: View; range?: string }) => {
     const nextView = changes.view ?? view;
     return compareHref({
-      a,
+      ...query,
       b: solo ? undefined : b,
       view: nextView === "figures" ? undefined : nextView,
       range: "range" in changes ? changes.range : recent ? String(RECENT) : undefined,
     });
   };
   const has = {
-    shots: men.some((each) => each.shots.length > 0),
+    shots: men.some((each) => (each.shots?.length ?? 0) > 0),
     passes: men.some((each) => each.keyPasses.length > 0),
-    touches: men.some((each) => each.touches !== undefined),
+    touches: men.some((each) => each.heat !== null),
   };
-  const dim = VIEWS.filter((entry) => entry.key in has && !has[entry.key as keyof typeof has]).map((entry) => entry.key);
+  const dim = shown.filter((entry) => entry.key in has && !has[entry.key as keyof typeof has]).map((entry) => entry.key);
 
   return (
     <ScoutShell current="analysis">
       {picker}
 
       <CompareBar
-        a={{ name: names.a, club: one_.football?.club, code: one_.football?.player.code ?? null }}
+        a={{ name: names.a, club: first.club, code: one_.football?.player.code ?? null }}
         b={
-          second === null || two === null || names.b === null
+          second === null || two === null
             ? null
-            : { name: names.b, club: two.football?.club, code: two.football?.player.code ?? null }
+            : { name: second.name, club: second.club, code: two.football?.player.code ?? null }
         }
       />
 
-      <Points
-        a={scored(a)}
-        b={solo ? null : scored(b)}
-        names={{ a: names.a, b: solo ? null : names.b }}
-        season={"unavailable" in pool ? null : pool.season}
-      />
+      {/* No league points beside a past ledger's goals, assists and clean sheets, which are FPL's counts (DESIGN §7). */}
+      {past ? null : (
+        <Points
+          a={scored(a)}
+          b={solo ? null : scored(b)}
+          names={{ a: names.a, b: solo ? null : names.b }}
+          season={"unavailable" in pool ? null : pool.season}
+        />
+      )}
 
       {/* One category at a time at every width (Craig, 24 Sep 2026: "desktop like mobile"). */}
       <TabStrip
         label="Compare views"
-        tabs={VIEWS.map((entry) => ({ ...entry, href: href({ view: entry.key }) }))}
+        tabs={shown.map((entry) => ({ ...entry, href: href({ view: entry.key }) }))}
         current={view}
         dim={dim}
         labels="word"
       />
 
-      {/* The range governs the figures and every map; the attributes are a season's percentiles. */}
-      {view === "attributes" ? null : (
+      {/* The range governs the figures and every map; the attributes are a season's percentiles, and a past season
+          is the whole of it. */}
+      {view === "attributes" || past ? null : (
         <div className="flex items-center gap-1.5">
           <Chip on={!recent} href={href({ range: undefined })}>
             Season
@@ -202,6 +231,7 @@ export default async function ComparePage({
           b={second?.played ?? null}
           names={{ a: names.a, b: second === null ? null : names.b }}
           window={told}
+          past={past}
         />
       ) : null}
 
@@ -226,8 +256,8 @@ export default async function ComparePage({
               id={index === 0 ? "a" : "b"}
               name={each.name}
               club={each.club}
-              touches={touchesOf(each.touches, null)}
-              matches={touchFixtures(each.touches).length}
+              touches={each.heat ?? []}
+              matches={each.matches}
             />
           ))}
         </div>
@@ -241,9 +271,10 @@ export default async function ComparePage({
       ) : null}
 
       <div className="flex flex-wrap gap-1.5">
+        {/* One way out per man: a man set against his own past is one Fantrax page. */}
         {[
-          { id: a, name: names.a },
-          ...(second === null || names.b === null ? [] : [{ id: b, name: names.b }]),
+          { id: a, name: shirtOf(one_) },
+          ...(second === null || b === a ? [] : [{ id: b, name: shirtOf(two) }]),
         ].map((each) => (
           <OutLink key={each.id} href={`${FANTRAX_PLAYER_BASE}/${each.id}/${FANTRAX_LEAGUE_ID}`}>
             {each.name} on Fantrax

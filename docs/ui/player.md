@@ -31,7 +31,8 @@ derived the same four from the same object.
   *"maybe we put compare in the player section too"*; PLATFORM_NOTES): it leaves the shell for
   `/players/analysis?a=<him>&b=<rival>`, the rival the man in his position group with the nearest season league points,
   ties to a free agent (`analysis/rival.ts`, `defaultRival`); with no points, or the pool silent, Compare opens with him
-  alone. *Known:* the strip replaces history (`TabStrip`), so Back from Compare skips the player page. **Five until
+  alone. On Compare a season select over each half sets either man in a completed season, with one tap for "vs his
+  last season" (`analysis.md`, Past seasons). *Known:* the strip replaces history (`TabStrip`), so Back from Compare skips the player page. **Five until
   25 Sep 2026**, CM's own count, when History folded into Data. Fitness folded into News on 4 Sep 2026
   (Craig: "Fitness could be doubled in with news") — they were two tabs asking
   one question with half an answer each. Which of them is hollow is decided from
