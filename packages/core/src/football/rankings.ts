@@ -30,15 +30,16 @@ interface Ranking {
 }
 
 const s = (man: Tallied) => man.player.season;
+const hasPlayed = (man: Tallied) => s(man).minutes > 0;
 
 export const OUTFIELD_RANKINGS: readonly Ranking[] = [
   { head: "Min", title: "Minutes played", of: (m) => s(m).minutes },
-  { head: "Gls", title: "Goals", of: (m) => s(m).goals },
+  { head: "G", title: "Goals", of: (m) => s(m).goals },
   { head: "xG", title: "Expected goals", kind: "expected", of: (m) => s(m).expectedGoals },
-  { head: "Ast", title: "Assists", of: (m) => s(m).assists },
+  { head: "A", title: "Assists", of: (m) => s(m).assists },
   { head: "xA", title: "Expected assists", kind: "expected", of: (m) => s(m).expectedAssists },
   { head: "Sh", title: "Shots, off the shot map", of: (m) => m.shots?.struck ?? null },
-  { head: "Ch", title: "Shots he set up, off the shot map", of: (m) => m.shots?.created ?? null },
+  { head: "Ch", title: "Shots he set up, where the shot map names the passer", of: (m) => m.shots?.created ?? null },
   { head: "Def", title: "Tackles, clearances, blocks, interceptions and recoveries", of: (m) => s(m).tackles + s(m).clearancesBlocksInterceptions + s(m).recoveries },
 ];
 
@@ -49,9 +50,10 @@ export const KEEPER_RANKINGS: readonly Ranking[] = [
   { head: "Prv", title: "Goals prevented: expected goals conceded less goals conceded", kind: "expected", of: (m) => s(m).expectedGoalsConceded - s(m).goalsConceded },
 ];
 
-/** His place on each figure among the cohort's men who have played. Pure. */
+/** His place on each figure among the cohort's men who have played; none until he has played himself. Pure. */
 export function rankings(man: Tallied, cohort: readonly Tallied[], list: readonly Ranking[]): Ranked[] {
-  const played = cohort.filter((other) => other.player.season.minutes > 0);
+  const played = cohort.filter(hasPlayed);
+  const placed = hasPlayed(man);
   return list.map((ranking) => {
     const value = ranking.of(man);
     const theirs = played.map(ranking.of).filter((figure): figure is number => figure !== null);
@@ -60,7 +62,7 @@ export function rankings(man: Tallied, cohort: readonly Tallied[], list: readonl
       title: ranking.title,
       value,
       kind: ranking.kind ?? "count",
-      rank: value === null ? null : 1 + theirs.filter((figure) => figure > value).length,
+      rank: value === null || !placed ? null : 1 + theirs.filter((figure) => figure > value).length,
       of: theirs.length,
     };
   });

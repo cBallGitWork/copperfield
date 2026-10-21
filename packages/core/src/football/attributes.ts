@@ -81,6 +81,8 @@ const per90 =
     man.line === null ? null : rate90(total(man.line, keys), man.line.minutes);
 /** FPL's figure per 90 of the minutes FPL covered. */
 const fpl90 = (key: LineCount) => (man: Scouted) => (man.line === null ? null : rate90(man.line[key], man.line.fplMinutes));
+/** His share of his club's set pieces, once he has a season to rate. */
+const share = (key: "penaltyShare" | "setPieceShare") => (man: Scouted) => (man.line === null ? null : man[key]);
 const ran90 = (key: "km" | "sprints") => (man: Scouted) => (man.running === null ? null : rate90(man.running[key], man.running.minutes));
 
 /** The grid, alphabetical down the columns as CM 01/02 sets it. */
@@ -101,10 +103,10 @@ const MEASURES: readonly Measure[] = [
   { name: "Off The Ball", from: "touches in the opposition box per 90", for: "outfield", of: per90("boxTouches") },
   { name: "Pace", from: "top speed, this season", for: "outfield", of: (m) => m.running?.topSpeed ?? null },
   { name: "Passing", from: "passes into the final third per 90", for: "outfield", of: per90("finalThirdPasses") },
-  { name: "Penalty Taking", from: "share of his club's penalties", for: "outfield", of: (m) => m.penaltyShare },
+  { name: "Penalty Taking", from: "share of his club's penalties", for: "outfield", of: share("penaltyShare") },
   { name: "Positioning", from: "expected goals conceded less goals conceded, per 90", for: "keeper", of: positioning },
   { name: "Reflexes", from: "goals prevented per 90", for: "keeper", of: per90("goalsPrevented") },
-  { name: "Set Pieces", from: "share of his club's free kicks and corners", for: "outfield", of: (m) => m.setPieceShare },
+  { name: "Set Pieces", from: "share of his club's free kicks and corners", for: "outfield", of: share("setPieceShare") },
   { name: "Stamina", from: "minutes per start", for: "outfield", of: stamina },
   { name: "Tackling", from: "tackles per 90", for: "outfield", of: per90("tackles") },
   { name: "Teamwork", from: "his part in moves that end in a shot, per 90", for: "both", of: per90("xgBuildup") },

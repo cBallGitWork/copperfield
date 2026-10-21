@@ -25,14 +25,24 @@ describe("rankings", () => {
   ];
 
   it("places him by how many have more, so ties share a place", () => {
-    expect(place(rankings(cohort[0], cohort, OUTFIELD_RANKINGS), "Gls")).toMatchObject({ value: 5, rank: 1 });
-    expect(place(rankings(cohort[1], cohort, OUTFIELD_RANKINGS), "Gls")?.rank).toBe(2);
-    expect(place(rankings(cohort[2], cohort, OUTFIELD_RANKINGS), "Gls")?.rank).toBe(2);
-    expect(place(rankings(cohort[3], cohort, OUTFIELD_RANKINGS), "Gls")?.rank).toBe(4);
+    expect(place(rankings(cohort[0], cohort, OUTFIELD_RANKINGS), "G")).toMatchObject({ value: 5, rank: 1 });
+    expect(place(rankings(cohort[1], cohort, OUTFIELD_RANKINGS), "G")?.rank).toBe(2);
+    expect(place(rankings(cohort[2], cohort, OUTFIELD_RANKINGS), "G")?.rank).toBe(2);
+    expect(place(rankings(cohort[3], cohort, OUTFIELD_RANKINGS), "G")?.rank).toBe(4);
   });
 
   it("counts only men who have played", () => {
-    expect(place(rankings(cohort[0], cohort, OUTFIELD_RANKINGS), "Gls")?.of).toBe(4);
+    expect(place(rankings(cohort[0], cohort, OUTFIELD_RANKINGS), "G")?.of).toBe(4);
+  });
+
+  it("gives a man who has not played no place, rather than one below the field", () => {
+    const ranked = rankings(cohort[4], cohort, OUTFIELD_RANKINGS);
+    expect(place(ranked, "Min")).toMatchObject({ value: 0, rank: null, of: 4 });
+    expect(ranked.every((r) => r.rank === null)).toBe(true);
+  });
+
+  it("heads goals and assists as the match log does", () => {
+    expect(OUTFIELD_RANKINGS.map((r) => r.head)).toEqual(expect.arrayContaining(["G", "A"]));
   });
 
   it("has no place for a figure the map does not carry", () => {
