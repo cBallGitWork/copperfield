@@ -14,19 +14,21 @@ export interface Candidate {
   name: string;
 }
 
-/** Each side's man and what its box holds, as the URL names them (`a`, `b`, `qa`, `qb`). */
+/** Each side's man and what its box holds, as the URL names them (`a`, `b`, `qa`, `qb`), and each side's season. */
 export interface Sides {
   a: string | undefined;
   b: string | undefined;
   qa: string;
   qb: string;
+  as?: string;
+  bs?: string;
 }
 
-/** The sides as the screen reads them: a lone man is A, whichever box chose him, with the empty box's search moved
- *  to B; and `?a=X&b=X` is the one-man screen. */
-export function sides({ a, b, qa, qb }: Sides): Sides {
-  if (a === undefined && b !== undefined) return { a: b, b: undefined, qa: qb, qb: qa };
-  return { a, b: b === a ? undefined : b, qa, qb };
+/** The sides as the screen reads them: a lone man is A, whichever box chose him, with the empty box's search and
+ *  season moved to B's; and `?a=X&b=X` is the one-man screen unless the two sides name different seasons. */
+export function sides({ a, b, qa, qb, as, bs }: Sides): Sides {
+  if (a === undefined && b !== undefined) return { a: b, b: undefined, qa: qb, qb: qa, as: bs };
+  return { a, b: b === a && (as ?? "") === (bs ?? "") ? undefined : b, qa, qb, as, bs };
 }
 
 /** The sides minus an id the player page would 404 (bad shape, or one the pool answered without), so one stale side

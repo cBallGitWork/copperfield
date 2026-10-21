@@ -1,12 +1,22 @@
-import type { RateTotals } from "@epl/core";
+import type { PastMaps, PastSeason, RateTotals } from "@epl/core";
 import { per90 } from "../standout";
+import { touchCount } from "../[fantraxId]/maps";
 
-// What the two men have done, as rates: the attribute grid says where he ranks, this how often. The underlying play
-// only, never the goals, assists and clean sheets the league counts. Under ninety minutes a rate is a dash.
+// What the two men have done, as rates: the attribute grid says where he ranks, this how often. This season's ledger
+// is the underlying play only; one with a past season in it is what both seasons carry. Under ninety minutes a rate is a dash.
 
-/** What a ledger reads for one man over the window: FPL's totals, and the export's counts, which are null for a
- *  man the export never bridged (a dash) and nought for one it covers who did nothing. */
-export type Played = RateTotals & { touches: number | null; shots: number | null; keyPasses: number | null };
+/** What a ledger reads for one man: FPL's totals, and the export's counts, which are null for a man the export never
+ *  bridged (a dash) and nought for one it covers who did nothing. A past season has no starts, expected goals or
+ *  defensive actions, so those are null; the four counts after `keyPasses` are read only beside a past season. */
+export type Played = { [Key in keyof RateTotals]: number | null } & {
+  touches: number | null;
+  shots: number | null;
+  keyPasses: number | null;
+  goals?: number | null;
+  assists?: number | null;
+  cleanSheets?: number | null;
+  goalsConceded?: number | null;
+};
 
 /** One measure, and how to read it off a season. */
 export interface Rate {
@@ -17,31 +27,45 @@ export interface Rate {
   /** Whether it is a count, so divided by ninety; minutes and starts are the denominators. */
   perNinety: boolean;
   of: (played: Played) => number | null;
+  /** Which ledger it joins: this season's own, one with a past season on either side, or both. */
+  on: "now" | "past" | "both";
 }
 
 /** The measures in the order a scout reads them: how much football, with the ball, without it. */
 const RATES: readonly Rate[] = [
-  { name: "Min", from: "Minutes, season total", perNinety: false, of: (s) => s.minutes },
-  { name: "Starts", from: "Starts, season total", perNinety: false, of: (s) => s.starts },
-  { name: "Touches", from: "Touches per 90", perNinety: true, of: (s) => s.touches },
-  { name: "Shots", from: "Shots per 90", perNinety: true, of: (s) => s.shots },
-  { name: "Key passes", from: "Key passes per 90", perNinety: true, of: (s) => s.keyPasses },
-  { name: "xG", from: "Expected goals per 90", perNinety: true, of: (s) => s.expectedGoals },
-  { name: "xA", from: "Expected assists per 90", perNinety: true, of: (s) => s.expectedAssists },
-  { name: "Tackles", from: "Tackles per 90", perNinety: true, of: (s) => s.tackles },
+  { name: "Min", from: "Minutes, season total", perNinety: false, of: (s) => s.minutes, on: "both" },
+  { name: "Starts", from: "Starts, season total", perNinety: false, of: (s) => s.starts, on: "now" },
+  { name: "Touches", from: "Touches per 90", perNinety: true, of: (s) => s.touches, on: "both" },
+  { name: "Shots", from: "Shots per 90", perNinety: true, of: (s) => s.shots, on: "both" },
+  { name: "Key passes", from: "Key passes per 90", perNinety: true, of: (s) => s.keyPasses, on: "now" },
+  { name: "Goals", from: "Goals per 90", perNinety: true, of: (s) => s.goals ?? null, on: "past" },
+  { name: "Assists", from: "Assists per 90", perNinety: true, of: (s) => s.assists ?? null, on: "past" },
+  { name: "xG", from: "Expected goals per 90", perNinety: true, of: (s) => s.expectedGoals, on: "now" },
+  { name: "xA", from: "Expected assists per 90", perNinety: true, of: (s) => s.expectedAssists, on: "now" },
+  { name: "Tackles", from: "Tackles per 90", perNinety: true, of: (s) => s.tackles, on: "now" },
   {
     name: "CBI",
     from: "Clearances, blocks and interceptions per 90",
     perNinety: true,
     of: (s) => s.clearancesBlocksInterceptions,
+    on: "now",
   },
-  { name: "Recoveries", from: "Recoveries per 90", perNinety: true, of: (s) => s.recoveries },
-  { name: "Saves", from: "Saves per 90", perNinety: true, of: (s) => s.saves },
+  { name: "Recoveries", from: "Recoveries per 90", perNinety: true, of: (s) => s.recoveries, on: "now" },
+  { name: "CS", from: "Clean sheets per 90", perNinety: true, of: (s) => s.cleanSheets ?? null, on: "past" },
+  { name: "Saves", from: "Saves per 90", perNinety: true, of: (s) => s.saves, on: "both" },
+  {
+    name: "Conceded",
+    from: "Goals conceded per 90, lower is better",
+    perNinety: true,
+    of: (s) => s.goalsConceded ?? null,
+    on: "past",
+  },
   {
     name: "xGC",
     from: "Expected goals conceded per 90, lower is better",
     perNinety: true,
     of: (s) => s.expectedGoalsConceded,
+    on: "now",
   },
 ];
 
@@ -55,17 +79,46 @@ export interface RateRow {
   b: number | null;
 }
 
+/** A ledger's measures: this season's own, or, with a past season on either side, only what both seasons carry. */
+export function measuresFor(past: boolean): readonly Rate[] {
+  return RATES.filter((rate) => rate.on === "both" || rate.on === (past ? "past" : "now"));
+}
+
 /** Every measure worth printing about these two, in `RATES`' order: a row neither has anything to say about (two
  *  forwards' saves) is dropped. A man with no football half is all dashes. */
-export function rateRows(a: Played | null, b: Played | null): RateRow[] {
+export function rateRows(a: Played | null, b: Played | null, past = false): RateRow[] {
   const rows: RateRow[] = [];
-  for (const rate of RATES) {
+  for (const rate of measuresFor(past)) {
     const left = read(rate, a);
     const right = read(rate, b);
     if (silent(left) && silent(right)) continue;
     rows.push({ name: rate.name, from: rate.from, perNinety: rate.perNinety, a: left, b: right });
   }
   return rows;
+}
+
+/** A completed season as the ledger reads it: its line, and the touches and shots its maps hold. A season with no map
+ *  for him, or one with nothing of his in it, is no reading rather than nought. */
+export function pastPlayed(season: PastSeason, maps: PastMaps | null): Played {
+  const mapped = maps !== null && (maps.counts.size > 0 || maps.shots.length > 0);
+  return {
+    minutes: season.minutes,
+    starts: null,
+    expectedGoals: null,
+    expectedAssists: null,
+    tackles: null,
+    clearancesBlocksInterceptions: null,
+    recoveries: null,
+    saves: season.saves,
+    expectedGoalsConceded: null,
+    touches: mapped ? touchCount(maps.counts) : null,
+    shots: mapped ? maps.shots.length : null,
+    keyPasses: null,
+    goals: season.goals,
+    assists: season.assists,
+    cleanSheets: season.cleanSheets,
+    goalsConceded: season.goalsConceded,
+  };
 }
 
 /** One side of one row; null for a man with no season or a rate with too little football under it. */

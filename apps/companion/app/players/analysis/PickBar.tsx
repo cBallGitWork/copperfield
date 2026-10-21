@@ -1,6 +1,7 @@
 import Link from "@/app/components/shell/Link";
 import PickField from "./PickField";
 import { candidates } from "./pick";
+import { SEASON_PARAM } from "./season";
 import type { Candidate } from "./pick";
 import type { PoolRow } from "../pool";
 import { ANALYSIS, compareHref } from "../routes";
@@ -18,6 +19,8 @@ interface Side {
   typed: string;
   /** Who this side is now, for the box's accessible name; the bar under the boxes prints it. */
   name: string | null;
+  /** This side's completed season as the URL carries it; kept when the other side's man is swapped. */
+  season: string | undefined;
 }
 
 export default function PickBar({
@@ -66,6 +69,7 @@ function Box({
         <Carried name="a" value={side === "a" ? mine.chosen : other.chosen} />
         <Carried name="b" value={side === "b" ? mine.chosen : other.chosen} />
         <Carried name={side === "a" ? "qb" : "qa"} value={other.typed} />
+        <Carried name={SEASON_PARAM[side === "a" ? "b" : "a"]} value={other.season} />
       </PickField>
       <Found side={side} mine={mine} other={other} found={found} />
     </div>
@@ -109,14 +113,19 @@ function Found({
   );
 }
 
-/** Where picking a name goes: this side becomes him and its search is spent; the other side, and its search, are kept. */
+/** Where picking a name goes: this side becomes him this season and its search is spent; the other side is kept. */
 function pickHref(side: "a" | "b", fantraxId: string, other: Side): string {
   const [otherSide, otherSearch] = side === "a" ? (["b", "qb"] as const) : (["a", "qa"] as const);
-  return compareHref({ [side]: fantraxId, [otherSide]: other.chosen, [otherSearch]: other.typed.trim() });
+  return compareHref({
+    [side]: fantraxId,
+    [otherSide]: other.chosen,
+    [otherSearch]: other.typed.trim(),
+    [SEASON_PARAM[otherSide]]: other.season,
+  });
 }
 
 /** One field of the query the form does not own, or nothing: an empty one would post `a=`, an id of "". */
-function Carried({ name, value }: { name: string; value: string | undefined }) {
+export function Carried({ name, value }: { name: string; value: string | undefined }) {
   if (value === undefined || value.trim() === "") return null;
   return <input type="hidden" name={name} value={value} />;
 }

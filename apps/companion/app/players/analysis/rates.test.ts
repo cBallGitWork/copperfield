@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SeasonTotals } from "@epl/core";
-import { rateRows, type Played } from "./rates";
+import { measuresFor, pastPlayed, rateRows, type Played } from "./rates";
 
 /** A season with everything at nought, so each case sets only what it is about.
  *  Every field on `SeasonTotals` is present on all 651 elements, so a plain
@@ -137,6 +137,39 @@ describe("how a row prints", () => {
     const rows = rateRows(season({ minutes: 270, tackles: 0 }), season({ minutes: 270, tackles: 4 }));
     expect(rows.find((each) => each.name === "Tackles")?.perNinety).toBe(true);
     expect(rows.find((each) => each.name === "Min")?.perNinety).toBe(false);
+  });
+});
+
+describe("a ledger with a past season in it", () => {
+  const line = { season: "2024/25", minutes: 1800, goals: 10, assists: 4, cleanSheets: 2, goalsConceded: 20, yellowCards: 3, redCards: 0, saves: 0, fplPoints: 150 };
+  const maps = { counts: new Map([[5, 900]]), shots: [{ x: 90, y: 50, xg: 0.3, outcome: "goal" as const }] };
+
+  it("offers only the measures both seasons carry", () => {
+    expect(measuresFor(true).map((rate) => rate.name)).toEqual(["Min", "Touches", "Shots", "Goals", "Assists", "CS", "Saves", "Conceded"]);
+    expect(measuresFor(false).map((rate) => rate.name)).not.toContain("Goals");
+  });
+
+  it("rates a part season per ninety, so it compares fairly with a whole one", () => {
+    const rows = rateRows(season({ minutes: 900, goals: 5 }), pastPlayed(line, maps), true);
+    expect(row(rows, "Goals")?.a).toBeCloseTo(0.5);
+    expect(row(rows, "Goals")?.b).toBeCloseTo(0.5);
+    expect(row(rows, "Touches")?.b).toBeCloseTo(45);
+    expect(row(rows, "Min")?.b).toBe(1800);
+  });
+
+  it("dashes the touches and shots of a season with no map, never nought", () => {
+    const rows = rateRows(season({ minutes: 900, touches: 400, shots: 9 }), pastPlayed(line, null), true);
+    expect(row(rows, "Touches")?.b).toBeNull();
+    expect(row(rows, "Shots")?.b).toBeNull();
+    const empty = pastPlayed(line, { counts: new Map(), shots: [] });
+    expect([empty.touches, empty.shots]).toEqual([null, null]);
+  });
+
+  it("never prints a measure a past season lacks", () => {
+    const names = rateRows(season({ minutes: 900, expectedGoals: 4, tackles: 9 }), pastPlayed(line, maps), true).map((each) => each.name);
+    expect(names).not.toContain("xG");
+    expect(names).not.toContain("Tackles");
+    expect(names).not.toContain("Starts");
   });
 });
 

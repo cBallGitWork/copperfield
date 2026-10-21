@@ -16,6 +16,11 @@ export function playerHref(fantraxId: string): string {
 /** The value of Data's season picker that shows every season with its club. */
 export const ALL_SEASONS = "all";
 
+/** A completed season's label as a URL carries it, on Data and Compare: "2024/25" is "2024-25". */
+export function seasonValue(label: string): string {
+  return label.replace("/", "-");
+}
+
 /** One player's record, at a season the picker offers: `""` is this season, `ALL_SEASONS` every one. */
 export function playerDataHref(fantraxId: string, season = ""): string {
   return season === "" ? `${playerHref(fantraxId)}/data` : `${playerHref(fantraxId)}/data?season=${season}`;
@@ -30,8 +35,11 @@ export function playerNewsHref(fantraxId: string, story?: string): string {
 /** Two players side by side, `?a=&b=`. */
 export const ANALYSIS = `${POOL}/analysis`;
 
-/** Compare, carrying each field given a value in the order given: the men, the boxes' searches, the view and range. */
-export function compareHref(fields: Partial<Record<"a" | "b" | "qa" | "qb" | "view" | "range", string>>): string {
+/** Compare's query: the men, the boxes' searches, the view and range, and each side's completed season ("2024-25"). */
+export type CompareField = "a" | "b" | "qa" | "qb" | "view" | "range" | "as" | "bs";
+
+/** Compare, carrying each field given a value in the order given. */
+export function compareHref(fields: Partial<Record<CompareField, string>>): string {
   const query = new URLSearchParams();
   for (const [name, value] of Object.entries(fields)) if (value !== undefined && value !== "") query.set(name, value);
   const search = query.toString();
