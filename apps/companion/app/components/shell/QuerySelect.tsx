@@ -23,6 +23,7 @@ export default function QuerySelect({
   action,
   clears,
   replace = false,
+  fill = false,
   children,
 }: {
   /** The query parameter it sets. */
@@ -37,6 +38,8 @@ export default function QuerySelect({
   clears?: readonly string[];
   /** Whether the pick replaces the history entry rather than adding one. */
   replace?: boolean;
+  /** Whether it takes the row's spare width rather than its options' own. */
+  fill?: boolean;
   /** The rest of the query as hidden fields, rendered on the server (`Carried`). */
   children?: ReactNode;
 }) {
@@ -60,7 +63,7 @@ export default function QuerySelect({
   }
 
   return (
-    <form method="get" action={action} className="flex shrink-0 gap-1.5">
+    <form method="get" action={action} className={`flex gap-1.5 ${fill ? "min-w-0 flex-1 lg:flex-none" : "shrink-0"}`}>
       {children}
       <select name={name} aria-label={label} value={shown} onChange={pick} className={`${SELECT} w-full`}>
         {options.map((option) => (

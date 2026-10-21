@@ -8,7 +8,7 @@ import LineupPlanner from "../../components/league/LineupPlanner";
 import SquadBoard from "../../components/league/SquadBoard";
 import Sheet from "./Sheet";
 import QuerySelect from "../../components/shell/QuerySelect";
-import { OWN, teamHref } from "../routes";
+import { OWN, SQUAD, teamHref } from "../routes";
 import SquadIndex from "../SquadIndex";
 import { readerTeamId } from "../../squads";
 import TeamShell from "./Shell";
@@ -40,7 +40,7 @@ export default async function TeamPage({
   const [{ teamId: slug }, { gw }] = await Promise.all([params, searchParams]);
   // No team yet: the index and its sign-in in place, so the Team tab that led here stays lit.
   if (slug === OWN && (await readerTeamId()) === null) return <SquadIndex />;
-  const { team, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = await squadView(slug, gw);
+  const { team, league, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = await squadView(slug, gw);
   // Fantrax's period selector, on every branch: an earlier week shows its scores, a later one its opponents.
   const picker =
     weeks === null ? null : (
@@ -52,6 +52,20 @@ export default async function TeamPage({
         action={teamHref(slug)}
       />
     );
+
+  // Quick access to another squad at the same week; `/squad` turns the pick into his route.
+  const teams = (
+    <QuerySelect
+      name="team"
+      label="Team"
+      value={team.teamId}
+      options={league.map((entry) => ({ value: entry.teamId, label: entry.teamName }))}
+      action={SQUAD}
+      fill
+    >
+      {weeks === null ? null : <input type="hidden" name="gw" value={weeks.shown} />}
+    </QuerySelect>
+  );
 
   return (
     <TeamShell
@@ -84,7 +98,10 @@ export default async function TeamPage({
       ) : board !== null ? (
         /* The gate: before a rival's lineups lock, his fifteen as a list alone; a pitch would draw the shape it withholds. */
         <div className="flex flex-col gap-2">
-          {picker === null ? null : <div className="flex justify-end px-1">{picker}</div>}
+          <div className="flex gap-2 px-1 lg:justify-end">
+            {teams}
+            {picker}
+          </div>
           <SquadBoard
             lines={board.lines}
             because={board.because}
