@@ -56,7 +56,7 @@ export function whole(value: number | null): string {
   return value === null ? DASH : String(value);
 }
 
-/** A step above the row default: DESIGN §6's fourth recorded exception, a ledger of two men's figures and nothing else. */
+/** A step above the row default: DESIGN §6's fifth recorded exception, a ledger of two men's figures and nothing else. */
 const LEDGER_FIGURE = "numeric cm-row py-1 text-base lg:text-lg";
 
 /** The better amber, a tie or a lone man ink, the weaker muted, a figure only the other man has quieter still. */

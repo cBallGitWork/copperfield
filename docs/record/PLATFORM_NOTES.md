@@ -57,8 +57,8 @@ not a column count: a board whose name takes the slack (SquadTable, LeaderBoard)
 by counting. Kept off `Board`, each for its own reason: `StandingsTable` (place block, Pts block, cut rows, form),
 `Ledger` and `SquadRows` (lists, not tables), scoring (merged cells for a category paid alike), a club's Run (no
 head, a "Played" break), Depth (names across, no figures), the shot map (a row picks a shot), the match Squads and
-team sheet, and Compare's `PairLedger` (DESIGN §6's exception). They wear the same tokens. Business lost its 1 Oct
-step up to `base`; the other four recorded exceptions stand.
+team sheet, and Compare's `PairLedger` (DESIGN §6's exception). They wear the same tokens. DESIGN §6's five
+recorded figure exceptions stand, Business's 1 Oct step up to `base` among them (Craig's ruling).
 
 ## Matchups folds into League › Fixtures — decided 20 Oct 2026
 

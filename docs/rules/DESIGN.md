@@ -876,7 +876,7 @@ apart silently.
 | A figure in a row | — | — | `sm`, `.numeric` | `ROW_FIGURE`, worn by `FIGURE_CELL` and `FIGURE` (bold), centred on every table |
 | A label that is furniture | — | — | `2xs` bold caps | `LABEL` |
 
-**Four recorded exceptions, and what earns one.** `prem/match/[id]/TeamSheet` sets
+**Five recorded exceptions, and what earns one.** `prem/match/[id]/TeamSheet` sets
 its names and figures a step above the row default — `base`/`lg:text-lg` against
 `sm`/`lg:base` — on Craig's call of 10 Sep 2026 (*"the player text could be much
 bigger on this screen too like CM… data much bigger too"*). The argument is that
@@ -903,17 +903,18 @@ the four.** The complaint was about a desk, the arithmetic only argues for a
 desk, and the phone's budget above the first row of data is the thing that band
 is spent out of.
 
-~~`players/[fantraxId]/Moves`, a player's Business board, was the third~~ (Craig, 1 Oct 2026: *"make text bigger
-in business"*). **Undone 21 Oct 2026**: it was the third figure size on a page Craig counted *"seven table styles on
-one page: six different row heights, three header styles and three figure sizes"*, so it is `sm` like every table.
+`players/[fantraxId]/Moves`, a player's Business board, is the third (Craig, 1 Oct 2026: *"make text bigger in
+business"*): its whole content is one man's handful of moves in four columns, so it takes TeamSheet's step,
+`base`/`lg:text-lg`, on the date's index block, the move and both sides. It survived the one-table spec of 21 Oct
+2026 as his ruling: the only figure on the player page off `sm`.
 
-`components/league/SquadRow`'s points are the third (Craig, 6 Oct 2026: *"make fpts row bigger, harder to read"*),
+`components/league/SquadRow`'s points are the fourth (Craig, 6 Oct 2026: *"make fpts row bigger, harder to read"*),
 and the figure alone: `base`/`lg:text-lg` against a `ROW_NAME` that stays put. Every squad list a manager reads
 fifteen of carries one figure per man, and since the season grid came off a rival's squad (the same day) that list
 is the whole screen. The figure is the board's one value, so it is amber rather than the accent, which said
 "yours" on every rival's squad.
 
-`players/analysis`, Compare, is the fourth, recorded 8 Oct 2026 (#144) for a step it had taken since 24 Sep (#66)
+`players/analysis`, Compare, is the fifth, recorded 8 Oct 2026 (#144) for a step it had taken since 24 Sep (#66)
 without saying so: its ledgers (`Figures`, `Measures`) are two men's figures either side of one label, a dozen rows
 and nothing else, so they take TeamSheet's step, `base`/`lg:text-lg`. #144 had read it as cells falling back to 16px
 for want of `BOARD`; it is a choice, and the screen can say what earns it.

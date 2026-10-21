@@ -197,8 +197,9 @@ like"), in four blocks:
    is worth against Fantrax's ranking (`+15 on his pick`). A man nobody holds has joined
    nobody: his line is "Dropped by" the team that let him go, and when, or no line at all.
 2. **Business** — every claim, drop and trade with him, newest first, on the house table:
-   the date in the index block, then the move, from and to ("The pool" for no team), at every table's size and
-   sized to its columns on a desk (21 Oct 2026; the 1 Oct step up is undone, DESIGN §6). Neither panel says
+   the date in the index block, then the move, from and to ("The pool" for no team), a step above a
+   row's type (Craig, 1 Oct 2026: "make text bigger in business"; DESIGN §6's third exception), sized to its columns
+   on a desk (21 Oct 2026). Neither panel says
    "This league" any more (Craig: "remove 'This league' twice"); the tab is only ever ours.
 3. **How he arrived** is the status panel's Draft row, `13th pick, by Atletico +12 on his pick`: the pick and
    the drafter, never the round (12 Oct 2026; the cyan closing sentence went).
