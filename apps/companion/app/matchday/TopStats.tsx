@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import TabStrip from "../components/shell/TabStrip";
 import { FootFrame } from "../components/shell/FootFrame";
 import { phoneShows } from "@/app/desk";
@@ -7,7 +8,7 @@ import type { TopBoard } from "./leaders";
 import { LIVE } from "../components/shell/sections";
 
 // This gameweek's leaders (Craig, 1 Oct 2026: "match day have 3rd tab, that shows top stats for just
-// this gameweek"). A phone picks one list from a strip at the foot, docked above the rail when the list runs past the screen; a desk shows them all, each its own `LeaderBoard`.
+// this gameweek"). A phone picks one list from a strip docked on the rail; a desk shows them all, each its own `LeaderBoard`.
 
 /** The Live tab's third view, by its query value. */
 export const STATS_VIEW = "stats";
@@ -25,20 +26,23 @@ export default function TopStats({
   stat,
   teamNames,
   reader,
+  exit,
 }: {
   boards: readonly TopBoard[];
   /** The list the address asks for; a stale key shows the first. */
   stat: string | undefined;
   teamNames: ReadonlyMap<string, string>;
   reader: string | null;
+  /** The way out under the boards, kept above the dock so the picker is the page's last block. */
+  exit?: ReactNode;
 }) {
   const first = boards[0]?.key;
   const picked = boards.find((board) => board.key === stat)?.key ?? first;
   return (
-    // Not a viewport tall: the bar and the Fantrax exit sit outside it, so a short board would scroll into empty ground.
+    // Fills what the page's frame leaves under the bar and the strip, so a short board's picker still sits on the rail.
     // `!` because Tailwind emits min-h-0 before FootFrame's arbitrary min-h, which would otherwise win.
     <FootFrame
-      className="min-h-0! lg:gap-0"
+      className="min-h-0! flex-1 lg:gap-0"
       foot={
         <div className="lg:hidden">
           <TabStrip
@@ -65,6 +69,7 @@ export default function TopStats({
           />
         ))}
       </div>
+      {exit === undefined ? null : <div className="lg:mt-4">{exit}</div>}
     </FootFrame>
   );
 }

@@ -154,3 +154,20 @@ describe("Live's reads", () => {
     expect(r.fn.marksFor).not.toHaveBeenCalled();
   });
 });
+
+describe("Live's frame", () => {
+  // Final review, 21 Oct 2026: the exit sat between the picker and the rail, and the picker floated mid-page.
+  it("gives the top stats a viewport-tall frame and hands them the exit, so the picker docks on the rail", async () => {
+    const html = await render({ view: "stats" });
+    expect(html).toMatch(/^<div class="flex min-h-\[calc\(100dvh[^"]*gap-4! min-h-\[calc\(100dvh-var\(--safe-top\)-var\(--page-top\)-var\(--thumbrail\)\)\]! mb-\[calc\(var\(--thumbrail\)-var\(--safe-bottom\)-var\(--page-foot\)\)\] lg:mb-0 lg:min-h-0!"/);
+    expect(html).toMatch(/<x-topstats data-p="[^"]*exit[^"]*x-outlink/);
+    expect(html.indexOf("x-outlink")).toBeGreaterThan(html.indexOf("x-topstats"));
+    expect(html).not.toMatch(/<\/x-topstats><x-outlink/);
+  });
+
+  it("leaves the scores ending where they do, with the exit last", async () => {
+    const html = await render();
+    expect(html).toMatch(/^<div class="flex flex-col gap-4">/);
+    expect(html).toMatch(/<x-outlink[^>]*><\/x-outlink><\/div>$/);
+  });
+});

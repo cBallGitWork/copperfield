@@ -23,6 +23,7 @@ import { lockAhead } from "../lockAhead";
 import { now } from "../clock";
 import { BetweenGameweeks } from "./Between";
 import OutLink from "../components/shell/OutLink";
+import { FootFrame } from "../components/shell/FootFrame";
 import { fantraxPage } from "../fantraxPages";
 import Link from "@/app/components/shell/Link";
 import { LIVE } from "../components/shell/sections";
@@ -76,11 +77,14 @@ export default async function MatchdayPage({
   const buildUp = toGo > 0 ? <BuildUp ms={toGo} locksAt={locksAt} /> : null;
   const state = roundState(snapshot, now().toISOString());
 
+  // Fantrax's Matchups for this gameweek's period; its current one when we could not read it.
+  const exit = <OutLink href={fantraxPage(FANTRAX_MATCHUPS_PATH, period)}>Matchups on Fantrax</OutLink>;
+
   // Each view asks only for its own reads: the gameweek's leaders, the scores, or the coming lock between gameweeks.
   let view: ReactNode;
   if (leading) {
     const top = await gameweekBoards(snapshot, await roundFigures(snapshot.gameweek), period);
-    view = <TopStats boards={top.boards} stat={query.stat} teamNames={top.teamNames} reader={mine} />;
+    view = <TopStats boards={top.boards} stat={query.stat} teamNames={top.teamNames} reader={mine} exit={exit} />;
   } else if (during) {
     view = <LiveScores snapshot={snapshot} season={season} drafted={drafted} mine={mine} day={query.day} />;
   } else {
@@ -88,8 +92,8 @@ export default async function MatchdayPage({
   }
 
   // Between gameweeks the route still answers, saying where the football went.
-  return (
-    <div className="flex flex-col gap-4">
+  const page = (
+    <>
       {/* The round and its state are the page's title (Craig, 5 Sep 2026: "gameweek 3 LIVE as the
           title"); the sub line carries "Full time" or "Final", never LIVE twice. */}
       <PageHeader
@@ -106,13 +110,16 @@ export default async function MatchdayPage({
         current={leading ? STATS_VIEW : "scores"}
       />
       {view}
-      {/* Fantrax's Matchups for this gameweek's period; its current one when we could not read it. */}
-      <OutLink href={fantraxPage(FANTRAX_MATCHUPS_PATH, period)}>
-        Matchups on Fantrax
-      </OutLink>
-    </div>
+      {leading ? null : exit}
+    </>
   );
+  // Top stats docks its picker on the rail, so its page is a viewport tall; the other views end where they do.
+  return leading ? <FootFrame className={ON_THE_RAIL}>{page}</FootFrame> : <div className="flex flex-col gap-4">{page}</div>;
 }
+
+/** A phone's frame down to the rail's top, taking back the air `<main>` leaves under the page, so the picker sits on it. */
+const ON_THE_RAIL =
+  "gap-4! min-h-[calc(100dvh-var(--safe-top)-var(--page-top)-var(--thumbrail))]! mb-[calc(var(--thumbrail)-var(--safe-bottom)-var(--page-foot))] lg:mb-0 lg:min-h-0!";
 
 /** The build-up's line: whole minutes to the first kickoff, rounded up, then the lineup lock while it is ahead, as a
  *  way to his team, whose tab Live has taken on a phone. */
