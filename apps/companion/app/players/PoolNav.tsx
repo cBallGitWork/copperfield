@@ -1,4 +1,4 @@
-import TabStrip from "../components/shell/TabStrip";
+import ViewStrip from "./ViewStrip";
 import { ANALYSIS, PLANNER, POOL, STATS, TEAMS } from "./routes";
 
 // The Data section's own views (Craig, 24 Sep 2026: Players and Compare, with more to come; 16 Oct 2026: Adv Stats
@@ -16,5 +16,5 @@ export const SCOUT_VIEWS = [
 export type ScoutView = (typeof SCOUT_VIEWS)[number]["key"];
 
 export default function PoolNav({ current }: { current: ScoutView }) {
-  return <TabStrip label="Data views" tabs={SCOUT_VIEWS} current={current} labels="word" />;
+  return <ViewStrip tabs={SCOUT_VIEWS} current={current} />;
 }

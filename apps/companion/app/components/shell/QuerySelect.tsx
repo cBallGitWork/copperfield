@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { type FormEvent, type ReactNode, useState } from "react";
+import { Fragment, type FormEvent, type ReactNode, useState } from "react";
 import { SELECT } from "./ButtonLink";
 import { formHref } from "./formHref";
 import { SUBMIT } from "@/app/desk";
@@ -13,6 +13,8 @@ import { ask } from "../../players/liveQuery";
 export interface QueryOption {
   value: string;
   label: string;
+  /** The heading it is listed under; a run of options sharing one is an `optgroup`. */
+  group?: string;
 }
 
 export default function QuerySelect({
@@ -63,11 +65,15 @@ export default function QuerySelect({
     <form method="get" action={action} className="flex shrink-0 gap-1.5">
       {children}
       <select name={name} aria-label={label} value={shown} onChange={pick} className={`${SELECT} w-full`}>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
+        {runs(options).map(({ group, options: run }, at) =>
+          group === undefined ? (
+            <Fragment key={at}>{run.map(choice)}</Fragment>
+          ) : (
+            <optgroup key={at} label={group}>
+              {run.map(choice)}
+            </optgroup>
+          ),
+        )}
       </select>
       <noscript>
         <button type="submit" className={SUBMIT}>
@@ -76,6 +82,25 @@ export default function QuerySelect({
       </noscript>
     </form>
   );
+}
+
+function choice(option: QueryOption) {
+  return (
+    <option key={option.value} value={option.value}>
+      {option.label}
+    </option>
+  );
+}
+
+/** The options in runs of one heading, in the order given. */
+function runs(options: readonly QueryOption[]): { group?: string; options: QueryOption[] }[] {
+  const out: { group?: string; options: QueryOption[] }[] = [];
+  for (const option of options) {
+    const last = out.at(-1);
+    if (last !== undefined && last.group === option.group) last.options.push(option);
+    else out.push({ group: option.group, options: [option] });
+  }
+  return out;
 }
 
 /** Taps a link to `href` without following it: false when a `LeaveGuard` caught the tap to ask first. */

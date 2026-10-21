@@ -4,7 +4,10 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
-vi.mock("next/navigation", () => ({ usePathname: () => "/players" }));
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/players",
+  useSearchParams: () => new URLSearchParams("q=Saka&pos=D&sort=sh&group=attacking"),
+}));
 
 import ScoutShell from "./Shell";
 
@@ -14,5 +17,13 @@ describe("Data's frame", () => {
     const html = renderToStaticMarkup(ScoutShell({ children: null }));
     expect(html).not.toContain("cm-title");
     expect(html.startsWith('<div class="flex flex-col gap-2"><h1 class="sr-only">Data</h1><nav')).toBe(true);
+  });
+
+  // P-13: the strip threw the search away; the boards over one pool share it, the rest stay bare.
+  it("hands Adv Stats the search and positions from Players, and Clubs nothing", () => {
+    const html = renderToStaticMarkup(ScoutShell({ current: "pool", children: null }));
+    expect(html).toContain('href="/players/stats?q=Saka&amp;pos=D"');
+    expect(html).toContain('href="/players/teams"');
+    expect(html).toContain('href="/players"');
   });
 });
