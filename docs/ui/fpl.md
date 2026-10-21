@@ -38,7 +38,7 @@ and this is not a second attempt at it.
   off the same cached match detail reads (`fpl/events.ts`).
 
   **A tap on any man opens his FPL points** (Craig, 1 Oct 2026: *"click player needs to show
-  points"*): `PickPoints`, the live card's `Modal`, `DialogHead` and `Breakdown` table over his
+  points"*): `PickPoints`, the player card's identity (photo, club · FPL's line, fixture), × and Close foot over the `Breakdown` table of his
   FPL scoring lines, named in FPL's words, then the armband's share, so the rows add up to the
   figure under his kit. A benched man's card is headed "On the bench · not counted" and totals
   what he scored.

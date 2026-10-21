@@ -1,9 +1,10 @@
 import { type ExpectedMinutes, DASH } from "@epl/core";
 import { QUIET_FIGURE } from "@/app/desk";
 import CardBlock from "./CardBlock";
+import { minutesInk } from "../football/xminsInk";
 
-// A man's xMins over the coming gameweeks, on a player card: our model's figure, so it takes the derived reading's
-// cyan, dated by the export it came from. Silent when the model knows nothing of him, as a card is for a fit man's news.
+// A man's xMins over the coming gameweeks, on a player card: our model's figure, inked as every list inks it (red
+// under the doubt floor, else cyan), dated by its export. Silent when the model knows nothing of him.
 
 export default function MinutesRun({ weeks }: { weeks: readonly ExpectedMinutes[] }) {
   if (weeks.every((week) => week.minutes === null)) return null;
@@ -15,7 +16,7 @@ export default function MinutesRun({ weeks }: { weeks: readonly ExpectedMinutes[
         {weeks.map((week) => (
           <li key={week.gameweek} className="flex flex-1 flex-col items-center">
             <span className={QUIET_FIGURE}>GW{week.gameweek}</span>
-            <span className="numeric text-base font-bold text-info">{week.minutes ?? DASH}</span>
+            <span className={`numeric text-base font-bold ${minutesInk(week.minutes)}`}>{week.minutes ?? DASH}</span>
           </li>
         ))}
       </ol>

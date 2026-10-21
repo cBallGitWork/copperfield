@@ -6,7 +6,7 @@ import { everyLine, isGoalkeeper, playerName } from "@epl/core";
 import BenchStrip from "./BenchStrip";
 import PitchMarker from "./PitchMarker";
 import { positionLabel } from "../../positions";
-import LivePlayerCard from "./LivePlayerCard";
+import PlayerCard from "./PlayerCard";
 import PitchRows, { GROWS, widestLine } from "./PitchRows";
 import SquadMarker, { squadBench, squadKey } from "./SquadMarker";
 import SquadRows from "./SquadRows";
@@ -148,10 +148,11 @@ export default function TeamSheet({
       )}
 
       {open ? (
-        <LivePlayerCard
+        <PlayerCard
           // Remounts per player, so the dialog opens clean without an effect to sync `showModal`.
           key={open.rostered.slot.fantraxId}
           player={open}
+          eligible={eligibility?.[open.rostered.slot.fantraxId]}
           breakdown={breakdown[open.rostered.slot.fantraxId] ?? []}
           played={played[open.rostered.slot.fantraxId] ?? null}
           story={news?.[open.rostered.slot.fantraxId] ?? null}

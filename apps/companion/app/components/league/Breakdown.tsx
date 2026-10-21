@@ -16,6 +16,7 @@ export default function Breakdown({
   minutes,
   over,
   onRetry,
+  totalInk = "reading",
 }: {
   breakdown: BreakdownLine[];
   points: number | null | undefined;
@@ -26,6 +27,8 @@ export default function Breakdown({
   over: boolean;
   /** Asks again where the table is missing; without one the note stands alone. */
   onRetry?: () => void;
+  /** The league's points are the card's reading, cyan (DESIGN §3); FPL's total keeps the direction pair. */
+  totalInk?: "reading" | "direction";
 }) {
   // No table at all is a refused read; `emptyBreakdownNote` tells a dash from a real nought.
   if (points === undefined) {
@@ -77,7 +80,7 @@ export default function Breakdown({
           <span className={`min-w-0 flex-1 ${LABEL}`}>Total</span>
           <span
             className={`numeric ${PTS_COLUMN} shrink-0 text-center text-xl font-bold leading-none ${
-              points === null ? "text-faint" : tone(points)
+              points === null ? "text-faint" : totalInk === "reading" ? "text-info" : tone(points)
             }`}
           >
             {points ?? DASH}

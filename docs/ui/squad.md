@@ -138,9 +138,9 @@ no longer describes this one.
 4. **Nothing beside it** (Craig, 6 Oct 2026: *"huge table next to the list, needs to be pitch?"*). The season
    grid stood beside the list above `lg` until then and came off: the Stats tab already carries the season, and a
    pitch of fifteen would draw the shape the gate withholds. The list takes the full width at both sizes.
-5. **A player card** (`PlayerCard`) over the top, when one is tapped — the "who
-   is this" card, not the live one. There is no score to explain on a squad whose
-   period has not opened. It carries his **xMins** for the week on screen and the four after (`MinutesRun`).
+5. **The player card** (`PlayerCard`) over the top, when one is tapped: who he is, his fitness line, his FPts as the
+   list prints them, and his **xMins** for the week on screen and the four after (`MinutesRun`, inked by risk as the
+   list is). The gameweek sheet hands it his breakdown instead of the FPts line.
 
 Every list of the squad carries an **xMins** column for the gameweek the picker shows, between the
 opponent and FPts (Craig, 7 Oct 2026: *"assign the xmins by gameweek"*). **Inked by risk** (Craig, 21 Oct 2026:

@@ -1,5 +1,5 @@
 import { groupedBy } from "../grouped";
-import { FPL_LINES, FPL_STARTERS } from "./types";
+import { FPL_STARTERS, fplLineName } from "./types";
 import type { FplPick, FplSquad } from "./types";
 
 // One FPL side arranged as a pitch, the XI in lines and the bench under it. A line is FPL's `element_type`, never a Fantrax letter.
@@ -19,7 +19,7 @@ export function fplLineup(squad: FplSquad): { rows: FplLine[]; bench: FplPick[] 
     rows: [...byLine.entries()]
       .sort(([a], [b]) => a - b)
       .map(([line, players]) => ({
-        label: FPL_LINES.find((known) => known.line === line)?.name ?? String(line),
+        label: fplLineName(line),
         players: players.sort((a, b) => a.slot - b.slot),
       })),
     bench: squad.picks

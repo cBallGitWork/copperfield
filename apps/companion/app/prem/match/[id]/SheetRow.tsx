@@ -1,7 +1,7 @@
 import type { PlayerOwner, SquadPlayerDetail } from "@epl/core";
 import PositionTile from "../../../components/league/PositionTile";
 import { chipsFor } from "../../../components/league/Chips";
-import { MaybeCard } from "./PlayerCardButton";
+import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import OwnedBy from "./OwnedBy";
 import SubNote from "./SubNote";
 import LeadFace from "../../../components/league/LeadFace";

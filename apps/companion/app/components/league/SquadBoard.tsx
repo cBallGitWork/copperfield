@@ -41,6 +41,8 @@ export default function SquadBoard({
           // Remounts per player, so the dialog opens clean with no effect keeping `showModal` in step.
           key={open.rostered.slot.fantraxId}
           player={open}
+          eligible={eligibility?.[open.rostered.slot.fantraxId]}
+          figure={projected ? "projected" : "season"}
           onClose={() => setOpen(null)}
         />
       ) : null}

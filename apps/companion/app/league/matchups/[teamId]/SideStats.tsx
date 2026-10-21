@@ -5,7 +5,7 @@ import Section from "../../../components/shell/Section";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import { gainOrLoss } from "@/app/desk";
-import { MaybeCard } from "../../../prem/match/[id]/PlayerCardButton";
+import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import { figureOf, paidIn, sideRows, type Breakdowns, type Counts } from "./sideRows";
 import { DEFAULT_SIDE_SORT } from "./views";
 import Absent from "@/app/components/shell/Absent";

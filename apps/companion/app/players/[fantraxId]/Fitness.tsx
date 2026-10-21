@@ -21,7 +21,7 @@ export default function Fitness({ found }: { found: Subject }) {
   if (note === null || player === null) return null;
   return (
     <Section title="Fitness">
-      <FitnessLine player={player} availability={availability} note={note} />
+      <FitnessLine player={player} />
     </Section>
   );
 }

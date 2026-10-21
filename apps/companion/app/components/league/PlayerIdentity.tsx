@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {
   type Club,
+  type FootballPlayer,
   type Opposition,
   type RosteredPlayer,
   crestUrl,
@@ -15,22 +16,55 @@ import EmptySlot from "./EmptySlot";
 import MatchClock from "../football/MatchClock";
 import PlayerImage from "./PlayerImage";
 import { fdrStep } from "../football/fdr";
-import { positionLabel } from "../../positions";
+import { positionLabel, positionsLabel } from "../../positions";
 import { LABEL, QUIET_FIGURE } from "@/app/desk";
 
-// Who the man on a card is, atop both player dialogs: his photograph, his club and slot, and the fixture.
+// Who the man on a card is, atop every player dialog: his photograph, his club and positions, and the fixture.
 // The photograph, not a pitch card, whose name plate and points band would repeat the dialog's title bar.
 
 export default function PlayerIdentity({
   rostered,
+  eligible,
   club,
   opposition,
   started = kickedOff(opposition),
 }: {
   rostered: RosteredPlayer;
+  /** Every position he may play, as his row prints them (`M/F`); absent, his slot. */
+  eligible?: readonly string[];
   club: Club | undefined;
   opposition: Opposition[] | undefined;
   /** Whether his match is on, where the caller knows better than FPL's fixture status (`underway`). */
+  started?: boolean;
+}) {
+  const slot = positionLabel(rostered.slot.position);
+  return (
+    <FootballerIdentity
+      player={isResolved(rostered) ? rostered.player : null}
+      keeper={isGoalkeeper(rostered.slot.position)}
+      position={(eligible && positionsLabel(eligible)) || slot}
+      club={club}
+      opposition={opposition}
+      started={started}
+    />
+  );
+}
+
+/** The same block for a man known only to football, as the FPL tab knows its picks. */
+export function FootballerIdentity({
+  player,
+  keeper,
+  position,
+  club,
+  opposition,
+  started = kickedOff(opposition),
+}: {
+  player: FootballPlayer | null;
+  keeper: boolean;
+  /** His position as the screen he came from prints it; null for none. */
+  position: string | null;
+  club: Club | undefined;
+  opposition: Opposition[] | undefined;
   started?: boolean;
 }) {
   // Only for a single match: beside a double's two chips, one kickoff reads as the time of both.
@@ -39,24 +73,16 @@ export default function PlayerIdentity({
   return (
     <div className="flex items-center gap-3">
       <span className="w-[var(--player-card-figure)] shrink-0 overflow-hidden">
-        {isResolved(rostered) ? (
-          <PlayerImage
-            player={rostered.player}
-            club={club}
-            keeper={isGoalkeeper(rostered.slot.position)}
-            kickedOff={started}
-          />
+        {player ? (
+          <PlayerImage player={player} club={club} keeper={keeper} kickedOff={started} />
         ) : (
           // Every slot on an open XI is tappable, so a card answers for one the bridge could not settle too.
-          <EmptySlot label={positionLabel(rostered.slot.position) ?? "?"} />
+          <EmptySlot label={position ?? "?"} />
         )}
       </span>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-        {/* The slot his manager has him in, not every position he is eligible for. */}
-        <p className="truncate text-sm text-muted">
-          {[club?.name, positionLabel(rostered.slot.position)].filter(Boolean).join(" · ") || DASH}
-        </p>
+        <p className="truncate text-sm text-muted">{[club?.name, position].filter(Boolean).join(" · ") || DASH}</p>
         <Fixture club={club} opposition={opposition} started={started} />
         {/* Nothing to come for a man with no fixture: "No fixture" above already says so. */}
         {opposition === undefined || opposition.length === 0 || started ? null : (

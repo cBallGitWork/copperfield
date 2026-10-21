@@ -5,7 +5,7 @@ import type { FootballPlayer, PlayerOwner } from "@epl/core";
 import { Goal, Man } from "./ScoreRows";
 
 vi.mock("@/app/desk", () => ({ SMALL_CAPS: "" }));
-vi.mock("./PlayerCardButton", () => ({
+vi.mock("../../../components/league/PlayerCardButton", () => ({
   MaybeCard: ({ className, children }: { className: string; children: ReactNode }) => createElement("span", { className }, children),
 }));
 

@@ -1,6 +1,6 @@
 import { DASH, fullFootballerName } from "@epl/core";
 import type { FootballPlayer, PlGoalGroup, PlayerOwner, SquadPlayerDetail } from "@epl/core";
-import { MaybeCard } from "./PlayerCardButton";
+import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import { forCode } from "./sheetJoin";
 import OwnedBy from "./OwnedBy";
 import PlayerName from "../../../components/shell/PlayerName";

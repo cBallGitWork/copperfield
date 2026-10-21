@@ -6,7 +6,7 @@ import { clubIndex } from "../../../components/football/clubIndex";
 import { intelSquads } from "../../../intel";
 import { BOARD, PANEL, PLATE_FRAME, QUIET_FIGURE, ROW_RULE, phoneShows, SMALL_CAPS } from "@/app/desk";
 import { fantraxPositions, type LeagueOpinion } from "../../leagueOpinions";
-import { MaybeCard } from "./PlayerCardButton";
+import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import OwnedBy from "./OwnedBy";
 import SideBySide from "./SideBySide";
 import { NAME_CELL } from "./SheetRow";
