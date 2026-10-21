@@ -65,7 +65,7 @@ matchups board's pending clean sheets read it for all ten at once.
 
 Craig, 1 Oct 2026: *"lets have a gameweek dropdown like fantrax does, shows their opp for that week (and
 previous week would show their score)"*. The picker (`shell/QuerySelect`) sits beside the Pitch/List toggle on every branch
-(alone at the right above `lg`) and sets `?gw=`. Its options are the weeks the league plays (`leagueWeeks`): one
+(alone at the right above `lg`), with the team picker beside or above it, and sets `?gw=`. Its options are the weeks the league plays (`leagueWeeks`): one
 per period of its own calendar (`readCalendar`, from `getLeagueInfo`'s periods, never FPL's gameweek list) that its
 schedule pairs anybody in. The real league's calendar carries all 38 periods and its schedule starts at period 6,
 so the picker starts at Gameweek 6. A `?gw=` the league does not play (5, 99) opens the default week with its
@@ -81,6 +81,14 @@ A rival's weeks follow the gate as before: locked weeks draw his sheet, the open
 A locked sheet's caption is the same for both (16 Oct 2026: "First-choice XI" sat over a played 43 and never said
 43); an open or later week keeps "First-choice XI". The bench stays off the grass, a reserve having no place in a
 formation; List has it. A change made with an unsaved lineup goes through `LeaveGuard`'s prompt like any link.
+
+## The team picker
+
+21 Oct 2026: *"a dropdown where you select a different draft team. Quick access"*. A second `QuerySelect`
+(`team`, every rostered team by name) opens another squad **at the week on screen**: it submits to `/squad`,
+whose `teamPick` (`squad/routes.ts`, tested) redirects to `/squad/[teamId]?gw=`, so it works with no script.
+On a rival before his lock it fills the gap left of the week (`fill`); where the Pitch/List toggle shares the
+week's row (the planner, any sheet) it takes a line of its own above. Above `lg` it sits at the right.
 
 ## How the data reaches the view
 
