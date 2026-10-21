@@ -78,6 +78,7 @@ export function PickCard({
             reserve={reserve}
             minutes={minutesOf(pick)}
             over={matchesOver(opposition)}
+            totalInk="direction"
           />
         ) : null}
       </div>

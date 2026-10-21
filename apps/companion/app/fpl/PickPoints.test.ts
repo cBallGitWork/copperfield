@@ -34,9 +34,11 @@ describe("an FPL pick's card", () => {
     expect(html).not.toContain("Full profile");
   });
 
-  it("breaks his points down once his match is on, the total in cyan", () => {
+  // FPL's points are not the league's reading, so the total keeps the direction pair rather than the league's cyan.
+  it("breaks his points down once his match is on, the total green for a gain", () => {
     const html = card(against("live"));
     expect(html).toContain("Goals scored");
-    expect(html).toMatch(/>Total<[\s\S]*?class="[^"]*text-info[^"]*">6</);
+    expect(html).toMatch(/>Total<[\s\S]*?class="[^"]*text-up[^"]*">6</);
+    expect(html).not.toMatch(/>Total<[\s\S]*?text-info/);
   });
 });

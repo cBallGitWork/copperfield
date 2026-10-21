@@ -48,7 +48,8 @@ export function MaybeCard({
   return player === undefined ? (
     <span className={className}>{children}</span>
   ) : (
-    <PlayerCardButton {...card} player={player} className={className}>
+    // The underline on hover says a name opens his card, here once for every list.
+    <PlayerCardButton {...card} player={player} className={`${className} hover:underline`}>
       {children}
     </PlayerCardButton>
   );

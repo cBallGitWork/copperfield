@@ -202,6 +202,12 @@ describe("one player card", () => {
     expect(render({ player: saliba() })).toMatch(/>FPts<[\s\S]*?class="[^"]*text-info[^"]*">41</);
   });
 
+  it("heads a projection Proj, as the row it was opened from does", () => {
+    const card = render({ player: saliba(), figure: "projected" });
+    expect(card).toMatch(/>Proj<[\s\S]*?class="[^"]*text-info[^"]*">41</);
+    expect(card).not.toContain(">FPts<");
+  });
+
   it("prints no FPts where the screen had no table", () => {
     expect(render({ player: { ...saliba(), points: undefined } })).not.toContain(">FPts<");
   });

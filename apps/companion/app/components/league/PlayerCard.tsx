@@ -25,6 +25,7 @@ import MinutesRun from "./MinutesRun";
 import Note from "./Note";
 import PlayerIdentity from "./PlayerIdentity";
 import { underway } from "./underway";
+import { FIGURE_HEADS, type SquadFigure } from "./squadFigure";
 import { fitnessOf } from "../football/doubtRow";
 import FitnessLine from "../../players/[fantraxId]/FitnessLine";
 import { unresolvedReason } from "../../unresolved";
@@ -49,6 +50,7 @@ export interface CardScore {
 export default function PlayerCard({
   player: { rostered, club, opposition, points, minutes },
   eligible,
+  figure = "season",
   breakdown,
   played = null,
   reserve = false,
@@ -59,6 +61,8 @@ export default function PlayerCard({
   player: SquadPlayerDetail;
   /** Every position he may play, as the row he came from prints them; absent, his slot. */
   eligible?: readonly string[];
+  /** What `points` holds, as the row he came from heads it: FPts, Proj or GW. */
+  figure?: SquadFigure;
   /** Fantrax's latest on him, handed in by a screen that read it; null, the card reads it on open. */
   story?: PlayerStory | null;
   /** What his auto sub is, in one line; null when he has none. */
@@ -105,7 +109,7 @@ export default function PlayerCard({
 
         {/* Nothing before he has been on: an empty table under a live score reads as a nought. */}
         {breakdown === undefined ? (
-          <Points points={points} />
+          <Points points={points} figure={figure} />
         ) : started ? (
           <Breakdown
             breakdown={breakdown}
@@ -152,12 +156,14 @@ function useLatest(fantraxId: string, handed: PlayerStory | null): NewsItem | nu
   return handed === null ? read : (inbox([handed])[0] ?? null);
 }
 
-/** His FPts as the row he came from prints them, in the reading's cyan; nothing where the screen had no table. */
-function Points({ points }: { points: number | null | undefined }) {
+/** His points under the word his row heads them with (FPts, Proj, GW), in the reading's cyan; nothing with no table. */
+function Points({ points, figure }: { points: number | null | undefined; figure: SquadFigure }) {
   if (points === undefined) return null;
   return (
     <p className="cm-panel flex items-baseline justify-between gap-2 px-3 py-2">
-      <span className={LABEL}>FPts</span>
+      <span className={LABEL} title={FIGURE_HEADS[figure].title}>
+        {FIGURE_HEADS[figure].word}
+      </span>
       <span className="numeric text-base font-bold text-info">{points ?? DASH}</span>
     </p>
   );

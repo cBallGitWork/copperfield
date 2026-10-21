@@ -42,6 +42,7 @@ export default function SquadBoard({
           key={open.rostered.slot.fantraxId}
           player={open}
           eligible={eligibility?.[open.rostered.slot.fantraxId]}
+          figure={projected ? "projected" : "season"}
           onClose={() => setOpen(null)}
         />
       ) : null}
