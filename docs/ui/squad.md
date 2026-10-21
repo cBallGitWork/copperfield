@@ -164,7 +164,9 @@ figure passed for Monday's.
 was amber on every row, the standout slot lit for nobody in particular. "Proj" takes the same ink. Live's Top stats
 FPts list follows (`lists.figureInk`); its xG and xA lists keep the lone figure's amber. **DCP on the Stats board lost
 its cyan** the same day (`statViews.measureInk`): our DefCon points take the board's standout lights like any count,
-since cyan on a board is the league's points alone.
+since cyan on a board is the league's points alone. **The Stats board's row** (21 Oct 2026, D-12/D-14): our position
+in the index tile at both widths, as the list has it, then the crest, I. Surname (`fullPlayerName`, not the shirt name
+that printed "Rogers"; `stats/roster.ts`) and CM's mark (`FitnessMark`) where the word box stood.
 
 Under a thumb the name takes the room (Craig, 11 Oct 2026: *"opponent should be further to the right on mobile
 as it cuts off names"*): the opponent is headed Opp and is 44px, xMins and FPts 36, the figures butted and a 4px gap

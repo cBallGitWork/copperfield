@@ -1,10 +1,10 @@
 import TabEmpty from "../../../components/league/TabEmpty";
-import { isResolved, playerName, type FootballPlayer } from "@epl/core";
 import TeamShell from "../Shell";
 import { leagueTeams } from "../team";
 import { getPlayerStats } from "../../../players/playerStats";
 import { statsLeagueSeason } from "../../../statsLeague";
 import StatBoard from "./StatBoard";
+import { rosterFacts } from "./roster";
 import { defconPricing } from "../../../defcon";
 import { STATS_LEAGUE_KEYS } from "./statViews";
 import { teamTitle } from "../title";
@@ -33,19 +33,7 @@ export default async function StatsPage({
   const his = all.filter((line) => line.ownerTeamId === team.teamId);
   const ids = new Set(his.map((line) => line.fantraxId));
 
-  // The footballer behind each resolved slot, for his availability.
-  const footballers: Record<string, FootballPlayer> = {};
-  for (const rostered of squad.players) {
-    if (isResolved(rostered)) footballers[rostered.slot.fantraxId] = rostered.player;
-  }
-
-  // The roster's spelling, by id: Fantrax's stat rows say "Schade, Kevin". And the slot each fills, which DefCon prices.
-  const names: Record<string, string> = {};
-  const slots: Record<string, string[]> = {};
-  for (const rostered of squad.players) {
-    names[rostered.slot.fantraxId] = playerName(rostered);
-    slots[rostered.slot.fantraxId] = rostered.slot.position === null ? [] : [rostered.slot.position];
-  }
+  const { footballers, names, slots } = rosterFacts(squad.players);
 
   return (
     <TeamShell

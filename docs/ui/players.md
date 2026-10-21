@@ -150,15 +150,16 @@ above does, that one is.
   beside a name at 390 (FPts to AT), five at 360, since the lead widened for the name on 1 Oct 2026 (it was
   seven and six). **Opp is gone** at both widths; the next fixture is the planner's question.
 - **Under a thumb each man is two lines** (Craig, 16 Oct 2026: *"Did you also see the side scrolling on Fantrax,
-  much better"*): his crest, name, holder, position and doubt box on a line held still at the board's left edge, and
+  much better"*): his crest, name, holder, position and CM's mark on a line held still at the board's left edge, and
   his figures across the full width under it, scrolling sideways with the head; the head row still sticks to the top
   of a long board. 13 of 18 figures show at 390 (6 beside a pinned 160px lead before), 11 at 360, and 8 men above the
   fold where 13 were. The desk keeps the one-line row below. Chrome and WebKit agree (measured 16 Oct 2026).
 - **The lead** is pinned on a desk (`players/BoardRow`, shared with Projections): crest, then the name with **who holds
-  him in brackets straight after it** (Craig, 24 Sep 2026: *"put the manager in brackets right after the
+  him in brackets straight after it**, behind CM's mark for an unfit man (`FitnessMark`; the word box until 21 Oct
+  2026, D-11) (Craig, 24 Sep 2026: *"put the manager in brackets right after the
   player to allow more room for columns"*). On a phone the name is initialled (`P. Groß`, `initialled` in
   core), in FPL's spelling wherever it is the same name as Fantrax's (`spelt`: Groß, João, O'Reilly, as every squad
-  list prints them; 16 Oct 2026, review N30), and has line one to itself and its doubt box, and line two is the position (`MID`, in `LABEL` ink) with
+  list prints them; 16 Oct 2026, review N30), and has line one to itself and CM's mark, and line two is the position (`MID`, in `LABEL` ink) with
   the holder after it (Craig, 1 Oct 2026: *"needs more space for player name on mobile"*); the lead is 160px,
   room for a fifteen-letter "Surname, I". On a desk the name is whole, CM's position tile
   runs down the left, green for a man on no roster (`--color-index-free`, Craig 1 Oct 2026), and the lead is 256px.

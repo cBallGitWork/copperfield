@@ -1,17 +1,20 @@
 import type { ReactNode } from "react";
-import { crestUrl, printed, printedPlaces, DASH, type Club } from "@epl/core";
+import { crestUrl, fullFootballerName, printed, printedPlaces, DASH, type Club, type FootballPlayer } from "@epl/core";
 import Board from "../components/league/Board";
 import LeadFace, { LEAD_BOX } from "../components/league/LeadFace";
 import NameLink from "../prem/club/[code]/NameLink";
+import FitnessMark from "../components/football/FitnessMark";
 import { PANEL_FLUSH, SECTION_BAR } from "@/app/desk";
 import { figureInk, type LeaderList, type Ranked } from "./lists";
 
-// One list: the men in order, his club's crest and his name, the one figure in amber (FPts cyan), every one recorded.
+// One list: the men in order, his club's crest, his name and CM's mark, the one figure in amber (FPts cyan), every one recorded.
 
 export interface Row extends Ranked {
   club: Club | undefined;
   /** His own page, or null when our league does not list him. */
   href: string | null;
+  /** The footballer behind him, for his name in full and his fitness mark; undefined where FPL has no such code. */
+  footballer: FootballPlayer | undefined;
   /** What follows his name, as who holds him on Live's lists. */
   tail?: ReactNode;
 }
@@ -44,7 +47,11 @@ export default function LeaderBoard({
               label: "Player",
               of: (row) => (
                 <NameLink href={row.href} className={LEAD_BOX}>
-                  <LeadFace crest={row.club === undefined ? null : crestUrl({ code: row.club.code })} name={row.name} short={null} after={row.tail} />
+                  <LeadFace
+                    crest={row.club === undefined ? null : crestUrl({ code: row.club.code })}
+                    name={row.footballer === undefined ? row.name : fullFootballerName(row.footballer)}
+                    after={<><FitnessMark player={row.footballer ?? null} />{row.tail}</>}
+                  />
                 </NameLink>
               ),
             },
