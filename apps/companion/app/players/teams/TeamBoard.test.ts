@@ -30,6 +30,15 @@ describe("Clubs under a thumb", () => {
     expect(html.indexOf(">Key<")).toBeLessThan(html.indexOf("<table"));
   });
 
+  // Final review: nested in the panel, the dock sat 10px in and up from Adv Stats' and the desk panel ran ~230px past row 20.
+  it("docks the plates outside the panel, as Adv Stats does", () => {
+    const html = render();
+    const panelEnd = html.indexOf("</section>");
+    expect(html.indexOf('aria-label="Data views"')).toBeGreaterThan(-1);
+    expect(panelEnd).toBeGreaterThan(html.indexOf("<table"));
+    expect(html.indexOf("sticky bottom-[var(--thumbrail)]")).toBeGreaterThan(panelEnd);
+  });
+
   // Integration review: on Defence at 390 the squeezed Place cell let the pinned Club slide over GC's head.
   it("holds the Place block at the width the pinned Club's offset assumes", () => {
     const html = render("defence");
