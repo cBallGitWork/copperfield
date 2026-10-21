@@ -9,6 +9,8 @@ import { touchCount } from "../[fantraxId]/maps";
  *  bridged (a dash) and nought for one it covers who did nothing. A past season has no starts, expected goals or
  *  defensive actions, so those are null; the four counts after `keyPasses` are read only beside a past season. */
 export type Played = { [Key in keyof RateTotals]: number | null } & {
+  /** His xG less his penalties' (`nonPenaltyXg`); null where his shots cannot vouch for it, and in a past season. */
+  nonPenaltyExpectedGoals: number | null;
   touches: number | null;
   shots: number | null;
   keyPasses: number | null;
@@ -41,7 +43,21 @@ const RATES: readonly Rate[] = [
   { name: "Goals", from: "Goals per 90", perNinety: true, of: (s) => s.goals, on: "past" },
   { name: "Assists", from: "Assists per 90", perNinety: true, of: (s) => s.assists, on: "past" },
   { name: "xG", from: "Expected goals per 90", perNinety: true, of: (s) => s.expectedGoals, on: "now" },
+  {
+    name: "npxG",
+    from: "Non-penalty expected goals per 90",
+    perNinety: true,
+    of: (s) => s.nonPenaltyExpectedGoals,
+    on: "now",
+  },
   { name: "xA", from: "Expected assists per 90", perNinety: true, of: (s) => s.expectedAssists, on: "now" },
+  {
+    name: "npxGI",
+    from: "Non-penalty expected goals and expected assists per 90",
+    perNinety: true,
+    of: (s) => sum(s.nonPenaltyExpectedGoals, s.expectedAssists),
+    on: "now",
+  },
   { name: "Tackles", from: "Tackles per 90", perNinety: true, of: (s) => s.tackles, on: "now" },
   {
     name: "CBI",
@@ -115,6 +131,7 @@ export function pastPlayed(season: PastSeason, maps: PastMaps | null): Played {
     minutes: season.minutes,
     starts: null,
     expectedGoals: null,
+    nonPenaltyExpectedGoals: null,
     expectedAssists: null,
     tackles: null,
     clearancesBlocksInterceptions: null,
@@ -137,6 +154,11 @@ function read(rate: Rate, played: Played | null): number | null {
   const total = rate.of(played);
   if (total === null) return null;
   return rate.perNinety ? per90(total, played.minutes) : total;
+}
+
+/** Two figures added, absent if either is. */
+function sum(a: number | null, b: number | null): number | null {
+  return a === null || b === null ? null : a + b;
 }
 
 /** Whether a figure has nothing to say: absent, or nought. */

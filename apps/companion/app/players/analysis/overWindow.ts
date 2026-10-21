@@ -1,10 +1,10 @@
-import { assistsOf, inGameweeks, totalsOver, touchFixtures, touchesOf } from "@epl/core";
+import { assistsOf, inGameweeks, nonPenaltyXg, totalsOver, touchFixtures, touchesOf } from "@epl/core";
 import type { Club, PastMaps, PastSeason, RateTotals, Shot, Touch } from "@epl/core";
 import { pastPlayed, seasonCounts, type Played } from "./rates";
 import type { subject } from "../[fantraxId]/subject";
 import { gameLog } from "../[fantraxId]/scouting";
 import type { PassMark } from "../../components/football/shotGeometry";
-import { intelShots, intelTouches } from "../../intel";
+import { heldShots, intelShots, intelTouches } from "../../intel";
 
 /** A man whose profile read answered. */
 export type Found = Extract<Awaited<ReturnType<typeof subject>>, { intel: unknown }>;
@@ -40,7 +40,8 @@ export async function manOver(side: Found, name: string, { recent, inWindow, gam
     recent ? inGameweeks(rows, gameweekOf, inWindow) : [...rows];
   const all = intelTouches.get(code);
   const touches = all === undefined ? undefined : { ...all, fixtures: keep(all.fixtures) };
-  const shots = keep(intelShots.get(code) ?? []);
+  const held = heldShots(code);
+  const shots = held === null ? [] : keep(held);
   const keyPasses = keep(assistsOf(intelShots, code));
   // The window is his game log: with FPL not answering it has no figures, rather than a window of noughts.
   const log = player !== undefined && recent ? await gameLog(player) : null;
@@ -55,6 +56,7 @@ export async function manOver(side: Found, name: string, { recent, inWindow, gam
       ? null
       : {
           ...totals,
+          nonPenaltyExpectedGoals: nonPenaltyXg(totals.expectedGoals, held === null ? null : shots),
           ...seasonCounts(recent ? null : (player?.season ?? null)),
           touches: touches === undefined ? null : touchesOf(touches, null).length,
           shots: touches === undefined ? null : shots.length,

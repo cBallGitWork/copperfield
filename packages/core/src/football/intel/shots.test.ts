@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { IntelShots, Shot } from "./shots";
-import { assistsOf, shotIntel, shotsInFixture } from "./shots";
+import { assistsOf, nonPenaltyXg, shotIntel, shotsInFixture } from "./shots";
 
 const MANIFEST = { season: "26-27", gameweek: null, exportedAt: "", rows: 0, sources: [] };
 
@@ -110,5 +110,29 @@ describe("assistsOf", () => {
     );
     expect(assistsOf(byCode, 7).map((each) => each.minute)).toEqual([5, 40]);
     expect(assistsOf(byCode, 99)).toEqual([]);
+  });
+});
+
+describe("nonPenaltyXg", () => {
+  it("takes what his penalties were worth off his expected goals", () => {
+    const his = [shot({ xg: 0.7884 }), shot({ xg: 0.7884, minute: 80 }), shot({ situation: "assisted", xg: 0.2 })];
+    expect(nonPenaltyXg(2.09, his)).toBeCloseTo(0.5132);
+  });
+
+  it("leaves a man who took none at his expected goals", () => {
+    expect(nonPenaltyXg(1.2, [shot({ situation: "assisted", xg: 1.2 })])).toBe(1.2);
+    expect(nonPenaltyXg(0, [])).toBe(0);
+  });
+
+  it("is absent, not nought, where the file cannot vouch for his shots", () => {
+    expect(nonPenaltyXg(null, [])).toBeNull();
+    expect(nonPenaltyXg(1.5, null)).toBeNull();
+    // Expected goals but no shot held: the file has not got his matches.
+    expect(nonPenaltyXg(1.5, [])).toBeNull();
+    expect(nonPenaltyXg(1.5, [shot({ xg: null })])).toBeNull();
+  });
+
+  it("never goes below nought on FPL's rounding", () => {
+    expect(nonPenaltyXg(0.78, [shot({ xg: 0.7884 })])).toBe(0);
   });
 });

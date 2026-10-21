@@ -30,7 +30,7 @@ import { offeredFor } from "./sortOptions";
 import { PRESSABLE, Plates } from "./BoardControls";
 import BoardLink from "./BoardLink";
 import { FootFrame } from "../components/shell/FootFrame";
-import { intelStats, intelStatsDay } from "../intel";
+import { heldShots, intelStats, intelStatsDay } from "../intel";
 import { divisionGrids } from "./[fantraxId]/grid";
 import { cutsFor } from "./standout";
 import { unlessSorted } from "../components/league/standout";
@@ -85,7 +85,7 @@ export default async function PoolBoard({
       ...(grid === undefined ? {} : attributeStats(grid)),
       ...(defcon === undefined ? {} : { [DEFCON_POINTS]: defcon[id] }),
       ...seasonStats(code === null ? undefined : intelStats.get(code)),
-      ...expectedStats(code === null ? undefined : footballers.get(code)),
+      ...(code === null ? {} : expectedStats(footballers.get(code), heldShots(code))),
     };
     if (Object.keys(ours).length > 0) raw.set(id, { ...raw.get(id), ...ours });
   }

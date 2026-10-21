@@ -16,6 +16,7 @@ function season(over: Partial<Played & SeasonTotals> = {}): Played & SeasonTotal
     minutes: 0,
     starts: 0,
     expectedGoals: 0,
+    nonPenaltyExpectedGoals: null,
     expectedAssists: 0,
     expectedGoalsConceded: 0,
     influence: 0,
@@ -92,6 +93,18 @@ describe("rateRows", () => {
     const rows = rateRows(null, season({ minutes: 900, expectedGoals: 4 }));
     expect(rows.every((each) => each.a === null)).toBe(true);
     expect(row(rows, "xG")?.b).toBeCloseTo(0.4);
+  });
+
+  it("rates npxG beside xG and npxGI beside xA, each per ninety", () => {
+    const rows = rateRows(season({ minutes: 900, expectedGoals: 4, nonPenaltyExpectedGoals: 3.2, expectedAssists: 1 }), null);
+    expect(rows.map((each) => each.name).filter((name) => /x/.test(name))).toEqual(["xG", "npxG", "xA", "npxGI"]);
+    expect(row(rows, "npxG")?.a).toBeCloseTo(0.32);
+    expect(row(rows, "npxGI")?.a).toBeCloseTo(0.42);
+  });
+
+  it("dashes npxG and npxGI where his shots cannot vouch for them, never nought", () => {
+    const rows = rateRows(season({ minutes: 900, expectedAssists: 1 }), season({ minutes: 900, nonPenaltyExpectedGoals: 2 }));
+    expect([row(rows, "npxG")?.a, row(rows, "npxGI")?.a]).toEqual([null, null]);
   });
 
   it("has no rows at all for two men we know nothing about", () => {

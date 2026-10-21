@@ -81,6 +81,9 @@ export const intelTouches: Map<number, TouchPlayer> = touchIntel(
 /** Every man's shots, by FPL code, on the touches' convention: the exporter flips SofaScore's shots to match. */
 export const intelShots: Map<number, Shot[]> = shotIntel(shotsFile as unknown as IntelShots);
 
+/** One man's shots, none for a man the file holds none of; null when the file holds nothing, which is no reading. */
+export const heldShots = (code: number): Shot[] | null => (intelShots.size === 0 ? null : (intelShots.get(code) ?? []));
+
 /** Each club's Dixon-Coles attack and defence by FPL club code. */
 export const intelStrength: Map<number, ClubStrength> = strengthIntel(strengthFile as unknown as IntelStrength);
 

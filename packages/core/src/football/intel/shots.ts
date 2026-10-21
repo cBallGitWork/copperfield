@@ -57,6 +57,19 @@ export function assistsOf(shots: ReadonlyMap<number, readonly Shot[]>, code: num
   return made;
 }
 
+/** His expected goals less what his penalties were worth; null where his shots cannot vouch for it (none held, a man
+ *  with expected goals and no shot in the file, or a penalty with no value). Never below nought on FPL's rounding. */
+export function nonPenaltyXg(xg: number | null, shots: readonly Shot[] | null): number | null {
+  if (xg === null || shots === null || (shots.length === 0 && xg > 0)) return null;
+  let penalties = 0;
+  for (const shot of shots) {
+    if (shot.situation !== "penalty") continue;
+    if (shot.xg === null) return null;
+    penalties += shot.xg;
+  }
+  return Math.max(0, xg - penalties);
+}
+
 /** Every shot in one fixture by the taker's code, earliest first; keyed because the export carries no team and the
  *  caller decides each code's side. */
 export function shotsInFixture(shots: Map<number, Shot[]>, fixture: number): Map<number, Shot[]> {

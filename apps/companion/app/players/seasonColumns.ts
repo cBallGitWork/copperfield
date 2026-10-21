@@ -1,4 +1,4 @@
-import { blocks, stat, type FootballPlayer, type StatKey, type StatsRow } from "@epl/core";
+import { blocks, nonPenaltyXg, stat, type FootballPlayer, type Shot, type StatKey, type StatsRow } from "@epl/core";
 import type { PoolColumn } from "./columns";
 import type { PoolGroup } from "./groups";
 
@@ -7,7 +7,7 @@ import type { PoolGroup } from "./groups";
 // stats bag under their own keys, never as a `stat`: the stats league's counts, and the expected figures.
 
 /** Where a figure is read from: a stats league count (or blocks, worked out of three), or an expected figure. */
-type From = { count: StatKey | "blocks" } | { expected: "xg" | "xa" | "xgi" | "xgc" };
+type From = { count: StatKey | "blocks" } | { expected: "xg" | "npxg" | "xa" | "xgi" | "npxgi" | "xgc" };
 
 interface SeasonStat {
   /** The address bar's key. */
@@ -24,7 +24,9 @@ interface SeasonStat {
 /** Every figure, by plate and in the order a plate draws them, headed in the house's words. */
 const SEASON_STATS: readonly SeasonStat[] = [
   { key: "xg", from: { expected: "xg" }, label: "xG", title: "Expected goals", means: "The goals his shots were worth, by how often shots like them go in.", group: "attacking" },
+  { key: "npxg", from: { expected: "npxg" }, label: "npxG", title: "Non-penalty expected goals", means: "His expected goals without the penalties he took.", group: "attacking" },
   { key: "xgi", from: { expected: "xgi" }, label: "xGI", title: "Expected goal involvements", means: "His expected goals and expected assists added together.", group: "attacking" },
+  { key: "npxgi", from: { expected: "npxgi" }, label: "npxGI", title: "Non-penalty expected goal involvements", means: "His expected goals without penalties, and his expected assists, added together.", group: "attacking" },
   { key: "sh", from: { count: "shots" }, label: "Sh", title: "Shots", means: "Every attempt at goal: on target, off it or blocked.", group: "attacking" },
   { key: "sot", from: { count: "shotsOnTarget" }, label: "SoT", title: "Shots on target", means: "Shots that went in or were saved.", group: "attacking" },
   { key: "bcm", from: { count: "bigChancesMissed" }, label: "BCM", title: "Big chances missed", means: "Chances he should have scored and missed.", group: "attacking", mark: "low" },
@@ -75,11 +77,13 @@ export function seasonStats(row: StatsRow | undefined): Record<string, number | 
   };
 }
 
-/** His expected figures keyed for the bag; nothing for a man who has not played, whose noughts are no reading. */
-export function expectedStats(player: FootballPlayer | undefined): Record<string, number | null> {
+/** His expected figures keyed for the bag; nothing for a man who has not played, whose noughts are no reading. His
+ *  shots (null when the file holds none) take his penalties off; a man they cannot vouch for has no npxG. */
+export function expectedStats(player: FootballPlayer | undefined, shots: readonly Shot[] | null): Record<string, number | null> {
   if (player === undefined || player.season.minutes <= 0) return {};
   const { expectedGoals: xg, expectedAssists: xa, expectedGoalsConceded: xgc, minutes } = player.season;
-  const figures = { xg, xa, xgi: xg + xa, xgc };
+  const npxg = nonPenaltyXg(xg, shots);
+  const figures = { xg, npxg, xa, xgi: xg + xa, npxgi: npxg === null ? null : npxg + xa, xgc };
   return {
     ...Object.fromEntries(Object.entries(figures).map(([key, value]) => [`expected ${key}`, value])),
     [EXPECTED_MINUTES]: minutes,

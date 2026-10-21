@@ -102,7 +102,7 @@ export { goalMinutes, loggedPlayers, matchIntel } from "./intel/matches";
 export { averageTouchPosition, touchFixtures, touchIntel, touchesOf } from "./intel/touches";
 export type { IntelTouches, Touch, TouchPlayer } from "./intel/touches";
 // Every shot, flipped onto the touch clouds' orientation.
-export { assistsOf, shotIntel, shotsInFixture } from "./intel/shots";
+export { assistsOf, nonPenaltyXg, shotIntel, shotsInFixture } from "./intel/shots";
 // A past season's maps, one file a season, touches already counted on the heat grid.
 export { pastMapsOf } from "./intel/pastMaps";
 export type { HeatGrid, IntelPastMaps, PastMaps, PastShot } from "./intel/pastMaps";

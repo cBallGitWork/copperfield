@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { FootballPlayer, StatsRow } from "@epl/core";
+import type { FootballPlayer, Shot, StatsRow } from "@epl/core";
 import type { PoolRow } from "./pool";
 import { COLUMNS, columnFor } from "./columns";
 import { columnsIn, sortableIn } from "./groups";
@@ -33,7 +33,7 @@ const footballer = (season: Partial<FootballPlayer["season"]>): FootballPlayer =
 
 // The real league's getPlayerStats columns on 1 Oct 2026: none of these.
 const REAL = new Set(["GP", "Min", "G", "AT", "YC", "RC", "Pen", "DFP", "DFP3", "PKM", "OG", "GAO", "CS", "GA", "PKS", "GKP"]);
-const ATTACK = ["xg", "xgi", "sh", "sot", "bcm"];
+const ATTACK = ["xg", "npxg", "xgi", "npxgi", "sh", "sot", "bcm"];
 const CHANCES = ["xa", "kp", "bcc", "cr", "ac"];
 const DEFENCE = ["tkl", "int", "blk", "clr", "rec", "aw", "xgc"];
 const KEYS = [...ATTACK, ...CHANCES, ...DEFENCE];
@@ -55,7 +55,7 @@ const read = (key: string, bag: Record<string, number | null>) => columnFor(key)
 describe("Adv Stats' season columns", () => {
   it("heads them in the house's words, KP titled as its head says (UX review, 19 Oct 2026)", () => {
     expect(SEASON_COLUMNS.map((column) => column.label)).toEqual([
-      "xG", "xGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC",
+      "xG", "npxG", "xGI", "npxGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC",
     ]);
     expect(columnFor("kp")?.title).toBe("Key passes");
   });
@@ -108,7 +108,7 @@ describe("Adv Stats' season columns", () => {
   });
 
   it("dates only the daily file's columns", () => {
-    expect(DAILY_COLUMNS.map((column) => column.key)).toEqual(KEYS.filter((key) => !key.startsWith("x")));
+    expect(DAILY_COLUMNS.map((column) => column.key)).toEqual(KEYS.filter((key) => !/^(np)?x/.test(key)));
   });
 
   it("rates per 90 over the file's own minutes, not the served league's", () => {
@@ -137,7 +137,7 @@ describe("expectedStats", () => {
   const haaland = footballer({ minutes: 540, expectedGoals: 6.12, expectedAssists: 0.75, expectedGoalsConceded: 4.5 });
 
   it("reads his xG, xA and xGC, and xGI as the two together, at two places", () => {
-    const bag = expectedStats(haaland);
+    const bag = expectedStats(haaland, []);
     expect(["xg", "xa", "xgc"].map((key) => read(key, bag))).toEqual([6.12, 0.75, 4.5]);
     expect(read("xgi", bag)).toBeCloseTo(6.87);
     expect(columnFor("xg")?.places).toBe("expected");
@@ -145,16 +145,32 @@ describe("expectedStats", () => {
 
   it("rates per 90 over his own minutes, never the stats league's", () => {
     const xg = columnFor("xg");
-    const bag = { ...seasonStats({ minutes: 450 }), ...expectedStats(haaland) };
+    const bag = { ...seasonStats({ minutes: 450 }), ...expectedStats(haaland, []) };
     expect(xg && figureOf(xg, row("haaland"), bag, true)).toBeCloseTo(1.02);
   });
 
   it("dashes a man who has not played, and one the bridge has not settled", () => {
-    expect(expectedStats(footballer({ minutes: 0 }))).toEqual({});
-    expect(expectedStats(undefined)).toEqual({});
+    expect(expectedStats(footballer({ minutes: 0 }), [])).toEqual({});
+    expect(expectedStats(undefined, null)).toEqual({});
+  });
+
+  it("takes his penalties off npxG and npxGI, and rates them per 90 like xG", () => {
+    const penalty = { situation: "penalty", xg: 0.7884 } as Shot;
+    const bag = expectedStats(haaland, [penalty, penalty, { situation: "assisted", xg: 0.4 } as Shot]);
+    expect(read("npxg", bag)).toBeCloseTo(4.5432);
+    expect(read("npxgi", bag)).toBeCloseTo(5.2932);
+    const npxg = columnFor("npxg");
+    expect(npxg && figureOf(npxg, row("haaland"), bag, true)).toBeCloseTo(0.76);
+  });
+
+  it("dashes npxG and npxGI where his shots cannot vouch for it, keeping xG", () => {
+    for (const shots of [null, []]) {
+      const bag = expectedStats(haaland, shots);
+      expect([read("npxg", bag), read("npxgi", bag), read("xg", bag)]).toEqual([null, null, 6.12]);
+    }
   });
 
   it("prints a played man's nought", () => {
-    expect(read("xg", expectedStats(footballer({ minutes: 90 })))).toBe(0);
+    expect(read("xg", expectedStats(footballer({ minutes: 90 }), []))).toBe(0);
   });
 });

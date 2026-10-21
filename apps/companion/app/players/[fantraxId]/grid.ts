@@ -25,8 +25,8 @@ import { footballNow } from "../../football";
 import {
   SET_PIECES,
   intelLines,
+  heldShots,
   intelSetPieces,
-  intelShots,
   intelSquads,
   intelStats,
   lineFloors,
@@ -80,11 +80,11 @@ const division = cache(async (): Promise<{ rated: Scouted[]; tallied: Tallied[] 
         setPieceShare: share([pieces?.freeKicks, pieces?.corners]),
       };
     }),
-    tallied: players.map((player) => ({
-      player,
-      shots: intelShots.size === 0 ? null : shotLine(intelShots.get(player.code) ?? []),
-      keyPasses: stat(intelStats.get(player.code), "keyPasses"),
-    })),
+    tallied: players.map((player) => {
+      const shots = heldShots(player.code);
+      const keyPasses = stat(intelStats.get(player.code), "keyPasses");
+      return { player, shots: shots === null ? null : shotLine(shots), keyPasses };
+    }),
   };
 });
 
