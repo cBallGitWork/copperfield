@@ -16,10 +16,12 @@ export interface Ranked {
   of: number;
 }
 
-/** A man's season as FPL counts it, and his line on the shot map. */
+/** A man's season as FPL counts it, his line on the shot map, and the league's count of his key passes. */
 export interface Tallied {
   player: FootballPlayer;
   shots: ShotLine | null;
+  /** The stats league's key passes, as Adv Stats prints them; null when it holds no reading for him. */
+  keyPasses: number | null;
 }
 
 interface Ranking {
@@ -39,7 +41,7 @@ export const OUTFIELD_RANKINGS: readonly Ranking[] = [
   { head: "A", title: "Assists", of: (m) => s(m).assists },
   { head: "xA", title: "Expected assists", kind: "expected", of: (m) => s(m).expectedAssists },
   { head: "Sh", title: "Shots, off the shot map", of: (m) => m.shots?.struck ?? null },
-  { head: "Ch", title: "Shots he set up, where the shot map names the passer", of: (m) => m.shots?.created ?? null },
+  { head: "KP", title: "Key passes: passes that led to a team-mate's shot", of: (m) => m.keyPasses },
   { head: "Def", title: "Tackles, clearances, blocks, interceptions and recoveries", of: (m) => s(m).tackles + s(m).clearancesBlocksInterceptions + s(m).recoveries },
 ];
 

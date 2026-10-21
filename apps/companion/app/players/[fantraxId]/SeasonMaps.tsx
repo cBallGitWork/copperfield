@@ -57,7 +57,7 @@ export default function SeasonMaps({
         {outcomes ? label("Outcomes", null, <Outcomes shots={maps.shots} />, "lg:hidden") : null}
         {maps.chances.length === 0
           ? null
-          : label("Chances created", maps.chances.length, <Half shots={maps.chances} passes={maps.chances} when={when} />)}
+          : label("Shots set up", maps.chances.length, <Half shots={maps.chances} passes={maps.chances} when={when} />)}
         {touches === 0
           ? null
           : label(

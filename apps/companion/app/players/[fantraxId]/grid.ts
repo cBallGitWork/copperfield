@@ -14,6 +14,7 @@ import {
   ratedRunning,
   shotLine,
   squadOf,
+  stat,
 } from "@epl/core";
 import type { Attribute, FootballPlayer, PastSeason, Ranked, Scouted, Tallied } from "@epl/core";
 import { unstable_cache } from "next/cache";
@@ -27,6 +28,7 @@ import {
   intelSetPieces,
   intelShots,
   intelSquads,
+  intelStats,
   lineFloors,
   lineSeasons,
 } from "../../intel";
@@ -87,6 +89,7 @@ const division = cache(async (): Promise<{ rated: Scouted[]; tallied: Tallied[] 
     tallied: players.map((player) => ({
       player,
       shots: intelShots.size === 0 ? null : shotLine(intelShots.get(player.code) ?? [], created.get(player.code) ?? 0),
+      keyPasses: stat(intelStats.get(player.code), "keyPasses"),
     })),
   };
 });
@@ -95,7 +98,7 @@ const division = cache(async (): Promise<{ rated: Scouted[]; tallied: Tallied[] 
 async function measured(player: FootballPlayer) {
   const { tallied } = await division();
   const group = groupOf(player.code);
-  const man = tallied.find((other) => other.player.code === player.code) ?? { player, shots: null };
+  const man = tallied.find((other) => other.player.code === player.code) ?? { player, shots: null, keyPasses: null };
   const cohort = group === null ? tallied : tallied.filter((other) => groupOf(other.player.code) === group);
   return { man, cohort, group, keeper: isKeeper(player.code) };
 }
