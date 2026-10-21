@@ -11,8 +11,11 @@ import Yours from "./Yours";
 // One Premier League match as Championship Manager's results row (Craig, 5 Sep 2026).
 // Its count opens `MatchList` under the row: Fixtures shows one round, so one read of its lines serves every row.
 
+/** Row and count side by side from 390; under it the count drops beneath the row, or the club codes go to 0px at 320. */
+const PAIR = { pair: "flex flex-col min-[390px]:flex-row min-[390px]:items-stretch", row: "min-w-0 min-[390px]:flex-1" };
+
 /** The count's column with room for its chevron, held on every row of a reader's round so the colons stay in line. */
-const COUNT = "numeric flex w-16 shrink-0 items-center justify-end pr-1.5 text-2xs font-semibold text-accent";
+const COUNT = "numeric flex min-[390px]:w-16 shrink-0 items-center justify-end pr-1.5 text-2xs font-semibold text-accent";
 
 export default function Match({
   fixture,
@@ -51,17 +54,17 @@ export default function Match({
   );
   if (yours === undefined) return row;
 
-  // The accent edge on a match with his men, a clear one on the rest, so every row keeps the column.
+  // The accent edge on a match with his men, a clear one on the rest, so every row keeps the column; in the gutter under 390.
   return (
-    <div className={yoursEdge(yours > 0)}>
+    <div className={`${yoursEdge(yours > 0)} max-[389px]:-ml-1`}>
       {yours > 0 && men !== undefined ? (
-        <Yours row={row} count={yours} className={COUNT}>
+        <Yours row={row} count={yours} layout={PAIR} className={COUNT}>
           {men}
         </Yours>
       ) : (
-        <div className="flex items-stretch">
-          <div className="min-w-0 flex-1">{row}</div>
-          <span className={COUNT}>{yours > 0 ? `${yours} yours` : null}</span>
+        <div className={PAIR.pair}>
+          <div className={PAIR.row}>{row}</div>
+          <span className={yours > 0 ? COUNT : `${COUNT} max-[389px]:hidden`}>{yours > 0 ? `${yours} yours` : null}</span>
         </div>
       )}
     </div>

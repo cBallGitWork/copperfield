@@ -7,11 +7,14 @@ import { type ReactNode, useId, useState } from "react";
 export default function Yours({
   row,
   count,
+  layout,
   className,
   children,
 }: {
   row: ReactNode;
   count: number;
+  /** The row and count's wrapper and the row's cell, as the rows without a button draw them. */
+  layout: { pair: string; row: string };
   /** The count's column, as the rows without one hold it. */
   className: string;
   children: ReactNode;
@@ -20,8 +23,8 @@ export default function Yours({
   const id = useId();
   return (
     <>
-      <div className="flex items-stretch">
-        <div className="min-w-0 flex-1">{row}</div>
+      <div className={layout.pair}>
+        <div className={layout.row}>{row}</div>
         {/* A sibling of the row's link, never inside it, so neither tap swallows the other. */}
         <button
           type="button"
