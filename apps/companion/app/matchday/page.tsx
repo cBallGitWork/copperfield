@@ -114,8 +114,12 @@ export default async function MatchdayPage({
     </>
   );
   // Top stats docks its picker on the rail, so its page is a viewport tall; the other views end where they do.
-  return leading ? <FootFrame className="gap-4!">{page}</FootFrame> : <div className="flex flex-col gap-4">{page}</div>;
+  return leading ? <FootFrame className={ON_THE_RAIL}>{page}</FootFrame> : <div className="flex flex-col gap-4">{page}</div>;
 }
+
+/** A phone's frame down to the rail's top, taking back the air `<main>` leaves under the page, so the picker sits on it. */
+const ON_THE_RAIL =
+  "gap-4! min-h-[calc(100dvh-var(--safe-top)-var(--page-top)-var(--thumbrail))]! mb-[calc(var(--thumbrail)-var(--safe-bottom)-var(--page-foot))] lg:mb-0 lg:min-h-0!";
 
 /** The build-up's line: whole minutes to the first kickoff, rounded up, then the lineup lock while it is ahead, as a
  *  way to his team, whose tab Live has taken on a phone. */
