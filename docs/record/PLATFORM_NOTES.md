@@ -50,7 +50,7 @@ capture season-specific tradeoffs.
 ## One table spec — decided 21 Oct 2026
 
 Craig, 21 Oct 2026: *"seven table styles on one page: six different row heights, three header styles and three
-figure sizes"*. The spec lives in `app/desk.ts` and DESIGN §6 ("One table"): a 24px head plate in `2xs` bold caps
+figure sizes"*. The spec lives in `app/desk.ts` and DESIGN §6 ("One table"): a 24px head plate in `3xs` bold caps (9px, the size it had; the complaint was the plate's height)
 (`PLATE_FRAME`, reversing 2 Oct's 28), read-only rows 24/28 (`READ_ROW`), tap rows 44/28 (`TAP_ROW`), PRODUCT's
 36px list kept (`TIGHT_TAP_ROW`), one figure size (`ROW_FIGURE`). Width stays an explicit `fit` at the call site,
 not a column count: a board whose name takes the slack (SquadTable, LeaderBoard) cannot be told from a short record

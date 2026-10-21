@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import Link from "@/app/components/shell/Link";
-import { HEAD_CELL, PLATE_FRAME, SMALL_CAPS, heldPlate } from "@/app/desk";
+import { HEAD_CELL, MINOR_CAPS, PLATE_FRAME, heldPlate } from "@/app/desk";
 
-// The one head strip every table in the app prints: `HeadRow`'s small caps, 24px bevelled plates, a centred word over
+// The one head strip every table in the app prints: `HeadRow`'s minor caps, 24px bevelled plates, a centred word over
 // a figure and a bare cell over a name. The column LISTS stay with their tables; the mechanics live here.
 
-/** The head row; its cells inherit `SMALL_CAPS`. */
+/** The head row; its cells inherit `MINOR_CAPS`, the 9px that keeps a narrow board from scrolling. */
 export function HeadRow({ children }: { children: ReactNode }) {
-  return <tr className={SMALL_CAPS}>{children}</tr>;
+  return <tr className={MINOR_CAPS}>{children}</tr>;
 }
 
 /** A head's or tab's word in capitals, unless a lower-case prefix runs into a capital: `xG` is not `XG`. */

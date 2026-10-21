@@ -872,7 +872,7 @@ apart silently.
 | A thumb-rail tab | 56 + inset | — | `xs`/600 under a 24px glyph | `.cm-thumbrail` |
 | **A row of a list**, or a table row that is one tap target | **44** | **28** | `sm`/`lg:base` name in the CHROME face, `sm` figures at both widths | `.cm-row` + `TAP_ROW` (`ROW_LINK`) + `ROW_NAME` + `FIGURE` |
 | **A table row nobody taps** | **24** | **28** | `sm` figures | `READ_ROW` on the `<tr>` |
-| A column head over any table or board, and a caption plate | 24 | 24 | `2xs` bold caps (`HeadRow` = `SMALL_CAPS`) | `PLATE_FRAME` (`h-6`): `TableHeads.PLATE` through `SortHead` or `PlateHead`; `HEAD_PLATE` |
+| A column head over any table or board, and a caption plate | 24 | 24 | `3xs` bold caps (`HeadRow` = `MINOR_CAPS`) | `PLATE_FRAME` (`h-6`): `TableHeads.PLATE` through `SortHead` or `PlateHead`; `HEAD_PLATE` |
 | A figure in a row | — | — | `sm`, `.numeric` | `ROW_FIGURE`, worn by `FIGURE_CELL` and `FIGURE` (bold), centred on every table |
 | A label that is furniture | — | — | `2xs` bold caps | `LABEL` |
 
