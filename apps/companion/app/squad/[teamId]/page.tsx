@@ -17,6 +17,8 @@ import { identify } from "./team";
 import { squadView } from "./squadView";
 import { commissionerSession } from "./saving";
 import { teamTitle } from "./title";
+import { teamOptions } from "./teamOptions";
+import { leagueTable } from "../../standings";
 import { autoSubbed } from "../../components/league/autoSubbed";
 
 // One manager's squad, laid out on a pitch. The screen the league opens on a
@@ -40,7 +42,9 @@ export default async function TeamPage({
   const [{ teamId: slug }, { gw }] = await Promise.all([params, searchParams]);
   // No team yet: the index and its sign-in in place, so the Team tab that led here stays lit.
   if (slug === OWN && (await readerTeamId()) === null) return <SquadIndex />;
-  const { team, league, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = await squadView(slug, gw);
+  // The table orders the team picker, read beside the squad rather than after it.
+  const [view, table] = await Promise.all([squadView(slug, gw), leagueTable()]);
+  const { team, league, mine, planning, open, standing, weeks, benchRanks, locks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = view;
   // Fantrax's period selector, on every branch: an earlier week shows its scores, a later one its opponents.
   const picker =
     weeks === null ? null : (
@@ -59,7 +63,7 @@ export default async function TeamPage({
       name="team"
       label="Team"
       value={team.teamId}
-      options={league.map((entry) => ({ value: entry.teamId, label: entry.teamName }))}
+      options={teamOptions(league, "unavailable" in table ? null : table)}
       action={SQUAD}
       fill
     >

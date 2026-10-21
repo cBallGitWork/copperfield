@@ -85,7 +85,8 @@ formation; List has it. A change made with an unsaved lineup goes through `Leave
 ## The team picker
 
 21 Oct 2026: *"a dropdown where you select a different draft team. Quick access"*. A second `QuerySelect`
-(`team`, every rostered team by name) opens another squad **at the week on screen**: it submits to `/squad`,
+(`team`, every rostered team in table order, each led by its place as the table prints it, `1st` to `10th`
+and `=3rd` for a shared place; `teamOptions`, tested; Fantrax's order, unplaced, when the table does not answer) opens another squad **at the week on screen**: it submits to `/squad`,
 whose `teamPick` (`squad/routes.ts`, tested) redirects to `/squad/[teamId]?gw=`, so it works with no script.
 On a rival before his lock it fills the gap left of the week (`fill`); where the Pitch/List toggle shares the
 week's row (the planner, any sheet) it takes a line of its own above. Above `lg` it sits at the right.
