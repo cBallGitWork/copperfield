@@ -42,6 +42,12 @@ Where a section below disagrees with this one, this one is current.
   `fantasy`. In the real league that is `FPts FP/G Min GP G AT CS DC DC+ DCP GA GKP PKS YC RC PKM OG`, which fits
   a 1440 desk (1100 of 1100) and a 1280 (1098 of 1098), where 27 heads had run 38px past both. A league whose scoring
   did not arrive keeps every count here. Players has no stat plates and no Per 90.
+- **A position chip draws only what that position scores** (`paidFor` in `columns.ts` over core's `paidAt`, Craig
+  21 Oct 2026): a count is drawn under the pressed chips when the league's own `getLeagueInfo` price is above nought
+  for one of them, so in the real league `GK` drops `DC DC+ DCP`, `DEF` drops `DC+ GKP PKS`, `MID` and `FWD` drop
+  `DC GA GKP PKS`, and `FWD` drops `CS` (priced 0). Several chips draw the union; no chip draws every column, as
+  before. `DCP` follows `DC` and `DC+`; a figure no category prices (FPts, FP/G, GP) is drawn under every chip, a price
+  that cannot be read keeps its column, and the sorted column stays. The Key lists what is drawn.
 - **Players rests on the free men** (`boardChange.statusesShown`): an absent `status` is FA and WW, and `status=all`
   is everyone, the only way the address bar can say it now. A typed search ignores the resting choice and looks
   through everyone, so "who holds Saka" finds him, as Fantrax's does; a status the reader pressed still applies.
@@ -51,7 +57,7 @@ Where a section below disagrees with this one, this one is current.
 - **The row under a thumb is two fixed lines**: the search and Filter, then `GK DEF MID FWD` and `Free Owned`
   (4 × 44 + 50 + 57 and gaps: it fits 346 at 390 and 316 at 360; at 320 the status pair takes a third line). Nothing
   on it moves when pressed, so the 16 Oct "row jumps 50px" is gone. **On a desk it is one row**: search, positions,
-  Free and Owned, Per 90 from `xl`, and Filter at the end (Adv Stats' `Key` before it). Adv Stats' plates dock at the
+  Free and Owned, Per 90 from `xl`, and Filter at the end (`Key` before it, on both boards). Adv Stats' plates dock at the
   screen's foot since 20 Oct 2026 (below).
 - **Position is on the row at every width** as grey plates, a union as before, and left the sheet: nothing is in two
   visible places. *Forwards in the bin* is **one tap** (FWD) at 390, from five (FA, WW, Filter, FWD, Show); Fantrax's
@@ -97,8 +103,9 @@ current. It reverses *"they don't need a glossary"* (`docs/rules/PRODUCT.md`, Us
   badge below `xl` counts Per 90 alone, and not on a plate where it stands down (`ratedOn`). The four end at 309 of 338 at 360 with Chances (UX review, 19 Oct 2026), so
   Creating, a capital longer, holds one line there too.
 - **`Key` sits beside Filter** (`players/ColumnKey`, the house dialog, Back shuts it): every head on the plate,
-  its name and one line on what it counts, in plain words and never a source. Players keeps its `Key` under the
-  board. Every line is one shape, "Title. What it counts." (attributes "Acceleration. 1–20, from sprints per 90, this
+  its name and one line on what it counts, in plain words and never a source. Players has it there too since
+  21 Oct 2026 (Craig), reversing 19 Oct's "Players keeps its `Key` under the board": seven of its 17 heads do not read
+  cold, and under the board it sat ~1,450px down past "Show 30 more". Every line is one shape, "Title. What it counts." (attributes "Acceleration. 1–20, from sprints per 90, this
   season."); an expected figure's head keeps its lower-case x (`TableHeads.headWord`), as the Key prints it.
 - **Not held, so not drawn**: touches in the box (Opta's per-man match read has it, one request per man per match;
   a season total is one request per man, a new cron; the touch cloud's box count ran 25 to 60% over Opta's on three
@@ -136,7 +143,9 @@ above does, that one is.
   rostering him, went on 12 Oct 2026 under DESIGN §7). `DC` and `DC+`
   are the league's DefCon counts, Fantrax's `DFP` and `DFP3` (Craig, 6 Oct 2026: *"data page needs our dfp and dfp3
   stats"*); `DCP` is our DefCon points beside them, in cyan and never marked, drawn only where the league prices DefCon
-  (Craig, 8 Oct 2026). Six figures sit
+  (Craig, 8 Oct 2026). **`FPts` prints in the same reading cyan and is never lit** (`PoolColumn.cyan`, Craig 21 Oct
+  2026, as on the Profile since #80): it was lit on 13 of 13 rows of his FREE board. It still sorts and sums as
+  Fantrax's count; only its ink changed. Six figures sit
   beside a name at 390 (FPts to AT), five at 360, since the lead widened for the name on 1 Oct 2026 (it was
   seven and six). **Opp is gone** at both widths; the next fixture is the planner's question.
 - **Under a thumb each man is two lines** (Craig, 16 Oct 2026: *"Did you also see the side scrolling on Fantrax,

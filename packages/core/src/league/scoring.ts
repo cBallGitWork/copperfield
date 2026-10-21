@@ -68,11 +68,29 @@ export function pointsFor(rules: ScoringRules, category: string, position: strin
 
 /** One category's price at one position; null when the rules do not cover it. */
 export function priceOf(rules: ScoringRules, category: string, position: string): Price | null {
+  return entryOf(rules, category, position) ?? null;
+}
+
+/** The wire's entry for a slot: undefined where it priced none, null where it priced one we cannot read. */
+function entryOf(rules: ScoringRules, category: string, position: string): Price | null | undefined {
   const goalie = rules.goaliePosition !== null && position === rules.goaliePosition;
   const row = (goalie ? rules.goalie : rules.outfield)[category];
-  if (!row) return null;
+  if (!row) return undefined;
   // A listed position stops here even when unreadable: `Default` is somebody else's rule.
-  return position in row ? row[position] : (row[DEFAULT_POSITION] ?? null);
+  return position in row ? row[position] : row[DEFAULT_POSITION];
+}
+
+/** Whether any of these positions is paid for any of these categories: a price or band above nought, or one unread.
+ *  True for no position, and for categories the league prices nowhere: those are not the scoring's to hide. */
+export function paidAt(rules: ScoringRules, categories: readonly string[], positions: readonly string[]): boolean {
+  if (positions.length === 0 || !categories.some((c) => c in rules.goalie || c in rules.outfield)) return true;
+  return positions.some((position) => categories.some((category) => pays(entryOf(rules, category, position))));
+}
+
+function pays(entry: Price | null | undefined): boolean {
+  if (entry === undefined) return false;
+  if (entry === null) return true;
+  return typeof entry === "number" ? entry !== 0 : entry.bands.some((band) => band.points !== 0);
 }
 
 /** The fewest of a category's count in one match that a position is paid for; null when it is never paid. */

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import real from "./fantrax/__fixtures__/leagueInfoScoringReal.json";
 import { mapScoringRules, type RawScoringSystem } from "./fantrax/scoring";
-import { firstPaid, keeperRung, returnPoints } from "./scoring";
+import { firstPaid, keeperRung, paidAt, returnPoints } from "./scoring";
 
 const rules = mapScoringRules(real.scoringSystem as RawScoringSystem)!;
 
@@ -33,5 +33,40 @@ describe("firstPaid and keeperRung", () => {
   it("pays a keeper from his third action, one point in every three", () => {
     expect(keeperRung(rules)).toBe(3);
     expect(keeperRung({ ...rules, goaliePosition: null })).toBeNull();
+  });
+});
+
+describe("paidAt", () => {
+  it("draws a category only for a position the league prices above nought", () => {
+    expect(paidAt(rules, ["DFP"], ["D"])).toBe(true);
+    expect(paidAt(rules, ["DFP"], ["M"])).toBe(false);
+    expect(paidAt(rules, ["DFP3"], ["D"])).toBe(false);
+    expect(paidAt(rules, ["DFP3"], ["F"])).toBe(true);
+    expect(paidAt(rules, ["CS"], ["M"])).toBe(true);
+    expect(paidAt(rules, ["CS"], ["F"])).toBe(false);
+  });
+
+  it("keeps the keeper's categories to the keeper, and DefCon off him", () => {
+    expect(paidAt(rules, ["GKP"], ["G"])).toBe(true);
+    expect(paidAt(rules, ["PKS"], ["D"])).toBe(false);
+    expect(paidAt(rules, ["DFP", "DFP3"], ["G"])).toBe(false);
+    expect(paidAt(rules, ["GA", "GAO"], ["D"])).toBe(true);
+    expect(paidAt(rules, ["GA", "GAO"], ["M"])).toBe(false);
+  });
+
+  it("draws the union over several positions, and everything over none", () => {
+    expect(paidAt(rules, ["DFP"], ["M", "D"])).toBe(true);
+    expect(paidAt(rules, ["GKP"], ["D", "M", "F"])).toBe(false);
+    expect(paidAt(rules, ["GKP"], [])).toBe(true);
+  });
+
+  it("leaves a category the league never priced to the caller, and hides one priced nought everywhere", () => {
+    expect(paidAt(rules, ["Sv"], ["D"])).toBe(true);
+    expect(paidAt(rules, ["Pen"], ["D"])).toBe(false);
+  });
+
+  it("keeps a price it cannot read rather than hide a scored figure", () => {
+    const unread = { ...rules, outfield: { ...rules.outfield, X: { Default: null } } };
+    expect(paidAt(unread, ["X"], ["M"])).toBe(true);
   });
 });

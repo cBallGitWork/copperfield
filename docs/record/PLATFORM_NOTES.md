@@ -73,6 +73,18 @@ and `docs/ui/players.md` carry the detail.
   keepers lose Influence; the scale is twenty equal slices. Position-group cohorts were measured and rejected:
   Haaland still read Anticipation 2 / Work Rate 2 among forwards.
 
+## Craig's calls from the Players board review — decided 21 Oct 2026
+
+Craig approved three calls from the board's second review (P-1, P-3, P-5/P-6). `docs/ui/players.md` carries the detail.
+
+- **Players' `Key` sits beside Filter, as on Adv Stats**: reverses 19 Oct's "Players keeps its `Key` under the board",
+  whose reason was "few heads". It has 17 in the real league, seven that do not read cold, and the Key sat ~1,450px down.
+- **Board FPts prints in the reading cyan and is never lit** (`PoolColumn.cyan`), as on the Profile since #80; reverses
+  24 Sep's FPts standouts. Cyan here is the reading ink on Fantrax's own count, not "ours": the head stays `FPts`.
+- **A position chip draws only what that position scores**, from the league's own `getLeagueInfo` prices (core
+  `paidAt`, a price or band above nought; 22 of 22 real category rows priced, probe 21 Oct). All is unchanged; several
+  chips draw the union; `DCP` follows `DC`/`DC+`; a category the league prices nowhere is not the chip's to hide.
+
 ## Compare is a tab on the player page — decided 21 Oct 2026
 
 Craig, 21 Oct 2026: *"maybe we put compare in the player section too"*. This reverses "Compare is an action on the man

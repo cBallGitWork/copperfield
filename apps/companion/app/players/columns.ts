@@ -15,9 +15,11 @@ import {
   RED_CARDS,
   SAVES,
   YELLOW_CARDS,
+  paidAt,
   wordsFor,
   type FantraxCategory,
   type FigureKind,
+  type ScoringRules,
 } from "@epl/core";
 import type { PoolRow } from "./pool";
 import type { PoolGroup } from "./groups";
@@ -59,6 +61,10 @@ export interface PoolColumn {
   places?: FigureKind;
   /** Ours rather than recorded, in the derived reading's ink and never marked. */
   derived?: true;
+  /** Recorded, but printed in the reading cyan and never marked: his league points (Craig, 21 Oct 2026). */
+  cyan?: true;
+  /** The categories whose prices say which positions it is drawn for, where not `scores` and `also`. */
+  pays?: readonly FantraxCategory[];
   /** The league category it counts: Players draws it only where getLeagueInfo says the league scores it. */
   scores?: FantraxCategory;
   /** A second category the same column reads, under the other half's name: an outfielder's GAO beside a keeper's GA. */
@@ -113,7 +119,7 @@ export const COLUMNS: PoolColumn[] = [
     label: "FPts",
     title: "Fantasy points, under this league's scoring",
     group: "scoring",
-    mark: "high",
+    cyan: true,
     rate: true,
     ascending: false,
     fantasy: true,
@@ -150,6 +156,7 @@ export const COLUMNS: PoolColumn[] = [
     rate: true,
     ascending: false,
     fantasy: true,
+    pays: DEFCON,
     value: (_row, stats) => stats?.[DEFCON_POINTS] ?? null,
     stat: DEFCON_POINTS,
   },
@@ -181,6 +188,23 @@ export function ratedOn(columns: readonly PoolColumn[], per90: boolean): boolean
 /** The heads as drawn: each rated one marked /90 under Per 90, since 0.82 could also be a season's total. */
 export function headedFor(columns: readonly PoolColumn[], rated: boolean | null): PoolColumn[] {
   return columns.map((column) => (rated === true && column.rate === true ? { ...column, label: `${column.label}/90` } : column));
+}
+
+/** The columns the chosen positions score, off the league's own prices: all of them for no chip or unread prices.
+ *  The sorted column stays, so a chip never hides the order or `aria-sort`. */
+export function paidFor(
+  columns: readonly PoolColumn[],
+  rules: ScoringRules | null,
+  positions: readonly string[],
+  sorted?: string,
+): readonly PoolColumn[] {
+  if (rules === null) return columns;
+  return columns.filter((column) => column.key === sorted || paidAt(rules, categoriesOf(column).map((category) => category.short), positions));
+}
+
+/** The categories a column is drawn by; none for a figure no category prices, which every chip keeps. */
+function categoriesOf(column: PoolColumn): readonly FantraxCategory[] {
+  return column.pays ?? [column.scores, column.also].filter((category) => category !== undefined);
 }
 
 export function columnFor(key: string | undefined): PoolColumn | undefined {

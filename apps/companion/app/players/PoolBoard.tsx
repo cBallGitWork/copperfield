@@ -1,4 +1,3 @@
-import BoardKey from "../components/league/BoardKey";
 import Link from "@/app/components/shell/Link";
 import ScoutShell, { POOL_ROWS } from "./Shell";
 import PlayerTable from "./PlayerTable";
@@ -16,12 +15,13 @@ import {
 } from "./query";
 import { ALL_ROWS, litRows, nextStep, pageRows } from "./pageRows";
 import { wayOut } from "./wayOut";
+import { chosen } from "./boardChange";
 import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
 import { boardView, onPlate, type BoardName } from "./views";
 import { leagueInfo } from "../round";
 import { figureOf } from "./figure";
 import { underFloor } from "./floors";
-import { DEFCON_POINTS, headedFor, ratedOn } from "./columns";
+import { DEFCON_POINTS, headedFor, paidFor, ratedOn } from "./columns";
 import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
 import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
@@ -104,7 +104,8 @@ export default async function PoolBoard({
   const step = nextStep(shown.length, query);
   const way = wayOut(query, view.route);
   const sorted = activeSort(query, view).column.key;
-  const drawn = columnsIn(view.columns, group, sorted, scored);
+  // A position chip draws what that position scores, off the league's own prices (Craig, 21 Oct 2026).
+  const drawn = paidFor(columnsIn(view.columns, group, sorted, scored), info?.scoring ?? null, chosen(query.pos), sorted);
   const rated = players ? null : ratedOn(drawn, isPer90(query));
   const columns = headedFor(drawn, rated);
   // Plain data, since the key is a client component: a column carries functions.
@@ -157,7 +158,7 @@ export default async function PoolBoard({
         rated={rated}
         shown={shown.length}
         scored={scored}
-        glossary={players ? null : <ColumnKey entries={heads} className={`${PRESSABLE} min-w-11`} />}
+        glossary={<ColumnKey entries={heads} className={`${PRESSABLE} min-w-11`} />}
       />
 
       {/* A column headed FPts that silently became a projection would be the confident wrong answer (DESIGN §7). */}
@@ -203,8 +204,6 @@ export default async function PoolBoard({
           </p>
         </div>
       )}
-      {/* Adv Stats' key is a tap away beside Filter; Players' few heads keep theirs under the board. */}
-      {shown.length === 0 || !players ? null : <BoardKey entries={heads} />}
 
       {/* The stats league's file is daily, so a gameweek in play runs ahead of it. */}
       {shown.length > 0 && columns.some((column) => DAILY_COLUMNS.includes(column)) ? (
