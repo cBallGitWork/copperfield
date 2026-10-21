@@ -127,7 +127,7 @@ its own proportions instead:
 |---|---|---|
 | A repeating **row** of a list | 28px | `.cm-row`, `desk.css` |
 | A **control** — button, input, tab, way out | 36px | `lg:min-h-9` |
-| A **column head** | 28px, with its strip | see the exception below |
+| A **column head** | 24px, with its strip | see the exception below |
 
 Craig's call, and the phone keeps 44 at every size. The target is 44 and a grey plate paints 32 of it
 (DESIGN §6): what a thumb can hit and what the eye sees are two measurements, and only the first is the floor. One rule rather than a
@@ -138,8 +138,8 @@ Championship Manager's own 18.
 
 **Three exceptions, all deliberate and all measured.** A **column head** belongs
 to the head strip it is cut from and is as wide as its column, so it is a short
-wide target rather than a small one; it has been 28px since the tables were built
-and no document had measured it until now. An **inline text link inside a
+wide target rather than a small one; it was 28px from the tables' start and is 24 since 21 Oct 2026 (DESIGN §6,
+"One table"). A table row that is read and never tapped is no target at all, so it is 24px (`READ_ROW`). An **inline text link inside a
 sentence** — "or show all 638" — is prose and never was a control. And **the match
 screens' rows are 36px under a thumb** (Craig, 23 Sep 2026: *"the mobile rows are
 too big"*, *"too big of a gap between a goal scorer and assister"*): the team

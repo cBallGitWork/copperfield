@@ -870,13 +870,13 @@ apart silently.
 | **A control** — button, select, input, a dialog's way out | **44** | **36** | `sm` | `BUTTON` `SELECT` `SUBMIT` |
 | **A tab** — one plate of a strip | **44**, painting 36 | **56** | `2xs`–`sm` | `.cm-tab` + `TAB` |
 | A thumb-rail tab | 56 + inset | — | `xs`/600 under a 24px glyph | `.cm-thumbrail` |
-| **A row of a list** | **44** | **28** | `sm`/`lg:base` name in the CHROME face, `sm` figures at both widths | `.cm-row` + `ROW_LINK` + `ROW_NAME` + `FIGURE` |
-| A column head over any table or board | 28 | 28 | `3xs` caps (`HeadRow`) | `PLATE` (`h-7`), through `SortHead` or `PlateHead` |
-| A caption plate: a group of columns, a block, a card's strip | 24 | 24 | `2xs` | `HEAD_PLATE` (`h-6`) |
+| **A row of a list**, or a table row that is one tap target | **44** | **28** | `sm`/`lg:base` name in the CHROME face, `sm` figures at both widths | `.cm-row` + `TAP_ROW` (`ROW_LINK`) + `ROW_NAME` + `FIGURE` |
+| **A table row nobody taps** | **24** | **28** | `sm` figures | `READ_ROW` on the `<tr>` |
+| A column head over any table or board, and a caption plate | 24 | 24 | `2xs` bold caps (`HeadRow` = `SMALL_CAPS`) | `PLATE_FRAME` (`h-6`): `TableHeads.PLATE` through `SortHead` or `PlateHead`; `HEAD_PLATE` |
 | A figure in a row | — | — | `sm`, `.numeric` | `ROW_FIGURE`, worn by `FIGURE_CELL` and `FIGURE` (bold), centred on every table |
 | A label that is furniture | — | — | `2xs` bold caps | `LABEL` |
 
-**Five recorded exceptions, and what earns one.** `prem/match/[id]/TeamSheet` sets
+**Four recorded exceptions, and what earns one.** `prem/match/[id]/TeamSheet` sets
 its names and figures a step above the row default — `base`/`lg:text-lg` against
 `sm`/`lg:base` — on Craig's call of 10 Sep 2026 (*"the player text could be much
 bigger on this screen too like CM… data much bigger too"*). The argument is that
@@ -903,17 +903,17 @@ the four.** The complaint was about a desk, the arithmetic only argues for a
 desk, and the phone's budget above the first row of data is the thing that band
 is spent out of.
 
-`players/[fantraxId]/Moves`, a player's Business board, is the third (Craig, 1 Oct 2026: *"make text bigger in
-business"*): its whole content is one man's handful of moves in four columns, so it takes TeamSheet's step,
-`base`/`lg:text-lg`, on the date's index block, the move and both sides.
+~~`players/[fantraxId]/Moves`, a player's Business board, was the third~~ (Craig, 1 Oct 2026: *"make text bigger
+in business"*). **Undone 21 Oct 2026**: it was the third figure size on a page Craig counted *"seven table styles on
+one page: six different row heights, three header styles and three figure sizes"*, so it is `sm` like every table.
 
-`components/league/SquadRow`'s points are the fourth (Craig, 6 Oct 2026: *"make fpts row bigger, harder to read"*),
+`components/league/SquadRow`'s points are the third (Craig, 6 Oct 2026: *"make fpts row bigger, harder to read"*),
 and the figure alone: `base`/`lg:text-lg` against a `ROW_NAME` that stays put. Every squad list a manager reads
 fifteen of carries one figure per man, and since the season grid came off a rival's squad (the same day) that list
 is the whole screen. The figure is the board's one value, so it is amber rather than the accent, which said
 "yours" on every rival's squad.
 
-`players/analysis`, Compare, is the fifth, recorded 8 Oct 2026 (#144) for a step it had taken since 24 Sep (#66)
+`players/analysis`, Compare, is the fourth, recorded 8 Oct 2026 (#144) for a step it had taken since 24 Sep (#66)
 without saying so: its ledgers (`Figures`, `Measures`) are two men's figures either side of one label, a dozen rows
 and nothing else, so they take TeamSheet's step, `base`/`lg:text-lg`. #144 had read it as cells falling back to 16px
 for want of `BOARD`; it is a choice, and the screen can say what earns it.
@@ -974,9 +974,15 @@ carrying an 11px figure is a row with 33px of nothing in it, and 11px of
 a name already set at `sm`. Measured after: a `/league` row at 390 is 44.5px with
 every figure in it at 14px, and the table still does not scroll sideways.
 
-*The head-plate pair — 28 over a table, 24 over a stats board — was a disagreement, and it is settled at 28*
-*(2 Oct 2026, Craig: "our tables are still all over the place, different settings"): every table's head row is*
-*`HeadRow` and every plate in it `PLATE`'s 28px, the pool's compact heads included. 24 is left to caption plates.*
+**One table, 21 Oct 2026** (Craig: *"seven table styles on one page: six different row heights, three header
+styles and three figure sizes"*). The head plate is **24px** at both widths, `2xs` bold caps, one frame
+(`PLATE_FRAME`) shared with every caption plate; it had been settled at 28 on 2 Oct, which stood a 28px head over
+19px rows on every read-only table. A row nobody taps is **24** under a thumb and **28** on a desk (`READ_ROW`); a
+row that is one tap target is **44** and **28** (`TAP_ROW`), PRODUCT's 36px list (`TIGHT_TAP_ROW`) aside. A two-line
+pool row is one target: a 24px name line over 20px of figures, the name's link hanging over both. Every figure is
+`ROW_FIGURE`, `FIGURE_CELL_TIGHT` only tightening the padding of a board of a dozen columns or more. A table fills
+its panel unless its call site says `fit`: a board whose name takes the slack cannot be told from a short record
+by its column count. A one-row table is a label and figure line (Set pieces). Only many-column boards scroll.
 
 ## 7. Grammar that outranks the look
 
@@ -999,7 +1005,8 @@ carried — `docs/rules/PRODUCT.md`'s accessibility section.
   `apps/companion/app/noSourceNames.test.ts` holds it.
 - **Taps are `min-h-11`** — but that is a rule about a THUMB. Above `lg` the
   desk keeps its own proportions: a repeating ROW is 28px (`.cm-row` in
-  `desk.css`), a CONTROL 36 (`lg:min-h-9`), a column head 28 with its strip.
+  `desk.css`), a CONTROL 36 (`lg:min-h-9`), a column head 24 with its strip;
+  a table row nobody taps is 24 under a thumb (`READ_ROW`).
   `docs/rules/PRODUCT.md`'s accessibility section is the parent and carries the three
   exceptions; `tools/ui/tapfit.mjs` measures it.
 - The lineup gate, the alphabetical gated order, and "no active/reserve leak"

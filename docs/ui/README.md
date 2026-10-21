@@ -128,5 +128,6 @@ Break these and the app is wrong, however good it looks.
    deliberate exception at `min-h-9` — on the head-to-head board and on a locked
    squad, the two screens that still draw an eleven two ways. Above `lg` the desk keeps its own
    proportions, because the rule is about a thumb and there is no thumb there:
-   a row is 28px (`.cm-row`), a control 36, a column head 28 with its strip.
+   a row is 28px (`.cm-row`), a control 36, a column head 24 with its strip; a table row nobody taps
+   is 24 under a thumb and 28 on a desk (`READ_ROW`).
    docs/rules/PRODUCT.md carries why and `tools/ui/tapfit.mjs` measures it.
