@@ -3,7 +3,7 @@ import type { Pedigree } from "@epl/core";
 import { DASH, fantraxDay } from "@epl/core";
 import Section from "../../components/shell/Section";
 import Absent from "@/app/components/shell/Absent";
-import { ROW_NAME } from "@/app/desk";
+import { READ_LINE, ROW_NAME } from "@/app/desk";
 import { Value, draftPick } from "./Pedigree";
 import type { Arrival, PlayerMove } from "./dossier";
 
@@ -67,7 +67,7 @@ function dated(what: string, move: PlayerMove): string {
 /** One of CM's label-and-value lines: the label quiet, the value loud. */
 function Fact({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="flex min-h-6 items-baseline justify-between gap-3 border-b border-bg py-0.5 lg:min-h-7 lg:flex-col lg:justify-start lg:gap-0.5 lg:border-b-0">
+    <div className={`flex items-baseline justify-between gap-3 border-b border-bg py-0.5 lg:flex-col lg:justify-start lg:gap-0.5 lg:border-b-0 ${READ_LINE}`}>
       <dt className="text-sm text-muted">{label}</dt>
       <dd className={`${ROW_NAME} text-ink`}>{children ?? <Absent />}</dd>
     </div>

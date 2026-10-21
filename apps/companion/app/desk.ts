@@ -70,6 +70,9 @@ export const BOARD_FIT = `${BOARD} lg:w-auto`;
 /** A table row nobody taps: 24px under a thumb, 28 on a desk. On the `<tr>`, whose height is a floor. */
 export const READ_ROW = "h-6 lg:h-7";
 
+/** `READ_ROW`'s heights as a floor, for a row drawn outside a table: a label and value line, a ranked block. */
+export const READ_LINE = "min-h-6 lg:min-h-7";
+
 /** The row that is one tap target, on the link or button filling its cell: the thumb's 44, `.cm-row`'s 28 from `lg`. */
 export const TAP_ROW = "cm-row flex min-h-11 items-center";
 

@@ -84,7 +84,7 @@ const RULE = "border-l border-line";
 const NAME_LINE = "h-6 lg:hidden border-b-0";
 
 /** The name line's face, as wide as the scroller (`@container` on it) and held at its left edge while the board
- *  scrolls under it; 24px tall, so a `LEAD_LINE` inside hangs over the figures and the pair is one 44px target. */
+ *  scrolls under it; 24px tall, so the 44px link inside (`players/Cell`) hangs over the figures and the pair is one target. */
 const LINE_FACE = "sticky left-0 h-6 w-[100cqw]";
 
 /** The figures under a name line: 20px, so the pair is 44 under a thumb. */
