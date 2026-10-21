@@ -60,7 +60,7 @@ export function Goal({
             key={code}
             player={cards.get(code)}
             // On its row's top edge, under the scorer; the rest of its 36px falls below, before the next goal.
-            className="flex min-h-9 w-full items-baseline gap-1.5 pl-3 text-left hover:underline lg:pl-4"
+            className="flex min-h-9 w-full items-baseline gap-1.5 pl-3 text-left lg:pl-4"
           >
             <span className={`${SMALL_CAPS} shrink-0 text-faint`}>A</span>
             <span className={`${NAME_BLOCK} font-chrome text-sm font-bold text-muted lg:text-xl`}>
@@ -107,7 +107,7 @@ export function Man({
     <MaybeCard
       player={card}
       // A phone tops the glyph on the name's first line (a baseline row set the ball four pixels low); a desk centres it.
-      className="group flex min-h-9 w-full gap-1.5 text-left max-lg:items-start max-lg:py-1 lg:min-h-11 lg:items-center lg:gap-3"
+      className="flex min-h-9 w-full gap-1.5 text-left max-lg:items-start max-lg:py-1 lg:min-h-11 lg:items-center lg:gap-3"
     >
       {glyph === null ? null : (
         // `EventIcon` is 1.1em, so it states its own size: level with the name on a phone, a step up on the desk.
@@ -117,7 +117,7 @@ export function Man({
       )}
       <span className={`${NAME_BLOCK} max-lg:text-lg`}>
         <span className={SCORER_FIGURE}>{figure}</span>
-        <span className={`${KEEPS_WIDTH} group-hover:underline ${NAME}`}>
+        <span className={`${KEEPS_WIDTH} ${NAME}`}>
           <PlayerName name={name} short={short} />
         </span>
         {note === null ? null : <> <span className={`${SMALL_CAPS} shrink-0 text-bad lg:ml-1.5`}>{note}</span></>}{" "}

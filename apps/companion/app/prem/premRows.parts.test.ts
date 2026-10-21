@@ -75,6 +75,11 @@ describe("a club's taps open the one player card", () => {
     expect(depth(DepthList)).not.toContain("<a ");
   });
 
+  // MaybeCard underlines on hover itself; a row's own copy printed the class twice.
+  it("underlines each card button once, from MaybeCard", () => {
+    for (const button of depth(DepthList).match(/<button[^>]*>/g) ?? []) expect(button.match(/hover:underline/g)).toHaveLength(1);
+  });
+
   it("builds a card with our league's position for each listed man only", () => {
     expect([...cards.keys()]).toEqual([1, 2, 3]);
     expect(cards.get(1)?.rostered.slot.position).toBe("D");

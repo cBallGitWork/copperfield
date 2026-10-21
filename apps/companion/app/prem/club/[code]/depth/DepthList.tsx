@@ -51,7 +51,7 @@ export default function DepthList({
                     ) : (
                       <MaybeCard
                         player={cardOf(player.code)}
-                        className={`${TAP_ROW} w-full gap-1 text-left hover:underline ${
+                        className={`${TAP_ROW} w-full gap-1 text-left ${
                           rank === 0 ? `${ROW_NAME} text-ink` : BEHIND
                         }`}
                       >

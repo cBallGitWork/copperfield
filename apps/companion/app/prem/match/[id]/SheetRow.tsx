@@ -16,7 +16,7 @@ import { appeared, type Join, type Named } from "./sheetJoin";
 const MARKS = 2;
 
 /** The trigger's box, centred in the row: a tap row's 36 under a thumb. */
-export const NAME_CELL = "flex min-h-9 w-full items-center px-1.5 text-left hover:underline";
+export const NAME_CELL = "flex min-h-9 w-full items-center px-1.5 text-left";
 
 /** Chips the card block already draws, so the row does not say them twice. */
 const CARDED = new Set(["YC", "RC"]);

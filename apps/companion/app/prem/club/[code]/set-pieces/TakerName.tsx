@@ -29,7 +29,7 @@ export default function TakerName({
       <MaybeCard
         player={card}
         // The row's floor restated on the link, which `tapfit` measures; `self-stretch` lands one short.
-        className={`flex min-h-9 min-w-0 items-center truncate text-left text-ink hover:underline ${ROW_NAME}`}
+        className={`flex min-h-9 min-w-0 items-center truncate text-left text-ink ${ROW_NAME}`}
       >
         {children}
       </MaybeCard>
