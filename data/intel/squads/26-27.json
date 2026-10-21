@@ -2,12 +2,12 @@
  "manifest": {
   "season": "26-27",
   "gameweek": null,
-  "exportedAt": "2026-10-21T11:37:57.177348+00:00",
+  "exportedAt": "2026-10-21T14:10:02.103729+00:00",
   "rows": 667,
   "sources": [
    {
     "path": "data/derived/team_squad/season=26-27/team_squad.parquet",
-    "mtime": "2026-10-20T23:53:50.159702+00:00"
+    "mtime": "2026-10-21T14:09:55.613942+00:00"
    }
   ],
   "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/",
@@ -386,9 +386,9 @@
     "LM",
     "LWB"
    ],
-   "depthTier": 0,
+   "depthTier": 2,
    "squadNumber": 3,
-   "status": "injured",
+   "status": "doubtful",
    "expectedReturnGw": 8
   },
   {
@@ -556,16 +556,15 @@
   {
    "code": 119090,
    "clubCode": "AVL",
-   "position": "CM",
-   "positionSource": "transfermarkt_position",
-   "line": "CM",
+   "position": "DM",
+   "positionSource": "understat_career",
+   "line": "DM",
    "secondaryPositions": [],
    "canCover": [
-    "AM",
-    "CAM",
-    "DM"
+    "CB",
+    "CM"
    ],
-   "depthTier": 1,
+   "depthTier": 4,
    "squadNumber": null,
    "status": "available",
    "expectedReturnGw": null
@@ -1020,9 +1019,9 @@
     "RM",
     "RWB"
    ],
-   "depthTier": 2,
+   "depthTier": 0,
    "squadNumber": 16,
-   "status": "available",
+   "status": "left_club",
    "expectedReturnGw": null
   },
   {
@@ -2155,10 +2154,10 @@
     "SS",
     "ST"
    ],
-   "depthTier": 0,
+   "depthTier": 1,
    "squadNumber": 22,
-   "status": "injured",
-   "expectedReturnGw": 10
+   "status": "doubtful",
+   "expectedReturnGw": 9
   },
   {
    "code": 561245,
@@ -2220,7 +2219,7 @@
    "depthTier": 0,
    "squadNumber": 4,
    "status": "injured",
-   "expectedReturnGw": 8
+   "expectedReturnGw": 10
   },
   {
    "code": 75115,
@@ -3629,7 +3628,7 @@
    "code": 461102,
    "clubCode": "COV",
    "position": "CB",
-   "positionSource": "understat_pl+tm_position+fotmob_position_id",
+   "positionSource": "understat_pl+tm_position+fotmob_position_id+sofascore_band",
    "line": "CB",
    "secondaryPositions": [],
    "canCover": [
@@ -5780,9 +5779,9 @@
     "CB",
     "CM"
    ],
-   "depthTier": 0,
+   "depthTier": 1,
    "squadNumber": null,
-   "status": "injured",
+   "status": "doubtful",
    "expectedReturnGw": 8
   },
   {
@@ -5826,7 +5825,7 @@
     "CB",
     "CM"
    ],
-   "depthTier": 1,
+   "depthTier": 2,
    "squadNumber": 47,
    "status": "available",
    "expectedReturnGw": null
@@ -5860,10 +5859,10 @@
     "CF",
     "SS"
    ],
-   "depthTier": 0,
+   "depthTier": 2,
    "squadNumber": null,
-   "status": "injured",
-   "expectedReturnGw": 8
+   "status": "doubtful",
+   "expectedReturnGw": null
   },
   {
    "code": 494950,
@@ -5991,7 +5990,7 @@
     "CB",
     "CM"
    ],
-   "depthTier": 1,
+   "depthTier": 2,
    "squadNumber": 5,
    "status": "available",
    "expectedReturnGw": null
@@ -7502,7 +7501,7 @@
    "depthTier": 2,
    "squadNumber": 38,
    "status": "available",
-   "expectedReturnGw": 8
+   "expectedReturnGw": null
   },
   {
    "code": 444884,
@@ -8024,7 +8023,7 @@
    "depthTier": 1,
    "squadNumber": 9,
    "status": "available",
-   "expectedReturnGw": 8
+   "expectedReturnGw": null
   },
   {
    "code": 248875,
@@ -9974,7 +9973,7 @@
    "depthTier": 0,
    "squadNumber": 2,
    "status": "injured",
-   "expectedReturnGw": 9
+   "expectedReturnGw": 11
   },
   {
    "code": 503301,
@@ -10628,7 +10627,7 @@
    "code": 109646,
    "clubCode": "TOT",
    "position": "CB",
-   "positionSource": "understat_pl+tm_position+fotmob_position_id",
+   "positionSource": "understat_pl+tm_position+fotmob_position_id+sofascore_band",
    "line": "CB",
    "secondaryPositions": [],
    "canCover": [
