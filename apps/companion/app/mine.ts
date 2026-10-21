@@ -16,6 +16,11 @@ export function yoursEdge(yours: boolean): string {
   return yours ? EDGE : "border-l-4 border-l-transparent";
 }
 
+/** The same edge painted inside a collapsed table's cell: a border there notches every row's rule, a shadow loses to the scroll drop. */
+export function yoursInset(yours: boolean): string {
+  return yours ? "bg-[linear-gradient(to_right,var(--color-accent)_4px,transparent_4px)]" : "";
+}
+
 /** The edge alone on a colour plate, where the accent cannot be ink; nothing on the others. */
 export function yoursMark(yours: boolean): string {
   return yours ? EDGE : "";
