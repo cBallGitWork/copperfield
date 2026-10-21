@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Shot, TouchPlayer } from "@epl/core";
-import { attackingSpan, pastSeasonMaps, seasonMaps, touchCount } from "./maps";
+import { attackingSpan, pastSeasonMaps, seasonMaps, shotBreakdown, touchCount } from "./maps";
 
 const HIM = 1;
 const MATE = 2;
@@ -103,5 +103,23 @@ describe("pastSeasonMaps", () => {
   it("counts touches off points or cells alike", () => {
     expect(touchCount(past.counts)).toBe(5);
     expect(touchCount([{ x: 1, y: 1 }])).toBe(1);
+  });
+});
+
+describe("shotBreakdown", () => {
+  it("counts every outcome, noughts kept, and sums the xG the shots carry", () => {
+    const { rows, xg } = shotBreakdown([
+      { x: 90, y: 50, xg: 0.5, outcome: "goal" },
+      { x: 90, y: 50, xg: 0.25, outcome: "miss" },
+      { x: 90, y: 50, xg: null, outcome: "miss" },
+    ]);
+    expect(rows.map((row) => [row.label, row.count])).toEqual([
+      ["Goals", 1], ["Saved", 0], ["Post", 0], ["Missed", 2], ["Blocked", 0],
+    ]);
+    expect(xg).toBe(0.75);
+  });
+
+  it("has no xG when no shot carries one", () => {
+    expect(shotBreakdown([{ x: 90, y: 50, xg: null, outcome: "save" }]).xg).toBeNull();
   });
 });

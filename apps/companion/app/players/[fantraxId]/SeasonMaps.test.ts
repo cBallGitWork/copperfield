@@ -46,3 +46,20 @@ describe("a past season's maps", () => {
     expect(html).toBe("");
   });
 });
+
+describe("the season maps without chances", () => {
+  const touches = new Map([[10, 4]]);
+  it("runs three columns on a desk and puts the outcomes beside the shots on a phone", () => {
+    const html = renderToStaticMarkup(createElement(SeasonMaps, { maps: { shots: [shot], chances: [], touches }, club: undefined }));
+    expect(html).toContain("lg:grid-cols-3");
+    expect(html).toContain("Outcomes");
+    expect(html).toContain("Missed");
+    expect(html).toContain("0.20");
+  });
+
+  it("keeps four columns and no outcomes when he set chances up", () => {
+    const html = renderToStaticMarkup(createElement(SeasonMaps, { maps: { shots: [shot], chances: [shot], touches }, club: undefined }));
+    expect(html).toContain("lg:grid-cols-4");
+    expect(html).not.toContain("Outcomes");
+  });
+});
