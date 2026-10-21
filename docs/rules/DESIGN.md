@@ -430,7 +430,7 @@ The rules are what keep them from becoming a set:
   the reader's operating system's house style, which hands a palette where every
   colour is a slot to Apple and Google. A glyph takes `currentColor`, so it wears
   whatever tone its row already had and adds no colour of its own.
-- **Beside or above the word, never instead of it.** A glyph alone is a rebus. The word is
+- **Beside or above the word, never instead of it** (see `StateMark` below). A glyph alone is a rebus. The word is
   also what a screen reader gets: the icon is `aria-hidden`, because the two
   together would say "goal goal".
 - **Sized in `em`**, so a glyph matches the type it sits in without a second
@@ -451,6 +451,9 @@ as a small filled rectangle rather than as a glyph, because CM draws exactly tha
 all. Where the reference already has a mark, the reference wins; where a provider
 has one, as the lion is, the provider's wins.
 
+`StateMark` is the same exception for a man's fitness: CM draws the cross and the card itself, so the squad row
+prints them instead of the word and fills them in the doubt ramp rather than `currentColor` (Craig, 21 Oct 2026; §3).
+
 ## 3. The Desk's palette
 
 Each colour is a **slot with one meaning**. This is CM's actual grammar and it
@@ -464,7 +467,7 @@ is more specific than a palette; it is the reason the token names in
 | Yellow | `--color-accent` | **yours · selected · active · primary** | 13.1 |
 | Cyan | `--color-info` | **a derived reading** — ours rather than recorded; and a row's kind on a ledger: the competition on a team's Fixtures, the deal on its Transfers (Craig, 7 Oct 2026, over the accent); and the league's points where they are the reading a screen is for — a scoreline, FPts on the player page and the Players board — never lit as a standout (Craig, 4 Sep and 21 Oct 2026). There cyan says "the reading", not "ours": the FPts head says whose | 11.2 |
 | Amber | `--color-mid` | **a figure standing alone beside a name** — never a column of a standings table | 9.8 |
-| Red | `--color-bad` | **a loss, a doubt, a negative** | 5.6 |
+| Red | `--color-bad` | **a loss, a doubt, a negative**; a derived figure takes it when it is a doubt (xMins under `START_DOUBT_MINUTES`, Craig 21 Oct 2026: *"Red bad"*) | 5.6 |
 | Green | `--color-up` | **a gain** — the other half of the direction pair | 9.9 |
 | Live red | `--color-live` | **a match in play**, and nothing else | 5.4 |
 | League red | `--color-league` | the league's own mark. Chrome only | 3.2 |
@@ -473,7 +476,7 @@ is more specific than a palette; it is the reason the token names in
 | Cream | `--color-cream` | ink on a colour plate | — |
 | Quiet on a plate | `--color-faint-plate` | the same **quiet** as `--color-faint`, on the blue plate that will not carry it | — |
 | Red on a wash | `--color-bad-wash` | the same **loss** as `--color-bad`, on a doubt wash that will not carry it (3.6:1); a quiet figure there greys to `muted` | 4.9 on the palest wash |
-| Doubt | `--color-doubt-out` `-major` `-slight` | **how likely he is to MISS**, as a ramp of three. A ground, never ink | ink 5.5 · 7.1 · 9.5 |
+| Doubt | `--color-doubt-out` `-major` `-slight` | **how likely he is to MISS**, as a ramp of three. A ground, never text; the one shape it fills is `StateMark` | ink 5.5 · 7.1 · 9.5 · the mark on its own wash 3.9 · 4.9 · 6.2 |
 | Ease | `--color-ease-1` … `-10` | **how kind an opponent is, by OUR strength model**: the planner's 1–20 rank, two a step, green easiest to dark red hardest. A ground, never ink; FPL's difficulty keeps the FDR steps | black 4.8–11.7 · cream 4.9–8.6 |
 | Free | `--color-index-free` | **a man on no roster**, anybody's to claim: the index block's ground in place of its blue. A ground, never ink | ink 4.8 at the ramp's top · 8.4 on the face |
 
@@ -507,13 +510,17 @@ name. Hue-locked like the FDR scale — `out` is `--color-bad`'s red, `slight` i
 alike — so no new colour family enters the app. The lightnesses run 0.66 · 0.72 ·
 0.79, which is a ramp a reader who cannot separate the hues can still separate.
 
-**It never replaces the word in a list.** `StateBox` still prints `Inj` · `Sus` · `Unav` ·
-`Dbt` beside the name in a list, because the colour says how likely and only the
-box says why. The pitch carries the colour alone: the box rode after the surname
+**The squad row says why with CM's mark, not the word** (Craig, 21 Oct 2026: *"Use a yellow and Red Cross when
+injured/doubt to match row. Red card for suspension"*). `StateMark` is a solid shape or 2px stroke — the cross for a knock,
+the card for a ban, a barred circle for a man who has gone — in his band's colour, so the mark and the wash say the
+same thing. Such a shape is a ground in this sense, never text: it carries no letters, and as a graphic it needs 3:1,
+which each step clears on its own wash (3.9 · 4.9 · 6.2). The word rides in its label and title. It is the Profile's
+fitness line's mark too, where `StateBox` still stands beside it. Every other list keeps `StateBox`, printing `Inj` ·
+`Sus` · `Unav` · `Dbt` beside the name, because the colour says how likely and only the box says why. The pitch carries the colour alone: the box rode after the surname
 from 30 Sep 2026 and came off on 1 Oct (Craig: *"pitch view, remove the chip, we
 already have coloured tiles"*), so the plate and the card say how likely and a
-tap on the man says why. The list carries both
-as a wash rather than a fill — 16% of the
+tap on the man says why. The row carries the band
+as a wash rather than a solid fill — 16% of the
 colour into the row's own ground — because the row's own ink runs down to
 `--color-faint`, which is already 4.6:1 on `--raised`.
 

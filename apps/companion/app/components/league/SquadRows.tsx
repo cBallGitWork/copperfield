@@ -19,6 +19,7 @@ export default function SquadRows({
   head = true,
   reserve = false,
   notes = {},
+  doubted = [],
 }: {
   lines: SquadDetailLine[];
   /** Skip the panel: the caller has drawn one round this and whatever stands beside it. */
@@ -36,6 +37,8 @@ export default function SquadRows({
   reserve?: boolean;
   /** Who an auto sub concerns, by Fantrax id: a word under his name says which way. */
   notes?: Record<string, AutoSubMark>;
+  /** The planner's "Might not start", by Fantrax id (`mightNotStart`); absent off the planner. */
+  doubted?: readonly string[];
 }) {
   const scored = lines.some((line) =>
     line.players.some((p) => p.points !== undefined),
@@ -90,6 +93,7 @@ export default function SquadRows({
                   onOpen={onOpen && (() => onOpen(player))}
                   reserve={reserve}
                   autoSub={notes[player.rostered.slot.fantraxId]}
+                  doubted={doubted.includes(player.rostered.slot.fantraxId)}
                 />
               </li>
             )),

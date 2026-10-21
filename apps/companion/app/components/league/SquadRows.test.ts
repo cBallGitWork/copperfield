@@ -86,3 +86,51 @@ describe("a man FPL expects back on a date", () => {
     expect(row).toMatch(/>Back 28 Nov</);
   });
 });
+
+describe("a squad row's status and minutes (Craig, 21 Oct 2026)", () => {
+  const held = (id: string, status: string, chance: number | null, minutes: number | null) =>
+    ({
+      ...man,
+      rostered: {
+        slot: { fantraxId: id, position: "M", status: "" },
+        player: { code: 1, name: id, fullName: id, status, chanceOfPlaying: chance, news: status === "a" ? "" : "Knock" },
+        stats: [],
+      },
+      minutes: [{ gameweek: 7, minutes, asOf: "Thu 15 Oct" }],
+    }) as unknown as SquadPlayerDetail;
+  const rows = (players: SquadPlayerDetail[], doubted?: string[]) =>
+    renderToStaticMarkup(createElement(SquadRows, { lines: [{ position: "M", players }], projected: false, doubted }));
+  /** One man's row, from his name to the end of his row. */
+  const rowOf = (html: string, id: string) => html.slice(html.indexOf(`>${id}<`)).split("</li>")[0];
+
+  it("marks every man who is not fit in his band's colour, and drops the word box", () => {
+    const html = rows([held("Slight", "d", 75, 80), held("Major", "d", 25, 80), held("Out", "i", 0, 0)]);
+    expect(rowOf(html, "Slight")).toContain("color:var(--color-doubt-slight)");
+    expect(rowOf(html, "Major")).toContain("color:var(--color-doubt-major)");
+    expect(rowOf(html, "Out")).toContain("color:var(--color-doubt-out)");
+    expect(html).not.toContain(">Dbt<");
+    expect(html).not.toContain(">Inj<");
+  });
+
+  it("gives a suspended man the red card", () => {
+    expect(rowOf(rows([held("Banned", "s", null, 0)]), "Banned")).toMatch(/<rect /);
+  });
+
+  it("prints MNS on the planner's men only, and never over a status mark", () => {
+    const html = rows([held("Named", "a", 100, 30), held("Other", "a", 100, 30), held("Hurt", "d", 75, 30)], ["Named", "Hurt"]);
+    expect(rowOf(html, "Named")).toContain('<span aria-hidden="true">MNS</span><span class="sr-only">Might not start</span>');
+    expect(rowOf(html, "Other")).not.toContain("MNS");
+    expect(rowOf(html, "Hurt")).not.toContain("MNS");
+  });
+
+  it.each([
+    [49, "text-bad"],
+    [50, "text-info"],
+  ])("inks %i xMins %s", (minutes, ink) => {
+    expect(rowOf(rows([held("Him", "a", 100, minutes)]), "Him")).toContain(`font-bold ${ink}">${minutes}<`);
+  });
+
+  it("dashes a missing reading", () => {
+    expect(rowOf(rows([held("Him", "a", 100, null)]), "Him")).toMatch(/font-bold text-info">—</);
+  });
+});
