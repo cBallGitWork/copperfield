@@ -12,7 +12,6 @@ import QuerySelect from "../../../components/shell/QuerySelect";
 import { ALL_SEASONS, playerDataHref } from "../../routes";
 import MatchLog from "../MatchLog";
 import PastSeasons from "../PastSeasons";
-import Rankings from "../Rankings";
 import SeasonMaps from "../SeasonMaps";
 import HeldNote from "../HeldNote";
 import NoProfile from "../NoProfile";
@@ -28,7 +27,7 @@ import { getLeaguePool } from "../../pool";
 import { poolPoints } from "../poolPoints";
 import { playerTitle } from "../title";
 
-// His record a season at a time (Craig, 25 Sep 2026): this season's tables, rankings, maps and every match by default,
+// His record a season at a time (Craig, 25 Sep 2026): this season's every match with its total and rank, then his maps, by default;
 // a past season's line and maps, or every season with his club. The old History route sends a reader to "All seasons".
 
 export const revalidate = 30;
@@ -93,19 +92,19 @@ async function Record({
     seasonFixtures(),
     getLeaguePool().then((pool) => playerStanding(player, poolPoints(pool))),
   ]);
-  // His place and his maps read no FPL, so they stand while it is silent.
-  const measured = (
-    <>
-      <Rankings ranked={standing.ranked} fpts={standing.fpts} group={standing.group} />
-      <SeasonMaps maps={seasonMaps(player.code, intelShots, intelTouches, standing.keeper)} club={club} />
-    </>
-  );
-  // One FPL read feeds both; when it will not answer, say so rather than print half a career.
+  const maps = <SeasonMaps maps={seasonMaps(player.code, intelShots, intelTouches, standing.keeper)} club={club} />;
+  // One FPL read feeds both; when it will not answer, say so rather than print half a career. His season's foot and
+  // his maps read no game log, so they stand while it is silent.
   if (past === null || log === null) {
     return (
       <>
         <Nothing title={UNAVAILABLE} code="element-summary" />
-        {chosen === "" ? measured : null}
+        {chosen === "" ? (
+          <>
+            <MatchLog rows={[]} standing={standing} />
+            {maps}
+          </>
+        ) : null}
       </>
     );
   }
@@ -146,8 +145,8 @@ async function Record({
       ) : (
         <>
           {log.heldAt === null ? null : <HeldNote at={log.heldAt} />}
-          {measured}
-          <MatchLog rows={joined} />
+          <MatchLog rows={joined} standing={standing} />
+          {maps}
         </>
       )}
     </>
