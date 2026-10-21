@@ -67,7 +67,7 @@ export function spotsOf(slot: DepthSlot): DepthSpot[] {
 }
 
 /** The lines of the pitch from goal outward, each as the reader sees it with the keeper at the top: the
- *  team's right on the reader's left. A back three sends the full-backs up as wing-backs; with no
+ *  team's right on the reader's left. A back three sends the full-backs up as wing-backs, LWB and RWB; with no
  *  attacking midfielder the wingers stand beside the striker. */
 export function depthLines(club: ClubDepth): DepthSpot[][] {
   const has = (slot: string) => club.slots.some((entry) => entry.slot === slot);
@@ -90,7 +90,8 @@ export function depthLines(club: ClubDepth): DepthSpot[][] {
   };
   const lines: DepthSpot[][] = [[], [], [], [], []];
   for (const slot of [...club.slots].sort((a, b) => order(a.slot) - order(b.slot))) {
-    lines[line(slot.slot)].push(...spotsOf(slot));
+    const shirt = backThree && (slot.slot === "LB" || slot.slot === "RB") ? `${slot.slot[0]}WB` : slot.slot;
+    lines[line(slot.slot)].push(...spotsOf({ ...slot, slot: shirt }));
   }
   return lines.filter((row) => row.length > 0);
 }
