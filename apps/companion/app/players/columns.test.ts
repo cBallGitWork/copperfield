@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ATTRIBUTE_ROWS, GOALS_AGAINST_OUTFIELD } from "@epl/core";
-import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor, ratedOn } from "./columns";
+import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor, headedFor, ratedOn } from "./columns";
 import { attributeStats } from "./attributeColumns";
 import { columnsIn } from "./groups";
 import { figureOf } from "./figure";
@@ -178,5 +178,25 @@ describe("ratedOn", () => {
   it("keeps it where one does, the sorted xG beside the attributes included", () => {
     expect(ratedOn(columnsIn(COLUMNS, "attributes", "xg", read), true)).toBe(true);
     expect(ratedOn(columnsIn(COLUMNS, "defensive", "fpts", read), false)).toBe(false);
+  });
+});
+
+describe("headedFor", () => {
+  const drawn = columnsIn(COLUMNS, "attacking", "xg", new Set(["Min", "G"]));
+  const heads = (rated: boolean | null) => headedFor(drawn, rated).map((column) => column.label);
+
+  it("marks each rated head /90 under Per 90, so a rate never reads as a season's total", () => {
+    // DATA-7, 21 Oct 2026: xG Sh SoT stood over 1.52 / 6.92 / 4.95 with nothing to say they were per 90.
+    expect(heads(true)).toEqual(expect.arrayContaining(["G/90", "xG/90", "Sh/90", "SoT/90"]));
+  });
+
+  it("leaves a head no rate divides alone: the name, minutes, games, a per-game figure and a rating", () => {
+    const bare = headedFor(COLUMNS, true).filter((column, at) => column.label === COLUMNS[at].label);
+    expect(bare.map((column) => column.label)).toEqual(expect.arrayContaining(["Player", "Min", "GP", "FP/G", "Acc"]));
+  });
+
+  it("leaves every head bare with the toggle off or hidden", () => {
+    expect(heads(false)).toEqual(drawn.map((column) => column.label));
+    expect(heads(null)).toEqual(drawn.map((column) => column.label));
   });
 });
