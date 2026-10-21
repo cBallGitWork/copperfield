@@ -4,7 +4,7 @@
 > `GameweekView` is gone: the same round was drawn twice, two ways, and Craig's ask (16 Oct, *"3 yours goes to a
 > bugged screen"*) was for the count to land somewhere that names his men. Fixtures' `N yours` now opens them under
 > the row, with everything below that this page existed for: the `Yours ·` line, the holder tags and the missing
-> scorers line. Since 21 Oct 2026 the count is by side, `N yours` under each club's name with no count column. The
+> scorers line. Since 21 Oct 2026 the count is by side, a count pill beside each club's name with no count column. The
 > current account is [prem.md](prem.md#fixtures); what follows is the page as it was.
 
 Any round of the season, addressable. Last week's results on Monday morning is

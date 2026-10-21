@@ -96,7 +96,7 @@ describe("a football row split into its three ways in", () => {
 });
 
 // Craig, 21 Oct 2026: the reader's count in its own column "looks crap"; it goes under the club's name.
-describe("a control under a side's name", () => {
+describe("a control beside a side's name", () => {
   const side = (name: string, href: string) => ({ name, short: name.slice(0, 3).toUpperCase(), href });
   const control = (label: string) => createElement("button", { type: "button" }, label);
   const render = (under?: { home?: ReactNode; away?: ReactNode }) =>
@@ -121,10 +121,10 @@ describe("a control under a side's name", () => {
     for (const a of html.match(/<a [\s\S]*?<\/a>/g) ?? []) expect(a).not.toContain("<button");
   });
 
-  it("stacks only the side that has a control", () => {
+  it("pairs only the side that has a control, on one line", () => {
     const html = render({ away: control("1 yours") });
     expect(html.match(/<button/g)).toHaveLength(1);
-    expect(html.match(/flex min-w-0 flex-col lg:items-center/g)).toHaveLength(1);
+    expect(html.match(/flex min-w-0 items-center gap-0\.5 max-\[359px\]:gap-0 lg:gap-1\.5/g)).toHaveLength(1);
     expect(html.indexOf("<button")).toBeGreaterThan(html.indexOf("Chelsea"));
   });
 

@@ -61,7 +61,7 @@ export default function ScoreRow({
   scoreHref?: string;
   /** A list that can hold the reader's row: every row takes the 4px edge so his keeps the column; football's stay flush. */
   marks?: boolean;
-  /** A control under each side's name (beside it from `lg`), a sibling of the name's link; never on a row that is one link. */
+  /** A control beside each side's name, toward the score, a sibling of the name's link; never on a row that is one link. */
   under?: { home?: ReactNode; away?: ReactNode };
 }) {
   const yours = home.mine === true || away.mine === true;
@@ -104,12 +104,6 @@ export default function ScoreRow({
 /** Block, name, score, name, block: the two `1fr`s hold every name in the panel at one x. */
 const GRID = "grid-cols-[auto_1fr_auto_1fr_auto] gap-x-0.5 lg:gap-x-2";
 
-/** A name over its control under a thumb: the name sits low in its half and the control high in its own, so they read as one. */
-const STACKED = "items-end lg:items-center";
-
-/** A cell's tap floor under a thumb (28 from `lg`): the 44, or 24 for each half of a name stacked over its control (Craig, 21 Oct 2026: "waaaaay too tall"). */
-const FLOOR = { whole: "min-h-11", half: "min-h-6" } as const;
-
 /** Which way a side reads: the away half mirrors the home, so both crests sit against their own block. */
 const READS = { home: "", away: "flex-row-reverse" } as const;
 
@@ -127,21 +121,11 @@ function Block({ side }: { side: ScoreSide }) {
 }
 
 /** A cell of a split row: a link at the thumb floor when it leads somewhere, else the plain span. */
-function Cell({
-  href,
-  className,
-  floor = FLOOR.whole,
-  children,
-}: {
-  href?: string;
-  className: string;
-  floor?: string;
-  children: ReactNode;
-}) {
+function Cell({ href, className, children }: { href?: string; className: string; children: ReactNode }) {
   return href === undefined ? (
     <span className={className}>{children}</span>
   ) : (
-    <Link href={href} className={`${className} ${floor} hover:brightness-110 lg:min-h-7`}>
+    <Link href={href} className={`${className} min-h-11 hover:brightness-110 lg:min-h-7`}>
       {children}
     </Link>
   );
@@ -153,8 +137,7 @@ function Name({ side, at, split, under }: { side: ScoreSide; at: "home" | "away"
   const name = (
     <Cell
       href={split ? side.href : undefined}
-      floor={under === undefined ? FLOOR.whole : FLOOR.half}
-      className={`flex min-w-0 ${under === undefined ? "items-center" : STACKED} gap-1 lg:gap-1.5 ${ROW_NAME} ${READS[at]} ${
+      className={`flex min-w-0 items-center gap-1 lg:gap-1.5 ${ROW_NAME} ${READS[at]} ${
         side.mine === true ? "text-accent" : side.lost === true ? "text-muted" : "text-ink"
       }`}
     >
@@ -164,7 +147,8 @@ function Name({ side, at, split, under }: { side: ScoreSide; at: "home" | "away"
           alt=""
           width={CREST_PX}
           height={CREST_PX}
-          className="h-5 w-5 shrink-0 object-contain lg:h-[1.625rem] lg:w-[1.625rem]"
+          // Under 360 a side with a control gives its crest up, or crest, code and pill clip the code to a letter at 320.
+          className={`h-5 w-5 shrink-0 object-contain lg:h-[1.625rem] lg:w-[1.625rem]${under === undefined ? "" : " max-[359px]:hidden"}`}
         />
       )}
       <span className={`flex min-w-0 flex-col lg:flex-row lg:items-baseline lg:gap-1.5 ${at === "away" ? "items-end lg:flex-row-reverse" : ""}`}>
@@ -182,11 +166,12 @@ function Name({ side, at, split, under }: { side: ScoreSide; at: "home" | "away"
     </Cell>
   );
   if (under === undefined) return name;
-  // The name's link over its control, side by side from `lg`; the away pair mirrors, so the control sits toward the score.
+  // The name's link and its control on one line (Craig, 21 Oct 2026: "Ew" at the count under the crest); the away pair
+  // mirrors, so the control sits toward the score.
   return (
-    <span className={`flex min-w-0 flex-col lg:items-center lg:gap-1.5 ${at === "away" ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+    <span className={`flex min-w-0 items-center gap-0.5 max-[359px]:gap-0 lg:gap-1.5 ${READS[at]}`}>
       {name}
-      <span className={`flex ${at === "away" ? "justify-end" : ""}`}>{under}</span>
+      {under}
     </span>
   );
 }

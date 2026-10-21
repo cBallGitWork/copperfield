@@ -43,8 +43,9 @@ the app.
 44px taps or CM's proportions. Two more are used, each in one place: `xl` on
 Data's boards, where Adv Stats' plates and Per 90 join the row and the Filter tally changes with them (five
 sites, counted 16 Oct 2026), and `2xl`, where `--page-frame` widens from 72rem to
-96rem. Under `lg`, `390px` is used in one place: Prem Fixtures signed in, where the owner edge hangs in the
-gutter below 390 (`max-[389px]:-ml-1`, `prem/Match.tsx`). A new breakpoint is recorded here
+96rem. Under `lg`, `360px` is used in one place: Prem Fixtures signed in, where a side with a count pill gives up its
+crest below 360, as crest, code and pill clipped the code to one letter at 320 (`max-[359px]:hidden`, `ScoreRow`,
+measured 21 Oct 2026). The 390 went with the owner edge. A new breakpoint is recorded here
 in the commit that adds it.
 
 **The count is deliberately not written down here.** This paragraph said "six"

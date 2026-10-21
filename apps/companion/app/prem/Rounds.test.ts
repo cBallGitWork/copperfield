@@ -59,9 +59,9 @@ describe("his men counted by side", () => {
 
 // Craig, 21 Oct 2026: "i hate the 2 yours text in its own columns, looks crap, put it under the team name".
 describe("a signed-in reader's count", () => {
-  it("prints each side's count under its own club's name, the home before the score and the away after", () => {
+  it("prints each side's count beside its own club's name, the home before the score and the away after", () => {
     const [match] = rows(round(new Map([[1, [saka, rice, palmer]]])));
-    expect(match).toMatch(/HOM[\s\S]*>2 yours<svg[\s\S]*href="\/prem\/match\/1"[\s\S]*AWA[\s\S]*>1 yours<svg/);
+    expect(match).toMatch(/HOM[\s\S]*aria-label="2 yours"[\s\S]*href="\/prem\/match\/1"[\s\S]*AWA[\s\S]*aria-label="1 yours"/);
   });
 
   it("prints a count only on the side that has his men", () => {
@@ -86,12 +86,12 @@ describe("a signed-in reader's count", () => {
     expect(html).toMatch(new RegExp(`<div id="${controls[0]}" hidden="">[\\s\\S]*Saka`));
   });
 
-  it("sits beside the names' links, never inside one, the pair one thumb's row: 24 each under lg", () => {
+  it("sits beside the names' links on one line, never inside one, each at a thumb's 44, a pill under lg", () => {
     const html = round(new Map([[1, [saka, palmer]]]));
     for (const a of html.match(/<a [\s\S]*?<\/a>/g) ?? []) expect(a).not.toContain("<button");
-    for (const b of html.match(/<button[^>]*>/g) ?? []) expect(b).toMatch(/min-h-6 /);
-    const names = (html.match(/<a [^>]*href="\/prem\/club[^"]*"[^>]*>/g) ?? []).filter((a) => a.includes("min-h-6"));
-    expect(names.length).toBeGreaterThan(0);
+    for (const b of html.match(/<button[^>]*>/g) ?? []) expect(b).toMatch(/min-h-11 /);
+    expect(html).not.toContain("min-h-6");
+    expect(html).toMatch(/<button[^>]*aria-label="1 yours"[^>]*><span aria-hidden="true" class="[^"]*bg-accent[^"]*lg:hidden">1<\/span>/);
   });
 
   it("marks the count as one that opens, with a closed chevron inside its button", () => {
@@ -102,17 +102,10 @@ describe("a signed-in reader's count", () => {
     expect(button).not.toContain("rotate-180");
   });
 
-  it("edges a match with his men in the accent, and holds a clear edge on the other", () => {
+  it("draws no owner edge, so every row's blocks keep the arrows' column", () => {
     const html = round(new Map([[1, [saka]]]));
-    expect(html.match(/border-l-accent/g)).toHaveLength(1);
-    expect(html.match(/border-l-transparent/g)).toHaveLength(1);
-    expect(html.indexOf("border-l-accent")).toBeLessThan(html.indexOf('href="/prem/match/1"'));
-    expect(html.indexOf("border-l-transparent")).toBeGreaterThan(html.indexOf('href="/prem/match/1"'));
-  });
-
-  it("hangs the owner edge in the gutter below 390, so the row keeps its full width", () => {
-    const html = round(new Map([[1, [saka]]]));
-    expect(html.match(/border-l-4[^"]*max-\[389px\]:-ml-1/g)).toHaveLength(2);
+    expect(html).not.toContain("border-l-4");
+    expect(html).not.toContain("-ml-1");
   });
 });
 
