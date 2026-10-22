@@ -1,12 +1,12 @@
 {
   "manifest": {
     "season": "26-27",
-    "gameweek": 7,
-    "exportedAt": "2026-10-16T16:45:44.712Z",
-    "rows": 278,
+    "gameweek": 8,
+    "exportedAt": "2026-10-22T15:01:20.114Z",
+    "rows": 293,
     "sources": [
       {
-        "path": "2026-10-16/fpl-gameweek-7-team-news-fridays-live-injury-updates-4.html",
+        "path": "2026-10-22/fpl-gameweek-8-team-news-thursdays-live-injury-updates.html",
         "mtime": null
       }
     ]
@@ -68,7 +68,11 @@
     {"club":91,"manager":"Marco Rose","at":"2026-10-16T11:00:00.000Z"},
     {"club":56,"manager":null,"at":"2026-10-16T11:00:00.000Z"},
     {"club":31,"manager":"Pierre Sage","at":"2026-10-16T11:00:00.000Z"},
-    {"club":40,"manager":null,"at":"2026-10-16T11:00:00.000Z"}
+    {"club":40,"manager":null,"at":"2026-10-16T11:00:00.000Z"},
+    {"club":43,"manager":"Enzo Maresca","at":"2026-10-22T09:30:00.000Z"},
+    {"club":94,"manager":"Keith Andrews","at":"2026-10-22T13:00:00.000Z"},
+    {"club":9,"manager":"Frank Lampard","at":"2026-10-22T12:30:00.000Z"},
+    {"club":40,"manager":null,"at":"2026-10-22T13:00:00.000Z"}
   ],
   "quotes": [
     {"club":8,"text":"In terms of injuries, and in terms of the squad, we are having the last training session tomorrow, so no one is ruled out for us for Friday. So, I prefer to be cautious and we will wait till tomorrow to take the final decision on every player.","said":"Xabi Alonso","about":"the Chelsea team news","at":"2026-09-17T12:30:00.000Z"},
@@ -152,7 +156,15 @@
     {"club":2,"text":"Progression. Joe will still miss this game on week seven so edging closer, good progress. Won’t be too long until team training but not yet.","said":"Daniel Farke","at":"2026-10-16T11:00:00.000Z"},
     {"club":54,"text":"We have a small problem with Hugo – his groin. We will check today, but I’m not sure if he will be okay for tomorrow. Everyone else is available.","said":"Alvaro Arbeloa","at":"2026-10-16T11:00:00.000Z"},
     {"club":91,"text":"We did yesterday an MRI and the pictures looked really well. So, his progression and his healing is on a good way, better than we expected. It means not that he is ready for Sunderland or for next week, but we can progress his rehab training now. We can bring him back on the pitch to start and see how he responds, and we are not talking about six to eight weeks anymore. We are quite confident that we get him back maybe a little bit earlier.","said":"Marco Rose","about":"Alex Scott","at":"2026-10-16T11:00:00.000Z"},
-    {"club":31,"text":"I don’t know because we will train after the press conference. That why we have to evaluate [Henderson’s] chance to come back in the team, and it’s the same for the other players. It’s not a way to say it, but for the moment I really don’t know.","said":"Pierre Sage","at":"2026-10-16T11:00:00.000Z"}
+    {"club":31,"text":"I don’t know because we will train after the press conference. That why we have to evaluate [Henderson’s] chance to come back in the team, and it’s the same for the other players. It’s not a way to say it, but for the moment I really don’t know.","said":"Pierre Sage","at":"2026-10-16T11:00:00.000Z"},
+    {"club":43,"text":"We have a session this afternoon. They can be all of them available or not. Yesterday they were all improving, and we’ll see this afternoon. Still a doubt. For sure, Erling is the only one 100% available, and the other three we need to wait for today’s session.","said":"Enzo Maresca","about":"Messrs Nunes, Kovacic, O’Reilly and Haaland","at":"2026-10-22T09:30:00.000Z"},
+    {"club":43,"text":"Yeah, it depends a little bit on the gameplan. I think they can play all together, yeah.","said":"Enzo Maresca","at":"2026-10-22T09:30:00.000Z"},
+    {"club":43,"text":"Since we started, I sat down with Phil two, three times, especially at the beginning, just to show him… I don’t know if ‘love’ is the right word to use but just to show him how important he is. I said many times that I know Phil from years ago, so I know how good he is. For different reasons, the last few years, it was not good enough. But again, I think when you have more players like Phil available, you are a better team, because at the end, it’s a matter of improving players. If you improve the players, you improve the team. So, for me, I think it’s my duty to try to help Phil to be again one of the best players in England.","said":"Enzo Maresca","about":"Phil Foden","at":"2026-10-22T09:30:00.000Z"},
+    {"club":43,"text":"Yeah, but it’s not a matter of just about one game. The season is very long, many games. The important thing is that again, when we decide to use Phil or to use another player, the important thing is that they are ready. Again, I think for the players, also it’s important that they are happy and they enjoy football.","said":"Enzo Maresca","about":"Phil Foden’s performance on Tuesday","at":"2026-10-22T09:30:00.000Z"},
+    {"club":43,"text":"I always said the same. I think football, at the end, is a team sport. So, it’s not about one player. They are all special, and not one of them is special. So, in the moment that I think you just consider one player special, I think from my point of view, it’s the wrong thing. So for me, Rayan is a top player, but we have another 20 top players. So, they are all different, but at the end it’s a matter of trying to find the right balance between what do we want to do when we have the ball and what do we want to do when we don’t have the ball. I think Rayan, in this moment, is one of the best players in Europe when he’s in the right position. That means when we are able to find him between the lines, it’s always dangerous.","said":"Enzo Maresca","about":"Rayan Cherki","at":"2026-10-22T09:30:00.000Z"},
+    {"club":94,"text":"Jannik just had a bit of a troubled week going into the Liverpool game, really. A bit of a knock from international duty crept up on him during the Villa game, and then he wasn’t particularly well for a few days, so it was just a very disruptive week. But he’s been back training the last few days, so he’s back to himself, more or less.","said":"Keith Andrews","at":"2026-10-22T13:00:00.000Z"},
+    {"club":94,"text":"There’s nothing major to note; we’re pretty much as we were last weekend. Some players have taken the next step of their journey back with really good weeks of training. Nathan [Collins], in particular, and Mathias Jensen made another really good step with training, considering that he’s only been back a week or two.","said":"Keith Andrews","at":"2026-10-22T13:00:00.000Z"},
+    {"club":9,"text":"He’s progressing. The ankle has been an annoyance, really, for all of us because Josh’s calf injury has cleared up and now the ankle’s a bit of a problem, so it’s affecting his rehab and his recovery. He’s still not with us out on the grass yet. I know he’ll be frustrated with that. We look forward to him being back outside with us.","said":"Frank Lampard","about":"Josh Eccles","at":"2026-10-22T12:30:00.000Z"}
   ],
   "rows": [
     {"code":486672,"club":8,"tag":"injury_scare","condition":"calf","confidence":0.65,"said":"2026-09-17T12:30:00.000Z","manager":"Xabi Alonso"},
@@ -432,6 +444,21 @@
     {"code":93605,"club":56,"tag":"ruled_out","confidence":0.65,"said":"2026-10-16T11:00:00.000Z","manager":""},
     {"code":515621,"club":31,"tag":"ruled_out","condition":"knee","confidence":0.65,"said":"2026-10-16T11:00:00.000Z","manager":"Pierre Sage"},
     {"code":220362,"club":31,"tag":"suspended","confidence":0.65,"said":"2026-10-16T11:00:00.000Z","manager":"Pierre Sage"},
-    {"code":531442,"club":40,"tag":"suspended","confidence":0.65,"said":"2026-10-16T11:00:00.000Z","manager":""}
+    {"code":531442,"club":40,"tag":"suspended","confidence":0.65,"said":"2026-10-16T11:00:00.000Z","manager":""},
+    {"code":465351,"club":43,"tag":"injury_scare","confidence":0.65,"said":"2026-10-22T09:30:00.000Z","manager":"Enzo Maresca"},
+    {"code":91651,"club":43,"tag":"injury_scare","confidence":0.65,"said":"2026-10-22T09:30:00.000Z","manager":"Enzo Maresca"},
+    {"code":472769,"club":43,"tag":"injury_scare","condition":"back","confidence":0.65,"said":"2026-10-22T09:30:00.000Z","manager":"Enzo Maresca"},
+    {"code":437730,"club":43,"tag":"ruled_out","condition":"knee","confidence":0.65,"said":"2026-10-22T09:30:00.000Z","manager":"Enzo Maresca"},
+    {"code":543295,"club":94,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-10-22T13:00:00.000Z","manager":"Keith Andrews"},
+    {"code":183656,"club":94,"tag":"still_out","condition":"hamstring","confidence":0.65,"said":"2026-10-22T13:00:00.000Z","manager":"Keith Andrews"},
+    {"code":593174,"club":94,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-10-22T13:00:00.000Z","manager":"Keith Andrews"},
+    {"code":513086,"club":94,"tag":"available","confidence":0.65,"said":"2026-10-22T13:00:00.000Z","manager":"Keith Andrews"},
+    {"code":204580,"club":94,"tag":"suspended","confidence":0.65,"said":"2026-10-22T13:00:00.000Z","manager":"Keith Andrews"},
+    {"code":508395,"club":94,"tag":"suspended","confidence":0.65,"said":"2026-10-22T13:00:00.000Z","manager":"Keith Andrews"},
+    {"code":220583,"club":9,"tag":"ruled_out","condition":"knee","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Frank Lampard"},
+    {"code":539142,"club":9,"tag":"ruled_out","condition":"calf","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Frank Lampard"},
+    {"code":439668,"club":9,"tag":"ruled_out","condition":"ankle","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Frank Lampard"},
+    {"code":176412,"club":9,"tag":"ruled_out","condition":"quad","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Frank Lampard"},
+    {"code":212314,"club":40,"tag":"ruled_out","confidence":0.65,"said":"2026-10-22T13:00:00.000Z","manager":""}
   ]
 }
