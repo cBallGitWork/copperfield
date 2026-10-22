@@ -27,8 +27,8 @@ const COLUMNS = {
 } as const;
 
 /** A row's breathing room under a thumb, on its cells, so the date block beside them runs rule to rule. */
-const ROW_TOP = "max-lg:pt-1";
-const ROW_FOOT = "max-lg:pb-1";
+const ROW_TOP = "max-lg:pt-0.5";
+const ROW_FOOT = "max-lg:pb-0.5";
 
 /** A club crest, or the empty slot that keeps the names in line when there is none. */
 const CREST = "size-5 shrink-0 object-contain lg:size-6";
@@ -154,8 +154,8 @@ function Side({
           players.map((player) => {
             // His real club as its crest; an unknown club leaves the slot empty rather than guess.
             const crest = player.club ? crestForShortName(toFplClubCode(player.club)) : null;
-            // The desk row's 28 floor on every name, linked or not, so stacked names keep one rhythm.
-            const line = `flex min-w-0 items-center gap-1.5 lg:min-h-7 ${NAME}`;
+            // A 28 floor on every name, linked or not, so stacked names keep one rhythm and In sits close on Out.
+            const line = `flex min-w-0 items-center gap-1.5 min-h-7 ${NAME}`;
             const body = (
               <>
                 {crest ? (
@@ -166,14 +166,14 @@ function Side({
                 <Named name={player.playerName} position={player.position} />
               </>
             );
-            // His page, at a tap row's 36 under a thumb; a deal from another feed carries no id and stays text.
+            // His page; a deal from another feed carries no id and stays text.
             return player.fantraxId === undefined ? (
               <span key={player.playerName} className={line}>{body}</span>
             ) : (
               <Link
                 key={player.playerName}
                 href={playerHref(player.fantraxId)}
-                className={`${line} max-lg:min-h-9 hover:underline`}
+                className={`${line} hover:underline`}
               >
                 {body}
               </Link>

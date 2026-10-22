@@ -35,8 +35,9 @@ date: Craig, 22 Oct 2026, *"remove the waivers run xx date, hate it"*),
 - **A man is named as on every list** (UI audit D-12, D-13, 21 Oct 2026): `PlayerName`'s rule, *L. Colwill* under a
   thumb and *Levi Colwill* on a desk, and his positions as the board leads' faint caps label (`positionsLabel`:
   *DEF*, *M/F*), not a bracketed letter, *(D)*, in its own ink.
-- **Every name opens his page** (`/players/[fantraxId]`, the id the feed's own row carries), at a tap row's 36px
-  under a thumb (16 Oct 2026: 66 names and not one could be tapped). The team Transfers tab draws the same ledger,
+- **Every name opens his page** (`/players/[fantraxId]`, the id the feed's own row carries), each name line 28px
+  so In sits close on Out (16 Oct 2026: 66 names and not one could be tapped; Craig, 22 Oct 2026, of 36px apiece: *"so big
+  spacing between the two rows, looks awful"*). The team Transfers tab draws the same ledger,
   so its names link too.
 - No moves: *Nothing* says so, coded `0 deals`.
 
