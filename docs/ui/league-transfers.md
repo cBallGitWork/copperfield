@@ -9,9 +9,10 @@ Transfers tab's ledger with each row's mover named, read off the same feed, so t
 ## On the page
 
 - Draft's frame (`league/Shell`): the league's bar and its strip, Transfers lit.
-- **The waiver line**, under the strip all week: *Waivers run Wed 18:00 · you're 9th*, a countdown from 18 hours out,
+- **The waiver line**, under the strip all week: *Waivers · you're 9th*, a countdown from 18 hours out (never the run's
+date: Craig, 22 Oct 2026, *"remove the waivers run xx date, hate it"*),
   to Draft › Waivers, which is a view of this tab and lights it (`league-waivers.md`, 19 Oct 2026). With the schedule
-  unreadable it still shows, without a time: *Waivers · you're 9th* (20 Oct 2026).
+  unreadable it still shows (20 Oct 2026).
 - The ledger (`components/league/Ledger`, no `teamId`, `groupByDay`): **the mover** on his own colour, the type in
   the info ink, who came in, who went out, and a trade's partner; the desk adds a date block on every row. Under a
   thumb a plate prints the league's short name (*DOME*); the desk prints the full one.

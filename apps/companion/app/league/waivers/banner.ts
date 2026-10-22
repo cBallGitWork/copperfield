@@ -1,13 +1,12 @@
-import { MS_PER_DAY, MS_PER_MINUTE, londonDayAndTime, nextRun, ordinal, timeLeft } from "@epl/core";
+import { MS_PER_DAY, MS_PER_MINUTE, nextRun, ordinal, timeLeft } from "@epl/core";
 import { WAIVER_BANNER_HOURS } from "../../config";
 
 // The waiver banner's words. A run day is a day claims can resolve, so it says when the run is, never what is waiting.
 
 /** The banner's parts: "Waivers run" `in 5h 12m` "· you're 9th". */
 export interface BannerWords {
-  /** `in 5h 12m` inside the window, `Wed 18:00` before it. */
+  /** `in 5h 12m`; before the window there are no words, never the run's day and time. */
   when: string;
-  near: boolean;
   /** `you're 9th`, or null when the reader has no place. */
   place: string | null;
 }
@@ -21,15 +20,9 @@ export function runsAfter(runs: readonly string[], next: string): string[] {
   });
 }
 
-/** The words at `now` (ms): under `WAIVER_BANNER_HOURS` to the next run, or before that when `always`; else null. */
-export function bannerWords(runs: readonly string[], now: number, place: number | null, always: boolean): BannerWords | null {
+/** The words at `now` (ms): under `WAIVER_BANNER_HOURS` to the next run; else null. */
+export function bannerWords(runs: readonly string[], now: number, place: number | null): BannerWords | null {
   const next = nextRun(runs, now);
-  if (next === null) return null;
-  const near = next.left <= WAIVER_BANNER_HOURS * 60 * MS_PER_MINUTE;
-  if (!near && !always) return null;
-  return {
-    when: near ? `in ${timeLeft(next.left)}` : londonDayAndTime(next.at),
-    near,
-    place: place === null ? null : `you're ${ordinal(place)}`,
-  };
+  if (next === null || next.left > WAIVER_BANNER_HOURS * 60 * MS_PER_MINUTE) return null;
+  return { when: `in ${timeLeft(next.left)}`, place: place === null ? null : `you're ${ordinal(place)}` };
 }
