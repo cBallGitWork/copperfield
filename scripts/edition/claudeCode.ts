@@ -31,6 +31,18 @@ export function readResult(stdout: string): Reply {
   return { text: body.result ?? "", stopReason: body.stop_reason, usage: body.usage };
 }
 
+/** A failed run's reason: the CLI's own `result` when it printed one (a refused login, a spent limit), else its stderr. */
+export function exitError(code: number | null, stderr: string, stdout: string): Error {
+  const line = stdout.trim().split("\n").reverse().find((l) => l.startsWith("{"));
+  let said: string | undefined;
+  try {
+    said = line === undefined ? undefined : (JSON.parse(line) as { result?: string }).result;
+  } catch {
+    said = undefined;
+  }
+  return new Error(`Claude Code exited ${code}: ${said || stderr.slice(-300) || stdout.slice(0, 300)}`);
+}
+
 export function viaClaudeCode(system: string, brief: string, model: string, maxTokens: number, effort: string | null): Promise<Reply> {
   // With an API key in its environment the CLI bills the key, which is the thing this route exists to stop.
   const { ANTHROPIC_API_KEY: _key, ...env } = process.env;
@@ -49,7 +61,7 @@ export function viaClaudeCode(system: string, brief: string, model: string, maxT
       try {
         resolve(readResult(out));
       } catch (error) {
-        reject(code === 0 ? error : new Error(`Claude Code exited ${code}: ${err.slice(-300) || out.slice(0, 300)}`));
+        reject(code === 0 ? error : exitError(code, err, out));
       }
     });
     child.stdin.end(brief);
