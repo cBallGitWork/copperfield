@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { FootballPlayer, PlayerStatLine, RosteredPlayer } from "@epl/core";
 import StatBoard from "./StatBoard";
 import { rosterFacts } from "./roster";
+import { noted, withWeeks } from "../../../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
@@ -28,7 +29,7 @@ describe("a squad's stat board", () => {
   const line = { fantraxId: "r", name: "Rogers, Morgan", club: null, clubShort: null, position: "M", ownerTeamId: "t", defaultPosition: "M", points: 10, stats: { G: 1 } } as PlayerStatLine;
   const { names, footballers } = rosterFacts(squad);
   const html = renderToStaticMarkup(
-    createElement(StatBoard, { lines: [line], footballers, names, served: ["G"], statsLeague: {}, statsColumns: [], defcon: null }),
+    withWeeks(createElement(StatBoard, { lines: [line], footballers, names, served: ["G"], statsLeague: {}, statsColumns: [], defcon: null })),
   );
 
   it("prints I. Surname under a thumb", () => {
@@ -38,5 +39,9 @@ describe("a squad's stat board", () => {
   it("marks an unfit man with CM's mark, never the word chip", () => {
     expect(html).toContain('role="img"');
     expect(html).not.toContain("cm-state");
+  });
+
+  it("notes his complaint and the export's return week", () => {
+    expect(html).toContain(`>${noted("Knee", "GW10")}</span>`);
   });
 });

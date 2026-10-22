@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { SquadPlayerDetail } from "@epl/core";
 import SquadRows from "./SquadRows";
+import { noted, withWeeks } from "../football/withWeeks";
 
 vi.mock("next/image", () => ({ default: () => null }));
 vi.mock("@/app/desk", () => import("../../desk"));
@@ -73,7 +74,7 @@ describe("the squad list at 390", () => {
   });
 });
 
-describe("a man FPL expects back on a date", () => {
+describe("a man due back in a known week", () => {
   const out = {
     ...man,
     rostered: {
@@ -82,11 +83,11 @@ describe("a man FPL expects back on a date", () => {
       stats: [],
     },
   } as unknown as SquadPlayerDetail;
-  const row = renderToStaticMarkup(createElement(SquadRows, { lines: [{ position: "D", players: [out] }] }));
+  const row = renderToStaticMarkup(withWeeks(createElement(SquadRows, { lines: [{ position: "D", players: [out] }] })));
 
-  // A phone never shows a title, and the date was in one alone (review M30, UX-5).
-  it("prints the date under his name, not in a title", () => {
-    expect(row).toMatch(/>Back 28 Nov</);
+  // A phone never shows a title (review M30, UX-5); the export's week beats FPL's fixed date.
+  it("prints his return week beside his name, not in a title", () => {
+    expect(row).toContain(`>${noted("Leg", "GW10")}</span>`);
   });
 });
 

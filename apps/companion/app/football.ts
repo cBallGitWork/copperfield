@@ -20,6 +20,7 @@ import {
   mapFixtures,
   mapLiveStats,
   mapMatchSheets,
+  nextRound,
   portraitUrl,
   rewindRound,
   roundAt,
@@ -165,6 +166,15 @@ export const seasonFixtures: () => Promise<Fixture[]> = cache(async () => {
   const round = base === null ? null : await roundFixtures(base.focus).catch(() => null);
   return round === null ? season.fixtures : withRoundFixtures(season.fixtures, mapFixtures(round.fixtures));
 });
+
+/** The gameweek of the next kickoff, whose lineups are being picked; null when FPL cannot be read. */
+export async function openGameweek(): Promise<number | null> {
+  try {
+    return nextRound(await seasonFixtures(), now().toISOString())?.gameweek ?? null;
+  } catch {
+    return null;
+  }
+}
 
 /** FPL's country list, which a `region` id points into. It does not change within a season. */
 export const regions = unstable_cache(async () => fetchRegions(), ["fpl-regions"], {

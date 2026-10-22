@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { LEAGUE_NAME } from "@epl/core";
-import { groundFaces, liveIn, offerLive } from "./football";
+import { groundFaces, liveIn, offerLive, openGameweek } from "./football";
 import { Suspense } from "react";
 import { headers } from "next/headers";
 import AutoRefresh from "./components/shell/AutoRefresh";
@@ -11,6 +11,8 @@ import LiveFigure from "./components/shell/LiveFigure";
 import LiveNow from "./components/shell/LiveNow";
 import OfflineWorker from "./components/shell/OfflineWorker";
 import PhotoGround from "./components/football/PhotoGround";
+import { ReturnWeeks } from "./components/football/FitnessNote";
+import { intelReturnWeeks } from "./intel";
 import PullToRefresh from "./components/shell/PullToRefresh";
 import Rail from "./components/shell/Rail";
 import ReplayStrip from "./components/shell/ReplayStrip";
@@ -72,8 +74,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const mail = readInbox()
     .then((inbox) => inbox.items.map((item) => item.id))
     .catch(() => null);
-  // The only read the shell waits for: whether the rail offers Live. The poller and the ground stream in after.
-  const matchday = await offerLive();
+  // The reads the shell waits for: whether the rail offers Live, and the open gameweek the rows' fitness notes judge a
+  // return week by (both cached FPL reads). The poller and the ground stream in after.
+  const [matchday, open] = await Promise.all([offerLive(), openGameweek()]);
 
   return (
     // `LaunchFrame`'s script stamps `data-launch` on <html> before hydration, in the installed app only.
@@ -129,7 +132,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             id="main"
             className="mx-auto w-full max-w-[var(--page-frame)] px-[var(--page-gutter)] pb-[var(--page-foot)] pt-[var(--page-top)]"
           >
-            {children}
+            {/* Every row's fitness note reads the squads export's return weeks from here. */}
+            <ReturnWeeks weeks={intelReturnWeeks} open={open}>{children}</ReturnWeeks>
           </main>
         </div>
       </body>

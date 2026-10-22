@@ -9,7 +9,8 @@ import SquadTable from "./club/[code]/SquadTable";
 import DepthList from "./club/[code]/depth/DepthList";
 import DepthPitch from "./club/[code]/depth/DepthPitch";
 import PlayerBoard from "./club/[code]/stats/PlayerBoard";
-import { CLUB, MEN, UNFIT, byCode, cards, league, marks, minutes } from "./premRows.fixture";
+import { CLUB, MEN, NOTES, UNFIT, byCode, cards, league, marks, minutes } from "./premRows.fixture";
+import { withWeeks } from "../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Absent", () => import("../components/shell/Absent"));
@@ -57,6 +58,11 @@ describe.each([
     expect(html).toContain("cm-doubt-out");
     expect(html).toContain("cm-doubt-major");
   });
+
+  it("notes each unfit man's complaint and return after his mark", () => {
+    const html = renderToStaticMarkup(withWeeks(draw()));
+    for (const note of NOTES) expect(html).toContain(`>${note}</span>`);
+  });
 });
 
 describe("a match's team sheet, once played", () => {
@@ -79,9 +85,10 @@ describe("a match's team sheet, once played", () => {
     });
   };
 
-  it("draws no doubt mark or wash, but keeps the holder tag", () => {
-    const html = renderToStaticMarkup(draw());
+  it("draws no doubt mark, note or wash, but keeps the holder tag", () => {
+    const html = renderToStaticMarkup(withWeeks(draw()));
     expect(marks(html)).toBe(0);
+    for (const note of NOTES) expect(html).not.toContain(note);
     expect(html).not.toContain("cm-doubt-");
     expect(html).toContain(">(Yours)<");
   });
@@ -95,13 +102,14 @@ describe("a match's team sheet, once played", () => {
 
 describe("the depth chart", () => {
   const lines: DepthSpot[][] = [MEN.map((player, at) => ({ slot: `S${at}`, label: "Slot", holders: [{ code: player.code, share: 1 }] }))];
-  const draw = (view: typeof DepthList | typeof DepthPitch) =>
-    renderToStaticMarkup(
-      createElement(view, { lines, playerOf: (code: number) => byCode.get(code) ?? null, cardOf: (code: number) => cards.get(code), minutes: { gameweek: 8, byCode: minutes } }),
-    );
+  const chart = (view: typeof DepthList | typeof DepthPitch) =>
+    createElement(view, { lines, playerOf: (code: number) => byCode.get(code) ?? null, cardOf: (code: number) => cards.get(code), minutes: { gameweek: 8, byCode: minutes } });
+  const draw = (view: typeof DepthList | typeof DepthPitch) => renderToStaticMarkup(chart(view));
 
-  it("marks every unfit man in the list", () => {
+  it("marks and notes every unfit man in the list", () => {
     expect(marks(draw(DepthList))).toBe(UNFIT);
+    const html = renderToStaticMarkup(withWeeks(chart(DepthList)));
+    for (const note of NOTES) expect(html).toContain(`>${note}</span>`);
   });
 
   // DESIGN §3: the pitch carries the colour alone (Craig, 1 Oct 2026: "pitch view, remove the chip").

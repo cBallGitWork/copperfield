@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { FootballPlayer, LeagueTeam, LineupDetail, SquadPlayerDetail } from "@epl/core";
 import SideStats from "./SideStats";
+import { noted, withWeeks } from "../../../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
@@ -28,7 +29,7 @@ const sheet: LineupDetail = {
   shape: "1-0-0-0",
 };
 
-const html = renderToStaticMarkup(
+const html = renderToStaticMarkup(withWeeks(
   createElement(SideStats, {
     team: { teamId: "t1", name: "Side" } as LeagueTeam,
     sheet,
@@ -38,13 +39,14 @@ const html = renderToStaticMarkup(
     sort: { head: "Pts", descending: true },
     hrefFor: (head: string) => `?sort=${head}`,
   }),
-);
+));
 
 describe("Matchup Stats board", () => {
   it("marks and washes an unfit man, on the bench too", () => {
     expect(html.match(/role="img"/g)?.length).toBe(1);
     expect(html).toContain("cm-doubt-out");
     expect(html).not.toContain("cm-state");
+    expect(html.split(`>${noted("Knee", "GW10")}</span>`)).toHaveLength(2);
   });
 
   it("heads Fantrax's points FPts and inks them cyan, never by gain or loss", () => {

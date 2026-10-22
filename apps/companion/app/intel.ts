@@ -29,7 +29,7 @@ import type {
   ShotCover,
   TouchPlayer,
 } from "@epl/core";
-import { londonDayAndDate, careerIntel, cupIntel, depthIntel, lineIntel, matchIntel, minuteMovesIntel, minutesIntel, playedFloor, clubKickedOff, shotFixtures, shotIntel, squadIntel, statIntel, strengthIntel, touchIntel } from "@epl/core";
+import { londonDayAndDate, careerIntel, returnWeek, cupIntel, depthIntel, lineIntel, matchIntel, minuteMovesIntel, minutesIntel, playedFloor, clubKickedOff, shotFixtures, shotIntel, squadIntel, statIntel, strengthIntel, touchIntel } from "@epl/core";
 import squadsFile from "../../../data/intel/squads/26-27.json";
 import xiFile from "../../../data/intel/xi/26-27.json";
 import piecesFile from "../../../data/intel/set-pieces/26-27.json";
@@ -55,6 +55,14 @@ import linesNowFile from "../../../data/intel/lines/26-27.json";
 /** Every player the export carries, by FPL's season-stable code. */
 export const intelSquads: Map<number, IntelPlayer> = squadIntel(
   squadsFile as unknown as IntelSquads,
+);
+
+/** Each man's return gameweek the export holds, by FPL code: the rows' fitness notes, small enough for every page. */
+export const intelReturnWeeks: Record<number, number> = Object.fromEntries(
+  [...intelSquads].flatMap(([code, player]) => {
+    const week = returnWeek(player);
+    return week === null ? [] : [[code, week]];
+  }),
 );
 
 /** The latest predicted elevens Scout has, as the export left them. Its round is `manifest.gameweek`. */

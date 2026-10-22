@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { type LeagueTeam, type LineupDetail, type ScoringCategory, type SquadPlayerDetail, crestUrl, fullPlayerName, inkOn, isResolved, wordsOf } from "@epl/core";
+import { type FootballPlayer, type LeagueTeam, type LineupDetail, type ScoringCategory, type SquadPlayerDetail, crestUrl, fullPlayerName, inkOn, isResolved, wordsOf } from "@epl/core";
 import { teamColours } from "@/app/teamColours";
 import Section from "../../../components/shell/Section";
 import Board from "../../../components/league/Board";
@@ -9,7 +9,7 @@ import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import { figureOf, paidIn, sideRows, type Breakdowns, type Counts } from "./sideRows";
 import { DEFAULT_SIDE_SORT } from "./views";
 import Absent from "@/app/components/shell/Absent";
-import { fitnessOf } from "../../../components/football/doubtRow";
+import { doubtRow } from "../../../components/football/doubtRow";
 import FitnessMark from "../../../components/football/FitnessMark";
 
 // One manager's fifteen in the match page's club board (`prem/match/[id]/ClubStats`): his colours on the
@@ -19,12 +19,15 @@ import FitnessMark from "../../../components/football/FitnessMark";
 interface Row {
   player: SquadPlayerDetail;
   reserve: boolean;
-  fitness: ReturnType<typeof fitnessOf>;
+  /** His footballer, null where the bridge has not settled him; his mark and note read it. */
+  footballer: FootballPlayer | null;
+  wash: string;
 }
 
-/** A man's row, asking his fitness once for the wash and the mark. */
+/** A man's row, asking his fitness once for the wash. */
 function rowOf(player: SquadPlayerDetail, reserve: boolean): Row {
-  return { player, reserve, fitness: fitnessOf(isResolved(player.rostered) ? player.rostered.player : null) };
+  const footballer = isResolved(player.rostered) ? player.rostered.player : null;
+  return { player, reserve, footballer, wash: doubtRow(footballer) };
 }
 
 export default function SideStats({
@@ -59,18 +62,18 @@ export default function SideStats({
         rows={eleven.map((player) => rowOf(player, false))}
         tail={{ label: "Bench · not counted", rows: bench.map((player) => rowOf(player, true)) }}
         keyOf={({ player }) => player.rostered.slot.fantraxId}
-        rowClass={({ reserve, fitness }) => `${reserve ? "cm-out" : ""} ${fitness.wash}`}
+        rowClass={({ reserve, wash }) => `${reserve ? "cm-out" : ""} ${wash}`}
         lead={{
           tile: { positions: ({ player }) => (player.rostered.slot.position ? [player.rostered.slot.position] : []) },
           name: {
             label: "Player",
-            className: ({ fitness }) => fitness.wash,
-            of: ({ player, fitness }) => (
+            className: ({ wash }) => wash,
+            of: ({ player, footballer }) => (
               <MaybeCard player={player} className={`${LEAD_LINK} gap-1.5`}>
                 <LeadFace
                   crest={player.club ? crestUrl(player.club) : null}
                   name={fullPlayerName(player.rostered)}
-                  after={<FitnessMark mark={fitness.mark} />}
+                  after={<FitnessMark player={footballer} />}
                 />
               </MaybeCard>
             ),
