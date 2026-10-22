@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, createContext, useContext, useId, useState } from "react";
+import Chevron from "../components/shell/Chevron";
 
 // A match's row whose counts open the reader's men under it; each count sits under its own club's name.
 
@@ -39,16 +40,7 @@ export function YoursToggle({ count }: { count: number }) {
       <span aria-hidden className="hidden lg:inline">
         {count} yours
       </span>
-      <svg
-        aria-hidden
-        viewBox="0 0 24 24"
-        className={`hidden h-3 w-3 shrink-0 text-faint transition-transform lg:block duration-200 ${state.open ? "rotate-180" : ""}`}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      >
-        <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <Chevron open={state.open} className="hidden h-3 w-3 lg:block" />
     </button>
   );
 }

@@ -138,9 +138,10 @@ no longer describes this one.
 4. **Nothing beside it** (Craig, 6 Oct 2026: *"huge table next to the list, needs to be pitch?"*). The season
    grid stood beside the list above `lg` until then and came off: the Stats tab already carries the season, and a
    pitch of fifteen would draw the shape the gate withholds. The list takes the full width at both sizes.
-5. **The player card** (`PlayerCard`) over the top, when one is tapped: who he is, his fitness line, his FPts as the
-   list prints them, and his **xMins** for the week on screen and the four after (`MinutesRun`, inked by risk as the
-   list is). The gameweek sheet hands it his breakdown instead of the FPts line.
+5. **The player card** (`PlayerCard`) over the top, when one is tapped: who he is, his fitness line, his last three matches over
+   our league's points with his FPts as the list prints them at the head, his next five on their difficulty with his
+   **xMins** under each (`WeekStrip`, inked by risk as the list is), and the news folded to its headline. The gameweek
+   sheet hands it his breakdown in place of the FPts figure.
 
 **One list on every branch** (Craig, 21 Oct 2026: *"my team is the one that's wrong"*). The gate's `SquadBoard`, a
 sheet's List (`TeamSheet` in `ListAndPitch`), your own planner and the head-to-head's unplayed side all print the same
@@ -157,7 +158,7 @@ opponent and FPts (Craig, 7 Oct 2026: *"assign the xmins by gameweek"*). **Inked
 otherwise the derived cyan, a dash included. A greyed bench row greys it as before. A week the export starts after (the
 gameweeks already played) has no column at all rather than a column of dashes; the head-to-head board has none.
 **Dated once** (16 Oct 2026): "xMins as of Thu 15 Oct", quiet, under the whole list (the bench included, 21 Oct), and
-on the player card beside its xMins label. The day is the export's (`XMINS_AS_OF`); undated, Friday's
+on the player card at the head of its Next row. The day is the export's (`XMINS_AS_OF`); undated, Friday's
 figure passed for Monday's.
 
 **FPts prints in the reading cyan** (Craig, 21 Oct 2026: *"put fpts in cyan too"*; DESIGN §3's Cyan row): the column
