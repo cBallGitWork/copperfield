@@ -1,4 +1,4 @@
-import type { ExpectedMinutes, Opposition } from "@epl/core";
+import { sideDifficulty, type ExpectedMinutes, type Fixture, type Opposition } from "@epl/core";
 import { played, type MatchRow } from "./matchRows";
 
 // A player card's two strips, as plain data a server action can hand over: his last few matches with what our league
@@ -14,6 +14,8 @@ export interface FormMatch {
   /** The opponent's short name; null where FPL's club is not in the snapshot. */
   opponent: string | null;
   home: boolean;
+  /** FPL's 1–5 difficulty that match had for his side; null where the fixture is not held or FPL published none. */
+  difficulty: number | null;
   points: number | null;
 }
 
@@ -36,18 +38,27 @@ export interface CardWeeks {
 }
 
 /** His latest `count` matches, oldest first, off his joined log (most recent first). */
-export function formMatches(rows: readonly MatchRow[], count: number = FORM_MATCHES): FormMatch[] {
+export function formMatches(
+  rows: readonly MatchRow[],
+  /** The season's fixtures by id, for each match's difficulty. */
+  fixtures: ReadonlyMap<number, Fixture>,
+  count: number = FORM_MATCHES,
+): FormMatch[] {
   return rows
     .slice(0, count)
     .reverse()
-    .map((row) => ({
-      fixtureId: row.fpl.match.fixtureId,
-      gameweek: row.fpl.match.gameweek,
-      opponent: row.fpl.opponent?.shortName ?? null,
-      home: row.fpl.match.home,
-      // A match he was not on is no reading, never a nought.
-      points: played(row) ? (row.paid?.points ?? null) : null,
-    }));
+    .map((row) => {
+      const fixture = fixtures.get(row.fpl.match.fixtureId);
+      return {
+        fixtureId: row.fpl.match.fixtureId,
+        gameweek: row.fpl.match.gameweek,
+        opponent: row.fpl.opponent?.shortName ?? null,
+        home: row.fpl.match.home,
+        difficulty: fixture === undefined ? null : sideDifficulty(fixture, row.fpl.match.home),
+        // A match he was not on is no reading, never a nought.
+        points: played(row) ? (row.paid?.points ?? null) : null,
+      };
+    });
 }
 
 /** His next `count` matches with the week's xMins under each week's first. */

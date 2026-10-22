@@ -11,9 +11,9 @@ const strip = (props: Partial<Parameters<typeof WeekStrip>[0]>) =>
 describe("a card's form and run", () => {
   const html = strip({
     form: [
-      { fixtureId: 1, gameweek: 5, opponent: "ARS", home: true, points: 6 },
-      { fixtureId: 2, gameweek: 6, opponent: "SUN", home: false, points: 0 },
-      { fixtureId: 3, gameweek: 7, opponent: "CRY", home: true, points: null },
+      { fixtureId: 1, gameweek: 5, opponent: "ARS", home: true, difficulty: 5, points: 6 },
+      { fixtureId: 2, gameweek: 6, opponent: "SUN", home: false, difficulty: 2, points: 0 },
+      { fixtureId: 3, gameweek: 7, opponent: "CRY", home: true, difficulty: 3, points: null },
     ],
     next: [
       { key: "a", gameweek: 8, against: { shortName: "LIV", home: false, difficulty: 4 }, minutes: 85 },
@@ -24,7 +24,6 @@ describe("a card's form and run", () => {
   });
 
   it("prints each recent opponent and venue over our league's points, in the reading's cyan", () => {
-    expect(html).toContain("GW5");
     expect(html).toMatch(/>ARS<\/span><span[^>]*>H</);
     expect(html).toMatch(/text-info"[^>]*>6</);
     // A man who played prints his nought; one who did not is a dash.
@@ -32,9 +31,27 @@ describe("a card's form and run", () => {
     expect(html).toMatch(/text-info"[^>]*>—</);
   });
 
+  it("heads every week, past and to come, with the table's bevelled gameweek plate", () => {
+    expect(html.match(/class="cm-bevel flex h-6[^"]*text-3xs font-bold uppercase"[^>]*>GW\d+</g)).toHaveLength(6);
+  });
+
+  it("draws a played match on that match's difficulty for him, never the unrated plate", () => {
+    expect(html).toMatch(/var\(--color-fdr-5\)"><span[^>]*>ARS</);
+    expect(html).toMatch(/var\(--color-fdr-2\)"><span[^>]*>SUN</);
+    expect(html).toMatch(/var\(--color-fdr-3\)"><span[^>]*>CRY</);
+    expect(html).not.toContain("var(--color-raised)");
+  });
+
+  it("parts Form from Next as two blocks, each with its own head", () => {
+    const blocks = html.match(/<section[^>]*>[\s\S]*?<\/section>/g) ?? [];
+    expect(blocks).toHaveLength(2);
+    expect(blocks[0]).toContain(">Form<");
+    expect(blocks[0]).not.toContain(">Next<");
+    expect(blocks[1]).toMatch(/^<section[^>]*><p[^>]*><span[^>]*>Next</);
+  });
+
   it("draws each fixture on its difficulty with his xMins inked under the week's first match", () => {
     expect(html).toContain("var(--color-fdr-4)");
-    expect(html).toContain("var(--color-fdr-5)");
     expect(html).toMatch(/text-info"[^>]*>85</);
     expect(html).toMatch(/text-bad"[^>]*>30</);
     expect(html.match(/title="Expected minutes/g)).toHaveLength(2);
@@ -42,12 +59,11 @@ describe("a card's form and run", () => {
   });
 
   it("prints a dash for a man with no matches yet", () => {
-    const empty = strip({ form: [] });
-    expect(empty).toMatch(/>Form<[\s\S]*<li[^>]*>—<\/li>/);
-    expect(strip({ form: null })).toMatch(/<li[^>]*>—<\/li>/);
+    expect(strip({ form: [] })).toMatch(/>Form<[\s\S]*<p[^>]*>—<\/p>/);
+    expect(strip({ form: null })).toMatch(/<p[^>]*>—<\/p>/);
   });
 
-  it("drops the Next row when nothing is to come", () => {
+  it("drops the Next block when nothing is to come", () => {
     expect(strip({})).not.toContain(">Next<");
   });
 

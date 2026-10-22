@@ -2,7 +2,7 @@ import type { Opposition } from "@epl/core";
 import Section from "../../components/shell/Section";
 import { fdrStep } from "../../components/football/fdr";
 import { DASH, venueMark } from "@epl/core";
-import { MINOR_CAPS, MINOR_LABEL, PLATE_FRAME, ROW_FIGURE } from "@/app/desk";
+import { GW_PLATE, MINOR_LABEL, ROW_FIGURE } from "@/app/desk";
 
 // What is coming, as a run: FPL's difficulty on each block, under it the sister model's xMins for that gameweek.
 // No source caption (Craig, 30 Sep 2026); each figure's title says whose it is.
@@ -63,6 +63,3 @@ export default function FixtureRun({
     </Section>
   );
 }
-
-/** A gameweek's head: a table's 24px plate in its minor caps, unpadded so "GW10" fits an eighth of a phone. */
-const GW_PLATE = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap ${MINOR_CAPS}`;

@@ -1,7 +1,7 @@
 "use server";
 
 import { clubById, isFantraxPlayerId } from "@epl/core";
-import { footballNow } from "../../football";
+import { footballNow, seasonFixtures } from "../../football";
 import { intelMinutes } from "../../intel";
 import { XMINS_AS_OF } from "../../xmins";
 import { XMINS_WEEKS } from "../../config";
@@ -19,10 +19,16 @@ export async function cardRecord(fantraxId: string): Promise<CardWeeks | null> {
   const paid = "unavailable" in found ? null : found.intel.matches;
   const football = "unavailable" in found ? await footballSelf(fantraxId) : found.football;
   if (football === null) return null;
-  const [log, run, snapshot] = await Promise.all([gameLog(football.player), scouting(football.player), footballNow()]);
+  const [log, run, snapshot, fixtures] = await Promise.all([
+    gameLog(football.player),
+    scouting(football.player),
+    footballNow(),
+    seasonFixtures(),
+  ]);
   const minutes = new Map((intelMinutes.get(football.player.code) ?? []).map((week) => [week.gameweek, week.minutes]));
+  const byId = new Map(fixtures.map((fixture) => [fixture.id, fixture]));
   return {
-    form: paid === null ? null : formMatches(joinMatches(log?.rows ?? [], paid, clubById(snapshot))),
+    form: paid === null ? null : formMatches(joinMatches(log?.rows ?? [], paid, clubById(snapshot)), byId),
     next: nextMatches(run, minutes, XMINS_WEEKS),
     asOf: XMINS_AS_OF,
   };

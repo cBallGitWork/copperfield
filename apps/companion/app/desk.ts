@@ -144,6 +144,9 @@ export const GROUP_PLATE = `${HEAD_PLATE_CENTRE} text-2xs font-bold uppercase`;
 /** A plate captioning a block inside a panel: a cup round, a group, a side of a bracket. */
 export const BLOCK_PLATE = `${HEAD_PLATE} ${MINOR_CAPS}`;
 
+/** A gameweek's head over a run of fixtures: a table's 24px plate in its minor caps, unpadded so "GW10" fits an eighth of a phone. */
+export const GW_PLATE = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap ${MINOR_CAPS}`;
+
 /* ---- Panels and controls -------------------------------------------------- */
 
 /** The default panel spacing. A caller with a reason keeps its own and says why. */
