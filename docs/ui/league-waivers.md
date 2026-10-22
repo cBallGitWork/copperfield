@@ -18,8 +18,8 @@ at 1:00 PM US Eastern, the rehearsal and dummy leagues Tuesday and Friday at 5:0
   accent. Read off Fantrax's own column, `wwOrder` on the standings page, **never derived from the table**: a claim
   sends its maker to the back and the order resets to reverse standings on its own day, so on 19 Oct the bottom
   team was tenth in it.
-- **Last run**: the claims off waivers on the latest run's stamp, in Transfers' own ledger (`Ledger`), headed with
-  the run's London time. Free-agent pick-ups are not a run and are left out.
+- **Last run**: the claims off waivers on the latest run's stamp, in Transfers' own ledger (`Ledger`), headed
+  *Last run* alone: the ledger's date column says when (Craig, 22 Oct 2026: *"remove the waivers run xx date, hate it"*). Free-agent pick-ups are not a run and are left out.
 - Under a thumb the order and the last run are one block at a time, picked by a compact strip (`?show=last`) docked
   in `FootFrame`'s foot above the thumb rail (20 Oct 2026); the desk shows both side by side and no strip.
 - The claim order's head row is for a screen reader only: its one plate, Order, is muted, and drawn it was a blank
