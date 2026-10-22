@@ -2,16 +2,16 @@
  "manifest": {
   "season": "26-27",
   "gameweek": 8,
-  "exportedAt": "2026-10-21T14:10:05.784234+00:00",
+  "exportedAt": "2026-10-22T16:15:24.902285+00:00",
   "rows": 20,
   "sources": [
    {
     "path": "data/derived/team_squad/season=26-27/team_squad.parquet",
-    "mtime": "2026-10-21T14:09:55.613942+00:00"
+    "mtime": "2026-10-22T16:15:08.422728+00:00"
    },
    {
     "path": "data/match_logs/player_match_log/season=26-27/player_match_log.parquet",
-    "mtime": "2026-10-21T14:09:57.587616+00:00"
+    "mtime": "2026-10-22T16:15:12.174268+00:00"
    },
    {
     "path": "data/match_logs/player_match_log/season=25-26/player_match_log.parquet",
@@ -143,10 +143,6 @@
       {
        "code": 208706,
        "share": 0.506
-      },
-      {
-       "code": 481655,
-       "share": 0.0
       }
      ]
     },
@@ -161,11 +157,11 @@
       },
       {
        "code": 232413,
-       "share": 0.762
+       "share": 0.776
       },
       {
        "code": 248857,
-       "share": 0.222
+       "share": 0.209
       }
      ]
     },
@@ -195,11 +191,11 @@
      "holders": [
       {
        "code": 223340,
-       "share": 0.971
+       "share": 0.486
       },
       {
        "code": 248857,
-       "share": 0.029
+       "share": 0.514
       }
      ]
     },
@@ -260,19 +256,11 @@
      "holders": [
       {
        "code": 184667,
-       "share": 0.36
+       "share": 0.95
       },
       {
        "code": 245719,
-       "share": 0.559
-      },
-      {
-       "code": 244954,
-       "share": 0.041
-      },
-      {
-       "code": 199796,
-       "share": 0.041
+       "share": 0.05
       }
      ]
     },
@@ -283,7 +271,7 @@
      "holders": [
       {
        "code": 441302,
-       "share": 0.36
+       "share": 0.48
       },
       {
        "code": 487992,
@@ -294,8 +282,12 @@
        "share": 0.0
       },
       {
+       "code": 638987,
+       "share": 0.47
+      },
+      {
        "code": 184667,
-       "share": 0.64
+       "share": 0.05
       }
      ]
     },
@@ -352,7 +344,7 @@
      "holders": [
       {
        "code": 577285,
-       "share": 0.398
+       "share": 0.469
       },
       {
        "code": 195546,
@@ -360,7 +352,7 @@
       },
       {
        "code": 614071,
-       "share": 0.071
+       "share": 0.0
       },
       {
        "code": 638987,
@@ -1473,7 +1465,7 @@
       },
       {
        "code": 172850,
-       "share": 0.0
+       "share": 0.014
       }
      ]
     },
@@ -1503,15 +1495,19 @@
       },
       {
        "code": 450063,
-       "share": 1.0
+       "share": 0.75
       },
       {
        "code": 209400,
-       "share": 0.021
+       "share": 0.122
       },
       {
        "code": 108413,
-       "share": 0.0
+       "share": 0.066
+      },
+      {
+       "code": 152551,
+       "share": 0.026
       }
      ]
     },
@@ -1526,11 +1522,11 @@
       },
       {
        "code": 209400,
-       "share": 0.97
+       "share": 0.869
       },
       {
        "code": 205533,
-       "share": 0.087
+       "share": 0.188
       },
       {
        "code": 232185,
@@ -2161,19 +2157,23 @@
      "holders": [
       {
        "code": 212314,
-       "share": 0.734
+       "share": 0.0
       },
       {
        "code": 218543,
-       "share": 0.62
+       "share": 1.0
       },
       {
        "code": 216055,
-       "share": 0.591
+       "share": 0.753
       },
       {
        "code": 501390,
-       "share": 0.055
+       "share": 0.097
+      },
+      {
+       "code": 183015,
+       "share": 0.15
       }
      ]
     },
@@ -3350,11 +3350,11 @@
       },
       {
        "code": 222531,
-       "share": 0.74
+       "share": 0.986
       },
       {
        "code": 250199,
-       "share": 0.297
+       "share": 0.051
       },
       {
        "code": 465680,
