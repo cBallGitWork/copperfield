@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { claudeArgs, readResult } from "./claudeCode";
+import { claudeArgs, exitError, readResult } from "./claudeCode";
 
 describe("claudeArgs", () => {
   it("runs bare of tools, settings, MCP and skills, with the voice as the whole system prompt", () => {
@@ -23,5 +23,19 @@ describe("readResult", () => {
   it("throws on an error result and on no result at all", () => {
     expect(() => readResult('{"is_error":true,"result":"Not logged in"}')).toThrow("Not logged in");
     expect(() => readResult("nothing")).toThrow("printed no result");
+  });
+});
+
+describe("exitError", () => {
+  // CI cut the reason off at 300 characters of the JSON, so a refused token read as a blank failure (22 Oct 2026).
+  it("names the CLI's own result when it printed one, past a long usage block", () => {
+    const usage = { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, padding: "x".repeat(400) };
+    const out = JSON.stringify({ is_error: true, usage, result: "Invalid API key · Please run /login" });
+    expect(exitError(1, "", out).message).toBe("Claude Code exited 1: Invalid API key · Please run /login");
+  });
+
+  it("falls back to stderr, then the start of stdout, when there is no result", () => {
+    expect(exitError(1, "boom", "").message).toBe("Claude Code exited 1: boom");
+    expect(exitError(2, "", "not json").message).toBe("Claude Code exited 2: not json");
   });
 });
