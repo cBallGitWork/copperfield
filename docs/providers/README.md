@@ -82,7 +82,8 @@ Of the nineteen JSON reads only the trade block, the proposals and the waiver sc
 Every workflow in `.github/workflows/`, crons in UTC as written. Writers commit through
 `scripts/ci/push.sh` (rebase, five tries); capture's and editions' commit steps run with `if: always()`, so a
 partial day or a killed firing is kept. Every scheduled job ends in `scripts/ci/alert.sh`: a red or timed-out run
-opens the issue `alert: <workflow>`, assigned to the owner, and the next green run closes it.
+opens the issue `alert: <workflow>`, assigned to the owner, and the next green run closes it. Editions puts the
+reason first (`scripts/ci/edition-reason.sh`): a refused login says "401: … re-run claude setup-token".
 
 | Workflow | Cron (UTC) | Runs | Commits, with prefix | Concurrency | Target |
 |---|---|---|---|---|---|
@@ -102,8 +103,9 @@ opens the issue `alert: <workflow>`, assigned to the owner, and the next green r
 | `.github/workflows/alert.yml` | none: dispatched by `scripts/sync-intel.sh` | `scripts/ci/alert.sh`, run named `alert <source> <state>` | nothing; opens or closes an issue | per source | stays |
 
 
-On Craig's Mac (launchd, London time; `scripts/install-intel-jobs.sh` installs all three): `com.epl-draft.intel-weekly` Tue 08:00 runs
-`scripts/sync-intel.sh weekly`, `com.epl-draft.intel-pressers` Thu 16:00, Fri 12:30, 14:00 and 15:45 (the conferences) and Thu 17:15
+On Craig's Mac (launchd, London time; `scripts/install-intel-jobs.sh` installs all four): `com.epl-draft.intel-weekly` Tue 08:00 runs
+`scripts/sync-intel.sh weekly`, and `com.epl-draft.intel-weekly-catch-up` Tue 14:00 and Wed 08:00 runs `weekly catch-up`, which stops in a
+line unless the weekly's alert (`intel-weekly` or `intel-weekly-stale`) is open; `com.epl-draft.intel-pressers` Thu 16:00, Fri 12:30, 14:00 and 15:45 (the conferences) and Thu 17:15
 and Fri 17:45 (the sister's 16:30 sweeps) runs `pressers`. Each restores the GitHub sweep's data from R2 through `scripts/sister-export.py`,
 writes a `chore/intel-<mode>-<date>-<time>` PR that merges itself once `verify` passes, logs to
 `~/Library/Logs/epl-draft-intel.log`, and ends in an `alert.yml` dispatch, `intel-<mode> ok` or `fail`.

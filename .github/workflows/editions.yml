@@ -124,7 +124,15 @@ jobs:
           # after the prose has been paid for.
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           FANTRAX_LEAGUE_ID: ${{ steps.league.outputs.id }}
-        run: npm run edition
+        run: |
+          set -o pipefail
+          npm run edition 2>&1 | tee "$RUNNER_TEMP/edition.log"
+
+      # The alert's first line: a refused login names its fix (re-run `claude setup-token`), else the first failure.
+      - name: Name the failure
+        id: reason
+        if: failure()
+        run: echo "text=$(scripts/ci/edition-reason.sh "$RUNNER_TEMP/edition.log")" >> "$GITHUB_OUTPUT"
 
       - name: Commit the edition, if one was written
         # Even after a failed or timed-out firing: the writer saves story by story, ledger last.
@@ -148,3 +156,4 @@ jobs:
         with:
           source: editions
           status: ${{ job.status }}
+          reason: ${{ steps.reason.outputs.text }}

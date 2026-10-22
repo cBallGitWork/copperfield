@@ -7,6 +7,10 @@ inputs:
   status:
     description: The caller's job.status
     required: true
+  reason:
+    description: Why it failed, in a line, set before the run's URL; never a secret
+    required: false
+    default: ""
 runs:
   using: composite
   steps:
@@ -15,5 +19,6 @@ runs:
         GH_TOKEN: ${{ github.token }}
         SOURCE: ${{ inputs.source }}
         STATE: ${{ inputs.status == 'success' && 'ok' || 'fail' }}
+        REASON: ${{ inputs.reason }}
         RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      run: scripts/ci/alert.sh "$SOURCE" "$STATE" "$RUN_URL"
+      run: scripts/ci/alert.sh "$SOURCE" "$STATE" "${REASON:+$REASON }$RUN_URL"

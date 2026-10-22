@@ -18,6 +18,8 @@ from pathlib import Path
 ZONES = "derived,signals,match_logs,staging/understat,raw/fpl/live/bootstrap,raw/fpl/live/element_summaries,staging/fpl/{season}"
 LOCK_WAIT_S = 900
 STALE = 3
+# The sister's Tuesday 06:30 UK sweep, after the round's Monday night; weekly accepts it from 05:00 UTC (Mon is 0).
+WEEKLY_SWEEP_DAY = 1
 
 
 def newest_report(sister: Path) -> dict | None:
@@ -26,8 +28,9 @@ def newest_report(sister: Path) -> dict | None:
 
 
 def stale_reason(report: dict | None, mode: str, now: datetime, due: datetime | None) -> str | None:
-    """Why the newest sweep is too old or red to trust, or None. Weekly wants Tuesday morning's own sweep; pressers the
-    one the sister's schedule says should have finished by now (`due`), or the last 26h when it cannot say."""
+    """Why the newest sweep is too old or red to trust, or None. Weekly wants this week's Tuesday-morning sweep or a later
+    one (a re-run, read on Wednesday too); pressers the one the sister's schedule says should have finished by now
+    (`due`), or the last 26h when it cannot say."""
     if report is None:
         return "there is no sweep report on this Mac"
     run, finished = report.get("run_id"), report.get("finished_at")
@@ -35,6 +38,9 @@ def stale_reason(report: dict | None, mode: str, now: datetime, due: datetime | 
         return f"the newest sweep, {run}, was not green"
     if mode == "weekly":
         since = now.replace(hour=5, minute=0, second=0, microsecond=0)
+        since -= timedelta(days=(since.weekday() - WEEKLY_SWEEP_DAY) % 7)
+        if since > now:
+            since -= timedelta(days=7)
     else:
         since = due if due is not None else now - timedelta(hours=26)
     if datetime.fromisoformat(finished) < since:
