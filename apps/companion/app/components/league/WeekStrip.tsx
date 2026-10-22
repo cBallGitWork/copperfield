@@ -14,17 +14,23 @@ export default function WeekStrip({
   next,
   asOf,
   caption,
+  captionAt = "form",
 }: {
   /** Undefined while the read is out; null or empty when there is nothing to print. */
   form: readonly FormMatch[] | null | undefined;
   next: readonly NextMatch[];
   asOf: string | null;
-  /** The row's own figure beside the Form head: "FPts 13". */
+  /** The row's own figure: "FPts 13". */
   caption?: ReactNode;
+  /** League points sit over the form's league points; a projection or a gameweek's over the run to come. */
+  captionAt?: "form" | "next";
 }) {
+  // With no run to head, the figure falls back to the Form head rather than vanish.
+  const atNext = captionAt === "next" && next.length > 0;
+  const minutesHead = asOf === null ? "xMins" : `xMins ${asOf}`;
   return (
     <section className="cm-panel flex flex-col gap-1 px-3 py-2">
-      <CardBlock label="Form" aside={caption} />
+      <CardBlock label="Form" aside={atNext ? null : caption} />
       <ol className="flex min-h-16 gap-1" aria-busy={form === undefined || undefined}>
         {form === undefined ? null : form === null || form.length === 0 ? (
           <li className={`${QUIET_FIGURE} self-center`}>{DASH}</li>
@@ -44,7 +50,18 @@ export default function WeekStrip({
       </ol>
       {next.length === 0 ? null : (
         <>
-          <CardBlock label="Next" aside={asOf === null ? "xMins" : `xMins ${asOf}`} />
+          <CardBlock
+            label="Next"
+            aside={
+              atNext && caption ? (
+                <>
+                  {caption} · {minutesHead}
+                </>
+              ) : (
+                minutesHead
+              )
+            }
+          />
           <ol className="flex min-h-16 gap-1">
             {next.map((match) => (
               <Week
@@ -93,7 +110,7 @@ function Week({
         ) : (
           <>
             <span className="truncate">{plate.shortName}</span>
-            <span className="text-3xs font-normal opacity-80">{venueMark(plate.home).replace(/[()]/g, "")}</span>
+            <span className="text-3xs font-normal">{venueMark(plate.home).replace(/[()]/g, "")}</span>
           </>
         )}
       </span>

@@ -24,7 +24,10 @@ describe("the card's form, run and folded news", () => {
     club: undefined,
     opposition: [{ club: { shortName: "LIV" }, home: true, difficulty: 4, fixture: upcoming } as unknown as Opposition],
     points: 41,
-    minutes: [{ gameweek: 8, minutes: 80, asOf: "Tue 20 Oct" }] as SquadPlayerDetail["minutes"],
+    minutes: [
+      { gameweek: 8, minutes: 80, asOf: "Tue 20 Oct" },
+      { gameweek: 9, minutes: 60, asOf: "Tue 20 Oct" },
+    ] as SquadPlayerDetail["minutes"],
   });
   const render = (props: Partial<Parameters<typeof PlayerCard>[0]> & { player: SquadPlayerDetail }) =>
     renderToStaticMarkup(createElement(PlayerCard, { onClose: () => undefined, ...props }));
@@ -44,10 +47,25 @@ describe("the card's form, run and folded news", () => {
     const card = render({ player: saliba(), story: told });
     expect(card).toContain("Saliba fit.");
     expect(card).not.toContain("<summary");
+    expect(card).not.toContain("line-clamp");
+  });
+
+  it("clamps the headline only inside the fold", () => {
+    const told: PlayerStory = { id: "t", headline: "Saliba ruled out.", content: "Saliba ruled out. Weeks, not days.", analysis: null, at: null };
+    const summary = render({ player: saliba(), story: told }).match(/<summary[^>]*>([\s\S]*?)<\/summary>/)?.[1] ?? "";
+    expect(summary).toMatch(/line-clamp-2[^"]*">Saliba ruled out\.</);
   });
 
   it("puts his FPts beside the Form head, not in a block of its own", () => {
     expect(render({ player: saliba() })).toMatch(/>Form<\/span><span[^>]*><span title="Points this season">FPts<\/span>/);
+  });
+
+  it("puts a projection or a gameweek's points at the Next head, never over the form's league points", () => {
+    for (const figure of ["projected", "gameweek"] as const) {
+      const card = render({ player: saliba(), figure });
+      expect(card).toMatch(/>Form<\/span><\/p>/);
+      expect(card).toMatch(/>Next<\/span><span[^>]*><span title="[^"]+">(Proj|GW)<\/span> <span[^>]*text-info[^>]*>41<\/span> · xMins Tue 20 Oct/);
+    }
   });
 
   it("holds the Form row's height while his matches are read", () => {
@@ -62,6 +80,9 @@ describe("the card's form, run and folded news", () => {
     expect(card).toContain(">Total<");
     expect(card).toContain(">Form<");
     expect(card).toContain(">Next<");
+    // His match in play is this gameweek's, never "next" (UX-10).
+    expect(card.slice(card.indexOf(">Next<"))).not.toContain(">GW8<");
+    expect(card.slice(card.indexOf(">Next<"))).toContain(">GW9<");
   });
 
   it("puts the screen's own opponent on its week while the run is read", () => {

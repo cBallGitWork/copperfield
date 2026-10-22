@@ -138,6 +138,7 @@ export default function PlayerCard({
           next={weeks?.next ?? handedWeeks(minutes, opposition)}
           asOf={weeks?.asOf ?? minutes.find((week) => week.asOf)?.asOf ?? null}
           caption={breakdown === undefined && points !== undefined ? <Points points={points} figure={figure} /> : null}
+          captionAt={figure === "season" ? "form" : "next"}
         />
 
         {news ? <Story story={news} /> : null}
@@ -193,6 +194,7 @@ function Points({ points, figure }: { points: number | null; figure: SquadFigure
 function Story({ story }: { story: NewsItem }) {
   const at = filedAt(story);
   const rest = noteBody(story);
+  const folded = rest.length > 0;
   const head = (
     <>
       <span className="flex items-baseline gap-2">
@@ -202,12 +204,15 @@ function Story({ story }: { story: NewsItem }) {
             {londonDayAndDate(at)} {londonTime(at)}
           </span>
         )}
-        {rest.length === 0 ? null : <Chevron />}
+        {folded ? <Chevron /> : null}
       </span>
-      <span className="line-clamp-2 text-sm font-bold leading-snug text-ink group-open:line-clamp-none">{story.headline}</span>
+      {/* Clamped only where a tap opens the rest: a headline with nothing behind it is never cut. */}
+      <span className={`text-sm font-bold leading-snug text-ink ${folded ? "line-clamp-2 group-open:line-clamp-none" : ""}`}>
+        {story.headline}
+      </span>
     </>
   );
-  if (rest.length === 0) return <section className="cm-panel flex flex-col gap-1 px-3 py-2">{head}</section>;
+  if (!folded) return <section className="cm-panel flex flex-col gap-1 px-3 py-2">{head}</section>;
   return (
     <details className="group cm-panel">
       <summary className="flex min-h-11 cursor-pointer list-none flex-col gap-1 px-3 py-2 [&::-webkit-details-marker]:hidden">

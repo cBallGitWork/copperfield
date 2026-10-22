@@ -39,8 +39,8 @@ describe("formMatches", () => {
   });
 });
 
-const match = (id: number, gameweek: number | null): Opposition =>
-  ({ club: club(id, `N${id}`), home: true, difficulty: 3, fixture: { id, gameweek } }) as unknown as Opposition;
+const match = (id: number, gameweek: number | null, status = "upcoming"): Opposition =>
+  ({ club: club(id, `N${id}`), home: true, difficulty: 3, fixture: { id, gameweek, status } }) as unknown as Opposition;
 
 describe("nextMatches", () => {
   const minutes = new Map<number, number | null>([[8, 80], [9, 20]]);
@@ -71,5 +71,18 @@ describe("handedWeeks", () => {
     const weeks = [{ gameweek: 8, minutes: 70 }, { gameweek: 9, minutes: 60 }] as ExpectedMinutes[];
     const run = handedWeeks(weeks, [match(4, 8)]);
     expect(run.map((m) => m.against?.shortName ?? null)).toEqual(["N4", null]);
+  });
+
+  // UX-10: a match in play is never shown as "next".
+  it("drops a week whose only match has kicked off", () => {
+    const weeks = [{ gameweek: 8, minutes: 70 }, { gameweek: 9, minutes: 60 }] as ExpectedMinutes[];
+    expect(handedWeeks(weeks, [match(4, 8, "live")]).map((m) => m.gameweek)).toEqual([9]);
+    expect(handedWeeks(weeks, [match(4, 8, "finished")]).map((m) => m.gameweek)).toEqual([9]);
+  });
+
+  it("keeps a double gameweek's match still to come", () => {
+    const weeks = [{ gameweek: 8, minutes: 70 }] as ExpectedMinutes[];
+    const run = handedWeeks(weeks, [match(4, 8, "finished"), match(5, 8)]);
+    expect(run.map((m) => m.against?.shortName)).toEqual(["N5"]);
   });
 });

@@ -70,16 +70,19 @@ export function nextMatches(
   });
 }
 
-/** The weeks a screen handed the card, with the one opponent it knows: what it shows while the run cannot be read. */
+/** The weeks a screen handed the card, with the one opponent it knows: what it shows while the run cannot be read.
+ *  A week whose every match has kicked off is not "next" and is dropped (conventions UX-10). */
 export function handedWeeks(weeks: readonly ExpectedMinutes[], opposition: readonly Opposition[] = []): NextMatch[] {
-  return weeks.map((week) => {
-    const match = opposition.find((one) => one.fixture.gameweek === week.gameweek);
-    return {
+  return weeks.flatMap((week) => {
+    const that = opposition.filter((one) => one.fixture.gameweek === week.gameweek);
+    const match = that.find((one) => one.fixture.status === "upcoming");
+    if (that.length > 0 && match === undefined) return [];
+    return [{
       key: `gw${week.gameweek}`,
       gameweek: week.gameweek,
       against: match ? against(match) : null,
       minutes: week.minutes,
-    };
+    }];
   });
 }
 
