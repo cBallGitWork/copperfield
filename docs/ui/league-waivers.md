@@ -39,9 +39,9 @@ A slim line under the strip, linking here: **`Waivers run in 5h 12m · you're 9t
 `WaiverCountdown`, words in `waivers/banner.ts`).
 
 - **On every Draft page**, from 18 hours before a run (`WAIVER_BANNER_HOURS`), but this one, which says it already.
-- **On both Transfers views it shows all week**, Draft's and the reader's own Team › Transfers, before the window as
-  `Waivers run Wed 18:00 · you're 9th`, and **even when the schedule is unreadable** or every run has gone, as
-  `Waivers · you're 9th` (or `Waivers` for a reader with no place), so Transfers always has its way in (`WaiverLine`). **Not on Team's other tabs**: over the planner it would cost the pitch its
+- **On both Transfers views it shows all week**, Draft's and the reader's own Team › Transfers, before the window and
+  **even when the schedule is unreadable** or every run has gone, as `Waivers · you're 9th`, never the run's date (Craig,
+  22 Oct 2026: *"remove the waivers run xx date, hate it"*) (or `Waivers` for a reader with no place), so Transfers always has its way in (`WaiverLine`). **Not on Team's other tabs**: over the planner it would cost the pitch its
   height and push the bench under the rail (`squad.md`, the pitch fits the phone), and a rival's squad is not where a
   claim is made.
 - **Every run day opens it**: 18 hours before an 18:00 run is midnight London, so with Wed, Thu and Fri runs it is up

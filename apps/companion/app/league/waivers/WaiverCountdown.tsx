@@ -19,11 +19,11 @@ export default function WaiverCountdown({
   /** The server's clock, so the first paint matches the server's. */
   now: string;
   place: number | null;
-  /** Before the window too, naming the day: on Transfers, whose view Waivers is. */
+  /** Before the window too, as the way in: on Transfers, whose view Waivers is. */
   always: boolean;
 }) {
   const at = useMinute(now);
-  return <WaiverLine words={bannerWords(runs, at, place, always)} place={place} always={always} />;
+  return <WaiverLine words={bannerWords(runs, at, place)} place={place} always={always} />;
 }
 
 /** The line itself; on Transfers (`always`) with no run to name it is still the way in: "Waivers · you're 7th". */
@@ -36,7 +36,7 @@ export function WaiverLine({ words, place, always }: { words: BannerWords | null
       <span className="min-w-0 flex-1 truncate">
         {words === null ? null : (
           <>
-            run <span className={`numeric font-bold ${words.near ? "text-accent" : "text-ink"}`}>{words.when}</span>
+            run <span className="numeric font-bold text-accent">{words.when}</span>
           </>
         )}
         {standing === null ? null : <span className="text-muted">{words === null ? "· " : " · "}{standing}</span>}
