@@ -1,0 +1,31 @@
+{
+  "slug": "here-we-go-3c6g775qmvihjzqv",
+  "kind": "trade",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 8,
+  "gameweek": 8,
+  "filedAt": "2026-10-22T19:22:12.342Z",
+  "expiresAt": null,
+  "edition": "The Mercato Wire",
+  "byline": "Here We Go",
+  "headline": "Here we go! Thierno Barry to Raccoons",
+  "deck": "Raccoons get Thierno Barry from Truffles for Mohammed Kudus",
+  "body": "Thierno Barry swaps ends of the league table, moving from Truffles to Raccoons. The Everton forward has 26 points and three goals this season. Raccoons send Mohammed Kudus the other way, the Tottenham Hotspur man good for 16 points and no goals so far for Truffles.\n\nHere we go!",
+  "subjects": [
+    "trade:3c6g775qmvihjzqv"
+  ],
+  "image": null,
+  "face": {
+    "code": 586309,
+    "name": "Thierno Barry",
+    "clubId": 9,
+    "position": "F"
+  },
+  "ties": [],
+  "extras": {
+    "transfer": {
+      "teamId": "l5kunst8msgbirdf",
+      "team": "Raccoons"
+    }
+  }
+}

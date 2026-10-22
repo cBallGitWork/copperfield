@@ -1,0 +1,110 @@
+{
+  "slug": "gw8-predictions",
+  "kind": "predictions",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 8,
+  "gameweek": 8,
+  "filedAt": "2026-10-22T19:22:12.342Z",
+  "expiresAt": null,
+  "edition": "The Form Guide",
+  "byline": "",
+  "reporter": "Mark Lawrenson",
+  "headline": "Lawro's Predictions: GW8",
+  "deck": "Lawro backs its_ohi over table-topping Cowthenbeef and GlengarryHearts over the champions, both against the run of expectation.",
+  "body": "Nought right from five last week. The two hunches went down with the rest. I did six World Cups for the BBC. Now my readership is ten men, and every one of them marks me down.",
+  "subjects": [
+    "predictions:gw8"
+  ],
+  "image": null,
+  "face": null,
+  "ties": [
+    {
+      "homeTeamId": "7z8fy0pnmuogbtdw",
+      "awayTeamId": "qgucu9dgmufwva1x",
+      "line": "Cowthenbeef are top after two wins, which is how every collapse starts. This is the Mikel Arteta Appreciation Match, a name with more in it than most defences. João Pedro has two goals from his last couple at Chelsea, and Cowthenbeef think it will last. It won't. Cowthenbeef also have Calvert-Lewin of Leeds United.\n\nits_ohi have Brobbey of Sunderland, and he comes up against Calvert-Lewin. its_ohi have Mac Allister as well, and nobody enjoys going to Liverpool, Brighton & Hove Albion included.\n\nMac Allister will play the game properly against the Seagulls, so I'm going against the favourites and taking its_ohi.",
+      "callsTeamId": "qgucu9dgmufwva1x",
+      "instinct": "liverpool",
+      "score": {
+        "home": 29,
+        "away": 30
+      },
+      "face": {
+        "code": 475168,
+        "name": "João Pedro",
+        "clubId": 6,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "ipnp5y4mmu9j7kop",
+      "awayTeamId": "kpj0z744muh1qwtd",
+      "line": "Justin is away at Sunderland for Hazza Maguazza's Redempshazza, and an easier afternoon you won't find. They have also brought in Senne Lammens off the waiver list, a Manchester United goalkeeper somebody else threw back.\n\nBayern Bru are second. On merit? No. Ødegaard has gone quiet for them at Arsenal, not a goal nor an assist in two. Bayern Bru have Guéhi too, away at Aston Villa with Manchester City, a hard one.\n\nI don't fully trust a goalkeeper off the scrapheap, but Justin at Sunderland makes it Hazza Maguazza's Redempshazza.",
+      "callsTeamId": "ipnp5y4mmu9j7kop",
+      "score": {
+        "home": 35,
+        "away": 31
+      },
+      "face": {
+        "code": 220627,
+        "name": "Justin",
+        "clubId": 13,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "syjkob6cmuobagfu",
+      "awayTeamId": "l5kunst8msgbirdf",
+      "line": "Brighton & Hove Albion are at Liverpool this weekend, and GlengarryHearts have Isak and Virgil waiting. GlengarryHearts are bottom with two defeats, which makes no sense to me. Barnes has gone quiet at Newcastle United, and I've given up on him.\n\nThe Raccoons are the champions, and champions go soft by October. Dewsbury-Hall has scored one and laid one on lately at Everton. The Raccoons are expected to win this, and I'm not having it.\n\nWith Virgil keeping Brighton quiet and Isak doing the rest, it has to be GlengarryHearts.",
+      "callsTeamId": "syjkob6cmuobagfu",
+      "instinct": "liverpool",
+      "score": {
+        "home": 36,
+        "away": 35
+      },
+      "face": {
+        "code": 219168,
+        "name": "Isak",
+        "clubId": 14,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "7to6xosimu8hyyw5",
+      "awayTeamId": "aekx2715mtzgcl3f",
+      "line": "Sacking of York, they call this one, and If anyone can, Bannan can arrive off a win. Gibbs-White is away at Ipswich Town for them, and the Tractor Boys defend like an open gate.\n\nThe Truffle Pigs have no points, so they traded Thierno Barry to The Raccoons for Kudus of Tottenham Hotspur. The champions let him go without a fuss, which tells you plenty. Stach, another of The Truffle Pigs, has a soft one at Sunderland and has been quiet at Leeds United lately.\n\nA trip to Ipswich Town for Gibbs-White decides this, and If anyone can, Bannan can will take it.",
+      "callsTeamId": "7to6xosimu8hyyw5",
+      "score": {
+        "home": 34,
+        "away": 29
+      },
+      "face": {
+        "code": 222531,
+        "name": "Gibbs-White",
+        "clubId": 18,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "uexqrijomu8l5asi",
+      "awayTeamId": "0g0j5mkomuqqwsbu",
+      "line": "I can't make AtleticoTimHortons out, won one and lost one. Lacroix of Chelsea has Tottenham Hotspur coming for AtleticoTimHortons, and the Lilywhites frighten nobody. Groß, also with AtleticoTimHortons, has set up two in a fortnight at Brighton & Hove Albion.\n\ndomeitalycoach are ninth and still waiting for a point. Anthony goes to Hull City for domeitalycoach, and I'll be sat watching the Tigers defend. I'd rather watch paint.\n\ndomeitalycoach are the sounder side, and Anthony at Hull City is why.",
+      "callsTeamId": "0g0j5mkomuqqwsbu",
+      "score": {
+        "home": 26,
+        "away": 29
+      },
+      "face": {
+        "code": 437499,
+        "name": "Lacroix",
+        "clubId": 6,
+        "position": null
+      }
+    }
+  ],
+  "extras": {
+    "record": {
+      "right": 4,
+      "called": 10
+    }
+  }
+}

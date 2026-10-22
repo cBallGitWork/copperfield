@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T07:46:15.579Z",
+  "updatedAt": "2026-10-22T19:22:12.342Z",
   "stories": [
     {
       "slug": "gw5-presser-2026-09-18",
@@ -6927,6 +6927,292 @@
       }
     },
     {
+      "slug": "gw8-presser-2026-10-22",
+      "kind": "presser",
+      "leagueId": "mqsjd23smsgbiqzr",
+      "period": 8,
+      "gameweek": 8,
+      "filedAt": "2026-10-22T19:22:12.342Z",
+      "expiresAt": "2026-10-23T18:45:00.000Z",
+      "edition": "The Team Sheet",
+      "byline": "The Team Sheet",
+      "headline": "Thursday Pressers",
+      "deck": "Vitaly Janelt banned for Brentford, with Yehor Yarmoliuk suspended alongside him",
+      "body": "Vitaly Janelt is suspended for Brentford, a ban rather than an injury.",
+      "subjects": [
+        "presser:gw8:2026-10-22"
+      ],
+      "image": null,
+      "face": {
+        "code": 204580,
+        "name": "Vitaly Janelt",
+        "clubId": 4,
+        "position": null
+      },
+      "ties": [],
+      "extras": {
+        "teamNews": [
+          {
+            "club": "Brentford",
+            "code": 94,
+            "line": "Jannik Schuster has trained for several days after a disrupted week, while Vitaly Janelt and Yehor Yarmoliuk both serve bans.",
+            "men": [
+              {
+                "name": "Vitaly Janelt",
+                "status": "Suspended",
+                "note": ""
+              },
+              {
+                "name": "Yehor Yarmoliuk",
+                "status": "Suspended",
+                "note": ""
+              },
+              {
+                "name": "Jannik Schuster",
+                "status": "FIT",
+                "note": "back from a disrupted week; training the last few days"
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Antoni Milambo"
+              },
+              {
+                "name": "Josh Dasilva"
+              },
+              {
+                "name": "Kaye Furo"
+              }
+            ],
+            "quote": {
+              "text": "But he’s been back training the last few days, so he’s back to himself, more or less.",
+              "said": "Keith Andrews"
+            },
+            "fixture": {
+              "opponent": "Hull City",
+              "home": false,
+              "kickoff": "2026-10-25T14:00:00Z"
+            }
+          },
+          {
+            "club": "Ipswich Town",
+            "code": 40,
+            "line": "Saša Lukić is ruled out for Ipswich Town.",
+            "men": [
+              {
+                "name": "Saša Lukić",
+                "status": "OUT",
+                "note": ""
+              }
+            ],
+            "fixture": {
+              "opponent": "Nottingham Forest",
+              "home": true,
+              "kickoff": "2026-10-23T19:00:00Z"
+            }
+          },
+          {
+            "club": "Coventry City",
+            "code": 9,
+            "line": "Four men are missing for Coventry City, and an ankle problem is now holding up Josh Eccles's rehab after his calf injury cleared.",
+            "men": [
+              {
+                "name": "Luke Woolfenden",
+                "status": "OUT",
+                "note": "knee"
+              },
+              {
+                "name": "Aurèle Amenda",
+                "status": "OUT",
+                "note": "calf"
+              },
+              {
+                "name": "Josh Eccles",
+                "status": "OUT",
+                "note": "ankle; calf cleared, not yet on the grass"
+              },
+              {
+                "name": "Haji Wright",
+                "status": "OUT",
+                "note": "quad"
+              }
+            ],
+            "quote": {
+              "text": "The ankle has been an annoyance, really, for all of us because Josh’s calf injury has cleared up and now the ankle’s a bit of a problem, so it’s affecting his rehab and his recovery. He’s still not with us out on the grass yet.",
+              "said": "Frank Lampard"
+            },
+            "fixture": {
+              "opponent": "Fulham",
+              "home": true,
+              "kickoff": "2026-10-24T14:00:00Z"
+            }
+          },
+          {
+            "club": "Manchester City",
+            "code": 43,
+            "line": "Antoine Semenyo is ruled out with a knee injury, and Haaland is the only one of four fully available, with Nunes, Kovacic and O’Reilly waiting on Thursday afternoon's session.",
+            "men": [
+              {
+                "name": "Antoine Semenyo",
+                "status": "OUT",
+                "note": "knee"
+              }
+            ],
+            "quote": {
+              "text": "Still a doubt. For sure, Erling is the only one 100% available, and the other three we need to wait for today’s session.",
+              "said": "Enzo Maresca"
+            },
+            "fixture": {
+              "opponent": "Aston Villa",
+              "home": false,
+              "kickoff": "2026-10-24T11:30:00Z"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "slug": "here-we-go-3c6g775qmvihjzqv",
+      "kind": "trade",
+      "leagueId": "mqsjd23smsgbiqzr",
+      "period": 8,
+      "gameweek": 8,
+      "filedAt": "2026-10-22T19:22:12.342Z",
+      "expiresAt": null,
+      "edition": "The Mercato Wire",
+      "byline": "Here We Go",
+      "headline": "Here we go! Thierno Barry to Raccoons",
+      "deck": "Raccoons get Thierno Barry from Truffles for Mohammed Kudus",
+      "body": "Thierno Barry swaps ends of the league table, moving from Truffles to Raccoons. The Everton forward has 26 points and three goals this season. Raccoons send Mohammed Kudus the other way, the Tottenham Hotspur man good for 16 points and no goals so far for Truffles.\n\nHere we go!",
+      "subjects": [
+        "trade:3c6g775qmvihjzqv"
+      ],
+      "image": null,
+      "face": {
+        "code": 586309,
+        "name": "Thierno Barry",
+        "clubId": 9,
+        "position": "F"
+      },
+      "ties": [],
+      "extras": {
+        "transfer": {
+          "teamId": "l5kunst8msgbirdf",
+          "team": "Raccoons"
+        }
+      }
+    },
+    {
+      "slug": "gw8-predictions",
+      "kind": "predictions",
+      "leagueId": "mqsjd23smsgbiqzr",
+      "period": 8,
+      "gameweek": 8,
+      "filedAt": "2026-10-22T19:22:12.342Z",
+      "expiresAt": null,
+      "edition": "The Form Guide",
+      "byline": "",
+      "reporter": "Mark Lawrenson",
+      "headline": "Lawro's Predictions: GW8",
+      "deck": "Lawro backs its_ohi over table-topping Cowthenbeef and GlengarryHearts over the champions, both against the run of expectation.",
+      "body": "Nought right from five last week. The two hunches went down with the rest. I did six World Cups for the BBC. Now my readership is ten men, and every one of them marks me down.",
+      "subjects": [
+        "predictions:gw8"
+      ],
+      "image": null,
+      "face": null,
+      "ties": [
+        {
+          "homeTeamId": "7z8fy0pnmuogbtdw",
+          "awayTeamId": "qgucu9dgmufwva1x",
+          "line": "Cowthenbeef are top after two wins, which is how every collapse starts. This is the Mikel Arteta Appreciation Match, a name with more in it than most defences. João Pedro has two goals from his last couple at Chelsea, and Cowthenbeef think it will last. It won't. Cowthenbeef also have Calvert-Lewin of Leeds United.\n\nits_ohi have Brobbey of Sunderland, and he comes up against Calvert-Lewin. its_ohi have Mac Allister as well, and nobody enjoys going to Liverpool, Brighton & Hove Albion included.\n\nMac Allister will play the game properly against the Seagulls, so I'm going against the favourites and taking its_ohi.",
+          "callsTeamId": "qgucu9dgmufwva1x",
+          "instinct": "liverpool",
+          "score": {
+            "home": 29,
+            "away": 30
+          },
+          "face": {
+            "code": 475168,
+            "name": "João Pedro",
+            "clubId": 6,
+            "position": null
+          }
+        },
+        {
+          "homeTeamId": "ipnp5y4mmu9j7kop",
+          "awayTeamId": "kpj0z744muh1qwtd",
+          "line": "Justin is away at Sunderland for Hazza Maguazza's Redempshazza, and an easier afternoon you won't find. They have also brought in Senne Lammens off the waiver list, a Manchester United goalkeeper somebody else threw back.\n\nBayern Bru are second. On merit? No. Ødegaard has gone quiet for them at Arsenal, not a goal nor an assist in two. Bayern Bru have Guéhi too, away at Aston Villa with Manchester City, a hard one.\n\nI don't fully trust a goalkeeper off the scrapheap, but Justin at Sunderland makes it Hazza Maguazza's Redempshazza.",
+          "callsTeamId": "ipnp5y4mmu9j7kop",
+          "score": {
+            "home": 35,
+            "away": 31
+          },
+          "face": {
+            "code": 220627,
+            "name": "Justin",
+            "clubId": 13,
+            "position": null
+          }
+        },
+        {
+          "homeTeamId": "syjkob6cmuobagfu",
+          "awayTeamId": "l5kunst8msgbirdf",
+          "line": "Brighton & Hove Albion are at Liverpool this weekend, and GlengarryHearts have Isak and Virgil waiting. GlengarryHearts are bottom with two defeats, which makes no sense to me. Barnes has gone quiet at Newcastle United, and I've given up on him.\n\nThe Raccoons are the champions, and champions go soft by October. Dewsbury-Hall has scored one and laid one on lately at Everton. The Raccoons are expected to win this, and I'm not having it.\n\nWith Virgil keeping Brighton quiet and Isak doing the rest, it has to be GlengarryHearts.",
+          "callsTeamId": "syjkob6cmuobagfu",
+          "instinct": "liverpool",
+          "score": {
+            "home": 36,
+            "away": 35
+          },
+          "face": {
+            "code": 219168,
+            "name": "Isak",
+            "clubId": 14,
+            "position": null
+          }
+        },
+        {
+          "homeTeamId": "7to6xosimu8hyyw5",
+          "awayTeamId": "aekx2715mtzgcl3f",
+          "line": "Sacking of York, they call this one, and If anyone can, Bannan can arrive off a win. Gibbs-White is away at Ipswich Town for them, and the Tractor Boys defend like an open gate.\n\nThe Truffle Pigs have no points, so they traded Thierno Barry to The Raccoons for Kudus of Tottenham Hotspur. The champions let him go without a fuss, which tells you plenty. Stach, another of The Truffle Pigs, has a soft one at Sunderland and has been quiet at Leeds United lately.\n\nA trip to Ipswich Town for Gibbs-White decides this, and If anyone can, Bannan can will take it.",
+          "callsTeamId": "7to6xosimu8hyyw5",
+          "score": {
+            "home": 34,
+            "away": 29
+          },
+          "face": {
+            "code": 222531,
+            "name": "Gibbs-White",
+            "clubId": 18,
+            "position": null
+          }
+        },
+        {
+          "homeTeamId": "uexqrijomu8l5asi",
+          "awayTeamId": "0g0j5mkomuqqwsbu",
+          "line": "I can't make AtleticoTimHortons out, won one and lost one. Lacroix of Chelsea has Tottenham Hotspur coming for AtleticoTimHortons, and the Lilywhites frighten nobody. Groß, also with AtleticoTimHortons, has set up two in a fortnight at Brighton & Hove Albion.\n\ndomeitalycoach are ninth and still waiting for a point. Anthony goes to Hull City for domeitalycoach, and I'll be sat watching the Tigers defend. I'd rather watch paint.\n\ndomeitalycoach are the sounder side, and Anthony at Hull City is why.",
+          "callsTeamId": "0g0j5mkomuqqwsbu",
+          "score": {
+            "home": 26,
+            "away": 29
+          },
+          "face": {
+            "code": 437499,
+            "name": "Lacroix",
+            "clubId": 6,
+            "position": null
+          }
+        }
+      ],
+      "extras": {
+        "record": {
+          "right": 4,
+          "called": 10
+        }
+      }
+    },
+    {
       "slug": "gw7-bin-xi",
       "kind": "bin-xi",
       "leagueId": "mqsjd23smsgbiqzr",
@@ -13129,116 +13415,6 @@
         "transfer": {
           "teamId": "0g0j5mkomuqqwsbu",
           "team": "Dome"
-        }
-      }
-    },
-    {
-      "slug": "gw7-predictions",
-      "kind": "predictions",
-      "leagueId": "mqsjd23smsgbiqzr",
-      "period": 7,
-      "gameweek": 7,
-      "filedAt": "2026-10-15T19:11:12.772Z",
-      "expiresAt": null,
-      "edition": "The Form Guide",
-      "byline": "",
-      "reporter": "Mark Lawrenson",
-      "headline": "Lawro's Predictions: GW7",
-      "deck": "Lawro backs two outsiders this week, The Truffle Pigs against Bayern Bru and domeitalycoach against Hazza Maguazza's Redempshazza.",
-      "body": "Four from five last week, which worries me. One from two on the hunches. Twenty-two years marked in front of the nation, and now a league named after a coffee shop marks me.",
-      "subjects": [
-        "predictions:gw7"
-      ],
-      "image": null,
-      "face": null,
-      "ties": [
-        {
-          "homeTeamId": "syjkob6cmuobagfu",
-          "awayTeamId": "qgucu9dgmufwva1x",
-          "line": "GlengarryHearts have Anderson at home to Ipswich Town, who stop nothing that comes at them. Schade of Brentford has two assists for GlengarryHearts from his last two games, and not a goal.\n\nMcBurnie goes to Fulham with Hull City for its_ohi, and Fulham frighten nobody. He hasn't scored or set one up lately, and a lamp post moves more. Rayan of AFC Bournemouth is no better for its_ohi.\n\nGlengarryHearts, because a soft opponent beats two quiet men.",
-          "callsTeamId": "syjkob6cmuobagfu",
-          "score": {
-            "home": 30,
-            "away": 28
-          },
-          "face": {
-            "code": 215379,
-            "name": "Anderson",
-            "clubId": 15,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "aekx2715mtzgcl3f",
-          "awayTeamId": "kpj0z744muh1qwtd",
-          "line": "Thiago has a goal and an assist for The Truffle Pigs in a fortnight with Brentford. In the Steve Clarke Classic he meets Liverpool, and Jacquet and A.Becker, two more Truffle Pigs men. Fancy owning a man who plays against your own goalkeeper.\n\nBayern Bru beat GlengarryHearts and now think they're a side. Barcola belongs to Bayern Bru and plays for Liverpool against Thiago. Bayern Bru go in as favourites, and I'm not having it.\n\nThe Truffle Pigs, because Jacquet defends properly and A.Becker catches everything they hit at him.",
-          "callsTeamId": "aekx2715mtzgcl3f",
-          "instinct": "liverpool",
-          "score": {
-            "home": 35,
-            "away": 34
-          },
-          "face": {
-            "code": 502500,
-            "name": "Thiago",
-            "clubId": 4,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "7z8fy0pnmuogbtdw",
-          "awayTeamId": "uexqrijomu8l5asi",
-          "line": "I can't make Cowthenbeef out, and the Teachers' Classic won't help. Cherki gets Cowthenbeef a free hit, Ipswich Town at home. Cowthenbeef went to the waiver list for Gudmundsson of Leeds United, and if he were any good he'd have gone weeks ago.\n\nAtleticoTimHortons have Semenyo with two goals and an assist in his last couple for Manchester City. Runs like that end, usually the week I back them.\n\nAtleticoTimHortons, because goals in the boots trump a defender nobody else wanted.",
-          "callsTeamId": "uexqrijomu8l5asi",
-          "score": {
-            "home": 25,
-            "away": 31
-          },
-          "face": {
-            "code": 466052,
-            "name": "Cherki",
-            "clubId": 15,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "0g0j5mkomuqqwsbu",
-          "awayTeamId": "ipnp5y4mmu9j7kop",
-          "line": "Doubts first, because Arsenal men have gone quiet all over this league. domeitalycoach hold Havertz, with no goal and no assist from two games. Sitting through his matches these days has been a chore. They also hold Wirtz and Szoboszlai, who face Brentford with Liverpool and will enjoy themselves.\n\nHazza Maguazza's Redempshazza are bottom, and the redemption is taking its time. Saka has gone the same way, no goal and no assist.\n\nHazza Maguazza's Redempshazza are fancied and I'm not having it, because Wirtz and Szoboszlai are the best footballers here.",
-          "callsTeamId": "0g0j5mkomuqqwsbu",
-          "instinct": "liverpool",
-          "score": {
-            "home": 33,
-            "away": 32
-          },
-          "face": {
-            "code": 219847,
-            "name": "Havertz",
-            "clubId": 1,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "7to6xosimu8hyyw5",
-          "awayTeamId": "l5kunst8msgbirdf",
-          "line": "Haaland takes The Raccoons into the Big Man Bakar Derby with Ipswich Town at home. Champions waste a gift like that out of habit. Palmer of Chelsea has two assists for The Raccoons in his last pair, without scoring.\n\nIf anyone can, Bannan can. Can they? No. If anyone can, Bannan can have Rogers going to Everton with Chelsea and Gibbs-White of Nottingham Forest gone dry.\n\nThe Raccoons, since Ipswich Town at home is a gift even champions can't refuse.",
-          "callsTeamId": "l5kunst8msgbirdf",
-          "score": {
-            "home": 31,
-            "away": 33
-          },
-          "face": {
-            "code": 223094,
-            "name": "Haaland",
-            "clubId": 15,
-            "position": null
-          }
-        }
-      ],
-      "extras": {
-        "record": {
-          "right": 4,
-          "called": 5
         }
       }
     },

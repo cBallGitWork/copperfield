@@ -1,0 +1,145 @@
+{
+  "slug": "gw8-presser-2026-10-22",
+  "kind": "presser",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 8,
+  "gameweek": 8,
+  "filedAt": "2026-10-22T19:22:12.342Z",
+  "expiresAt": "2026-10-23T18:45:00.000Z",
+  "edition": "The Team Sheet",
+  "byline": "The Team Sheet",
+  "headline": "Thursday Pressers",
+  "deck": "Vitaly Janelt banned for Brentford, with Yehor Yarmoliuk suspended alongside him",
+  "body": "Vitaly Janelt is suspended for Brentford, a ban rather than an injury.",
+  "subjects": [
+    "presser:gw8:2026-10-22"
+  ],
+  "image": null,
+  "face": {
+    "code": 204580,
+    "name": "Vitaly Janelt",
+    "clubId": 4,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "teamNews": [
+      {
+        "club": "Brentford",
+        "code": 94,
+        "line": "Jannik Schuster has trained for several days after a disrupted week, while Vitaly Janelt and Yehor Yarmoliuk both serve bans.",
+        "men": [
+          {
+            "name": "Vitaly Janelt",
+            "status": "Suspended",
+            "note": ""
+          },
+          {
+            "name": "Yehor Yarmoliuk",
+            "status": "Suspended",
+            "note": ""
+          },
+          {
+            "name": "Jannik Schuster",
+            "status": "FIT",
+            "note": "back from a disrupted week; training the last few days"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Antoni Milambo"
+          },
+          {
+            "name": "Josh Dasilva"
+          },
+          {
+            "name": "Kaye Furo"
+          }
+        ],
+        "quote": {
+          "text": "But he’s been back training the last few days, so he’s back to himself, more or less.",
+          "said": "Keith Andrews"
+        },
+        "fixture": {
+          "opponent": "Hull City",
+          "home": false,
+          "kickoff": "2026-10-25T14:00:00Z"
+        }
+      },
+      {
+        "club": "Ipswich Town",
+        "code": 40,
+        "line": "Saša Lukić is ruled out for Ipswich Town.",
+        "men": [
+          {
+            "name": "Saša Lukić",
+            "status": "OUT",
+            "note": ""
+          }
+        ],
+        "fixture": {
+          "opponent": "Nottingham Forest",
+          "home": true,
+          "kickoff": "2026-10-23T19:00:00Z"
+        }
+      },
+      {
+        "club": "Coventry City",
+        "code": 9,
+        "line": "Four men are missing for Coventry City, and an ankle problem is now holding up Josh Eccles's rehab after his calf injury cleared.",
+        "men": [
+          {
+            "name": "Luke Woolfenden",
+            "status": "OUT",
+            "note": "knee"
+          },
+          {
+            "name": "Aurèle Amenda",
+            "status": "OUT",
+            "note": "calf"
+          },
+          {
+            "name": "Josh Eccles",
+            "status": "OUT",
+            "note": "ankle; calf cleared, not yet on the grass"
+          },
+          {
+            "name": "Haji Wright",
+            "status": "OUT",
+            "note": "quad"
+          }
+        ],
+        "quote": {
+          "text": "The ankle has been an annoyance, really, for all of us because Josh’s calf injury has cleared up and now the ankle’s a bit of a problem, so it’s affecting his rehab and his recovery. He’s still not with us out on the grass yet.",
+          "said": "Frank Lampard"
+        },
+        "fixture": {
+          "opponent": "Fulham",
+          "home": true,
+          "kickoff": "2026-10-24T14:00:00Z"
+        }
+      },
+      {
+        "club": "Manchester City",
+        "code": 43,
+        "line": "Antoine Semenyo is ruled out with a knee injury, and Haaland is the only one of four fully available, with Nunes, Kovacic and O’Reilly waiting on Thursday afternoon's session.",
+        "men": [
+          {
+            "name": "Antoine Semenyo",
+            "status": "OUT",
+            "note": "knee"
+          }
+        ],
+        "quote": {
+          "text": "Still a doubt. For sure, Erling is the only one 100% available, and the other three we need to wait for today’s session.",
+          "said": "Enzo Maresca"
+        },
+        "fixture": {
+          "opponent": "Aston Villa",
+          "home": false,
+          "kickoff": "2026-10-24T11:30:00Z"
+        }
+      }
+    ]
+  }
+}
