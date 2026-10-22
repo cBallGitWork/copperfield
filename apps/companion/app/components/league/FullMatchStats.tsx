@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Chevron from "../shell/Chevron";
 import Failed from "./Failed";
 import { type Opposition, attackingStats, defensiveStats, fullMatchStats } from "@epl/core";
 import { readMatchParts, type MatchRead } from "../../matchParts";
@@ -67,16 +68,7 @@ export default function FullMatchStats({
     <details className="group cm-panel" open={open}>
       <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-2 [&::-webkit-details-marker]:hidden">
         <span className={`min-w-0 flex-1 ${LABEL}`}>Full match stats</span>
-        <svg
-          aria-hidden
-          viewBox="0 0 24 24"
-          className="h-4 w-4 shrink-0 text-faint transition-transform duration-200 group-open:rotate-180"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        >
-          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <Chevron />
       </summary>
 
       <MatchFigures read={read} position={position} over={over} onRetry={retry} />

@@ -10,6 +10,7 @@ vi.mock("@/app/desk", async () => await import("../../desk"));
 vi.mock("../../matchParts", () => ({ readMatchParts: () => new Promise(() => undefined) }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: () => undefined }) }));
 vi.mock("../../players/[fantraxId]/latestNews", () => ({ latestNews: () => new Promise(() => undefined) }));
+vi.mock("../../players/[fantraxId]/cardRecord", () => ({ cardRecord: () => new Promise(() => undefined) }));
 
 const man: SquadPlayerDetail = {
   rostered: { slot: { fantraxId: "a", position: "D", status: "" }, unresolved: "unmapped" },
@@ -223,8 +224,8 @@ describe("one player card", () => {
 
   it("inks a doubtful week's xMins red and a safe one cyan", () => {
     const card = render({ player: saliba() });
-    expect(card).toMatch(/text-bad[^"]*">20</);
-    expect(card).toMatch(/text-info[^"]*">85</);
+    expect(card).toMatch(/text-bad"[^>]*>20</);
+    expect(card).toMatch(/text-info"[^>]*>85</);
   });
 
   it("names every position he may play, as his row does, not only his slot", () => {
