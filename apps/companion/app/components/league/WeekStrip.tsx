@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import { DASH, venueMark } from "@epl/core";
-import { GW_PLATE, QUIET_FIGURE, ROW_FIGURE } from "@/app/desk";
+import { GW_PLATE, MINOR_LABEL, QUIET_FIGURE, ROW_FIGURE } from "@/app/desk";
 import CardBlock from "./CardBlock";
 import { fdrStep } from "../football/fdr";
 import { minutesInk } from "../football/xminsInk";
 import type { FormMatch, NextMatch } from "../../players/[fantraxId]/cardWeeks";
 
-// A card's should-I-play-him strip, FPL's sheet as two blocks of one run: his last matches over our league's points,
-// then the run to come over his xMins, each opponent on that match's difficulty for him.
+// A card's should-I-play-him strip, FPL's sheet as two blocks of one run: his last matches on plain plates over our
+// league's points (no FPL difficulty beside them, DESIGN §7), then the run to come on its difficulty over his xMins.
 
 export default function WeekStrip({
   form,
@@ -38,13 +38,11 @@ export default function WeekStrip({
           <p className={QUIET_FIGURE}>{DASH}</p>
         ) : (
           <Run
+            word="FPts"
             weeks={form.map((match) => ({
               key: String(match.fixtureId),
               gameweek: match.gameweek,
-              against:
-                match.opponent === null
-                  ? null
-                  : { shortName: match.opponent, home: match.home, difficulty: match.difficulty },
+              against: match.opponent === null ? null : { shortName: match.opponent, home: match.home, difficulty: null },
               figure: match.points,
               ink: "text-info",
               title: `FPts, gameweek ${match.gameweek}`,
@@ -67,6 +65,7 @@ export default function WeekStrip({
             }
           />
           <Run
+            word="xMins"
             weeks={next.map((match) => ({
               key: match.key,
               gameweek: match.gameweek,
@@ -95,17 +94,25 @@ interface Week {
   title: string;
 }
 
-/** A run of matches, the Profile's Next up in small: butted gameweek heads, the opponent on his difficulty, the figure under. */
-function Run({ weeks }: { weeks: readonly Week[] }) {
+/** A run of matches, the Profile's Next up in small: gameweek heads, the opponent on his plate, the figure under. */
+function Run({ word, weeks }: { word: string; weeks: readonly Week[] }) {
   return (
-    <ol className="flex items-stretch">
+    <ol className="flex items-stretch gap-1">
+      {/* The figure row's word, in the lines' own heights, so the run is named on a phone. */}
+      <li className="flex shrink-0 flex-col gap-1">
+        <span className="h-6" aria-hidden />
+        <span className="min-h-7" />
+        <span className={`block ${ROW_FIGURE}`}>
+          <span className={MINOR_LABEL}>{word}</span>
+        </span>
+      </li>
       {weeks.map((week) => {
         const step = fdrStep(week.against?.difficulty ?? null);
         return (
           <li key={week.key} className="flex min-w-0 flex-1 flex-col gap-1">
             <span className={GW_PLATE}>{week.gameweek === null ? DASH : `GW${week.gameweek}`}</span>
             <span
-              className={`numeric mx-px flex min-h-7 items-baseline justify-center gap-px px-0.5 pt-1.5 text-xs font-bold leading-none ${step.ink}`}
+              className={`numeric flex min-h-7 items-baseline justify-center gap-px px-0.5 pt-1.5 text-xs font-bold leading-none ${step.ink}`}
               style={{ backgroundColor: step.ground }}
             >
               {week.against === null ? (
@@ -113,7 +120,7 @@ function Run({ weeks }: { weeks: readonly Week[] }) {
               ) : (
                 <>
                   <span className="truncate">{week.against.shortName}</span>
-                  <span className="text-3xs font-normal">{venueMark(week.against.home).replace(/[()]/g, "")}</span>
+                  <span className="text-3xs font-normal opacity-80">{venueMark(week.against.home).replace(/[()]/g, "")}</span>
                 </>
               )}
             </span>

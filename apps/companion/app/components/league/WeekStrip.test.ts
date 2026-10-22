@@ -11,9 +11,9 @@ const strip = (props: Partial<Parameters<typeof WeekStrip>[0]>) =>
 describe("a card's form and run", () => {
   const html = strip({
     form: [
-      { fixtureId: 1, gameweek: 5, opponent: "ARS", home: true, difficulty: 5, points: 6 },
-      { fixtureId: 2, gameweek: 6, opponent: "SUN", home: false, difficulty: 2, points: 0 },
-      { fixtureId: 3, gameweek: 7, opponent: "CRY", home: true, difficulty: 3, points: null },
+      { fixtureId: 1, gameweek: 5, opponent: "ARS", home: true, points: 6 },
+      { fixtureId: 2, gameweek: 6, opponent: "SUN", home: false, points: 0 },
+      { fixtureId: 3, gameweek: 7, opponent: "CRY", home: true, points: null },
     ],
     next: [
       { key: "a", gameweek: 8, against: { shortName: "LIV", home: false, difficulty: 4 }, minutes: 85 },
@@ -35,11 +35,14 @@ describe("a card's form and run", () => {
     expect(html.match(/class="cm-bevel flex h-6[^"]*text-3xs font-bold uppercase"[^>]*>GW\d+</g)).toHaveLength(6);
   });
 
-  it("draws a played match on that match's difficulty for him, never the unrated plate", () => {
-    expect(html).toMatch(/var\(--color-fdr-5\)"><span[^>]*>ARS</);
-    expect(html).toMatch(/var\(--color-fdr-2\)"><span[^>]*>SUN</);
-    expect(html).toMatch(/var\(--color-fdr-3\)"><span[^>]*>CRY</);
-    expect(html).not.toContain("var(--color-raised)");
+  it("draws a played match on the plain plate: FPL's difficulty never sits beside the league's points", () => {
+    for (const club of ["ARS", "SUN", "CRY"]) expect(html).toMatch(new RegExp(`var\\(--color-raised\\)"><span[^>]*>${club}<`));
+    expect(html).toMatch(/var\(--color-fdr-4\)"><span[^>]*>LIV</);
+  });
+
+  it("names each figure row in a leading column, as the Profile's run does", () => {
+    const words = [...html.matchAll(/<li class="flex shrink-0[^"]*">[\s\S]*?<span class="[^"]*text-faint">([^<]+)</g)];
+    expect(words.map((word) => word[1])).toEqual(["FPts", "xMins"]);
   });
 
   it("parts Form from Next as two blocks, each with its own head", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Club, ExpectedMinutes, Fixture, GameLogEntry, Opposition, PlayerMatch } from "@epl/core";
+import type { Club, ExpectedMinutes, GameLogEntry, Opposition, PlayerMatch } from "@epl/core";
 import { formMatches, handedWeeks, nextMatches } from "./cardWeeks";
 import type { MatchRow } from "./matchRows";
 
@@ -17,33 +17,25 @@ const row = (gameweek: number, minutes: number, points: number | null, paidRow =
 describe("formMatches", () => {
   // The log comes most recent first; the strip reads left to right, oldest first.
   const rows = [row(7, 90, 6), row(6, 0, 0), row(5, 45, 0), row(4, 90, 9)];
-  // Fixture ids are the gameweeks; he is at home in even ones, and gameweek 7 is not held.
-  const held = new Map(
-    [5, 6].map((id) => [id, { id, homeDifficulty: id - 4, awayDifficulty: id - 2 } as Fixture]),
-  );
-
-  it("draws each match on its difficulty for his side, and none for a fixture not held", () => {
-    expect(formMatches(rows, held).map((m) => m.difficulty)).toEqual([3, 2, null]);
-  });
 
   it("takes his latest three, oldest first", () => {
-    expect(formMatches(rows, held).map((m) => m.gameweek)).toEqual([5, 6, 7]);
+    expect(formMatches(rows).map((m) => m.gameweek)).toEqual([5, 6, 7]);
   });
 
   it("prints a played nought, and no reading for a match he was not on", () => {
-    expect(formMatches(rows, held).map((m) => m.points)).toEqual([0, null, 6]);
+    expect(formMatches(rows).map((m) => m.points)).toEqual([0, null, 6]);
   });
 
   it("has no league figure where Fantrax's window does not reach", () => {
-    expect(formMatches([row(3, 90, null, false)], held)[0].points).toBeNull();
+    expect(formMatches([row(3, 90, null, false)])[0].points).toBeNull();
   });
 
   it("names the opponent and the venue", () => {
-    expect(formMatches(rows, held)[2]).toMatchObject({ opponent: "C7", home: false });
+    expect(formMatches(rows)[2]).toMatchObject({ opponent: "C7", home: false });
   });
 
   it("is empty for a man with no matches", () => {
-    expect(formMatches([], held)).toEqual([]);
+    expect(formMatches([])).toEqual([]);
   });
 });
 
