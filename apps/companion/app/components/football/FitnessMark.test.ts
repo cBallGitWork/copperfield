@@ -23,14 +23,15 @@ describe("FitnessMark", () => {
     expect(html.indexOf("<svg")).toBeLessThan(html.indexOf("Knee"));
   });
 
-  it("gives a doubt with no week his chance, in faint ink that gives way first", () => {
+  it("gives a doubt with no week his complaint alone, never his chance, in faint ink that gives way first", () => {
     const html = draw(man("d", 75, "Back injury - 75% chance of playing", 2));
-    expect(html).toContain(`<span class="min-w-0 truncate leading-tight text-2xs text-faint shrink-[99]">${noted("Back injury", "75%")}</span>`);
+    expect(html).toContain(`<span class="min-w-0 truncate leading-tight text-2xs text-faint shrink-[99]">${noted("Back injury")}</span>`);
   });
 
-  it("draws FPL's fixed date outside the layout's weeks", () => {
+  it("prints the complaint alone outside the layout's calendar, a date it cannot place never printed", () => {
     const html = renderToStaticMarkup(createElement(FitnessMark, { player: man("s", 0, "Suspended until 31 Oct") }));
-    expect(html).toContain(`>${noted("Suspended", "back 31 Oct")}</span>`);
+    expect(html).toContain(`>${noted("Suspended")}</span>`);
+    expect(html.split("</svg>")[1]).not.toContain("Oct");
   });
 
   it("is silent for a fit man and one the bridge has not settled", () => {

@@ -166,8 +166,8 @@ export {
 export type { DatedFixture, MatchContribution } from "./selectors";
 export { availabilityOf, doubtBand, isDoubtful, onTheBooks } from "./playerState";
 export type { Availability, DoubtBand, PlayerState } from "./playerState";
-export { fitnessNote, returnWeek, SEASON_OUT_GW } from "./fitnessNote";
-export type { FitnessNote } from "./fitnessNote";
+export { fitnessNote, gameweekStarts, returnWeek, SEASON_OUT_GW, weekOfDate } from "./fitnessNote";
+export type { FitnessNote, GameweekStarts, NoteCalendar } from "./fitnessNote";
 
 // Where a round stands in time, as against what a snapshot contains.
 export {

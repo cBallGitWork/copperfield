@@ -174,11 +174,13 @@ as it cuts off names"*): the opponent is headed Opp and is 44px, xMins and FPts 
 between tile, crest, name and figures. Counted on his squad at 390, 4 of 14 names truncated (S. Lammens, Matheus N.,
 K. Dewsbury-Hall, J. Hinshelwood beside his DBT) in a 75px column; the column is 141px now and the widest, Hinshelwood
 with his box, is 131.5 (`SquadRows.test.ts`).
-**Why he may miss and when he is back** print after his mark in quiet `text-2xs` ink, the return in figures: "Back
-injury · 75%", "Knee · GW10", "Hamstring · back 1 Nov", "Suspended · GW9" (Craig, 22 Oct 2026: *"should be global"*).
+**Why he may miss and when he is back** print after his mark in quiet `text-2xs` ink, the return as a gameweek: "Back
+injury", "Knee · GW10", "Hamstring · GW10", "Suspended · GW9" (Craig, 22 Oct 2026: *"should be global"*, *"put back
+gwx"*, *"dont put percentages in this row"*).
 The word is the complaint before FPL's " - " ("Back injury" stays whole, or it reads as a return). The return is the
-squads export's `expectedReturnGw` past the open gameweek, else FPL's fixed "Expected back 1 Nov" or "Suspended until";
-a doubt shows his chance unless the week is two or more gameweeks off, and a man who has left shows none. On a phone the
+squads export's `expectedReturnGw` past the open gameweek, else FPL's fixed "Expected back 1 Nov" or "Suspended until"
+date turned into the first gameweek starting on or after it; a date is never printed, nor a chance, and a man who has
+left shows no week. On a phone the
 note sits beside the name when it fits and wraps under it when not, so it never shrinks to an ellipsis; the row stays
 36px. Every player row prints it.
 
