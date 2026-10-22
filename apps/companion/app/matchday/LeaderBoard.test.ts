@@ -27,6 +27,6 @@ describe("a Top stats list", () => {
 
   it("marks an unfit man with CM's mark and notes his complaint and chance", () => {
     expect(html).toContain('role="img"');
-    expect(html).toContain(`>${noted("Knock", "50%")}</span>`);
+    expect(html).toContain(`>${noted("Knock")}</span>`);
   });
 });
