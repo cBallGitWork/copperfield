@@ -10,6 +10,10 @@ export interface Tab {
   href: string;
   label: string;
   key: string;
+  /** A plate the desk has room for and a phone does not: drawn from `lg` only. */
+  desk?: boolean;
+  /** Under `lg`, where this desk plate is hidden, its page lights this plate instead. */
+  folds?: string;
 }
 
 export default function TabStrip<K extends string>({
@@ -35,30 +39,35 @@ export default function TabStrip<K extends string>({
   /** `paper` sets the strip in the paper's small capitals on its stock, the current tab in the print red. */
   register?: "desk" | "paper";
 }) {
+  // A page whose plate folds away under a thumb lights another there, so that plate is drawn once per width.
+  const phoneCurrent = tabs.find((tab) => tab.key === current)?.folds ?? current;
+  const plate = (tab: Tab & { key: K }, here: boolean, width: string) => (
+    // A tab replaces this page in history, so Back leaves the section rather than stepping through its tabs.
+    <Link
+      key={`${tab.key}${width}`}
+      href={tab.href}
+      replace
+      aria-current={here ? "page" : undefined}
+      // `desk.css` marks the current tab in the accent, never in red.
+      className={`${
+        register === "paper"
+          ? PAPER_TAB
+          : `${TAB} ${LABELS[labels]} ${compact ? "cm-tab-compact" : ""} ${
+              // Never greys the current tab, which the accent already marks.
+              !here && dim.includes(tab.key) ? "cm-out" : ""
+            }`
+      }${width}`}
+    >
+      {headWord(tab.label)}
+    </Link>
+  );
   return (
     <nav aria-label={label} className="flex">
-      {tabs.map((tab) => {
+      {tabs.flatMap((tab) => {
         const here = tab.key === current;
-        return (
-          // A tab replaces this page in history, so Back leaves the section rather than stepping through its tabs.
-          <Link
-            key={tab.key}
-            href={tab.href}
-            replace
-            aria-current={here ? "page" : undefined}
-            // `desk.css` marks the current tab in the accent, never in red.
-            className={
-              register === "paper"
-                ? PAPER_TAB
-                : `${TAB} ${LABELS[labels]} ${compact ? "cm-tab-compact" : ""} ${
-                    // Never greys the current tab, which the accent already marks.
-                    !here && dim.includes(tab.key) ? "cm-out" : ""
-                  }`
-            }
-          >
-            {headWord(tab.label)}
-          </Link>
-        );
+        if (tab.desk === true) return [plate(tab, here, " max-lg:hidden")];
+        const herePhone = tab.key === phoneCurrent;
+        return herePhone === here ? [plate(tab, here, "")] : [plate(tab, herePhone, " lg:hidden"), plate(tab, here, " max-lg:hidden")];
       })}
     </nav>
   );

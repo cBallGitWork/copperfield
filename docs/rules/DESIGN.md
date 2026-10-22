@@ -236,7 +236,7 @@ were blue.
 
 | Object | Class | How CM draws it | Ours |
 |---|---|---|---|
-| **Tab strip** — one of a subject's views | `cm-tab` | filled royal-blue plates, bevelled, current one pressed with a yellow label and border | `shell/TabStrip`, `league/GroupNav`; one at the top for the screen's own views, a sub-view's in `shell/FootFrame`'s docked foot (20 Oct 2026), on the main strip's word ladder so it never wraps |
+| **Tab strip** — one of a subject's views | `cm-tab` | filled royal-blue plates, bevelled, current one pressed with a yellow label and border | `shell/TabStrip`, `league/GroupNav`; one at the top for the screen's own views, a sub-view's in `shell/FootFrame`'s docked foot (20 Oct 2026), on the main strip's word ladder so it never wraps; from `lg` a strip may carry `desk` plates a phone has no room for (League's Waivers and Squads, 22 Oct 2026) |
 | **Rail** — where you can go from anywhere | — / `cm-thumbrail` | the page's own navy, each entry in a thin outlined box | `shell/Rail` above `lg`, accent on the label AND the border; `shell/ThumbRail` along the foot below it, a glyph over each word, accent on both and a 32px edge on top |
 | **Foot row** — related screens, across the bottom | — | ONE filled strip, flat, a light edge along the top and a rule between plates, current marked on the label alone | not the phone's nav since 23 Sep 2026: a bottom tab bar goes where you can go from anywhere, which is the rail's job |
 

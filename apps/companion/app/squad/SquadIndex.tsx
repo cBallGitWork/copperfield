@@ -1,4 +1,5 @@
 import Link from "@/app/components/shell/Link";
+import type { ReactNode } from "react";
 import { type RosteredTeam, headToHeads, inPairingOrder, isResolved } from "@epl/core";
 import Nothing from "../components/shell/Nothing";
 import PageHeader from "../components/shell/PageHeader";
@@ -21,9 +22,12 @@ import { SQUADS, YOUR_SQUAD } from "../titles";
 
 export default async function SquadIndex({
   back,
+  nav,
 }: {
   /** Where the phone's back plate goes with no history; none at `/squad/me`, a tab of its own. */
   back?: string;
+  /** A strip under the bar: the League's, on the desk, at `/squad`. */
+  nav?: ReactNode;
 }) {
   // The week a manager can still change: from Friday teatime that is next week, not the one in play.
   const [squads, table] = await Promise.all([getLeagueSquads(await planningRound()), leagueTable()]);
@@ -77,6 +81,7 @@ export default async function SquadIndex({
   return (
     <div className="flex flex-col gap-3">
       <PageHeader title={yours ? YOUR_SQUAD : SQUADS} back={back} />
+      {nav}
 
       {/* The sign-in follows the code, not the team on screen; signing out is offered only to a real code. */}
       {holder ? null : <SignIn />}
