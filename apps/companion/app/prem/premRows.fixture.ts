@@ -1,6 +1,7 @@
 import type { Club, FootballPlayer } from "@epl/core";
 import type { LeagueOpinion } from "./leagueOpinions";
 import { clubCards } from "./premCards";
+import { noted } from "../components/football/withWeeks";
 
 // The squad both Prem row tests draw: every unfit kind beside two fit men, our league listing three of them.
 
@@ -30,8 +31,9 @@ export const MEN = [
   man(5, "Ødegaard", "a", null, ""),
 ];
 export const UNFIT = 3;
-/** Each unfit man's note under `withWeeks`, which has Saliba (code 1) back in GW10; FPL's "Expected back" is never read. */
-export const NOTES = ["Hamstring · GW10", "Knock · 25%", "Suspended"];
+/** Each unfit man's note under `withWeeks`, which has Saliba (code 1) back in GW10 with GW8 open; the export's week
+ *  beats FPL's date, which Rice's ban falls back to. */
+export const NOTES = [noted("Hamstring", "GW10"), noted("Knock", "25%"), noted("Suspended", "back 25 Oct")];
 export const byCode = new Map(MEN.map((player) => [player.code, player]));
 const opinion = (ownerTeamId: string | null, owner: string | null, status: string): LeagueOpinion => ({
   fantraxId: "x",

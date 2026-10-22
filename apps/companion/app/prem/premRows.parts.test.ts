@@ -11,7 +11,7 @@ import PlayerBoard from "./club/[code]/stats/PlayerBoard";
 import TakerName from "./club/[code]/set-pieces/TakerName";
 import FitnessMark from "../components/football/FitnessMark";
 import { CLUB, MEN, byCode, buttons, cards, league } from "./premRows.fixture";
-import { withWeeks } from "../components/football/withWeeks";
+import { noted, withWeeks } from "../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Absent", () => import("../components/shell/Absent"));
@@ -56,8 +56,9 @@ describe("a set-piece taker", () => {
       ),
     ));
     expect(html.indexOf("W. Saliba")).toBeLessThan(html.indexOf('<svg role="img"'));
-    expect(html.indexOf('<svg role="img"')).toBeLessThan(html.indexOf(">Hamstring · GW10<"));
-    expect(html.indexOf(">Hamstring · GW10<")).toBeLessThan(html.indexOf("(Ban"));
+    const note = html.indexOf(`>${noted("Hamstring", "GW10")}<`);
+    expect(html.indexOf('<svg role="img"')).toBeLessThan(note);
+    expect(note).toBeLessThan(html.indexOf("(Ban"));
   });
 });
 

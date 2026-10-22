@@ -516,8 +516,8 @@ the card for a ban, a barred circle for a man who has gone — in his band's col
 same thing. Such a shape is a ground in this sense, never text: it carries no letters, and as a graphic it needs 3:1,
 which each step clears on its own wash (3.9 · 4.9 · 6.2). The word rides in its label and title. It is the Profile's
 fitness line's mark too. **Every list prints `StateMark`; `StateBox` survives only beside the Profile's fitness
-line** (Craig, 21 Oct 2026: one kind of row, one look), and a row asks `fitnessOf` once for its wash and its mark together.
-After the mark every row prints `FitnessNote` in faint `text-2xs`, "Knee · GW10" or "Back · 75%", truncating before the name (Craig, 22 Oct 2026).
+line** (Craig, 21 Oct 2026: one kind of row, one look); a row asks `fitnessOf` for its wash, and `FitnessMark` asks it again for the mark.
+After the mark every row prints `FitnessNote` in faint `text-2xs`, its return in figures: "Knee · GW10", "Back injury · 75%", "Hamstring · back 1 Nov" (Craig, 22 Oct 2026).
 The mark keeps its band on a greyed reserve row: its shapes paint their own fill and stroke, which `.cm-out` never
 reaches. The pitch carries the colour alone: the box rode after the surname
 from 30 Sep 2026 and came off on 1 Oct (Craig: *"pitch view, remove the chip, we

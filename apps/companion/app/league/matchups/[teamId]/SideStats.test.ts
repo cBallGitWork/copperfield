@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { FootballPlayer, LeagueTeam, LineupDetail, SquadPlayerDetail } from "@epl/core";
 import SideStats from "./SideStats";
-import { withWeeks } from "../../../components/football/withWeeks";
+import { noted, withWeeks } from "../../../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
@@ -46,7 +46,7 @@ describe("Matchup Stats board", () => {
     expect(html.match(/role="img"/g)?.length).toBe(1);
     expect(html).toContain("cm-doubt-out");
     expect(html).not.toContain("cm-state");
-    expect(html.match(/>Knee · GW10<\/span>/g)?.length).toBe(1);
+    expect(html.split(`>${noted("Knee", "GW10")}</span>`)).toHaveLength(2);
   });
 
   it("heads Fantrax's points FPts and inks them cyan, never by gain or loss", () => {

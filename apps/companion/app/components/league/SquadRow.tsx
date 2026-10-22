@@ -6,7 +6,9 @@ import {
   fullPlayerName,
   DASH,
 } from "@epl/core";
-import FitnessMark from "../football/FitnessMark";
+import StateMark from "../football/StateMark";
+import FitnessNote from "../football/FitnessNote";
+import { notedOf } from "../football/FitnessMark";
 import { fitnessOf } from "../football/doubtRow";
 import { minutesInk } from "../football/xminsInk";
 import PositionTile from "./PositionTile";
@@ -79,18 +81,22 @@ export default function SquadRow({
       </span>
 
       {/* `ROW_NAME`, not a size of its own; the `flex-` is this screen's, as it decides what gives way.
-          CM's mark and the note of why he may miss follow his name, else the planner's doubt; silent for a fit starter. */}
+          CM's mark follows his name, else the planner's doubt; silent for a fit starter. The note of why wraps under the
+          name on a phone when it cannot sit beside it, so it never shrinks to an ellipsis; a desk keeps one line. */}
       <span className="flex min-w-0 flex-[1_1_5rem] flex-col lg:flex-row lg:items-center lg:gap-1.5">
-        <span className="flex min-w-0 items-center gap-1.5">
-          <span className={`min-w-0 truncate ${ROW_NAME}`}><PlayerName name={fullPlayerName(player.rostered)} /></span>
-          {mark ? (
-            <FitnessMark player={footballer} />
-          ) : doubted ? (
-            <span title="Might not start" className={`numeric shrink-0 ${MINOR_LABEL}`}>
-              <span aria-hidden>MNS</span>
-              <span className="sr-only">Might not start</span>
-            </span>
-          ) : null}
+        <span className="flex min-w-0 flex-wrap items-center gap-x-1.5 lg:flex-nowrap">
+          <span className="flex min-w-0 max-w-full items-center gap-1.5">
+            <span className={`min-w-0 truncate ${ROW_NAME}`}><PlayerName name={fullPlayerName(player.rostered)} /></span>
+            {mark ? (
+              <StateMark availability={mark} />
+            ) : doubted ? (
+              <span title="Might not start" className={`numeric shrink-0 ${MINOR_LABEL}`}>
+                <span aria-hidden>MNS</span>
+                <span className="sr-only">Might not start</span>
+              </span>
+            ) : null}
+          </span>
+          {mark ? <FitnessNote player={notedOf(footballer)} /> : null}
         </span>
         {autoSub === undefined ? null : (
           <span className="shrink-0 truncate text-2xs leading-tight text-info">

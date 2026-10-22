@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { FootballPlayer } from "@epl/core";
 import LeaderBoard from "./LeaderBoard";
 import { LISTS } from "./lists";
-import { withWeeks } from "../components/football/withWeeks";
+import { noted, withWeeks } from "../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
@@ -27,6 +27,6 @@ describe("a Top stats list", () => {
 
   it("marks an unfit man with CM's mark and notes his complaint and chance", () => {
     expect(html).toContain('role="img"');
-    expect(html).toContain(">Knock · 50%</span>");
+    expect(html).toContain(`>${noted("Knock", "50%")}</span>`);
   });
 });

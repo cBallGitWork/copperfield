@@ -16,6 +16,6 @@ export default function FitnessMark({ player }: { player: FootballPlayer | null 
 }
 
 /** The four fields the note reads, so a server row hands the client note no more of the footballer than that. */
-function notedOf(player: FootballPlayer | null): NotedPlayer | null {
+export function notedOf(player: FootballPlayer | null): NotedPlayer | null {
   return player === null ? null : { code: player.code, status: player.status, news: player.news, chanceOfPlaying: player.chanceOfPlaying };
 }

@@ -1,35 +1,63 @@
 import { describe, expect, it } from "vitest";
-import { fitnessNote, fitnessNoteText, returnWeek, SEASON_OUT_GW } from "./fitnessNote";
+import { fitnessNote, returnWeek, SEASON_OUT_GW } from "./fitnessNote";
 
 const man = (status: string, chanceOfPlaying: number | null, news: string, code = 1) => ({ code, status, chanceOfPlaying, news });
 const weeks = (week: number | null, code = 1) => new Map([[code, { expectedReturnGw: week }]]);
 const none = new Map<number, { expectedReturnGw: number | null }>();
-const text = (...args: Parameters<typeof fitnessNote>) => {
-  const note = fitnessNote(...args);
-  return note === null ? null : fitnessNoteText(note);
+/** GW8 is open: its lineups are being picked. */
+const OPEN = 8;
+const text = (player: ReturnType<typeof man> | null, held: Parameters<typeof fitnessNote>[1], open: number | null = OPEN) => {
+  const note = fitnessNote(player, held, open);
+  return note === null ? null : note.back === null ? note.word : `${note.word} · ${note.back}`;
 };
 
 describe("fitnessNote", () => {
-  it("gives a doubt with no return week his complaint and chance", () => {
-    expect(text(man("d", 75, "Back injury - 75% chance of playing"), none)).toBe("Back · 75%");
-    expect(fitnessNote(man("d", 75, "Back injury - 75% chance of playing"), weeks(null))).toEqual({ word: "Back", back: "75%" });
+  it("keeps Back injury whole, so it never reads as a return, with a doubt's chance", () => {
+    expect(text(man("d", 75, "Back injury - 75% chance of playing"), none)).toBe("Back injury · 75%");
+    expect(fitnessNote(man("d", 75, "Back injury - 75% chance of playing"), weeks(null), OPEN)).toEqual({ word: "Back injury", back: "75%" });
   });
 
   it("gives an injured man the squads export's week", () => {
     expect(text(man("i", 0, "Knee injury - Unknown return date"), weeks(10))).toBe("Knee · GW10");
   });
 
-  it("prefers the week to a doubt's chance", () => {
+  it("gives a doubt his chance unless the week is two or more gameweeks off", () => {
+    expect(text(man("d", 75, "Ankle injury - 75% chance of playing"), weeks(9))).toBe("Ankle · 75%");
     expect(text(man("d", 50, "Thigh injury - 50% chance of playing"), weeks(13))).toBe("Thigh · GW13");
+    expect(text(man("d", 50, "Thigh injury - 50% chance of playing"), weeks(10))).toBe("Thigh · GW10");
+  });
+
+  it("drops a week at or below the open gameweek", () => {
+    expect(text(man("i", 0, "Knee injury - Unknown return date"), weeks(8))).toBe("Knee");
+    expect(text(man("i", 0, "Knee injury - Unknown return date"), weeks(7))).toBe("Knee");
+    expect(text(man("d", 75, "Calf injury - 75% chance of playing"), weeks(8))).toBe("Calf · 75%");
+  });
+
+  it("keeps the week when the open gameweek is unknown, a doubt still preferring his chance", () => {
+    expect(text(man("i", 0, "Knee injury - Unknown return date"), weeks(8), null)).toBe("Knee · GW8");
+    expect(text(man("d", 75, "Calf injury - 75% chance of playing"), weeks(13), null)).toBe("Calf · 75%");
   });
 
   it("gives a ban its word and week", () => {
     expect(text(man("s", 0, "Suspended until 31 Oct"), weeks(9))).toBe("Suspended · GW9");
-    expect(text(man("s", 0, "Suspended until 31 Oct"), none)).toBe("Suspended");
   });
 
-  it("never reads a date out of FPL's prose", () => {
-    expect(text(man("i", 0, "Hamstring injury - Expected back 1 Nov"), none)).toBe("Hamstring");
+  it("falls back to FPL's fixed 'Expected back' and 'Suspended until' dates when the export has no week", () => {
+    expect(text(man("i", 0, "Hamstring injury - Expected back 1 Nov"), none)).toBe("Hamstring · back 1 Nov");
+    expect(text(man("i", 0, "Hamstring injury - Expected back 1 Nov"), weeks(7))).toBe("Hamstring · back 1 Nov");
+    expect(text(man("s", 0, "Suspended until 31 Oct"), none)).toBe("Suspended · back 31 Oct");
+    expect(text(man("i", 0, "Hamstring injury - Expected back 1 Nov"), weeks(11))).toBe("Hamstring · GW11");
+  });
+
+  it("never reads a date out of free prose", () => {
+    expect(text(man("i", 0, "Knee injury - back in December"), none)).toBe("Knee");
+    expect(text(man("u", 0, "Has joined Oxford United on loan until January"), none)).toBe("On loan");
+  });
+
+  it("prints no week for a man who has left, whatever the export says", () => {
+    expect(text(man("u", 0, "Has joined Al Hilal permanently"), weeks(999))).toBe("Left");
+    expect(text(man("u", 0, "Has joined Al Hilal permanently"), weeks(12))).toBe("Left");
+    expect(text(man("u", 0, "Has joined Rangers on loan for the rest of the season"), weeks(12))).toBe("On loan");
   });
 
   it("prints no chance for a man who is out", () => {
@@ -43,18 +71,13 @@ describe("fitnessNote", () => {
     expect(text(man("d", 25, "Lack of match fitness - 25% chance of playing"), none)).toBe("Doubt · 25%");
   });
 
-  it("names a move by its kind", () => {
-    expect(text(man("u", 0, "Has joined Rangers on loan for the rest of the season"), none)).toBe("On loan");
-    expect(text(man("u", 0, "Has joined Al Hilal permanently"), none)).toBe("Left");
-  });
-
   it("gives a doubt with no news its state's word", () => {
     expect(text(man("a", 75, ""), none)).toBe("Doubt · 75%");
   });
 
   it("is null for a fit man and one the bridge has not settled", () => {
-    expect(fitnessNote(man("a", 100, ""), weeks(10))).toBeNull();
-    expect(fitnessNote(null, weeks(10))).toBeNull();
+    expect(fitnessNote(man("a", 100, ""), weeks(10), OPEN)).toBeNull();
+    expect(fitnessNote(null, weeks(10), OPEN)).toBeNull();
   });
 
   it("reads another man's week as none", () => {

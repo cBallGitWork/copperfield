@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { FootballPlayer, PlayerStatLine, RosteredPlayer } from "@epl/core";
 import StatBoard from "./StatBoard";
 import { rosterFacts } from "./roster";
-import { withWeeks } from "../../../components/football/withWeeks";
+import { noted, withWeeks } from "../../../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
@@ -42,6 +42,6 @@ describe("a squad's stat board", () => {
   });
 
   it("notes his complaint and the export's return week", () => {
-    expect(html).toContain(">Knee · GW10</span>");
+    expect(html).toContain(`>${noted("Knee", "GW10")}</span>`);
   });
 });

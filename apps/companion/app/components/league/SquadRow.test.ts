@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { FootballPlayer, SquadPlayerDetail } from "@epl/core";
 import SquadRow from "./SquadRow";
-import { withWeeks } from "../football/withWeeks";
+import { noted, withWeeks } from "../football/withWeeks";
 
 vi.mock("next/image", () => ({ default: () => null }));
 vi.mock("@/app/desk", () => import("../../desk"));
@@ -28,19 +28,21 @@ describe("a squad row", () => {
   it("notes a doubt's complaint and chance after his mark", () => {
     const html = draw(doubt);
     expect(html.indexOf('<svg role="img"')).toBeGreaterThan(-1);
-    expect(html.indexOf('<svg role="img"')).toBeLessThan(html.indexOf(">Back · 75%</span>"));
+    expect(html.indexOf('<svg role="img"')).toBeLessThan(html.indexOf(`>${noted("Back injury", "75%")}</span>`));
   });
 
-  it("gives an injured man the export's return week, never FPL's dated prose", () => {
-    const html = draw({ code: 1, status: "i", chanceOfPlaying: 0, news: "Hamstring injury - Expected back 1 Nov" });
-    expect(html).toContain(">Hamstring · GW10</span>");
-    expect(html).not.toContain(">Back 1 Nov<");
+  it("gives an injured man the export's return week over FPL's date, and the date without one", () => {
+    const news = "Hamstring injury - Expected back 1 Nov";
+    expect(draw({ code: 1, status: "i", chanceOfPlaying: 0, news })).toContain(`>${noted("Hamstring", "GW10")}</span>`);
+    expect(draw({ code: 3, status: "i", chanceOfPlaying: 0, news })).toContain(`>${noted("Hamstring", "back 1 Nov")}</span>`);
   });
 
-  it("stays one 36px row: the note rides the name's line", () => {
+  it("keeps a 36px row, the note beside the name when it fits and wrapping under it on a phone when not", () => {
     const html = draw(doubt);
     expect(html).toMatch(/class="cm-row flex min-h-9 /);
-    expect(html).toMatch(/<\/svg><span class="[^"]*">Back · 75%<\/span><\/span><\/span><span class="flex shrink-0/);
+    // The name and mark never part; the note is their sibling in a line that wraps under a thumb and not on a desk.
+    expect(html).toContain('<span class="flex min-w-0 flex-wrap items-center gap-x-1.5 lg:flex-nowrap"><span class="flex min-w-0 max-w-full items-center gap-1.5">');
+    expect(html).toContain(`</svg></span><span class="min-w-0 truncate leading-tight text-2xs text-faint shrink-[99]">${noted("Back injury", "75%")}</span></span>`);
   });
 
   it("notes nothing for a fit man", () => {
