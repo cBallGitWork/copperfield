@@ -1,4 +1,4 @@
-import { FANTRAX_PLAYERS_PATH, deals, fantraxTime, lastWaiverRun, ordinal } from "@epl/core";
+import { FANTRAX_PLAYERS_PATH, deals, lastWaiverRun, ordinal } from "@epl/core";
 import Ledger from "../../components/league/Ledger";
 import StandingsTable, { StandingsName, type StandingsColumn } from "../../components/league/StandingsTable";
 import TeamName from "../../components/league/TeamName";
@@ -42,7 +42,6 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
   // Every team's name by id: a deal's own copy goes stale when a manager renames.
   const nameOf = named(info?.teams ?? []);
   const run = lastWaiverRun(deals(feed.rows));
-  const ranAt = run[0]?.processedAt ?? null;
 
   return (
     // Under a thumb the block is picked from the foot, above the thumb rail; the desk shows both and no strip.
@@ -88,7 +87,7 @@ export default async function WaiversPage({ searchParams }: { searchParams: Prom
           </section>
 
           <section className={`flex flex-col gap-1 ${shown === "last" ? "" : "max-lg:hidden"}`}>
-            <h2 className={BLOCK_PLATE}>{ranAt === null ? "Last run" : `Last run · ${fantraxTime(ranAt) ?? ranAt}`}</h2>
+            <h2 className={BLOCK_PLATE}>Last run</h2>
             {run.length === 0 ? (
               <p className={`${QUIET_NOTE} p-2`}>No claims off waivers yet</p>
             ) : (
