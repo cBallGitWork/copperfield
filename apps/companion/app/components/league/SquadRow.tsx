@@ -6,14 +6,13 @@ import {
   fullPlayerName,
   DASH,
 } from "@epl/core";
-import StateMark from "../football/StateMark";
+import FitnessMark from "../football/FitnessMark";
 import { fitnessOf } from "../football/doubtRow";
 import { minutesInk } from "../football/xminsInk";
 import PositionTile from "./PositionTile";
 import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
-import { MINOR_LABEL, QUIET_NOTE, ROW_NAME } from "@/app/desk";
-import { returnDate } from "./returnDate";
+import { MINOR_LABEL, ROW_NAME } from "@/app/desk";
 import type { AutoSubMark } from "./autoSubbed";
 
 // One man's row in a squad list: our position, his club's crest, his name, his fixture and his figure.
@@ -54,7 +53,6 @@ export default function SquadRow({
 
   // Who his club plays, in the app's one spelling of a fixture — `BRE (H)`.
   const fixture = rowFixture(player);
-  const back = footballer?.news ? returnDate(footballer.news) : null;
   const { wash, mark } = fitnessOf(footballer);
   const xMins = player.minutes[0]?.minutes ?? null;
 
@@ -81,13 +79,12 @@ export default function SquadRow({
       </span>
 
       {/* `ROW_NAME`, not a size of its own; the `flex-` is this screen's, as it decides what gives way.
-          CM's mark for why he may miss follows his name, else the planner's doubt; silent for a fit starter. The day he
-          is due back goes under it on a phone, where the name column has 7px to spare, and beside it on a desk. */}
+          CM's mark and the note of why he may miss follow his name, else the planner's doubt; silent for a fit starter. */}
       <span className="flex min-w-0 flex-[1_1_5rem] flex-col lg:flex-row lg:items-center lg:gap-1.5">
         <span className="flex min-w-0 items-center gap-1.5">
           <span className={`min-w-0 truncate ${ROW_NAME}`}><PlayerName name={fullPlayerName(player.rostered)} /></span>
           {mark ? (
-            <StateMark availability={mark} />
+            <FitnessMark player={footballer} />
           ) : doubted ? (
             <span title="Might not start" className={`numeric shrink-0 ${MINOR_LABEL}`}>
               <span aria-hidden>MNS</span>
@@ -95,7 +92,6 @@ export default function SquadRow({
             </span>
           ) : null}
         </span>
-        {back === null ? null : <span className={`${QUIET_NOTE} shrink-0 leading-tight`}>{back}</span>}
         {autoSub === undefined ? null : (
           <span className="shrink-0 truncate text-2xs leading-tight text-info">
             {autoSub.on ? `Auto-sub for ${autoSub.with}` : `Auto-sub: ${autoSub.with} on`}

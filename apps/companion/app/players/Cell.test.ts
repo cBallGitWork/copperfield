@@ -4,7 +4,8 @@ import { describe, expect, it, vi } from "vitest";
 import { Lead } from "./Cell";
 import { playersQuery } from "./query";
 import type { PoolRow } from "./pool";
-import { fitnessOf } from "../components/football/doubtRow";
+import type { FootballPlayer } from "@epl/core";
+import { withWeeks } from "../components/football/withWeeks";
 
 vi.mock("@/app/desk", () => import("../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
@@ -20,14 +21,15 @@ const row = {
   stats: null,
   fplCode: 1,
 } as unknown as PoolRow;
-const injured = fitnessOf({ status: "i", chanceOfPlaying: 0, news: "Knee" } as never).mark;
+const injured = { code: 1, status: "i", chanceOfPlaying: 0, news: "Knee injury - Unknown return date" } as unknown as FootballPlayer;
 
 describe("the pool board's lead", () => {
   for (const line of [false, true]) {
-    it(`marks an unfit man with CM's mark, never the word chip${line ? ", on the phone's line" : ""}`, () => {
+    it(`marks and notes an unfit man with CM's mark, never the word chip${line ? ", on the phone's line" : ""}`, () => {
       const html = renderToStaticMarkup(
-        createElement(Lead, { row, query: playersQuery({}), teamNames: new Map(), reader: null, mark: injured, line }),
+        withWeeks(createElement(Lead, { row, query: playersQuery({}), teamNames: new Map(), reader: null, footballer: injured, line })),
       );
+      expect(html).toContain(">Knee · GW10</span>");
       expect(html).toContain('role="img"');
       expect(html).not.toContain("cm-state");
       expect(html).toContain("W. Saliba");

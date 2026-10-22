@@ -173,9 +173,10 @@ as it cuts off names"*): the opponent is headed Opp and is 44px, xMins and FPts 
 between tile, crest, name and figures. Counted on his squad at 390, 4 of 14 names truncated (S. Lammens, Matheus N.,
 K. Dewsbury-Hall, J. Hinshelwood beside his DBT) in a 75px column; the column is 141px now and the widest, Hinshelwood
 with his box, is 131.5 (`SquadRows.test.ts`).
-**The day FPL expects him back** ("Back 28 Nov", or the day a ban ends) prints in quiet ink under the name on a phone
-and beside it on a desk (16 Oct 2026): it lived in the box's title, which a phone never shows, and the 7px the name
-column spares could not take it beside the box. Two lines fit the row's 36px; no date, no second line.
+**Why he may miss and when he is back** print after his mark in quiet `text-2xs` ink on the name's own line, "Back ·
+75%", "Knee · GW10", "Suspended · GW9" (Craig, 22 Oct 2026: *"should be global"*): the complaint before FPL's " - ", and
+the squads export's `expectedReturnGw`, else a doubt's chance. FPL's "Expected back 28 Nov" is never read (it replaced
+the 16 Oct "Back 28 Nov" line). The note truncates before the name and the row stays 36px; every player row prints it.
 
 **CM's mark, not the box, beside every man who is not fit** (Craig, 21 Oct 2026: *"Use a yellow and Red Cross when
 injured/doubt to match row. Red card for suspension"*). `StateMark` draws the cross for a knock, a card for a ban and a

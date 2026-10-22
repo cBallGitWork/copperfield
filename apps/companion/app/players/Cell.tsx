@@ -1,6 +1,6 @@
 import Link from "@/app/components/shell/Link";
 import { crestForShortName, fixed, toFplClubCode, DASH } from "@epl/core";
-import type { Availability } from "@epl/core";
+import type { FootballPlayer } from "@epl/core";
 import type { PoolRow } from "./pool";
 import type { PoolColumn, RawStats } from "./columns";
 import { figureOf } from "./figure";
@@ -22,15 +22,15 @@ export function Lead({
   query,
   teamNames,
   reader,
-  mark,
+  footballer,
   line = false,
 }: {
   row: PoolRow;
   query: PlayersQuery;
   teamNames: Map<string, string>;
   reader: string | null;
-  /** His fitness mark from the row's one `fitnessOf`; null for a fit man and one the bridge has not settled. */
-  mark: Availability | null;
+  /** His footballer, for his fitness mark and note; null where the bridge has not settled him. */
+  footballer: FootballPlayer | null;
   line?: boolean;
 }) {
   const { player } = row.entry;
@@ -44,7 +44,7 @@ export function Lead({
   const holder = (className: string) => (
     <Holder held={row.entry} teamNames={teamNames} reader={reader} className={className} filtered={filtered} />
   );
-  const state = <FitnessMark mark={mark} />;
+  const state = <FitnessMark player={footballer} />;
 
   // The holder after the name and its mark on a desk (Craig, 24 Sep 2026), after the position under a thumb (1 Oct 2026).
   const face = (

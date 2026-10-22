@@ -30,6 +30,8 @@ export const MEN = [
   man(5, "Ødegaard", "a", null, ""),
 ];
 export const UNFIT = 3;
+/** Each unfit man's note under `withWeeks`, which has Saliba (code 1) back in GW10; FPL's "Expected back" is never read. */
+export const NOTES = ["Hamstring · GW10", "Knock · 25%", "Suspended"];
 export const byCode = new Map(MEN.map((player) => [player.code, player]));
 const opinion = (ownerTeamId: string | null, owner: string | null, status: string): LeagueOpinion => ({
   fantraxId: "x",

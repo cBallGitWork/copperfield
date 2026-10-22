@@ -517,6 +517,7 @@ same thing. Such a shape is a ground in this sense, never text: it carries no le
 which each step clears on its own wash (3.9 · 4.9 · 6.2). The word rides in its label and title. It is the Profile's
 fitness line's mark too. **Every list prints `StateMark`; `StateBox` survives only beside the Profile's fitness
 line** (Craig, 21 Oct 2026: one kind of row, one look), and a row asks `fitnessOf` once for its wash and its mark together.
+After the mark every row prints `FitnessNote` in faint `text-2xs`, "Knee · GW10" or "Back · 75%", truncating before the name (Craig, 22 Oct 2026).
 The mark keeps its band on a greyed reserve row: its shapes paint their own fill and stroke, which `.cm-out` never
 reaches. The pitch carries the colour alone: the box rode after the surname
 from 30 Sep 2026 and came off on 1 Oct (Craig: *"pitch view, remove the chip, we

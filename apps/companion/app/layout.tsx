@@ -11,6 +11,8 @@ import LiveFigure from "./components/shell/LiveFigure";
 import LiveNow from "./components/shell/LiveNow";
 import OfflineWorker from "./components/shell/OfflineWorker";
 import PhotoGround from "./components/football/PhotoGround";
+import { ReturnWeeks } from "./components/football/FitnessNote";
+import { intelReturnWeeks } from "./intel";
 import PullToRefresh from "./components/shell/PullToRefresh";
 import Rail from "./components/shell/Rail";
 import ReplayStrip from "./components/shell/ReplayStrip";
@@ -129,7 +131,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             id="main"
             className="mx-auto w-full max-w-[var(--page-frame)] px-[var(--page-gutter)] pb-[var(--page-foot)] pt-[var(--page-top)]"
           >
-            {children}
+            {/* Every row's fitness note reads the squads export's return weeks from here. */}
+            <ReturnWeeks weeks={intelReturnWeeks}>{children}</ReturnWeeks>
           </main>
         </div>
       </body>
