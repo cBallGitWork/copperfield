@@ -1,4 +1,8 @@
+import { MS_PER_DAY } from "../time";
 import type { Fixture, FootballPlayer } from "./types";
+
+/** How far behind the open gameweek a date may fall before it is read as next year's. */
+const ROLLOVER_DAYS = 60;
 import type { IntelPlayer } from "./intel/types";
 import { availabilityOf, type Availability, type PlayerState } from "./playerState";
 
@@ -58,12 +62,12 @@ export function gameweekStarts(fixtures: readonly Pick<Fixture, "gameweek" | "ki
  *  put the date more than two months behind it. Null with no calendar. */
 export function weekOfDate(day: number, month: string, calendar: NoteCalendar): number | null {
   const index = MONTHS.indexOf(month);
-  const sorted = [...calendar.starts].sort((a, b) => a[0] - b[0]);
+  const sorted = calendar.starts;
   if (index < 0 || sorted.length === 0) return null;
   const anchor = sorted.find(([gw]) => gw === calendar.open)?.[1] ?? sorted[0][1];
   const year = Number(anchor.slice(0, 4));
   const iso = (y: number) => `${y}-${String(index + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-  const behind = (date: string) => Date.parse(anchor) - Date.parse(date) > 60 * 86_400_000;
+  const behind = (date: string) => Date.parse(anchor) - Date.parse(date) > ROLLOVER_DAYS * MS_PER_DAY;
   const date = behind(iso(year)) ? iso(year + 1) : iso(year);
   return sorted.find(([, start]) => start >= date)?.[0] ?? null;
 }

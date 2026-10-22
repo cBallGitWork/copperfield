@@ -21,6 +21,7 @@ import {
   mapLiveStats,
   mapMatchSheets,
   gameweekStarts,
+  type NoteCalendar,
   nextRound,
   portraitUrl,
   rewindRound,
@@ -170,7 +171,7 @@ export const seasonFixtures: () => Promise<Fixture[]> = cache(async () => {
 
 /** The calendar a row's fitness note reads: the gameweek of the next kickoff, whose lineups are being picked, and every
  *  gameweek's first kickoff date; an open of null and no starts when FPL cannot be read. */
-export async function noteCalendar(): Promise<{ open: number | null; starts: [number, string][] }> {
+export async function noteCalendar(): Promise<NoteCalendar> {
   try {
     const fixtures = await seasonFixtures();
     return { open: nextRound(fixtures, now().toISOString())?.gameweek ?? null, starts: gameweekStarts(fixtures) };
