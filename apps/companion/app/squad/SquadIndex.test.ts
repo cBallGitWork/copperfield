@@ -134,3 +134,13 @@ describe("each row's index block", () => {
     expect(row(page, "Glengarry").slice(0, row(page, "Glengarry").indexOf(">"))).not.toMatch(/\bpx-3\b/);
   });
 });
+
+describe("the League strip over the index", () => {
+  it("draws the strip it is handed under the bar, and none when handed none", async () => {
+    const strip = createElement("nav", { id: "league-strip" });
+    const page = renderToStaticMarkup(await SquadIndex({ back: "/more", nav: strip }));
+    expect(page.indexOf('id="league-strip"')).toBeGreaterThan(page.indexOf("Your squad"));
+    expect(page.indexOf('id="league-strip"')).toBeLessThan(page.indexOf("<ul"));
+    expect(await html()).not.toContain("league-strip");
+  });
+});

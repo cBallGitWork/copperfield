@@ -6,6 +6,10 @@ import type { PremSection } from "./prem/PremNav";
 // Every screen's name, keyed on the section its shell already knows: never a literal at a call site (DESIGN §2).
 // A caption is not a tab label (`Table` against `League Table`), so this is its own table.
 
+/** The squad index's bar: the reader's own, or every team's. */
+export const YOUR_SQUAD = "Your squad";
+export const SQUADS = "Squads";
+
 /** Our league's views. */
 export const LEAGUE_CAPTION: Record<LeagueSection, string> = {
   table: "League Table",
@@ -16,6 +20,8 @@ export const LEAGUE_CAPTION: Record<LeagueSection, string> = {
   // Not a tab (`SectionNav` records why), but a section a route can BE on.
   matchups: "Matchups",
   waivers: "Waivers",
+  // The squad index, a League plate on the desk only; its page wears its own bar.
+  squads: SQUADS,
 };
 
 /** The fantasy deep dive's bar; the rail says the same word. */
@@ -41,10 +47,6 @@ export const SCORING_TITLE = "Scoring";
 
 /** The page that names who made the app's pictures and data. */
 export const CREDITS_TITLE = "Credits";
-
-/** The squad index's bar: the reader's own, or every team's. */
-export const YOUR_SQUAD = "Your squad";
-export const SQUADS = "Squads";
 
 /** What joins a title's parts, and the league's name to the end of each (the root layout's template). */
 export const TITLE_JOIN = " · ";

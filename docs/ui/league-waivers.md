@@ -25,11 +25,13 @@ at 1:00 PM US Eastern, the rehearsal and dummy leagues Tuesday and Friday at 5:0
 - The claim order's head row is for a screen reader only: its one plate, Order, is muted, and drawn it was a blank
   grey box over the column (`StandingsTable` hides a head row with no figure in it).
 
-## A view of Transfers, not a sixth tab
+## A view of Transfers under a thumb, its own plate on the desk
 
 Draft's strip holds five plates and Craig ruled six too many on 13 Oct 2026 (`SectionNav`), and at 390 the five
-already fill the row (shot of 19 Oct). Waivers is about transfers, so it lights the Transfers plate
-(`SectionNav`'s `LIGHTS`) and Transfers carries the way in: the waiver line, all week, at the head of its ledger.
+already fill the row (shot of 19 Oct). Waivers is about transfers, so under `lg` it lights the Transfers plate
+(its entry's `folds`) and Transfers carries the way in: the waiver line, all week, at the head of its ledger.
+**From `lg` Waivers is a plate of its own after Transfers, and lit there** (Craig, 22 Oct 2026: the desk's bar
+has the room); `TabStrip` draws Transfers once per width so each width has one current plate.
 The other choices were a sixth plate, which would truncate at 320, or a second strip on Transfers, which is a row of
 buttons more on a page that has none. Reversible: a plate in `SECTIONS` and the line's `always` would undo it.
 

@@ -6,6 +6,8 @@ Your squad, then everyone else's.
 
 - A `←` at the title bar's left on a phone, back to More, which is where its Squads row is (16 Oct 2026). Not at
   `/squad/me`, which draws this index for a reader with no team: that is the Team tab's own page.
+- **On the desk, League's strip under the bar with Squads lit** (22 Oct 2026): the rail already lights Draft here,
+  and Squads is that strip's last desk plate. Not at `/squad/me`, and never under `lg`.
 - One list. Your own squad first, its row on the raised surface with the accent edge; no "You" chip (Craig,
   5 Sep 2026): the edge and the top place carry it. No "Around the league" heading since 20 Oct 2026.
 - Every row leads with **his table place in CM's blue index block**, at the table's place width (21 Oct 2026: the

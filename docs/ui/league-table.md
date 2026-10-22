@@ -5,6 +5,9 @@ Fantrax computes the standings. **This page never adds anything up.**
 Wrapped in `LeagueShell`: page header, then the section nav — `League · Cups
 · Fixtures · Transfers · Team Stats` (Craig, 27 Sep 2026: *"Change table to league. Move cups to
 2nd"*; Schedule and Results one Fixtures, and Transfers in from Mail and Scoring out to More, 13 Oct) — that the League tab is divided into.
+**From `lg` the strip has seven** (Craig, 22 Oct 2026: *"on desktop, lets have more items on the blue nav bar, we
+can use the space"*): Waivers after Transfers and Squads last, each a `desk` plate in `SectionNav`'s list that a
+phone never draws, so 390 is the five above unchanged.
 The nav stays on screen even in the empty states: without it a reader landing
 here during an outage has no way to reach the others and the section becomes a
 dead end. **Matchups is not on the strip**: the list folded into Fixtures on 20 Oct 2026 (Craig), and only the
