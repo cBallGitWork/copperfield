@@ -1,16 +1,20 @@
 #!/bin/bash
 # The Mac's half of the week: the sister repo's exports into a PR that merges once CI passes.
 #   sync-intel.sh weekly    Tuesday, the round settled: every sister file, cups, careers and league projections
+#   sync-intel.sh weekly catch-up   Tuesday 14:00 and Wednesday 08:00: the same, only while the weekly's alert is open
 #   sync-intel.sh pressers  Thursday 16:00 and 17:15, Friday 12:30, 14:00, 15:45 and 17:45: the press conferences, squads, depth and xMins
 #   sync-intel.sh zones     every half hour: shots and touches of matches the Mac's SofaScore pages hold; silent when none is new
 # Every run ends in an alert.yml dispatch, intel-<mode> ok or fail, which the watchdog reads. DRY_RUN=1 stops before the push.
 # launchd starts with a bare PATH; node comes from the newest nvm install. Then the token, before anything can fail.
 NODE_BIN=$(ls -d "$HOME"/.nvm/versions/node/*/bin 2>/dev/null | sort -V | tail -1)
 export PATH="${NODE_BIN:+$NODE_BIN:}/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
-GH_TOKEN=$(gh auth token --user cBallGitWork 2>/dev/null); export GH_TOKEN
+GH_TOKEN=${GH_TOKEN:-$(gh auth token --user cBallGitWork 2>/dev/null)}; export GH_TOKEN
+# A fetch begun as the Mac slept hung for an hour on 20 Oct and held the lock past the weekly's wait; ssh now gives up.
+export GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-ssh -o ConnectTimeout=20 -o ServerAliveInterval=15 -o ServerAliveCountMax=4}
 set -Eeuo pipefail
 
 MODE=${1:-}
+CATCH_UP=$([ "${2:-}" = catch-up ] && echo 1 || echo 0)
 MAIN=${EPL_DRAFT:-$HOME/epl-draft-1}
 WT=${INTEL_WORKTREE:-$HOME/epl-draft-intel}
 SISTER=${SISTER_REPO:-$HOME/ai-carling-premiership}
@@ -38,7 +42,7 @@ alert() {
   return 1
 }
 # A soft alert has its own source, so this run's ok cannot close it; ok is sent only when its issue is open.
-OPEN_ALERTS=$(gh issue list -R "$REPO" --label alert --state open --json title --jq '.[].title' 2>/dev/null || true)
+OPEN_ALERTS=${OPEN_ALERTS-$(gh issue list -R "$REPO" --label alert --state open --json title --jq '.[].title' 2>/dev/null || true)}
 soft() {
   if [ "$2" = ok ] && ! grep -qx "alert: $1" <<<"$OPEN_ALERTS"; then return 0; fi
   [ "$2" = fail ] && log "ALERT $1: $3"
@@ -58,17 +62,31 @@ on_exit() {
   [ "$(cat "$LOCK/pid" 2>/dev/null)" = "$$" ] && rm -rf "$LOCK"
   rm -rf "$OUT"
 }
-trap 'LAST_ERROR="line $LINENO: $BASH_COMMAND"' ERR
-trap on_exit EXIT
-
+# retry <label> <command...>: five tries, 15 s doubling (a Mac just woken has no network for a minute or two), each
+# failure logged with the command's last stderr line; stdout passes through, so a caller may capture it.
 retry() {
-  local try
+  local label=$1 try wait=${RETRY_WAIT:-15} err
+  shift
+  err=$(mktemp)
   for try in 1 2 3 4 5; do
-    "$@" && return 0
-    [ "$try" = 5 ] || { log "$1 failed, try $try of 5"; sleep 30; }
+    if "$@" 2>"$err"; then rm -f "$err"; return 0; fi
+    log "$label failed, try $try of 5: $(tail -1 "$err")" >&2
+    [ "$try" = 5 ] || { sleep "$wait"; wait=$((wait * 2)); }
   done
+  rm -f "$err"
   return 1
 }
+# The branch's PR, opened once: a create whose answer was lost (a reset connection, 18 Oct) may have opened it already.
+open_pr() {
+  gh pr view -R "$REPO" "$BRANCH" --json url --jq .url 2>/dev/null && return 0
+  gh pr create -R "$REPO" --base main --head "$BRANCH" --label chore --label intel --title "$TITLE" \
+    --body "Written by \`scripts/sync-intel.sh $MODE\` on Craig's Mac. Changed: $CHANGED. It merges itself once CI's verify passes."
+}
+# Tests source the helpers above and stop here.
+[ "${SYNC_INTEL_LIB:-0}" = 1 ] && return 0
+
+trap 'LAST_ERROR="line $LINENO: $BASH_COMMAND"' ERR
+trap on_exit EXIT
 
 case "$MODE" in
   weekly) KINDS="squads set-pieces strength depth matches lines shots touches projections" ;;
@@ -78,9 +96,14 @@ case "$MODE" in
 esac
 [ -n "$GH_TOKEN" ] || fail "no cBallGitWork token from gh"
 
-# One run at a time; a lock whose holder has died is taken over.
-for _ in $(seq 1 60); do
-  if mkdir "$LOCK" 2>/dev/null; then echo $$ >"$LOCK/pid"; break; fi
+# The weekly's later slots run only while its morning's alert, a failure or a stale sweep, is still open.
+if [ "$CATCH_UP" = 1 ] && ! grep -qxE "alert: intel-$MODE(-stale)?" <<<"$OPEN_ALERTS"; then
+  quiet "catch-up: no intel-$MODE alert open"
+fi
+
+# One run at a time, an hour's wait at most; a lock whose holder has died is taken over.
+for _ in $(seq 1 120); do
+  if mkdir "$LOCK" 2>/dev/null; then echo $$ >"$LOCK/pid"; echo "$MODE" >"$LOCK/mode"; break; fi
   holder=$(cat "$LOCK/pid" 2>/dev/null || true)
   if [ -z "$holder" ] || ! kill -0 "$holder" 2>/dev/null; then
     log "taking over a stale lock from pid ${holder:-unknown}"
@@ -90,10 +113,11 @@ for _ in $(seq 1 60); do
   [ "$MODE" = zones ] && quiet "pid $holder holds the lock; the next half hour tries again"
   sleep 30
 done
-[ "$(cat "$LOCK/pid" 2>/dev/null)" = "$$" ] || fail "another run (pid $(cat "$LOCK/pid" 2>/dev/null)) held $LOCK for 30 minutes"
+[ "$(cat "$LOCK/pid" 2>/dev/null)" = "$$" ] \
+  || fail "a $(cat "$LOCK/mode" 2>/dev/null) run (pid $(cat "$LOCK/pid" 2>/dev/null)) held $LOCK for an hour"
 
 # A fresh worktree on origin/main; the main folder is never touched.
-retry git -C "$MAIN" fetch -q origin || fail "could not fetch origin in 5 tries; is the network up?"
+retry "git fetch" git -C "$MAIN" fetch -q origin || fail "could not fetch origin in 5 tries; is the network up?"
 [ -d "$WT" ] || git -C "$MAIN" worktree add -q --detach "$WT" origin/main || fail "worktree"
 cd "$WT"
 git checkout -q --detach origin/main && git reset -q --hard origin/main && git clean -fdq data/intel || fail "reset"
@@ -198,10 +222,9 @@ SHA=$(git rev-parse HEAD)
 ASKPASS="$OUT/askpass"
 # shellcheck disable=SC2016  # $GH_TOKEN is for askpass to expand, not this shell
 printf '#!/bin/sh\necho "$GH_TOKEN"\n' >"$ASKPASS" && chmod 700 "$ASKPASS"
-retry env GIT_ASKPASS="$ASKPASS" GIT_TERMINAL_PROMPT=0 git -c credential.helper= push -q \
-  "https://x-access-token@github.com/$REPO.git" "$BRANCH" || fail "push"
-PR=$(gh pr create -R "$REPO" --base main --head "$BRANCH" --label chore --label intel --title "$TITLE" \
-  --body "Written by \`scripts/sync-intel.sh $MODE\` on Craig's Mac. Changed: $CHANGED. It merges itself once CI's verify passes.") || fail "pr"
+retry "git push" env GIT_ASKPASS="$ASKPASS" GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c http.lowSpeedLimit=1000 \
+  -c http.lowSpeedTime=60 push -q "https://x-access-token@github.com/$REPO.git" "$BRANCH" || fail "push"
+PR=$(retry "gh pr create" open_pr) || fail "pr"
 
 state=""
 for _ in $(seq 1 90); do

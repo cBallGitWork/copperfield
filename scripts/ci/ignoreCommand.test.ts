@@ -77,9 +77,11 @@ describe("production builds", () => {
     expect(builds()).toBe(false);
   });
 
-  // 19 Oct 2026: since the repo went private the club page's read of the branch 404s, so only a build ships them.
-  it("for the predicted elevens", () => {
+  // 22 Oct 2026: the repo is public again, so the club page reads them off the branch; each build fired an FPL 403 burst.
+  it("not for the predicted elevens alone", () => {
     commit("data/intel/xi/26-27.json");
+    expect(builds()).toBe(false);
+    commit("data/intel/xi/26-27.json", "data/intel/squads/26-27.json");
     expect(builds()).toBe(true);
   });
 

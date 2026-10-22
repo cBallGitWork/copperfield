@@ -396,9 +396,22 @@ GitHub mails a failed cron only to whoever last edited its line, and the Mac sho
 - **The Mac exports what the GitHub sweep wrote.** `scripts/sister-export.py` holds the sister's sweep lock, restores
   `derived,signals,match_logs,staging/understat,raw/fpl/live/bootstrap,staging/fpl/<season>` from R2 (the bootstrap
   was 9 days old on the Mac on 7 Oct, and the export reads its gameweek), judges the newest sweep report, then
-  exports. Weekly wants Tuesday's own sweep, finished after 05:00 UTC; pressers the sweep the sister's schedule says
+  exports. Weekly wants this week's Tuesday sweep or a later one, finished after Tuesday 05:00 UTC, whichever day it
+  runs; pressers the sweep the sister's schedule says
   was due (`gw_trigger.full_sweep_due`, through `digest._collect_full_sweep_due`), since sweeps stopped being daily
   on 7 Oct (Mon and Tue 06:30, Thu and Fri 16:30 UK).
+- **The weekly catches up** (22 Oct 2026). Tuesday's 06:30 UK sweep went red on 13 and 20 Oct (`sofascore_ingest`:
+  the Monday match's SofaScore pages had not arrived while the Mac slept), and the sister re-ran it green the same day
+  (11:08Z, 23:50Z). The weekly had already taken the red one, and on 21 Oct a hand run refused the 23:50Z re-run
+  because the rule then read "after 05:00 today". `com.epl-draft.intel-weekly-catch-up` runs `weekly catch-up` on
+  Tuesday 14:00 and Wednesday 08:00, silent unless `alert: intel-weekly` or `intel-weekly-stale` is open, so the
+  alert closes the day the sweep is re-run instead of the Tuesday after.
+- **Git and gh on the Mac give up and say why** (22 Oct 2026). Every `git fetch` failure in 14 days (4) came on a
+  wake from sleep and passed on its second try; one fetch begun as the Mac slept hung an hour on 20 Oct, held the
+  lock past the weekly's 30 minutes and cost that Tuesday's weekly. ssh now has `ConnectTimeout` and
+  `ServerAlive`, `retry` waits 15 s doubling and logs the command's last stderr line, the weekly and pressers wait an
+  hour for the lock, and the PR is opened through `open_pr`, which finds a PR a lost create already opened (twice on
+  18 Oct, "connection reset by peer").
 - **Shots and touches land the evening of a match, not the Tuesday after** (Craig, 11 Oct 2026). The sister's
   hand-off agent fetches a match's SofaScore pages 2.5 h after kickoff (`SOFASCORE_HANDOFF_GRACE_H`, every 30 min,
   no request when nothing is due), and `sync-intel.sh zones` runs `epl_draft_intel.py --zones-live` over the
@@ -530,6 +543,12 @@ read has answered 404 since, so production kept its last build's elevens: Saturd
 unless the read is shaped as the elevens and newer. A 404 is remembered for the life of the process and never logged,
 so the dead read costs one request per cold start. A read-only token on Vercel would revive it; that is Craig's call,
 and a public repo would do the same. Every other `data/intel` kind builds: they are baked in and read nowhere else.
+
+**The predicted elevens skip the build again** (22 Oct 2026): the repo is public since 20 Oct and the branch's raw
+file answers 200, so the club page has them within `XI_REVALIDATE` without a deploy. Each deploy sends Vercel's
+screenshot bot across every tab, and FPL answers that burst 403 (19 Oct section): on 22 Oct 10 of the 13 commits on
+main were XI commits, production ran 8 deployments in 12 hours, and the FPL refusals came in the minutes after them
+(16 at 12:00–12:07 UTC behind the 12:05 XI commit, 19 at 18:01–18:37 behind 18:01's).
 
 ## Kits load straight from FPL, not through Vercel's optimizer — decided 5 Oct 2026
 
