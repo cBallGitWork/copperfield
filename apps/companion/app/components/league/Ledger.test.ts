@@ -53,8 +53,15 @@ describe("a transfer under a thumb (Craig, 19 Oct 2026: two rows, not three)", (
     const row = html.match(/<li class="(cm-row [^"]*)"/)?.[1].split(/\s+/) ?? [];
     expect(row).toContain("grid-cols-[auto_5.25rem_minmax(0,1fr)]");
     expect(row.filter((name) => /^(px|pl|py|pt|pb)-/.test(name))).toEqual([]);
-    expect(html.match(/max-lg:pt-1/g)).toHaveLength(2);
-    expect(html.match(/max-lg:pb-1/g)).toHaveLength(2);
+    expect(html.match(/max-lg:pt-0\.5/g)).toHaveLength(2);
+    expect(html.match(/max-lg:pb-0\.5/g)).toHaveLength(2);
+  });
+
+  // Craig, 22 Oct 2026: "why are these rows so big, so big spacing between the two rows, looks awful".
+  it("pairs In and Out tight under a thumb: each name line 28px, never a 36px floor apiece", () => {
+    const html = render();
+    expect(html).not.toContain("max-lg:min-h-9");
+    expect(html).toContain("min-h-7");
   });
 
   it("hides the weekday on the league's list, below the desk", () => {
@@ -80,11 +87,11 @@ describe("a transfer under a thumb (Craig, 19 Oct 2026: two rows, not three)", (
 
 // Review SHELL-1 and LEAGUE-6 (20 Oct 2026): desk names at 24px under the row's 28 floor, and plates cut at 128px.
 describe("a transfer on a desk", () => {
-  it("holds every name, linked or not, to the desk row's 28px floor", () => {
+  it("holds every name, linked or not, to a 28px floor at every width", () => {
     const linked: Deal = { ...WAIVER, inbound: [{ ...man("Levi Colwill", BEEF), fantraxId: "p1" }] };
     const html = renderToStaticMarkup(createElement(Ledger, { deals: [linked], nameOf: named([{ teamId: BEEF, name: "Cowthenbeef" }]) }));
-    expect(html.match(/<a [^>]*class="[^"]*lg:min-h-7/g)).toHaveLength(1);
-    expect(html.match(/<span class="[^"]*lg:min-h-7/g)).toHaveLength(1);
+    expect(html.match(/<a [^>]*class="[^"]*[" ]min-h-7/g)).toHaveLength(1);
+    expect(html.match(/<span class="[^"]*[" ]min-h-7/g)).toHaveLength(1);
   });
 
   it("lets a long team name wrap in its plate rather than cut", () => {
