@@ -69,7 +69,7 @@ describe("the card's form, run and folded news", () => {
   });
 
   it("holds the Form row's height while his matches are read", () => {
-    expect(render({ player: saliba() })).toMatch(/<ol class="[^"]*min-h-16[^"]*" aria-busy="true"><\/ol>/);
+    expect(render({ player: saliba() })).toMatch(/<ol class="[^"]*min-h-20[^"]*" aria-busy="true"><\/ol>/);
   });
 
   it("keeps the strip under a live breakdown, without the season figure", () => {

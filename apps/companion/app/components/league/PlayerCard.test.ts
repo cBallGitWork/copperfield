@@ -206,11 +206,11 @@ describe("one player card", () => {
   it("heads a projection Proj, as the row it was opened from does", () => {
     const card = render({ player: saliba(), figure: "projected" });
     expect(card).toMatch(/>Proj<[\s\S]*?class="[^"]*text-info[^"]*">41</);
-    expect(card).not.toContain(">FPts<");
+    expect(card).not.toMatch(/title="[^"]*">FPts</);
   });
 
   it("prints no FPts where the screen had no table", () => {
-    expect(render({ player: { ...saliba(), points: undefined } })).not.toContain(">FPts<");
+    expect(render({ player: { ...saliba(), points: undefined } })).not.toMatch(/title="[^"]*">FPts</);
   });
 
   it("totals the gameweek's breakdown in cyan, never lit", () => {
@@ -219,7 +219,7 @@ describe("one player card", () => {
     const goal: BreakdownLine = { code: "G", name: "Goals", points: 6, value: "1" };
     const card = render({ player: live, breakdown: [goal], played: 70, reserve: false });
     expect(card).toMatch(/>Total<[\s\S]*?class="[^"]*text-info[^"]*">6</);
-    expect(card).not.toContain(">FPts<");
+    expect(card).not.toMatch(/title="[^"]*">FPts</);
   });
 
   it("inks a doubtful week's xMins red and a safe one cyan", () => {

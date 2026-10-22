@@ -14,6 +14,11 @@ export interface Opposition {
   fixture: Fixture;
 }
 
+/** FPL's 1–5 difficulty for the side at home or away in a fixture; null when FPL published none. */
+export function sideDifficulty(fixture: Pick<Fixture, "homeDifficulty" | "awayDifficulty">, home: boolean): number | null {
+  return home ? fixture.homeDifficulty : fixture.awayDifficulty;
+}
+
 /** Every club's fixtures this round by club id: none in a blank, two in a double, undated last.
  *  A club with no match is absent rather than an empty list. */
 export function oppositionByClub(snapshot: FootballSnapshot): Map<number, Opposition[]> {
@@ -27,7 +32,7 @@ export function oppositionByClub(snapshot: FootballSnapshot): Map<number, Opposi
     const against: Opposition = {
       club: opponent,
       home,
-      difficulty: home ? fixture.homeDifficulty : fixture.awayDifficulty,
+      difficulty: sideDifficulty(fixture, home),
       fixture,
     };
     const rows = byClub.get(clubId);
@@ -76,7 +81,7 @@ export function nextFixtures(
     run.push({
       club: opponent,
       home,
-      difficulty: home ? fixture.homeDifficulty : fixture.awayDifficulty,
+      difficulty: sideDifficulty(fixture, home),
       fixture,
     });
   }
