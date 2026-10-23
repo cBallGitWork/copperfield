@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-22T22:04:41.824Z",
+    "exportedAt": "2026-10-23T08:11:26.292Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-22T22:04:41.824Z",
+  "fetchedAt": "2026-10-23T08:11:26.292Z",
   "source": "rotowire",
   "clubs": {
     "IPS": {
@@ -1074,6 +1074,14 @@
       "lineup": "predicted",
       "absent": [
         {
+          "code": 222694,
+          "status": "QUES"
+        },
+        {
+          "code": 467779,
+          "status": "QUES"
+        },
+        {
           "code": 471551,
           "status": "OUT"
         },
@@ -1090,15 +1098,7 @@
           "status": "OUT"
         },
         {
-          "code": 222694,
-          "status": "OUT"
-        },
-        {
           "code": 608181,
-          "status": "OUT"
-        },
-        {
-          "code": 467779,
           "status": "OUT"
         },
         {
