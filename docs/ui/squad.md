@@ -182,7 +182,9 @@ squads export's `expectedReturnGw` past the open gameweek, else FPL's fixed "Exp
 date turned into the first gameweek starting on or after it; a date is never printed, nor a chance, and a man who has
 left shows no week. On a phone the
 note sits beside the name when it fits and wraps under it when not, so it never shrinks to an ellipsis; the row stays
-36px. Every player row prints it.
+36px. Every player row prints it. The squad row also puts FPL's expected day under the name, *Back 28 Nov*
+(`returnDate`), beside it on a desk, the note itself never printing a date (Craig, 23 Oct 2026: *"theres an expected
+date too … wheres that gone"*).
 
 **CM's mark, not the box, beside every man who is not fit** (Craig, 21 Oct 2026: *"Use a yellow and Red Cross when
 injured/doubt to match row. Red card for suspension"*). `StateMark` draws the cross for a knock, a card for a ban and a
