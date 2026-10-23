@@ -14,7 +14,8 @@ import { minutesInk } from "../football/xminsInk";
 import PositionTile from "./PositionTile";
 import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
-import { MINOR_LABEL, ROW_NAME } from "@/app/desk";
+import { MINOR_LABEL, QUIET_NOTE, ROW_NAME } from "@/app/desk";
+import { returnDate } from "./returnDate";
 import type { AutoSubMark } from "./autoSubbed";
 
 // One man's row in a squad list: our position, his club's crest, his name, his fixture and his figure.
@@ -55,6 +56,7 @@ export default function SquadRow({
 
   // Who his club plays, in the app's one spelling of a fixture — `BRE (H)`.
   const fixture = rowFixture(player);
+  const back = footballer?.news ? returnDate(footballer.news) : null;
   const { wash, mark } = fitnessOf(footballer);
   const xMins = player.minutes[0]?.minutes ?? null;
 
@@ -98,6 +100,8 @@ export default function SquadRow({
           </span>
           {mark ? <FitnessNote player={notedOf(footballer)} /> : null}
         </span>
+        {/* FPL's expected day under the name on a phone, beside it on a desk. */}
+        {back === null ? null : <span className={`${QUIET_NOTE} shrink-0 leading-tight`}>{back}</span>}
         {autoSub === undefined ? null : (
           <span className="shrink-0 truncate text-2xs leading-tight text-info">
             {autoSub.on ? `Auto-sub for ${autoSub.with}` : `Auto-sub: ${autoSub.with} on`}

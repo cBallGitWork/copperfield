@@ -37,6 +37,13 @@ describe("a squad row", () => {
     expect(draw({ code: 3, status: "i", chanceOfPlaying: 0, news })).toContain(`>${noted("Hamstring", "GW10")}</span>`);
   });
 
+  // Craig, 23 Oct 2026: "theres an expected date too, on some rows we had that under the player name, wheres that gone".
+  it("puts FPL's expected date back under the name, and none where FPL names no day", () => {
+    expect(draw({ code: 1, status: "i", chanceOfPlaying: 0, news: "Hamstring injury - Expected back 1 Nov" })).toContain(">Back 1 Nov</span>");
+    expect(draw({ code: 1, status: "s", chanceOfPlaying: 0, news: "Suspended until 31 Oct" })).toContain(">Back 31 Oct</span>");
+    expect(draw({ code: 1, status: "i", chanceOfPlaying: 0, news: "Knee injury - Unknown return date" })).not.toContain(">Back ");
+  });
+
   it("keeps a 36px row, the note beside the name when it fits and wrapping under it on a phone when not", () => {
     const html = draw(doubt);
     expect(html).toMatch(/class="cm-row flex min-h-9 /);
