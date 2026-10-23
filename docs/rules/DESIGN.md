@@ -1024,7 +1024,8 @@ carried — `docs/rules/PRODUCT.md`'s accessibility section.
   "Set this line-up in Fantrax ↗"), the FPL tab and its form, and licence
   credits. A figure that would only read right with a byline is cut, not
   labelled: FPL's own points, DefCon and difficulty no longer print beside the
-  league's. Nothing of ours sits in a column headed `FPts`, which stays the
+  league's, save the player card's Form, whose opponents take the difficulty tile
+  as Next's do (Craig, 23 Oct 2026: *"just use the same code"*). Nothing of ours sits in a column headed `FPts`, which stays the
   league's word. An empty or outage state is a title and at most one short line,
   with the read's code on the element (`data-code`), not on the screen.
   `apps/companion/app/noSourceNames.test.ts` holds it.

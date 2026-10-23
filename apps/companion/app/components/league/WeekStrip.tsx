@@ -6,8 +6,8 @@ import { fdrStep } from "../football/fdr";
 import { minutesInk } from "../football/xminsInk";
 import type { FormMatch, NextMatch } from "../../players/[fantraxId]/cardWeeks";
 
-// A card's should-I-play-him strip, FPL's sheet as two blocks of one run: his last matches on plain plates over our
-// league's points (no FPL difficulty beside them, DESIGN §7), then the run to come on its difficulty over his xMins.
+// A card's should-I-play-him strip, FPL's sheet as two blocks of one run, each opponent on that match's difficulty for
+// him: his last matches over our league's points, then the run to come over his xMins.
 
 export default function WeekStrip({
   form,
@@ -42,7 +42,7 @@ export default function WeekStrip({
             weeks={form.map((match) => ({
               key: String(match.fixtureId),
               gameweek: match.gameweek,
-              against: match.opponent === null ? null : { shortName: match.opponent, home: match.home, difficulty: null },
+              against: match.opponent === null ? null : { shortName: match.opponent, home: match.home, difficulty: match.difficulty },
               figure: match.points,
               ink: "text-info",
               title: `FPts, gameweek ${match.gameweek}`,
