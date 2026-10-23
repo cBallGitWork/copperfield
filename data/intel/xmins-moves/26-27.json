@@ -2,12 +2,12 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-23T09:04:07.782Z",
-    "rows": 10,
+    "exportedAt": "2026-10-23T17:08:43.347Z",
+    "rows": 11,
     "sources": [
       {
         "path": "data/intel/projections/26-27.json",
-        "mtime": "2026-10-23T09:03:33.780076+00:00"
+        "mtime": "2026-10-23T17:08:19.667372+00:00"
       }
     ]
   },
@@ -3179,6 +3179,103 @@
           "code": 606745,
           "before": 25,
           "after": 14
+        }
+      ]
+    },
+    {
+      "at": "2026-10-23T17:08:19.667Z",
+      "since": "2026-10-23T09:03:33.780Z",
+      "gameweek": 8,
+      "moves": [
+        {
+          "code": 223340,
+          "before": 64,
+          "after": 0
+        },
+        {
+          "code": 441164,
+          "before": 0,
+          "after": 34
+        },
+        {
+          "code": 466525,
+          "before": 86,
+          "after": 55
+        },
+        {
+          "code": 487053,
+          "before": 26,
+          "after": 0
+        },
+        {
+          "code": 449434,
+          "before": 0,
+          "after": 25
+        },
+        {
+          "code": 551050,
+          "before": 2,
+          "after": 26
+        },
+        {
+          "code": 172780,
+          "before": 41,
+          "after": 18
+        },
+        {
+          "code": 551499,
+          "before": 52,
+          "after": 29
+        },
+        {
+          "code": 115556,
+          "before": 34,
+          "after": 12
+        },
+        {
+          "code": 498444,
+          "before": 22,
+          "after": 0
+        },
+        {
+          "code": 592031,
+          "before": 0,
+          "after": 19
+        },
+        {
+          "code": 481655,
+          "before": 23,
+          "after": 38
+        },
+        {
+          "code": 224117,
+          "before": 19,
+          "after": 32
+        },
+        {
+          "code": 153682,
+          "before": 37,
+          "after": 49
+        },
+        {
+          "code": 606745,
+          "before": 14,
+          "after": 26
+        },
+        {
+          "code": 122798,
+          "before": 74,
+          "after": 85
+        },
+        {
+          "code": 448104,
+          "before": 16,
+          "after": 27
+        },
+        {
+          "code": 614574,
+          "before": 11,
+          "after": 0
         }
       ]
     }
