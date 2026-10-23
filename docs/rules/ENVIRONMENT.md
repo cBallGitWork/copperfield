@@ -33,6 +33,9 @@ there.
   `bench-order.yml`). The app saves lineups to Fantrax only where `FANTRAX_COOKIE` (the
   commissioner's session) and `LINEUP_SAVE` are set in Vercel: `on` for every team, or
   comma-separated Fantrax team ids for only those. Everything else reads public endpoints.
+- Analytics: the root layout's `<Analytics />` (`@vercel/analytics`, cookieless page views by route) sends only once
+  Web Analytics is on in the Vercel project (Analytics tab); until then `/_vercel/insights/script.js` is a 404 and
+  nothing is counted. No env var.
 
 ## Data and league health
 
