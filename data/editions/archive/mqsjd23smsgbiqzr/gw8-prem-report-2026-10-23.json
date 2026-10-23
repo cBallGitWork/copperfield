@@ -1,0 +1,439 @@
+{
+  "slug": "gw8-prem-report-2026-10-23",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 8,
+  "gameweek": 8,
+  "filedAt": "2026-10-23T22:12:49.006Z",
+  "expiresAt": null,
+  "edition": "Friday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Enciso on the level",
+  "deck": "Ipswich Town and Nottingham Forest drew 1-1",
+  "body": "",
+  "subjects": [
+    "match-report:gw8:2026-10-23"
+  ],
+  "image": null,
+  "face": {
+    "code": 474120,
+    "name": "Enciso",
+    "clubId": 12,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645271,
+        "kickoff": "2026-10-23T19:00:00Z",
+        "home": {
+          "code": 40,
+          "score": 1,
+          "goals": [
+            "Enciso 41"
+          ],
+          "assists": [],
+          "manager": null,
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Walton",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.7
+                }
+              ],
+              [
+                {
+                  "name": "Ouattara",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Diop",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3
+                },
+                {
+                  "name": "O'Shea",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.5
+                },
+                {
+                  "name": "Davis",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.9
+                }
+              ],
+              [
+                {
+                  "name": "Palacios",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.5
+                },
+                {
+                  "name": "Florentino",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Matusiwa",
+                    "minute": "85",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Abdul Fatawu",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Maeda",
+                    "minute": "73",
+                    "booked": false,
+                    "mark": 3.4
+                  },
+                  "mark": 4.5
+                },
+                {
+                  "name": "Enciso",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Akpom",
+                    "minute": "86",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 7.6
+                },
+                {
+                  "name": "Philogene",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Clarke",
+                    "minute": "61",
+                    "booked": false,
+                    "mark": 3.4
+                  },
+                  "mark": 3.2
+                }
+              ],
+              [
+                {
+                  "name": "Emersonn",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Flemming",
+                    "minute": "60",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 3.5
+                }
+              ]
+            ],
+            "unused": [
+              "Greaves",
+              "Furlong",
+              "Scherpen",
+              "Núñez"
+            ]
+          },
+          "next": "Hull City (a)"
+        },
+        "away": {
+          "code": 17,
+          "score": 1,
+          "goals": [
+            "Williams 13"
+          ],
+          "assists": [
+            "Muñoz 13"
+          ],
+          "manager": null,
+          "lineup": {
+            "formation": "3-4-2-1",
+            "lines": [
+              [
+                {
+                  "name": "Sels",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.1
+                }
+              ],
+              [
+                {
+                  "name": "Cunha",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Milenkovic",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Murillo",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Muñoz",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.5
+                },
+                {
+                  "name": "McAtee",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.6
+                },
+                {
+                  "name": "Schlager",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.6
+                },
+                {
+                  "name": "Williams",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Netz",
+                    "minute": "84",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 7.1
+                }
+              ],
+              [
+                {
+                  "name": "Gibbs-White",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.2
+                },
+                {
+                  "name": "Ndoye",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Hudson-Odoi",
+                    "minute": "69",
+                    "booked": false,
+                    "mark": 2.5
+                  },
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Delap",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Wood",
+                    "minute": "90+4",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 3.4
+                }
+              ]
+            ],
+            "unused": [
+              "Sangaré",
+              "John Victor",
+              "Diomande",
+              "Kalimuendo",
+              "Yates",
+              "Aina"
+            ]
+          },
+          "next": "Brentford (a)"
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 1
+        },
+        "venue": "Portman Road",
+        "attendance": 29198,
+        "referee": "Thomas Bramall",
+        "standfirst": "Ipswich Town drew 1-1 with Nottingham Forest, levelling after falling behind to an early opener.",
+        "account": "Forest went ahead in the 13th minute when Daniel Muñoz crossed and Neco Williams met it right-footed inside the box, his finish going into the middle of the goal. Ipswich came from behind just before half-time, Julio Enciso sending a left-footed shot from outside the box low into the corner. Williams went off injured six minutes from time.",
+        "sections": [
+          {
+            "head": "Williams scores, then injured",
+            "pitch": "Williams gave Forest their goal and could not last the match, an injury forcing him off with six minutes left.",
+            "stake": "A free agent since domeitalycoach let him go on Thursday; eight points."
+          },
+          {
+            "head": "Muñoz makes the opener",
+            "pitch": "Muñoz made Forest's goal and also earned one defensive point, half the most the league pays a man for his defending in a match.",
+            "stake": "Cowthenbeef has him, for six points against its_ohi."
+          },
+          {
+            "head": "Enciso levels from range",
+            "pitch": "Enciso had four shots at goal, and it was his effort from distance that drew Ipswich level before the break.",
+            "stake": "If anyone can, Bannan can has him, for seven points against The Truffle Pigs."
+          }
+        ],
+        "keyStats": [
+          {
+            "label": "Points",
+            "value": "Williams 8, Enciso 7 (If anyone can, Bannan can), Muñoz 6 (Cowthenbeef), Walton 4"
+          },
+          {
+            "label": "Shots",
+            "value": "7 (3 on target) v 17 (5)"
+          },
+          {
+            "label": "xG",
+            "value": "Ipswich 0.46, Forest 2.33"
+          },
+          {
+            "label": "Saves",
+            "value": "Walton 3"
+          },
+          {
+            "label": "DefCon",
+            "value": "Palacios 2, Milenkovic 2, Schlager 2"
+          },
+          {
+            "label": "xG without a goal",
+            "value": "Gibbs-White 0.74"
+          },
+          {
+            "label": "Most shots",
+            "value": "Enciso 4 (2 on target, 1 goal)"
+          },
+          {
+            "label": "Chances created",
+            "value": "Gibbs-White 3"
+          },
+          {
+            "label": "Top xG",
+            "value": "Delap 0.44, Enciso 0.31, Williams 0.30"
+          }
+        ],
+        "star": {
+          "name": "Enciso",
+          "club": "Ipswich",
+          "holder": "If anyone can, Bannan can",
+          "mark": 7.6,
+          "did": "1 goal"
+        },
+        "rows": [
+          {
+            "minute": "13",
+            "kind": "Goal",
+            "side": "away",
+            "text": "Williams (Muñoz)"
+          },
+          {
+            "minute": "41",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Enciso"
+          },
+          {
+            "minute": "51",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Diop"
+          },
+          {
+            "minute": "54",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Murillo"
+          },
+          {
+            "minute": "60",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Flemming for Emersonn"
+          },
+          {
+            "minute": "61",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Clarke for Philogene"
+          },
+          {
+            "minute": "69",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Hudson-Odoi for Ndoye"
+          },
+          {
+            "minute": "73",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Maeda for Abdul Fatawu"
+          },
+          {
+            "minute": "84",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Netz for Williams, injured"
+          },
+          {
+            "minute": "85",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Matusiwa for Florentino"
+          },
+          {
+            "minute": "86",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Akpom for Enciso"
+          },
+          {
+            "minute": "90+4",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Wood for Delap"
+          }
+        ],
+        "video": "lO_goITj_Fc"
+      }
+    ]
+  }
+}

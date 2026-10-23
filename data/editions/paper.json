@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T18:16:57.875Z",
+  "updatedAt": "2026-10-23T22:12:49.006Z",
   "stories": [
     {
       "slug": "gw5-presser-2026-09-18",
@@ -6927,1858 +6927,440 @@
       }
     },
     {
-      "slug": "gw8-predicted-xi",
-      "kind": "predicted-xi",
+      "slug": "gw8-prem-report-2026-10-23",
+      "kind": "match-report",
       "leagueId": "mqsjd23smsgbiqzr",
       "period": 8,
       "gameweek": 8,
-      "filedAt": "2026-10-23T18:16:57.875Z",
-      "expiresAt": "2026-10-23T19:00:00Z",
-      "leadsUntil": "2026-10-23T18:45:00.000Z",
-      "edition": "The Form Guide",
-      "byline": "The Line-Ups",
-      "headline": "Predicted Line-Ups: Gameweek 8",
-      "deck": "Every club's expected starting eleven for the gameweek.",
+      "filedAt": "2026-10-23T22:12:49.006Z",
+      "expiresAt": null,
+      "edition": "Friday Prem Report",
+      "byline": "The Back Page",
+      "headline": "Enciso on the level",
+      "deck": "Ipswich Town and Nottingham Forest drew 1-1",
       "body": "",
       "subjects": [
-        "predicted-xi:gw8:0543e52e"
+        "match-report:gw8:2026-10-23"
       ],
       "image": null,
       "face": {
-        "code": 482616,
-        "name": "Bradley Barcola",
-        "clubId": 14,
+        "code": 474120,
+        "name": "Enciso",
+        "clubId": 12,
         "position": null
       },
       "ties": [],
       "extras": {
-        "lineups": [
+        "reports": [
           {
+            "fixtureCode": 2645271,
+            "kickoff": "2026-10-23T19:00:00Z",
             "home": {
-              "club": "Arsenal",
-              "code": 3,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "David Raya",
-                  "position": "GK",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Benjamin White",
-                  "position": "RB",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Gabriel",
-                  "position": "CB",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Ezri Konsa",
-                  "position": "CB",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Riccardo Calafiori",
-                  "position": "LB",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Myles Lewis-Skelly",
-                  "position": "DM"
-                },
-                {
-                  "name": "Declan Rice",
-                  "position": "DM",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Noni Madueke",
-                  "position": "LW",
-                  "owner": "7z8fy0pnmuogbtdw"
-                },
-                {
-                  "name": "Martin Ødegaard",
-                  "position": "AM",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Eberechi Eze",
-                  "position": "LW",
-                  "owner": "l5kunst8msgbirdf"
-                },
-                {
-                  "name": "Kai Havertz",
-                  "position": "ST",
-                  "owner": "0g0j5mkomuqqwsbu"
-                }
-              ]
-            },
-            "away": {
-              "club": "Everton",
-              "code": 11,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Jordan Pickford",
-                  "position": "GK",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Ainsley Maitland-Niles",
-                  "position": "RB",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "James Tarkowski",
-                  "position": "CB",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Jarrad Branthwaite",
-                  "position": "CB",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Vitalii Mykolenko",
-                  "position": "LB",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Harrison Armstrong",
-                  "position": "DM"
-                },
-                {
-                  "name": "James Garner",
-                  "position": "DM"
-                },
-                {
-                  "name": "Merlin Röhl",
-                  "position": "RB"
-                },
-                {
-                  "name": "Kiernan Dewsbury-Hall",
-                  "position": "AM",
-                  "owner": "l5kunst8msgbirdf"
-                },
-                {
-                  "name": "Jack Grealish",
-                  "position": "LW"
-                },
-                {
-                  "name": "Thierno Barry",
-                  "position": "ST",
-                  "owner": "l5kunst8msgbirdf"
-                }
-              ]
-            },
-            "kickoff": "2026-10-24T14:00:00Z"
-          },
-          {
-            "home": {
-              "club": "Aston Villa",
-              "code": 7,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Zion Suzuki",
-                  "position": "GK",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Matty Cash",
-                  "position": "RB",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Victor Lindelöf",
-                  "position": "CB"
-                },
-                {
-                  "name": "Tyrone Mings",
-                  "position": "CB"
-                },
-                {
-                  "name": "Ian Maatsen",
-                  "position": "LB"
-                },
-                {
-                  "name": "Joao Gomes",
-                  "position": "DM"
-                },
-                {
-                  "name": "Boubacar Kamara",
-                  "position": "DM"
-                },
-                {
-                  "name": "John McGinn",
-                  "position": "RW",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Johan Manzambi",
-                  "position": "AM",
-                  "owner": "7z8fy0pnmuogbtdw",
-                  "status": "Doubt"
-                },
-                {
-                  "name": "Emiliano Buendía",
-                  "position": "AM",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Nicolas Jackson",
-                  "position": "ST",
-                  "owner": "aekx2715mtzgcl3f"
-                }
-              ]
-            },
-            "away": {
-              "club": "Manchester City",
-              "code": 43,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Gianluigi Donnarumma",
-                  "position": "GK",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Matheus N.",
-                  "position": "RB",
-                  "owner": "l5kunst8msgbirdf",
-                  "status": "Doubt"
-                },
-                {
-                  "name": "Rúben",
-                  "position": "CB",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Marc Guéhi",
-                  "position": "CB",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Joško Gvardiol",
-                  "position": "LB",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Elliot Anderson",
-                  "position": "DM",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Ayyoub Bouaddi",
-                  "position": "DM"
-                },
-                {
-                  "name": "Iliman Ndiaye",
-                  "position": "RW",
-                  "owner": "7z8fy0pnmuogbtdw"
-                },
-                {
-                  "name": "Enzo",
-                  "position": "CM",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Jérémy Doku",
-                  "position": "LW",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Erling Haaland",
-                  "position": "ST",
-                  "owner": "l5kunst8msgbirdf"
-                }
-              ]
-            },
-            "kickoff": "2026-10-24T11:30:00Z"
-          },
-          {
-            "home": {
-              "club": "Chelsea",
-              "code": 8,
-              "formation": "3-4-2-1",
-              "men": [
-                {
-                  "name": "Mike Penders",
-                  "position": "GK"
-                },
-                {
-                  "name": "Maxence Lacroix",
-                  "position": "CB",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Levi Colwill",
-                  "position": "CB"
-                },
-                {
-                  "name": "Josh Acheampong",
-                  "position": "CB"
-                },
-                {
-                  "name": "Pedro Neto",
-                  "position": "RWB",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Jordan Henderson",
-                  "position": "CM"
-                },
-                {
-                  "name": "Moisés Caicedo",
-                  "position": "DM",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Jorrel Hato",
-                  "position": "LWB"
-                },
-                {
-                  "name": "Morgan Rogers",
-                  "position": "AM",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Cole Palmer",
-                  "position": "AM",
-                  "owner": "l5kunst8msgbirdf"
-                },
-                {
-                  "name": "João Pedro",
-                  "position": "CF",
-                  "owner": "7z8fy0pnmuogbtdw"
-                }
-              ]
-            },
-            "away": {
-              "club": "Tottenham Hotspur",
-              "code": 6,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Antonín Kinský",
-                  "position": "GK"
-                },
-                {
-                  "name": "Archie Gray",
-                  "position": "RB"
-                },
-                {
-                  "name": "Micky van de Ven",
-                  "position": "CB"
-                },
-                {
-                  "name": "Jan van Hecke",
-                  "position": "CB",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Andrew Robertson",
-                  "position": "LB"
-                },
-                {
-                  "name": "Sandro Tonali",
-                  "position": "DM",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Mateus Fernandes",
-                  "position": "AM"
-                },
-                {
-                  "name": "Mohammed Kudus",
-                  "position": "RW",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Conor Gallagher",
-                  "position": "AM"
-                },
-                {
-                  "name": "Omar Marmoush",
-                  "position": "CF"
-                },
-                {
-                  "name": "Solanke",
-                  "position": "ST",
-                  "owner": "kpj0z744muh1qwtd"
-                }
-              ]
-            },
-            "kickoff": "2026-10-24T16:30:00Z"
-          },
-          {
-            "home": {
-              "club": "Coventry City",
-              "code": 9,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Carl Rushworth",
-                  "position": "GK"
-                },
-                {
-                  "name": "Milan van Ewijk",
-                  "position": "RB"
-                },
-                {
-                  "name": "Bobby Thomas",
-                  "position": "CB",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Ethan Pinnock",
-                  "position": "CB"
-                },
-                {
-                  "name": "Jay Dasilva",
-                  "position": "LB"
-                },
-                {
-                  "name": "Matt Grimes",
-                  "position": "DM"
-                },
-                {
-                  "name": "Caleb Yirenkyi",
-                  "position": "DM"
-                },
-                {
-                  "name": "Brandon Thomas-Asante",
-                  "position": "LW"
-                },
-                {
-                  "name": "Jack Rudoni",
-                  "position": "AM",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Ephron Mason-Clark",
-                  "position": "AM"
-                },
-                {
-                  "name": "Taiwo Awoniyi",
-                  "position": "CF"
-                }
-              ]
-            },
-            "away": {
-              "club": "Fulham",
-              "code": 54,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Bernd Leno",
-                  "position": "GK"
-                },
-                {
-                  "name": "Timothy Castagne",
-                  "position": "RB"
-                },
-                {
-                  "name": "David Affengruber",
-                  "position": "CB",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Calvin Bassey",
-                  "position": "CB"
-                },
-                {
-                  "name": "Antonee Robinson",
-                  "position": "LB",
-                  "owner": "7z8fy0pnmuogbtdw"
-                },
-                {
-                  "name": "Shea Charles",
-                  "position": "DM"
-                },
-                {
-                  "name": "Sander Berge",
-                  "position": "DM"
-                },
-                {
-                  "name": "Oscar Bobb",
-                  "position": "RW"
-                },
-                {
-                  "name": "Josh King",
-                  "position": "AM",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Alex Iwobi",
-                  "position": "LW",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Gonzalo",
-                  "position": "ST",
-                  "owner": "l5kunst8msgbirdf"
-                }
-              ]
-            },
-            "kickoff": "2026-10-24T14:00:00Z"
-          },
-          {
-            "home": {
-              "club": "Crystal Palace",
-              "code": 31,
-              "formation": "3-4-2-1",
-              "men": [
-                {
-                  "name": "Walter Benítez",
-                  "position": "GK"
-                },
-                {
-                  "name": "Jaydee Canvot",
-                  "position": "CB"
-                },
-                {
-                  "name": "Chris Richards",
-                  "position": "CB"
-                },
-                {
-                  "name": "Axel Disasi",
-                  "position": "CB"
-                },
-                {
-                  "name": "Anan Khalaili",
-                  "position": "RWB",
-                  "owner": "l5kunst8msgbirdf"
-                },
-                {
-                  "name": "Adam Wharton",
-                  "position": "CM",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Daichi Kamada",
-                  "position": "AM",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Tyrick Mitchell",
-                  "position": "LWB",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Yeremy",
-                  "position": "AM"
-                },
-                {
-                  "name": "Ismaïla Sarr",
-                  "position": "RAM",
-                  "owner": "l5kunst8msgbirdf"
-                },
-                {
-                  "name": "Jean-Philippe Mateta",
-                  "position": "CF",
-                  "owner": "7to6xosimu8hyyw5"
-                }
-              ]
-            },
-            "away": {
-              "club": "Newcastle United",
-              "code": 4,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Lukás Hornícek",
-                  "position": "GK",
-                  "owner": "l5kunst8msgbirdf"
-                },
-                {
-                  "name": "Lewis Miley",
-                  "position": "DM"
-                },
-                {
-                  "name": "Sven Botman",
-                  "position": "CB"
-                },
-                {
-                  "name": "Malick Thiaw",
-                  "position": "CB"
-                },
-                {
-                  "name": "Lewis Hall",
-                  "position": "LB",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Joelinton",
-                  "position": "DM"
-                },
-                {
-                  "name": "Nico González",
-                  "position": "DM"
-                },
-                {
-                  "name": "Matias Fernandez-Pardo",
-                  "position": "AM",
-                  "status": "Doubt"
-                },
-                {
-                  "name": "William Osula",
-                  "position": "ST"
-                },
-                {
-                  "name": "Harvey Barnes",
-                  "position": "LW",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Yoane Wissa",
-                  "position": "CF",
-                  "owner": "7to6xosimu8hyyw5"
-                }
-              ]
-            },
-            "kickoff": "2026-10-25T14:00:00Z"
-          },
-          {
-            "home": {
-              "club": "Hull City",
-              "code": 88,
-              "formation": "5-4-1",
-              "men": [
-                {
-                  "name": "Konstantinos Tzolakis",
-                  "position": "GK",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Lewie Coyle",
-                  "position": "RB"
-                },
-                {
-                  "name": "Lucas Herrington",
-                  "position": "CB"
-                },
-                {
-                  "name": "Semi Ajayi",
-                  "position": "CB",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "John Egan",
-                  "position": "CB"
-                },
-                {
-                  "name": "Ryan Giles",
-                  "position": "LB"
-                },
-                {
-                  "name": "Mohamed Belloumi",
-                  "position": "RM",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Tim Iroegbunam",
-                  "position": "DM"
-                },
-                {
-                  "name": "Regan Slater",
-                  "position": "CM"
-                },
-                {
-                  "name": "Sorba Thomas",
-                  "position": "LM"
-                },
-                {
-                  "name": "Oli McBurnie",
-                  "position": "ST",
-                  "owner": "qgucu9dgmufwva1x"
-                }
-              ]
-            },
-            "away": {
-              "club": "Brentford",
-              "code": 94,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Caoimhín Kelleher",
-                  "position": "GK",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Michael Kayode",
-                  "position": "RB",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Kristoffer Ajer",
-                  "position": "CB",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Sepp van den Berg",
-                  "position": "CB"
-                },
-                {
-                  "name": "Keane Lewis-Potter",
-                  "position": "LB",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Mathias Jensen",
-                  "position": "AM"
-                },
-                {
-                  "name": "Mamadou Sangaré",
-                  "position": "DM",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Jaidon Anthony",
-                  "position": "RW",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Mikkel Damsgaard",
-                  "position": "AM"
-                },
-                {
-                  "name": "Kevin Schade",
-                  "position": "LW",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Igor Thiago",
-                  "position": "ST",
-                  "owner": "aekx2715mtzgcl3f"
-                }
-              ]
-            },
-            "kickoff": "2026-10-25T14:00:00Z"
-          },
-          {
-            "home": {
-              "club": "Ipswich Town",
               "code": 40,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Christian Walton",
-                  "position": "GK"
-                },
-                {
-                  "name": "Abdoul Ouattara",
-                  "position": "RB"
-                },
-                {
-                  "name": "Issa Diop",
-                  "position": "CB"
-                },
-                {
-                  "name": "Dara O'Shea",
-                  "position": "RB"
-                },
-                {
-                  "name": "Leif Davis",
-                  "position": "LB"
-                },
-                {
-                  "name": "Florentino",
-                  "position": "DM"
-                },
-                {
-                  "name": "Exequiel Palacios",
-                  "position": "DM"
-                },
-                {
-                  "name": "Abdul Fatawu",
-                  "position": "RW"
-                },
-                {
-                  "name": "Julio Enciso",
-                  "position": "AM",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Jaden Philogene",
-                  "position": "LW"
-                },
-                {
-                  "name": "Emersonn",
-                  "position": "ST",
-                  "owner": "0g0j5mkomuqqwsbu"
-                }
-              ]
+              "score": 1,
+              "goals": [
+                "Enciso 41"
+              ],
+              "assists": [],
+              "manager": null,
+              "lineup": {
+                "formation": "4-2-3-1",
+                "lines": [
+                  [
+                    {
+                      "name": "Walton",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 5.7
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Ouattara",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 4.5
+                    },
+                    {
+                      "name": "Diop",
+                      "booked": true,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 3
+                    },
+                    {
+                      "name": "O'Shea",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 3.5
+                    },
+                    {
+                      "name": "Davis",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 5.9
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Palacios",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 5.5
+                    },
+                    {
+                      "name": "Florentino",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Matusiwa",
+                        "minute": "85",
+                        "booked": false,
+                        "mark": null
+                      },
+                      "mark": 4.5
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Abdul Fatawu",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Maeda",
+                        "minute": "73",
+                        "booked": false,
+                        "mark": 3.4
+                      },
+                      "mark": 4.5
+                    },
+                    {
+                      "name": "Enciso",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Akpom",
+                        "minute": "86",
+                        "booked": false,
+                        "mark": null
+                      },
+                      "mark": 7.6
+                    },
+                    {
+                      "name": "Philogene",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Clarke",
+                        "minute": "61",
+                        "booked": false,
+                        "mark": 3.4
+                      },
+                      "mark": 3.2
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Emersonn",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Flemming",
+                        "minute": "60",
+                        "booked": false,
+                        "mark": 3.5
+                      },
+                      "mark": 3.5
+                    }
+                  ]
+                ],
+                "unused": [
+                  "Greaves",
+                  "Furlong",
+                  "Scherpen",
+                  "Núñez"
+                ]
+              },
+              "next": "Hull City (a)"
             },
             "away": {
-              "club": "Nottingham Forest",
               "code": 17,
-              "formation": "3-4-2-1",
-              "men": [
-                {
-                  "name": "Matz Sels",
-                  "position": "GK"
-                },
-                {
-                  "name": "Jair Cunha",
-                  "position": "CB"
-                },
-                {
-                  "name": "Murillo",
-                  "position": "CB"
-                },
-                {
-                  "name": "Nikola Milenković",
-                  "position": "CB"
-                },
-                {
-                  "name": "Daniel Muñoz",
-                  "position": "RWB",
-                  "owner": "7z8fy0pnmuogbtdw"
-                },
-                {
-                  "name": "James McAtee",
-                  "position": "CM"
-                },
-                {
-                  "name": "Xaver Schlager",
-                  "position": "DM"
-                },
-                {
-                  "name": "Neco Williams",
-                  "position": "LWB"
-                },
-                {
-                  "name": "Morgan Gibbs-White",
-                  "position": "AM",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Dan Ndoye",
-                  "position": "AM",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Liam Delap",
-                  "position": "CF",
-                  "owner": "ipnp5y4mmu9j7kop"
-                }
-              ]
+              "score": 1,
+              "goals": [
+                "Williams 13"
+              ],
+              "assists": [
+                "Muñoz 13"
+              ],
+              "manager": null,
+              "lineup": {
+                "formation": "3-4-2-1",
+                "lines": [
+                  [
+                    {
+                      "name": "Sels",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 5.1
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Cunha",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 4.5
+                    },
+                    {
+                      "name": "Milenkovic",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 4.5
+                    },
+                    {
+                      "name": "Murillo",
+                      "booked": true,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 4.5
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Muñoz",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 6.5
+                    },
+                    {
+                      "name": "McAtee",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 5.6
+                    },
+                    {
+                      "name": "Schlager",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 5.6
+                    },
+                    {
+                      "name": "Williams",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Netz",
+                        "minute": "84",
+                        "booked": false,
+                        "mark": null
+                      },
+                      "mark": 7.1
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Gibbs-White",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": null,
+                      "mark": 3.2
+                    },
+                    {
+                      "name": "Ndoye",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Hudson-Odoi",
+                        "minute": "69",
+                        "booked": false,
+                        "mark": 2.5
+                      },
+                      "mark": 4.5
+                    }
+                  ],
+                  [
+                    {
+                      "name": "Delap",
+                      "booked": false,
+                      "sentOff": false,
+                      "replacedBy": {
+                        "name": "Wood",
+                        "minute": "90+4",
+                        "booked": false,
+                        "mark": null
+                      },
+                      "mark": 3.4
+                    }
+                  ]
+                ],
+                "unused": [
+                  "Sangaré",
+                  "John Victor",
+                  "Diomande",
+                  "Kalimuendo",
+                  "Yates",
+                  "Aina"
+                ]
+              },
+              "next": "Brentford (a)"
             },
-            "kickoff": "2026-10-23T19:00:00Z"
-          },
-          {
-            "home": {
-              "club": "Liverpool",
-              "code": 14,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Alisson Becker",
-                  "position": "GK",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Ronald Araujo",
-                  "position": "RB",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Virgil",
-                  "position": "CB",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Jeremy Jacquet",
-                  "position": "CB",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Milos Kerkez",
-                  "position": "LB",
-                  "owner": "l5kunst8msgbirdf"
-                },
-                {
-                  "name": "Alexis Mac Allister",
-                  "position": "DM",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Ryan Gravenberch",
-                  "position": "DM"
-                },
-                {
-                  "name": "Bradley Barcola",
-                  "position": "LW",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Florian Wirtz",
-                  "position": "AM",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Cody Gakpo",
-                  "position": "LW",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Alexander Isak",
-                  "position": "ST",
-                  "owner": "syjkob6cmuobagfu"
-                }
-              ]
+            "halfTime": {
+              "home": 1,
+              "away": 1
             },
-            "away": {
-              "club": "Brighton & Hove Albion",
-              "code": 36,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Bart Verbruggen",
-                  "position": "GK",
-                  "owner": "7z8fy0pnmuogbtdw"
-                },
-                {
-                  "name": "Ferdi Kadıoğlu",
-                  "position": "RB",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Luka Vušković",
-                  "position": "CB",
-                  "owner": "aekx2715mtzgcl3f"
-                },
-                {
-                  "name": "Lewis Dunk",
-                  "position": "CB",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Olivier Boscagli",
-                  "position": "LB",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "José Andrés",
-                  "position": "DM"
-                },
-                {
-                  "name": "Pascal Groß",
-                  "position": "DM",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Diego Gómez",
-                  "position": "RW",
-                  "owner": "7z8fy0pnmuogbtdw"
-                },
-                {
-                  "name": "Yasin Ayari",
-                  "position": "AM",
-                  "owner": "0g0j5mkomuqqwsbu"
-                },
-                {
-                  "name": "Maxim De Cuyper",
-                  "position": "LW",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Charalampos Kostoulas",
-                  "position": "ST",
-                  "owner": "aekx2715mtzgcl3f"
-                }
-              ]
+            "venue": "Portman Road",
+            "attendance": 29198,
+            "referee": "Thomas Bramall",
+            "standfirst": "Ipswich Town drew 1-1 with Nottingham Forest, levelling after falling behind to an early opener.",
+            "account": "Forest went ahead in the 13th minute when Daniel Muñoz crossed and Neco Williams met it right-footed inside the box, his finish going into the middle of the goal. Ipswich came from behind just before half-time, Julio Enciso sending a left-footed shot from outside the box low into the corner. Williams went off injured six minutes from time.",
+            "sections": [
+              {
+                "head": "Williams scores, then injured",
+                "pitch": "Williams gave Forest their goal and could not last the match, an injury forcing him off with six minutes left.",
+                "stake": "A free agent since domeitalycoach let him go on Thursday; eight points."
+              },
+              {
+                "head": "Muñoz makes the opener",
+                "pitch": "Muñoz made Forest's goal and also earned one defensive point, half the most the league pays a man for his defending in a match.",
+                "stake": "Cowthenbeef has him, for six points against its_ohi."
+              },
+              {
+                "head": "Enciso levels from range",
+                "pitch": "Enciso had four shots at goal, and it was his effort from distance that drew Ipswich level before the break.",
+                "stake": "If anyone can, Bannan can has him, for seven points against The Truffle Pigs."
+              }
+            ],
+            "keyStats": [
+              {
+                "label": "Points",
+                "value": "Williams 8, Enciso 7 (If anyone can, Bannan can), Muñoz 6 (Cowthenbeef), Walton 4"
+              },
+              {
+                "label": "Shots",
+                "value": "7 (3 on target) v 17 (5)"
+              },
+              {
+                "label": "xG",
+                "value": "Ipswich 0.46, Forest 2.33"
+              },
+              {
+                "label": "Saves",
+                "value": "Walton 3"
+              },
+              {
+                "label": "DefCon",
+                "value": "Palacios 2, Milenkovic 2, Schlager 2"
+              },
+              {
+                "label": "xG without a goal",
+                "value": "Gibbs-White 0.74"
+              },
+              {
+                "label": "Most shots",
+                "value": "Enciso 4 (2 on target, 1 goal)"
+              },
+              {
+                "label": "Chances created",
+                "value": "Gibbs-White 3"
+              },
+              {
+                "label": "Top xG",
+                "value": "Delap 0.44, Enciso 0.31, Williams 0.30"
+              }
+            ],
+            "star": {
+              "name": "Enciso",
+              "club": "Ipswich",
+              "holder": "If anyone can, Bannan can",
+              "mark": 7.6,
+              "did": "1 goal"
             },
-            "kickoff": "2026-10-25T14:00:00Z"
-          },
-          {
-            "home": {
-              "club": "Manchester United",
-              "code": 1,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Senne Lammens",
-                  "position": "GK"
-                },
-                {
-                  "name": "Leny Yoro",
-                  "position": "RB"
-                },
-                {
-                  "name": "Ayden Heaven",
-                  "position": "CB"
-                },
-                {
-                  "name": "Harry Maguire",
-                  "position": "CB",
-                  "owner": "kpj0z744muh1qwtd"
-                },
-                {
-                  "name": "Diogo Dalot",
-                  "position": "RB"
-                },
-                {
-                  "name": "Andrey Santos",
-                  "position": "DM"
-                },
-                {
-                  "name": "Carlos Baleba",
-                  "position": "DM"
-                },
-                {
-                  "name": "Amad",
-                  "position": "RW",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Youri Tielemans",
-                  "position": "DM",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Bruno Fernandes",
-                  "position": "AM",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Bryan Mbeumo",
-                  "position": "RW",
-                  "owner": "kpj0z744muh1qwtd"
-                }
-              ]
-            },
-            "away": {
-              "club": "AFC Bournemouth",
-              "code": 91,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Đorđe Petrović",
-                  "position": "GK"
-                },
-                {
-                  "name": "Adam Smith",
-                  "position": "RB"
-                },
-                {
-                  "name": "António Silva",
-                  "position": "CB"
-                },
-                {
-                  "name": "James Hill",
-                  "position": "CB",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Adrien Truffert",
-                  "position": "LB",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Ryan Christie",
-                  "position": "AM"
-                },
-                {
-                  "name": "Tyler Adams",
-                  "position": "DM"
-                },
-                {
-                  "name": "Rayan",
-                  "position": "RW",
-                  "owner": "qgucu9dgmufwva1x"
-                },
-                {
-                  "name": "Justin Kluivert",
-                  "position": "AM",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Marcus Tavernier",
-                  "position": "LW",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Francisco Evanilson",
-                  "position": "ST",
-                  "owner": "7to6xosimu8hyyw5"
-                }
-              ]
-            },
-            "kickoff": "2026-10-25T14:00:00Z"
-          },
-          {
-            "home": {
-              "club": "Sunderland",
-              "code": 56,
-              "formation": "4-2-3-1",
-              "men": [
-                {
-                  "name": "Robin Roefs",
-                  "position": "GK"
-                },
-                {
-                  "name": "Nordi Mukiele",
-                  "position": "RB",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Luke O'Nien",
-                  "position": "CB"
-                },
-                {
-                  "name": "Omar Alderete",
-                  "position": "CB"
-                },
-                {
-                  "name": "Reinildo",
-                  "position": "LB"
-                },
-                {
-                  "name": "Noah Sadiki",
-                  "position": "DM"
-                },
-                {
-                  "name": "Granit Xhaka",
-                  "position": "DM",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Trai Hume",
-                  "position": "RW"
-                },
-                {
-                  "name": "Habib Diarra",
-                  "position": "CAM"
-                },
-                {
-                  "name": "Enzo Fée",
-                  "position": "AM",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Brian Brobbey",
-                  "position": "ST",
-                  "status": "Doubt"
-                }
-              ]
-            },
-            "away": {
-              "club": "Leeds United",
-              "code": 2,
-              "formation": "3-4-2-1",
-              "men": [
-                {
-                  "name": "James Trafford",
-                  "position": "GK",
-                  "owner": "uexqrijomu8l5asi"
-                },
-                {
-                  "name": "Tarik Muharemović",
-                  "position": "CB",
-                  "owner": "7to6xosimu8hyyw5"
-                },
-                {
-                  "name": "Nico Elvedi",
-                  "position": "CB"
-                },
-                {
-                  "name": "James Justin",
-                  "position": "CB",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Jayden Bogle",
-                  "position": "DM",
-                  "owner": "ipnp5y4mmu9j7kop"
-                },
-                {
-                  "name": "Ethan Ampadu",
-                  "position": "CM",
-                  "owner": "syjkob6cmuobagfu"
-                },
-                {
-                  "name": "Tanaka",
-                  "position": "CM"
-                },
-                {
-                  "name": "Gabriel Gudmundsson",
-                  "position": "DM",
-                  "owner": "7z8fy0pnmuogbtdw"
-                },
-                {
-                  "name": "Anton Stach",
-                  "position": "CM",
-                  "owner": "aekx2715mtzgcl3f",
-                  "status": "Doubt"
-                },
-                {
-                  "name": "Lukas Nmecha",
-                  "position": "ST"
-                },
-                {
-                  "name": "Dominic Calvert-Lewin",
-                  "position": "CF",
-                  "owner": "7z8fy0pnmuogbtdw",
-                  "status": "Doubt"
-                }
-              ]
-            },
-            "kickoff": "2026-10-25T16:30:00Z"
-          }
-        ]
-      }
-    },
-    {
-      "slug": "gw8-presser-2026-10-23",
-      "kind": "presser",
-      "leagueId": "mqsjd23smsgbiqzr",
-      "period": 8,
-      "gameweek": 8,
-      "filedAt": "2026-10-23T16:18:31.483Z",
-      "expiresAt": "2026-10-23T18:45:00.000Z",
-      "edition": "The Team Sheet",
-      "byline": "The Team Sheet",
-      "headline": "Friday Pressers",
-      "deck": "Emiliano Martínez out for Chelsea, a few weeks after surgery",
-      "body": "Emiliano Martínez will not play for Chelsea, with Xabi Alonso saying he has had surgery and is feeling better day by day. Alonso put the wait at a few weeks, hopefully fewer rather than more.",
-      "subjects": [
-        "presser:gw8:2026-10-23"
-      ],
-      "image": null,
-      "face": {
-        "code": 98980,
-        "name": "Emiliano Martínez",
-        "clubId": 6,
-        "position": null
-      },
-      "ties": [],
-      "extras": {
-        "teamNews": [
-          {
-            "club": "Brighton & Hove Albion",
-            "code": 36,
-            "line": "Yankuba Minteh and Mats Wieffer return from leg and knee injuries, while Maxim De Cuyper and Diego Gómez may be rotated.",
-            "men": [
+            "rows": [
               {
-                "name": "Yankuba Minteh",
-                "status": "FIT",
-                "note": "back from a leg injury"
+                "minute": "13",
+                "kind": "Goal",
+                "side": "away",
+                "text": "Williams (Muñoz)"
               },
               {
-                "name": "Mats Wieffer",
-                "status": "FIT",
-                "note": "back from a knee injury"
+                "minute": "41",
+                "kind": "Goal",
+                "side": "home",
+                "text": "Enciso"
               },
               {
-                "name": "Maxim De Cuyper",
-                "owner": "Atletico",
-                "status": "Doubt",
-                "note": "may be rotated"
+                "minute": "51",
+                "kind": "Booked",
+                "side": "home",
+                "text": "Diop"
               },
               {
-                "name": "Diego Gómez",
-                "owner": "Beef",
-                "status": "Doubt",
-                "note": "may be rotated"
+                "minute": "54",
+                "kind": "Booked",
+                "side": "away",
+                "text": "Murillo"
+              },
+              {
+                "minute": "60",
+                "kind": "Sub",
+                "side": "home",
+                "text": "Flemming for Emersonn"
+              },
+              {
+                "minute": "61",
+                "kind": "Sub",
+                "side": "home",
+                "text": "Clarke for Philogene"
+              },
+              {
+                "minute": "69",
+                "kind": "Sub",
+                "side": "away",
+                "text": "Hudson-Odoi for Ndoye"
+              },
+              {
+                "minute": "73",
+                "kind": "Sub",
+                "side": "home",
+                "text": "Maeda for Abdul Fatawu"
+              },
+              {
+                "minute": "84",
+                "kind": "Sub",
+                "side": "away",
+                "text": "Netz for Williams, injured"
+              },
+              {
+                "minute": "85",
+                "kind": "Sub",
+                "side": "home",
+                "text": "Matusiwa for Florentino"
+              },
+              {
+                "minute": "86",
+                "kind": "Sub",
+                "side": "home",
+                "text": "Akpom for Enciso"
+              },
+              {
+                "minute": "90+4",
+                "kind": "Sub",
+                "side": "away",
+                "text": "Wood for Delap"
               }
             ],
-            "stillOut": [
-              {
-                "name": "Femi Azeez"
-              },
-              {
-                "name": "Mitoma"
-              },
-              {
-                "name": "Zadok Yohanna"
-              },
-              {
-                "name": "Evan Ferguson"
-              },
-              {
-                "name": "Stefanos Tzimas"
-              }
-            ],
-            "fixture": {
-              "opponent": "Liverpool",
-              "home": false,
-              "kickoff": "2026-10-25T14:00:00Z"
-            }
-          },
-          {
-            "club": "Aston Villa",
-            "code": 7,
-            "line": "Onana, Wan-Bissaka and Ruggeri remain out, and the rest of the squad were to be assessed in Friday afternoon's training after some came through Wednesday's match in pain.",
-            "stillOut": [
-              {
-                "name": "Matteo Ruggeri"
-              },
-              {
-                "name": "Aaron Wan-Bissaka"
-              },
-              {
-                "name": "Amadou Onana"
-              }
-            ],
-            "quote": {
-              "text": "Still being some players clearly out like Onana, Aaron Wan-Bissaka and Ruggeri. Other players we will see how they are after the match we played on Wednesday. Some were in some pain.",
-              "said": "Unai Emery"
-            },
-            "fixture": {
-              "opponent": "Manchester City",
-              "home": true,
-              "kickoff": "2026-10-24T11:30:00Z"
-            }
-          },
-          {
-            "club": "Manchester United",
-            "code": 1,
-            "stillOut": [
-              {
-                "name": "Patrick Dorgu"
-              },
-              {
-                "name": "Manuel Ugarte"
-              },
-              {
-                "name": "Benjamin Sesko"
-              },
-              {
-                "name": "Luke Shaw"
-              },
-              {
-                "name": "Kobbie Mainoo",
-                "owner": "Atletico"
-              }
-            ],
-            "fixture": {
-              "opponent": "AFC Bournemouth",
-              "home": true,
-              "kickoff": "2026-10-25T14:00:00Z"
-            }
-          },
-          {
-            "club": "Newcastle United",
-            "code": 4,
-            "stillOut": [
-              {
-                "name": "Jacob Ramsey"
-              },
-              {
-                "name": "Ewen Jaouen"
-              },
-              {
-                "name": "Tino Livramento"
-              }
-            ],
-            "fixture": {
-              "opponent": "Crystal Palace",
-              "home": false,
-              "kickoff": "2026-10-25T14:00:00Z"
-            }
-          },
-          {
-            "club": "Fulham",
-            "code": 54,
-            "line": "Hugo Larsson is available again and Ryan Sessegnon serves a ban.",
-            "men": [
-              {
-                "name": "Hugo Larsson",
-                "status": "FIT",
-                "note": ""
-              },
-              {
-                "name": "Ryan Sessegnon",
-                "owner": "Dome",
-                "status": "Suspended",
-                "note": ""
-              }
-            ],
-            "fixture": {
-              "opponent": "Coventry City",
-              "home": false,
-              "kickoff": "2026-10-24T14:00:00Z"
-            }
-          },
-          {
-            "club": "Hull City",
-            "code": 88,
-            "line": "Nobel Mendy has recovered from a groin injury.",
-            "men": [
-              {
-                "name": "Nobel Mendy",
-                "status": "FIT",
-                "note": "back from a groin injury"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Matt Targett"
-              },
-              {
-                "name": "Jack Butland"
-              },
-              {
-                "name": "Charlie Hughes"
-              },
-              {
-                "name": "Ilyas Ansah"
-              },
-              {
-                "name": "Darko Gyabi"
-              }
-            ],
-            "fixture": {
-              "opponent": "Brentford",
-              "home": true,
-              "kickoff": "2026-10-25T14:00:00Z"
-            }
-          },
-          {
-            "club": "Arsenal",
-            "code": 3,
-            "line": "Bukayo Saka underwent a further MRI on Friday afternoon with the extent of the injury unclear, and Riccardo Calafiori is ready.",
-            "men": [
-              {
-                "name": "Bukayo Saka",
-                "status": "Doubt",
-                "note": "further MRI Friday; fluid in the area, more expected Saturday"
-              },
-              {
-                "name": "Riccardo Calafiori",
-                "status": "FIT",
-                "note": "ready; available for every match"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "William Saliba",
-                "owner": "Bannan"
-              },
-              {
-                "name": "Christos Tzolis"
-              }
-            ],
-            "quote": {
-              "text": "He’s got another MRI this afternoon because he had quite a lot of fluid in the area, so it was difficult to understand the extent of the injury. We will know more probably tomorrow.",
-              "said": "Mikel Arteta"
-            },
-            "fixture": {
-              "opponent": "Everton",
-              "home": true,
-              "kickoff": "2026-10-24T14:00:00Z"
-            }
-          },
-          {
-            "club": "Liverpool",
-            "code": 14,
-            "line": "Dominik Szoboszlai is over his hamstring injury and Bradley Barcola trained normally.",
-            "men": [
-              {
-                "name": "Dominik Szoboszlai",
-                "owner": "Dome",
-                "status": "FIT",
-                "note": "back from a hamstring injury"
-              },
-              {
-                "name": "Bradley Barcola",
-                "owner": "Bru",
-                "status": "FIT",
-                "note": "trained normally; load managed"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Conor Bradley"
-              },
-              {
-                "name": "Jeremie Frimpong"
-              },
-              {
-                "name": "Giovanni Leoni"
-              },
-              {
-                "name": "Hugo Ekitiké"
-              }
-            ],
-            "quote": {
-              "text": "Bradley has trained today normally. He’s fine with no problem.",
-              "said": "Andoni Iraola"
-            },
-            "fixture": {
-              "opponent": "Brighton & Hove Albion",
-              "home": true,
-              "kickoff": "2026-10-25T14:00:00Z"
-            }
-          },
-          {
-            "club": "Chelsea",
-            "code": 8,
-            "line": "Malo Gusto is fine, while Emiliano Martínez is recovering from surgery and needs a few weeks.",
-            "men": [
-              {
-                "name": "Emiliano Martínez",
-                "owner": "its_ohi",
-                "status": "OUT",
-                "note": "a few weeks; recovering from surgery"
-              },
-              {
-                "name": "Malo Gusto",
-                "status": "FIT",
-                "note": "back from a muscle injury; fine"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Reece James"
-              },
-              {
-                "name": "Emmanuel Emegha"
-              },
-              {
-                "name": "Gittens"
-              },
-              {
-                "name": "Pep Chavarría",
-                "owner": "Atletico"
-              }
-            ],
-            "quote": {
-              "text": "He’s doing better. He had the surgery. Day by day he’s feeling better, but we still need to wait. A few weeks. Hopefully less than more, but we need to wait.",
-              "said": "Xabi Alonso"
-            },
-            "fixture": {
-              "opponent": "Tottenham Hotspur",
-              "home": true,
-              "kickoff": "2026-10-24T16:30:00Z"
-            }
-          },
-          {
-            "club": "Leeds United",
-            "code": 2,
-            "line": "Daniel James is back from a back injury, but Dominic Calvert-Lewin, Anton Stach and Noah Okafor have missed training and face late decisions.",
-            "men": [
-              {
-                "name": "Daniel James",
-                "status": "FIT",
-                "note": "back from a back injury"
-              },
-              {
-                "name": "Dominic Calvert-Lewin",
-                "status": "Doubt",
-                "note": "bruised foot; late decision"
-              },
-              {
-                "name": "Anton Stach",
-                "status": "Doubt",
-                "note": "foot problem; late decision"
-              },
-              {
-                "name": "Noah Okafor",
-                "status": "Doubt",
-                "note": "adductor problems; late decision"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Joe Rodon"
-              },
-              {
-                "name": "Mateo Joseph"
-              }
-            ],
-            "quote": {
-              "text": "If the game was today, all three of them wouldn’t be available. They have missed many training sessions during this week.",
-              "said": "Daniel Farke"
-            },
-            "fixture": {
-              "opponent": "Sunderland",
-              "home": false,
-              "kickoff": "2026-10-25T16:30:00Z"
-            }
-          },
-          {
-            "club": "Tottenham Hotspur",
-            "code": 6,
-            "line": "Pedro Porro, Andrew Robertson and Omar Marmoush are available, Rodrigo Bentancur is banned and Sávio is out, with James Maddison and Dejan Kulusevski unproven after working apart early in the week.",
-            "men": [
-              {
-                "name": "Pedro Porro",
-                "status": "FIT",
-                "note": "back from a hamstring injury"
-              },
-              {
-                "name": "Rodrigo Bentancur",
-                "status": "Suspended",
-                "note": ""
-              },
-              {
-                "name": "Omar Marmoush",
-                "status": "FIT",
-                "note": "good; an option"
-              },
-              {
-                "name": "Andrew Robertson",
-                "status": "FIT",
-                "note": "available"
-              },
-              {
-                "name": "Sávio",
-                "status": "OUT",
-                "note": "ruled out for Saturday"
-              },
-              {
-                "name": "Maddison",
-                "status": "Doubt",
-                "note": "missed the first three days of training"
-              },
-              {
-                "name": "Kulusevski",
-                "status": "Doubt",
-                "note": "worked well after early individual sessions"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Lucas Bergvall"
-              },
-              {
-                "name": "Destiny Udogie"
-              },
-              {
-                "name": "Mykhailo Mudryk"
-              },
-              {
-                "name": "Xavi"
-              },
-              {
-                "name": "Wilson Odobert"
-              }
-            ],
-            "quote": {
-              "text": "I don’t know [if Maddison can play], because in the first three days Maddison didn’t work with us, I don’t know if he’s ready for tomorrow.",
-              "said": "Roberto De Zerbi"
-            },
-            "fixture": {
-              "opponent": "Chelsea",
-              "home": false,
-              "kickoff": "2026-10-24T16:30:00Z"
-            }
-          },
-          {
-            "club": "Everton",
-            "code": 11,
-            "line": "Christian Norgaard is further from full fitness than hoped and is not expected to be firing until after the next international break.",
-            "men": [
-              {
-                "name": "Christian Norgaard",
-                "status": "Doubt",
-                "note": "short of fitness; full sharpness after the international break"
-              }
-            ],
-            "quote": {
-              "text": "But we also expected that, we didn’t think he was going to be back fully firing until probably after the next international break, if we’re being honest, because he’s had no real pre-season with us.",
-              "said": "David Moyes"
-            },
-            "fixture": {
-              "opponent": "Arsenal",
-              "home": false,
-              "kickoff": "2026-10-24T14:00:00Z"
-            }
-          },
-          {
-            "club": "AFC Bournemouth",
-            "code": 91,
-            "line": "Alex Toth faces some weeks out with a muscle injury, Eli Junior Kroupi is due back in the squad, Veljko Milosavljevic is match-fit and Francisco Evanilson is a doubt.",
-            "men": [
-              {
-                "name": "Alex Toth",
-                "status": "OUT",
-                "note": "some weeks; a bigger muscle injury"
-              },
-              {
-                "name": "Eli Junior Kroupi",
-                "status": "FIT",
-                "note": "planned squad return; training assessed Saturday"
-              },
-              {
-                "name": "Veljko Milosavljevic",
-                "status": "FIT",
-                "note": "back from a knee injury; match-fit with the under-21s"
-              },
-              {
-                "name": "Francisco Evanilson",
-                "owner": "Bannan",
-                "status": "Doubt",
-                "note": ""
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Alex Scott"
-              },
-              {
-                "name": "Julián Araujo"
-              }
-            ],
-            "quote": {
-              "text": "Now we’re going to miss him for some weeks. I think it’s a bigger muscle injury.",
-              "said": "Marco Rose"
-            },
-            "fixture": {
-              "opponent": "Manchester United",
-              "home": false,
-              "kickoff": "2026-10-25T14:00:00Z"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "slug": "gw8-presser-2026-10-22",
-      "kind": "presser",
-      "leagueId": "mqsjd23smsgbiqzr",
-      "period": 8,
-      "gameweek": 8,
-      "filedAt": "2026-10-22T19:22:12.342Z",
-      "expiresAt": "2026-10-23T18:45:00.000Z",
-      "edition": "The Team Sheet",
-      "byline": "The Team Sheet",
-      "headline": "Thursday Pressers",
-      "deck": "Vitaly Janelt banned for Brentford, with Yehor Yarmoliuk suspended alongside him",
-      "body": "Vitaly Janelt is suspended for Brentford, a ban rather than an injury.",
-      "subjects": [
-        "presser:gw8:2026-10-22"
-      ],
-      "image": null,
-      "face": {
-        "code": 204580,
-        "name": "Vitaly Janelt",
-        "clubId": 4,
-        "position": null
-      },
-      "ties": [],
-      "extras": {
-        "teamNews": [
-          {
-            "club": "Brentford",
-            "code": 94,
-            "line": "Jannik Schuster has trained for several days after a disrupted week, while Vitaly Janelt and Yehor Yarmoliuk both serve bans.",
-            "men": [
-              {
-                "name": "Vitaly Janelt",
-                "status": "Suspended",
-                "note": ""
-              },
-              {
-                "name": "Yehor Yarmoliuk",
-                "status": "Suspended",
-                "note": ""
-              },
-              {
-                "name": "Jannik Schuster",
-                "status": "FIT",
-                "note": "back from a disrupted week; training the last few days"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Antoni Milambo"
-              },
-              {
-                "name": "Josh Dasilva"
-              },
-              {
-                "name": "Kaye Furo"
-              }
-            ],
-            "quote": {
-              "text": "But he’s been back training the last few days, so he’s back to himself, more or less.",
-              "said": "Keith Andrews"
-            },
-            "fixture": {
-              "opponent": "Hull City",
-              "home": false,
-              "kickoff": "2026-10-25T14:00:00Z"
-            }
-          },
-          {
-            "club": "Ipswich Town",
-            "code": 40,
-            "line": "Saša Lukić is ruled out for Ipswich Town.",
-            "men": [
-              {
-                "name": "Saša Lukić",
-                "status": "OUT",
-                "note": ""
-              }
-            ],
-            "fixture": {
-              "opponent": "Nottingham Forest",
-              "home": true,
-              "kickoff": "2026-10-23T19:00:00Z"
-            }
-          },
-          {
-            "club": "Coventry City",
-            "code": 9,
-            "line": "Four men are missing for Coventry City, and an ankle problem is now holding up Josh Eccles's rehab after his calf injury cleared.",
-            "men": [
-              {
-                "name": "Luke Woolfenden",
-                "status": "OUT",
-                "note": "knee"
-              },
-              {
-                "name": "Aurèle Amenda",
-                "status": "OUT",
-                "note": "calf"
-              },
-              {
-                "name": "Josh Eccles",
-                "status": "OUT",
-                "note": "ankle; calf cleared, not yet on the grass"
-              },
-              {
-                "name": "Haji Wright",
-                "status": "OUT",
-                "note": "quad"
-              }
-            ],
-            "quote": {
-              "text": "The ankle has been an annoyance, really, for all of us because Josh’s calf injury has cleared up and now the ankle’s a bit of a problem, so it’s affecting his rehab and his recovery. He’s still not with us out on the grass yet.",
-              "said": "Frank Lampard"
-            },
-            "fixture": {
-              "opponent": "Fulham",
-              "home": true,
-              "kickoff": "2026-10-24T14:00:00Z"
-            }
-          },
-          {
-            "club": "Manchester City",
-            "code": 43,
-            "line": "Antoine Semenyo is ruled out with a knee injury, and Haaland is the only one of four fully available, with Nunes, Kovacic and O’Reilly waiting on Thursday afternoon's session.",
-            "men": [
-              {
-                "name": "Antoine Semenyo",
-                "status": "OUT",
-                "note": "knee"
-              }
-            ],
-            "quote": {
-              "text": "Still a doubt. For sure, Erling is the only one 100% available, and the other three we need to wait for today’s session.",
-              "said": "Enzo Maresca"
-            },
-            "fixture": {
-              "opponent": "Aston Villa",
-              "home": false,
-              "kickoff": "2026-10-24T11:30:00Z"
-            }
+            "video": "lO_goITj_Fc"
           }
         ]
       }
