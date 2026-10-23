@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-23T08:11:26.292Z",
+    "exportedAt": "2026-10-23T09:09:30.833Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-23T08:11:26.292Z",
+  "fetchedAt": "2026-10-23T09:09:30.833Z",
   "source": "rotowire",
   "clubs": {
     "IPS": {
@@ -436,6 +436,10 @@
       "absent": [
         {
           "code": 551050,
+          "status": "QUES"
+        },
+        {
+          "code": 209289,
           "status": "QUES"
         },
         {
