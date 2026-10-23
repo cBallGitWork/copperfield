@@ -2,11 +2,11 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-23T09:04:04.452Z",
-    "rows": 293,
+    "exportedAt": "2026-10-23T11:31:16.820Z",
+    "rows": 309,
     "sources": [
       {
-        "path": "2026-10-22/fpl-gameweek-8-team-news-thursdays-live-injury-updates.html",
+        "path": "2026-10-23/fpl-gameweek-8-team-news-fridays-live-injury-updates-3.html",
         "mtime": null
       }
     ]
@@ -72,7 +72,10 @@
     {"club":43,"manager":"Enzo Maresca","at":"2026-10-22T09:30:00.000Z"},
     {"club":94,"manager":"Keith Andrews","at":"2026-10-22T13:00:00.000Z"},
     {"club":9,"manager":"Frank Lampard","at":"2026-10-22T12:30:00.000Z"},
-    {"club":40,"manager":"Gary O’Neil","at":"2026-10-22T12:30:00.000Z"}
+    {"club":40,"manager":"Gary O’Neil","at":"2026-10-22T12:30:00.000Z"},
+    {"club":36,"manager":null,"at":"2026-10-23T13:00:00.000Z"},
+    {"club":91,"manager":"Marco Rose","at":"2026-10-23T08:30:00.000Z"},
+    {"club":54,"manager":null,"at":"2026-10-23T13:00:00.000Z"}
   ],
   "quotes": [
     {"club":8,"text":"In terms of injuries, and in terms of the squad, we are having the last training session tomorrow, so no one is ruled out for us for Friday. So, I prefer to be cautious and we will wait till tomorrow to take the final decision on every player.","said":"Xabi Alonso","about":"the Chelsea team news","at":"2026-09-17T12:30:00.000Z"},
@@ -166,7 +169,10 @@
     {"club":94,"text":"There’s nothing major to note; we’re pretty much as we were last weekend. Some players have taken the next step of their journey back with a really good week’s training. The likes of Nathan [Collins], in particular. Jannik, who I alluded to, who had a disrupted week the week before. Matty Jensen made another really good step with training, considering that he’s just came back over the last week or two.","said":"Keith Andrews","at":"2026-10-22T13:00:00.000Z"},
     {"club":9,"text":"He’s progressing. The ankle has been an annoyance, really, for all of us because Josh’s calf injury has cleared up and now the ankle’s a bit of a problem, so it’s affecting his rehab and his recovery. He’s still not with us out on the grass yet. I know he’ll be frustrated with that. We look forward to him being back outside with us.","said":"Frank Lampard","about":"Josh Eccles","at":"2026-10-22T12:30:00.000Z"},
     {"club":9,"text":"He’s showing his true talents, which is a great thing because the level’s gone up: more pressure, more blocks to do, all the things you said. He’s acquitting himself very, very well, hence getting some good attention for it, and he just needs to keep doing the same thing because it’s been good to see him play like this.","said":"Frank Lampard","about":"Bobby Thomas","at":"2026-10-22T12:30:00.000Z"},
-    {"club":40,"text":"No, he’s not going to make it. Sasa will be out tomorrow. It’s taken a little bit longer. Missing this weekend is to almost guarantee that he’s back on the grass really early next week. Obviously, we’ve got a bit of a longer turnaround before we play Hull next weekend. So, the idea is that in missing this one, that he’s definitely back with the group for a decent part of next week and he has a real good lead into the Hull game, rather than trying to push him into something this weekend, that we maybe could have done but it would have carried a risk. So, we’re hopeful that next weekend he’ll be fully fit and ready to go.","said":"Gary O’Neil","about":"Sasa Lukic","at":"2026-10-22T12:30:00.000Z"}
+    {"club":40,"text":"No, he’s not going to make it. Sasa will be out tomorrow. It’s taken a little bit longer. Missing this weekend is to almost guarantee that he’s back on the grass really early next week. Obviously, we’ve got a bit of a longer turnaround before we play Hull next weekend. So, the idea is that in missing this one, that he’s definitely back with the group for a decent part of next week and he has a real good lead into the Hull game, rather than trying to push him into something this weekend, that we maybe could have done but it would have carried a risk. So, we’re hopeful that next weekend he’ll be fully fit and ready to go.","said":"Gary O’Neil","about":"Sasa Lukic","at":"2026-10-22T12:30:00.000Z"},
+    {"club":91,"text":"Now we’re going to miss him for some weeks. I think it’s a bigger muscle injury.","said":"Marco Rose","about":"Alex Toth","at":"2026-10-23T08:30:00.000Z"},
+    {"club":91,"text":"This is the plan, to have him back in the squad. We’re going to see how he works tomorrow in training and after tomorrow but the plan is to have him with us in Manchester.","said":"Marco Rose","about":"Eli Junior Kroupi","at":"2026-10-23T08:30:00.000Z"},
+    {"club":91,"text":"Junior is coming back, Veljko is match-fit with the under-21s.","said":"Marco Rose","at":"2026-10-23T08:30:00.000Z"}
   ],
   "rows": [
     {"code":486672,"club":8,"tag":"injury_scare","condition":"calf","confidence":0.65,"said":"2026-09-17T12:30:00.000Z","manager":"Xabi Alonso"},
@@ -461,6 +467,22 @@
     {"code":539142,"club":9,"tag":"ruled_out","condition":"calf","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Frank Lampard"},
     {"code":439668,"club":9,"tag":"ruled_out","condition":"ankle","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Frank Lampard"},
     {"code":176412,"club":9,"tag":"ruled_out","condition":"quad","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Frank Lampard"},
-    {"code":212314,"club":40,"tag":"ruled_out","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Gary O’Neil"}
+    {"code":212314,"club":40,"tag":"ruled_out","confidence":0.65,"said":"2026-10-22T12:30:00.000Z","manager":"Gary O’Neil"},
+    {"code":592031,"club":36,"tag":"available","condition":"leg","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":467779,"club":36,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":471551,"club":36,"tag":"still_out","condition":"hamstring","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":451340,"club":36,"tag":"still_out","condition":"hamstring","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":700308,"club":36,"tag":"still_out","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":487117,"club":36,"tag":"still_out","condition":"ankle","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":608181,"club":36,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":465730,"club":36,"tag":"rotation_risk","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":514254,"club":36,"tag":"rotation_risk","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":503139,"club":91,"tag":"injury_scare","condition":"tendon","confidence":0.65,"said":"2026-10-23T08:30:00.000Z","manager":"Marco Rose"},
+    {"code":436893,"club":91,"tag":"injury_scare","condition":"thigh","confidence":0.65,"said":"2026-10-23T08:30:00.000Z","manager":"Marco Rose"},
+    {"code":560262,"club":91,"tag":"injury_scare","condition":"foot","confidence":0.65,"said":"2026-10-23T08:30:00.000Z","manager":"Marco Rose"},
+    {"code":620487,"club":91,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-10-23T08:30:00.000Z","manager":"Marco Rose"},
+    {"code":444102,"club":91,"tag":"injury_scare","confidence":0.65,"said":"2026-10-23T08:30:00.000Z","manager":"Marco Rose"},
+    {"code":551050,"club":54,"tag":"available","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""},
+    {"code":184349,"club":54,"tag":"suspended","confidence":0.65,"said":"2026-10-23T13:00:00.000Z","manager":""}
   ]
 }
