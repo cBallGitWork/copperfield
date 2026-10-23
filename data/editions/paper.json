@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T16:32:34.098Z",
+  "updatedAt": "2026-10-23T17:19:38.714Z",
   "stories": [
     {
       "slug": "gw5-presser-2026-09-18",
@@ -6932,7 +6932,7 @@
       "leagueId": "mqsjd23smsgbiqzr",
       "period": 8,
       "gameweek": 8,
-      "filedAt": "2026-10-23T16:32:34.098Z",
+      "filedAt": "2026-10-23T17:19:38.714Z",
       "expiresAt": "2026-10-23T19:00:00Z",
       "leadsUntil": "2026-10-23T18:45:00.000Z",
       "edition": "The Form Guide",
@@ -6941,7 +6941,7 @@
       "deck": "Every club's expected starting eleven for the gameweek.",
       "body": "",
       "subjects": [
-        "predicted-xi:gw8:e4b2dd4e"
+        "predicted-xi:gw8:40b50b55"
       ],
       "image": null,
       "face": {
@@ -7269,7 +7269,8 @@
                 },
                 {
                   "name": "Tosin",
-                  "position": "CB"
+                  "position": "CB",
+                  "status": "Doubt"
                 },
                 {
                   "name": "Micky van de Ven",
