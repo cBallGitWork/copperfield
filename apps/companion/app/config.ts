@@ -86,9 +86,6 @@ export const PAGE_REVALIDATE = 30;
 /** How long the league's waiver schedule is held, in seconds: it moves only when the commissioner edits the setup. */
 export const WAIVER_SCHEDULE_REVALIDATE = 60 * 60 * 6;
 
-/** How near the next waiver run is before a banner says so, in hours (Craig, 19 Oct 2026: "when 18 hours left"). */
-export const WAIVER_BANNER_HOURS = 18;
-
 /** How many waiver runs a page carries, so a countdown left open past one moves on to the next without a reload. */
 export const WAIVER_RUNS_AHEAD = 4;
 

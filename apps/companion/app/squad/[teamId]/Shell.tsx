@@ -29,7 +29,7 @@ export default async function TeamShell({
       phoneBar={team.slug !== OWN}
       tabs={<TeamTabs slug={team.slug} current={current} empty={empty} />}>
       {/* His own Transfers only: a rival's is not where he claims, and over his pitch it would push the bench off the screen. */}
-      {team.slug === OWN && current === "transfers" ? <WaiverBanner always /> : null}
+      {team.slug === OWN && current === "transfers" ? <WaiverBanner /> : null}
       {children}
     </PlateShell>
   );
