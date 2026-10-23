@@ -1,11 +1,9 @@
 import { readWaivers } from "../../waivers";
-import WaiverCountdown from "./WaiverCountdown";
+import { WaiverLine } from "./WaiverLine";
 
-// The waiver banner over Draft and the reader's own Transfers. Off Transfers, a league with no schedule read draws nothing.
+// The waiver line over Draft's Transfers and the reader's own, naming his place in the claim order.
 
-/** `always` on a Transfers view, whose way in to Waivers it is all week, schedule or none; elsewhere only near a run. */
-export default async function WaiverBanner({ always = false }: { always?: boolean }) {
-  const { runs, now, place } = await readWaivers();
-  if (runs.length === 0 && !always) return null;
-  return <WaiverCountdown runs={runs} now={now} place={place} always={always} />;
+export default async function WaiverBanner() {
+  const { place } = await readWaivers();
+  return <WaiverLine place={place} />;
 }

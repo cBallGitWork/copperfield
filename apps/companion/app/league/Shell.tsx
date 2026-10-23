@@ -39,7 +39,7 @@ export default function LeagueShell({
       // The competition's own name on its bar; the tabs under it name the page (`cm9900/24.jpg`).
       header={<PageHeader title={LEAGUE_NAME} competition />}
       // The waiver banner under the tabs; Waivers says it already.
-      nav={<><SectionNav current={current} />{current === "waivers" ? null : <WaiverBanner always={current === "transfers"} />}</>}
+      nav={<><SectionNav current={current} />{current === "transfers" ? <WaiverBanner /> : null}</>}
       caption={sub === undefined ? named : <>{named} · {sub}</>}
       captionOnPhone={current === "matchups"}
       rows={rows ?? Math.max(teams ?? 0, PANEL_FLOOR)}

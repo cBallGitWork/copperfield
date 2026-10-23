@@ -37,19 +37,12 @@ buttons more on a page that has none. Reversible: a plate in `SECTIONS` and the 
 
 ## The banner
 
-A slim line under the strip, linking here: **`Waivers run in 5h 12m · you're 9th`** (`WaiverBanner`, client
-`WaiverCountdown`, words in `waivers/banner.ts`).
-
-- **On every Draft page**, from 18 hours before a run (`WAIVER_BANNER_HOURS`), but this one, which says it already.
-- **On both Transfers views it shows all week**, Draft's and the reader's own Team › Transfers, before the window and
-  **even when the schedule is unreadable** or every run has gone, as `Waivers · you're 9th`, never the run's date (Craig,
-  22 Oct 2026: *"remove the waivers run xx date, hate it"*) (or `Waivers` for a reader with no place), so Transfers always has its way in (`WaiverLine`). **Not on Team's other tabs**: over the planner it would cost the pitch its
-  height and push the bench under the rail (`squad.md`, the pitch fits the phone), and a rival's squad is not where a
-  claim is made.
-- **Every run day opens it**: 18 hours before an 18:00 run is midnight London, so with Wed, Thu and Fri runs it is up
-  from 00:00 to 18:00 on each of the three days (23:00 the night before to 17:00, the week the clocks disagree). A run day is a day claims CAN resolve, so it never says anything is waiting: other teams' pending claims are not readable
-  (PLATFORM_NOTES, 1 Oct 2026).
-- `you're 9th` only for a signed-in reader with a place; the countdown is the accent inside the window, ink before it.
+A slim line under the strip on both Transfers views, Draft's and the reader's own Team › Transfers, linking here:
+**`Waivers · you're 9th`** (or `Waivers` for a reader with no place; `WaiverBanner` over `WaiverLine`). It never names a
+run, its day or a countdown (Craig, 22 Oct 2026: *"remove the waivers run xx date, hate it"*; 23 Oct, of the
+countdown: *"yes remove"*), so it is on no other Draft page. **Not on Team's other tabs**: over the planner it would cost
+the pitch its height and push the bench under the rail (`squad.md`, the pitch fits the phone), and a rival's squad is not
+where a claim is made.
 
 ## Clocks
 
@@ -74,7 +67,7 @@ have not, 25 Oct to 1 Nov 2026, the runs are at **17:00** London, and 18:00 agai
 | `apps/companion/app/waivers.ts` | the schedule read (commissioner cookie, held 6 h) and `readWaivers` |
 | `apps/companion/app/league/waivers/page.tsx` | the page |
 | `apps/companion/app/league/waivers/NextRun.tsx` | the head, ticking |
-| `apps/companion/app/league/waivers/WaiverBanner.tsx`, `WaiverCountdown.tsx` | the banner |
+| `apps/companion/app/league/waivers/WaiverBanner.tsx`, `WaiverLine.tsx` | the banner |
 | `apps/companion/app/league/waivers/banner.ts` | its words, and the week's other runs |
 | `packages/core/src/league/fantrax/waivers.ts` | `mapWaiverSchedule`, the setup's block |
 | `packages/core/src/league/waivers.ts` | `upcomingRuns`, `nextRun`, `timeLeft` |
