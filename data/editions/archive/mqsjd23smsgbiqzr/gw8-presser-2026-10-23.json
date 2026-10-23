@@ -1,0 +1,506 @@
+{
+  "slug": "gw8-presser-2026-10-23",
+  "kind": "presser",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 8,
+  "gameweek": 8,
+  "filedAt": "2026-10-23T16:18:31.483Z",
+  "expiresAt": "2026-10-23T18:45:00.000Z",
+  "edition": "The Team Sheet",
+  "byline": "The Team Sheet",
+  "headline": "Friday Pressers",
+  "deck": "Emiliano Martínez out for Chelsea, a few weeks after surgery",
+  "body": "Emiliano Martínez will not play for Chelsea, with Xabi Alonso saying he has had surgery and is feeling better day by day. Alonso put the wait at a few weeks, hopefully fewer rather than more.",
+  "subjects": [
+    "presser:gw8:2026-10-23"
+  ],
+  "image": null,
+  "face": {
+    "code": 98980,
+    "name": "Emiliano Martínez",
+    "clubId": 6,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "teamNews": [
+      {
+        "club": "Brighton & Hove Albion",
+        "code": 36,
+        "line": "Yankuba Minteh and Mats Wieffer return from leg and knee injuries, while Maxim De Cuyper and Diego Gómez may be rotated.",
+        "men": [
+          {
+            "name": "Yankuba Minteh",
+            "status": "FIT",
+            "note": "back from a leg injury"
+          },
+          {
+            "name": "Mats Wieffer",
+            "status": "FIT",
+            "note": "back from a knee injury"
+          },
+          {
+            "name": "Maxim De Cuyper",
+            "owner": "Atletico",
+            "status": "Doubt",
+            "note": "may be rotated"
+          },
+          {
+            "name": "Diego Gómez",
+            "owner": "Beef",
+            "status": "Doubt",
+            "note": "may be rotated"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Femi Azeez"
+          },
+          {
+            "name": "Mitoma"
+          },
+          {
+            "name": "Zadok Yohanna"
+          },
+          {
+            "name": "Evan Ferguson"
+          },
+          {
+            "name": "Stefanos Tzimas"
+          }
+        ],
+        "fixture": {
+          "opponent": "Liverpool",
+          "home": false,
+          "kickoff": "2026-10-25T14:00:00Z"
+        }
+      },
+      {
+        "club": "Aston Villa",
+        "code": 7,
+        "line": "Onana, Wan-Bissaka and Ruggeri remain out, and the rest of the squad were to be assessed in Friday afternoon's training after some came through Wednesday's match in pain.",
+        "stillOut": [
+          {
+            "name": "Matteo Ruggeri"
+          },
+          {
+            "name": "Aaron Wan-Bissaka"
+          },
+          {
+            "name": "Amadou Onana"
+          }
+        ],
+        "quote": {
+          "text": "Still being some players clearly out like Onana, Aaron Wan-Bissaka and Ruggeri. Other players we will see how they are after the match we played on Wednesday. Some were in some pain.",
+          "said": "Unai Emery"
+        },
+        "fixture": {
+          "opponent": "Manchester City",
+          "home": true,
+          "kickoff": "2026-10-24T11:30:00Z"
+        }
+      },
+      {
+        "club": "Manchester United",
+        "code": 1,
+        "stillOut": [
+          {
+            "name": "Patrick Dorgu"
+          },
+          {
+            "name": "Manuel Ugarte"
+          },
+          {
+            "name": "Benjamin Sesko"
+          },
+          {
+            "name": "Luke Shaw"
+          },
+          {
+            "name": "Kobbie Mainoo",
+            "owner": "Atletico"
+          }
+        ],
+        "fixture": {
+          "opponent": "AFC Bournemouth",
+          "home": true,
+          "kickoff": "2026-10-25T14:00:00Z"
+        }
+      },
+      {
+        "club": "Newcastle United",
+        "code": 4,
+        "stillOut": [
+          {
+            "name": "Jacob Ramsey"
+          },
+          {
+            "name": "Ewen Jaouen"
+          },
+          {
+            "name": "Tino Livramento"
+          }
+        ],
+        "fixture": {
+          "opponent": "Crystal Palace",
+          "home": false,
+          "kickoff": "2026-10-25T14:00:00Z"
+        }
+      },
+      {
+        "club": "Fulham",
+        "code": 54,
+        "line": "Hugo Larsson is available again and Ryan Sessegnon serves a ban.",
+        "men": [
+          {
+            "name": "Hugo Larsson",
+            "status": "FIT",
+            "note": ""
+          },
+          {
+            "name": "Ryan Sessegnon",
+            "owner": "Dome",
+            "status": "Suspended",
+            "note": ""
+          }
+        ],
+        "fixture": {
+          "opponent": "Coventry City",
+          "home": false,
+          "kickoff": "2026-10-24T14:00:00Z"
+        }
+      },
+      {
+        "club": "Hull City",
+        "code": 88,
+        "line": "Nobel Mendy has recovered from a groin injury.",
+        "men": [
+          {
+            "name": "Nobel Mendy",
+            "status": "FIT",
+            "note": "back from a groin injury"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Matt Targett"
+          },
+          {
+            "name": "Jack Butland"
+          },
+          {
+            "name": "Charlie Hughes"
+          },
+          {
+            "name": "Ilyas Ansah"
+          },
+          {
+            "name": "Darko Gyabi"
+          }
+        ],
+        "fixture": {
+          "opponent": "Brentford",
+          "home": true,
+          "kickoff": "2026-10-25T14:00:00Z"
+        }
+      },
+      {
+        "club": "Arsenal",
+        "code": 3,
+        "line": "Bukayo Saka underwent a further MRI on Friday afternoon with the extent of the injury unclear, and Riccardo Calafiori is ready.",
+        "men": [
+          {
+            "name": "Bukayo Saka",
+            "status": "Doubt",
+            "note": "further MRI Friday; fluid in the area, more expected Saturday"
+          },
+          {
+            "name": "Riccardo Calafiori",
+            "status": "FIT",
+            "note": "ready; available for every match"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "William Saliba",
+            "owner": "Bannan"
+          },
+          {
+            "name": "Christos Tzolis"
+          }
+        ],
+        "quote": {
+          "text": "He’s got another MRI this afternoon because he had quite a lot of fluid in the area, so it was difficult to understand the extent of the injury. We will know more probably tomorrow.",
+          "said": "Mikel Arteta"
+        },
+        "fixture": {
+          "opponent": "Everton",
+          "home": true,
+          "kickoff": "2026-10-24T14:00:00Z"
+        }
+      },
+      {
+        "club": "Liverpool",
+        "code": 14,
+        "line": "Dominik Szoboszlai is over his hamstring injury and Bradley Barcola trained normally.",
+        "men": [
+          {
+            "name": "Dominik Szoboszlai",
+            "owner": "Dome",
+            "status": "FIT",
+            "note": "back from a hamstring injury"
+          },
+          {
+            "name": "Bradley Barcola",
+            "owner": "Bru",
+            "status": "FIT",
+            "note": "trained normally; load managed"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Conor Bradley"
+          },
+          {
+            "name": "Jeremie Frimpong"
+          },
+          {
+            "name": "Giovanni Leoni"
+          },
+          {
+            "name": "Hugo Ekitiké"
+          }
+        ],
+        "quote": {
+          "text": "Bradley has trained today normally. He’s fine with no problem.",
+          "said": "Andoni Iraola"
+        },
+        "fixture": {
+          "opponent": "Brighton & Hove Albion",
+          "home": true,
+          "kickoff": "2026-10-25T14:00:00Z"
+        }
+      },
+      {
+        "club": "Chelsea",
+        "code": 8,
+        "line": "Malo Gusto is fine, while Emiliano Martínez is recovering from surgery and needs a few weeks.",
+        "men": [
+          {
+            "name": "Emiliano Martínez",
+            "owner": "its_ohi",
+            "status": "OUT",
+            "note": "a few weeks; recovering from surgery"
+          },
+          {
+            "name": "Malo Gusto",
+            "status": "FIT",
+            "note": "back from a muscle injury; fine"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Reece James"
+          },
+          {
+            "name": "Emmanuel Emegha"
+          },
+          {
+            "name": "Gittens"
+          },
+          {
+            "name": "Pep Chavarría",
+            "owner": "Atletico"
+          }
+        ],
+        "quote": {
+          "text": "He’s doing better. He had the surgery. Day by day he’s feeling better, but we still need to wait. A few weeks. Hopefully less than more, but we need to wait.",
+          "said": "Xabi Alonso"
+        },
+        "fixture": {
+          "opponent": "Tottenham Hotspur",
+          "home": true,
+          "kickoff": "2026-10-24T16:30:00Z"
+        }
+      },
+      {
+        "club": "Leeds United",
+        "code": 2,
+        "line": "Daniel James is back from a back injury, but Dominic Calvert-Lewin, Anton Stach and Noah Okafor have missed training and face late decisions.",
+        "men": [
+          {
+            "name": "Daniel James",
+            "status": "FIT",
+            "note": "back from a back injury"
+          },
+          {
+            "name": "Dominic Calvert-Lewin",
+            "status": "Doubt",
+            "note": "bruised foot; late decision"
+          },
+          {
+            "name": "Anton Stach",
+            "status": "Doubt",
+            "note": "foot problem; late decision"
+          },
+          {
+            "name": "Noah Okafor",
+            "status": "Doubt",
+            "note": "adductor problems; late decision"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Joe Rodon"
+          },
+          {
+            "name": "Mateo Joseph"
+          }
+        ],
+        "quote": {
+          "text": "If the game was today, all three of them wouldn’t be available. They have missed many training sessions during this week.",
+          "said": "Daniel Farke"
+        },
+        "fixture": {
+          "opponent": "Sunderland",
+          "home": false,
+          "kickoff": "2026-10-25T16:30:00Z"
+        }
+      },
+      {
+        "club": "Tottenham Hotspur",
+        "code": 6,
+        "line": "Pedro Porro, Andrew Robertson and Omar Marmoush are available, Rodrigo Bentancur is banned and Sávio is out, with James Maddison and Dejan Kulusevski unproven after working apart early in the week.",
+        "men": [
+          {
+            "name": "Pedro Porro",
+            "status": "FIT",
+            "note": "back from a hamstring injury"
+          },
+          {
+            "name": "Rodrigo Bentancur",
+            "status": "Suspended",
+            "note": ""
+          },
+          {
+            "name": "Omar Marmoush",
+            "status": "FIT",
+            "note": "good; an option"
+          },
+          {
+            "name": "Andrew Robertson",
+            "status": "FIT",
+            "note": "available"
+          },
+          {
+            "name": "Sávio",
+            "status": "OUT",
+            "note": "ruled out for Saturday"
+          },
+          {
+            "name": "Maddison",
+            "status": "Doubt",
+            "note": "missed the first three days of training"
+          },
+          {
+            "name": "Kulusevski",
+            "status": "Doubt",
+            "note": "worked well after early individual sessions"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Lucas Bergvall"
+          },
+          {
+            "name": "Destiny Udogie"
+          },
+          {
+            "name": "Mykhailo Mudryk"
+          },
+          {
+            "name": "Xavi"
+          },
+          {
+            "name": "Wilson Odobert"
+          }
+        ],
+        "quote": {
+          "text": "I don’t know [if Maddison can play], because in the first three days Maddison didn’t work with us, I don’t know if he’s ready for tomorrow.",
+          "said": "Roberto De Zerbi"
+        },
+        "fixture": {
+          "opponent": "Chelsea",
+          "home": false,
+          "kickoff": "2026-10-24T16:30:00Z"
+        }
+      },
+      {
+        "club": "Everton",
+        "code": 11,
+        "line": "Christian Norgaard is further from full fitness than hoped and is not expected to be firing until after the next international break.",
+        "men": [
+          {
+            "name": "Christian Norgaard",
+            "status": "Doubt",
+            "note": "short of fitness; full sharpness after the international break"
+          }
+        ],
+        "quote": {
+          "text": "But we also expected that, we didn’t think he was going to be back fully firing until probably after the next international break, if we’re being honest, because he’s had no real pre-season with us.",
+          "said": "David Moyes"
+        },
+        "fixture": {
+          "opponent": "Arsenal",
+          "home": false,
+          "kickoff": "2026-10-24T14:00:00Z"
+        }
+      },
+      {
+        "club": "AFC Bournemouth",
+        "code": 91,
+        "line": "Alex Toth faces some weeks out with a muscle injury, Eli Junior Kroupi is due back in the squad, Veljko Milosavljevic is match-fit and Francisco Evanilson is a doubt.",
+        "men": [
+          {
+            "name": "Alex Toth",
+            "status": "OUT",
+            "note": "some weeks; a bigger muscle injury"
+          },
+          {
+            "name": "Eli Junior Kroupi",
+            "status": "FIT",
+            "note": "planned squad return; training assessed Saturday"
+          },
+          {
+            "name": "Veljko Milosavljevic",
+            "status": "FIT",
+            "note": "back from a knee injury; match-fit with the under-21s"
+          },
+          {
+            "name": "Francisco Evanilson",
+            "owner": "Bannan",
+            "status": "Doubt",
+            "note": ""
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Alex Scott"
+          },
+          {
+            "name": "Julián Araujo"
+          }
+        ],
+        "quote": {
+          "text": "Now we’re going to miss him for some weeks. I think it’s a bigger muscle injury.",
+          "said": "Marco Rose"
+        },
+        "fixture": {
+          "opponent": "Manchester United",
+          "home": false,
+          "kickoff": "2026-10-25T14:00:00Z"
+        }
+      }
+    ]
+  }
+}

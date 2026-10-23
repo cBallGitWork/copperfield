@@ -413,9 +413,18 @@
       "bin-xi:gw7",
       "presser:gw8:2026-10-22",
       "predictions:gw8",
-      "trade:3c6g775qmvihjzqv"
+      "trade:3c6g775qmvihjzqv",
+      "presser:gw8:2026-10-23",
+      "predicted-xi:gw8:e4b2dd4e"
     ],
     "threads": [
+      {
+        "subject": "Saka's scan",
+        "beat": "A further MRI on Friday afternoon after fluid in the area; more expected on Saturday",
+        "status": "open",
+        "beats": 1,
+        "lastUsedAt": "2026-10-23T16:32:34.098Z"
+      },
       {
         "subject": "Isak's quad",
         "beat": "Ruled out for Sunday, described as small and not long term",
