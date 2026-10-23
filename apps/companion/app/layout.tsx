@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { LEAGUE_NAME } from "@epl/core";
 import { groundFaces, liveIn, offerLive, noteCalendar } from "./football";
 import { Suspense } from "react";
@@ -136,6 +137,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <ReturnWeeks weeks={intelReturnWeeks} open={calendar.open} starts={calendar.starts}>{children}</ReturnWeeks>
           </main>
         </div>
+        {/* Page views by route, cookieless; it sends only on a Vercel deployment with Web Analytics on. */}
+        <Analytics />
       </body>
     </html>
   );
