@@ -5,7 +5,7 @@ import Nothing from "../../../components/shell/Nothing";
 import { LABEL, PANEL } from "@/app/desk";
 import { footballNow, seasonFixtures, seasonKickoffs } from "../../../football";
 import { leagueInfo } from "../../../round";
-import { leagueDefConWords } from "../../../defconWords";
+import { leagueDefConWords, ownDefCon } from "../../../defconWords";
 import { statsLeagueGameweek } from "../../../statsLeague";
 import { now } from "../../../clock";
 import { playerMarks } from "../../../ratings";
@@ -89,12 +89,15 @@ async function Record({
   paid: PlayerMatch[];
   season: string | null;
 }) {
-  const [past, log, snapshot, fixtures, standing, info, kickoffs] = await Promise.all([
+  const [past, log, snapshot, fixtures, { standing, positions }, info, kickoffs] = await Promise.all([
     pastSeasons(player),
     gameLog(player),
     footballNow(),
     seasonFixtures(),
-    getLeaguePool().then((pool) => playerStanding(player, poolPoints(pool))),
+    getLeaguePool().then(async (pool) => ({
+      standing: await playerStanding(player, poolPoints(pool)),
+      positions: "unavailable" in pool ? [] : (pool.rows.find((row) => row.entry.player.fantraxId === fantraxId)?.entry.eligiblePositions ?? []),
+    })),
     leagueInfo(),
     seasonKickoffs(),
   ]);
@@ -151,7 +154,9 @@ async function Record({
       ) : (
         <>
           {log.heldAt === null ? null : <HeldNote at={log.heldAt} />}
-          <MatchLog rows={joined} standing={standing} defconWords={Object.fromEntries(leagueDefConWords(info))} />
+          <MatchLog rows={joined} standing={standing} defconWords={Object.fromEntries(leagueDefConWords(info))}
+            defcon={[...ownDefCon(info?.scoring ?? null, positions)]}
+          />
           {maps}
         </>
       )}

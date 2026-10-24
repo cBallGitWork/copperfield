@@ -37,18 +37,23 @@ export default function MatchLog({
   rows,
   standing,
   defconWords = {},
+  defcon,
 }: {
   rows: readonly MatchRow[];
   standing: Standing;
   /** DefCon's counts named by who the league pays on each, by Fantrax code (`defConWords`). */
   defconWords?: Readonly<Record<string, DefConWords>>;
+  /** The DefCon counts he is paid on (`ownDefCon`); absent, both. */
+  defcon?: readonly string[];
 }) {
   const field = standing.ranked[0]?.of ?? 0;
   const ranks = new Map((field === 0 ? [] : [...(standing.fpts ? [standing.fpts] : []), ...standing.ranked]).map((r) => [r.head, r]));
-  const drawn = columnsFor(rows, standing.keeper, [...ranks.values()]).map((column) => {
-    const named = column.defcon === undefined ? undefined : defconWords[column.defcon];
-    return named === undefined ? column : { ...column, head: named.head, title: named.key };
-  });
+  const drawn = columnsFor(rows, standing.keeper, [...ranks.values()])
+    .filter((column) => column.defcon === undefined || defcon === undefined || defcon.includes(column.defcon))
+    .map((column) => {
+      const named = column.defcon === undefined ? undefined : defconWords[column.defcon];
+      return named === undefined ? column : { ...column, head: named.head, title: named.key };
+    });
   if (rows.length === 0 && ranks.size === 0) {
     return (
       <Section title="Every match">

@@ -193,6 +193,19 @@ describe("the match log's DefCon", () => {
     }),
   );
 
+  it("draws only the count he is paid on: a defender's DC D, never DC MF", () => {
+    const own = renderToStaticMarkup(
+      createElement(MatchLog, {
+        rows: [{ ...row({}, null), defcon: { DFP: 4, DFP3: 9 } }],
+        standing: UNRANKED,
+        defconWords: words,
+        defcon: ["DFP"],
+      }),
+    );
+    expect(column(own, "DefCon DEF")[0]).toBe("4");
+    expect(column(own, "DefCon M/F")).toEqual([]);
+  });
+
   it("draws both counts a match, a dash where the week was not read", () => {
     expect(column(html, "DefCon DEF").slice(0, 2)).toEqual(["4", "—"]);
     expect(column(html, "DefCon M/F").slice(0, 2)).toEqual(["9", "—"]);
