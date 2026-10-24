@@ -15,7 +15,7 @@ const render = (lead: object, extra: object = {}) =>
 
 /** Every class on each `<tr>` in the body, in order. */
 const bodyRows = (html: string) =>
-  [...(html.match(/<tbody>[\s\S]*<\/tbody>/)?.[0] ?? "").matchAll(/<tr class="([^"]*)"/g)].map((m) => m[1].split(/\s+/));
+  [...(html.match(/<tbody>[\s\S]*<\/tbody>/)?.[0] ?? "").matchAll(/<tr[^>]*? class="([^"]*)"/g)].map((m) => m[1].split(/\s+/));
 
 describe("the one board", () => {
   // Craig, 24 Oct 2026: "when you select a column to sort by, the background should fill for that column".
