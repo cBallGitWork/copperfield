@@ -684,3 +684,22 @@ select.cm-bevel {
     color-mix(in oklab, var(--color-ink) 14%, transparent)
   );
 }
+
+/* A board row under the pointer, or tapped, lit across every cell but the index block; a two-line row lights both lines. */
+.cm-hl:is(:hover, :focus),
+.cm-hl-line:is(:hover, :focus) + .cm-hl,
+.cm-hl-line:has(+ .cm-hl:is(:hover, :focus)) {
+  outline: none;
+  --cm-hl: color-mix(in oklab, var(--color-ink) 12%, transparent);
+}
+.cm-hl > :not(.cm-index) {
+  background-image: linear-gradient(var(--cm-hl, transparent), var(--cm-hl, transparent));
+}
+.cm-hl > .cm-sorted:not(.cm-index) {
+  background-image:
+    linear-gradient(var(--cm-hl, transparent), var(--cm-hl, transparent)),
+    linear-gradient(
+      color-mix(in oklab, var(--color-ink) 14%, transparent),
+      color-mix(in oklab, var(--color-ink) 14%, transparent)
+    );
+}

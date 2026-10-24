@@ -16,7 +16,7 @@ import {
   PINNED_TILE,
   READ_ROW,
   ROW_HEAD_CELL,
-  ROW_HOVER_ON_SURFACE,
+  ROW_RULE,
   SMALL_CAPS,
   SORTED_CELL,
 } from "@/app/desk";
@@ -81,6 +81,9 @@ const FREE_TILE = "[--cm-index:var(--color-index-free)]";
 
 const RULE = "border-l border-line";
 
+/** A row lit under the pointer or a tap (`.cm-hl`), its name line and figures as one (Craig, 24 Oct 2026). */
+const LIT_ROW = `${ROW_RULE} cm-hl`;
+
 /** A row's name line under a thumb: no rule under it, so the line and its figures read as one row. */
 const NAME_LINE = "h-5 lg:hidden border-b-0";
 
@@ -133,7 +136,7 @@ export default function Board<Row>({
   const ruled = groups === null ? columns : columns.map((column, at) => ({ ...column, rule: column.rule === true || column.group !== columns[at - 1]?.group }));
   const span = columns.length + (lead.tile || lead.index ? 1 : 0) + (lead.name ? 1 : 0);
   const figures = (entry: Row, at: number) => (
-    <tr className={`${ROW_HOVER_ON_SURFACE} ${line === undefined ? READ_ROW : UNDER_LINE} ${rowClass?.(entry) ?? ""}`} {...rowAttrs}>
+    <tr tabIndex={-1} className={`${LIT_ROW} ${line === undefined ? READ_ROW : UNDER_LINE} ${rowClass?.(entry) ?? ""}`} {...rowAttrs}>
       {lead.tile ? (
         <PositionTile
           positions={lead.tile.positions(entry)}
@@ -165,7 +168,7 @@ export default function Board<Row>({
   const row = (entry: Row, at: number) => (
     <Fragment key={keyOf(entry, at)}>
       {line === undefined ? null : (
-        <tr className={`${ROW_HOVER_ON_SURFACE} ${rowClass?.(entry) ?? ""} ${NAME_LINE}`} {...rowAttrs}>
+        <tr tabIndex={-1} className={`${LIT_ROW} cm-hl-line ${rowClass?.(entry) ?? ""} ${NAME_LINE}`} {...rowAttrs}>
           <th scope="row" colSpan={columns.length} className={ROW_HEAD_CELL}>
             <div className={LINE_FACE}>{line(entry)}</div>
           </th>
