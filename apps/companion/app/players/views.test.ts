@@ -16,7 +16,7 @@ const labels = (key: "pool" | "stats", categories: typeof realCategories) =>
 describe("boardView", () => {
   it("puts the real league's scored counts on Players, with FPts, FP/G, GP and DCP (Craig, 16 Oct 2026)", () => {
     expect(labels("pool", realCategories)).toEqual([
-      "Player", "FPts", "FP/G", "Min", "GP", "G", "AT", "CS", "DC", "DC+", "DCP", "GA", "GKP", "PKS", "YC", "RC", "PKM", "OG",
+      "Player", "FPts", "xMins", "FP/G", "Min", "GP", "G", "AT", "CS", "DC", "DC+", "DCP", "GA", "GKP", "PKS", "YC", "RC", "PKM", "OG",
     ]);
   });
 

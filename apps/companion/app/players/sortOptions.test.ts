@@ -43,7 +43,7 @@ describe("Sort by's options", () => {
   it("leaves Players' few figures flat, in the board's order", () => {
     const options = sortOptions(players, every, null);
     expect(options.every((option) => option.group === undefined)).toBe(true);
-    expect(options.slice(0, 2).map((option) => option.label)).toEqual(["FPts — Fantasy points", "FP/G — Fantasy points per game"]);
+    expect(options.slice(0, 2).map((option) => option.label)).toEqual(["FPts — Fantasy points", "xMins — Expected minutes"]);
   });
 });
 

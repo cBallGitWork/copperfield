@@ -1,7 +1,7 @@
 import Link from "@/app/components/shell/Link";
 import { toFplClubCode } from "@epl/core";
 import type { PoolGroupKey, PoolPlate } from "./groups";
-import { isChosen } from "./query";
+import { PER_TOTAL, isChosen } from "./query";
 import { filterChange, type BoardChange } from "./boardChange";
 import BoardLink from "./BoardLink";
 import type { QueryOption } from "../components/shell/QuerySelect";
@@ -144,7 +144,7 @@ export function Figures({
   route: string;
   replace: boolean;
 }) {
-  const change: BoardChange = { toggle: ["per", "90"] };
+  const change: BoardChange = { toggle: ["per", PER_TOTAL] };
   return (
     <Chip on={rated} query={query} change={change} route={route} replace={replace}>
       Per 90
@@ -153,7 +153,7 @@ export function Figures({
 }
 
 /** How many of the board's settings the sheet holds that are on, so a shut sheet cannot hide a filtered board: the
- *  club, a lone half of the bin, and below `xl`, where the sheet carries it, Per 90. The sort is
+ *  club, a lone half of the bin, and below `xl`, where the sheet carries it, Per 90 switched off. The sort is
  *  never counted; the table's head says it. Its slot keeps its width at nought, so Filter never moves. */
 export function Count({ sheet, wide }: { sheet: number; wide: number }) {
   return (
@@ -181,11 +181,11 @@ export function Chip({
   title?: string;
   children: React.ReactNode;
 } & ({ href: string } | { query: PlayersQuery; change: BoardChange; route?: string; replace?: boolean })) {
-  const className = `group relative min-w-11 cm-bevel aria-[pressed=false]:hover:brightness-110 ${PLATE}`;
+  const className = `group relative min-w-11 cm-bevel aria-[pressed=false]:hover:brightness-110 ${PLATE} lg:pr-4`;
   const face = (
     <>
       {/* `aria-pressed` already says it to a screen reader. */}
-      <span aria-hidden className="absolute top-0.5 right-0.5 hidden text-[0.5rem] leading-none group-aria-pressed:inline">
+      <span aria-hidden className="absolute top-px right-0.5 hidden text-xs font-bold leading-none group-aria-pressed:inline">
         ✓
       </span>
       {children}

@@ -22,6 +22,7 @@ import {
   type ScoringRules,
 } from "@epl/core";
 import type { PoolRow } from "./pool";
+import { START_DOUBT_MINUTES } from "../config";
 import type { PoolGroup } from "./groups";
 import { ATTRIBUTE_COLUMNS } from "./attributeColumns";
 import { SEASON_COLUMNS } from "./seasonColumns";
@@ -48,6 +49,10 @@ export interface PoolColumn {
   mark?: Mark;
   /** A count, which the per-90 toggle divides by minutes. A rate or a denominator never is. */
   rate?: true;
+  /** Divided by minutes whatever the toggle says: DefCon's bands are per match, so a season total misleads (Craig, 24 Oct 2026). */
+  always90?: true;
+  /** Its own ink by value, in place of the standout cut. */
+  ink?: (figure: number) => string;
   /** The bag key of the minutes a rate divides by, where not the served league's `Min`. */
   minutes?: string;
   /** A figure per game played, held under the games floor (`floors.ts`). */
@@ -73,6 +78,9 @@ export interface PoolColumn {
 
 /** Games played in the stats bag, under Fantrax's abbreviation. */
 export const GAMES = "GP";
+
+/** Next gameweek's xMins in the stats bag, by the model's export. */
+export const XMINS = "xMins";
 
 /** Our DefCon points in the stats bag, beside Fantrax's counts. */
 export const DEFCON_POINTS = "DCP";
@@ -123,6 +131,17 @@ export const COLUMNS: PoolColumn[] = [
     fantasy: true,
     value: (row) => row.stats?.points ?? null,
   },
+  // Second, in amber beside FPts' cyan so the model's minutes never read as the league's points (Craig, 24 Oct 2026).
+  {
+    key: "xmins",
+    label: "xMins",
+    title: "Expected minutes, next gameweek",
+    group: "scoring",
+    ascending: false,
+    fantasy: true,
+    ink: (figure) => (figure < START_DOUBT_MINUTES ? "text-bad" : "text-mid"),
+    value: (_row, stats) => stats?.[XMINS] ?? null,
+  },
   {
     key: "fpg",
     label: "FP/G",
@@ -143,7 +162,7 @@ export const COLUMNS: PoolColumn[] = [
   count(ASSISTS_FANTASY, "creating"),
   ...SEASON_COLUMNS,
   count(CLEAN_SHEETS, "defensive"),
-  ...DEFCON.map((category) => count(category, "defensive")),
+  ...DEFCON.map((category) => ({ ...count(category, "defensive"), always90: true as const })),
   {
     key: "dcp",
     label: "DCP",
@@ -153,6 +172,7 @@ export const COLUMNS: PoolColumn[] = [
     rate: true,
     ascending: false,
     fantasy: true,
+    always90: true,
     pays: DEFCON,
     value: (_row, stats) => stats?.[DEFCON_POINTS] ?? null,
     stat: DEFCON_POINTS,
@@ -182,9 +202,14 @@ export function ratedOn(columns: readonly PoolColumn[], per90: boolean): boolean
   return columns.some((column) => column.rate === true) ? per90 : null;
 }
 
-/** The heads as drawn: each rated one marked /90 under Per 90, since 0.82 could also be a season's total. */
+/** Whether this column's figure is per ninety: under the toggle, or always for one that never shows a total. */
+export function isRated(column: PoolColumn, rated: boolean | null): boolean {
+  return column.rate === true && (rated === true || column.always90 === true);
+}
+
+/** The heads as drawn: each rated one marked /90, since 0.82 could also be a season's total. */
 export function headedFor(columns: readonly PoolColumn[], rated: boolean | null): PoolColumn[] {
-  return columns.map((column) => (rated === true && column.rate === true ? { ...column, label: `${column.label}/90` } : column));
+  return columns.map((column) => (isRated(column, rated) ? { ...column, label: `${column.label}/90` } : column));
 }
 
 /** The columns the chosen positions score, off the league's own prices: all of them for no chip or unread prices.
