@@ -178,3 +178,23 @@ describe("the match log's foot (N-13)", () => {
     expect(season.indexOf("<MatchLog")).toBeLessThan(season.indexOf("{maps}"));
   });
 });
+
+// Craig, 24 Oct 2026: "needs both defcon types". Each match's DFP and DFP3, headed by who the league pays on each.
+describe("the match log's DefCon", () => {
+  const words = {
+    DFP: { head: "DefCon DEF", name: "DefCon DEF", key: "DefCon DEF: tackles won, interceptions and blocks" },
+    DFP3: { head: "DefCon M/F", name: "DefCon M/F", key: "DefCon M/F: tackles won, interceptions, blocks, clearances and recoveries" },
+  };
+  const html = renderToStaticMarkup(
+    createElement(MatchLog, {
+      rows: [{ ...row({}, null), defcon: { DFP: 4, DFP3: 9 } }, { ...row({ gameweek: 7, fixtureId: 70 }, null), defcon: null }],
+      standing: UNRANKED,
+      defconWords: words,
+    }),
+  );
+
+  it("draws both counts a match, a dash where the week was not read", () => {
+    expect(column(html, "DefCon DEF").slice(0, 2)).toEqual(["4", "—"]);
+    expect(column(html, "DefCon M/F").slice(0, 2)).toEqual(["9", "—"]);
+  });
+});

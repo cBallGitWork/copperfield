@@ -6,6 +6,7 @@ import { standoutCuts, standoutInk, type StandoutCut } from "../../components/le
 import Section from "../../components/shell/Section";
 import { matchHref } from "../../prem/match/[id]/matchRoutes";
 import type { MatchRow } from "./matchRows";
+import type { DefConWords } from "../../defconWords";
 import { POINTS, columnsFor, totalOf, type MatchColumn } from "./matchColumns";
 import { TAP_ROW } from "@/app/desk";
 
@@ -32,10 +33,22 @@ export interface Standing {
 /** A column's standouts over his matches: its best in orange, its top quarter in yellow. */
 const SHARES = { good: 0.25, best: 0.1 };
 
-export default function MatchLog({ rows, standing }: { rows: readonly MatchRow[]; standing: Standing }) {
+export default function MatchLog({
+  rows,
+  standing,
+  defconWords = {},
+}: {
+  rows: readonly MatchRow[];
+  standing: Standing;
+  /** DefCon's counts named by who the league pays on each, by Fantrax code (`defConWords`). */
+  defconWords?: Readonly<Record<string, DefConWords>>;
+}) {
   const field = standing.ranked[0]?.of ?? 0;
   const ranks = new Map((field === 0 ? [] : [...(standing.fpts ? [standing.fpts] : []), ...standing.ranked]).map((r) => [r.head, r]));
-  const drawn = columnsFor(rows, standing.keeper, [...ranks.values()]);
+  const drawn = columnsFor(rows, standing.keeper, [...ranks.values()]).map((column) => {
+    const named = column.defcon === undefined ? undefined : defconWords[column.defcon];
+    return named === undefined ? column : { ...column, head: named.head, title: named.key };
+  });
   if (rows.length === 0 && ranks.size === 0) {
     return (
       <Section title="Every match">

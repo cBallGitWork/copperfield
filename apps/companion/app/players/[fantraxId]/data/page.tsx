@@ -1,9 +1,13 @@
 import { Suspense } from "react";
-import { clubById, seasonKey } from "@epl/core";
+import { DEFCON, clubById, seasonKey } from "@epl/core";
 import type { Club, FootballPlayer, PastSeason, PlayerMatch } from "@epl/core";
 import Nothing from "../../../components/shell/Nothing";
 import { LABEL, PANEL } from "@/app/desk";
-import { footballNow, seasonFixtures } from "../../../football";
+import { footballNow, seasonFixtures, seasonKickoffs } from "../../../football";
+import { leagueInfo } from "../../../round";
+import { leagueDefConWords } from "../../../defconWords";
+import { statsLeagueGameweek } from "../../../statsLeague";
+import { now } from "../../../clock";
 import { playerMarks } from "../../../ratings";
 import { intelCareers, intelShots, intelTouches } from "../../../intel";
 import { pastMaps } from "../../../pastMaps";
@@ -85,12 +89,14 @@ async function Record({
   paid: PlayerMatch[];
   season: string | null;
 }) {
-  const [past, log, snapshot, fixtures, standing] = await Promise.all([
+  const [past, log, snapshot, fixtures, standing, info, kickoffs] = await Promise.all([
     pastSeasons(player),
     gameLog(player),
     footballNow(),
     seasonFixtures(),
     getLeaguePool().then((pool) => playerStanding(player, poolPoints(pool))),
+    leagueInfo(),
+    seasonKickoffs(),
   ]);
   const maps = <SeasonMaps maps={seasonMaps(player.code, intelShots, intelTouches, standing.keeper)} club={club} />;
   // One FPL read feeds both; when it will not answer, say so rather than print half a career. His season's foot and
@@ -109,7 +115,7 @@ async function Record({
     );
   }
   const byId = clubById(snapshot);
-  const joined = joinMatches(log.rows, paid, byId, playerMarks(player.code, fixtures));
+  const joined = joinMatches(log.rows, paid, byId, playerMarks(player.code, fixtures), await defconWeeks(fantraxId, log.rows, kickoffs));
   const league = [...byId.values()];
   const clubs = intelCareers.get(player.code) ?? new Map<string, string>();
   const label = season ?? "This season";
@@ -145,7 +151,7 @@ async function Record({
       ) : (
         <>
           {log.heldAt === null ? null : <HeldNote at={log.heldAt} />}
-          <MatchLog rows={joined} standing={standing} />
+          <MatchLog rows={joined} standing={standing} defconWords={Object.fromEntries(leagueDefConWords(info))} />
           {maps}
         </>
       )}
@@ -169,4 +175,21 @@ function thisSeason(rows: readonly MatchRow[], season: string): PastSeason | nul
     saves: t.saves,
     fplPoints: t.fplPoints,
   };
+}
+
+/** His DefCon counts in each gameweek he played, off the stats league's weeks; a week it could not read is left out. */
+async function defconWeeks(
+  fantraxId: string,
+  rows: readonly MatchRow["fpl"][],
+  kickoffs: Awaited<ReturnType<typeof seasonKickoffs>>,
+): Promise<Map<number, Record<string, number | null>>> {
+  const keys = DEFCON.map((category) => category.short);
+  const weeks = [...new Set(rows.filter((row) => row.match.minutes > 0).map((row) => row.match.gameweek))];
+  const read = await Promise.all(weeks.map((week) => statsLeagueGameweek(keys, week, kickoffs, now())));
+  return new Map(
+    weeks.flatMap((week, at) => {
+      const his = read[at]?.find(([id]) => id === fantraxId);
+      return his === undefined ? [] : [[week, his[2]] as const];
+    }),
+  );
 }
