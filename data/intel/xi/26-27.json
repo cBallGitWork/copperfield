@@ -2,152 +2,22 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-23T18:01:18.004Z",
+    "exportedAt": "2026-10-24T08:03:06.129Z",
     "rows": 20,
     "sources": [
       {
         "path": "https://www.rotowire.com/soccer/lineups.php?league=EPL",
         "mtime": null
+      },
+      {
+        "path": "https://www.fantasyfootballscout.co.uk/team-news",
+        "mtime": null
       }
     ]
   },
-  "fetchedAt": "2026-10-23T18:01:18.004Z",
-  "source": "rotowire",
+  "fetchedAt": "2026-10-24T08:03:06.129Z",
+  "source": "rotowire+ffscout",
   "clubs": {
-    "IPS": {
-      "formation": "4-2-3-1",
-      "slots": {
-        "1": 1,
-        "2": 4,
-        "3": 2,
-        "4": 3,
-        "5": 1
-      },
-      "starters": [
-        {
-          "code": 108813,
-          "prob": 1
-        },
-        {
-          "code": 572584,
-          "prob": 1
-        },
-        {
-          "code": 219924,
-          "prob": 1
-        },
-        {
-          "code": 216616,
-          "prob": 1
-        },
-        {
-          "code": 455084,
-          "prob": 1
-        },
-        {
-          "code": 216055,
-          "prob": 1
-        },
-        {
-          "code": 218543,
-          "prob": 1
-        },
-        {
-          "code": 531442,
-          "prob": 1
-        },
-        {
-          "code": 474120,
-          "prob": 1
-        },
-        {
-          "code": 481624,
-          "prob": 1
-        },
-        {
-          "code": 543968,
-          "prob": 1
-        }
-      ],
-      "lineup": "confirmed",
-      "absent": [
-        {
-          "code": 212314,
-          "status": "OUT"
-        },
-        {
-          "code": 231899,
-          "status": "OUT"
-        }
-      ]
-    },
-    "NFO": {
-      "formation": "3-4-2-1",
-      "slots": {
-        "1": 1,
-        "2": 3,
-        "3": 4,
-        "4": 2,
-        "5": 1
-      },
-      "starters": [
-        {
-          "code": 85633,
-          "prob": 1
-        },
-        {
-          "code": 575458,
-          "prob": 1
-        },
-        {
-          "code": 575476,
-          "prob": 1
-        },
-        {
-          "code": 227444,
-          "prob": 1
-        },
-        {
-          "code": 247348,
-          "prob": 1
-        },
-        {
-          "code": 432714,
-          "prob": 1
-        },
-        {
-          "code": 204561,
-          "prob": 1
-        },
-        {
-          "code": 215136,
-          "prob": 1
-        },
-        {
-          "code": 222531,
-          "prob": 1
-        },
-        {
-          "code": 456512,
-          "prob": 1
-        },
-        {
-          "code": 463034,
-          "prob": 1
-        }
-      ],
-      "lineup": "confirmed",
-      "absent": [
-        {
-          "code": 482973,
-          "status": "OUT"
-        },
-        {
-          "code": 500151,
-          "status": "OUT"
-        }
-      ]
-    },
     "AVL": {
       "formation": "4-2-3-1",
       "slots": {
@@ -254,11 +124,11 @@
           "prob": 0.9
         },
         {
-          "code": 215379,
+          "code": 637238,
           "prob": 0.9
         },
         {
-          "code": 637238,
+          "code": 215379,
           "prob": 0.9
         },
         {
@@ -940,11 +810,11 @@
           "prob": 0.9
         },
         {
-          "code": 97032,
+          "code": 606702,
           "prob": 0.9
         },
         {
-          "code": 606702,
+          "code": 97032,
           "prob": 0.9
         },
         {
@@ -952,11 +822,11 @@
           "prob": 0.9
         },
         {
-          "code": 243016,
+          "code": 441266,
           "prob": 0.9
         },
         {
-          "code": 441266,
+          "code": 243016,
           "prob": 0.9
         },
         {
@@ -1117,11 +987,11 @@
           "prob": 0.9
         },
         {
-          "code": 146426,
+          "code": 108416,
           "prob": 0.9
         },
         {
-          "code": 108416,
+          "code": 146426,
           "prob": 0.9
         },
         {
@@ -1133,11 +1003,11 @@
           "prob": 0.9
         },
         {
-          "code": 490094,
+          "code": 243413,
           "prob": 0.9
         },
         {
-          "code": 243413,
+          "code": 490094,
           "prob": 0.9
         },
         {
@@ -1382,11 +1252,11 @@
           "prob": 0.9
         },
         {
-          "code": 180974,
+          "code": 465694,
           "prob": 0.9
         },
         {
-          "code": 465694,
+          "code": 180974,
           "prob": 0.9
         },
         {
@@ -1532,11 +1402,11 @@
           "prob": 0.9
         },
         {
-          "code": 173774,
+          "code": 220627,
           "prob": 0.9
         },
         {
-          "code": 220627,
+          "code": 173774,
           "prob": 0.9
         },
         {
@@ -1556,11 +1426,11 @@
           "prob": 0.9
         },
         {
-          "code": 466525,
+          "code": 174594,
           "prob": 0.9
         },
         {
-          "code": 174594,
+          "code": 466525,
           "prob": 0.9
         },
         {
@@ -1589,6 +1459,118 @@
         {
           "code": 214225,
           "status": "OUT"
+        }
+      ]
+    },
+    "IPS": {
+      "formation": "4-2-3-1",
+      "slots": {
+        "1": 1,
+        "2": 4,
+        "3": 2,
+        "4": 3,
+        "5": 1
+      },
+      "starters": [
+        {
+          "code": 108813,
+          "prob": 0.9
+        },
+        {
+          "code": 572584,
+          "prob": 0.9
+        },
+        {
+          "code": 219924,
+          "prob": 0.9
+        },
+        {
+          "code": 216616,
+          "prob": 0.9
+        },
+        {
+          "code": 455084,
+          "prob": 0.9
+        },
+        {
+          "code": 216055,
+          "prob": 0.9
+        },
+        {
+          "code": 218543,
+          "prob": 0.9
+        },
+        {
+          "code": 531442,
+          "prob": 0.9
+        },
+        {
+          "code": 474120,
+          "prob": 0.9
+        },
+        {
+          "code": 442967,
+          "prob": 0.9
+        },
+        {
+          "code": 543968,
+          "prob": 0.9
+        }
+      ]
+    },
+    "NFO": {
+      "formation": "3-4-2-1",
+      "slots": {
+        "1": 1,
+        "2": 3,
+        "3": 4,
+        "4": 2,
+        "5": 1
+      },
+      "starters": [
+        {
+          "code": 85633,
+          "prob": 0.9
+        },
+        {
+          "code": 575458,
+          "prob": 0.9
+        },
+        {
+          "code": 227444,
+          "prob": 0.9
+        },
+        {
+          "code": 575476,
+          "prob": 0.9
+        },
+        {
+          "code": 247348,
+          "prob": 0.9
+        },
+        {
+          "code": 432714,
+          "prob": 0.9
+        },
+        {
+          "code": 204561,
+          "prob": 0.9
+        },
+        {
+          "code": 215136,
+          "prob": 0.9
+        },
+        {
+          "code": 222531,
+          "prob": 0.9
+        },
+        {
+          "code": 456512,
+          "prob": 0.9
+        },
+        {
+          "code": 463034,
+          "prob": 0.9
         }
       ]
     }
