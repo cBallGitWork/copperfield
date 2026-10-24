@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-24T13:10:54.047Z",
+    "exportedAt": "2026-10-24T14:00:37.962Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-24T13:10:54.047Z",
+  "fetchedAt": "2026-10-24T14:00:37.962Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "AVL": {
@@ -148,7 +148,7 @@
       "absent": [
         {
           "code": 465351,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 437730,
