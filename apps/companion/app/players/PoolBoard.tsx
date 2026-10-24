@@ -116,7 +116,7 @@ export default async function PoolBoard({
   const sorted = activeSort(query, view).column.key;
   // A position chip draws what that position scores, off the league's own prices (Craig, 21 Oct 2026).
   const drawn = paidFor(columnsIn(view.columns, group, sorted, scored), info?.scoring ?? null, chosen(query.pos), sorted);
-  const rated = players ? null : ratedOn(drawn, isPer90(query));
+  const rated = players ? null : ratedOn(drawn, isPer90(query, view));
   const columns = headedFor(drawn, rated);
   // Plain data, since the key is a client component: a column carries functions.
   const heads = columns.filter((column) => column.key !== "name").map(({ label, title, means }) => ({ label, title, means }));

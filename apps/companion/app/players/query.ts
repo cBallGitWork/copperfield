@@ -71,9 +71,12 @@ export function playersQuery(raw: PlayersSearchParams): PlayersQuery {
   };
 }
 
-/** Whether the counts are drawn per ninety minutes: `?per=90`, and anything else is off. */
-export function isPer90(query: PlayersQuery): boolean {
-  return query.per === "90";
+/** The address bar's way to switch Per 90 off. */
+export const PER_TOTAL = "total";
+
+/** Whether Adv Stats draws its counts per ninety minutes: on unless `?per=total` (Craig, 24 Oct 2026); Players never. */
+export function isPer90(query: PlayersQuery, view: BoardView): boolean {
+  return view.key === "stats" && query.per !== PER_TOTAL;
 }
 
 /** Rows a page carries before it offers more, at every width (Craig, 20 Oct 2026): a hundred ran eight phone screens. */
@@ -111,7 +114,7 @@ export function shownRows(
   const status = statusesOf(query);
   const positions = chosen(query.pos);
   const club = (query.club ?? "").trim();
-  const rated = isPer90(query);
+  const rated = isPer90(query, view);
   const known = rows.some((row) => row.entry.status !== "");
   const filtered = rows.filter(
     (row) =>

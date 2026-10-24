@@ -54,7 +54,7 @@ export default function BoardBar({
   const open = query.panel === "1";
   const route = view.route;
   const held = (query.club ? 1 : 0) + loneCount(query);
-  const narrow = rated ? 1 : 0;
+  const narrow = rated === false ? 1 : 0;
   // The button promises what the board draws.
   const drawn = drawnCount(shown, query);
 

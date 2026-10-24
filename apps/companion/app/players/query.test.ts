@@ -5,6 +5,8 @@ import type { PoolRow } from "./pool";
 import { boardView } from "./views";
 
 const PLAYERS = boardView("pool", {});
+// A league that scores no goals, so G sits on Adv Stats.
+const STATS = boardView("stats", { other: { code: "ZZ" } } as never);
 const shownRows = (rows: readonly PoolRow[], query: Parameters<typeof shownOn>[1], raw: Parameters<typeof shownOn>[2]) =>
   shownOn(rows, query, raw, PLAYERS);
 
@@ -175,9 +177,11 @@ describe("shownRows floors", () => {
       ["regular", { Min: 900, G: 3 }],
       ["none", { Min: 900, G: null }],
     ]);
-    expect(order({ sort: "g", per: "90" }, rows, raw)).toEqual(["regular", "cameo", "none"]);
-    // Off the toggle the counts sort as counts, his two goals under three.
-    expect(order({ sort: "g" }, rows, raw)).toEqual(["regular", "cameo", "none"]);
-    expect(order({ sort: "g", dir: "asc" }, rows, raw)).toEqual(["cameo", "regular", "none"]);
+    // Adv Stats is per 90 unless asked otherwise (Craig, 24 Oct 2026): the cameo sinks either way the column runs.
+    expect(order({ sort: "g" }, rows, raw, STATS)).toEqual(["regular", "cameo", "none"]);
+    expect(order({ sort: "g", dir: "asc" }, rows, raw, STATS)).toEqual(["regular", "cameo", "none"]);
+    // Off the toggle, and always on Players, the counts sort as counts, his two goals under three.
+    expect(order({ sort: "g", dir: "asc", per: "total" }, rows, raw, STATS)).toEqual(["cameo", "regular", "none"]);
+    expect(order({ sort: "g", dir: "asc", per: "90" }, rows, raw)).toEqual(["cameo", "regular", "none"]);
   });
 });
