@@ -72,6 +72,8 @@ export interface PoolColumn {
   scores?: FantraxCategory;
   /** A second category the same column reads, under the other half's name: an outfielder's GAO beside a keeper's GA. */
   also?: FantraxCategory;
+  /** On Adv Stats though the league scores it: a rare penalty against a man, noise beside his points (Craig, 24 Oct 2026). */
+  statsOnly?: true;
   /** On Players whatever the league scores: its points, and the games and DefCon they are read against. */
   fantasy?: true;
 }
@@ -189,8 +191,8 @@ export const COLUMNS: PoolColumn[] = [
   count(PENALTY_SAVES, "defensive"),
   count(YELLOW_CARDS, "discipline", "low"),
   count(RED_CARDS, "discipline", "low"),
-  count(PENALTIES_MISSED, "attacking", "low"),
-  count(OWN_GOALS, "defensive", "low"),
+  { ...count(PENALTIES_MISSED, "discipline", "low"), statsOnly: true },
+  { ...count(OWN_GOALS, "discipline", "low"), statsOnly: true },
   ...ATTRIBUTE_COLUMNS,
 ];
 

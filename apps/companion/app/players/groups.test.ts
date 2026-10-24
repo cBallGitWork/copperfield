@@ -11,8 +11,8 @@ const stats = boardView("stats", mapLeagueInfo(real).scoringCategories);
 const plates = platesFor(sortableIn(stats.columns, READ));
 
 describe("Adv Stats' plates (Craig, 19 Oct 2026: \"split into attack/defending\")", () => {
-  it("offers Attack, Creating, Defence and Attributes, with no All", () => {
-    expect(plates.map((plate) => plate.label)).toEqual(["Attack", "Creating", "Defence", "Attributes"]);
+  it("offers Attack, Creating, Defence, Discipline and Attributes, with no All", () => {
+    expect(plates.map((plate) => plate.label)).toEqual(["Attack", "Creating", "Defence", "Discipline", "Attributes"]);
   });
 
   it("rests on Attack, and an address bar naming a plate it lacks lands there too", () => {

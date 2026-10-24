@@ -18,6 +18,14 @@ const bodyRows = (html: string) =>
   [...(html.match(/<tbody>[\s\S]*<\/tbody>/)?.[0] ?? "").matchAll(/<tr class="([^"]*)"/g)].map((m) => m[1].split(/\s+/));
 
 describe("the one board", () => {
+  // Craig, 24 Oct 2026: "when you select a column to sort by, the background should fill for that column".
+  it("fills the sorted column's cells, and only those", () => {
+    const two: BoardColumn<string>[] = [...columns, { key: "a", head: "A", cell: () => ({ value: 2 }) }];
+    const html = render({}, { columns: two, order: { key: "a", descending: true, href: (key: string) => `?sort=${key}` } });
+    const cells = [...html.matchAll(/<td class="([^"]*)"/g)].map((m) => m[1].split(/\s+/).includes("cm-sorted"));
+    expect(cells).toEqual([false, true]);
+  });
+
   // Craig, 21 Oct 2026: "six different row heights". A row nobody taps is 24 under a thumb and 28 on a desk.
   it("sets every figures row at the read-only height", () => {
     const [row] = bodyRows(render({ index: { label: "Row", of: (row: string) => row } }));

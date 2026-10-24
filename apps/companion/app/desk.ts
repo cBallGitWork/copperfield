@@ -74,6 +74,9 @@ export const BOARD_FIT = `${BOARD} lg:w-auto`;
 
 /* ---- Table rows: DESIGN §6's three heights ------------------------------- */
 
+/** The cells of the column a board is sorted by (`.cm-sorted`). */
+export const SORTED_CELL = "cm-sorted";
+
 /** A table row nobody taps: 24px under a thumb, 28 on a desk. On the `<tr>`, whose height is a floor. */
 export const READ_ROW = "h-6 lg:h-7";
 
