@@ -6,6 +6,8 @@ import { statsLeagueSeason } from "../../../statsLeague";
 import StatBoard from "./StatBoard";
 import { rosterFacts } from "./roster";
 import { defconPricing } from "../../../defcon";
+import { leagueDefConWords } from "../../../defconWords";
+import { leagueInfo } from "../../../round";
 import { STATS_LEAGUE_KEYS } from "./statViews";
 import { teamTitle } from "../title";
 
@@ -22,11 +24,12 @@ export default async function StatsPage({
   params: Promise<{ teamId: string }>;
 }) {
   const { teamId: slug } = await params;
-  const [{ team, squad }, all, statsLeague, pricing] = await Promise.all([
+  const [{ team, squad }, all, statsLeague, pricing, info] = await Promise.all([
     leagueTeams(slug),
     getPlayerStats(),
     statsLeagueSeason(STATS_LEAGUE_KEYS),
     defconPricing(),
+    leagueInfo(),
   ]);
 
   // `team.teamId` and not the slug, which on the front door is the word `me`.
@@ -52,6 +55,7 @@ export default async function StatsPage({
           statsLeague={Object.fromEntries(statsLeague.filter(([id]) => ids.has(id)))}
           statsColumns={[...new Set(statsLeague.flatMap(([, counts]) => Object.keys(counts)))]}
           defcon={pricing === null ? null : pricing(slots)}
+          defconWords={Object.fromEntries(leagueDefConWords(info))}
         />
       )}
     </TeamShell>

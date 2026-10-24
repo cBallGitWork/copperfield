@@ -4,6 +4,7 @@ import { CUP_TIE_STEPS, rulesCard, scoredSlots } from "@epl/core";
 import Nothing from "../components/shell/Nothing";
 import { HeadRow, NameHead, PlateHead } from "../components/league/TableHeads";
 import { leagueScoring } from "@/app/scoring";
+import { defConRenames, defConWords } from "../defconWords";
 import { backToFront, leaguePositionLabel } from "../positions";
 import PageHeader from "../components/shell/PageHeader";
 import { MORE } from "../components/shell/sections";
@@ -28,7 +29,11 @@ export default async function ScoringPage() {
   }
 
   const slots = backToFront(scoredSlots(scoring.rules));
-  const lines = rulesCard(scoring, slots);
+  const renames = defConRenames(defConWords(scoring, slots));
+  const lines = rulesCard(scoring, slots).map((line) => {
+    const named = renames.get(line.name);
+    return named === undefined ? line : { ...line, name: named.name, key: named.key };
+  });
 
   return (
     <Frame>

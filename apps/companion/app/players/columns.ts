@@ -23,6 +23,7 @@ import {
 } from "@epl/core";
 import type { PoolRow } from "./pool";
 import { START_DOUBT_MINUTES } from "../config";
+import type { DefConWords } from "../defconWords";
 import type { PoolGroup } from "./groups";
 import { ATTRIBUTE_COLUMNS } from "./attributeColumns";
 import { SEASON_COLUMNS } from "./seasonColumns";
@@ -233,4 +234,12 @@ function categoriesOf(column: PoolColumn): readonly FantraxCategory[] {
 
 export function columnFor(key: string | undefined): PoolColumn | undefined {
   return COLUMNS.find((column) => column.key === key);
+}
+
+/** The board's DefCon counts headed by who the league pays on each (`defConWords`). */
+export function namedDefCon(columns: readonly PoolColumn[], words: ReadonlyMap<string, DefConWords>): PoolColumn[] {
+  return columns.map((column) => {
+    const named = column.scores === undefined ? undefined : words.get(column.scores.short);
+    return named === undefined ? column : { ...column, label: named.head, title: named.key };
+  });
 }

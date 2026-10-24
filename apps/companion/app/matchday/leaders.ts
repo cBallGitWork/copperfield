@@ -1,3 +1,4 @@
+import { positionsLabel } from "../positions";
 import type { Club, FootballPlayer, FootballSnapshot, LeagueScoring, PlayerMatchStats, PoolPlayer } from "@epl/core";
 import { clubById, defConAt, playerByCode, playerById } from "@epl/core";
 import { LISTS, asPrinted, ranked, type LeaderList, type Ranked } from "./lists";
@@ -48,12 +49,13 @@ export interface DefconGroup {
 /** A group's DefCon list and its tab, named with the slots it counts ("DefCon M/F"): the count itself, never points. */
 export function defconList(group: DefconGroup): { tab: string; list: LeaderList } {
   const { positions } = group;
+  const tab = `DefCon ${positionsLabel(positions) ?? positions.join("/")}`;
   return {
-    tab: `DefCon ${positions.join("/")}`,
+    tab,
     list: {
       key: `defcon-${positions.join("")}`,
       title: `DefCon, ${positions.map((position) => POSITION_WORD[position] ?? position).join(" and ")}`,
-      head: "DC",
+      head: tab,
       explain: "DefCon this gameweek, counted as the league counts it at these positions",
       kind: "count",
     },
