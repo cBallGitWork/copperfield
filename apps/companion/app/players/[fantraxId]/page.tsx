@@ -17,6 +17,8 @@ import RealPosition from "./RealPosition";
 import SetPieces from "./SetPieces";
 import { playerGrid, playerPieces, playerStanding } from "./grid";
 import { scouting } from "./scouting";
+import { getLeaguePool } from "../pool";
+import { easeView } from "../../components/football/fixtureEase";
 import { subject } from "./subject";
 import { playerTitle } from "./title";
 
@@ -43,6 +45,9 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
   const position = football === null ? null : (intelSquads.get(football.player.code) ?? null);
   // His run to come, off the snapshot and calendar every screen holds, so outside any boundary.
   const run = football === null ? null : await scouting(football.player);
+  // His fixtures read for his side of the ball, by the positions the league lets him play.
+  const pool = await getLeaguePool();
+  const entry = "unavailable" in pool ? undefined : pool.rows.find((row) => row.entry.player.fantraxId === fantraxId)?.entry;
   const minutes = new Map(
     (football === null ? [] : (intelMinutes.get(football.player.code) ?? [])).map((week) => [week.gameweek, week.minutes]),
   );
@@ -65,7 +70,7 @@ export default async function PlayerProfile({ params }: { params: Promise<{ fant
 
       {/* Whether he can play, then the run to come, on a phone's first screen (Craig, 21 Oct 2026). */}
       <Fitness found={found} />
-      {run === null ? null : <FixtureRun run={run} minutes={minutes} asOf={XMINS_AS_OF} />}
+      {run === null ? null : <FixtureRun run={run} minutes={minutes} asOf={XMINS_AS_OF} view={easeView(entry?.eligiblePositions ?? [])} />}
 
       {/* Portrait above the grid on a phone, beside it on a desk and as tall as it (Craig, 4 Sep 2026). */}
       <div className="flex flex-col gap-2 lg:flex-row lg:items-stretch">

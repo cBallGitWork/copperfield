@@ -11,7 +11,6 @@ import type {
   IntelSquads,
   IntelStats,
   IntelShots,
-  IntelStrength,
   IntelTouches,
   IntelXi,
   IntelProjections,
@@ -19,7 +18,6 @@ import type {
   ExpectedMinutes,
   MinutesUpdate,
   ClubDepth,
-  ClubStrength,
   Floors,
   IntelLines,
   PlayerLine,
@@ -29,14 +27,13 @@ import type {
   ShotCover,
   TouchPlayer,
 } from "@epl/core";
-import { londonDayAndDate, careerIntel, returnWeek, cupIntel, depthIntel, lineIntel, matchIntel, minuteMovesIntel, minutesIntel, playedFloor, clubKickedOff, shotFixtures, shotIntel, squadIntel, statIntel, strengthIntel, touchIntel } from "@epl/core";
+import { londonDayAndDate, careerIntel, returnWeek, cupIntel, depthIntel, lineIntel, matchIntel, minuteMovesIntel, minutesIntel, playedFloor, clubKickedOff, shotFixtures, shotIntel, squadIntel, statIntel, touchIntel } from "@epl/core";
 import squadsFile from "../../../data/intel/squads/26-27.json";
 import xiFile from "../../../data/intel/xi/26-27.json";
 import piecesFile from "../../../data/intel/set-pieces/26-27.json";
 import matchesFile from "../../../data/intel/matches/26-27.json";
 import touchesFile from "../../../data/intel/touches/26-27.json";
 import shotsFile from "../../../data/intel/shots/26-27.json";
-import strengthFile from "../../../data/intel/strength/26-27.json";
 import projectionsFile from "../../../data/intel/projections/26-27.json";
 import type { IntelHistory } from "@epl/core";
 import minuteMovesFile from "../../../data/intel/xmins-moves/26-27.json";
@@ -102,8 +99,7 @@ export function shotCover(fixtures: readonly Fixture[] | null, clubId: number, c
   return fixtures === null ? null : { counted: clubKickedOff(fixtures, clubId).filter(counts), held: shotsHeldFrom };
 }
 
-/** Each club's Dixon-Coles attack and defence by FPL club code. */
-export const intelStrength: Map<number, ClubStrength> = strengthIntel(strengthFile as unknown as IntelStrength);
+export { intelStrength } from "./strength";
 
 /** The sister model's xMins by FPL code and gameweek, its minutes only (`minutesIntel`); the manifest names its first week. */
 export const intelMinutes: Map<number, ExpectedMinutes[]> = minutesIntel(projectionsFile as unknown as IntelProjections);

@@ -123,8 +123,8 @@ export type { IntelStats, StatsRow } from "./intel/stats";
 export { fixtureGameweeks, gameweekSpan, inGameweeks, lastPlayed } from "./intel/window";
 export type { IntelShots, Shot, ShotCover } from "./intel/shots";
 // Each club's Dixon-Coles strength from the sister repo, ranked 1–20 as an opponent for the fixture planner.
-export { easeStep, plannerGameweeks, plannerRows, strengthIntel, strengthPlaces, strengthTable } from "./intel/strength";
-export type { ClubStrength, IntelStrength, PlannerCell, PlannerRow, PlannerView, StrengthRank } from "./intel/strength";
+export { easeRanks, easeStep, plannerGameweeks, plannerRows, strengthIntel, strengthPlaces, strengthTable } from "./intel/strength";
+export type { ClubStrength, IntelStrength, PlannerCell, PlannerRow, PlannerView, StrengthRank, Venue } from "./intel/strength";
 // The sister model's projected FPL points per player per gameweek, for the paper's predictions.
 export { projectionIntel } from "./intel/projections";
 export { minutesAhead, minutesIntel } from "./intel/minutes";

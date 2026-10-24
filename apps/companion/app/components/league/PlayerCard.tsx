@@ -22,6 +22,7 @@ import Chevron from "../shell/Chevron";
 import Breakdown from "./Breakdown";
 import FullMatchStats from "./FullMatchStats";
 import Note from "./Note";
+import { easeView } from "../football/fixtureEase";
 import WeekStrip from "./WeekStrip";
 import PlayerIdentity from "./PlayerIdentity";
 import { underway } from "./underway";
@@ -134,6 +135,7 @@ export default function PlayerCard({
 
         {/* The screen's own xMins stand in for the run until it is read, or when it cannot be. */}
         <WeekStrip
+          view={easeView(eligible ?? [rostered.slot.position])}
           form={weeks === undefined ? undefined : (weeks?.form ?? null)}
           next={weeks?.next ?? handedWeeks(minutes, opposition)}
           asOf={weeks?.asOf ?? minutes.find((week) => week.asOf)?.asOf ?? null}
