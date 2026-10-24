@@ -36,7 +36,7 @@ describe("Sort by's options", () => {
 
   it("groups Adv Stats under its plates' words in plate order", () => {
     const groups = [...new Set(sortOptions(stats, every, false).map((option) => option.group))];
-    expect(groups).toEqual(["Attack", "Creating", "Defence", "Attributes"]);
+    expect(groups).toEqual(["Attack", "Creating", "Defence", "Discipline", "Attributes"]);
     expect(new Set(sortOptions(stats, every, false).map((option) => option.value)).size).toBe(stats.columns.length - 1);
   });
 

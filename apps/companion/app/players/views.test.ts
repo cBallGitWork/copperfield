@@ -16,13 +16,13 @@ const labels = (key: "pool" | "stats", categories: typeof realCategories) =>
 describe("boardView", () => {
   it("puts the real league's scored counts on Players, with FPts, FP/G, GP and DCP (Craig, 16 Oct 2026)", () => {
     expect(labels("pool", realCategories)).toEqual([
-      "Player", "FPts", "xMins", "FP/G", "Min", "GP", "G", "AT", "CS", "DC", "DC+", "DCP", "GA", "GKP", "PKS", "YC", "RC", "PKM", "OG",
+      "Player", "FPts", "xMins", "FP/G", "Min", "GP", "G", "AT", "CS", "DC", "DC+", "DCP", "GA", "GKP", "PKS", "YC", "RC",
     ]);
   });
 
   it("puts every other figure on Adv Stats: the season's counts, the counts the league does not score, the attributes", () => {
     expect(labels("stats", realCategories)).toEqual([
-      "Player", "A", "AF", ...ADV, "Sv",
+      "Player", "A", "AF", ...ADV, "Sv", "PKM", "OG",
     ]);
     expect(boardView("stats", realCategories).columns.some((column) => column.key === "fin")).toBe(true);
   });
@@ -43,7 +43,8 @@ describe("boardView", () => {
 
   it("keeps every count on Players for a league whose scoring did not arrive", () => {
     expect(labels("pool", {})).toEqual(expect.arrayContaining(["AT", "A", "AF", "Sv", "GKP"]));
-    expect(labels("stats", {})).toEqual(["Player", ...ADV]);
+    // PKM and OG sit on Adv Stats whatever the league scores (Craig, 24 Oct 2026).
+    expect(labels("stats", {})).toEqual(["Player", ...ADV, "PKM", "OG"]);
   });
 
   it("orders Adv Stats by a column it draws", () => {

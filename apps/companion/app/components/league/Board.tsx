@@ -18,6 +18,7 @@ import {
   ROW_HEAD_CELL,
   ROW_HOVER_ON_SURFACE,
   SMALL_CAPS,
+  SORTED_CELL,
 } from "@/app/desk";
 
 // The one stats board: a pinned lead (a position tile or an index block, then a name) and a column per figure, every
@@ -150,7 +151,11 @@ export default function Board<Row>({
         const figure = column.cell(entry);
         const base = column.bare ? "" : `${compact ? FIGURE_CELL_TIGHT : FIGURE_CELL} ${column.left ? "text-left" : ""}`;
         return (
-          <td key={column.key} title={figure.title} className={`${base} ${column.rule ? RULE : ""} ${figure.className ?? ""}`}>
+          <td
+            key={column.key}
+            title={figure.title}
+            className={`${base} ${column.rule ? RULE : ""} ${column.key === order?.key ? SORTED_CELL : ""} ${figure.className ?? ""}`}
+          >
             {figure.value}
           </td>
         );

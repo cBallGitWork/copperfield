@@ -6,7 +6,7 @@ import ScrollBoard from "./ScrollBoard";
 import { Head, HeadRow, MUTE, NameHead, PLATE, SortHead, sortedAs } from "./TableHeads";
 import { CutRow, IndexCell, PointsCell } from "./TableCells";
 import { yoursInk } from "@/app/mine";
-import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, TAP_ROW, TONE, standDown } from "@/app/desk";
+import { BOARD, FIGURE, FIGURE_CELL, ROW_NAME, ROW_RULE, SORTED_CELL, TAP_ROW, TONE, standDown } from "@/app/desk";
 import { FORM_GAMES } from "@/app/config";
 
 // Every league table in the app (`cm9900/24.jpg`): the fantasy league's, the Premier League's and a cup's groups.
@@ -149,7 +149,7 @@ function Cell<K extends string>({
   line: StandingsLine;
   sort: K | undefined;
 }) {
-  const shown = shownAt(column, sort);
+  const shown = `${shownAt(column, sort)} ${column.key === sort ? SORTED_CELL : ""}`;
   const value = line.values[column.key];
   switch (column.kind) {
     case "place":
