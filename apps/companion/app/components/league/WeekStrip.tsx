@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
-import { DASH, venueMark } from "@epl/core";
+import { DASH, venueMark, type PlannerView } from "@epl/core";
 import { GW_PLATE, MINOR_LABEL, QUIET_FIGURE, ROW_FIGURE } from "@/app/desk";
 import CardBlock from "./CardBlock";
-import { fdrStep } from "../football/fdr";
+import { fixtureEase } from "../football/fixtureEase";
 import { minutesInk } from "../football/xminsInk";
 import type { FormMatch, NextMatch } from "../../players/[fantraxId]/cardWeeks";
 
-// A card's should-I-play-him strip, FPL's sheet as two blocks of one run, each opponent on that match's difficulty for
-// him: his last matches over our league's points, then the run to come over his xMins.
+// A card's should-I-play-him strip, FPL's sheet as two blocks of one run, each opponent on the planner's ease ramp for
+// his side of the ball: his last matches over our league's points, then the run to come over his xMins.
 
 export default function WeekStrip({
   form,
@@ -15,6 +15,7 @@ export default function WeekStrip({
   asOf,
   caption,
   captionAt = "form",
+  view,
 }: {
   /** Undefined while the read is out; null or empty when there is nothing to print. */
   form: readonly FormMatch[] | null | undefined;
@@ -24,6 +25,8 @@ export default function WeekStrip({
   caption?: ReactNode;
   /** League points sit over the form's league points; a projection or a gameweek's over the run to come. */
   captionAt?: "form" | "next";
+  /** Which planner board his fixtures read off (`easeView`). */
+  view: PlannerView;
 }) {
   // With no run to head, the figure falls back to the Form head rather than vanish.
   const atNext = captionAt === "next" && next.length > 0;
@@ -39,10 +42,12 @@ export default function WeekStrip({
         ) : (
           <Run
             word="FPts"
+            view={view}
             weeks={form.map((match) => ({
               key: String(match.fixtureId),
               gameweek: match.gameweek,
-              against: match.opponent === null ? null : { shortName: match.opponent, home: match.home, difficulty: match.difficulty },
+              against:
+                match.opponent === null ? null : { shortName: match.opponent, home: match.home, code: match.opponentCode },
               figure: match.points,
               ink: "text-info",
               title: `FPts, gameweek ${match.gameweek}`,
@@ -66,6 +71,7 @@ export default function WeekStrip({
           />
           <Run
             word="xMins"
+            view={view}
             weeks={next.map((match) => ({
               key: match.key,
               gameweek: match.gameweek,
@@ -87,7 +93,7 @@ const BLOCK = "cm-panel flex flex-col gap-1 px-3 py-2";
 interface Week {
   key: string;
   gameweek: number | null;
-  against: { shortName: string; home: boolean; difficulty: number | null } | null;
+  against: { shortName: string; home: boolean; code: number | null } | null;
   /** Undefined prints nothing: a double gameweek's second match shares the first's figure. */
   figure: number | null | undefined;
   ink: string;
@@ -95,7 +101,7 @@ interface Week {
 }
 
 /** A run of matches, the Profile's Next up in small: gameweek heads, the opponent on his plate, the figure under. */
-function Run({ word, weeks }: { word: string; weeks: readonly Week[] }) {
+function Run({ word, weeks, view }: { word: string; weeks: readonly Week[]; view: PlannerView }) {
   return (
     <ol className="flex items-stretch gap-1">
       {/* The figure row's word, in the lines' own heights, so the run is named on a phone. */}
@@ -107,7 +113,7 @@ function Run({ word, weeks }: { word: string; weeks: readonly Week[] }) {
         </span>
       </li>
       {weeks.map((week) => {
-        const step = fdrStep(week.against?.difficulty ?? null);
+        const step = fixtureEase(view, week.against?.code ?? null, week.against?.home ?? true);
         return (
           <li key={week.key} className="flex min-w-0 flex-1 flex-col gap-1">
             <span className={GW_PLATE}>{week.gameweek === null ? DASH : `GW${week.gameweek}`}</span>

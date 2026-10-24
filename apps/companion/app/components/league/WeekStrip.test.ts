@@ -6,19 +6,19 @@ import WeekStrip from "./WeekStrip";
 vi.mock("@/app/desk", () => import("../../desk"));
 
 const strip = (props: Partial<Parameters<typeof WeekStrip>[0]>) =>
-  renderToStaticMarkup(createElement(WeekStrip, { form: [], next: [], asOf: null, ...props }));
+  renderToStaticMarkup(createElement(WeekStrip, { form: [], next: [], asOf: null, view: "attack", ...props }));
 
 describe("a card's form and run", () => {
   const html = strip({
     form: [
-      { fixtureId: 1, gameweek: 5, opponent: "ARS", home: true, difficulty: 5, points: 6 },
-      { fixtureId: 2, gameweek: 6, opponent: "SUN", home: false, difficulty: 2, points: 0 },
-      { fixtureId: 3, gameweek: 7, opponent: "CRY", home: true, difficulty: 3, points: null },
+      { fixtureId: 1, gameweek: 5, opponent: "ARS", home: true, opponentCode: 3, points: 6 },
+      { fixtureId: 2, gameweek: 6, opponent: "SUN", home: false, opponentCode: 56, points: 0 },
+      { fixtureId: 3, gameweek: 7, opponent: "CRY", home: true, opponentCode: 31, points: null },
     ],
     next: [
-      { key: "a", gameweek: 8, against: { shortName: "LIV", home: false, difficulty: 4 }, minutes: 85 },
-      { key: "b", gameweek: 9, against: { shortName: "MCI", home: false, difficulty: 5 }, minutes: 30 },
-      { key: "c", gameweek: 9, against: { shortName: "BRE", home: true, difficulty: 3 } },
+      { key: "a", gameweek: 8, against: { shortName: "LIV", home: false, code: 14 }, minutes: 85 },
+      { key: "b", gameweek: 9, against: { shortName: "MCI", home: false, code: 43 }, minutes: 30 },
+      { key: "c", gameweek: 9, against: { shortName: "BRE", home: true, code: 94 } },
     ],
     asOf: "Thu 22 Oct",
   });
@@ -36,10 +36,11 @@ describe("a card's form and run", () => {
   });
 
   // Craig, 23 Oct 2026: "the fixture for FORM should show the green red tile too like upcoming fixtures does".
-  it("draws a played match on that match's difficulty for him, as Next does", () => {
-    expect(html).toMatch(/var\(--color-fdr-5\)"><span[^>]*>ARS</);
-    expect(html).toMatch(/var\(--color-fdr-2\)"><span[^>]*>SUN</);
-    expect(html).toMatch(/var\(--color-fdr-3\)"><span[^>]*>CRY</);
+  // Craig, 24 Oct 2026: the planner's ramp in place of FPL's five steps, past and to come.
+  it("draws a played match on the ease ramp for his side of the ball, as Next does", () => {
+    expect(html).toMatch(/var\(--color-ease-(9|10)\)"><span[^>]*>ARS</);
+    expect(html).toMatch(/var\(--color-ease-\d+\)"><span[^>]*>SUN</);
+    expect(html).not.toContain("--color-fdr-");
   });
 
   it("names each figure row in a leading column, as the Profile's run does", () => {
@@ -55,8 +56,8 @@ describe("a card's form and run", () => {
     expect(blocks[1]).toMatch(/^<section[^>]*><p[^>]*><span[^>]*>Next</);
   });
 
-  it("draws each fixture on its difficulty with his xMins inked under the week's first match", () => {
-    expect(html).toContain("var(--color-fdr-4)");
+  it("draws each fixture on the ease ramp with his xMins inked under the week's first match", () => {
+    expect(html).toMatch(/var\(--color-ease-\d+\)"><span[^>]*>LIV</);
     expect(html).toMatch(/text-info"[^>]*>85</);
     expect(html).toMatch(/text-bad"[^>]*>30</);
     expect(html.match(/title="Expected minutes/g)).toHaveLength(2);

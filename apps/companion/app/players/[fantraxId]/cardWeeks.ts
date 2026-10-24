@@ -1,4 +1,4 @@
-import { sideDifficulty, type ExpectedMinutes, type Fixture, type Opposition } from "@epl/core";
+import type { ExpectedMinutes, Opposition } from "@epl/core";
 import { played, type MatchRow } from "./matchRows";
 
 // A player card's two strips, as plain data a server action can hand over: his last few matches with what our league
@@ -14,17 +14,17 @@ export interface FormMatch {
   /** The opponent's short name; null where FPL's club is not in the snapshot. */
   opponent: string | null;
   home: boolean;
-  /** FPL's 1–5 difficulty that match had for his side; null where the fixture is not held or FPL published none. */
-  difficulty: number | null;
+  /** The opponent's FPL club code, for its ground on the ease ramp; null where FPL's club is not in the snapshot. */
+  opponentCode: number | null;
   points: number | null;
 }
 
-/** One match to come: the opponent on its difficulty, and the week's xMins under the week's first match only. */
+/** One match to come: the opponent on the ease ramp, and the week's xMins under the week's first match only. */
 export interface NextMatch {
   key: string;
   gameweek: number | null;
   /** Null where only the week is known: a card whose run could not be read. */
-  against: { shortName: string; home: boolean; difficulty: number | null } | null;
+  against: { shortName: string; home: boolean; code: number } | null;
   /** The week's xMins; undefined under a double gameweek's second match, which shares the first's figure. */
   minutes?: number | null;
 }
@@ -38,23 +38,17 @@ export interface CardWeeks {
 }
 
 /** His latest `count` matches, oldest first, off his joined log (most recent first). */
-export function formMatches(
-  rows: readonly MatchRow[],
-  /** The season's fixtures by id, for each match's difficulty. */
-  fixtures: ReadonlyMap<number, Fixture>,
-  count: number = FORM_MATCHES,
-): FormMatch[] {
+export function formMatches(rows: readonly MatchRow[], count: number = FORM_MATCHES): FormMatch[] {
   return rows
     .slice(0, count)
     .reverse()
     .map((row) => {
-      const fixture = fixtures.get(row.fpl.match.fixtureId);
       return {
         fixtureId: row.fpl.match.fixtureId,
         gameweek: row.fpl.match.gameweek,
         opponent: row.fpl.opponent?.shortName ?? null,
         home: row.fpl.match.home,
-        difficulty: fixture === undefined ? null : sideDifficulty(fixture, row.fpl.match.home),
+        opponentCode: row.fpl.opponent?.code ?? null,
         // A match he was not on is no reading, never a nought.
         points: played(row) ? (row.paid?.points ?? null) : null,
       };
@@ -100,5 +94,5 @@ export function handedWeeks(weeks: readonly ExpectedMinutes[], opposition: reado
 const against = (match: Opposition): NonNullable<NextMatch["against"]> => ({
   shortName: match.club.shortName,
   home: match.home,
-  difficulty: match.difficulty,
+  code: match.club.code,
 });

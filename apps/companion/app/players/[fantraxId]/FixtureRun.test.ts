@@ -17,7 +17,7 @@ const run = [7, 8].map(
 );
 
 const html = renderToStaticMarkup(
-  createElement(FixtureRun, { run, minutes: new Map([[7, 83], [8, 85]]), asOf: "Thu 15 Oct" }),
+  createElement(FixtureRun, { run, minutes: new Map([[7, 83], [8, 85]]), asOf: "Thu 15 Oct", view: "attack" }),
 );
 
 describe("Next up", () => {
@@ -33,6 +33,12 @@ describe("Next up", () => {
     expect(html).toMatch(/class="numeric flex min-h-7 items-baseline[^"]*"/);
     expect(html).not.toMatch(/min-h-11/);
     expect(html).toMatch(/<span class="numeric text-center font-bold text-info text-sm"[^>]*>83</);
+  });
+
+  // Craig, 24 Oct 2026: the planner's ramp in place of FPL's five steps.
+  it("draws each fixture on the ease ramp, never FPL's difficulty", () => {
+    expect(html).toContain("--color-ease-");
+    expect(html).not.toContain("--color-fdr-");
   });
 
   // The model's figure was undated, so Friday's read passed for Monday's (review M23).

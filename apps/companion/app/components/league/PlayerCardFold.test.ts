@@ -22,7 +22,7 @@ describe("the card's form, run and folded news", () => {
       stats: [],
     },
     club: undefined,
-    opposition: [{ club: { shortName: "LIV" }, home: true, difficulty: 4, fixture: upcoming } as unknown as Opposition],
+    opposition: [{ club: { shortName: "LIV", code: 14 }, home: true, difficulty: 4, fixture: upcoming } as unknown as Opposition],
     points: 41,
     minutes: [
       { gameweek: 8, minutes: 80, asOf: "Tue 20 Oct" },
@@ -85,7 +85,12 @@ describe("the card's form, run and folded news", () => {
     expect(card.slice(card.indexOf(">Next<"))).toContain(">GW9<");
   });
 
+  // Craig, 24 Oct 2026: the planner's ramp on every fixture, the identity's chip included; FPL's steps stay on the FPL tab.
+  it("draws the fixture chip on the ease ramp for his side of the ball", () => {
+    expect(render({ player: saliba() })).toMatch(/background-color:var\(--color-ease-\d+\)">LIV \(H\)</);
+  });
+
   it("puts the screen's own opponent on its week while the run is read", () => {
-    expect(render({ player: saliba() })).toMatch(/>GW8<\/span><span[^>]*var\(--color-fdr-4\)[^>]*><span class="truncate">LIV</);
+    expect(render({ player: saliba() })).toMatch(/>GW8<\/span><span[^>]*var\(--color-ease-\d+\)[^>]*><span class="truncate">LIV</);
   });
 });
