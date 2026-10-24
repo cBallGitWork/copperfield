@@ -72,7 +72,7 @@ describe("gameweekLeaders on a fixture gameweek", () => {
   it("draws five lists in order, DefCon as two: defenders, then midfielders and forwards together", () => {
     expect(boards.map((board) => [board.key, board.tab])).toEqual([
       ["points", "Points"],
-      ["defcon-D", "DefCon D"],
+      ["defcon-D", "DefCon DEF"],
       ["defcon-MF", "DefCon M/F"],
       ["xg", "xG"],
       ["xa", "xA"],
@@ -99,9 +99,9 @@ describe("gameweekLeaders on a fixture gameweek", () => {
     ]);
   });
 
-  it("heads the counts DC, a recorded figure, never DefCon points", () => {
+  it("heads the counts by who the league pays (Craig, 24 Oct 2026), never DefCon points", () => {
     const list = board("defcon-MF")!.list;
-    expect(list).toMatchObject({ title: "DefCon, midfielders and forwards", head: "DC", kind: "count" });
+    expect(list).toMatchObject({ title: "DefCon, midfielders and forwards", head: "DefCon M/F", kind: "count" });
   });
 
   it("ranks ten on FPL's xG and xA among the fourteen who played", () => {
@@ -169,7 +169,7 @@ describe("defconGroups", () => {
   });
 
   it("names the two lists for their positions", () => {
-    expect(defconGroups(scoring, ["G", "D", "M", "F"]).map((group) => defconList(group).tab)).toEqual(["DefCon D", "DefCon M/F"]);
+    expect(defconGroups(scoring, ["G", "D", "M", "F"]).map((group) => defconList(group).tab)).toEqual(["DefCon DEF", "DefCon M/F"]);
   });
 });
 

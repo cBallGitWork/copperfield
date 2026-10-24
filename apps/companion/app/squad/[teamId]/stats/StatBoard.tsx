@@ -6,6 +6,7 @@ import { type FootballPlayer, type PlayerStatLine, DASH, crestForShortName, toFp
 import { type Beside, type Counts, VIEWS, type ViewKey, measureInk, measuresFor, readingOf } from "./statViews";
 import { playerHref } from "../../../players/routes";
 import { positionsFromList } from "../../../positions";
+import type { DefConWords } from "../../../defconWords";
 import { SELECT } from "../../../components/shell/ButtonLink";
 import BoardKey from "../../../components/league/BoardKey";
 import Board from "../../../components/league/Board";
@@ -35,6 +36,7 @@ export default function StatBoard({
   statsLeague,
   statsColumns,
   defcon,
+  defconWords = {},
 }: {
   lines: readonly PlayerStatLine[];
   /** Every column the served league's read carries, which is the categories it scores. */
@@ -45,6 +47,8 @@ export default function StatBoard({
   statsColumns: readonly string[];
   /** His men's DefCon points by Fantrax id, ours; null when the league prices no DefCon, which draws no column. */
   defcon: Record<string, number | null> | null;
+  /** DefCon's counts named by who the league pays on each, by Fantrax code (`defConWords`). */
+  defconWords?: Record<string, DefConWords>;
   /** The footballer behind each Fantrax id, for his availability; absent where the bridge has not settled him. */
   footballers: Record<string, FootballPlayer>;
   /** The roster's spelling of each name, by id: Fantrax's stat rows say "Schade, Kevin". */
@@ -54,7 +58,10 @@ export default function StatBoard({
   // Null is the squad's own order, the one the Squad tab prints.
   const [sort, setSort] = useState<{ key: string; descending: boolean } | null>(null);
 
-  const measures = measuresFor(view, new Set(served), new Set(statsColumns), defcon !== null);
+  const measures = measuresFor(view, new Set(served), new Set(statsColumns), defcon !== null).map((measure) => {
+    const named = defconWords[measure.key];
+    return named === undefined ? measure : { ...measure, head: named.head, label: named.key };
+  });
   const cuts = unlessSorted(
     new Map(
       measures.map((measure) => [

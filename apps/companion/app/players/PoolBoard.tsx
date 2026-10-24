@@ -19,9 +19,10 @@ import { chosen } from "./boardChange";
 import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
 import { boardView, onPlate, type BoardName } from "./views";
 import { leagueInfo } from "../round";
+import { leagueDefConWords } from "../defconWords";
 import { figureOf } from "./figure";
 import { underFloor } from "./floors";
-import { DEFCON_POINTS, XMINS, headedFor, paidFor, ratedOn } from "./columns";
+import { DEFCON_POINTS, XMINS, headedFor, namedDefCon, paidFor, ratedOn } from "./columns";
 import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
 import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
@@ -104,7 +105,8 @@ export default async function PoolBoard({
   if (defcon !== undefined && scored.size > 0) scored.add(DEFCON_POINTS);
   // Players is the league's own few figures, so it needs no plates and no rate (Craig, 16 Oct 2026).
   const players = board === "pool";
-  const whole = boardView(board, info?.scoringCategories ?? {});
+  const split = boardView(board, info?.scoringCategories ?? {});
+  const whole = { ...split, columns: namedDefCon(split.columns, leagueDefConWords(info)) };
   const plates = players ? [] : platesFor(sortableIn(whole.columns, scored));
   const group = groupFor(query.group, plates);
   const view = onPlate(whole, group);
