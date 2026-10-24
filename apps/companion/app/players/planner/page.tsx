@@ -19,8 +19,8 @@ export const revalidate = 30;
 
 type View = PlannerView | "rankings";
 
-/** Each rankings table by what it is for: 1 the easiest, as on the Attack and Defence boards. */
-const RANKING_TITLE = { defence: "Defences, easiest to attack first", attack: "Attacks, easiest to defend first" } as const;
+/** Each rankings table, best first: 1 the best, in the ramp's red. */
+const RANKING_TITLE = { defence: "Best defences", attack: "Best attacks" } as const;
 
 const VIEWS: readonly { key: View; label: string }[] = [
   { key: "attack", label: "Attack" },
