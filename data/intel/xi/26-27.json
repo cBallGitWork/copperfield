@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 8,
-    "exportedAt": "2026-10-24T10:59:33.445Z",
+    "exportedAt": "2026-10-24T13:10:54.047Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-24T10:59:33.445Z",
+  "fetchedAt": "2026-10-24T13:10:54.047Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "AVL": {
@@ -37,11 +37,11 @@
           "prob": 1
         },
         {
-          "code": 244954,
+          "code": 184667,
           "prob": 1
         },
         {
-          "code": 184667,
+          "code": 244954,
           "prob": 1
         },
         {
@@ -168,50 +168,50 @@
       "starters": [
         {
           "code": 472739,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 451284,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 461102,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 231065,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 173878,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 168144,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 661888,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 230730,
-          "prob": 0.9
+          "code": 501459,
+          "prob": 1
         },
         {
           "code": 480457,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 241293,
-          "prob": 0.9
+          "code": 230730,
+          "prob": 1
         },
         {
-          "code": 210156,
-          "prob": 0.9
+          "code": 627221,
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
+      "lineup": "confirmed",
       "absent": [
         {
           "code": 539142,
@@ -243,61 +243,57 @@
       "starters": [
         {
           "code": 80201,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 166477,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 442299,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 232892,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 169528,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 463210,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 207189,
-          "prob": 0.9
+          "code": 551050,
+          "prob": 1
         },
         {
           "code": 477555,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 577725,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 153133,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 551466,
-          "prob": 0.9
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
+      "lineup": "confirmed",
       "absent": [
         {
-          "code": 551050,
-          "status": "QUES"
+          "code": 184349,
+          "status": "OUT"
         },
         {
           "code": 209289,
-          "status": "QUES"
-        },
-        {
-          "code": 184349,
           "status": "OUT"
         }
       ]
@@ -314,55 +310,51 @@
       "starters": [
         {
           "code": 154561,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 198869,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 226597,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 199798,
-          "prob": 0.9
-        },
-        {
-          "code": 466075,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 499169,
-          "prob": 0.9
+          "prob": 1
+        },
+        {
+          "code": 195384,
+          "prob": 1
         },
         {
           "code": 204480,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 248857,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 184029,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 232413,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 219847,
-          "prob": 0.9
+          "code": 224117,
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
+      "lineup": "confirmed",
       "absent": [
-        {
-          "code": 448104,
-          "status": "QUES"
-        },
         {
           "code": 223340,
           "status": "OUT"
@@ -389,51 +381,60 @@
       "starters": [
         {
           "code": 111234,
-          "prob": 0.9
-        },
-        {
-          "code": 154043,
-          "prob": 0.9
-        },
-        {
-          "code": 17761,
-          "prob": 0.9
-        },
-        {
-          "code": 480455,
-          "prob": 0.9
-        },
-        {
-          "code": 224967,
-          "prob": 0.9
-        },
-        {
-          "code": 609873,
-          "prob": 0.9
-        },
-        {
-          "code": 232928,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 513466,
-          "prob": 0.9
+          "prob": 1
+        },
+        {
+          "code": 17761,
+          "prob": 1
+        },
+        {
+          "code": 512462,
+          "prob": 1
+        },
+        {
+          "code": 224967,
+          "prob": 1
+        },
+        {
+          "code": 232928,
+          "prob": 1
+        },
+        {
+          "code": 609873,
+          "prob": 1
+        },
+        {
+          "code": 242898,
+          "prob": 1
         },
         {
           "code": 215413,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 114283,
-          "prob": 0.9
+          "code": 550615,
+          "prob": 1
         },
         {
           "code": 586309,
-          "prob": 0.9
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
-      "absent": []
+      "lineup": "confirmed",
+      "absent": [
+        {
+          "code": 480455,
+          "status": "OUT"
+        },
+        {
+          "code": 114283,
+          "status": "OUT"
+        }
+      ]
     },
     "CHE": {
       "formation": "3-4-2-1",
@@ -450,11 +451,11 @@
           "prob": 0.9
         },
         {
-          "code": 437499,
+          "code": 460028,
           "prob": 0.9
         },
         {
-          "code": 460028,
+          "code": 437499,
           "prob": 0.9
         },
         {
@@ -478,11 +479,11 @@
           "prob": 0.9
         },
         {
-          "code": 244851,
+          "code": 244850,
           "prob": 0.9
         },
         {
-          "code": 244850,
+          "code": 244851,
           "prob": 0.9
         },
         {
@@ -533,11 +534,11 @@
           "prob": 0.9
         },
         {
-          "code": 491279,
+          "code": 469142,
           "prob": 0.9
         },
         {
-          "code": 469142,
+          "code": 491279,
           "prob": 0.9
         },
         {
@@ -545,11 +546,11 @@
           "prob": 0.9
         },
         {
-          "code": 432422,
+          "code": 551226,
           "prob": 0.9
         },
         {
-          "code": 551226,
+          "code": 432422,
           "prob": 0.9
         },
         {
@@ -644,11 +645,11 @@
           "prob": 0.9
         },
         {
-          "code": 532605,
+          "code": 535301,
           "prob": 0.9
         },
         {
-          "code": 535301,
+          "code": 532605,
           "prob": 0.9
         },
         {
@@ -1149,11 +1150,11 @@
           "prob": 0.9
         },
         {
-          "code": 427623,
+          "code": 220362,
           "prob": 0.9
         },
         {
-          "code": 220362,
+          "code": 427623,
           "prob": 0.9
         },
         {
@@ -1161,11 +1162,11 @@
           "prob": 0.9
         },
         {
-          "code": 496221,
+          "code": 209400,
           "prob": 0.9
         },
         {
-          "code": 209400,
+          "code": 496221,
           "prob": 0.9
         },
         {
