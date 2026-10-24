@@ -101,7 +101,7 @@ describe("gameweekLeaders on a fixture gameweek", () => {
 
   it("heads the counts by who the league pays (Craig, 24 Oct 2026), never DefCon points", () => {
     const list = board("defcon-MF")!.list;
-    expect(list).toMatchObject({ title: "DefCon, midfielders and forwards", head: "DefCon M/F", kind: "count" });
+    expect(list).toMatchObject({ title: "DefCon, midfielders and forwards", head: "DC MF", kind: "count" });
   });
 
   it("ranks ten on FPL's xG and xA among the fourteen who played", () => {

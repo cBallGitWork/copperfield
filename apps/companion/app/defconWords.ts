@@ -1,5 +1,5 @@
 import { DEFCON, byPositionDepth, wordsFor, type LeagueInfo, type LeagueScoring } from "@epl/core";
-import { defconGroups } from "./matchday/leaders";
+import { defConHead, defconGroups } from "./matchday/leaders";
 import { positionsLabel } from "./positions";
 
 // DefCon's counts named by who the league pays on each (Craig, 24 Oct 2026: "DC and DC+ means nothing").
@@ -11,7 +11,8 @@ export interface DefConWords {
   key: string;
 }
 
-/** Each DefCon count the league pays at these positions, by Fantrax code: "DefCon DEF", "DefCon M/F". */
+/** Each DefCon count the league pays at these positions, by Fantrax code: "DefCon DEF" and "DefCon M/F", headed "DC D"
+ *  and "DC MF" so a phone's column stays narrow (Craig, 24 Oct 2026). */
 export function defConWords(scoring: LeagueScoring | null, positions: readonly string[]): ReadonlyMap<string, DefConWords> {
   if (scoring === null) return new Map();
   return new Map(
@@ -19,7 +20,7 @@ export function defConWords(scoring: LeagueScoring | null, positions: readonly s
       const name = `DefCon ${positionsLabel(paid) ?? ""}`.trim();
       const counted = DEFCON.find((each) => each.short === category);
       const what = counted === undefined ? undefined : wordsFor(counted).key.split(": ")[1];
-      return [category, { head: name, name, key: what === undefined ? name : `${name}: ${what}` }];
+      return [category, { head: defConHead(paid), name, key: what === undefined ? name : `${name}: ${what}` }];
     }),
   );
 }
