@@ -24,6 +24,22 @@ const paid = (over: Partial<PlayerMatch> = {}): PlayerMatch => ({
 });
 
 describe("joinMatches", () => {
+  it("files each week's DefCon counts on its match, and none on a double gameweek's two", () => {
+    const counts = new Map([[1, { DFP: 4, DFP3: 9 }], [2, { DFP: 6, DFP3: 12 }]]);
+    const rows = joinMatches(
+      [
+        { match: match(), opponent: CLUBS.get(1) },
+        { match: match({ gameweek: 2, fixtureId: 2, opponentClubId: 2 }), opponent: CLUBS.get(2) },
+        { match: match({ gameweek: 2, fixtureId: 3, opponentClubId: 3 }), opponent: CLUBS.get(3) },
+      ],
+      [],
+      CLUBS,
+      new Map(),
+      counts,
+    );
+    expect(rows.map((row) => row.defcon)).toEqual([{ DFP: 4, DFP3: 9 }, null, null]);
+  });
+
   it("joins on the opponent and the venue", () => {
     const rows = joinMatches(
       [{ match: match(), opponent: CLUBS.get(1) }],

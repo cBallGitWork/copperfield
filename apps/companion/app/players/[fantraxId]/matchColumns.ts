@@ -1,4 +1,4 @@
-import { mean, type FigureKind, type Ranked } from "@epl/core";
+import { DEFCON, mean, wordsFor, type FigureKind, type Ranked } from "@epl/core";
 import { RATING_TITLE } from "../../ratings";
 import { played, type MatchRow } from "./matchRows";
 
@@ -22,6 +22,8 @@ export interface MatchColumn {
   cyan?: boolean;
   /** Drawn for this role alone; omitted, for both. */
   role?: Role;
+  /** The DefCon count it reads, by Fantrax code, so the league's name for it can head it. */
+  defcon?: string;
 }
 
 export const POINTS: MatchColumn = { head: "FPts", title: "Points", of: (r) => r.paid?.points ?? null, cyan: true };
@@ -53,6 +55,13 @@ const ON: readonly MatchColumn[] = [
     of: (r) => sumOf(r.fpl.match.tackles, r.fpl.match.clearancesBlocksInterceptions, r.fpl.match.recoveries),
     role: "outfield",
   },
+  ...DEFCON.map((category): MatchColumn => ({
+    head: wordsFor(category).head,
+    title: wordsFor(category).key,
+    of: (r) => r.defcon?.[category.short] ?? null,
+    role: "outfield",
+    defcon: category.short,
+  })),
   { head: "Sh", title: "Shots", of: (r) => r.paid?.shots ?? null, rule: true, role: "outfield" },
   { head: "SoT", title: "Shots on target", of: (r) => r.paid?.shotsOnTarget ?? null, role: "outfield" },
   // The league counts key passes for the season only, so its column is a foot under dashes.

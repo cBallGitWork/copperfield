@@ -11,6 +11,8 @@ export interface MatchRow {
   paid: PlayerMatch | null;
   /** Our mark out of ten; null when the match was not rated or he was too brief to rate. */
   mark: number | null;
+  /** His DefCon counts that match by Fantrax code, off the stats league's week; null unread or a double gameweek. */
+  defcon?: Readonly<Record<string, number | null>> | null;
 }
 
 export function joinMatches(
@@ -19,7 +21,12 @@ export function joinMatches(
   clubs: ReadonlyMap<number, Club>,
   /** Our marks by FPL fixture id. */
   marks: ReadonlyMap<number, number | null> = new Map(),
+  /** His DefCon counts by gameweek. */
+  defcon: ReadonlyMap<number, Readonly<Record<string, number | null>>> = new Map(),
 ): MatchRow[] {
+  // A week's count is the sum of its matches, so a double gameweek's two get none.
+  const weeks = new Map<number, number>();
+  for (const row of fpl) weeks.set(row.match.gameweek, (weeks.get(row.match.gameweek) ?? 0) + 1);
   const paid = new Map<string, PlayerMatch>();
   for (const match of fantrax) paid.set(key(toFplClubCode(match.opponent), match.home), match);
 
@@ -29,6 +36,7 @@ export function joinMatches(
       fpl: row,
       paid: (opponent === undefined ? undefined : paid.get(key(opponent, row.match.home))) ?? null,
       mark: marks.get(row.match.fixtureId) ?? null,
+      defcon: weeks.get(row.match.gameweek) === 1 ? (defcon.get(row.match.gameweek) ?? null) : null,
     };
   });
 }
