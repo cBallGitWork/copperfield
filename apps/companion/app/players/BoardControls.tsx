@@ -181,11 +181,11 @@ export function Chip({
   title?: string;
   children: React.ReactNode;
 } & ({ href: string } | { query: PlayersQuery; change: BoardChange; route?: string; replace?: boolean })) {
-  const className = `group relative min-w-11 cm-bevel aria-[pressed=false]:hover:brightness-110 ${PLATE}`;
+  const className = `group relative min-w-11 cm-bevel aria-[pressed=false]:hover:brightness-110 ${PLATE} lg:pr-4`;
   const face = (
     <>
       {/* `aria-pressed` already says it to a screen reader. */}
-      <span aria-hidden className="absolute top-0.5 right-0.5 hidden text-[0.5rem] leading-none group-aria-pressed:inline">
+      <span aria-hidden className="absolute top-px right-0.5 hidden text-xs font-bold leading-none group-aria-pressed:inline">
         ✓
       </span>
       {children}
