@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { LeagueScoring } from "@epl/core";
-import { defConRenames, defConWords } from "./defconWords";
+import { defConRenames, defConWords, ownDefCon } from "./defconWords";
 
 // Craig, 24 Oct 2026: "DC and DC+ means nothing, other players wouldn't know what that means". Named by who is paid.
 const band = (from: number) => ({ bands: [{ from, to: null, points: 1, every: null }], cumulative: false });
@@ -25,5 +25,18 @@ describe("defConWords", () => {
 
   it("maps the static names to the league's, for a list built off them", () => {
     expect(defConRenames(defConWords(scoring, ["D", "M", "F"])).get("DefCon+")?.name).toBe("DefCon M/F");
+  });
+});
+
+describe("ownDefCon", () => {
+  // Craig, 24 Oct 2026: "defenders dont get def m/f, visa versa for mids/forwards".
+  it("keeps the count a man is paid on at his positions, both for a man eligible at each", () => {
+    expect([...ownDefCon(scoring.rules, ["D"])]).toEqual(["DFP"]);
+    expect([...ownDefCon(scoring.rules, ["M", "F"])]).toEqual(["DFP3"]);
+    expect([...ownDefCon(scoring.rules, ["D", "M"])]).toEqual(["DFP", "DFP3"]);
+  });
+
+  it("keeps both where the scoring is unread", () => {
+    expect(ownDefCon(null, ["D"]).size).toBe(2);
   });
 });

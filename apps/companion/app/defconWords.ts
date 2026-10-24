@@ -1,4 +1,4 @@
-import { DEFCON, byPositionDepth, wordsFor, type LeagueInfo, type LeagueScoring } from "@epl/core";
+import { DEFCON, byPositionDepth, paidAt, wordsFor, type LeagueInfo, type LeagueScoring, type ScoringRules } from "@epl/core";
 import { defConHead, defconGroups } from "./matchday/leaders";
 import { positionsLabel } from "./positions";
 
@@ -38,4 +38,10 @@ export function defConRenames(words: ReadonlyMap<string, DefConWords>): Readonly
     const named = words.get(category.short);
     return named === undefined ? [] : [[wordsFor(category).name, named] as const];
   }));
+}
+
+/** The DefCon counts a man is paid on at any of his positions, by Fantrax code: a defender's not the M/F count
+ *  (Craig, 24 Oct 2026). Every count where the scoring is unread. */
+export function ownDefCon(rules: ScoringRules | null, positions: readonly string[]): ReadonlySet<string> {
+  return new Set(DEFCON.filter((category) => rules === null || paidAt(rules, [category.short], positions)).map((each) => each.short));
 }

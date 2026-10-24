@@ -19,7 +19,7 @@ import { chosen } from "./boardChange";
 import { columnsIn, groupFor, platesFor, sortableIn } from "./groups";
 import { boardView, onPlate, type BoardName } from "./views";
 import { leagueInfo } from "../round";
-import { leagueDefConWords } from "../defconWords";
+import { leagueDefConWords, ownDefCon } from "../defconWords";
 import { figureOf } from "./figure";
 import { underFloor } from "./floors";
 import { DEFCON_POINTS, XMINS, headedFor, namedDefCon, paidFor, ratedOn } from "./columns";
@@ -36,7 +36,7 @@ import { minutesFrom } from "../xmins";
 import { divisionGrids } from "./[fantraxId]/grid";
 import { cutsFor } from "./standout";
 import { unlessSorted } from "../components/league/standout";
-import { FANTRAX_PLAYERS_PATH, playerByCode } from "@epl/core";
+import { DEFCON, FANTRAX_PLAYERS_PATH, playerByCode } from "@epl/core";
 import { footballNow, seasonFixtures } from "../football";
 import OutLink from "../components/shell/OutLink";
 import FantraxSilent from "../components/shell/FantraxSilent";
@@ -97,7 +97,10 @@ export default async function PoolBoard({
         ? {}
         : expectedStats(footballer, heldShots(code), shotCover(fixtures, footballer.clubId))),
     };
-    if (Object.keys(ours).length > 0) raw.set(id, { ...raw.get(id), ...ours });
+    // A count he is not paid on at his positions is no reading of his: a defender's M/F DefCon dashes.
+    const own = ownDefCon(info?.scoring ?? null, row.entry.eligiblePositions);
+    const unpaid = Object.fromEntries(DEFCON.filter((category) => !own.has(category.short)).map((category) => [category.short, null]));
+    if (Object.keys(ours).length + Object.keys(unpaid).length > 0) raw.set(id, { ...raw.get(id), ...ours, ...unpaid });
   }
 
   const scored = new Set(lines.flatMap((line) => Object.keys(line.stats)));
