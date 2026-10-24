@@ -45,8 +45,9 @@ describe("a man with no minutes", () => {
 
 describe("a man who played", () => {
   it("keeps his noughts", () => {
-    for (const key of ["fpts", "cs", "ga", "sv", "gkp", "yc", "dcp"])
+    for (const key of ["fpts", "cs", "ga", "sv", "gkp", "yc"])
       expect(figureCell(columnFor(key)!, row("keeper", 0), PLAYED, false, undefined).value, key).toBe("0");
+    expect(figureCell(columnFor("dcp")!, row("keeper", 0), PLAYED, false, undefined).value).toBe("0.00");
   });
 
   it("is read as before where the read carries no minutes", () => {
@@ -75,7 +76,7 @@ describe("the sort", () => {
 describe("DCP takes the board's lights", () => {
   // Craig, 21 Oct 2026, "DCP yes lose it": cyan on Players is FPts alone.
   const dcp = columnFor("dcp")!;
-  const cell = (points: number) => figureCell(dcp, {} as never, { Min: 900, [DEFCON_POINTS]: points }, false, { good: 4, best: 8 });
+  const cell = (points: number) => figureCell(dcp, {} as never, { Min: 900, [DEFCON_POINTS]: points * 10 }, false, { good: 4, best: 8 });
 
   it("lights a standout like any figure, and leaves the rest in plain ink", () => {
     expect(cell(9).className).toBe("cm-lit-best font-bold text-peak");

@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { ATTRIBUTE_ROWS, GOALS_AGAINST_OUTFIELD, type ScoringRules } from "@epl/core";
-import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, columnFor, headedFor, paidFor, ratedOn } from "./columns";
+import { COLUMNS, DEFAULT_SORT, DEFCON_POINTS, XMINS, columnFor, headedFor, paidFor, ratedOn } from "./columns";
 import { figureCell } from "./Cell";
 import { attributeStats } from "./attributeColumns";
 import { columnsIn } from "./groups";
@@ -37,7 +37,7 @@ describe("COLUMNS", () => {
   it("runs phone-first, so the figures a thumb sees first are the ones worth seeing", () => {
     // Craig, 24 Sep 2026: seven figures fit beside a name at 390, and these are the seven.
     expect(COLUMNS.filter((column) => column.group !== "attributes").map((column) => column.label)).toEqual([
-      "Player", "FPts", "FP/G", "Min", "GP", "G", "AT", "A", "AF", "xG", "npxG", "xGI", "npxGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC", "CS", "DC", "DC+", "DCP", "GA", "Sv", "GKP", "PKS", "YC", "RC", "PKM", "OG",
+      "Player", "FPts", "xMins", "FP/G", "Min", "GP", "G", "AT", "A", "AF", "xG", "npxG", "xGI", "npxGI", "Sh", "SoT", "BCM", "xA", "KP", "BCC", "Crs", "AC", "Tkl", "Int", "Blk", "Clr", "Rec", "AW", "xGC", "CS", "DC", "DC+", "DCP", "GA", "Sv", "GKP", "PKS", "YC", "RC", "PKM", "OG",
     ]);
   });
 
@@ -274,5 +274,28 @@ describe("paidFor: a position chip draws what that position scores", () => {
 
   it("draws everything where the league's prices were not read", () => {
     expect(paidFor(all, null, ["G"])).toEqual(all);
+  });
+});
+
+describe("xMins and DefCon on Players", () => {
+  const row = { stats: null } as never;
+  const column = (key: string) => columnFor(key)!;
+
+  it("draws xMins second, after FPts", () => {
+    expect(boardView("pool", {}).columns.map((c) => c.key).slice(0, 3)).toEqual(["name", "fpts", "xmins"]);
+  });
+
+  it("inks xMins apart from FPts' cyan, red for a doubt, nought included", () => {
+    const ink = (minutes: number) => figureCell(column("xmins"), row, { [XMINS]: minutes, Min: 500 }, false, undefined).className;
+    expect(ink(85)).toContain("text-mid");
+    expect(ink(85)).not.toContain("text-info");
+    expect(ink(0)).toContain("text-bad");
+  });
+
+  it("draws DefCon per 90 with the toggle off, headed /90", () => {
+    const stats = { DFP: 9, [DEFCON_POINTS]: 18, Min: 900 };
+    expect(figureOf(column("dfp"), row, stats, false)).toBeCloseTo(0.9);
+    expect(figureOf(column("dcp"), row, stats, false)).toBeCloseTo(1.8);
+    expect(headedFor([column("dcp")], null)[0].label).toBe("DCP/90");
   });
 });

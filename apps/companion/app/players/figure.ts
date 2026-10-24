@@ -1,5 +1,5 @@
 import { MINUTES } from "@epl/core";
-import { GAMES, type PoolColumn, type RawStats } from "./columns";
+import { GAMES, isRated, type PoolColumn, type RawStats } from "./columns";
 import type { PoolRow } from "./pool";
 import { per90 } from "./standout";
 
@@ -14,7 +14,7 @@ export function figureOf(
 ): number | string | null {
   if (unplayed(stats) && isReading(column)) return null;
   const value = column.value(row, stats);
-  if (!rated || column.rate !== true || typeof value !== "number") return value;
+  if (!isRated(column, rated) || typeof value !== "number") return value;
   return per90(value, stats?.[column.minutes ?? MINUTES.short] ?? null);
 }
 

@@ -21,7 +21,7 @@ import { boardView, onPlate, type BoardName } from "./views";
 import { leagueInfo } from "../round";
 import { figureOf } from "./figure";
 import { underFloor } from "./floors";
-import { DEFCON_POINTS, headedFor, paidFor, ratedOn } from "./columns";
+import { DEFCON_POINTS, XMINS, headedFor, paidFor, ratedOn } from "./columns";
 import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
 import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
@@ -30,7 +30,8 @@ import { offeredFor } from "./sortOptions";
 import { PRESSABLE, Plates } from "./BoardControls";
 import BoardLink from "./BoardLink";
 import { FootFrame } from "../components/shell/FootFrame";
-import { heldShots, intelStats, intelStatsDay, shotCover } from "../intel";
+import { heldShots, intelMinutesManifest, intelStats, intelStatsDay, shotCover } from "../intel";
+import { minutesFrom } from "../xmins";
 import { divisionGrids } from "./[fantraxId]/grid";
 import { cutsFor } from "./standout";
 import { unlessSorted } from "../components/league/standout";
@@ -79,6 +80,8 @@ export default async function PoolBoard({
 
   // Our ratings, our DefCon points and the season's figures ride in the same bag, so they sort like any count.
   const defcon = pricing?.(poolPositions(pool.rows));
+  // The export's first week is the next one to be played.
+  const minutes = minutesFrom(intelMinutesManifest.gameweek);
   for (const row of pool.rows) {
     const id = row.entry.player.fantraxId;
     const code = row.fplCode;
@@ -87,6 +90,7 @@ export default async function PoolBoard({
     const ours = {
       ...(grid === undefined ? {} : attributeStats(grid)),
       ...(defcon === undefined ? {} : { [DEFCON_POINTS]: defcon[id] }),
+      ...(code === null ? {} : { [XMINS]: minutes(code)[0]?.minutes ?? null }),
       ...seasonStats(code === null ? undefined : intelStats.get(code)),
       ...(code === null || footballer === undefined
         ? {}

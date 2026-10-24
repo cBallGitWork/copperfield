@@ -2,7 +2,7 @@ import Link from "@/app/components/shell/Link";
 import { crestForShortName, fixed, isDoubtful, toFplClubCode, DASH } from "@epl/core";
 import type { FootballPlayer } from "@epl/core";
 import type { PoolRow } from "./pool";
-import type { PoolColumn, RawStats } from "./columns";
+import { isRated, type PoolColumn, type RawStats } from "./columns";
 import { figureOf } from "./figure";
 import { underFloor } from "./floors";
 import { standoutInk, type StandoutCut } from "../components/league/standout";
@@ -96,7 +96,8 @@ export function figureCell(
   const value = figureOf(column, row, stats, rated);
   if (value === null) return { value: DASH, className: "text-faint" };
   const figure = Number(value);
-  const printed = rated && column.rate === true ? fixed(figure, "perNinety") : column.places ? fixed(figure, column.places) : String(value);
+  const printed = isRated(column, rated) ? fixed(figure, "perNinety") : column.places ? fixed(figure, column.places) : String(value);
+  if (column.ink) return { value: printed, className: `font-bold ${column.ink(figure)}` };
   // Zero is a stat, and a quiet one; so is a rate under its floor.
   if (figure === 0 || underFloor(column, stats, rated)) return { value: printed, className: "text-faint" };
   return { value: printed, className: column.cyan ? "text-info" : column.mark ? standoutInk(figure, cut, column.mark) : "" };
