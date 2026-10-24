@@ -15,8 +15,8 @@ const scoring = {
 describe("defConWords", () => {
   it("heads each count by the positions the league pays on it, off its own prices", () => {
     const words = defConWords(scoring, ["G", "D", "M", "F"]);
-    expect(words.get("DFP")).toEqual({ head: "DefCon DEF", name: "DefCon DEF", key: "DefCon DEF: tackles won, interceptions and blocks" });
-    expect(words.get("DFP3")?.head).toBe("DefCon M/F");
+    expect(words.get("DFP")).toEqual({ head: "DC D", name: "DefCon DEF", key: "DefCon DEF: tackles won, interceptions and blocks" });
+    expect(words.get("DFP3")?.head).toBe("DC MF");
   });
 
   it("renames nothing where the league's scoring is unread", () => {

@@ -46,6 +46,11 @@ export interface DefconGroup {
   positions: readonly string[];
 }
 
+/** A DefCon column's head: "DC" and the letters of the positions it is paid at ("DC MF"). */
+export function defConHead(positions: readonly string[]): string {
+  return `DC ${positions.join("")}`;
+}
+
 /** A group's DefCon list and its tab, named with the slots it counts ("DefCon M/F"): the count itself, never points. */
 export function defconList(group: DefconGroup): { tab: string; list: LeaderList } {
   const { positions } = group;
@@ -55,7 +60,7 @@ export function defconList(group: DefconGroup): { tab: string; list: LeaderList 
     list: {
       key: `defcon-${positions.join("")}`,
       title: `DefCon, ${positions.map((position) => POSITION_WORD[position] ?? position).join(" and ")}`,
-      head: tab,
+      head: defConHead(positions),
       explain: "DefCon this gameweek, counted as the league counts it at these positions",
       kind: "count",
     },
