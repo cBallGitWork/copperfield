@@ -1,5 +1,5 @@
 import { clubColoursOf, inkOn, DASH } from "@epl/core";
-import { PITCH_BOX } from "@/app/components/football/pitchBox";
+import { PITCH_BOX, toBoxY } from "@/app/components/football/pitchBox";
 import type { Club } from "@epl/core";
 import { placeLabels } from "./labels";
 import type { Placed } from "./labels";
@@ -112,6 +112,22 @@ function Side({
             <rect x="0.5" y="24" width="5.5" height="16" />
             <rect x={PITCH_BOX.width - 6} y="24" width="5.5" height="16" />
           </g>
+          {/* A name that had to sit nearer someone else is tied to its own man. */}
+          {labelled.map((man) =>
+            man.leader === null ? null : (
+              <line
+                key={man.code}
+                x1={man.x}
+                y1={toBoxY(man.y)}
+                x2={man.leader.x}
+                y2={toBoxY(man.leader.y)}
+                stroke="var(--color-cream)"
+                strokeWidth="1"
+                opacity="0.7"
+                vectorEffect="non-scaling-stroke"
+              />
+            ),
+          )}
         </svg>
 
         {/* The disc and the name are two marks: `labels.ts` moves a name to clear another man; the disc never moves. */}
