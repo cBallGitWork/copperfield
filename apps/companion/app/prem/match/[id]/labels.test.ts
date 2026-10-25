@@ -122,6 +122,40 @@ describe("placeLabels", () => {
     expect(onDiscs(placed)).toEqual([]);
   });
 
+  // Craig, 25 Oct 2026, Arsenal v Everton: "names a little glitched when dots are together/not sure where to put names".
+  it("puts every name nearer its own man than any other, or draws a line to him", () => {
+    const arsenal = [
+      man(1, "Raya", 10.3, 52.3),
+      man(2, "Gabriel", 36.0, 32.9),
+      man(3, "Konsa", 38.2, 65.2),
+      man(4, "Lewis-Skelly", 54.9, 28.2),
+      man(5, "Eze", 68.4, 23.9),
+      man(6, "Merino", 60.2, 40.6),
+      man(7, "Gyökeres", 66.2, 44.3),
+      man(8, "Rice", 61.5, 51.8),
+      man(9, "Ødegaard", 59.3, 62.2),
+      man(10, "Madueke", 63.0, 63.4),
+      man(11, "White", 53.2, 81.5),
+    ];
+    const placed = placeLabels(arsenal);
+    expect(overlapping(placed)).toBe(0);
+    expect(onDiscs(placed)).toEqual([]);
+    // How far a disc is from a label's box, the pitch's height scaled to its width as the eye reads it.
+    const gap = (disc: { x: number; y: number }, label: (typeof placed)[number]) =>
+      Math.hypot(
+        Math.max(0, Math.abs(disc.x - label.labelX) - (label.name.length * CHAR) / 2),
+        Math.max(0, Math.abs(disc.y - label.labelY) - 2.5) * 0.64,
+      );
+    const lost = placed.filter(
+      (label) => label.leader === null && placed.some((other) => other.code !== label.code && gap(other, label) < gap(label, label)),
+    );
+    expect(lost.map((label) => label.name)).toEqual([]);
+  });
+
+  it("draws no line for a name hung beside its own man", () => {
+    expect(placeLabels([man(1, "Isak", 50, 50)])[0].leader).toBeNull();
+  });
+
   it("answers nothing for nobody", () => {
     expect(placeLabels([])).toEqual([]);
   });
