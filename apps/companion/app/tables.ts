@@ -52,7 +52,7 @@ export async function scorerRows(): Promise<PaperTableRow[]> {
     detail:
       row.entry.ownerTeamId === null
         ? UNOWNED
-        : shortName(row.entry.ownerTeamId, names.get(row.entry.ownerTeamId) ?? UNOWNED),
+        : shortName(row.entry.ownerTeamId, names.get(row.entry.ownerTeamId) ?? row.entry.ownerTeamId),
     points,
   }));
 }
