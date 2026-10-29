@@ -9,7 +9,7 @@ import { PITCH_BOX } from "../../components/football/pitchBox";
 import Absent from "../../components/shell/Absent";
 import Section from "../../components/shell/Section";
 import HeatPitch from "../analysis/HeatPitch";
-import { SMALL_CAPS } from "@/app/desk";
+import { MAP_CAPTION } from "@/app/desk";
 import { attackingSpan, shotBreakdown, touchCount, type SeasonMaps as Maps } from "./maps";
 
 // His season on three pitches (Craig, 9 Oct 2026): shots and chances on the attacking half, touches on the whole.
@@ -38,7 +38,7 @@ export default function SeasonMaps({
   const label = (title: string, count: number | null, children: ReactNode, extra = "") => (
     <figure className={`flex min-w-0 flex-col gap-1 ${extra}`}>
       <figcaption
-        className={`flex items-baseline justify-between gap-2 px-2 py-1 ${SMALL_CAPS}`}
+        className={MAP_CAPTION}
         style={{ background: plate.background, color: plate.ink }}
       >
         <span className="min-w-0 truncate">{title}</span>

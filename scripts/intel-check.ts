@@ -5,6 +5,7 @@ import {
   depthIntel,
   fetchBootstrap,
   instantOf,
+  MS_PER_HOUR,
   intelFreshness,
   lineIntel,
   matchIntel,
@@ -191,7 +192,7 @@ function age(at: string | null | undefined): string {
   if (!at) return "at an unrecorded time";
   const when = instantOf(at);
   if (when === null) return "at an unreadable time";
-  const hours = Math.floor((Date.now() - when) / 3_600_000);
+  const hours = Math.floor((Date.now() - when) / MS_PER_HOUR);
   if (hours < 1) return "less than an hour ago";
   if (hours < 48) return `${hours}h ago`;
   return `${Math.floor(hours / 24)}d ago`;

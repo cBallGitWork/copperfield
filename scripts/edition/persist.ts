@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   FANTRAX_LEAGUE_ID,
@@ -12,6 +12,7 @@ import {
   type StoryKind,
   type ThreadUpdate,
 } from "@epl/core";
+import { readJsonOr } from "../absent";
 import { EDITIONS_ROOT } from "../paths";
 
 // Where a filing lands: the paper, its archive file, then the ledger, one story at a time. These
@@ -20,21 +21,10 @@ import { EDITIONS_ROOT } from "../paths";
 const paperPath = (root: string): string => join(root, "paper.json");
 const ledgerPath = (root: string): string => join(root, "ledger.json");
 
-function readJson(path: string): unknown {
-  if (!existsSync(path)) return null;
-  try {
-    return JSON.parse(readFileSync(path, "utf8")) as unknown;
-  } catch {
-    // An unreadable file is treated as absent: the writer rebuilds it from what
-    // it can prove, rather than dying on a corrupt commit forever.
-    return null;
-  }
-}
-
 /** Every story on file, all leagues — persistence must not drop another
  *  league's paper while filing this one's. */
 export function readPaperStories(root = EDITIONS_ROOT): PublishedStory[] {
-  const parsed = readJson(paperPath(root));
+  const parsed = readJsonOr<unknown>(paperPath(root), null);
   if (parsed === null || typeof parsed !== "object") return [];
   const stories = (parsed as { stories?: unknown }).stories;
   if (!Array.isArray(stories)) return [];
@@ -43,20 +33,30 @@ export function readPaperStories(root = EDITIONS_ROOT): PublishedStory[] {
 
 /** Every archived story of one kind in the served league, the latest period first. The paper keeps 24 and retires a
  *  column once its round is reported; the archive keeps them all, which is what a record is marked from. */
-export function readArchive(kind: StoryKind): PublishedStory[] {
-  const dir = join(EDITIONS_ROOT, "archive", FANTRAX_LEAGUE_ID);
+export function readArchive(kind: StoryKind, root = EDITIONS_ROOT): PublishedStory[] {
+  const dir = join(root, "archive", FANTRAX_LEAGUE_ID);
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
     .filter((name) => name.endsWith(".json"))
     .flatMap((name) => {
-      const story = normalizeStory(readJson(join(dir, name)));
+      const story = normalizeStory(archived(join(dir, name)));
       return story !== null && story.kind === kind && story.leagueId === FANTRAX_LEAGUE_ID ? [story] : [];
     })
     .sort((a, b) => b.period - a.period);
 }
 
+/** One archive file, or null for one that will not read. Nothing is rebuilt from the archive, so a torn file costs
+ *  the record one story rather than stopping every desk that reads it. */
+function archived(path: string): unknown {
+  try {
+    return readJsonOr<unknown>(path, null);
+  } catch {
+    return null;
+  }
+}
+
 export function readLedger(root = EDITIONS_ROOT): Ledger {
-  return normalizeLedger(readJson(ledgerPath(root)));
+  return normalizeLedger(readJsonOr<unknown>(ledgerPath(root), null));
 }
 
 export interface Filing {

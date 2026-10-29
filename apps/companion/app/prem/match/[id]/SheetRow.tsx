@@ -1,6 +1,6 @@
 import type { SquadPlayerDetail } from "@epl/core";
 import PositionTile from "../../../components/league/PositionTile";
-import { chipsFor } from "../../../components/league/Chips";
+import { chipsFor } from "../../../components/football/chips";
 import { MaybeCard } from "../../../components/league/PlayerCardButton";
 import SubNote from "./SubNote";
 import LeadFace from "../../../components/league/LeadFace";

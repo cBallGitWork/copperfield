@@ -3,8 +3,8 @@
 // check by eye and never a pass.
 //   node tools/ui/sweep.mjs [--base http://localhost:3000] [--team-cookie <file>]
 
-import { AUDIT_WIDTHS, BASE_URL, DESK, PHONE, connect, discover, parseArgs, teamCookie } from "./cdp.mjs";
-import { ALL_ROUTES, FRONT_PAGE, clubRoutes, playedMatchRoutes, playerRoutes, teamRoutes } from "./routes.mjs";
+import { AUDIT_SETTLE_MS, AUDIT_WIDTHS, DESK, PHONE, connect, discover, parseArgs, teamCookie } from "./cdp.mjs";
+import { ALL_ROUTES, FRONT_PAGE, clubRoutes, playedMatchRoutes, playerRoutes, teamRoutes, unplayedMatchRoute } from "./routes.mjs";
 
 /** This run's routes: the shared list plus the ids discovered below; a copy, so `routes.mjs` stays a declaration. */
 const ROUTES = [...ALL_ROUTES];
@@ -63,7 +63,6 @@ const AUDIT = `(function(){
 
 const { flags } = parseArgs(process.argv.slice(2));
 if (flags.base) process.env.BASE_URL = flags.base;
-const base = flags.base ?? BASE_URL;
 
 const cdp = await connect();
 await cdp.setCookie(teamCookie(flags));
@@ -83,16 +82,13 @@ ROUTES.push(...(await playerRoutes(cdp)));
 const played = await playedMatchRoutes(cdp);
 ROUTES.push(...played);
 
-// A match nobody has played is a different screen under the same two bars; the results list cannot produce one.
-const coming = await discover(cdp, "/prem/fixtures", 'a[href^="/prem/match/"]');
-if (coming && coming !== played[0]) ROUTES.push(coming);
+ROUTES.push(...(await unplayedMatchRoute(cdp)));
 
 let failures = 0;
 for (const width of AUDIT_WIDTHS) {
   await cdp.setViewport(width, DESK.height);
   for (const route of ROUTES) {
-    await cdp.send("Page.navigate", { url: base + route });
-    await new Promise((resolve) => setTimeout(resolve, 2200));
+    await cdp.open(route, AUDIT_SETTLE_MS);
     const { fail, blind } = JSON.parse(await cdp.js(AUDIT));
     // `documentElement` is null between documents; reading it threw the whole sweep away.
     const sideways = await cdp.js(

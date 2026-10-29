@@ -52,6 +52,12 @@ describe("mapPlayerStories", () => {
     expect(mapPlayerStories(suzuki)[0].at).toBe(1788221819000);
   });
 
+  it("reads a date no clock can hold as undated, so a card formatting it does not throw", () => {
+    // `new Date(1e17).toISOString()` is a RangeError; NaN and Infinity are not instants either.
+    const odd = section([1e17, Number.NaN, Number.POSITIVE_INFINITY].map((newsDate) => ({ content: "Odd", newsDate })));
+    expect(mapPlayerStories(odd).map((s) => s.at)).toEqual([null, null, null]);
+  });
+
   it("falls back to the headline when there is no body", () => {
     expect(mapPlayerStories(section([{ headlineNoBrief: "Out for a month" }]))[0].content).toBe(
       "Out for a month",
@@ -124,6 +130,10 @@ describe("mapPoolNews", () => {
     // A story about nobody joins nothing.
     expect(mapPoolNews(pool([{ playerNews: { content: "Somebody is injured." } }]))).toEqual({});
     expect(mapPoolNews(pool([story("", { content: "Somebody is injured." })]))).toEqual({});
+  });
+
+  it("reads a date no clock can hold as undated", () => {
+    expect(mapPoolNews(pool([story("05g2o", { content: "Odd", newsDate: 1e17 })]))["05g2o"].at).toBeNull();
   });
 
   it("drops a row with no story on it", () => {

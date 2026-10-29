@@ -1,5 +1,5 @@
 import { FANTRAX_LEAGUE_ID, fetchTeamRosterInfo, mapBenchOrder, mapLineupState, mapRosterSlots } from "@epl/core";
-import { BASE_REVALIDATE, PAGE_REVALIDATE } from "./config";
+import { BENCH_ORDER_REVALIDATE, PAGE_REVALIDATE } from "./config";
 import { leagueCache } from "./leagueCache";
 import { refusedAs } from "./refusals";
 
@@ -23,8 +23,8 @@ const read = (teamId: string, period: number): Promise<BenchRoster> =>
     (raw) => (mapLineupState(raw)?.period === period ? { order: mapBenchOrder(raw).order, slots: mapRosterSlots(raw) } : NONE),
   );
 
-/** A locked period's order, held five minutes: its manager can still renumber after the lock (Raccoons, GW6). */
-const lockedOrder = leagueCache("bench-roster", read, () => NONE, BASE_REVALIDATE);
+/** A locked period's order, held `BENCH_ORDER_REVALIDATE`. */
+const lockedOrder = leagueCache("bench-roster", read, () => NONE, BENCH_ORDER_REVALIDATE);
 
 /** The cache key of the open period's order, which a lineup save marks stale. */
 export const OPEN_ORDER_KEY = "bench-roster-open";

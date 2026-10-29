@@ -40,7 +40,6 @@ function goal(over: Partial<MatchEvent> & { minute: string; code: number }): Mat
     kind: "goal",
     seconds: 0,
     absolute: 0,
-    text: "",
     players: [over.code, null],
     ...over,
   } as MatchEvent;

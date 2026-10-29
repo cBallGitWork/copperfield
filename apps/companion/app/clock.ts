@@ -1,4 +1,5 @@
-// The app's clock: every clock read at this edge goes through it, and `REPLAY_AT` can rewind it.
+// The app's clock: every reading of the present moment goes through it, and `REPLAY_AT` can rewind it.
+// A fetch's own stamp is wall time.
 
 /** The instant the app is running at: the wall clock, or the moment `REPLAY_AT`
  *  names. */

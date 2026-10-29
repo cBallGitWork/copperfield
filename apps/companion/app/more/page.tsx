@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "@/app/components/shell/Link";
 import type { ReactNode } from "react";
-import { FANTRAX_HOME_PATH } from "@epl/core";
+import { FANTRAX_HOME_PATH, teamFullName } from "@epl/core";
 import { feedAddresses } from "../calendar.ics/locks";
 import { fantraxPage } from "../fantraxPages";
 import { BUTTON } from "../components/shell/ButtonLink";
@@ -117,7 +117,7 @@ function Row({ href, aside, children }: { href: string; aside?: string; children
 /** The signed-in reader's team name, or null for a reader with no code: one cached league read, no rosters. */
 async function readerTeamName(): Promise<string | null> {
   const [info, mine] = await Promise.all([leagueInfo(), readerTeamId()]);
-  return info?.teams.find((team) => team.teamId === mine)?.name ?? null;
+  return teamFullName(info?.teams ?? [], mine);
 }
 
 /** The lock calendar's addresses on the host this page was asked for; null with no host to name. */

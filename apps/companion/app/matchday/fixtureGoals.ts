@@ -20,8 +20,6 @@ export interface FixtureGoals {
   away: GoalNote[];
 }
 
-const GOAL_KINDS: ReadonlySet<MatchEventKind> = new Set(["goal", "penalty-goal", "own-goal"]);
-
 /** Goals by fixture id, each side oldest first; a goal whose scorer the join could not place is left out. */
 export function fixtureGoals(lines: readonly WireLine[], fixtures: readonly Fixture[]): Map<number, FixtureGoals> {
   const byCode = new Map(fixtures.map((fixture) => [fixture.code, fixture]));
@@ -30,7 +28,7 @@ export function fixtureGoals(lines: readonly WireLine[], fixtures: readonly Fixt
 
   for (const line of oldestFirst) {
     const fixture = byCode.get(line.fixtureCode);
-    if (!GOAL_KINDS.has(line.kind) || line.man === null || fixture === undefined) continue;
+    if (line.man === null || fixture === undefined) continue;
     const ownClub = line.man.player.clubId === fixture.homeClubId;
     // An own goal counts for the other side.
     const home = line.kind === "own-goal" ? !ownClub : ownClub;

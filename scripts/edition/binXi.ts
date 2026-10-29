@@ -15,7 +15,6 @@ import {
   categoryPoints,
   fetchLive,
   fetchPoolWindow,
-  fetchTransactions,
   firstScored,
   formations,
   fplWeeks,
@@ -24,12 +23,12 @@ import {
   londonDayOf,
   mapLiveStats,
   mapPlayerStats,
-  mapTransactions,
   leagueLimits,
   openingGameweek,
   periodDays,
   periodGameweeks,
   playerByCode,
+  teamFullName,
   type Assignment,
   type BinMatch,
   type Club,
@@ -93,12 +92,11 @@ export async function binXiDesk(input: {
     const day = londonDayOf(fixture.kickoff);
     return fixture.status === "finished" && day !== null && day >= window.startDate && day <= window.endDate;
   });
-  const [pool, outfield, keepers, transactions, rows, priced] = await Promise.all([
+  const [pool, outfield, keepers, rows, priced] = await Promise.all([
     fetchPoolWindow(FANTRAX_LEAGUE_ID, window, "ALL_AVAILABLE").then(mapPlayerStats),
     // The stats league costs the brief its shots and chances, never the column.
     fetchPoolWindow(STATS_LEAGUE.leagueId, window, "ALL", OUTFIELD).then(mapPlayerStats).catch(() => []),
     fetchPoolWindow(STATS_LEAGUE.leagueId, window, "ALL", KEEPER).then(mapPlayerStats).catch(() => []),
-    fetchTransactions(FANTRAX_LEAGUE_ID, "CLAIM_DROP").then((raw) => mapTransactions(raw, "CLAIM_DROP")).catch(() => []),
     Promise.all(input.gameweeks.map((gw) => (gw === snapshot.gameweek ? Promise.resolve(snapshot.stats) : fetchLive(gw).then(mapLiveStats)))),
     readScoring(),
   ]);
@@ -133,7 +131,7 @@ export async function binXiDesk(input: {
   const calendar = periodGameweeks(info.scoringPeriods, [...input.kickoffs]);
   const gameweek = openingGameweek(calendar, period) ?? snapshot.gameweek;
   const club = (clubId: number) => fullClubName(clubs.get(clubId)?.name ?? "an unknown club");
-  const teamName = (teamId: string) => info.teams.find((team) => team.teamId === teamId)?.name ?? teamId;
+  const teamName = (teamId: string) => teamFullName(info.teams, teamId) ?? teamId;
   const lastWeek = readArchive("bin-xi").find((story) => story.gameweek === gameweek - 1)?.extras?.bin?.xi ?? [];
   const sides = [...facts.scores.values()].map((score) => score.points);
   const brief = buildBinBrief({
@@ -150,7 +148,7 @@ export async function binXiDesk(input: {
       }),
     extras: (man) => extras.get(man.fantraxId) ?? { cleanSheet: false, saves: null, tacklesWon: null, interceptions: null, clearances: null },
     history: binHistory({
-      gameweek, teams: facts.teams, fielded: facts.fielded, transactions, pedigree: facts.pedigree, teamName,
+      gameweek, teams: facts.teams, fielded: facts.fielded, transactions: facts.moves, pedigree: facts.pedigree, teamName,
       gameweekOf: (each) => openingGameweek(calendar, each) ?? null,
     }),
     status: (man) => STATUS[availabilityOf(byCode.get(man.code) ?? null).state] ?? null,

@@ -1,4 +1,4 @@
-import { BANNED, americanisms, banned, overused } from "../banned";
+import { BANNED, banned, notBritish, overused } from "../banned";
 import { excerpt, faultLog, faultOnMatch, type Fault, type Report } from "../fault";
 import { LAWRO_LIMITS as LIMITS } from "../../config";
 import { mean } from "../../mean";
@@ -90,7 +90,7 @@ export function checkLawro(draft: LawroDraft, ctx: CheckContext): Fault[] {
   for (const [section, text] of prose) rules.section(section, text);
   // British football English, every desk's list (`british.ts`).
   for (const [section, text] of [["deck", draft.deck] as const, ...prose]) {
-    for (const word of americanisms(masked(text, ctx.names))) fault(section, "not British football English", "send-back", word);
+    notBritish(fault, section, masked(text, ctx.names));
   }
   columnRules(draft.intro, prose, ctx, fault);
   frameRules(prose.slice(1), sides, fault);

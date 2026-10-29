@@ -1,7 +1,7 @@
 import { DRAFT_WRITING } from "../../config";
 import { everyMan } from "./state";
 import { derbyNames } from "../../league/derbies";
-import { QUOTE_MARKS, americanisms, banned } from "../banned";
+import { QUOTE_MARKS, banned, notBritish } from "../banned";
 import { faultLog, type Fault } from "../fault";
 import { mentionAt, numbersIn, sentences, wordCount } from "../predictions/prose";
 import { SOURCE_NAMES, blanked, faultOn, strayFigures } from "../proofing";
@@ -62,7 +62,7 @@ export function checkDraft(writing: DraftWriting, contexts: readonly MatchupCont
     const plain = blanked(prose, [...everyone.flat(), ctx.state.home.side.name, ctx.state.away.side.name, ...derbyNames(ctx.derby)]);
     for (const phrase of banned(plain, [...new Set([...SOURCE_NAMES, ...REPORT_FPL])])) fault(`${n}:matchup`, "names a source", "hard", phrase);
     for (const phrase of banned(plain, DRAFT_NEVER)) fault(`${n}:matchup`, "a phrase this paper does not print", "send-back", phrase);
-    for (const phrase of americanisms(plain)) fault(`${n}:matchup`, "American, not British", "send-back", phrase);
+    notBritish(fault, `${n}:matchup`, plain);
     faultOn(fault, `${n}:matchup`, "a colon, a question or an exclamation mark", "send-back", MARKS, prose);
     faultOn(fault, `${n}:matchup`, "a named person's feeling", "send-back", FEELING, prose);
     // The brief's "Crystal Palace 3-1 Nott'm Forest" is a label; a report names the match its own way.

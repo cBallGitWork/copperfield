@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ProviderError } from "../../http/errors";
-import { htmlPage, serve, statusOnly } from "../../http/fakeFetch";
+import { htmlPage, jsonBody, serve, statusOnly } from "../../http/fakeFetch";
 import { fetchPlFixture } from "./client";
 
 describe("Premier League client", () => {
@@ -18,5 +18,12 @@ describe("Premier League client", () => {
     const error = await fetchPlFixture(1).catch((e: unknown) => e);
     expect(error).toBeInstanceOf(ProviderError);
     expect(error).toMatchObject({ code: "404", message: "Premier League /fixtures/1 → 404" });
+  });
+
+  it("refuses a JSON string or null where an object belongs", async () => {
+    serve(jsonBody("maintenance"));
+    await expect(fetchPlFixture(1)).rejects.toMatchObject({ code: "WRONG_SHAPE", kind: "malformed", message: "Premier League /fixtures/1 → a string, not an object" });
+    serve(jsonBody(null));
+    await expect(fetchPlFixture(1)).rejects.toMatchObject({ code: "WRONG_SHAPE", message: "Premier League /fixtures/1 → null, not an object" });
   });
 });

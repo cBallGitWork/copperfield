@@ -84,7 +84,6 @@ export function mapRoundGoals(
           codes.get(goal.personId) ?? null,
           codeOf(codes, goal.assistId),
         ],
-        text: "",
       });
     }
   }

@@ -1,6 +1,7 @@
 import Link from "@/app/components/shell/Link";
 import { PAPER_NAME } from "../config";
 import { STANDING_HEAD } from "../components/gazette/heads";
+import { PAPER } from "../components/shell/sections";
 
 // A 404 inside the paper, set in the paper: a story whose slug has gone answers in newsprint, not desk chrome.
 
@@ -16,7 +17,7 @@ export default function NotFound() {
       </h1>
       <span className="mt-3 block h-px w-6 bg-ink" />
       <p className="pt-3">
-        <Link href="/" className="flex min-h-11 items-center font-sans text-3xs font-semibold uppercase tracking-[0.16em] text-accent">
+        <Link href={PAPER} className="flex min-h-11 items-center font-sans text-3xs font-semibold uppercase tracking-[0.16em] text-accent">
           The front page
         </Link>
       </p>

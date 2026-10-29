@@ -9,7 +9,7 @@ import {
   contributions,
   fullFootballerName,
 } from "@epl/core";
-import { chipsFor } from "../league/Chips";
+import { chipsFor } from "./chips";
 import { ROW_NAME } from "@/app/desk";
 import PlayerName from "../shell/PlayerName";
 import PlayerPortrait from "./PlayerPortrait";

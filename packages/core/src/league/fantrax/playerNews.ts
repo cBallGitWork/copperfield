@@ -1,4 +1,11 @@
+import { finiteOrNull } from "../../untrusted";
 import { plainText } from "./markup";
+
+/** Epoch milliseconds a `Date` can hold, or null: past ±8.64e15 `toISOString()` throws a RangeError in render. */
+function instantOrNull(value: unknown): number | null {
+  const at = finiteOrNull(value);
+  return at !== null && !Number.isNaN(new Date(at).getTime()) ? at : null;
+}
 
 // `getPlayerProfile?tab=NEWS_NOTES` → every story filed about one player, each with its body, analysis and timestamp.
 
@@ -44,7 +51,7 @@ export function mapPlayerStories(raw: RawNewsSection): PlayerStory[] {
       headline: plainText(story.headlineNoBrief) ?? content,
       content,
       analysis: plainText(story.analysis),
-      at: typeof story.newsDate === "number" ? story.newsDate : null,
+      at: instantOrNull(story.newsDate),
     });
   }
   return out.sort((a, b) => (b.at ?? -Infinity) - (a.at ?? -Infinity));
@@ -84,7 +91,7 @@ export function mapPoolNews(raw: RawPoolNews): Record<string, PlayerStory> {
       headline: plainText(story.headlineNoBrief) ?? content,
       content,
       analysis: plainText(story.analysis),
-      at: typeof story.newsDate === "number" ? story.newsDate : null,
+      at: instantOrNull(story.newsDate),
     };
   }
   return latest;

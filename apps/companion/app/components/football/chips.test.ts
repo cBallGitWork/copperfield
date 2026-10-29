@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { chipsFor } from "./Chips";
+import { chipsFor } from "./chips";
 
 const quiet = { goals: 0, assists: 0, saves: 0, yellowCards: 0, redCards: 0 };
 

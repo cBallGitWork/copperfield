@@ -61,7 +61,7 @@ describe("checkDraft", () => {
     const gray = contextOf(draftSide("123", 38, eleven("h", { 5: draftMan("Gray", "M", 2, 90, 0, { club: "Spurs" }) })), draftSide("test2", 33, eleven("a")));
     const said = (text: string) => checkDraft({ ...writing(text), matchups: new Map([[1, { paragraphs: [text] }]]) }, [gray], draftBlocks([gray])).map((f) => f.check);
     const text = "Gray kept going for 123 to the end, and they won by five, the gap the page prints above.";
-    expect(said(text)).not.toContain("American, not British");
+    expect(said(text)).not.toContain("not British football English");
     expect(said(text).filter((c) => c.includes("figure"))).toEqual([]);
     expect(said(`${text} Was it enough?`)).toContain("a colon, a question or an exclamation mark");
   });
@@ -91,7 +91,7 @@ describe("checkDraft", () => {
   });
 
   it("sends back an American -ize, as every other desk does", () => {
-    expect(checks(`${clean} test2 never organized a reply.`)).toEqual(["send-back: American, not British (organized)"]);
+    expect(checks(`${clean} test2 never organized a reply.`)).toEqual(["send-back: not British football English (organized)"]);
   });
 });
 

@@ -1,8 +1,8 @@
 import { unstable_cache } from "next/cache";
 import {
   FantraxError,
-  KEEPER,
   OUTFIELD,
+  POOL_GROUPS,
   POOL_PAGE_SIZE,
   type GameweekKickoff,
   type RawPlayerStats,
@@ -10,8 +10,7 @@ import {
   fetchPoolStats,
   mapLeagueInfo,
   mapPlayerStats,
-  periodGameweeks,
-  periodOfGameweek,
+  periodHoldingGameweek,
   recordedRole,
 } from "@epl/core";
 import { FINAL_REVALIDATE, STATS_PERIODS_REVALIDATE } from "./config";
@@ -40,7 +39,7 @@ export const statsLeagueSeason = leagueCache(
   async (keys: readonly string[]): Promise<StatsLeagueLine[]> => {
     if (STATS_LEAGUE === null) return [];
     const halves = await Promise.all(
-      [OUTFIELD, KEEPER].map((group) => orRefusal(fetchPoolStats(STATS_LEAGUE, POOL_PAGE_SIZE, undefined, group))),
+      POOL_GROUPS.map((group) => orRefusal(fetchPoolStats(STATS_LEAGUE, POOL_PAGE_SIZE, undefined, group))),
     );
     return halves.flatMap((half) => kept(half, keys));
   },
@@ -109,7 +108,7 @@ export async function statsLeagueGameweek(
   const league = STATS_LEAGUE;
   if (league === null) return null;
   const periods = await orDegraded(periodsOf(league), () => null);
-  const own = periods === null ? undefined : periodOfGameweek(periodGameweeks(periods, kickoffs), gameweek);
+  const own = periods === null ? undefined : periodHoldingGameweek(periods, kickoffs, gameweek);
   const period = periods?.find((each) => each.number === own?.period);
   if (period === undefined) return null;
   return (Date.parse(period.end) < now.getTime() ? settledPeriod : openPeriod)(league, period.number, keys);

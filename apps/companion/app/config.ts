@@ -68,8 +68,8 @@ export const FORM_GAMES = 5;
 /** How many filed stories run beside the lead, at the second rank. */
 export const SHOULDER_STORIES = 2;
 
-/** How many filed stories run as headlines under the lead, shoulders included: every one while the
- *  paper is verified, then 8. With no section pages, a story past the cap is linked from nowhere. */
+/** How many filed stories run as headlines under the lead, shoulders included: every story the paper
+ *  carries (MAX_PAPER_STORIES). With no section pages, a story past the cap is linked from nowhere. */
 export const HEADLINES_SHOWN = MAX_PAPER_STORIES;
 
 /** A team to treat as the reader's own when nobody has signed in, for the test leagues, from the
@@ -107,6 +107,9 @@ export const STATS_PERIODS_REVALIDATE = 300;
 
 /** How stale one day of the scoring league's counts may be, in seconds: three reads, two of them the whole pool. */
 export const SCORING_DAY_REVALIDATE = 300;
+
+/** How stale a locked period's bench order may be, in seconds: its manager can still renumber after the lock (Raccoons, GW6). */
+export const BENCH_ORDER_REVALIDATE = 300;
 
 /** How stale one footballer's FPL match history may be, in seconds: it moves only when he plays, and asking FPL
  *  for every player viewed every 30s helped it refuse Vercel (PLATFORM_NOTES, 8 Oct 2026). */

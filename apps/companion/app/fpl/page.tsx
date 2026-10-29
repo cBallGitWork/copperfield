@@ -11,7 +11,6 @@ import FplPitch from "./FplPitch";
 import EntryForm from "./EntryForm";
 import { forgetEntry } from "./actions";
 import { myEntryId, mySide } from "./entry";
-import type { Played } from "./played";
 import { squadSubs } from "./events";
 import { LABEL, PANEL, ROW_NAME, phoneShows } from "@/app/desk";
 import OutLink from "../components/shell/OutLink";
@@ -20,7 +19,6 @@ import { titled } from "../titles";
 
 // The reader's FPL side, under FPL's scoring: this week's points, the fifteen, the mini-leagues and a way out to FPL.
 // Under a thumb the gameweek and the mini-leagues are one block at a time (`?view=leagues`); the desk shows both.
-// A man whose club has not kicked off prints a dash, not a nought: `played.ts` asks the snapshot, not the live feed.
 
 // Must match `PAGE_REVALIDATE` in the app's config: Next reads this statically, so it cannot be imported.
 export const revalidate = 30;
@@ -29,6 +27,10 @@ export const revalidate = 30;
 const FPL_TITLE = "FPL";
 
 export const metadata = titled(FPL_TITLE);
+
+/** Whether a footballer's club has kicked off this gameweek, by the fixture's status: a live-feed row proves only that
+ *  the gameweek began. A man whose club has not kicked off prints a dash, not a nought. */
+type Played = (code: number) => boolean;
 
 const VIEWS = [
   { href: FPL, label: "Gameweek", key: "gameweek" },

@@ -3,6 +3,7 @@ import type {
   PlGoal,
   PlManMatch,
   PlMatchFacts,
+  RawPlFixture,
   StreamCredit,
 } from "@epl/core";
 import {
@@ -26,6 +27,17 @@ import {
 // facts, the team sheets, the men's events and names, the injuries, the goals and the stream's
 // assist credits. The match's other reads are in `matchFeed.ts`.
 
+/** One match's detail read joined to our players by Opta code, or `absent` at any step that fails. */
+function ofTeamSheet<T>(
+  gameweek: number | null,
+  fixtureCode: number,
+  players: readonly FootballPlayer[],
+  absent: T,
+  read: (fixture: RawPlFixture, codes: Map<string, number>) => T,
+): Promise<T> {
+  return ofFixture(gameweek, fixtureCode, absent, async (round) => read(await plFixture(round), optaToCode(players)));
+}
+
 /** Where a match was played, how many watched and who refereed, off the detail read: the round read
  *  carries no officials. Null when they will not answer, and the caller falls back to `clubGround`. */
 export async function matchFacts(
@@ -41,9 +53,7 @@ export async function teamSheets(
   fixtureCode: number,
   players: readonly FootballPlayer[],
 ): Promise<ReturnType<typeof plTeamSheets>> {
-  return ofFixture(gameweek, fixtureCode, null, async (round) =>
-    plTeamSheets(await plFixture(round), optaToCode(players)),
-  );
+  return ofTeamSheet(gameweek, fixtureCode, players, null, plTeamSheets);
 }
 
 /** What each man did in one match, by FPL player code, off `teamSheets`' cached detail read.
@@ -53,9 +63,7 @@ export async function matchManEvents(
   fixtureCode: number,
   players: readonly FootballPlayer[],
 ): Promise<Map<number, PlManMatch>> {
-  return ofFixture(gameweek, fixtureCode, new Map<number, PlManMatch>(), async (round) =>
-    plManMatches(await plFixture(round), optaToCode(players)),
-  );
+  return ofTeamSheet(gameweek, fixtureCode, players, new Map<number, PlManMatch>(), plManMatches);
 }
 
 /** Every goal in the commentary with the man FPL's rules would credit, the detail read joining ids.
@@ -103,7 +111,5 @@ export async function matchGoals(
   fixtureCode: number,
   players: readonly FootballPlayer[],
 ): Promise<PlGoal[]> {
-  return ofFixture(gameweek, fixtureCode, [] as PlGoal[], async (round) =>
-    plGoals(await plFixture(round), optaToCode(players)),
-  );
+  return ofTeamSheet(gameweek, fixtureCode, players, [] as PlGoal[], plGoals);
 }

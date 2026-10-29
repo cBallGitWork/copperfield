@@ -2,8 +2,8 @@
 // the floor and never decides: the exceptions below are read out on every run, not hidden.
 //   node tools/ui/tapfit.mjs [--team-cookie <file>]
 
-import { AUDIT_WIDTHS, DESK, PHONE, connect, discover, parseArgs, teamCookie } from "./cdp.mjs";
-import { ALL_ROUTES, FRONT_PAGE, clubRoutes, playedMatchRoutes, playerRoutes, teamRoutes } from "./routes.mjs";
+import { AUDIT_SETTLE_MS, AUDIT_WIDTHS, DESK, PHONE, connect, discover, parseArgs, teamCookie } from "./cdp.mjs";
+import { ALL_ROUTES, FRONT_PAGE, clubRoutes, playedMatchRoutes, playerRoutes, teamRoutes, unplayedMatchRoute } from "./routes.mjs";
 
 /** This run's routes: the shared list plus the ids discovered below; a copy, so `routes.mjs` stays a declaration. */
 const ROUTES = [...ALL_ROUTES];
@@ -54,9 +54,7 @@ ROUTES.push(...(await clubRoutes(cdp)));
 const played = await playedMatchRoutes(cdp);
 ROUTES.push(...played);
 
-// A match nobody has played is a different screen under the same two bars; the results list cannot produce one.
-const coming = await discover(cdp, "/prem/fixtures", 'a[href^="/prem/match/"]');
-if (coming && coming !== played[0]) ROUTES.push(coming);
+ROUTES.push(...(await unplayedMatchRoute(cdp)));
 
 const article = await discover(cdp, FRONT_PAGE, 'a[href^="/paper/"]');
 if (article) ROUTES.push(article);
@@ -67,7 +65,7 @@ let failures = 0;
 for (const width of AUDIT_WIDTHS) {
   for (const route of ROUTES) {
     await cdp.setViewport(width, DESK.height);
-    await cdp.open(route, 2200);
+    await cdp.open(route, AUDIT_SETTLE_MS);
     const all = JSON.parse(await cdp.js(MEASURE));
     const phone = width < 1024;
     const floor = (item) =>

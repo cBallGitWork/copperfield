@@ -1,4 +1,4 @@
-import { LEAGUE_TIMEZONE, MS_PER_DAY, wallClockInstant } from "@epl/core";
+import { LEAGUE_TIMEZONE, MS_PER_DAY, MS_PER_HOUR, wallClockInstant } from "@epl/core";
 
 // What should have run by now and has not: the watchdog's verdict, pure, so a test can stand at any hour.
 
@@ -33,7 +33,6 @@ export interface MacRule {
   slots: readonly Slot[];
 }
 
-const HOUR = 3_600_000;
 const EVERY_DAY = [0, 1, 2, 3, 4, 5, 6];
 
 /** Every scheduled workflow but this one; a test holds the list to `.github/workflows`. Dailies get 30h: crons run late. */
@@ -78,7 +77,7 @@ export function standAt(input: string, real: number): number {
   const text = input.trim();
   if (text === "") return real;
   const ahead = /^\+(\d+)h$/.exec(text);
-  if (ahead !== null) return real + Number(ahead[1]) * HOUR;
+  if (ahead !== null) return real + Number(ahead[1]) * MS_PER_HOUR;
   const at = Date.parse(text);
   if (Number.isNaN(at)) throw new Error(`now must be an ISO instant or +<hours>h, not "${input}"`);
   return at;
@@ -137,7 +136,7 @@ function workflowFindings(rule: WorkflowRule, runs: readonly Run[], now: number)
   const last = success === undefined ? null : Date.parse(success.createdAt);
   const since = last === null ? "has no success among its recent runs" : `last succeeded at ${utc(last)}`;
   if ("within" in rule) {
-    if (last === null || last < now - rule.within * HOUR) {
+    if (last === null || last < now - rule.within * MS_PER_HOUR) {
       found.push({ source, message: `${rule.workflow} ${since}; it owes one every ${rule.within}h.` });
     }
   } else {
@@ -150,9 +149,9 @@ function workflowFindings(rule: WorkflowRule, runs: readonly Run[], now: number)
 }
 
 /** How far back a missed Mac slot is still told, beyond the latest one: a watchdog run GitHub drops or delays loses none. */
-const MAC_LOOK_BACK = 24 * HOUR;
+const MAC_LOOK_BACK = 24 * MS_PER_HOUR;
 /** watchdog.yml's cron spacing, so the runs before this one stood at `now` less a multiple of it. */
-const WATCHDOG_SPACING = 2 * HOUR;
+const WATCHDOG_SPACING = 2 * MS_PER_HOUR;
 
 /** Slots past their deadline at `at` with no report, latest deadline first; each takes the latest report since it opened. */
 function unreported(slots: readonly Opened[], reports: readonly number[], at: number): Opened[] {

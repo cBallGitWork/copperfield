@@ -1,4 +1,4 @@
-import { notJson, statusError } from "./errors";
+import { notJson, statusError, wrongShape } from "./errors";
 import { bodyText, politeFetch } from "./fetch";
 import { readJson } from "./json";
 
@@ -20,6 +20,16 @@ export async function fetchText(url: string, provider: string, what: string, ini
   const res = await politeFetch(url, init);
   if (!res.ok) throw statusError(provider, what, res.status);
   return bodyText(res, url);
+}
+
+/** The JSON container an endpoint answers with. */
+export type JsonContainer = "object" | "array";
+
+/** The body, if it is the container the endpoint answers with: anything else would reach a mapper as a TypeError. */
+export function expectContainer(body: unknown, container: JsonContainer, provider: string, what: string): unknown {
+  const arrived = body === null ? "null" : Array.isArray(body) ? "an array" : typeof body === "object" ? "an object" : `a ${typeof body}`;
+  if (arrived === `an ${container}`) return body;
+  throw wrongShape(provider, what, `${arrived}, not an ${container}`);
 }
 
 async function jsonOf(res: Response, provider: string, what: string): Promise<unknown> {

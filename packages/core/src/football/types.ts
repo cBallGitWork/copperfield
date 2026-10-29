@@ -86,20 +86,15 @@ export interface Fixture {
   awayDifficulty: number | null;
 }
 
-/** The events that move a fantasy score or change who is on the pitch; the mapper drops the rest.
- *  `disallowed-goal` is never also a `goal`, so counting goals reproduces every scoreline. */
+/** A goal's kind as the gameweek read records it (`mapRoundGoals`); the commentary's vocabulary is `MomentKind`. */
 export type MatchEventKind =
   | "goal"
   | "penalty-goal"
-  | "own-goal"
-  | "disallowed-goal"
-  | "yellow-card"
-  | "red-card"
-  | "substitution";
+  | "own-goal";
 
 /** One thing that happened in a match and its minute, from the Premier League's own feed. */
 export interface MatchEvent {
-  /** The provider's id, stable across polls: key lists on it. */
+  /** Synthesised from the fixture and the goal's clock, so stable across polls: key lists on it. */
   id: number;
   /** FPL's fixture code, read off `altIds.opta`. */
   fixtureCode: number;
@@ -111,11 +106,8 @@ export interface MatchEvent {
   seconds: number;
   /** Kickoff plus `seconds`, epoch ms: the only order across fixtures. Null without a kickoff time. */
   absolute: number | null;
-  /** Opta's sentence, verbatim: we reprint the wire, never write it. */
-  text: string;
-  /** FPL codes, POSITIONAL by kind: goal `[scorer, assister?]`, own/disallowed goal `[scorer]`, card
-   *  `[booked]`, substitution `[on, off]`. Null holds an unresolved man's place, so an assister is
-   *  never promoted to scorer. */
+  /** FPL codes, POSITIONAL: `[scorer, assister]`, the assister null when nobody assisted. Null holds
+   *  an unresolved man's place too, so an assister is never promoted to scorer. */
   players: (number | null)[];
 }
 

@@ -2577,9 +2577,8 @@ Elapsed seconds from that fixture's own kick-off, so a 12:30 match and a 17:30 o
 start at nought — a round interleaved on it alone puts the afternoon out of order. Order
 on `kickoff.millis + secs × 1000` (`MatchEvent.absolute`). It also runs **backwards**
 across the interval: `end 1` carries 2910 and the second half's `start` carries 2700.
-Every period-boundary type is outside `MatchEventKind`, so the events we keep are safely
-ordered — a test pins that, because it is a consequence of the kind list and not a
-property of the feed.
+So nothing orders on it alone: `plMoments` keeps the feed's own order and a half, and
+`mapRoundGoals` orders on `absolute`.
 
 ### The feed is append-only
 

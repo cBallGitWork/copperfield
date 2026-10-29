@@ -15,6 +15,8 @@
 // `.mjs` and under tools/ rather than scripts/, which is a typechecked tsx
 // project, matching the instrument drawer's own reasoning.
 import { readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 const D = "2026-08-29";
 const R = new URL("../..", import.meta.url).pathname;
 const read = (p) => JSON.parse(readFileSync(`${R}/${p}`, "utf8"));
@@ -138,6 +140,6 @@ const standings = RECORDS.map(([w, d, l, pf], i) => ({
 }));
 
 const out = { leagueInfo, standingsPage, standings, rosters };
-writeFileSync(`${R}/packages/core/src/league/fantrax/demoPayloads.json`, JSON.stringify(out));
+writeFileSync(join(R, "packages/core/src/league/fantrax/demoPayloads.json"), JSON.stringify(out));
 console.log("teams", TEAMS.length, "| players/squad", squads[0].length, "| pool used", playable.length);
 console.log("bytes", JSON.stringify(out).length);

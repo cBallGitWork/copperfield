@@ -43,7 +43,7 @@ const stats = [
 ];
 
 const goal = (id: number, minute: string, kind: MatchEvent["kind"], ...who: (number | null)[]): MatchEvent => ({
-  id, fixtureCode: CODE, kind, minute, seconds: 0, absolute: null, text: "", players: who,
+  id, fixtureCode: CODE, kind, minute, seconds: 0, absolute: null, players: who,
 });
 
 // United's five as the round feed has them: Opta placed the 40th and 82nd only.

@@ -4,19 +4,17 @@ import {
   type FootballSnapshot,
   type LiveTeamScore,
   clubById,
-  cupTies,
   fixturesInOrder,
-  leagueTies,
   londonDay,
   londonTime,
   onLondonDay,
-  periodPairings,
 } from "@epl/core";
 import { leagueTable } from "../standings";
 import { roundFigures, speaksForNow, takenLately } from "../football";
 import { Scores } from "./Scores";
 import type { ReadableSquads } from "../squads";
 import { liveScores } from "../scoreboard";
+import { roundTies } from "../league/fixtures/roundTies";
 import { type Marks, marksFor } from "../involvement";
 import { creditAssists, roundGoals, roundStreams, withRoundState } from "../commentary";
 import { roundAssistKinds } from "../assistKinds";
@@ -79,10 +77,7 @@ export default async function LiveScores({
   // Every tie this week: the league's pairings and our cups (Craig, 5 Sep 2026).
   const ties: CompetitionTie[] =
     drafted?.info != null && period !== null
-      ? [
-          ...leagueTies(periodPairings(drafted.info.matchups, drafted.info.teams, period)),
-          ...cupTies(drafted.info.teams.length, snapshot.gameweek),
-        ]
+      ? roundTies(drafted.info, { gameweek: snapshot.gameweek, period })
       : [];
 
   return (

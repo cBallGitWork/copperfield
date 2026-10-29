@@ -2,7 +2,7 @@
    No bevel on a repeating row, or on a `<th>`/`<td>`: collapsed borders eat its edges, so bevel a block inside.
    A plate owns its ink: a `text-*` on one lands under the contrast floor. */
 
-/* A two-pixel bevel, light top-left and dark bottom-right; 55% because at 30% the light edge is 1.34:1 and vanishes. */
+/* A two-pixel bevel, light top-left and dark bottom-right. */
 .cm-bevel,
 .cm-bevel-pressed,
 .cm-tab,
@@ -10,12 +10,21 @@
   /* The chrome face goes on the plate, so a new bevelled thing is in it without anyone remembering. */
   font-family: var(--font-chrome);
   --cm-face: var(--color-face);
-  --cm-light: color-mix(in oklch, var(--cm-face), white 55%);
-  --cm-dark: color-mix(in oklch, var(--cm-face), black 55%);
   background: var(--cm-face);
   color: var(--color-bg);
   border: 2px solid;
   border-color: var(--cm-light) var(--cm-dark) var(--cm-dark) var(--cm-light);
+}
+
+/* The two edges off whatever face a plate or panel sets; 55% because at 30% the light edge is 1.34:1 and vanishes.
+   Custom properties only, so a panel takes the edges and never the bevel. */
+.cm-bevel,
+.cm-bevel-pressed,
+.cm-tab,
+.cm-titlebar,
+.cm-panel {
+  --cm-light: color-mix(in oklch, var(--cm-face), white 55%);
+  --cm-dark: color-mix(in oklch, var(--cm-face), black 55%);
 }
 
 /* Pressed: the light and dark edges swap corners; the sorted column head is drawn this way, and a pressed toggle. */
@@ -587,8 +596,6 @@ select.cm-bevel {
 /* CM's panel: the grey is the frame only; the fill is `--color-surface`, the ground every ink was measured on. */
 .cm-panel {
   --cm-face: var(--color-face);
-  --cm-light: color-mix(in oklch, var(--cm-face), white 55%);
-  --cm-dark: color-mix(in oklch, var(--cm-face), black 55%);
   /* Translucent so the photograph shows faintly through; at 88% the ink still reads as on `--color-surface`. */
   background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   /* No `color` here: this file loads after the utilities, so it would beat a `text-*` on the same element. */
