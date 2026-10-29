@@ -85,10 +85,20 @@ export async function clubRoutes(cdp) {
   return club ? [club, ...CLUB_TABS.map((tab) => `${club}/${tab}`)] : [];
 }
 
-/** A played match's screens, discovered off the results list: a fixture id is per-season, so none is written down. */
+/** A fixtures row holding a score, whose `Scoreline` rule is its only `aria-hidden`; a row to come holds a kickoff. */
+export const PLAYED_MATCH = 'a[href^="/prem/match/"]:has(span[aria-hidden])';
+export const UNPLAYED_MATCH = 'a[href^="/prem/match/"]:not(:has(span[aria-hidden]))';
+
+/** A played match's screens, off the first round, as the bare list may open on a week not yet begun. */
 export async function playedMatchRoutes(cdp) {
-  const match = await discover(cdp, "/prem/fixtures", 'a[href^="/prem/match/"]');
+  const match = await discover(cdp, "/prem/fixtures?gw=1", PLAYED_MATCH);
   return match ? matchRoutes(match) : [];
+}
+
+/** A match nobody has played, a different screen under the same bars, off the week the list opens on. */
+export async function unplayedMatchRoute(cdp) {
+  const match = await discover(cdp, "/prem/fixtures", UNPLAYED_MATCH);
+  return match ? [match] : [];
 }
 
 /** One player's screens, discovered off the directory's BODY: a bare selector finds Find's own tab strip first. Then

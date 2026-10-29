@@ -3,7 +3,17 @@ import { readdirSync } from "node:fs";
 import { CUPS } from "@epl/core";
 import { ANALYSIS } from "../../apps/companion/app/players/routes";
 import { walkPaths } from "../../scripts/smoke/routes";
-import { ALL_ROUTES, DESK_ROUTES, clubRoutes, playerRoutes, teamRoutes } from "./routes.mjs";
+import {
+  ALL_ROUTES,
+  DESK_ROUTES,
+  PLAYED_MATCH,
+  UNPLAYED_MATCH,
+  clubRoutes,
+  playedMatchRoutes,
+  playerRoutes,
+  teamRoutes,
+  unplayedMatchRoute,
+} from "./routes.mjs";
 
 // The instruments' route list, and the routes they discover, against a browser written here: no Chrome.
 
@@ -56,5 +66,14 @@ describe("the instruments' routes", () => {
 
   it("walk no team or club when none is linked", async () => {
     expect([...(await teamRoutes(browser({}))), ...(await clubRoutes(browser({})))]).toEqual([]);
+  });
+
+  it("measure a match nobody has played as well as one that was, off the rows that hold a score and those that do not", async () => {
+    const cdp = browser({
+      "/prem/fixtures?gw=1": { [PLAYED_MATCH]: "/prem/match/1" },
+      "/prem/fixtures": { [UNPLAYED_MATCH]: "/prem/match/2" },
+    });
+    expect((await playedMatchRoutes(cdp))[0]).toBe("/prem/match/1");
+    expect(await unplayedMatchRoute(cdp)).toEqual(["/prem/match/2"]);
   });
 });
