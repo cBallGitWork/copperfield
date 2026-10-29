@@ -1,11 +1,10 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { MS_PER_HOUR } from "@epl/core";
 import { MAC_RULES, type Run, WATCHDOG_RULE, WORKFLOW_RULES, type WorkflowRule, findings, standAt } from "./decide";
 
 // The watchdog's verdict at chosen instants, over runs written by hand.
-
-const HOUR = 3_600_000;
 
 function run(createdAt: string, conclusion = "success", displayTitle = "a run"): Run {
   return { displayTitle, status: "completed", conclusion, createdAt };
@@ -136,7 +135,7 @@ describe("every presser slot, at the watchdog's two-hourly runs", () => {
   const starts = Object.entries(weeks).flatMap(([day, times]) => times.map((time) => `${day}T${time}:00Z`));
   // A report five minutes into each slot, this week and last, but for one slot this week.
   const reportsBut = (missed: string | null) =>
-    [0, 7].flatMap((back) => starts.filter((at) => back > 0 || at !== missed).map((at) => run(new Date(Date.parse(at) + 5 * 60_000 - back * 24 * HOUR).toISOString(), "success", "alert intel-pressers ok")));
+    [0, 7].flatMap((back) => starts.filter((at) => back > 0 || at !== missed).map((at) => run(new Date(Date.parse(at) + 5 * 60_000 - back * 24 * MS_PER_HOUR).toISOString(), "success", "alert intel-pressers ok")));
   const pressers = MAC_RULES.filter((rule) => rule.source === "intel-pressers");
   const watchdogRuns = (day: string) => Array.from({ length: 9 }, (_, i) => Date.parse(`${day}T${String(6 + 2 * i).padStart(2, "0")}:50:00Z`));
   const raised = (reports: Run[], at: number) => findings([], pressers, new Map([["alert.yml", reports]]), at);
@@ -184,7 +183,7 @@ describe("standAt", () => {
 
   it("reads now, an offset in hours, or an instant", () => {
     expect(standAt("", real)).toBe(real);
-    expect(standAt("+31h", real)).toBe(real + 31 * HOUR);
+    expect(standAt("+31h", real)).toBe(real + 31 * MS_PER_HOUR);
     expect(standAt("2026-10-08T17:05:00Z", real)).toBe(Date.parse("2026-10-08T17:05:00Z"));
   });
 

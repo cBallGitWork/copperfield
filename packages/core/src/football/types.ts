@@ -94,7 +94,7 @@ export type MatchEventKind =
 
 /** One thing that happened in a match and its minute, from the Premier League's own feed. */
 export interface MatchEvent {
-  /** The provider's id, stable across polls: key lists on it. */
+  /** Synthesised from the fixture and the goal's clock, so stable across polls: key lists on it. */
   id: number;
   /** FPL's fixture code, read off `altIds.opta`. */
   fixtureCode: number;
@@ -106,8 +106,6 @@ export interface MatchEvent {
   seconds: number;
   /** Kickoff plus `seconds`, epoch ms: the only order across fixtures. Null without a kickoff time. */
   absolute: number | null;
-  /** Opta's sentence, verbatim: we reprint the wire, never write it. */
-  text: string;
   /** FPL codes, POSITIONAL: `[scorer, assister]`, the assister null when nobody assisted. Null holds
    *  an unresolved man's place too, so an assister is never promoted to scorer. */
   players: (number | null)[];

@@ -133,6 +133,9 @@ export const SECTION_BAR =
 /** A section's head row: title left, aside right, ruled under. */
 export const SECTION_HEAD = "flex items-baseline justify-between gap-3 border-b border-line pb-1";
 
+/** A map's caption bar on its club or team plate: what it maps left, its count right. The plate is the caller's. */
+export const MAP_CAPTION = `flex items-baseline justify-between gap-2 px-2 py-1 ${SMALL_CAPS}`;
+
 /** The 24px every plate is cut to, ground and padding the caller's: a table's column head, a block's or a card's strip. */
 export const PLATE_FRAME = "flex h-6 items-center";
 
