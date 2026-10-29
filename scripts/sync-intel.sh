@@ -19,7 +19,8 @@ MAIN=${EPL_DRAFT:-$HOME/epl-draft-1}
 WT=${INTEL_WORKTREE:-$HOME/epl-draft-intel}
 SISTER=${SISTER_REPO:-$HOME/ai-carling-premiership}
 export FFS_SCRAPE_DIR=${FFS_SCRAPE_DIR:-$SISTER/data/raw/fantasy_football_scout/daily}
-REPO=cBallGitWork/copperfield
+# owner/name off the main folder's origin, ssh or https.
+REPO=${INTEL_REPO:-$(git -C "$MAIN" remote get-url origin 2>/dev/null | sed -E 's#^.*github\.com[:/]##; s#\.git$##' || true)}
 LOG=${INTEL_LOG:-$HOME/Library/Logs/epl-draft-intel.log}
 LOCK=$HOME/epl-draft-intel.lock
 OUT=$(mktemp -d)
@@ -41,10 +42,9 @@ alert() {
   notify "alert $1 $2 never reached GitHub"
   return 1
 }
-# A soft alert has its own source, so this run's ok cannot close it; ok is sent only when its issue is open.
-OPEN_ALERTS=${OPEN_ALERTS-$(gh issue list -R "$REPO" --label alert --state open --json title --jq '.[].title' 2>/dev/null || true)}
+# A soft alert has its own source, so this run's ok cannot close it; ok is sent only when its issue is open or unknown.
 soft() {
-  if [ "$2" = ok ] && ! grep -qx "alert: $1" <<<"$OPEN_ALERTS"; then return 0; fi
+  if [ "$2" = ok ] && [ "$ALERTS_UNKNOWN" = 0 ] && ! grep -qx "alert: $1" <<<"$OPEN_ALERTS"; then return 0; fi
   [ "$2" = fail ] && log "ALERT $1: $3"
   alert "$@" || true
 }
@@ -76,6 +76,14 @@ retry() {
   rm -f "$err"
   return 1
 }
+# The open alerts' titles; when GitHub never answers the list is unknown, and nothing is read as closed.
+ALERTS_UNKNOWN=0
+if [ -z "${OPEN_ALERTS+set}" ]; then
+  OPEN_ALERTS=$(retry "gh issue list" gh issue list -R "$REPO" --label alert --state open --json title --jq '.[].title') \
+    || { OPEN_ALERTS=""; ALERTS_UNKNOWN=1; }
+fi
+# The weekly's later slots run while its alert, a failure or a stale sweep, is open, or while none can tell.
+catch_up_due() { [ "$ALERTS_UNKNOWN" = 1 ] || grep -qxE "alert: intel-$MODE(-stale)?" <<<"$OPEN_ALERTS"; }
 # The branch's PR, opened once: a create whose answer was lost (a reset connection, 18 Oct) may have opened it already.
 open_pr() {
   gh pr view -R "$REPO" "$BRANCH" --json url --jq .url 2>/dev/null && return 0
@@ -96,8 +104,7 @@ case "$MODE" in
 esac
 [ -n "$GH_TOKEN" ] || fail "no cBallGitWork token from gh"
 
-# The weekly's later slots run only while its morning's alert, a failure or a stale sweep, is still open.
-if [ "$CATCH_UP" = 1 ] && ! grep -qxE "alert: intel-$MODE(-stale)?" <<<"$OPEN_ALERTS"; then
+if [ "$CATCH_UP" = 1 ] && ! catch_up_due; then
   quiet "catch-up: no intel-$MODE alert open"
 fi
 
@@ -208,7 +215,9 @@ fi
 CHANGED=$(git status --porcelain data/intel | awk '{print $2}' | tr '\n' ' ')
 [ -n "$CHANGED" ] || finish "nothing changed"
 log "changed: $CHANGED"
-npm run -s intel-check >>"$LOG" 2>&1 || true
+if npm run -s intel-check >"$OUT/intel-check.log" 2>&1; then soft intel-check-sync ok "intel-check passed"
+else soft intel-check-sync fail "intel-check refused: $(tail -1 "$OUT/intel-check.log")"; fi
+cat "$OUT/intel-check.log" >>"$LOG"
 [ "${DRY_RUN:-0}" = 1 ] && finish "dry run: stopping before the push"
 
 # CI's verify runs the four gates; a red one leaves the PR open and alerts.
