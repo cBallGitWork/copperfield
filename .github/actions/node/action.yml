@@ -1,5 +1,5 @@
 name: Node
-description: Node 22 with the npm cache, then npm ci. Every workflow's setup but the watchdog's, which keeps its own.
+description: Node 22 with the npm cache, then npm ci. Every workflow's setup but the watchdog's and capture-status's watchdog job, its witness, which keep their own so the witness rests on no shared parts.
 runs:
   using: composite
   steps:
