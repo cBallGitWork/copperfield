@@ -123,18 +123,14 @@ export {
   fetchTransactions,
 } from "./fantrax/client";
 export { mapLeagueInfo, mapPlayerPool } from "./fantrax/map";
-export { fetchLineupState, sendBenchOrder, sendLineup } from "./fantrax/lineupClient";
+export { fantraxLineupPort, fetchLineupState, sendBenchOrder } from "./fantrax/lineupClient";
+export { writeLineup } from "./fantrax/lineupSave";
+export type { LineupPort, LineupSave, OnStep, PlannedLineup, SaveRecord, SaveStep } from "./fantrax/lineupSave";
 export {
   benchOrderMap,
-  benchToWrite,
-  changesLineup,
-  fieldMapFor,
-  lineupChanges,
   mapLineupState,
   numberedOrder,
   readBenchAnswer,
-  readLineupAnswer,
-  stillHeld,
 } from "./fantrax/lineupWrite";
 export type { WriteAnswer } from "./fantrax/lineupWrite";
 export { mapTeamRosters } from "./fantrax/rosters";
