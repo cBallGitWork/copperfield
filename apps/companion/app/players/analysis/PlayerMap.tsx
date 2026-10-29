@@ -2,7 +2,7 @@ import type { Club, Touch } from "@epl/core";
 import { clubColoursOf, plateOn } from "@epl/core";
 import HeatPitch from "./HeatPitch";
 import { touchCount } from "../[fantraxId]/maps";
-import { SMALL_CAPS } from "@/app/desk";
+import { MAP_CAPTION } from "@/app/desk";
 
 // One man's pitch, shaded where he played, under a strip in his club's colours: a pitch each, the same way round.
 
@@ -30,7 +30,7 @@ export default function PlayerMap({
   return (
     <figure className="flex min-w-0 flex-col gap-1">
       <figcaption
-        className={`flex items-baseline justify-between gap-2 px-2 py-1 ${SMALL_CAPS}`}
+        className={MAP_CAPTION}
         style={{ background: plate.background, color: plate.ink }}
       >
         <span className="min-w-0 truncate">{name}</span>

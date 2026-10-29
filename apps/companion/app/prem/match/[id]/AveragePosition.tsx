@@ -4,7 +4,7 @@ import { Pitch } from "@/app/components/football/ShotPitch";
 import type { Club } from "@epl/core";
 import { placeLabels } from "./labels";
 import type { Placed } from "./labels";
-import { SECTION_BAR, SMALL_CAPS } from "@/app/desk";
+import { MAP_CAPTION, SECTION_BAR } from "@/app/desk";
 
 // Where each eleven played: every starter at SofaScore's average position, one pitch per side.
 // Starters only, as a substitute's centre can come off two touches; names are HTML so they do not scale.
@@ -69,7 +69,7 @@ function Side({
     <div className="flex flex-col">
       {/* The club's plate over its grass, and its formation at the right as `cm9900/19.jpg` sets it. */}
       <div
-        className={`flex items-baseline justify-between gap-2 px-2 py-1 ${SMALL_CAPS}`}
+        className={MAP_CAPTION}
         style={{ background: colours.primary, color: ink }}
       >
         <span className="min-w-0 truncate">{club?.shortName ?? DASH}</span>

@@ -15,7 +15,7 @@ const fixture = (over: Partial<Fixture> & { id: number }): Fixture => ({
 
 const goal = (over: Partial<MatchEvent> = {}): MatchEvent => ({
   id: 1, fixtureCode: 100, kind: "goal", minute: "10", seconds: 600,
-  absolute: KICKOFF + 10 * 60_000, text: "", players: [10, null], ...over,
+  absolute: KICKOFF + 10 * 60_000, players: [10, null], ...over,
 });
 
 const snap = (fixtures: Fixture[]): FootballSnapshot =>
