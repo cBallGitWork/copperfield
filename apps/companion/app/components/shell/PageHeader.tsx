@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import BackPlate from "./BackPlate";
+import BackBar from "./BackBar";
 
 // How a desk screen opens: CM's title bar, and the `sub` line under it, never in it (a CM bar holds only a title).
 // The matchday screen keeps its own header on purpose: baseline-aligned with a live badge, a different design.
@@ -21,7 +21,8 @@ export default function PageHeader({
   /** The bar's plate when the subject has a colour of its own, a fantasy team; absent leaves the chrome blue.
    *  Inline, because a colour picked per team at runtime has no literal token name for Tailwind to emit. */
   plate?: { background: string; ink: string };
-  /** Where the phone's back plate goes with no history; absent draws none, as on a tab's own page. */
+  /** Where the phone's back plate goes with no history; absent draws none, as on a tab's own page. A screen with a
+   *  way back locks its bar to the top of a phone, so the way back stays under the thumb down a long page. */
   back?: string;
   children?: React.ReactNode;
 }) {
@@ -59,19 +60,24 @@ export default function PageHeader({
     </div>
   );
 
+  if (back === undefined)
+    return (
+      <header>
+        {bar}
+        <Sub>{sub}</Sub>
+        {children}
+      </header>
+    );
+  // `BackBar` pins in the page's own column, not a header's, which ends with the header and would carry the bar away.
   return (
-    <header>
-      {back === undefined ? (
-        bar
-      ) : (
-        <div className="flex items-stretch">
-          <BackPlate fallback={back} />
-          <div className="min-w-0 flex-1">{bar}</div>
-        </div>
-      )}
+    <>
+      <BackBar back={back}>
+        <div className="min-w-0 flex-1">{bar}</div>
+      </BackBar>
+      {/* The bar alone locks: the line under it scrolls away with the page. */}
       <Sub>{sub}</Sub>
       {children}
-    </header>
+    </>
   );
 }
 

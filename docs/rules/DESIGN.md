@@ -246,6 +246,16 @@ six bevelled plates are twelve bevel edges across a 390px phone, and a bevelled
 foot row under a bevelled tab strip is two identical objects bracketing a screen
 with nothing saying which is the section and which is the view.
 
+**On a phone a screen with a way back locks its bar, and a subject's tabs lock at the foot** (29 Oct 2026: Craig,
+*"the top title bar of a section (that has back button) should be locked, and footer too"*). The bar and its back
+plate stick under the status bar (`PINNED_TOP`), and so do the match bar and a head-to-head's scoreline, which are
+those screens' title bars; the line under a bar scrolls away. A section's tab strip (League, Prem, Players:
+`SectionShell`) locks the same way, its title bar scrolling off above it (Craig, 29 Oct: *"lock these blue bars
+too"*), and the League's waiver banner under it does not. A team's, club's or player's tab strip moves from under the bar to
+docked above the rail (`PlateShell`), as a match's foot row already was. Each publishes its height through
+`shell/Pinned`, so whatever else pins to that edge (a board's copied head, the shot map, the gauge, `SaveBar`) reads
+`--pin-top` or `--pin-foot` and stacks beside it. The desk keeps both in the flow.
+
 **A table on a phone has two shapes, and which one it is is decided by its LAST
 column.** A table whose last column is what the table is FOR — `Pts` on a
 standings table — shows that column at 390 without a sideways scroll, and drops

@@ -50,11 +50,17 @@
   --page-foot: calc(3.5rem + 1rem);
   /* What the fixed thumb rail covers at the foot of the screen, inset included: where anything docked above it sits. */
   --thumbrail: calc(3.5rem + var(--safe-bottom));
+  /* Where a pinned thing sticks on a phone: under a screen's locked title bar, above its locked tabs (`shell/Pinned`). */
+  --pin-top: calc(var(--safe-top) + var(--top-bar, 0px));
+  --pin-foot: calc(var(--thumbrail) + var(--foot-bar, 0px));
 }
 
 @media (min-width: 64rem) {
   :root {
     --page-foot: 2rem;
+    /* The desk keeps its bars in the flow, so nothing pins beside them. */
+    --pin-top: var(--safe-top);
+    --pin-foot: 0px;
   }
 }
 

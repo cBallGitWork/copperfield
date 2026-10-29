@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import PhotoGround from "../../../components/football/PhotoGround";
 import { FootFrame } from "../../../components/shell/FootFrame";
-import BackPlate from "../../../components/shell/BackPlate";
+import BackBar from "../../../components/shell/BackBar";
 import { premFixturesHref } from "../../routes";
 import MatchBar from "./MatchBar";
 import MatchTabs from "./MatchTabs";
@@ -31,9 +31,8 @@ export default async function MatchShell({
     <FootFrame foot={foot}>
       {/* The HOME club's ground: a fixture id says nothing about who is at home, so this is where it is known. */}
       <PhotoGround subject={home?.shortName ?? null} />
-      <div className="flex items-stretch">
-        {/* Opened cold, back is the round it is in, not the table. */}
-        <BackPlate fallback={premFixturesHref(fixture.gameweek)} />
+      {/* Opened cold, back is the round it is in, not the table. */}
+      <BackBar back={premFixturesHref(fixture.gameweek)}>
         <div className="min-w-0 flex-1">
           {/* `v` until a ball is kicked; FPL writes a running score from the first goal. */}
           <MatchBar
@@ -43,7 +42,7 @@ export default async function MatchShell({
             awayScore={fixture.status === "upcoming" ? null : fixture.awayScore}
           />
         </div>
-      </div>
+      </BackBar>
       <MatchTabs id={fixture.id} current={current} dim={video === null ? ["highlights"] : []} />
       {/* A panel ends where its content does, and blocks keep a gap between them. */}
       <div className="flex flex-col gap-2">{children}</div>

@@ -11,10 +11,9 @@ export function pinHead(board: HTMLElement, box: HTMLElement, strip: HTMLElement
   const copy = document.createElement("table");
   strip.replaceChildren(copy);
 
-  // The strip sticks below the installed app's status bar, so the real head counts as gone once it passes that.
-  let inset = 0;
+  // The strip sticks under the status bar and any locked title bar, which can mount or wrap after this one: read per place.
+  const inset = () => parseFloat(getComputedStyle(strip.parentElement ?? strip).top) || 0;
   const size = () => {
-    inset = parseFloat(getComputedStyle(strip.parentElement ?? strip).top) || 0;
     copy.className = table.className;
     copy.style.width = `${table.getBoundingClientRect().width}px`;
     copy.style.tableLayout = "fixed";
@@ -40,7 +39,8 @@ export function pinHead(board: HTMLElement, box: HTMLElement, strip: HTMLElement
     queued = 0;
     const top = head.getBoundingClientRect();
     const end = table.getBoundingClientRect().bottom;
-    board.toggleAttribute("data-headless", top.bottom < inset && end > inset + top.height * 2);
+    const below = inset();
+    board.toggleAttribute("data-headless", top.bottom < below && end > below + top.height * 2);
     strip.scrollLeft = box.scrollLeft;
   };
   const queue = () => {

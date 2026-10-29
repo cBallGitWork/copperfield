@@ -389,9 +389,9 @@ select.cm-bevel {
   display: none;
 }
 
-/* Where a pinned head sticks: under the installed app's clock, not behind it. Set while hidden, as `stickyHead` reads it. */
+/* Where a pinned head sticks: under the clock and any locked title bar. Set while hidden, as `stickyHead` reads it. */
 .cm-board-head {
-  top: var(--safe-top);
+  top: var(--pin-top);
 }
 
 @media (width < 64rem) {
@@ -412,7 +412,7 @@ select.cm-bevel {
   .cm-board[data-wide] .cm-board-gauge {
     display: block;
     position: sticky;
-    bottom: calc(var(--thumbrail) + var(--foot-dock, 0px));
+    bottom: var(--pin-foot);
     z-index: 20;
     height: 0.375rem;
     background: var(--color-bg);

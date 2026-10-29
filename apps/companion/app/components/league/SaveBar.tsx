@@ -29,7 +29,7 @@ export default function SaveBar({
   const ready = dirty && legal && !saving;
 
   return (
-    <div className="bleed sticky bottom-[var(--thumbrail)] z-20 flex flex-col gap-1 border-t border-line bg-bg px-[var(--page-gutter)] lg:bottom-0 lg:py-1">
+    <div className="bleed sticky bottom-[var(--pin-foot)] z-20 flex flex-col gap-1 border-t border-line bg-bg px-[var(--page-gutter)] lg:bottom-0 lg:py-1">
       {answer?.ok === false ? (
         <ul className="flex flex-col gap-1 pt-1.5">
           {answer.messages.map((message) => (

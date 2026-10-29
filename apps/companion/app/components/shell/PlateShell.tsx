@@ -1,10 +1,12 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { ClubColours } from "@epl/core";
 import { plateOn } from "@epl/core";
+import { SCREEN_TALL } from "./FootFrame";
 import PageHeader from "./PageHeader";
+import Pinned from "./Pinned";
 
-// The frame a screen about a subject wears (a team, a club, a player): his colour on the bar, his tabs
-// under it, and every table inside in his colours. `plateOn` picks the ink that survives the fill.
+// The frame a screen about a subject wears (a team, a club, a player): his colour on the bar, his tabs under it on the
+// desk and locked at the foot of a phone, and every table inside in his colours. `plateOn` picks the ink that survives the fill.
 
 export default function PlateShell({
   colours,
@@ -26,13 +28,14 @@ export default function PlateShell({
   children: ReactNode;
 }) {
   const plate = plateOn(colours);
-  const header = <PageHeader title={title} plate={plate} back={back} />;
+  // No back plate on a bar a phone never draws: a hidden one would still lock, and claim the top's room.
+  const header = <PageHeader title={title} plate={plate} back={phoneBar ? back : undefined} />;
 
   return (
     // `--cm-index` re-points every table's index block at the subject's colour; `cm-index-scoped` stops
     // that block greying, which on a purple chip read 3.89:1 (`desk.css`).
     <div
-      className="cm-index-scoped flex flex-col gap-2"
+      className={`cm-index-scoped flex flex-col gap-2 ${SCREEN_TALL}`}
       style={
         {
           "--cm-index": plate.background,
@@ -42,8 +45,14 @@ export default function PlateShell({
     >
       {/* Off a phone's screen, never out of its outline: the bar holds the page's h1. */}
       {phoneBar ? header : <div className="max-lg:sr-only">{header}</div>}
-      {tabs}
+      {/* Last on a phone, docked above the thumb rail; the foot of a short screen, as `FootFrame`'s foot is. */}
+      <Pinned edge="foot" className={PINNED_FOOT}>
+        {tabs}
+      </Pinned>
       {children}
     </div>
   );
 }
+
+/** The tabs' place on a phone: after the body, held above the thumb rail; opaque so the page scrolls under them. */
+const PINNED_FOOT = "max-lg:order-last max-lg:sticky max-lg:bottom-[var(--thumbrail)] max-lg:z-20 max-lg:mt-auto max-lg:bg-bg";

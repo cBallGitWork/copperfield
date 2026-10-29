@@ -24,6 +24,11 @@ const board = (a: MatchupSide, b: MatchupSide) =>
   renderToStaticMarkup(createElement(MatchupBoard, { team: a, opponent: b, view: "lineups", tabs: [{ key: "lineups", label: "Lineups", href: "#" }], body: null, back: "/league/fixtures?gw=6" }));
 
 describe("the head-to-head's scoreline on a phone", () => {
+  // Craig, 29 Oct 2026: the scoreline is this screen's title bar, so it stays put with its way back.
+  it("locks to the top, back plate and all", () => {
+    expect(board(side("a", "A", 1), side("b", "B", 0))).toMatch(/^<div[^>]*><div class="max-lg:sticky [^"]*"><header class="flex items-stretch"><button[^>]*aria-label="Back"/);
+  });
+
   // Craig, 11 Oct 2026: "THE TRUF…" and "COWTHE…" at 390.
   it("names each side by the league's short name under a thumb, and in full on the desk", () => {
     const html = board(side("aekx2715mtzgcl3f", "The Truffle Pigs", 15), side("7z8fy0pnmuogbtdw", "Cowthenbeef", 12));
