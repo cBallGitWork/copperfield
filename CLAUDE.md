@@ -120,8 +120,8 @@ The binding set is `docs/rules/CODE_RULES.md`. The ones that bite most here:
 - `next start` renames itself `next-server`, so `pkill -f "next start"` leaves it running and the
   next smoke tests the old build. Stop yours by port, `kill $(lsof -ti tcp:<port> -sTCP:LISTEN)`;
   never `pkill -f next-server`, which kills every session's and worktree's server. Check the
-  listener started after the build, and leave none running: `guard_bash.sh` asks before every
-  build while any `next-server` is up on the Mac.
+  listener started after the build, and leave none running: `guard_bash.sh` asks before a
+  build or server while a `next build` or `next-server` runs with its cwd in this tree.
 - Next 16 locks per directory: never start a second dev server. Turbopack in a long-lived
   `next dev` never sees a new file; restart it.
 - `.next/types` from another branch's build makes typecheck name routes that are not there. Delete

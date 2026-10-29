@@ -41,7 +41,7 @@ if printf '%s' "$cmd" | grep -qE 'git[[:space:]]+merge([[:space:]]|$)' \
 fi
 
 # 3) git push --force in any spelling.
-if printf '%s' "$cmd" | grep -qE 'git[[:space:]]+push[^;&|]*(--force[^[:space:]]*|-f)([[:space:]]|$)'; then
+if printf '%s' "$cmd" | grep -qE 'git[[:space:]]+push[^;&|]*((--force[^[:space:]]*|-f)([[:space:]]|$)|[[:space:]]\+[^[:space:]])'; then
   deny "A force push rewrites what Vercel has already deployed and what the cron workflows commit into. If a rebase left the branch diverged, say so and let Craig decide."
 fi
 
@@ -52,17 +52,34 @@ if printf '%s' "$cmd" | grep -qE 'npm[[:space:]]+run[[:space:]]+capture([[:space
   ask "Pull first. capture writes today's directory and it cannot be backfilled — and capture:status counts directories, so it cannot tell 'the cron stopped' from 'this tree never pulled the cron's commits'. Run: git pull --rebase, then capture."
 fi
 
-# 5) A second build/start/dev while one is already running. Next 16 keeps
-#    .next/dev and .next/build apart, so dev + build is fine; two BUILDS are not,
-#    and two servers means the second silently takes another port.
+# 5) A second build/start/dev while one is already running in THIS tree. Next 16
+#    keeps .next/dev and .next/build apart, so dev + build is fine; two BUILDS are
+#    not, and two servers means the second silently takes another port.
+# Lines of "<cwd>\t<command>"; GUARD_PROC_LIST stands in for the live table in tests.
+proc_table() {
+  if [ -n "${GUARD_PROC_LIST+set}" ]; then printf '%s\n' "$GUARD_PROC_LIST"; return; fi
+  for pid in $(pgrep -f 'next build|next-server' 2>/dev/null || true); do
+    cwd=$(lsof -a -d cwd -p "$pid" -Fn 2>/dev/null | sed -n 's/^n//p' | head -1 || true)
+    printf '%s\t%s\n' "$cwd" "$(ps -o command= -p "$pid" 2>/dev/null || true)"
+  done
+}
+# True when a process whose command matches $1 has its cwd under this tree.
+running_here() {
+  local root="${CLAUDE_PROJECT_DIR:-$PWD}" cwd command
+  while IFS=$'\t' read -r cwd command; do
+    case "$cwd" in "$root"|"$root"/*) ;; *) continue ;; esac
+    if printf '%s' "$command" | grep -qE "$1"; then return 0; fi
+  done < <(proc_table)
+  return 1
+}
 if printf '%s' "$cmd" | grep -qE 'npm[[:space:]]+run[[:space:]]+(build|start|dev)([[:space:]]|$)' \
    || printf '%s' "$cmd" | grep -qE '(^|[;&|[:space:]])next[[:space:]]+(build|start|dev)([[:space:]]|$)'; then
-  if pgrep -f 'next build' >/dev/null 2>&1; then
+  if running_here 'next build'; then
     ask "A 'next build' is already running in this tree. Two builds share one .next and clobber each other. Wait for it, or confirm you know it is finished."
-  elif printf '%s' "$cmd" | grep -qE '(build)' && pgrep -f 'next-server' >/dev/null 2>&1; then
+  elif printf '%s' "$cmd" | grep -qE '(build)' && running_here 'next-server'; then
     exit 0   # dev server + a build is the normal case at Next 16.
-  elif pgrep -f 'next-server' >/dev/null 2>&1; then
-    ask "A Next server is already up on this tree (pgrep next-server). A second 'npm run dev/start' takes a different port and every tools/ui BASE_URL then points at the old one. Check http://localhost:3000 first."
+  elif running_here 'next-server'; then
+    ask "A Next server is already up on this tree. A second 'npm run dev/start' takes a different port and every tools/ui BASE_URL then points at the old one. Check http://localhost:3000 first."
   fi
 fi
 
@@ -104,7 +121,7 @@ if printf '%s' "$cmd" | grep -qE 'git[[:space:]]+commit([[:space:]]|$)'; then
         [ -f "$root/$f" ] || continue
         n=$(wc -l < "$root/$f" | tr -d ' ')
         [ "$n" -gt 300 ] && printf '%s (%s) ' "$f" "$n"
-      done)
+      done || true)   # pipefail: grep finding no code file is not a failure
   if [ -n "$over" ]; then
     ask "Staged past CODE_RULES §4's hard 300-line ceiling: ${over}. Split before committing, or record the exception in docs/record/PLATFORM_NOTES.md in the same commit. (line_ceiling.sh misses this when the file was edited through bash rather than Write/Edit.)"
   fi
