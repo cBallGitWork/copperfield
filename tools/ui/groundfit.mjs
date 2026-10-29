@@ -2,7 +2,7 @@
 // `fixed -z-10` and a contrast walk composites past it; the paper is not walked, having no photograph under it.
 //   node tools/ui/groundfit.mjs [--team-cookie <file>]
 
-import { AUDIT_WIDTHS, DESK, connect, parseArgs, teamCookie } from "./cdp.mjs";
+import { AUDIT_SETTLE_MS, AUDIT_WIDTHS, DESK, connect, parseArgs, teamCookie } from "./cdp.mjs";
 import { DESK_ROUTES, playedMatchRoutes, playerRoutes } from "./routes.mjs";
 
 /** This run's routes: the shared list plus the ids discovered below; a copy, so `routes.mjs` stays a declaration. */
@@ -80,7 +80,7 @@ let failures = 0;
 for (const width of AUDIT_WIDTHS) {
   for (const route of ROUTES) {
     await cdp.setViewport(width, DESK.height);
-    await cdp.open(route, 2200);
+    await cdp.open(route, AUDIT_SETTLE_MS);
     const bare = JSON.parse(await cdp.js(AUDIT));
     failures += bare.length;
     console.log(`${width} ${route.padEnd(20)} ${bare.length ? `${bare.length} ON THE BARE GROUND` : "ok"}`);
