@@ -4,21 +4,27 @@ import { describe, expect, it } from "vitest";
 
 // sister-export.py's stale_reason, called through python3; the sister repo is never imported (main() alone reads it).
 const SCRIPT = join(import.meta.dirname, "sister-export.py");
-const DRIVER = `
+const LOAD = `
 import importlib.util, json, sys
 from datetime import datetime
 spec = importlib.util.spec_from_file_location("sister_export", sys.argv[1])
 mod = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mod)
-report, mode, now, due = json.loads(sys.argv[2])
-print(json.dumps(mod.stale_reason(report, mode, datetime.fromisoformat(now), datetime.fromisoformat(due) if due else None)))
+args = json.loads(sys.argv[2])
 `;
 
-function staleReason(report: object | null, mode: string, now: string, due: string | null = null): string | null {
-  const run = spawnSync("python3", ["-I", "-B", "-c", DRIVER, SCRIPT, JSON.stringify([report, mode, now, due])], { encoding: "utf8" });
+// One call into sister-export.py: `call` is a Python expression over `mod` and `args`, printed as JSON.
+function py<T>(call: string, args: unknown[]): T {
+  const run = spawnSync("python3", ["-I", "-B", "-c", `${LOAD}print(json.dumps(${call}))`, SCRIPT, JSON.stringify(args)], { encoding: "utf8" });
   expect(run.stderr).toBe("");
-  return JSON.parse(run.stdout) as string | null;
+  return JSON.parse(run.stdout) as T;
 }
+
+const staleReason = (report: object | null, mode: string, now: string, due: string | null = null) =>
+  py<string | null>(
+    "mod.stale_reason(args[0], args[1], datetime.fromisoformat(args[2]), datetime.fromisoformat(args[3]) if args[3] else None)",
+    [report, mode, now, due],
+  );
 
 const sweep = (finished: string, green = true) => ({ run_id: "R", green, finished_at: finished });
 
@@ -57,28 +63,17 @@ describe("the pressers' sweep", () => {
 });
 
 // 27-29 Oct 2026: the sweep minted Sharman-Lowe's 26-27 file in R2, the restore skips curated identity, and the depth export died on him.
-describe("the new identities", () => {
-  const UNHELD = `
-import importlib.util, json, sys
-spec = importlib.util.spec_from_file_location("sister_export", sys.argv[1])
-mod = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(mod)
-remote, held = json.loads(sys.argv[2])
-print(json.dumps(mod.unheld(remote, set(held))))
-`;
-  const unheld = (remote: string[], held: string[]): string[] => {
-    const run = spawnSync("python3", ["-I", "-B", "-c", UNHELD, SCRIPT, JSON.stringify([remote, held])], { encoding: "utf8" });
-    expect(run.stderr).toBe("");
-    return JSON.parse(run.stdout) as string[];
-  };
+describe("the new identity files", () => {
+  const unheld = (remote: string[], held: string[], skipped: string[] = []) =>
+    py<string[]>("mod.unheld(args[0], set(args[1]), lambda key: key in args[2])", [remote, held, skipped]);
+  const signing = "players/seasons/26-27/sharman-lowe_teddy_26-27_player_3a2eda.json";
+  const held = "players/seasons/26-27/abbott_zach_26-27_player_c491b9.json";
 
   it("takes the bucket's files this Mac lacks, never one it holds", () => {
-    const signing = "players/seasons/26-27/sharman-lowe_teddy_26-27_player_3a2eda.json";
-    const held = "players/seasons/26-27/abbott_zach_26-27_player_c491b9.json";
     expect(unheld([held, signing], [held])).toEqual([signing]);
   });
 
-  it("leaves a half-written upload in the bucket", () => {
-    expect(unheld(["root/x.json.tmp", "root/y.json.tmp.123"], [])).toEqual([]);
+  it("leaves what the sister's own rules skip", () => {
+    expect(unheld([signing], [], [signing])).toEqual([]);
   });
 });
