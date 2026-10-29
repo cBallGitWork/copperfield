@@ -1,14 +1,19 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { MAX_PAPER_STORIES, composePaper, type PublishedStory, type StoryKind } from "@epl/core";
-import { readLedger, readPaperStories, saveFiling, type Filing } from "./persist";
+import { readArchive, readLedger, readPaperStories, saveFiling, type Filing } from "./persist";
 
 const NOW = "2026-10-10T12:00:00.000Z";
 const EARLIER = "2026-10-10T09:00:00.000Z";
 const YESTERDAY = "2026-10-09T09:00:00.000Z";
-const LEAGUE = "a-test-league";
+// The served league too, set before @epl/core reads it, so readArchive reads this league's folder.
+const LEAGUE = vi.hoisted(() => {
+  vi.stubEnv("FANTRAX_LEAGUE_ID", "a-test-league");
+  return "a-test-league";
+});
+afterAll(() => vi.unstubAllEnvs());
 
 const roots: string[] = [];
 function tempRoot(): string {
@@ -44,6 +49,25 @@ describe("a firing's save point", () => {
       expect(() => saveFiling([], [filing("a")], {}, NOW, root)).toThrow(/EISDIR/);
       expect(existsSync(join(root, "ledger.json"))).toBe(false);
     }
+  });
+
+  it("a corrupt paper or ledger stops the firing before it is overwritten", () => {
+    // Read as the firing reads, then saved: a corrupt file taken for absent would be rebuilt from nothing.
+    for (const corrupt of ["paper.json", "ledger.json"]) {
+      const root = tempRoot();
+      writeFileSync(join(root, corrupt), "{ not json");
+      expect(() => saveFiling(readPaperStories(root), [filing("a")], readLedger(root), NOW, root)).toThrow(SyntaxError);
+      expect(readFileSync(join(root, corrupt), "utf8")).toBe("{ not json");
+    }
+  });
+
+  it("a corrupt archive file is left out of the record, not a stop on every desk that reads it", () => {
+    const root = tempRoot();
+    const dir = join(root, "archive", LEAGUE);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, "kept.json"), JSON.stringify(story("kept", "bin-xi")));
+    writeFileSync(join(dir, "torn.json"), "{ not json");
+    expect(readArchive("bin-xi", root).map((each) => each.slug)).toEqual(["kept"]);
   });
 
   it("the paper is on disk when the archive write fails", () => {
