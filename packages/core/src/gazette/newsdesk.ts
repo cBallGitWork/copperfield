@@ -16,8 +16,8 @@ export interface Assignment {
   slug: string;
   /** The London day a match-day report, a draft report or a Team Sheet is about. */
   day?: string;
-  /** A draft report's cut-off: after Saturday's matches, or the end of the gameweek. */
-  cutoff?: "saturday" | "gameweek";
+  /** A draft report's cut-off: the end of the gameweek. */
+  cutoff?: "gameweek";
   /** The round a look-ahead story is about, which between rounds is not FPL's current one. */
   round?: { period: number; gameweek: number };
   /** Until when its story leads the paper whatever files after it: the elevens', their round's lock. */
@@ -47,7 +47,7 @@ export interface DeskState {
   /** The London days whose every match has settled, each a match-day report (`reports/due.ts`). */
   reportDays: readonly { key: string; slug: string; day: string }[];
   /** The draft reports due: after Saturday, and at the end of the gameweek (`matchups/due.ts`). */
-  draftReports: readonly { key: string; slug: string; cutoff: "saturday" | "gameweek"; day: string }[];
+  draftReports: readonly { key: string; slug: string; cutoff: "gameweek"; day: string }[];
   /** The season's completed trades, newest first, each keyed by its own id and placed in the round it takes effect in. */
   trades: readonly { key: string; slug: string; round: { period: number; gameweek: number } | null }[];
 }
@@ -73,9 +73,7 @@ export function newsdesk(
   if (fixtured) {
     // A match-day report as each day's football settles, then one draft report once the gameweek ends.
     for (const day of desk.reportDays) want({ kind: "match-report", ...day });
-    for (const due of desk.draftReports) {
-      if (due.cutoff === "gameweek") want({ kind: "draft-report", key: due.key, slug: due.slug, cutoff: due.cutoff, day: due.day });
-    }
+    for (const due of desk.draftReports) want({ kind: "draft-report", key: due.key, slug: due.slug, cutoff: due.cutoff, day: due.day });
   }
 
   if (desk.finished && fixtured) {

@@ -1,13 +1,12 @@
 import { londonDayOf } from "../../time";
 import type { Fixture } from "../../football/types";
 import { pastSettle } from "../reports/due";
-import type { Cutoff } from "./brief";
 
 // When the draft report is due: once, at the end of the gameweek, when its last match has settled and Fantrax's
 // auto-subs have run (`SETTLED_AFTER_KICKOFF_HOURS`), never on FPL's bonus. No report after Saturday (Craig, 11 Oct 2026).
 
 interface DraftReportDue {
-  cutoff: Cutoff;
+  cutoff: "gameweek";
   key: string;
   slug: string;
   /** The London day the gameweek ends on, which names the edition: "Monday Draft Report". */
