@@ -63,6 +63,19 @@ describe("ratings, owed a success between 07:00 and 10:00 UTC", () => {
   });
 });
 
+describe("bench-order, hourly 07:23 to 19:23 UTC", () => {
+  const BENCH = WORKFLOW_RULES.find((rule) => rule.workflow === "bench-order.yml")!;
+
+  it("is quiet at the 06:50 watchdog after the evening's last run", () => {
+    expect(check([BENCH], { "bench-order.yml": [run("2026-10-06T19:23:00Z")] }, "2026-10-07T06:50:00Z")).toEqual([]);
+  });
+
+  it("files at 13:00 when nothing has succeeded since the evening before", () => {
+    const found = check([BENCH], { "bench-order.yml": [run("2026-10-06T19:23:00Z")] }, "2026-10-07T13:00:00Z");
+    expect(found[0].source).toBe("bench-order");
+  });
+});
+
 describe("the Mac's jobs, by their alert.yml reports", () => {
   // Thursday 8 October, 18:05 London (BST) is 17:05 UTC.
   const thursdayEvening = "2026-10-08T17:05:00Z";
