@@ -3,6 +3,7 @@
 //   node tools/ui/pitchfit.mjs [--team-cookie <file>]
 
 import { DESK, PHONE, connect, discover, parseArgs, teamCookie } from "./cdp.mjs";
+import { clubRoutes } from "./routes.mjs";
 
 /** The reference phone, and the two desk sizes either side of the `lg` where the season grid moves beside the board. */
 const SIZES = [
@@ -11,6 +12,9 @@ const SIZES = [
   [1024, DESK.height],
   [DESK.width, DESK.height],
 ];
+
+/** This instrument's wait on each page, longer than an audit's `AUDIT_SETTLE_MS`. */
+const PITCH_SETTLE_MS = 2500;
 
 const MEASURE = `(function(){
   // The first VISIBLE pitch: the head-to-head hides two of its four per width, and a hidden one measures 0px.
@@ -43,7 +47,7 @@ await cdp.setCookie(teamCookie(flags));
 
 /** Every squad the served league has; which one is the reader's own is a fact about the cookie, not the route. */
 await cdp.setViewport(PHONE.width, DESK.height);
-await cdp.open("/squad", 2500);
+await cdp.open("/squad", PITCH_SETTLE_MS);
 const teams = JSON.parse(
   await cdp.js(
     `JSON.stringify(Array.prototype.slice.call(document.querySelectorAll('a[href^="/squad/"]'))
@@ -53,21 +57,21 @@ const teams = JSON.parse(
 if (teams.length === 0) throw new Error("no squads on /squad — is the league drafted?");
 
 // The club pitch: a predicted eleven on the same grass and the same fold.
-const club = await discover(cdp, "/prem", 'a[href^="/prem/club/"]');
+const [club] = await clubRoutes(cdp);
 if (club) teams.push(club);
 
 // `/fpl`, the one pitch with no column beside it; without the `fpl` cookie it is a form and reports "no pitch".
 teams.push("/fpl");
 
 // The head-to-head board, the reference page for the grass (DESIGN §9), discovered off the matchups board.
-const tie = await discover(cdp, "/league/matchups", 'a[href^="/league/matchups/"]', 2500);
+const tie = await discover(cdp, "/league/matchups", 'a[href^="/league/matchups/"]', PITCH_SETTLE_MS);
 if (tie) teams.push(tie);
 
 let failures = 0;
 for (const route of teams) {
   for (const [width, height] of SIZES) {
     await cdp.setViewport(width, height);
-    await cdp.open(route, 2500);
+    await cdp.open(route, PITCH_SETTLE_MS);
     const out = JSON.parse(await cdp.js(MEASURE));
     if (out.none) {
       console.log(`${route} ${width}×${height}  no pitch (withheld, or the list view)`);

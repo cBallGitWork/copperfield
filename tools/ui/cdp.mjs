@@ -44,9 +44,12 @@ export function teamCookie(flags) {
   return process.env.TEAM_COOKIE ?? null;
 }
 
+/** An audit's wait on each route before it measures; `discover` waits four times it on a second try. */
+export const AUDIT_SETTLE_MS = 2200;
+
 /** The first href on `route` matching `selector`, or a loud nothing: a miss is announced, so a run that skipped
  *  routes can never report clean. Per-record routes are discovered because a written-down id is a 404 when it moves. */
-export async function discover(cdp, route, selector, settle = 2200) {
+export async function discover(cdp, route, selector, settle = AUDIT_SETTLE_MS) {
   const read = async (wait) => {
     await cdp.open(route, wait);
     return cdp.js(
