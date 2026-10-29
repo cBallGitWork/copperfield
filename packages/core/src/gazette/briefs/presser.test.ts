@@ -64,7 +64,7 @@ describe("buildPresserBrief", () => {
     });
 
     it("tells the writer which men a quote names, so a note carries what was said", () => {
-      expect(brief).toMatch(/Saka \(Dons\) — OUT — he does not play \(hamstring\), said by Arteta \[NAMED IN A QUOTE BELOW\]/u);
+      expect(brief).toMatch(/Saka \(Dons\): OUT, he does not play \(hamstring\), said by Arteta \[NAMED IN A QUOTE BELOW\]/u);
     });
 
     it("asks a line of every club with news, and a quote of every club offered one with a fact", () => {
@@ -95,7 +95,7 @@ describe("buildPresserBrief", () => {
     });
 
     it("gives a standing absence as a fact, never as nothing new", () => {
-      expect(brief).toContain("- Arsenal (code 3): Cristhian Mosquera — FIT again — back from muscle");
+      expect(brief).toContain("- Arsenal (code 3): Cristhian Mosquera: FIT again, back from muscle");
       expect(brief).not.toContain("nothing new");
     });
 

@@ -1,6 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NEWS_GAPS, banned } from "@epl/core";
-import { presserFaults, sendBackPresser, written } from "./subedit";
+import { writeColumn } from "./newsroom";
+import { presserFaults, sendBackPresser, writeSubedited, written } from "./subedit";
+
+vi.mock("./newsroom", () => ({ writeColumn: vi.fn() }));
 
 // A banned phrase in the HEADLINE sends the column back, though `checks.prose()` leaves the headline out.
 
@@ -105,3 +108,39 @@ describe("the Team Sheet's send-back", () => {
   });
 });
 
+
+describe("the sub-editor's rewrite", () => {
+  const log = (): { said: string[]; say: (line: string) => void } => {
+    const said: string[] = [];
+    return { said, say: (line) => void said.push(line) };
+  };
+  beforeEach(() => vi.mocked(writeColumn).mockReset());
+
+  it("files the first column and warns when the rewrite throws", async () => {
+    const first = { headline: "City Bank It", body: "He scored." };
+    vi.mocked(writeColumn).mockResolvedValueOnce(first).mockRejectedValueOnce(new Error("timed out"));
+    const { said, say } = log();
+    await expect(writeSubedited("sys", "brief", say, "round")).resolves.toBe(first);
+    expect(said.some((line) => line.includes("rewrite failed") && line.includes("timed out"))).toBe(true);
+  });
+
+  it("sends back a column that uses an American word", async () => {
+    vi.mocked(writeColumn).mockResolvedValueOnce({ body: "His roster held." }).mockResolvedValueOnce({ body: "His squad held." });
+    await expect(writeSubedited("sys", "brief", () => {}, "round")).resolves.toEqual({ body: "His squad held." });
+    expect(vi.mocked(writeColumn).mock.calls[1][1]).toContain('"roster"');
+  });
+
+  it("sends back an em dash, and logs what the rewrite still prints", async () => {
+    vi.mocked(writeColumn).mockResolvedValueOnce({ body: "He scored — twice." }).mockResolvedValueOnce({ body: "He banked it — twice." });
+    const { said, say } = log();
+    await writeSubedited("sys", "brief", say, "round");
+    expect(vi.mocked(writeColumn).mock.calls[1][1]).toContain('"—"');
+    expect(said.at(-1)).toBe("  ⚠ round rewrite still prints banked, —, filing it anyway.");
+  });
+
+  it("files a clean column without a second call", async () => {
+    vi.mocked(writeColumn).mockResolvedValueOnce({ body: "He scored." });
+    await writeSubedited("sys", "brief", () => {}, "round");
+    expect(writeColumn).toHaveBeenCalledTimes(1);
+  });
+});

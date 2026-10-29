@@ -21,6 +21,7 @@ import {
   periodGameweeks,
   periodLock,
   periodOfGameweek,
+  americanisms,
   banned,
   REPORT_NEVER,
   DRAFT_NEVER,
@@ -232,7 +233,8 @@ function commissioner(ctx: DeskContext, paper: readonly PublishedStory[], now: s
         say(`  ⚠ ${assignment.kind} names ${unknown.length} not in its brief: ${unknown.join(", ")}`);
       }
       // The backstop reads the FILED story, cargo included, and files anyway, loudly.
-      const printed = banned(headlineAndProse(filed.story), assignment.kind === "match-report" ? REPORT_NEVER : assignment.kind === "draft-report" ? DRAFT_NEVER : undefined);
+      const filedText = headlineAndProse(filed.story);
+      const printed = [...banned(filedText, assignment.kind === "match-report" ? REPORT_NEVER : assignment.kind === "draft-report" ? DRAFT_NEVER : undefined), ...americanisms(filedText)];
       if (printed.length > 0) {
         say(`  ⚠ ${assignment.kind} STILL prints banned phrasing after a rewrite: ${printed.join(", ")}`);
       }

@@ -21,9 +21,9 @@ export interface PresserLine extends PresserSignal {
 
 /** Each tag in the words the column may use, so the model never invents one for `managed_load`. */
 const MEANS: Record<string, string> = {
-  ruled_out: "OUT — he does not play",
-  suspended: "SUSPENDED — banned, not injured",
-  available: "FIT again — back in contention",
+  ruled_out: "OUT, he does not play",
+  suspended: "SUSPENDED, banned, not injured",
+  available: "FIT again, back in contention",
   rotation_risk: "may be rotated",
   managed_load: "his minutes are being managed",
   injury_scare: "a doubt",
@@ -68,12 +68,12 @@ export function buildPresserBrief(brief: {
       const known = line.condition !== undefined && line.condition !== "";
       const what =
         line.tag === FIT_AGAIN
-          ? known ? `FIT again — back from ${line.condition}` : MEANS.available
+          ? known ? `FIT again, back from ${line.condition}` : MEANS.available
           : `${MEANS[line.tag] ?? line.tag}${known ? ` (${line.condition})` : " (COMPLAINT NOT STATED — you may not name one)"}`;
       // The export writes "" or null for a conference with no named speaker: offer nobody rather than a gap.
       const by = speaker(line.manager) === null ? "" : `, said by ${line.manager}`;
       const named = row.named.has(line.playerName) ? " [NAMED IN A QUOTE BELOW]" : "";
-      return `${line.playerName}${who} — ${what}${by}${soft}${named}`;
+      return `${line.playerName}${who}: ${what}${by}${soft}${named}`;
     });
     const also = row.standing.length === 0 ? [] : [`  STILL OUT: ${row.standing.map((line) => line.playerName).join(", ")}`];
     const quotes = row.quotes.map(({ quote, fact }) => said(quote, fact));
