@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FantraxError, ProviderError } from "@epl/core";
-import { leagueCache } from "./leagueCache";
+import { leagueCache, leagueRead } from "./leagueCache";
 
 // Next's cache as far as this file can see it: what a read stored, keyed as asked.
 const stored = new Map<string, unknown>();
@@ -49,6 +49,36 @@ describe("leagueCache", () => {
   it("throws a bug of our own rather than dressing it as an outage", async () => {
     const cached = leagueCache("squads", failing(new TypeError("cannot read teams of undefined")), unavailable);
     await expect(cached(6)).rejects.toThrow(TypeError);
+  });
+});
+
+describe("leagueRead", () => {
+  /** What a read answers here: its mapped raw, or the absence a failure stands for. */
+  type Answer = { raw?: unknown; absent?: string };
+  const absent = (error: ProviderError): Answer => ({ absent: error.code });
+
+  it("caches a refusal Fantrax meant as the league's answer", async () => {
+    const read = failing(new FantraxError("getTeamStats", "WARNING", "not drafted"));
+    const cached = leagueRead("team-stats", read, (raw) => ({ raw }), absent);
+    expect(await cached(6)).toEqual({ absent: "WARNING" });
+    expect(await cached(6)).toEqual({ absent: "WARNING" });
+    expect(read).toHaveBeenCalledTimes(1);
+    expect([...stored.values()]).toEqual([{ absent: "WARNING" }]);
+  });
+
+  it("answers an outage with the same absence, and never stores it", async () => {
+    const read = failing(new FantraxError("getTeamStats", "503", "Service Unavailable", "unreachable"));
+    const cached = leagueRead("team-stats", read, (raw) => ({ raw }), absent);
+    expect(await cached(6)).toEqual({ absent: "503" });
+    expect(await cached(6)).toEqual({ absent: "503" });
+    expect(read).toHaveBeenCalledTimes(2);
+    expect(stored.size).toBe(0);
+  });
+
+  it("maps and keeps an answer", async () => {
+    const cached = leagueRead("team-stats", async (gameweek: number) => gameweek, (raw) => ({ raw }), absent);
+    expect(await cached(6)).toEqual({ raw: 6 });
+    expect([...stored.values()]).toEqual([{ raw: 6 }]);
   });
 });
 
