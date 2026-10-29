@@ -68,8 +68,8 @@ export const FORM_GAMES = 5;
 /** How many filed stories run beside the lead, at the second rank. */
 export const SHOULDER_STORIES = 2;
 
-/** How many filed stories run as headlines under the lead, shoulders included: every one while the
- *  paper is verified, then 8. With no section pages, a story past the cap is linked from nowhere. */
+/** How many filed stories run as headlines under the lead, shoulders included: every story the paper
+ *  carries (MAX_PAPER_STORIES). With no section pages, a story past the cap is linked from nowhere. */
 export const HEADLINES_SHOWN = MAX_PAPER_STORIES;
 
 /** A team to treat as the reader's own when nobody has signed in, for the test leagues, from the

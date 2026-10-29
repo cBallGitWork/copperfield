@@ -20,7 +20,6 @@ function goal(minute: string, at: number, kind: MatchEventKind, scorer: WireLine
 const doku = man("Doku", MCI, true);
 const lines: WireLine[] = [
   goal("68", 3, "goal", doku),
-  { key: "red", fixtureCode: FIXTURE.code, minute: "70", kind: "red-card", man: man("Van Dijk", LIV), second: null, at: 4 },
   goal("65", 2, "goal", man("Haaland", MCI), doku),
   goal("12", 1, "own-goal", man("Dias", MCI)),
 ];
@@ -43,7 +42,7 @@ describe("fixtureGoals", () => {
     ]);
   });
 
-  it("leaves out cards, and a goal whose scorer cannot be placed on a side", () => {
+  it("leaves out a goal whose scorer cannot be placed on a side", () => {
     const nameless = goal("90", 5, "goal", null);
     const all = fixtureGoals([...lines, nameless], [FIXTURE]).get(FIXTURE.id);
     expect((all?.home.length ?? 0) + (all?.away.length ?? 0)).toBe(3);

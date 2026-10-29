@@ -328,7 +328,7 @@ with its row here in the same commit.**
 | `PINNED_BESIDE_TILE` | `PINNED_NAME` starting where a pinned position tile ends, at `TILE_WIDTH`'s offsets. | `Board` (11 Oct 2026) |
 | `PINNED_BESIDE_INDEX` | `PINNED_NAME` starting where a pinned index block ends, at `INDEX_WIDTH`'s offsets. | `Board` (11 Oct 2026) |
 | `league/ScrollBoard` | A board that scrolls sideways, with drawn cues under a thumb: a fade while there is more, a gauge docked above the rail, a shadow on the pinned lead once scrolled (`.cm-board`, `desk.css`). A pinned board passes `bg-surface`. | 23 boards (27 Sep 2026) |
-| `TableHeads` `sortedAs` · `SortArrow` | A `SortHead`'s direction from "is this the column" and "descending"; the ▲/▼ beside a head. | `Board` and the standings (11 Oct 2026) |
+| `TableHeads` `sortedAs` | A `SortHead`'s direction from "is this the column" and "descending"; `TableHeads` draws its ▲/▼ beside the head. | `Board` and the standings (11 Oct 2026) |
 | `heldPlate()` | A grey plate held down while what it stands for is chosen (`cm-bevel-pressed`), else raised and lifting under a pointer. Geometry is the caller's. | a sortable column head, Team Stats' measure and `PRESSABLE` (8 Oct 2026); the Data section's chips (`players/BoardControls` `Chip`) are drawn off `aria-pressed` instead, so a tap shows at once (16 Oct 2026) |
 | `gazette/StoryFace` · `hasPicture` | A story's own picture: its man, else its columnist's photograph, in `.paper-frame`. | 3 sites at 2 ranks (splash; a shoulder's and a brief's card) |
 | `DESK_ONLY` · `standDown()` | A column shown on the desk only; `standDown` keeps it when the table is sorted by it, or the sort arrow and `aria-sort` would hide with it. | 4 files |
