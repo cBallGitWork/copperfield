@@ -935,7 +935,7 @@ rather than colliding with it.
 Craig set the formats on 27 Sep. The cups are declared in `packages/core/src/league/cups/declared.ts`, and
 `declared.test.ts` lays each one out for ten teams:
 
-- **Timbeibs Cup**: GW9 is a seeding round, seeded by that week's Fantrax points, with a tie going to
+- **Tims INFUSR Energy Cup**: GW9 is a seeding round, seeded by that week's Fantrax points, with a tie going to
   the higher league position. Then a one-leg double elimination with no reset final, from GW10 to the
   GW17 final (Boxing Day). The top six byes are not declared: `doubleBracket(10)` gives them, because only
   seeds 7 to 10 fill a sixteen-slot first round. **Every round is played as late as the final allows**

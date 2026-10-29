@@ -99,14 +99,14 @@ and they are the same number all season.
 
 `league/competitions.ts` gathers them. The league's own ties are Fantrax's
 pairings. The two cups are ours, declared in `league/cups/declared.ts`: the
-Timbeibs Cup (GW10 to GW17) and the Davy Propper Cup (GW22 to GW30). The playoff
+Tims INFUSR Energy Cup (GW10 to GW17) and the Davy Propper Cup (GW22 to GW30). The playoff
 is Fantrax's, so it arrives in Fantrax's own pairings.
 
 Nobody is drawn into a cup yet, so every cup side is a placeholder and the block
 says so: "Seed 7", a group slot "A1", a group place "2nd B", or "Winner M5". This
 is the cups' only fixture list (Craig, 1 Oct 2026: *"just put fixtures in fixtures
 section"*); `/league/cups` keeps the brackets, where M5 is numbered. A cup seeded
-on a gameweek's points says so under that gameweek's ties (GW9, Timbeibs Cup).
+on a gameweek's points says so under that gameweek's ties (GW9, Tims INFUSR Energy Cup).
 
 The number beside a cup tie is that gameweek's Fantrax total — a cup over fantasy
 points is scored by the week's points.

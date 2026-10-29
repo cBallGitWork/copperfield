@@ -31,8 +31,8 @@ export interface Cup {
 
 export const CUPS: readonly Cup[] = [
   {
-    id: "timbeibs",
-    name: "Timbeibs Cup",
+    id: "infusr",
+    name: "Tims INFUSR Energy Cup",
     seeding: { from: "gameweek", gameweek: 9 },
     // Gameweek 17 is Boxing Day.
     knockout: { elimination: "double", finalGameweek: 17, drawnRounds: 2 },

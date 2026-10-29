@@ -8,11 +8,11 @@ rules (27 Sep 2026). Their fixtures are on Fixtures (`/league/fixtures`), not he
 
 ## On the page
 
-- One picker: the cup (Timbeibs Cup, Davy Propper Cup; `?cup=`), the first by default, docked in `FootFrame`'s
+- One picker: the cup (Tims INFUSR Energy Cup, Davy Propper Cup; `?cup=`), the first by default, docked in `FootFrame`'s
   foot above the thumb rail so the top keeps Draft's own strip alone (20 Oct 2026). Craig, 1 Oct
   2026: *"just put fixtures in fixtures section, too many buttons, leave brackets here"*. The Fixtures
   view went, and with it the view picker; an old `?view=` link is ignored.
-- **The Timbeibs Cup** is two brackets, each side of the draw as columns of ties, first round on the
+- **The Tims INFUSR Energy Cup** is two brackets, each side of the draw as columns of ties, first round on the
   left, scrolling sideways on a phone: the winners' side (with the final) and the losers' side. Craig,
   27 Sep: *"we really need a bracket view as well."*
 - **The Davy Propper Cup** is its two groups as league tables (Craig, 1 Oct: *"propper cup should be a
@@ -26,7 +26,7 @@ rules (27 Sep 2026). Their fixtures are on Fixtures (`/league/fixtures`), not he
 Craig, 27 Sep 2026: *"Placeholder brackets are fine for now."* Nobody is seeded until GW9 is
 scored, and nobody is in a group until the draw around GW19, so every side is a placeholder:
 "Seed 7", a group slot "A1", a group place "2nd B", or "Winner M5" / "Loser M5", M5 being the tie
-numbered 5 in the bracket. A round drawn at random (the Timbeibs Cup's first two) prints "To be drawn"
+numbered 5 in the bracket. A round drawn at random (the Tims INFUSR Energy Cup's first two) prints "To be drawn"
 on both sides until Craig's draw fills it. Ties are numbered in the order they are played. The draw is laid out for
 however many teams `getLeagueInfo` has, so a league still filling up gets a smaller bracket.
 

@@ -3,7 +3,7 @@ import type { LivePlayerCategory } from "../points";
 import type { ScoringCategory } from "../scoring";
 import { CUP_TIE_STEPS, coinToss, decideTie, throughOn, tieTally, type TieTally } from "./tieBreak";
 
-const DRAW = { cupId: "timbeibs", gameweek: 10 };
+const DRAW = { cupId: "infusr", gameweek: 10 };
 const LEVEL: TieTally = { goals: 2, assists: 3, cleanSheets: 1, cards: 2 };
 const side = (teamId: string, tally: Partial<TieTally> = {}, points: number | null = 40) => ({
   teamId,
