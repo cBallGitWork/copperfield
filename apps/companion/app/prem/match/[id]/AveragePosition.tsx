@@ -1,5 +1,6 @@
 import { clubColoursOf, inkOn, DASH } from "@epl/core";
 import { PITCH_BOX, toBoxY } from "@/app/components/football/pitchBox";
+import { Pitch } from "@/app/components/football/ShotPitch";
 import type { Club } from "@epl/core";
 import { placeLabels } from "./labels";
 import type { Placed } from "./labels";
@@ -7,8 +8,6 @@ import { SECTION_BAR, SMALL_CAPS } from "@/app/desk";
 
 // Where each eleven played: every starter at SofaScore's average position, one pitch per side.
 // Starters only, as a substitute's centre can come off two touches; names are HTML so they do not scale.
-
-// `ShotMap`'s markings, copied: two occurrences, declined until a third (CODE_RULES §1).
 
 export default function AveragePosition({
   home,
@@ -93,25 +92,7 @@ function Side({
           preserveAspectRatio="none"
           className="absolute inset-0 h-full w-full"
         >
-          <rect width={PITCH_BOX.width} height={PITCH_BOX.height} fill="var(--color-pitch-turf)" />
-          {[0, 2, 4, 6, 8].map((band) => (
-            <rect
-              key={band}
-              x={band * 10}
-              width="10"
-              height={PITCH_BOX.height}
-              fill="var(--color-pitch-mow)"
-            />
-          ))}
-          <g fill="none" stroke="var(--color-pitch-line)" strokeWidth="0.4" opacity="0.65">
-            <rect x="0.5" y="0.5" width={PITCH_BOX.width - 1} height={PITCH_BOX.height - 1} />
-            <line x1="50" y1="0.5" x2="50" y2={PITCH_BOX.height - 0.5} />
-            <circle cx="50" cy={PITCH_BOX.height / 2} r="9" />
-            <rect x="0.5" y="13" width="16" height="38" />
-            <rect x={PITCH_BOX.width - 16.5} y="13" width="16" height="38" />
-            <rect x="0.5" y="24" width="5.5" height="16" />
-            <rect x={PITCH_BOX.width - 6} y="24" width="5.5" height="16" />
-          </g>
+          <Pitch />
           {/* A name that had to sit nearer someone else is tied to its own man. */}
           {labelled.map((man) =>
             man.leader === null ? null : (

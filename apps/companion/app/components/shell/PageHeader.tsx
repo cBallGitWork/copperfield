@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import BackBar from "./BackBar";
 
 // How a desk screen opens: CM's title bar, and the `sub` line under it, never in it (a CM bar holds only a title).
@@ -27,14 +27,10 @@ export default function PageHeader({
   children?: React.ReactNode;
 }) {
   const bar = competition ? (
-    // The bevel with the plate turned over: its edges mixed off `--color-ink` rather than the chrome.
+    // The title bar with the plate turned over: its face, and so its bevel's edges, off `--color-ink`.
     <div
-      className="flex min-h-11 items-center gap-2 border-2 px-2 py-1 lg:min-h-24"
-      style={{
-        background: "var(--color-ink)",
-        borderColor:
-          "color-mix(in oklch, var(--color-ink), white 55%) color-mix(in oklch, var(--color-ink), black 55%) color-mix(in oklch, var(--color-ink), black 55%) color-mix(in oklch, var(--color-ink), white 55%)",
-      }}
+      className="cm-titlebar flex min-h-11 items-center gap-2 px-2 py-1 lg:min-h-24"
+      style={{ "--cm-face": "var(--color-ink)" } as CSSProperties}
     >
       <h1
         className="cm-title min-w-0 flex-1 truncate text-center font-chrome text-lg font-bold lg:text-3xl"
