@@ -14,11 +14,11 @@ describe("leagueTies", () => {
 });
 
 describe("cupTies", () => {
-  it("opens the Timbeibs Cup on GW10 with two ties still to be drawn", () => {
+  it("opens the Tims INFUSR Energy Cup on GW10 with two ties still to be drawn", () => {
     const ties = cupTies(10, 10);
     expect(ties.map((tie) => [tie.competition.id, tie.round, tie.home.label, tie.away.label])).toEqual([
-      ["timbeibs", "Round 1", "To be drawn", "To be drawn"],
-      ["timbeibs", "Round 1", "To be drawn", "To be drawn"],
+      ["infusr", "Round 1", "To be drawn", "To be drawn"],
+      ["infusr", "Round 1", "To be drawn", "To be drawn"],
     ]);
     expect(ties.every((tie) => tie.home.team === null && tie.away.team === null)).toBe(true);
   });
@@ -37,8 +37,8 @@ describe("cupTies", () => {
 });
 
 describe("seededIn", () => {
-  it("names the Timbeibs Cup on GW9, whose points set its seeds", () => {
-    expect(seededIn(9)?.id).toBe("timbeibs");
+  it("names the Tims INFUSR Energy Cup on GW9, whose points set its seeds", () => {
+    expect(seededIn(9)?.id).toBe("infusr");
   });
 
   it("names no cup on any other gameweek, the group-seeded cup included", () => {
@@ -58,7 +58,7 @@ describe("groupTies", () => {
   const ties = [...cupTies(10, 13), ...leagueTies([{ home: team("t1", "Alpha"), away: team("t2", "Bravo") }])];
 
   it("boxes each competition's ties under it, league first", () => {
-    expect(groupTies(ties).map((group) => group.competition.id)).toEqual(["league", "timbeibs", "timbeibs"]);
+    expect(groupTies(ties).map((group) => group.competition.id)).toEqual(["league", "infusr", "infusr"]);
   });
 
   it("keeps the league's own fixtures out of any round, and splits a cup's two rounds in one week", () => {

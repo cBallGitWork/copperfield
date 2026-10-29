@@ -17,13 +17,13 @@ const cup = (id: string): Cup => {
 
 const weeks = (schedule: Map<string, number>) => Object.fromEntries(schedule);
 
-describe("Timbeibs Cup", () => {
-  const timbeibs = cup("timbeibs");
+describe("Tims INFUSR Energy Cup", () => {
+  const infusr = cup("infusr");
   const rounds = doubleBracket(TEAMS);
-  const schedule = scheduleRounds(rounds, timbeibs.knockout.finalGameweek);
+  const schedule = scheduleRounds(rounds, infusr.knockout.finalGameweek);
 
   it("starts the week after its seeding round and ends on Boxing Day", () => {
-    expect(timbeibs.seeding).toEqual({ from: "gameweek", gameweek: 9 });
+    expect(infusr.seeding).toEqual({ from: "gameweek", gameweek: 9 });
     expect(weeks(schedule)).toEqual({
       W1: 10,
       W2: 11,
@@ -40,7 +40,7 @@ describe("Timbeibs Cup", () => {
 
   it("draws rounds 1 and 2 at random, seeds 7–10 into round 1, then follows strict bracket order", () => {
     // Craig, 30 Sep: "cup 1, once seeded, follows a strict bracket order"; "round 1 can be drawn, and round 2".
-    expect(timbeibs.knockout.drawnRounds).toBe(2);
+    expect(infusr.knockout.drawnRounds).toBe(2);
     const seedsIn = (round: (typeof rounds)[number] | undefined) =>
       (round?.ties ?? []).flatMap((tie) => [tie.home, tie.away]).flatMap((side) => ("seed" in side ? [side.seed] : []));
     const [first, second, third] = rounds.filter((round) => round.id.startsWith("W"));
@@ -54,7 +54,7 @@ describe("Timbeibs Cup", () => {
 
   it("plays the winners' side late, so its champion waits one gameweek for the final", () => {
     // Craig, 30 Sep: "dont have wb so early, too much of a gap to final for winners".
-    expect(timbeibs.knockout.finalGameweek - (schedule.get("W4") ?? 0)).toBe(2);
+    expect(infusr.knockout.finalGameweek - (schedule.get("W4") ?? 0)).toBe(2);
   });
 });
 

@@ -14,7 +14,7 @@ vi.mock("@/app/squad/routes", () => import("../../squad/routes"));
 vi.mock("@/app/components/league/TeamName", () => ({ default: ({ name }: { name: string }) => name }));
 
 const team = (teamId: string): LeagueTeam => ({ teamId, name: teamId });
-const CUP = { id: "cup", name: "Timbeibs Cup" };
+const CUP = { id: "cup", name: "Tims INFUSR Energy Cup" };
 
 /** One of this team's ties in `gameweek`, against `opponent`. */
 const tie = (opponent: string, gameweek = 34, over: Partial<SeasonRow["round"]> = {}, competition = LEAGUE_COMPETITION): SeasonRow => ({
@@ -51,7 +51,7 @@ describe("a team's season", () => {
 
   it("names a cup under the opponent on a phone and leaves a league row bare", () => {
     const [league, cup] = items(draw({ toCome: [tie("a", 10), tie("b", 10, {}, CUP)], played: [] }));
-    expect(cup).toMatch(/lg:hidden[^"]*"[^>]*>Timbeibs Cup/);
+    expect(cup).toMatch(/lg:hidden[^"]*"[^>]*>Tims INFUSR Energy Cup/);
     expect(league).not.toMatch(/lg:hidden[^"]*"[^>]*>League/);
     // The cyan column itself is the desk's alone.
     expect(league).toMatch(/class="hidden [^"]*text-info lg:flex/);

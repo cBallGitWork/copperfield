@@ -11,8 +11,8 @@ const cup = (id: string): Cup => {
 const outline = (stages: ReturnType<typeof cupPlan>) => stages.map((stage) => `GW${stage.gameweek} ${stage.name}`);
 
 describe("cupPlan", () => {
-  it("lays the Timbeibs Cup out for ten, winners' round first when two share a week", () => {
-    expect(outline(cupPlan(cup("timbeibs"), 10))).toEqual([
+  it("lays the Tims INFUSR Energy Cup out for ten, winners' round first when two share a week", () => {
+    expect(outline(cupPlan(cup("infusr"), 10))).toEqual([
       "GW10 Round 1",
       "GW11 Round 2",
       "GW12 Losers' round 1",
@@ -27,7 +27,7 @@ describe("cupPlan", () => {
   });
 
   it("numbers every knockout tie in playing order and names later sides by those numbers", () => {
-    const stages = cupPlan(cup("timbeibs"), 10);
+    const stages = cupPlan(cup("infusr"), 10);
     // Craig, 30 Sep: rounds 1 and 2 are drawn at random, so no seed is printed in them.
     expect(stages[0]?.fixtures).toEqual([
       { code: "M1", home: "To be drawn", away: "To be drawn" },
@@ -71,12 +71,12 @@ describe("cupPlan", () => {
   });
 
   it("has nothing to play for a league of one", () => {
-    expect(cupPlan(cup("timbeibs"), 1)).toEqual([]);
+    expect(cupPlan(cup("infusr"), 1)).toEqual([]);
   });
 
   it("puts each stage on its side of the draw, the double final closing the winners' side", () => {
     const sides = (id: string) => cupPlan(cup(id), 10).map((stage) => stage.side);
-    expect(sides("timbeibs")).toEqual(["winners", "winners", "losers", "winners", "losers", "losers", "winners", "losers", "losers", "winners"]);
+    expect(sides("infusr")).toEqual(["winners", "winners", "losers", "winners", "losers", "losers", "winners", "losers", "losers", "winners"]);
     expect(sides("davy-propper")).toEqual(["groups", "groups", "groups", "groups", "groups", "winners", "winners", "winners"]);
   });
 });
@@ -87,6 +87,6 @@ describe("cupGroups", () => {
       ["A1", "A2", "A3", "A4", "A5"],
       ["B1", "B2", "B3", "B4", "B5"],
     ]);
-    expect(cupGroups(cup("timbeibs"), 10)).toEqual([]);
+    expect(cupGroups(cup("infusr"), 10)).toEqual([]);
   });
 });
