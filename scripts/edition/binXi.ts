@@ -15,7 +15,6 @@ import {
   categoryPoints,
   fetchLive,
   fetchPoolWindow,
-  fetchTransactions,
   firstScored,
   formations,
   fplWeeks,
@@ -24,7 +23,6 @@ import {
   londonDayOf,
   mapLiveStats,
   mapPlayerStats,
-  mapTransactions,
   leagueLimits,
   openingGameweek,
   periodDays,
@@ -94,12 +92,11 @@ export async function binXiDesk(input: {
     const day = londonDayOf(fixture.kickoff);
     return fixture.status === "finished" && day !== null && day >= window.startDate && day <= window.endDate;
   });
-  const [pool, outfield, keepers, transactions, rows, priced] = await Promise.all([
+  const [pool, outfield, keepers, rows, priced] = await Promise.all([
     fetchPoolWindow(FANTRAX_LEAGUE_ID, window, "ALL_AVAILABLE").then(mapPlayerStats),
     // The stats league costs the brief its shots and chances, never the column.
     fetchPoolWindow(STATS_LEAGUE.leagueId, window, "ALL", OUTFIELD).then(mapPlayerStats).catch(() => []),
     fetchPoolWindow(STATS_LEAGUE.leagueId, window, "ALL", KEEPER).then(mapPlayerStats).catch(() => []),
-    fetchTransactions(FANTRAX_LEAGUE_ID, "CLAIM_DROP").then((raw) => mapTransactions(raw, "CLAIM_DROP")).catch(() => []),
     Promise.all(input.gameweeks.map((gw) => (gw === snapshot.gameweek ? Promise.resolve(snapshot.stats) : fetchLive(gw).then(mapLiveStats)))),
     readScoring(),
   ]);
@@ -151,7 +148,7 @@ export async function binXiDesk(input: {
       }),
     extras: (man) => extras.get(man.fantraxId) ?? { cleanSheet: false, saves: null, tacklesWon: null, interceptions: null, clearances: null },
     history: binHistory({
-      gameweek, teams: facts.teams, fielded: facts.fielded, transactions, pedigree: facts.pedigree, teamName,
+      gameweek, teams: facts.teams, fielded: facts.fielded, transactions: facts.moves, pedigree: facts.pedigree, teamName,
       gameweekOf: (each) => openingGameweek(calendar, each) ?? null,
     }),
     status: (man) => STATUS[availabilityOf(byCode.get(man.code) ?? null).state] ?? null,

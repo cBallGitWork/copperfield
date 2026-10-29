@@ -1,11 +1,10 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { mapLeagueInfo, matchupState, type PeriodResult, type StandingsRow } from "@epl/core";
 import real from "../../packages/core/src/league/fantrax/__fixtures__/leagueInfoScoringReal.json";
 import { draftSide, eleven } from "../../packages/core/src/gazette/matchups/__fixtures__/draftSide";
 import { LIMITS } from "../../packages/core/src/gazette/matchups/__fixtures__/limits";
 
-vi.mock("@epl/core", async (actual) => ({ ...(await actual<typeof import("@epl/core")>()), fetchTransactions: () => Promise.reject(new Error("refused")) }));
-const { draftSeason, gameweekFacts, placeOf, ranksAfter, sweepOf } = await import("./draftSeason");
+import { draftSeason, gameweekFacts, placeOf, ranksAfter, sweepOf } from "./draftSeason";
 
 // Four gameweeks settled before the fifth: Zeta won all four, Alpha lost all four.
 const games: [period: number, home: string, homePoints: number, away: string, awayPoints: number][] = [
@@ -27,14 +26,14 @@ const side = (name: string) => ({ teamId: name, name });
 
 describe("draftSeason", () => {
   it("places each side by the results it has settled, and tells its form, the table and its meetings", async () => {
-    const season = await draftSeason(info, table, results, new Map(), 5);
+    const season = draftSeason(info, { table, pedigree: new Map(), moves: [], traded: [] }, results, 5);
     expect(placeOf(season, "Zeta")).toEqual({ rank: 1, won: 4, drawn: 0, lost: 0, run: "WWWW" });
     expect(gameweekFacts(season, states).get("Zeta")?.map((f) => f.text)).toEqual(["Zeta have won 5 in a row", "Zeta stayed top"]);
     expect(sweepOf(season, side("Zeta"), side("Bravo"), { for: 70, against: 50 })?.text).toBe("Zeta have won both meetings with Bravo");
   });
 
   it("tells no place, table, form or meeting when Fantrax would not give the season's results", async () => {
-    const season = await draftSeason(info, table, null, new Map(), 5);
+    const season = draftSeason(info, { table, pedigree: new Map(), moves: [], traded: [] }, null, 5);
     expect(placeOf(season, "Zeta")).toBeNull();
     expect(ranksAfter(season, states).size).toBe(0);
     expect(gameweekFacts(season, states).size).toBe(0);

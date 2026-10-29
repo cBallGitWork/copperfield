@@ -1,7 +1,4 @@
 import {
-  FANTRAX_LEAGUE_ID,
-  fetchTransactions,
-  mapTransactions,
   meetingsWon,
   periodPairings,
   gameweekForm,
@@ -10,7 +7,6 @@ import {
   tableBefore,
   tableMoves,
   tablePoints,
-  type DraftPick,
   type FormGame,
   type FormerSide,
   type LeagueInfo,
@@ -20,6 +16,7 @@ import {
   type StandingsRow,
   type TablePlace,
 } from "@epl/core";
+import type { DeskFacts } from "./facts";
 
 // The season around one gameweek, for the draft report's form and table (Craig, 29 Sep 2026, and the FM panel): each
 // side's settled results before the gameweek, the table rebuilt from them, the meetings of any two sides, and where a man
@@ -40,14 +37,14 @@ interface DraftSeason {
   arrivals: Map<string, { teamId: string; how: "claim" | "trade" }>;
 }
 
-export async function draftSeason(info: LeagueInfo, table: readonly StandingsRow[], results: readonly PeriodResult[] | null, pedigree: ReadonlyMap<string, DraftPick>, period: number): Promise<DraftSeason> {
+export function draftSeason(info: LeagueInfo, facts: Pick<DeskFacts, "table" | "pedigree" | "moves" | "traded">, results: readonly PeriodResult[] | null, period: number): DraftSeason {
+  const { table, pedigree } = facts;
   const runs = new Map(seasonForm(table, info.matchups, results ?? []).map((f) => [f.teamId, f.run.filter((g) => g.period < period)]));
   const pay = results === null ? null : tablePoints(table);
   const formerly = new Map<string, FormerSide[]>();
   const add = (id: string, side: FormerSide) => formerly.set(id, [...(formerly.get(id) ?? []), side]);
   for (const [id, pick] of pedigree) add(id, { teamId: pick.teamId, how: "drafted", when: pick.round });
-  const [claims, trades] = await Promise.all([fetchTransactions(FANTRAX_LEAGUE_ID, "CLAIM_DROP").catch(() => null), fetchTransactions(FANTRAX_LEAGUE_ID, "TRADE").catch(() => null)]);
-  const moves = [...(claims === null ? [] : mapTransactions(claims, "CLAIM_DROP")), ...(trades === null ? [] : mapTransactions(trades, "TRADE"))];
+  const moves = [...facts.moves, ...facts.traded];
   const arrivals = new Map<string, { teamId: string; how: "claim" | "trade" }>();
   for (const t of moves) {
     if ((t.kind === "claim" || t.kind === "trade") && t.executed && t.period === period && t.toTeamId !== null) arrivals.set(t.fantraxId, { teamId: t.toTeamId, how: t.kind });

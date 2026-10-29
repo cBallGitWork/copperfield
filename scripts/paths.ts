@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 // Where captures live and what "today" means; the capture writer and the staleness check must agree on both.
 
-const REPO_ROOT = fileURLToPath(new URL("..", import.meta.url));
+export const REPO_ROOT = fileURLToPath(new URL("..", import.meta.url));
 
 export const SNAPSHOT_ROOT = join(REPO_ROOT, "data", "snapshots", "fantrax");
 
@@ -18,6 +18,9 @@ export const MAPPINGS_ROOT = join(REPO_ROOT, "data", "mappings");
 
 /** The app's static files, served from its own origin. */
 export const PUBLIC_ROOT = join(REPO_ROOT, "apps", "companion", "public");
+
+/** The paper's splash pictures, served at `/paper/<slug>.png`. */
+export const SPLASH_ROOT = join(PUBLIC_ROOT, "paper");
 
 /** League rules Fantrax will not serve as JSON (the per-position minimums off the commissioner's setup page). */
 export const LEAGUE_LIMITS = join(REPO_ROOT, "data", "leagues");

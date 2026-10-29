@@ -47,6 +47,8 @@ export interface DeskFacts {
   business: Deal[];
   /** This season's claims and drops, row by row; empty when the read refused. */
   moves: LeagueTransaction[];
+  /** Every trade row, executed or not; empty when the read refused. */
+  traded: LeagueTransaction[];
   /** The season's completed trades, newest first: Here We Go files each on detection. */
   trades: Trade[];
   pedigree: Map<string, DraftPick>;
@@ -89,6 +91,7 @@ export async function gatherRoundFacts(
     fielded: squads !== null && wasFielded(squads, period),
     business: deals([...moves, ...traded]),
     moves,
+    traded,
     trades: completedTrades(traded),
     table: standingsPage === null ? [] : mapStandings(standingsPage),
     // Where each man was taken; empty before a draft, so no brief calls every squad undrafted.
