@@ -7,6 +7,7 @@ Exits 0 fresh, 3 exported from a stale or red sweep, 1 failed; the last line pri
 """
 
 import json
+from fnmatch import fnmatch
 import subprocess
 import sys
 import time
@@ -16,6 +17,9 @@ from pathlib import Path
 # What the export reads that the GitHub sweep writes, and the staged FPL calendar the sweep schedule is read off.
 # Never a curated zone: a restore overwrites hand edits.
 ZONES = "derived,signals,match_logs,staging/understat,raw/fpl/live/bootstrap,raw/fpl/live/element_summaries,staging/fpl/{season}"
+# New men's identity files: the sweep mints them and names them in its projections, but the restore skips curated zones.
+IDENTITY = "identity/persons"
+UPLOADING = ("*.tmp", "*.tmp.*")
 LOCK_WAIT_S = 900
 STALE = 3
 # The sister's Tuesday 06:30 UK sweep, after the round's Monday night; weekly accepts it from 05:00 UTC (Mon is 0).
@@ -25,6 +29,28 @@ WEEKLY_SWEEP_DAY = 1
 def newest_report(sister: Path) -> dict | None:
     reports = sorted((sister / "data/derived/sweep_runs").glob("*/report.json"))
     return json.loads(reports[-1].read_text()) if reports else None
+
+
+def unheld(remote: list[str], held: set[str]) -> list[str]:
+    """The bucket's identity files this Mac lacks; never one it holds, which may carry a hand edit."""
+    return sorted(key for key in set(remote) - held if not any(fnmatch(key.rsplit("/", 1)[-1], p) for p in UPLOADING))
+
+
+def add_new_identities(sister: Path) -> list[str]:
+    from src.sweep.orchestration import s3_sync
+
+    target = s3_sync.r2_target()
+    client = s3_sync._build_s3_client(target.endpoint_url)
+    base, root = f"{target.prefix.rstrip('/')}/{IDENTITY}", sister / "data" / IDENTITY
+    held = {path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()}
+    new = unheld(list(s3_sync._remote_index(client, target.bucket, base)), held)
+    for rel in new:
+        dest = root / rel
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        part = dest.with_name(dest.name + ".part")
+        client.download_file(target.bucket, f"{base}/{rel}", str(part))
+        part.replace(dest)
+    return new
 
 
 def stale_reason(report: dict | None, mode: str, now: datetime, due: datetime | None) -> str | None:
@@ -67,6 +93,8 @@ def main() -> int:
         if restore.returncode != 0:
             print(f"the restore from R2 exited {restore.returncode}", flush=True)
             return 1
+        for rel in add_new_identities(sister):
+            print(f"new identity: {rel}", flush=True)
         now = datetime.now(timezone.utc)
         due = _collect_full_sweep_due(sister, now)
         stale = stale_reason(newest_report(sister), mode, now, datetime.fromisoformat(due) if due else None)
