@@ -2,6 +2,7 @@ import TurnLink from "./TurnLink";
 import { PAPER_NAME } from "../../config";
 import { londonDate } from "@epl/core";
 import { STANDING_CAPS } from "./heads";
+import { PAPER } from "../shell/sections";
 
 // The head of an article: the paper's name and the date in small capitals.
 
@@ -17,7 +18,7 @@ export default function Folio({
 
       <div className={`${STANDING_CAPS} flex items-baseline justify-between gap-3 border-b border-line py-2`}>
         {/* The way back to the front page is the paper's own name; a phone has no rail arrows, so it points. */}
-        <TurnLink href="/" className="flex min-h-11 items-center text-muted">
+        <TurnLink href={PAPER} className="flex min-h-11 items-center text-muted">
           <span aria-hidden className="pr-1.5 lg:hidden">
             ←
           </span>

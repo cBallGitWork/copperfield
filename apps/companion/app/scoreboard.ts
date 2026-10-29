@@ -139,19 +139,20 @@ export async function squadLivePoints(
 
   const eleven = players.find(([id]) => id === teamId)?.[1] ?? [];
   const reserves = bench.find(([id]) => id === teamId)?.[1] ?? [];
-  const lines = (squad: LivePlayerPoints[]) =>
+  const squad = [...eleven, ...reserves];
+  const lines = (men: LivePlayerPoints[]) =>
     Object.fromEntries(
-      squad.map((player) => [player.fantraxId, liveBreakdown(player.categories, categories)]),
+      men.map((player) => [player.fantraxId, liveBreakdown(player.categories, categories)]),
     );
   const counted = lines(eleven);
   return {
     points: new Map<string, number | null>(
-      [...eleven, ...reserves].map((player) => [player.fantraxId, player.points]),
+      squad.map((player) => [player.fantraxId, player.points]),
     ),
     breakdown: { ...counted, ...lines(reserves) },
     counted,
     counts: Object.fromEntries(
-      [...eleven, ...reserves].map((player) => [
+      squad.map((player) => [
         player.fantraxId,
         Object.fromEntries(
           player.counts.flatMap(({ category, value }) => {
@@ -161,7 +162,7 @@ export async function squadLivePoints(
         ),
       ]),
     ),
-    played: minutesByMan([...eleven, ...reserves], categories),
+    played: minutesByMan(squad, categories),
   };
 }
 

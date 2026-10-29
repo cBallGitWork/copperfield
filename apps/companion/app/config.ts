@@ -108,6 +108,9 @@ export const STATS_PERIODS_REVALIDATE = 300;
 /** How stale one day of the scoring league's counts may be, in seconds: three reads, two of them the whole pool. */
 export const SCORING_DAY_REVALIDATE = 300;
 
+/** How stale a locked period's bench order may be, in seconds: its manager can still renumber after the lock (Raccoons, GW6). */
+export const BENCH_ORDER_REVALIDATE = 300;
+
 /** How stale one footballer's FPL match history may be, in seconds: it moves only when he plays, and asking FPL
  *  for every player viewed every 30s helped it refuse Vercel (PLATFORM_NOTES, 8 Oct 2026). */
 export const PLAYER_LOG_REVALIDATE = 60 * 60;
