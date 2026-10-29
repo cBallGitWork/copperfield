@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { MODEL_TIMEOUT_MS, NEWSROOM, OPENAI_IMAGES_URL, type PublishedStory } from "@epl/core";
+import { SPLASH_ROOT } from "../paths";
 
 // The splash picture for the paper's lead, drawn in CI: an editorial cartoon, never a photograph and never a likeness
 // of a real footballer. Any failure (no key, a refusal, a bad payload) returns null and costs the picture, never the
@@ -9,9 +9,6 @@ import { MODEL_TIMEOUT_MS, NEWSROOM, OPENAI_IMAGES_URL, type PublishedStory } fr
 
 const MODEL = process.env.GAZETTA_IMAGE_MODEL ?? NEWSROOM.illustrator;
 
-/** Where the app serves it from. `public/` and not `data/`: Next serves this
- *  directory statically, and `data/` is not reachable from a browser. */
-const PUBLIC_ROOT = fileURLToPath(new URL("../../apps/companion/public/paper/", import.meta.url));
 
 /** The house style, in one string. Craig's copy, and the whole reason the
  *  pictures will look like one paper's rather than like a model's default. */
@@ -61,8 +58,8 @@ export async function drawSplash(story: PublishedStory): Promise<Splash | null> 
       return null;
     }
 
-    mkdirSync(PUBLIC_ROOT, { recursive: true });
-    writeFileSync(join(PUBLIC_ROOT, `${story.slug}.png`), Buffer.from(encoded, "base64"));
+    mkdirSync(SPLASH_ROOT, { recursive: true });
+    writeFileSync(join(SPLASH_ROOT, `${story.slug}.png`), Buffer.from(encoded, "base64"));
     return {
       src: `/paper/${story.slug}.png`,
       // The alt is the deck, which is the story in plain words — a drawing of
