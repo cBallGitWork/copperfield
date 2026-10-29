@@ -1,14 +1,7 @@
 import { describe, expect, it } from "vitest";
-import type { FootballPlayer, LineupDetail, SquadPlayerDetail } from "@epl/core";
+import type { LineupDetail } from "@epl/core";
+import { man } from "../../testing/squadMan";
 import { autoSubLine, autoSubbed } from "./autoSubbed";
-
-const man = (fantraxId: string, position: string, points: number | null): SquadPlayerDetail => ({
-  rostered: { slot: { fantraxId, position, status: "" }, player: { code: 1, name: fantraxId } as FootballPlayer, stats: [] },
-  club: undefined,
-  opposition: undefined,
-  points,
-  minutes: [],
-});
 
 // Craig's GW7: Sarr started and did not play, Kerkez was numbered first and played.
 const sheet: LineupDetail = {

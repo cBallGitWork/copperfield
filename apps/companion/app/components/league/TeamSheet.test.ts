@@ -1,7 +1,8 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import type { FootballPlayer, LineupDetail, SquadPlayerDetail } from "@epl/core";
+import type { LineupDetail } from "@epl/core";
+import { man as squadMan } from "../../testing/squadMan";
 import TeamSheet from "./TeamSheet";
 import { autoSubbed } from "./autoSubbed";
 
@@ -11,13 +12,7 @@ vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => crea
 vi.mock("../../matchParts", () => ({ readMatchParts: () => new Promise(() => undefined) }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: () => undefined }) }));
 
-const man = (name: string, position: string, points: number | null): SquadPlayerDetail => ({
-  rostered: { slot: { fantraxId: name, position, status: "" }, player: { code: 1, name, fullName: name, status: "a", news: "" } as FootballPlayer, stats: [] },
-  club: undefined,
-  opposition: undefined,
-  points,
-  minutes: [],
-});
+const man = (name: string, position: string, points: number | null) => squadMan(name, position, points, { fullName: name, status: "a", news: "" });
 
 // Craig, 19 Oct 2026: "on the live head to head we show an auto subbed icon? then sarr (my sub) goes to the back of
 // the bench, no number assigned to him, make it clear its auto sub".
