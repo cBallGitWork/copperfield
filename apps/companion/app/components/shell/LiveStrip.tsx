@@ -5,7 +5,7 @@ import type { LiveTie } from "./liveTie";
 import { usePathname } from "next/navigation";
 import { DASH, trails } from "@epl/core";
 import { SMALL_CAPS } from "@/app/desk";
-import { LIVE, owns } from "./sections";
+import { LIVE, PAPER, owns } from "./sections";
 import LiveMark from "./LiveMark";
 
 // Your tie's score across the top of a desk screen while a ball is in the air, both of a double header's. It stands
@@ -14,7 +14,7 @@ import LiveMark from "./LiveMark";
 export default function LiveStrip({ ties }: { ties: readonly LiveTie[] }) {
   const pathname = usePathname();
   // The front page owns only itself, since every path starts with "/".
-  if (pathname === "/" || owns([LIVE], pathname)) return null;
+  if (pathname === PAPER || owns([LIVE], pathname)) return null;
 
   return (
     // Sticky and full-bleed: the shell's strip, not the page's.
