@@ -1,4 +1,5 @@
 import { fxpaRead } from "./fxpa";
+import type { LineupPort } from "./lineupSave";
 import type { FieldMap } from "./lineupWrite";
 
 // The lineup save's three calls; `lineupWrite.ts` maps the answers.
@@ -43,4 +44,13 @@ export function sendBenchOrder(
     { teamId: write.teamId, period: write.period, adminMode: true, autoSubOrderMap: write.order },
     session,
   );
+}
+
+/** The save's port for one team and period: the commissioner's session writes to the signed-in manager's team. */
+export function fantraxLineupPort(leagueId: string, teamId: string, period: number, session: string): LineupPort {
+  return {
+    state: () => fetchLineupState(leagueId, teamId, period, session),
+    sendLineup: (write) => sendLineup(leagueId, { teamId, period, ...write }, session),
+    sendBench: (order) => sendBenchOrder(leagueId, { teamId, period, order }, session),
+  };
 }

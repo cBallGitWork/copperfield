@@ -2,22 +2,15 @@
 
 import {
   FANTRAX_LEAGUE_ID,
-  benchToWrite,
-  changesLineup,
   eligibilityOf,
-  fetchLineupState,
-  fieldMapFor,
+  fantraxLineupPort,
   firstKickoff,
-  lineupChanges,
   locksAt,
-  mapLineupState,
-  readBenchAnswer,
-  readLineupAnswer,
-  stillHeld,
   saveOpen,
-  sendBenchOrder,
-  sendLineup,
   violations,
+  writeLineup,
+  type OnStep,
+  type PlannedLineup,
   type RosterSlot,
   type WriteAnswer,
 } from "@epl/core";
@@ -33,16 +26,9 @@ import { commissionerSession } from "./saving";
 // Saves the signed-in manager's planned lineup and bench order to Fantrax. The server names the team and the
 // week, and refuses a week that has locked or is about to: the commissioner's write can override a live team.
 
-export interface Plan {
+export interface Plan extends PlannedLineup {
   /** The period the page planned, which must still be the open one. */
   period: number;
-  slots: RosterSlot[];
-  /** Reserves' ids in the order they come on. */
-  bench: string[];
-  /** Whether the manager reordered the bench; an unnumbered one is otherwise left to Fantrax. */
-  reordered: boolean;
-  /** What the page loaded as Fantrax's: the save is refused if Fantrax has moved on since. */
-  held: { slots: RosterSlot[]; bench: string[] };
 }
 
 const SWITCHED_OFF = "Saving to Fantrax is switched off. Set this line-up in Fantrax instead.";
@@ -114,46 +100,24 @@ export async function saveLineup(input: unknown): Promise<WriteAnswer> {
 }
 
 async function write(teamId: string, period: number, plan: Plan, session: string): Promise<WriteAnswer> {
-  const state = mapLineupState(await fetchLineupState(FANTRAX_LEAGUE_ID, teamId, period, session));
-  if (state === null || state.period !== period) return refuse(REFUSED);
-  if (!stillHeld(state, plan.held)) {
-    // The page's copy is behind Fantrax: mark it stale so the reload fetches what Fantrax now holds.
-    markPlanStale();
-    return refuse(CHANGED);
-  }
-  const fieldMap = fieldMapFor(state, plan.slots);
-  if (typeof fieldMap === "string") return refuse(RELOAD);
-
-  const lineup = changesLineup(state, fieldMap);
-  const bench = benchToWrite(plan.bench, plan.reordered, state.autoSubOrder);
-  // Who moved where and the bench order sent (null: Fantrax's left alone), with Fantrax's words when it refuses.
-  const moved = lineupChanges(state, fieldMap);
-  const audit = (answer: WriteAnswer, step: string) => {
+  // Each write as Fantrax answers it: who moved where, the bench order sent (null: Fantrax's left alone), and
+  // Fantrax's words when it refuses.
+  const audit: OnStep = (step, answer, { lineup, moved, bench }) => {
     const refused = answer.ok ? {} : { refused: answer.messages };
     console.info(JSON.stringify({ event: "lineup-save", teamId, period, step, ok: answer.ok, lineup, moved, bench, ...refused }));
   };
-
-  if (lineup) {
-    const send = (dryRun: boolean) =>
-      sendLineup(FANTRAX_LEAGUE_ID, { teamId, period, fieldMap, applyToFuturePeriods: state.applyToFuturePeriods, dryRun }, session);
-    const dry = readLineupAnswer(await send(true));
-    if (!dry.ok) {
-      audit(dry, "dry-run");
-      return dry;
-    }
-    const done = readLineupAnswer(await send(false));
-    audit(done, "lineup");
-    if (!done.ok) return done;
+  const saved = await writeLineup(fantraxLineupPort(FANTRAX_LEAGUE_ID, teamId, period, session), period, plan, audit);
+  switch (saved.outcome) {
+    case "unreadable":
+      return refuse(REFUSED);
+    case "moved-on":
+      // The page's copy is behind Fantrax: mark it stale so the reload fetches what Fantrax now holds.
+      markPlanStale();
+      return refuse(CHANGED);
+    case "unplaceable":
+      return refuse(RELOAD);
+    case "answered":
+      if (saved.stale) markPlanStale();
+      return saved.answer;
   }
-  if (bench !== null) {
-    const done = readBenchAnswer(await sendBenchOrder(FANTRAX_LEAGUE_ID, { teamId, period, order: bench }, session));
-    audit(done, "bench");
-    if (!done.ok) {
-      // The lineup above may have gone through, and the page must show it.
-      if (lineup) markPlanStale();
-      return done;
-    }
-  }
-  markPlanStale();
-  return { ok: true };
 }

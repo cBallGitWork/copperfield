@@ -5659,6 +5659,9 @@ Craig asked for a Save button on the planner and chose a real write over a save 
 - **No save over a newer Fantrax lineup** (Craig, 8 Oct: "should be checking beforehand to see if its upto date"): the
   page sends what it loaded as Fantrax's, and `stillHeld` refuses the save when Fantrax's lineup or the manager's bench
   numbers have changed since, expiring the squads cache so the reload shows them.
+- **The steps live in one module** (29 Oct 2026, the first `/deepen` pass's pick): `writeLineup` in
+  `league/fantrax/lineupSave.ts` runs read, `stillHeld`, dry run, write and bench behind a `LineupPort`, so
+  `lineupSave.test.ts` replays Fantrax's answers without a login; `save.ts` keeps the gate and the wording.
 - **A session may carry three methods and no others** (`fxpa.ts`), because the same cookie reaches
   `deleteLeague`.
 - **Switched on per team**: `FANTRAX_COOKIE` plus `LINEUP_SAVE`, `on` for every team or comma-separated Fantrax

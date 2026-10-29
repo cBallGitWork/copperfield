@@ -405,7 +405,8 @@ unresolved when it is, and a way out to the full profile.
   your lineup button should just be greyed out when no changes, and it should act as a footer"). `saveLineup`
   (`squad/[teamId]/save.ts`) names the team from the signed code (never the lent demo team) and the week from
   `planningRound()`, refuses a page planned for another week and anything inside `SAVE_MARGIN_MINUTES` of the
-  lock, re-checks the league's rules, then sends Fantrax's dry run and saves only on a clean `CONFIRM`. It runs
+  lock, re-checks the league's rules, then hands the write to core's `writeLineup` (`league/fantrax/lineupSave.ts`),
+which owns the steps: Fantrax's dry run first, the save only on a clean `CONFIRM`, then the bench. It runs
   only for a team `LINEUP_SAVE` allows (`on`, or a list of team ids) with `FANTRAX_COOKIE` set; elsewhere the bar reads
   "Planned, not saved" and the Fantrax link is the way to submit. Each write logs one `lineup-save` line: who moved,
   from and to (`lineupChanges`), the bench order sent or null, and Fantrax's words when it refuses.
