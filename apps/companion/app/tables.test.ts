@@ -42,4 +42,9 @@ describe("the paper's tables", () => {
     scorers = [scorer("Haaland", BEEF, 47), scorer("Saka", BEEF, 41), scorer("Palmer", BEEF, 41), scorer("Isak", BEEF, 39)];
     expect((await scorerRows()).map((row) => `${row.rank} ${row.name}`)).toEqual(["1 Haaland", "2 Palmer", "2 Saka", "4 Isak"]);
   });
+
+  it("never calls an owned man a free agent when his team's name is missing", async () => {
+    scorers = [scorer("Saka", "t9", 41)];
+    expect((await scorerRows()).map((row) => row.detail)).toEqual(["t9"]);
+  });
 });
