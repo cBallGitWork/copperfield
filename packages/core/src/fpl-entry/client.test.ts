@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ProviderError } from "../http/errors";
-import { htmlPage, serve, statusOnly } from "../http/fakeFetch";
+import { htmlPage, jsonBody, serve, statusOnly } from "../http/fakeFetch";
 import { fetchEntry, fetchPicks } from "./client";
 
 describe("fetchEntry", () => {
@@ -22,6 +22,14 @@ describe("fetchEntry", () => {
     const error = await fetchEntry(1).catch((e: unknown) => e);
     expect(error).toBeInstanceOf(ProviderError);
     expect(error).toMatchObject({ code: "403", message: "FPL entry 1 → 403" });
+  });
+});
+
+describe("an entry read's container", () => {
+  it("refuses an array where the entry or its picks belong", async () => {
+    serve(jsonBody([]));
+    await expect(fetchEntry(1)).rejects.toMatchObject({ code: "WRONG_SHAPE", kind: "malformed", message: "FPL entry 1 → an array, not an object" });
+    await expect(fetchPicks(1, 6)).rejects.toMatchObject({ code: "WRONG_SHAPE", message: "FPL picks 1/6 → an array, not an object" });
   });
 });
 

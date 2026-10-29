@@ -1,5 +1,5 @@
 import { PL_COMPETITION, PL_COMP_SEASON, PL_FOOTBALL_API_BASE, PL_TEXTSTREAM_PAGE } from "../../config";
-import { fetchJson } from "../../http/get";
+import { expectContainer, fetchJson } from "../../http/get";
 import type {
   RawPlFixture,
   RawPlFixturePage,
@@ -11,9 +11,10 @@ import type { RawPlMatchStats, RawPlPlayerStats, RawPlTeamPage, RawPlTeamStats }
 // All Premier League API I/O, server-side only: it allows only premierleague.com's origin, so a browser is refused.
 // Their CDN caches for 30 seconds, so polling faster is served the same bytes.
 
-/** Throws: a default would print silence as "nothing happened". */
+/** Throws: a default would print silence as "nothing happened". Every endpoint here answers an object. */
 async function get<T>(path: string): Promise<T> {
-  return (await fetchJson(`${PL_FOOTBALL_API_BASE}${path}`, "Premier League", path)) as T;
+  const body = await fetchJson(`${PL_FOOTBALL_API_BASE}${path}`, "Premier League", path);
+  return expectContainer(body, "object", "Premier League", path) as T;
 }
 
 /** One gameweek's fixtures, with every goal of all ten matches (scorer, assister, minute) in one request.
