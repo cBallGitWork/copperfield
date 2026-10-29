@@ -56,7 +56,7 @@ export function presserDesk(input: {
   };
 }
 
-/** One edition of the Team Sheet: everything said on one London day, so Friday's column carries none of Thursday's. */
+/** One edition of the Team Sheet: the round's conferences through one London day, so Friday's carries Thursday's. */
 export function presserEdition<
   L extends { said?: string },
   Q extends { at?: string },
@@ -67,16 +67,24 @@ export function presserEdition<
   spoke: S[];
 } {
   return {
-    lines: onDay(all.lines, day, (row) => row.said),
+    lines: through(all.lines, day, (row) => row.said),
     // A quote's `said` is the speaker's name; its day is `at`.
-    quotes: onDay(all.quotes, day, (row) => row.at),
-    spoke: onDay(all.spoke, day, (row) => row.at),
+    quotes: through(all.quotes, day, (row) => row.at),
+    spoke: through(all.spoke, day, (row) => row.at),
   };
 }
 
-/** Only what was said on one London day; `when` names the row's instant. */
-function onDay<T>(rows: readonly T[], day: string, when: (row: T) => string | undefined): T[] {
-  return rows.filter((row) => onLondonDay(when(row), day));
+/** The men said on that day alone: the edition's lead and picture, so Friday's never leads on a Thursday man. */
+export function presserDayLines<L extends { said?: string }>(day: string, lines: readonly L[]): L[] {
+  return lines.filter((row) => onLondonDay(row.said, day));
+}
+
+/** What was said on or before one London day; `when` names the row's instant, and an unreadable one is dropped. */
+function through<T>(rows: readonly T[], day: string, when: (row: T) => string | undefined): T[] {
+  return rows.filter((row) => {
+    const held = londonDayOf(when(row));
+    return held !== null && held <= day;
+  });
 }
 
 /** The London days the round's conferences were held, one Team Sheet each. */

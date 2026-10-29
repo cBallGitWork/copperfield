@@ -487,6 +487,11 @@ reprinted reports took the lead): `persist.firstRun` carries the printed story's
 and the archive, so a corrected story keeps its place. The Line-Ups are the exception (`REFILES_AS_NEWS`): each new
 eleven is news and is dated when it runs.
 
+**Friday's Team Sheet is the round's whole Team Sheet** (Craig, 29 Oct 2026: *"on friday its one big article"*). It
+carries every conference in the round through Friday, each club dated by its own day under the headline "Thursday and
+Friday Pressers", and it retires Thursday's from the page, which stays in the archive. Its lead and picture are
+Friday's own news.
+
 **The one exception is the Line-Ups, which lead until the lock** (Craig, 9 Oct
 2026: *"Predicted line up becomes the headline article until deadline"*). The
 newsdesk stamps the round's lock on the assignment and the filing carries it as

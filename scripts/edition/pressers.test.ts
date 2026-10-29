@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { Club, Fixture, PresserLine, PresserQuote } from "@epl/core";
 import shortNames from "../../data/leagues/short-names.json";
 import { display, isNews, ownerShort, presserFixtures, tagOf, type PresserSquadMan } from "./pressers";
-import { presserDays, presserEdition, withStillOut } from "./presserWeek";
+import { presserDayLines, presserDays, presserEdition, withStillOut } from "./presserWeek";
 import { withoutEchoes } from "./checks";
 
 // Every row is a real 26/27 player, read out of the FPL snapshot on 18 Sep 2026.
@@ -69,18 +69,23 @@ describe("presserEdition", () => {
     spoke: [{ at: "2026-09-17T12:30:00.000Z", club: "Chelsea" }],
   };
 
-  it("carries one day's conferences and no others", () => {
+  // Craig, 29 Oct 2026: "on friday its one big article", so a manager has all the round's news in one place.
+  it("carries Friday's conferences and Thursday's before them", () => {
     const friday = presserEdition("2026-09-18", all);
-    expect(friday.lines.map((r) => r.club)).toEqual(["Arsenal", "Spurs"]);
+    expect(friday.lines.map((r) => r.club)).toEqual(["Chelsea", "Arsenal", "Spurs"]);
     expect(friday.quotes).toHaveLength(1);
-    expect(friday.spoke).toHaveLength(0);
+    expect(friday.spoke).toHaveLength(1);
   });
 
-  it("narrows every member the same way", () => {
+  it("carries none of a later day's on Thursday", () => {
     const thursday = presserEdition("2026-09-17", all);
     expect(thursday.lines.map((r) => r.club)).toEqual(["Chelsea"]);
     expect(thursday.quotes).toHaveLength(0);
     expect(thursday.spoke).toHaveLength(1);
+  });
+
+  it("leads on the day's own men, never a Thursday man on Friday", () => {
+    expect(presserDayLines("2026-09-18", all.lines).map((r) => r.club)).toEqual(["Arsenal", "Spurs"]);
   });
 
   it("reads the day in London, not UTC", () => {

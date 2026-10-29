@@ -83,7 +83,7 @@ export function newsdesk(
     if (binXiDue(now)) want({ kind: "bin-xi", ...roundSlot("bin-xi", desk.gameweek) });
   }
 
-  // The Team Sheet, outside the finished and lock gates: one column per press-conference day, Thursday's and Friday's.
+  // The Team Sheet, outside the finished and lock gates: one per conference day, and Friday's carries Thursday's.
   const about = desk.ahead === null ? {} : { round: desk.ahead };
   const next = desk.next;
   if (next !== null) {

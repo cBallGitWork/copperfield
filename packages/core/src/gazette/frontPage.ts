@@ -64,13 +64,13 @@ function expired(story: PublishedStory, now: string): boolean {
   return at < clock;
 }
 
-/** Columns that run one edition per gameweek, so a later period's replaces the last. Never the presser: a week
- *  holds two, keyed by day and possibly a period apart; it expires at the lock it previewed, and a later gameweek's retires it. */
+/** Columns that run one edition per gameweek, so a later period's replaces the last. Never the presser, keyed by day: a
+ *  later one in its round carries the earlier's clubs and retires it, a later gameweek's retires both, and the lock ends it. */
 const EDITIONS: readonly StoryKind[] = ["predictions", "bin-xi"];
 
 function editionRetires(newer: PublishedStory, older: PublishedStory): boolean {
   if (newer.kind !== older.kind) return false;
-  if (newer.kind === "presser") return newer.gameweek > older.gameweek;
+  if (newer.kind === "presser") return newer.gameweek > older.gameweek || (newer.gameweek === older.gameweek && compareFiled(newer, older) > 0);
   return EDITIONS.includes(newer.kind) && newer.period > older.period;
 }
 

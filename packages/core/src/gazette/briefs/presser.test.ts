@@ -24,6 +24,16 @@ describe("buildPresserBrief", () => {
     expect(banned(thursday.replace(/^DAYS BY NAME\..*$/mu, ""), RELATIVE_DAYS)).toEqual([]);
   });
 
+  it("names each club's own day when the column carries two days' conferences", () => {
+    const thursday = { ...saka, said: "2026-10-15T12:00:00Z" };
+    const friday = { ...saka, playerName: "Isak", club: 4, clubName: "Newcastle", said: "2026-10-16T12:00:00Z" };
+    const brief = buildPresserBrief({ gameweek: 7, lines: [thursday, friday], held: "2026-10-16", threads: [] });
+    expect(brief).toContain("held on Thursday and Friday");
+    expect(brief).toContain("- Arsenal (code 3), spoke Thursday:");
+    expect(brief).toContain("- Newcastle (code 4), spoke Friday:");
+    expect(banned(brief.replace(/^DAYS BY NAME\..*$/mu, ""), RELATIVE_DAYS)).toEqual([]);
+  });
+
   it("lists only a standing absence as STILL OUT, never a standing doubt or rotation risk", () => {
     const standing = (playerName: string, tag: string): PresserLine => ({ ...saka, playerName, tag, fresh: false });
     const lines = [standing("Saka", "ruled_out"), standing("Partey", "suspended"), standing("Rice", "rotation_risk"), standing("Odegaard", "injury_scare")];

@@ -13,7 +13,7 @@ import {
   type StoryThread,
   type ThreadUpdate,
 } from "@epl/core";
-import { presserEdition, withStillOut } from "./presserWeek";
+import { presserDayLines, presserDays, presserEdition, withStillOut } from "./presserWeek";
 import { withoutEchoes } from "./checks";
 import { faceOf, type FaceContext } from "./faces";
 import type { DeskFacts } from "./facts";
@@ -65,8 +65,7 @@ export interface DeskContext {
   elevens: { column: Record<string, unknown>; starters: ReadonlySet<number> } | null;
 }
 
-/** One edition of the Team Sheet — the day's conferences, and nothing else.
- *  Every consumer reads the same narrowing: the brief, the picture and the lead. */
+/** One edition of the Team Sheet — the round's conferences through its day. The brief, the checks and the rows read it. */
 export function edition(ctx: DeskContext, assignment: Assignment) {
   return presserEdition(assignment.day ?? "", {
     lines: ctx.presserLines,
@@ -75,11 +74,10 @@ export function edition(ctx: DeskContext, assignment: Assignment) {
   });
 }
 
-/** What `faceOf` reads. The presser's men are narrowed to the assignment's own
- *  DAY, or the picture and the lead are chosen from the whole week. */
+/** What `faceOf` reads. The presser's men are the assignment's own DAY's, so Friday's leads on Friday's news. */
 export function faceCtx(ctx: DeskContext, assignment: Assignment): FaceContext {
   return {
-    presserLines: assignment.kind === "presser" ? edition(ctx, assignment).lines : ctx.presserLines,
+    presserLines: assignment.kind === "presser" ? presserDayLines(assignment.day ?? "", ctx.presserLines) : ctx.presserLines,
     starters: ctx.elevens?.starters,
     players: ctx.snapshot.players,
     drafts: ctx.drafts,
@@ -97,7 +95,7 @@ export function file(
     assignment.kind === "presser"
       ? {
           ...column,
-          headline: presserHeadline(assignment.day ?? ""),
+          headline: presserHeadline(presserDays(edition(ctx, assignment).lines)),
           // The fixture and the still-out list are the desk's, joined on the club code the writer echoed, never recalled by
           // a model. They join at the column's top level: `storyOfColumn` folds `teamNews` into `extras` only afterwards.
           teamNews: teamSheetRows(column.teamNews, ctx, edition(ctx, assignment).lines),
