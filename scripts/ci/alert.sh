@@ -15,8 +15,12 @@ message=${3:-}
 [[ $source =~ ^[a-z0-9-]+$ ]] || { echo "::error::alert source '$source' is not lowercase letters, digits and dashes"; exit 1; }
 [[ $state == fail || $state == ok ]] || { echo "::error::alert state '$state' is not fail or ok"; exit 1; }
 title="alert: $source"
-# A backtick would close the fence; a token-shaped string is redacted in case a caller slips.
-message=$(printf '%s' "$message" | tr '`' "'" | sed -E 's/(gh[pousr]_|github_pat_)[A-Za-z0-9_]+/[redacted]/g')
+# A backtick would close the fence; a token, API key or Fantrax cookie value is redacted in case a caller slips.
+message=$(printf '%s' "$message" | tr '`' "'" | sed -E \
+  -e 's/(gh[pousr]_|github_pat_)[A-Za-z0-9_]+/[redacted]/g' \
+  -e 's/sk-ant-[A-Za-z0-9_-]+/[redacted]/g' \
+  -e 's/sk-[A-Za-z0-9_-]{20,}/[redacted]/g' \
+  -e 's/(JSESSIONID|FX_RM)=[^;[:space:]]+/\1=[redacted]/g')
 fence='```'
 body=$(printf '%s\n\n%s\n%s\n%s\n' "$(date -u '+%Y-%m-%d %H:%M UTC')" "$fence" "${message:-no message}" "$fence")
 
