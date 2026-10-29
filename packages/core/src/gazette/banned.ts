@@ -1,4 +1,5 @@
 import { escapeRegExp } from "../regExp";
+import type { Report } from "./fault";
 import { AMERICAN } from "./british";
 import { AMERICAN_IZE } from "./sheets/words";
 
@@ -66,4 +67,9 @@ export const QUOTE_MARKS = /["“”«»]/u;
 export function americanisms(prose: string, list: readonly string[] = AMERICAN): string[] {
   const ize = prose.match(AMERICAN_IZE)?.[0];
   return ize === undefined ? banned(prose, list) : [...banned(prose, list), ize];
+}
+
+/** Sends back each American word or -ize spelling in the prose, filed under the section named. */
+export function notBritish(fault: Report, section: string, prose: string): void {
+  for (const word of americanisms(prose)) fault(section, "not British football English", "send-back", word);
 }

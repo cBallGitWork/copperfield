@@ -6,6 +6,9 @@ export const MS_PER_DAY = 86_400_000;
 /** A minute in milliseconds. */
 export const MS_PER_MINUTE = 60_000;
 
+/** An hour in milliseconds. */
+export const MS_PER_HOUR = 60 * MS_PER_MINUTE;
+
 /** A second in milliseconds. */
 export const MS_PER_SECOND = 1_000;
 

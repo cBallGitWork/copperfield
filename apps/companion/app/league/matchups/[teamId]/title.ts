@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { teamFullName } from "@epl/core";
 import { leagueInfo, readCalendar } from "../../../round";
 import { askedWeek, leagueWeeks } from "../../../squad/[teamId]/weeks";
 import { HEAD_TO_HEAD, gameweekName, titled } from "../../../titles";
@@ -15,6 +16,6 @@ export async function headToHeadTitle({
 }): Promise<Metadata> {
   const [{ teamId }, { gw }, info, calendar] = await Promise.all([params, searchParams, leagueInfo(), readCalendar()]);
   const asked = askedWeek(leagueWeeks(calendar, info?.matchups ?? []), wholeNumber(gw));
-  const team = info?.teams.find((entry) => entry.teamId === teamId)?.name;
+  const team = teamFullName(info?.teams ?? [], teamId);
   return titled(team, HEAD_TO_HEAD, asked === null ? null : gameweekName(asked.gameweek));
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { headToHeads, inPairingOrder, leaguePool, leagueSeason, nextPairedPeriod, pairingInvolves, periodPairings } from "./selectors";
+import { headToHeads, inPairingOrder, leaguePool, leagueSeason, nextPairedPeriod, pairingInvolves, periodPairings, teamFullName } from "./selectors";
 import type {
   LeagueMatchup,
   LeaguePlayer,
@@ -243,5 +243,19 @@ describe("leagueSeason", () => {
 
   it("has no season of its own until the schedule pairs somebody", () => {
     expect(leagueSeason({ matchups: [], scoringPeriods: periods, endDate: "2027-05-30" })).toBeNull();
+  });
+});
+
+describe("teamFullName", () => {
+  const teams: LeagueTeam[] = [{ teamId: "a", name: "Arsenal Ladies FC" }, { teamId: "b", name: "" }];
+
+  it("finds a team's full name by id", () => {
+    expect(teamFullName(teams, "a")).toBe("Arsenal Ladies FC");
+  });
+
+  it("is null for a team the league lacks, an unnamed one, or no id", () => {
+    expect(teamFullName(teams, "z")).toBeNull();
+    expect(teamFullName(teams, "b")).toBeNull();
+    expect(teamFullName(teams, null)).toBeNull();
   });
 });

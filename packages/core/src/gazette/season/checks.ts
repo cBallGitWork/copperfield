@@ -1,5 +1,5 @@
 import { LAWRO_LIMITS, SEASON_RANKINGS } from "../../config";
-import { americanisms, banned } from "../banned";
+import { banned, notBritish } from "../banned";
 import { faultLog, faultOnMatch, type Fault, type Report } from "../fault";
 import { columnRules, lawroProse, type CheckContext } from "../predictions/checks";
 import { lengthOf, masked, mentionAt, sentences, wordCount } from "../predictions/prose";
@@ -72,7 +72,7 @@ export function checkSeason(draft: SeasonDraft, calls: SeasonCalls, squads: Read
     const plain = masked(text, ctx.names);
     for (const word of banned(plain, SEASON_BANNED)) fault(section, "banned", "send-back", word);
     faultOnMatch(fault, section, "banned", "send-back", plain, DRAFT_ROUND);
-    for (const word of americanisms(plain)) fault(section, "not British football English", "send-back", word);
+    notBritish(fault, section, plain);
     // A place beside one side must be the place the desk gave it.
     const own = section.startsWith("table:") ? sides.get(section.slice("table:".length)) : undefined;
     for (const sentence of sentences(text)) {

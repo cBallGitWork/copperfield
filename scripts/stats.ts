@@ -1,6 +1,5 @@
 import {
-  KEEPER,
-  OUTFIELD,
+  POOL_GROUPS,
   POOL_PAGE_SIZE,
   columnDrift,
   fetchPoolStats,
@@ -19,7 +18,7 @@ import { buildStats } from "./stats/build";
 async function main(): Promise<void> {
   // One group after the other, never both at once: Fantrax throttles a burst.
   const sheets: StatSheet[] = [];
-  for (const group of [OUTFIELD, KEEPER]) {
+  for (const group of POOL_GROUPS) {
     sheets.push(mapStatSheet(await fetchPoolStats(STATS_LEAGUE.leagueId, POOL_PAGE_SIZE, undefined, group)));
   }
   const projected = sheets.find((sheet) => sheet.season.projected);

@@ -1,7 +1,6 @@
 import {
   FantraxError,
-  KEEPER,
-  OUTFIELD,
+  POOL_GROUPS,
   POOL_PAGE_SIZE,
   fetchPoolStats,
   fetchSeasonCodes,
@@ -33,7 +32,7 @@ export const scoringDay = leagueCache(
     if (byDate === null) return null;
     const lines: [number, LeagueDayLine][] = [];
     // One half after the other: Fantrax throttles a burst.
-    for (const group of [OUTFIELD, KEEPER]) {
+    for (const group of POOL_GROUPS) {
       const raw = await orRefusal(fetchPoolStats(SCORING_LEAGUE, POOL_PAGE_SIZE, byDate, group, undefined, day));
       if (raw instanceof FantraxError) return null;
       const positions = new Map(mapPlayerStats(raw).map((line) => [line.fantraxId, line.defaultPosition]));

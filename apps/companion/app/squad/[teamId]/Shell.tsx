@@ -1,3 +1,4 @@
+import { teamFullName } from "@epl/core";
 import { teamColours } from "@/app/teamColours";
 import PlateShell from "../../components/shell/PlateShell";
 import { leagueInfo } from "../../round";
@@ -22,7 +23,7 @@ export default async function TeamShell({
   children: React.ReactNode;
 }) {
   // The bar prints Fantrax's name in full; `team.teamName` is the short one every list uses.
-  const full = (await leagueInfo())?.teams.find((t) => t.teamId === team.teamId)?.name || team.teamName;
+  const full = teamFullName((await leagueInfo())?.teams ?? [], team.teamId) ?? team.teamName;
   return (
     <PlateShell colours={teamColours(team.teamId)} title={full}
       back={teamBack(team.slug)}

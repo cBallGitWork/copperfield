@@ -16,6 +16,7 @@ import {
   readMoves,
   seasonCalls,
   seasonMan,
+  teamFullName,
   ukSpelling,
   type Assignment,
   type CallMan,
@@ -94,7 +95,7 @@ export async function seasonDesk(input: {
       const call: CallMan = { fantraxId: slot.fantraxId, name: ukSpelling(fullPrintName(player)), club: clubs.get(player.clubId) ?? "", season: man.season, availability: availabilityOf(player), overall: pick?.overall ?? null };
       return [{ man, call }];
     });
-    squads.push({ teamId: team.teamId, name: info.teams.find((each) => each.teamId === team.teamId)?.name ?? team.teamName, men: men.map((each) => each.man) });
+    squads.push({ teamId: team.teamId, name: teamFullName(info.teams, team.teamId) ?? team.teamName, men: men.map((each) => each.man) });
     named.set(team.teamId, men.map((each) => each.call));
   }
   if (missing.length > 0) say(`  Power rankings: ${missing.length} men have no league projection (npm run draft-pack): ${missing.slice(0, 5).join(", ")}`);

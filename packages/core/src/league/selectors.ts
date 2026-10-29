@@ -10,6 +10,11 @@ import type {
 
 // Pure read-side selectors over league state.
 
+/** A team's full name off the league's teams; null for a team it lacks or one Fantrax sent unnamed (`""`). */
+export function teamFullName(teams: readonly LeagueTeam[], teamId: string | null): string | null {
+  return teams.find((team) => team.teamId === teamId)?.name || null;
+}
+
 /** A footballer in Fantrax's global pool, seen through our competition: `player` is Fantrax-wide and stays nested,
  *  apart from our commissioner's `eligiblePositions` and `status` and this week's `ownerTeamId` and `slot`. */
 export interface PoolPlayer {

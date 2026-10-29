@@ -1,8 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import {
-  KEEPER,
-  OUTFIELD,
+  POOL_GROUPS,
   POOL_PAGE_SIZE,
   fetchBootstrap,
   fetchLeagueInfo,
@@ -49,7 +48,7 @@ async function main(): Promise<void> {
   const matches = new Map<string, LeagueMatch[]>();
   const who = new Map<string, PlayerStatLine>();
   for (const period of begun) {
-    for (const group of [OUTFIELD, KEEPER]) {
+    for (const group of POOL_GROUPS) {
       for (const line of mapPlayerStats(await fetchPoolStats(SCORING_LEAGUE.leagueId, POOL_PAGE_SIZE, undefined, group, period))) {
         if (!who.has(line.fantraxId)) who.set(line.fantraxId, line);
         if (line.stats.GP !== 1) continue;

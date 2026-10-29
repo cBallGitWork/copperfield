@@ -44,7 +44,7 @@ export { linesAfter, tableLines } from "./tableLines";
 export type { SortKey } from "./standingsOrder";
 
 
-export { firstKickoff, gameweekLock, locksAt, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodLock, periodOfGameweek, saveOpen } from "./calendar";
+export { firstKickoff, gameweekLock, locksAt, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
 export type { GameweekKickoff, PeriodGameweeks } from "./calendar";
 
 export { lastLockedPeriod, periodToRead, planningPeriod, rosterDisplay } from "./visibility";
@@ -67,7 +67,7 @@ export { fetchSeasonCodes } from "./fantrax/playerClient";
 // The shape differ, for `scripts/shape-diff.ts`: does the league still answer in the shape the mappers expect.
 export { diffShapes, shapeOf } from "./fantrax/shape";
 
-export { headToHeads, inPairingOrder, leaguePool, leagueSeason, nextPairedPeriod, pairingInvolves, periodPairings, scoringOf } from "./selectors";
+export { headToHeads, inPairingOrder, leaguePool, leagueSeason, nextPairedPeriod, pairingInvolves, periodPairings, scoringOf, teamFullName } from "./selectors";
 export { leads, trails } from "./scoreline";
 export type { HeadToHead, LeagueSeason, PeriodPairing, PoolPlayer } from "./selectors";
 
@@ -176,7 +176,7 @@ export { wordsFor, wordsOf } from "./categoryWords";
 export { bestDefConPoints, defConAt, defConMost, defConScored } from "./defcon";
 export type { DefConPeriod } from "./defcon";
 export type { GroupKey, Measure, StatCategory } from "./categories";
-export { mapPlayerStats, KEEPER, OUTFIELD } from "./fantrax/playerStats";
+export { mapPlayerStats, KEEPER, OUTFIELD, POOL_GROUPS } from "./fantrax/playerStats";
 export { mapAssistKinds } from "./fantrax/assistKinds";
 export { fetchPoolWindow } from "./fantrax/windowClient";
 export type { PlayerStatLine, RawPlayerStats } from "./fantrax/playerStats";

@@ -9,6 +9,8 @@ export type PositionGroup = "SOCCER_NON_GOALIE" | "SOCCER_GOALIE";
 
 export const OUTFIELD: PositionGroup = "SOCCER_NON_GOALIE";
 export const KEEPER: PositionGroup = "SOCCER_GOALIE";
+/** The whole pool, outfielders then keepers: one ask per group. */
+export const POOL_GROUPS = [OUTFIELD, KEEPER] as const;
 
 interface RawHeaderCell {
   /** "G", "A", "CS": the only stable handle on a column, as `key` is `sc` on every stat. */

@@ -63,10 +63,13 @@ export interface RawCategoryStat {
   fpts?: number;
 }
 
-export function mapLiveScores(raw: RawLiveScoring): LiveTeamScore[] {
-  const teams = raw.statsPerTeam?.allTeamsStats ?? {};
+/** Each team's sections by team id; none when Fantrax sent no teams. */
+function teamSections(raw: RawLiveScoring): [teamId: string, sections: RawTeamSections | undefined][] {
+  return Object.entries(raw.statsPerTeam?.allTeamsStats ?? {});
+}
 
-  return Object.entries(teams).flatMap(([teamId, sections]) => {
+export function mapLiveScores(raw: RawLiveScoring): LiveTeamScore[] {
+  return teamSections(raw).flatMap(([teamId, sections]) => {
     const active = sections?.ACTIVE;
     if (!active) return [];
     return [
@@ -82,10 +85,9 @@ export function mapLiveScores(raw: RawLiveScoring): LiveTeamScore[] {
 
 /** Each team's eleven and bench as Fantrax lists them, with the share of each man's football still to come. */
 export function mapLiveRemaining(raw: RawLiveScoring): LiveRemaining[] {
-  const teams = raw.statsPerTeam?.allTeamsStats ?? {};
   const shares = (section: RawTeamSection | undefined): Record<string, number> =>
     Object.fromEntries(Object.entries(section?.remainingEventPercent ?? {}).filter((entry): entry is [string, number] => typeof entry[1] === "number"));
-  return Object.entries(teams).flatMap(([teamId, sections]) =>
+  return teamSections(raw).flatMap(([teamId, sections]) =>
     sections?.ACTIVE === undefined ? [] : [{ teamId, eleven: shares(sections.ACTIVE), bench: shares(sections.BENCH) }],
   );
 }
@@ -101,9 +103,7 @@ function countToPlay(remaining: Record<string, number | undefined> | undefined):
 /** Fantrax's projected total per team, summed from ACTIVE projections (`totalFpts` is nought until kickoff).
  *  Group subtotals are skipped, or every projection roughly doubles; null, never nought, when nothing is projected. */
 export function mapProjectedTotals(raw: RawLiveScoring): TeamProjection[] {
-  const teams = raw.statsPerTeam?.allTeamsStats ?? {};
-
-  return Object.entries(teams).flatMap(([teamId, sections]) => {
+  return teamSections(raw).flatMap(([teamId, sections]) => {
     const projected = sections?.ACTIVE?.projectedTotalsMap;
     if (!projected) return [{ teamId, points: null }];
 
@@ -141,9 +141,7 @@ export function mapBenchPlayerPoints(raw: RawLiveScoring): LiveSquadPoints[] {
 }
 
 function sectionPoints(raw: RawLiveScoring, which: keyof RawTeamSections): LiveSquadPoints[] {
-  const teams = raw.statsPerTeam?.allTeamsStats ?? {};
-
-  return Object.entries(teams).flatMap(([teamId, sections]) => {
+  return teamSections(raw).flatMap(([teamId, sections]) => {
     const section = sections?.[which];
     if (!section) return [];
 
