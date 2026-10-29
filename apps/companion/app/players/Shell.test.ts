@@ -13,10 +13,10 @@ import ScoutShell from "./Shell";
 
 // M-CONSIST-5: a 'DATA' bar sat over the strip, repeating the lit Data tab beside it and naming no subject.
 describe("Data's frame", () => {
-  it("opens on its views' strip with no bar, keeping its heading for a screen reader", () => {
+  it("opens on its views' strip, locked to a phone's top, with no bar, keeping its heading for a screen reader", () => {
     const html = renderToStaticMarkup(ScoutShell({ children: null }));
     expect(html).not.toContain("cm-title");
-    expect(html.startsWith('<div class="flex flex-col gap-2"><h1 class="sr-only">Data</h1><nav')).toBe(true);
+    expect(html).toMatch(/^<div class="flex flex-col gap-2"><h1 class="sr-only">Data<\/h1><div class="max-lg:sticky [^"]*"><nav/);
   });
 
   // P-13: the strip threw the search away; the boards over one pool share it, the rest stay bare.

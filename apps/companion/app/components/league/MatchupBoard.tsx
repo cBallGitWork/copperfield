@@ -8,7 +8,7 @@ import {
   inkOn,
 } from "@epl/core";
 import { teamColours } from "@/app/teamColours";
-import BackPlate from "../shell/BackPlate";
+import BackBar from "../shell/BackBar";
 import TabStrip, { type Tab } from "../shell/TabStrip";
 import TeamName from "./TeamName";
 import { BAR_TITLE } from "@/app/desk";
@@ -56,11 +56,10 @@ export default function MatchupBoard<K extends string>({
   return (
     <div className="flex flex-col gap-2">
       {/* One row, read as a scoreline: each side on its own colour, its total at its own right edge. */}
-      <div className="flex items-stretch">
-        <BackPlate fallback={back} />
+      <BackBar back={back}>
         <Side side={team} open={lineups ? open === "team" : null} onOpen={() => setOpen("team")} />
         <Side side={opponent} open={lineups ? open === "opponent" : null} onOpen={() => setOpen("opponent")} />
-      </div>
+      </BackBar>
 
       <TabStrip label="Match views" tabs={tabs} current={view} />
 
