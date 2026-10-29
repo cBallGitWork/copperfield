@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { firstKickoff, gameweekLock, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodLock, periodOfGameweek, saveOpen } from "./calendar";
+import { firstKickoff, gameweekLock, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
 import type { GameweekKickoff } from "./calendar";
 import type { LeaguePeriod } from "./types";
 import alignment from "./__fixtures__/periodAlignment.json";
@@ -212,6 +212,13 @@ describe("openingGameweek", () => {
     const calendar = periodGameweeks([P5, P6], [...early, ...GW6]);
     expect(periodOfGameweek(calendar, 6)?.period).toBe(6);
     expect(periodOfGameweek(calendar, 5)?.period).toBe(5);
+  });
+
+  it("finds the period holding a gameweek straight from the periods and kickoffs", () => {
+    const season = [{ gameweek: 3, kickoff: "2026-09-05T14:00:00Z" }, ...GW6, { gameweek: 3, kickoff: "2026-10-14T18:30:00Z" }];
+    expect(periodHoldingGameweek([P3, P6], season, 3)?.period).toBe(3);
+    expect(periodHoldingGameweek([P3, P6], season, 6)).toEqual(periodOfGameweek(periodGameweeks([P3, P6], season), 6));
+    expect(periodHoldingGameweek([P3, P6], season, 7)).toBeUndefined();
   });
 
   it("has none for a blank, or a period the calendar lacks", () => {

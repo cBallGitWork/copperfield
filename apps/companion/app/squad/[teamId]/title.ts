@@ -1,3 +1,4 @@
+import { teamFullName } from "@epl/core";
 import { leagueInfo } from "../../round";
 import { myTeamId } from "../../session";
 import { labelOf, subjectTitle } from "../../titles";
@@ -10,6 +11,6 @@ export function teamTitle(tab: TeamTab) {
   return subjectTitle(async ({ teamId: slug }: { teamId: string }) => {
     const teams = (await leagueInfo())?.teams ?? [];
     const teamId = slug === OWN ? await myTeamId(teams) : slug;
-    return teams.find((team) => team.teamId === teamId)?.name || null;
+    return teamFullName(teams, teamId);
   }, labelOf(TEAM_TABS, tab));
 }

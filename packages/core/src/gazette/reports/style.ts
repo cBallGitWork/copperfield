@@ -1,5 +1,5 @@
 import { REPORTS } from "../../config";
-import { FILLER, GROUNDS, QUOTE_MARKS, REGISTER, americanisms, banned, overused } from "../banned";
+import { FILLER, GROUNDS, QUOTE_MARKS, REGISTER, banned, notBritish, overused } from "../banned";
 import type { Report } from "../fault";
 import { masked, ngrams, sentences, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
@@ -35,7 +35,7 @@ export function wordFaults(section: string, text: string, football: boolean, nam
   sourceFaults(fault, section, plain);
   for (const word of banned(plain, REPORT_FPL)) fault(section, "a fantasy game's term", "hard", word);
   for (const word of banned(plain, REPORT_NEVER)) fault(section, "a phrase this paper does not print", "send-back", word);
-  for (const word of americanisms(plain)) fault(section, "American, not British", "send-back", word);
+  notBritish(fault, section, plain);
   for (const word of banned(plain, REPORT_ADVICE)) fault(section, "advice; set the facts side by side instead", "send-back", word);
   if (football) for (const word of banned(plain, REPORT_FANTASY)) fault(section, "a draft word in the football", "send-back", word);
   faultOn(fault, section, "a man called anything but his name", "send-back", REPORT_NOT_HIS_NAME, text);

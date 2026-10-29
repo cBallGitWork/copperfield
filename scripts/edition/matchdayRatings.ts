@@ -1,7 +1,6 @@
 import {
   DEFCON,
-  KEEPER,
-  OUTFIELD,
+  POOL_GROUPS,
   POOL_PAGE_SIZE,
   RATING_WEIGHTS,
   STRENGTH_SO_FAR,
@@ -44,7 +43,7 @@ async function dayRead(leagueId: string, day: string) {
   const code = mapPoolStats(await fetchSeasonCodes(leagueId)).byDate;
   if (code === null) throw new Error(`no per-date season from ${leagueId}`);
   const reads = [];
-  for (const group of [OUTFIELD, KEEPER]) {
+  for (const group of POOL_GROUPS) {
     const raw = await fetchPoolStats(leagueId, POOL_PAGE_SIZE, code, group, undefined, day);
     reads.push({ pool: mapPoolStats(raw), sheet: mapStatSheet(raw) });
   }

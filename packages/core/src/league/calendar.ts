@@ -33,6 +33,15 @@ export function periodOfGameweek(calendar: readonly PeriodGameweeks[], gameweek:
   return calendar.find((entry) => entry.own === gameweek) ?? calendar.find((entry) => entry.gameweeks.includes(gameweek));
 }
 
+/** The period holding a gameweek on the calendar `periods` and `kickoffs` make; undefined when none does. */
+export function periodHoldingGameweek(
+  periods: LeaguePeriod[],
+  kickoffs: GameweekKickoff[],
+  gameweek: number,
+): PeriodGameweeks | undefined {
+  return periodOfGameweek(periodGameweeks(periods, kickoffs), gameweek);
+}
+
 export function periodGameweeks(
   periods: LeaguePeriod[],
   kickoffs: GameweekKickoff[],
@@ -113,7 +122,7 @@ export function periodLock(period: LeaguePeriod | undefined, kickoffs: readonly 
 /** A gameweek's lineup lock: its period on the roster calendar, then that period's `periodLock`; null for a gameweek
  *  no period holds. */
 export function gameweekLock(periods: LeaguePeriod[], kickoffs: GameweekKickoff[], gameweek: number): string | null {
-  const found = periodOfGameweek(periodGameweeks(periods, kickoffs), gameweek);
+  const found = periodHoldingGameweek(periods, kickoffs, gameweek);
   return periodLock(periods.find((period) => period.number === found?.period), kickoffs);
 }
 

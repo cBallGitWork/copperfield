@@ -6,6 +6,7 @@ import {
   mapPoolStats,
   playerByCode,
   tradeSlot,
+  teamFullName,
   tradeStory,
   type Assignment,
   type FootballSnapshot,
@@ -51,7 +52,7 @@ export async function hereWeGoDesk(input: {
     goals: footballer(fantraxId)?.season.goals ?? null,
   });
   const teamName = (teamId: string) =>
-    ownerShort({ teamId, teamName: info.teams.find((team) => team.teamId === teamId)?.name ?? teamId }) ?? teamId;
+    ownerShort({ teamId, teamName: teamFullName(info.teams, teamId) ?? teamId }) ?? teamId;
 
   const jobs = new Map<string, TradeJob>();
   for (const assignment of due) {

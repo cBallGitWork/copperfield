@@ -1,5 +1,5 @@
 import { HERE_WE_GO } from "../editorial";
-import { BANNED, americanisms, banned } from "../banned";
+import { BANNED, banned, notBritish } from "../banned";
 import { faultLog, type Fault } from "../fault";
 import { lengthOf, masked, numbersIn, sentences, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
@@ -27,7 +27,7 @@ export function checkTrade(column: Record<string, unknown>, ctx: { brief: string
   for (const figure of strayFigures(plain, figures)) fault("body", "a figure not in the brief", "hard", String(figure));
   for (const name of strangers(body, ctx.brief)) fault("body", "a name not in the brief", "hard", name);
   for (const word of banned(plain, [...BANNED, ...DESK_BANNED, ...SHEETS_STOCK])) fault("body", "banned or stock phrasing", "send-back", word);
-  for (const word of americanisms(plain)) fault("body", "not British football English", "send-back", word);
+  notBritish(fault, "body", plain);
   for (const word of banned(plain, TRADE_SIGN_OFF)) fault("body", "the desk prints the sign-off", "send-back", word);
   faultOn(fault, "body", "no emoji: the paper prints words", "send-back", EMOJI, body);
 

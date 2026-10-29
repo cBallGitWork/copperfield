@@ -7,8 +7,7 @@ import {
   fplCodeOf,
   mapAssistKinds,
   mapPlayerStats,
-  periodGameweeks,
-  periodOfGameweek,
+  periodHoldingGameweek,
 } from "@epl/core";
 import { ASSIST_KINDS_REVALIDATE } from "./config";
 import { seasonKickoffs } from "./football";
@@ -36,7 +35,7 @@ export async function roundAssistKinds(gameweek: number | null): Promise<Map<num
   if (gameweek === null || STATS_LEAGUE === null) return new Map();
   const kinds = async (league: string) => {
     const [periods, kickoffs] = await Promise.all([periodsOf(league), seasonKickoffs()]);
-    const period = periodOfGameweek(periodGameweeks(periods, kickoffs), gameweek)?.period;
+    const period = periodHoldingGameweek(periods, kickoffs, gameweek)?.period;
     return new Map(period === undefined ? [] : await kindsOf(league, period));
   };
   return orDegraded(kinds(STATS_LEAGUE), () => new Map<number, AssistKinds>());
