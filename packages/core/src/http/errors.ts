@@ -35,6 +35,11 @@ export function notJson(provider: string, what: string): (arrived: string) => Pr
   return (arrived) => failure(provider, what, "NOT_JSON", "malformed", arrived);
 }
 
+/** JSON of the wrong shape for the endpoint: "FPL /regions/ → an object, not an array". */
+export function wrongShape(provider: string, what: string, answer: string): ProviderError {
+  return failure(provider, what, "WRONG_SHAPE", "malformed", answer);
+}
+
 /** No answer at all, named by host and path because no provider client is in the loop. */
 export function unreachable(url: string, code: string): ProviderError {
   const { host, pathname } = new URL(url);

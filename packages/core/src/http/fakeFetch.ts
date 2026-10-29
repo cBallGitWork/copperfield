@@ -25,3 +25,6 @@ export const htmlPage = () =>
 
 /** An answer with this status and no body. */
 export const statusOnly = (status: number) => () => new Response(null, { status });
+
+/** A 200 carrying this value as JSON. */
+export const jsonBody = (value: unknown) => () => new Response(JSON.stringify(value), { status: 200 });
