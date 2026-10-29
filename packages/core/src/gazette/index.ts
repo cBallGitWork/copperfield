@@ -12,7 +12,7 @@ export { presserClubs, teamSheetExpect } from "./briefs/presserClubs";
 export type { TeamSheetExpect } from "./briefs/presserClubs";
 export type { PresserLine } from "./briefs/presser";
 export { standingHeadlines } from "./briefs/standing";
-export { BANNED, banned } from "./banned";
+export { BANNED, americanisms, banned, styleFaults } from "./banned";
 export { AMERICAN } from "./british";
 export { NEWS_GAPS, RELATIVE_DAYS, teamSheetGaps, unbackedFit } from "./teamSheetChecks";
 export { MAX_PAPER_STORIES, composePaper } from "./frontPage";

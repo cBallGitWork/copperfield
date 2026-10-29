@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { BANNED, americanisms, banned, overused } from "./banned";
+import { BANNED, americanisms, banned, overused, styleFaults } from "./banned";
 
 // The two failures this exists for, both printed: five headlines on "bank" in
 // one edition, and "Isidor Off The Bench Wins It Short" filed by a writer that
@@ -56,5 +56,12 @@ describe("americanisms", () => {
 describe("overused", () => {
   it("files each phrase past its cap with the times it was used, whole words only", () => {
     expect(overused("On paper, on paper, on paper. Paperwork.", [["on paper", 2], ["paper", 3]])).toEqual(["on paper ×3"]);
+  });
+});
+
+describe("styleFaults", () => {
+  it("names the American words, then the em dash once", () => {
+    expect(styleFaults("His roster — twice — held.")).toEqual(["roster", "—"]);
+    expect(styleFaults("He scored, twice: both late.")).toEqual([]);
   });
 });

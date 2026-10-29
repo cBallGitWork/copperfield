@@ -69,6 +69,14 @@ export function americanisms(prose: string, list: readonly string[] = AMERICAN):
   return ize === undefined ? banned(prose, list) : [...banned(prose, list), ize];
 }
 
+/** An em dash, which the paper never prints: a comma or a colon does its job. */
+export const EM_DASH = "—";
+
+/** The prose's style faults: its American words, then the em dash once if it uses one. */
+export function styleFaults(prose: string): string[] {
+  return prose.includes(EM_DASH) ? [...americanisms(prose), EM_DASH] : americanisms(prose);
+}
+
 /** Sends back each American word or -ize spelling in the prose, filed under the section named. */
 export function notBritish(fault: Report, section: string, prose: string): void {
   for (const word of americanisms(prose)) fault(section, "not British football English", "send-back", word);
