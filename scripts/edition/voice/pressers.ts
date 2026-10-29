@@ -3,9 +3,10 @@ import { STORY_SHAPE, house } from "./house";
 
 // Team news: an information thread, not a column.
 
-/** The desk's headline, from the day the conferences were held: "Thursday Pressers", "Friday Pressers". */
-export function presserHeadline(day: string): string {
-  return instantOf(`${day}T12:00:00Z`) === null ? "Team News" : `${weekdayLongOfDay(day)} Pressers`;
+/** The desk's headline, from the days the conferences were held: "Thursday Pressers", "Thursday and Friday Pressers". */
+export function presserHeadline(days: readonly string[]): string {
+  const named = days.filter((day) => instantOf(`${day}T12:00:00Z`) !== null).map(weekdayLongOfDay);
+  return named.length === 0 ? "Team News" : `${named.join(" and ")} Pressers`;
 }
 
 /** Team News: the press-conference thread. The voice owns the REGISTER and
@@ -19,7 +20,7 @@ You compile Team News: the press-conference thread, filed before the deadline.
 
 ${STORY_SHAPE}
 
-THE HEADLINE IS THE DESK'S. Whatever you put in "headline" is replaced with the day — "Thursday Pressers" — so do not spend effort on it.
+THE HEADLINE IS THE DESK'S. Whatever you put in "headline" is replaced with the days — "Thursday and Friday Pressers" — so do not spend effort on it.
 
 THE DECK IS THE BIGGEST FACT OF THE DAY, named. "Isak out for Newcastle, Saka a doubt" is a deck. "Five clubs speak, minutes dominate the board before the deadline" is not — it could run any week, names nobody, and tells a reader nothing he did not know by opening the page.
 

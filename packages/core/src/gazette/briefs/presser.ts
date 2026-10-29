@@ -4,7 +4,7 @@ import { presserClubs, type ClubQuote } from "./presserClubs";
 import { storylinesBlock } from "./storylines";
 import type { StoryThread } from "../ledger";
 import { briefOf } from "./briefOf";
-import { MS_PER_DAY, londonWeekdayLong } from "../../time";
+import { MS_PER_DAY, londonDayOf, londonWeekdayLong, weekdayLongOfDay } from "../../time";
 
 // The team news brief: what managers said about availability, by club, owned or not.
 
@@ -43,13 +43,18 @@ export function buildPresserBrief(brief: {
   /** The man the desk has chosen to print, so the prose and the picture agree. */
   lead?: string | null;
   /** Every club that held a conference, including those with nothing to report. */
-  spoke?: readonly { clubName: string; manager: string | null }[];
+  spoke?: readonly { clubName: string; manager: string | null; at?: string }[];
   /** The London day the conferences were held, which the column names in place of "today" and "tomorrow". */
   held?: string;
   threads: readonly StoryThread[];
 }): string {
   // By club: the unit the news arrives in and a reader scans, with its manager's words beside its men.
   const byClub = presserClubs(brief.lines, brief.quotes ?? []);
+  // Friday's column carries Thursday's clubs too, so each club is dated by its own conference.
+  const dayOf = (row: (typeof byClub)[number]) =>
+    [...row.men, ...row.standing].map((line) => londonDayOf(line.said)).concat(row.quotes.map(({ quote }) => londonDayOf(quote.at))).find((day) => day !== null) ?? null;
+  const days = [...new Set([...byClub.map(dayOf), ...(brief.spoke ?? []).map((each) => londonDayOf(each.at))].filter((day) => day !== null))].sort();
+  const spokeOn = (day: string | null) => (days.length > 1 && day !== null ? `, spoke ${weekdayLongOfDay(day)}` : "");
   const said = (quote: ClubQuote, fact: boolean) =>
     `    ${fact ? "QUOTE WITH A FACT" : "quote, no fact"}: "${quote.text}" — ${quote.said}${quote.about === undefined ? "" : ` on ${quote.about}`}`;
 
@@ -72,7 +77,7 @@ export function buildPresserBrief(brief: {
     });
     const also = row.standing.length === 0 ? [] : [`  STILL OUT: ${row.standing.map((line) => line.playerName).join(", ")}`];
     const quotes = row.quotes.map(({ quote, fact }) => said(quote, fact));
-    return [`- ${row.name} (code ${row.code}):${men.length === 0 ? "" : ` ${men.join(" · ")}`}`, ...also, ...quotes].join("\n");
+    return [`- ${row.name} (code ${row.code})${spokeOn(dayOf(row))}:${men.length === 0 ? "" : ` ${men.join(" · ")}`}`, ...also, ...quotes].join("\n");
   });
 
   const owned = brief.lines.filter((line) => line.ownerName !== null).length;
@@ -81,7 +86,7 @@ export function buildPresserBrief(brief: {
   const listed = new Set(byClub.map((row) => row.name));
   const quiet = (brief.spoke ?? [])
     .filter((each) => !listed.has(each.clubName))
-    .map((each) => `- ${each.clubName}${speaker(each.manager) === null ? "" : ` (${each.manager})`}`);
+    .map((each) => `- ${each.clubName}${speaker(each.manager) === null ? "" : ` (${each.manager})`}${spokeOn(londonDayOf(each.at))}`);
 
   const quoted = (brief.quotes ?? []).length > 0;
   const weekday = (shift: number) => (brief.held === undefined ? "" : londonWeekdayLong(new Date(Date.parse(`${brief.held}T12:00:00Z`) + shift * MS_PER_DAY).toISOString()));
@@ -90,7 +95,9 @@ export function buildPresserBrief(brief: {
     `TEAM NEWS, gameweek ${brief.gameweek}. What the managers said before the deadline. A draft manager reads this to decide who to start AND who to claim, so it covers every man mentioned, not only the ones somebody owns.`,
     brief.held === undefined
       ? null
-      : `DAYS BY NAME. These conferences were held on ${weekday(0)}, and the column is read on the days after, until the lock. Outside a manager's quote never write today, tonight, last night, yesterday, tomorrow, this week or next week: name the day itself. For ${weekday(0)}'s conferences the day before was ${weekday(-1)} and the day after is ${weekday(1)}.`,
+      : days.length > 1
+        ? `DAYS BY NAME. These conferences were held on ${days.map(weekdayLongOfDay).join(" and ")}, each club's day beside its name, and the column is read on the days after, until the lock. Outside a manager's quote never write today, tonight, last night, yesterday, tomorrow, this week or next week: name the club's own day.`
+        : `DAYS BY NAME. These conferences were held on ${weekday(0)}, and the column is read on the days after, until the lock. Outside a manager's quote never write today, tonight, last night, yesterday, tomorrow, this week or next week: name the day itself. For ${weekday(0)}'s conferences the day before was ${weekday(-1)} and the day after is ${weekday(1)}.`,
     [`WHAT WAS SAID, by club — ${brief.lines.length} men across ${new Set(brief.lines.map((line) => line.clubName)).size} clubs, ${owned} of them owned in this league. The code is the club's and you must echo it back exactly. Under each club are its manager's words, verbatim, the ones carrying a fact first:`, ...clubs].join("\n"),
     quiet.length === 0
       ? null

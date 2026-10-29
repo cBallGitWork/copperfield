@@ -133,9 +133,12 @@ describe("composePaper — one edition of a column at a time", () => {
     expect(out.map((s) => s.slug)).toEqual(["gw5"]);
   });
 
-  it("keeps Thursday's and Friday's pressers, which share a round", () => {
-    const out = composePaper([story("presser", "thu", 5), story("presser", "fri", 5)], "2026-09-21T12:00:00.000Z");
-    expect(out).toHaveLength(2);
+  // Craig, 29 Oct 2026: Friday's carries Thursday's clubs too, so it is the one Team Sheet on the page.
+  it("retires Thursday's presser when Friday's, which carries it, files", () => {
+    const thu = { ...story("presser", "thu", 5), filedAt: "2026-09-17T17:00:00.000Z" };
+    const fri = { ...story("presser", "fri", 5), filedAt: "2026-09-18T16:30:00.000Z" };
+    expect(composePaper([thu, fri], "2026-09-18T17:00:00.000Z").map((s) => s.slug)).toEqual(["fri"]);
+    expect(composePaper([thu], "2026-09-18T17:00:00.000Z").map((s) => s.slug)).toEqual(["thu"]);
   });
 
   it("retires last round's pressers when this round's first files", () => {
