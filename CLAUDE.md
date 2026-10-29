@@ -140,7 +140,7 @@ The binding set is `docs/rules/CODE_RULES.md`. The ones that bite most here:
 - **`tools/ui/`** holds `.mjs` browser instruments over `cdp.mjs`. They talk to an
   already-running headless Chrome on `CDP_PORT` (default 9261) and never launch one; auth is
   `--team-cookie <file>` or `TEAM_COOKIE`.
-- **Skills**: `/verify` `/shoot` `/audit-ui` `/probe` `/refactor`, and seven Craig starts: the runbooks
+- **Skills**: `/verify` `/shoot` `/audit-ui` `/probe` `/refactor` `/deepen` (the architecture pass, on Craig's ask), and seven Craig starts: the runbooks
   `/phase-gate` `/handover` `/swap-day` `/rehearsal-saturday`, and `/grill` (interview before
   building, ends in the issue), `/wait-what` (say it again plainly), `/retro` (suggest fixes to
   the surroundings before clearing the chat).
