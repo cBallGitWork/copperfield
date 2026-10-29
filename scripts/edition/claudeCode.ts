@@ -22,24 +22,30 @@ export function claudeArgs(system: string, model: string, effort: string | null)
   ];
 }
 
+interface CliResult { is_error?: boolean; result?: string; stop_reason?: string; usage?: Record<string, number> }
+
+/** The CLI's last JSON line parsed, or undefined when there is none or it does not parse. */
+function lastJsonLine(stdout: string): CliResult | undefined {
+  const line = stdout.trim().split("\n").reverse().find((l) => l.startsWith("{"));
+  if (line === undefined) return undefined;
+  try {
+    return JSON.parse(line) as CliResult;
+  } catch {
+    return undefined;
+  }
+}
+
 /** The CLI's one JSON result, or a throw naming what it said instead. */
 export function readResult(stdout: string): Reply {
-  const line = stdout.trim().split("\n").reverse().find((l) => l.startsWith("{"));
-  if (line === undefined) throw new Error(`Claude Code printed no result: ${stdout.slice(0, 300)}`);
-  const body = JSON.parse(line) as { is_error?: boolean; result?: string; stop_reason?: string; usage?: Record<string, number> };
+  const body = lastJsonLine(stdout);
+  if (body === undefined) throw new Error(`Claude Code printed no result: ${stdout.slice(0, 300)}`);
   if (body.is_error === true) throw new Error(`Claude Code: ${body.result ?? "an error with no message"}`);
   return { text: body.result ?? "", stopReason: body.stop_reason, usage: body.usage };
 }
 
 /** A failed run's reason: the CLI's own `result` when it printed one (a refused login, a spent limit), else its stderr. */
 export function exitError(code: number | null, stderr: string, stdout: string): Error {
-  const line = stdout.trim().split("\n").reverse().find((l) => l.startsWith("{"));
-  let said: string | undefined;
-  try {
-    said = line === undefined ? undefined : (JSON.parse(line) as { result?: string }).result;
-  } catch {
-    said = undefined;
-  }
+  const said = lastJsonLine(stdout)?.result;
   return new Error(`Claude Code exited ${code}: ${said || stderr.slice(-300) || stdout.slice(0, 300)}`);
 }
 

@@ -24,6 +24,10 @@ describe("readResult", () => {
     expect(() => readResult('{"is_error":true,"result":"Not logged in"}')).toThrow("Not logged in");
     expect(() => readResult("nothing")).toThrow("printed no result");
   });
+
+  it("throws when the last JSON-looking line does not parse", () => {
+    expect(() => readResult('{"result":"ok"}\n{truncated')).toThrow();
+  });
 });
 
 describe("exitError", () => {
@@ -37,5 +41,6 @@ describe("exitError", () => {
   it("falls back to stderr, then the start of stdout, when there is no result", () => {
     expect(exitError(1, "boom", "").message).toBe("Claude Code exited 1: boom");
     expect(exitError(2, "", "not json").message).toBe("Claude Code exited 2: not json");
+    expect(exitError(3, "boom", "{truncated").message).toBe("Claude Code exited 3: boom");
   });
 });
