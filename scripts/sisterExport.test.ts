@@ -55,3 +55,30 @@ describe("the pressers' sweep", () => {
     expect(staleReason(sweep("2026-10-21T14:05:00+00:00"), "pressers", "2026-10-22T12:00:00+00:00")).toBeNull();
   });
 });
+
+// 27-29 Oct 2026: the sweep minted Sharman-Lowe's 26-27 file in R2, the restore skips curated identity, and the depth export died on him.
+describe("the new identities", () => {
+  const UNHELD = `
+import importlib.util, json, sys
+spec = importlib.util.spec_from_file_location("sister_export", sys.argv[1])
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+remote, held = json.loads(sys.argv[2])
+print(json.dumps(mod.unheld(remote, set(held))))
+`;
+  const unheld = (remote: string[], held: string[]): string[] => {
+    const run = spawnSync("python3", ["-I", "-B", "-c", UNHELD, SCRIPT, JSON.stringify([remote, held])], { encoding: "utf8" });
+    expect(run.stderr).toBe("");
+    return JSON.parse(run.stdout) as string[];
+  };
+
+  it("takes the bucket's files this Mac lacks, never one it holds", () => {
+    const signing = "players/seasons/26-27/sharman-lowe_teddy_26-27_player_3a2eda.json";
+    const held = "players/seasons/26-27/abbott_zach_26-27_player_c491b9.json";
+    expect(unheld([held, signing], [held])).toEqual([signing]);
+  });
+
+  it("leaves a half-written upload in the bucket", () => {
+    expect(unheld(["root/x.json.tmp", "root/y.json.tmp.123"], [])).toEqual([]);
+  });
+});
