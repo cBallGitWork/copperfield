@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 9,
-    "exportedAt": "2026-10-28T07:37:12.486Z",
+    "exportedAt": "2026-10-29T08:23:36.436Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-28T07:37:12.486Z",
+  "fetchedAt": "2026-10-29T08:23:36.436Z",
   "source": "rotowire",
   "clubs": {
     "CHE": {
@@ -29,7 +29,7 @@
           "prob": 0.9
         },
         {
-          "code": 437499,
+          "code": 444463,
           "prob": 0.9
         },
         {
@@ -45,15 +45,15 @@
           "prob": 0.9
         },
         {
-          "code": 56979,
-          "prob": 0.9
-        },
-        {
           "code": 486672,
           "prob": 0.9
         },
         {
-          "code": 620109,
+          "code": 56979,
+          "prob": 0.9
+        },
+        {
+          "code": 551210,
           "prob": 0.9
         },
         {
@@ -72,6 +72,10 @@
       "lineup": "predicted",
       "absent": [
         {
+          "code": 486672,
+          "status": "QUES"
+        },
+        {
           "code": 498444,
           "status": "QUES"
         },
@@ -81,6 +85,10 @@
         },
         {
           "code": 463936,
+          "status": "QUES"
+        },
+        {
+          "code": 437499,
           "status": "QUES"
         },
         {
@@ -132,7 +140,7 @@
           "prob": 0.9
         },
         {
-          "code": 535301,
+          "code": 516895,
           "prob": 0.9
         },
         {
@@ -154,10 +162,6 @@
       ],
       "lineup": "predicted",
       "absent": [
-        {
-          "code": 141746,
-          "status": "QUES"
-        },
         {
           "code": 516895,
           "status": "QUES"
@@ -317,15 +321,7 @@
           "status": "QUES"
         },
         {
-          "code": 592031,
-          "status": "QUES"
-        },
-        {
           "code": 222694,
-          "status": "QUES"
-        },
-        {
-          "code": 467779,
           "status": "QUES"
         },
         {
@@ -372,11 +368,11 @@
           "prob": 0.9
         },
         {
-          "code": 108416,
+          "code": 146426,
           "prob": 0.9
         },
         {
-          "code": 146426,
+          "code": 108416,
           "prob": 0.9
         },
         {
@@ -649,10 +645,6 @@
         },
         {
           "code": 437505,
-          "status": "QUES"
-        },
-        {
-          "code": 93605,
           "status": "QUES"
         },
         {
@@ -933,11 +925,11 @@
           "prob": 0.9
         },
         {
-          "code": 435997,
+          "code": 466525,
           "prob": 0.9
         },
         {
-          "code": 466525,
+          "code": 435997,
           "prob": 0.9
         },
         {
@@ -1114,10 +1106,6 @@
       "lineup": "predicted",
       "absent": [
         {
-          "code": 172649,
-          "status": "QUES"
-        },
-        {
           "code": 232185,
           "status": "QUES"
         },
@@ -1268,7 +1256,7 @@
       "lineup": "predicted",
       "absent": [
         {
-          "code": 209289,
+          "code": 442299,
           "status": "QUES"
         },
         {
@@ -1334,10 +1322,6 @@
       ],
       "lineup": "predicted",
       "absent": [
-        {
-          "code": 494595,
-          "status": "QUES"
-        },
         {
           "code": 551499,
           "status": "QUES"
@@ -1421,6 +1405,14 @@
       ],
       "lineup": "predicted",
       "absent": [
+        {
+          "code": 204480,
+          "status": "QUES"
+        },
+        {
+          "code": 248857,
+          "status": "QUES"
+        },
         {
           "code": 466075,
           "status": "QUES"
