@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T18:43:49.403Z",
+  "updatedAt": "2026-10-29T20:27:53.660Z",
   "stories": [
     {
       "slug": "gw5-presser-2026-09-18",
@@ -6927,6 +6927,117 @@
       }
     },
     {
+      "slug": "gw9-predictions",
+      "kind": "predictions",
+      "leagueId": "mqsjd23smsgbiqzr",
+      "period": 9,
+      "gameweek": 9,
+      "filedAt": "2026-10-29T20:27:53.660Z",
+      "expiresAt": null,
+      "edition": "The Form Guide",
+      "byline": "",
+      "reporter": "Mark Lawrenson",
+      "headline": "Lawro's Predictions: GW9",
+      "deck": "Lawro goes against the favourites in three ties, siding with domeitalycoach, GlengarryHearts and Hazza Maguazza's Redempshazza.",
+      "body": "Five from five last week. Both gut calls came in. I don't trust it. I used to be on the Match of the Day sofa. Now I'm in the small print of a league with a side called Cowthenbeef.",
+      "subjects": [
+        "predictions:gw9"
+      ],
+      "image": null,
+      "face": null,
+      "ties": [
+        {
+          "homeTeamId": "qgucu9dgmufwva1x",
+          "awayTeamId": "uexqrijomu8l5asi",
+          "line": "Mac Allister has gone quiet for its_ohi these last two games. A man from that Liverpool side never stays that way for long. B.Fernandes of Manchester United is fit again after missing last week. Three wins from three and top of the table, so the fall is coming, and I'll be the one who misses it.\n\nAtleticoTimHortons have lost two running and look soft with it. Tavernier has scored in both of his last two games, and AFC Bournemouth have Leeds United at home. AtleticoTimHortons have Lacroix of Chelsea down as a slight doubt.\n\nB.Fernandes back in the squad is enough, and its_ohi keep the run going one more week.",
+          "callsTeamId": "qgucu9dgmufwva1x",
+          "score": {
+            "home": 30,
+            "away": 12
+          },
+          "face": {
+            "code": 243016,
+            "name": "Mac Allister",
+            "clubId": 14,
+            "position": null
+          }
+        },
+        {
+          "homeTeamId": "0g0j5mkomuqqwsbu",
+          "awayTeamId": "aekx2715mtzgcl3f",
+          "line": "The Milan Derby is ninth against tenth. Proper derbies used to be about the top of the table. Kayode is at home to Nottingham Forest for domeitalycoach, and Hall is at home to Everton. Neither visitor will frighten a back line.\n\nThe Truffle Pigs are bottom without a point, and somehow the favourites. I'm against them. The Truffle Pigs have Van de Ven facing Crystal Palace and Jacquet facing an Arsenal side that scores goals.\n\nI don't trust either lot, but Kayode and Hall face the gentler visitors and domeitalycoach sneak it.",
+          "callsTeamId": "0g0j5mkomuqqwsbu",
+          "instinct": "defence",
+          "score": {
+            "home": 35,
+            "away": 34
+          },
+          "face": {
+            "code": 607464,
+            "name": "Kayode",
+            "clubId": 4,
+            "position": null
+          }
+        },
+        {
+          "homeTeamId": "7to6xosimu8hyyw5",
+          "awayTeamId": "syjkob6cmuobagfu",
+          "line": "If anyone can, Bannan can are second. No side with a comma in its name belongs that high. Evanilson has found the net twice running for them at AFC Bournemouth. They're favoured here, and I'm going against them.\n\nGlengarryHearts play the game properly. Isak and Virgil of Liverpool have Arsenal at home, and Arsenal won't bother Isak. I played centre-half, and Virgil defends the way I was taught. Hill, also for GlengarryHearts, has two clean sheets on the bounce for the Cherries.\n\nIsak and Virgil play the better football, and that's enough for GlengarryHearts.",
+          "callsTeamId": "syjkob6cmuobagfu",
+          "instinct": "liverpool",
+          "score": {
+            "home": 36,
+            "away": 37
+          },
+          "face": {
+            "code": 444102,
+            "name": "Evanilson",
+            "clubId": 3,
+            "position": null
+          }
+        },
+        {
+          "homeTeamId": "kpj0z744muh1qwtd",
+          "awayTeamId": "l5kunst8msgbirdf",
+          "line": "Petrović has kept the door shut two weeks in a row for The Raccoons and AFC Bournemouth. The champions have lost two of three, and nobody told them a title needs defending. Petrović is the only one who got the message.\n\nBayern Bru took a hiding last week and went straight to the waiver list. They came back with Andrew Robertson and Mathys Tel, two Tottenham Hotspur men nobody else wanted. Bayern Bru also have Mbeumo, away at Chelsea with Manchester United.\n\nManchester United at Chelsea is a difficult game for Mbeumo, and The Raccoons come through it.",
+          "callsTeamId": "l5kunst8msgbirdf",
+          "score": {
+            "home": 25,
+            "away": 38
+          },
+          "face": {
+            "code": 457569,
+            "name": "Petrović",
+            "clubId": 3,
+            "position": "G"
+          }
+        },
+        {
+          "homeTeamId": "ipnp5y4mmu9j7kop",
+          "awayTeamId": "7z8fy0pnmuogbtdw",
+          "line": "The Subway Sandwich Siesta is aptly named, and I'll be asleep by half-time. Hazza Maguazza's Redempshazza have Gakpo with Liverpool at home to Arsenal. Arsenal are hard to score against, which won't trouble Gakpo. They also hold Gabriel, who hasn't conceded in two and plays for Arsenal in that same game.\n\nCowthenbeef are third and everybody else would take them. I'm not everybody else. Cowthenbeef have Silva, with a clean sheet in each of his last two for AFC Bournemouth.\n\nHazza Maguazza's Redempshazza do enough, with Gakpo the cleverest footballer in the tie.",
+          "callsTeamId": "ipnp5y4mmu9j7kop",
+          "instinct": "liverpool",
+          "score": {
+            "home": 33,
+            "away": 32
+          },
+          "face": {
+            "code": 243298,
+            "name": "Gakpo",
+            "clubId": 14,
+            "position": null
+          }
+        }
+      ],
+      "extras": {
+        "record": {
+          "right": 9,
+          "called": 15
+        }
+      }
+    },
+    {
       "slug": "gw9-presser-2026-10-29",
       "kind": "presser",
       "leagueId": "mqsjd23smsgbiqzr",
@@ -13129,116 +13240,6 @@
         "transfer": {
           "teamId": "l5kunst8msgbirdf",
           "team": "Raccoons"
-        }
-      }
-    },
-    {
-      "slug": "gw8-predictions",
-      "kind": "predictions",
-      "leagueId": "mqsjd23smsgbiqzr",
-      "period": 8,
-      "gameweek": 8,
-      "filedAt": "2026-10-22T19:22:12.342Z",
-      "expiresAt": null,
-      "edition": "The Form Guide",
-      "byline": "",
-      "reporter": "Mark Lawrenson",
-      "headline": "Lawro's Predictions: GW8",
-      "deck": "Lawro backs its_ohi over table-topping Cowthenbeef and GlengarryHearts over the champions, both against the run of expectation.",
-      "body": "Nought right from five last week. The two hunches went down with the rest. I did six World Cups for the BBC. Now my readership is ten men, and every one of them marks me down.",
-      "subjects": [
-        "predictions:gw8"
-      ],
-      "image": null,
-      "face": null,
-      "ties": [
-        {
-          "homeTeamId": "7z8fy0pnmuogbtdw",
-          "awayTeamId": "qgucu9dgmufwva1x",
-          "line": "Cowthenbeef are top after two wins, which is how every collapse starts. This is the Mikel Arteta Appreciation Match, a name with more in it than most defences. João Pedro has two goals from his last couple at Chelsea, and Cowthenbeef think it will last. It won't. Cowthenbeef also have Calvert-Lewin of Leeds United.\n\nits_ohi have Brobbey of Sunderland, and he comes up against Calvert-Lewin. its_ohi have Mac Allister as well, and nobody enjoys going to Liverpool, Brighton & Hove Albion included.\n\nMac Allister will play the game properly against the Seagulls, so I'm going against the favourites and taking its_ohi.",
-          "callsTeamId": "qgucu9dgmufwva1x",
-          "instinct": "liverpool",
-          "score": {
-            "home": 29,
-            "away": 30
-          },
-          "face": {
-            "code": 475168,
-            "name": "João Pedro",
-            "clubId": 6,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "ipnp5y4mmu9j7kop",
-          "awayTeamId": "kpj0z744muh1qwtd",
-          "line": "Justin is away at Sunderland for Hazza Maguazza's Redempshazza, and an easier afternoon you won't find. They have also brought in Senne Lammens off the waiver list, a Manchester United goalkeeper somebody else threw back.\n\nBayern Bru are second. On merit? No. Ødegaard has gone quiet for them at Arsenal, not a goal nor an assist in two. Bayern Bru have Guéhi too, away at Aston Villa with Manchester City, a hard one.\n\nI don't fully trust a goalkeeper off the scrapheap, but Justin at Sunderland makes it Hazza Maguazza's Redempshazza.",
-          "callsTeamId": "ipnp5y4mmu9j7kop",
-          "score": {
-            "home": 35,
-            "away": 31
-          },
-          "face": {
-            "code": 220627,
-            "name": "Justin",
-            "clubId": 13,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "syjkob6cmuobagfu",
-          "awayTeamId": "l5kunst8msgbirdf",
-          "line": "Brighton & Hove Albion are at Liverpool this weekend, and GlengarryHearts have Isak and Virgil waiting. GlengarryHearts are bottom with two defeats, which makes no sense to me. Barnes has gone quiet at Newcastle United, and I've given up on him.\n\nThe Raccoons are the champions, and champions go soft by October. Dewsbury-Hall has scored one and laid one on lately at Everton. The Raccoons are expected to win this, and I'm not having it.\n\nWith Virgil keeping Brighton quiet and Isak doing the rest, it has to be GlengarryHearts.",
-          "callsTeamId": "syjkob6cmuobagfu",
-          "instinct": "liverpool",
-          "score": {
-            "home": 36,
-            "away": 35
-          },
-          "face": {
-            "code": 219168,
-            "name": "Isak",
-            "clubId": 14,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "7to6xosimu8hyyw5",
-          "awayTeamId": "aekx2715mtzgcl3f",
-          "line": "Sacking of York, they call this one, and If anyone can, Bannan can arrive off a win. Gibbs-White is away at Ipswich Town for them, and the Tractor Boys defend like an open gate.\n\nThe Truffle Pigs have no points, so they traded Thierno Barry to The Raccoons for Kudus of Tottenham Hotspur. The champions let him go without a fuss, which tells you plenty. Stach, another of The Truffle Pigs, has a soft one at Sunderland and has been quiet at Leeds United lately.\n\nA trip to Ipswich Town for Gibbs-White decides this, and If anyone can, Bannan can will take it.",
-          "callsTeamId": "7to6xosimu8hyyw5",
-          "score": {
-            "home": 34,
-            "away": 29
-          },
-          "face": {
-            "code": 222531,
-            "name": "Gibbs-White",
-            "clubId": 18,
-            "position": null
-          }
-        },
-        {
-          "homeTeamId": "uexqrijomu8l5asi",
-          "awayTeamId": "0g0j5mkomuqqwsbu",
-          "line": "I can't make AtleticoTimHortons out, won one and lost one. Lacroix of Chelsea has Tottenham Hotspur coming for AtleticoTimHortons, and the Lilywhites frighten nobody. Groß, also with AtleticoTimHortons, has set up two in a fortnight at Brighton & Hove Albion.\n\ndomeitalycoach are ninth and still waiting for a point. Anthony goes to Hull City for domeitalycoach, and I'll be sat watching the Tigers defend. I'd rather watch paint.\n\ndomeitalycoach are the sounder side, and Anthony at Hull City is why.",
-          "callsTeamId": "0g0j5mkomuqqwsbu",
-          "score": {
-            "home": 26,
-            "away": 29
-          },
-          "face": {
-            "code": 437499,
-            "name": "Lacroix",
-            "clubId": 6,
-            "position": null
-          }
-        }
-      ],
-      "extras": {
-        "record": {
-          "right": 4,
-          "called": 10
         }
       }
     },
