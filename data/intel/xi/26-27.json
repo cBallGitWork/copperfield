@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 9,
-    "exportedAt": "2026-10-29T13:37:47.962Z",
+    "exportedAt": "2026-10-29T14:27:37.616Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-29T13:37:47.962Z",
+  "fetchedAt": "2026-10-29T14:27:37.616Z",
   "source": "rotowire",
   "clubs": {
     "CHE": {
@@ -935,6 +935,10 @@
       ],
       "lineup": "predicted",
       "absent": [
+        {
+          "code": 466525,
+          "status": "QUES"
+        },
         {
           "code": 173774,
           "status": "QUES"
