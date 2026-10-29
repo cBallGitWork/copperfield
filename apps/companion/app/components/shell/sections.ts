@@ -106,14 +106,13 @@ export function tabOwns(sections: readonly Section[], section: Section, pathname
   );
 }
 
-/** The pages `AutoRefresh` fetches ahead so a tap draws at once: the bar's tabs and the paper, a tap from Mail, on
- *  each tick, and a heavy one only when the app opens. */
 /** The pages fetched ahead: `each` on every tick, `once` when the app opens. */
 export interface Ahead {
   each: readonly string[];
   once: readonly string[];
 }
 
+/** What `AutoRefresh` fetches ahead so a tap draws at once: the bar's light tabs and the paper, and heavy ones once. */
 export function aheadOf(sections: readonly Section[]): Ahead {
   const bar = barSections(sections);
   return {

@@ -78,7 +78,7 @@ Public, no auth. `CLAUDE.md` carries the full probe; this is the live subset.
   first kickoff there is a row for *every player in the league*: 600 elements,
   600 with an `explain` block, **569 of them on zero minutes**. So the presence of
   a row says the ROUND has started and never that the MAN appeared. This is what
-  `fpl/played.ts` exists for, and printing `0` instead of `—` for an idle player
+  the FPL tab's `Played` (`fpl/page.tsx`) exists for, and printing `0` instead of `—` for an idle player
   was the bug it fixed.
 - **Provisional bonus agreeing with BPS is not evidence it is final.** The live
   feed publishes provisional bonus long before `event-status` turns its flag, and
