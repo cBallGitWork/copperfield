@@ -1,7 +1,7 @@
 import { statusChange } from "./boardChange";
 import { Chip } from "./BoardControls";
 import { isShown, type PlayersQuery } from "./query";
-import { FREE, FREE_CHIP, STATUS, STATUS_CHIP } from "./status";
+import { FREE, FREE_CHIP, STATUS, STATUS_CHIP } from "../ownerWords";
 
 // Who he belongs to, as chips: the row's Free and Owned, each showing its men alone, and the sheet's FA and WW, the
 // two halves of Free, for the reader who wants one of them (Craig, 16 Oct 2026).

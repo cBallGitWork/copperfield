@@ -1,6 +1,6 @@
 import type { PlayersQuery } from "./query";
 import { POOL } from "./routes";
-import { FREE } from "./status";
+import { FREE } from "../ownerWords";
 
 // One board control's own change to the query, applied to the server's (its no-script link) or to the one last asked
 // for. No heavier imports, so a client control can reach it without the column table.

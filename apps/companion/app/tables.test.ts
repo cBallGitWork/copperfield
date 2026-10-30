@@ -12,7 +12,10 @@ vi.mock("./standings", () => ({
   ],
 }));
 
-const scorer = (name: string, owner: string, points: number) => ({ entry: { player: { fantraxId: name, displayName: name }, ownerTeamId: owner }, stats: { points } });
+const scorer = (name: string, owner: string | null, points: number, status = "T") => ({
+  entry: { player: { fantraxId: name, displayName: name }, ownerTeamId: owner, status },
+  stats: { points },
+});
 let scorers = [scorer("Pascal Gross", ATLETICO, 44), scorer("João Pedro", BEEF, 40)];
 
 vi.mock("./players/pool", () => ({
@@ -43,8 +46,13 @@ describe("the paper's tables", () => {
     expect((await scorerRows()).map((row) => `${row.rank} ${row.name}`)).toEqual(["1 Haaland", "2 Palmer", "2 Saka", "4 Isak"]);
   });
 
-  it("never calls an owned man a free agent when his team's name is missing", async () => {
+  it("prints a dash, never an id or free agent, for an owned man whose team's name is missing", async () => {
     scorers = [scorer("Saka", "t9", 41)];
-    expect((await scorerRows()).map((row) => row.detail)).toEqual(["t9"]);
+    expect((await scorerRows()).map((row) => row.detail)).toEqual(["—"]);
+  });
+
+  it("writes a man nobody holds out in full", async () => {
+    scorers = [scorer("Saka", null, 41, "FA"), scorer("Rice", null, 40, "WW")];
+    expect((await scorerRows()).map((row) => row.detail)).toEqual(["Free agent", "On waivers"]);
   });
 });

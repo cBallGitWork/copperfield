@@ -13,9 +13,9 @@ describe("holderOf", () => {
     });
   });
 
-  it("falls back to Fantrax's name for a team with no short one, then to its id", () => {
+  it("falls back to Fantrax's name for a team with no short one, then to a dash, never its id", () => {
     expect(holderOf({ ownerTeamId: "demo", status: "T" }, new Map([["demo", "Ctrl Alt Defeat"]]), null)?.text).toBe("Ctrl Alt Defeat");
-    expect(holderOf({ ownerTeamId: "demo", status: "T" }, new Map(), null)?.text).toBe("demo");
+    expect(holderOf({ ownerTeamId: "demo", status: "T" }, new Map(), null)?.text).toBe("—");
   });
 
   it("says Yours for the reader's own man", () => {

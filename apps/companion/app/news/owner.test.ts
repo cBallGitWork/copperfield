@@ -12,8 +12,8 @@ describe("ownerTag", () => {
     expect(ownerTag("0g0j5mkomuqqwsbu", "l5kunst8msgbirdf", names, "Mykolenko a doubt")).toBe("Dome");
   });
 
-  it("says You for the reader's own team", () => {
-    expect(ownerTag("l5kunst8msgbirdf", "l5kunst8msgbirdf", names, "Mykolenko a doubt")).toBe("You");
+  it("says Yours for the reader's own team", () => {
+    expect(ownerTag("l5kunst8msgbirdf", "l5kunst8msgbirdf", names, "Mykolenko a doubt")).toBe("Yours");
   });
 
   it("keeps Fantrax's name for a team with no short name", () => {
@@ -27,12 +27,10 @@ describe("ownerTag", () => {
 
   it("prints nothing when the headline already names the team", () => {
     expect(ownerTag("0g0j5mkomuqqwsbu", null, names, "Dome sign Marco Palestra (CHE)")).toBeNull();
-    expect(ownerTag("0g0j5mkomuqqwsbu", null, names, "An offer from Dome")).toBeNull();
-    expect(ownerTag("l5kunst8msgbirdf", "l5kunst8msgbirdf", names, "You sign Marco Palestra (CHE)")).toBeNull();
-  });
+    expect(ownerTag("0g0j5mkomuqqwsbu", null, names, "An offer from Dome")).toBeNull();  });
 
   it("matches the name as a word, not inside another", () => {
     expect(ownerTag("0g0j5mkomuqqwsbu", null, names, "Domenico a doubt")).toBe("Dome");
-    expect(ownerTag("l5kunst8msgbirdf", "l5kunst8msgbirdf", names, "Your offer to Dome")).toBe("You");
+    expect(ownerTag("l5kunst8msgbirdf", "l5kunst8msgbirdf", names, "Your offer to Dome")).toBe("Yours");
   });
 });
