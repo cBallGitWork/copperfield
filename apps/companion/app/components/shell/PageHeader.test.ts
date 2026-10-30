@@ -49,12 +49,14 @@ describe("a phone's locked bars", () => {
     return renderToStaticMarkup(createElement(PlateShell, props));
   };
 
-  it("docks a subject's tabs last, above the thumb rail", () => {
-    expect(shell(true)).toMatch(/<div class="[^"]*\bmax-lg:order-last max-lg:sticky max-lg:bottom-\[var\(--thumbrail\)\][^"]*"><nav>views/);
+  // Craig, 30 Oct 2026: the tabs were a footer; they lock as a header, never at the foot.
+  it("locks a subject's tabs inside the bar's pin, under its way back", () => {
+    expect(shell(true)).toMatch(new RegExp(`<div class="${PINNED_TOP.replace(/[[\]()]/g, "\\$&")}"><header[^]*</header><nav>views`));
+    expect(shell(true)).not.toContain("bottom-[var(--thumbrail)]");
   });
 
-  it("locks nothing at the top when a phone draws no bar", () => {
-    expect(pinnedTop(shell(false))).toBe(false);
+  it("locks the tabs alone at the top when a phone draws no bar", () => {
+    expect(shell(false)).toContain(`<div class="${PINNED_TOP}"><nav>views`);
     expect(shell(false)).not.toContain(BACK);
   });
 });
