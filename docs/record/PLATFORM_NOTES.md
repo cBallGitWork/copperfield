@@ -69,19 +69,27 @@ Craig, 30 Oct: *"vidiprinter on live, why dont we just include all scoring actio
 etc for drafted players, sub offs for drafted players, goals assists red cards etc for all players inc ww"*. This
 reverses "Live drops the vidiprinter" (19 Oct, below). Live's strip is `Scores · Vidiprinter · Top stats`
 (`?view=vidiprinter`), one match day at a time like Scores, newest first.
+After its last whistle the gameweek's lines and day arrows stay until Live turns to the next (`liveGameweek`,
+`gameweekOpened`); only Scores gives way to "No football today" (GW8 replay, 30 Oct, #214).
 
 - **Every match:** kick-off, half-time and full time, off the Premier League fixture detail's `events` (`PS`/`PE`
   by `phase`), each with its wall clock (`time.millis`) and score. Same detail read Scores' name join already makes:
   20 s while a match is in play, no new request.
 - **Every man, drafted or not:** goals and assists off the round read and `creditAssists` (as Scores' goal notes),
-  re-stamped with the detail's wall clock and score; red cards (`B`/`R`) off the detail.
-- **Drafted men only:** bookings (`B`/`Y`) and being taken off (`S`/`OFF`) off the detail; and every category the
+  re-stamped with the detail's wall clock and score; red cards (`B`/`R`) off the detail. A goal the detail has not
+  filed yet (the round read runs ahead of it) is timed off its half's start (`PS` by `phase`) plus its clock, and
+  scored by counting that match's goals up to it; nothing after `now` prints. An own goal prints no assister.
+- **Drafted men only:** bookings (`B`/`Y`), coming on (`S`/`ON`) and being taken off (`S`/`OFF`) off the detail; and every category the
   league scores that moved his total (`getLiveScoringStats` `statsMap`, eleven and bench, 20 s), named from
   `getLeagueInfo`'s scoring list. No points print, only what he did. The feed's own lines (goals, assists, cards,
   own goals) are not repeated as counts.
 - **The counts carry no minute**, as Fantrax publishes none: they sit on his change when he goes off, else under the
-  full-time whistle, else, while he plays, at the head of his match with the dash, leaving out minutes, clean sheet
-  and goals conceded, which stand only once he is off. A double gameweek's counts sit with his later match.
+  full-time whistle, else, while he plays, under an "In play" heading for his match at its newest line, leaving out
+  minutes, clean sheet and goals conceded, which stand only once he is off. A double gameweek's counts sit with his
+  later match.
+- **Order:** newest first by wall clock across matches, but match order within one (half, then clock): the feed can
+  stamp a 90+5′ card after its full-time whistle, so each line takes the latest clock of anything before it in its
+  match, and HT and FT close their halves.
 - **Not readable:** the minute a DefCon, a save or any other untimed count happened; a second booking as its own
   line (the detail sends `R`). Under `REPLAY_AT` the feed's moments rewind but Fantrax's counts are the period's
   latest, so a replayed match in play shows its whole match's counts.
