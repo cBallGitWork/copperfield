@@ -9,11 +9,9 @@ import {
   composePaper,
   datedKickoffs,
   fetchFixtures,
-  fetchLeagueInfo,
   getFootballSnapshot,
   isCovered,
   mapFixtures,
-  mapLeagueInfo,
   mapTransactions,
   newsdesk,
   nextDeadline,
@@ -46,6 +44,7 @@ import { presserDesk } from "./edition/presserWeek";
 import { lineupsSlot, readXi } from "./edition/xi";
 import { deskState, seasonOpening } from "./edition/desk";
 import { deskContext } from "./edition/context";
+import { readLeagueInfo } from "./leagueInfo";
 import { fire, type Run } from "./edition/firing";
 import { printStory, readLedger, readPaperStories, saveFiling } from "./edition/persist";
 import { spentSince, tokensLine, tokensSpent, type Say } from "./edition/newsroom";
@@ -78,9 +77,8 @@ async function main(): Promise<void> {
   const state = roundState(snapshot, now);
   const finished = state !== null && state !== "live";
 
-  const raw = await fetchLeagueInfo(FANTRAX_LEAGUE_ID).catch(() => null);
-  if (raw === null) return say("Fantrax would not describe the league; nothing to write.");
-  const info = mapLeagueInfo(raw);
+  const info = await readLeagueInfo().catch(() => null);
+  if (info === null) return say("Fantrax would not describe the league; nothing to write.");
   if (info.teams.length === 0) return say("No teams yet. A paper needs a league.");
 
   // The whole season's kickoffs: the snapshot holds one round, so it cannot place the next.

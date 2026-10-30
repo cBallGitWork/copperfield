@@ -13,7 +13,6 @@ import { OWN, SQUAD, teamHref } from "../routes";
 import SquadIndex from "../SquadIndex";
 import { readerTeamId } from "../../squads";
 import TeamShell from "./Shell";
-import { rosterMinimums } from "../../rosterMinimums";
 import { identify } from "./team";
 import { squadView } from "./squadView";
 import { commissionerSession } from "./saving";
@@ -89,9 +88,7 @@ export default async function TeamPage({
             )}
             // His fifteen's eligibility, not the pool's: this crosses to the browser.
             players={planning.players.filter((p) => squadIds.has(p.fantraxId))}
-            // The floors join the caps here: no JSON endpoint publishes a minimum, so `scripts/roster-limits.ts` reads
-            // the commissioner's setup page into a file.
-            limits={{ ...planning.roster, minActiveByPosition: rosterMinimums() }}
+            limits={planning.roster}
             // The same week the planner shows, never Fantrax's open one.
             fantraxUrl={`${FANTRAX_LEAGUE_PAGE}${open === null ? "" : `/${FANTRAX_ROSTER_PATH};period=${open.period}`}`}
             pending={pending}

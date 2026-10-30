@@ -23,7 +23,6 @@ import {
   londonDayOf,
   mapLiveStats,
   mapPlayerStats,
-  leagueLimits,
   openingGameweek,
   periodDays,
   periodGameweeks,
@@ -40,7 +39,6 @@ import {
   type StoryFace,
   type StoryThread,
 } from "@epl/core";
-import limits from "../../data/leagues/roster-limits.json";
 import { STATS_LEAGUE } from "../leagues";
 import { readScoring } from "../scoring";
 import { BRIDGE } from "./bridge";
@@ -82,7 +80,7 @@ export async function binXiDesk(input: {
   if (!input.assignments.some((each) => each.kind === "bin-xi")) return null;
   // Before a draft every man is in nobody's squad, and an eleven of the whole pool is not the bin.
   if (!facts.teams.some((team) => team.players.length > 0)) return say("Bin XI: no squads yet; nothing filed."), null;
-  const shapes = formations(leagueLimits(info.roster, limits, FANTRAX_LEAGUE_ID));
+  const shapes = formations(info.roster);
   if (shapes.length === 0) return say("Bin XI: no position minimums on record for this league (npm run roster-limits); nothing filed."), null;
   const scoring = info.scoringPeriods.find((each) => each.number === period);
   if (scoring === undefined) return say(`Bin XI: Fantrax has no period ${period}; nothing filed.`), null;

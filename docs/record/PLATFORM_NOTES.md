@@ -1733,9 +1733,10 @@ guessing, and the planner enforces no floor for a league it could not read.
 `npm run roster-limits` → `data/leagues/roster-limits.json`, keyed by league id,
 with `fetchedAt` and `minimumsInForce`. It is the labelled fallback CODE_RULES §3
 allows and it is labelled: `mapLeagueInfo` returns an EMPTY
-`minActiveByPosition` because the endpoint publishes none, and
-`apps/companion/app/rosterMinimums.ts` is the only place a number joins it — on
-the way into the planner, which is the one screen that enforces a formation.
+`minActiveByPosition` because the endpoint publishes none, and core's
+`leagueLimits` joins the numbers where league info is read: the app's
+`leagueOrRefusal` (`apps/companion/app/round.ts`) and the scripts'
+`readLeagueInfo` (`scripts/leagueInfo.ts`), so every reader gets the floors (#182).
 
 A scrape, and a script rather than an adapter for that reason: a regex over
 somebody's markup is run by a person, audited, and checked in, never executed on

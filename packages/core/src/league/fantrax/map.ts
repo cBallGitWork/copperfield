@@ -86,7 +86,7 @@ function mapRosterLimits(info: RawRosterInfo | undefined): RosterLimits {
     maxActivePlayers: info?.maxTotalActivePlayers ?? null,
     maxReservePlayers: info?.maxTotalReservePlayers ?? null,
     maxActiveByPosition,
-    // Always empty: minimums are on Fantrax's setup page only, read by `scripts/roster-limits.ts` and merged in later.
+    // Always empty: minimums are on Fantrax's setup page only, read by `scripts/roster-limits.ts`; `leagueLimits` joins them.
     minActiveByPosition: {},
   };
 }

@@ -35,7 +35,7 @@ export interface RosterLimits {
   /** Position letter to maximum active count, e.g. `{ G: 1, D: 5, M: 5, F: 3 }`. */
   maxActiveByPosition: Record<string, number>;
   /** Position letter to the fewest that may start there, e.g. `{ D: 3, M: 2 }`.
-   *  Always empty from `getLeagueInfo`: it arrives from a checked-in file a script generates.
+   *  Always empty from `getLeagueInfo`: the readers of league info join it from a checked-in file a script generates.
    *  An absent position means "not told", which is a different claim from a minimum of nought. */
   minActiveByPosition: Record<string, number>;
 }
