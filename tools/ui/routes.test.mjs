@@ -47,6 +47,12 @@ describe("the instruments' routes", () => {
     expect(await playerRoutes(cdp)).toContain("/players/analysis?a=p1&b=p2");
   });
 
+  // Review D0, 30 Oct 2026: his own Compare printed 46 figures on the bare photograph and no instrument walked it.
+  it("walk the player's own Compare tab", async () => {
+    const cdp = browser({ "/players": { 'tbody a[href^="/players/"]': "/players/p1" } });
+    expect(await playerRoutes(cdp)).toContain("/players/p1/compare");
+  });
+
   it("measure every page the smoke walk visits without an id; Compare is the player's, discovered", () => {
     const measured = new Set(ALL_ROUTES.map((route) => route.split("?")[0]));
     const free = walkPaths({ teamId: null, playerId: null, rivalId: null, club: null, match: null }).map((path) => path.split("?")[0]);

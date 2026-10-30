@@ -102,10 +102,10 @@ export async function unplayedMatchRoute(cdp) {
 }
 
 /** One player's screens, discovered off the directory's BODY: a bare selector finds Find's own tab strip first. Then
- *  Compare, off the link the board gives the next man once he is chosen (`?compare=`), as no link reaches it bare. */
+ *  Data's Compare, off the link the board gives the next man once he is chosen (`?compare=`), as no link reaches it bare. */
 export async function playerRoutes(cdp) {
   const man = await discover(cdp, "/players", 'tbody a[href^="/players/"]');
   if (!man) return [];
   const pair = await discover(cdp, `/players?compare=${man.split("/").pop()}`, 'tbody a[href^="/players/analysis?"]');
-  return [man, ...["data", "news", "transfer", "data?season=all"].map((tab) => `${man}/${tab}`), ...(pair ? [pair] : [])];
+  return [man, ...["data", "news", "compare", "data?season=all"].map((tab) => `${man}/${tab}`), ...(pair ? [pair] : [])];
 }
