@@ -111,6 +111,12 @@ async function afterSubs(
   );
 }
 
+/** Every man priced this period, eleven and reserves, with his categories; empty when Fantrax refused. */
+export async function periodMen(period: number): Promise<LivePlayerPoints[]> {
+  const { players, bench } = await readScores(period);
+  return [...players, ...bench].flatMap(([, squad]) => squad);
+}
+
 /** Every man Fantrax priced this period, eleven and reserves, by Fantrax id; empty when it refused. */
 export async function periodPoints(period: number): Promise<Map<string, number>> {
   const { players, bench } = await readScores(period);

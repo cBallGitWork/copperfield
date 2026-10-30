@@ -61,6 +61,13 @@ describe("dayStep", () => {
     });
   });
 
+  it("steps another view's days on that view's own address", () => {
+    expect(dayStep(DAYS, "2026-10-18", "2026-10-17", "/matchday?view=vidiprinter")).toMatchObject({
+      previous: { href: "/matchday?view=vidiprinter&day=2026-10-16" },
+      next: { href: "/matchday?view=vidiprinter" },
+    });
+  });
+
   it("has no arrow past either end of the gameweek", () => {
     expect(dayStep(DAYS, "2026-10-18", "2026-10-16")?.previous).toBeNull();
     expect(dayStep(DAYS, "2026-10-18", "2026-10-19")?.next).toBeNull();

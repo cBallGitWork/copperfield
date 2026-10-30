@@ -47,6 +47,29 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## Live has a vidiprinter again, wider than the one it dropped — decided 30 Oct 2026
+
+Craig, 30 Oct: *"vidiprinter on live, why dont we just include all scoring actions, ht, game start, so defcons/cards
+etc for drafted players, sub offs for drafted players, goals assists red cards etc for all players inc ww"*. This
+reverses "Live drops the vidiprinter" (19 Oct, below). Live's strip is `Scores · Vidiprinter · Top stats`
+(`?view=vidiprinter`), one match day at a time like Scores, newest first.
+
+- **Every match:** kick-off, half-time and full time, off the Premier League fixture detail's `events` (`PS`/`PE`
+  by `phase`), each with its wall clock (`time.millis`) and score. Same detail read Scores' name join already makes:
+  20 s while a match is in play, no new request.
+- **Every man, drafted or not:** goals and assists off the round read and `creditAssists` (as Scores' goal notes),
+  re-stamped with the detail's wall clock and score; red cards (`B`/`R`) off the detail.
+- **Drafted men only:** bookings (`B`/`Y`) and being taken off (`S`/`OFF`) off the detail; and every category the
+  league scores that moved his total (`getLiveScoringStats` `statsMap`, eleven and bench, 20 s), named from
+  `getLeagueInfo`'s scoring list. No points print, only what he did. The feed's own lines (goals, assists, cards,
+  own goals) are not repeated as counts.
+- **The counts carry no minute**, as Fantrax publishes none: they sit on his change when he goes off, else under the
+  full-time whistle, else, while he plays, at the head of his match with the dash, leaving out minutes, clean sheet
+  and goals conceded, which stand only once he is off. A double gameweek's counts sit with his later match.
+- **Not readable:** the minute a DefCon, a save or any other untimed count happened; a second booking as its own
+  line (the detail sends `R`). Under `REPLAY_AT` the feed's moments rewind but Fantrax's counts are the period's
+  latest, so a replayed match in play shows its whole match's counts.
+
 ## Lists move to StateMark, with one fitness helper and one xMins ink — decided 21 Oct 2026
 
 Craig, 21 Oct 2026: *"Huge problem in this app where similar tables/rows etc are using different layouts"*. Every list
@@ -277,6 +300,8 @@ Decided: `getLeagueSetup` joins the fxpa session allow-list as a read (`saveLeag
 when only `getLeagueInfo` had been grepped); the Mercato Wire's detection-not-schedule trigger stands on its own merits.
 
 ## Live drops the vidiprinter and the desk — decided 19 Oct 2026
+
+**The vidiprinter half is reversed 30 Oct 2026** (above). The desk stays gone.
 
 Craig, 19 Oct: *"ditch vidiprinter, no longer needed"*. Scores had carried each match's goals since 16 Oct, so the
 wire's tab said nothing Scores did not. Live's strip is `Scores · Top stats`; `?view=vidiprinter` falls back to

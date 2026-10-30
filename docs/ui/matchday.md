@@ -60,15 +60,18 @@ hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers print
    like if you only ever picture a Saturday. GW1 ran Friday night to Monday
    night and the strip read `15:00` above `14:00` — right, because one was
    Saturday and the other Sunday, and unreadable, because it said neither.
-3. ~~**`Wire`**, the vidiprinter~~ — **superseded 19 Oct 2026** (Craig: *"ditch vidiprinter, no
-   longer needed"*). Sky's teleprinter with the ownership on it, behind its own tab since 5 Sep;
-   Scores has carried the goals under each match since 16 Oct, so the tab, the component and the
-   full-time and red-card reads that fed only it are gone. Live's strip is `Scores · Top stats`.
+3. **`Vidiprinter`**, the second view (`?view=vidiprinter`; Craig, 30 Oct 2026, reversing the 19 Oct drop): one
+   match day at a time with Scores' arrows, newest first. Every match's kick-off, half-time and full time with the
+   score; every man's goals, assists and red cards, drafted or not; a drafted man's bookings and changes, and the
+   counts of every category the league scores, in its own words and never as points. Counts carry no minute, so they
+   ride on his change, under the full-time whistle, or with the dash at the head of a match still in play. The
+   reader's men are in the accent and every drafted man carries his holder. Off `vidiprinter` over `sheetMoments`
+   (PLATFORM_NOTES, "Live has a vidiprinter again"). Live's strip is `Scores · Vidiprinter · Top stats`.
 4. ~~**`GameweekView`**~~ — **gone 20 Oct 2026**: Live had stopped embedding it, and `/gw/N`, its one
    user, now redirects to Prem › Fixtures at that gameweek ([prem.md](prem.md#fixtures)). Between rounds,
    Live's two buttons lead there through `gameweekHref`.
 
-**Top stats**, the second view (`?view=stats`; Craig, 1 Oct 2026: *"match day have 3rd tab, that
+**Top stats**, the third view (`?view=stats`; Craig, 1 Oct 2026: *"match day have 3rd tab, that
 shows top stats for just this gameweek, like xg, fpts, ratings etc"*): the gameweek's ten leaders in
 Fantrax points, the DefCon count (defenders, then midfielders and forwards together; no keeper list,
 as the league counts no keeper DefCon), xG and xA, each man with whoever holds him. Craig, 11 Oct
@@ -76,7 +79,7 @@ as the league counts no keeper DefCon), xG and xA, each man with whoever holds h
 defcon"*, then *"Just group defcon mid and forward together. Use the actual value, not the points."*
 The phone picks one list from a strip (`Points · DefCon D · DefCon M/F · xG · xA`, `&stat=`; DefCon is its one name on every screen, with the slots it counts, 16 Oct 2026, review N30), docked
 in the foot above the thumb rail (`FootFrame`, 20 Oct 2026: a sub-view switches from the foot, while
-`Scores · Top stats` stays the one strip on top). The frame is only as tall as its board, because the bar and
+`Scores · Vidiprinter · Top stats` stays the one strip on top). The frame is only as tall as its board, because the bar and
 `Matchups on Fantrax` sit outside it: under a short board the strip sits straight below the ten men with the exit
 under it and nothing scrolls, and it docks on the rail only when a list runs past the screen. A desk shows all five, three across.
 
