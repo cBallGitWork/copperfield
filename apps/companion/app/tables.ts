@@ -5,6 +5,7 @@ import { leagueTable as draftTable } from "./standings";
 import { getLeaguePool } from "./players/pool";
 import { SCORERS_SHOWN } from "./config";
 import { shortName } from "./teamNames";
+import { ownerWords, type OwnerWords } from "./ownerWords";
 
 // The paper's two tables as rows, off reads the page already makes, kept apart: Fantrax's we quote, the Premier
 // League's we compute under fixed rules.
@@ -24,8 +25,11 @@ export async function draftRows(mine: string | null): Promise<PaperTableRow[]> {
   }));
 }
 
-/** What the chart calls a man nobody holds. */
-const UNOWNED = "free agent";
+/** The chart's holder: a team by its short name, a man nobody holds written out ("Free agent"), else a dash. */
+function heldBy(words: OwnerWords | null): string | null {
+  if (words === null) return null;
+  return words.kind === "free" ? words.label : words.chip;
+}
 
 /** The season's top scorers by Fantrax's season totals: the player's season, bench points included, never his owner's. */
 export async function scorerRows(): Promise<PaperTableRow[]> {
@@ -49,10 +53,7 @@ export async function scorerRows(): Promise<PaperTableRow[]> {
     rank: ranks[at],
     name: row.entry.player.displayName,
     played: null,
-    detail:
-      row.entry.ownerTeamId === null
-        ? UNOWNED
-        : shortName(row.entry.ownerTeamId, names.get(row.entry.ownerTeamId) ?? row.entry.ownerTeamId),
+    detail: heldBy(ownerWords(row.entry.ownerTeamId, row.entry.status, null, names)),
     points,
   }));
 }

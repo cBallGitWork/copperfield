@@ -1,6 +1,5 @@
 import type { PoolPlayer } from "@epl/core";
-import { STATUS } from "./status";
-import { shortName } from "../teamNames";
+import { ownerWords } from "../ownerWords";
 
 // Who holds a man, as a Data board prints it in brackets after his name.
 
@@ -21,12 +20,7 @@ export function holderOf(
   reader: string | null,
   filtered: readonly string[] = [],
 ): Holder | null {
-  const owner = held.ownerTeamId;
-  if (owner !== null && owner === reader) return { text: "Yours", title: "Yours", tone: "yours" };
-  if (owner !== null) {
-    const name = teamNames.get(owner) ?? owner;
-    return { text: shortName(owner, name), title: name, tone: "rival" };
-  }
-  if (filtered.length === 1 && filtered[0] === held.status) return null;
-  return held.status ? { text: held.status, title: STATUS[held.status] ?? held.status, tone: "free" } : null;
+  if (held.ownerTeamId === null && filtered.length === 1 && filtered[0] === held.status) return null;
+  const words = ownerWords(held.ownerTeamId, held.status, reader, teamNames);
+  return words === null ? null : { text: words.chip, title: words.label, tone: words.kind };
 }

@@ -1,16 +1,15 @@
-import { shortName } from "../teamNames";
+import { ownerWords } from "../ownerWords";
 
-/** Whose item a Mail row says it is: "You" for the reader's own team, else the league's short name for it; nothing
- *  when the headline already names the team, so a row never says it twice. */
+/** Whose item a Mail row says it is: "Yours" for the reader's own team, else the league's short name for it; nothing
+ *  for a team the league does not describe, or when the headline already names it, so a row never says it twice. */
 export function ownerTag(
   teamId: string | null,
   mine: string | null,
   names: ReadonlyMap<string, string>,
   headline: string,
 ): string | null {
-  if (teamId === null) return null;
-  const full = names.get(teamId);
-  const tag = teamId === mine ? "You" : full === undefined ? null : shortName(teamId, full);
+  if (teamId === null || (teamId !== mine && !names.has(teamId))) return null;
+  const tag = ownerWords(teamId, "", mine, names)?.chip ?? null;
   return tag === null || namesWord(headline, tag) ? null : tag;
 }
 

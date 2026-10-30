@@ -1,4 +1,4 @@
-import { FREE } from "../status";
+import { FREE } from "../../ownerWords";
 import type { Subject } from "./subject";
 
 /** What the title bar's brackets hold: his fantasy side, else FA or WW for a man anybody can claim, else nothing. */

@@ -17,7 +17,7 @@ describe("PaperTable's middle column", () => {
   });
 
   it("gives an owner's name on the scorers chart the wide width", () => {
-    const row = { key: "1", rank: 1, name: "Haaland", played: null, detail: "free agent", points: 61 };
-    expect(widthsOf([row], "free agent")).toEqual(["w-20"]);
+    const row = { key: "1", rank: 1, name: "Haaland", played: null, detail: "Free agent", points: 61 };
+    expect(widthsOf([row], "Free agent")).toEqual(["w-20"]);
   });
 });
