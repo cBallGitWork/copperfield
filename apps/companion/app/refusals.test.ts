@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { FantraxError, ProviderError } from "@epl/core";
-import { orRefusal, refusedAs, tell } from "./refusals";
+import { fallbackReason, orRefusal, refusedAs, tell } from "./refusals";
 
 describe("orRefusal", () => {
   it("returns a refusal Fantrax meant, to be modelled and cached", async () => {
@@ -35,6 +35,27 @@ describe("refusedAs", () => {
   it("still throws an outage", async () => {
     const down = new FantraxError("getTeamRosters", "503", "Service Unavailable", "unreachable");
     await expect(refusedAs(Promise.reject(down), () => null, () => "read")).rejects.toBe(down);
+  });
+
+  it("logs one line for a refusal it answers, naming the method, and none for an answer", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    await refusedAs(Promise.resolve(2), () => 0, (n) => n);
+    expect(warn).not.toHaveBeenCalled();
+    await refusedAs(Promise.reject(new FantraxError("getTeamStats", "WARNING", "not drafted")), () => 0, () => 1);
+    expect(warn).toHaveBeenCalledOnce();
+    expect(JSON.parse(String(warn.mock.calls[0]?.[0]))).toMatchObject({
+      event: "fantrax-fallback", key: "getTeamStats", reason: "refused", code: "WARNING", ms: expect.any(Number),
+    });
+    warn.mockRestore();
+  });
+});
+
+describe("fallbackReason", () => {
+  it("tells a deadline, a refusal and a misshapen answer apart", () => {
+    expect(fallbackReason(new ProviderError("TIMEOUT", "www.fantrax.com /fxpa/req → TIMEOUT", "unreachable"))).toBe("timeout");
+    expect(fallbackReason(new FantraxError("getStandings", "503", "down", "unreachable"))).toBe("refused");
+    expect(fallbackReason(new FantraxError("getStandings", "NO_TEAMS", "none"))).toBe("refused");
+    expect(fallbackReason(new FantraxError("getStandings", "NOT_JSON", "<html>", "malformed"))).toBe("shape");
   });
 });
 

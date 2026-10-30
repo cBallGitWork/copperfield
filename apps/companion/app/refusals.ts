@@ -20,14 +20,29 @@ export function unavailable(error: ProviderError): Unavailable {
   return { unavailable: tell(error) };
 }
 
-/** The read, or the refusal Fantrax meant. An outage still throws, so a cache keeps its last good
- *  answer rather than holding the outage as one. */
+/** Why a read fell back: its deadline passed, the provider said no or did not answer, or the answer was misshapen. */
+export function fallbackReason(error: ProviderError): "timeout" | "refused" | "shape" {
+  if (error.code === "TIMEOUT") return "timeout";
+  return error.kind === "malformed" ? "shape" : "refused";
+}
+
+/** One JSON line per read drawn as its empty answer, so a matchday's empties can be counted. Codes only, never a
+ *  message: a body sample or a header has no place in a log. */
+export function logFallback(key: string, error: ProviderError, startedAt: number): void {
+  const line = { event: "fantrax-fallback", key, reason: fallbackReason(error), code: error.code, ms: Date.now() - startedAt };
+  console.warn(JSON.stringify(line));
+}
+
+/** The read, or the refusal Fantrax meant, logged under its method. An outage still throws, so a cache keeps its last
+ *  good answer rather than holding the outage as one. */
 export async function orRefusal<T>(read: Promise<T>): Promise<T | FantraxError> {
+  const startedAt = Date.now();
   try {
     return await read;
   } catch (error: unknown) {
-    if (error instanceof FantraxError && error.kind === "refused") return error;
-    throw error;
+    if (!(error instanceof FantraxError && error.kind === "refused")) throw error;
+    logFallback(error.method, error, startedAt);
+    return error;
   }
 }
 

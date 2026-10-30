@@ -46,6 +46,24 @@ describe("leagueCache", () => {
     expect(await cached(6)).toEqual({ unavailable: "TIMEOUT in 6" });
   });
 
+  it("logs one line per cold-key fallback: the key, the reason and the wait, and nothing of the session", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const hung = new ProviderError("TIMEOUT", "www.fantrax.com /fxpa/req → TIMEOUT", "unreachable");
+    await leagueCache("live-scores", failing(hung), unavailable)(6);
+    expect(warn).toHaveBeenCalledOnce();
+    const line = String(warn.mock.calls[0]?.[0]);
+    expect(JSON.parse(line)).toEqual({ event: "fantrax-fallback", key: "live-scores", reason: "timeout", code: "TIMEOUT", ms: expect.any(Number) });
+    expect(line).not.toMatch(/cookie|session|leagueId|fantrax\.com/i);
+    warn.mockRestore();
+  });
+
+  it("logs nothing for a read that answered", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    await leagueCache("squads", async (gameweek: number): Promise<object> => ({ gameweek }), unavailable)(6);
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
+
   it("throws a bug of our own rather than dressing it as an outage", async () => {
     const cached = leagueCache("squads", failing(new TypeError("cannot read teams of undefined")), unavailable);
     await expect(cached(6)).rejects.toThrow(TypeError);
