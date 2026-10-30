@@ -30,6 +30,12 @@ export interface Standing {
   keeper: boolean;
 }
 
+/** `INDEX_WIDTH` as a floor, which a cell keeps when the board overflows. */
+const INDEX_MIN = "min-w-8 lg:min-w-9";
+
+/** The score's link over its whole cell, `FIGURE_CELL`'s padding included, and a thumb wide (review D3: 21px). */
+const CELL_WIDE = "-mx-1.5 min-w-11 px-1.5";
+
 /** A column's standouts over his matches: its best in orange, its top quarter in yellow. */
 const SHARES = { good: 0.25, best: 0.1 };
 
@@ -85,7 +91,9 @@ export default function MatchLog({
         keyOf={(row) => (isFoot(row) ? row : `${row.fpl.match.gameweek}-${row.fpl.match.fixtureId}`)}
         tail={{ label: "Season", rows: FOOT }}
         lead={{
-          index: { label: "Gameweek", of: (row) => (isFoot(row) ? "" : row.fpl.match.gameweek) },
+          // A board wider than the phone sets its cells at min-content, so `INDEX_WIDTH` alone gave 20px and the
+          // name, pinned at 32, overlapped FPts by 12 (review D1); a minimum holds the block to the pin.
+          index: { label: "Gameweek", of: (row) => (isFoot(row) ? "" : row.fpl.match.gameweek), className: INDEX_MIN },
           name: {
             label: "Opponent",
             of: (row) => (
@@ -146,7 +154,7 @@ function score(row: MatchRow["fpl"]): BoardFigure {
     className: `font-bold ${ink}`,
     value: (
       // A tappable score makes its row a tap row: 36 under a thumb, the desk's 28.
-      <Link href={matchHref(match.fixtureId, "overview")} className={`${TAP_ROW} justify-center hover:underline`}>
+      <Link href={matchHref(match.fixtureId, "overview")} className={`${TAP_ROW} ${CELL_WIDE} justify-center hover:underline`}>
         <span className="sr-only">{`${result} `}</span>
         {match.scored}–{match.conceded}
       </Link>
