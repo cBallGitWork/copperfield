@@ -20,8 +20,8 @@ export default function Round({
   points: Map<string, number | null>;
   places: Map<string, string>;
   mine: string | null;
-  /** A cup's line in a week it plays no tie, such as its seeding. */
-  note?: { title: string; text: string } | undefined;
+  /** A cup's plate in a week it plays no tie, such as its seeding. */
+  note?: string | undefined;
   /** The arrows to the weeks either side. */
   step: RoundStep;
 }) {
@@ -54,10 +54,7 @@ export default function Round({
         </div>
       ))}
       {note === undefined ? null : (
-        <div className="flex flex-col">
-          <h3 className={BLOCK_PLATE}>{note.title}</h3>
-          <p className="cm-rows flex min-h-11 items-center px-3 text-sm">{note.text}</p>
-        </div>
+        <h3 className={BLOCK_PLATE}>{note}</h3>
       )}
     </section>
   );

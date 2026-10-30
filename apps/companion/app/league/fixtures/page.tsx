@@ -101,7 +101,5 @@ async function cleanSheetsOwed(round: ScheduleRound): Promise<Map<string, number
 /** A cup seeded on this gameweek's points says so under its fixtures. */
 function seeding(gameweek: number) {
   const cup = seededIn(gameweek);
-  return cup === undefined
-    ? undefined
-    : { title: `${cup.name} · Seeding`, text: "Every team's points this gameweek set the seeds." };
+  return cup === undefined ? undefined : `${cup.name} · Seeding`;
 }
