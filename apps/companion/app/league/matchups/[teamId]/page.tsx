@@ -9,12 +9,13 @@ import {
   openingGameweek,
   oppositionByClub,
   roundState,
-  withoutFitness,
 } from "@epl/core";
 import MatchupBoard, { type MatchupSide } from "../../../components/league/MatchupBoard";
 import Nothing from "../../../components/shell/Nothing";
 import TeamSheet from "../../../components/league/TeamSheet";
-import { SquadList, arrangeBoth } from "./sides";
+import { SquadList } from "./sides";
+import { teamSheet } from "../../../teamSheet";
+import { widestLine } from "../../../components/league/PitchRows";
 import { unplayedLists, unplayedSheet } from "./unplayed";
 import { SideTab, StatsTab, sharedSides, withheldNotice, type SharedSide } from "./tabs";
 import { FixturesTab, TableTab } from "./wider";
@@ -26,8 +27,7 @@ import { getLeagueSquads, readableOr404, teamDisplay } from "../../../squads";
 import { leagueInfo, readCalendar } from "../../../round";
 import { askedWeek, leagueWeeks } from "../../../squad/[teamId]/weeks";
 import { headToHeadTitle } from "./title";
-import { liveScores, squadLivePoints } from "../../../scoreboard";
-import { newsFor, readPoolNews } from "../../../poolNews";
+import { liveScores } from "../../../scoreboard";
 import { myTeamId } from "../../../session";
 import { now } from "../../../clock";
 import { MATCHUPS, matchupHref } from "../../routes";
@@ -40,12 +40,10 @@ import TabStrip from "../../../components/shell/TabStrip";
 import { everyone, subMarks } from "./subs";
 import ScoreboardDown from "../../ScoreboardDown";
 import StatsViews from "./StatsViews";
-import { benchOrder } from "../../../benchOrders";
 import { roundUnderway } from "../../../football";
 import { toPlayWord } from "../../../components/league/toPlay";
 import RoundWord from "../../../components/league/RoundWord";
 import { leagueFixturesHref } from "../../SectionNav";
-import { autoSubbed } from "../../../components/league/autoSubbed";
 
 // One head-to-head: the scoreline and the elevens behind it. The URL's team is the side the board opens on; the side
 // Fantrax calls home decides only the ground, its venue.
@@ -107,45 +105,37 @@ export default async function HeadToHeadPage({
     );
   }
 
-  // One cached read of the whole pool's news, narrowed per sheet below.
-  const [mine, stories] = await Promise.all([myTeamId(squads.period.teams), readPoolNews()]);
-  const { scores, subs, refused } = await liveScores(period);
+  const mine = await myTeamId(squads.period.teams);
+  const { scores, refused } = await liveScores(period);
   // Under way, gaps between kickoffs included: "all played" says something only then.
   const underway = roundUnderway(squads.snapshot);
-  // A finished week says so under each name, and wears none of today's fitness (review N9).
+  // A finished week says so under each name.
   const state = roundState(squads.snapshot, now().toISOString());
   const over = state === null || state === "live" ? null : <RoundWord state={state} />;
   // The league's own names for its categories.
   const categories = squads.info.scoringCategories;
-  const clubs = clubById(squads.snapshot);
-  const opposition = oppositionByClub(squads.snapshot);
   /** Whether a side's eleven goes on screen, asked before the fetch it decides. */
   const shows = (team: LeagueTeam) =>
     rostered.get(team.teamId) !== undefined &&
     teamDisplay(squads, team.teamId === mine).show === "lineup";
 
-  // Each man's points off the scoreboard's own live payload, priced at his slot, so an eleven adds up to its header.
-  // Only for a side whose eleven shows, once a ball is kicked: where a man is priced says who is in it.
-  // Fantrax's bench order for the period: fixed once a ball is kicked, still the manager's to change before.
-  const benchOf = async (team: LeagueTeam) =>
-    [team.teamId, shows(team) ? await benchOrder(team.teamId, period, started) : []] as const;
-  const [yours, theirs, ...benched] = await Promise.all([
-    started && shows(pairing.team) ? squadLivePoints(period, pairing.team.teamId, categories) : null,
-    started && shows(pairing.opponent) ? squadLivePoints(period, pairing.opponent.teamId, categories) : null,
-    benchOf(pairing.team),
-    benchOf(pairing.opponent),
-  ]);
-  const benches = new Map(benched);
-  const scored = new Map([
-    [pairing.team.teamId, yours],
-    [pairing.opponent.teamId, theirs],
-  ]);
-
-  const { arranged: sheets, widest } = arrangeBoth({ pairing, rostered, shows, scored, benches, clubs, opposition });
-  // After the auto subs, so the eleven on the grass is the one the score counts.
-  const made = new Map([...sheets].map(([id, sheet]) => [id, autoSubbed(over === null ? sheet : withoutFitness(sheet), subs.get(id) ?? [])]));
-  const arranged = new Map([...made].map(([id, { sheet }]) => [id, sheet]));
-  const listed = started ? null : unplayedLists({ pairing, rostered, shows, benches, clubs, opposition });
+  // Each shown side's sheet as the Team tab draws it; only behind the gate, since where a man is priced says who starts.
+  const drawn = new Map(
+    await Promise.all(
+      [pairing.team, pairing.opponent].flatMap((team) => {
+        const roster = rostered.get(team.teamId);
+        return roster === undefined || !shows(team) ? [] : [teamSheet(squads, roster).then((read) => [team.teamId, read] as const)];
+      }),
+    ),
+  );
+  const yours = drawn.get(pairing.team.teamId)?.live ?? null;
+  const theirs = drawn.get(pairing.opponent.teamId)?.live ?? null;
+  const arranged = new Map([...drawn].map(([id, read]) => [id, read.sheet]));
+  // One card size for both sides, so the pitch holds still as the reader flips; a withheld side's shape would leak.
+  const widest = Math.max(1, ...[...arranged.values()].map((sheet) => widestLine([...sheet.rows, { players: sheet.bench }])));
+  const clubs = clubById(squads.snapshot);
+  const opposition = oppositionByClub(squads.snapshot);
+  const listed = started ? null : unplayedLists({ pairing, rostered, shows, arranged, clubs, opposition });
 
   // Who came on and off, which only the pitch marks.
   const events = view === "lineups" ? await sheetEvents(arranged.values(), squads.snapshot) : new Map();
@@ -159,7 +149,8 @@ export default async function HeadToHeadPage({
 
   // Joined on the server, and only once the gate has opened his eleven: what crosses is his men's own detail.
   const side = ({ team, detail, withheld }: SharedSide): MatchupSide => {
-    const priced = scored.get(team.teamId) ?? null;
+    const sheet = drawn.get(team.teamId);
+    const priced = sheet?.live ?? null;
     const score = scores.get(team.teamId);
     return {
       team,
@@ -178,11 +169,11 @@ export default async function HeadToHeadPage({
             bench={detail.bench}
             widest={widest}
             subs={subMarks(everyone(detail), events)}
-            autoSubs={made.get(team.teamId)?.marks}
+            autoSubs={sheet?.marks}
             breakdown={priced?.breakdown ?? {}}
             played={priced?.played}
             // This sheet's men only — a story is keyed by player, and would name a withheld eleven.
-            news={over === null ? newsFor(stories, everyone(detail).map((player) => player.rostered.slot.fantraxId)) : {}}
+            news={sheet?.news ?? {}}
             mode="pitch"
           />
         ),

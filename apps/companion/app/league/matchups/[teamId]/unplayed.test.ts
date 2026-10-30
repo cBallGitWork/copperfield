@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { FootballPlayer, LeagueTeam, RosteredPlayer, RosteredTeam } from "@epl/core";
+import { NO_MINUTES, lineupDetail } from "@epl/core";
 import { unplayedLists, unplayedSheet } from "./unplayed";
 
 const man = (fantraxId: string, position: string, status: "ACTIVE" | "RESERVE"): RosteredPlayer => ({
@@ -21,7 +22,8 @@ const lists = unplayedLists({
   pairing: { team: team("mine"), opponent: team("rival") },
   rostered: new Map([["mine", roster("mine")], ["rival", roster("rival")]]),
   shows: (side) => side.teamId === "mine",
-  benches: new Map(),
+  // Both sheets handed in: the gate, not the caller, decides the rival's stays unarranged.
+  arranged: new Map(["mine", "rival"].map((id) => [id, lineupDetail(roster(id), new Map(), new Map(), null, NO_MINUTES)])),
   clubs: new Map(),
   opposition: new Map(),
 });
