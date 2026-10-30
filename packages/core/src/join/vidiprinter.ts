@@ -6,6 +6,8 @@ import {
   ASSISTS_TOTAL,
   DEFCON,
   GOALS,
+  GOALS_AGAINST,
+  GOALS_AGAINST_OUTFIELD,
   KEEPER_WORK,
   MINUTES,
   OWN_GOALS,
@@ -60,6 +62,8 @@ export interface PrinterTally {
 
 /** What the feed prints with a minute of its own, or what is every man's, so the counts never say it. */
 const UNCOUNTED = [GOALS, ASSISTS_TOTAL, ASSISTS_OFFICIAL, ASSISTS_FANTASY, YELLOW_CARDS, RED_CARDS, OWN_GOALS, MINUTES];
+/** Goals conceded never print (Craig, 30 Oct 2026: "remove goals conceded rows"). */
+const UNPRINTED = [GOALS_AGAINST, GOALS_AGAINST_OUTFIELD];
 
 /** A whistle's place in its match: kick-off first, half-time after the first half's last event, full time after all. */
 const WHISTLE_PLACE: Partial<Record<SheetMomentKind, number>> = { "kick-off": 0, "half-time": 1.5 * HALF, "full-time": 2.5 * HALF };
@@ -170,8 +174,9 @@ function countsOf(categories: readonly LivePlayerCategory[] | undefined, names: 
   return (categories ?? []).flatMap((category) => {
     const named = names?.[category.category];
     if (named === undefined || category.points === 0) return [];
-    if (meaningOf(named, UNCOUNTED) !== null) return [];
+    if (meaningOf(named, UNCOUNTED) !== null || meaningOf(named, UNPRINTED) !== null) return [];
     const sort = meaningOf(named, DEFCON) !== null ? "defcon" : meaningOf(named, KEEPER_WORK) !== null ? "keeper" : null;
-    return [{ name: wordsOf(named).name, value: category.value, points: category.points, sort }];
+    // Either DefCon tier is DefCon here (Craig, 30 Oct 2026: "remove + from defcon"); its points say which.
+    return [{ name: sort === "defcon" ? "DefCon" : wordsOf(named).name, value: category.value, points: category.points, sort }];
   });
 }

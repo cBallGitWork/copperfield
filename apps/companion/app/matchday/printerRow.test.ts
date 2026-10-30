@@ -35,7 +35,7 @@ describe("printerRow", () => {
   it("prints a whistle as its letters and both sides by crest and three letters, a score once one stands", () => {
     expect(row({ kind: "kick-off", score: { home: 0, away: 0 } })).toMatchObject({
       word: "KO",
-      minute: null,
+      minute: "KO",
       sides: [
         { club: ARSENAL, name: "ARS", score: null },
         { club: EVERTON, name: "EVE", score: null },
@@ -61,12 +61,12 @@ describe("printerRow", () => {
 
   it("prints a change as the man coming on and the man taken off, with his counts and their points", () => {
     const change = row({ kind: "injury", man: 20, second: 10, counts: [{ name: "DefCon", value: "1", points: 2, sort: "defcon" }] });
-    expect(change).toMatchObject({ word: "Injury", second: { word: "Off", man: { name: "Saka" } } });
+    expect(change).toMatchObject({ word: "Injury", second: { word: "for", man: { name: "Saka" } } });
     expect(change.counts).toEqual([{ name: "DefCon", value: "1", points: "+2", sort: "defcon" }]);
   });
 
-  it("prints a man's full-time counts with no word and no minute: they sit under the whistle", () => {
-    expect(row({ kind: "tally", minute: null, man: 10 })).toMatchObject({ word: null, minute: null, man: { name: "Saka" } });
+  it("prints a man's full-time counts with no word, FT in the minute's column (Craig, 30 Oct 2026)", () => {
+    expect(row({ kind: "tally", minute: null, man: 10 })).toMatchObject({ word: null, minute: "FT", man: { name: "Saka" } });
   });
 
   it("prints the dash for a man the snapshot cannot name", () => {

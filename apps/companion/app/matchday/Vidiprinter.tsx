@@ -28,7 +28,7 @@ const GLYPH: Record<PrinterKind, EventGlyph | null> = {
   tally: null,
 };
 
-/** A count's glyph: the match report's shield for defensive work, its hand for a keeper's (Craig, 30 Oct 2026). */
+/** A count row's glyph, in the event column: the match report's shield for DefCon, its hand for a keeper (Craig, 30 Oct 2026). */
 const COUNT_GLYPH: Record<NonNullable<PrinterRow["counts"][number]["sort"]>, EventGlyph> = { defcon: "block", keeper: "save" };
 
 /** The event's ink, as the match report's: a goal a gain, a card its colour, a loss red, a change the pitch's sub amber. */
@@ -47,12 +47,12 @@ const TONE: Record<PrinterKind, string> = {
 };
 
 /** One face for the whole line; names one step up, the rest of it one step down. */
-const LINE = "cm-row flex items-start gap-1.5 px-1.5 py-1.5 font-chrome lg:gap-2 lg:px-2 lg:py-1";
+const LINE = "cm-row flex items-start gap-1.5 pr-1.5 py-1.5 font-chrome lg:gap-2 lg:pr-2 lg:py-1";
 const NAME = "text-sm font-bold lg:text-base";
 const TEXT = "text-xs lg:text-sm";
 const WORD = `${TEXT} font-bold uppercase`;
-/** The minute's own column (Craig, 30 Oct 2026): as wide as `90+5′`, right-aligned so it and `7′` end together. */
-const MINUTE_SLOT = `w-7 shrink-0 text-right numeric min-h-5 leading-5 lg:w-10 ${TEXT} text-ink`;
+/** The minute's own column, flush with the rows' rule (Craig, 30 Oct 2026: "still space on the left side"); `90+5′` fills it. */
+const MINUTE_SLOT = `w-7 shrink-0 text-left numeric min-h-5 leading-5 lg:w-10 ${TEXT} text-ink`;
 /** The event's own column: its coloured icon on a phone, so both men fit one row at 390; the word joins it on a desk. */
 const WORD_SLOT = `flex w-5 shrink-0 items-center gap-1 lg:w-24 min-h-5 ${WORD}`;
 
@@ -96,7 +96,8 @@ export default function Vidiprinter({
 }
 
 function Row({ row, mine }: { row: PrinterRow; mine: string | null }) {
-  const glyph = GLYPH[row.kind];
+  const counted = row.counts.find((count) => count.sort !== null)?.sort;
+  const glyph = row.kind === "tally" && counted !== undefined && counted !== null ? COUNT_GLYPH[counted] : GLYPH[row.kind];
   return (
     <li className={LINE}>
       <span className={MINUTE_SLOT}>{row.minute}</span>
@@ -109,8 +110,15 @@ function Row({ row, mine }: { row: PrinterRow; mine: string | null }) {
         <span className="flex min-w-0 items-center gap-x-1.5">
           {row.sides === null ? null : (
             <>
+              {/* `AVL 2–1 MCI`, read as `ARS v EVE` is at kick-off (Craig, 30 Oct 2026). */}
               <Side side={row.sides[0]} />
-              {row.sides[0].score === null ? <span className={`${TEXT} text-muted`}>v</span> : null}
+              {row.sides[0].score === null || row.sides[1].score === null ? (
+                <span className={`${TEXT} text-muted`}>v</span>
+              ) : (
+                <span className={`${NAME} numeric whitespace-nowrap text-ink`}>
+                  {row.sides[0].score}–{row.sides[1].score}
+                </span>
+              )}
               <Side side={row.sides[1]} />
             </>
           )}
@@ -123,12 +131,13 @@ function Row({ row, mine }: { row: PrinterRow; mine: string | null }) {
           )}
         </span>
         {row.counts.length === 0 ? null : (
-          // Every count a flex item on one centre line, so an iconed count and a plain one sit level.
+          // Every count a flex item on one centre line, the dot between them level with the words.
           <span className={`flex flex-wrap items-center gap-x-1.5 ${TEXT} text-muted`}>
+            {/* On a change the counts are the man taken off's, so they name him rather than read as the arrival's. */}
+            {row.second === null || row.kind === "tally" ? null : <span className="text-ink">{row.second.man.name}</span>}
             {row.counts.map((count, at) => (
               <span key={count.name} className="inline-flex items-center gap-1 whitespace-nowrap">
                 {at === 0 ? null : <span aria-hidden>·</span>}
-                {count.sort === null ? null : <EventIcon glyph={COUNT_GLYPH[count.sort]} />}
                 {count.name}
                 {count.value === null ? null : <span className="numeric text-ink">{count.value}</span>}
                 <span className="numeric font-bold text-info">{count.points}</span>
@@ -160,13 +169,12 @@ function Man({ man, mine, crest = true }: { man: PrinterMan; mine: string | null
   );
 }
 
-/** One side of a match on a whistle: its crest, its name and, once one stands, its score. */
+/** One side of a match on a whistle: its crest and its three letters; the score sits between the two. */
 function Side({ side }: { side: NonNullable<PrinterRow["sides"]>[0] }) {
   return (
     <span className="flex min-w-0 items-center gap-1 whitespace-nowrap">
       <Crest club={side.club} />
       <span className={`${NAME} text-ink`}>{side.name}</span>
-      {side.score === null ? null : <span className={`${NAME} numeric text-ink`}>{side.score}</span>}
     </span>
   );
 }
