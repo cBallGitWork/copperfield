@@ -44,15 +44,6 @@ export interface AvailabilityNote extends Availability {
   teamId: string | null;
 }
 
-/** When the lineup locks next. The commissioner's deadline, never FPL's. */
-export interface Deadline {
-  period: number;
-  /** The period's first kickoff, ISO, which the lock is measured back from; not the period boundary. */
-  at: string;
-  /** When lineups lock: `at` less `LINEUP_LOCK_LEAD_MINUTES`, a house rule no API publishes. */
-  locksAt: string;
-}
-
 /** One player in the week's eleven, with the fact that got him there and the manager who owns him. */
 export interface Pick {
   /** His Fantrax id, the key of draft picks, rosters and the transaction log. */

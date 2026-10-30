@@ -11,7 +11,7 @@ import {
   isResolved,
   leagueLimits,
   periodGameweeks,
-  periodLock,
+  lockOf,
   playSeason,
   readMoves,
   seasonCalls,
@@ -106,7 +106,7 @@ export async function seasonDesk(input: {
   if (calls === null) return say("Power rankings: too few sides to rank; nothing filed."), null;
   for (const move of calls.moved) say(`  Power rankings: ${move.by} moved ${move.teamId} from ${move.from} to ${move.place} (${move.on}).`);
 
-  const lock = periodLock(info.rosterPeriods.find((each) => each.number === round.period), input.kickoffs);
+  const lock = lockOf(info.rosterPeriods, input.kickoffs, round.period);
   if (lock === null) return say(`Power rankings: no lock for period ${round.period}; nothing filed.`), null;
 
   const recorded = limits.leagues[FANTRAX_LEAGUE_ID as keyof typeof limits.leagues]?.positions ?? [];

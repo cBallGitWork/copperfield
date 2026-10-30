@@ -7,9 +7,8 @@ import {
   eligibilityOf,
   fetchLineupState,
   fieldMapFor,
-  firstKickoff,
   lineupChanges,
-  locksAt,
+  lockOf,
   mapLineupState,
   readBenchAnswer,
   readLineupAnswer,
@@ -87,9 +86,7 @@ export async function saveLineup(input: unknown): Promise<WriteAnswer> {
   const squads = await getLeagueSquads(round);
   if (round === null || !("period" in squads) || squads.info === null) return refuse(REFUSED);
   if (input.period !== round.period) return refuse(`That gameweek has locked. Reload to plan gameweek ${round.gameweek}.`);
-  const period = squads.info.rosterPeriods.find((p) => p.number === round.period);
-  const kickoff = period === undefined ? null : firstKickoff(period, squads.kickoffs);
-  if (!saveOpen(kickoff === null ? null : locksAt(kickoff), now().toISOString())) {
+  if (!saveOpen(lockOf(squads.info.rosterPeriods, squads.kickoffs, round.period), now().toISOString())) {
     return refuse(`Gameweek ${round.gameweek} is about to lock. Set this line-up in Fantrax instead.`);
   }
 

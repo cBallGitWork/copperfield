@@ -19,7 +19,7 @@ import {
   nextDeadline,
   openingGameweek,
   periodGameweeks,
-  periodLock,
+  lockOf,
   periodOfGameweek,
   americanisms,
   banned,
@@ -93,7 +93,7 @@ async function main(): Promise<void> {
   if (round === undefined) return say(`No Fantrax period covers gameweek ${snapshot.gameweek}.`);
 
   // When this round locks, and whether it has: the pressers' desk reads both.
-  const lock = periodLock(info.rosterPeriods.find((each) => each.number === round.period), kickoffs);
+  const lock = lockOf(info.rosterPeriods, kickoffs, round.period);
   const locked = lock !== null && Date.parse(now) >= Date.parse(lock);
 
   const ledger = readLedger();

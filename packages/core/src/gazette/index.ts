@@ -2,7 +2,6 @@
 // A nested type is exported only once something outside core names it.
 
 export { availability } from "./availability";
-export { nextDeadline } from "./deadline";
 export { deals, lastWaiverRun, weekOfBusiness } from "./deals";
 export { kindOf, moverOf, movement } from "./dealSides";
 export { strangers } from "./strangers";
@@ -31,7 +30,6 @@ export type { PublishedStory, StoryKind } from "./story";
 export type { StoryFace } from "./face";
 export type {
   AvailabilityNote,
-  Deadline,
   Deal,
   DealSide,
   Pick,

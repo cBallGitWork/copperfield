@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
-import type { GameweekKickoff } from "../league/calendar";
-import type { LeaguePeriod } from "../league/types";
+import { nextDeadline, type GameweekKickoff } from "./calendar";
+import type { LeaguePeriod } from "./types";
 import { LINEUP_LOCK_LEAD_MINUTES } from "../config";
-import { nextDeadline } from "./deadline";
 
 // Real periods and kickoffs: only period 4, a Friday-morning open for a Saturday start, tells boundary from kickoff.
 
