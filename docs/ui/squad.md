@@ -167,7 +167,8 @@ FPts list follows (`lists.figureInk`); its xG and xA lists keep the lone figure'
 its cyan** the same day (`statViews.measureInk`): our DefCon points take the board's standout lights like any count,
 since cyan on a board is the league's points alone. **The Stats board's row** (21 Oct 2026, D-12/D-14): our position
 in the index tile at both widths, as the list has it, then the crest, I. Surname (`fullPlayerName`, not the shirt name
-that printed "Rogers"; `stats/roster.ts`) and CM's mark (`FitnessMark`) where the word box stood.
+that printed "Rogers"; `stats/roster.ts`) and CM's mark where the word box stood; the note after it on a desk alone,
+since a phone's 160px name cell cut it to "K…" (30 Oct 2026, review round 5 A2).
 
 Under a thumb the name takes the room (Craig, 11 Oct 2026: *"opponent should be further to the right on mobile
 as it cuts off names"*): the opponent is headed Opp and is 44px, xMins and FPts 36, the figures butted and a 4px gap
@@ -182,7 +183,7 @@ squads export's `expectedReturnGw` past the open gameweek, else FPL's fixed "Exp
 date turned into the first gameweek starting on or after it; a date is never printed, nor a chance, and a man who has
 left shows no week. On a phone the
 note sits beside the name when it fits and wraps under it when not, so it never shrinks to an ellipsis; the row stays
-36px. Every player row prints it. The squad row also puts FPL's expected day under the name, *Back 28 Nov*
+36px. Every player row prints it but the Stats board's under a thumb. The squad row also puts FPL's expected day under the name, *Back 28 Nov*
 (`returnDate`), beside it on a desk, the note itself never printing a date (Craig, 23 Oct 2026: *"theres an expected
 date too … wheres that gone"*).
 
@@ -474,7 +475,7 @@ this section, and it goes on doing it — `owns()` prefix-matches `/squad/`.
 |---|---|---|---|
 | Squad | `/squad/[teamId]` | The list and the pitch, side by side on the desk | the rosters read this page already makes |
 | Transfers | `…/transfers` | His business, as `cm0102/23.jpg`'s ledger: one row a deal, a With column only once he has traded; under a thumb a day heading over each day's deals and the type beside In (`groupByDay`, 20 Oct 2026); on his own team, the waiver line over it all week (`league-waivers.md`, 19 Oct 2026) | `readDeals`, filtered to him — the same feed the paper's business column reads |
-| Match | `…/next` | Who he plays, both sides on their own colours (`21.jpg`); the whole plate opens that tie's head-to-head at the gameweek (19 Oct 2026). Under it both line-ups for the planning gameweek, as the head-to-head lists them before kickoff: a rival's eleven once his period opens, his squad unarranged before (`teamDisplay`); a phone shows one side, picked from two plates in the foot (`?side=opponent`), the desk both side by side; the bench stands in position order, as its order is a Fantrax read per team (Craig, 20 Oct 2026: the tab stays and earns its place) | `headToHeads` and the rosters, already on the page; two ties for a double header, each its plate and its two sides |
+| Match | `…/next` | Who he plays, both sides on their own colours (`21.jpg`); the whole plate opens that tie's head-to-head at the gameweek (19 Oct 2026). Under it both line-ups for the planning gameweek, as the head-to-head lists them before kickoff: a rival's eleven once his period opens, his squad unarranged before (`teamDisplay`); a phone shows one side, picked from two plates in the foot (`?side=opponent`), the desk both side by side; each shown side is its `teamSheet`, so the bench is Fantrax's numbered order as on Squad (30 Oct 2026, review round 5 A1; Craig, 20 Oct 2026: the tab stays and earns its place) | `headToHeads` and the rosters, already on the page; two ties for a double header, each its plate and its two sides |
 | Fixtures | `…/fixtures` | The whole season: to come first with the current gameweek on the accent edge, then the played under one "Played" row, newest first; a cup named only on its own row on a phone, a league row bare, a gameweek to come a faint dash (21 Oct 2026) | `seasonRows` + `seasonOrder` + `Season`, imported from `/league/schedule` rather than copied |
 | Stats | `…/stats` | Every man he owns, filtered by category | `getPlayerStats` filtered on `ownerTeamId`, off a warm cache; the stats league's season beneath each group (`statsLeague.ts`); DefCon points of ours on Scoring, off its periods |
 
