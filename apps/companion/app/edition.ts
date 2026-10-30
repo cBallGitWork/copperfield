@@ -54,11 +54,9 @@ export interface Edition {
   filed: PublishedStory[];
   /** The desk's own stories for the week, strongest first; empty most of the week. */
   stories: Story[];
-  /** The reader's own team, when they have signed in. */
-  mine: string | null;
 }
 
-export async function edition(mine: string | null): Promise<Edition> {
+export async function edition(): Promise<Edition> {
   const [squads, feed, kickoffs] = await Promise.all([
     getLeagueSquads(),
     readDeals(),
@@ -96,7 +94,6 @@ export async function edition(mine: string | null): Promise<Edition> {
     // Composed here because the clock is the app edge's to read.
     // A Prem Report filed before its picture was stored is pictured here, from its headline.
     filed: composePaper(drafted ? filed.map((story) => withReportFace(story, drafted.snapshot)) : filed, at),
-    mine,
   };
 
   return { ...paper, silence: silenceOf(squads, paper) };

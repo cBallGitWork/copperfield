@@ -34,7 +34,7 @@ beforeEach(() => readBoard.mockClear());
 describe("the paper's edition", () => {
   it("reads no head-to-head scores while the gameweek is being played, and carries none", async () => {
     statuses = ["finished", "live"];
-    const paper = await edition(null);
+    const paper = await edition();
     expect(readBoard).not.toHaveBeenCalled();
     expect(paper).not.toHaveProperty("board");
     expect(paper).not.toHaveProperty("live");
@@ -43,13 +43,13 @@ describe("the paper's edition", () => {
 
   it("reads the finished gameweek's scores for the desk's own stories", async () => {
     statuses = ["finished", "finished"];
-    await edition(null);
+    await edition();
     expect(readBoard).toHaveBeenCalledOnce();
   });
 
   it("pictures a Prem Report filed with no face by the man its headline names", async () => {
     statuses = ["finished"];
-    expect((await edition(null)).filed[0]?.face).toEqual({ code: 204480, name: "Rice", clubId: 1, position: null });
+    expect((await edition()).filed[0]?.face).toEqual({ code: 204480, name: "Rice", clubId: 1, position: null });
   });
 });
 
