@@ -44,12 +44,12 @@ const TONE: Record<PrinterKind, string> = {
 };
 
 /** One face for the whole line; names one step up, the rest of it one step down. */
-const LINE = "cm-row flex items-start gap-2 px-2 py-1.5 font-chrome lg:py-1";
+const LINE = "cm-row flex items-start gap-1.5 px-1.5 py-1.5 font-chrome lg:gap-2 lg:px-2 lg:py-1";
 const NAME = "text-sm font-bold lg:text-base";
 const TEXT = "text-xs lg:text-sm";
 const WORD = `${TEXT} font-bold uppercase`;
-/** The minute's own column (Craig, 30 Oct 2026), right-aligned so `90+5′` and `7′` end together. */
-const MINUTE_SLOT = `w-10 shrink-0 text-right numeric min-h-5 leading-5 lg:w-12 ${TEXT} text-ink`;
+/** The minute's own column (Craig, 30 Oct 2026): as wide as `90+5′`, right-aligned so it and `7′` end together. */
+const MINUTE_SLOT = `w-7 shrink-0 text-right numeric min-h-5 leading-5 lg:w-10 ${TEXT} text-ink`;
 /** The event's own column: its coloured icon on a phone, so both men fit one row at 390; the word joins it on a desk. */
 const WORD_SLOT = `flex w-5 shrink-0 items-center gap-1 lg:w-24 min-h-5 ${WORD}`;
 

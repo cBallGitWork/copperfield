@@ -44,11 +44,11 @@ describe("printerRow", () => {
     expect(row({ kind: "full-time", score: { home: 2, away: 1 } }).sides?.map((side) => side.score)).toEqual([2, 1]);
   });
 
-  it("prints a goal with its minute, scorer and assister with their clubs and points, and no score: the whistles carry it (Craig, 30 Oct 2026)", () => {
+  it("prints a goal with its minute, scorer and assister with their clubs and no figure or score: the word and the whistles carry them (Craig, 30 Oct 2026)", () => {
     expect(row({ man: 10, points: 5, second: 20, secondPoints: null, score: { home: 1, away: 0 } })).toMatchObject({
       word: "Goal",
       minute: "7′",
-      man: { name: "Saka", club: ARSENAL, owner: { teamId: "t1", teamName: "Raccoons" }, points: "+5" },
+      man: { name: "Saka", club: ARSENAL, owner: { teamId: "t1", teamName: "Raccoons" }, points: null },
       second: { word: "As", man: { name: "Pickford", club: EVERTON, owner: null, points: null } },
       sides: null,
     });
