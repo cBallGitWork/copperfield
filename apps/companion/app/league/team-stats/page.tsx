@@ -22,6 +22,7 @@ import { boardHref } from "./boardHref";
 import { getSeasonStats } from "./seasonStats";
 import { getSquadStats } from "./squadStats";
 import { squadColumnsIn } from "./squadColumns";
+import { scoredIn } from "./scored";
 import { intelStatsDay } from "../../intel";
 import { getSchedule } from "../schedule/schedule";
 import { readerTeamId } from "../../squads";
@@ -70,7 +71,9 @@ export default async function TeamStatsPage({ searchParams }: { searchParams: Se
   const begun = rounds.filter((round) => season !== null && round.period >= season.firstPeriod && round.started);
   const opening = rounds.find((round) => round.period === season?.firstPeriod);
   const lines = await (squad ? getSquadStats() : getSeasonStats(season));
-  const columns = squad ? squadColumnsIn(group) : offeredIn(group, lines);
+  const offered = squad ? squadColumnsIn(group) : offeredIn(group, lines);
+  // FPts drops a category the league pays nothing for at any position: ten noughts say nothing.
+  const columns = view === "points" ? scoredIn(offered, info.scoring, Object.keys(info.roster.maxActiveByPosition)) : offered;
   const category = columns.find((entry) => entry.key === query.cat) ?? columns[0] ?? categoryFor(undefined);
 
   const board = rankBy(columns, lines, category, measure);
