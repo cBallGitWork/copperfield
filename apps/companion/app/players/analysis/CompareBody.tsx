@@ -29,6 +29,7 @@ import { getLeaguePool } from "../pool";
 import { getPlayerStats } from "../playerStats";
 import { lastValue, seasonValue } from "../routes";
 import { seasonFixtures } from "../../football";
+import { PANEL } from "@/app/desk";
 
 // Two players side by side (Craig, 6 Sep 2026), on Data's page or a player's own tab with him fixed as A (Craig,
 // 21 Oct 2026). Two profile reads a view and never more; the search boxes read the cached pool, so a keystroke is
@@ -204,67 +205,71 @@ export default async function CompareBody({
         }
       />
 
-      {/* No league points beside a past ledger's goals, assists and clean sheets, which are FPL's counts (DESIGN §7). */}
-      {past ? null : (
-        <Points
-          a={scored(a)}
-          b={solo ? null : scored(b)}
-          names={{ a: names.a, b: solo ? null : names.b }}
-          season={"unavailable" in pool ? null : pool.season}
-        />
-      )}
+      {/* Nothing prints on the bare photograph (DESIGN §1, review D0); the attributes bring their own panel, and
+          `empty:hidden` drops this one when it holds nothing. */}
+      <section className={`${PANEL} empty:hidden`}>
+        {/* No league points beside a past ledger's goals, assists and clean sheets, which are FPL's counts (DESIGN §7). */}
+        {past ? null : (
+          <Points
+            a={scored(a)}
+            b={solo ? null : scored(b)}
+            names={{ a: names.a, b: solo ? null : names.b }}
+            season={"unavailable" in pool ? null : pool.season}
+          />
+        )}
 
-      {/* The range governs the figures and every map; the attributes are a season's percentiles, and a past season
-          is the whole of it. */}
-      {view === "attributes" || past ? null : (
-        <div className="flex items-center gap-1.5">
-          <Chip on={!recent} href={href({ range: undefined })}>
-            Season
-          </Chip>
-          <Chip on={recent} href={href({ range: String(RECENT) })}>
-            Last {RECENT}
-          </Chip>
-          <span className="numeric px-1.5 text-sm text-muted">{span}</span>
-        </div>
-      )}
+        {/* The range governs the figures and every map; the attributes are a season's percentiles, and a past season
+            is the whole of it. */}
+        {view === "attributes" || past ? null : (
+          <div className="flex items-center gap-1.5">
+            <Chip on={!recent} href={href({ range: undefined })}>
+              Season
+            </Chip>
+            <Chip on={recent} href={href({ range: String(RECENT) })}>
+              Last {RECENT}
+            </Chip>
+            <span className="numeric px-1.5 text-sm text-muted">{span}</span>
+          </div>
+        )}
 
-      {view === "figures" ? (
-        <Figures
-          a={first.played}
-          b={second?.played ?? null}
-          names={{ a: names.a, b: second === null ? null : names.b }}
-          window={told}
-          past={past}
-        />
-      ) : null}
+        {view === "figures" ? (
+          <Figures
+            a={first.played}
+            b={second?.played ?? null}
+            names={{ a: names.a, b: second === null ? null : names.b }}
+            window={told}
+            past={past}
+          />
+        ) : null}
 
-      {view === "shots" || view === "passes" ? (
-        <CompareMap
-          men={men.map((each) => ({
-            name: each.name,
-            club: each.club,
-            shots: view === "shots" ? each.shots : each.keyPasses,
-          }))}
-          passes={view === "passes"}
-          window={told}
-          className="mx-auto w-full lg:max-w-3xl"
-        />
-      ) : null}
+        {view === "shots" || view === "passes" ? (
+          <CompareMap
+            men={men.map((each) => ({
+              name: each.name,
+              club: each.club,
+              shots: view === "shots" ? each.shots : each.keyPasses,
+            }))}
+            passes={view === "passes"}
+            window={told}
+            className="mx-auto w-full lg:max-w-3xl"
+          />
+        ) : null}
 
-      {view === "touches" ? (
-        <div className="grid gap-2 lg:grid-cols-2">
-          {men.map((each, index) => (
-            <PlayerMap
-              key={index}
-              id={index === 0 ? "a" : "b"}
-              name={each.name}
-              club={each.club}
-              touches={each.heat ?? []}
-              matches={each.matches}
-            />
-          ))}
-        </div>
-      ) : null}
+        {view === "touches" ? (
+          <div className="grid gap-2 lg:grid-cols-2">
+            {men.map((each, index) => (
+              <PlayerMap
+                key={index}
+                id={index === 0 ? "a" : "b"}
+                name={each.name}
+                club={each.club}
+                touches={each.heat ?? []}
+                matches={each.matches}
+              />
+            ))}
+          </div>
+        ) : null}
+      </section>
 
       {/* Streamed: each grid is a percentile over every man of his role. */}
       {view === "attributes" ? (

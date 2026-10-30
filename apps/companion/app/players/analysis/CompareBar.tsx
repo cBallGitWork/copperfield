@@ -45,9 +45,10 @@ function Half({ side }: { side: Side }) {
       style={{ background: colours.primary, "--row-portrait": "3.5rem" } as CSSProperties}
     >
       <PlayerPortrait player={{ code: side.code, name: side.name }} colours={colours} chrome large />
-      {/* Two lines before a cut, so a half at 390 holds "Strand Larsen" whole. */}
+      {/* Two lines before a cut, so a half at 390 holds "Strand Larsen" whole; one word stays on one line and ends in an
+          ellipsis, never split (review D2: "AFFENGRUBE / R"; WebKit clamps without the ellipsis). */}
       <span
-        className="cm-title line-clamp-2 min-w-0 flex-1 font-chrome text-sm font-bold uppercase wrap-break-word lg:text-2xl"
+        className={`cm-title min-w-0 flex-1 font-chrome text-sm font-bold uppercase lg:text-2xl ${side.name.includes(" ") ? "line-clamp-2" : "truncate"}`}
         style={{ color: ink }}
       >
         {side.name}

@@ -41,6 +41,16 @@ describe("Next up", () => {
     expect(html).not.toContain("--color-fdr-");
   });
 
+  // Review D4, 30 Oct 2026: "87" under all eight gameweeks is one figure printed eight times.
+  it("prints a run of one figure once, and a run that moves under each week", () => {
+    const flat = renderToStaticMarkup(
+      createElement(FixtureRun, { run, minutes: new Map([[7, 87], [8, 87]]), asOf: "Thu 15 Oct", view: "attack" }),
+    );
+    expect(flat.match(/>87</g)).toHaveLength(1);
+    expect(flat).toMatch(/>xMins</);
+    expect(html.match(/>8[35]</g)).toHaveLength(2);
+  });
+
   // The model's figure was undated, so Friday's read passed for Monday's (review M23).
   it("dates the xMins once", () => {
     expect(html.match(/Thu 15 Oct/g)).toHaveLength(1);

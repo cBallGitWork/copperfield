@@ -10,6 +10,11 @@ import { LG } from "../../breakpoints";
 /** What the optimizer may serve: the whole phone's width, or the desk column's. */
 const SIZES = `${LG} 13rem, 100vw`;
 
+/** A man with no photograph, drawn in his kit (FPL's `/shirts/`, served unoptimized) or his initials (no img), gets a
+ *  phone band half as tall, so Attributes and News stay nearer the first screen (review D5). */
+const NO_PHOTO =
+  "max-lg:[&:has(img[src*='/shirts/'])_.pitch-figure]:h-16 max-lg:[&:not(:has(img))_.pitch-figure]:h-16";
+
 export default function Portrait({
   player,
   club,
@@ -24,7 +29,7 @@ export default function Portrait({
 
   return (
     <div
-      className="relative shrink-0 overflow-hidden [--pitch-figure:1.8] max-lg:[&_img]:object-contain max-lg:[&_img]:object-bottom max-lg:[&_.pitch-figure]:h-30 lg:w-52 lg:[&_.pitch-figure]:h-full"
+      className={`relative shrink-0 overflow-hidden [--pitch-figure:1.8] max-lg:[&_img]:object-contain max-lg:[&_img]:object-bottom max-lg:[&_.pitch-figure]:h-30 lg:w-52 lg:[&_.pitch-figure]:h-full ${NO_PHOTO}`}
       style={{ backgroundColor: colours.primary }}
     >
       {/* `kickedOff`: a profile has no Saturday, so he is never drawn back. */}

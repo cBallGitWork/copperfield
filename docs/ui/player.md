@@ -70,14 +70,15 @@ Fitness, Next up, portrait and grid, Business, set pieces, News, real position (
 2. **Next up**, the run to come: the next eight across the row, each fixture one 28px line in FPL's difficulty, the
    club with its venue a step down beside it (`3xs`), under the table's 24px plates in their 9px caps (Craig, 21 Oct
    2026: *"next up can be smaller"*), and under each
-   gameweek the sister model's xMins in cyan (Craig, 7 Oct 2026: *"we have confidence of our xmins more"*). The
+   gameweek the sister model's xMins in cyan (Craig, 7 Oct 2026: *"we have confidence of our xmins more"*); a run of
+   one figure prints it once, beside the row's name (review D4, 30 Oct 2026). The
    projected points and rank under it, off since 7 Oct, went with the projections page on 19 Oct 2026 (Craig: *"ok"*).
    No source caption on the panel
    ("FPL's own · Fantrax's own remove"); a leading column names the row, `xMins`, since the
    titles never reach a phone, and the heading's aside dates them, "xMins as of Thu 15 Oct" (16 Oct 2026). *Fantrax's projection for the
    round was here and is gone* (25 Sep: "remove row"): it covered one period and only the men
    fielded, so it could not fill a run; the round just gone went on 4 Sep.
-3. **The portrait**, his club's colour behind the cut-out, crest top-left: on a phone a 120px band showing the whole
+3. **The portrait**, his club's colour behind the cut-out, crest top-left: on a phone a 120px band (64px for a man drawn in his kit or initials, review D5) showing the whole
    cut-out (`object-contain`), so fitness and the run stay on the first screen (Craig, 21 Oct 2026, reversing 25 Sep's
    banner and 4 Sep's portrait-first order); on a desk a 208px column as tall as the grid, filled to its foot (Craig,
    25 Sep 2026: "cut off mid box").
