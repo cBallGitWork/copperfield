@@ -50,6 +50,16 @@ const list = (page: string) => page.slice(page.indexOf("<ul"), page.indexOf(">",
 
 beforeEach(() => Object.assign(state, { holder: true, mine: "t1", cap: 14, table: TABLE }));
 
+// F2: headed "Your squad" over all ten teams, which More calls Squads.
+describe("the index's heading", () => {
+  it("reads Squads, his team signed in or not", async () => {
+    const heading = (page: string) => page.slice(page.indexOf(">", page.indexOf("<h1")) + 1, page.indexOf("</h1>"));
+    expect(heading(await html())).toBe("Squads");
+    state.mine = null;
+    expect(heading(await html())).toBe("Squads");
+  });
+});
+
 // M-SHELL-8 + M-SQUADS-9: every row ended in the same unlabelled '14'.
 describe("a squad's size on the index", () => {
   it("prints nothing for a full squad", async () => {
@@ -139,7 +149,7 @@ describe("the League strip over the index", () => {
   it("draws the strip it is handed under the bar, and none when handed none", async () => {
     const strip = createElement("nav", { id: "league-strip" });
     const page = renderToStaticMarkup(await SquadIndex({ back: "/more", nav: strip }));
-    expect(page.indexOf('id="league-strip"')).toBeGreaterThan(page.indexOf("Your squad"));
+    expect(page.indexOf('id="league-strip"')).toBeGreaterThan(page.indexOf("</h1>"));
     expect(page.indexOf('id="league-strip"')).toBeLessThan(page.indexOf("<ul"));
     expect(await html()).not.toContain("league-strip");
   });

@@ -11,6 +11,8 @@ import { CREDITS_TITLE, titled } from "../titles";
 
 /** A credit's outbound link: 44px to a thumb, its padding cancelled by margin so a wrap costs one text line. */
 const CREDIT_LINK = "-my-3 min-w-0 break-words py-3 underline lg:-my-2 lg:py-2";
+/** The licence's link: "CC0" still 44px wide, the 20px it gains cancelled by margin so no line wraps for it. */
+const LICENCE_LINK = `${CREDIT_LINK.replace("min-w-0", "min-w-11")} -mx-2.5 px-2.5`;
 
 export const metadata = titled(CREDITS_TITLE);
 
@@ -47,7 +49,7 @@ export default function CreditsPage() {
                   {photo.title}
                 </a>
                 <span>{photo.author}</span>
-                <a className={CREDIT_LINK} href={photo.licenceUrl} rel="noreferrer" target="_blank">
+                <a className={LICENCE_LINK} href={photo.licenceUrl} rel="noreferrer" target="_blank">
                   {photo.licence}
                 </a>
               </div>

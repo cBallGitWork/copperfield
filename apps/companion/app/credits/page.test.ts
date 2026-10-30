@@ -56,3 +56,14 @@ describe("a credit's second row", () => {
     }
   });
 });
+
+// F5: a short licence ("CC0", "© BBC") was a 24px-wide link under a thumb.
+describe("a credit's licence link", () => {
+  it("reaches the 44px tap floor however short its name, its reach held in by a negative margin", () => {
+    for (const entry of entries) {
+      const licence = entry.match(/<a [^>]*>/g)!.at(-1)!;
+      expect(licence).toMatch(/class="[^"]*\bmin-w-11\b/);
+      expect(licence).toMatch(/class="[^"]*-mx-2\.5 px-2\.5/);
+    }
+  });
+});

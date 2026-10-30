@@ -33,7 +33,7 @@ export default function EntryForm() {
           name="entry"
           inputMode="numeric"
           required
-          placeholder="1234567"
+          placeholder="e.g. 1234567"
           className="cm-panel numeric min-h-11 min-w-0 flex-1 px-3 text-base text-ink placeholder:text-faint"
         />
         <button
