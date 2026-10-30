@@ -10,23 +10,6 @@ const MATCH_MINUTES = 115;
 /** Minutes of the interval, which the match clock does not count. */
 const INTERVAL_MINUTES = 15;
 
-
-/** The gameweek of the latest dated fixture kicked off by `at`; null before the season starts. */
-export function roundAt(fixtures: readonly Fixture[], at: string): number | null {
-  const now = instant(at);
-  let latest = -Infinity;
-  let gameweek: number | null = null;
-
-  for (const fixture of fixtures) {
-    if (fixture.kickoff === null || fixture.gameweek === null) continue;
-    const kickoff = instantOf(fixture.kickoff);
-    if (kickoff === null || kickoff > now || kickoff <= latest) continue;
-    latest = kickoff;
-    gameweek = fixture.gameweek;
-  }
-  return gameweek;
-}
-
 /** The events that had happened by `at`; one with no instant is dropped. */
 export function before<T extends { absolute: number | null }>(
   events: readonly T[],

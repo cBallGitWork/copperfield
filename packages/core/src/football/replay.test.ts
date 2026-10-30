@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Fixture, FootballPlayer, FootballSnapshot, MatchEvent } from "./types";
-import { before, rewindRound, roundAt } from "./replay";
+import { before, rewindRound } from "./replay";
 
 const KICKOFF = Date.parse("2026-09-19T14:00:00Z");
 
@@ -26,35 +26,6 @@ const snap = (fixtures: Fixture[]): FootballSnapshot =>
   });
 
 const at = (minutesIn: number) => new Date(KICKOFF + minutesIn * 60_000).toISOString();
-
-describe("roundAt", () => {
-  const season = [
-    fixture({ id: 1, gameweek: 4, kickoff: "2026-09-12T14:00:00Z" }),
-    fixture({ id: 2, gameweek: 5, kickoff: "2026-09-19T14:00:00Z" }),
-    fixture({ id: 3, gameweek: 5, kickoff: "2026-09-20T13:00:00Z" }),
-    fixture({ id: 4, gameweek: 6, kickoff: "2026-10-10T14:00:00Z" }),
-  ];
-
-  it("names the round an instant falls in", () => {
-    expect(roundAt(season, "2026-09-19T15:00:00Z")).toBe(5);
-  });
-
-  it("stays on a round through the gap between its matches", () => {
-    expect(roundAt(season, "2026-09-20T09:00:00Z")).toBe(5);
-  });
-
-  it("does not run ahead to a round nobody has kicked off", () => {
-    expect(roundAt(season, "2026-09-25T12:00:00Z")).toBe(5);
-  });
-
-  it("is null before the season starts", () => {
-    expect(roundAt(season, "2026-08-01T12:00:00Z")).toBeNull();
-  });
-
-  it("ignores a fixture with no date", () => {
-    expect(roundAt([fixture({ id: 9, gameweek: 7, kickoff: null })], at(0))).toBeNull();
-  });
-});
 
 describe("before", () => {
   it("keeps what had happened and drops what had not", () => {

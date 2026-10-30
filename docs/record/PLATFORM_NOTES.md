@@ -5453,8 +5453,8 @@ Restart `next dev` after changing it: Turbopack will not re-read a `.env.local`
 that a long-lived server already loaded.
 
 **Where the parts are.** `packages/core/src/football/replay.ts` is pure and
-holds the two functions — `roundAt` names the gameweek an instant falls in,
-`rewindRound` puts that round back to it. `apps/companion/app/clock.ts` is the
+holds `rewindRound`, which puts a round back to an instant; the round is the one Live
+would show then, `liveGameweek` in `league/calendar.ts` (`roundAt` went 30 Oct 2026). `apps/companion/app/clock.ts` is the
 one door every clock read at the app edge goes through; `footballNow()` in
 `football.ts` is what decides to rewind.
 
