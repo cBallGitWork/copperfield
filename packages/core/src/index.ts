@@ -30,6 +30,7 @@ export * from "./join/roster";
 export * from "./join/squadDetail";
 export * from "./join/squadStats";
 export * from "./join/teamSheet";
+export * from "./join/vidiprinter";
 export * from "./league";
 export { politeFetch } from "./http/fetch";
 export { fetchJson, fetchJsonOr404 } from "./http/get";
