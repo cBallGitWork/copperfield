@@ -3,9 +3,8 @@
 # Named foot-guns, each of which has actually fired in this tree. Nothing else:
 # a guard that stops commands nobody regrets is a guard people learn to click
 # through. Guards 6 to 8 were added 17 Sep 2026, each for a mistake made that
-# day under the new working agreement — branch protection needs a paid plan on a
-# private repo, so this file is the only place the agreement can be machinery
-# rather than manners.
+# day under the new working agreement. GitHub's ruleset on main blocks only
+# force-pushes and deletion (the crons push to main), so the rest is this file.
 set -euo pipefail
 
 input=$(cat)
@@ -83,15 +82,15 @@ if printf '%s' "$cmd" | grep -qE 'npm[[:space:]]+run[[:space:]]+(build|start|dev
   fi
 fi
 
-# 6) Committing or pushing straight to main. WORKING_AGREEMENT rule 8 says cut from
-#    origin/main and work on a branch; GitHub cannot enforce it here (branch
-#    protection is a paid feature on a private repo), so this is the enforcement.
-#    The crons are the exception — they commit to main by design, and they do not
-#    run through this hook.
+# 6) Committing or pushing straight to main, from main or by a refspec naming it.
+#    WORKING_AGREEMENT rule 8; the crons commit to main by design and skip this hook.
+if printf '%s' "$cmd" | grep -qE 'git[[:space:]]+push[^;&|]*[[:space:]]([^[:space:];&|]*:)?(refs/heads/)?main([[:space:];&|]|$)'; then
+  deny "That push targets main. The working agreement (docs/rules/WORKING_AGREEMENT.md rule 8) lands work on main only by a squash-merged PR. Push your branch under its own name and open a PR."
+fi
 if printf '%s' "$cmd" | grep -qE 'git[[:space:]]+(commit|push)([[:space:]]|$)'; then
   branch=$(git -C "${CLAUDE_PROJECT_DIR:-$PWD}" branch --show-current 2>/dev/null || echo "")
   if [ "$branch" = "main" ]; then
-    deny "You are on main. The working agreement (docs/rules/WORKING_AGREEMENT.md rule 8) is one branch per piece of work — branch protection is a paid feature on a private repo, so this hook is the only thing enforcing it. Run: git switch -c <type>/<thing> origin/main, then commit there. Prefixes: feat/ fix/ refactor/ docs/ chore/."
+    deny "You are on main. The working agreement (docs/rules/WORKING_AGREEMENT.md rule 8) is one branch per piece of work Run: git switch -c <type>/<thing> origin/main, then commit there. Prefixes: feat/ fix/ refactor/ docs/ chore/."
   fi
 fi
 

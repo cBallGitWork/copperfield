@@ -80,6 +80,23 @@ describe("guard_bash.sh", () => {
     expect(bash(`${G} commit -m x`)).toBe("allow");
   });
 
+  it.each([
+    [`${G} push origin HEAD:` + "main"],
+    [`${G} push origin feat/x:` + "main"],
+    [`${G} push origin feat/x:refs/heads/` + "main"],
+    [`${G} push origin ` + "main"],
+    [`${G} push -u origin ` + "main && echo done"],
+  ])("denies a push to main from a feature branch: %s", (command) => {
+    expect(bash(command)).toBe("deny");
+  });
+
+  it.each([[`${G} push origin feat/main-menu`], [`${G} push -u origin fix/maintain`]])(
+    "allows a branch whose name only contains main: %s",
+    (command) => {
+      expect(bash(command)).toBe("allow");
+    },
+  );
+
   it("asks before a staged file past 300 lines", () => {
     writeFileSync(join(tree, "big.ts"), "x\n".repeat(301));
     gitIn("add", "big.ts");
