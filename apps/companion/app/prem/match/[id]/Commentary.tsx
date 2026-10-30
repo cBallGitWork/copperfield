@@ -1,4 +1,4 @@
-import { proseSpans, saysInjury } from "@epl/core";
+import { bareMinute, proseSpans, saysInjury } from "@epl/core";
 import type { PlCommentaryLine } from "@epl/core";
 import EventIcon, { glyphFor } from "../../../components/football/EventIcon";
 import PlayerName from "../../../components/shell/PlayerName";
@@ -26,7 +26,7 @@ export default function Line({
     <li className={`flex min-h-9 items-stretch gap-2 lg:min-h-8 ${deskOnly ? "max-lg:hidden" : ""}`}>
       {/* `w-11` holds stoppage time, `90+7`. */}
       <span className={`${INDEX_BLOCK} numeric w-11`}>
-        {line.minute.replace(/^0(?=\d)/, "")}&prime;
+        {bareMinute(line.minute)}&prime;
       </span>
       {/* Every row is marked; the glyph wears the row's tone, and a word stands beside it only where the sentence does not say it. */}
       <span className={`flex shrink-0 items-center gap-1 ${SMALL_CAPS} ${tone}`}>

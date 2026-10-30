@@ -25,13 +25,13 @@ export interface DayStep {
   next: Step | null;
 }
 
-/** Scores' day and its arrows. The day it opens on keeps Live's plain address, so the landing view has one URL. */
-export function dayStep(days: readonly string[], today: string, asked: string | undefined): DayStep | null {
+/** A view's day and its arrows. The day it opens on keeps the view's plain address (`base`), so it has one URL. */
+export function dayStep(days: readonly string[], today: string, asked: string | undefined, base = LIVE): DayStep | null {
   const day = scoreDay(days, today, asked);
   if (day === null) return null;
   const opening = scoreDay(days, today, undefined);
   const to = (at: string | null): Step | null =>
-    at === null ? null : { href: at === opening ? LIVE : `${LIVE}?day=${at}`, label: dayAndDateOfDay(at) };
+    at === null ? null : { href: at === opening ? base : `${base}${base.includes("?") ? "&" : "?"}day=${at}`, label: dayAndDateOfDay(at) };
   const side = beside(days, day);
   return { day, title: dayAndDateOfDay(day), previous: to(side.previous), next: to(side.next) };
 }

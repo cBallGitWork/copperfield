@@ -85,6 +85,8 @@ vi.mock("../clock", () => ({ now: () => r.at }));
 vi.mock("../prem/places", () => ({ clubPlaces: () => new Map([[1, 3]]) }));
 vi.mock("./TopStats", () => ({ default: stub("topstats"), STATS_VIEW: "stats", TOP_STATS: "Top stats", statsHref: () => "/matchday?view=stats" }));
 vi.mock("./Scores", () => ({ Scores: stub("scores") }));
+vi.mock("./LiveVidiprinter", () => ({ default: stub("vidiprinter") }));
+vi.mock("./Vidiprinter", () => ({ VIDIPRINTER_VIEW: "vidiprinter", VIDIPRINTER_HREF: "/matchday?view=vidiprinter" }));
 vi.mock("./Between", () => ({ BetweenGameweeks: stub("between") }));
 vi.mock("./ShareButton", () => ({ default: stub("share") }));
 vi.mock("../components/league/RoundWord", () => ({ default: stub("roundword") }));
@@ -146,6 +148,13 @@ describe("Live's reads", () => {
     expect(r.fn.marks).not.toHaveBeenCalled();
     expect(r.fn.marksFor).toHaveBeenCalledWith(r.squads, r.snapshot.fixtures);
     expect(r.fn.gameweekBoards).not.toHaveBeenCalled();
+  });
+
+  it("prints the vidiprinter on its own view and asks nothing the scores need", async () => {
+    const html = await render({ view: "vidiprinter" });
+    expect(html).toContain("x-vidiprinter");
+    expect(html).not.toContain("x-scores");
+    for (const read of scoresOnly) expect(read).not.toHaveBeenCalled();
   });
 
   it("marks nothing when the league cannot be read", async () => {

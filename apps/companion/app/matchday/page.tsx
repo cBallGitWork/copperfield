@@ -19,6 +19,8 @@ import { getLeagueSquads, readable, readerTeamId } from "../squads";
 import TopStats, { STATS_VIEW, TOP_STATS, statsHref } from "./TopStats";
 import { gameweekBoards } from "./boards";
 import LiveScores from "./LiveScores";
+import LiveVidiprinter from "./LiveVidiprinter";
+import { VIDIPRINTER_HREF, VIDIPRINTER_VIEW } from "./Vidiprinter";
 import { lockAhead } from "../lockAhead";
 import { now } from "../clock";
 import { BetweenGameweeks } from "./Between";
@@ -65,6 +67,7 @@ export default async function MatchdayPage({
   // Scores is the landing view (Craig, 21 Sep 2026); the top stats are a tap away.
   const query = await searchParams;
   const leading = query.view === STATS_VIEW;
+  const printing = query.view === VIDIPRINTER_VIEW;
   const [{ snapshot, season, during, up }, mine, squads] = await Promise.all([matchday(), readerTeamId(), getLeagueSquads()]);
   const drafted = readable(squads);
   const period = drafted?.roundPeriod ?? null;
@@ -85,6 +88,8 @@ export default async function MatchdayPage({
   if (leading) {
     const top = await gameweekBoards(snapshot, await roundFigures(snapshot.gameweek), period);
     view = <TopStats boards={top.boards} stat={query.stat} teamNames={top.teamNames} reader={mine} exit={exit} />;
+  } else if (during && printing) {
+    view = <LiveVidiprinter snapshot={snapshot} drafted={drafted} mine={mine} day={query.day} />;
   } else if (during) {
     view = <LiveScores snapshot={snapshot} season={season} drafted={drafted} mine={mine} day={query.day} />;
   } else {
@@ -105,9 +110,10 @@ export default async function MatchdayPage({
         label="Which view"
         tabs={[
           { key: "scores", label: "Scores", href: LIVE },
+          { key: VIDIPRINTER_VIEW, label: "Vidiprinter", href: VIDIPRINTER_HREF },
           { key: STATS_VIEW, label: TOP_STATS, href: statsHref() },
         ]}
-        current={leading ? STATS_VIEW : "scores"}
+        current={leading ? STATS_VIEW : printing ? VIDIPRINTER_VIEW : "scores"}
       />
       {view}
       {leading ? null : exit}

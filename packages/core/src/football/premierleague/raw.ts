@@ -111,6 +111,10 @@ export interface RawPlFixtureEvent {
   clock?: RawPlClock;
   /** `"1"` or `"2"`: which half. */
   phase?: string;
+  /** The wall clock, `millis` epoch ms: the one order across matches, as `clock.secs` runs backwards over the interval. */
+  time?: { millis?: number };
+  /** The score once the event stood. */
+  score?: RawPlScore;
 }
 
 interface RawPlScore {
