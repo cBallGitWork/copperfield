@@ -1,16 +1,18 @@
 import type { CupStage } from "@epl/core";
 import { BLOCK_PLATE, LABEL, QUIET_FIGURE, ROW_NAME } from "@/app/desk";
+import ScrollBoard from "../../components/league/ScrollBoard";
 
-/** One side of a draw as columns of ties, first round on the left; a phone scrolls it sideways. */
+/** One side of a draw as columns of ties, first round on the left; a phone scrolls it sideways a round at a time,
+ *  with the board's fade and gauge saying there is more. */
 export default function Bracket({ title, stages }: { title: string; stages: readonly CupStage[] }) {
   if (stages.length === 0) return null;
   return (
     <section className="flex flex-col gap-1">
       <h2 className={BLOCK_PLATE}>{title}</h2>
-      <div className="cm-scroll overflow-x-auto">
+      <ScrollBoard className="snap-x snap-mandatory scroll-px-1">
         <ol className="flex min-w-max gap-3 p-1">
           {stages.map((stage) => (
-            <li key={`${stage.gameweek}-${stage.name}`} className="flex w-36 flex-col gap-2 lg:w-44">
+            <li key={`${stage.gameweek}-${stage.name}`} className="flex w-36 snap-start flex-col gap-2 lg:w-44">
               <p className={`${LABEL} flex justify-between gap-2`}>
                 <span className="truncate">{stage.name}</span>
                 <span className="numeric shrink-0">GW{stage.gameweek}</span>
@@ -28,7 +30,7 @@ export default function Bracket({ title, stages }: { title: string; stages: read
             </li>
           ))}
         </ol>
-      </div>
+      </ScrollBoard>
     </section>
   );
 }
