@@ -11,8 +11,10 @@ import { SELECT } from "../../../components/shell/ButtonLink";
 import BoardKey from "../../../components/league/BoardKey";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
-import FitnessMark from "../../../components/football/FitnessMark";
-import { doubtRow } from "../../../components/football/doubtRow";
+import { notedOf } from "../../../components/football/FitnessMark";
+import FitnessNote from "../../../components/football/FitnessNote";
+import StateMark from "../../../components/football/StateMark";
+import { doubtRow, fitnessOf } from "../../../components/football/doubtRow";
 import { byFigure } from "../../../components/league/order";
 import { SIDE_SHARES, standoutCuts, unlessSorted } from "../../../components/league/standout";
 import { MINOR_LABEL, PANEL_FLUSH } from "@/app/desk";
@@ -124,7 +126,7 @@ export default function StatBoard({
                 <LeadFace
                   crest={line.clubShort ? crestForShortName(toFplClubCode(line.clubShort)) : null}
                   name={names[line.fantraxId] ?? line.name}
-                  after={<FitnessMark player={footballers[line.fantraxId] ?? null} />}
+                  after={<Fitness player={footballers[line.fantraxId] ?? null} />}
                 />
               </Link>
             ),
@@ -146,5 +148,16 @@ export default function StatBoard({
 
       <BoardKey entries={measures.map((measure) => ({ label: measure.head, title: measure.label }))} />
     </section>
+  );
+}
+
+/** His mark, and his note on the desk alone: a phone's name cell cut it to "K…" (review round 5, A2). */
+function Fitness({ player }: { player: FootballPlayer | null }) {
+  const { mark } = fitnessOf(player);
+  return mark === null ? null : (
+    <>
+      <StateMark availability={mark} />
+      <FitnessNote player={notedOf(player)} className="hidden shrink-[99] lg:block" />
+    </>
   );
 }
