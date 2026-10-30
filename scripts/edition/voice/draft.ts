@@ -30,7 +30,7 @@ NAMES, as UK reports give them:
 
 THE GAME, in the words UK football writers use, never the same one twice on the page and never "returned" for points:
 - Reserves: when a man in a side's eleven did not play, a reserve comes off the bench automatically. Say it the way managers do: Millar did not play, so Meunier subbed on, or came off the bench, or was auto-subbed. A reserve played his own match in full; he is never a Premier League substitute.
-- Numbers one to nine are words and 10 up are figures; a score and fantasy points are always figures. Minutes as the brief gives them.
+- Numbers one to nine are words and 10 up are figures; a score and points are always figures. Minutes as the brief gives them.
 - A minute belongs to its own match: never set one match's minute against another's, and never put goals in different matches in order with before, after, earlier, later or then.
 - Dry wit where the facts invite it, never forced. An adjective only where a fact earns it.
 

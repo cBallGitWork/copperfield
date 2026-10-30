@@ -34,3 +34,9 @@ const SPELLING: readonly string[] = [
 
 /** Not British English: the team sheets' American words, the match report's, and the idiom, sport and spelling above. */
 export const AMERICAN: readonly string[] = [...new Set([...SHEETS_AMERICAN, ...REPORT_AMERICAN, ...IDIOM, ...SPORT, ...SPELLING])];
+
+/** The few American words the house prompt names as examples, each one on AMERICAN so each is checked. */
+export const AMERICAN_EXAMPLES: readonly string[] = [
+  "roster", "lineup", "matchup", "starter", "rookie", "playoff", "overtime", "road win", "tie game", "shut-out",
+  "step up", "lean on", "show up",
+];

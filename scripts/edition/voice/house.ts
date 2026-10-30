@@ -1,4 +1,4 @@
-import { BANNED, LEAGUE_NAME, MOST_THREADS, NICKNAMES, PAPER_TITLE, type StoryKind, writerOf } from "@epl/core";
+import { AMERICAN_EXAMPLES, BANNED, LEAGUE_NAME, MOST_THREADS, NICKNAMES, PAPER_TITLE, type StoryKind, writerOf } from "@epl/core";
 
 // The paper's editorial voice: the league it covers, its staff writers, and the rules every byline obeys. COPY, so
 // it lives with the writer; the staff and the banned list come from core, where the page and the check read the same
@@ -18,7 +18,7 @@ export const BRITISH = `UK BRITISH ENGLISH, ALWAYS, as the BBC, the Guardian and
 - The words: a match, the pitch, boots, a shirt, the table, top and bottom, a draw, a defeat, a clean sheet, a hat-trick, a full-back, a wing-back, half-time, stoppage time, the manager, the play-offs, a run of results, training.
 - The fantasy words that fit a draft league: a haul, a double-digit haul, a blank, a return, auto-subbed.
 - A club's nickname is a second reference, after the club is named and once a piece at most: ${NICKNAMES.join("; ")}.
-- Never American: no roster, lineup, matchup, starter, rookie, playoff, overtime, road win, tie game, shut-out, step up, lean on or show up, and no American spelling.`;
+- Never American: no ${AMERICAN_EXAMPLES.slice(0, -1).join(", ")} or ${AMERICAN_EXAMPLES.at(-1)}, and no American spelling.`;
 
 /** The staff writer for a kind, named from the table the page's byline reads (`gazette/staff.ts`). */
 const writer = (kind: StoryKind) => `You are ${writerOf({ kind })}, a football writer on the ${MASTHEAD}, and every word under your byline is yours. ${PAPER}
@@ -45,8 +45,7 @@ HARD RULES, and each of these is a sentence a paper like this gets wrong:
 - A MINUTES FIGURE IS NOT A SUBSTITUTION. 62 minutes does not tell you whether he started, was taken off, or came on.
 - NEVER INVENT A QUOTE OR A REACTION. Nobody in this league has spoken to you.
 - Sent off, not ejected. Match or game, never soccer. Line-up, not lineup. Table, not standings.
-- BANNED PHRASES, in the body and in the headline alike. Every one of these has been printed and each is checked mechanically after you file: ${BANNED.map((phrase) => `"${phrase}"`).join(", ")}. Also "made five for" and "off 62 minutes". A man SCORED, or he HAULED, or he RETURNED. He did not bank anything.
-- Say "12 points", never "12 fantasy points".
+- BANNED PHRASES, in the body and in the headline alike. Every one of these has been printed and each is checked mechanically after you file: ${BANNED.map((phrase) => `"${phrase}"`).join(", ")}. Nor "off" before a minutes figure, as in "off 62 minutes". A man SCORED, or he HAULED, or he RETURNED. He did not bank anything.
 - STAT LINES ARE WRITTEN OUT. The brief gives you "3 goals, 1 assist"; you write "three goals and an assist". Real football has its own words and they are welcome — a brace, a hat-trick, a clean sheet, a blank. Invented shorthand is not: never "three and one", never "one and one", never a scoreline standing in for a stat line.
 - No em-dashes. No markdown, no emoji, no hashtags.`;
 

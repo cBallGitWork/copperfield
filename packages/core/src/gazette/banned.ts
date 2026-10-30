@@ -17,7 +17,7 @@ export const REGISTER: readonly string[] = [
 /** Sequence: claims about a match the desk cannot see. Lifted for the match report, which is handed the sequence. */
 const SEQUENCE: readonly string[] = [
   "off the bench", "came on", "brought on", "withdrawn", "substituted",
-  "opened the scoring", "levelled it", "put them ahead",
+  "opened the scoring", "levelled it", "put them ahead", "made five for",
 ];
 
 /** Grounds: recalled, never read, since the desk is given no venue. */
@@ -36,19 +36,23 @@ export const FILLER: readonly string[] = [
   "the better news", "the day's better news", "elsewhere the picture",
   "the shape of the day", "long absence lists",
   "all told", "make no mistake", "it remains to be seen", "needless to say",
-  "the fact remains", "one thing is certain",
+  "the fact remains", "one thing is certain", "fantasy points",
 ];
 
 export const BANNED: readonly string[] = [...REGISTER, ...SEQUENCE, ...GROUNDS, ...FILLER];
+
+/** Banned shapes a phrase list cannot hold: a minutes figure read as a substitution. */
+export const BANNED_PATTERNS: readonly RegExp[] = [/(?<![\p{L}])off \d+ minutes(?![\p{L}])/iu];
 
 /** How often the prose uses a phrase, whole words only, so "bank" never counts "Bankole". */
 function timesUsed(prose: string, phrase: string): number {
   return (prose.match(new RegExp(`(?<![\\p{L}])${escapeRegExp(phrase)}(?![\\p{L}])`, "giu")) ?? []).length;
 }
 
-/** Every listed phrase the prose uses, once each in list order. */
-export function banned(prose: string, list: readonly string[] = BANNED): string[] {
-  return list.filter((phrase) => timesUsed(prose, phrase) > 0);
+/** Every listed phrase the prose uses, once each in list order, then the first text each pattern matches (BANNED brings its own). */
+export function banned(prose: string, list: readonly string[] = BANNED, patterns: readonly RegExp[] = list === BANNED ? BANNED_PATTERNS : []): string[] {
+  const shapes = patterns.flatMap((pattern) => prose.match(pattern)?.[0] ?? []);
+  return [...list.filter((phrase) => timesUsed(prose, phrase) > 0), ...shapes];
 }
 
 /** Each capped phrase the prose uses more often than its cap, as "phrase ×times". */
