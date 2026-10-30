@@ -1,4 +1,16 @@
-import { type FootballSnapshot, type PrinterTally, clubById, fixturesInOrder, isResolved, londonDay, onLondonDay, vidiprinter } from "@epl/core";
+import {
+  type FootballSnapshot,
+  type PrinterTally,
+  clubById,
+  fixturesInOrder,
+  injuryMinutes,
+  isActive,
+  isResolved,
+  londonDay,
+  onLondonDay,
+  scoringOf,
+  vidiprinter,
+} from "@epl/core";
 import { roundFigures } from "../football";
 import type { ReadableSquads } from "../squads";
 import { periodMen } from "../scoreboard";
@@ -40,10 +52,15 @@ export default async function LiveVidiprinter({
     withRoundState(fixturesInOrder(snapshot), snapshot.gameweek),
   ]);
 
-  // Fantrax id → FPL code off the rosters already held: the bridge's join, never a name.
-  const codeOf = new Map(
-    (drafted?.period.teams ?? []).flatMap((team) => team.players.filter(isResolved).map((man) => [man.slot.fantraxId, man.player.code] as const)),
-  );
+  // The elevens off the rosters already held, once lineups lock: a reserve's points count for nobody.
+  const eleven =
+    drafted?.display.show === "lineup"
+      ? drafted.period.teams.flatMap((team) => team.players.filter(isResolved).filter((man) => isActive(man.slot)))
+      : [];
+  // Fantrax id → FPL code: the bridge's join, never a name.
+  const codeOf = new Map(eleven.map((man) => [man.slot.fantraxId, man.player.code]));
+  const slots = new Map(eleven.flatMap((man) => (man.slot.position === null ? [] : [[man.player.code, man.slot.position] as const])));
+  const injured = new Map([...streams].map(([fixture, stream]) => [fixture, new Set(injuryMinutes(stream.events, codes).keys())]));
   const tallies: PrinterTally[] = men.flatMap((man) => {
     const code = codeOf.get(man.fantraxId);
     return code === undefined ? [] : [{ code, categories: man.categories }];
@@ -56,6 +73,9 @@ export default async function LiveVidiprinter({
     fixtures: round,
     players: snapshot.players,
     drafted: new Set(owners.keys()),
+    slots,
+    scoring: info === null ? null : scoringOf(info),
+    injured,
     tallies,
     names: info?.scoringCategories,
   });

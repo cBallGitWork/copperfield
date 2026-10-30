@@ -1,53 +1,62 @@
-import { type Club, type Fixture, type FootballPlayer, type PlayerOwner, type PrinterCount, type PrinterKind, type PrinterLine, DASH } from "@epl/core";
+import { type Club, type Fixture, type FootballPlayer, type PlayerOwner, type PrinterKind, type PrinterLine, DASH, signed } from "@epl/core";
 
-// One vidiprinter line in words: the clock, what happened, the man and his holder, and the match or his club.
+// One vidiprinter line in words: what happened, the men with their clubs, holders and league points.
 
-/** A man on a line, and who holds him; null owner for a man on no roster. */
+/** A man on a line: his club for the crest, who holds him, and what the action earned him. */
 export interface PrinterMan {
   name: string;
-  ownerTeamId: string | null;
+  club: Club | null;
+  /** The holder's team name; null for a man on no roster. */
+  owner: { teamId: string; teamName: string } | null;
+  /** The league's points, signed; null where none were earned or he is in no eleven. */
+  points: string | null;
+}
+
+/** One side of a match on a whistle. */
+interface PrinterSide {
+  club: Club | null;
+  name: string;
+  /** Null before a score stands, at kick-off. */
+  score: number | null;
 }
 
 export interface PrinterRow {
   key: string;
-  /** `KO`, `HT`, `FT` or a minute `7′`; blank on a count line or a match's heading, which the feed gives no minute. */
-  clock: string;
-  /** Null on a count line, which is the man and his counts alone. */
+  kind: PrinterKind;
+  /** The event's word; null on a man's full-time counts, which sit under the whistle. */
   word: string | null;
-  /** A sending-off is the one loss the line prints in red. */
-  loss: boolean;
-  /** A match's heading while it is played. */
-  live: boolean;
+  /** `7′`, on a man's line; null on a whistle and a count line. */
+  minute: string | null;
   man: PrinterMan | null;
-  /** The assister, on a goal. */
-  second: PrinterMan | null;
-  /** The match on a whistle, a goal and a heading, its score null before one stands. */
-  match: { home: string; score: string | null; away: string } | null;
-  /** His club, on the rest. */
-  club: string | null;
-  /** The league's counts in its own words, each with what he did. */
-  counts: PrinterCount[];
+  /** The assister, or the man taken off, and the word before him. */
+  second: { word: string; man: PrinterMan } | null;
+  /** Both sides, on a whistle. */
+  sides: [PrinterSide, PrinterSide] | null;
+  /** The league's counts in its own words, each with what he did and its points. */
+  counts: { name: string; value: string | null; points: string }[];
 }
 
 const WORDS: Record<PrinterKind, string | null> = {
-  "kick-off": "Kick-off",
-  "half-time": "Half-time",
-  "full-time": "Full time",
+  "kick-off": "KO",
+  "half-time": "HT",
+  "full-time": "FT",
   goal: "Goal",
-  "penalty-goal": "Penalty",
-  "own-goal": "Own goal",
+  "penalty-goal": "Pen",
+  "own-goal": "OG",
   booked: "Booked",
-  "sent-off": "Sent off",
-  on: "On",
-  off: "Off",
+  "sent-off": "Red",
+  sub: "Sub",
+  injury: "Injury",
   tally: null,
-  "in-play": "In play",
 };
 
-const WHISTLES: Partial<Record<PrinterKind, string>> = { "kick-off": "KO", "half-time": "HT", "full-time": "FT" };
+/** The word before the second man: an assister, or the man taken off. */
+const SECOND_WORDS: Partial<Record<PrinterKind, string>> = { goal: "As", "penalty-goal": "As", sub: "Off", injury: "Off" };
 
-/** The lines that name their match rather than a man's club, besides a whistle. */
-const MATCHED = new Set<PrinterKind>(["goal", "penalty-goal", "own-goal", "in-play"]);
+const WHISTLES = new Set<PrinterKind>(["kick-off", "half-time", "full-time"]);
+
+/** A figure worth printing: a nought moved nothing. */
+const pointsOf = (points: number | null): string | null => (points === null || points === 0 ? null : signed(points));
 
 /** The line as printed; a man the snapshot cannot name prints the dash. */
 export function printerRow(
@@ -58,26 +67,37 @@ export function printerRow(
   owners: ReadonlyMap<number, PlayerOwner>,
 ): PrinterRow {
   const fixture = fixtures.get(line.fixtureCode);
-  const home = fixture === undefined ? undefined : clubs.get(fixture.homeClubId)?.name;
-  const away = fixture === undefined ? undefined : clubs.get(fixture.awayClubId)?.name;
-  const man = (code: number | null): PrinterMan | null =>
-    code === null ? null : { name: players.get(code)?.name ?? DASH, ownerTeamId: owners.get(code)?.teamId ?? null };
-
-  const whistle = WHISTLES[line.kind];
-  const matched = whistle !== undefined || MATCHED.has(line.kind);
-  const score = line.kind === "kick-off" || line.score === null ? null : `${line.score.home}–${line.score.away}`;
-  const clubId = matched || line.man === null ? undefined : players.get(line.man)?.clubId;
+  const home = fixture === undefined ? null : (clubs.get(fixture.homeClubId) ?? null);
+  const away = fixture === undefined ? null : (clubs.get(fixture.awayClubId) ?? null);
+  const man = (code: number | null, points: number | null): PrinterMan | null => {
+    if (code === null) return null;
+    const player = players.get(code);
+    const owner = owners.get(code);
+    return {
+      name: player?.name ?? DASH,
+      club: player === undefined ? null : (clubs.get(player.clubId) ?? null),
+      owner: owner === undefined ? null : { teamId: owner.teamId, teamName: owner.teamName },
+      points: pointsOf(points),
+    };
+  };
+  const second = man(line.second, line.secondPoints);
+  const secondWord = SECOND_WORDS[line.kind];
+  const whistle = WHISTLES.has(line.kind);
+  const score = line.kind === "kick-off" ? null : line.score;
 
   return {
     key: line.key,
-    clock: whistle ?? (line.minute === null ? "" : `${line.minute}′`),
+    kind: line.kind,
     word: WORDS[line.kind],
-    loss: line.kind === "sent-off",
-    live: line.kind === "in-play",
-    man: man(line.man),
-    second: man(line.second),
-    match: matched ? { home: home ?? DASH, score, away: away ?? DASH } : null,
-    club: clubId === undefined ? null : (clubs.get(clubId)?.shortName ?? null),
-    counts: line.counts,
+    minute: whistle || line.minute === null ? null : `${line.minute}′`,
+    man: man(line.man, line.points),
+    second: second === null || secondWord === undefined ? null : { word: secondWord, man: second },
+    sides: whistle
+      ? [
+          { club: home, name: home?.shortName ?? DASH, score: score?.home ?? null },
+          { club: away, name: away?.shortName ?? DASH, score: score?.away ?? null },
+        ]
+      : null,
+    counts: line.counts.map((count) => ({ name: count.name, value: count.value, points: signed(count.points) })),
   };
 }

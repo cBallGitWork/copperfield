@@ -10,6 +10,8 @@ export interface SheetMoment {
   /** Stable across polls: the fixture, the kind and the clock, with the man where there is one. */
   key: string;
   fixtureCode: number;
+  /** The feed's event id, shared by a change's `ON` and `OFF`; null on a period mark. */
+  id: number | null;
   kind: SheetMomentKind;
   /** The printed minute, `"45+4"`; never for sorting. */
   minute: string;
@@ -49,6 +51,7 @@ export function sheetMoments(detail: RawPlFixture, fixtureCode: number, optaToCo
       {
         key: `${fixtureCode}:${kind}:${event.clock.secs}:${event.personId ?? ""}`,
         fixtureCode,
+        id: event.id ?? null,
         kind,
         minute: bareMinute(event.clock.label),
         seconds: event.clock.secs,

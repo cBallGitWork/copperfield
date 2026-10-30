@@ -79,20 +79,26 @@ After its last whistle the gameweek's lines and day arrows stay until Live turns
   re-stamped with the detail's wall clock and score; red cards (`B`/`R`) off the detail. A goal the detail has not
   filed yet (the round read runs ahead of it) is timed off its half's start (`PS` by `phase`) plus its clock, and
   scored by counting that match's goals up to it; nothing after `now` prints. An own goal prints no assister.
-- **Drafted men only:** bookings (`B`/`Y`), coming on (`S`/`ON`) and being taken off (`S`/`OFF`) off the detail; and every category the
-  league scores that moved his total (`getLiveScoringStats` `statsMap`, eleven and bench, 20 s), named from
-  `getLeagueInfo`'s scoring list. No points print, only what he did. The feed's own lines (goals, assists, cards,
-  own goals) are not repeated as counts.
-- **The counts carry no minute**, as Fantrax publishes none: they sit on his change when he goes off, else under the
-  full-time whistle, else, while he plays, under an "In play" heading for his match at its newest line, leaving out
-  minutes, clean sheet and goals conceded, which stand only once he is off. A double gameweek's counts sit with his
-  later match.
+- **Drafted men only:** bookings (`B`/`Y`), and a change (`S`, its `ON` and `OFF` paired by the event's shared `id`)
+  either man is drafted in; and every category the league scores that moved his total (`getLiveScoringStats`
+  `statsMap`, 20 s), named from `getLeagueInfo`'s scoring list.
+- **The old look, 30 Oct 2026** (Craig, on the GW8 replay: *"wheres the ui from old vidi? no colour / needs team
+  logos / icons for goals/subs etc / injury subs too / a +1 for the actual fantasy score too for action / thats
+  grouped by game"*): crest per man, `EventIcon` glyphs, the event word in a fixed slot inked by DESIGN's slots, and
+  no "In play" heading. **Injury:** a change whose Opta commentary line says "because of an injury"
+  (`saysInjury`/`injuryMinutes`, the stream `roundStreams` already reads) prints `Injury`; the fixture detail's `S`
+  event carries no reason, and nothing is inferred. **Points:** `actionPoints` prices a goal, assist, own goal,
+  booking and red card at the slot his manager played him in (`isActive` roster slot, once lineups lock), off
+  `getLeagueInfo`'s flat price; a reserve, a free man and a tiered price get no figure. The untimed counts carry
+  Fantrax's own points per category and print on his `Off` line, else one line under his match's full time;
+  minutes never print and a man with nothing else gets no line. A match in play prints no counts.
 - **Order:** newest first by wall clock across matches, but match order within one (half, then clock): the feed can
   stamp a 90+5′ card after its full-time whistle, so each line takes the latest clock of anything before it in its
   match, and HT and FT close their halves.
 - **Not readable:** the minute a DefCon, a save or any other untimed count happened; a second booking as its own
   line (the detail sends `R`). Under `REPLAY_AT` the feed's moments rewind but Fantrax's counts are the period's
-  latest, so a replayed match in play shows its whole match's counts.
+  latest, so a replayed man's `Off` line shows his whole match's counts. A VAR-chalked goal is in the commentary
+  (`VAR cancelled goal`) but has no wall clock there, so it does not print yet.
 
 ## Lists move to StateMark, with one fitness helper and one xMins ink — decided 21 Oct 2026
 

@@ -156,6 +156,13 @@ describe("Live's reads", () => {
     expect(r.fn.gameweekBoards).not.toHaveBeenCalled();
   });
 
+  // Craig, 30 Oct 2026: "Scores is the tab users land on".
+  it("opens on the scores, never the vidiprinter, with no view asked", async () => {
+    const html = await render();
+    expect(html).toContain("x-scores");
+    expect(html).not.toContain("x-vidiprinter");
+  });
+
   it("prints the vidiprinter on its own view and asks nothing the scores need", async () => {
     const html = await render({ view: "vidiprinter" });
     expect(html).toContain("x-vidiprinter");

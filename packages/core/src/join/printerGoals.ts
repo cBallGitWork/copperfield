@@ -79,8 +79,10 @@ export function goalLines(input: {
       minute: bareMinute(event.minute),
       at,
       man: event.players[0] ?? null,
+      points: null,
       // An own goal is nobody's assist: the score says which side it counted for.
       second: event.kind === "own-goal" ? null : (event.players[1] ?? null),
+      secondPoints: null,
       score: stamp?.score ?? scoreAt(event.fixtureCode, place),
       counts: [],
     };

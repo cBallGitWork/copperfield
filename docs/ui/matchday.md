@@ -67,15 +67,23 @@ hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers print
    night and the strip read `15:00` above `14:00` — right, because one was
    Saturday and the other Sunday, and unreadable, because it said neither.
 3. **`Vidiprinter`**, the second view (`?view=vidiprinter`; Craig, 30 Oct 2026, reversing the 19 Oct drop): one
-   match day at a time with Scores' arrows, newest first. Every match's kick-off, half-time and full time with the
-   score; every man's goals (an own goal with no assister), assists and red cards, drafted or not; a drafted man's
-   bookings, coming on and going off, and the
-   counts of every category the league scores, in its own words and never as points. Counts carry no minute, so they
-   ride on his change, under the full-time whistle, or under an "In play" heading for a match still in play. Newest
-   first across matches, match order within one; a club name and a score never break across a line, and a desk caps
-   the column at a reading width. It stays after the last whistle until Live turns to the next gameweek. The
-   reader's men are in the accent and every drafted man carries his holder. Off `vidiprinter` over `sheetMoments`
-   (PLATFORM_NOTES, "Live has a vidiprinter again"). Live's strip is `Scores · Vidiprinter · Top stats`.
+   match day at a time with Scores' arrows, strictly newest first across matches (match order within one), with no
+   per-match grouping. Every match's kick-off and full time with both crests, three letters and the score (no half-time,
+   and no score on a goal: Craig, 30 Oct 2026); every man's
+   goals (an own goal with no assister), assists and red cards, drafted or not; a drafted man's bookings; and every
+   change a drafted man is in. The old teleprinter's look is back (Craig, 30 Oct 2026: *"wheres the ui from old
+   vidi? no colour / needs team logos / icons for goals/subs etc / injury subs too / a +1 for the actual fantasy
+   score"*): one row per event with both men (scorer and `As` assister; the man on and `Off` the man taken off),
+   on ONE row (the first man's crest only; names never cut, a holder truncates first), the minute in its own
+   right-aligned column, his holder bracketed after his name; on a phone the event is `EventIcon`'s glyph alone, the
+   word joining it on a desk, inked by meaning (a goal green, an own goal, red card and injury red, a booking
+   yellow as the match report has it, a change and a whistle amber). A change the commentary files "because of an
+   injury" reads `Injury` with the cross. A man in a manager's eleven carries the league's points for the action
+   at the slot he was played in, in cyan (`+4`, `-1`); a reserve and an undrafted man carry none. The league's
+   untimed counts, each with its points, ride on his `Off` line, else on one line under his match's full time;
+   minutes never print, and a man with nothing else gets no line. The reader's men are in the accent. Off
+   `vidiprinter` over `sheetMoments` (PLATFORM_NOTES, "Live has a vidiprinter again"). Live's strip is
+   `Scores · Vidiprinter · Top stats`, and Live opens on Scores.
 4. ~~**`GameweekView`**~~ — **gone 20 Oct 2026**: Live had stopped embedding it, and `/gw/N`, its one
    user, now redirects to Prem › Fixtures at that gameweek ([prem.md](prem.md#fixtures)). Between rounds,
    Live's two buttons lead there through `gameweekHref`.
