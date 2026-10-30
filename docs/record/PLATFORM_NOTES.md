@@ -47,6 +47,22 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## Live turns to a gameweek two hours before its first kickoff, off the calendar — decided 30 Oct 2026
+
+Craig, 30 Oct: *"live tab change, activates 2 hours before kick off for first game of the gameweek"*. This replaces
+the hour of 8 Oct (`LIVE_LEAD_MINUTES` was 60, in the app's config) and the rule under it.
+
+- **Was:** Live showed FPL's focus round (`is_current`, else `is_next`), which turns at FPL's deadline, 90 minutes
+  before the first kickoff, and opened its scores an hour before that round's first ball. So from the last whistle
+  until 90 minutes out Live read the last gameweek's `Final` over the next lock.
+- **Is:** `liveGameweek` (core `league/calendar.ts`) names the round off the season's kickoffs as plain data: the
+  last gameweek whose first kickoff, less `LIVE_LEAD_MINUTES` (120, core `config.ts`), has passed. An undated
+  gameweek is skipped; a double gameweek holds until the next one's own lead. The app's `liveNow` reads that round,
+  FPL's focus when they agree, else that gameweek's snapshot, and `getLeagueSquads` with its period.
+- **One instant everywhere:** the matchday page and its title, `roundLive` (the rail's Live tab and the cold open's
+  landing), the rail's score (`liveTie`) and `/matchday/share.png`. `REPLAY_AT` turns its round on `liveGameweek` too,
+  so a replay's other screens now turn two hours out rather than one.
+
 ## Live has a vidiprinter again, wider than the one it dropped — decided 30 Oct 2026
 
 Craig, 30 Oct: *"vidiprinter on live, why dont we just include all scoring actions, ht, game start, so defcons/cards
@@ -5437,8 +5453,8 @@ Restart `next dev` after changing it: Turbopack will not re-read a `.env.local`
 that a long-lived server already loaded.
 
 **Where the parts are.** `packages/core/src/football/replay.ts` is pure and
-holds the two functions — `roundAt` names the gameweek an instant falls in,
-`rewindRound` puts that round back to it. `apps/companion/app/clock.ts` is the
+holds `rewindRound`, which puts a round back to an instant; the round is the one Live
+would show then, `liveGameweek` in `league/calendar.ts` (`roundAt` went 30 Oct 2026). `apps/companion/app/clock.ts` is the
 one door every clock read at the app edge goes through; `footballNow()` in
 `football.ts` is what decides to rewind.
 

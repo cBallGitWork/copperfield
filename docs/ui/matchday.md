@@ -1,16 +1,22 @@
 # `/matchday` — the live centre
 
-The tab is called **Live**, and it exists from an hour before a gameweek's first
-kickoff until its last whistle (`LIVE_LEAD_MINUTES`; Craig, 8 Oct 2026: *"build
-the hype"*). The order is the order a manager cares about: your head-to-head
-first, the real football under it.
+The tab is called **Live**, and it exists from two hours before a gameweek's first
+kickoff until its last whistle (`LIVE_LEAD_MINUTES` in core's config; Craig, 30 Oct
+2026: *"activates 2 hours before kick off for first game of the gameweek"*, after an
+hour since 8 Oct: *"build the hype"*). The order is the order a manager cares about:
+your head-to-head first, the real football under it.
 
-**The hour before kickoff is the build-up**, not "No football today": the same
+**Which gameweek Live shows is the league calendar's, not FPL's** (`liveGameweek`, read by
+`liveNow`): the last whose first kickoff, less the lead, has passed. FPL turns its own round
+at its deadline, 90 minutes out, so for the half hour before that Live reads the coming round
+by number, and the draft's ties for its period. The rail's Live tab, the cold open's landing,
+the rail's score and the share picture all read the same `liveNow`.
+
+**The two hours before kickoff are the build-up**, not "No football today": the same
 board, every tie at nought, today's fixtures at their kickoffs, and under the title
 the minutes to go and, while it is ahead, the lineup lock as a link to your team,
-whose phone tab Live has taken. Opening the app in that hour lands on Live, and the
-page polls at the live rate. Replay reads the round ahead from the same hour, as FPL
-turns its round 90 minutes before the first kickoff.
+whose phone tab Live has taken. Opening the app then lands on Live. Replay turns its
+round at the same instant.
 
 **Scores shows one match day at a time, with arrows to the others** (Craig, 19 Oct 2026: *"live scores
 shows the days games, why dont we have a back/forward arrow for each day so you can access?"*). Under the

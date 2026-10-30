@@ -187,7 +187,7 @@ export { inMatchWindow, secondsToWindow } from "./matchWindow";
 // `roundFinished` is not exported: it cannot say "live", and `roundState` is the pairing callers want.
 export type { RoundState } from "./round";
 // A played round rewound to a moment inside it, for rehearsing the Live tab; `app/clock.ts` is the only caller.
-export { before, rewindRound, roundAt } from "./replay";
+export { before, rewindRound } from "./replay";
 export { fixtureLabel, kickedOff, matchesOver, nextFixtures, oppositionByClub, sideDifficulty, venueMark } from "./opposition";
 export { leagueTable } from "./table";
 export type { TableRow } from "./table";

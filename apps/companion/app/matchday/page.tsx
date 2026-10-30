@@ -11,11 +11,12 @@ import {
   nextDeadline,
 } from "@epl/core";
 import type { ReactNode } from "react";
-import { footballNow, liveOpen, roundFigures, seasonFixtures } from "../football";
+import { liveNow, liveOpen, roundFigures, seasonFixtures } from "../football";
 import RoundWord from "../components/league/RoundWord";
 import PageHeader from "../components/shell/PageHeader";
 import TabStrip from "../components/shell/TabStrip";
 import { getLeagueSquads, readable, readerTeamId } from "../squads";
+import { roundOf } from "../round";
 import TopStats, { STATS_VIEW, TOP_STATS, statsHref } from "./TopStats";
 import { gameweekBoards } from "./boards";
 import LiveScores from "./LiveScores";
@@ -42,7 +43,7 @@ export const revalidate = 30;
 
 /** The bar's words, off the page's own cached snapshot; the league's name alone when FPL could not be asked. */
 export async function generateMetadata(): Promise<Metadata> {
-  const snapshot = await orDegraded(footballNow(), () => null);
+  const snapshot = await orDegraded(liveNow(), () => null);
   return snapshot === null ? {} : titled(draftGameweek(snapshot.gameweek));
 }
 
@@ -55,7 +56,7 @@ async function matchday(): Promise<{
   up: { gameweek: number; kickoff: string } | null;
 }> {
   // The season, because the snapshot holds one round and cannot name the next.
-  const [snapshot, season] = await Promise.all([footballNow(), seasonFixtures()]);
+  const [snapshot, season] = await Promise.all([liveNow(), seasonFixtures()]);
   return { snapshot, season, during: liveOpen(snapshot), up: nextRound(season, now().toISOString()) };
 }
 
@@ -68,11 +69,13 @@ export default async function MatchdayPage({
   const query = await searchParams;
   const leading = query.view === STATS_VIEW;
   const printing = query.view === VIDIPRINTER_VIEW;
-  const [{ snapshot, season, during, up }, mine, squads] = await Promise.all([matchday(), readerTeamId(), getLeagueSquads()]);
+  const [{ snapshot, season, during, up }, mine] = await Promise.all([matchday(), readerTeamId()]);
+  // The squads for Live's round, which leads FPL's for the half hour before its deadline.
+  const squads = await getLeagueSquads(await roundOf(snapshot.gameweek));
   const drafted = readable(squads);
   const period = drafted?.roundPeriod ?? null;
 
-  // The hour before the first kickoff (Craig, 8 Oct 2026: "build the hype"): the minutes to go, and the lock if ahead.
+  // The build-up to the first kickoff (Craig, 8 Oct 2026: "build the hype"): the minutes to go, and the lock if ahead.
   const first = fixturesInOrder(snapshot).find((fixture) => fixture.kickoff !== null)?.kickoff ?? null;
   const toGo = during && first !== null ? Date.parse(first) - now().getTime() : 0;
   const lock = drafted?.info == null ? null : nextDeadline(drafted.info.rosterPeriods, datedKickoffs(season), now().toISOString());

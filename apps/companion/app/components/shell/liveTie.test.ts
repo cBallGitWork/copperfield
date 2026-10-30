@@ -8,7 +8,7 @@ const reader = vi.fn<() => Promise<string | null>>();
 const scores = new Map([["t1", { points: 40 }], ["t2", { points: 31 }], ["t3", { points: 44 }]]);
 
 vi.mock("next/server", () => ({ connection: async () => {} }));
-vi.mock("../../football", () => ({ footballNow: () => football(), speaksForNow: () => true }));
+vi.mock("../../football", () => ({ liveNow: () => football(), speaksForNow: () => true }));
 vi.mock("../../squads", async (actual) => ({
   readable: (await actual<typeof import("../../squads")>()).readable,
   getLeagueSquads: () => squads(),

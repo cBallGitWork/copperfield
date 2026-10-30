@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { firstKickoff, gameweekLock, lockOf, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
+import { firstKickoff, gameweekLock, liveGameweek, lockOf, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
 import type { GameweekKickoff } from "./calendar";
 import type { LeaguePeriod } from "./types";
+import { LIVE_LEAD_MINUTES } from "../config";
 import alignment from "./__fixtures__/periodAlignment.json";
 
 // The fixture is the whole 26/27 season, recorded 6 Aug 2026: the rehearsal
@@ -264,5 +265,40 @@ describe("periodFixtures", () => {
   it("holds no undated match, and nothing for a period the league does not have", () => {
     expect(periodFixtures(P6, season).some((fixture) => fixture.kickoff === null)).toBe(false);
     expect(periodFixtures(undefined, season)).toEqual([]);
+  });
+});
+
+describe("liveGameweek", () => {
+  // GW8 played; GW9 first ball Sat 31 Oct 12:30 UK; GW10 a double, Sat then Wed; GW11 undated; GW12 Sat.
+  const live: GameweekKickoff[] = [
+    { gameweek: 8, kickoff: "2026-10-24T14:00:00Z" },
+    { gameweek: 9, kickoff: "2026-10-31T15:00:00Z" },
+    { gameweek: 9, kickoff: "2026-10-31T12:30:00Z" },
+    { gameweek: 10, kickoff: "2026-11-07T15:00:00Z" },
+    { gameweek: 10, kickoff: "2026-11-11T19:30:00Z" },
+    { gameweek: 11, kickoff: "TBC" },
+    { gameweek: 12, kickoff: "2026-11-21T15:00:00Z" },
+  ];
+  const lead = LIVE_LEAD_MINUTES * 60_000;
+  const before = (iso: string, ms: number) => new Date(Date.parse(iso) - ms).toISOString();
+
+  it("opens two hours before a gameweek's earliest ball, not its first listed", () => {
+    expect(LIVE_LEAD_MINUTES).toBe(120);
+    expect(liveGameweek(live, before("2026-10-31T12:30:00Z", lead + 5 * 60_000))).toBe(8);
+    expect(liveGameweek(live, before("2026-10-31T12:30:00Z", lead))).toBe(9);
+    expect(liveGameweek(live, before("2026-10-31T12:30:00Z", lead - 5 * 60_000))).toBe(9);
+    expect(liveGameweek(live, "2026-11-01T22:00:00Z")).toBe(9);
+  });
+
+  it("holds a double gameweek through its midweek round, until the next one's own lead", () => {
+    expect(liveGameweek(live, "2026-11-11T18:00:00Z")).toBe(10);
+    expect(liveGameweek(live, "2026-11-14T15:00:00Z")).toBe(10);
+  });
+
+  it("skips a gameweek with no dated football, and is null before the season's first", () => {
+    expect(liveGameweek(live, "2026-11-21T12:00:00Z")).toBe(10);
+    expect(liveGameweek(live, "2026-11-21T13:00:00Z")).toBe(12);
+    expect(liveGameweek(live, "2026-10-01T00:00:00Z")).toBeNull();
+    expect(liveGameweek(live, "not a time")).toBeNull();
   });
 });

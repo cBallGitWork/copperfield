@@ -161,6 +161,9 @@ export const POOL_PAGE_SIZE = 2000;
  *  read exposes. If he moves it, only this knows, and the app prints the wrong deadline. */
 export const LINEUP_LOCK_LEAD_MINUTES = 15;
 
+/** Minutes before a gameweek's first kickoff that Live turns to it (Craig, 30 Oct 2026: "2 hours before kick off"). */
+export const LIVE_LEAD_MINUTES = 120;
+
 /** Minutes before the lock that a save to Fantrax stops being taken: the commissioner's write can override a
  *  locked team, so a save must fail short of the lock. */
 export const SAVE_MARGIN_MINUTES = 10;

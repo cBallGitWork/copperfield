@@ -1,6 +1,6 @@
 import { connection } from "next/server";
 import { headToHeads, isMatchdayLive, ProviderError } from "@epl/core";
-import { footballNow, speaksForNow } from "../../football";
+import { liveNow, speaksForNow } from "../../football";
 import { liveScores } from "../../scoreboard";
 import { myTeamId } from "../../session";
 import { getLeagueSquads, readable } from "../../squads";
@@ -32,7 +32,7 @@ export async function liveTie(): Promise<LiveTie[]> {
 
 async function askedWhileLive(): Promise<LiveTie[]> {
   // `isMatchdayLive`, not `roundUnderway`: the strip claims right now. Football is asked first, so Fantrax is read only then.
-  const snapshot = await footballNow();
+  const snapshot = await liveNow();
   if (!isMatchdayLive(snapshot) || !speaksForNow(snapshot)) return [];
 
   const squads = readable(await getLeagueSquads());
