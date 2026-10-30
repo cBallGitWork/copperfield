@@ -423,22 +423,23 @@
       "match-report:gw8:2026-10-25",
       "draft-report:gw8:gameweek",
       "presser:gw9:2026-10-29",
-      "predictions:gw9"
+      "predictions:gw9",
+      "presser:gw9:2026-10-30"
     ],
     "threads": [
+      {
+        "subject": "Saka's scan",
+        "beat": "Probably out until after the international break, pending another scan",
+        "status": "open",
+        "beats": 2,
+        "lastUsedAt": "2026-10-30T17:27:59.604Z"
+      },
       {
         "subject": "The Truffle Pigs without a point",
         "beat": "Bottom after three defeats, and still favourites in the Milan Derby",
         "status": "open",
         "beats": 1,
         "lastUsedAt": "2026-10-29T20:27:53.660Z"
-      },
-      {
-        "subject": "Saka's scan",
-        "beat": "A further MRI on Friday afternoon after fluid in the area; more expected on Saturday",
-        "status": "open",
-        "beats": 1,
-        "lastUsedAt": "2026-10-23T16:32:34.098Z"
       },
       {
         "subject": "Isak's quad",

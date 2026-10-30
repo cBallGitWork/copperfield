@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T20:27:53.660Z",
+  "updatedAt": "2026-10-30T17:27:59.604Z",
   "stories": [
     {
       "slug": "gw5-presser-2026-09-18",
@@ -6927,6 +6927,747 @@
       }
     },
     {
+      "slug": "gw9-presser-2026-10-30",
+      "kind": "presser",
+      "leagueId": "mqsjd23smsgbiqzr",
+      "period": 9,
+      "gameweek": 9,
+      "filedAt": "2026-10-30T17:27:59.604Z",
+      "expiresAt": "2026-10-31T12:15:00.000Z",
+      "edition": "The Team Sheet",
+      "byline": "The Team Sheet",
+      "headline": "Thursday and Friday Pressers",
+      "deck": "Rayan Cherki a doubt for Manchester City; Isak and Gakpo ruled out for Liverpool",
+      "body": "Rayan Cherki is a doubt for Manchester City, with no complaint given.\n\nEnzo Maresca rated him one of the best players in Europe when he is in the right position, and said he and Phil Foden can play together depending on the opposition.",
+      "subjects": [
+        "presser:gw9:2026-10-30"
+      ],
+      "image": null,
+      "face": {
+        "code": 466052,
+        "name": "Rayan Cherki",
+        "clubId": 15,
+        "position": null
+      },
+      "ties": [],
+      "extras": {
+        "teamNews": [
+          {
+            "club": "Aston Villa",
+            "code": 7,
+            "line": "Onana, Aaron Wan-Bissaka and Ruggeri remain out, and others in pain after Wednesday's match await Friday afternoon's session.",
+            "stillOut": [
+              {
+                "name": "Matteo Ruggeri"
+              },
+              {
+                "name": "Aaron Wan-Bissaka"
+              },
+              {
+                "name": "Amadou Onana"
+              }
+            ],
+            "quote": {
+              "text": "Still being some players clearly out like Onana, Aaron Wan-Bissaka and Ruggeri. Other players we will see how they are after the match we played on Wednesday.",
+              "said": "Unai Emery"
+            },
+            "fixture": {
+              "opponent": "Fulham",
+              "home": true,
+              "kickoff": "2026-10-31T20:00:00Z"
+            }
+          },
+          {
+            "club": "Newcastle United",
+            "code": 4,
+            "line": "Anthony Elanga awaits an MRI, and William Osula twisted an ankle and is too early to call for Monday.",
+            "stillOut": [
+              {
+                "name": "Ewen Jaouen"
+              },
+              {
+                "name": "Tino Livramento"
+              }
+            ],
+            "quote": {
+              "text": "Amar will be also not able to play on Saturday.",
+              "said": "Matthias Jaissle"
+            },
+            "fixture": {
+              "opponent": "Everton",
+              "home": true,
+              "kickoff": "2026-11-02T20:00:00Z"
+            }
+          },
+          {
+            "club": "Brentford",
+            "code": 94,
+            "line": "Nathan Collins and Matty Jensen are closer to a return, and Jannik has trained again after a disrupted week.",
+            "men": [
+              {
+                "name": "Antoni Milambo",
+                "status": "FIT",
+                "note": "back from a knee injury; not yet involved"
+              },
+              {
+                "name": "Josh Dasilva",
+                "status": "FIT",
+                "note": "back from a hamstring injury; not yet involved"
+              },
+              {
+                "name": "Yehor Yarmoliuk",
+                "status": "Suspended",
+                "note": ""
+              },
+              {
+                "name": "Vitaly Janelt",
+                "status": "Suspended",
+                "note": ""
+              },
+              {
+                "name": "Fábio Carvalho",
+                "status": "OUT",
+                "note": ""
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Rico Henry"
+              },
+              {
+                "name": "Kaye Furo"
+              }
+            ],
+            "quote": {
+              "text": "Antoni and Josh definitely won’t be involved tomorrow.",
+              "said": "Keith Andrews"
+            },
+            "fixture": {
+              "opponent": "Nottingham Forest",
+              "home": true,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Arsenal",
+            "code": 3,
+            "line": "Cristhian Mosquera and Ben White are available, and Christos Tzolis is back in training.",
+            "men": [
+              {
+                "name": "Noni Madueke",
+                "owner": "Beef",
+                "status": "OUT",
+                "note": "ankle"
+              },
+              {
+                "name": "Mikel Merino",
+                "status": "Doubt",
+                "note": ""
+              },
+              {
+                "name": "Max Dowman",
+                "status": "Suspended",
+                "note": ""
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Bukayo Saka",
+                "owner": "Hazza"
+              },
+              {
+                "name": "William Saliba",
+                "owner": "Bannan"
+              }
+            ],
+            "quote": {
+              "text": "Probably [he will be out until after the international break].",
+              "said": "Mikel Arteta"
+            },
+            "fixture": {
+              "opponent": "Liverpool",
+              "home": false,
+              "kickoff": "2026-11-01T16:30:00Z"
+            }
+          },
+          {
+            "club": "Chelsea",
+            "code": 8,
+            "line": "Moisés Caicedo is fit, Pep Chavarría returns to the squad and Cole Palmer is banned.",
+            "men": [
+              {
+                "name": "Aaron Anselmino",
+                "status": "OUT",
+                "note": ""
+              },
+              {
+                "name": "Pep Chavarría",
+                "owner": "Atletico",
+                "status": "FIT",
+                "note": "back from a muscle injury; back in the squad"
+              },
+              {
+                "name": "Maxence Lacroix",
+                "owner": "Atletico",
+                "status": "OUT",
+                "note": "a few weeks; not ready before the international break"
+              },
+              {
+                "name": "Moisés Caicedo",
+                "owner": "Truffles",
+                "status": "FIT",
+                "note": "trained well; ready to go"
+              },
+              {
+                "name": "Cole Palmer",
+                "owner": "Raccoons",
+                "status": "Suspended",
+                "note": ""
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Reece James"
+              },
+              {
+                "name": "Gittens"
+              },
+              {
+                "name": "João Pedro",
+                "owner": "Beef"
+              },
+              {
+                "name": "Emiliano Martínez",
+                "owner": "its_ohi"
+              }
+            ],
+            "quote": {
+              "text": "Max picked up an injury and we expect that he is not going to be ready before the international break. So, he will be a few weeks out.",
+              "said": "Xabi Alonso"
+            },
+            "fixture": {
+              "opponent": "Manchester United",
+              "home": true,
+              "kickoff": "2026-10-31T12:30:00Z"
+            }
+          },
+          {
+            "club": "Liverpool",
+            "code": 14,
+            "line": "Alex Isak has a small thigh injury and Cody Gakpo an ankle injury, neither expected to be long term, while Jeremy Jacquet is fit.",
+            "stillOut": [
+              {
+                "name": "Conor Bradley"
+              },
+              {
+                "name": "Jeremie Frimpong"
+              },
+              {
+                "name": "Giovanni Leoni"
+              },
+              {
+                "name": "Hugo Ekitiké"
+              }
+            ],
+            "quote": {
+              "text": "Alex Isak and Cody Gakpo will not play the game. They are not ready.",
+              "said": "Andoni Iraola"
+            },
+            "fixture": {
+              "opponent": "Arsenal",
+              "home": true,
+              "kickoff": "2026-11-01T16:30:00Z"
+            }
+          },
+          {
+            "club": "Manchester City",
+            "code": 43,
+            "line": "Erling Haaland is fit after a few days off, Phil Foden is available, and Antoine Semenyo remains the one absentee.",
+            "men": [
+              {
+                "name": "Matheus N.",
+                "owner": "Raccoons",
+                "status": "FIT",
+                "note": ""
+              },
+              {
+                "name": "Iliman Ndiaye",
+                "owner": "Beef",
+                "status": "FIT",
+                "note": ""
+              },
+              {
+                "name": "Enzo",
+                "owner": "Hazza",
+                "status": "Doubt",
+                "note": ""
+              },
+              {
+                "name": "Rayan Cherki",
+                "owner": "Beef",
+                "status": "Doubt",
+                "note": "can play alongside Foden, depending on opposition"
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Antoine Semenyo",
+                "owner": "Atletico"
+              }
+            ],
+            "quote": {
+              "text": "Still a doubt. For sure, Erling is the only one 100% available, and the other three we need to wait for today’s session.",
+              "said": "Enzo Maresca"
+            },
+            "fixture": {
+              "opponent": "Brighton & Hove Albion",
+              "home": true,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Tottenham Hotspur",
+            "code": 6,
+            "line": "Pedro Porro is back, Dejan Kulusevski travels with the squad, and Bergvall and Mudryk remain out.",
+            "men": [
+              {
+                "name": "James Maddison",
+                "owner": "Raccoons",
+                "status": "FIT",
+                "note": "back from a groin injury; missed three or four days of training"
+              },
+              {
+                "name": "Destiny Udogie",
+                "status": "FIT",
+                "note": "back from a knee injury"
+              },
+              {
+                "name": "Tosin",
+                "status": "OUT",
+                "note": "calf"
+              },
+              {
+                "name": "Rodrigo Bentancur",
+                "status": "Suspended",
+                "note": ""
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Lucas Bergvall"
+              },
+              {
+                "name": "Mykhailo Mudryk"
+              },
+              {
+                "name": "Xavi"
+              },
+              {
+                "name": "Wilson Odobert"
+              }
+            ],
+            "quote": {
+              "text": "Porro, Tonali, Maddison, all are available to play.",
+              "said": "Roberto De Zerbi"
+            },
+            "fixture": {
+              "opponent": "Crystal Palace",
+              "home": true,
+              "kickoff": "2026-10-31T17:30:00Z"
+            }
+          },
+          {
+            "club": "Ipswich Town",
+            "code": 40,
+            "line": "Sasa Lukic misses the weekend with a groin injury, held back to be fully fit for the Hull match.",
+            "quote": {
+              "text": "No, he’s not going to make it. Sasa will be out tomorrow.",
+              "said": "Gary O’Neil"
+            },
+            "fixture": {
+              "opponent": "Hull City",
+              "home": false,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Everton",
+            "code": 11,
+            "line": "Mykolenko has a chance, Christian Norgaard is not yet ready to start and Merlin Röhl is hoped to be ready at the end of the international break.",
+            "men": [
+              {
+                "name": "Jarrad Branthwaite",
+                "owner": "Atletico",
+                "status": "Doubt",
+                "note": "concussion; expected to have recovered"
+              }
+            ],
+            "quote": {
+              "text": "Jarrad should have recovered from his concussion and also the timescale which we had to abide by.",
+              "said": "David Moyes"
+            },
+            "fixture": {
+              "opponent": "Newcastle United",
+              "home": false,
+              "kickoff": "2026-11-02T20:00:00Z"
+            }
+          },
+          {
+            "club": "Fulham",
+            "code": 54,
+            "line": "Hugo has a groin problem and is uncertain for Saturday, with everyone else available.",
+            "men": [
+              {
+                "name": "Ryan Sessegnon",
+                "status": "Suspended",
+                "note": ""
+              },
+              {
+                "name": "Emile Smith Rowe",
+                "status": "FIT",
+                "note": ""
+              }
+            ],
+            "quote": {
+              "text": "We have a small problem with Hugo – his groin.",
+              "said": "Alvaro Arbeloa"
+            },
+            "fixture": {
+              "opponent": "Aston Villa",
+              "home": false,
+              "kickoff": "2026-10-31T20:00:00Z"
+            }
+          },
+          {
+            "club": "Manchester United",
+            "code": 1,
+            "line": "Patrick Dorgu faces a number of weeks out, and Kobbie has returned to training.",
+            "men": [
+              {
+                "name": "Luke Shaw",
+                "status": "OUT",
+                "note": "short term; assessed at the weekend"
+              },
+              {
+                "name": "Marcus Rashford",
+                "status": "OUT",
+                "note": "hip; some training done"
+              },
+              {
+                "name": "Patrick Dorgu",
+                "status": "OUT",
+                "note": "probably a number of weeks; hamstring"
+              },
+              {
+                "name": "Manuel Ugarte",
+                "status": "OUT",
+                "note": "knee"
+              },
+              {
+                "name": "Benjamin Sesko",
+                "status": "OUT",
+                "note": "calf; further away, still undergoing checks"
+              }
+            ],
+            "quote": {
+              "text": "Ben is further away, with the issue he has got. He won’t be ready.",
+              "said": "Michael Carrick"
+            },
+            "fixture": {
+              "opponent": "Chelsea",
+              "home": false,
+              "kickoff": "2026-10-31T12:30:00Z"
+            }
+          },
+          {
+            "club": "Brighton & Hove Albion",
+            "code": 36,
+            "line": "Yankuba Minteh and Mats Wieffer returned in Wednesday's match, and Luka Vuskovic is an option.",
+            "men": [
+              {
+                "name": "Stefanos Tzimas",
+                "status": "FIT",
+                "note": "back from a knee injury; back on the training pitch"
+              },
+              {
+                "name": "Charalampos Kostoulas",
+                "owner": "Truffles",
+                "status": "FIT",
+                "note": "rested Wednesday; expected to be an option for Saturday"
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Pascal Struijk"
+              },
+              {
+                "name": "Zadok Yohanna"
+              },
+              {
+                "name": "Femi Azeez"
+              },
+              {
+                "name": "Mitoma"
+              },
+              {
+                "name": "Evan Ferguson"
+              }
+            ],
+            "quote": {
+              "text": "Regarding Pascal Struijk, he won’t be an option for the weekend, but we are quite convinced that he will be back afterwards.",
+              "said": "Fabian Hurzeler"
+            },
+            "fixture": {
+              "opponent": "Manchester City",
+              "home": false,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "AFC Bournemouth",
+            "code": 91,
+            "line": "Eli Junior Kroupi is planned to return to the squad, Veljko is match-fit with the under-21s, and Alex Toth faces some weeks out with a muscle injury.",
+            "men": [
+              {
+                "name": "Alex Scott",
+                "status": "FIT",
+                "note": "back from a tendon injury; rehab ahead of schedule"
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Veljko Milosavljevic"
+              },
+              {
+                "name": "Alex Tóth"
+              },
+              {
+                "name": "Julián Araujo"
+              }
+            ],
+            "quote": {
+              "text": "Brooksy is fully in team training.",
+              "said": "Marco Rose"
+            },
+            "fixture": {
+              "opponent": "Leeds United",
+              "home": true,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Leeds United",
+            "code": 2,
+            "line": "Dominic Calvert-Lewin and Noah Okafor trained normally and appear fully available.",
+            "men": [
+              {
+                "name": "Anton Stach",
+                "owner": "Truffles",
+                "status": "Doubt",
+                "note": "foot; still painful"
+              },
+              {
+                "name": "Joe Rodon",
+                "status": "FIT",
+                "note": "back from a hamstring injury; part-integrated in team training, too soon for the weekend"
+              },
+              {
+                "name": "Nico Elvedi",
+                "status": "FIT",
+                "note": "back in training"
+              },
+              {
+                "name": "Daniel James",
+                "status": "FIT",
+                "note": "back from a back injury that cost him the Arsenal match"
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Mateo Joseph"
+              }
+            ],
+            "quote": {
+              "text": "Anton Stach is struggling still a bit with his foot injury. So, let’s see.",
+              "said": "Daniel Farke"
+            },
+            "fixture": {
+              "opponent": "AFC Bournemouth",
+              "home": false,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Nottingham Forest",
+            "code": 17,
+            "line": "Morgan Gibbs-White is a doubt with a minor muscle injury, and Nikola Milenkovic misses out with a bone bruise.",
+            "men": [
+              {
+                "name": "Neco Williams",
+                "status": "FIT",
+                "note": "back from an elbow injury; trained all week"
+              },
+              {
+                "name": "Dan Ndoye",
+                "owner": "Atletico",
+                "status": "Doubt",
+                "note": "must train Friday without risk; expected fit for City"
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Nicolò Savona"
+              },
+              {
+                "name": "Igor Jesus"
+              }
+            ],
+            "quote": {
+              "text": "Savona and Igor are still out. Nicolás Domínguez is progressing very well. He will train for the first time tomorrow with the team.",
+              "said": "Oliver Glasner"
+            },
+            "fixture": {
+              "opponent": "Brentford",
+              "home": false,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Coventry City",
+            "code": 9,
+            "line": "Bobby Thomas has a small calf problem and is uncertain for the weekend, while Milan and Kaine are back in training.",
+            "stillOut": [
+              {
+                "name": "Luke Woolfenden"
+              },
+              {
+                "name": "Aurèle Amenda"
+              },
+              {
+                "name": "Josh Eccles"
+              },
+              {
+                "name": "Haji Wright"
+              }
+            ],
+            "quote": {
+              "text": "Haji won’t be back until November.",
+              "said": "Frank Lampard"
+            },
+            "fixture": {
+              "opponent": "Sunderland",
+              "home": true,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Crystal Palace",
+            "code": 31,
+            "line": "Jorgen Strand Larsen joins group training on Thursday, Quinten Timber returns on Friday and Henderson's return is still being evaluated.",
+            "stillOut": [
+              {
+                "name": "Ismaïla Sarr",
+                "owner": "Raccoons"
+              },
+              {
+                "name": "Takehiro Tomiyasu"
+              },
+              {
+                "name": "Chadi Riad"
+              }
+            ],
+            "quote": {
+              "text": "He’s ready to play, and we managed him yesterday, because he played two times 60 [minutes] in seven days, and normally he has to play only two times 30 [minutes].",
+              "said": "Pierre Sage"
+            },
+            "fixture": {
+              "opponent": "Tottenham Hotspur",
+              "home": false,
+              "kickoff": "2026-10-31T17:30:00Z"
+            }
+          },
+          {
+            "club": "Sunderland",
+            "code": 56,
+            "line": "Brian Brobbey and Habib are close to full availability, and Isidor should be available.",
+            "men": [
+              {
+                "name": "Nordi Mukiele",
+                "owner": "Glengarry",
+                "status": "Doubt",
+                "note": "throat; minor and short term"
+              },
+              {
+                "name": "Kevin Danso",
+                "status": "Suspended",
+                "note": ""
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Daniel Ballard"
+              },
+              {
+                "name": "Romaine Mundle"
+              }
+            ],
+            "quote": {
+              "text": "It’s a shame for Ballard because he was in a good place and he will be sidelined for a few weeks.",
+              "said": "Regis Le Bris"
+            },
+            "fixture": {
+              "opponent": "Coventry City",
+              "home": false,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          },
+          {
+            "club": "Hull City",
+            "code": 88,
+            "line": "Lewie Coyle has a minor hamstring issue but has trained, and Morita is due back after the first week of the international break.",
+            "men": [
+              {
+                "name": "Nobel Mendy",
+                "status": "FIT",
+                "note": "back from a groin injury; back in training"
+              },
+              {
+                "name": "Oli McBurnie",
+                "owner": "its_ohi",
+                "status": "Doubt",
+                "note": "ribs"
+              },
+              {
+                "name": "Jack Butland",
+                "status": "FIT",
+                "note": "back from a shoulder injury; training with the group, decision Friday"
+              }
+            ],
+            "stillOut": [
+              {
+                "name": "Charlie Hughes"
+              },
+              {
+                "name": "Ilyas Ansah"
+              },
+              {
+                "name": "Matt Targett"
+              }
+            ],
+            "quote": {
+              "text": "Jack is in training sessions with the group, which is excellent news.",
+              "said": "Sergej Jakirovic"
+            },
+            "fixture": {
+              "opponent": "Ipswich Town",
+              "home": true,
+              "kickoff": "2026-10-31T15:00:00Z"
+            }
+          }
+        ]
+      }
+    },
+    {
       "slug": "gw9-predictions",
       "kind": "predictions",
       "leagueId": "mqsjd23smsgbiqzr",
@@ -7035,360 +7776,6 @@
           "right": 9,
           "called": 15
         }
-      }
-    },
-    {
-      "slug": "gw9-presser-2026-10-29",
-      "kind": "presser",
-      "leagueId": "mqsjd23smsgbiqzr",
-      "period": 9,
-      "gameweek": 9,
-      "filedAt": "2026-10-29T18:43:49.403Z",
-      "expiresAt": "2026-10-31T12:15:00.000Z",
-      "edition": "The Team Sheet",
-      "byline": "The Team Sheet",
-      "headline": "Thursday Pressers",
-      "deck": "Kostoulas rested on Wednesday, expected to be an option for Saturday",
-      "body": "Charalampos Kostoulas was rested by Brighton & Hove Albion on Wednesday and may yet be rotated.\n\nFabian Hurzeler is quite convinced he will be an option for Saturday.",
-      "subjects": [
-        "presser:gw9:2026-10-29"
-      ],
-      "image": null,
-      "face": {
-        "code": 647850,
-        "name": "Charalampos Kostoulas",
-        "clubId": 5,
-        "position": null
-      },
-      "ties": [],
-      "extras": {
-        "teamNews": [
-          {
-            "club": "Manchester United",
-            "code": 1,
-            "line": "Sesko, Rashford, Dorgu, Ugarte and Shaw are all ruled out of Saturday's match, while Kobbie did some training on Wednesday.",
-            "men": [
-              {
-                "name": "Benjamin Sesko",
-                "status": "OUT",
-                "note": "calf"
-              },
-              {
-                "name": "Marcus Rashford",
-                "status": "OUT",
-                "note": "hip"
-              },
-              {
-                "name": "Patrick Dorgu",
-                "status": "OUT",
-                "note": "hamstring"
-              },
-              {
-                "name": "Manuel Ugarte",
-                "status": "OUT",
-                "note": "knee"
-              },
-              {
-                "name": "Luke Shaw",
-                "status": "OUT",
-                "note": ""
-              }
-            ],
-            "quote": {
-              "text": "[In terms of] good news, Kobbie has done a little bit of training yesterday. So, he’s back in and around the group, so that’s obviously a positive.",
-              "said": "Michael Carrick"
-            },
-            "fixture": {
-              "opponent": "Chelsea",
-              "home": false,
-              "kickoff": "2026-10-31T12:30:00Z"
-            }
-          },
-          {
-            "club": "Brighton & Hove Albion",
-            "code": 36,
-            "line": "Tzimas is back on the training pitch after his ACL injury, and Kostoulas sat out Wednesday's match to rest.",
-            "men": [
-              {
-                "name": "Charalampos Kostoulas",
-                "owner": "Truffles",
-                "status": "Doubt",
-                "note": "rested Wednesday; expected to be an option Saturday"
-              },
-              {
-                "name": "Stefanos Tzimas",
-                "status": "FIT",
-                "note": "back from a knee injury; back on the training pitch"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Pascal Struijk"
-              },
-              {
-                "name": "Zadok Yohanna"
-              },
-              {
-                "name": "Femi Azeez"
-              },
-              {
-                "name": "Mitoma"
-              },
-              {
-                "name": "Evan Ferguson"
-              }
-            ],
-            "quote": {
-              "text": "Ferdi, Chema, also Kostoulas, we rested yesterday… we are quite convinced that they will be an option for Saturday.",
-              "said": "Fabian Hurzeler"
-            },
-            "fixture": {
-              "opponent": "Manchester City",
-              "home": false,
-              "kickoff": "2026-10-31T15:00:00Z"
-            }
-          },
-          {
-            "club": "AFC Bournemouth",
-            "code": 91,
-            "line": "Alex Scott has yet to train with the team after his tendon injury, and whether he returns to the squad before or after the international break is still open.",
-            "men": [
-              {
-                "name": "Alex Scott",
-                "status": "FIT",
-                "note": "back from a tendon injury; yet to train with the team, may wait until after the international break"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Veljko Milosavljevic"
-              },
-              {
-                "name": "Alex Tóth"
-              },
-              {
-                "name": "Julián Araujo"
-              }
-            ],
-            "quote": {
-              "text": "He’s on the pitch, he works hard, he has no problems. He didn’t train with the team so far, but I’m quite sure that he’s going to do it the next couple of days and then we’re going to see: is it worth bringing him back before the international break in the squad or do we do it after the international break to be maybe more reasonable?",
-              "said": "Marco Rose"
-            },
-            "fixture": {
-              "opponent": "Leeds United",
-              "home": true,
-              "kickoff": "2026-10-31T15:00:00Z"
-            }
-          },
-          {
-            "club": "Leeds United",
-            "code": 2,
-            "line": "Elvedi is available, Rodon has rejoined part of team training but is not ready for the weekend, and Stach's foot leaves him a question mark.",
-            "men": [
-              {
-                "name": "Anton Stach",
-                "owner": "Truffles",
-                "status": "Doubt",
-                "note": "foot; still struggling, assessed over 48 hours"
-              },
-              {
-                "name": "Joe Rodon",
-                "status": "FIT",
-                "note": "back from a hamstring injury; part-integrated in training, too soon for the weekend"
-              },
-              {
-                "name": "Nico Elvedi",
-                "status": "FIT",
-                "note": "back in training; available"
-              },
-              {
-                "name": "Daniel James",
-                "status": "FIT",
-                "note": ""
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Mateo Joseph"
-              }
-            ],
-            "quote": {
-              "text": "Anton Stach is struggling still a bit with his foot injury. So, let’s see. I hope it will get better in the next 48 hours but it’s a question mark.",
-              "said": "Daniel Farke"
-            },
-            "fixture": {
-              "opponent": "AFC Bournemouth",
-              "home": false,
-              "kickoff": "2026-10-31T15:00:00Z"
-            }
-          },
-          {
-            "club": "Nottingham Forest",
-            "code": 17,
-            "line": "Neco Williams trained the whole week after a nerve problem in his elbow, while Dan Ndoye is a doubt.",
-            "men": [
-              {
-                "name": "Neco Williams",
-                "status": "FIT",
-                "note": "back from an elbow injury; trained the entire week"
-              },
-              {
-                "name": "Dan Ndoye",
-                "owner": "Atletico",
-                "status": "Doubt",
-                "note": ""
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Nicolò Savona"
-              },
-              {
-                "name": "Igor Jesus"
-              }
-            ],
-            "quote": {
-              "text": "He fell on his nerve and he was numb to his fingers and he had a huge pain during the game. Everything is settled and he trained the entire week, so he is fine.",
-              "said": "Oliver Glasner"
-            },
-            "fixture": {
-              "opponent": "Brentford",
-              "home": false,
-              "kickoff": "2026-10-31T15:00:00Z"
-            }
-          },
-          {
-            "club": "Coventry City",
-            "code": 9,
-            "line": "Bobby Thomas has a small calf problem rather than the Achilles trouble first feared, and is uncertain for the weekend.",
-            "stillOut": [
-              {
-                "name": "Luke Woolfenden"
-              },
-              {
-                "name": "Aurèle Amenda"
-              },
-              {
-                "name": "Josh Eccles"
-              },
-              {
-                "name": "Haji Wright"
-              }
-            ],
-            "quote": {
-              "text": "So, we’re not sure about this weekend. We’ll see. We’ve got another 48 hours at the moment, but yeah, the injury is hopefully not a terrible one and we’ll see.",
-              "said": "Frank Lampard"
-            },
-            "fixture": {
-              "opponent": "Sunderland",
-              "home": true,
-              "kickoff": "2026-10-31T15:00:00Z"
-            }
-          },
-          {
-            "club": "Crystal Palace",
-            "code": 31,
-            "line": "Jorgen Strand Larsen rejoins group training on Thursday, Quinten Timber returns on Friday with possible minutes on Saturday, and Jean-Philippe Mateta was rested on Wednesday after two 60-minute outings in seven days.",
-            "stillOut": [
-              {
-                "name": "Ismaïla Sarr",
-                "owner": "Raccoons"
-              },
-              {
-                "name": "Takehiro Tomiyasu"
-              },
-              {
-                "name": "Chadi Riad"
-              }
-            ],
-            "quote": {
-              "text": "He’s trained individually for the moment, but today he will be ready to be with us.",
-              "said": "Pierre Sage"
-            },
-            "fixture": {
-              "opponent": "Tottenham Hotspur",
-              "home": false,
-              "kickoff": "2026-10-31T17:30:00Z"
-            }
-          },
-          {
-            "club": "Sunderland",
-            "code": 56,
-            "line": "Kevin Danso is suspended, and Isidor should be available.",
-            "men": [
-              {
-                "name": "Kevin Danso",
-                "status": "Suspended",
-                "note": ""
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Daniel Ballard"
-              },
-              {
-                "name": "Romaine Mundle"
-              }
-            ],
-            "quote": {
-              "text": "[Isidor] should be available. At the minute, except Ballard and Romaine, all our players are more or less available.",
-              "said": "Regis Le Bris"
-            },
-            "fixture": {
-              "opponent": "Coventry City",
-              "home": false,
-              "kickoff": "2026-10-31T15:00:00Z"
-            }
-          },
-          {
-            "club": "Hull City",
-            "code": 88,
-            "line": "Butland and Mendy are back in group training, Gourna-Douath has recovered from a calf problem and McBurnie's ribs leave him a doubt.",
-            "men": [
-              {
-                "name": "Oli McBurnie",
-                "owner": "its_ohi",
-                "status": "Doubt",
-                "note": "ribs"
-              },
-              {
-                "name": "Jack Butland",
-                "status": "FIT",
-                "note": "back from a shoulder injury; training with the group, decision Friday"
-              },
-              {
-                "name": "Nobel Mendy",
-                "status": "FIT",
-                "note": "back from a groin injury; back in training, in the squad"
-              },
-              {
-                "name": "Lucas Gourna-Douath",
-                "status": "FIT",
-                "note": "back from a calf injury"
-              }
-            ],
-            "stillOut": [
-              {
-                "name": "Charlie Hughes"
-              },
-              {
-                "name": "Ilyas Ansah"
-              },
-              {
-                "name": "Matt Targett"
-              }
-            ],
-            "quote": {
-              "text": "Jack is in training sessions with the group, which is excellent news. Yes, [he could be involved]. We will see, we will decide tomorrow.",
-              "said": "Sergej Jakirovic"
-            },
-            "fixture": {
-              "opponent": "Ipswich Town",
-              "home": true,
-              "kickoff": "2026-10-31T15:00:00Z"
-            }
-          }
-        ]
       }
     },
     {
