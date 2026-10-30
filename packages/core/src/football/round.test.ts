@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { POSTPONED_AFTER_MINUTES } from "../config";
 import type { Fixture, FootballSnapshot } from "./types";
-import { duringGameweek, isMatchdayLive, roundFinished, roundState } from "./round";
+import { duringGameweek, gameweekOpened, isMatchdayLive, roundFinished, roundState } from "./round";
 
 const snap = (over: Partial<FootballSnapshot> = {}): FootballSnapshot => ({
   clubs: [],
@@ -40,6 +40,20 @@ describe("isMatchdayLive", () => {
     const one = (status: Fixture["status"]) => snap({ fixtures: [fixture({ id: 1, status })] });
     expect(isMatchdayLive(one("finished"))).toBe(false);
     expect(isMatchdayLive(one("live"))).toBe(true);
+  });
+});
+
+describe("gameweekOpened", () => {
+  it("opens a lead's minutes before the first kickoff and stays open after the last whistle", () => {
+    const done = snap({ fixtures: [played({ id: 1 })] });
+    expect(gameweekOpened(done, "2026-08-22T12:59:00Z", 60)).toBe(false);
+    expect(gameweekOpened(done, "2026-08-22T13:00:00Z", 60)).toBe(true);
+    expect(gameweekOpened(done, "2026-08-23T20:00:00Z", 60)).toBe(true);
+    expect(duringGameweek(done, "2026-08-23T20:00:00Z", 60)).toBe(false);
+  });
+
+  it("is never open with no dated match", () => {
+    expect(gameweekOpened(snap({ fixtures: [fixture({ id: 1, kickoff: null })] }), "2026-09-01T00:00:00Z")).toBe(false);
   });
 });
 

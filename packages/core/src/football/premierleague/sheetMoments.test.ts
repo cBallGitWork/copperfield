@@ -10,7 +10,7 @@ const CODE = 2561895;
 const moments = sheetMoments(DETAIL, CODE, optaToCode);
 
 describe("sheetMoments", () => {
-  it("names the kick-off, half-time and full-time whistles, and not the second half's start", () => {
+  it("names the kick-off, half-time and full-time whistles", () => {
     const whistles = moments.filter((m) => m.kind === "kick-off" || m.kind === "half-time" || m.kind === "full-time");
     expect(whistles.map((m) => [m.kind, m.minute])).toEqual([
       ["kick-off", "0"],
@@ -26,13 +26,22 @@ describe("sheetMoments", () => {
     expect(moments.find((m) => m.kind === "kick-off")?.at).toBe(1788003087000);
   });
 
-  it("files the man taken off, never the man coming on", () => {
+  it("files the man taken off and the man coming on, each at the change's minute", () => {
     const offs = moments.filter((m) => m.kind === "off");
-    const ons = (DETAIL.events ?? []).filter((e) => e.type === "S" && e.description === "ON");
-    expect(offs.length).toBe(ons.length);
+    const ons = moments.filter((m) => m.kind === "on");
+    const changes = (DETAIL.events ?? []).filter((e) => e.type === "S");
+    expect(offs.length + ons.length).toBe(changes.length);
     // plFixtureCodes.ts codes each man as his Premier League id plus a million.
-    const off = new Set((DETAIL.events ?? []).filter((e) => e.description === "OFF").map((e) => (e.personId ?? 0) + 1_000_000));
-    expect(offs.every((m) => m.man !== null && off.has(m.man))).toBe(true);
+    const on = new Set(changes.filter((e) => e.description === "ON").map((e) => (e.personId ?? 0) + 1_000_000));
+    expect(ons.every((m) => m.man !== null && on.has(m.man))).toBe(true);
+    expect(ons[0]?.minute).toBe("66");
+  });
+
+  it("knows each moment's half, so the first half's added time orders before the second half", () => {
+    const half = (kind: string) => moments.find((m) => m.kind === kind)?.half;
+    expect(half("half-time")).toBe(1);
+    expect(half("full-time")).toBe(2);
+    expect(moments.find((m) => m.kind === "second-half")?.at).toBe(1788006980000);
   });
 
   it("keeps each goal's clock and score, for the stream to stamp the round's goals with", () => {

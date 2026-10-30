@@ -15,21 +15,15 @@ export function isMatchdayLive(snapshot: FootballSnapshot): boolean {
  *  Undated fixtures are ignored at both ends, and so is one unstarted `POSTPONED_AFTER_MINUTES` past its kickoff. */
 export function duringGameweek(snapshot: FootballSnapshot, at: string, lead = 0): boolean {
   const now = Date.parse(at);
+  return gameweekOpened(snapshot, at, lead) && snapshot.fixtures.some((f) => countedKickoff(f, now) !== null && f.status !== "finished");
+}
+
+/** Whether the round's first dated kickoff, less `lead` minutes, has passed; it stays true after the last whistle. */
+export function gameweekOpened(snapshot: FootballSnapshot, at: string, lead = 0): boolean {
+  const now = Date.parse(at);
   if (Number.isNaN(now)) return false;
-
-  let firstKickoff = Infinity;
-  let everythingFinished = true;
-  let anyDated = false;
-
-  for (const fixture of snapshot.fixtures) {
-    const kickoff = countedKickoff(fixture, now);
-    if (kickoff === null) continue;
-    anyDated = true;
-    if (kickoff < firstKickoff) firstKickoff = kickoff;
-    if (fixture.status !== "finished") everythingFinished = false;
-  }
-
-  return anyDated && now >= firstKickoff - lead * MS_PER_MINUTE && !everythingFinished;
+  const kickoffs = snapshot.fixtures.flatMap((fixture) => countedKickoff(fixture, now) ?? []);
+  return kickoffs.length > 0 && now >= Math.min(...kickoffs) - lead * MS_PER_MINUTE;
 }
 
 /** A fixture's kickoff instant when it counts in its round at `now`; null when undated, or unstarted
