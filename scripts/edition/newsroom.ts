@@ -28,12 +28,44 @@ export interface Usage {
   cache_creation_input_tokens?: number;
 }
 
+/** Tokens spent: fresh input (cache writes included), cache reads, and output. */
+export interface Spent {
+  input: number;
+  cached: number;
+  output: number;
+}
+
+// Every call of the firing, fed by writeColumn; desks run one at a time, so a desk's share is the difference.
+const spent: Spent = { input: 0, cached: 0, output: 0 };
+
+/** The firing's running total, to mark where a desk starts. */
+export function tokensSpent(): Spent {
+  return { ...spent };
+}
+
+/** What was spent since `mark`. */
+export function spentSince(mark: Spent): Spent {
+  return { input: spent.input - mark.input, cached: spent.cached - mark.cached, output: spent.output - mark.output };
+}
+
+/** A total as the log prints it. */
+export function tokensLine(total: Spent): string {
+  return `${total.input} tokens in, ${total.cached} from cache, ${total.output} out`;
+}
+
+/** A helper's failure as a `.catch`: the step is lost, never the column, and the log says why. */
+export function helperFailed<T>(say: Say, desk: string, step: string, instead: T): (error: unknown) => T {
+  return (error) => {
+    say(`  ${desk}: the ${step} failed, ${error instanceof Error ? error.message.slice(0, 200) : String(error)}`);
+    return instead;
+  };
+}
+
 /** One call: through Claude Code on the Max subscription, or by fetch with the API key when GAZETTA_VIA is "api".
  *  `maxTokens` is for a call that thinks at length before it answers, whose thinking spends the same budget. */
 export async function writeColumn(
   system: string,
   brief: string,
-  onUsage?: (usage: Usage) => void,
   tier: Tier = "writer",
   maxTokens: number = NEWSROOM.maxTokens,
 ): Promise<Record<string, unknown>> {
@@ -41,7 +73,7 @@ export async function writeColumn(
   // A helper's effort is said too: the CLI's default is not the API's, and the bill would move unseen.
   const effort = tier === "helper" ? NEWSROOM.helperEffort : tier === "draft" ? NEWSROOM.draftEffort : NEWSROOM.effort;
   const reply = process.env.GAZETTA_VIA === "api" ? await viaApi(system, brief, model, maxTokens, effort) : await viaClaudeCode(system, brief, model, maxTokens, effort);
-  if (reply.usage !== undefined) onUsage?.(reply.usage);
+  if (reply.usage !== undefined) count(reply.usage);
   // A truncated column is a JSON parse away from garbage, and the parse would
   // fail with a message about a bracket rather than about a limit.
   if (reply.stopReason !== "end_turn") throw new Error(`Stopped on ${reply.stopReason}, not a finished column.`);
@@ -54,6 +86,12 @@ export async function writeColumn(
     // escaping control characters inside string literals; a column whose braces are wrong still fails.
     return JSON.parse(__escapeControlsInStrings(fenced)) as Record<string, unknown>;
   }
+}
+
+function count(u: Usage): void {
+  spent.input += (u.input_tokens ?? 0) + (u.cache_creation_input_tokens ?? 0);
+  spent.cached += u.cache_read_input_tokens ?? 0;
+  spent.output += u.output_tokens ?? 0;
 }
 
 /** The API by fetch, no SDK: CODE_RULES §2 says no dependency a small local function would cover. */

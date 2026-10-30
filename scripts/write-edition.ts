@@ -48,7 +48,7 @@ import { deskState, seasonOpening } from "./edition/desk";
 import { deskContext } from "./edition/context";
 import { fire, type Run } from "./edition/firing";
 import { printStory, readLedger, readPaperStories, saveFiling } from "./edition/persist";
-import type { Say } from "./edition/newsroom";
+import { spentSince, tokensLine, tokensSpent, type Say } from "./edition/newsroom";
 
 // The newsroom's orchestrator, run from CI on a wide cron net: each firing files the top of the running order up to the
 // cap, saving each story before the next, and CI commits them. Those commits run no CI, so the shape checks in
@@ -210,6 +210,7 @@ function commissioner(ctx: DeskContext, paper: readonly PublishedStory[], now: s
       return null;
     }
     // One bad story costs that story; the firing fails only when every call it made failed.
+    const mark = tokensSpent();
     try {
       // Sub-edited before it is filed: a banned phrase sends the column back once (`subedit.ts`).
       const column =
@@ -244,7 +245,7 @@ function commissioner(ctx: DeskContext, paper: readonly PublishedStory[], now: s
       if (missing !== undefined && (cargo === undefined || (Array.isArray(cargo) && cargo.length === 0))) {
         say(`  ⚠ ${assignment.kind} filed with no "${missing}" — the column's substance is missing.`);
       }
-      say(`Filed ${assignment.kind}: "${filed.story.headline}"`);
+      say(`Filed ${assignment.kind}: "${filed.story.headline}"; ${tokensLine(spentSince(mark))}`);
       return { story: filed.story, spentKeys: [assignment.key], threads: filed.threads };
     } catch (error) {
       console.error(`${assignment.kind} (${assignment.key}) failed:`, error);
