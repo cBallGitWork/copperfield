@@ -1,4 +1,4 @@
-import { FANTRAX_FXEA_BASE, FANTRAX_SPORT, TRANSACTION_PAGE_SIZE } from "../../config";
+import { FANTRAX_FXEA_BASE, FANTRAX_READ_TIMEOUT_MS, FANTRAX_SPORT, TRANSACTION_PAGE_SIZE } from "../../config";
 import { politeFetch } from "../../http/fetch";
 import { readJson } from "../../http/json";
 import type { TransactionView } from "../types";
@@ -32,7 +32,7 @@ async function fxeaGet<T>(method: string, params: Record<string, string>): Promi
   }
 
   const url = `${FANTRAX_FXEA_BASE}/${method}?${new URLSearchParams(params)}`;
-  const res = await politeFetch(url);
+  const res = await politeFetch(url, {}, { timeoutMs: FANTRAX_READ_TIMEOUT_MS });
 
   // A backstop only: Fantrax reports its own refusals with a 200 and an error body.
   if (!res.ok) throw statusFailure(method, res);

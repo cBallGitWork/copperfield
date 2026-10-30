@@ -17,7 +17,11 @@ const TIMEOUT = "TIMEOUT";
 export async function politeFetch(
   url: string,
   init: RequestInit = {},
-  { idempotent = IDEMPOTENT_METHODS.has((init.method ?? "GET").toUpperCase()) } = {},
+  {
+    idempotent = IDEMPOTENT_METHODS.has((init.method ?? "GET").toUpperCase()),
+    /** Each attempt's deadline: the shared one fits FPL's bootstrap, which a provider answering less may cut. */
+    timeoutMs = FETCH_TIMEOUT_MS,
+  }: { idempotent?: boolean; timeoutMs?: number } = {},
 ): Promise<Response> {
   for (let attempt = 1; ; attempt++) {
     const mayRetry = idempotent && attempt <= HTTP_RETRIES;
@@ -27,7 +31,7 @@ export async function politeFetch(
         ...init,
         headers: { "User-Agent": HTTP_USER_AGENT, "Accept-Language": HTTP_ACCEPT_LANGUAGE, ...init.headers },
         // A deadline per attempt: a provider that never answers would otherwise hold the render.
-        signal: init.signal ?? AbortSignal.timeout(FETCH_TIMEOUT_MS),
+        signal: init.signal ?? AbortSignal.timeout(timeoutMs),
       });
     } catch (error: unknown) {
       const code = failureCode(error);
