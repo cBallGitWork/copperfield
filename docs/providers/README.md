@@ -126,6 +126,8 @@ Every provider read the app makes at request time sits in one of these 47 caches
 meant (`kind: "refused"`) is caught by `orRefusal` inside the cache and held for the window like an
 answer. Any other `ProviderError` passes through: a warm key serves its last good answer (Next keeps
 a stale entry whose refresh threw) and a cold one returns the call site's `degrade`, never stored.
+Both fallbacks, a cold key's degrade and a refusal `orRefusal` answers, log one `fantrax-fallback` JSON
+line: the key (a refusal's is Fantrax's method), `reason` (`timeout`, `refused`, `shape`), the code and `ms`.
 **Never nested**: a cache inside another skips its own and its degrade is stored by the outer entry,
 so `readCalendar` and `getSchedule` compose their cached reads outside any cache.
 All targets are `apps/companion/app/_reads/<provider>.ts`, one leaf read each.
