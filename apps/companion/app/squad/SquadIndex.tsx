@@ -15,7 +15,7 @@ import { MY_TEAM, teamHref } from "./routes";
 import { INDEX_BLOCK, PANEL, PANEL_FLUSH, ROW_NAME } from "@/app/desk";
 import FantraxSilent from "../components/shell/FantraxSilent";
 import { shortName } from "../teamNames";
-import { SQUADS, YOUR_SQUAD } from "../titles";
+import { SQUADS } from "../titles";
 
 // Your squad, then everyone else's, and the sign-in: `/squad`, and `/squad/me` for a reader with no team, so Team
 // stays lit. The cookie makes it dynamic; the reads under it are cached.
@@ -80,7 +80,7 @@ export default async function SquadIndex({
 
   return (
     <div className="flex flex-col gap-3">
-      <PageHeader title={yours ? YOUR_SQUAD : SQUADS} back={back} />
+      <PageHeader title={SQUADS} back={back} />
       {nav}
 
       {/* The sign-in follows the code, not the team on screen; signing out is offered only to a real code. */}

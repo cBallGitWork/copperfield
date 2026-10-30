@@ -4,6 +4,7 @@ Your squad, then everyone else's.
 
 ## On the page
 
+- The bar reads **Squads**, signed in or not, as More names the row (30 Oct 2026): it was "Your squad" over all ten.
 - A `←` at the title bar's left on a phone, back to More, which is where its Squads row is (16 Oct 2026). Not at
   `/squad/me`, which draws this index for a reader with no team: that is the Team tab's own page.
 - **On the desk, League's strip under the bar with Squads lit** (22 Oct 2026): the rail already lights Draft here,

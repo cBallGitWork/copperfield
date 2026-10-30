@@ -6,8 +6,7 @@ import type { PremSection } from "./prem/PremNav";
 // Every screen's name, keyed on the section its shell already knows: never a literal at a call site (DESIGN §2).
 // A caption is not a tab label (`Table` against `League Table`), so this is its own table.
 
-/** The squad index's bar: the reader's own, or every team's. */
-export const YOUR_SQUAD = "Your squad";
+/** The squad index's bar: every team's, his own among them, as More names it. */
 export const SQUADS = "Squads";
 
 /** Our league's views. */
