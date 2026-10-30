@@ -37,6 +37,13 @@ describe("sheetMoments", () => {
     expect(ons[0]?.minute).toBe("66");
   });
 
+  it("gives a change's two halves the feed's one event id, and a whistle none", () => {
+    const first = moments.find((m) => m.kind === "on");
+    expect(first?.id).toBe(392141);
+    expect(moments.filter((m) => m.id === first?.id).map((m) => m.kind)).toEqual(["on", "off"]);
+    expect(moments.find((m) => m.kind === "kick-off")?.id).toBeNull();
+  });
+
   it("knows each moment's half, so the first half's added time orders before the second half", () => {
     const half = (kind: string) => moments.find((m) => m.kind === kind)?.half;
     expect(half("half-time")).toBe(1);
