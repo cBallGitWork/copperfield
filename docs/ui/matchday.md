@@ -68,9 +68,12 @@ hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers print
    Saturday and the other Sunday, and unreadable, because it said neither.
 3. **`Vidiprinter`**, the second view (`?view=vidiprinter`; Craig, 30 Oct 2026, reversing the 19 Oct drop): one
    match day at a time with Scores' arrows, newest first. Every match's kick-off, half-time and full time with the
-   score; every man's goals, assists and red cards, drafted or not; a drafted man's bookings and changes, and the
+   score; every man's goals (an own goal with no assister), assists and red cards, drafted or not; a drafted man's
+   bookings, coming on and going off, and the
    counts of every category the league scores, in its own words and never as points. Counts carry no minute, so they
-   ride on his change, under the full-time whistle, or with the dash at the head of a match still in play. The
+   ride on his change, under the full-time whistle, or under an "In play" heading for a match still in play. Newest
+   first across matches, match order within one; a club name and a score never break across a line, and a desk caps
+   the column at a reading width. It stays after the last whistle until Live turns to the next gameweek. The
    reader's men are in the accent and every drafted man carries his holder. Off `vidiprinter` over `sheetMoments`
    (PLATFORM_NOTES, "Live has a vidiprinter again"). Live's strip is `Scores · Vidiprinter · Top stats`.
 4. ~~**`GameweekView`**~~ — **gone 20 Oct 2026**: Live had stopped embedding it, and `/gw/N`, its one

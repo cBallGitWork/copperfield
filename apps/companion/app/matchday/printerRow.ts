@@ -10,17 +10,21 @@ export interface PrinterMan {
 
 export interface PrinterRow {
   key: string;
-  /** `KO`, `HT`, `FT`, a minute `7′`, or the dash for a count the feed gives no minute. */
+  /** `KO`, `HT`, `FT` or a minute `7′`; blank on a count line or a match's heading, which the feed gives no minute. */
   clock: string;
   /** Null on a count line, which is the man and his counts alone. */
   word: string | null;
   /** A sending-off is the one loss the line prints in red. */
   loss: boolean;
+  /** A match's heading while it is played. */
+  live: boolean;
   man: PrinterMan | null;
   /** The assister, on a goal. */
   second: PrinterMan | null;
-  /** The match and its score on a whistle and a goal; his club on the rest. */
-  where: string | null;
+  /** The match on a whistle, a goal and a heading, its score null before one stands. */
+  match: { home: string; score: string | null; away: string } | null;
+  /** His club, on the rest. */
+  club: string | null;
   /** The league's counts in its own words, each with what he did. */
   counts: PrinterCount[];
 }
@@ -34,11 +38,16 @@ const WORDS: Record<PrinterKind, string | null> = {
   "own-goal": "Own goal",
   booked: "Booked",
   "sent-off": "Sent off",
+  on: "On",
   off: "Off",
   tally: null,
+  "in-play": "In play",
 };
 
 const WHISTLES: Partial<Record<PrinterKind, string>> = { "kick-off": "KO", "half-time": "HT", "full-time": "FT" };
+
+/** The lines that name their match rather than a man's club, besides a whistle. */
+const MATCHED = new Set<PrinterKind>(["goal", "penalty-goal", "own-goal", "in-play"]);
 
 /** The line as printed; a man the snapshot cannot name prints the dash. */
 export function printerRow(
@@ -54,25 +63,21 @@ export function printerRow(
   const man = (code: number | null): PrinterMan | null =>
     code === null ? null : { name: players.get(code)?.name ?? DASH, ownerTeamId: owners.get(code)?.teamId ?? null };
 
-  const scored = line.kind === "goal" || line.kind === "penalty-goal" || line.kind === "own-goal";
   const whistle = WHISTLES[line.kind];
-  let where: string | null = null;
-  if (whistle !== undefined || scored) {
-    const score = line.kind === "kick-off" || line.score === null ? " v " : ` ${line.score.home}–${line.score.away} `;
-    where = `${home ?? DASH}${score}${away ?? DASH}`;
-  } else if (line.man !== null) {
-    const club = players.get(line.man)?.clubId;
-    where = club === undefined ? null : (clubs.get(club)?.shortName ?? null);
-  }
+  const matched = whistle !== undefined || MATCHED.has(line.kind);
+  const score = line.kind === "kick-off" || line.score === null ? null : `${line.score.home}–${line.score.away}`;
+  const clubId = matched || line.man === null ? undefined : players.get(line.man)?.clubId;
 
   return {
     key: line.key,
-    clock: whistle ?? (line.minute === null ? DASH : `${line.minute}′`),
+    clock: whistle ?? (line.minute === null ? "" : `${line.minute}′`),
     word: WORDS[line.kind],
     loss: line.kind === "sent-off",
+    live: line.kind === "in-play",
     man: man(line.man),
     second: man(line.second),
-    where,
+    match: matched ? { home: home ?? DASH, score, away: away ?? DASH } : null,
+    club: clubId === undefined ? null : (clubs.get(clubId)?.shortName ?? null),
     counts: line.counts,
   };
 }

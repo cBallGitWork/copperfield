@@ -1,5 +1,4 @@
-import { bareMinute } from "../football/premierleague/fixtureEvents";
-import type { SheetMoment } from "../football/premierleague/sheetMoments";
+import type { SheetMoment, SheetMomentKind } from "../football/premierleague/sheetMoments";
 import type { Fixture, FootballPlayer, MatchEvent, MatchEventKind } from "../football/types";
 import {
   ASSISTS_FANTASY,
@@ -18,10 +17,12 @@ import {
 import { wordsOf } from "../league/categoryWords";
 import type { LivePlayerCategory } from "../league/points";
 import type { ScoringCategory } from "../league/scoring";
+import { HALF, goalLines, halfAt, placeIn } from "./printerGoals";
 
 // Live's vidiprinter: the match feed's timed moments for everyone, and the league's scoring counts for drafted men.
 
-export type PrinterKind = Exclude<SheetMoment["kind"], "goal"> | MatchEventKind | "tally";
+/** `in-play` heads a match's counts while it is played; `tally` is one drafted man's counts. */
+export type PrinterKind = Exclude<SheetMomentKind, "goal" | "second-half"> | MatchEventKind | "tally" | "in-play";
 
 /** One of a drafted man's league categories, in plain words, with what he did. */
 export interface PrinterCount {
@@ -56,13 +57,23 @@ const TIMED = [GOALS, ASSISTS_TOTAL, ASSISTS_OFFICIAL, ASSISTS_FANTASY, YELLOW_C
 /** What only stands once he leaves the pitch. */
 const UNSETTLED = [MINUTES, CLEAN_SHEETS, GOALS_AGAINST, GOALS_AGAINST_OUTFIELD];
 
-/** On one instant: a live count first, then the whistle, the event, and last the counts a whistle settles. */
-const RANK: Partial<Record<PrinterKind, number>> = { "kick-off": 1, "half-time": 1, "full-time": 1, tally: 3 };
-const LIVE_TALLY = 0;
-const EVENT = 2;
+/** A whistle's place in its match: kick-off first, half-time after the first half's last event, full time after all. */
+const WHISTLE_PLACE: Partial<Record<SheetMomentKind, number>> = { "kick-off": 0, "half-time": 1.5 * HALF, "full-time": 2.5 * HALF };
+/** Counts the full-time whistle settles print under it. */
+const SETTLED_PLACE = 2.5 * HALF - 1;
+/** A match in play's counts sit above its newest line, under their heading. */
+const IN_PLAY_PLACE = 3 * HALF;
 
-/** Every line of the round, newest first; a match the feed has not started prints nothing. */
+interface Placed {
+  line: PrinterLine;
+  place: number;
+}
+
+/** Every line of the round up to `now`, newest first across matches and in match order within one; a match the
+ *  feed has not started prints nothing. */
 export function vidiprinter(input: {
+  /** Epoch ms: nothing after it prints. */
+  now: number;
   goals: readonly MatchEvent[];
   moments: readonly SheetMoment[];
   fixtures: readonly Pick<Fixture, "code" | "homeClubId" | "awayClubId">[];
@@ -72,42 +83,29 @@ export function vidiprinter(input: {
   tallies: readonly PrinterTally[];
   names: Record<string, ScoringCategory> | undefined;
 }): PrinterLine[] {
-  const { goals, moments, drafted } = input;
-  const ranked: { line: PrinterLine; rank: number }[] = [];
-  const push = (line: PrinterLine, rank = RANK[line.kind] ?? EVENT) => ranked.push({ line, rank });
+  const { drafted } = input;
+  const moments = input.moments.filter((m) => m.at !== null && m.at <= input.now);
+  const clubOf = new Map(input.players.map((player) => [player.code, player.clubId]));
+  const fixtures = new Map(input.fixtures.map((fixture) => [fixture.code, fixture]));
+  const placed: Placed[] = goalLines({ now: input.now, goals: input.goals, moments, fixtures, clubOf });
   const blank = { second: null, score: null, counts: [] };
-
-  const sheetGoal = new Map(moments.filter((m) => m.kind === "goal").map((m) => [`${m.fixtureCode}:${m.seconds}`, m]));
-  for (const event of goals) {
-    const stamp = sheetGoal.get(`${event.fixtureCode}:${event.seconds}`);
-    push({
-      key: `goal:${event.id}`,
-      fixtureCode: event.fixtureCode,
-      kind: event.kind,
-      minute: bareMinute(event.minute),
-      at: stamp?.at ?? event.absolute,
-      man: event.players[0] ?? null,
-      second: event.players[1] ?? null,
-      score: stamp?.score ?? null,
-      counts: [],
-    });
-  }
 
   const tallies = new Map(input.tallies.map((tally) => [tally.code, tally.categories]));
   const counted = new Set<number>();
   for (const m of moments) {
-    if (m.kind === "goal") continue;
+    if (m.kind === "goal" || m.kind === "second-half") continue;
     const man = m.man;
     // A booking and a change are a drafted man's news; a red card is everybody's.
-    if ((m.kind === "booked" || m.kind === "off") && (man === null || !drafted.has(man))) continue;
+    if ((m.kind === "booked" || m.kind === "off" || m.kind === "on") && (man === null || !drafted.has(man))) continue;
     if (m.kind === "sent-off" && man === null) continue;
     const counts = m.kind === "off" && man !== null ? countsOf(tallies.get(man), input.names, true) : [];
     if (m.kind === "off" && man !== null) counted.add(man);
-    push({ ...blank, key: m.key, fixtureCode: m.fixtureCode, kind: m.kind, minute: m.minute, at: m.at, man, score: m.score, counts });
+    const place = WHISTLE_PLACE[m.kind] ?? placeIn(halfAt(m.half, m.seconds), m.seconds);
+    placed.push({ line: { ...blank, key: m.key, fixtureCode: m.fixtureCode, kind: m.kind, minute: m.minute, at: m.at, man, score: m.score, counts }, place });
   }
 
   const byFixture = Map.groupBy(moments, (m) => m.fixtureCode);
-  const clubOf = new Map(input.players.map((player) => [player.code, player.clubId]));
+  const playing = new Set<number>();
   for (const [code, categories] of tallies) {
     if (counted.has(code)) continue;
     const club = clubOf.get(code);
@@ -118,14 +116,42 @@ export function vidiprinter(input: {
     const whistle = own.find((m) => m.kind === "full-time");
     const counts = countsOf(categories, input.names, whistle !== undefined);
     if (counts.length === 0) continue;
-    const latest = Math.max(...own.map((m) => m.at ?? 0));
     const line = { ...blank, key: `tally:${fixture.code}:${code}`, fixtureCode: fixture.code, kind: "tally" as const, minute: null, man: code, counts };
-    if (whistle === undefined) push({ ...line, at: latest }, LIVE_TALLY);
-    else push({ ...line, at: whistle.at });
+    if (whistle === undefined) playing.add(fixture.code);
+    placed.push(
+      whistle === undefined
+        ? { line: { ...line, at: Math.max(...own.map((m) => m.at ?? 0)) }, place: IN_PLAY_PLACE }
+        : { line: { ...line, at: whistle.at }, place: SETTLED_PLACE },
+    );
   }
+  for (const code of playing) placed.push(inPlay(code, placed));
 
-  return ranked
-    .sort((a, b) => (b.line.at ?? 0) - (a.line.at ?? 0) || a.rank - b.rank)
+  return printOrder(placed);
+}
+
+/** The heading over a match's counts while it is played, with the score its latest line made. */
+function inPlay(fixtureCode: number, placed: readonly Placed[]): Placed {
+  const own = placed.filter((p) => p.line.fixtureCode === fixtureCode && p.line.score !== null).sort((a, b) => a.place - b.place);
+  const score = own.at(-1)?.line.score ?? null;
+  const line: PrinterLine = { key: `in-play:${fixtureCode}`, fixtureCode, kind: "in-play", minute: null, at: null, man: null, second: null, score, counts: [] };
+  return { line, place: IN_PLAY_PLACE + 1 };
+}
+
+/** Newest first across matches. Within one, a line never rises above what follows it in the match: each takes the
+ *  latest clock of anything before it, and a match's lines on one instant keep together. */
+function printOrder(placed: readonly Placed[]): PrinterLine[] {
+  const timed = [...Map.groupBy(placed, (p) => p.line.fixtureCode).values()].flatMap((own) => {
+    let latest = -Infinity;
+    return own
+      .map((p, index) => ({ ...p, index }))
+      .sort((a, b) => a.place - b.place || a.index - b.index)
+      .map((p) => {
+        latest = Math.max(latest, p.line.at ?? -Infinity);
+        return { ...p, shown: latest };
+      });
+  });
+  return timed
+    .sort((a, b) => b.shown - a.shown || a.line.fixtureCode - b.line.fixtureCode || b.place - a.place || b.index - a.index)
     .map(({ line }) => line);
 }
 

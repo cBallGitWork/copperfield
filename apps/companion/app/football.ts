@@ -7,6 +7,7 @@ import {
   type RoundReads,
   datedKickoffs,
   duringGameweek,
+  gameweekOpened,
   fetchBootstrap,
   fetchFixtures,
   inMatchWindow,
@@ -239,6 +240,11 @@ export async function groundFaces(): Promise<string[]> {
 /** Whether Live is open: from `LIVE_LEAD_MINUTES` before the round's first kickoff to its last whistle. */
 export function liveOpen(snapshot: FootballSnapshot): boolean {
   return duringGameweek(snapshot, now().toISOString(), LIVE_LEAD_MINUTES);
+}
+
+/** Whether Live's round has opened; true after its last whistle too, until `liveNow` turns to the next. */
+export function liveOpened(snapshot: FootballSnapshot): boolean {
+  return gameweekOpened(snapshot, now().toISOString(), LIVE_LEAD_MINUTES);
 }
 
 /** Whether the shell offers its Live section. Fails open, so an FPL outage never hides Live mid-match. */

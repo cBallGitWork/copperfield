@@ -176,6 +176,7 @@ export type { FitnessNote, GameweekStarts, NoteCalendar } from "./fitnessNote";
 export {
   anyStarted,
   duringGameweek,
+  gameweekOpened,
   fixturesStatus,
   gameweekStarted,
   gameweekStatus,

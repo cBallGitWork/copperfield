@@ -27,15 +27,24 @@ const fixtures = [
   { code: 901, homeClubId: 3, awayClubId: 4 },
 ];
 
-const moment = (fixtureCode: number, kind: SheetMomentKind, minute: number, man: number | null = null, score?: [number, number]): SheetMoment => ({
+const moment = (
+  fixtureCode: number,
+  kind: SheetMomentKind,
+  minute: number,
+  man: number | null = null,
+  score?: [number, number],
+  over: Partial<SheetMoment> = {},
+): SheetMoment => ({
   key: `${fixtureCode}:${kind}:${minute}:${man ?? ""}`,
   fixtureCode,
   kind,
   minute: String(minute),
   seconds: minute * 60,
+  half: kind === "half-time" || (kind !== "full-time" && kind !== "second-half" && minute <= 45) ? 1 : 2,
   at: KO + minute * MIN,
   man,
   score: score === undefined ? null : { home: score[0], away: score[1] },
+  ...over,
 });
 
 const goal = (fixtureCode: number, minute: number, scorer: number, assister: number | null = null): MatchEvent => ({
@@ -65,6 +74,9 @@ const moments: SheetMoment[] = [
   moment(900, "booked", 30, PICKFORD),
   moment(900, "booked", 31, FREE_MAN),
   moment(900, "half-time", 45, null, [1, 0]),
+  moment(900, "second-half", 45, null, [1, 0], { at: KO + 46 * MIN }),
+  moment(900, "on", 70, RAYA),
+  moment(900, "on", 71, PICKFORD),
   moment(900, "off", 70, SAKA),
   moment(900, "off", 71, FREE_MAN),
   moment(900, "sent-off", 80, FREE_MAN),
@@ -73,7 +85,9 @@ const moments: SheetMoment[] = [
   moment(901, "booked", 140, PALMER),
 ];
 
+const LATER = KO + 1_000 * MIN;
 const lines = vidiprinter({
+  now: LATER,
   goals: [goal(900, 7, SAKA, FREE_MAN)],
   moments,
   fixtures,
@@ -93,13 +107,16 @@ const kinds = (of: readonly PrinterLine[]) => of.map((line) => `${line.kind}${li
 describe("vidiprinter", () => {
   it("runs newest first across matches, a whistle above what it settles", () => {
     expect(kinds(lines)).toEqual([
+      "in-play",
       "tally:30",
       "booked:30",
       "kick-off",
       "full-time",
       "tally:11",
       "sent-off:21",
+      "on:20",
       "off:10",
+      "on:11",
       "half-time",
       "booked:20",
       "goal:10",
@@ -148,7 +165,105 @@ describe("vidiprinter", () => {
   });
 
   it("prints nothing for a match the feed has not started", () => {
-    const quiet = vidiprinter({ goals: [], moments: [], fixtures, players, drafted: new Set([SAKA]), tallies: [{ code: SAKA, categories: [scored("1#dfp", "1")] }], names });
+    const quiet = vidiprinter({ now: LATER, goals: [], moments: [], fixtures, players, drafted: new Set([SAKA]), tallies: [{ code: SAKA, categories: [scored("1#dfp", "1")] }], names });
     expect(quiet).toEqual([]);
+  });
+
+  it("prints a drafted man coming on at his minute, and nobody else's", () => {
+    expect(lines.filter((line) => line.kind === "on").map((line) => [line.man, line.minute])).toEqual([
+      [PICKFORD, "71"],
+      [RAYA, "70"],
+    ]);
+    expect(lines.find((line) => line.kind === "on")?.counts).toEqual([]);
+  });
+});
+
+const arsenalEverton = moments.filter((m) => m.fixtureCode === 900);
+const upTo = (now: number) => arsenalEverton.filter((m) => m.at !== null && m.at <= now);
+
+/** The printer over Arsenal v Everton alone, at `now`, with every one of its moments unless given others. */
+const printAt = (now: number, over: { goals?: MatchEvent[]; moments?: SheetMoment[] } = {}) =>
+  vidiprinter({
+    now,
+    goals: over.goals ?? [],
+    moments: over.moments ?? arsenalEverton,
+    fixtures,
+    players,
+    drafted: new Set([SAKA, RAYA, SALIBA, PICKFORD, PALMER]),
+    tallies: [],
+    names,
+  });
+
+describe("vidiprinter, at a moment in time", () => {
+  it("never prints what happened after now: a goal the round read holds, or a moment", () => {
+    const now = KO + 20 * MIN;
+    expect(kinds(printAt(now, { goals: [goal(900, 7, SAKA), goal(900, 60, SAKA)] }))).toEqual(["goal:10", "kick-off"]);
+  });
+
+  it("times a goal the feed has not filed off its half's restart, so the half-time break does not let it out early", () => {
+    // 60′ is fifteen minutes into a second half that restarted at KO + 46′.
+    const at = (now: number) => printAt(now, { goals: [goal(900, 60, SAKA)], moments: upTo(now) }).find((line) => line.kind === "goal");
+    expect(at(KO + 60 * MIN)).toBeUndefined();
+    expect(at(KO + 61 * MIN)?.at).toBe(KO + 61 * MIN);
+  });
+
+  it("gives a goal the feed has not filed the score it made, counted from the match's goals up to it", () => {
+    const at = printAt(LATER, {
+      goals: [goal(900, 7, SAKA), goal(900, 50, PICKFORD), goal(900, 52, SAKA), { ...goal(900, 80, PICKFORD), kind: "own-goal" }],
+    });
+    const scores = at.filter((line) => line.man !== null && line.score !== null).map((line) => [line.minute, line.score]);
+    expect(scores).toEqual([
+      ["80", { home: 3, away: 1 }],
+      ["52", { home: 2, away: 1 }],
+      ["50", { home: 1, away: 1 }],
+      ["7", { home: 1, away: 0 }],
+    ]);
+  });
+
+  it("prints no assister on an own goal", () => {
+    const at = printAt(LATER, { goals: [{ ...goal(900, 80, PICKFORD, SAKA), kind: "own-goal" }] });
+    expect(at.find((line) => line.kind === "own-goal")?.second).toBeNull();
+  });
+
+  it("keeps one match in match order: a stoppage-time card filed after the whistle still prints under it", () => {
+    const late = moment(900, "booked", 95, PICKFORD, undefined, { minute: "90+5", seconds: 5700, at: KO + 97 * MIN });
+    const firstHalf = moment(900, "booked", 45, SAKA, undefined, { minute: "45+3", seconds: 2880, half: 1, at: KO + 46 * MIN });
+    const order = kinds(printAt(LATER, { moments: [...arsenalEverton, late, firstHalf] }));
+    expect(order[0]).toBe("full-time");
+    expect(order.indexOf("half-time")).toBeLessThan(order.indexOf("booked:10"));
+    expect(order.indexOf("half-time")).toBeGreaterThan(order.indexOf("on:11"));
+  });
+
+  it("heads a match's in-play counts with the match, at its newest line, never between another match's lines", () => {
+    // Both matches file a line at the same instant; each man's counts stay with his own match.
+    const same = KO + 140 * MIN;
+    const at = vidiprinter({
+      now: LATER,
+      goals: [],
+      moments: [
+        moment(901, "kick-off", 120, null, [0, 0]),
+        moment(901, "booked", 140, PALMER),
+        moment(900, "kick-off", 0, null, [0, 0]),
+        moment(900, "booked", 140, PICKFORD, undefined, { at: same }),
+      ],
+      fixtures,
+      players,
+      drafted: new Set([PALMER, PICKFORD, SAKA]),
+      tallies: [
+        { code: PALMER, categories: [scored("1#dfp", "1", 2)] },
+        { code: SAKA, categories: [scored("1#dfp", "2", 2)] },
+      ],
+      names,
+    });
+    const heads = at.flatMap((line, index) => (line.kind === "in-play" ? [index] : []));
+    expect(heads.length).toBe(2);
+    for (const head of heads) {
+      const fixture = at[head]?.fixtureCode;
+      expect(at[head]?.minute).toBeNull();
+      expect(at[head + 1]?.kind).toBe("tally");
+      expect(at[head + 1]?.fixtureCode).toBe(fixture);
+      expect(at[head + 2]?.kind).toBe("booked");
+      expect(at[head + 2]?.fixtureCode).toBe(fixture);
+    }
   });
 });
