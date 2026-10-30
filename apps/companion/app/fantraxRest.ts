@@ -1,4 +1,5 @@
 import { FANTRAX_FXEA_BASE, ProviderError } from "@epl/core";
+import { FANTRAX_REST_MS } from "./config";
 
 // After one Fantrax read times out, the league's reads fail with that timeout for a rest instead of each waiting out
 // a deadline of its own: a page's dependent reads would otherwise wait one after another (45 s on `/`, 30 Oct 2026).
@@ -27,3 +28,6 @@ export function restAfterTimeout(restMs: number, clock: () => number = () => Dat
       }
     };
 }
+
+/** One rest for every league read in this process, which `leagueCache` wraps: a Fantrax that hung for one hangs for all. */
+export const leagueRest = restAfterTimeout(FANTRAX_REST_MS);

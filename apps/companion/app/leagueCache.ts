@@ -1,15 +1,12 @@
 import { revalidateTag, unstable_cache } from "next/cache";
 import { FANTRAX_LEAGUE_ID, type ProviderError } from "@epl/core";
-import { FANTRAX_REST_MS, PAGE_REVALIDATE } from "./config";
-import { restAfterTimeout } from "./fantraxRest";
+import { PAGE_REVALIDATE } from "./config";
 import { orDegraded, refusedAs } from "./refusals";
 import { singleFlight } from "./singleFlight";
+import { leagueRest } from "./fantraxRest";
 
 // One league read, cached for everybody. The key and the tag both carry the league id, so the swap
 // cannot serve one league's entry to the other; nothing about who is asking may cross into a read.
-
-/** One rest for every league read in this process: a Fantrax that hung for one read hangs for the next. */
-const resting = restAfterTimeout(FANTRAX_REST_MS);
 
 export function leagueCache<A extends unknown[], R>(
   /** What is being read, in the domain's words. Joined with the league id to
@@ -22,7 +19,7 @@ export function leagueCache<A extends unknown[], R>(
   /** How long it may be held. Defaults to the page's own window; only a final answer earns longer. */
   revalidate: number = PAGE_REVALIDATE,
 ): (...args: A) => Promise<R> {
-  const cached = unstable_cache(singleFlight(resting(read)), [key, FANTRAX_LEAGUE_ID], {
+  const cached = unstable_cache(singleFlight(leagueRest(read)), [key, FANTRAX_LEAGUE_ID], {
     revalidate,
     tags: [leagueTag(key)],
   });
