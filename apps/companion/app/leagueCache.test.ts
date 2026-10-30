@@ -47,6 +47,9 @@ describe("leagueCache", () => {
   });
 
   it("logs one line per cold-key fallback: the key, the reason and the wait, and nothing of the session", async () => {
+    // Its Fantrax timeout starts the shared rest; a clock at 0 lets it lapse before the next test's real one.
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(0);
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const hung = new ProviderError("TIMEOUT", "www.fantrax.com /fxpa/req → TIMEOUT", "unreachable");
     await leagueCache("live-scores", failing(hung), unavailable)(6);
@@ -55,6 +58,7 @@ describe("leagueCache", () => {
     expect(JSON.parse(line)).toEqual({ event: "fantrax-fallback", key: "live-scores", reason: "timeout", code: "TIMEOUT", ms: expect.any(Number) });
     expect(line).not.toMatch(/cookie|session|leagueId|fantrax\.com/i);
     warn.mockRestore();
+    vi.useRealTimers();
   });
 
   it("logs nothing for a read that answered", async () => {
