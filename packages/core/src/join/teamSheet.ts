@@ -1,5 +1,5 @@
-import type { LineupDetail, SquadPlayerDetail } from "@epl/core";
-import { isResolved } from "@epl/core";
+import { isResolved } from "./roster";
+import type { LineupDetail, SquadPlayerDetail } from "./squadDetail";
 
 /** A played week's sheet with today's fitness taken off: a doubt dated after the week is not the week's (review N9).
  *  `availabilityOf` reads no letter, note or chance as fit. */

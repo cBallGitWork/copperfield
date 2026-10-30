@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
-import type { FootballPlayer, LineupDetail, SquadPlayerDetail } from "@epl/core";
-import { availabilityOf, isResolved } from "@epl/core";
-import { withoutFitness } from "./pastWeek";
+import { availabilityOf } from "../football/playerState";
+import type { FootballPlayer } from "../football/types";
+import { isResolved } from "./roster";
+import type { LineupDetail, SquadPlayerDetail } from "./squadDetail";
+import { withoutFitness } from "./teamSheet";
 
 const man = (fantraxId: string, fitness: Pick<FootballPlayer, "status" | "news" | "chanceOfPlaying">): SquadPlayerDetail => ({
   rostered: { slot: { fantraxId, position: "M", status: "" }, player: { code: 1, name: fantraxId, newsAdded: null, ...fitness } as FootballPlayer, stats: [] },

@@ -9,6 +9,7 @@ import {
   openingGameweek,
   oppositionByClub,
   roundState,
+  withoutFitness,
 } from "@epl/core";
 import MatchupBoard, { type MatchupSide } from "../../../components/league/MatchupBoard";
 import Nothing from "../../../components/shell/Nothing";
@@ -43,7 +44,6 @@ import { benchOrder } from "../../../benchOrders";
 import { roundUnderway } from "../../../football";
 import { toPlayWord } from "../../../components/league/toPlay";
 import RoundWord from "../../../components/league/RoundWord";
-import { withoutFitness } from "./pastWeek";
 import { leagueFixturesHref } from "../../SectionNav";
 import { autoSubbed } from "../../../components/league/autoSubbed";
 
