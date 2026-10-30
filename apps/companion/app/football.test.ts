@@ -6,18 +6,18 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 // window, and a stale entry asked a refusing FPL again on every page view. Next's cache as far as this file can see
 // it: a stale entry is served while it refreshes, and a refresh that throws leaves it as it was.
 
-const stored = new Map<string, { value: unknown; stale: boolean }>();
+const stored = new Map<string, { value: unknown; stale: boolean; at: number }>();
 const refreshes: Promise<unknown>[] = [];
 
 vi.mock("next/cache", () => ({
   unstable_cache:
-    <A extends unknown[], R>(read: (...args: A) => Promise<R>, keys: string[]) =>
+    <A extends unknown[], R>(read: (...args: A) => Promise<R>, keys: string[], { revalidate }: { revalidate: number }) =>
     async (...args: A): Promise<R> => {
       const key = JSON.stringify([...keys, ...args]);
       const held = stored.get(key);
-      const store = (value: R) => stored.set(key, { value, stale: false });
+      const store = (value: R) => stored.set(key, { value, stale: false, at: Date.parse(clockAt) });
       if (held === undefined) return read(...args).then((value) => (store(value), value));
-      if (held.stale) refreshes.push(read(...args).then(store, () => undefined));
+      if (held.stale || Date.parse(clockAt) - held.at > revalidate * 1000) refreshes.push(read(...args).then(store, () => undefined));
       return held.value as R;
     },
 }));
@@ -161,7 +161,7 @@ describe("the season's fixtures", () => {
 const liveReads = () => asked.filter((path) => path.startsWith("/event/")).length;
 
 describe("FPL on the football clock", () => {
-  it("asks nothing live at 02:00 on a day with no match, and a lines reader at most once that hour", async () => {
+  it("asks nothing live at 02:00 on a day with no match, and a lines reader at most once an hour", async () => {
     clockAt = "2026-10-14T01:05:00Z";
     const { footballNow, roundFigures } = await import("./football");
     await footballNow();
@@ -170,7 +170,7 @@ describe("FPL on the football clock", () => {
     clockAt = "2026-10-14T01:55:00Z";
     await roundFigures(5);
     expect(liveReads()).toBe(1);
-    clockAt = "2026-10-14T02:05:00Z";
+    clockAt = "2026-10-14T02:06:00Z";
     await roundFigures(5);
     expect(liveReads()).toBe(2);
   });
@@ -182,6 +182,7 @@ describe("FPL on the football clock", () => {
     expect(liveReads()).toBe(1);
     clockAt = "2026-10-11T12:50:00Z";
     await roundFigures(5);
+    await settled();
     expect(liveReads()).toBe(2);
   });
 
