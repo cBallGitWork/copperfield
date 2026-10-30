@@ -1,9 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { americanisms } from "./banned";
 import { checkBin } from "./binXi/checks";
+import { AMERICAN, AMERICAN_EXAMPLES } from "./british";
 import { NICKNAMES, clubNickname } from "./clubNames";
 
 describe("British football English", () => {
+  it("names as examples only words the list checks", () => {
+    expect(AMERICAN_EXAMPLES.filter((word) => !AMERICAN.includes(word))).toEqual([]);
+  });
+
   it("is one list every desk reads: American idiom, sport and spelling", () => {
     expect(americanisms("He stepped up, it was a tie game, a hat trick and a shut-out, and his behavior was awesome.")).toEqual(
       expect.arrayContaining(["stepped up", "tie game", "hat trick", "shut-out", "behavior", "awesome"]),

@@ -25,6 +25,13 @@ describe("banned", () => {
     expect(banned("Cameron came through it")).toEqual([]);
   });
 
+  it("catches the phrases the prompt names: made five for, off a minutes figure, fantasy points", () => {
+    expect(banned("Saka made five for test2")).toEqual(["made five for"]);
+    expect(banned("Cunha was off 62 minutes in")).toEqual(["off 62 minutes"]);
+    expect(banned("Cunha scored 12 fantasy points")).toEqual(["fantasy points"]);
+    expect(banned("Cunha played 62 minutes, well off the pace")).toEqual([]);
+  });
+
   it("names a phrase once however often it is used", () => {
     expect(banned("He banked it, then banked another, and banked a third")).toEqual(["banked"]);
   });

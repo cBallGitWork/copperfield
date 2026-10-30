@@ -1,5 +1,5 @@
 import { BIN_XI } from "../../config";
-import { BANNED, banned, notBritish } from "../banned";
+import { BANNED, BANNED_PATTERNS, banned, notBritish } from "../banned";
 import { faultLog, type Fault } from "../fault";
 import { masked, numbersIn, wordCount } from "../predictions/prose";
 import { DESK_BANNED } from "../predictions/words";
@@ -39,7 +39,7 @@ export function checkBin(column: Record<string, unknown>, ctx: BinCheck): Fault[
     for (const word of banned(plain, BIN_GLOSS)) fault(section, "a gloss that adds no fact", "send-back", word);
     for (const word of banned(plain, BIN_ROLES)) fault(section, "a role the brief does not give", "send-back", word);
     for (const word of banned(plain, BIN_OWNERSHIP)) fault(section, "a man is in a squad, never owned or held", "send-back", word);
-    for (const word of banned(plain, [...BANNED, ...DESK_BANNED, ...SHEETS_STOCK])) fault(section, "banned or stock phrasing", "send-back", word);
+    for (const word of banned(plain, [...BANNED, ...DESK_BANNED, ...SHEETS_STOCK], BANNED_PATTERNS)) fault(section, "banned or stock phrasing", "send-back", word);
     notBritish(fault, section, plain);
     faultOn(fault, section, "counts the weeks", "send-back", COUNTED, written);
     if (section === "headline") continue;
