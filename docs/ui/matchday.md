@@ -78,7 +78,7 @@ hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers print
    right-aligned column, his holder bracketed after his name; on a phone the event is `EventIcon`'s glyph alone, the
    word joining it on a desk, inked by meaning (a goal green, an own goal, red card and injury red, a booking
    yellow as the match report has it, a change and a whistle amber). A change the commentary files "because of an
-   injury" reads `Injury` with the cross. A man in a manager's eleven carries the league's points for the action
+   injury" reads `Injury` with the cross. A man in a manager's eleven carries the league's points for the action (never on a goal or its assist: Craig, 30 Oct 2026)
    at the slot he was played in, in cyan (`+4`, `-1`); a reserve and an undrafted man carry none. The league's
    untimed counts, each with its points, ride on his `Off` line, else on one line under his match's full time;
    minutes never print, and a man with nothing else gets no line. The reader's men are in the accent. Off

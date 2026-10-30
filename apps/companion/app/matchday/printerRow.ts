@@ -54,6 +54,8 @@ const WORDS: Record<PrinterKind, string | null> = {
 const SECOND_WORDS: Partial<Record<PrinterKind, string>> = { goal: "As", "penalty-goal": "As", sub: "Off", injury: "Off" };
 
 const WHISTLES = new Set<PrinterKind>(["kick-off", "half-time", "full-time"]);
+/** A goal and its assist carry no figure (Craig, 30 Oct 2026): the word says what it was worth. */
+const UNPRICED = new Set<PrinterKind>(["goal", "penalty-goal"]);
 
 /** A figure worth printing: a nought moved nothing. */
 const pointsOf = (points: number | null): string | null => (points === null || points === 0 ? null : signed(points));
@@ -80,7 +82,8 @@ export function printerRow(
       points: pointsOf(points),
     };
   };
-  const second = man(line.second, line.secondPoints);
+  const priced = !UNPRICED.has(line.kind);
+  const second = man(line.second, priced ? line.secondPoints : null);
   const secondWord = SECOND_WORDS[line.kind];
   const whistle = WHISTLES.has(line.kind);
   const score = line.kind === "kick-off" ? null : line.score;
@@ -90,7 +93,7 @@ export function printerRow(
     kind: line.kind,
     word: WORDS[line.kind],
     minute: whistle || line.minute === null ? null : `${line.minute}′`,
-    man: man(line.man, line.points),
+    man: man(line.man, priced ? line.points : null),
     second: second === null || secondWord === undefined ? null : { word: secondWord, man: second },
     sides: whistle
       ? [
