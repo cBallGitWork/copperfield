@@ -1,4 +1,4 @@
-import { FANTRAX_FXPA_BASE } from "../../config";
+import { FANTRAX_FXPA_BASE, FANTRAX_READ_TIMEOUT_MS, FETCH_TIMEOUT_MS } from "../../config";
 import { demoFxpa, isDemo } from "./demo";
 import { politeFetch } from "../../http/fetch";
 import { readJson } from "../../http/json";
@@ -60,12 +60,14 @@ export async function fxpaRead(
     if (canned !== null) return canned;
   }
 
-  // A read is safe to send twice; a session call may be a lineup write, so it goes once.
+  // A read is safe to send twice and short of time; a session call may be a lineup write, so it goes once and is not
+  // abandoned while Fantrax may still be saving it.
+  const read = session === undefined;
   const res = await politeFetch(`${FANTRAX_FXPA_BASE}?leagueId=${encodeURIComponent(leagueId)}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...(session ? { Cookie: session } : {}) },
     body: JSON.stringify({ msgs: [{ method, data: { leagueId, ...data } }] }),
-  }, { idempotent: session === undefined });
+  }, { idempotent: read, timeoutMs: read ? FANTRAX_READ_TIMEOUT_MS : FETCH_TIMEOUT_MS });
 
   // As on fxea, a backstop only: fxpa reports its own refusals with a 200.
   if (!res.ok) throw statusFailure(method, res);

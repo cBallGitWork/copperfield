@@ -2,6 +2,7 @@ import { describe, expect, it, onTestFinished, vi } from "vitest";
 import { htmlPage, serve, statusOnly } from "../../http/fakeFetch";
 import { fetchLeagueInfo, fetchStandings, fetchTeamRosters, fetchTransactions } from "./client";
 import { FantraxError } from "./errors";
+import { FANTRAX_READ_TIMEOUT_MS, FETCH_TIMEOUT_MS } from "../../config";
 
 const LEAGUE = "league-under-test";
 
@@ -66,6 +67,20 @@ describe("fxea reads", () => {
   it("passes an array, which is how getStandings answers", async () => {
     serve(() => Response.json([]));
     await expect(fetchStandings(LEAGUE)).resolves.toEqual([]);
+  });
+});
+
+// 30 Oct 2026: a hanging Fantrax held each read for the shared 15 s, sized for FPL's 1.3 MB bootstrap.
+describe("a read's deadline", () => {
+  it("is Fantrax's own on both surfaces, short enough for a reader holding a phone", async () => {
+    const timeout = vi.spyOn(AbortSignal, "timeout");
+    onTestFinished(() => timeout.mockRestore());
+    serve(() => Response.json({}));
+    await fetchLeagueInfo(LEAGUE);
+    serveLog([["a"]]);
+    await fetchTransactions(LEAGUE, "CLAIM_DROP");
+    expect(timeout.mock.calls.map(([ms]) => ms)).toEqual([FANTRAX_READ_TIMEOUT_MS, FANTRAX_READ_TIMEOUT_MS]);
+    expect(FANTRAX_READ_TIMEOUT_MS).toBeLessThan(FETCH_TIMEOUT_MS);
   });
 });
 

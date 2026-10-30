@@ -226,7 +226,10 @@ The settled vocabulary. New code uses these words; persisted names are frozen.
 Landed 1 Oct 2026: the three kinds on `ProviderError`, `orRefusal` catching `refused` only, and
 `leagueCache`'s degrade.
 
-- Each attempt has its own deadline.
+- Each attempt has its own deadline: 15 s (`FETCH_TIMEOUT_MS`, sized for FPL's bootstrap), and 6 s for a Fantrax
+  read (`FANTRAX_READ_TIMEOUT_MS`; its heaviest answered in 1.2 s on 30 Oct 2026). A session call keeps 15 s, as
+  it may be a write. After one Fantrax timeout, every `leagueCache` read fails at once for 10 s
+  (`FANTRAX_REST_MS`, `apps/companion/app/fantraxRest.ts`), so a page's dependent reads cost one wait, not one each.
 - Retry only idempotent requests, and only on 429, 502–504 and quick network errors; never a
   timeout. `Retry-After` is honoured up to a cap.
 - A failure is a `ProviderError` of kind `refused` (an envelope, or a 4xx we model),

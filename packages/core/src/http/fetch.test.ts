@@ -101,6 +101,18 @@ describe("politeFetch on a failed connection", () => {
     expect(count.calls).toBe(3);
   });
 
+  it("abandons an attempt at a caller's own deadline, shorter than the shared one", async () => {
+    vi.stubGlobal("fetch", (_url: string, init: RequestInit) =>
+      new Promise((_, reject) => init.signal?.addEventListener("abort", () => reject(init.signal?.reason))));
+    onTestFinished(() => {
+      vi.unstubAllGlobals();
+    });
+    const started = Date.now();
+    const error = await politeFetch("https://example.test/", {}, { timeoutMs: 20 }).catch((e: unknown) => e);
+    expect(error).toMatchObject({ name: "ProviderError", code: "TIMEOUT" });
+    expect(Date.now() - started).toBeLessThan(1_000);
+  });
+
   it("does not retry a timeout, and says it was one", async () => {
     vi.useFakeTimers();
     const count = serve(timedOut, fine);

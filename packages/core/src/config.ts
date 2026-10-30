@@ -76,6 +76,9 @@ export const HTTP_BODY_SAMPLE_CHARS = 120;
 /** How long one provider request may take before it is abandoned; the 1.3 MB bootstrap fits. */
 export const FETCH_TIMEOUT_MS = 15_000;
 
+/** How long one Fantrax read may take: its heaviest, the whole pool's stats, answered in 1.2 s (30 Oct 2026). */
+export const FANTRAX_READ_TIMEOUT_MS = 6_000;
+
 /** How long a model call may take. A whole column is minutes, not seconds. */
 export const MODEL_TIMEOUT_MS = 600_000;
 

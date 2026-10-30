@@ -28,15 +28,17 @@ import { shortName } from "../teamNames";
 export const metadata = titled(PAPER_NAME);
 
 export default async function GazettePage() {
-  const mine = await readerTeamId();
-  const paper = await edition(mine);
-  // The three tables, from reads the page already makes, and the calendar that names the lock's gameweek.
-  const [draft, football, scorers, calendar] = await Promise.all([
-    draftRows(mine),
+  // Every read at once: none needs another's answer, and a Fantrax that hangs would cost each its wait in turn.
+  // The tables come from reads the page already makes, and the calendar names the lock's gameweek.
+  const [mine, paper, draftTable, football, scorers, calendar] = await Promise.all([
+    readerTeamId(),
+    edition(),
+    draftRows(),
     footballRows(),
     scorerRows(),
     readCalendar(),
   ]);
+  const draft = draftTable.map((row) => ({ ...row, yours: row.key === mine }));
   // One club lookup for the whole page.
   const clubs = paper.snapshot ? clubById(paper.snapshot) : new Map();
   // Fantrax's lock is by period: the reader gets the gameweek it opens, or no number where the calendar cannot say.
@@ -132,7 +134,7 @@ export default async function GazettePage() {
           {paper.eleven ? (
             <TeamOfTheWeek
               eleven={paper.eleven}
-              mine={paper.mine}
+              mine={mine}
               partial={paper.partial}
               fielded={paper.fielded}
             />

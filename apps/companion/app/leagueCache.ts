@@ -3,6 +3,7 @@ import { FANTRAX_LEAGUE_ID, type ProviderError } from "@epl/core";
 import { PAGE_REVALIDATE } from "./config";
 import { logFallback, orDegraded, refusedAs } from "./refusals";
 import { singleFlight } from "./singleFlight";
+import { leagueRest } from "./fantraxRest";
 
 // One league read, cached for everybody. The key and the tag both carry the league id, so the swap
 // cannot serve one league's entry to the other; nothing about who is asking may cross into a read.
@@ -18,7 +19,7 @@ export function leagueCache<A extends unknown[], R>(
   /** How long it may be held. Defaults to the page's own window; only a final answer earns longer. */
   revalidate: number = PAGE_REVALIDATE,
 ): (...args: A) => Promise<R> {
-  const cached = unstable_cache(singleFlight(read), [key, FANTRAX_LEAGUE_ID], {
+  const cached = unstable_cache(singleFlight(leagueRest(read)), [key, FANTRAX_LEAGUE_ID], {
     revalidate,
     tags: [leagueTag(key)],
   });

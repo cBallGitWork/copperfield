@@ -8,12 +8,15 @@ export default function Nothing({
   code,
   page = false,
   children,
+  action,
 }: {
   title: string;
   code?: string;
   /** No title bar above it, as on the 404: its title is the page's h1. Under a bar it is an h2, the bar's h1 stands. */
   page?: boolean;
   children?: React.ReactNode;
+  /** The one thing to press, under the words. */
+  action?: React.ReactNode;
 }) {
   const Head = page ? "h1" : "h2";
   return (
@@ -23,6 +26,7 @@ export default function Nothing({
         <Head className="font-chrome text-2xl font-bold tracking-tight">{title}</Head>
         {children ? <p className="mx-auto max-w-xs text-sm text-muted">{children}</p> : null}
       </div>
+      {action}
     </div>
   );
 }

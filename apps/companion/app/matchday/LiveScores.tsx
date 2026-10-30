@@ -24,6 +24,7 @@ import { fixtureGoals } from "./fixtureGoals";
 import { dayStep, matchDays } from "./scoreDay";
 import { now } from "../clock";
 import ShareButton from "./ShareButton";
+import PageFailed from "../components/league/PageFailed";
 import { LIVE } from "../components/shell/sections";
 import { clubPlaces } from "../prem/places";
 import { placings } from "../league/placings";
@@ -36,6 +37,7 @@ export default async function LiveScores({
   snapshot,
   season,
   drafted,
+  silent,
   mine,
   day: asked,
 }: {
@@ -43,6 +45,8 @@ export default async function LiveScores({
   /** The whole season's fixtures, which the real table is built from. */
   season: Fixture[];
   drafted: ReadableSquads | null;
+  /** The league did not answer, so its ties are missing rather than none. */
+  silent: boolean;
   mine: string | null;
   /** The match day the address asks for. */
   day: string | undefined;
@@ -96,6 +100,7 @@ export default async function LiveScores({
         asOf={asOf}
         goals={fixtureGoals(lines, shown)}
       />
+      {silent ? <PageFailed>Draft scores are not available right now.</PageFailed> : null}
       {/* The league's ties as a picture for the group (Craig, 19 Oct 2026), under the list it draws. */}
       {ties.length > 0 ? <ShareButton href={SHARE_PICTURE} name={`draft-gameweek-${snapshot.gameweek}.png`} /> : null}
     </>

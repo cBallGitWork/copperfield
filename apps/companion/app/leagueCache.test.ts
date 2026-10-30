@@ -68,6 +68,18 @@ describe("leagueCache", () => {
     const cached = leagueCache("squads", failing(new TypeError("cannot read teams of undefined")), unavailable);
     await expect(cached(6)).rejects.toThrow(TypeError);
   });
+
+  // 30 Oct 2026: with Fantrax hanging, `/` asked the reader's team, then the edition, then the tables, 15 s each.
+  it("degrades a second cold read at once after Fantrax timed out, rather than wait out a deadline of its own", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(0);
+    const hung = new ProviderError("TIMEOUT", "www.fantrax.com /fxea/general/getLeagueInfo → TIMEOUT", "unreachable");
+    expect(await leagueCache("league-described", failing(hung), unavailable)(6)).toEqual({ unavailable: "TIMEOUT in 6" });
+    const rosters = vi.fn(async (gameweek: number): Promise<object> => ({ gameweek }));
+    expect(await leagueCache("squads", rosters, unavailable)(6)).toEqual({ unavailable: "TIMEOUT in 6" });
+    expect(rosters).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
 });
 
 describe("leagueRead", () => {

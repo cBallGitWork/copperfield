@@ -37,7 +37,7 @@ beforeEach(() => {
 describe("the paper's tables", () => {
   it("name a team by its short name, as Team of the Week beside them does", async () => {
     expect((await scorerRows()).map((row) => row.detail)).toEqual(["Atletico", "Beef"]);
-    expect((await draftRows(null)).map((row) => row.name)).toEqual(["Atletico", "Beef"]);
+    expect((await draftRows()).map((row) => row.name)).toEqual(["Atletico", "Beef"]);
   });
 
   // 20 Oct 2026: Raya and Calafiori, both on 41, printed 5 and 6, their order settled by spelling.
