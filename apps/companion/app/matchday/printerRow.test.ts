@@ -29,8 +29,12 @@ const row = (over: Partial<PrinterLine>) => printerRow(line(over), fixtures, clu
 
 describe("printerRow", () => {
   it("prints a whistle as its letters and the match, the score once there is one", () => {
-    expect(row({ kind: "kick-off", score: { home: 0, away: 0 } })).toMatchObject({ clock: "KO", word: "Kick-off", where: "Arsenal v Everton" });
-    expect(row({ kind: "full-time", score: { home: 2, away: 1 } })).toMatchObject({ clock: "FT", where: "Arsenal 2–1 Everton" });
+    expect(row({ kind: "kick-off", score: { home: 0, away: 0 } })).toMatchObject({
+      clock: "KO",
+      word: "Kick-off",
+      match: { home: "Arsenal", score: null, away: "Everton" },
+    });
+    expect(row({ kind: "full-time", score: { home: 2, away: 1 } })).toMatchObject({ clock: "FT", match: { home: "Arsenal", score: "2–1", away: "Everton" } });
   });
 
   it("prints a goal with its minute, scorer, assister and the score it made", () => {
@@ -39,17 +43,27 @@ describe("printerRow", () => {
       word: "Goal",
       man: { name: "Saka", ownerTeamId: "t1" },
       second: { name: "Pickford", ownerTeamId: null },
-      where: "Arsenal 1–0 Everton",
+      match: { home: "Arsenal", score: "1–0", away: "Everton" },
     });
   });
 
   it("names a booked or changed man's club, and a sending-off is a loss", () => {
-    expect(row({ kind: "sent-off", man: 20 })).toMatchObject({ word: "Sent off", loss: true, where: "EVE" });
+    expect(row({ kind: "sent-off", man: 20 })).toMatchObject({ word: "Sent off", loss: true, club: "EVE", match: null });
+    expect(row({ kind: "on", man: 10 })).toMatchObject({ word: "On", club: "ARS" });
   });
 
-  it("prints a count line with the dash for its minute and no word", () => {
+  it("prints a count line with no clock and no word: it sits under its whistle or its match's heading", () => {
     const counts = row({ kind: "tally", minute: null, man: 10, counts: [{ name: "DefCon", value: "1" }, { name: "Saves", value: null }] });
-    expect(counts).toMatchObject({ clock: "—", word: null, man: { name: "Saka" } });
+    expect(counts).toMatchObject({ clock: "", word: null, man: { name: "Saka" } });
+  });
+
+  it("heads a match in play with the match and its score", () => {
+    expect(row({ kind: "in-play", minute: null, score: { home: 1, away: 0 } })).toMatchObject({
+      clock: "",
+      word: "In play",
+      live: true,
+      match: { home: "Arsenal", score: "1–0", away: "Everton" },
+    });
   });
 
   it("prints the dash for a man the snapshot cannot name", () => {

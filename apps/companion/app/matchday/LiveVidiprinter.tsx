@@ -50,6 +50,7 @@ export default async function LiveVidiprinter({
   });
   const owners = league.owners ?? new Map();
   const lines = vidiprinter({
+    now: now().getTime(),
     goals: creditAssists(goals, snapshot, stats, streams, kinds, codes),
     moments,
     fixtures: round,

@@ -11,7 +11,7 @@ import {
   nextDeadline,
 } from "@epl/core";
 import type { ReactNode } from "react";
-import { liveNow, liveOpen, roundFigures, seasonFixtures } from "../football";
+import { liveNow, liveOpen, liveOpened, roundFigures, seasonFixtures } from "../football";
 import RoundWord from "../components/league/RoundWord";
 import PageHeader from "../components/shell/PageHeader";
 import TabStrip from "../components/shell/TabStrip";
@@ -91,7 +91,8 @@ export default async function MatchdayPage({
   if (leading) {
     const top = await gameweekBoards(snapshot, await roundFigures(snapshot.gameweek), period);
     view = <TopStats boards={top.boards} stat={query.stat} teamNames={top.teamNames} reader={mine} exit={exit} />;
-  } else if (during && printing) {
+  } else if (printing && liveOpened(snapshot)) {
+    // The round's lines stay up after its last whistle, until Live turns to the next gameweek.
     view = <LiveVidiprinter snapshot={snapshot} drafted={drafted} mine={mine} day={query.day} />;
   } else if (during) {
     view = <LiveScores snapshot={snapshot} season={season} drafted={drafted} silent={leagueSilent(squads)} mine={mine} day={query.day} />;

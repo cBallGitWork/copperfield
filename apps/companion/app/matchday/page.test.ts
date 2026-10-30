@@ -17,6 +17,7 @@ const r = vi.hoisted(() => {
     snapshot,
     squads,
     during: true,
+    opened: true,
     state: null as string | null,
     fn: {
       getLeagueSquads: vi.fn(async () => ({ ok: squads })),
@@ -59,6 +60,7 @@ vi.mock("../football", () => ({
   liveNow: async () => r.snapshot,
   seasonFixtures: async () => [],
   liveOpen: () => r.during,
+  liveOpened: () => r.opened,
   roundFigures: r.fn.roundFigures,
   speaksForNow: () => true,
   takenLately: () => true,
@@ -125,6 +127,7 @@ const scoresOnly = [
 beforeEach(() => {
   vi.clearAllMocks();
   r.during = true;
+  r.opened = true;
   r.state = null;
 });
 
@@ -158,6 +161,16 @@ describe("Live's reads", () => {
     expect(html).toContain("x-vidiprinter");
     expect(html).not.toContain("x-scores");
     for (const read of scoresOnly) expect(read).not.toHaveBeenCalled();
+  });
+
+  // GW8 replay, 30 Oct 2026: 15 min after the last whistle the vidiprinter said "No football today".
+  it("keeps the vidiprinter after the gameweek's last whistle, until Live turns to the next", async () => {
+    r.during = false;
+    r.state = "final";
+    expect(await render({ view: "vidiprinter" })).toContain("x-vidiprinter");
+    expect(await render()).toContain("x-between");
+    r.opened = false;
+    expect(await render({ view: "vidiprinter" })).toContain("x-between");
   });
 
   it("marks nothing when the league cannot be read", async () => {
