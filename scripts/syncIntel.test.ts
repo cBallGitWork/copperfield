@@ -55,3 +55,40 @@ PR=$(retry "gh pr create" open_pr); echo "pr $PR"`);
     expect(r.stdout).not.toContain("gh pr create failed");
   });
 });
+
+/** Sources the helpers with OPEN_ALERTS unset and gh an exported function that answers `gh`'s exit status. */
+function sourced(ghStatus: number, body: string): string {
+  const script = `set +e; source "${SCRIPT}" weekly; set +eE; trap - ERR EXIT; rm -rf "$OUT"\n${body}`;
+  return spawnSync("bash", ["-c", script], {
+    encoding: "utf8",
+    env: {
+      HOME: home,
+      SYNC_INTEL_LIB: "1",
+      GH_TOKEN: "test",
+      RETRY_WAIT: "0",
+      INTEL_REPO: "o/r",
+      INTEL_LOG: join(home, "intel.log"),
+      DRY_RUN: "1",
+      "BASH_FUNC_gh%%": `() { [ "$1" = issue ] && echo "alert: intel-cups"; return ${ghStatus}; }`,
+    },
+  }).stdout;
+}
+
+describe("the open alerts", () => {
+  it("when GitHub never answers, the catch-up runs and a soft ok is still sent", () => {
+    const out = sourced(1, `echo "unknown $ALERTS_UNKNOWN"; catch_up_due && echo due; soft intel-cups ok fine`);
+    expect(out).toContain("unknown 1\ndue");
+    expect(out).toContain("would alert intel-cups ok");
+  });
+
+  it("when GitHub answers, the catch-up waits for its own alert and ok goes only to an open one", () => {
+    const out = sourced(0, `echo "unknown $ALERTS_UNKNOWN"; catch_up_due || echo idle; soft intel-cups ok a; soft intel-history ok b`);
+    expect(out).toContain("unknown 0\nidle");
+    expect(out).toContain("would alert intel-cups ok");
+    expect(out).not.toContain("intel-history");
+  });
+
+  it("names the repo off INTEL_REPO", () => {
+    expect(sourced(0, `echo "repo $REPO"`)).toContain("repo o/r");
+  });
+});
