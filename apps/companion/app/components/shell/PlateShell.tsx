@@ -4,9 +4,10 @@ import { plateOn } from "@epl/core";
 import { SCREEN_TALL } from "./FootFrame";
 import PageHeader from "./PageHeader";
 import Pinned from "./Pinned";
+import { PINNED_TOP } from "@/app/desk";
 
-// The frame a screen about a subject wears (a team, a club, a player): his colour on the bar, his tabs under it on the
-// desk and locked at the foot of a phone, and every table inside in his colours. `plateOn` picks the ink that survives the fill.
+// The frame a screen about a subject wears (a team, a club, a player): his colour on the bar, his tabs under it, locked
+// with it to the top of a phone, and every table inside in his colours. `plateOn` picks the ink that survives the fill.
 
 export default function PlateShell({
   colours,
@@ -44,15 +45,19 @@ export default function PlateShell({
       }
     >
       {/* Off a phone's screen, never out of its outline: the bar holds the page's h1. */}
-      {phoneBar ? header : <div className="max-lg:sr-only">{header}</div>}
-      {/* Last on a phone, docked above the thumb rail; the foot of a short screen, as `FootFrame`'s foot is. */}
-      <Pinned edge="foot" className={PINNED_FOOT}>
-        {tabs}
-      </Pinned>
+      {/* A bar with a way back locks the tabs inside its own pin; any other locks them alone, to the top of a phone. */}
+      {phoneBar && back !== undefined ? (
+        <PageHeader title={title} plate={plate} back={back} under={tabs} />
+      ) : (
+        <>
+          {phoneBar ? header : <div className="max-lg:sr-only">{header}</div>}
+          <Pinned edge="top" className={PINNED_TOP}>
+            {tabs}
+          </Pinned>
+        </>
+      )}
       {children}
     </div>
   );
 }
 
-/** The tabs' place on a phone: after the body, held above the thumb rail; opaque so the page scrolls under them. */
-const PINNED_FOOT = "max-lg:order-last max-lg:sticky max-lg:bottom-[var(--thumbrail)] max-lg:z-20 max-lg:mt-auto max-lg:bg-bg";

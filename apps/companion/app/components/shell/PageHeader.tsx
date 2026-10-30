@@ -10,6 +10,7 @@ export default function PageHeader({
   competition = false,
   plate,
   back,
+  under,
   children,
 }: {
   title: string;
@@ -24,6 +25,8 @@ export default function PageHeader({
   /** Where the phone's back plate goes with no history; absent draws none, as on a tab's own page. A screen with a
    *  way back locks its bar to the top of a phone, so the way back stays under the thumb down a long page. */
   back?: string;
+  /** Locks under the bar with it on a phone, a subject's tabs; drawn under the bar when there is no way back. */
+  under?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   const bar = competition ? (
@@ -60,6 +63,7 @@ export default function PageHeader({
     return (
       <header>
         {bar}
+        {under}
         <Sub>{sub}</Sub>
         {children}
       </header>
@@ -67,7 +71,7 @@ export default function PageHeader({
   // `BackBar` pins in the page's own column, not a header's, which ends with the header and would carry the bar away.
   return (
     <>
-      <BackBar back={back}>
+      <BackBar back={back} under={under}>
         <div className="min-w-0 flex-1">{bar}</div>
       </BackBar>
       {/* The bar alone locks: the line under it scrolls away with the page. */}
