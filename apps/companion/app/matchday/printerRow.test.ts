@@ -60,9 +60,9 @@ describe("printerRow", () => {
   });
 
   it("prints a change as the man coming on and the man taken off, with his counts and their points", () => {
-    const change = row({ kind: "injury", man: 20, second: 10, counts: [{ name: "DefCon", value: "1", points: 2 }] });
+    const change = row({ kind: "injury", man: 20, second: 10, counts: [{ name: "DefCon", value: "1", points: 2, sort: "defcon" }] });
     expect(change).toMatchObject({ word: "Injury", second: { word: "Off", man: { name: "Saka" } } });
-    expect(change.counts).toEqual([{ name: "DefCon", value: "1", points: "+2" }]);
+    expect(change.counts).toEqual([{ name: "DefCon", value: "1", points: "+2", sort: "defcon" }]);
   });
 
   it("prints a man's full-time counts with no word and no minute: they sit under the whistle", () => {

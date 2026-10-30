@@ -28,6 +28,9 @@ const GLYPH: Record<PrinterKind, EventGlyph | null> = {
   tally: null,
 };
 
+/** A count's glyph: the match report's shield for defensive work, its hand for a keeper's (Craig, 30 Oct 2026). */
+const COUNT_GLYPH: Record<NonNullable<PrinterRow["counts"][number]["sort"]>, EventGlyph> = { defcon: "block", keeper: "save" };
+
 /** The event's ink, as the match report's: a goal a gain, a card its colour, a loss red, a change the pitch's sub amber. */
 const TONE: Record<PrinterKind, string> = {
   "kick-off": "text-mid",
@@ -120,13 +123,15 @@ function Row({ row, mine }: { row: PrinterRow; mine: string | null }) {
           )}
         </span>
         {row.counts.length === 0 ? null : (
-          <span className={`${TEXT} text-muted`}>
+          // Every count a flex item on one centre line, so an iconed count and a plain one sit level.
+          <span className={`flex flex-wrap items-center gap-x-1.5 ${TEXT} text-muted`}>
             {row.counts.map((count, at) => (
-              <span key={count.name} className="whitespace-nowrap">
-                {at === 0 ? null : " · "}
+              <span key={count.name} className="inline-flex items-center gap-1 whitespace-nowrap">
+                {at === 0 ? null : <span aria-hidden>·</span>}
+                {count.sort === null ? null : <EventIcon glyph={COUNT_GLYPH[count.sort]} />}
                 {count.name}
-                {count.value === null ? null : <span className="numeric text-ink"> {count.value}</span>}
-                <span className="numeric font-bold text-info"> {count.points}</span>
+                {count.value === null ? null : <span className="numeric text-ink">{count.value}</span>}
+                <span className="numeric font-bold text-info">{count.points}</span>
               </span>
             ))}
           </span>

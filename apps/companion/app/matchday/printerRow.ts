@@ -1,4 +1,4 @@
-import { type Club, type Fixture, type FootballPlayer, type PlayerOwner, type PrinterKind, type PrinterLine, DASH, signed } from "@epl/core";
+import { type Club, type Fixture, type FootballPlayer, type PlayerOwner, type PrinterCount, type PrinterKind, type PrinterLine, DASH, signed } from "@epl/core";
 
 // One vidiprinter line in words: what happened, the men with their clubs, holders and league points.
 
@@ -33,7 +33,7 @@ export interface PrinterRow {
   /** Both sides, on a whistle. */
   sides: [PrinterSide, PrinterSide] | null;
   /** The league's counts in its own words, each with what he did and its points. */
-  counts: { name: string; value: string | null; points: string }[];
+  counts: { name: string; value: string | null; points: string; sort: PrinterCount["sort"] }[];
 }
 
 const WORDS: Record<PrinterKind, string | null> = {
@@ -101,6 +101,6 @@ export function printerRow(
           { club: away, name: away?.shortName ?? DASH, score: score?.away ?? null },
         ]
       : null,
-    counts: line.counts.map((count) => ({ name: count.name, value: count.value, points: signed(count.points) })),
+    counts: line.counts.map((count) => ({ name: count.name, value: count.value, points: signed(count.points), sort: count.sort })),
   };
 }
