@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 9,
-    "exportedAt": "2026-10-30T14:28:34.094Z",
+    "exportedAt": "2026-10-30T15:23:59.080Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-30T14:28:34.094Z",
+  "fetchedAt": "2026-10-30T15:23:59.080Z",
   "source": "rotowire",
   "clubs": {
     "CHE": {
@@ -78,6 +78,10 @@
         {
           "code": 498444,
           "status": "QUES"
+        },
+        {
+          "code": 622758,
+          "status": "OUT"
         },
         {
           "code": 463936,
