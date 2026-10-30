@@ -64,7 +64,8 @@ export default async function StandingsPage({ searchParams }: { searchParams: Se
   const places = printedPlaces(rows);
 
   return (
-    <LeagueShell current="table" teams={info?.teams.length} flush>
+    // Every team's row is drawn, so the table is its own height: a floor left board under the last row.
+    <LeagueShell current="table" rows={0} flush>
       {/* A table wider than the phone scrolls sideways inside its own box. */}
       <StandingsTable
         columns={COLUMNS}
