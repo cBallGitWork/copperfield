@@ -23,16 +23,23 @@ export default function FixtureRun({
 }) {
   // A club with nothing left has an empty run, and a heading over no blocks is a claim that something is missing.
   if (run.length === 0) return null;
+  const flat = oneFigure(run, minutes);
 
   return (
     <Section title="Next up" aside={`xMins as of ${asOf}`}>
       <ol className="flex items-stretch gap-1">
-        {/* Each row's word, in the lines' own heights, so the cyan run is named on a phone (review M30). */}
+        {/* Each row's word, in the lines' own heights, so the cyan run is named on a phone (review M30); a run of
+            one figure prints it here, once (review D4). */}
         <li className="flex shrink-0 flex-col gap-1">
           <span className="h-6" aria-hidden />
           <span className="min-h-7" />
-          <span className={`block ${ROW_FIGURE}`}>
+          <span className={`flex items-baseline gap-1 ${ROW_FIGURE}`}>
             <span className={MINOR_LABEL}>xMins</span>
+            {flat === null ? null : (
+              <span className="numeric font-bold text-info" title="Expected minutes, every gameweek in the run">
+                {flat}
+              </span>
+            )}
           </span>
         </li>
         {run.map((against, at) => {
@@ -54,7 +61,7 @@ export default function FixtureRun({
                 <span className="truncate">{against.club.shortName}</span>
                 <span className="text-3xs font-normal opacity-80">{venueMark(against.home).replace(/[()]/g, "")}</span>
               </span>
-              {repeat || gw === null ? null : (
+              {repeat || gw === null || flat !== null ? null : (
                 <span className={`numeric text-center font-bold text-info ${ROW_FIGURE}`} title={`Expected minutes, gameweek ${gw}`}>
                   {minutes.get(gw) ?? DASH}
                 </span>
@@ -65,4 +72,11 @@ export default function FixtureRun({
       </ol>
     </Section>
   );
+}
+
+/** The one xMins every gameweek of the run shares, or null when the run moves or has a gap. */
+export function oneFigure(run: readonly Opposition[], minutes: ReadonlyMap<number, number | null>): number | null {
+  const figures = new Set(run.map((against) => (against.fixture.gameweek === null ? null : minutes.get(against.fixture.gameweek) ?? null)));
+  const [only] = figures;
+  return run.length > 1 && figures.size === 1 && only !== undefined && only !== null ? only : null;
 }
