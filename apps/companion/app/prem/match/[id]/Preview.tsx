@@ -67,18 +67,21 @@ function SideBlock({
           : `${record.goalsFor}–${record.goalsAgainst} in ${record.played}`}
       </span>
 
-      {/* Oldest first, as the season ran: the last `FORM_GAMES` at most. */}
-      <span className={`flex gap-1 ${align === "end" ? "flex-row-reverse" : ""}`}>
-        {form.length === 0 ? (
-          <span className={QUIET_FIGURE}>{DASH}</span>
-        ) : (
-          form.map((result, at) => (
-            <span key={at} className={`numeric text-2xs font-bold ${TONE[result]}`}>
-              {result}
-            </span>
-          ))
-        )}
-      </span>
+      {/* Oldest first, as the season ran: the last `FORM_GAMES` at most, captioned so it is not read as the record's games. */}
+      {form.length === 0 ? (
+        <span className={QUIET_FIGURE}>{DASH}</span>
+      ) : (
+        <span className="flex items-baseline gap-1.5">
+          <span className={QUIET_FIGURE}>Last {form.length}</span>
+          <span className={`flex gap-1 ${align === "end" ? "flex-row-reverse" : ""}`}>
+            {form.map((result, at) => (
+              <span key={at} className={`numeric text-2xs font-bold ${TONE[result]}`}>
+                {result}
+              </span>
+            ))}
+          </span>
+        </span>
+      )}
 
       <span className="sr-only">{club?.name ?? "Club unknown"}</span>
     </div>

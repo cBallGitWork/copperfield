@@ -20,8 +20,8 @@ export default function Yours({ row, children }: { row: ReactNode; children: Rea
   );
 }
 
-/** His count beside a club's name: a yours-yellow pill under a thumb, "2 yours" from `lg`. A sibling of the name's link,
- *  never inside it, so neither tap swallows the other. */
+/** His count beside a club's name: a yours-yellow pill under a thumb (32px wide from 390; wider cuts a name), "2 yours"
+ *  from `lg`. A sibling of the name's link, never inside it, so neither tap swallows the other. */
 export function YoursToggle({ count }: { count: number }) {
   const state = useContext(Open);
   if (state === null) return null;
@@ -32,7 +32,7 @@ export function YoursToggle({ count }: { count: number }) {
       aria-controls={state.id}
       onClick={state.flip}
       aria-label={`${count} yours`}
-      className="numeric flex min-h-9 shrink-0 cursor-pointer items-center gap-0.5 px-1 text-2xs font-bold text-accent hover:brightness-110 max-[359px]:px-0 lg:min-h-7 lg:px-0"
+      className="numeric flex min-h-9 shrink-0 cursor-pointer items-center justify-center gap-0.5 px-1 text-2xs font-bold text-accent hover:brightness-110 max-[359px]:px-0 min-[390px]:min-w-8 lg:min-h-7 lg:min-w-0 lg:px-0"
     >
       <span aria-hidden className="min-w-4 bg-accent px-1 text-center leading-4 text-bg max-[359px]:px-0.5 lg:hidden">
         {count}

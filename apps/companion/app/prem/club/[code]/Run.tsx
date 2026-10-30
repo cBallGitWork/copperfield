@@ -13,7 +13,7 @@ import { matchHref } from "../../match/[id]/matchRoutes";
 import { hasScore } from "../../score";
 
 // One club's season, league and cups, opened on the next match (`runOrder`): a date, the opponent once, H/A, the competition, the score.
-// A live score keeps its ink: a running score with no tense reads as a final one.
+// A live score keeps its ink: a running score with no tense reads as a final one. A league row is one link, to its match.
 
 interface Cells {
   key: string;
@@ -61,10 +61,11 @@ export default function Run({
 function runRow(entry: RunEntry, club: Club, clubs: Map<number, Club>, byCode: Map<number, Club>) {
   const row = entry.kind === "league" ? leagueCells(entry.fixture, club, clubs) : cupCells(entry.tie, byCode);
   return (
-    <tr key={row.key} className={`cm-row ${ROW_HOVER}`}>
+    // `relative` holds a league row's link, stretched over every cell.
+    <tr key={row.key} className={`cm-row relative ${ROW_HOVER}`}>
       {/* The date in the club's own colour: `ClubShell` scopes `--cm-index` to this club. */}
       <IndexCell wide width="" className="whitespace-nowrap">{kickoffAt(row.kickoff, londonDayAndDate)}</IndexCell>
-      <td className="numeric whitespace-nowrap px-1 text-3xs text-faint lg:text-2xs">
+      <td className="numeric whitespace-nowrap px-1 text-xs text-faint">
         {row.kickoff === null ? "" : londonTime(row.kickoff)}
       </td>
       <td className="w-full max-w-0 px-1">{row.opponent}</td>
@@ -75,7 +76,7 @@ function runRow(entry: RunEntry, club: Club, clubs: Map<number, Club>, byCode: M
   );
 }
 
-/** A league fixture: the opponent and the score both open a page. */
+/** A league fixture: the whole row opens the match, through the opponent's link stretched over it. */
 function leagueCells(fixture: Fixture, club: Club, clubs: Map<number, Club>): Cells {
   const home = fixture.homeClubId === club.id;
   const opponent = clubs.get(home ? fixture.awayClubId : fixture.homeClubId);
@@ -86,29 +87,23 @@ function leagueCells(fixture: Fixture, club: Club, clubs: Map<number, Club>): Ce
   return {
     key: `league-${fixture.id}`,
     kickoff: fixture.kickoff,
-    opponent:
-      opponent === undefined ? (
-        <span className="text-sm text-faint">{DASH}</span>
-      ) : (
-        <Link href={clubHref(opponent.code)} className={ROW_LINK}>
-          <ClubLabel club={opponent} crest={{ px: CREST_PX, className: `${CREST} object-contain` }} />
-        </Link>
-      ),
-    venue: home ? "H" : "A",
-    competition: COMPETITION_NAME,
-    score: (
-      <Link
-        href={matchHref(fixture.id, "overview")}
-        className={`${TAP_ROW} justify-center hover:underline`}
-      >
-        {!played ? (
-          <Absent />
+    opponent: (
+      <Link href={matchHref(fixture.id, "overview")} className={`${ROW_LINK} after:absolute after:inset-0`}>
+        {opponent === undefined ? (
+          <span className="text-sm text-faint">{DASH}</span>
         ) : (
-          <span className={fixture.status === "live" ? "text-live" : undefined}>
-            <Scoreline home={mine} away={theirs} />
-          </span>
+          <ClubLabel club={opponent} crest={{ px: CREST_PX, className: `${CREST} object-contain` }} />
         )}
       </Link>
+    ),
+    venue: home ? "H" : "A",
+    competition: COMPETITION_NAME,
+    score: !played ? (
+      <Absent />
+    ) : (
+      <span className={fixture.status === "live" ? "text-live" : undefined}>
+        <Scoreline home={mine} away={theirs} />
+      </span>
     ),
   };
 }

@@ -462,7 +462,8 @@ is `--color-mid`, because the thing being printed is a minute.
 
 **Ordered down the pitch, keeper to attack** (Craig: *"ordered by position/match
 line up though (strikers at bottom etc)"*), which is the order `cm9900/25.jpg`
-runs its slot strip. The bench sits under the eleven.
+runs its slot strip. The bench sits under the eleven, headed **Subs** in the quiet label a club's run heads its Played
+with (30 Oct 2026, #202).
 
 **Every row is a link** — a tap row's 36 under a thumb (21 Oct 2026) and a control's 36 on
 the desk, not `.cm-row`'s 28. `tapfit` failed all 32 names on the first build at
@@ -494,7 +495,7 @@ that is about a player rather than about a tally.
 
 | State | Test | Overview | Players |
 |---|---|---|---|
-| Upcoming | `status === "upcoming"` | `Preview` — each side's **home record against the other's away**, its place, its last five | **both clubs' squads**, keeper to attack, to the team sheet's standards — the Fantrax tile, the name opening his card, his `StateMark` and wash, the holder tag, his real position and xMins; one club at a time on a phone |
+| Upcoming | `status === "upcoming"` | `Preview` — each side's **home record against the other's away**, its place, its last five captioned `Last 5`, so five letters are not read against a record of four (#202) | **both clubs' squads**, keeper to attack, to the team sheet's standards — the Fantrax tile, the name opening his card, his `StateMark` and wash, the holder tag, his real position and xMins; one club at a time on a phone |
 | Live | `status === "live"` **and** `speaksForNow` | the scoresheet so far, `Live 45′` | who has appeared so far |
 | Finished | `finished` | `FT` | the appearance list |
 | No round | `gameweek === null` | no sheet; the fixture still renders | `TabEmpty` |

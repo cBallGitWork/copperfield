@@ -210,7 +210,7 @@ export default function ShotMap({
                     aria-pressed={picked === at}
                     // The assister under the shooter on a phone, beside him on a desk, so neither name is cut to three letters.
                     // A list row, so `.cm-row` gives it the desk's 28px.
-                    className="cm-row flex min-h-9 w-full min-w-0 flex-col px-2 py-1 text-left lg:flex-row lg:items-baseline lg:gap-1.5"
+                    className="cm-row flex min-h-9 w-full min-w-0 flex-col justify-center px-2 py-1 text-left lg:flex-row lg:items-baseline lg:justify-start lg:gap-1.5"
                   >
                     <span className="min-w-0 truncate font-chrome text-sm font-bold">
                       {shot.name}
