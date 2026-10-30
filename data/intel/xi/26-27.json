@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 9,
-    "exportedAt": "2026-10-30T15:23:59.080Z",
+    "exportedAt": "2026-10-30T16:22:25.605Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-30T15:23:59.080Z",
+  "fetchedAt": "2026-10-30T16:22:25.605Z",
   "source": "rotowire",
   "clubs": {
     "CHE": {
@@ -290,7 +290,7 @@
           "prob": 0.9
         },
         {
-          "code": 509416,
+          "code": 592984,
           "prob": 0.9
         },
         {
@@ -302,7 +302,7 @@
           "prob": 0.9
         },
         {
-          "code": 532529,
+          "code": 509416,
           "prob": 0.9
         },
         {
@@ -937,7 +937,7 @@
           "prob": 0.9
         },
         {
-          "code": 466525,
+          "code": 153682,
           "prob": 0.9
         },
         {
@@ -956,11 +956,11 @@
           "status": "QUES"
         },
         {
-          "code": 466525,
+          "code": 200617,
           "status": "QUES"
         },
         {
-          "code": 200617,
+          "code": 466525,
           "status": "QUES"
         },
         {
@@ -1387,7 +1387,7 @@
           "prob": 0.9
         },
         {
-          "code": 499169,
+          "code": 466075,
           "prob": 0.9
         },
         {
@@ -1418,15 +1418,15 @@
       "lineup": "predicted",
       "absent": [
         {
+          "code": 466075,
+          "status": "QUES"
+        },
+        {
           "code": 204480,
           "status": "QUES"
         },
         {
           "code": 248857,
-          "status": "QUES"
-        },
-        {
-          "code": 466075,
           "status": "QUES"
         },
         {
@@ -1498,22 +1498,22 @@
           "prob": 0.9
         },
         {
-          "code": 538207,
+          "code": 216646,
           "prob": 0.9
         }
       ],
       "lineup": "predicted",
       "absent": [
         {
-          "code": 538207,
-          "status": "QUES"
-        },
-        {
           "code": 613221,
           "status": "QUES"
         },
         {
           "code": 547719,
+          "status": "QUES"
+        },
+        {
+          "code": 538207,
           "status": "QUES"
         },
         {
