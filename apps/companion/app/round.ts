@@ -3,6 +3,7 @@ import {
   type LeagueInfo,
   type PeriodGameweeks,
   fetchLeagueInfo,
+  leagueLimits,
   mapLeagueInfo,
   openingGameweek,
   periodGameweeks,
@@ -14,16 +15,23 @@ import { now } from "./clock";
 import { leagueCache } from "./leagueCache";
 import { type Unavailable, refusedAs, unavailable } from "./refusals";
 import { seasonKickoffs } from "./football";
+import limits from "../../../data/leagues/roster-limits.json";
 
 // The competition's own description of itself, and which round of it a screen is about.
 // Nothing here reads a roster: `squads.ts` imports this module, never the reverse.
 
-/** The competition's own description of itself, or its refusal with the tell: one read for every reader of the served
- *  league. Its key is new, as "league-info" and "schedule-info" held other shapes. */
-export const leagueOrRefusal = leagueCache("league-described",
+/** Its key is new, as "league-info" and "schedule-info" held other shapes. */
+const described = leagueCache("league-described",
   (): Promise<LeagueInfo | Unavailable> => refusedAs(fetchLeagueInfo(FANTRAX_LEAGUE_ID), unavailable, mapLeagueInfo),
   unavailable,
 );
+
+/** The competition's own description of itself, its roster carrying the formation floors on record, or its refusal
+ *  with the tell: one read for every reader of the served league. Floors join outside the cache, so no entry lacks them. */
+export async function leagueOrRefusal(): Promise<LeagueInfo | Unavailable> {
+  const info = await described();
+  return "unavailable" in info ? info : { ...info, roster: leagueLimits(info.roster, limits, FANTRAX_LEAGUE_ID) };
+}
 
 /** The same, or null when Fantrax refuses: no calendar then, so squads only, never an XI we cannot prove may be shown.
  *  No cache of its own, so it nests in none. */

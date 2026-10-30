@@ -6,7 +6,6 @@ import {
   byPositionDepth,
   datedKickoffs,
   fetchFixtures,
-  fetchLeagueInfo,
   fetchLiveScoringDay,
   fetchSeasonResults,
   fetchTeamRosterInfo,
@@ -14,13 +13,11 @@ import {
   headToHeads,
   isDated,
   clubById,
-  minimumsOf,
   judgePage,
   getFootballSnapshot,
   londonDayOf,
   mapBenchOrder,
   mapFixtures,
-  mapLeagueInfo,
   mapLiveScores,
   mapSeasonResults,
   matchupState,
@@ -39,8 +36,8 @@ import {
 } from "@epl/core";
 import derbies from "../../data/leagues/derbies.json";
 import ratingsFile from "../../data/ratings/26-27.json";
-import recordedLimits from "../../data/leagues/roster-limits.json";
 import { readProjections } from "../intel";
+import { readLeagueInfo } from "../leagueInfo";
 import { readScoring } from "../scoring";
 import { gatherRoundFacts } from "./facts";
 import { categoryIds, matchReads, slotWorth, tallies } from "./draftReads";
@@ -69,7 +66,7 @@ interface DraftDesk {
 }
 
 export async function draftDesk(gameweek: number): Promise<DraftDesk> {
-  const [snapshot, info, schedule] = await Promise.all([getFootballSnapshot(gameweek), fetchLeagueInfo(FANTRAX_LEAGUE_ID).then(mapLeagueInfo), fetchFixtures().then(mapFixtures)]);
+  const [snapshot, info, schedule] = await Promise.all([getFootballSnapshot(gameweek), readLeagueInfo(), fetchFixtures().then(mapFixtures)]);
   const covering = periodHoldingGameweek(info.scoringPeriods, datedKickoffs(schedule), gameweek);
   if (covering === undefined) throw new Error(`No Fantrax period covers gameweek ${gameweek}.`);
   const period = covering.period;
@@ -94,8 +91,7 @@ export async function draftDesk(gameweek: number): Promise<DraftDesk> {
   const ids = categoryIds(info);
   const slots = Object.keys(info.roster.maxActiveByPosition).sort(byPositionDepth);
   const worth = slotWorth(scoring, ids, reads.map((r) => r.raw), facts.teams, slots);
-  const min = minimumsOf(recordedLimits, FANTRAX_LEAGUE_ID);
-  const limits = { min: min ?? {}, max: info.roster.maxActiveByPosition };
+  const limits = { min: info.roster.minActiveByPosition, max: info.roster.maxActiveByPosition };
   const projections = readProjections();
   const clubs = clubById(snapshot);
 
@@ -104,7 +100,7 @@ export async function draftDesk(gameweek: number): Promise<DraftDesk> {
   const due = draftReportsDue(schedule, gameweek, new Date().toISOString()).length > 0;
   const notes = [
     `Returns by slot: ${slots.map((s) => `${s} ${worth.returns[s].map((w) => `${w.kind} ${w.worth}`).join(", ")}`).join("; ")}; a full match's minutes ${worth.appearance}.`,
-    `Eleven limits: most ${JSON.stringify(limits.max)}; fewest ${min === null ? "not recorded for this league" : JSON.stringify(min)}.`,
+    `Eleven limits: most ${JSON.stringify(limits.max)}; fewest ${Object.keys(limits.min).length === 0 ? "not recorded for this league" : JSON.stringify(limits.min)}.`,
     `Bench orders: ${[...orders.values()].filter((o) => o.by === "manager").length} of ${orders.size} set by the manager, the rest by total points.`,
     `Goal times read for ${goals.size} of ${fixtures.length} matches.`,
     `Due: ${due ? "gameweek" : "nothing yet; the gameweek's matches are not settled"}.`,

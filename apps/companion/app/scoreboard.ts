@@ -29,7 +29,6 @@ import { LIVE_REVALIDATE } from "./config";
 import { leagueCache } from "./leagueCache";
 import { orRefusal, tell } from "./refusals";
 import { leagueInfo } from "./round";
-import { rosterMinimums } from "./rosterMinimums";
 
 // The head-to-head board's reads and joins, kept out of the page.
 
@@ -101,7 +100,7 @@ async function afterSubs(
   if (info === null) return scores.map(([, score]) => ({ score, subs: [] }));
   const men = priced.flatMap(([, squad]) => squad);
   const read = { points: new Map(men.map((man) => [man.fantraxId, man.points])), minutes: minutesByMan(men, info.scoringCategories) };
-  const limits = { min: rosterMinimums(), max: info.roster.maxActiveByPosition };
+  const limits = { min: info.roster.minActiveByPosition, max: info.roster.maxActiveByPosition };
   return Promise.all(
     scores.map(async ([teamId, score]) => {
       const side = remaining.find((men) => men.teamId === teamId);

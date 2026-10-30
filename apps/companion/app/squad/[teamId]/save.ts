@@ -25,7 +25,6 @@ import { now, replayAt } from "../../clock";
 import { markStale } from "../../leagueCache";
 import { OPEN_ORDER_KEY } from "../../benchOrders";
 import { planningRound } from "../../round";
-import { rosterMinimums } from "../../rosterMinimums";
 import { signedTeamId } from "../../session";
 import { SQUADS_KEY, getLeagueSquads } from "../../squads";
 import { commissionerSession } from "./saving";
@@ -98,8 +97,7 @@ export async function saveLineup(input: unknown): Promise<WriteAnswer> {
   const session = commissionerSession(teamId);
   if (session === null) return refuse(SWITCHED_OFF);
 
-  const limits = { ...squads.info.roster, minActiveByPosition: rosterMinimums() };
-  if (violations(input.slots, eligibilityOf(squads.info.players), limits).length > 0) {
+  if (violations(input.slots, eligibilityOf(squads.info.players), squads.info.roster).length > 0) {
     return refuse("This line-up breaks the league's rules. Fix it before saving.");
   }
   const reserves = new Set(input.slots.filter((s) => s.status !== "ACTIVE").map((s) => s.fantraxId));

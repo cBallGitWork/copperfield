@@ -55,7 +55,7 @@ export type { Eligibility, Move } from "./moves";
 
 export { violations } from "./violations";
 export { formations } from "./formations";
-export { leagueLimits, minimumsOf } from "./minimums";
+export { leagueLimits } from "./minimums";
 export { derbyNames, derbyOf } from "./derbies";
 export type { Derby, DerbyName } from "./derbies";
 export type { Violation } from "./violations";

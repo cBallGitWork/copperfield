@@ -9,7 +9,6 @@ import {
   fullClubName,
   fullPrintName,
   isResolved,
-  leagueLimits,
   periodGameweeks,
   periodLock,
   playSeason,
@@ -68,7 +67,7 @@ export async function seasonDesk(input: {
   if (round === undefined) return null;
   const { info, say } = input;
   if (input.pedigree.size === 0) return say("Power rankings: the draft is not complete; nothing filed."), null;
-  const shapes = formations(leagueLimits(info.roster, limits, FANTRAX_LEAGUE_ID));
+  const shapes = formations(info.roster);
   if (shapes.length === 0) return say("Power rankings: no position minimums on record (npm run roster-limits); nothing filed."), null;
   const pack = readIntel<LeagueProjectionFile>("league-projections");
   if (pack === null) return say("Power rankings: no league projections held (npm run draft-pack); nothing filed."), null;
