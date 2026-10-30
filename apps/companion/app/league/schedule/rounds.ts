@@ -17,7 +17,7 @@ import type { ScheduleRound } from "./schedule";
 export function scheduleRounds(info: LeagueInfo, season: readonly Fixture[]): ScheduleRound[] {
   const kickoffs = datedKickoffs(season);
 
-  // When each round's lineups lock: off the roster period's first kickoff, never its boundary (`gazette/deadline.ts`).
+  // When each round's lineups lock: off the roster period's first kickoff, never its boundary (`league/calendar.ts`).
   const opens = new Map(
     info.rosterPeriods.map((period) => [period.number, { kickoff: firstKickoff(period, kickoffs), deadline: periodLock(period, kickoffs) }]),
   );

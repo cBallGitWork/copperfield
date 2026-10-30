@@ -6,7 +6,7 @@ import {
   fetchLineupState,
   mapFixtures,
   mapLeagueInfo,
-  periodLock,
+  lockOf,
   planningPeriod,
   readBenchAnswer,
   requireLeague,
@@ -23,7 +23,7 @@ import { benchOrderRun } from "./benchOrder/run";
 async function calendar() {
   const [info, fixtures] = await Promise.all([fetchLeagueInfo(FANTRAX_LEAGUE_ID).then(mapLeagueInfo), fetchFixtures().then(mapFixtures)]);
   const kickoffs = datedKickoffs(fixtures);
-  return { info, kickoffs, lockOf: (period: number) => periodLock(info.rosterPeriods.find((p) => p.number === period), kickoffs) };
+  return { info, kickoffs, lockOf: (period: number) => lockOf(info.rosterPeriods, kickoffs, period) };
 }
 
 /** `--team <id>`'s id, or undefined. */

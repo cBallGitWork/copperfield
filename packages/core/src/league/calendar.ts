@@ -119,11 +119,50 @@ export function periodLock(period: LeaguePeriod | undefined, kickoffs: readonly 
   return kickoff === null ? null : locksAt(kickoff);
 }
 
+/** Period `number`'s lineup lock, its `periodLock`; null for a number no period has. */
+export function lockOf(periods: readonly LeaguePeriod[], kickoffs: readonly GameweekKickoff[], number: number | null | undefined): string | null {
+  return periodLock(periods.find((period) => period.number === number), kickoffs);
+}
+
 /** A gameweek's lineup lock: its period on the roster calendar, then that period's `periodLock`; null for a gameweek
  *  no period holds. */
 export function gameweekLock(periods: LeaguePeriod[], kickoffs: GameweekKickoff[], gameweek: number): string | null {
-  const found = periodHoldingGameweek(periods, kickoffs, gameweek);
-  return periodLock(periods.find((period) => period.number === found?.period), kickoffs);
+  return lockOf(periods, kickoffs, periodHoldingGameweek(periods, kickoffs, gameweek)?.period);
+}
+
+/** When the lineup locks next. The commissioner's deadline, never FPL's. */
+export interface Deadline {
+  period: number;
+  /** The period's first kickoff, ISO, which the lock is measured back from; not the period boundary. */
+  at: string;
+  /** When lineups lock: `at` less `LINEUP_LOCK_LEAD_MINUTES`, a house rule no API publishes. */
+  locksAt: string;
+}
+
+/** The next lock a manager has to beat: the earliest lock still ahead, never the next period to open,
+ *  which is a day later whenever a period opens on a Friday for a Saturday start. */
+export function nextDeadline(
+  periods: readonly LeaguePeriod[],
+  kickoffs: readonly GameweekKickoff[],
+  nowIso: string,
+): Deadline | null {
+  const now = Date.parse(nowIso);
+  if (Number.isNaN(now)) return null;
+
+  let next: Deadline | null = null;
+  for (const period of periods) {
+    const kickoff = firstKickoff(period, kickoffs);
+    if (kickoff === null) continue;
+
+    const locks = locksAt(kickoff);
+    if (locks === null || Date.parse(locks) <= now) continue;
+
+    if (next === null || Date.parse(locks) < Date.parse(next.locksAt)) {
+      next = { period: period.number, at: kickoff, locksAt: locks };
+    }
+  }
+
+  return next;
 }
 
 /** When a period's football is over, its last kickoff plus a match; null with no period or no dated football in it. */

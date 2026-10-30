@@ -15,7 +15,7 @@ import {
   mapSeasonResults,
   movement,
   pastOffered,
-  periodLock,
+  lockOf,
   periodPairings,
   plannerRows,
   predictionRecord,
@@ -80,7 +80,7 @@ export async function predictionsDesk(input: {
   if (round === undefined) return null;
   const { info, snapshot } = input;
   const pairings = periodPairings(info.matchups, info.teams, round.period);
-  const lock = periodLock(info.rosterPeriods.find((each) => each.number === round.period), input.kickoffs);
+  const lock = lockOf(info.rosterPeriods, input.kickoffs, round.period);
   if (pairings.length === 0 || lock === null) return null;
 
   const played = Array.from({ length: PREDICTIONS.recentGames }, (_, at) => round.gameweek - PREDICTIONS.recentGames + at).filter((gw) => gw >= 1);

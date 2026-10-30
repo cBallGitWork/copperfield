@@ -2,7 +2,7 @@ import {
   draftReportsDue,
   tradeSlot,
   openingGameweek,
-  periodLock,
+  lockOf,
   reportDays,
   type DeskState,
   type FootballSnapshot,
@@ -58,7 +58,7 @@ export function deskState(input: {
 export function seasonOpening(info: LeagueInfo, calendar: readonly PeriodGameweeks[], kickoffs: readonly GameweekKickoff[], drafted: boolean): DeskState["season"] {
   if (!drafted || info.matchups.length === 0) return null;
   const period = Math.min(...info.matchups.map((each) => each.period));
-  const lock = periodLock(info.rosterPeriods.find((each) => each.number === period), kickoffs);
+  const lock = lockOf(info.rosterPeriods, kickoffs, period);
   const gameweek = openingGameweek(calendar, period);
   return lock !== null && gameweek !== undefined ? { period, gameweek, locksAt: lock } : null;
 }

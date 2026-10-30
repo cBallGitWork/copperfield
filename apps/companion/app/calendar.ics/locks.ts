@@ -4,11 +4,11 @@ import {
   LEAGUE_TIMEZONE,
   MS_PER_MINUTE,
   firstKickoff,
-  locksAt,
   londonDayOf,
   wallClockInstant,
   openingGameweek,
   periodGameweeks,
+  periodLock,
 } from "@epl/core";
 import type { CalendarEvent } from "./ics";
 
@@ -43,7 +43,7 @@ export function lockEvents(
   return periods
     .flatMap((period) => {
       const kickoff = firstKickoff(period, kickoffs);
-      const lock = kickoff === null ? null : locksAt(kickoff);
+      const lock = periodLock(period, kickoffs);
       const gameweek = openingGameweek(calendar, period.number);
       if (kickoff === null || lock === null || gameweek === undefined || !(Date.parse(lock) > now)) return [];
       return [{

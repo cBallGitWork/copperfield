@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { firstKickoff, gameweekLock, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
+import { firstKickoff, gameweekLock, lockOf, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
 import type { GameweekKickoff } from "./calendar";
 import type { LeaguePeriod } from "./types";
 import alignment from "./__fixtures__/periodAlignment.json";
@@ -116,6 +116,20 @@ describe("periodLock", () => {
   it("has no lock for a period it was not given, or one with no football in it", () => {
     expect(periodLock(undefined, KICKOFFS)).toBeNull();
     expect(periodLock(P3, [])).toBeNull();
+  });
+});
+
+describe("lockOf", () => {
+  it("locks each period by number, as its periodLock", () => {
+    expect(lockOf([P3, P4], KICKOFFS, 3)).toBe("2026-09-04T18:45:00.000Z");
+    expect(lockOf([P3, P4], KICKOFFS, 4)).toBe("2026-09-12T13:45:00.000Z");
+  });
+
+  it("has no lock for a period with no dated football, or a number no period has", () => {
+    expect(lockOf([P3, P4], KICKOFFS.filter((k) => k.gameweek !== 3), 3)).toBeNull();
+    expect(lockOf([P3, P4], KICKOFFS, 9)).toBeNull();
+    expect(lockOf([P3, P4], KICKOFFS, undefined)).toBeNull();
+    expect(lockOf([P3, P4], KICKOFFS, null)).toBeNull();
   });
 });
 

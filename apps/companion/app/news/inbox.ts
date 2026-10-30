@@ -6,7 +6,7 @@ import {
   openingGameweek,
   periodFullTime,
   periodGameweeks,
-  periodLock,
+  lockOf,
   availabilityNews,
   availability,
   blockNews,
@@ -188,5 +188,5 @@ function lock(
 /** The last lock passed, when the next gameweek became the next; null before the first. */
 function lastLock(periods: readonly LeaguePeriod[], kickoffs: readonly GameweekKickoff[]): string | null {
   const period = lastLockedPeriod([...periods], kickoffs, now().toISOString());
-  return periodLock(periods.find((each) => each.number === period), kickoffs);
+  return lockOf(periods, kickoffs, period);
 }
