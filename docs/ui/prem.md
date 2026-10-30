@@ -260,8 +260,10 @@ team over and over"), which is the whole difference from `prem/Match`: that one
 draws both sides because it lists a round rather than a campaign.
 
 The score is the club's own goals first whichever end it was at — a column read
-down a season means nothing if half of them are reversed — and it links to the
-match page. Full date and kick-off time on every row, in their own columns.
+down a season means nothing if half of them are reversed. **A league row is one link, to its match** (30 Oct 2026,
+#202): the opponent's link is stretched over the row, so the date, the time and the score all open it, where the score's
+dash had been a 16px target beside a 188px link to the opponent's club. A cup tie has no match page and keeps its club
+link. Full date and kick-off time (`text-xs`) on every row, in their own columns.
 
 ### Two position columns, and why there are two
 

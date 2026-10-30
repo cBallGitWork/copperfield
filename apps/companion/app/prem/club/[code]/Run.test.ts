@@ -71,4 +71,11 @@ describe("a club's run of fixtures", () => {
   it("draws no Played row before anything is played", () => {
     expect(rows({ toCome: [league(3)], played: [] }).includes("Played")).toBe(false);
   });
+
+  it("makes a league row one link, to its match", () => {
+    const html = renderToStaticMarkup(
+      createElement(Run, { order: { toCome: [league(3)], played: [] }, club: arsenal, clubs: new Map([[1, arsenal], [2, villa]]), byCode: new Map() }),
+    );
+    expect([...html.matchAll(/<a [^>]*href="([^"]+)"/g)].map((link) => link[1])).toEqual(["/prem/match/3"]);
+  });
 });
