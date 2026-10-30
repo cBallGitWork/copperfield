@@ -31,7 +31,17 @@ describe("what the sub-editor reads", () => {
   it("ignores non-string members rather than stringifying them", () => {
     // The column is the model's own JSON and a member may be anything. Joining
     // an object in would put "[object Object]" into the checked text.
-    expect(written({ headline: "A Clean Line", ranks: [{ line: "x" }], extras: null })).toBe("A Clean Line");
+    expect(written({ headline: "A Clean Line", ranks: [{ line: 3 }, { id: 9 }], teamNews: { line: "x" }, extras: null })).toBe("A Clean Line");
+  });
+
+  it("reads the cargo the filed check reads: tie lines, ranks, reports and the draft report", () => {
+    const column = {
+      ties: [{ key: "a", line: "He banked it." }],
+      ranks: [{ line: "A knock." }],
+      reports: [{ standfirst: "s", account: "a", sections: [{ head: "h", pitch: "p", stake: "Banking on it." }] }],
+      draft: { matchups: [{ standfirst: "d", paragraphs: ["They bank on him."] }] },
+    };
+    expect(banned(written(column))).toEqual(expect.arrayContaining(["banked", "knock", "banking", "bank"]));
   });
 
   it("catches one in a team-news row, which is the Team Sheet's substance, and never in a manager's own words", () => {
@@ -142,5 +152,54 @@ describe("the sub-editor's rewrite", () => {
     vi.mocked(writeColumn).mockResolvedValueOnce({ body: "He scored." });
     await writeSubedited("sys", "brief", () => {}, "round");
     expect(writeColumn).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("the sub-editor's send-back prompt, byte for byte", () => {
+  beforeEach(() => vi.mocked(writeColumn).mockReset());
+  const rewritten = async (column: Record<string, unknown>, kind: string, expected?: Parameters<typeof writeSubedited>[4]) => {
+    vi.mocked(writeColumn).mockResolvedValueOnce(column).mockResolvedValueOnce({ body: "He scored." });
+    await writeSubedited("sys", "brief", () => {}, kind, expected);
+    return vi.mocked(writeColumn).mock.calls[1][1];
+  };
+
+  it("quotes a banned phrase", async () => {
+    expect(await rewritten({ headline: "City Bank It", body: "He banked it — twice." }, "round")).toMatchInlineSnapshot(`
+      "brief
+
+      YOUR LAST ATTEMPT PRINTED BANNED PHRASING: "banked", "bank", "—". Write it again without those phrases, in any form — not a synonym of the same tic, and not the same sentence with the word swapped. Keep everything true; only the wording is wrong."
+    `);
+  });
+
+  it("names a presser's faults after its banned phrases", async () => {
+    const column = {
+      body: "He banked it, and no manager spoke tomorrow.",
+      teamNews: [{ club: "Arsenal", code: 3, men: [{ name: "Cristhian Mosquera", status: "FIT", note: "muscle" }, { name: "Ben White", status: "OUT", note: "" }] }],
+    };
+    const expected = { reported: [{ code: 3, club: "Arsenal" }], quoted: [{ code: 3, club: "Arsenal" }], noted: ["Ben White"] };
+    expect(await rewritten(column, "presser", expected)).toMatchInlineSnapshot(`
+      "brief
+
+      YOUR LAST ATTEMPT PRINTED BANNED PHRASING: "banked". Write it again without that phrase, in any form — not a synonym of the same tic, and not the same sentence with the word swapped. Keep everything true; only the wording is wrong.
+
+      YOUR LAST ATTEMPT WROTE ABOUT WHO DID NOT SPEAK OR WHAT WAS NOT SAID: "no manager". A reader wants who is out and who is back. Say that plainly, and never forecast who starts.
+
+      THESE FIT MEN CARRY A BARE COMPLAINT AS THEIR NOTE, which reads as if they still have it: Cristhian Mosquera. Write "back from a muscle injury", and what was said of him where you were given it.
+
+      THESE WORDS DATE THE COLUMN TO THE DAY IT WAS FILED, and it is read on the days after: "tomorrow". NAME THE DAY instead, as the brief gives them. A manager's quote keeps his own words.
+
+      THESE CLUBS HAD NEWS AND NO LINE: Arsenal. Give each one sentence of what its manager said: what was decided, the timescale, the reason.
+
+      THESE CLUBS WERE GIVEN A QUOTE WITH A FACT AND PRINTED NONE: Arsenal. Print one each, verbatim, trimmed to the sentence that carries the fact.
+
+      THESE MEN HAVE AN EMPTY NOTE: Ben White. The brief gave each a complaint or his manager's words; put it in a few words."
+    `);
+  });
+
+  it("logs every fault it sends back", async () => {
+    vi.mocked(writeColumn).mockResolvedValueOnce({ body: "He banked it." }).mockResolvedValueOnce({ body: "He scored." });
+    const said: string[] = [];
+    await writeSubedited("sys", "brief", (line) => void said.push(line), "round");
+    expect(said).toEqual([expect.stringContaining("banked")]);
   });
 });
