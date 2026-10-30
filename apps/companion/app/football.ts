@@ -11,11 +11,12 @@ import {
   fetchFixtures,
   inMatchWindow,
   isDated,
+  LIVE_LEAD_MINUTES,
+  liveGameweek,
   type MatchSheet,
   type PlayerMatchStats,
   fetchLive,
   fetchRegions,
-  MS_PER_MINUTE,
   mapBase,
   mapFixtures,
   mapLiveStats,
@@ -25,7 +26,6 @@ import {
   nextRound,
   portraitUrl,
   rewindRound,
-  roundAt,
   secondsToWindow,
   snapshotOf,
   withRoundFixtures,
@@ -39,7 +39,6 @@ import {
   BASE_REVALIDATE,
   FPL_REST_MAX_MS,
   FPL_REST_MS,
-  LIVE_LEAD_MINUTES,
   LIVE_REVALIDATE,
   MATCH_WINDOW,
   POLL,
@@ -144,15 +143,20 @@ export const footballLinesNow = cache(async (): Promise<FootballSnapshot> => {
   return at === null ? currentRound(true) : rewound(at);
 });
 
-/** The round `REPLAY_AT` falls in as it stood then, the next from Live's opening, or the live round before the season.
+/** The round `REPLAY_AT` falls in as it stood then, Live's own (`liveGameweek`), or the live round before the season.
  *  Outside `currentRound`: `roundGoals` has its own cache, and a nested `unstable_cache` bypasses it. */
 const rewound = cache(async (at: string): Promise<FootballSnapshot> => {
-  // FPL's round turns 90 minutes before its first kickoff, so a replay of Live's opening hour reads the round ahead.
-  const ahead = new Date(Date.parse(at) + LIVE_LEAD_MINUTES * MS_PER_MINUTE).toISOString();
-  const gameweek = roundAt(await seasonFixtures(), ahead);
+  const gameweek = liveGameweek(datedKickoffs(await seasonFixtures()), at);
   if (gameweek === null) return currentRound(true);
   const snapshot = await gameweekSnapshot(gameweek);
   return rewindRound(snapshot, await roundGoals(gameweek, snapshot.players), at);
+});
+
+/** The round Live shows, `liveGameweek`'s: FPL's own turns at its deadline, which may be after Live's. Once per request. */
+export const liveNow = cache(async (): Promise<FootballSnapshot> => {
+  const [focus, season] = await Promise.all([footballNow(), seasonFixtures()]);
+  const gameweek = liveGameweek(datedKickoffs(season), now().toISOString());
+  return gameweek === null || gameweek === focus.gameweek ? focus : gameweekSnapshot(gameweek);
 });
 
 /** One named round of football with its lines, off the same caches as the current one. */
@@ -245,7 +249,7 @@ export async function offerLive(): Promise<boolean> {
 /** Whether Live is open; null when FPL could not be read, so each caller picks its own failure. */
 export async function roundLive(): Promise<boolean | null> {
   try {
-    return liveOpen(await footballNow());
+    return liveOpen(await liveNow());
   } catch {
     return null;
   }

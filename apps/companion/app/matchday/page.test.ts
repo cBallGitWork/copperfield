@@ -56,7 +56,7 @@ vi.mock("@epl/core", async (actual) => ({
   periodPairings: () => [],
 }));
 vi.mock("../football", () => ({
-  footballNow: async () => r.snapshot,
+  liveNow: async () => r.snapshot,
   seasonFixtures: async () => [],
   liveOpen: () => r.during,
   roundFigures: r.fn.roundFigures,
@@ -81,6 +81,7 @@ vi.mock("../assistKinds", () => ({ roundAssistKinds: r.fn.roundAssistKinds }));
 vi.mock("./sheetCodes", () => ({ roundCodes: r.fn.roundCodes }));
 vi.mock("./boards", () => ({ gameweekBoards: r.fn.gameweekBoards }));
 vi.mock("../lockAhead", () => ({ lockAhead: r.fn.lockAhead }));
+vi.mock("../round", () => ({ roundOf: async () => null }));
 vi.mock("../clock", () => ({ now: () => r.at }));
 vi.mock("../prem/places", () => ({ clubPlaces: () => new Map([[1, 3]]) }));
 vi.mock("./TopStats", () => ({ default: stub("topstats"), STATS_VIEW: "stats", TOP_STATS: "Top stats", statsHref: () => "/matchday?view=stats" }));

@@ -327,7 +327,7 @@ two squares over the third tab, 24 Sep 2026) is gone: **Draft** opens `/league` 
 the squad index; **Prem** opens `/prem/results` and lights `/prem/**`; **Data** is the fantasy deep dive at
 `/players` (CM's Find until 24 Sep: *"data needs to be at the bottom"*).
 
-**The second tab is always yours.** Team all week and through a gameweek too; Live (from an hour before the
+**The second tab is always yours.** Team all week and through a gameweek too; Live (from two hours before the
 first kickoff, `onlyDuringGameweek` applied by `sectionsFor()`) takes the third place beside it rather than
 Team's. The Live tab puts your score where the glyph sits, a rung smaller per extra figure so `112–108` fits
 (`scoreSize`), and the match clock when there is no tie of yours to count.

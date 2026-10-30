@@ -1,4 +1,4 @@
-import { FULL_TIME_AFTER_KICKOFF_MINUTES, LINEUP_LOCK_LEAD_MINUTES, SAVE_MARGIN_MINUTES } from "../config";
+import { FULL_TIME_AFTER_KICKOFF_MINUTES, LINEUP_LOCK_LEAD_MINUTES, LIVE_LEAD_MINUTES, SAVE_MARGIN_MINUTES } from "../config";
 import { MS_PER_DAY, MS_PER_MINUTE, instantOf } from "../time";
 import type { LeaguePeriod } from "./types";
 
@@ -128,6 +128,24 @@ export function lockOf(periods: readonly LeaguePeriod[], kickoffs: readonly Game
  *  no period holds. */
 export function gameweekLock(periods: LeaguePeriod[], kickoffs: GameweekKickoff[], gameweek: number): string | null {
   return lockOf(periods, kickoffs, periodHoldingGameweek(periods, kickoffs, gameweek)?.period);
+}
+
+/** The gameweek Live shows at `nowIso`: the last whose first kickoff, less `LIVE_LEAD_MINUTES`, has passed; an undated
+ *  one is skipped, and null before the season's first. */
+export function liveGameweek(kickoffs: readonly GameweekKickoff[], nowIso: string): number | null {
+  const now = instantOf(nowIso);
+  if (now === null) return null;
+  const opens = new Map<number, number>();
+  for (const { gameweek, kickoff } of kickoffs) {
+    const at = instantOf(kickoff);
+    if (at !== null) opens.set(gameweek, Math.min(opens.get(gameweek) ?? at, at));
+  }
+  let live: { gameweek: number; opens: number } | null = null;
+  for (const [gameweek, first] of opens) {
+    const at = first - LIVE_LEAD_MINUTES * MS_PER_MINUTE;
+    if (at <= now && (live === null || at > live.opens)) live = { gameweek, opens: at };
+  }
+  return live?.gameweek ?? null;
 }
 
 /** When the lineup locks next. The commissioner's deadline, never FPL's. */

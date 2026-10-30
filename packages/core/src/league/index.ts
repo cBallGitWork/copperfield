@@ -44,7 +44,7 @@ export { linesAfter, tableLines } from "./tableLines";
 export type { SortKey } from "./standingsOrder";
 
 
-export { firstKickoff, gameweekLock, lockOf, locksAt, nextDeadline, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
+export { firstKickoff, gameweekLock, liveGameweek, lockOf, locksAt, nextDeadline, openingGameweek, periodDays, periodFixtures, periodFullTime, periodGameweeks, periodHoldingGameweek, periodLock, periodOfGameweek, saveOpen } from "./calendar";
 export type { Deadline, GameweekKickoff, PeriodGameweeks } from "./calendar";
 
 export { lastLockedPeriod, periodToRead, planningPeriod, rosterDisplay } from "./visibility";
