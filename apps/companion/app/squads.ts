@@ -52,6 +52,12 @@ export function readable(squads: LeagueSquads): ReadableSquads | null {
   return "period" in squads ? squads : null;
 }
 
+/** The league did not answer for its squads, or for the description beside them; an undrafted league is an answer. */
+export function leagueSilent(squads: LeagueSquads): boolean {
+  if ("unavailable" in squads) return true;
+  return "period" in squads && squads.info === null;
+}
+
 /** The squads read's cache key, which a lineup save marks stale. */
 export const SQUADS_KEY = "league-squads";
 

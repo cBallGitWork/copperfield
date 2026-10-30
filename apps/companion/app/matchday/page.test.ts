@@ -66,6 +66,7 @@ vi.mock("../football", () => ({
 vi.mock("../squads", () => ({
   getLeagueSquads: r.fn.getLeagueSquads,
   readable: (s: { ok?: unknown }) => s.ok ?? null,
+  leagueSilent: () => false,
   readerTeamId: r.fn.readerTeamId,
 }));
 vi.mock("../involvement", () => ({ marks: r.fn.marks, marksFor: r.fn.marksFor }));
@@ -90,6 +91,7 @@ vi.mock("./LiveVidiprinter", () => ({ default: stub("vidiprinter") }));
 vi.mock("./Vidiprinter", () => ({ VIDIPRINTER_VIEW: "vidiprinter", VIDIPRINTER_HREF: "/matchday?view=vidiprinter" }));
 vi.mock("./Between", () => ({ BetweenGameweeks: stub("between") }));
 vi.mock("./ShareButton", () => ({ default: stub("share") }));
+vi.mock("../components/league/PageFailed", () => ({ default: stub("failed") }));
 vi.mock("../components/league/RoundWord", () => ({ default: stub("roundword") }));
 vi.mock("../components/shell/PageHeader", () => ({ default: stub("header") }));
 vi.mock("../components/shell/TabStrip", () => ({ default: stub("tabs") }));

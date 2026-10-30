@@ -15,7 +15,7 @@ import { liveNow, liveOpen, roundFigures, seasonFixtures } from "../football";
 import RoundWord from "../components/league/RoundWord";
 import PageHeader from "../components/shell/PageHeader";
 import TabStrip from "../components/shell/TabStrip";
-import { getLeagueSquads, readable, readerTeamId } from "../squads";
+import { getLeagueSquads, leagueSilent, readable, readerTeamId } from "../squads";
 import { roundOf } from "../round";
 import TopStats, { STATS_VIEW, TOP_STATS, statsHref } from "./TopStats";
 import { gameweekBoards } from "./boards";
@@ -94,7 +94,7 @@ export default async function MatchdayPage({
   } else if (during && printing) {
     view = <LiveVidiprinter snapshot={snapshot} drafted={drafted} mine={mine} day={query.day} />;
   } else if (during) {
-    view = <LiveScores snapshot={snapshot} season={season} drafted={drafted} mine={mine} day={query.day} />;
+    view = <LiveScores snapshot={snapshot} season={season} drafted={drafted} silent={leagueSilent(squads)} mine={mine} day={query.day} />;
   } else {
     view = <BetweenGameweeks snapshot={snapshot} up={up} locksAt={up === null ? null : await lockAhead(up.gameweek)} />;
   }

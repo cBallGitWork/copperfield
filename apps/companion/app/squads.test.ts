@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { getLeagueSquads } from "./squads";
+import { type ReadableSquads, getLeagueSquads, leagueSilent } from "./squads";
 
 // Next's cache as the squads read meets it: a read nested inside another's skips its own cache and goes live.
 const { inCache, ownCache, nested } = await vi.hoisted(async () => {
@@ -46,5 +46,20 @@ describe("getLeagueSquads", () => {
   it("asks only Fantrax from inside its cache; the kickoffs, the calendar and the rules come from their own", async () => {
     expect(await getLeagueSquads()).toEqual({ undrafted: expect.any(String) });
     expect(nested).toEqual([]);
+  });
+});
+
+// 30 Oct 2026: with Fantrax hanging, Live drew the football and dropped the draft's ties without a word.
+describe("leagueSilent", () => {
+  const drafted = (info: ReadableSquads["info"]) => ({ period: {}, info }) as ReadableSquads;
+
+  it("is a league that did not answer, for its squads or for its description", () => {
+    expect(leagueSilent({ unavailable: "getTeamRosters → TIMEOUT" })).toBe(true);
+    expect(leagueSilent(drafted(null))).toBe(true);
+  });
+
+  it("is not an undrafted league, which is an answer, nor one that answered", () => {
+    expect(leagueSilent({ undrafted: "getTeamRosters → NO_TEAMS" })).toBe(false);
+    expect(leagueSilent(drafted({} as ReadableSquads["info"]))).toBe(false);
   });
 });
