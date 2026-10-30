@@ -25,7 +25,7 @@ export interface PrinterRow {
   kind: PrinterKind;
   /** The event's word; null on a man's full-time counts, which sit under the whistle. */
   word: string | null;
-  /** `7′`, on a man's line; null on a whistle and a count line. */
+  /** `7′` on a man's line; `KO` or `FT` on a whistle, `FT` on a man's full-time counts (Craig, 30 Oct 2026). */
   minute: string | null;
   man: PrinterMan | null;
   /** The assister, or the man taken off, and the word before him. */
@@ -50,8 +50,8 @@ const WORDS: Record<PrinterKind, string | null> = {
   tally: null,
 };
 
-/** The word before the second man: an assister, or the man taken off. */
-const SECOND_WORDS: Partial<Record<PrinterKind, string>> = { goal: "As", "penalty-goal": "As", sub: "Off", injury: "Off" };
+/** The word before the second man: an assister, or the man taken off, read "Mfuni for Thomas" as a sub is said. */
+const SECOND_WORDS: Partial<Record<PrinterKind, string>> = { goal: "As", "penalty-goal": "As", sub: "for", injury: "for" };
 
 const WHISTLES = new Set<PrinterKind>(["kick-off", "half-time", "full-time"]);
 /** A goal and its assist carry no figure (Craig, 30 Oct 2026): the word says what it was worth. */
@@ -92,7 +92,7 @@ export function printerRow(
     key: line.key,
     kind: line.kind,
     word: WORDS[line.kind],
-    minute: whistle || line.minute === null ? null : `${line.minute}′`,
+    minute: whistle ? WORDS[line.kind] : line.kind === "tally" ? WORDS["full-time"] : line.minute === null ? null : `${line.minute}′`,
     man: man(line.man, priced ? line.points : null),
     second: second === null || secondWord === undefined ? null : { word: secondWord, man: second },
     sides: whistle

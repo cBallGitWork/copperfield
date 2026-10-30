@@ -66,6 +66,8 @@ const names: Record<string, ScoringCategory> = {
   "1#dfp": { code: "DFP", name: "Defensive Points", longCode: "INDIVIDUAL_DEFENSIVE_POINTS" },
   "1#cs": { code: "CS", name: "Clean Sheets On Field", longCode: "INDIVIDUAL_SHUTOUTS_ON_FIELD" },
   "2#sv": { code: "Sv", name: "Saves", longCode: "INDIVIDUAL_SAVES" },
+  "1#dfp3": { code: "DFP3", name: "Defensive Points 3", longCode: "INDIVIDUAL_DEFENSIVE_POINTS_3" },
+  "1#ga": { code: "GA", name: "Goals Against", longCode: "INDIVIDUAL_GOALS_AGAINST" },
 };
 const rules: ScoringRules = {
   goaliePosition: "G",
@@ -114,8 +116,8 @@ const lines = vidiprinter({
   tallies: [
     { code: SAKA, categories: [scored("1#min", "70", 2), scored("1#g", "1", 5), scored("1#dfp", "1", 2)] },
     { code: RAYA, categories: [scored("1#min", "90", 2), scored("2#sv", "3"), scored("1#cs", "1", 4)] },
-    { code: SALIBA, categories: [] },
-    { code: PICKFORD, categories: [scored("1#min", "24", 1)] },
+    { code: SALIBA, categories: [scored("1#ga", "2", -1)] },
+    { code: PICKFORD, categories: [scored("1#min", "24", 1), scored("1#dfp3", "11", 2), scored("1#ga", "2", -1)] },
     { code: PALMER, categories: [scored("1#min", "20"), scored("1#yc", "1", -1), scored("1#dfp", "1", 2), scored("9#unknown", "4")] },
   ],
   names,
@@ -129,6 +131,7 @@ describe("vidiprinter", () => {
       "booked:30",
       "kick-off",
       "full-time",
+      "tally:20",
       "tally:11",
       "sent-off:21",
       "injury:20",
@@ -183,7 +186,13 @@ describe("vidiprinter", () => {
       { name: "Saves", value: "3", points: 1, sort: "keeper" },
       { name: "Clean sheets", value: "1", points: 4, sort: null },
     ]);
-    expect(lines.some((line) => line.kind === "tally" && (line.man === SALIBA || line.man === PICKFORD))).toBe(false);
+    expect(lines.some((line) => line.kind === "tally" && line.man === SALIBA)).toBe(false);
+  });
+
+  // Craig, 30 Oct 2026: "remove + from defcon its just defcon in this / remove goals conceded rows".
+  it("calls either DefCon tier DefCon, and never prints goals conceded", () => {
+    const pickford = lines.find((line) => line.kind === "tally" && line.man === PICKFORD);
+    expect(pickford?.counts).toEqual([{ name: "DefCon", value: "11", points: 2, sort: "defcon" }]);
   });
 
   it("prints no counts for a man whose match is still in play", () => {
