@@ -1,6 +1,6 @@
 import TabEmpty from "../../../components/league/TabEmpty";
 import TeamName from "../../../components/league/TeamName";
-import { type LeagueTeam, clubById, headToHeads, inkOn, oppositionByClub } from "@epl/core";
+import { type LeagueTeam, NO_MINUTES, clubById, headToHeads, inkOn, lineupDetail, oppositionByClub } from "@epl/core";
 import TeamShell from "../Shell";
 import { SQUAD } from "../../routes";
 import { identify, whoseTeam } from "../team";
@@ -63,8 +63,11 @@ export default async function NextMatchPage({
   const clubs = clubById(squads.snapshot);
   const opposition = oppositionByClub(squads.snapshot);
   // No bench order: that is a Fantrax read per team, so a bench stands in position order here.
+  const arranged = new Map(
+    [...rostered].map(([id, roster]) => [id, lineupDetail(roster, clubs, opposition, null, NO_MINUTES)] as const),
+  );
   const listsOf = (tie: (typeof ties)[number]) =>
-    unplayedLists({ pairing: tie, rostered, shows, benches: new Map(), clubs, opposition });
+    unplayedLists({ pairing: tie, rostered, shows, arranged, clubs, opposition });
 
   return (
     <TeamShell

@@ -1,7 +1,6 @@
 import {
   FANTRAX_LEAGUE_PAGE,
   FANTRAX_ROSTER_PATH,
-  lineupDetail,
   playerDetail,
 } from "@epl/core";
 import LineupPlanner from "../../components/league/LineupPlanner";
@@ -19,7 +18,6 @@ import { commissionerSession } from "./saving";
 import { teamTitle } from "./title";
 import { teamOptions } from "./teamOptions";
 import { leagueTable } from "../../standings";
-import { autoSubbed } from "../../components/league/autoSubbed";
 
 // One manager's squad, laid out on a pitch. The screen the league opens on a
 // Saturday, and the reason the join exists.
@@ -44,7 +42,7 @@ export default async function TeamPage({
   if (slug === OWN && (await readerTeamId()) === null) return <SquadIndex />;
   // The table orders the team picker, read beside the squad rather than after it.
   const [view, table] = await Promise.all([squadView(slug, gw), leagueTable()]);
-  const { team, league, mine, planning, open, standing, weeks, benchRanks, bench, autoSubs, eligibility, clubs, opposition, live, news, points, board, pending, squadIds, minutes } = view;
+  const { team, league, mine, planning, open, standing, weeks, benchRanks, eligibility, clubs, opposition, drawn, points, board, pending, squadIds, minutes } = view;
   // Fantrax's period selector, on every branch: an earlier week shows its scores, a later one its opponents.
   const picker =
     weeks === null ? null : (
@@ -113,14 +111,15 @@ export default async function TeamPage({
             eligibility={eligibility}
           />
         </div>
-      ) : (
+      ) : drawn === null ? null : (
         /* An eleven nobody may change here: a rival's once locked, or your own in any week but the open one. */
         <Above row={teams}>
           <Sheet
-            {...afterSubs(lineupDetail(team, clubs, opposition, points, minutes, bench), autoSubs)}
-            breakdown={live?.breakdown ?? {}}
-            played={live?.played}
-            news={news}
+            {...drawn.sheet}
+            marks={drawn.marks}
+            breakdown={drawn.live?.breakdown ?? {}}
+            played={drawn.live?.played}
+            news={drawn.news}
             pending={pending}
             eligibility={eligibility}
             picker={picker}
@@ -143,10 +142,4 @@ function Above({ row, children }: { row: React.ReactNode; children: React.ReactN
       {children}
     </div>
   );
-}
-
-/** The sheet with the auto subs made, and the marks that say so. */
-function afterSubs(...args: Parameters<typeof autoSubbed>) {
-  const { sheet, marks } = autoSubbed(...args);
-  return { ...sheet, marks };
 }
