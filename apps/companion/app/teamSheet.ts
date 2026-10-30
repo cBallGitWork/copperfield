@@ -15,6 +15,9 @@ import { newsFor, readPoolNews } from "./poolNews";
 import { minutesFrom } from "./xmins";
 import { now } from "./clock";
 import { type AutoSubMark, autoSubbed } from "./components/league/autoSubbed";
+import type { SubMark } from "./components/football/SubMarker";
+import { sheetEvents } from "./league/matchups/[teamId]/events";
+import { everyone, subMarks } from "./league/matchups/[teamId]/subs";
 
 // One team's sheet for the gameweek `squads` was read for, which the head-to-head and the Team tab both draw. Asked
 // only for a side the lineup gate has opened: where a man is priced says who is in the eleven.
@@ -24,6 +27,8 @@ export interface TeamSheet {
   /** After the auto subs, so the eleven on the grass is the one the score counts. */
   sheet: LineupDetail;
   marks: Record<string, AutoSubMark>;
+  /** Who came on or went off in his real match, by Fantrax id; none before kickoff. */
+  subs: Record<string, SubMark>;
   /** The gameweek's scoring at each man's slot; null before the first ball or when Fantrax refused. */
   live: Awaited<ReturnType<typeof squadLivePoints>>;
   /** Today's news on his men; none on a finished week, whose doubts are not today's. */
@@ -55,6 +60,7 @@ export async function teamSheet(
     bench,
   );
   const { sheet, marks } = autoSubbed(detail, scores?.subs.get(team.teamId) ?? []);
+  const subs = subMarks(everyone(sheet), await sheetEvents([sheet], snapshot));
   const ids = team.players.map((man) => man.slot.fantraxId);
-  return { stage, sheet, marks, live, news: stories === null ? {} : newsFor(stories, ids) };
+  return { stage, sheet, marks, subs, live, news: stories === null ? {} : newsFor(stories, ids) };
 }

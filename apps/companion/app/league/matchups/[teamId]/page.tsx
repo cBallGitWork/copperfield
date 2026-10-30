@@ -32,12 +32,10 @@ import { myTeamId } from "../../../session";
 import { now } from "../../../clock";
 import { MATCHUPS, matchupHref } from "../../routes";
 import { wholeNumber } from "../../../wholeNumber";
-import { sheetEvents } from "./events";
 import { DEFAULT_SIDE_SORT, matchupTabs, matchupView, pickTie, statsHref, statsOf, tieTabs } from "./views";
 import { boardCategories, boardColumns } from "./sideRows";
 import { FootFrame } from "../../../components/shell/FootFrame";
 import TabStrip from "../../../components/shell/TabStrip";
-import { everyone, subMarks } from "./subs";
 import ScoreboardDown from "../../ScoreboardDown";
 import StatsViews from "./StatsViews";
 import { roundUnderway } from "../../../football";
@@ -137,9 +135,6 @@ export default async function HeadToHeadPage({
   const opposition = oppositionByClub(squads.snapshot);
   const listed = started ? null : unplayedLists({ pairing, rostered, shows, arranged, clubs, opposition });
 
-  // Who came on and off, which only the pitch marks.
-  const events = view === "lineups" ? await sheetEvents(arranged.values(), squads.snapshot) : new Map();
-
   // The league's categories either side has a count in, so both boards carry the same columns.
   const printed = boardCategories(categories);
   const columns = boardColumns(printed, arranged.values(), { ...yours?.counts, ...theirs?.counts });
@@ -168,7 +163,7 @@ export default async function HeadToHeadPage({
             rows={detail.rows}
             bench={detail.bench}
             widest={widest}
-            subs={subMarks(everyone(detail), events)}
+            subs={sheet?.subs}
             autoSubs={sheet?.marks}
             breakdown={priced?.breakdown ?? {}}
             played={priced?.played}
