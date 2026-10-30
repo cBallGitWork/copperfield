@@ -4900,6 +4900,10 @@ Craig: *"/players/04fk1 — pages are broke"*. 19 of 20 player pages answered 20
   outside one each is one reading per hour, keyed by the hour so an older one is never served, and only on demand
   (`apps/companion/app/fplClock.ts`). The live feed is read only by the screens that print a man's lines
   (`footballLinesNow`); the rest take `footballNow`, fixtures alone. Health's walk is paced a page every 2.5 s.
+  **Superseded 30 Oct 2026:** keyed by the hour, every quiet key went cold on the hour (44 of a day's 105 FPL refusals
+  fell in hh:00–01), and a refusal fell back to the live key, which only a match window refreshes, so a window's first
+  view drew the last window's reading, days old. Now one key per read on both clocks, stamped `takenAt`: a reading
+  under an hour old is served while it refreshes, an older one waits on FPL and is drawn only when FPL refuses.
 - Production's runtime logs are readable from this Mac: `npx vercel@latest logs --project
   prj_KdNA8KG6xpLprVm0HISzLUXhjpC4 --environment production --level error --since 2h --expand`.
 
