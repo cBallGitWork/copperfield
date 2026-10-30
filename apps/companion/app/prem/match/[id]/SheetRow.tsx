@@ -28,7 +28,6 @@ export default function SheetRow({
   join,
   card,
   hurt,
-  opensBench,
 }: {
   row: Named;
   holders: Holders;
@@ -38,7 +37,6 @@ export default function SheetRow({
   /** The app's player card for him, or none where the league does not list him. */
   card: SquadPlayerDetail | undefined;
   hurt: boolean;
-  opensBench: boolean;
 }) {
   const { man, did } = row;
   // Grey is "not on the pitch at the whistle" — CM's `cm9900/02.jpg` rule.
@@ -46,11 +44,7 @@ export default function SheetRow({
   const line = join.line(man.code);
 
   return (
-    <tr
-      className={`${ROW_RULE} ${finished ? "" : "cm-out"} ${
-        opensBench ? "border-t-4 border-t-bg" : ""
-      }`}
-    >
+    <tr className={`${ROW_RULE} ${finished ? "" : "cm-out"}`}>
       <PositionTile positions={positions} cell />
       {/* CM's card block between the index and the name. */}
       <td className="w-3 px-0">

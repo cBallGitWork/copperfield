@@ -1,7 +1,8 @@
 import type { Club, PlManMatch, PlTeamSheet, SquadPlayerDetail } from "@epl/core";
 import { TILE_WIDTH } from "../../../components/league/PositionTile";
 import { clubIndex } from "../../../components/football/clubIndex";
-import { BOARD, PANEL_FLUSH, phoneShows } from "@/app/desk";
+import { Fragment } from "react";
+import { BOARD, MINOR_LABEL, PANEL_FLUSH, phoneShows } from "@/app/desk";
 import type { Match } from "./match";
 import SheetRow from "./SheetRow";
 import SideBySide from "./SideBySide";
@@ -76,16 +77,23 @@ function Side({
         </colgroup>
         <tbody>
           {rows.map((row, at) => (
-            <SheetRow
-              key={`${row.man.code ?? row.man.name}-${row.man.shirt ?? at}`}
-              row={row}
-              holders={holders}
-              positions={fantraxPositions(holders.league, row.man.code)}
-              join={join}
-              card={forCode(cards, row.man.code)}
-              hurt={row.man.code !== null && injured.has(row.man.code)}
-              opensBench={at === bench}
-            />
+            <Fragment key={`${row.man.code ?? row.man.name}-${row.man.shirt ?? at}`}>
+              {at === bench ? (
+                <tr>
+                  <td colSpan={4} className={`${MINOR_LABEL} px-1.5 pb-1 pt-3`}>
+                    Subs
+                  </td>
+                </tr>
+              ) : null}
+              <SheetRow
+                row={row}
+                holders={holders}
+                positions={fantraxPositions(holders.league, row.man.code)}
+                join={join}
+                card={forCode(cards, row.man.code)}
+                hurt={row.man.code !== null && injured.has(row.man.code)}
+              />
+            </Fragment>
           ))}
         </tbody>
       </table>
