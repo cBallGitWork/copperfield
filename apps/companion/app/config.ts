@@ -146,6 +146,9 @@ export const FPL_REST_MS = 60_000;
  *  Vercel for stretches of an hour and more and asking every minute only adds to them (19 Oct 2026). */
 export const FPL_REST_MAX_MS = 240_000;
 
+/** How long the league's reads fail at once after one Fantrax timeout, in ms: short, so a Try again soon asks again. */
+export const FANTRAX_REST_MS = 10_000;
+
 /** How long one reading of the branch's predicted elevens is held, in seconds: they move hourly at most, Thursday to
  *  Saturday's lock. */
 export const XI_REVALIDATE = 600;
