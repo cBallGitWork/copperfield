@@ -13,30 +13,40 @@ export const CARGO: Partial<Record<Assignment["kind"], "ranks" | "teamNews" | "r
   presser: "teamNews",
 };
 
-/** Every written surface of a filed story, as one string to check names in: the body, the tie lines and every
- *  cargo row's written member, never the row itself, whose ids would read as names. */
-export function prose(story: PublishedStory): string {
-  const extras = story.extras ?? {};
+/** Every written surface of a column, flat as the writer returns it: the deck, the body, the tie lines and every cargo
+ *  row's written member, never the row itself, whose ids would read as names. The headline and a manager's quotes only
+ *  where asked. Each part on its own line, which the name check reads as a sentence opening. */
+export function surfaces(column: Record<string, unknown>, { withHeadline, withQuotes }: { withHeadline: boolean; withQuotes: boolean }): string {
+  const rows = (key: string) => (Array.isArray(column[key]) ? (column[key] as unknown[]).map(recordOrEmpty) : []);
+  const list = (value: unknown) => (Array.isArray(value) ? value : []);
+  const teamNews = rows("teamNews");
   const parts: unknown[] = [
-    // Not the headline: it is title case, so every ordinary word in it would report as a stranger.
-    story.deck,
-    story.body,
-    ...(story.ties ?? []).map((tie) => tie.line),
-    ...lines(extras.ranks),
-    // The Team Sheet's rows are the article: the club's line, each man's note and the quote it carries.
-    ...lines(extras.teamNews),
-    ...(extras.teamNews ?? []).flatMap((row) => (row.men ?? []).map((man) => man.note)),
-    ...(extras.teamNews ?? []).map((row) => row.quote?.text),
-    ...(extras.reports ?? []).flatMap((r) => [r.standfirst, r.account, ...r.sections.flatMap((s) => [s.head, s.pitch, s.stake])]),
-    ...(extras.draft?.matchups ?? []).flatMap((m) => [m.standfirst, ...m.paragraphs]),
+    ...(withHeadline ? [column.headline] : []),
+    column.deck,
+    column.body,
+    ...rows("ties").map((tie) => tie.line),
+    ...lines(column.ranks),
+    // The Team Sheet's rows are the article: the club's line, each man's note and, where asked, the quote it carries.
+    ...lines(column.teamNews),
+    ...teamNews.flatMap((row) => list(row.men).map((man) => recordOrEmpty(man).note)),
+    ...(withQuotes ? teamNews.map((row) => recordOrEmpty(row.quote).text) : []),
+    ...rows("reports").flatMap((r) => [r.standfirst, r.account, ...list(r.sections).map(recordOrEmpty).flatMap((s) => [s.head, s.pitch, s.stake])]),
+    ...list(recordOrEmpty(column.draft).matchups).map(recordOrEmpty).flatMap((m) => [m.standfirst, ...list(m.paragraphs)]),
   ];
-  // Each part on its own line, which the check reads as a sentence opening.
   return parts.filter((part): part is string => typeof part === "string").join("\n");
+}
+
+/** A filed story's surfaces, its cargo folded back to the column's top level. */
+const flat = (story: PublishedStory): Record<string, unknown> => ({ ...story.extras, ...story });
+
+/** What the name check reads: not the headline, which is title case, so every ordinary word in it would report as a stranger. */
+export function prose(story: PublishedStory): string {
+  return surfaces(flat(story), { withHeadline: false, withQuotes: true });
 }
 
 /** The same with the headline, which is what the banned list reads: the headline is where "bank" did its damage. */
 export function headlineAndProse(story: PublishedStory): string {
-  return `${story.headline}\n${prose(story)}`;
+  return surfaces(flat(story), { withHeadline: true, withQuotes: true });
 }
 
 /** Each cargo row's written `line`, or the row itself where it is a string; anything else is dropped, not stringified. */

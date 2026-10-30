@@ -35,7 +35,10 @@ export async function sendBackOnce<A extends { faults: readonly Fault[] }>(job: 
   const faults = serious(attempts[0].faults);
   if (faults.length > 0) {
     say(`  ↩ ${job.desk}: ${faults.length} faults, sent back once: ${(job.summary ?? faultSummary)(faults)}`);
-    const second = await writeColumn(job.voice, `${job.brief}\n\n${job.sendBack(faults)}`, undefined, job.tier ?? "writer", job.maxTokens).catch(() => null);
+    const second = await writeColumn(job.voice, `${job.brief}\n\n${job.sendBack(faults)}`, undefined, job.tier ?? "writer", job.maxTokens).catch((error: unknown) => {
+      say(`  ⚠ ${job.desk} rewrite failed, filing the first column: ${error instanceof Error ? error.message : String(error)}`);
+      return null;
+    });
     if (second !== null) attempts.push(job.read(second));
   }
   return attempts;

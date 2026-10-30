@@ -1,27 +1,16 @@
-import { NEWS_GAPS, RELATIVE_DAYS, banned, recordOrEmpty, styleFaults, teamSheetGaps, unbackedFit, type TeamSheetExpect } from "@epl/core";
-import { writeColumn, type Say } from "./newsroom";
+import { NEWS_GAPS, RELATIVE_DAYS, banned, styleFaults, teamSheetGaps, unbackedFit, type Fault, type TeamSheetExpect } from "@epl/core";
+import { surfaces } from "./checks";
+import type { Say } from "./newsroom";
+import { sendBackOnce } from "./sendBack";
 import { sendBack } from "./voice/house";
 
 // The sub-editor's pass: the column read back against the register and sent back ONCE if it reached for a banned
 // phrase, an American word or an em dash; a second offence files anyway, and says so. It reads the raw column, before `file()`, so checking never
 // stamps two `filedAt` instants on one story.
 
-/** The written surfaces of a column as one string, the headline IN it (unlike `checks.prose()`): it is where a
- *  banned word did its damage, five times on one front page. A team-news row's line and notes are the Team Sheet. */
-export function written(column: Record<string, unknown>): string {
-  return [...["headline", "deck", "body"].map((key) => column[key]), ...rowWords(column.teamNews)]
-    .filter((value): value is string => typeof value === "string")
-    .join("\n");
-}
-
-/** Each team-news row's own words, its line and each man's note; never the quote, which is a manager's and is carried. */
-function rowWords(rows: unknown): unknown[] {
-  if (!Array.isArray(rows)) return [];
-  return rows.flatMap((row) => {
-    const { line, men } = recordOrEmpty(row);
-    return [line, ...(Array.isArray(men) ? men.map((man) => recordOrEmpty(man).note) : [])];
-  });
-}
+/** The written surfaces of a column, the headline IN it (unlike `checks.prose()`): it is where a banned word did its
+ *  damage, five times on one front page. Never a manager's quote, which is his and is carried. */
+export const written = (column: Record<string, unknown>): string => surfaces(column, { withHeadline: true, withQuotes: false });
 
 type PresserFaults = { phrases: string[]; fit: string[]; days: string[]; lines: string[]; quotes: string[]; notes: string[] };
 
@@ -32,7 +21,6 @@ export function presserFaults(column: Record<string, unknown>, expected: TeamShe
 }
 
 const NOTHING_OWED: TeamSheetExpect = { reported: [], quoted: [], noted: [] };
-const faulted = (faults: PresserFaults) => Object.values(faults).some((each) => each.length > 0);
 
 /** One part of a send-back: its words around the names, or nothing when there are none. */
 const ask = (names: readonly string[], words: (list: string) => string) => (names.length === 0 ? [] : [words(names.join(", "))]);
@@ -59,28 +47,43 @@ export async function writeSubedited(
   /** What the Team Sheet's brief gave it, so a column that drops it is sent back. */
   expected?: TeamSheetExpect,
 ): Promise<Record<string, unknown>> {
-  const column = await writeColumn(system, brief);
-  const first = review(column, kind, expected);
-  if (first.offended.length === 0 && !faulted(first.faults)) return column;
-
-  say(`  ↩ ${kind} printed ${first.named.join(", ")}, sending it back once.`);
-  const notes = [first.offended.length === 0 ? "" : sendBack(first.offended), sendBackPresser(first.faults)].filter((part) => part !== "");
-  const rewrite = await writeColumn(system, `${brief}\n\n${notes.join("\n\n")}`).catch((error: unknown) => {
-    say(`  ⚠ ${kind} rewrite failed, filing the first column: ${error instanceof Error ? error.message : String(error)}`);
-    return null;
-  });
-  if (rewrite === null) return column;
-  const left = review(rewrite, kind, expected).named;
-  if (left.length > 0) say(`  ⚠ ${kind} rewrite still prints ${left.join(", ")}, filing it anyway.`);
-  return rewrite;
+  const read = (raw: Record<string, unknown>) => ({ raw, faults: review(raw, kind, expected) });
+  const attempts = await sendBackOnce({ desk: kind, voice: system, brief, read, sendBack: subeditSendBack, summary: named }, say);
+  const filed = attempts.at(-1)!;
+  if (attempts.length > 1 && filed.faults.length > 0) say(`  ⚠ ${kind} rewrite still prints ${named(filed.faults)}, filing it anyway.`);
+  return filed.raw;
 }
 
-/** The column's banned and style phrases, its Team Sheet faults, and every one of them named for the log. */
-function review(column: Record<string, unknown>, kind: string, expected?: TeamSheetExpect) {
+/** A banned or style phrase's check; every other sub-edit fault's check is a `PresserFaults` key. */
+const BANNED_CHECK = "banned";
+const PRESSER_KEYS = ["phrases", "fit", "days", "lines", "quotes", "notes"] as const satisfies readonly (keyof PresserFaults)[];
+
+/** The column's banned and style phrases, then its Team Sheet faults, each a fault whose evidence is the phrase or the name. */
+function review(column: Record<string, unknown>, kind: string, expected?: TeamSheetExpect): Fault[] {
   const text = written(column);
-  const offended = [...banned(text), ...styleFaults(text)];
-  const faults = kind === "presser" ? presserFaults(column, expected) : presserFaults({});
-  const gaps = [...faults.lines.map((club) => `${club} with no line`), ...faults.quotes.map((club) => `${club} with no quote`), ...faults.notes.map((name) => `${name} with no note`)];
-  const named = [...offended, ...faults.phrases, ...faults.days, ...faults.fit.map((name) => `${name} FIT with a complaint`), ...gaps];
-  return { offended, faults, named };
+  const presser = kind === "presser" ? presserFaults(column, expected) : presserFaults({});
+  const fault = (check: string) => (evidence: string): Fault => ({ section: "column", check, severity: "send-back", evidence });
+  return [...[...banned(text), ...styleFaults(text)].map(fault(BANNED_CHECK)), ...PRESSER_KEYS.flatMap((key) => presser[key].map(fault(key)))];
+}
+
+/** The send-back the writer reads: the banned phrases quoted, then the Team Sheet's faults in its own terms. */
+function subeditSendBack(faults: readonly Fault[]): string {
+  const of = (check: string) => faults.filter((fault) => fault.check === check).map((fault) => fault.evidence);
+  const offended = of(BANNED_CHECK);
+  const presser = Object.fromEntries(PRESSER_KEYS.map((key) => [key, of(key)])) as PresserFaults;
+  return [offended.length === 0 ? "" : sendBack(offended), sendBackPresser(presser)].filter((part) => part !== "").join("\n\n");
+}
+
+/** How the log names a man or a club, with what is wrong with him; a phrase is named as printed. */
+const LOGGED: Partial<Record<string, (evidence: string) => string>> = {
+  fit: (name) => `${name} FIT with a complaint`,
+  lines: (club) => `${club} with no line`,
+  quotes: (club) => `${club} with no quote`,
+  notes: (name) => `${name} with no note`,
+};
+
+/** The log's list: phrases, days, fit men, then the gaps. */
+function named(faults: readonly Fault[]): string {
+  const order = [BANNED_CHECK, "phrases", "days", "fit", "lines", "quotes", "notes"];
+  return order.flatMap((check) => faults.filter((fault) => fault.check === check).map((fault) => (LOGGED[check] ?? String)(fault.evidence))).join(", ");
 }
