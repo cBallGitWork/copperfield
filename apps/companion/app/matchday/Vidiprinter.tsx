@@ -48,8 +48,10 @@ const LINE = "cm-row flex items-start gap-2 px-2 py-1.5 font-chrome lg:py-1";
 const NAME = "text-sm font-bold lg:text-base";
 const TEXT = "text-xs lg:text-sm";
 const WORD = `${TEXT} font-bold uppercase`;
-/** The event's own column, one width so the names beside it line up. `Booked` and `Injury` are the longest. */
-const WORD_SLOT = `flex w-[4.75rem] shrink-0 items-center gap-1 lg:w-24 min-h-5 ${WORD}`;
+/** The minute's own column (Craig, 30 Oct 2026), right-aligned so `90+5′` and `7′` end together. */
+const MINUTE_SLOT = `w-10 shrink-0 text-right numeric min-h-5 leading-5 lg:w-12 ${TEXT} text-ink`;
+/** The event's own column: its coloured icon on a phone, so both men fit one row at 390; the word joins it on a desk. */
+const WORD_SLOT = `flex w-5 shrink-0 items-center gap-1 lg:w-24 min-h-5 ${WORD}`;
 
 export default function Vidiprinter({
   lines,
@@ -80,7 +82,7 @@ export default function Vidiprinter({
           <p className="px-2 py-3 text-sm text-muted">Nothing on the vidiprinter yet.</p>
         ) : (
           <ul className="cm-rows">
-            {lines.map((line) => (
+            {lines.filter((line) => line.kind !== "half-time").map((line) => (
               <Row key={line.key} row={printerRow(line, byCode, clubs, byMan, owners)} mine={mine} />
             ))}
           </ul>
@@ -94,12 +96,14 @@ function Row({ row, mine }: { row: PrinterRow; mine: string | null }) {
   const glyph = GLYPH[row.kind];
   return (
     <li className={LINE}>
+      <span className={MINUTE_SLOT}>{row.minute}</span>
       <span className={`${WORD_SLOT} ${TONE[row.kind]}`}>
         {glyph === null ? null : <EventIcon glyph={glyph} />}
-        {row.word}
+        {row.word === null ? null : <span className="sr-only lg:not-sr-only">{row.word}</span>}
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5">
+        {/* Scorer and assister, or both men of a change, on one row (Craig, 30 Oct 2026): a long holder truncates. */}
+        <span className="flex min-w-0 items-center gap-x-1.5">
           {row.sides === null ? null : (
             <>
               <Side side={row.sides[0]} />
@@ -107,14 +111,13 @@ function Row({ row, mine }: { row: PrinterRow; mine: string | null }) {
               <Side side={row.sides[1]} />
             </>
           )}
-          {row.man === null ? null : <Man man={row.man} minute={row.minute} mine={mine} />}
+          {row.man === null ? null : <Man man={row.man} mine={mine} />}
           {row.second === null ? null : (
             <>
-              <span className={`${WORD} text-muted`}>{row.second.word}</span>
-              <Man man={row.second.man} minute={null} mine={mine} />
+              <span className={`${WORD} shrink-0 text-muted`}>{row.second.word}</span>
+              <Man man={row.second.man} mine={mine} crest={false} />
             </>
           )}
-          {row.score === null ? null : <span className={`${TEXT} numeric whitespace-nowrap text-ink`}>{row.score}</span>}
         </span>
         {row.counts.length === 0 ? null : (
           <span className={`${TEXT} text-muted`}>
@@ -137,13 +140,13 @@ function Crest({ club }: { club: Club | null }) {
   return club === null ? null : <Image src={crestUrl(club)} alt="" width={20} height={20} className="h-4 w-4 shrink-0 object-contain lg:h-5 lg:w-5" />;
 }
 
-/** One man: his club's crest, his name, the minute and who holds him, bracketed as Sky prints it, then his points. */
-function Man({ man, minute, mine }: { man: PrinterMan; minute: string | null; mine: string | null }) {
+/** One man: his club's crest, his name and who holds him, bracketed as Sky prints it, then his points. */
+function Man({ man, mine, crest = true }: { man: PrinterMan; mine: string | null; crest?: boolean }) {
+  // The name never gives way; the holder truncates first. The second man shares the first's club, so no second crest.
   return (
     <span className="flex min-w-0 items-center gap-1">
-      <Crest club={man.club} />
-      <span className={`${NAME} min-w-0 truncate ${man.owner !== null && man.owner.teamId === mine ? "text-accent" : "text-ink"}`}>{man.name}</span>
-      {minute === null ? null : <span className={`${TEXT} numeric shrink-0 text-ink`}>({minute})</span>}
+      {crest ? <Crest club={man.club} /> : null}
+      <span className={`${NAME} shrink-0 whitespace-nowrap ${man.owner !== null && man.owner.teamId === mine ? "text-accent" : "text-ink"}`}>{man.name}</span>
       {man.owner === null ? null : (
         <span className={`${TEXT} min-w-0 truncate ${man.owner.teamId === mine ? "text-accent" : "text-ink"}`}>({man.owner.teamName})</span>
       )}

@@ -32,25 +32,24 @@ const line = (over: Partial<PrinterLine>): PrinterLine => ({
 const row = (over: Partial<PrinterLine>) => printerRow(line(over), fixtures, clubs, players, owners);
 
 describe("printerRow", () => {
-  it("prints a whistle as its letters and both sides with their crests, a score once one stands", () => {
+  it("prints a whistle as its letters and both sides by crest and three letters, a score once one stands", () => {
     expect(row({ kind: "kick-off", score: { home: 0, away: 0 } })).toMatchObject({
       word: "KO",
       minute: null,
       sides: [
-        { club: ARSENAL, name: "Arsenal", score: null },
-        { club: EVERTON, name: "Everton", score: null },
+        { club: ARSENAL, name: "ARS", score: null },
+        { club: EVERTON, name: "EVE", score: null },
       ],
     });
     expect(row({ kind: "full-time", score: { home: 2, away: 1 } }).sides?.map((side) => side.score)).toEqual([2, 1]);
   });
 
-  it("prints a goal with its minute, scorer and assister with their clubs and points, and the score it made", () => {
+  it("prints a goal with its minute, scorer and assister with their clubs and points, and no score: the whistles carry it (Craig, 30 Oct 2026)", () => {
     expect(row({ man: 10, points: 5, second: 20, secondPoints: null, score: { home: 1, away: 0 } })).toMatchObject({
       word: "Goal",
       minute: "7′",
       man: { name: "Saka", club: ARSENAL, owner: { teamId: "t1", teamName: "Raccoons" }, points: "+5" },
       second: { word: "As", man: { name: "Pickford", club: EVERTON, owner: null, points: null } },
-      score: "ARS 1–0 EVE",
       sides: null,
     });
   });
@@ -62,7 +61,7 @@ describe("printerRow", () => {
 
   it("prints a change as the man coming on and the man taken off, with his counts and their points", () => {
     const change = row({ kind: "injury", man: 20, second: 10, counts: [{ name: "DefCon", value: "1", points: 2 }] });
-    expect(change).toMatchObject({ word: "Injury", second: { word: "Off", man: { name: "Saka" } }, score: null });
+    expect(change).toMatchObject({ word: "Injury", second: { word: "Off", man: { name: "Saka" } } });
     expect(change.counts).toEqual([{ name: "DefCon", value: "1", points: "+2" }]);
   });
 

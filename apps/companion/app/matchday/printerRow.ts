@@ -1,6 +1,6 @@
 import { type Club, type Fixture, type FootballPlayer, type PlayerOwner, type PrinterKind, type PrinterLine, DASH, signed } from "@epl/core";
 
-// One vidiprinter line in words: what happened, the men with their clubs, holders and league points, and the match.
+// One vidiprinter line in words: what happened, the men with their clubs, holders and league points.
 
 /** A man on a line: his club for the crest, who holds him, and what the action earned him. */
 export interface PrinterMan {
@@ -32,8 +32,6 @@ export interface PrinterRow {
   second: { word: string; man: PrinterMan } | null;
   /** Both sides, on a whistle. */
   sides: [PrinterSide, PrinterSide] | null;
-  /** The score a goal made, as `ARS 1–0 EVE`; null on the rest. */
-  score: string | null;
   /** The league's counts in its own words, each with what he did and its points. */
   counts: { name: string; value: string | null; points: string }[];
 }
@@ -56,7 +54,6 @@ const WORDS: Record<PrinterKind, string | null> = {
 const SECOND_WORDS: Partial<Record<PrinterKind, string>> = { goal: "As", "penalty-goal": "As", sub: "Off", injury: "Off" };
 
 const WHISTLES = new Set<PrinterKind>(["kick-off", "half-time", "full-time"]);
-const GOALS = new Set<PrinterKind>(["goal", "penalty-goal", "own-goal"]);
 
 /** A figure worth printing: a nought moved nothing. */
 const pointsOf = (points: number | null): string | null => (points === null || points === 0 ? null : signed(points));
@@ -97,14 +94,10 @@ export function printerRow(
     second: second === null || secondWord === undefined ? null : { word: secondWord, man: second },
     sides: whistle
       ? [
-          { club: home, name: home?.name ?? DASH, score: score?.home ?? null },
-          { club: away, name: away?.name ?? DASH, score: score?.away ?? null },
+          { club: home, name: home?.shortName ?? DASH, score: score?.home ?? null },
+          { club: away, name: away?.shortName ?? DASH, score: score?.away ?? null },
         ]
       : null,
-    score:
-      GOALS.has(line.kind) && line.score !== null
-        ? `${home?.shortName ?? DASH} ${line.score.home}–${line.score.away} ${away?.shortName ?? DASH}`
-        : null,
     counts: line.counts.map((count) => ({ name: count.name, value: count.value, points: signed(count.points) })),
   };
 }

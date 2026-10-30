@@ -68,13 +68,15 @@ hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers print
    Saturday and the other Sunday, and unreadable, because it said neither.
 3. **`Vidiprinter`**, the second view (`?view=vidiprinter`; Craig, 30 Oct 2026, reversing the 19 Oct drop): one
    match day at a time with Scores' arrows, strictly newest first across matches (match order within one), with no
-   per-match grouping. Every match's kick-off, half-time and full time with both crests and the score; every man's
+   per-match grouping. Every match's kick-off and full time with both crests, three letters and the score (no half-time,
+   and no score on a goal: Craig, 30 Oct 2026); every man's
    goals (an own goal with no assister), assists and red cards, drafted or not; a drafted man's bookings; and every
    change a drafted man is in. The old teleprinter's look is back (Craig, 30 Oct 2026: *"wheres the ui from old
    vidi? no colour / needs team logos / icons for goals/subs etc / injury subs too / a +1 for the actual fantasy
    score"*): one row per event with both men (scorer and `As` assister; the man on and `Off` the man taken off),
-   each with his club's crest, the minute and his holder bracketed after his name; the event's word in a fixed slot
-   beside `EventIcon`'s glyph, inked by meaning (a goal green, an own goal, red card and injury red, a booking
+   on ONE row (the first man's crest only; names never cut, a holder truncates first), the minute in its own
+   right-aligned column, his holder bracketed after his name; on a phone the event is `EventIcon`'s glyph alone, the
+   word joining it on a desk, inked by meaning (a goal green, an own goal, red card and injury red, a booking
    yellow as the match report has it, a change and a whistle amber). A change the commentary files "because of an
    injury" reads `Injury` with the cross. A man in a manager's eleven carries the league's points for the action
    at the slot he was played in, in cyan (`+4`, `-1`); a reserve and an undrafted man carry none. The league's
