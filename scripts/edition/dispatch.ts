@@ -46,7 +46,7 @@ export interface DeskContext {
   reports: ReadonlyMap<string, ReportsJob>;
   /** The Bin XI's side, brief and cargo; null unless it is due this firing. */
   bin: BinDesk | null;
-  drafts: ReadonlyMap<"saturday" | "gameweek", DraftJob>;
+  drafts: ReadonlyMap<"gameweek", DraftJob>;
   /** Each trade this firing commissioned, by its covered-key. */
   trades: ReadonlyMap<string, TradeJob>;
   /** This week's press-conference signals, for men the league holds; empty until the intel export lands. */
