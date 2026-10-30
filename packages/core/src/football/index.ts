@@ -60,6 +60,7 @@ export type { PlCommentaryLine } from "./premierleague/map";
 export { plNameParts, plPlayerCodes, plTeamSheets } from "./premierleague/teamSheet";
 export type { PlSquadMan, PlTeamSheet } from "./premierleague/teamSheet";
 export { plManMatches } from "./premierleague/sheetEvents";
+export { bareMinute } from "./premierleague/fixtureEvents";
 export { sheetMoments } from "./premierleague/sheetMoments";
 export type { SheetMoment, SheetMomentKind } from "./premierleague/sheetMoments";
 export type { PlManMatch } from "./premierleague/sheetEvents";

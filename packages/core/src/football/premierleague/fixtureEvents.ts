@@ -20,6 +20,11 @@ export function addedOf(event: RawPlFixtureEvent): number | undefined {
   return added > 0 ? added : undefined;
 }
 
+/** A minute as football prints it: the feed pads it (`"07"`, `"07'00"`), and the seconds go. */
+export function bareMinute(label: string): string {
+  return (label.split("'")[0] ?? "").replace(/^0(?=\d)/u, "");
+}
+
 /** A printed clock's minute, added time dropped: `"56'00"` and `"56"` are 56, `"90+1"` is 90. */
 export function clockMinute(label: string | undefined): number | null {
   if (label === undefined) return null;

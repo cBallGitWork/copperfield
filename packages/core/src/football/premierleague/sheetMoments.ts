@@ -1,5 +1,5 @@
 import { plPlayerCodes } from "./teamSheet";
-import { BOOKING, GOAL, OWN_GOAL, PENALTY, SUBSTITUTION } from "./fixtureEvents";
+import { BOOKING, GOAL, OWN_GOAL, PENALTY, SUBSTITUTION, bareMinute } from "./fixtureEvents";
 import type { RawPlFixture, RawPlFixtureEvent } from "./raw";
 
 // One match's timed moments off the fixture detail's `events`, for the vidiprinter: whistles, cards, changes, goals.
@@ -48,8 +48,7 @@ export function sheetMoments(detail: RawPlFixture, fixtureCode: number, optaToCo
         key: `${fixtureCode}:${kind}:${event.clock.secs}:${event.personId ?? ""}`,
         fixtureCode,
         kind,
-        // `"07'00"` prints 7 and `"45+4'00"` 45+4.
-        minute: (event.clock.label.split("'")[0] ?? "").replace(/^0(?=\d)/u, ""),
+        minute: bareMinute(event.clock.label),
         seconds: event.clock.secs,
         at: event.time?.millis ?? null,
         man,

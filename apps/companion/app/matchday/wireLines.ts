@@ -1,5 +1,5 @@
 import type { FootballPlayer, FootballSnapshot, MatchEvent, MatchEventKind, PlayerOwner } from "@epl/core";
-import { playerByCode } from "@epl/core";
+import { bareMinute, playerByCode } from "@epl/core";
 
 // The ownership join: each goal's men, and whether the reader holds them.
 // At the app edge, not in core: the football and league layers may not import each other.
@@ -54,8 +54,7 @@ export function wireLines(
   const lines = events.map((event) => ({
     key: String(event.id),
     fixtureCode: event.fixtureCode,
-    // The feed's clock pads the minute ("09"); football prints it bare.
-    minute: event.minute.replace(/^0(?=\d)/, ""),
+    minute: bareMinute(event.minute),
     kind: event.kind,
     man: manAt(event, 0),
     second: SECOND[event.kind] === true ? manAt(event, 1) : null,

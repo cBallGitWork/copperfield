@@ -1,3 +1,4 @@
+import { bareMinute } from "../football/premierleague/fixtureEvents";
 import type { SheetMoment } from "../football/premierleague/sheetMoments";
 import type { Fixture, FootballPlayer, MatchEvent, MatchEventKind } from "../football/types";
 import {
@@ -83,7 +84,7 @@ export function vidiprinter(input: {
       key: `goal:${event.id}`,
       fixtureCode: event.fixtureCode,
       kind: event.kind,
-      minute: event.minute.replace(/^0(?=\d)/u, ""),
+      minute: bareMinute(event.minute),
       at: stamp?.at ?? event.absolute,
       man: event.players[0] ?? null,
       second: event.players[1] ?? null,
