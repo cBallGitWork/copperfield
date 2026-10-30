@@ -25,8 +25,8 @@ import {
   type ReportsDraft,
 } from "@epl/core";
 import { namesOfClub, plainStandfirst, reportsCargo } from "@epl/core";
-import { writeColumn, type Say } from "./newsroom";
-import { serious } from "./sendBack";
+import { helperFailed, spentSince, tokensSpent, writeColumn, type Say, type Spent } from "./newsroom";
+import { lineEditBrief, serious } from "./sendBack";
 import { pastReports } from "./reportsPast";
 import type { ReportsJob } from "./reports";
 import { FAN_VOICE, LINE_EDIT_VOICE, PUN_VOICE, REPORTS_VOICE, reportsSendBack } from "./voice/reports";
@@ -38,7 +38,7 @@ interface ReportsLog {
   attempts: { faults: Fault[] }[];
   fan: Fault[];
   kept: Record<number, "first" | "rewrite" | "plain">;
-  usage: { input: number; output: number };
+  usage: Spent;
 }
 
 export async function writeReports(
@@ -50,11 +50,8 @@ export async function writeReports(
   /** `sendBack: false` is a proof's test mode: the first attempt stands with its faults logged, and calls are saved. */
   options: { sendBack?: boolean } = {},
 ): Promise<{ draft: ReportsDraft; brief: string; log: ReportsLog }> {
-  const usage = { input: 0, output: 0 };
-  const count = (u: { input_tokens?: number; output_tokens?: number }) => {
-    usage.input += u.input_tokens ?? 0;
-    usage.output += u.output_tokens ?? 0;
-  };
+  const mark = tokensSpent();
+  const failed = <T,>(step: string, instead: T) => helperFailed(say, "reports", step, instead);
   const blocks = new Map(desks.map((desk) => [desk.match.fixture.code, matchBlock(desk)]));
   const ctx = { desks, blocks, gameweek, past };
   const codes = desks.map((d) => d.match.fixture.code);
@@ -68,7 +65,7 @@ export async function writeReports(
     const chunk = desks.slice(at, at + REPORTS.perCall);
     const written = [...first.matches.values()].map((p) => `${p.standfirst} ${p.account}`).join("\n");
     const part = buildReportsBrief(day, gameweek, chunk) + (written === "" ? "" : `\n\nALREADY ON THE PAGE, not to be echoed:\n${written}`);
-    const draft = readReportsDraft(await writeColumn(REPORTS_VOICE, part, count, "writer", REPORTS.tokens), surnames, stakes);
+    const draft = readReportsDraft(await writeColumn(REPORTS_VOICE, part, "writer", REPORTS.tokens), surnames, stakes);
     if (first.headline === "") first.headline = draft.headline;
     if (first.headlineStory === undefined || first.headlineStory === "") first.headlineStory = draft.headlineStory;
     first.headlines.push(...draft.headlines);
@@ -80,21 +77,20 @@ export async function writeReports(
   // The desk strikes headlines that break a rule; the fan picks one of the rest, or none and a plain line prints.
   const names = desks.flatMap((d) => [...namesOfClub(d.match.home), ...namesOfClub(d.match.away), ...d.match.men.map((m) => m.name)]);
   // The pun writer's go, on the lead match alone; its candidates join the reporter's before the strike and the judge.
-  const puns = await writeColumn(PUN_VOICE, punBrief(desks[0], first.headlineStory ?? ""), count, "helper").then(readHeadlines).catch(() => ({ headlines: [], meanings: {} }));
+  const puns = await writeColumn(PUN_VOICE, punBrief(desks[0], first.headlineStory ?? ""), "helper").then(readHeadlines).catch(failed("pun writer", { headlines: [], meanings: {} }));
   first.headlines.push(...puns.headlines.filter((h) => !first.headlines.includes(h)));
   first.meanings = { ...first.meanings, ...puns.meanings };
   const candidates = survivors(first.headlines, names);
   for (const h of first.headlines) say(`    headline candidate: "${h}"${candidates.includes(h) ? "" : ` struck (${strike(h, names)})`}${first.meanings?.[h] === undefined ? "" : ` [${first.meanings[h]}]`}`);
-  const fanRaw = await writeColumn(FAN_VOICE, fanBrief(first, desks, candidates), count, "helper").catch(() => null);
+  const fanRaw = await writeColumn(FAN_VOICE, fanBrief(first, desks, candidates), "helper").catch(failed("fan's read-back", null));
   const fan = fanRaw === null ? [] : fanFaults(fanRaw, first, REPORTS.fanFlags);
   const chosen = fanRaw === null ? null : fanHeadline(fanRaw, candidates);
-  if (fanRaw === null) say("  ⚠ reports: the fan's read-back failed; the mechanical checks stand alone.");
 
   const sendable = serious([...faults1, ...fan]);
   const attempts = [{ draft: first, faults: [...faults1, ...fan] }];
   if (sendable.length > 0 && options.sendBack !== false) {
     say(`  ↩ reports: ${sendable.length} faults, sent back once`);
-    const again = await writeColumn(REPORTS_VOICE, `${brief}\n\n${reportsSendBack(sendable)}`, count, "writer", REPORTS.tokens).catch(() => null);
+    const again = await writeColumn(REPORTS_VOICE, `${brief}\n\n${reportsSendBack(sendable)}`, "writer", REPORTS.tokens).catch(failed("rewrite", null));
     if (again !== null) {
       const second = readReportsDraft(again, surnames, stakes);
       // The rewrite holds only the matches sent back; every other match is judged on its first attempt.
@@ -116,7 +112,7 @@ export async function writeReports(
   const fixes = faultySentences(headed, names);
   let draft = headed;
   if (fixes.length > 0) {
-    const edited = await writeColumn(LINE_EDIT_VOICE, fixes.map((f, i) => `${i + 1}. ${f.sentence} [${f.words.join(", ")}]`).join("\n"), count, "helper").catch(() => null);
+    const edited = await writeColumn(LINE_EDIT_VOICE, lineEditBrief(fixes), "helper").catch(failed("line edit", null));
     const lines = Array.isArray(edited?.lines) ? edited.lines.map(String) : [];
     draft = applyFixes(headed, fixes, lines);
     say(`  reports: line edit fixed ${fixes.length - faultySentences(draft, names).length} of ${fixes.length} sentences`);
@@ -131,13 +127,13 @@ export async function writeReports(
     say(`  ⚠ reports: match ${code} prints the plain line. ${why.join("; ") || "No attempt carried it."}`);
   }
   say(`  reports: headline ${headline === null ? `${chosen === null ? "none chosen" : `"${chosen}" dropped over the lead's plain line`}, the lead result prints` : `"${headline}"`} from ${candidates.length} of ${first.headlines.length} candidates`);
-  return { draft, brief, log: { attempts: attempts.map((a) => ({ faults: [...a.faults] })), fan, kept, usage } };
+  return { draft, brief, log: { attempts: attempts.map((a) => ({ faults: [...a.faults] })), fan, kept, usage: spentSince(mark) } };
 }
 
 /** A match-day report as a column the dispatch files: the day's headline, the lead's result as the deck, and the cargo. */
 export async function reportsColumn(job: ReportsJob, say: Say): Promise<Record<string, unknown>> {
   const { draft, log } = await writeReports(job.day, job.gameweek, job.desks, pastReports(job.day), say);
-  say(`  reports ${job.day}: kept ${JSON.stringify(log.kept)}; ${log.usage.input} tokens in, ${log.usage.output} out`);
+  say(`  reports ${job.day}: kept ${JSON.stringify(log.kept)}`);
   const lead = plainStandfirst(job.desks[0]).replace(/\.$/u, "");
   return { headline: draft.headline === "" ? lead : draft.headline, deck: lead, body: "", reports: reportsCargo(job.desks, draft) };
 }

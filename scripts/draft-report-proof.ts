@@ -17,7 +17,7 @@ import {
 import { draftDesk } from "./edition/draftDesk";
 import { toldThisGameweek } from "./edition/draftPast";
 import { draftColumn } from "./edition/draftWriter";
-import { storyOfColumn } from "./edition/newsroom";
+import { spentSince, storyOfColumn, tokensLine, tokensSpent } from "./edition/newsroom";
 import { STORY_BYLINE, editionName } from "./edition/voice/bylines";
 
 // The draft report for a past gameweek, never filed. No GAZETTA_PROOF_OUT prints the brief and calls no model; with one,
@@ -69,7 +69,9 @@ async function main(): Promise<void> {
     say(`\n---------- THE PAGE, unwritten ----------\n\n${plain("", draftCargo(gameweek, contexts, new Map(), desk.rankAfter))}`);
     return;
   }
+  const mark = tokensSpent();
   const column = await draftColumn({ gameweek, contexts, rankAfter: desk.rankAfter, pastHeadlines: desk.pastHeadlines, pastProse: desk.pastProse, told: toldThisGameweek(gameweek) }, say, { sendBack: !test });
+  say(`  draft report: ${tokensLine(spentSince(mark))}`);
   const slug = `proof-gw${gameweek}-draft-report`;
   const filedAt = new Date().toISOString();
   const { story } = storyOfColumn(column, {

@@ -31,11 +31,11 @@ interface SendBack<A> {
 
 /** The column read, then, when its serious faults send it back, the rewrite read after it; a failed rewrite leaves one. */
 export async function sendBackOnce<A extends { faults: readonly Fault[] }>(job: SendBack<A>, say: Say): Promise<A[]> {
-  const attempts = [job.read(await writeColumn(job.voice, job.brief, undefined, job.tier ?? "writer", job.maxTokens))];
+  const attempts = [job.read(await writeColumn(job.voice, job.brief, job.tier ?? "writer", job.maxTokens))];
   const faults = serious(attempts[0].faults);
   if (faults.length > 0) {
     say(`  ↩ ${job.desk}: ${faults.length} faults, sent back once: ${(job.summary ?? faultSummary)(faults)}`);
-    const second = await writeColumn(job.voice, `${job.brief}\n\n${job.sendBack(faults)}`, undefined, job.tier ?? "writer", job.maxTokens).catch((error: unknown) => {
+    const second = await writeColumn(job.voice, `${job.brief}\n\n${job.sendBack(faults)}`, job.tier ?? "writer", job.maxTokens).catch((error: unknown) => {
       say(`  ⚠ ${job.desk} rewrite failed, filing the first column: ${error instanceof Error ? error.message : String(error)}`);
       return null;
     });
@@ -48,4 +48,9 @@ export async function sendBackOnce<A extends { faults: readonly Fault[] }>(job: 
 export function faultsSendBack(faults: readonly Fault[], label: (section: string) => string): string {
   const lines = faults.map((fault) => `- ${label(fault.section)}: ${fault.check}${fault.evidence === "" ? "" : `, "${fault.evidence}"`}`);
   return `YOUR LAST ATTEMPT BROKE THESE RULES. Write every paragraph again, fixing each one without reaching for a synonym:\n${lines.join("\n")}`;
+}
+
+/** The line editor's brief: each sentence numbered, the words it must lose in brackets. */
+export function lineEditBrief(fixes: readonly { sentence: string; words: readonly string[] }[]): string {
+  return fixes.map((f, i) => `${i + 1}. ${f.sentence} [${f.words.join(", ")}]`).join("\n");
 }

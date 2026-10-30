@@ -21,7 +21,7 @@ import { matchdayInput } from "./edition/matchday";
 import { writeReports } from "./edition/reportsWriter";
 import { pastReports } from "./edition/reportsPast";
 import { proofText } from "./edition/reportsProofText";
-import { storyOfColumn, type Say } from "./edition/newsroom";
+import { storyOfColumn, tokensLine, type Say } from "./edition/newsroom";
 import { STORY_BYLINE, editionName } from "./edition/voice/bylines";
 
 // A match-day report for a past gameweek, written to scratch and never to the paper, so Craig can read it before anything files.
@@ -90,7 +90,7 @@ async function main(): Promise<void> {
     },
   );
   writeFileSync(join(out, `${slug}.story.json`), JSON.stringify(story, null, 2));
-  say(`Wrote ${slug} to ${out}. Kept: ${JSON.stringify(log.kept)}. Tokens in ${log.usage.input}, out ${log.usage.output}.`);
+  say(`Wrote ${slug} to ${out}. Kept: ${JSON.stringify(log.kept)}. ${tokensLine(log.usage)}.`);
   for (const [i, attempt] of log.attempts.entries()) say(`  attempt ${i + 1}: ${attempt.faults.map((f) => `${f.severity} ${f.section} ${f.check} [${f.evidence}]`).join("\n    ") || "clean"}`);
 }
 
