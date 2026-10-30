@@ -117,6 +117,7 @@ export default async function TeamPage({
           <Sheet
             {...drawn.sheet}
             marks={drawn.marks}
+            subs={drawn.subs}
             breakdown={drawn.live?.breakdown ?? {}}
             played={drawn.live?.played}
             news={drawn.news}

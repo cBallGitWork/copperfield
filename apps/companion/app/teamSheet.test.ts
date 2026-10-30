@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Fixture, FootballPlayer, FootballSnapshot, RosteredTeam } from "@epl/core";
+import type { Fixture, FootballPlayer, FootballSnapshot, PlManMatch, RosteredTeam } from "@epl/core";
 import type { ReadableSquads } from "./squads";
 import { teamSheet } from "./teamSheet";
 
@@ -12,7 +12,9 @@ const reads = vi.hoisted(() => ({
   benchOrder: vi.fn<(team: string, period: number, locked: boolean) => Promise<string[]>>(async () => ["elanga"]),
   readPoolNews: vi.fn(async () => ({ mainoo: { headline: "Mainoo a doubt" } })),
   squadLivePoints: vi.fn(async () => ({ points: new Map([["mainoo", 0], ["elanga", 2]]), breakdown: {}, counted: {}, counts: {}, played: { mainoo: 90 } })),
+  matchManEvents: vi.fn(async () => new Map<number, PlManMatch>()),
 }));
+vi.mock("./matchDetail", () => ({ matchManEvents: reads.matchManEvents }));
 vi.mock("./benchOrders", () => ({ benchOrder: reads.benchOrder }));
 vi.mock("./poolNews", async (original) => ({ ...(await original<typeof import("./poolNews")>()), readPoolNews: reads.readPoolNews }));
 vi.mock("./scoreboard", () => ({
@@ -81,5 +83,16 @@ describe("teamSheet", () => {
     expect(stage).toBe("unscored");
     expect(sheet.rows[0].players[0].points).toBeUndefined();
     expect(live).toBeNull();
+  });
+
+  // #192: only the head-to-head built these, in its page, so the Team tab's pitch drew no ▼65' or ▲66'.
+  it("carries who went off and who came on in his real match, the bench included", async () => {
+    const did = (onAt: number | null, offAt: number | null) => ({ onAt, offAt }) as PlManMatch;
+    reads.matchManEvents.mockResolvedValueOnce(new Map([[1, did(null, 65)], [2, did(52, null)]]));
+    const clubs = [1, 2].map((id) => ({ id, code: id, name: `C${id}`, shortName: `C${id}` }));
+    const at = (fantraxId: string, status: string, code: number) => man(fantraxId, status, { code, clubId: 1 });
+    const read = { ...squads("finished"), snapshot: { ...snapshot("finished"), clubs } } as ReadableSquads;
+    const { subs } = await teamSheet(read, { ...team, players: [at("mainoo", "ACTIVE", 1), at("elanga", "RESERVE", 2)] });
+    expect(subs).toEqual({ mainoo: { minute: 65, off: true }, elanga: { minute: 52, off: false } });
   });
 });
