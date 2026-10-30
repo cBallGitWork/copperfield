@@ -4,7 +4,9 @@ import {
   ASSISTS_FANTASY,
   ASSISTS_OFFICIAL,
   ASSISTS_TOTAL,
+  DEFCON,
   GOALS,
+  KEEPER_WORK,
   MINUTES,
   OWN_GOALS,
   RED_CARDS,
@@ -27,6 +29,8 @@ export interface PrinterCount {
   name: string;
   value: string | null;
   points: number;
+  /** Which family it is, for its icon; null for the rest. */
+  sort: "defcon" | "keeper" | null;
 }
 
 export interface PrinterLine {
@@ -167,6 +171,7 @@ function countsOf(categories: readonly LivePlayerCategory[] | undefined, names: 
     const named = names?.[category.category];
     if (named === undefined || category.points === 0) return [];
     if (meaningOf(named, UNCOUNTED) !== null) return [];
-    return [{ name: wordsOf(named).name, value: category.value, points: category.points }];
+    const sort = meaningOf(named, DEFCON) !== null ? "defcon" : meaningOf(named, KEEPER_WORK) !== null ? "keeper" : null;
+    return [{ name: wordsOf(named).name, value: category.value, points: category.points, sort }];
   });
 }

@@ -172,7 +172,7 @@ describe("vidiprinter", () => {
   });
 
   it("puts the man taken off's league counts on his change, with their points, leaving out minutes and what the feed times", () => {
-    expect(lines.find((line) => line.kind === "sub")?.counts).toEqual([{ name: "DefCon", value: "1", points: 2 }]);
+    expect(lines.find((line) => line.kind === "sub")?.counts).toEqual([{ name: "DefCon", value: "1", points: 2, sort: "defcon" }]);
   });
 
   it("settles a man who finished at the full-time whistle, and prints nobody whose only count is his minutes", () => {
@@ -180,8 +180,8 @@ describe("vidiprinter", () => {
     expect(raya?.at).toBe(KO + 95 * MIN);
     expect(raya?.minute).toBeNull();
     expect(raya?.counts).toEqual([
-      { name: "Saves", value: "3", points: 1 },
-      { name: "Clean sheets", value: "1", points: 4 },
+      { name: "Saves", value: "3", points: 1, sort: "keeper" },
+      { name: "Clean sheets", value: "1", points: 4, sort: null },
     ]);
     expect(lines.some((line) => line.kind === "tally" && (line.man === SALIBA || line.man === PICKFORD))).toBe(false);
   });
