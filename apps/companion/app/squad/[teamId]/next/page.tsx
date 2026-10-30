@@ -1,6 +1,6 @@
 import TabEmpty from "../../../components/league/TabEmpty";
 import TeamName from "../../../components/league/TeamName";
-import { type LeagueTeam, NO_MINUTES, clubById, headToHeads, inkOn, lineupDetail, oppositionByClub } from "@epl/core";
+import { type LeagueTeam, clubById, headToHeads, inkOn, oppositionByClub } from "@epl/core";
 import TeamShell from "../Shell";
 import { SQUAD } from "../../routes";
 import { identify, whoseTeam } from "../team";
@@ -14,6 +14,7 @@ import { teamColours } from "@/app/teamColours";
 import { placings } from "../../../league/placings";
 import { UNAVAILABLE } from "../../../config";
 import { teamTitle } from "../title";
+import { teamSheet } from "../../../teamSheet";
 import { myTeamId } from "../../../session";
 import { FootFrame } from "../../../components/shell/FootFrame";
 import { SquadList } from "../../../league/matchups/[teamId]/sides";
@@ -62,9 +63,15 @@ export default async function NextMatchPage({
   const shows = (side: LeagueTeam) => teamDisplay(squads, side.teamId === mine).show === "lineup";
   const clubs = clubById(squads.snapshot);
   const opposition = oppositionByClub(squads.snapshot);
-  // No bench order: that is a Fantrax read per team, so a bench stands in position order here.
+  // Each shown side's sheet as the Squad tab and the head-to-head draw it, so the bench is Fantrax's numbered order.
+  const shown = [...new Map(ties.flatMap((tie) => [tie.team, tie.opponent]).map((side) => [side.teamId, side])).values()];
   const arranged = new Map(
-    [...rostered].map(([id, roster]) => [id, lineupDetail(roster, clubs, opposition, null, NO_MINUTES)] as const),
+    await Promise.all(
+      shown.flatMap((side) => {
+        const roster = rostered.get(side.teamId);
+        return roster === undefined || !shows(side) ? [] : [teamSheet(squads, roster).then((read) => [side.teamId, read.sheet] as const)];
+      }),
+    ),
   );
   const listsOf = (tie: (typeof ties)[number]) =>
     unplayedLists({ pairing: tie, rostered, shows, arranged, clubs, opposition });

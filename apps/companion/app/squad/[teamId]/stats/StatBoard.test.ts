@@ -41,7 +41,9 @@ describe("a squad's stat board", () => {
     expect(html).not.toContain("cm-state");
   });
 
-  it("notes his complaint and the export's return week", () => {
+  it("notes his complaint and the export's return week on the desk alone", () => {
     expect(html).toContain(`>${noted("Knee", "GW10")}</span>`);
+    // A2, review round 5: under a thumb the name cell cut the note to "K…"; the mark says it there.
+    expect(html).toMatch(/<span class="[^"]*\bhidden\b[^"]*\blg:block\b[^"]*">Knee/);
   });
 });
