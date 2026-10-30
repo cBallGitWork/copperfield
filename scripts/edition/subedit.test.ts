@@ -167,7 +167,7 @@ describe("the sub-editor's send-back prompt, byte for byte", () => {
     expect(await rewritten({ headline: "City Bank It", body: "He banked it — twice." }, "round")).toMatchInlineSnapshot(`
       "brief
 
-      YOUR LAST ATTEMPT PRINTED BANNED PHRASING: "banked", "bank", "—". Write it again without those phrases, in any form — not a synonym of the same tic, and not the same sentence with the word swapped. Keep everything true; only the wording is wrong."
+      YOUR LAST ATTEMPT PRINTED BANNED PHRASING: "banked", "bank", "—". Write it again without those phrases, in any form, not a synonym of the same tic, and not the same sentence with the word swapped. Keep everything true; only the wording is wrong."
     `);
   });
 
@@ -180,7 +180,7 @@ describe("the sub-editor's send-back prompt, byte for byte", () => {
     expect(await rewritten(column, "presser", expected)).toMatchInlineSnapshot(`
       "brief
 
-      YOUR LAST ATTEMPT PRINTED BANNED PHRASING: "banked". Write it again without that phrase, in any form — not a synonym of the same tic, and not the same sentence with the word swapped. Keep everything true; only the wording is wrong.
+      YOUR LAST ATTEMPT PRINTED BANNED PHRASING: "banked". Write it again without that phrase, in any form, not a synonym of the same tic, and not the same sentence with the word swapped. Keep everything true; only the wording is wrong.
 
       YOUR LAST ATTEMPT WROTE ABOUT WHO DID NOT SPEAK OR WHAT WAS NOT SAID: "no manager". A reader wants who is out and who is back. Say that plainly, and never forecast who starts.
 
