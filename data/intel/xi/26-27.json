@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 9,
-    "exportedAt": "2026-10-31T18:05:37.887Z",
+    "exportedAt": "2026-10-31T22:47:56.802Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-31T18:05:37.887Z",
+  "fetchedAt": "2026-10-31T22:47:56.802Z",
   "source": "rotowire",
   "clubs": {
     "CHE": {
@@ -1123,50 +1123,50 @@
       "starters": [
         {
           "code": 433969,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 199796,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 184667,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 244954,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 441302,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 226944,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 448089,
-          "prob": 0.9
+          "code": 119090,
+          "prob": 1
         },
         {
           "code": 653481,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 122806,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 614071,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 517052,
-          "prob": 0.9
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
+      "lineup": "confirmed",
       "absent": [
         {
           "code": 449871,
@@ -1194,50 +1194,50 @@
       "starters": [
         {
           "code": 80201,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 166477,
-          "prob": 0.9
-        },
-        {
-          "code": 232892,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 442299,
-          "prob": 0.9
+          "prob": 1
+        },
+        {
+          "code": 232892,
+          "prob": 1
         },
         {
           "code": 169528,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 207189,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 463210,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 477555,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 577725,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 153133,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 551466,
-          "prob": 0.9
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
+      "lineup": "confirmed",
       "absent": [
         {
           "code": 184349,
@@ -1276,11 +1276,11 @@
           "prob": 0.9
         },
         {
-          "code": 441266,
+          "code": 243016,
           "prob": 0.9
         },
         {
-          "code": 243016,
+          "code": 441266,
           "prob": 0.9
         },
         {
