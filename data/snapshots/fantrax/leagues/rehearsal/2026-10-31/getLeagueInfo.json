@@ -1051,27 +1051,27 @@
   "playerInfo": {
     "075zi": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "02m5b": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "07app": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07apq": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07apn": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "07apo": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06onv": {
       "eligiblePos": "M",
@@ -1079,63 +1079,63 @@
     },
     "06uzy": {
       "eligiblePos": "M",
-      "status": "FA"
-    },
-    "05os8": {
-      "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "02ltw": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
+    },
+    "05os8": {
+      "eligiblePos": "D",
+      "status": "WW"
     },
     "04lnu": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06uzw": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06uzu": {
       "eligiblePos": "D",
-      "status": "FA"
-    },
-    "05os4": {
-      "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06uzv": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
-    "04mr4": {
-      "eligiblePos": "G",
-      "status": "FA"
+    "05os4": {
+      "eligiblePos": "D",
+      "status": "WW"
     },
     "062x7": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
+    },
+    "04mr4": {
+      "eligiblePos": "G",
+      "status": "WW"
     },
     "06uzt": {
       "eligiblePos": "G",
-      "status": "FA"
-    },
-    "045c8": {
-      "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06uzo": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
+    },
+    "045c8": {
+      "eligiblePos": "F",
+      "status": "WW"
     },
     "04rzl": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06r2g": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "04ge6": {
       "eligiblePos": "M",
@@ -1143,15 +1143,15 @@
     },
     "04ge9": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "04ge8": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "03jlw": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05nns": {
       "eligiblePos": "D",
@@ -1159,7 +1159,7 @@
     },
     "06zbz": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06yb9": {
       "eligiblePos": "D",
@@ -1171,15 +1171,15 @@
     },
     "063y7": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06yb7": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06zbw": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05ye7": {
       "eligiblePos": "M",
@@ -1187,39 +1187,39 @@
     },
     "05opl": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06ezb": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05opj": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05yct": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06zbp": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "06zbq": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06zbn": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05r4h": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0635j": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06r5b": {
       "eligiblePos": "M",
@@ -1231,19 +1231,19 @@
     },
     "06mn7": {
       "eligiblePos": "M",
-      "status": "FA"
-    },
-    "06pry": {
-      "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05gcr": {
       "eligiblePos": "M",
       "status": "T"
     },
+    "06pry": {
+      "eligiblePos": "D",
+      "status": "WW"
+    },
     "03p9y": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06jh3": {
       "eligiblePos": "M",
@@ -1251,27 +1251,27 @@
     },
     "06prt": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "032aa": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06mn1": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "03fgl": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "03m3q": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "03fgo": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05a6e": {
       "eligiblePos": "D",
@@ -1283,7 +1283,7 @@
     },
     "06mn0": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "061vp": {
       "eligiblePos": "M",
@@ -1291,7 +1291,7 @@
     },
     "0626q": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "061vq": {
       "eligiblePos": "F",
@@ -1301,65 +1301,65 @@
       "eligiblePos": "M",
       "status": "T"
     },
-    "061vk": {
-      "eligiblePos": "F,M",
-      "status": "FA"
-    },
     "06jfe": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
+    },
+    "061vk": {
+      "eligiblePos": "F,M",
+      "status": "WW"
     },
     "061vn": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "063zi": {
       "eligiblePos": "M,D",
-      "status": "FA"
+      "status": "WW"
     },
     "061ve": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "061vb": {
       "eligiblePos": "D",
-      "status": "FA"
-    },
-    "06zef": {
-      "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "061va": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
+    },
+    "06zef": {
+      "eligiblePos": "D",
+      "status": "WW"
     },
     "05n09": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05n07": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06r3w": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06c6g": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "0722t": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06ybq": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "057cr": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "02m5l": {
       "eligiblePos": "D",
@@ -1367,7 +1367,7 @@
     },
     "056as": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06ybp": {
       "eligiblePos": "F",
@@ -1375,15 +1375,15 @@
     },
     "072pc": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06mfy": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06ews": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0427d": {
       "eligiblePos": "D",
@@ -1391,11 +1391,11 @@
     },
     "06ewn": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06ewm": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05omu": {
       "eligiblePos": "D",
@@ -1403,19 +1403,19 @@
     },
     "05r34": {
       "eligiblePos": "F,M",
-      "status": "FA"
-    },
-    "03r93": {
-      "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0414o": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
+    },
+    "03r93": {
+      "eligiblePos": "D",
+      "status": "WW"
     },
     "04tzt": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "02lpf": {
       "eligiblePos": "M",
@@ -1423,15 +1423,15 @@
     },
     "04p0d": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "02lpi": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06fxu": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06ex4": {
       "eligiblePos": "D",
@@ -1439,19 +1439,19 @@
     },
     "06crm": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06crn": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06mg4": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06mg2": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05244": {
       "eligiblePos": "F,M",
@@ -1459,7 +1459,7 @@
     },
     "0558w": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06fxe": {
       "eligiblePos": "M",
@@ -1467,15 +1467,15 @@
     },
     "0328q": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "03rxs": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "06fwz": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0788g": {
       "eligiblePos": "G",
@@ -1483,7 +1483,7 @@
     },
     "0522h": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06zbm": {
       "eligiblePos": "D",
@@ -1491,27 +1491,27 @@
     },
     "02lsa": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06uyc": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06on5": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06ya6": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06zc8": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "068a0": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05ybq": {
       "eligiblePos": "D",
@@ -1519,7 +1519,7 @@
     },
     "068a1": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06f8y": {
       "eligiblePos": "M",
@@ -1531,47 +1531,47 @@
     },
     "072py": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06qq8": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05t6z": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06qq9": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05t6x": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "03r8x": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06nk0": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "02ls8": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06mgk": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06exa": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "03rzp": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06mgd": {
       "eligiblePos": "F",
@@ -1579,7 +1579,7 @@
     },
     "078i7": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06msb": {
       "eligiblePos": "M",
@@ -1587,7 +1587,7 @@
     },
     "06msc": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05uel": {
       "eligiblePos": "D",
@@ -1595,75 +1595,75 @@
     },
     "078gh": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "078gi": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078gf": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "078gg": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04fjz": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "03rec": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078gd": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078ge": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078gc": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "03ysd": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "076d9": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "078fy": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "078fz": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076d7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05udw": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "078fx": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05ylx": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076d6": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06p6j": {
       "eligiblePos": "F",
@@ -1671,43 +1671,43 @@
     },
     "076d3": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05uds": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05ylw": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076d4": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076d1": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "076d0": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05ylj": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "03vlj": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06lox": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "04fk8": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05l27": {
       "eligiblePos": "D",
@@ -1727,7 +1727,7 @@
     },
     "06r9x": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "072zs": {
       "eligiblePos": "F,M",
@@ -1735,19 +1735,19 @@
     },
     "07awa": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "07awb": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05ue7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "072zr": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05oz3": {
       "eligiblePos": "G",
@@ -1755,23 +1755,23 @@
     },
     "072zp": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06mul": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "068n8": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "068lx": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "06muk": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "049tq": {
       "eligiblePos": "F",
@@ -1779,15 +1779,15 @@
     },
     "052cb": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "052ce": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "052cd": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04abn": {
       "eligiblePos": "M",
@@ -1795,7 +1795,7 @@
     },
     "052ca": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06znb": {
       "eligiblePos": "G",
@@ -1811,23 +1811,23 @@
     },
     "076dw": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05rb8": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076dx": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "076du": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076dv": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04abb": {
       "eligiblePos": "M",
@@ -1835,11 +1835,11 @@
     },
     "033l8": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "063c2": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "076dq": {
       "eligiblePos": "F,M",
@@ -1847,27 +1847,27 @@
     },
     "076dr": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "078j4": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "076dn": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076dl": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076di": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06nvb": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "076dg": {
       "eligiblePos": "D",
@@ -1875,23 +1875,23 @@
     },
     "078hi": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076dh": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078hj": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "076de": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "076df": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05l2z": {
       "eligiblePos": "D",
@@ -1899,23 +1899,23 @@
     },
     "076da": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "076db": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06fg0": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076cz": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "076cx": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "056iy": {
       "eligiblePos": "F",
@@ -1923,7 +1923,7 @@
     },
     "076cw": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05o8o": {
       "eligiblePos": "D",
@@ -1931,31 +1931,31 @@
     },
     "04xjr": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07a46": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06r7f": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "07a45": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "060wh": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "05o4b": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "037mt": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05o4c": {
       "eligiblePos": "D",
@@ -1963,11 +1963,11 @@
     },
     "061ya": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0701y": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06r6s": {
       "eligiblePos": "G",
@@ -1975,31 +1975,31 @@
     },
     "04o82": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06mnm": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06yey": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "061z3": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06mnn": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "072wq": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "061z5": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "061xs": {
       "eligiblePos": "M",
@@ -2015,23 +2015,23 @@
     },
     "03m5h": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06mnc": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04ym7": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "03m5i": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06mnd": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05r9b": {
       "eligiblePos": "M",
@@ -2039,19 +2039,19 @@
     },
     "06avm": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06jgs": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04hk9": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0700u": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0639x": {
       "eligiblePos": "M",
@@ -2059,15 +2059,15 @@
     },
     "07ase": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06s7v": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0700t": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078az": {
       "eligiblePos": "G",
@@ -2075,15 +2075,15 @@
     },
     "072x7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05nt6": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "061y6": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05o2p": {
       "eligiblePos": "M",
@@ -2091,7 +2091,7 @@
     },
     "06s7r": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0700p": {
       "eligiblePos": "D",
@@ -2099,31 +2099,31 @@
     },
     "06r5r": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06jgi": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05r8o": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06r5m": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06rwp": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078g4": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078g5": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05o6h": {
       "eligiblePos": "F",
@@ -2135,39 +2135,39 @@
     },
     "078g0": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06r9h": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05o6g": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078ei": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06klv": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05n3v": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05n3u": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "02lzt": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07avb": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06mpp": {
       "eligiblePos": "M,D",
@@ -2175,11 +2175,11 @@
     },
     "05ubv": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06p4l": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "032f9": {
       "eligiblePos": "G",
@@ -2187,39 +2187,39 @@
     },
     "06p4j": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04sat": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06p4k": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "064a0": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0703h": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "065ao": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04yo7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "079h0": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06ygl": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0703c": {
       "eligiblePos": "D",
@@ -2227,23 +2227,23 @@
     },
     "06ygm": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04ug0": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05ubh": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "044ei": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "03yr0": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "04yme": {
       "eligiblePos": "G",
@@ -2251,31 +2251,31 @@
     },
     "06mow": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06igq": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04io4": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06195": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "06r7l": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "06kwp": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06rf9": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06y29": {
       "eligiblePos": "M",
@@ -2283,23 +2283,23 @@
     },
     "052k6": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06y27": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "062h7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "063hu": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07918": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06y26": {
       "eligiblePos": "D",
@@ -2307,71 +2307,71 @@
     },
     "05y55": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06eka": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "066nn": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "07aa5": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "076ki": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "07aa4": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "076kf": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "066ng": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "076kg": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "03am7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "076kd": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "076ke": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "03pif": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "076kc": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "048xg": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06kx1": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05rfp": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "04agz": {
       "eligiblePos": "M",
@@ -2379,11 +2379,11 @@
     },
     "05rff": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "04ai5": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "04qfz": {
       "eligiblePos": "D",
@@ -2391,7 +2391,7 @@
     },
     "038ze": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "05l8q": {
       "eligiblePos": "M",
@@ -2399,7 +2399,7 @@
     },
     "05rey": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05g2o": {
       "eligiblePos": "F",
@@ -2411,19 +2411,19 @@
     },
     "051k8": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "051k7": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06h1g": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05uox": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "04e1e": {
       "eligiblePos": "D",
@@ -2431,19 +2431,19 @@
     },
     "051k3": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "066r9": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "051k0": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07933": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05uor": {
       "eligiblePos": "F",
@@ -2451,11 +2451,11 @@
     },
     "05ocl": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "07934": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "04e1c": {
       "eligiblePos": "D",
@@ -2463,27 +2463,27 @@
     },
     "0791o": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07931": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0791p": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07932": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0791n": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "07930": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06zvn": {
       "eligiblePos": "M",
@@ -2491,23 +2491,23 @@
     },
     "078qj": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "078qh": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078qi": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078qg": {
       "eligiblePos": "F,D",
-      "status": "FA"
+      "status": "WW"
     },
     "04h87": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05unu": {
       "eligiblePos": "M",
@@ -2515,15 +2515,15 @@
     },
     "05uns": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "05748": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "05xtr": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "04y92": {
       "eligiblePos": "F,M",
@@ -2531,11 +2531,11 @@
     },
     "0790i": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04rh9": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "03yww": {
       "eligiblePos": "G",
@@ -2543,35 +2543,35 @@
     },
     "06fhy": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "073ac": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "073ab": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04adp": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06mvz": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "04gpx": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06l2r": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "03gu5": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "03gu4": {
       "eligiblePos": "D",
@@ -2579,11 +2579,11 @@
     },
     "06mx0": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "063e7": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05uht": {
       "eligiblePos": "F,M",
@@ -2591,7 +2591,7 @@
     },
     "06ymt": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05uhs": {
       "eligiblePos": "M",
@@ -2599,39 +2599,39 @@
     },
     "06ymu": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05rbn": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0372y": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05uhq": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06mve": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05uhj": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06kqy": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04tig": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06zod": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05nzu": {
       "eligiblePos": "D",
@@ -2639,15 +2639,15 @@
     },
     "06mw0": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "062du": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "072at": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "04sjt": {
       "eligiblePos": "G",
@@ -2655,7 +2655,7 @@
     },
     "04qfq": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04sjv": {
       "eligiblePos": "D",
@@ -2663,27 +2663,27 @@
     },
     "04qfm": {
       "eligiblePos": "M,D",
-      "status": "FA"
+      "status": "WW"
     },
     "06804": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06kue": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06zrs": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06zrq": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078ml": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078mm": {
       "eligiblePos": "D",
@@ -2691,19 +2691,19 @@
     },
     "06ab3": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04rha": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06j20": {
       "eligiblePos": "M,D",
-      "status": "FA"
+      "status": "WW"
     },
     "05m9r": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "062ct": {
       "eligiblePos": "G",
@@ -2711,15 +2711,15 @@
     },
     "06l4i": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "052h5": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "02t13": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06zqq": {
       "eligiblePos": "D",
@@ -2731,15 +2731,15 @@
     },
     "062ci": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078lg": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078lh": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "03frx": {
       "eligiblePos": "D",
@@ -2747,19 +2747,19 @@
     },
     "078le": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078lf": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05mzz": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06nyw": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "045ob": {
       "eligiblePos": "G",
@@ -2767,23 +2767,23 @@
     },
     "05mzt": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0786b": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06fup": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "06phw": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "070gt": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "04qr9": {
       "eligiblePos": "M",
@@ -2791,11 +2791,11 @@
     },
     "06phr": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "062p5": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "07877": {
       "eligiblePos": "M",
@@ -2803,15 +2803,15 @@
     },
     "062p1": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05w7t": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "062p0": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "062p3": {
       "eligiblePos": "F,M",
@@ -2819,23 +2819,23 @@
     },
     "06rlj": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05oig": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "078wn": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0785l": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078wo": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0785j": {
       "eligiblePos": "D",
@@ -2843,75 +2843,75 @@
     },
     "06rlf": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078wl": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06phe": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078wm": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078wj": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0785h": {
       "eligiblePos": "F,D",
-      "status": "FA"
+      "status": "WW"
     },
     "0410j": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06dpw": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078wk": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06fv8": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0785g": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0785d": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0785e": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "03ybi": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05roa": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0785c": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0785a": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070h9": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0784y": {
       "eligiblePos": "D",
@@ -2919,19 +2919,19 @@
     },
     "02lm7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05s08": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06rm7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04mi4": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "063q8": {
       "eligiblePos": "M",
@@ -2939,11 +2939,11 @@
     },
     "0784z": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06rm8": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0784w": {
       "eligiblePos": "F",
@@ -2951,11 +2951,11 @@
     },
     "0784x": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "04qos": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04qor": {
       "eligiblePos": "G",
@@ -2963,19 +2963,19 @@
     },
     "0784v": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0784s": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0784t": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05s00": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "068yt": {
       "eligiblePos": "M",
@@ -2983,15 +2983,15 @@
     },
     "0784r": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0784o": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05u40": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0784p": {
       "eligiblePos": "M",
@@ -2999,27 +2999,27 @@
     },
     "0784l": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0784i": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0554i": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0784j": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06cmt": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "070fa": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06cmu": {
       "eligiblePos": "G",
@@ -3027,7 +3027,7 @@
     },
     "068ym": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05tre": {
       "eligiblePos": "M",
@@ -3035,51 +3035,51 @@
     },
     "0784e": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0784f": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06cms": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0784c": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0554g": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06fy7": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0788a": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06ew2": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "03yeg": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0788b": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "02lnx": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06fwn": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0521z": {
       "eligiblePos": "D",
@@ -3087,15 +3087,15 @@
     },
     "072o9": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "06fwi": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0787y": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "07898": {
       "eligiblePos": "F",
@@ -3103,7 +3103,7 @@
     },
     "05nip": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "067zv": {
       "eligiblePos": "F,M",
@@ -3111,19 +3111,19 @@
     },
     "072mp": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "07897": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06442": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "072mq": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05nil": {
       "eligiblePos": "D",
@@ -3131,63 +3131,63 @@
     },
     "06rnn": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "02lp5": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "062pl": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05w9r": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06xzp": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0327r": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0666p": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06xzn": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05vyj": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "075sh": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078yh": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06xzi": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "078yi": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "062pa": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06xzg": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06xzd": {
       "eligiblePos": "F",
@@ -3195,27 +3195,27 @@
     },
     "06xze": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "06xzc": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06fvn": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06xza": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "062ow": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06y9z": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070hs": {
       "eligiblePos": "G",
@@ -3223,19 +3223,19 @@
     },
     "06rmv": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "070hq": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "062ot": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070hr": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0326x": {
       "eligiblePos": "F",
@@ -3247,7 +3247,7 @@
     },
     "02lo6": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "067yz": {
       "eligiblePos": "F",
@@ -3255,15 +3255,15 @@
     },
     "062op": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "070hn": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "072lp": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06v51": {
       "eligiblePos": "D",
@@ -3275,7 +3275,7 @@
     },
     "06hze": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070hl": {
       "eligiblePos": "G",
@@ -3287,11 +3287,11 @@
     },
     "070hj": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05220": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "067ys": {
       "eligiblePos": "M",
@@ -3299,23 +3299,23 @@
     },
     "06y9n": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06pig": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06y9o": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05ojf": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "062oh": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06y9m": {
       "eligiblePos": "D",
@@ -3323,7 +3323,7 @@
     },
     "062og": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "070hc": {
       "eligiblePos": "F",
@@ -3343,43 +3343,43 @@
     },
     "070ha": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06pib": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070hb": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0794a": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04tsb": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06dmj": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0793y": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06v08": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0793w": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "07959": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v07": {
       "eligiblePos": "M",
@@ -3387,35 +3387,35 @@
     },
     "0793x": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v05": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04spw": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06zxy": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "070cj": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v00": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0793q": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v01": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "051kl": {
       "eligiblePos": "M",
@@ -3423,51 +3423,51 @@
     },
     "04u40": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0793o": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070ci": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0793p": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "04u41": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04gyd": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05oeh": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0793n": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "051kg": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06y4g": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "03mga": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0793h": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05y7c": {
       "eligiblePos": "M",
@@ -3479,19 +3479,19 @@
     },
     "0792z": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06pe1": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078t9": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "07948": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06y59": {
       "eligiblePos": "M",
@@ -3499,7 +3499,7 @@
     },
     "07949": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "043qy": {
       "eligiblePos": "M",
@@ -3507,31 +3507,31 @@
     },
     "078t8": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "07947": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "03v6t": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0792s": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07942": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05rjn": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "07941": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06rgg": {
       "eligiblePos": "D",
@@ -3539,7 +3539,7 @@
     },
     "02oo1": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "03mfe": {
       "eligiblePos": "M",
@@ -3547,23 +3547,23 @@
     },
     "06zwj": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06kyw": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "078rd": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0784a": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "068yd": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05trb": {
       "eligiblePos": "F",
@@ -3571,15 +3571,15 @@
     },
     "0784b": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "068yc": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06fso": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06cmm": {
       "eligiblePos": "M",
@@ -3587,23 +3587,23 @@
     },
     "0687c": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070g8": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06nbu": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "05tqz": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0x": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0y": {
       "eligiblePos": "D",
@@ -3611,7 +3611,7 @@
     },
     "070g7": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "05tqx": {
       "eligiblePos": "G",
@@ -3619,11 +3619,11 @@
     },
     "072iu": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0w": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0t": {
       "eligiblePos": "F",
@@ -3631,15 +3631,15 @@
     },
     "07858": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "07859": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070eq": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "067x8": {
       "eligiblePos": "M,D",
@@ -3647,7 +3647,7 @@
     },
     "070eo": {
       "eligiblePos": "M,D",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0p": {
       "eligiblePos": "M",
@@ -3655,7 +3655,7 @@
     },
     "07852": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06v21": {
       "eligiblePos": "M",
@@ -3663,7 +3663,7 @@
     },
     "06v0l": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05u1m": {
       "eligiblePos": "D",
@@ -3671,23 +3671,23 @@
     },
     "07850": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0m": {
       "eligiblePos": "M,D",
-      "status": "FA"
+      "status": "WW"
     },
     "05ogg": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06clz": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0k": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05y9n": {
       "eligiblePos": "D",
@@ -3695,7 +3695,7 @@
     },
     "06v0f": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06v0g": {
       "eligiblePos": "D",
@@ -3703,11 +3703,11 @@
     },
     "03dwz": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05akv": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "076qg": {
       "eligiblePos": "F",
@@ -3715,7 +3715,7 @@
     },
     "06clt": {
       "eligiblePos": "F,M",
-      "status": "FA"
+      "status": "WW"
     },
     "05ogb": {
       "eligiblePos": "F",
@@ -3723,11 +3723,11 @@
     },
     "06v0c": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06yxe": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "078ud": {
       "eligiblePos": "D",
@@ -3735,19 +3735,19 @@
     },
     "06v0a": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06yxc": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "05wwd": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "06yxd": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "070f9": {
       "eligiblePos": "M",
@@ -3755,7 +3755,7 @@
     },
     "04f6o": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05tr9": {
       "eligiblePos": "M",
@@ -3763,11 +3763,11 @@
     },
     "07849": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "02lk5": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "04f6h": {
       "eligiblePos": "G",
@@ -3775,27 +3775,27 @@
     },
     "072j3": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "07847": {
       "eligiblePos": "M,D",
-      "status": "FA"
+      "status": "WW"
     },
     "05tr8": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "07848": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "05oh0": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "02oq6": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "050jq": {
       "eligiblePos": "D",
@@ -3803,19 +3803,19 @@
     },
     "05tr1": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "04vy4": {
       "eligiblePos": "G",
-      "status": "FA"
+      "status": "WW"
     },
     "0794n": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "064oo": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "068y0": {
       "eligiblePos": "F,M",
@@ -3823,43 +3823,43 @@
     },
     "0794m": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06do9": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0794j": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0794k": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0794h": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0794i": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06cm4": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0794f": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     },
     "0794g": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06do3": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "066sd": {
       "eligiblePos": "M,D",
@@ -3867,27 +3867,27 @@
     },
     "0794d": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "06do4": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0794e": {
       "eligiblePos": "M",
-      "status": "FA"
+      "status": "WW"
     },
     "0794b": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "06cm1": {
       "eligiblePos": "F",
-      "status": "FA"
+      "status": "WW"
     },
     "0794c": {
       "eligiblePos": "D",
-      "status": "FA"
+      "status": "WW"
     }
   },
   "poolSettings": {

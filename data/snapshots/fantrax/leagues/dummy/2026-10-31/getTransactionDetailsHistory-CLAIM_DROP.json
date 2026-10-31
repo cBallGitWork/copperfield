@@ -240,7 +240,6 @@
           "urlName": "tyrick-mitchell",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Crystal_Palace.png",
           "scorerId": "05akv",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -248,12 +247,6 @@
           "defaultPosId": "703",
           "posShortNames": "D",
           "team": false,
-          "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            }
-          ],
           "rookie": false,
           "minorsEligible": false,
           "posIds": [
@@ -303,7 +296,6 @@
           "urlName": "ryan-giles",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Hull_City_3.png",
           "scorerId": "04sjv",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -312,10 +304,6 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 25, 3:00 PM: Giles recorded five crosses (one...",
               "typeId": "9"
@@ -423,7 +411,6 @@
           "urlName": "semi-ajayi",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Hull_City_3.png",
           "scorerId": "03ksl",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -432,10 +419,6 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 17, 5:31 PM: Ajayi had one cross (zero accurate),...",
               "typeId": "8"
@@ -476,7 +459,6 @@
           "urlName": "daichi-kamada",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Crystal_Palace.png",
           "scorerId": "06mnc",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -485,10 +467,6 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 11, 10:21 PM: Kamada scored one goal to go with one...",
               "typeId": "8"
@@ -543,7 +521,6 @@
           "urlName": "james-trafford",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "05oz3",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -552,10 +529,6 @@
           "posShortNames": "G",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 26, 4:15 PM: Trafford registered four saves and...",
               "typeId": "9"

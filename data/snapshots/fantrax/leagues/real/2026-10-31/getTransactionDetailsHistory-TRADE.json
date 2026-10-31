@@ -247,7 +247,6 @@
           "urlName": "mohammed-kudus",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Tottenham_Hotspur.png",
           "scorerId": "06fv8",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -257,10 +256,6 @@
           "posShortNames": "M,F",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 20, 1:07 PM: Kudus assisted once to go with two...",
               "typeId": "8"
@@ -382,7 +377,6 @@
           "urlName": "jeremy-doku",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_City.png",
           "scorerId": "06fup",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -393,12 +387,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Oct 24, 10:09 AM: Doku registered three shots (zero on...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,

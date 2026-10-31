@@ -247,7 +247,6 @@
           "urlName": "gianluigi-donnarumma",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_City.png",
           "scorerId": "070hs",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -256,10 +255,6 @@
           "posShortNames": "G",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 21, 3:04 PM: Donnarumma made two saves and allowed...",
               "typeId": "8"
@@ -380,7 +375,6 @@
           "urlName": "senne-lammens",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "070hl",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -390,12 +384,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
-              "tooltip": "Oct 26, 3:03 PM: Lammens recorded one save and allowed...",
-              "typeId": "9"
+              "tooltip": "Oct 31, 1:03 PM: Lammens made seven saves and allowed...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -506,7 +496,6 @@
           "urlName": "maxim-de-cuyper",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y9m",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -515,10 +504,6 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 26, 12:34 PM: De Cuyper registered two shots (zero on...",
               "typeId": "9"
@@ -591,7 +576,7 @@
             },
             {
               "tooltip": "Oct 24, 6:44 AM: Ballard (hamstring) remains sidelined...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,

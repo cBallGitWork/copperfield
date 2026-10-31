@@ -246,7 +246,6 @@
           "urlName": "brian-brobbey",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Sunderland.png",
           "scorerId": "070hc",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -255,10 +254,6 @@
           "posShortNames": "F",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 29, 9:58 AM: Brobbey is gradually returning to his...",
               "typeId": "9"

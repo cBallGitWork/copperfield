@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-10-31T05:40:35.364Z",
+  "capturedAt": "2026-10-31T17:33:47.887Z",
   "leagueId": "zbn1z3ukmsgb36sz",
   "reads": [
     {
@@ -25,7 +25,7 @@
     {
       "method": "getTransactionDetailsHistory-CLAIM_DROP",
       "ok": true,
-      "bytes": 8480
+      "bytes": 8312
     },
     {
       "method": "getTransactionDetailsHistory-TRADE",
@@ -35,7 +35,7 @@
     {
       "method": "getTransactionDetailsHistory-LINEUP_CHANGE",
       "ok": true,
-      "bytes": 13069
+      "bytes": 12733
     }
   ]
 }

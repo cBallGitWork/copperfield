@@ -254,7 +254,6 @@
           "urlName": "lewie-coyle",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Hull_City_3.png",
           "scorerId": "076dg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -263,10 +262,6 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 29, 2:17 PM: Coyle suffered a minor hamstring injury...",
               "typeId": "9"
@@ -458,7 +453,6 @@
           "urlName": "lewie-coyle",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Hull_City_3.png",
           "scorerId": "076dg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -467,10 +461,6 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
-            {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
             {
               "tooltip": "Oct 29, 2:17 PM: Coyle suffered a minor hamstring injury...",
               "typeId": "9"
