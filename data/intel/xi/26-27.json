@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 9,
-    "exportedAt": "2026-10-30T16:22:25.605Z",
+    "exportedAt": "2026-10-31T12:07:44.509Z",
     "rows": 20,
     "sources": [
       {
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-10-30T16:22:25.605Z",
+  "fetchedAt": "2026-10-31T12:07:44.509Z",
   "source": "rotowire",
   "clubs": {
     "CHE": {
@@ -26,59 +26,51 @@
       "starters": [
         {
           "code": 549939,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 460028,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 444463,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 577016,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 247632,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 56979,
-          "prob": 0.9
+          "code": 514356,
+          "prob": 1
         },
         {
           "code": 486672,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 482609,
-          "prob": 0.9
+          "code": 620109,
+          "prob": 1
         },
         {
-          "code": 593117,
-          "prob": 0.9
+          "code": 624773,
+          "prob": 1
         },
         {
           "code": 244851,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 244850,
-          "prob": 0.9
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
+      "lineup": "confirmed",
       "absent": [
-        {
-          "code": 486672,
-          "status": "QUES"
-        },
-        {
-          "code": 498444,
-          "status": "QUES"
-        },
         {
           "code": 622758,
           "status": "OUT"
@@ -89,6 +81,10 @@
         },
         {
           "code": 551210,
+          "status": "OUT"
+        },
+        {
+          "code": 56979,
           "status": "OUT"
         },
         {
@@ -121,61 +117,57 @@
       "starters": [
         {
           "code": 465247,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 550864,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 221820,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 95658,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 216051,
-          "prob": 0.9
+          "prob": 1
         },
         {
-          "code": 166989,
-          "prob": 0.9
+          "code": 532605,
+          "prob": 1
         },
         {
-          "code": 516895,
-          "prob": 0.9
+          "code": 535301,
+          "prob": 1
         },
         {
           "code": 493250,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 141746,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 430871,
-          "prob": 0.9
+          "prob": 1
         },
         {
           "code": 446008,
-          "prob": 0.9
+          "prob": 1
         }
       ],
-      "lineup": "predicted",
+      "lineup": "confirmed",
       "absent": [
         {
-          "code": 516895,
-          "status": "QUES"
+          "code": 596777,
+          "status": "OUT"
         },
         {
           "code": 176297,
-          "status": "QUES"
-        },
-        {
-          "code": 596777,
           "status": "OUT"
         },
         {
