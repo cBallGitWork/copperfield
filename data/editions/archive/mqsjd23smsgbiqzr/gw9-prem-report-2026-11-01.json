@@ -1,0 +1,483 @@
+{
+  "slug": "gw9-prem-report-2026-11-01",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 9,
+  "gameweek": 9,
+  "filedAt": "2026-11-01T21:57:38.985Z",
+  "expiresAt": null,
+  "edition": "Sunday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Rice and easy for Havertz",
+  "deck": "Arsenal won 1-0 at Liverpool",
+  "body": "",
+  "subjects": [
+    "match-report:gw9:2026-11-01"
+  ],
+  "image": null,
+  "face": {
+    "code": 204480,
+    "name": "Rice",
+    "clubId": 1,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645281,
+        "kickoff": "2026-11-01T16:30:00Z",
+        "home": {
+          "code": 14,
+          "score": 0,
+          "goals": [],
+          "assists": [],
+          "manager": "Andoni Iraola",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Becker",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 2.5
+                }
+              ],
+              [
+                {
+                  "name": "Araujo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Muñoz",
+                    "minute": "81",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 5.1
+                },
+                {
+                  "name": "Jacquet",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.4
+                },
+                {
+                  "name": "van Dijk",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.5
+                },
+                {
+                  "name": "Kerkez",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Tsimikas",
+                    "minute": "81",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 3.5
+                }
+              ],
+              [
+                {
+                  "name": "Mac Allister",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.5
+                },
+                {
+                  "name": "Nyoni",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Szoboszlai",
+                    "minute": "59",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 3.5
+                }
+              ],
+              [
+                {
+                  "name": "Gakpo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Ngumoha",
+                    "minute": "67",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 4.1
+                },
+                {
+                  "name": "Wirtz",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Koumas",
+                    "minute": "81",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 4.2
+                },
+                {
+                  "name": "Barcola",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 2.5
+                }
+              ],
+              [
+                {
+                  "name": "Isak",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.4
+                }
+              ]
+            ],
+            "unused": [
+              "Gomez",
+              "Gravenberch",
+              "Mamardashvili",
+              "Endo"
+            ]
+          },
+          "next": "Crystal Palace (a)"
+        },
+        "away": {
+          "code": 3,
+          "score": 1,
+          "goals": [
+            "Havertz 16"
+          ],
+          "assists": [
+            "Rice 16"
+          ],
+          "manager": "Mikel Arteta",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Raya",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.3
+                }
+              ],
+              [
+                {
+                  "name": "Timber",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.2
+                },
+                {
+                  "name": "Konsa",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 7.6
+                },
+                {
+                  "name": "Magalhães",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 7.5
+                },
+                {
+                  "name": "Calafiori",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 7.6
+                }
+              ],
+              [
+                {
+                  "name": "Rice",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 7.3
+                },
+                {
+                  "name": "Guimarães",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Lewis-Skelly",
+                    "minute": "62",
+                    "booked": true,
+                    "mark": 2.5
+                  },
+                  "mark": 5
+                }
+              ],
+              [
+                {
+                  "name": "Madueke",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.2
+                },
+                {
+                  "name": "Ødegaard",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Merino",
+                    "minute": "88",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 5.7
+                },
+                {
+                  "name": "Tzolis",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Hincapié",
+                    "minute": "84",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 5
+                }
+              ],
+              [
+                {
+                  "name": "Havertz",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Gyökeres",
+                    "minute": "84",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 7.3
+                }
+              ]
+            ],
+            "unused": [
+              "Arrizabalaga",
+              "Eze",
+              "White",
+              "Mosquera",
+              "Zubimendi"
+            ]
+          },
+          "next": "Hull City (h)"
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 1
+        },
+        "venue": "Anfield",
+        "attendance": null,
+        "referee": "Andy Madley",
+        "standfirst": "Arsenal won 1-0 at Liverpool, a fourth win in a row taking them top.",
+        "account": "Mikel Arteta's Arsenal went ahead in the 16th minute when Declan Rice crossed and Kai Havertz, inside the six-yard box, sent it low into the corner with his left foot.",
+        "sections": [
+          {
+            "head": "Calafiori and Konsa unbreached",
+            "pitch": "Riccardo Calafiori and Ezri Konsa both played the whole match and Arsenal conceded nothing. Each earned two defensive points, the maximum available.",
+            "stake": "AtleticoTimHortons has Calafiori, for eight points; its_ohi has Konsa, for eight points against AtleticoTimHortons."
+          },
+          {
+            "head": "Rice's cross, Havertz's third",
+            "pitch": "Declan Rice had three shots besides the cross, and earned one defensive point. Kai Havertz's goal was his third in the league this season, and he also took one defensive point.",
+            "stake": "The Truffle Pigs has Rice, for seven points; domeitalycoach has Havertz, for seven points against The Truffle Pigs."
+          },
+          {
+            "head": "Magalhães unbeaten throughout",
+            "pitch": "Gabriel Magalhães went the full distance as Arsenal kept a clean sheet, and his resolute play was worth two points in that column, the most one match pays.",
+            "stake": "Hazza Maguazza's Redempshazza has him, for eight points against Cowthenbeef."
+          }
+        ],
+        "keyStats": [
+          {
+            "label": "Points",
+            "value": "Calafiori 8 (AtleticoTimHortons), Magalhães 8 (Hazza Maguazza's Redempshazza), Konsa 8 (its_ohi), Rice 7 (The Truffle Pigs)"
+          },
+          {
+            "label": "Shots",
+            "value": "17 (0 on target) v 10 (3)"
+          },
+          {
+            "label": "xG",
+            "value": "Liverpool 1.14, Arsenal 0.95"
+          },
+          {
+            "label": "DefCon",
+            "value": "Jacquet 2, Calafiori 2, Magalhães 2"
+          },
+          {
+            "label": "Clean sheet, full match",
+            "value": "Raya, Timber, Calafiori, Magalhães, Konsa"
+          },
+          {
+            "label": "Off before the hour",
+            "value": "Nyoni 59"
+          },
+          {
+            "label": "Chances created",
+            "value": "Kerkez 3, Madueke 3"
+          },
+          {
+            "label": "Top xG",
+            "value": "Havertz 0.63"
+          },
+          {
+            "label": "Top xA",
+            "value": "Madueke 0.67, Rice 0.35, Tzolis 0.30"
+          }
+        ],
+        "star": {
+          "name": "Calafiori",
+          "club": "Arsenal",
+          "holder": "AtleticoTimHortons",
+          "mark": 7.6,
+          "did": ""
+        },
+        "rows": [
+          {
+            "minute": "16",
+            "kind": "Goal",
+            "side": "away",
+            "text": "Havertz (Rice)"
+          },
+          {
+            "minute": "39",
+            "kind": "Post",
+            "side": "home",
+            "text": "Wirtz"
+          },
+          {
+            "minute": "45+2",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Barcola"
+          },
+          {
+            "minute": "55",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Madueke"
+          },
+          {
+            "minute": "59",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Szoboszlai for Nyoni"
+          },
+          {
+            "minute": "62",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Lewis-Skelly for Guimarães"
+          },
+          {
+            "minute": "67",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Kerkez"
+          },
+          {
+            "minute": "67",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Ngumoha for Gakpo"
+          },
+          {
+            "minute": "72",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Lewis-Skelly"
+          },
+          {
+            "minute": "80",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Timber"
+          },
+          {
+            "minute": "80",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Mac Allister"
+          },
+          {
+            "minute": "81",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Tsimikas for Kerkez"
+          },
+          {
+            "minute": "81",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Muñoz for Araujo"
+          },
+          {
+            "minute": "81",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Koumas for Wirtz"
+          },
+          {
+            "minute": "84",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Hincapié for Tzolis"
+          },
+          {
+            "minute": "84",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Gyökeres for Havertz"
+          },
+          {
+            "minute": "88",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Merino for Ødegaard"
+          },
+          {
+            "minute": "90+3",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Raya"
+          },
+          {
+            "minute": "90+7",
+            "kind": "Booked",
+            "side": "home",
+            "text": "van Dijk"
+          }
+        ],
+        "video": "RoX_MFDQn58"
+      }
+    ]
+  }
+}
