@@ -996,10 +996,11 @@ Craig set the formats on 27 Sep. The cups are declared in `packages/core/src/lea
   seeds 7 to 10 fill a sixteen-slot first round. **Every round is played as late as the final allows**
   (`scheduleRounds`; Craig, 30 Sep: *"dont have wb so early"*): the winners' final is GW15, so its winner
   waits one gameweek for the final, not three. **Once seeded it follows strict bracket order** (Craig, 30 Sep):
-  every side from round 3 on is a fixed winner or loser, never reseeded. **Rounds 1 and 2 are drawn at random**
-  (Craig, 30 Sep: *"round 1 can be drawn, and round 2"*), off the app like the Davy Propper groups: seeds 7–10
-  into round 1, then the six byes and the two round 1 winners into round 2 (`drawnRounds: 2`). The GW9 seeding
-  decides only the byes; losers drop into the losers' side by the tie position the draw gave them.
+  every side from round 3 on is a fixed winner or loser, never reseeded. **Hard seeds 1–10, no random draw**
+  (Craig, 4 Nov: *"fill in the bracket with hard seeds 1-10"*, replacing 30 Sep's drawn rounds 1 and 2): round 1
+  is 8 v 9 and 7 v 10, round 2 seeds 1–6 against them by `seedSlots`. The seeds are data,
+  `data/leagues/cup-seeds.json`, entered from GW9's scores on 4 Nov (Glengarry and Dome level on 39, Glengarry
+  6th on the higher league position).
 - **Davy Propper Cup**: two groups drawn at random around GW19, off the app, each playing once over GW22
   to GW26 (Craig, 30 Sep: *"starts gw22"*). The top three go through and the group winners skip the
   quarter-finals (`seededBracket(6)`). Quarter-finals are A2 v B3 and B2 v A3, all one leg: GW28, GW29
@@ -1026,8 +1027,8 @@ Craig set the formats on 27 Sep. The cups are declared in `packages/core/src/lea
 - **On screen with a placeholder draw** (Craig, 27 Sep: *"Placeholder brackets are fine for now"*):
   `/league/cups` shows each cup's bracket, and Schedule and Live carry the cup ties, the cups' only fixture
   list (Craig, 1 Oct: *"just put fixtures in fixtures section, too many buttons, leave brackets here"*; GW9's
-  seeding line moved to the schedule with them). Every side is "To be drawn", "A1", "2nd B" or "Winner M5"
-  until the draws are made; nothing yet puts a team into a slot. The screen no longer says "Placeholder
+  seeding line moved to the schedule with them). A seeded side prints its team (the INFUSR Cup's, from 4 Nov);
+  every other is "A1", "2nd B" or "Winner M5" until the draws and results fill it. The screen no longer says "Placeholder
   draw" (Craig, 30 Sep: *"remove placeholder draw sentence"*). The Davy Propper groups are drawn as
   `groupTable` league tables (Craig, 1 Oct: *"propper cup should be a table view"*), every figure 0 until
   results are wired in.

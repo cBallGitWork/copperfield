@@ -21,13 +21,13 @@ rules (27 Sep 2026). Their fixtures are on Fixtures (`/league/fixtures`), not he
   and a dashed line under the last place through to the knockout. Until the group stage is played every
   figure is 0: no group tie has a result to count.
 
-## Placeholder draw
+## Seeds and placeholders
 
-Craig, 27 Sep 2026: *"Placeholder brackets are fine for now."* Nobody is seeded until GW9 is
-scored, and nobody is in a group until the draw around GW19, so every side is a placeholder:
-"Seed 7", a group slot "A1", a group place "2nd B", or "Winner M5" / "Loser M5", M5 being the tie
-numbered 5 in the bracket. A round drawn at random (the Tims INFUSR Energy Cup's first two) prints "To be drawn"
-on both sides until Craig's draw fills it. Ties are numbered in the order they are played. The draw is laid out for
+**The Tims INFUSR Energy Cup is seeded 1–10 off GW9** (Craig, 4 Nov 2026: *"fill in the bracket with hard seeds
+1-10"*), recorded in `data/leagues/cup-seeds.json` and read by `app/cupSeeds.ts`; a league missing any of the file's
+teams (demo) stays unseeded. A seeded side prints its team; every other side is still a placeholder: "Seed 7", a
+group slot "A1", a group place "2nd B", or "Winner M5" / "Loser M5", M5 being the tie numbered 5 in the bracket.
+Ties are numbered in the order they are played. The draw is laid out for
 however many teams `getLeagueInfo` has, so a league still filling up gets a smaller bracket.
 
 ## A level tie
@@ -54,12 +54,8 @@ and the 8 Oct ruling that he settles ties by hand.
 
 ## What the draw still needs
 
-Today every GW10 and GW11 side prints "To be drawn" and nothing puts a team into a slot. Before GW10:
+The GW9 seeds are in (above). Still missing:
 
-- **The GW9 seeding**: nothing reads GW9's points into seeds (the reader was deleted in #378). They only split
-  the six byes from the four in round 1.
-- **The draw itself**: Craig draws rounds 1 and 2 off the app; there is no file or form to enter who he drew,
-  so the bracket cannot name a team.
 - **Cup results**: no read puts each side's GW points and counted men's categories against a tie, so
   `decideTie` has no caller and Bracket, Fixtures and Live cannot print a winner or a "Through on" line.
 

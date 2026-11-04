@@ -14,13 +14,20 @@ describe("leagueTies", () => {
 });
 
 describe("cupTies", () => {
-  it("opens the Tims INFUSR Energy Cup on GW10 with two ties still to be drawn", () => {
+  it("opens the Tims INFUSR Energy Cup on GW10 with two ties between placeholder seeds", () => {
     const ties = cupTies(10, 10);
     expect(ties.map((tie) => [tie.competition.id, tie.round, tie.home.label, tie.away.label])).toEqual([
-      ["infusr", "Round 1", "To be drawn", "To be drawn"],
-      ["infusr", "Round 1", "To be drawn", "To be drawn"],
+      ["infusr", "Round 1", "Seed 8", "Seed 9"],
+      ["infusr", "Round 1", "Seed 7", "Seed 10"],
     ]);
     expect(ties.every((tie) => tie.home.team === null && tie.away.team === null)).toBe(true);
+  });
+
+  it("puts the seeded teams into their ties", () => {
+    const seeds = Array.from({ length: 10 }, (_, at) => team(`t${at + 1}`, `Team ${at + 1}`));
+    const [first] = cupTies(10, 10, { infusr: seeds });
+    expect(first?.home).toEqual({ team: seeds[7], label: "Team 8" });
+    expect(first?.away).toEqual({ team: seeds[8], label: "Team 9" });
   });
 
   it("answers nothing for a gameweek no cup plays in", () => {

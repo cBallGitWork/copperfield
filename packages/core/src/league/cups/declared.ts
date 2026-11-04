@@ -18,8 +18,6 @@ export interface Knockout {
   /** Every tie is one leg. */
   elimination: "single" | "double";
   finalGameweek: number;
-  /** The first winners' rounds drawn at random, off the app; the seeds decide only who plays in them. */
-  drawnRounds?: number;
 }
 
 export interface Cup {
@@ -35,7 +33,7 @@ export const CUPS: readonly Cup[] = [
     name: "Tims INFUSR Energy Cup",
     seeding: { from: "gameweek", gameweek: 9 },
     // Gameweek 17 is Boxing Day.
-    knockout: { elimination: "double", finalGameweek: 17, drawnRounds: 2 },
+    knockout: { elimination: "double", finalGameweek: 17 },
   },
   {
     id: "davy-propper",
