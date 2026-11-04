@@ -1,0 +1,459 @@
+{
+  "slug": "gw9-prem-report-2026-11-02",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 9,
+  "gameweek": 9,
+  "filedAt": "2026-11-04T17:34:25.865Z",
+  "expiresAt": null,
+  "edition": "Monday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Barry buries a set piece",
+  "deck": "Everton won 1-0 at Newcastle United",
+  "body": "",
+  "subjects": [
+    "match-report:gw9:2026-11-02"
+  ],
+  "image": null,
+  "face": {
+    "code": 586309,
+    "name": "Barry",
+    "clubId": 9,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645283,
+        "kickoff": "2026-11-02T20:00:00Z",
+        "home": {
+          "code": 4,
+          "score": 0,
+          "goals": [],
+          "assists": [],
+          "manager": "Matthias Jaissle",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Hornícek",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Dedic",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Touré",
+                    "minute": "87",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 4.4
+                },
+                {
+                  "name": "Schär",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.5
+                },
+                {
+                  "name": "Burn",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.5
+                },
+                {
+                  "name": "Hall",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Joelinton",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Ramsey",
+                    "minute": "75",
+                    "booked": true,
+                    "mark": 1.8
+                  },
+                  "mark": 4.5
+                },
+                {
+                  "name": "González",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Steur",
+                    "minute": "64",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "Elanga",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Murphy",
+                    "minute": "76",
+                    "booked": false,
+                    "mark": 3.4
+                  },
+                  "mark": 3.4
+                },
+                {
+                  "name": "Willock",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Wissa",
+                    "minute": "64",
+                    "booked": false,
+                    "mark": 2.4
+                  },
+                  "mark": 4.5
+                },
+                {
+                  "name": "Barnes",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 3.6
+                }
+              ],
+              [
+                {
+                  "name": "Osula",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.4
+                }
+              ]
+            ],
+            "unused": [
+              "Bamba",
+              "Botman",
+              "Thiaw",
+              "Pope"
+            ]
+          },
+          "next": "Fulham (a)"
+        },
+        "away": {
+          "code": 11,
+          "score": 1,
+          "goals": [
+            "Barry 49"
+          ],
+          "assists": [],
+          "manager": "David Moyes",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Pickford",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 7.1
+                }
+              ],
+              [
+                {
+                  "name": "O'Brien",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.1
+                },
+                {
+                  "name": "Tarkowski",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.7
+                },
+                {
+                  "name": "Branthwaite",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Keane",
+                    "minute": "82",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 7.1
+                },
+                {
+                  "name": "Mykolenko",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.7
+                }
+              ],
+              [
+                {
+                  "name": "Armstrong",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.1
+                },
+                {
+                  "name": "Garner",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.6
+                }
+              ],
+              [
+                {
+                  "name": "Röhl",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5
+                },
+                {
+                  "name": "Dewsbury-Hall",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.8
+                },
+                {
+                  "name": "George",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Hackney",
+                    "minute": "90+2",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 5.4
+                }
+              ],
+              [
+                {
+                  "name": "Barry",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Johnson",
+                    "minute": "80",
+                    "booked": true,
+                    "mark": 2.5
+                  },
+                  "mark": 5.9
+                }
+              ]
+            ],
+            "unused": [
+              "Dibling",
+              "Graham",
+              "Alcaraz",
+              "Maitland-Niles",
+              "Travers",
+              "Nørgaard"
+            ]
+          },
+          "next": "Coventry City (h)"
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        },
+        "venue": "St. James' Park",
+        "attendance": 52279,
+        "referee": "John Brooks",
+        "standfirst": "Everton beat Newcastle United 1-0 for their first away win of the season.",
+        "account": "Jake O'Brien headed wide from inside the six-yard box just before the interval, meeting a cross from Kiernan Dewsbury-Hall. Thierno Barry gave Everton the lead just after half-time, his right-footed finish from close range going into the middle of the goal after a set piece. Jacob Ramsey was sent off for a second booking deep into stoppage time, leaving Newcastle with ten men.",
+        "sections": [
+          {
+            "head": "Tarkowski concedes nothing",
+            "pitch": "James Tarkowski was on the pitch from kick-off to the final whistle, and Everton conceded nothing in that time, their defence leaving Newcastle without a goal.",
+            "stake": "Hazza Maguazza's Redempshazza has him on the bench, for six points, and beat Cowthenbeef 42-36."
+          },
+          {
+            "head": "Pickford keeps Newcastle out",
+            "pitch": "Jordan Pickford was in goal for every minute and ended the match with a clean sheet, the one goal of the match arriving at the other end.",
+            "stake": "Hazza Maguazza's Redempshazza has him, for seven points."
+          },
+          {
+            "head": "Barry's fourth league goal",
+            "pitch": "Thierno Barry took three shots in the match, and his goal took his league total for this season to four.",
+            "stake": "The Raccoons has him, for six points, and beat Bayern Bru 51-29."
+          }
+        ],
+        "keyStats": [
+          {
+            "label": "Points",
+            "value": "Pickford 7 (Hazza Maguazza's Redempshazza), Branthwaite 7 (AtleticoTimHortons), O'Brien 6, Mykolenko 6 (AtleticoTimHortons)"
+          },
+          {
+            "label": "Shots",
+            "value": "17 (2 on target) v 16 (5)"
+          },
+          {
+            "label": "xG",
+            "value": "Newcastle 1.30, Everton 2.44"
+          },
+          {
+            "label": "Saves",
+            "value": "Hornícek 4"
+          },
+          {
+            "label": "DefCon",
+            "value": "Branthwaite 1, Garner 1, George 1"
+          },
+          {
+            "label": "Clean sheet, full match",
+            "value": "Pickford, O'Brien, Mykolenko, Tarkowski"
+          },
+          {
+            "label": "Most shots",
+            "value": "Schär 4 (0 on target)"
+          },
+          {
+            "label": "Chances created",
+            "value": "Dewsbury-Hall 3"
+          },
+          {
+            "label": "Top xG",
+            "value": "Barry 1.29, Wissa 0.40, Elanga 0.35"
+          }
+        ],
+        "star": {
+          "name": "Pickford",
+          "club": "Everton",
+          "holder": "Hazza Maguazza's Redempshazza",
+          "mark": 7.1,
+          "did": ""
+        },
+        "rows": [
+          {
+            "minute": "32",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Burn"
+          },
+          {
+            "minute": "49",
+            "kind": "Goal",
+            "side": "away",
+            "text": "Barry"
+          },
+          {
+            "minute": "52",
+            "kind": "Booked",
+            "side": "away",
+            "text": "George"
+          },
+          {
+            "minute": "64",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Wissa for Willock"
+          },
+          {
+            "minute": "64",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Steur for González"
+          },
+          {
+            "minute": "66",
+            "kind": "Post",
+            "side": "home",
+            "text": "Elanga"
+          },
+          {
+            "minute": "75",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Ramsey for Joelinton"
+          },
+          {
+            "minute": "76",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Murphy for Elanga"
+          },
+          {
+            "minute": "80",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Johnson for Barry"
+          },
+          {
+            "minute": "82",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Keane for Branthwaite"
+          },
+          {
+            "minute": "87",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Touré for Dedic"
+          },
+          {
+            "minute": "90+2",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Hackney for George"
+          },
+          {
+            "minute": "90+6",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Ramsey"
+          },
+          {
+            "minute": "90+8",
+            "kind": "Sent off",
+            "side": "home",
+            "text": "Ramsey, second booking"
+          },
+          {
+            "minute": "90+9",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Schär"
+          },
+          {
+            "minute": "90+9",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Johnson"
+          }
+        ],
+        "video": "PU37pz7aYwI"
+      }
+    ]
+  }
+}
