@@ -3,6 +3,7 @@ import LeagueShell from "../Shell";
 import Nothing from "../../components/shell/Nothing";
 import FantraxSilent from "../../components/shell/FantraxSilent";
 import { getSchedule } from "../schedule/schedule";
+import { cupSeeds } from "../../cupSeeds";
 import { cupHref } from "../SectionNav";
 import Bracket from "./Bracket";
 import Groups from "./Groups";
@@ -10,7 +11,7 @@ import TabStrip from "../../components/shell/TabStrip";
 import { FootFrame } from "../../components/shell/FootFrame";
 import { LEAGUE_CAPTION, titled } from "../../titles";
 
-// Each cup's draw; its fixtures are on the schedule. Every side is a placeholder until the draws are made.
+// Each cup's draw; its fixtures are on the schedule. A side is a placeholder until its seed or group place is known.
 
 export const revalidate = 30;
 
@@ -35,7 +36,7 @@ export default async function CupsPage({
   }
 
   const teams = read.info.teams.length;
-  const stages = cupPlan(cup, teams);
+  const stages = cupPlan(cup, teams, cupSeeds(read.info.teams)[cup.id]);
 
   return (
     // The cup is picked from the foot, above the thumb rail: the top keeps Draft's own strip alone.

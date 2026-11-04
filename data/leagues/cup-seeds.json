@@ -1,0 +1,21 @@
+{
+  "seeds": [
+    {
+      "cup": "infusr",
+      "gameweek": 9,
+      "how": "GW9 Fantrax points, best first; Glengarry and Dome level on 39, Glengarry through on the higher league position (9th v 10th)",
+      "teams": [
+        { "teamId": "aekx2715mtzgcl3f", "seed": "1 · The Truffle Pigs · 55" },
+        { "teamId": "l5kunst8msgbirdf", "seed": "2 · The Raccoons · 51" },
+        { "teamId": "uexqrijomu8l5asi", "seed": "3 · AtleticoTimHortons · 43" },
+        { "teamId": "ipnp5y4mmu9j7kop", "seed": "4 · Hazza Maguazza's Redempshazza · 42" },
+        { "teamId": "7to6xosimu8hyyw5", "seed": "5 · If anyone can, Bannan can · 41" },
+        { "teamId": "syjkob6cmuobagfu", "seed": "6 · GlengarryHearts · 39" },
+        { "teamId": "0g0j5mkomuqqwsbu", "seed": "7 · domeitalycoach · 39" },
+        { "teamId": "7z8fy0pnmuogbtdw", "seed": "8 · Cowthenbeef · 36" },
+        { "teamId": "qgucu9dgmufwva1x", "seed": "9 · its_ohi · 33" },
+        { "teamId": "kpj0z744muh1qwtd", "seed": "10 · Bayern Bru · 29" }
+      ]
+    }
+  ]
+}

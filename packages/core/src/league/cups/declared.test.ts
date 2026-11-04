@@ -38,9 +38,8 @@ describe("Tims INFUSR Energy Cup", () => {
     });
   });
 
-  it("draws rounds 1 and 2 at random, seeds 7–10 into round 1, then follows strict bracket order", () => {
-    // Craig, 30 Sep: "cup 1, once seeded, follows a strict bracket order"; "round 1 can be drawn, and round 2".
-    expect(infusr.knockout.drawnRounds).toBe(2);
+  it("puts seeds 7–10 into round 1 and the six byes into round 2, then follows strict bracket order", () => {
+    // Craig, 30 Sep: "cup 1, once seeded, follows a strict bracket order"; 4 Nov: "hard seeds 1-10", no random draw.
     const seedsIn = (round: (typeof rounds)[number] | undefined) =>
       (round?.ties ?? []).flatMap((tie) => [tie.home, tie.away]).flatMap((side) => ("seed" in side ? [side.seed] : []));
     const [first, second, third] = rounds.filter((round) => round.id.startsWith("W"));

@@ -28,16 +28,29 @@ describe("cupPlan", () => {
 
   it("numbers every knockout tie in playing order and names later sides by those numbers", () => {
     const stages = cupPlan(cup("infusr"), 10);
-    // Craig, 30 Sep: rounds 1 and 2 are drawn at random, so no seed is printed in them.
+    // Craig, 4 Nov: hard seeds 1–10, so round 1 is 8 v 9 and 7 v 10 and the six byes wait in round 2.
     expect(stages[0]?.fixtures).toEqual([
-      { code: "M1", home: "To be drawn", away: "To be drawn" },
-      { code: "M2", home: "To be drawn", away: "To be drawn" },
+      { code: "M1", home: "Seed 8", away: "Seed 9" },
+      { code: "M2", home: "Seed 7", away: "Seed 10" },
     ]);
-    expect(stages[1]?.fixtures[0]).toEqual({ code: "M3", home: "To be drawn", away: "To be drawn" });
+    expect(stages[1]?.fixtures[0]).toEqual({ code: "M3", home: "Seed 1", away: "Winner M1" });
     expect(stages[2]?.fixtures[0]).toEqual({ code: "M7", home: "Loser M1", away: "Loser M6" });
     // Numbered in the order they are played: the winners' final (GW15) is M15, the losers' (GW16) M17.
     expect(stages.at(-1)?.fixtures).toEqual([{ code: "M18", home: "Winner M15", away: "Winner M17" }]);
     expect(stages.flatMap((stage) => stage.fixtures)).toHaveLength(18);
+  });
+
+  it("names the seeded teams, and carries each onto its side", () => {
+    const seeds = Array.from({ length: 10 }, (_, at) => ({ teamId: `t${at + 1}`, name: `Team ${at + 1}` }));
+    const stages = cupPlan(cup("infusr"), 10, seeds);
+    expect(stages[0]?.fixtures[0]).toEqual({
+      code: "M1",
+      home: "Team 8",
+      away: "Team 9",
+      homeTeam: seeds[7],
+      awayTeam: seeds[8],
+    });
+    expect(stages[1]?.fixtures[0]).toEqual({ code: "M3", home: "Team 1", away: "Winner M1", homeTeam: seeds[0] });
   });
 
   it("lays the Davy Propper Cup out as five group matchdays, then a knockout to GW30", () => {

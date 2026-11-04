@@ -72,7 +72,7 @@ export { leads, trails } from "./scoreline";
 export type { HeadToHead, LeagueSeason, PeriodPairing, PoolPlayer } from "./selectors";
 
 export { LEAGUE_COMPETITION, cupTies, groupTies, leagueTies, seededIn } from "./competitions";
-export type { CompetitionTie, TieSide } from "./competitions";
+export type { CompetitionTie, CupSeeds, TieSide } from "./competitions";
 export { CUPS } from "./cups/declared";
 export type { Cup, GroupStage } from "./cups/declared";
 export { groupTable } from "./cups/groupTable";

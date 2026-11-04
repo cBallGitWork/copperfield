@@ -1,4 +1,5 @@
 import { type CompetitionTie, type LeagueInfo, LEAGUE_COMPETITION, cupTies, leagueTies, periodPairings } from "@epl/core";
+import { cupSeeds } from "../../cupSeeds";
 import { yoursFirst } from "../../mine";
 
 // Which gameweeks Draft's Fixtures has anything to show for, off the league's own pairings and our cups.
@@ -9,7 +10,7 @@ type League = Pick<LeagueInfo, "matchups" | "teams">;
 export function roundTies(league: League, round: { gameweek: number; period: number }): CompetitionTie[] {
   return [
     ...leagueTies(periodPairings(league.matchups, league.teams, round.period)),
-    ...cupTies(league.teams.length, round.gameweek),
+    ...cupTies(league.teams.length, round.gameweek, cupSeeds(league.teams)),
   ];
 }
 

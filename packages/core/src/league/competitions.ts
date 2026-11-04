@@ -44,19 +44,22 @@ export function leagueTies(pairings: readonly PeriodPairing[]): CompetitionTie[]
   }));
 }
 
-/** The cup ties in one gameweek for a league of `teams`. Nobody is drawn yet, so every side is a
- *  placeholder ("Seed 7", "A1", "Winner M5"). */
-export function cupTies(teams: number, gameweek: number): CompetitionTie[] {
+/** Each seeded cup's entrants, best first, by cup id. */
+export type CupSeeds = Readonly<Record<string, readonly LeagueTeam[]>>;
+
+/** The cup ties in one gameweek for a league of `teams`. A side no seed names is a placeholder ("Seed 7", "A1",
+ *  "Winner M5"). */
+export function cupTies(teams: number, gameweek: number, seeds: CupSeeds = {}): CompetitionTie[] {
   return CUPS.flatMap((cup) =>
-    cupPlan(cup, teams)
+    cupPlan(cup, teams, seeds[cup.id])
       .filter((stage) => stage.gameweek === gameweek)
       .flatMap((stage) =>
         stage.fixtures.map((fixture) => ({
           competition: cup,
           round: stage.name,
           code: fixture.code,
-          home: { team: null, label: fixture.home },
-          away: { team: null, label: fixture.away },
+          home: { team: fixture.homeTeam ?? null, label: fixture.home },
+          away: { team: fixture.awayTeam ?? null, label: fixture.away },
         })),
       ),
   );
