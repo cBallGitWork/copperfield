@@ -1,0 +1,109 @@
+{
+  "slug": "gw10-predictions",
+  "kind": "predictions",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 10,
+  "gameweek": 10,
+  "filedAt": "2026-11-05T22:56:56.773Z",
+  "expiresAt": null,
+  "edition": "The Form Guide",
+  "byline": "",
+  "reporter": "Mark Lawrenson",
+  "headline": "Lawro's Predictions: GW10",
+  "deck": "Lawro goes against the favourites once, backing Bayern Bru over its_ohi.",
+  "body": "Two from five last week, one from three on the gut calls. I used to do Match of the Day. Now I'm previewing a side called Cowthenbeef.",
+  "subjects": [
+    "predictions:gw10"
+  ],
+  "image": null,
+  "face": null,
+  "ties": [
+    {
+      "homeTeamId": "qgucu9dgmufwva1x",
+      "awayTeamId": "kpj0z744muh1qwtd",
+      "line": "its_ohi are second, and I've never trusted them. Three wins, then AtleticoTimHortons beat them, and flaky sides never get over that.\n\nBayern Bru have Barcola and Munoz, both Liverpool, both away at Crystal Palace. That's no bother to either of them. Bayern Bru's Ødegaard of Arsenal hasn't had a goal or an assist in his last two. He's there to create, and he's created a cup of tea.\n\nBarcola and Munoz pass it and move it the proper way, so I'm going against the favourites with Bayern Bru.",
+      "callsTeamId": "kpj0z744muh1qwtd",
+      "instinct": "liverpool",
+      "score": {
+        "home": 30,
+        "away": 31
+      },
+      "face": {
+        "code": 482616,
+        "name": "Barcola",
+        "clubId": 14,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "7z8fy0pnmuogbtdw",
+      "awayTeamId": "syjkob6cmuobagfu",
+      "line": "Silva goes to Ipswich Town for Cowthenbeef, a side who couldn't hit a barn door. I don't fancy the rest of this lot. Two defeats in a row, and they look soft. Cowthenbeef's Calvert-Lewin of Leeds United is a slight doubt with a foot injury.\n\nGlengarryHearts are ninth and play like it. Hill of AFC Bournemouth hasn't let one in for a fortnight, and that'll end. Every run does. GlengarryHearts have Anderson of Manchester City at Nottingham Forest, and he's done nothing for a couple of games.\n\nI've my doubts about all of it, but Hill keeping things tidy gets me to GlengarryHearts.",
+      "callsTeamId": "syjkob6cmuobagfu",
+      "score": {
+        "home": 38,
+        "away": 39
+      },
+      "face": {
+        "code": 483067,
+        "name": "Silva",
+        "clubId": 3,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "aekx2715mtzgcl3f",
+      "awayTeamId": "ipnp5y4mmu9j7kop",
+      "line": "Hull City come to Rice for The Truffle Pigs in the Irish Wilderness Derby, and that defence is a revolving door. The Truffle Pigs are eighth, and one win in four is a side that wakes up late.\n\nHazza Maguazza's Redempshazza are third and far too pleased with themselves. Gabriel of Arsenal has Hull City too, with two clean sheets behind him. Enzo of Manchester City has gone two games without a return for Hazza Maguazza's Redempshazza.\n\nA Hull City defence like that and Rice at home to it is enough for The Truffle Pigs.",
+      "callsTeamId": "aekx2715mtzgcl3f",
+      "score": {
+        "home": 42,
+        "away": 35
+      },
+      "face": {
+        "code": 204480,
+        "name": "Rice",
+        "clubId": 1,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "l5kunst8msgbirdf",
+      "awayTeamId": "uexqrijomu8l5asi",
+      "line": "I've never trusted champions, and The Raccoons have played like champions who've signed off. They emptied the waiver list for the Cold Tea Classic, five men nobody else wanted. James Garner of Everton is one, somebody's cast-off like the rest. Palmer has a trip to Sunderland for the champions.\n\nAtleticoTimHortons are fourth, and one win over its_ohi has gone to their heads. For AtleticoTimHortons, Tavernier of AFC Bournemouth gets Ipswich Town away, and the Tractor Boys leave the back door open.\n\nSunderland away for Palmer is the fixture that decides it, and The Raccoons get it.",
+      "callsTeamId": "l5kunst8msgbirdf",
+      "score": {
+        "home": 39,
+        "away": 33
+      },
+      "face": {
+        "code": 232928,
+        "name": "Garner",
+        "clubId": 9,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "0g0j5mkomuqqwsbu",
+      "awayTeamId": "7to6xosimu8hyyw5",
+      "line": "No win in four and bottom of the table, yet favourites? Apparently. domeitalycoach's Havertz has Hull City at home, and that defence wouldn't stop a bus.\n\nIf anyone can, Bannan can are top, and I couldn't tell you how. Rogers of Chelsea has Sunderland away. If anyone can, Bannan can also have Gibbs-White of Nottingham Forest, up against domeitalycoach's Doku of Manchester City. Neither has scored or set one up lately. I'll be asleep by half-time.\n\ndomeitalycoach are due a win, and Hull City's defence is the one to get it against.",
+      "callsTeamId": "0g0j5mkomuqqwsbu",
+      "score": {
+        "home": 40,
+        "away": 32
+      },
+      "face": {
+        "code": 219847,
+        "name": "Havertz",
+        "clubId": 1,
+        "position": null
+      }
+    }
+  ],
+  "extras": {
+    "record": {
+      "right": 10,
+      "called": 19
+    }
+  }
+}
