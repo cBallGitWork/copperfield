@@ -49,7 +49,7 @@ export function presserDesk(input: {
   const lines = wrongRound ? [] : presserLines(facts.teams, since, byCode, snapshot.players);
   return {
     lines,
-    quotes: presserQuotes(byCode),
+    quotes: presserQuotes(since, byCode),
     spoke: presserSpoke(since, byCode),
     ties: lines.length === 0 ? new Map() : presserFixtures(gameweek, byCode, input.season),
     gameweek,
