@@ -23,7 +23,7 @@ export default function Extras({
 }) {
   if (story.kind === "season-rankings") return <Ranks story={story} named={named} mine={mine} />;
   if (story.kind === "presser") return <TeamNews story={story} myName={mine === null ? null : shortName(mine, named(mine))} />;
-  if (story.kind === "predicted-xi") return <Lineups story={story} named={named} mine={mine} />;
+  if (story.kind === "predicted-xi") return <Lineups story={story} mine={mine} />;
   if (story.kind === "match-report") return <Reports story={story} snapshot={snapshot} />;
   if (story.kind === "bin-xi") return <BinXi story={story} snapshot={snapshot} />;
   if (story.kind === "draft-report") return <DraftReport story={story} snapshot={snapshot} />;

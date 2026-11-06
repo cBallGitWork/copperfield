@@ -10,7 +10,6 @@ import {
 } from "@epl/core";
 import { LINEUP_NEWS_MEN, START_DOUBT_MINUTES } from "../../config";
 import { yoursInk } from "../../mine";
-import { shortName } from "../../teamNames";
 import { HAIRLINES } from "./rules";
 import { CAPTION, CAPTION_CAPS } from "./heads";
 
@@ -24,11 +23,9 @@ const STATUS: Record<NonNullable<StoryLineupMan["status"]>, string> = {
 
 export default function Lineups({
   story,
-  named,
   mine,
 }: {
   story: PublishedStory;
-  named: (teamId: string) => string;
   mine: string | null;
 }) {
   const ties = story.extras?.lineups ?? [];
@@ -46,8 +43,8 @@ export default function Lineups({
           {/* Side by side at every width: a match is two teams facing each
               other, and stacked they read as a list of twenty clubs. */}
           <div className="grid grid-cols-2 gap-x-3 pt-2 sm:gap-x-6">
-            <Side side={tie.home} named={named} mine={mine} minuted={minuted} />
-            <Side side={tie.away} named={named} mine={mine} minuted={minuted} />
+            <Side side={tie.home} mine={mine} minuted={minuted} />
+            <Side side={tie.away} mine={mine} minuted={minuted} />
           </div>
         </section>
       ))}
@@ -57,12 +54,10 @@ export default function Lineups({
 
 function Side({
   side,
-  named,
   mine,
   minuted,
 }: {
   side: StoryLineupSide;
-  named: (teamId: string) => string;
   mine: string | null;
   minuted: boolean;
 }) {
@@ -92,15 +87,10 @@ function Side({
               {man.position ?? DASH}
             </span>
             <p className="min-w-0 flex-1">
+              {/* No holder's name: two columns on a phone have no room for it; the reader's own men take his ink. */}
               <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>
                 {man.name}
               </span>
-              {/* Owned is marked and unowned is not: a bracket on every one of
-                  two hundred and twenty names is noise, and the question this
-                  list answers is which of them somebody holds. */}
-              {man.owner === undefined ? null : (
-                <span className="text-muted"> (<em>{shortName(man.owner, named(man.owner))}</em>)</span>
-              )}
               {/* Printed as predicted, never replaced: the mark says the football has him out or in doubt. */}
               {man.status === undefined ? null : (
                 <span className={`${CAPTION_CAPS} pl-1.5 ${STATUS[man.status]}`}>{man.status}</span>
@@ -118,7 +108,7 @@ function Side({
           </li>
         ))}
       </ol>
-      <TeamNews news={side.news ?? []} named={named} mine={mine} />
+      <TeamNews news={side.news ?? []} mine={mine} />
     </div>
   );
 }
@@ -127,11 +117,9 @@ function Side({
  *  and one for the doubts, each man's complaint in a few words, and a count of the rest. */
 function TeamNews({
   news,
-  named,
   mine,
 }: {
   news: readonly StoryLineupNews[];
-  named: (teamId: string) => string;
   mine: string | null;
 }) {
   if (news.length === 0) return null;
@@ -149,7 +137,6 @@ function TeamNews({
             <span key={man.name}>
               {at === 0 ? null : "; "}
               <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>{man.name}</span>
-              {man.owner === undefined ? null : <> (<em>{shortName(man.owner, named(man.owner))}</em>)</>}
               {man.note === undefined ? null : <> – {man.note}</>}
             </span>
           ))}

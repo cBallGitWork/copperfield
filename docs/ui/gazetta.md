@@ -563,11 +563,10 @@ about a man. It is his general position and not his position in *this* eleven:
 Liverpool play Szoboszlai at right-back and he prints as `DM`, which is true
 about him and not about the team sheet.
 
-**A man somebody holds is marked; a free agent is not.** The reverse of the Team
-Sheet's rule, and for a reason the Team Sheet does not have: a bracket on every
-one of two hundred and twenty names is noise, and the question this list answers
-is which of them are already owned. The mark is `yoursInk`, so the reader's own
-men are in the sheet's one print red. **The Team Sheet marks the reader's men the same way** (20 Oct 2026):
+**No holder is named** (Craig, 6 Nov 2026: "Take out the manager names on that page, not enough real
+estate"). Two elevens side by side on a phone have no width for a bracket, and from 21 Sep until then every
+held man carried one. The desk still files who holds each man, so the reader's own men print in `yoursInk`,
+the sheet's one print red, which costs no width. **The Team Sheet marks the reader's men the same way** (20 Oct 2026):
 a man and his owner tag take `yoursInk`, in his row and in Still out, when the tag is the reader's short name
 (`teamNames.shortName`, the form the desk filed it in); no reader, no mark, and no reordering.
 
@@ -579,7 +578,7 @@ both sides named" was *"just repeated ai slip"*), so a dropped tie is simply not
 on the page.
 
 **Each side's team news prints under its eleven** (6 Nov 2026): the club's men outside the eleven who are
-out or a doubt, an `OUT` line and a `Doubt` line, each man with his holder and his complaint in a few words,
+out or a doubt, an `OUT` line and a `Doubt` line, each man with his complaint in a few words (no holder, as above),
 at most `LINEUP_NEWS_MEN` named (most season minutes first) and `+N more` for the rest. The desk stamps it
 (`xi.ts`'s `teamNews`), joining by FPL code and never by name: the week's firm presser signal leads where it
 is newer than FPL's note (ruled out, still out and suspended are OUT, a scare a Doubt, fit again drops him),
