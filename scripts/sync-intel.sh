@@ -19,8 +19,8 @@ MAIN=${EPL_DRAFT:-$HOME/epl-draft-1}
 WT=${INTEL_WORKTREE:-$HOME/epl-draft-intel}
 SISTER=${SISTER_REPO:-$HOME/ai-carling-premiership}
 export FFS_SCRAPE_DIR=${FFS_SCRAPE_DIR:-$SISTER/data/raw/fantasy_football_scout/daily}
-# owner/name off the main folder's origin, ssh or https.
-REPO=${INTEL_REPO:-$(git -C "$MAIN" remote get-url origin 2>/dev/null | sed -E 's#^.*github\.com[:/]##; s#\.git$##' || true)}
+# owner/name off the main folder's origin: https, ssh, or an ssh host alias (git@github-personal:o/r).
+REPO=${INTEL_REPO:-$(git -C "$MAIN" remote get-url origin 2>/dev/null | sed -E 's#\.git$##; s#^.*[:/]([^/:]+/[^/:]+)$#\1#' || true)}
 LOG=${INTEL_LOG:-$HOME/Library/Logs/epl-draft-intel.log}
 LOCK=$HOME/epl-draft-intel.lock
 OUT=$(mktemp -d)
