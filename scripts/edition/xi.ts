@@ -125,10 +125,16 @@ function markOf(xi: IntelXi): (player: XiPlayer) => LineupStatus | null {
   };
 }
 
-/** FPL's note cut to its complaint: "Hamstring injury - Expected back 22 Nov" is "Hamstring injury"; null for none. */
+/** A complaint as the Line-Ups print it: "Thigh injury" is "Thigh", capitalised; null where it names nothing. */
+export function complaintOf(text: string): string | null {
+  const part = text.trim().replace(/\s+injury$/i, "");
+  if (part === "" || /^(unspecified|unknown)( injury)?$/i.test(part)) return null;
+  return part[0].toUpperCase() + part.slice(1);
+}
+
+/** FPL's note cut to its complaint: "Hamstring injury - Expected back 22 Nov" is "Hamstring"; null for none. */
 export function briefNote(news: string): string | null {
-  const complaint = news.split(" - ")[0].trim();
-  return complaint === "" ? null : complaint;
+  return complaintOf(news.split(" - ")[0]);
 }
 
 /** A presser's word on one man: his mark (null is fit again), when it was said, and the complaint in its own word. */
@@ -148,8 +154,7 @@ export function presserWords(signals: readonly PresserSignal[]): ReadonlyMap<num
   const words = new Map<number, PresserWord>();
   for (const signal of signals) {
     if (words.has(signal.code) || signal.confidence < FIRM || !Object.hasOwn(PRESSER_MARK, signal.tag)) continue;
-    const complaint = signal.tag === "suspended" ? "Suspended" : (signal.condition ?? "").trim();
-    const note = complaint === "" ? null : complaint[0].toUpperCase() + complaint.slice(1);
+    const note = complaintOf(signal.tag === "suspended" ? "Suspended" : (signal.condition ?? ""));
     words.set(signal.code, { mark: PRESSER_MARK[signal.tag], at: signal.said, note });
   }
   return words;
