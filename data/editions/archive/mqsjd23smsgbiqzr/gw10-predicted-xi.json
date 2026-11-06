@@ -4,7 +4,7 @@
   "leagueId": "mqsjd23smsgbiqzr",
   "period": 10,
   "gameweek": 10,
-  "filedAt": "2026-11-06T17:43:40.810Z",
+  "filedAt": "2026-11-06T18:09:32.957Z",
   "expiresAt": "2026-11-06T20:00:00Z",
   "leadsUntil": "2026-11-06T19:45:00.000Z",
   "edition": "The Form Guide",
@@ -1379,7 +1379,6 @@
               "name": "Matheus Cunha",
               "position": "ST",
               "owner": "qgucu9dgmufwva1x",
-              "status": "OUT",
               "xMins": 63
             }
           ],
