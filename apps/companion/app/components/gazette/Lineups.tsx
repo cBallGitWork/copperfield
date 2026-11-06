@@ -123,8 +123,8 @@ function Side({
   );
 }
 
-/** Who misses out, under the eleven: the filing's first few (it leads with the men who play most), a line for the OUT
- *  and one for the doubts, each man's complaint in a few words, and a count of the rest. */
+/** Who misses out, under the eleven: the filing's first few (it leads with the men who play most) under an OUT head and a
+ *  Doubt head, a man to a line with his complaint in a few words, and a count of the rest. */
 function TeamNews({
   news,
   mine,
@@ -139,18 +139,20 @@ function TeamNews({
     .map((status) => ({ status, men: shown.filter((man) => man.status === status) }))
     .filter((row) => row.men.length > 0);
   return (
-    <div className="flex flex-col gap-1 pt-2 text-xs leading-snug sm:text-sm">
+    <div className="flex flex-col gap-1.5 pt-2 text-xs leading-snug sm:text-sm">
+      {/* A head per status, then a man to a line: a run of names joined by semicolons wrapped mid-name on a phone. */}
       {rows.map(({ status, men }) => (
-        <p key={status} className="text-muted">
-          <span className={`${CAPTION_CAPS} pr-1.5 ${STATUS[status]}`}>{status}</span>
-          {men.map((man, at) => (
-            <span key={man.name}>
-              {at === 0 ? null : "; "}
-              <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>{initialled(man.name)}</span>
-              {man.note === undefined ? null : <> – {man.note}</>}
-            </span>
-          ))}
-        </p>
+        <div key={status}>
+          <p className={`${CAPTION_CAPS} ${STATUS[status]}`}>{status}</p>
+          <ul className="text-muted">
+            {men.map((man) => (
+              <li key={man.name}>
+                <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>{initialled(man.name)}</span>
+                {man.note === undefined ? null : <> – {man.note}</>}
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
       {rest === 0 ? null : <p className="text-faint">+{rest} more</p>}
     </div>

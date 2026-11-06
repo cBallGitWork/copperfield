@@ -70,9 +70,12 @@ describe("the predicted line-ups", () => {
     ];
     const listed = { extras: { lineups: [{ home: { ...side("Arsenal"), news }, away: side("Hull City"), kickoff: "2026-10-10T14:00:00Z" }] } } as PublishedStory;
     const text = renderToStaticMarkup(createElement(Lineups, { story: listed, mine: null })).replace(/<[^>]+>/g, "");
-    expect(text).toContain("OUTSaka – Hamstring injury; White");
+    expect(text).toContain("OUTSaka – Hamstring injuryWhite");
     expect(text).toContain("DoubtDoubtful – Knock");
     expect(text.indexOf("OUTSaka")).toBeLessThan(text.indexOf("DoubtDoubtful"));
+    // Craig, 6 Nov 2026: "a new line for each player".
+    const html = renderToStaticMarkup(createElement(Lineups, { story: listed, mine: null }));
+    expect(html.match(/<li>/g)).toHaveLength(3);
     const plain = renderToStaticMarkup(createElement(Lineups, { story, mine: null })).replace(/<[^>]+>/g, "");
     expect(plain).not.toMatch(/OUT|Doubt/);
   });
