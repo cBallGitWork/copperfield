@@ -91,6 +91,7 @@ vi.mock("./TopStats", () => ({ default: stub("topstats"), STATS_VIEW: "stats", T
 vi.mock("./Scores", () => ({ Scores: stub("scores") }));
 vi.mock("./LiveVidiprinter", () => ({ default: stub("vidiprinter") }));
 vi.mock("./Vidiprinter", () => ({ VIDIPRINTER_VIEW: "vidiprinter", VIDIPRINTER_HREF: "/matchday?view=vidiprinter" }));
+vi.mock("./LiveHighlights", () => ({ default: stub("highlights"), HIGHLIGHTS_VIEW: "highlights", HIGHLIGHTS_HREF: "/matchday?view=highlights" }));
 vi.mock("./Between", () => ({ BetweenGameweeks: stub("between") }));
 vi.mock("./ShareButton", () => ({ default: stub("share") }));
 vi.mock("../components/league/PageFailed", () => ({ default: stub("failed") }));
@@ -161,6 +162,15 @@ describe("Live's reads", () => {
     const html = await render();
     expect(html).toContain("x-scores");
     expect(html).not.toContain("x-vidiprinter");
+  });
+
+  // Craig, 6 Nov 2026: "Highlights tab works".
+  it("plays the highlights on their own view, a tab beside the others, and asks nothing the scores need", async () => {
+    const html = await render({ view: "highlights" });
+    expect(html).toContain("x-highlights");
+    expect(html).not.toContain("x-scores");
+    expect(html).toContain("/matchday?view=highlights");
+    for (const read of scoresOnly) expect(read).not.toHaveBeenCalled();
   });
 
   it("prints the vidiprinter on its own view and asks nothing the scores need", async () => {

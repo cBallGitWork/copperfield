@@ -82,6 +82,15 @@ export async function matchStatsBoard(
   });
 }
 
+/** Every video in the highlights playlist, parsed once for a page that lists many; none when the feed will not read. */
+export async function highlightVideos(): Promise<HighlightVideo[]> {
+  try {
+    return parseHighlightFeed(await highlightsFeed());
+  } catch {
+    return [];
+  }
+}
+
 /** The highlights video for one fixture (both clubs and the score must agree), or null. */
 export async function matchHighlight(fixture: {
   home: string;

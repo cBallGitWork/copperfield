@@ -77,8 +77,8 @@ export default function Vidiprinter({
   const byMan = new Map(players.map((p) => [p.code, p]));
 
   return (
-    // No head: the tab above already names the view. A desk keeps the column to a reading width.
-    <div className="lg:max-w-3xl">
+    // No head: the tab above already names the view. Full width, as Scores is, so every Live view lines up under the tabs.
+    <div>
       <Section>
         {day === null ? null : <StepHead label="Match days" title={day.title} previous={day.previous} next={day.next} heading="h3" />}
         {lines.length === 0 ? (

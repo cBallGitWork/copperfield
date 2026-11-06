@@ -22,6 +22,7 @@ import { gameweekBoards } from "./boards";
 import LiveScores from "./LiveScores";
 import LiveVidiprinter from "./LiveVidiprinter";
 import { VIDIPRINTER_HREF, VIDIPRINTER_VIEW } from "./Vidiprinter";
+import LiveHighlights, { HIGHLIGHTS_HREF, HIGHLIGHTS_VIEW } from "./LiveHighlights";
 import { lockAhead } from "../lockAhead";
 import { now } from "../clock";
 import { BetweenGameweeks } from "./Between";
@@ -69,6 +70,7 @@ export default async function MatchdayPage({
   const query = await searchParams;
   const leading = query.view === STATS_VIEW;
   const printing = query.view === VIDIPRINTER_VIEW;
+  const watching = query.view === HIGHLIGHTS_VIEW;
   const [{ snapshot, season, during, up }, mine] = await Promise.all([matchday(), readerTeamId()]);
   // The squads for Live's round, which leads FPL's for the half hour before its deadline.
   const squads = await getLeagueSquads(await roundOf(snapshot.gameweek));
@@ -94,6 +96,8 @@ export default async function MatchdayPage({
   } else if (printing && liveOpened(snapshot)) {
     // The round's lines stay up after its last whistle, until Live turns to the next gameweek.
     view = <LiveVidiprinter snapshot={snapshot} drafted={drafted} mine={mine} day={query.day} />;
+  } else if (watching && liveOpened(snapshot)) {
+    view = <LiveHighlights snapshot={snapshot} day={query.day} />;
   } else if (during) {
     view = <LiveScores snapshot={snapshot} season={season} drafted={drafted} silent={leagueSilent(squads)} mine={mine} day={query.day} />;
   } else {
@@ -116,8 +120,9 @@ export default async function MatchdayPage({
           { key: "scores", label: "Scores", href: LIVE },
           { key: VIDIPRINTER_VIEW, label: "Vidiprinter", href: VIDIPRINTER_HREF },
           { key: STATS_VIEW, label: TOP_STATS, href: statsHref() },
+          { key: HIGHLIGHTS_VIEW, label: "Highlights", href: HIGHLIGHTS_HREF },
         ]}
-        current={leading ? STATS_VIEW : printing ? VIDIPRINTER_VIEW : "scores"}
+        current={leading ? STATS_VIEW : printing ? VIDIPRINTER_VIEW : watching ? HIGHLIGHTS_VIEW : "scores"}
       />
       {view}
       {leading ? null : exit}
