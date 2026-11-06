@@ -1,12 +1,12 @@
 {
   "manifest": {
     "season": "26-27",
-    "gameweek": 9,
-    "exportedAt": "2026-10-30T17:22:07.602Z",
-    "rows": 469,
+    "gameweek": 10,
+    "exportedAt": "2026-11-06T12:27:19.812Z",
+    "rows": 502,
     "sources": [
       {
-        "path": "2026-10-30/fpl-gameweek-9-team-news-fridays-live-injury-updates-3.html",
+        "path": "2026-11-06/fpl-gameweek-10-team-news-fridays-live-injury-updates-3.html",
         "mtime": null
       }
     ]
@@ -105,7 +105,15 @@
     {"club":4,"manager":"Matthias Jaissle","at":"2026-10-30T14:00:00.000Z"},
     {"club":94,"manager":null,"at":"2026-10-30T14:00:00.000Z"},
     {"club":54,"manager":"Alvaro Arbeloa","at":"2026-10-30T10:00:00.000Z"},
-    {"club":40,"manager":"Gary O’Neil","at":"2026-10-30T13:30:00.000Z"}
+    {"club":40,"manager":"Gary O’Neil","at":"2026-10-30T13:30:00.000Z"},
+    {"club":2,"manager":"Daniel Farke","at":"2026-11-05T13:30:00.000Z"},
+    {"club":11,"manager":"David Moyes","at":"2026-11-05T13:30:00.000Z"},
+    {"club":17,"manager":"Oliver Glasner","at":"2026-11-05T14:00:00.000Z"},
+    {"club":4,"manager":"Matthias Jaissle","at":"2026-11-05T14:45:00.000Z"},
+    {"club":94,"manager":"Keith Andrews","at":"2026-11-05T13:45:00.000Z"},
+    {"club":88,"manager":"Sergej Jakirovic","at":"2026-11-05T13:00:00.000Z"},
+    {"club":43,"manager":"Enzo Maresca","at":"2026-11-06T10:30:00.000Z"},
+    {"club":54,"manager":null,"at":"2026-11-06T14:00:00.000Z"}
   ],
   "quotes": [
     {"club":8,"text":"In terms of injuries, and in terms of the squad, we are having the last training session tomorrow, so no one is ruled out for us for Friday. So, I prefer to be cautious and we will wait till tomorrow to take the final decision on every player.","said":"Xabi Alonso","about":"the Chelsea team news","at":"2026-09-17T12:30:00.000Z"},
@@ -263,7 +271,24 @@
     {"club":11,"text":"You probably know I’m not gonna give any details, and it’s a club decision. So, I support the decision, but it’s a club decision.","said":"David Moyes","about":"Jack Grealish’s omission","at":"2026-10-30T12:30:00.000Z"},
     {"club":4,"text":"Sorry, right now, I cannot give you an update on them. Hopefully, they can make progress in the next days to be able maybe to make it in the squad but right now, I cannot update you, really.","said":"Matthias Jaissle","about":"Mathias Fernandez-Pardo and Lewis Miley","at":"2026-10-30T14:00:00.000Z"},
     {"club":4,"text":"Will Osula was not able to continue. He twisted his ankle in that occasion when he took the shot. It’s too early at the moment [to know if he’ll be fit for Monday].","said":"Matthias Jaissle","about":"William Osula","at":"2026-10-30T14:00:00.000Z"},
-    {"club":40,"text":"He was on the grass today. He looked good, to be fair, so we’ll make a call on Sasa tomorrow. He’s an important player for us, we’ve missed him a lot in the last few weeks. He’s had a little bit of a groin injury that has taken some time. We’ve been careful with him, we’ve tried to manage the situaion well. So, let’s see tomorrow. I’ve got a big call to make on that one.","said":"Gary O’Neil","about":"Sasa Lukic","at":"2026-10-30T13:30:00.000Z"}
+    {"club":40,"text":"He was on the grass today. He looked good, to be fair, so we’ll make a call on Sasa tomorrow. He’s an important player for us, we’ve missed him a lot in the last few weeks. He’s had a little bit of a groin injury that has taken some time. We’ve been careful with him, we’ve tried to manage the situaion well. So, let’s see tomorrow. I’ve got a big call to make on that one.","said":"Gary O’Neil","about":"Sasa Lukic","at":"2026-10-30T13:30:00.000Z"},
+    {"club":2,"text":"In the offence, we still are struggling a little bit. Noah Okafor, obviously missed the last game due to some adductor problems. He was also not able to have one team training session during this week so far, just individual work for him. So, can’t really say if he’s available for the game. We have two more days but so far he has not joined us in team training. Same with Anton Stach, with foot problems. Just individual rehab work was possible. So, major doubts, them both. Dominic Calvert-Lewin had a little setback with his foot, as well, and wasn’t able to train with us today, but with him, I’d say I am carefully optimistic that he’s back in training hopefully tomorrow. Then, he would also be available.","said":"Daniel Farke","at":"2026-11-05T13:30:00.000Z"},
+    {"club":2,"text":"Since a few weeks, he’s been dealing with a broken toe. A little toe is broken. Of course, although painful, it’s possible to be available for the games but… we can’t inject him for each and every training session. We can take his pain away with injections for the game but obviously we can’t do this on every weekday. So, for that, he’s just doing innovative programmes where he doesn’t have always a tight football boot on, a bit more like running shoes. Of course, it’s not ideal if you don’t have the preparation, but that was the reason he was not involved in the starting line-ups in the last weeks. I accept at the moment that he’s perhaps not ready to be in the starting line-up due to these problems, but I also appreciate that he’s willing to sacrifice himself and to give something to the squad, and also to be ready then for the last days in training, and then also be ready for the games to deliver at least coming from the bench.","said":"Daniel Farke","about":"Anton Stach","at":"2026-11-05T13:30:00.000Z"},
+    {"club":2,"text":"Good news with Joe Rodon: he is back in full team training during this week. Of course, he was out for quite a time, but it’s definitely good because he is an important player for us. Normally, after being out for, I think, nine weeks, it wouldn’t be possible, after being [just] one full week back in training, to be involved too much. But Joe is an experienced player and the good thing is in the years before, he has more or less played each and every game. For that, he can deal with such a break perhaps better than a player who is always out. He looked looked good and sharp in training. On the defensive position, we have delivered really good performances so far, so for that, perhaps not the need to rush him in. But I think it’s also a big, big boost to have him back. I think he’s also called up for the Welsh side; I think he will get important minutes there. But if I get the feeling he is also ready to help us, if it’s just for a few minutes anyhow, then he will be in the squad.","said":"Daniel Farke","at":"2026-11-05T13:30:00.000Z"},
+    {"club":2,"text":"Yes, knocks, especially Gabby Gudmundsson, but everything is okay. They were able to train with us the last days. As it stands, no problem.","said":"Daniel Farke","about":"James Justin and Gabriel Gudmundsson","at":"2026-11-05T13:30:00.000Z"},
+    {"club":11,"text":"No, Jack’s not available [for tomorrow]. I wouldn’t give you the plan [on his reintegration] but we will be working with Jack again soon. We’ll see [if the international break will give Everton the chance to resolve Grealish’s situation]. We just need to wait and see how things go.","said":"David Moyes","at":"2026-11-05T13:30:00.000Z"},
+    {"club":11,"text":"Yeah, we’re just nursing him along a wee bit, just checking to see he’s okay, so we need to see how he is, yes.","said":"David Moyes","about":"if Jarrad Branthwaite is okay","at":"2026-11-05T13:30:00.000Z"},
+    {"club":17,"text":"Savona joined the team training today. Of course, we managed the load in the sessions because when you have been out for seven months, we have to be careful. He is on track. It looks like he will get some minutes in the friendly in the international break. Igor also trained the full week so far and looks good, no reaction. Nico Domínguez joined training as well. Unfortunately, he had a setback and a re-injury, so he will be out for up to eight weeks now. It’s really tough but Igor is back and Savona is on the way back.","said":"Oliver Glasner","at":"2026-11-05T14:00:00.000Z"},
+    {"club":17,"text":"There are minor issues. Dan was ill one day. Dani Muñoz, that’s why he also did not start [at Brentford], he had some minor issues with his foot but looks okay and trained this week. Right now, we are in phase [where] the weather is getting colder, the games are getting more. There are some niggles [that] players are suffering [from] but all others should be available.","said":"Oliver Glasner","at":"2026-11-05T14:00:00.000Z"},
+    {"club":4,"text":"Joelinton, unfortunately, went out with an injury again. We need to make the final treatment plan for him to see how long he will be out.","said":"Matthias Jaissle","at":"2026-11-05T14:45:00.000Z"},
+    {"club":4,"text":"He got a heavy virus. He was out for more than two weeks and it had a big impact. Now, he is progressing and training again with us. We will have to see, against Fulham, is he then really in a [good] physical state.","said":"Matthias Jaissle","about":"Mathias Fernandez-Pardo","at":"2026-11-05T14:45:00.000Z"},
+    {"club":4,"text":"Lewis Miley is getting better and better, showed a good reaction now after he is back from injury. His progress is exactly how I expected and wished for.","said":"Matthias Jaissle","at":"2026-11-05T14:45:00.000Z"},
+    {"club":94,"text":"Antoni, probably not just yet. He’s trained pretty consistently over the last week, 10 days. Did a really tough sesson today. Josh… came on [on Monday] for the right amount of minutes. I thought he looked good, he looked pretty fluid and free. Again, he’s trained really well since then. So, Josh, a little bit closer, but we’ll look to build him more and more as the weeks go on.","said":"Keith Andrews","at":"2026-11-05T13:45:00.000Z"},
+    {"club":88,"text":"Morita is just the one who has problems with his groin again. It’s the same leg. He felt something after Ipswich. [He’s had] a scan; maybe a few weeks he will be out.","said":"Sergej Jakirovic","about":"Hidemasa Morita","at":"2026-11-05T13:00:00.000Z"},
+    {"club":43,"text":"Since we started the season, his back [problem], if you remember, before the Coventry game. Some more problems, unfortunately. He’s not 100%. In the last game, I really liked him, he was playing a very good game. This is what we need from Nico; just keep him fit because we know how good he is. And no doubt that in the future he will be again with the international team. The break is what he needs, to use the break to do the right things in terms of therapy and these kind of things, and be 100% after the international break.","said":"Enzo Maresca","about":"Nico O’Reilly","at":"2026-11-06T10:30:00.000Z"},
+    {"club":43,"text":"He’s doing well, to be honest. Now, the reason why he has been left out from the international team, I don’t know. But we are happy with Phil. We know that he can give much more, we know that. But slowly, slowly; I said many times, it’s my duty to try to help him to be back and be one of the best.","said":"Enzo Maresca","about":"Phil Foden","at":"2026-11-06T10:30:00.000Z"},
+    {"club":43,"text":"Overall, he’s good. He’s quite relaxed in terms of… he recognises that he has done some mistakes. But at the same time, as I said after the last game, also he has made some good saves. So it’s just a matter of balance, try to avoid mistakes, and continue to do the right things.","said":"Enzo Maresca","about":"Gianluigi Donnarumma","at":"2026-11-06T10:30:00.000Z"},
+    {"club":43,"text":"It depends a little bit on the game. We have probably 60, 65 games, so it’s impossible to use always the same players. I feel quite lucky because I have many good players that I can choose which ones we need for different games.","said":"Enzo Maresca","at":"2026-11-06T10:30:00.000Z"}
   ],
   "rows": [
     {"code":486672,"club":8,"tag":"injury_scare","condition":"calf","confidence":0.65,"said":"2026-09-17T12:30:00.000Z","manager":"Xabi Alonso"},
@@ -734,6 +759,39 @@
     {"code":244858,"club":94,"tag":"injury_scare","confidence":0.65,"said":"2026-10-30T14:00:00.000Z","manager":""},
     {"code":184349,"club":54,"tag":"suspended","confidence":0.65,"said":"2026-10-30T10:00:00.000Z","manager":"Alvaro Arbeloa"},
     {"code":209289,"club":54,"tag":"available","confidence":0.65,"said":"2026-10-30T10:00:00.000Z","manager":"Alvaro Arbeloa"},
-    {"code":212314,"club":40,"tag":"injury_scare","condition":"groin","confidence":0.65,"said":"2026-10-30T13:30:00.000Z","manager":"Gary O’Neil"}
+    {"code":212314,"club":40,"tag":"injury_scare","condition":"groin","confidence":0.65,"said":"2026-10-30T13:30:00.000Z","manager":"Gary O’Neil"},
+    {"code":177815,"club":2,"tag":"injury_scare","condition":"foot","confidence":0.65,"said":"2026-11-05T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":435997,"club":2,"tag":"injury_scare","condition":"adductor","confidence":0.65,"said":"2026-11-05T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":466525,"club":2,"tag":"injury_scare","condition":"broken toe","confidence":0.65,"said":"2026-11-05T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":214225,"club":2,"tag":"available","condition":"hamstring","confidence":0.65,"said":"2026-11-05T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":243526,"club":2,"tag":"available","confidence":0.65,"said":"2026-11-05T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":220627,"club":2,"tag":"available","confidence":0.65,"said":"2026-11-05T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":114283,"club":11,"tag":"available","confidence":0.65,"said":"2026-11-05T13:30:00.000Z","manager":"David Moyes"},
+    {"code":500151,"club":17,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-11-05T14:00:00.000Z","manager":"Oliver Glasner"},
+    {"code":482973,"club":17,"tag":"available","condition":"calf","confidence":0.65,"said":"2026-11-05T14:00:00.000Z","manager":"Oliver Glasner"},
+    {"code":250199,"club":17,"tag":"ruled_out","condition":"muscle","confidence":0.65,"said":"2026-11-05T14:00:00.000Z","manager":"Oliver Glasner"},
+    {"code":247348,"club":17,"tag":"injury_scare","confidence":0.65,"said":"2026-11-05T14:00:00.000Z","manager":"Oliver Glasner"},
+    {"code":613221,"club":4,"tag":"injury_scare","condition":"illness","confidence":0.65,"said":"2026-11-05T14:45:00.000Z","manager":"Matthias Jaissle"},
+    {"code":547719,"club":4,"tag":"injury_scare","condition":"muscle","confidence":0.65,"said":"2026-11-05T14:45:00.000Z","manager":"Matthias Jaissle"},
+    {"code":554578,"club":4,"tag":"still_out","condition":"hamstring","confidence":0.65,"said":"2026-11-05T14:45:00.000Z","manager":"Matthias Jaissle"},
+    {"code":441191,"club":4,"tag":"still_out","confidence":0.65,"said":"2026-11-05T14:45:00.000Z","manager":"Matthias Jaissle"},
+    {"code":232653,"club":4,"tag":"suspended","confidence":0.65,"said":"2026-11-05T14:45:00.000Z","manager":"Matthias Jaissle"},
+    {"code":543295,"club":94,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-11-05T13:45:00.000Z","manager":"Keith Andrews"},
+    {"code":183656,"club":94,"tag":"available","condition":"hamstring","confidence":0.65,"said":"2026-11-05T13:45:00.000Z","manager":"Keith Andrews"},
+    {"code":194010,"club":94,"tag":"still_out","condition":"hip","confidence":0.65,"said":"2026-11-05T13:45:00.000Z","manager":"Keith Andrews"},
+    {"code":593174,"club":94,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-05T13:45:00.000Z","manager":"Keith Andrews"},
+    {"code":244858,"club":94,"tag":"still_out","condition":"knock","confidence":0.65,"said":"2026-11-05T13:45:00.000Z","manager":"Keith Andrews"},
+    {"code":508395,"club":94,"tag":"suspended","confidence":0.65,"said":"2026-11-05T13:45:00.000Z","manager":"Keith Andrews"},
+    {"code":105666,"club":88,"tag":"available","condition":"shoulder","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":169359,"club":88,"tag":"still_out","condition":"ankle","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":501902,"club":88,"tag":"still_out","condition":"groin","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":465525,"club":88,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":626751,"club":88,"tag":"still_out","condition":"back","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":445028,"club":88,"tag":"ruled_out","condition":"groin","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":101282,"club":88,"tag":"suspended","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":608227,"club":88,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-05T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":437730,"club":43,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-06T10:30:00.000Z","manager":"Enzo Maresca"},
+    {"code":472769,"club":43,"tag":"injury_scare","confidence":0.65,"said":"2026-11-06T10:30:00.000Z","manager":"Enzo Maresca"},
+    {"code":184349,"club":54,"tag":"suspended","confidence":0.65,"said":"2026-11-06T14:00:00.000Z","manager":""}
   ]
 }
