@@ -183,6 +183,13 @@ describe("xiColumn with RotoWire's absences", () => {
   it("keeps FPL's fresher OUT over RotoWire's older clean bill, one mark each", () => {
     expect(ties[0].home.men[0].status).toBe("OUT");
   });
+
+  // Craig, 6 Nov 2026: "He's not out". RotoWire both started Cunha and listed him OUT; FPL had him fit with no note.
+  it("takes no word from a source that starts a man and lists him absent, so FPL's clean bill stands", () => {
+    const torn = { ...xi, clubs: { ...xi.clubs, BOU: rotowire(4, [{ code: 403, status: "OUT" }]) } };
+    const men = (column(torn)?.lineups as typeof ties)[1].away.men;
+    expect(men[3].status).toBeUndefined();
+  });
 });
 
 describe("the Line-Ups refile when the elevens change", () => {
