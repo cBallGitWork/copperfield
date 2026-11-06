@@ -1,0 +1,469 @@
+{
+  "slug": "gw10-prem-report-2026-11-06",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 10,
+  "gameweek": 10,
+  "filedAt": "2026-11-06T23:32:19.799Z",
+  "expiresAt": null,
+  "edition": "Friday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Barry proves properly barry",
+  "deck": "Everton beat Coventry City 3-1",
+  "body": "",
+  "subjects": [
+    "match-report:gw10:2026-11-06"
+  ],
+  "image": null,
+  "face": {
+    "code": 586309,
+    "name": "Barry",
+    "clubId": 9,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645288,
+        "kickoff": "2026-11-06T20:00:00Z",
+        "home": {
+          "code": 11,
+          "score": 3,
+          "goals": [
+            "Barry 56",
+            "Barry 61",
+            "Dewsbury-Hall 81"
+          ],
+          "assists": [
+            "Mykolenko 56",
+            "Barry 81"
+          ],
+          "manager": "David Moyes",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Pickford",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.1
+                }
+              ],
+              [
+                {
+                  "name": "Röhl",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "O'Brien",
+                    "minute": "73",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 5.1
+                },
+                {
+                  "name": "Tarkowski",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Branthwaite",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Keane",
+                    "minute": "89",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 3.5
+                },
+                {
+                  "name": "Mykolenko",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.5
+                }
+              ],
+              [
+                {
+                  "name": "Armstrong",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Hackney",
+                    "minute": "73",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 5.1
+                },
+                {
+                  "name": "Garner",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5
+                }
+              ],
+              [
+                {
+                  "name": "Dibling",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Johnson",
+                    "minute": "73",
+                    "booked": false,
+                    "mark": 3.5
+                  },
+                  "mark": 5
+                },
+                {
+                  "name": "Dewsbury-Hall",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 6.7
+                },
+                {
+                  "name": "George",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Alcaraz",
+                    "minute": "90",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 5
+                }
+              ],
+              [
+                {
+                  "name": "Barry",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 8.3
+                }
+              ]
+            ],
+            "unused": [
+              "Graham",
+              "Nørgaard",
+              "Maitland-Niles",
+              "Travers"
+            ]
+          },
+          "next": "Brentford (a)"
+        },
+        "away": {
+          "code": 9,
+          "score": 1,
+          "goals": [
+            "Gboho 52"
+          ],
+          "assists": [],
+          "manager": "Frank Lampard",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Rushworth",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                }
+              ],
+              [
+                {
+                  "name": "van Ewijk",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 5.1
+                },
+                {
+                  "name": "Mfuni",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Pinnock",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.5
+                },
+                {
+                  "name": "Dasilva",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4
+                }
+              ],
+              [
+                {
+                  "name": "Yirenkyi",
+                  "booked": true,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": 4.4
+                },
+                {
+                  "name": "Torp",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Grimes",
+                    "minute": "86",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 5.7
+                }
+              ],
+              [
+                {
+                  "name": "Sakamoto",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Tchaouna",
+                    "minute": "87",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 4.5
+                },
+                {
+                  "name": "Rudoni",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Hamer",
+                    "minute": "86",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 5
+                },
+                {
+                  "name": "Gboho",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Thomas-Asante",
+                    "minute": "73",
+                    "booked": false,
+                    "mark": 3.4
+                  },
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Awoniyi",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": {
+                    "name": "Cherif",
+                    "minute": "87",
+                    "booked": false,
+                    "mark": null
+                  },
+                  "mark": 3.4
+                }
+              ]
+            ],
+            "unused": [
+              "Simms",
+              "Kesler-Hayden",
+              "Latibeaudiere",
+              "Bentley"
+            ]
+          },
+          "next": "Crystal Palace (h)"
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        },
+        "venue": "Hill Dickinson Stadium",
+        "attendance": 52395,
+        "referee": "Stuart Attwell",
+        "standfirst": "Everton recovered from a goal down to beat Coventry City 3-1.",
+        "account": "Yann Gboho put Coventry City ahead in the 52nd minute with a low right-footed shot from inside the box that went in at the corner. Everton were level four minutes after Gboho's goal, when Vitalii Mykolenko crossed and Thierno Barry headed the ball into the top corner of the Coventry net from within the box. Barry gave Everton the lead after 61 minutes, drilling a left-footed finish from close range into the bottom corner. With nine minutes left, Barry played a through ball to Kiernan Dewsbury-Hall, whose low left-footed shot from a tight angle found the corner.",
+        "sections": [
+          {
+            "head": "Barry double, Mykolenko assist",
+            "pitch": "Thierno Barry had six shots, and his pair took him to six league goals for the campaign, alongside the pass that set up Dewsbury-Hall. Vitalii Mykolenko earned a defensive point to go with the cross for the leveller.",
+            "stake": "The Raccoons has Barry, for 13 points; AtleticoTimHortons has Mykolenko, for six points against The Raccoons."
+          },
+          {
+            "head": "Dewsbury-Hall's third goal",
+            "pitch": "Kiernan Dewsbury-Hall had three shots in all, and his late goal lifted his Premier League total for the season to three.",
+            "stake": "The Raccoons has him, for seven points."
+          }
+        ],
+        "keyStats": [
+          {
+            "label": "Points",
+            "value": "Barry 13 (The Raccoons), Dewsbury-Hall 7 (The Raccoons), Mykolenko 6 (AtleticoTimHortons), Torp 4"
+          },
+          {
+            "label": "Shots",
+            "value": "16 (7 on target) v 15 (4)"
+          },
+          {
+            "label": "xG",
+            "value": "Everton 2.28, Coventry 1.39"
+          },
+          {
+            "label": "Saves",
+            "value": "Pickford 3, Rushworth 4"
+          },
+          {
+            "label": "DefCon",
+            "value": "van Ewijk 2, Torp 2, Dibling 1"
+          },
+          {
+            "label": "Most shots",
+            "value": "Barry 6 (2 on target, 2 goals)"
+          },
+          {
+            "label": "Chances created",
+            "value": "Rudoni 3"
+          },
+          {
+            "label": "Top xG",
+            "value": "Barry 1.66"
+          },
+          {
+            "label": "Top xA",
+            "value": "George 0.44, Rudoni 0.42"
+          }
+        ],
+        "star": {
+          "name": "Barry",
+          "club": "Everton",
+          "holder": "The Raccoons",
+          "mark": 8.3,
+          "did": "2 goals, 1 assist"
+        },
+        "rows": [
+          {
+            "minute": "52",
+            "kind": "Goal",
+            "side": "away",
+            "text": "Gboho"
+          },
+          {
+            "minute": "56",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Barry (Mykolenko)"
+          },
+          {
+            "minute": "61",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Barry"
+          },
+          {
+            "minute": "73",
+            "kind": "Sub",
+            "side": "home",
+            "text": "O'Brien for Röhl"
+          },
+          {
+            "minute": "73",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Hackney for Armstrong"
+          },
+          {
+            "minute": "73",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Johnson for Dibling"
+          },
+          {
+            "minute": "73",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Thomas-Asante for Gboho"
+          },
+          {
+            "minute": "81",
+            "kind": "Goal",
+            "side": "home",
+            "text": "Dewsbury-Hall (Barry)"
+          },
+          {
+            "minute": "86",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Grimes for Torp"
+          },
+          {
+            "minute": "86",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Hamer for Rudoni"
+          },
+          {
+            "minute": "87",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Tchaouna for Sakamoto"
+          },
+          {
+            "minute": "87",
+            "kind": "Sub",
+            "side": "away",
+            "text": "Cherif for Awoniyi"
+          },
+          {
+            "minute": "88",
+            "kind": "Booked",
+            "side": "home",
+            "text": "Branthwaite"
+          },
+          {
+            "minute": "88",
+            "kind": "Booked",
+            "side": "away",
+            "text": "Yirenkyi"
+          },
+          {
+            "minute": "89",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Keane for Branthwaite"
+          },
+          {
+            "minute": "90",
+            "kind": "Sub",
+            "side": "home",
+            "text": "Alcaraz for George"
+          }
+        ],
+        "video": null
+      }
+    ]
+  }
+}

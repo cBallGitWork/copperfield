@@ -433,7 +433,8 @@
       "predictions:gw10",
       "presser:gw10:2026-11-05",
       "presser:gw10:2026-11-06",
-      "predicted-xi:gw10:226f01b1"
+      "predicted-xi:gw10:226f01b1",
+      "match-report:gw10:2026-11-06"
     ],
     "threads": [
       {
