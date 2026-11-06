@@ -243,5 +243,3 @@ export function columnistOf(story: { reporter?: string }): Columnist | null {
   return story.reporter === undefined ? null : (COLUMNISTS[story.reporter] ?? null);
 }
 
-/** The most men a Line-Ups side's team news names before "+N more": kept brief, as asked on 6 Nov 2026. */
-export const LINEUP_NEWS_MEN = 4;

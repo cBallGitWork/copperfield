@@ -109,8 +109,13 @@ function rotowireSignals(xi: IntelXi): (code: number) => Signal {
   const said = new Map<number, Signal>();
   for (const club of Object.values(xi.clubs ?? {})) {
     if (club.absent === undefined) continue;
+    const starting = new Set(club.starters.map((man) => man.code));
     for (const man of club.starters) said.set(man.code, { mark: null, at: xi.fetchedAt });
-    for (const man of club.absent) said.set(man.code, { mark: man.status === "OUT" ? "OUT" : "Doubt", at: xi.fetchedAt });
+    for (const man of club.absent) {
+      // Starting a man it calls OUT contradicts itself, so it says nothing of him and FPL decides; a QUES starter is a doubt.
+      if (man.status === "OUT" && starting.has(man.code)) said.delete(man.code);
+      else said.set(man.code, { mark: man.status === "OUT" ? "OUT" : "Doubt", at: xi.fetchedAt });
+    }
   }
   return (code) => said.get(code) ?? null;
 }

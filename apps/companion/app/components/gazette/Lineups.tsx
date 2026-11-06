@@ -9,7 +9,7 @@ import {
   londonDayAndTime,
   DASH,
 } from "@epl/core";
-import { LINEUP_NEWS_MEN, START_DOUBT_MINUTES } from "../../config";
+import { START_DOUBT_MINUTES } from "../../config";
 import { yoursInk } from "../../mine";
 import { HAIRLINES, RULE } from "./rules";
 import { CAPTION, CAPTION_CAPS } from "./heads";
@@ -124,7 +124,7 @@ function Side({
 }
 
 /** Who misses out, under the eleven: the filing's first few (it leads with the men who play most) under an OUT head and a
- *  Doubt head, a man to a line with his complaint in a few words, and a count of the rest. */
+ *  Doubt head, a man to a line with his complaint in a few words, every one of them. */
 function TeamNews({
   news,
   mine,
@@ -133,10 +133,8 @@ function TeamNews({
   mine: string | null;
 }) {
   if (news.length === 0) return null;
-  const shown = news.slice(0, LINEUP_NEWS_MEN);
-  const rest = news.length - shown.length;
   const rows = (Object.keys(STATUS) as StoryLineupNews["status"][])
-    .map((status) => ({ status, men: shown.filter((man) => man.status === status) }))
+    .map((status) => ({ status, men: news.filter((man) => man.status === status) }))
     .filter((row) => row.men.length > 0);
   return (
     <div className="flex flex-col gap-1.5 pt-2 text-xs leading-snug sm:text-sm">
@@ -154,7 +152,6 @@ function TeamNews({
           </ul>
         </div>
       ))}
-      {rest === 0 ? null : <p className="text-faint">+{rest} more</p>}
     </div>
   );
 }
