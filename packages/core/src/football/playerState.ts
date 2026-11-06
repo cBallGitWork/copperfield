@@ -51,7 +51,7 @@ export function isDoubtful(player: FootballPlayer): boolean {
 
 /** Whether he is still on a Premier League club's books: FPL's `u` means he has left, so he drops off every list.
  *  A rule about lists, not the record: a match page or a roster slot still shows him, greyed. */
-export function onTheBooks(player: FootballPlayer): boolean {
+export function onTheBooks(player: Pick<FootballPlayer, "status" | "news" | "chanceOfPlaying">): boolean {
   return availabilityOf(player).state !== "unavailable";
 }
 

@@ -22,6 +22,22 @@ describe("normalizeExtras — teamNews", () => {
     expect(marked("Starting")?.status).toBeUndefined();
   });
 
+  it("keeps a side's team news by the closed set, drops a repeat, and files none when nobody misses out", () => {
+    const news = [
+      { name: "Saka", status: "OUT", note: "Hamstring", owner: "t1" },
+      { name: "Saka", status: "Doubt" },
+      { name: "Rice", status: "Doubt", note: "" },
+      { name: "White", status: "Starting" },
+    ];
+    const side = { club: "Arsenal", code: 3, formation: "4-3-3", men: [{ name: "Raya", position: "GK" }] };
+    const tie = (home: object) => normalizeExtras({ lineups: [{ home, away: side, kickoff: "2026-10-10T14:00:00Z" }] })?.lineups?.[0];
+    expect(tie({ ...side, news })?.home.news).toEqual([
+      { name: "Saka", status: "OUT", note: "Hamstring", owner: "t1" },
+      { name: "Rice", status: "Doubt" },
+    ]);
+    expect(tie(side)?.home).not.toHaveProperty("news");
+  });
+
   it("keeps a club whose only news is its list, with no line to repeat it", () => {
     const out = normalizeExtras({ teamNews: [{ club: "Spurs", code: 6, line: "", stillOut: [{ name: "Porro" }] }] })?.teamNews?.[0];
     expect(out?.stillOut).toEqual([{ name: "Porro" }]);

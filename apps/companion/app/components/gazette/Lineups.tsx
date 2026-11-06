@@ -1,6 +1,14 @@
 import Image from "next/image";
-import { crestUrl, type PublishedStory, type StoryLineupMan, type StoryLineupSide, londonDayAndTime, DASH } from "@epl/core";
-import { START_DOUBT_MINUTES } from "../../config";
+import {
+  crestUrl,
+  type PublishedStory,
+  type StoryLineupMan,
+  type StoryLineupNews,
+  type StoryLineupSide,
+  londonDayAndTime,
+  DASH,
+} from "@epl/core";
+import { LINEUP_NEWS_MEN, START_DOUBT_MINUTES } from "../../config";
 import { yoursInk } from "../../mine";
 import { shortName } from "../../teamNames";
 import { HAIRLINES } from "./rules";
@@ -110,6 +118,44 @@ function Side({
           </li>
         ))}
       </ol>
+      <TeamNews news={side.news ?? []} named={named} mine={mine} />
+    </div>
+  );
+}
+
+/** Who misses out, under the eleven: the filing's first few (it leads with the men who play most), a line for the OUT
+ *  and one for the doubts, each man's complaint in a few words, and a count of the rest. */
+function TeamNews({
+  news,
+  named,
+  mine,
+}: {
+  news: readonly StoryLineupNews[];
+  named: (teamId: string) => string;
+  mine: string | null;
+}) {
+  if (news.length === 0) return null;
+  const shown = news.slice(0, LINEUP_NEWS_MEN);
+  const rest = news.length - shown.length;
+  const rows = (Object.keys(STATUS) as StoryLineupNews["status"][])
+    .map((status) => ({ status, men: shown.filter((man) => man.status === status) }))
+    .filter((row) => row.men.length > 0);
+  return (
+    <div className="flex flex-col gap-1 pt-2 text-xs leading-snug sm:text-sm">
+      {rows.map(({ status, men }) => (
+        <p key={status} className="text-muted">
+          <span className={`${CAPTION_CAPS} pr-1.5 ${STATUS[status]}`}>{status}</span>
+          {men.map((man, at) => (
+            <span key={man.name}>
+              {at === 0 ? null : "; "}
+              <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>{man.name}</span>
+              {man.owner === undefined ? null : <> (<em>{shortName(man.owner, named(man.owner))}</em>)</>}
+              {man.note === undefined ? null : <> – {man.note}</>}
+            </span>
+          ))}
+        </p>
+      ))}
+      {rest === 0 ? null : <p className="text-faint">+{rest} more</p>}
     </div>
   );
 }

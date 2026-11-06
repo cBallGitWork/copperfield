@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import {
   availabilityOf,
   elevensKey,
+  onTheBooks,
   owners,
   predictedLineups,
   roundSlot,
@@ -15,6 +16,8 @@ import {
   type LineupStatus,
   type RosteredTeam,
   type StoryLineupMan,
+  type StoryLineupNews,
+  type StoryLineupSide,
 } from "@epl/core";
 import { readIntel } from "../intel";
 import { roundTies } from "./round";
@@ -53,7 +56,13 @@ export function xiColumn(input: {
   const { xi, gameweek, clubs, teams, players, season, minutes } = input;
 
   const ties = roundTies(gameweek, clubs, season);
-  const lineups = predictedLineups(ties, xi, man(players, teams, xi, gameweek, minutes));
+  const marked = markOf(xi);
+  const withNews = teamNews(players, teams, xi, clubs, marked);
+  const lineups = predictedLineups(ties, xi, man(players, teams, xi, gameweek, minutes, marked)).map((tie) => ({
+    ...tie,
+    home: withNews(tie.home),
+    away: withNews(tie.away),
+  }));
   if (lineups.length === 0) return null;
 
   // Read back off the export by each printed side's club, so a club whose tie did not print starts nobody.
@@ -73,7 +82,10 @@ export function xiColumn(input: {
 }
 
 /** What the desk reads of a footballer: his names, and his fitness. */
-type XiPlayer = Pick<FootballPlayer, "code" | "name" | "fullName" | "status" | "news" | "newsAdded" | "chanceOfPlaying">;
+type XiPlayer = Pick<
+  FootballPlayer,
+  "code" | "name" | "fullName" | "clubId" | "status" | "news" | "newsAdded" | "chanceOfPlaying" | "season"
+>;
 
 /** One source's word on a man: a mark or none (fit), and when it was said; null when it says nothing of him. */
 type Signal = { mark: LineupStatus | null; at: string | null } | null;
@@ -98,6 +110,52 @@ function rotowireSignals(xi: IntelXi): (code: number) => Signal {
   return (code) => said.get(code) ?? null;
 }
 
+/** His mark from FPL's and RotoWire's words together: OUT, Doubt, or null for fit. */
+function markOf(xi: IntelXi): (player: XiPlayer) => LineupStatus | null {
+  const rotowire = rotowireSignals(xi);
+  return (player) => {
+    const fitness = availabilityOf(player);
+    const fpl = fitness.out ? "OUT" : fitness.state === "doubt" ? "Doubt" : null;
+    return freshestMark({ mark: fpl, at: player.newsAdded }, rotowire(player.code));
+  };
+}
+
+/** FPL's note cut to its complaint: "Hamstring injury - Expected back 22 Nov" is "Hamstring injury"; null for none. */
+export function briefNote(news: string): string | null {
+  const complaint = news.split(" - ")[0].trim();
+  return complaint === "" ? null : complaint;
+}
+
+/** Attaches to a side the men of its club outside the eleven whom the football has out or in doubt, by season minutes
+ *  so the names that matter lead. The eleven is never changed. */
+function teamNews(
+  players: readonly XiPlayer[],
+  teams: readonly RosteredTeam[],
+  xi: IntelXi,
+  clubs: ReadonlyMap<number, Club>,
+  marked: (player: XiPlayer) => LineupStatus | null,
+): (side: StoryLineupSide) => StoryLineupSide {
+  const held = owners(teams);
+  return (side) => {
+    const club = clubs.get(side.code);
+    if (club === undefined) return side;
+    const starting = new Set((xi.clubs?.[club.shortName]?.starters ?? []).map((starter) => starter.code));
+    const news = players
+      .filter((player) => player.clubId === club.id && !starting.has(player.code) && onTheBooks(player))
+      .flatMap((player) => {
+        const status = marked(player);
+        return status === null ? [] : [{ player, status }];
+      })
+      .sort((a, b) => b.player.season.minutes - a.player.season.minutes)
+      .map(({ player, status }): StoryLineupNews => {
+        const owner = held.get(player.code)?.teamId;
+        const note = briefNote(player.news);
+        return { name: display(player), ...(owner === undefined ? {} : { owner }), status, ...(note === null ? {} : { note }) };
+      });
+    return news.length === 0 ? side : { ...side, news };
+  };
+}
+
 /** One starter as printed: his name, who holds him, his real position off the SQUADS export (nothing where that had
  *  only FPL's `element_type`), OUT or Doubt where the football says so, and his xMins. The eleven is never changed. */
 function man(
@@ -106,21 +164,19 @@ function man(
   xi: IntelXi,
   gameweek: number,
   minutes: ReadonlyMap<number, readonly ExpectedMinutes[]>,
+  marked: (player: XiPlayer) => LineupStatus | null,
 ): (code: number) => StoryLineupMan | null {
   const byCode = new Map(players.map((player) => [player.code, player]));
   // The squads for the season the XI itself names, so the two exports cannot be read from different years.
   const squads = squadIntel(readIntel<IntelSquads>("squads", xi.manifest.season));
   const held = owners(teams);
-  const rotowire = rotowireSignals(xi);
 
   return (code) => {
     const player = byCode.get(code);
     if (player === undefined) return null;
     // The id, never the name, which goes stale the day a manager renames.
     const owner = held.get(code)?.teamId;
-    const fitness = availabilityOf(player);
-    const fpl = fitness.out ? "OUT" : fitness.state === "doubt" ? "Doubt" : null;
-    const status = freshestMark({ mark: fpl, at: player.newsAdded }, rotowire(code));
+    const status = marked(player);
     const xMins = minutes.get(code)?.find((week) => week.gameweek === gameweek)?.minutes ?? null;
     return {
       name: display(player),
