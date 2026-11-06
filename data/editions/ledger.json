@@ -431,15 +431,17 @@
       "match-report:gw9:2026-11-02",
       "draft-report:gw9:gameweek",
       "predictions:gw10",
-      "presser:gw10:2026-11-05"
+      "presser:gw10:2026-11-05",
+      "presser:gw10:2026-11-06",
+      "predicted-xi:gw10:226f01b1"
     ],
     "threads": [
       {
         "subject": "Saka's scan",
-        "beat": "Probably out until after the international break, pending another scan",
+        "beat": "Weeks out with a quad injury, activity to build only after the international break",
         "status": "open",
-        "beats": 2,
-        "lastUsedAt": "2026-10-30T17:27:59.604Z"
+        "beats": 3,
+        "lastUsedAt": "2026-11-06T17:43:40.810Z"
       },
       {
         "subject": "The Truffle Pigs without a point",
