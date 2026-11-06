@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import type { Club, Fixture, PresserLine, PresserQuote } from "@epl/core";
+import type { Club, Fixture, IntelPressers, PresserLine, PresserQuote } from "@epl/core";
 import shortNames from "../../data/leagues/short-names.json";
-import { display, isNews, ownerShort, presserFixtures, tagOf, type PresserSquadMan } from "./pressers";
+import { display, isNews, ownerShort, presserFixtures, presserQuotes, tagOf, type PresserSquadMan } from "./pressers";
 import { presserDayLines, presserDays, presserEdition, withStillOut } from "./presserWeek";
 import { withoutEchoes } from "./checks";
 
@@ -273,5 +273,23 @@ describe("withoutEchoes", () => {
   it("passes rows it cannot read through untouched", () => {
     expect(withoutEchoes(undefined)).toBeUndefined();
     expect(withoutEchoes([null, "row", { club: "X" }])).toEqual([null, "row", { club: "X" }]);
+  });
+});
+
+// Craig, 6 Nov 2026: "Says Isak got an injury on int break that was 4 weeks ago". The export holds the season's
+// quotes; the brief got Iraola's 9 Oct quote on 6 Nov, because only the lines and the speakers were windowed.
+describe("presserQuotes", () => {
+  const clubs = new Map<number, Club>([[14, { id: 12, code: 14, name: "Liverpool", shortName: "LIV" } as Club]]);
+  const quote = (at: string, text: string) => ({ club: 14, text, said: "Andoni Iraola", at });
+  const intel = {
+    manifest: { season: "26-27", gameweek: 10, exportedAt: "", rows: 0, sources: [] },
+    rows: [],
+    quotes: [quote("2026-10-09T12:30:00.000Z", "both got injuries during the international break"), quote("2026-11-06T13:30:00.000Z", "The only doubt we will have is Ryan.")],
+  } as IntelPressers;
+
+  it("carries only what was said in the window, never an earlier week's", () => {
+    const kept = presserQuotes("2026-10-31T00:00:00.000Z", clubs, intel);
+    expect(kept.map((each) => each.text)).toEqual(["The only doubt we will have is Ryan."]);
+    expect(kept[0].clubName).toBe("Liverpool");
   });
 });

@@ -135,10 +135,8 @@ export function presserSpoke(
 ): { clubName: string; manager: string | null; at: string }[] {
   const intel = read();
   if (intel === null) return [];
-  const floor = instantOf(since);
   return (intel.spoke ?? []).flatMap((each) => {
-    const at = instantOf(each.at);
-    if (at !== null && floor !== null && at < floor) return [];
+    if (!inWindow(each.at, since)) return [];
     const club = clubs.get(each.club);
     return club === undefined ? [] : [{ clubName: fullClubName(club.name), manager: each.manager, at: each.at }];
   });
@@ -164,12 +162,22 @@ export function presserFixtures(
   return out;
 }
 
-/** What each manager actually said, for the clubs in this round. A quote whose
- *  club we cannot name is dropped — it would print under no crest. */
-export function presserQuotes(clubs: ReadonlyMap<number, Club>): (PresserQuote & { clubName: string })[] {
-  const intel = read();
+/** Whether an instant is on or after the window's opening; an unreadable one is kept, as a hidden absence costs more. */
+function inWindow(at: string | undefined, since: string): boolean {
+  const [when, floor] = [instantOf(at ?? ""), instantOf(since)];
+  return when === null || floor === null || when >= floor;
+}
+
+/** What each manager said in the window, for the clubs in this round: the export holds the season's quotes, and an
+ *  earlier week's read as this week's news. A quote whose club we cannot name is dropped — it would print under no crest. */
+export function presserQuotes(
+  since: string,
+  clubs: ReadonlyMap<number, Club>,
+  intel: IntelPressers | null = read(),
+): (PresserQuote & { clubName: string })[] {
   if (intel === null) return [];
   return (intel.quotes ?? []).flatMap((quote) => {
+    if (!inWindow(quote.at, since)) return [];
     const club = clubs.get(quote.club);
     // The same spelling the LINES use, or the brief groups one club under two
     // headings and then tells the writer to echo "the club name exactly as given".
