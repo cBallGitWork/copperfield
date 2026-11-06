@@ -45,7 +45,7 @@ const lists: [string, () => Promise<ReactNode>][] = [
   ["the power rankings", async () =>
     createElement(Ranks, { story: story({ ranks: [{ teamId: "a", line: "" }, { teamId: "b", line: "" }] }), named, mine: null })],
   ["the predicted elevens", async () =>
-    createElement(Lineups, { story: story({ lineups: [{ home: lineup("A"), away: lineup("B"), kickoff: "2026-10-10T14:00:00Z" }, { home: lineup("C"), away: lineup("D"), kickoff: "2026-10-10T14:00:00Z" }] }), named, mine: null })],
+    createElement(Lineups, { story: story({ lineups: [{ home: lineup("A"), away: lineup("B"), kickoff: "2026-10-10T14:00:00Z" }, { home: lineup("C"), away: lineup("D"), kickoff: "2026-10-10T14:00:00Z" }] }), mine: null })],
   ["a draft report's match-ups", async () =>
     createElement(DraftReport, { story: story({ draft: { cutoff: "gameweek", gameweek: 6, matchups: [draftMatchup, draftMatchup] } }), snapshot: null })],
   ["a match-day report's matches", async () =>
