@@ -53,7 +53,9 @@ is in the playlist as a row, Sky's 16:9 still with a play mark, `ARS 2–1 HUL` 
 that match's Highlights tab, which plays it. The video is the match page's own join (`highlightFor`: both clubs and
 the score agree), the feed read once for the page (`highlightVideos`). A finished match with no video yet is named
 under the list, `Not posted yet: MCI v TOT`; a match still being played is not listed. Up from the first kickoff, as
-the vidiprinter is, and credited to Sky Sports Premier League.
+the vidiprinter is, and credited to Sky Sports Premier League. **Every Live view runs the width of the tabs on a
+desk** (Craig, 6 Nov 2026: *"desktop live section needs to be better aligned"*): the Vidiprinter and Highlights stopped
+at a reading width and hugged the left; Highlights sets two matches a row there.
 
 **The scorers' names come off the team sheets too** (`roundCodes`): the bridge is harvested by
 hand (`npm run pl-bridge`) and lagged a month by GW6, when 6 of 36 scorers printed `—`.

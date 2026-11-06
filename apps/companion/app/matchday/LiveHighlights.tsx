@@ -23,14 +23,14 @@ export default async function LiveHighlights({ snapshot, day: asked }: { snapsho
   const { rows, waiting } = highlightRows(round, clubById(snapshot), await highlightVideos(), day?.day ?? null);
 
   return (
-    // No head: the tab above names the view. A desk keeps the column to a reading width.
-    <div className="lg:max-w-3xl">
+    // No head: the tab above names the view. Full width, as Scores is, and two matches a row on a desk.
+    <div>
       <Section>
         {day === null ? null : <StepHead label="Match days" title={day.title} previous={day.previous} next={day.next} heading="h3" />}
         {rows.length === 0 ? (
           <p className="px-2 py-3 text-sm text-muted">No highlights yet.</p>
         ) : (
-          <ul className="cm-rows">
+          <ul className="cm-rows lg:grid lg:grid-cols-2 lg:gap-x-4">
             {rows.map(({ fixture, home, away, video }) => (
               <li key={fixture.id}>
                 <Link href={matchHref(fixture.id, "highlights")} className="flex min-h-11 items-center gap-3 py-2">
