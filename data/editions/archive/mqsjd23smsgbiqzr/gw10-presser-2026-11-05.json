@@ -1,0 +1,449 @@
+{
+  "slug": "gw10-presser-2026-11-05",
+  "kind": "presser",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 10,
+  "gameweek": 10,
+  "filedAt": "2026-11-06T14:42:55.645Z",
+  "expiresAt": "2026-11-06T19:45:00.000Z",
+  "edition": "The Team Sheet",
+  "byline": "The Team Sheet",
+  "headline": "Thursday Pressers",
+  "deck": "James Justin back in contention for Leeds United after training",
+  "body": "James Justin is back in contention for Leeds United, having trained with the squad over the last days. Daniel Farke said that, as it stands, there is no problem.",
+  "subjects": [
+    "presser:gw10:2026-11-05"
+  ],
+  "image": null,
+  "face": {
+    "code": 220627,
+    "name": "James Justin",
+    "clubId": 13,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "teamNews": [
+      {
+        "club": "Newcastle United",
+        "code": 4,
+        "line": "Jacob Ramsey serves a ban, Ewen Jaouen faces a couple of months out with a hamstring injury and Amar Dedic misses Saturday.",
+        "men": [
+          {
+            "name": "Jacob Ramsey",
+            "status": "Suspended",
+            "note": ""
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Ewen Jaouen"
+          },
+          {
+            "name": "Tino Livramento"
+          }
+        ],
+        "quote": {
+          "text": "Amar will be also not able to play on Saturday.",
+          "said": "Matthias Jaissle"
+        },
+        "fixture": {
+          "opponent": "Fulham",
+          "home": false,
+          "kickoff": "2026-11-07T15:00:00Z"
+        }
+      },
+      {
+        "club": "Nottingham Forest",
+        "code": 17,
+        "line": "Igor Jesus has trained fully without reaction and Nicolò Savona has returned to training after seven months out, but Nicolás Domínguez has suffered a re-injury.",
+        "men": [
+          {
+            "name": "Nicolò Savona",
+            "status": "FIT",
+            "note": "back from knee; in team training, load managed after seven months out"
+          },
+          {
+            "name": "Igor Jesus",
+            "status": "FIT",
+            "note": "back from calf; trained the full week, no reaction"
+          },
+          {
+            "name": "Nicolás Domínguez",
+            "status": "OUT",
+            "note": "up to eight weeks; muscle, re-injury after a setback"
+          },
+          {
+            "name": "Daniel Muñoz",
+            "owner": "Beef",
+            "status": "Doubt",
+            "note": "trained in the build-up"
+          }
+        ],
+        "quote": {
+          "text": "Nico Domínguez joined training as well. Unfortunately, he had a setback and a re-injury, so he will be out for up to eight weeks now.",
+          "said": "Oliver Glasner"
+        },
+        "fixture": {
+          "opponent": "Manchester City",
+          "home": true,
+          "kickoff": "2026-11-07T17:30:00Z"
+        }
+      },
+      {
+        "club": "Brentford",
+        "code": 94,
+        "line": "Antoni Milambo and Josh Dasilva have returned to training from knee and hamstring injuries, while Yehor Yarmoliuk is banned.",
+        "men": [
+          {
+            "name": "Antoni Milambo",
+            "status": "FIT",
+            "note": "back from knee; trained consistently for ten days"
+          },
+          {
+            "name": "Josh Dasilva",
+            "status": "FIT",
+            "note": "back from hamstring; trained well, minutes still being built"
+          },
+          {
+            "name": "Yehor Yarmoliuk",
+            "status": "Suspended",
+            "note": ""
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Rico Henry"
+          },
+          {
+            "name": "Kaye Furo"
+          },
+          {
+            "name": "Fábio Carvalho"
+          }
+        ],
+        "quote": {
+          "text": "Some players have taken the next step of their journey back with a really good week’s training. The likes of Nathan [Collins], in particular.",
+          "said": "Keith Andrews"
+        },
+        "fixture": {
+          "opponent": "Brighton & Hove Albion",
+          "home": false,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      },
+      {
+        "club": "Leeds United",
+        "code": 2,
+        "line": "Dominic Calvert-Lewin has a bruised foot and Anton Stach a broken toe, leaving both in doubt, while Joe Rodon has returned to full team training.",
+        "men": [
+          {
+            "name": "James Justin",
+            "owner": "Hazza",
+            "status": "FIT",
+            "note": "trained the last days; no problem as it stands"
+          },
+          {
+            "name": "Gabriel Gudmundsson",
+            "owner": "Beef",
+            "status": "FIT",
+            "note": "trained the last days; no problem as it stands"
+          },
+          {
+            "name": "Dominic Calvert-Lewin",
+            "owner": "Beef",
+            "status": "Doubt",
+            "note": "foot; bruise and a setback, cautious optimism"
+          },
+          {
+            "name": "Anton Stach",
+            "owner": "Truffles",
+            "status": "Doubt",
+            "note": "broken toe; painful, a question mark"
+          },
+          {
+            "name": "Joe Rodon",
+            "status": "FIT",
+            "note": "back from hamstring; full team training after about nine weeks out"
+          }
+        ],
+        "quote": {
+          "text": "They were able to train with us the last days. As it stands, no problem.",
+          "said": "Daniel Farke"
+        },
+        "fixture": {
+          "opponent": "Tottenham Hotspur",
+          "home": true,
+          "kickoff": "2026-11-07T12:30:00Z"
+        }
+      },
+      {
+        "club": "Everton",
+        "code": 11,
+        "line": "Jack Grealish returns after an omission that was a club decision, and Merlin Röhl is not yet available.",
+        "men": [
+          {
+            "name": "Jack Grealish",
+            "status": "FIT",
+            "note": "earlier omission a club decision"
+          }
+        ],
+        "quote": {
+          "text": "Merlin Röhl is not available yet, hopefully he’ll be ready at the end of the international break.",
+          "said": "David Moyes"
+        },
+        "fixture": {
+          "opponent": "Coventry City",
+          "home": true,
+          "kickoff": "2026-11-06T20:00:00Z"
+        }
+      },
+      {
+        "club": "Hull City",
+        "code": 88,
+        "line": "Jack Butland is training with the group after a shoulder injury, but Hidemasa Morita has a recurring groin problem, Elliot Stroud a knee injury and Matt Crooks a ban.",
+        "men": [
+          {
+            "name": "Jack Butland",
+            "status": "FIT",
+            "note": "back from shoulder; training with the group, decision Friday"
+          },
+          {
+            "name": "Hidemasa Morita",
+            "status": "OUT",
+            "note": "a few weeks; groin, same leg again, scanned"
+          },
+          {
+            "name": "Matt Crooks",
+            "status": "Suspended",
+            "note": ""
+          },
+          {
+            "name": "Elliot Stroud",
+            "status": "OUT",
+            "note": "knee"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Matt Targett"
+          },
+          {
+            "name": "Charlie Hughes"
+          },
+          {
+            "name": "Eliot Matazo"
+          },
+          {
+            "name": "Ilyas Ansah"
+          }
+        ],
+        "quote": {
+          "text": "Morita is just the one who has problems with his groin again. It’s the same leg. He felt something after Ipswich. [He’s had] a scan; maybe a few weeks he will be out.",
+          "said": "Sergej Jakirovic"
+        },
+        "fixture": {
+          "opponent": "Arsenal",
+          "home": false,
+          "kickoff": "2026-11-07T15:00:00Z"
+        }
+      },
+      {
+        "club": "Chelsea",
+        "code": 8,
+        "line": "Jamie Gittens and Maxence Lacroix face a few weeks out, Gittens with an ankle injury.",
+        "quote": {
+          "text": "He’s not going to be fit for tomorrow. That’s the bad news about this international break, that he picked an injury on his ankle and he’s going to be out for a few weeks.",
+          "said": "Xabi Alonso"
+        },
+        "fixture": {
+          "opponent": "Sunderland",
+          "home": false,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      },
+      {
+        "club": "Coventry City",
+        "code": 9,
+        "line": "Bobby Thomas has a small calf problem that leaves the weekend uncertain, and Josh Eccles is still not training because of his ankle.",
+        "quote": {
+          "text": "Aurele is working away. It’s a 2-3 month injury, so we’re working through that.",
+          "said": "Frank Lampard"
+        },
+        "fixture": {
+          "opponent": "Everton",
+          "home": false,
+          "kickoff": "2026-11-06T20:00:00Z"
+        }
+      },
+      {
+        "club": "Arsenal",
+        "code": 3,
+        "line": "Bukayo Saka is probably out until after the international break with another scan to come, and Noni Madueke must complete Saturday's session to be available.",
+        "quote": {
+          "text": "He needed another scan to see the amount of fluid that was there resolving. Afterwards, we will know more about it.",
+          "said": "Mikel Arteta"
+        },
+        "fixture": {
+          "opponent": "Hull City",
+          "home": true,
+          "kickoff": "2026-11-07T15:00:00Z"
+        }
+      },
+      {
+        "club": "Liverpool",
+        "code": 14,
+        "line": "Alex Isak has a small thigh injury and Cody Gakpo an ankle injury, neither long term, and both miss Sunday along with Dom.",
+        "quote": {
+          "text": "Alex Isak and Cody Gakpo will not play the game. They are not ready.",
+          "said": "Andoni Iraola"
+        },
+        "fixture": {
+          "opponent": "Crystal Palace",
+          "home": false,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      },
+      {
+        "club": "Manchester United",
+        "code": 1,
+        "line": "Ben will not be ready, and Kobbie has returned to training with the group.",
+        "quote": {
+          "text": "Patrick came off and it looks like he will be out for probably a number of weeks.",
+          "said": "Michael Carrick"
+        },
+        "fixture": {
+          "opponent": "Aston Villa",
+          "home": true,
+          "kickoff": "2026-11-08T16:30:00Z"
+        }
+      },
+      {
+        "club": "Tottenham Hotspur",
+        "code": 6,
+        "line": "James Maddison is available despite losing three or four days of training, Rodrigo Bentancur is suspended and Lucas Bergvall and Savio are out.",
+        "quote": {
+          "text": "Porro, Tonali, Maddison, all are available to play.",
+          "said": "Roberto De Zerbi"
+        },
+        "fixture": {
+          "opponent": "Leeds United",
+          "home": false,
+          "kickoff": "2026-11-07T12:30:00Z"
+        }
+      },
+      {
+        "club": "Aston Villa",
+        "code": 7,
+        "line": "Aaron Wan-Bissaka and Ruggeri are also out, and players in pain after Wednesday's match were to be assessed in Friday afternoon's training.",
+        "quote": {
+          "text": "Marco is out, Onana, Cisse out, Pau, Maatsen out, Goretzka out, Madjo out.",
+          "said": "Unai Emery"
+        },
+        "fixture": {
+          "opponent": "Manchester United",
+          "home": false,
+          "kickoff": "2026-11-08T16:30:00Z"
+        }
+      },
+      {
+        "club": "Brighton & Hove Albion",
+        "code": 36,
+        "line": "Luka Vuskovic will be an option, Yankuba Minteh and Mats Wieffer have returned, and Kaoru Mitoma needs more patience.",
+        "quote": {
+          "text": "Regarding Pascal Struijk, he won’t be an option for the weekend, but we are quite convinced that he will be back afterwards.",
+          "said": "Fabian Hurzeler"
+        },
+        "fixture": {
+          "opponent": "Brentford",
+          "home": true,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      },
+      {
+        "club": "Sunderland",
+        "code": 56,
+        "line": "Brobbey's problem is short term, Habib is around a week from full availability and Nordi Mukiele has a minor issue that leaves Saturday uncertain.",
+        "quote": {
+          "text": "It’s a shame for Ballard because he was in a good place and he will be sidelined for a few weeks.",
+          "said": "Regis Le Bris"
+        },
+        "fixture": {
+          "opponent": "Chelsea",
+          "home": true,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      },
+      {
+        "club": "AFC Bournemouth",
+        "code": 91,
+        "line": "Eli Junior Kroupi is due back in the squad and Brooksy is in full team training.",
+        "quote": {
+          "text": "Now we’re going to miss him for some weeks. I think it’s a bigger muscle injury.",
+          "said": "Marco Rose"
+        },
+        "fixture": {
+          "opponent": "Ipswich Town",
+          "home": false,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      },
+      {
+        "club": "Manchester City",
+        "code": 43,
+        "line": "Erling Haaland is ready after two or three days off, and Phil Foden is available.",
+        "quote": {
+          "text": "[Apart from] Antoine Semenyo, the rest, they are all available.",
+          "said": "Enzo Maresca"
+        },
+        "fixture": {
+          "opponent": "Nottingham Forest",
+          "home": false,
+          "kickoff": "2026-11-07T17:30:00Z"
+        }
+      },
+      {
+        "club": "Fulham",
+        "code": 54,
+        "line": "Hugo has a small groin problem that leaves Saturday in doubt, with everyone else available.",
+        "quote": {
+          "text": "We have a small problem with Hugo – his groin. We will check today, but I’m not sure if he will be okay for tomorrow. Everyone else is available.",
+          "said": "Alvaro Arbeloa"
+        },
+        "fixture": {
+          "opponent": "Newcastle United",
+          "home": true,
+          "kickoff": "2026-11-07T15:00:00Z"
+        }
+      },
+      {
+        "club": "Crystal Palace",
+        "code": 31,
+        "line": "Jorgen Strand Larsen rejoins group training and Quinten Timber is due to return, while Jean-Philippe Mateta was rested to be ready to start.",
+        "quote": {
+          "text": "He’s ready to play, and we managed him yesterday, because he played two times 60 [minutes] in seven days, and normally he has to play only two times 30 [minutes].",
+          "said": "Pierre Sage"
+        },
+        "fixture": {
+          "opponent": "Liverpool",
+          "home": true,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      },
+      {
+        "club": "Ipswich Town",
+        "code": 40,
+        "line": "Sasa Lukic misses the weekend with a groin injury, held back so that he is fully ready for Hull City.",
+        "quote": {
+          "text": "No, he’s not going to make it. Sasa will be out tomorrow.",
+          "said": "Gary O’Neil"
+        },
+        "fixture": {
+          "opponent": "AFC Bournemouth",
+          "home": true,
+          "kickoff": "2026-11-08T14:00:00Z"
+        }
+      }
+    ]
+  }
+}
