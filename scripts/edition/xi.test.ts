@@ -88,8 +88,8 @@ describe("the Line-Ups' team news", () => {
   it("lists the club's men outside the eleven who are out or a doubt, by season minutes, each in a few words", () => {
     expect(filed(bench)[0].home.news).toEqual([
       { name: "First Bench150", status: "Doubt", note: "Knock" },
-      { name: "First Bench152", status: "OUT", note: "Knee injury" },
-      { name: "First Bench151", status: "OUT", note: "Hamstring injury" },
+      { name: "First Bench152", status: "OUT", note: "Knee" },
+      { name: "First Bench151", status: "OUT", note: "Hamstring" },
     ]);
   });
 
@@ -110,14 +110,14 @@ describe("the Line-Ups' team news", () => {
     ];
     expect(filed(bench, pressers)[0].home.news).toEqual([
       { name: "First Bench154", status: "OUT", note: "Calf" },
-      { name: "First Bench152", status: "OUT", note: "Knee injury" },
+      { name: "First Bench152", status: "OUT", note: "Knee" },
       { name: "First Bench151", status: "Doubt", note: "Hamstring" },
     ]);
   });
 
   it("keeps FPL's word where its note is newer than the conference", () => {
     const news = filed(bench, [signal(151, "available", "2026-10-07T12:00:00Z")])[0].home.news;
-    expect(news).toContainEqual({ name: "First Bench151", status: "OUT", note: "Hamstring injury" });
+    expect(news).toContainEqual({ name: "First Bench151", status: "OUT", note: "Hamstring" });
   });
 
   it("reads the newest firm word per man, says Suspended for a ban, and ignores a hint or a rotation", () => {
@@ -135,6 +135,14 @@ describe("the Line-Ups' team news", () => {
   it("cuts FPL's note to its complaint", () => {
     expect(briefNote("Suspended until 15 Nov")).toBe("Suspended until 15 Nov");
     expect(briefNote("")).toBeNull();
+  });
+
+  // Craig, 6 Nov 2026: "Don't say thigh injury, just say thigh".
+  it("names the part, never the word injury, and nothing for an unspecified one", () => {
+    expect(briefNote("Thigh injury - 75% chance of playing")).toBe("Thigh");
+    expect(briefNote("Knock - Unknown return date")).toBe("Knock");
+    expect(briefNote("Unspecified injury - Unknown return date")).toBeNull();
+    expect(presserWords([{ code: 1, club: 1, tag: "injury_scare", condition: "knee injury", said: "2026-10-09T12:00:00Z", confidence: 0.9, manager: "" }]).get(1)?.note).toBe("Knee");
   });
 });
 

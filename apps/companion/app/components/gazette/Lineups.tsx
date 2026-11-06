@@ -5,13 +5,17 @@ import {
   type StoryLineupMan,
   type StoryLineupNews,
   type StoryLineupSide,
+  initialled,
   londonDayAndTime,
   DASH,
 } from "@epl/core";
 import { LINEUP_NEWS_MEN, START_DOUBT_MINUTES } from "../../config";
 import { yoursInk } from "../../mine";
-import { HAIRLINES } from "./rules";
+import { HAIRLINES, RULE } from "./rules";
 import { CAPTION, CAPTION_CAPS } from "./heads";
+
+/** The xMins column: its own width and a faint rule down its left, header and rows alike, so it reads as one column. */
+const MINUTES_COLUMN = `w-9 shrink-0 border-l ${RULE} pl-1.5 text-right sm:w-11`;
 
 /** OUT is the loud one, as on the Team Sheet: ranked in scale, never in hue (DESIGN §4). */
 const STATUS: Record<NonNullable<StoryLineupMan["status"]>, string> = {
@@ -77,7 +81,13 @@ function Side({
         </span>
         <span className="numeric shrink-0 text-3xs text-muted sm:text-2xs">{side.formation}</span>
       </h2>
-      <ol className="flex flex-col pt-1.5">
+      {/* The column's head, so a bracketed figure is never read as anything but expected minutes. */}
+      {!minuted ? null : (
+        <div className="flex justify-end pt-1.5">
+          <span className={`${MINUTES_COLUMN} font-sans text-3xs font-semibold tracking-wide text-muted sm:text-2xs`}>xMins</span>
+        </div>
+      )}
+      <ol className={`flex flex-col ${minuted ? "" : "pt-1.5"}`}>
         {side.men.map((man) => (
           <li key={man.name} className="flex gap-1.5 text-sm leading-snug sm:gap-2 sm:text-base">
             {/* His REAL position, in a gutter of its own so eleven names line
@@ -87,9 +97,9 @@ function Side({
               {man.position ?? DASH}
             </span>
             <p className="min-w-0 flex-1">
-              {/* No holder's name: two columns on a phone have no room for it; the reader's own men take his ink. */}
+              {/* Initial and surname, and no holder's name: two columns on a phone have no room; the reader's own take his ink. */}
               <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>
-                {man.name}
+                {initialled(man.name)}
               </span>
               {/* Printed as predicted, never replaced: the mark says the football has him out or in doubt. */}
               {man.status === undefined ? null : (
@@ -100,9 +110,9 @@ function Side({
             {!minuted ? null : (
               <span
                 title="Expected minutes"
-                className={`numeric shrink-0 pt-0.5 text-xs sm:text-sm ${man.xMins !== undefined && man.xMins < START_DOUBT_MINUTES ? "font-bold text-ink" : "text-muted"}`}
+                className={`numeric ${MINUTES_COLUMN} pt-0.5 text-xs sm:text-sm ${man.xMins !== undefined && man.xMins < START_DOUBT_MINUTES ? "font-bold text-ink" : "text-muted"}`}
               >
-                {man.xMins ?? DASH}
+                {man.xMins === undefined ? DASH : `(${man.xMins})`}
               </span>
             )}
           </li>
@@ -136,7 +146,7 @@ function TeamNews({
           {men.map((man, at) => (
             <span key={man.name}>
               {at === 0 ? null : "; "}
-              <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>{man.name}</span>
+              <span className={yoursInk(man.owner !== undefined && man.owner === mine)}>{initialled(man.name)}</span>
               {man.note === undefined ? null : <> – {man.note}</>}
             </span>
           ))}

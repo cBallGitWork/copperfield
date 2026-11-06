@@ -34,14 +34,27 @@ describe("the predicted line-ups", () => {
     expect(html).toMatch(/<span class="[^"]*font-bold[^"]*">CB<\/span>/);
   });
 
-  it("prints each man's xMins, bold under fifty, and a dash where there is none", () => {
+  it("prints each man's xMins in brackets under its own head, bold under fifty, and a dash where there is none", () => {
     const men = [{ name: "Low", position: "CB", xMins: 34 }, { name: "Full", position: "CB", xMins: 88 }, { name: "None", position: "CB" }];
     const listed = { extras: { lineups: [{ home: { ...side("Everton"), men }, away: side("Hull City"), kickoff: "2026-10-10T14:00:00Z" }] } } as PublishedStory;
     const html = renderToStaticMarkup(createElement(Lineups, { story: listed, mine: null }));
-    const figure = (text: string) => new RegExp(`<span title="Expected minutes" class="([^"]*)">${text}</span>`).exec(html)?.[1] ?? "";
-    expect(figure("34")).toContain("font-bold");
-    expect(figure("88")).not.toContain("font-bold");
+    const figure = (text: string) => new RegExp(`<span title="Expected minutes" class="([^"]*)">${text.replace(/[()]/g, "\\$&")}</span>`).exec(html)?.[1] ?? "";
+    expect(figure("(34)")).toContain("font-bold");
+    expect(figure("(88)")).not.toContain("font-bold");
     expect(figure("—")).not.toBe("");
+    // Its own column, ruled down the left, under a head that says what the figure is.
+    expect(figure("(88)")).toContain("border-l");
+    expect(html).toMatch(/<span class="[^"]*border-l[^"]*">xMins<\/span>/);
+  });
+
+  // Craig, 6 Nov 2026: "just initial and surname to save space".
+  it("prints each man by his initial and surname, in the eleven and the team news", () => {
+    const men = [{ name: "David Raya", position: "GK" }, { name: "Sepp van den Berg", position: "CB" }, { name: "Bruno G.", position: "DM" }];
+    const news = [{ name: "Bukayo Saka", status: "OUT" as const, note: "Thigh" }];
+    const listed = { extras: { lineups: [{ home: { ...side("Arsenal"), men, news }, away: side("Hull City"), kickoff: "2026-10-10T14:00:00Z" }] } } as PublishedStory;
+    const text = renderToStaticMarkup(createElement(Lineups, { story: listed, mine: null })).replace(/<[^>]+>/g, "");
+    for (const name of ["D. Raya", "S. van den Berg", "Bruno G.", "B. Saka – Thigh"]) expect(text).toContain(name);
+    expect(text).not.toContain("David");
   });
 
   it("prints no xMins at all from a filing that carries none", () => {
