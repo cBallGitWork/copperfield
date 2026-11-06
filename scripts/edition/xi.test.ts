@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { newsdesk, type Club, type DeskState, type Fixture, type IntelXi } from "@epl/core";
-import { freshestMark, lineupsSlot, xiColumn } from "./xi";
+import { newsdesk, type Club, type FootballPlayer, type PresserSignal, type DeskState, type Fixture, type IntelXi } from "@epl/core";
+import { briefNote, freshestMark, lineupsSlot, presserWords, xiColumn } from "./xi";
 
 // Four clubs in two matches, eleven men each: a gameweek small enough to read.
 const SHORT = ["ARS", "LEE", "CHE", "BOU"];
@@ -13,7 +13,14 @@ const fitness = (code: number) =>
     : code === 101
       ? { status: "d", news: "Knock - 50% chance of playing", newsAdded: "2026-10-08T10:00:00Z", chanceOfPlaying: 50 }
       : { status: "a", news: "", newsAdded: null, chanceOfPlaying: null };
-const players = SHORT.flatMap((_, at) => squad(at + 1)).map((code) => ({ code, name: `Man${code}`, fullName: `First Man${code}`, ...fitness(code) }));
+const players = SHORT.flatMap((_, at) => squad(at + 1)).map((code) => ({
+  code,
+  name: `Man${code}`,
+  fullName: `First Man${code}`,
+  clubId: Math.floor(code / 100),
+  season: { minutes: 0 } as FootballPlayer["season"],
+  ...fitness(code),
+}));
 const eleven = (club: number) => ({ formation: "4-4-2", slots: { "1": 1, "2": 4, "3": 4, "4": 2 }, starters: squad(club).map((code) => ({ code, prob: 0.9 })) });
 const season = [
   { gameweek: 6, homeClubId: 1, awayClubId: 2, kickoff: "2026-10-10T11:30:00Z" },
@@ -59,6 +66,75 @@ describe("xiColumn", () => {
   it("starts only the men of the ties it printed, for the picture", () => {
     const filed = xiColumn({ xi: xiOf({ ARS: eleven(1), LEE: eleven(2), CHE: eleven(3) }), gameweek: 6, clubs, teams: [], players, season, minutes: new Map() });
     expect([...(filed?.starters ?? [])].sort((a, b) => a - b)).toEqual([...squad(1), ...squad(2)]);
+  });
+});
+
+describe("the Line-Ups' team news", () => {
+  const injured = (code: number, news: string, minutes: number, status = "i") => ({
+    code, name: `Bench${code}`, fullName: `First Bench${code}`, clubId: 1, season: { minutes } as FootballPlayer["season"],
+    status, news, newsAdded: "2026-10-08T10:00:00Z", chanceOfPlaying: status === "d" ? 50 : 0,
+  });
+  const bench = [
+    injured(150, "Knock - 75% chance of playing", 900, "d"),
+    injured(151, "Hamstring injury - Expected back 22 Nov", 300),
+    injured(152, "Knee injury - Unknown return date", 800),
+    injured(153, "Joined Roma on loan", 1200, "u"),
+    { ...injured(154, "", 1000), status: "a", chanceOfPlaying: null },
+  ];
+  const filed = (extra: typeof bench, pressers: PresserSignal[] = []) =>
+    xiColumn({ xi: xiOf({ ARS: eleven(1), LEE: eleven(2), CHE: eleven(3), BOU: eleven(4) }), gameweek: 6, clubs, teams: [], players: [...players, ...extra], season, minutes: new Map(), pressers })
+      ?.column.lineups as { home: { news?: unknown[] }; away: { news?: unknown[] } }[];
+
+  it("lists the club's men outside the eleven who are out or a doubt, by season minutes, each in a few words", () => {
+    expect(filed(bench)[0].home.news).toEqual([
+      { name: "First Bench150", status: "Doubt", note: "Knock" },
+      { name: "First Bench152", status: "OUT", note: "Knee injury" },
+      { name: "First Bench151", status: "OUT", note: "Hamstring injury" },
+    ]);
+  });
+
+  it("files no news for a side nobody misses, and never repeats a marked starter", () => {
+    const tie = filed([])[0];
+    expect(tie.home).not.toHaveProperty("news");
+    expect(tie.away).not.toHaveProperty("news");
+  });
+
+  const signal = (code: number, tag: string, said: string, condition?: string): PresserSignal =>
+    ({ code, club: 1, tag, said, confidence: 0.9, manager: "Arteta", ...(condition === undefined ? {} : { condition }) });
+
+  it("takes the presser's word and its complaint where it is fresher than FPL's note, a fit-again included", () => {
+    const pressers = [
+      signal(150, "available", "2026-10-09T12:00:00Z"),
+      signal(154, "ruled_out", "2026-10-09T12:00:00Z", "calf"),
+      signal(151, "injury_scare", "2026-10-09T12:00:00Z", "hamstring"),
+    ];
+    expect(filed(bench, pressers)[0].home.news).toEqual([
+      { name: "First Bench154", status: "OUT", note: "Calf" },
+      { name: "First Bench152", status: "OUT", note: "Knee injury" },
+      { name: "First Bench151", status: "Doubt", note: "Hamstring" },
+    ]);
+  });
+
+  it("keeps FPL's word where its note is newer than the conference", () => {
+    const news = filed(bench, [signal(151, "available", "2026-10-07T12:00:00Z")])[0].home.news;
+    expect(news).toContainEqual({ name: "First Bench151", status: "OUT", note: "Hamstring injury" });
+  });
+
+  it("reads the newest firm word per man, says Suspended for a ban, and ignores a hint or a rotation", () => {
+    const words = presserWords([
+      signal(1, "suspended", "2026-10-09T12:00:00Z"),
+      signal(1, "injury_scare", "2026-10-08T12:00:00Z", "knee"),
+      { ...signal(2, "ruled_out", "2026-10-09T12:00:00Z"), confidence: 0.6 },
+      signal(3, "rotation_risk", "2026-10-09T12:00:00Z"),
+      signal(4, "constructor", "2026-10-09T12:00:00Z"),
+    ]);
+    expect(words.get(1)).toEqual({ mark: "OUT", at: "2026-10-09T12:00:00Z", note: "Suspended" });
+    expect([...words.keys()]).toEqual([1]);
+  });
+
+  it("cuts FPL's note to its complaint", () => {
+    expect(briefNote("Suspended until 15 Nov")).toBe("Suspended until 15 Nov");
+    expect(briefNote("")).toBeNull();
   });
 });
 

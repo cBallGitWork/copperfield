@@ -578,6 +578,14 @@ dateline, then the elevens (Craig, 9 Oct 2026: a line counting the matches "with
 both sides named" was *"just repeated ai slip"*), so a dropped tie is simply not
 on the page.
 
+**Each side's team news prints under its eleven** (6 Nov 2026): the club's men outside the eleven who are
+out or a doubt, an `OUT` line and a `Doubt` line, each man with his holder and his complaint in a few words,
+at most `LINEUP_NEWS_MEN` named (most season minutes first) and `+N more` for the rest. The desk stamps it
+(`xi.ts`'s `teamNews`), joining by FPL code and never by name: the week's firm presser signal leads where it
+is newer than FPL's note (ruled out, still out and suspended are OUT, a scare a Doubt, fit again drops him),
+else FPL's and RotoWire's mark. A starter keeps his own mark in the eleven and is not repeated. A filing
+from before 6 Nov carries none and prints as it did.
+
 **Under the team-news writer's byline**, like the rest of team news (Craig, 30 Sep
 2026: "yes bylines"). It had none from 21 Sep, when the house name over a listing
 the desk printed from an export read as a claim somebody wrote it.

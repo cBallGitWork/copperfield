@@ -81,6 +81,16 @@ export interface StoryLineupMan {
 export type LineupStatus = "OUT" | "Doubt";
 const LINEUP_STATUS: readonly LineupStatus[] = ["OUT", "Doubt"];
 
+/** One man outside a predicted eleven whom the football has out or in doubt: the side's team news. */
+export interface StoryLineupNews {
+  name: string;
+  /** The Fantrax team that holds him, named at render; absent is a free agent. */
+  owner?: string;
+  status: LineupStatus;
+  /** The complaint in a few words, off FPL's note; absent where it gave none. */
+  note?: string;
+}
+
 /** One club's predicted eleven, in the source's own order. */
 export interface StoryLineupSide {
   club: string;
@@ -88,6 +98,8 @@ export interface StoryLineupSide {
   code: number;
   formation: string;
   men: StoryLineupMan[];
+  /** Who misses out and why, OUT first; absent from a filing made before 6 Nov 2026, or where nobody does. */
+  news?: StoryLineupNews[];
 }
 
 /** One fixture and both its predicted elevens. */
@@ -179,6 +191,22 @@ function lineupMan(raw: unknown): StoryLineupMan[] {
   ];
 }
 
+/** One man in a side's team news, or nothing: a status outside the closed set is dropped, never guessed. */
+function lineupNews(raw: unknown): StoryLineupNews[] {
+  const man = raw as Partial<StoryLineupNews> | null;
+  if (man === null || typeof man !== "object") return [];
+  if (typeof man.name !== "string" || man.name.trim() === "") return [];
+  if (!LINEUP_STATUS.includes(man.status as LineupStatus)) return [];
+  return [
+    {
+      name: man.name,
+      ...(typeof man.owner === "string" && man.owner !== "" ? { owner: man.owner } : {}),
+      status: man.status as LineupStatus,
+      ...(typeof man.note === "string" && man.note.trim() !== "" ? { note: man.note } : {}),
+    },
+  ];
+}
+
 function lineupSide(raw: unknown): StoryLineupSide | null {
   const side = raw as Partial<StoryLineupSide> | null;
   if (side === null || typeof side !== "object") return null;
@@ -187,9 +215,10 @@ function lineupSide(raw: unknown): StoryLineupSide | null {
   if (code === null) return null;
   if (typeof side.formation !== "string" || side.formation === "") return null;
   const men = Array.isArray(side.men) ? side.men.flatMap(lineupMan) : [];
+  const news = Array.isArray(side.news) ? once(side.news.flatMap(lineupNews), (man) => man.name) : [];
   return men.length === 0
     ? null
-    : { club: side.club, code, formation: side.formation, men };
+    : { club: side.club, code, formation: side.formation, men, ...(news.length > 0 ? { news } : {}) };
 }
 
 /** A fixture prints both elevens or neither. */

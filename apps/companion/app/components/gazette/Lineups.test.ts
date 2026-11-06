@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { PublishedStory } from "@epl/core";
 import names from "../../../../../data/leagues/short-names.json";
+import { LINEUP_NEWS_MEN } from "../../config";
 import Lineups from "./Lineups";
 
 vi.mock("next/image", () => ({ default: () => null }));
@@ -44,5 +45,29 @@ describe("the predicted line-ups", () => {
   it("prints no xMins at all from a filing that carries none", () => {
     const html = renderToStaticMarkup(createElement(Lineups, { story, named: () => entry.team, mine: null }));
     expect(html).not.toContain("Expected minutes");
+  });
+
+  it("prints a side's team news under its eleven, OUT before the doubts, and nothing where there is none", () => {
+    const news = [
+      { name: "Doubtful", status: "Doubt" as const, note: "Knock" },
+      { name: "Saka", status: "OUT" as const, note: "Hamstring injury", owner: teamId },
+      { name: "White", status: "OUT" as const },
+    ];
+    const listed = { extras: { lineups: [{ home: { ...side("Arsenal"), news }, away: side("Hull City"), kickoff: "2026-10-10T14:00:00Z" }] } } as PublishedStory;
+    const text = renderToStaticMarkup(createElement(Lineups, { story: listed, named: () => entry.team, mine: null })).replace(/<[^>]+>/g, "");
+    expect(text).toContain(`OUTSaka (${entry.short}) – Hamstring injury; White`);
+    expect(text).toContain("DoubtDoubtful – Knock");
+    expect(text.indexOf("OUTSaka")).toBeLessThan(text.indexOf("DoubtDoubtful"));
+    const plain = renderToStaticMarkup(createElement(Lineups, { story, named: () => entry.team, mine: null })).replace(/<[^>]+>/g, "");
+    expect(plain).not.toMatch(/OUT|Doubt/);
+  });
+
+  it("names only the first few of a long list, and counts the rest", () => {
+    const news = Array.from({ length: LINEUP_NEWS_MEN + 3 }, (_, at) => ({ name: `Hurt${at}`, status: "OUT" as const }));
+    const listed = { extras: { lineups: [{ home: { ...side("Hull City"), news }, away: side("Everton"), kickoff: "2026-10-10T14:00:00Z" }] } } as PublishedStory;
+    const text = renderToStaticMarkup(createElement(Lineups, { story: listed, named: () => entry.team, mine: null })).replace(/<[^>]+>/g, "");
+    expect(text).toContain(`Hurt${LINEUP_NEWS_MEN - 1}`);
+    expect(text).not.toContain(`Hurt${LINEUP_NEWS_MEN}`);
+    expect(text).toContain("+3 more");
   });
 });
