@@ -585,7 +585,7 @@ model has none, and no column at all on a filing that carries none.
 
 **Each side's team news prints under its eleven** (6 Nov 2026): the club's men outside the eleven who are
 out or a doubt, under an `OUT` head and a `Doubt` head, a man to a line with his complaint in a few words (no holder),
-at most `LINEUP_NEWS_MEN` named (most season minutes first) and `+N more` for the rest. The desk stamps it
+every man named, most season minutes first, and none counted away (Craig, 6 Nov 2026: "don't show '2 more' … that's hiding info"). The desk stamps it
 (`xi.ts`'s `teamNews`), joining by FPL code and never by name: the week's firm presser signal leads where it
 is newer than FPL's note (ruled out, still out and suspended are OUT, a scare a Doubt, fit again drops him),
 else FPL's and RotoWire's mark. A starter keeps his own mark in the eleven and is not repeated. A filing

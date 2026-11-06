@@ -3,7 +3,6 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import type { PublishedStory } from "@epl/core";
 import names from "../../../../../data/leagues/short-names.json";
-import { LINEUP_NEWS_MEN } from "../../config";
 import Lineups from "./Lineups";
 
 vi.mock("next/image", () => ({ default: () => null }));
@@ -80,12 +79,12 @@ describe("the predicted line-ups", () => {
     expect(plain).not.toMatch(/OUT|Doubt/);
   });
 
-  it("names only the first few of a long list, and counts the rest", () => {
-    const news = Array.from({ length: LINEUP_NEWS_MEN + 3 }, (_, at) => ({ name: `Hurt${at}`, status: "OUT" as const }));
+  // Craig, 6 Nov 2026: "don't show '2 more' in predicted line ups. That's hiding info".
+  it("names every man in a side's team news, however long the list, and never counts any away", () => {
+    const news = Array.from({ length: 9 }, (_, at) => ({ name: `Hurt${at}`, status: "OUT" as const }));
     const listed = { extras: { lineups: [{ home: { ...side("Hull City"), news }, away: side("Everton"), kickoff: "2026-10-10T14:00:00Z" }] } } as PublishedStory;
     const text = renderToStaticMarkup(createElement(Lineups, { story: listed, mine: null })).replace(/<[^>]+>/g, "");
-    expect(text).toContain(`Hurt${LINEUP_NEWS_MEN - 1}`);
-    expect(text).not.toContain(`Hurt${LINEUP_NEWS_MEN}`);
-    expect(text).toContain("+3 more");
+    for (let at = 0; at < 9; at++) expect(text).toContain(`Hurt${at}`);
+    expect(text).not.toContain("more");
   });
 });
