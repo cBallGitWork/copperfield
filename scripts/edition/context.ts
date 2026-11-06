@@ -94,6 +94,7 @@ export async function deskContext(input: {
             players: snapshot.players,
             season,
             minutes: minutesIntel(readIntel<IntelProjections>("projections")),
+            pressers: sheet.lines,
           }),
   };
   return { ctx, lost };
