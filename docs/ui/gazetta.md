@@ -577,6 +577,12 @@ dateline, then the elevens (Craig, 9 Oct 2026: a line counting the matches "with
 both sides named" was *"just repeated ai slip"*), so a dropped tie is simply not
 on the page.
 
+**A man is his initial and surname** (`initialled`: "D. Raya", "S. van den Berg", "Bruno G." as it stands), in
+the eleven and the team news, and **his xMins sit in a column of their own** (Craig, 6 Nov 2026: "just initial
+and surname to save space … put xmins in brackets and make it more obvious"): bracketed, `(88)`, under an
+`xMins` head, with a faint rule down the column's left; bold under `START_DOUBT_MINUTES`, a dash where the
+model has none, and no column at all on a filing that carries none.
+
 **Each side's team news prints under its eleven** (6 Nov 2026): the club's men outside the eleven who are
 out or a doubt, an `OUT` line and a `Doubt` line, each man with his complaint in a few words (no holder, as above),
 at most `LINEUP_NEWS_MEN` named (most season minutes first) and `+N more` for the rest. The desk stamps it
