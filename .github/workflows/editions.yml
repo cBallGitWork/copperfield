@@ -25,7 +25,7 @@ name: Editions
 # Cost when it DOES write: at most GAZETTA_STORY_CAP (10, set below) stories
 # per firing, and one Anthropic call each. A desk that refuses spends nothing,
 # so a firing costs what it FILES rather than what it considers. The
-# Actions-minutes budget is still the real spend — 130 runs a
+# Actions-minutes budget is still the real spend — 132 runs a
 # week at a minute or two each against the 2000 free monthly minutes shared
 # with capture and scout-xi — and this cron block is the data to trim if
 # that ever bites.
@@ -44,9 +44,13 @@ on:
     # **Every evening band reaches 23:00 UTC**: the draft report is due three hours after a gameweek's last kickoff,
     # and a 20:00 London kickoff in winter is due at 23:00 UTC, on whichever day the gameweek ends.
     #
-    # **Friday opens at 14:00 UTC**, early for the Team Sheet at 16:30 London and the Line-Ups at 17:00: 15:00 London is
+    # **Friday opens at 14:00 UTC**, early for the Team Sheet at 16:30 London and a Friday lock's Line-Ups at 17:30: 15:00 London is
     # 14:00 UTC in summer and 15:00 in winter.
     - cron: "0 14-23 * * 5"
+    # **17:40 London on a Friday** for a Friday lock's Line-Ups, due from 17:30 (Craig, 6 Nov 2026: "knock that to
+    # 5.40"), not the 18:00 run: 16:40 UTC is 17:40 in summer and 17:40 UTC is 17:40 in winter. The other run is a
+    # no-op for the Line-Ups. At :40 it shares no slot with the lines here.
+    - cron: "40 16,17 * * 5"
     - cron: "0 10-23 * * 6"
     - cron: "0 11-23 * * 0"
     - cron: "0 17-23 * * 1,2"
