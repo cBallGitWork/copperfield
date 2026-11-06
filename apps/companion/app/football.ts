@@ -13,6 +13,7 @@ import {
   inMatchWindow,
   isDated,
   LIVE_LEAD_MINUTES,
+  LIVE_TAIL_MINUTES,
   liveGameweek,
   type MatchSheet,
   type PlayerMatchStats,
@@ -237,9 +238,9 @@ export async function groundFaces(): Promise<string[]> {
   }
 }
 
-/** Whether Live is open: from `LIVE_LEAD_MINUTES` before the round's first kickoff to its last whistle. */
+/** Whether Live is open: from `LIVE_LEAD_MINUTES` before the round's first kickoff to `LIVE_TAIL_MINUTES` past its last. */
 export function liveOpen(snapshot: FootballSnapshot): boolean {
-  return duringGameweek(snapshot, now().toISOString(), LIVE_LEAD_MINUTES);
+  return duringGameweek(snapshot, now().toISOString(), LIVE_LEAD_MINUTES, LIVE_TAIL_MINUTES);
 }
 
 /** Whether Live's round has opened; true after its last whistle too, until `liveNow` turns to the next. */

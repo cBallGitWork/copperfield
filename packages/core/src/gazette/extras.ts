@@ -73,6 +73,8 @@ export interface StoryLineupMan {
   owner?: string;
   /** Whether the football says he cannot or may not play, stamped by the desk; absent is fit. */
   status?: LineupStatus;
+  /** His expected minutes for the gameweek, whole; absent where the model has no reading. */
+  xMins?: number;
 }
 
 /** A predicted starter's fitness in the Team Sheet's words: out, or a doubt. */
@@ -172,6 +174,7 @@ function lineupMan(raw: unknown): StoryLineupMan[] {
       position: textOrNull(man.position),
       ...(typeof man.owner === "string" && man.owner !== "" ? { owner: man.owner } : {}),
       ...(LINEUP_STATUS.includes(man.status as LineupStatus) ? { status: man.status } : {}),
+      ...(typeof man.xMins === "number" && Number.isFinite(man.xMins) && man.xMins >= 0 ? { xMins: man.xMins } : {}),
     },
   ];
 }

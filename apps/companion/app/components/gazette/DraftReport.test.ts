@@ -19,9 +19,10 @@ describe("a draft report on a phone", () => {
     expect(name.split(" ")).toEqual(expect.arrayContaining(["min-w-0", "wrap-anywhere"]));
   });
 
-  it("lands a tapped match-up below its contents list, the list's height set off its rows", () => {
+  it("prints every match-up one after another, with no contents list and none hidden", () => {
     const out = html(5);
-    expect(out).toContain("max-lg:[&amp;&gt;section]:scroll-mt-(--list-h)");
-    expect(out).toContain("--list-h:calc(5 * 2.25rem + 3rem)");
+    expect(out).not.toContain("The match-ups");
+    expect(out).not.toContain(":hidden");
+    expect(out.match(/<section/g)).toHaveLength(5);
   });
 });

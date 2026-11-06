@@ -71,6 +71,14 @@ describe("duringGameweek", () => {
     expect(duringGameweek(snap({ fixtures: [played({ id: 1 })] }), "2026-08-22T13:30:00Z", 60)).toBe(false);
   });
 
+  it("stays open a tail's minutes past the last match's full-time mark, read off its kickoff", () => {
+    // Kickoff 14:00, so full time is 15:55 and a two-hour tail runs to 17:55; with no tail it shuts at the whistle.
+    const done = snap({ fixtures: [played({ id: 1, kickoff: "2026-08-22T12:00:00Z" }), played({ id: 2 })] });
+    expect(duringGameweek(done, "2026-08-22T17:54:00Z", 60, 120)).toBe(true);
+    expect(duringGameweek(done, "2026-08-22T17:55:00Z", 60, 120)).toBe(false);
+    expect(duringGameweek(done, "2026-08-22T16:00:00Z", 60)).toBe(false);
+  });
+
   it("stays open between matches, when nothing is in play", () => {
     // The gap `isMatchdayLive` cannot see: Saturday teatime, one match done and
     // the next not started, which is still matchday to whoever is watching.

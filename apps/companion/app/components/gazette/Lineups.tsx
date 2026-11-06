@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { crestUrl, type PublishedStory, type StoryLineupMan, type StoryLineupSide, londonDayAndTime, DASH } from "@epl/core";
+import { START_DOUBT_MINUTES } from "../../config";
 import { yoursInk } from "../../mine";
 import { shortName } from "../../teamNames";
 import { HAIRLINES } from "./rules";
@@ -24,6 +25,8 @@ export default function Lineups({
 }) {
   const ties = story.extras?.lineups ?? [];
   if (ties.length === 0) return null;
+  // A filing from before xMins were filed carries none, and would print a dash beside every man.
+  const minuted = ties.some((tie) => [tie.home, tie.away].some((side) => side.men.some((man) => man.xMins !== undefined)));
 
   return (
     <div className={`flex flex-col pt-4 ${HAIRLINES}`}>
@@ -35,8 +38,8 @@ export default function Lineups({
           {/* Side by side at every width: a match is two teams facing each
               other, and stacked they read as a list of twenty clubs. */}
           <div className="grid grid-cols-2 gap-x-3 pt-2 sm:gap-x-6">
-            <Side side={tie.home} named={named} mine={mine} />
-            <Side side={tie.away} named={named} mine={mine} />
+            <Side side={tie.home} named={named} mine={mine} minuted={minuted} />
+            <Side side={tie.away} named={named} mine={mine} minuted={minuted} />
           </div>
         </section>
       ))}
@@ -48,10 +51,12 @@ function Side({
   side,
   named,
   mine,
+  minuted,
 }: {
   side: StoryLineupSide;
   named: (teamId: string) => string;
   mine: string | null;
+  minuted: boolean;
 }) {
   return (
     <div>
@@ -93,6 +98,15 @@ function Side({
                 <span className={`${CAPTION_CAPS} pl-1.5 ${STATUS[man.status]}`}>{man.status}</span>
               )}
             </p>
+            {/* His xMins, loud in scale under the planner's floor, as the paper ranks; a dash where the model has none. */}
+            {!minuted ? null : (
+              <span
+                title="Expected minutes"
+                className={`numeric shrink-0 pt-0.5 text-xs sm:text-sm ${man.xMins !== undefined && man.xMins < START_DOUBT_MINUTES ? "font-bold text-ink" : "text-muted"}`}
+              >
+                {man.xMins ?? DASH}
+              </span>
+            )}
           </li>
         ))}
       </ol>
