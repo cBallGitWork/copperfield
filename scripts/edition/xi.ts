@@ -7,6 +7,7 @@ import {
   roundSlot,
   squadIntel,
   type Club,
+  type ExpectedMinutes,
   type Fixture,
   type FootballPlayer,
   type IntelSquads,
@@ -46,11 +47,13 @@ export function xiColumn(input: {
   teams: readonly RosteredTeam[];
   players: readonly XiPlayer[];
   season: readonly Fixture[];
+  /** The sister model's xMins by FPL code, off the projections export; empty prints none. */
+  minutes: ReadonlyMap<number, readonly ExpectedMinutes[]>;
 }): { column: Record<string, unknown>; starters: ReadonlySet<number> } | null {
-  const { xi, gameweek, clubs, teams, players, season } = input;
+  const { xi, gameweek, clubs, teams, players, season, minutes } = input;
 
   const ties = roundTies(gameweek, clubs, season);
-  const lineups = predictedLineups(ties, xi, man(players, teams, xi));
+  const lineups = predictedLineups(ties, xi, man(players, teams, xi, gameweek, minutes));
   if (lineups.length === 0) return null;
 
   // Read back off the export by each printed side's club, so a club whose tie did not print starts nobody.
@@ -96,11 +99,13 @@ function rotowireSignals(xi: IntelXi): (code: number) => Signal {
 }
 
 /** One starter as printed: his name, who holds him, his real position off the SQUADS export (nothing where that had
- *  only FPL's `element_type`), and OUT or Doubt where the football says so. The eleven is never changed. */
+ *  only FPL's `element_type`), OUT or Doubt where the football says so, and his xMins. The eleven is never changed. */
 function man(
   players: readonly XiPlayer[],
   teams: readonly RosteredTeam[],
   xi: IntelXi,
+  gameweek: number,
+  minutes: ReadonlyMap<number, readonly ExpectedMinutes[]>,
 ): (code: number) => StoryLineupMan | null {
   const byCode = new Map(players.map((player) => [player.code, player]));
   // The squads for the season the XI itself names, so the two exports cannot be read from different years.
@@ -116,11 +121,13 @@ function man(
     const fitness = availabilityOf(player);
     const fpl = fitness.out ? "OUT" : fitness.state === "doubt" ? "Doubt" : null;
     const status = freshestMark({ mark: fpl, at: player.newsAdded }, rotowire(code));
+    const xMins = minutes.get(code)?.find((week) => week.gameweek === gameweek)?.minutes ?? null;
     return {
       name: display(player),
       position: squads.get(code)?.position ?? null,
       ...(owner === undefined ? {} : { owner }),
       ...(status === null ? {} : { status }),
+      ...(xMins === null ? {} : { xMins }),
     };
   };
 }

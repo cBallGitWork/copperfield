@@ -1,4 +1,4 @@
-import { POSTPONED_AFTER_MINUTES } from "../config";
+import { FULL_TIME_AFTER_KICKOFF_MINUTES, POSTPONED_AFTER_MINUTES } from "../config";
 import { MS_PER_MINUTE } from "../time";
 import type { Fixture, FixtureStatus, FootballSnapshot } from "./types";
 
@@ -10,12 +10,16 @@ export function isMatchdayLive(snapshot: FootballSnapshot): boolean {
   return snapshot.fixtures.some((f) => f.status === "live");
 }
 
-/** From the round's first dated kickoff, or `lead` minutes before it, until its last dated match finishes.
- *  Wider than `isMatchdayLive`, since the gap between kickoffs counts; closes on `finished`, not `data_checked`.
- *  Undated fixtures are ignored at both ends, and so is one unstarted `POSTPONED_AFTER_MINUTES` past its kickoff. */
-export function duringGameweek(snapshot: FootballSnapshot, at: string, lead = 0): boolean {
+/** From the round's first dated kickoff, or `lead` minutes before it, until its last dated match finishes, or `tail`
+ *  minutes past that match's full-time mark. Wider than `isMatchdayLive`, since the gap between kickoffs counts; closes
+ *  on `finished`, not `data_checked`. Undated fixtures are ignored at both ends, and so is one called off. */
+export function duringGameweek(snapshot: FootballSnapshot, at: string, lead = 0, tail = 0): boolean {
   const now = Date.parse(at);
-  return gameweekOpened(snapshot, at, lead) && snapshot.fixtures.some((f) => countedKickoff(f, now) !== null && f.status !== "finished");
+  if (!gameweekOpened(snapshot, at, lead)) return false;
+  const counted = snapshot.fixtures.filter((f) => countedKickoff(f, now) !== null);
+  if (counted.some((f) => f.status !== "finished")) return true;
+  const last = Math.max(...counted.map((f) => countedKickoff(f, now) ?? -Infinity));
+  return tail > 0 && now < last + (FULL_TIME_AFTER_KICKOFF_MINUTES + tail) * MS_PER_MINUTE;
 }
 
 /** Whether the round's first dated kickoff, less `lead` minutes, has passed; it stays true after the last whistle. */

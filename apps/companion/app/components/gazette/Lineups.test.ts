@@ -30,4 +30,19 @@ describe("the predicted line-ups", () => {
     const html = renderToStaticMarkup(createElement(Lineups, { story, named: () => entry.team, mine: null }));
     expect(html).toMatch(/<span class="[^"]*font-bold[^"]*">CB<\/span>/);
   });
+
+  it("prints each man's xMins, bold under fifty, and a dash where there is none", () => {
+    const men = [{ name: "Low", position: "CB", xMins: 34 }, { name: "Full", position: "CB", xMins: 88 }, { name: "None", position: "CB" }];
+    const listed = { extras: { lineups: [{ home: { ...side("Everton"), men }, away: side("Hull City"), kickoff: "2026-10-10T14:00:00Z" }] } } as PublishedStory;
+    const html = renderToStaticMarkup(createElement(Lineups, { story: listed, named: () => entry.team, mine: null }));
+    const figure = (text: string) => new RegExp(`<span title="Expected minutes" class="([^"]*)">${text}</span>`).exec(html)?.[1] ?? "";
+    expect(figure("34")).toContain("font-bold");
+    expect(figure("88")).not.toContain("font-bold");
+    expect(figure("—")).not.toBe("");
+  });
+
+  it("prints no xMins at all from a filing that carries none", () => {
+    const html = renderToStaticMarkup(createElement(Lineups, { story, named: () => entry.team, mine: null }));
+    expect(html).not.toContain("Expected minutes");
+  });
 });

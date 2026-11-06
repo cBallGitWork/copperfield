@@ -167,6 +167,9 @@ export const LINEUP_LOCK_LEAD_MINUTES = 15;
 /** Minutes before a gameweek's first kickoff that Live turns to it (Craig, 30 Oct 2026: "2 hours before kick off"). */
 export const LIVE_LEAD_MINUTES = 120;
 
+/** Minutes past the gameweek's last full time that Live stays on it (Craig, 6 Nov 2026), read off its last kickoff. */
+export const LIVE_TAIL_MINUTES = 120;
+
 /** Minutes before the lock that a save to Fantrax stops being taken: the commissioner's write can override a
  *  locked team, so a save must fail short of the lock. */
 export const SAVE_MARGIN_MINUTES = 10;

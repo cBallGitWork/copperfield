@@ -1,4 +1,4 @@
-import { FANTRAX_LEAGUE_ID, type Assignment, type Club, type Fixture, type FootballSnapshot, type GameweekKickoff, type LeagueInfo } from "@epl/core";
+import { FANTRAX_LEAGUE_ID, minutesIntel, type Assignment, type IntelProjections, type Club, type Fixture, type FootballSnapshot, type GameweekKickoff, type LeagueInfo } from "@epl/core";
 import { binXiDesk } from "./binXi";
 import { hereWeGoDesk } from "./hereWeGo";
 import type { DeskContext } from "./dispatch";
@@ -10,6 +10,7 @@ import { draftsDesk } from "./drafts";
 import { reportsDesk } from "./reports";
 import type { readLedger } from "./persist";
 import type { presserDesk } from "./presserWeek";
+import { readIntel } from "../intel";
 import { xiColumn, type readXi } from "./xi";
 
 // Everything a desk may read this firing, built once the newsdesk has said there is work to do. Each desk's reads run in
@@ -92,6 +93,7 @@ export async function deskContext(input: {
             teams: facts.teams,
             players: snapshot.players,
             season,
+            minutes: minutesIntel(readIntel<IntelProjections>("projections")),
           }),
   };
   return { ctx, lost };

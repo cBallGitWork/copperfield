@@ -22,9 +22,19 @@ const season = [
 // A season no export is held for, so no squads file is read.
 const xiOf = (elevens: Record<string, ReturnType<typeof eleven>>) =>
   ({ manifest: { season: "none", gameweek: 6, exportedAt: "", rows: 4, sources: [] }, fetchedAt: null, source: null, clubs: elevens }) as IntelXi;
-const column = (xi: IntelXi) => xiColumn({ xi, gameweek: 6, clubs, teams: [], players, season })?.column;
+const column = (xi: IntelXi) => xiColumn({ xi, gameweek: 6, clubs, teams: [], players, season, minutes: new Map() })?.column;
 
 describe("xiColumn", () => {
+  it("files each man's xMins for the gameweek, and none where the model has no reading", () => {
+    const minutes = new Map([[100, [{ gameweek: 5, minutes: 90 }, { gameweek: 6, minutes: 34 }]], [101, [{ gameweek: 6, minutes: null }]]]);
+    const xi = xiOf({ ARS: eleven(1), LEE: eleven(2), CHE: eleven(3), BOU: eleven(4) });
+    const filed = xiColumn({ xi, gameweek: 6, clubs, teams: [], players, season, minutes })?.column;
+    const men = (filed?.lineups as { home: { men: { xMins?: number }[] } }[])[0].home.men;
+    expect(men[0].xMins).toBe(34);
+    expect(men[1]).not.toHaveProperty("xMins");
+    expect(men[2]).not.toHaveProperty("xMins");
+  });
+
   it("calls the week a gameweek in its deck, never a round", () => {
     const filed = column(xiOf({ ARS: eleven(1), LEE: eleven(2), CHE: eleven(3), BOU: eleven(4) }));
     expect(filed?.deck).toBe("Every club's expected starting eleven for the gameweek.");
@@ -47,7 +57,7 @@ describe("xiColumn", () => {
   });
 
   it("starts only the men of the ties it printed, for the picture", () => {
-    const filed = xiColumn({ xi: xiOf({ ARS: eleven(1), LEE: eleven(2), CHE: eleven(3) }), gameweek: 6, clubs, teams: [], players, season });
+    const filed = xiColumn({ xi: xiOf({ ARS: eleven(1), LEE: eleven(2), CHE: eleven(3) }), gameweek: 6, clubs, teams: [], players, season, minutes: new Map() });
     expect([...(filed?.starters ?? [])].sort((a, b) => a - b)).toEqual([...squad(1), ...squad(2)]);
   });
 });
