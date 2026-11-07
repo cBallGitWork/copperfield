@@ -51,16 +51,30 @@ token and DESIGN rows; nothing in the app changes until then.
 1. **Purple for the column a table is for, everywhere** (`--color-for`): Pts, FPts, Proj and GW. It replaces FPts'
    cyan (21 Oct 2026); DESIGN §3's cyan row loses the league's points, and the purple row takes them.
 2. **The indigo tab strip** (`--color-tab`); DESIGN §2's "royal-blue plates" becomes indigo under a royal-blue bar.
-3. **The desk fills 1440**; the paper keeps its frame, and the name column is capped (360px on a table, 300 on a
-   squad) so the figures stay near the names.
+3. **A 1200px frame, centred**, the ground either side: CM's proportions, and the figures near the names. (It was
+   full width until the fresh review below.)
 4. **`◄ ►` only where a screen has a gameweek**: the Squad's rail has them, the season table's doesn't.
 5. **A fixture tile is the club and h/a, and nothing else** (Craig, 7 Nov 2026: *"Stop adding numbers to the
    fixture tile, team and h/a"*). The difficulty is the tile's colour; its words, "difficulty 2 of 10", are the
    tile's title for a screen reader.
-6. **A near-black team takes its second colour** for the bar and the index spine: The Raccoons' bar is white with
-   black ink, CM's own competition plate (`cm9900/24.jpg`).
+6. **A near-black team**: its bar takes its second colour as a bevelled plate (The Raccoons' white, black ink), and
+   its index spine the league's blue, since a white spine read as column heads.
 7. **A banned man's xMins stays `0`**: a known figure, not an absence.
-8. **No foot row**: the docs name none, so the ground shows under the panel, as `cm9900/09.jpg` does.
+8. **CM's foot bar**: grey `◄ Back` and the next screen on the League (`Cups ►`), the teams either side in the
+   table on a Squad (`◄ Bru`, `Atletico ►`), as `cm9900/24.jpg` and `10.jpg` close every screen.
+
+## The fresh-eyes review (7 Nov 2026)
+
+A reviewer who had seen none of this judged the boards cold, as a site and as a CM tribute, against
+`docs/ui/reference/cm9900/`. Craig: *"Your call"*. Taken: the frame (3), the foot bar (8), names that outrank the
+figures (19px), the rail as bevelled plates with the date in yellow, the caption on CM's soft band and the photo
+through the panel (80%), blue position plates (6), one `Inf` column for the mark and the word, no Club column beside
+the crest, no `You` chip, readable cut labels, the deadline on the phone, and Live's own glyph.
+
+Declined, as Craig's standing rulings: keys and legends ("people aren't stupid"), yellow cut lines (league red, so
+yellow stays "yours"), renaming the phone's Read and Draft or dropping its glyphs, CM's `Inj` word chips in place of
+the cross and card, and the fixture tile as text (it stays a filled tile, club and h/a). The rail and title
+gradients CM draws were drawn and then taken out: the design lint fails them (DESIGN §10, 3).
 
 ## Doc drift the panel found
 
