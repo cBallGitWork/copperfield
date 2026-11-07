@@ -58,9 +58,10 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false,
 
-  // Keep a visited page on the phone for 30s, the server's own revalidate, so switching back is instant; live pages refresh themselves.
+  // Keep a visited page, and a tab AutoRefresh fetched ahead, on the phone for 30s, the server's own revalidate: unset,
+  // `static` held a fetched-ahead Live for five minutes, and a fresh entry is never fetched again.
   experimental: {
-    staleTimes: { dynamic: 30 },
+    staleTimes: { dynamic: 30, static: 30 },
   },
 
   async headers() {

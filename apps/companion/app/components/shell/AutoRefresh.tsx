@@ -17,9 +17,12 @@ const FULL = { kind: "full" } as NonNullable<Parameters<ReturnType<typeof useRou
 
 export default function AutoRefresh({
   liveIn,
+  liveOffered,
   ahead,
 }: {
   liveIn: number | null;
+  /** Whether the shell offers Live: between a gameweek's match windows its reads are stale on an open too. */
+  liveOffered: boolean;
   ahead: Ahead;
 }) {
   const router = useRouter();
@@ -73,7 +76,7 @@ export default function AutoRefresh({
 
     // A stale read answers with its old reading and fetches behind it, so an open or a return asks once more.
     const settle = (since: number | null) => {
-      const wait = settleAfter(liveIn, elapsed(), since, { lifetime: LIVE_REVALIDATE, settle: POLL.settle });
+      const wait = settleAfter(liveIn, elapsed(), since, liveOffered, { lifetime: LIVE_REVALIDATE, settle: POLL.settle });
       if (wait === null) return;
       clearTimeout(settling.current);
       settling.current = setTimeout(refresh, wait * 1000);
@@ -111,7 +114,7 @@ export default function AutoRefresh({
       window.removeEventListener("load", opened);
       document.removeEventListener("visibilitychange", returned);
     };
-  }, [router, liveIn, each, once]);
+  }, [router, liveIn, liveOffered, each, once]);
 
   return null;
 }
