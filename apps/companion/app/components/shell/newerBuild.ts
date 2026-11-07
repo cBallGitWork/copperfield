@@ -1,3 +1,4 @@
+import { MS_PER_MINUTE } from "@epl/core";
 import { reloadsHeld } from "./unsaved";
 
 // An installed app keeps the deployment it opened on (Vercel's skew protection pins its requests with `dpl=`), and the
@@ -7,7 +8,7 @@ import { reloadsHeld } from "./unsaved";
 /** The address that names the live deployment; a plain fetch is never pinned. */
 const DEPLOYMENT_ROUTE = "/api/deployment";
 /** The fewest milliseconds between two asks, outside a pull. */
-const ASK_EVERY_MS = 60_000;
+const ASK_EVERY_MS = MS_PER_MINUTE;
 
 /** The deployment a page's own scripts were served from, or null where nothing pins them (local, preview of none). */
 export function deploymentOf(sources: readonly string[]): string | null {

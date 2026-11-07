@@ -1,4 +1,4 @@
-import { londonTime, type PlMatchFacts } from "@epl/core";
+import { londonTime, type PlMatchFacts, PART_JOIN } from "@epl/core";
 import type { Match } from "./match";
 
 /** The overview's state line: the gameweek, then the live minute, FT or the kick-off, then the half-time score. */
@@ -17,7 +17,7 @@ export function stateLine(
   else if (fixture.kickoff !== null) parts.push(londonTime(fixture.kickoff));
   else parts.push("Kick-off TBC");
   if (half !== null) parts.push(half);
-  return parts.join(" · ");
+  return parts.join(PART_JOIN);
 }
 
 /** An empty match tab's one line for a match not yet started (Stats, Action Zones, Highlights); null once it has. */

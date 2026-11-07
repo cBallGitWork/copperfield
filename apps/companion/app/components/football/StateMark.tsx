@@ -1,4 +1,4 @@
-import { type Availability, type PlayerState, doubtBand, noteBesideChance } from "@epl/core";
+import { type Availability, type PlayerState, doubtBand, noteBesideChance, PART_JOIN } from "@epl/core";
 import { DOUBT_FILL } from "./doubtRow";
 
 /** The word in full, where the box abbreviates it: a screen reader says "Doubtful", not "D-B-T". */
@@ -41,7 +41,7 @@ export default function StateMark({
   // The word the mark stands in for, and the chance and news a box used to carry in its title.
   const detail = [word, chance === null ? null : `${chance}% chance of playing`, noteBesideChance(availability.news, chance) || null]
     .filter(Boolean)
-    .join(" · ");
+    .join(PART_JOIN);
 
   return (
     <svg

@@ -1,4 +1,4 @@
-import { MAX_PAPER_STORIES, type PhotoCredit } from "@epl/core";
+import { MAX_PAPER_STORIES, MS_PER_MINUTE, type PhotoCredit } from "@epl/core";
 
 // The companion's own constants; anything a second consumer of core would need belongs in core's `config.ts`.
 
@@ -140,7 +140,7 @@ export const QUIET_REVALIDATE = 60 * 60;
 
 /** How long one FPL read rests after a failure before this process asks again, in ms: FPL's edge refreshes its live
  *  read about once a minute, and a stale entry otherwise asked a refusing FPL on every page view (11 Oct 2026). */
-export const FPL_REST_MS = 60_000;
+export const FPL_REST_MS = MS_PER_MINUTE;
 
 /** The longest that rest grows to, in ms: it doubles on each refusal in a row (60, 120, 240s), since FPL refuses
  *  Vercel for stretches of an hour and more and asking every minute only adds to them (19 Oct 2026). */
@@ -155,7 +155,7 @@ export const XI_REVALIDATE = 600;
 
 /** How long a failed read of the branch's elevens rests before this process asks again, in ms, so a cold key is not
  *  asked on every view. GitHub's, not FPL's: the two need not move together. */
-export const XI_REST_MS = 60_000;
+export const XI_REST_MS = MS_PER_MINUTE;
 
 /** How often an open page asks for a fresh render, in seconds; `settle` is how soon it asks again after an open or a
  *  return in a match window, when the first answer was a stale read's (a deployment ask, a render and Fantrax's 0.5s read). */

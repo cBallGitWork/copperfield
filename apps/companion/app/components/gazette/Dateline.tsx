@@ -1,4 +1,4 @@
-import { type PublishedStory, londonDayAndDate, writerOf } from "@epl/core";
+import { type PublishedStory, londonDayAndDate, writerOf, PART_JOIN } from "@epl/core";
 import { QUIET_CAPS } from "./heads";
 import { filedWhen } from "./filedWhen";
 import { now } from "../../clock";
@@ -29,7 +29,7 @@ export default function Dateline({
   if (day) return <Tag className={`${QUIET_CAPS} ${className}`}>{londonDayAndDate(story.filedAt)}</Tag>;
   return (
     <Tag className={`${QUIET_CAPS} ${className}`}>
-      {byline ? `by ${writerOf(story)} · ` : ""}
+      {byline ? `by ${writerOf(story)}${PART_JOIN}` : ""}
       Filed {filedWhen(story.filedAt, now())}
       {/* The affordance, in words rather than a chevron. */}
       {turn ? <span className="text-muted">{" · read on"}</span> : null}

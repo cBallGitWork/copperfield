@@ -1,4 +1,4 @@
-import { availabilityOf, noteBesideChance } from "@epl/core";
+import { availabilityOf, noteBesideChance, PART_JOIN } from "@epl/core";
 import type { FootballPlayer } from "@epl/core";
 import { MINOR_CAPS } from "@/app/desk";
 
@@ -14,7 +14,7 @@ export default function StateBox({ player }: { player: FootballPlayer | null }) 
     noteBesideChance(availability.news, availability.chance) || null,
   ]
     .filter(Boolean)
-    .join(" · ");
+    .join(PART_JOIN);
 
   return (
     <span

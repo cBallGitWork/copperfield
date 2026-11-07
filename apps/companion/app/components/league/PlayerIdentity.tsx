@@ -12,6 +12,7 @@ import {
   kickedOff,
   londonDayAndTime,
   DASH,
+  PART_JOIN,
 } from "@epl/core";
 import EmptySlot from "./EmptySlot";
 import MatchClock from "../football/MatchClock";
@@ -88,7 +89,7 @@ export function FootballerIdentity({
       </span>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-        <p className="truncate text-sm text-muted">{[club?.name, position].filter(Boolean).join(" · ") || DASH}</p>
+        <p className="truncate text-sm text-muted">{[club?.name, position].filter(Boolean).join(PART_JOIN) || DASH}</p>
         <Fixture club={club} opposition={opposition} started={started} view={view} />
         {/* Nothing to come for a man with no fixture: "No fixture" above already says so. */}
         {opposition === undefined || opposition.length === 0 || started ? null : (

@@ -1,4 +1,4 @@
-import { byPositionDepth, clubById, isGoalkeeper, pitchName, playerByCode, plural, type FootballSnapshot, type PublishedStory } from "@epl/core";
+import { byPositionDepth, clubById, isGoalkeeper, pitchName, playerByCode, plural, type FootballSnapshot, type PublishedStory, PART_JOIN } from "@epl/core";
 import PitchMarker from "../league/PitchMarker";
 import PitchRows from "../league/PitchRows";
 import { STANDING_HEAD } from "./heads";
@@ -19,7 +19,7 @@ export default function BinXi({ story, snapshot }: { story: PublishedStory; snap
   return (
     <div className="flex flex-col gap-3 pt-4">
       <p className={STANDING_HEAD}>
-        The Bin XI · {bin.shape} · <span className="numeric">{bin.total}</span> {plural(bin.total, "pt")}
+        The Bin XI{PART_JOIN}{bin.shape}{PART_JOIN}<span className="numeric">{bin.total}</span> {plural(bin.total, "pt")}
       </p>
       {/* Stacked on a phone; the pitch beside its stats at a desk, where it would fill the sheet. */}
       <div className="grid gap-3 @3xl:grid-cols-2 @3xl:gap-x-8">

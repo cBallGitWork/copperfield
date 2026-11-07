@@ -1,5 +1,5 @@
 import type { Club, Touch } from "@epl/core";
-import { clubColoursOf, plateOn } from "@epl/core";
+import { clubColoursOf, plateOn, PART_JOIN } from "@epl/core";
 import HeatPitch from "./HeatPitch";
 import { touchCount } from "../[fantraxId]/maps";
 import { MAP_CAPTION } from "@/app/desk";
@@ -25,7 +25,7 @@ export default function PlayerMap({
 }) {
   const plate = plateOn(clubColoursOf(club));
   const count = touchCount(touches);
-  const across = matches === null ? "" : ` · ${matches} ${matches === 1 ? "match" : "matches"}`;
+  const across = matches === null ? "" : `${PART_JOIN}${matches} ${matches === 1 ? "match" : "matches"}`;
 
   return (
     <figure className="flex min-w-0 flex-col gap-1">

@@ -1,4 +1,4 @@
-import { clubColoursOf, inkOn, DASH } from "@epl/core";
+import { clubColoursOf, inkOn, DASH, PART_JOIN } from "@epl/core";
 import { PITCH_BOX, toBoxY } from "@/app/components/football/pitchBox";
 import { Pitch } from "@/app/components/football/ShotPitch";
 import type { Club } from "@epl/core";
@@ -75,7 +75,7 @@ function Side({
         <span className="min-w-0 truncate">{club?.shortName ?? DASH}</span>
         {/* A man with no touches is dropped, and the plate admits it: `10 of 11`. */}
         <span className="numeric shrink-0">
-          {men.length < named ? `${men.length} of ${named} · ` : ""}
+          {men.length < named ? `${men.length} of ${named}${PART_JOIN}` : ""}
           {shape ?? ""}
         </span>
       </div>

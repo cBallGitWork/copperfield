@@ -8,6 +8,7 @@ import {
   clubColoursOf,
   contributions,
   fullFootballerName,
+  PART_JOIN,
 } from "@epl/core";
 import { chipsFor } from "./chips";
 import { ROW_NAME } from "@/app/desk";
@@ -42,7 +43,7 @@ export default function MatchList({
     <div className="flex flex-col gap-2 border-t border-line bg-bg/40 px-3 py-2.5">
       <p className="truncate text-xs text-accent">
         <span className="font-semibold uppercase">Yours</span>
-        {yours.map((p) => ` · ${p.name}`).join("")}
+        {yours.map((p) => `${PART_JOIN}${p.name}`).join("")}
       </p>
       {fixture.status === "upcoming" ? null : lines === null || lines.statsUnavailable ? (
         // Said, or a scoreline with no scorers reads as nobody having done anything.

@@ -1,4 +1,4 @@
-import { YOUTUBE_EMBED_BASE } from "@epl/core";
+import { YOUTUBE_EMBED_BASE, PART_JOIN } from "@epl/core";
 import TabEmpty from "../../../../components/league/TabEmpty";
 import MatchShell from "../Shell";
 import { matchVideo, readMatch } from "../match";
@@ -47,7 +47,7 @@ export default async function MatchHighlightsPage({
                 />
               </div>
               {/* Their title, verbatim and credited: their cut and their words, pointed at, not republished. */}
-              <figcaption className={QUIET_NOTE}>{`${video.title} · Sky Sports Premier League`}</figcaption>
+              <figcaption className={QUIET_NOTE}>{`${video.title}${PART_JOIN}Sky Sports Premier League`}</figcaption>
             </figure>
           </section>
         )}

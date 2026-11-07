@@ -1,4 +1,4 @@
-import { benchText, lineupText, returnText, type Club, type StoryDraftMatchup, type StoryDraftReturn, type StoryDraftSide } from "@epl/core";
+import { benchText, lineupText, returnText, type Club, type StoryDraftMatchup, type StoryDraftReturn, type StoryDraftSide, PART_JOIN } from "@epl/core";
 import { derbyBetween } from "@/app/derbies";
 import Face from "./Face";
 import LineupText from "./LineupText";
@@ -27,7 +27,7 @@ function Tally({ label, sides, of }: { label: string; sides: StoryDraftSide[]; o
   return (
     <p className="text-2xs leading-snug text-muted">
       <span className={SMALL}>{label} </span>
-      {parts.join(" · ")}
+      {parts.join(PART_JOIN)}
     </p>
   );
 }
@@ -40,7 +40,7 @@ export default function DraftMatchup({ matchup, n, saturday, clubs }: { matchup:
       <header className={`flex flex-col gap-2 border-y py-3 ${RULE}`}>
         <p className={SMALL}>
           {saturday ? "After Saturday" : "Full time"}
-          {derby === null ? null : ` · ${derby.name}`}
+          {derby === null ? null : `${PART_JOIN}${derby.name}`}
         </p>
         <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
           {/* A long name wraps in its own column rather than pushing a 320px page sideways. */}

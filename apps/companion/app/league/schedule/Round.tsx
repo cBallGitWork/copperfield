@@ -1,4 +1,4 @@
-import { LEAGUE_COMPETITION, type CompetitionTie, groupTies } from "@epl/core";
+import { LEAGUE_COMPETITION, type CompetitionTie, groupTies, PART_JOIN } from "@epl/core";
 import RoundHeader from "./RoundHeader";
 import Tie from "./Tie";
 import type { ScheduleRound } from "./schedule";
@@ -35,7 +35,7 @@ export default function Round({
           {/* The league's own block is unheaded; a cup's round is named on a plate. */}
           {group.competition.id === LEAGUE_COMPETITION.id && group.round === null ? null : (
             <h3 className={BLOCK_PLATE}>
-              {group.round === null ? group.competition.name : `${group.competition.name} · ${group.round}`}
+              {group.round === null ? group.competition.name : `${group.competition.name}${PART_JOIN}${group.round}`}
             </h3>
           )}
           <ul className="cm-rows flex flex-col">

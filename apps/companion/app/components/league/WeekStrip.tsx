@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { DASH, venueMark, type PlannerView } from "@epl/core";
+import { DASH, venueMark, type PlannerView, PART_JOIN } from "@epl/core";
 import { GW_PLATE, MINOR_LABEL, QUIET_FIGURE, ROW_FIGURE } from "@/app/desk";
 import CardBlock from "./CardBlock";
 import { fixtureEase } from "../football/fixtureEase";
@@ -62,7 +62,7 @@ export default function WeekStrip({
             aside={
               atNext && caption ? (
                 <>
-                  {caption} · {minutesHead}
+                  {caption}{PART_JOIN}{minutesHead}
                 </>
               ) : (
                 minutesHead

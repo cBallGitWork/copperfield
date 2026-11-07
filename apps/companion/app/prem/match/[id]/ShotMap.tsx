@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
-import { DASH, fixed, type Shot } from "@epl/core";
+import { DASH, fixed, type Shot, PART_JOIN } from "@epl/core";
 import { PITCH_BOX, toBoxY } from "@/app/components/football/pitchBox";
 import { drawOrder } from "@/app/components/football/shotGeometry";
 import ShotMarks, { MarksKey } from "../../../components/football/ShotMarks";
@@ -153,7 +153,7 @@ export default function ShotMap({
                   className="cursor-pointer"
                   onClick={() => pick(at)}
                 >
-                  <title>{`${shot.minute ?? DASH}′ ${shot.name}${shot.assister === null ? "" : ` (A ${shot.assister})`} · ${OUTCOME[shot.outcome]}`}</title>
+                  <title>{`${shot.minute ?? DASH}′ ${shot.name}${shot.assister === null ? "" : ` (A ${shot.assister})`}${PART_JOIN}${OUTCOME[shot.outcome]}`}</title>
                 </circle>
               );
             })}

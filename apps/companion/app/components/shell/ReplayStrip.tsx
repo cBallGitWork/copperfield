@@ -1,5 +1,5 @@
 import { replayAt } from "../../clock";
-import { londonDayAndDate, londonTime } from "@epl/core";
+import { londonDayAndDate, londonTime, PART_JOIN } from "@epl/core";
 import { SMALL_CAPS } from "@/app/desk";
 
 /** Says what time the app is pretending it is whenever `REPLAY_AT` is set, and draws nothing otherwise.
@@ -15,7 +15,7 @@ export default function ReplayStrip() {
     >
       <span>Replay</span>
       <span className="numeric opacity-80">
-        {londonDayAndDate(at)} · {londonTime(at)}
+        {londonDayAndDate(at)}{PART_JOIN}{londonTime(at)}
       </span>
       <span className="opacity-60">not live</span>
     </div>

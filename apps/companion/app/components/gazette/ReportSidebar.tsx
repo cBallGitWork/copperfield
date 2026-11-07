@@ -1,6 +1,6 @@
 import Link from "@/app/components/shell/Link";
 import type { StoryLineup, StoryReport } from "@epl/core";
-import { DASH, fixed } from "@epl/core";
+import { DASH, fixed, PART_JOIN } from "@epl/core";
 import { STANDING_CAPS, STANDING_HEAD as HEAD } from "./heads";
 import LineupText from "./LineupText";
 import { RULE } from "./rules";
@@ -103,7 +103,7 @@ export default function ReportSidebar({ report, names, matchHref }: { report: St
           <p className="text-xs text-muted">
             {report.star.club}
             {report.star.holder == null ? "" : `, ${report.star.holder}`}
-            {report.star.did === "" ? "" : ` · ${report.star.did}`}
+            {report.star.did === "" ? "" : `${PART_JOIN}${report.star.did}`}
           </p>
         </Panel>
       )}

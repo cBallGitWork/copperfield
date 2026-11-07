@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Attribute } from "@epl/core";
-import { DASH } from "@epl/core";
+import { DASH, PART_JOIN } from "@epl/core";
 import Section from "../../components/shell/Section";
 import { READ_LINE, ROW_FIGURE } from "@/app/desk";
 
@@ -34,7 +34,7 @@ export default function AttributeGrid({
   const rows = { "--rows": Math.ceil(cells.length / 2), "--rows-lg": Math.ceil(cells.length / 3) } as CSSProperties;
 
   return (
-    <Section title="Attributes" aside={`${season === null ? "" : `${season.replace("-", "/")} · `}against ${keeper ? "keepers" : "outfielders"}`}>
+    <Section title="Attributes" aside={`${season === null ? "" : `${season.replace("-", "/")}${PART_JOIN}`}against ${keeper ? "keepers" : "outfielders"}`}>
       <dl
         className="grid auto-cols-fr grid-flow-col gap-x-4 [grid-template-rows:repeat(var(--rows),auto)] lg:gap-x-6 lg:[grid-template-rows:repeat(var(--rows-lg),auto)]"
         style={rows}

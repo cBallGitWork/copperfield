@@ -1,4 +1,4 @@
-import { byPositionDepth, type CategoryBand } from "@epl/core";
+import { byPositionDepth, type CategoryBand, PART_JOIN } from "@epl/core";
 import { leaguePositionLabel } from "../../positions";
 
 /** Each band's plate title by code: its name, and where two share one ("Goals conceded" in goal and on the pitch),
@@ -15,7 +15,7 @@ export function bandTitles(
         .filter((slot) => slot !== "")
         .sort(byPositionDepth);
       const by = slots.length === 0 ? band.code : slots.map(leaguePositionLabel).join("/");
-      return [band.code, `${band.name} · ${by}`];
+      return [band.code, `${band.name}${PART_JOIN}${by}`];
     }),
   );
 }

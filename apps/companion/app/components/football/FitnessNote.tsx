@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";
-import { type FootballPlayer, type GameweekStarts, fitnessNote } from "@epl/core";
+import { type FootballPlayer, type GameweekStarts, fitnessNote, PART_JOIN } from "@epl/core";
 import { QUIET_NOTE } from "../../desk";
 
 /** What the note needs of a man: small enough to cross into a client row. */
@@ -48,7 +48,7 @@ export default function FitnessNote({ player, className = "shrink-[99]" }: { pla
         note.word
       ) : (
         <>
-          {`${note.word} · `}
+          {`${note.word}${PART_JOIN}`}
           <span className="numeric">{note.back}</span>
         </>
       )}

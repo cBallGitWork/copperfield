@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { crestUrl, type PublishedStory, londonDayAndTime, venueMark } from "@epl/core";
+import { crestUrl, type PublishedStory, londonDayAndTime, venueMark, PART_JOIN } from "@epl/core";
 import { RULE } from "./rules";
 import { CAPTION, CAPTION_CAPS, SUBHEAD } from "./heads";
 import { yoursInk } from "../../mine";
@@ -40,7 +40,7 @@ export default function TeamNews({ story, myName = null }: { story: PublishedSto
               {/* Who they play, and when, off the fixture list: under the name, so neither wraps beside the other. */}
               {row.fixture === undefined ? null : (
                 <span className={CAPTION}>
-                  v {row.fixture.opponent} {venueMark(row.fixture.home)} · {londonDayAndTime(row.fixture.kickoff)}
+                  v {row.fixture.opponent} {venueMark(row.fixture.home)}{PART_JOIN}{londonDayAndTime(row.fixture.kickoff)}
                 </span>
               )}
             </span>
@@ -93,7 +93,7 @@ function StillOut({ men, myName }: { men: readonly { name: string; owner?: strin
       <span className={`${CAPTION_CAPS} pr-1.5 font-semibold text-ink`}>Still out</span>
       {men.map((man, at) => (
         <span key={man.name}>
-          {at > 0 ? " · " : null}
+          {at > 0 ? PART_JOIN : null}
           <span className={isMine(man.owner, myName) ? yoursInk(true) : undefined}>
             {man.name}
             {man.owner === undefined ? null : <> (<em>{man.owner}</em>)</>}
