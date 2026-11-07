@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Board: Squad at 390 (reskin proposal)</title>
+<style>
+@font-face { font-family: Oxanium; src: url(../../../apps/companion/app/fonts/oxanium/latin.woff2) format("woff2"); font-weight: 400 800; }
+@font-face { font-family: Jost; src: url(../../../apps/companion/app/fonts/jost/latin.woff2) format("woff2"); font-weight: 400 700; }
+@font-face { font-family: "Archivo Narrow"; src: url(../../../apps/companion/app/fonts/archivo-narrow/latin.woff2) format("woff2"); font-weight: 400 700; }
+:root {
+  /* Copied from apps/companion/app/tokens.css, 7 Nov 2026. */
+  --color-bg: oklch(0.190 0.045 265); --color-surface: oklch(0.245 0.012 80);
+  --color-ink: oklch(0.97 0.008 80); --color-muted: oklch(0.76 0.022 80); --color-faint: oklch(0.65 0.022 80);
+  --color-accent: oklch(0.88 0.16 95); --color-info: oklch(0.82 0.13 210);
+  --color-chrome: oklch(0.45 0.13 264); --color-index: oklch(0.40 0.16 266); --color-face: oklch(0.72 0.02 265);
+  --color-bad: oklch(0.66 0.17 25); --color-up: oklch(0.78 0.17 148); --color-mid: oklch(0.79 0.14 85);
+  --color-doubt-out: oklch(0.66 0.19 25); --color-doubt-major: oklch(0.72 0.17 55); --color-doubt-slight: oklch(0.79 0.14 85);
+  --color-ease-2: oklch(0.833 0.165 132.4); --color-ease-4: oklch(0.751 0.148 92); --color-ease-6: oklch(0.653 0.16 55.7);
+  --color-ease-8: oklch(0.534 0.178 31.6); --color-ease-1: oklch(0.87 0.19 150); --color-ease-9: oklch(0.467 0.161 27.3);
+  --color-cream: oklch(0.94 0.02 75);
+  /* PROPOSED, not yet tokens (Craig's calls): CM's indigo tab strip, and its purple block for the column a table is for. */
+  --color-tab: oklch(0.30 0.14 280);
+  --color-for: oklch(0.36 0.15 315);
+  --font-chrome: Oxanium, sans-serif; --font-sans: Jost, sans-serif; --font-display: "Archivo Narrow", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 1440px; min-height: 900px; font-family: var(--font-sans); color: var(--color-ink); background: var(--color-bg); }
+.ground { position: fixed; inset: 0; background: url(../../../apps/companion/public/ground/venues/wing-eating.jpg) center / cover; filter: brightness(0.55); z-index: -1; }
+.desk { display: grid; grid-template-columns: 130px 1fr; width: 1200px; min-height: 900px; margin: 0 auto; box-shadow: 0 0 0 2px black; }
+
+/* The rail: CM's sidebar, top to bottom (cm9900/24.jpg, 12.jpg). */
+.rail { background: oklch(0.16 0.05 265); border-right: 2px solid black; display: flex; flex-direction: column; gap: 4px; padding: 4px; font-family: var(--font-chrome); }
+.rail > * { text-align: center; }
+.rail a, .rail .continue, .rail .manager, .rail .date { --face: oklch(0.24 0.08 266); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 60%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); }
+.rail .date { --face: var(--color-index); color: var(--color-accent); padding: 8px 4px; font-weight: 700; font-size: 14px; line-height: 18px; }
+.arrows { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.arrows span { --face: var(--color-chrome); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); padding: 6px 0; color: var(--color-ink); font-size: 14px; }
+.continue { padding: 12px 6px; font-size: 15px; font-weight: 600; }
+.manager { padding: 10px 6px; color: var(--color-accent); font-size: 15px; font-weight: 600; }
+.rail a { display: block; padding: 14px 6px; font-size: 15px; font-weight: 600; color: var(--color-ink); text-decoration: none; }
+.rail a[aria-current] { color: var(--color-accent); border-color: var(--color-accent); }
+
+.main { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.bevel { border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); }
+.titlebar { --face: var(--color-chrome); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 96px; display: grid; place-items: center; font-family: var(--font-chrome); font-weight: 700; font-size: 45px;
+  text-shadow: 0.06em 0.06em 0.07em rgb(0 0 0 / 0.45); }
+.tabs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
+.tab { --face: var(--color-tab); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 56px; display: grid; place-items: center; font-family: var(--font-chrome); font-weight: 600; font-size: 16px; }
+.tab[aria-current] { color: var(--color-accent); border-color: var(--color-accent); }
+.panel { background: color-mix(in srgb, var(--color-surface) 80%, transparent); border: 2px solid oklch(0.12 0.01 80); }
+.caption { margin: 0 0 6px; background: oklch(0.40 0.03 265 / 0.55); text-align: center; color: var(--color-accent); font-family: var(--font-chrome); font-weight: 600; font-size: 21px; padding: 8px 0; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th { height: 24px; padding: 0 1px; }
+th span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  display: block; height: 22px; line-height: 18px; color: var(--color-bg); font-family: var(--font-chrome); font-size: 13px; font-weight: 600; text-align: center; }
+th span.sorted { border-color: var(--dark) var(--light) var(--light) var(--dark); }
+td { height: 28px; border-bottom: 1px solid var(--color-bg); font-size: 16px; }
+td.fig { font-family: var(--font-display); font-variant-numeric: tabular-nums; text-align: center; font-size: 16px; }
+td.name { padding-left: 10px; font-weight: 600; font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mine td { background: oklch(0.255 0.012 80); }
+.mine td.name { color: var(--color-accent); box-shadow: inset 4px 0 0 var(--color-accent); }
+.you { display: inline-block; margin-left: 10px; padding: 0 6px; background: var(--color-bg); color: var(--color-accent); font-family: var(--font-chrome); font-size: 12px; line-height: 18px; vertical-align: 2px; }
+tr.cut td { height: 20px; border-bottom: 0; padding: 0; }
+tr.cut td div { border-top: 2px dashed oklch(0.530 0.207 22); display: flex; justify-content: flex-end; }
+tr.cut td span { margin-top: -10px; padding: 0 8px; background: oklch(0.245 0.012 80); color: oklch(0.72 0.15 22); font-size: 14px; line-height: 18px; }
+td.cm-index { width: 64px; text-align: center; font-family: var(--font-chrome); font-weight: 800; font-size: 15px; }
+.cm-index { background-color: var(--cm-index-face, var(--color-index));
+  background-image: linear-gradient(180deg, color-mix(in oklab, white 22%, var(--cm-index-face, var(--color-index))), var(--cm-index-face, var(--color-index)) 55%, color-mix(in oklab, black 45%, var(--cm-index-face, var(--color-index))));
+  background-attachment: fixed; text-shadow: 0.04em 0.05em 0.05em rgb(0 0 0 / 0.55); box-shadow: inset -1px 0 0 var(--color-bg); }
+td.for { width: 72px; padding: 0 0 0 2px; }
+td.for b { display: block; background: var(--color-for); font-family: var(--font-display); font-variant-numeric: tabular-nums; text-align: center; font-size: 17px; line-height: 27px; color: var(--color-ink); }
+tr.greyed td.for b { background: color-mix(in oklch, var(--color-for), oklch(0.245 0.012 80) 55%); color: var(--color-muted); }
+tr.greyed td.opp { filter: saturate(0.45) brightness(0.8); }
+.up { color: var(--color-up); } .bad { color: var(--color-bad); } .quiet { color: var(--color-muted); } .info { color: var(--color-info); }
+.form span { display: inline-block; width: 18px; font-weight: 700; }
+.foot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: auto; }
+.foot span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 48px; display: grid; place-items: center; color: var(--color-bg); font-family: var(--font-chrome); font-weight: 700; font-size: 20px; }
+.foot { grid-template-columns: 1fr 1fr; gap: 4px; }
+.foot span.off { color: color-mix(in oklch, var(--color-face), black 30%); }
+
+body { width: 390px; min-height: 844px; }
+.phone { display: flex; flex-direction: column; min-height: 844px; padding: 0 0 calc(56px + 34px); }
+.status { height: 47px; }
+.lock { --face: var(--color-index); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 60%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); margin: 0 6px 6px; padding: 6px 10px; display: flex; justify-content: space-between;
+  font-family: var(--font-chrome); font-weight: 600; font-size: 14px; color: var(--color-ink); }
+.lock b { color: var(--color-accent); font-weight: 700; }
+.titlebar { min-height: 56px; font-size: 24px; margin: 0 6px; }
+.tabs { margin: 6px 6px 0; }
+.tab { min-height: 44px; font-size: 13px; padding: 0 2px; }
+.panel { margin: 6px 6px 0; background: color-mix(in srgb, var(--color-surface) 80%, transparent); }
+.caption { font-size: 16px; padding: 4px 0; margin: 0 0 4px; border: 0; background: oklch(0.40 0.03 265 / 0.55); }
+th span { font-size: 11px; height: 20px; line-height: 16px; }
+td { height: 44px; } td.name { font-size: 15px; padding-left: 8px; } td.fig { font-size: 15px; }
+td.cm-index { font-size: 13px; }
+td.for b { line-height: 43px; font-size: 16px; }
+/* The thumb rail: the desk rail laid along the foot, a glyph over each word (DESIGN §2). */
+.thumb { position: fixed; left: 0; right: 0; bottom: 0; height: calc(56px + 34px); padding-bottom: 34px; background: var(--color-bg);
+  border-top: 1px solid black; display: grid; grid-template-columns: repeat(6, 1fr); font-family: var(--font-chrome); }
+.thumb a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--color-ink); text-decoration: none; font-size: 12px; font-weight: 600; }
+.thumb a[aria-current] { color: var(--color-accent); box-shadow: inset 0 3px 0 var(--color-accent); }
+.thumb svg { width: 24px; height: 24px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.squad { --cm-index-face: var(--color-index); }
+td { height: 36px; } td.for b { line-height: 35px; font-size: 15px; }
+td.name { padding-left: 6px; font-size: 14px; overflow: hidden; }
+td.name .who { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+td.name svg { flex: none; margin-left: 2px; }
+td.name .note { display: block; font-weight: 400; font-size: 11px; line-height: 13px; color: var(--color-muted); }
+td.name .note b { font-weight: 400; color: var(--color-faint); margin-left: 4px; }
+img.crest { width: 18px; height: 18px; flex: none; }
+.order { width: 10px; color: var(--color-muted); font-family: var(--font-display); font-weight: 400; }
+td.opp { text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 13px; border-left: 1px solid var(--color-bg); }
+td.opp b { margin-left: 2px; }
+tr.greyed td.name { color: var(--color-muted); }
+tr.greyed td.for b { background: color-mix(in oklch, var(--color-for), oklch(0.245 0.012 80) 55%); color: var(--color-muted); }
+tr.greyed td.opp { filter: saturate(0.45) brightness(0.8); }
+tr.plate td { height: 26px; padding: 4px 0 2px; }
+tr.plate span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  display: inline-block; padding: 0 12px; color: var(--color-bg); font-family: var(--font-chrome); font-weight: 600; font-size: 12px; line-height: 16px; }
+.asof { padding: 6px 8px 8px; font-size: 11px; }
+.tabs { grid-template-columns: repeat(5, 1fr); }
+.tabs .tab { font-size: 12px; }
+
+</style></head><body><div class="ground"></div><div class="phone"><div class="status"></div><div class="lock" role="status"><span>GW11</span><span>locks <b>11:00</b></span></div>
+<nav class="tabs" aria-label="The Raccoons"><span class="tab bevel" aria-current="page">Squad</span><span class="tab bevel">Transfers</span><span class="tab bevel">Next</span><span class="tab bevel">Fixtures</span><span class="tab bevel">Stats</span></nav>
+<section class="panel squad"><table>
+<colgroup><col style="width:34px"><col><col style="width:66px"><col style="width:40px"><col style="width:46px"></colgroup>
+<thead><tr><th><span class="sr-only">Pos</span></th><th><span class="sr-only">Player</span></th><th><span class="bevel">Opp</span></th><th><span class="bevel">xMins</span></th><th><span class="bevel sorted">FPts</span></th></tr></thead><tbody><tr><td class="cm-index pos">GK</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t3.png" alt="">D. Raya</span></td><td class="opp" title="BOU (h), difficulty 2 of 10" style="background:var(--color-ease-2);color:#08090b">BOU (h)</td><td class="fig info">90</td><td class="for"><b>58.5</b></td></tr><tr><td class="cm-index pos">D</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t14.png" alt="">V. van Dijk</span></td><td class="opp" title="AVL (a), difficulty 6 of 10" style="background:var(--color-ease-6);color:var(--color-cream)">AVL (a)</td><td class="fig info">90</td><td class="for"><b>71.0</b></td></tr><tr style="background:oklch(0.79 0.14 85 / 0.16)"><td class="cm-index pos">D</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t3.png" alt="">G. Magalhães<svg width="14" height="14" viewBox="0 0 16 16" role="img" aria-label="Doubt"><path d="M6 1h4v5h5v4h-5v5H6v-5H1V6h5z" fill="var(--color-doubt-slight)"/></svg></span><span class="note">Knock</span></td><td class="opp" title="BOU (h), difficulty 2 of 10" style="background:var(--color-ease-2);color:#08090b">BOU (h)</td><td class="fig info">62</td><td class="for"><b>64.5</b></td></tr><tr><td class="cm-index pos">D</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t8.png" alt="">M. Cucurella</span></td><td class="opp" title="WOL (h), difficulty 1 of 10" style="background:var(--color-ease-1);color:#08090b">WOL (h)</td><td class="fig info">85</td><td class="for"><b>55.0</b></td></tr><tr><td class="cm-index pos">M</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t43.png" alt="">P. Foden</span></td><td class="opp" title="FUL (h), difficulty 2 of 10" style="background:var(--color-ease-2);color:#08090b">FUL (h)</td><td class="fig info">80</td><td class="for"><b>62.0</b></td></tr><tr style="background:oklch(0.72 0.17 55 / 0.16)"><td class="cm-index pos">M</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t8.png" alt="">C. Palmer<svg width="14" height="14" viewBox="0 0 16 16" role="img" aria-label="Doubt"><path d="M6 1h4v5h5v4h-5v5H6v-5H1V6h5z" fill="var(--color-doubt-major)"/></svg></span><span class="note">Groin <b>GW12</b></span></td><td class="opp" title="WOL (h), difficulty 1 of 10" style="background:var(--color-ease-1);color:#08090b">WOL (h)</td><td class="fig bad">35</td><td class="for"><b>77.5</b></td></tr><tr><td class="cm-index pos">M</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t36.png" alt="">K. Mitoma</span></td><td class="opp" title="CRY (a), difficulty 4 of 10" style="background:var(--color-ease-4);color:#08090b">CRY (a)</td><td class="fig info">74</td><td class="for"><b>49.0</b></td></tr><tr><td class="cm-index pos">M</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t17.png" alt="">M. Gibbs-White</span></td><td class="opp" title="SUN (h), difficulty 2 of 10" style="background:var(--color-ease-2);color:#08090b">SUN (h)</td><td class="fig info">84</td><td class="for"><b>52.5</b></td></tr><tr><td class="cm-index pos">F</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t4.png" alt="">A. Isak</span></td><td class="opp" title="MUN (a), difficulty 8 of 10" style="background:var(--color-ease-8);color:var(--color-cream)">MUN (a)</td><td class="fig info">82</td><td class="for"><b>68.0</b></td></tr><tr style="background:oklch(0.66 0.19 25 / 0.16)"><td class="cm-index pos">F</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t94.png" alt="">I. Thiago<svg width="10" height="14" viewBox="0 0 12 16" role="img" aria-label="Suspended"><rect x="1" y="1" width="10" height="14" fill="var(--color-doubt-out)"/></svg></span><span class="note">Suspended <b>GW12</b></span></td><td class="opp" title="LEE (a), difficulty 4 of 10" style="background:var(--color-ease-4);color:#08090b">LEE (a)</td><td class="fig bad">0</td><td class="for"><b>44.0</b></td></tr><tr><td class="cm-index pos">F</td><td class="name"><span class="who"><img class="crest" src="../../../apps/companion/public/crests/t7.png" alt="">O. Watkins</span></td><td class="opp" title="LIV (h), difficulty 9 of 10" style="background:var(--color-ease-9);color:var(--color-cream)">LIV (h)</td><td class="fig info">86</td><td class="for"><b>59.5</b></td></tr><tr class="plate"><td colspan="5"><span class="bevel">Bench</span></td></tr><tr class="greyed"><td class="cm-index pos">GK</td><td class="name"><span class="who"><span class="order">1</span><img class="crest" src="../../../apps/companion/public/crests/t11.png" alt="">J. Pickford</span></td><td class="opp" title="TOT (a), difficulty 6 of 10" style="background:var(--color-ease-6);color:var(--color-cream)">TOT (a)</td><td class="fig quiet">0</td><td class="for"><b>48.0</b></td></tr><tr class="greyed"><td class="cm-index pos">D</td><td class="name"><span class="who"><span class="order">2</span><img class="crest" src="../../../apps/companion/public/crests/t31.png" alt="">M. Guéhi</span></td><td class="opp" title="BHA (h), difficulty 4 of 10" style="background:var(--color-ease-4);color:#08090b">BHA (h)</td><td class="fig quiet">88</td><td class="for"><b>46.5</b></td></tr><tr class="greyed"><td class="cm-index pos">M</td><td class="name"><span class="who"><span class="order">3</span><img class="crest" src="../../../apps/companion/public/crests/t54.png" alt="">A. Iwobi</span></td><td class="opp" title="MCI (a), difficulty 9 of 10" style="background:var(--color-ease-9);color:var(--color-cream)">MCI (a)</td><td class="fig quiet">71</td><td class="for"><b>33.0</b></td></tr></tbody></table>
+<p class="asof quiet">xMins as of Thu 5 Nov</p></section></div><nav class="thumb" aria-label="Sections"><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Read</span></a><a href="#" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3l-5 3 2 4 2-1v12h10V9l2 1 2-4-5-3c-1 2-2 3-4 3s-3-1-4-3z" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Team</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M8 8a5.5 5.5 0 000 8M16 8a5.5 5.5 0 010 8M5 5a9.5 9.5 0 000 14M19 5a9.5 9.5 0 010 14" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Live</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 01-10 0z M12 14v4 M8 20h8 M7 6H4v2a3 3 0 003 3 M17 6h3v2a3 3 0 01-3 3" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Draft</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7l4 3-1.5 5h-5L8 10z" fill="currentColor"/></svg><span>Prem</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10 M10 20V4 M16 20v-7 M22 20H2" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Data</span></a></nav></body></html>

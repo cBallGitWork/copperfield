@@ -2,7 +2,7 @@
 
 **Contents:** 1. Two registers · 2. The Desk is Championship Manager 99/00 · 3. The Desk's palette ·
 4. The Paper · 5. Colour plates · 6. Type · 7. Grammar that outranks the look · 8. Deferred,
-deliberately · 9. Decided at sign-off, 29 Aug 2026
+deliberately · 9. Decided at sign-off, 29 Aug 2026 · 10. Never: the tells
 
 The visual contract. `docs/rules/CODE_RULES.md` and `docs/rules/PRODUCT.md` still override this file;
 `docs/ui/` still describes what each page *is*. This says what the app **looks
@@ -1204,3 +1204,29 @@ the drawing, at every rank a picture prints (the splash band, a shoulder, a
 brief's thumbnail) and, on his article, as a banner the way the BBC ran his: his
 name and billing on a raised band, a square crop of the same photograph on the right. It is a real photograph of a real man,
 so it is only ever the one we hold a licence for.
+
+## 10. Never: the tells
+
+Ported from draft-platform's `docs/design/plate.md` with its design pipeline (Craig, 7 Nov 2026: *"apply the
+same to the epl draft"*), and read against CM 99/00, which has none of them: every one is a modern web habit the
+game predates. A screen, a board or a component that shows one is a finding before anything else is.
+`tools/ui/designlint.mjs` fails what a script can see (marked †); the `/design` skill's review panel looks for the
+rest. `.claude/rules/register-palette.md` carries a copy, so change both together.
+
+1. **Rows of stat tiles, a card for every section, small tracked capitals over big numbers.** A desk figure sits
+   in a table's column or beside a name, under a column head; small capitals are the paper's furniture (§6),
+   never the desk's (†).
+2. **Pills, rounded corners and tinted badges.** Radius is 0. A chip, where one is needed, is a square solid block
+   as CM's `Inj` and `Fut` are (`cm9900/12.jpg`); a crest keeps its own shape (†).
+3. **Gradient buttons, frosted glass, soft drop shadows, glow.** Depth is the 2px bevel (§2) and nothing else; the
+   only gradients are the index ramp and the ground's darkening (†).
+4. **`·` strings, ★ typed as text, floating rows, one 16px gutter round everything.** Two facts are two cells or a
+   rule between them; a row meets its panel's edge, as the index spine does (§2) (†).
+5. **Telling a manager what he knows.** A state is a word or a mark (`Live`, `Provisional`), never a sentence; an
+   empty state is a title and at most one short line (§7). Our own mechanics, DefCon's threshold or what a
+   clearance pays, are explained where a manager meets them.
+6. **Keys and legends.** The colours and the heads carry it; the words stay for a screen reader (†).
+7. **A source named on the screen** (§7), save a control that leaves the app with its `↗` (†).
+8. **A landing page's furniture on the desk.** No hero band, no centred marketing line, no empty space spent as
+   decoration: a desk screen opens on its table, its first row above the fold at 1440, as CM's do.
+
