@@ -9,8 +9,14 @@ clear-cut findings are fixed below. The rest are Craig's calls.
 
 | Board | Route | CM shots it borrows |
 |---|---|---|
-| [`LeagueTable.html`](LeagueTable.html), [`1440`](LeagueTable-1440.png) | `/league` | `cm9900/24.jpg` (the table, the caption plate, the Pts block) |
-| [`Squad.html`](Squad.html), [`1440`](Squad-1440.png) | `/squad/me` | `cm9900/12.jpg` (the Inf column, the value block), `25.jpg` (the team's tabs) |
+| [`LeagueTable.html`](LeagueTable.html), [`1440`](LeagueTable-1440.png); [`390`](LeagueTable-390.png) | `/league` | `cm9900/24.jpg` (the table, the caption plate, the Pts block) |
+| [`Squad.html`](Squad.html), [`1440`](Squad-1440.png); [`390`](Squad-390.png) | `/squad/me` | `cm9900/12.jpg` (the Inf column, the value block), `25.jpg` (the team's tabs) |
+
+**The phone** (Craig, 7 Nov 2026: *"make sure mobile is looking good"*). Both boards at 390 by DESIGN §2's phone
+rules: the rail along the foot with Live in it, 44px tabs, a strip's labels on their short word (`Stats`) so none
+wraps, the table ending on `Pts` with short names and `Ag`/`Form` standing down, 44px rows where a row is tapped,
+your own team's bar off the phone so the list has the room, the squad's complaint and return under the name, and the
+opponent with his rank in 66px. Neither scrolls sideways; both lint clean.
 
 ## What the reskin changes
 
@@ -37,23 +43,22 @@ clear-cut findings are fixed below. The rest are Craig's calls.
   doubt wash and FPL's expected day restored; a reserve's figures dimmed with his name; the date in ink, the
   arrows raised.
 
-## Craig's calls
+## Decided (Craig, 7 Nov 2026: *"Your call"*)
 
-1. **Purple for the column a table is for (E)?** It reverses *"put fpts in cyan too"* (21 Oct 2026) and reaches
-   every FPts list. Options: purple everywhere; purple for Pts only, FPts stays cyan; or keep cyan. Recommended:
-   purple everywhere, as CM's value block is one object.
-2. **Indigo tabs (C)?** Amends DESIGN §2's "royal-blue plates". Recommended: yes.
-3. **Full width (B)?** The desk only; the paper keeps its frame. Recommended: yes, with the name column capped as
-   drawn.
-4. **What `◄ ►` steps.** A desk-wide gameweek (new state), only on screens that have one, or drop it.
-   Recommended: only where a screen has a gameweek; a label elsewhere.
-5. **The opponent's difficulty.** Five full colours as drawn, the rank printed beside the code, or one hue in
-   steps. Recommended: print the rank, as the planner does.
-6. **A black team.** The Raccoons' colour makes a black bar and a black spine that vanish on the ground.
-   Recommended: a team whose colour is near black takes its second colour for the spine.
-7. **A banned man's xMins**: `0` as drawn, or `—`. Recommended: `0`; it is a known figure, not an absence.
-8. **The empty foot.** Both boards leave the ground showing under the panel, as `cm9900/09.jpg` does. A CM foot
-   row of related screens over `Back`/`Next` would fill it; the docs don't name one, so it isn't drawn.
+Craig handed the calls back; these are the recommendations, now drawn on the boards. A build PR lands each with its
+token and DESIGN rows; nothing in the app changes until then.
+
+1. **Purple for the column a table is for, everywhere** (`--color-for`): Pts, FPts, Proj and GW. It replaces FPts'
+   cyan (21 Oct 2026); DESIGN §3's cyan row loses the league's points, and the purple row takes them.
+2. **The indigo tab strip** (`--color-tab`); DESIGN §2's "royal-blue plates" becomes indigo under a royal-blue bar.
+3. **The desk fills 1440**; the paper keeps its frame, and the name column is capped (360px on a table, 300 on a
+   squad) so the figures stay near the names.
+4. **`◄ ►` only where a screen has a gameweek**: the Squad's rail has them, the season table's doesn't.
+5. **The opponent's rank is printed** beside his code, so colour never carries difficulty alone.
+6. **A near-black team takes its second colour** for the bar and the index spine: The Raccoons' bar is white with
+   black ink, CM's own competition plate (`cm9900/24.jpg`).
+7. **A banned man's xMins stays `0`**: a known figure, not an absence.
+8. **No foot row**: the docs name none, so the ground shows under the panel, as `cm9900/09.jpg` does.
 
 ## Doc drift the panel found
 
