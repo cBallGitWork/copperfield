@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 10,
-    "exportedAt": "2026-11-06T21:02:12.424Z",
+    "exportedAt": "2026-11-07T01:08:14.484Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-06T21:02:12.424Z",
+  "fetchedAt": "2026-11-07T01:08:14.484Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "EVE": {
@@ -77,7 +77,7 @@
       "absent": [
         {
           "code": 114283,
-          "status": "OUT"
+          "status": "QUES"
         }
       ]
     },
@@ -139,27 +139,27 @@
       "lineup": "confirmed",
       "absent": [
         {
-          "code": 539142,
-          "status": "OUT"
-        },
-        {
           "code": 439668,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 428580,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 461102,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 220583,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 176412,
+          "status": "QUES"
+        },
+        {
+          "code": 539142,
           "status": "OUT"
         }
       ]
@@ -179,15 +179,15 @@
           "prob": 0.9
         },
         {
-          "code": 220627,
-          "prob": 0.9
-        },
-        {
           "code": 173774,
           "prob": 0.9
         },
         {
           "code": 522047,
+          "prob": 0.9
+        },
+        {
+          "code": 220627,
           "prob": 0.9
         },
         {
@@ -557,7 +557,7 @@
           "prob": 0.9
         },
         {
-          "code": 108416,
+          "code": 606930,
           "prob": 0.9
         },
         {
@@ -565,7 +565,7 @@
           "prob": 0.9
         },
         {
-          "code": 606930,
+          "code": 108416,
           "prob": 0.9
         },
         {
@@ -577,11 +577,11 @@
           "prob": 0.9
         },
         {
-          "code": 243413,
+          "code": 490094,
           "prob": 0.9
         },
         {
-          "code": 490094,
+          "code": 243413,
           "prob": 0.9
         },
         {
@@ -715,11 +715,11 @@
           "prob": 0.9
         },
         {
-          "code": 578153,
+          "code": 171314,
           "prob": 0.9
         },
         {
-          "code": 171314,
+          "code": 578153,
           "prob": 0.9
         },
         {
@@ -869,11 +869,11 @@
           "prob": 0.9
         },
         {
-          "code": 56979,
+          "code": 514356,
           "prob": 0.9
         },
         {
-          "code": 514356,
+          "code": 56979,
           "prob": 0.9
         },
         {
@@ -900,16 +900,16 @@
           "status": "QUES"
         },
         {
+          "code": 622758,
+          "status": "QUES"
+        },
+        {
           "code": 486672,
           "status": "QUES"
         },
         {
           "code": 593117,
           "status": "QUES"
-        },
-        {
-          "code": 622758,
-          "status": "OUT"
         },
         {
           "code": 463936,
@@ -964,11 +964,11 @@
           "prob": 0.9
         },
         {
-          "code": 216055,
+          "code": 218543,
           "prob": 0.9
         },
         {
-          "code": 218543,
+          "code": 216055,
           "prob": 0.9
         },
         {
@@ -1181,11 +1181,11 @@
           "prob": 0.9
         },
         {
-          "code": 591386,
+          "code": 243016,
           "prob": 0.9
         },
         {
-          "code": 243016,
+          "code": 591386,
           "prob": 0.9
         },
         {
@@ -1335,11 +1335,11 @@
           "prob": 0.9
         },
         {
-          "code": 606745,
+          "code": 95658,
           "prob": 0.9
         },
         {
-          "code": 95658,
+          "code": 606745,
           "prob": 0.9
         },
         {
@@ -1438,11 +1438,11 @@
           "prob": 0.9
         },
         {
-          "code": 119090,
+          "code": 226944,
           "prob": 0.9
         },
         {
-          "code": 226944,
+          "code": 119090,
           "prob": 0.9
         },
         {
