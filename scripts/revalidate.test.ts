@@ -56,12 +56,19 @@ describe("every route segment's revalidate", () => {
 });
 
 /** Read as text: importing `next.config.ts` would bring Next's own `ProcessEnv` typing into every script. */
-const STALE = /staleTimes: \{ dynamic: (\d+) \}/;
+const STALE = /staleTimes: \{ dynamic: (\d+), static: (\d+) \}/;
 
 describe("the router's own cache", () => {
   it("keeps a visited page on the phone as long as the server keeps it", () => {
     const config = readFileSync(join(APP, "..", "next.config.ts"), "utf8");
     // A regex that stops matching reads NaN, which fails rather than passing on nothing.
     expect(Number(STALE.exec(config)?.[1])).toBe(PAGE_REVALIDATE);
+  });
+
+  // `AutoRefresh` warms the rail's tabs with a full `router.prefetch`, which Next keeps for `static` (5 min unset), and a
+  // fresh entry is never fetched again: a tap on Live drew a render up to five minutes old (Craig, 7 Nov 2026).
+  it("keeps a tab fetched ahead no longer than a visited page", () => {
+    const config = readFileSync(join(APP, "..", "next.config.ts"), "utf8");
+    expect(Number(STALE.exec(config)?.[2])).toBe(PAGE_REVALIDATE);
   });
 });

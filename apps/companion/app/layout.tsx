@@ -57,7 +57,7 @@ export const viewport: Viewport = {
 async function Poller({ matchday }: { matchday: boolean }) {
   const [live, asked] = await Promise.all([liveIn().catch(() => null), headers()]);
   const ahead = aheadFor(sectionsFor(matchday), asked.get("host"), process.env.VERCEL_URL);
-  return <AutoRefresh liveIn={live} ahead={ahead} />;
+  return <AutoRefresh liveIn={live} liveOffered={matchday} ahead={ahead} />;
 }
 
 /** The desk's ground, over the reader's own team's once signed in (Craig, 8 Oct 2026), Anfield's crowd before. The

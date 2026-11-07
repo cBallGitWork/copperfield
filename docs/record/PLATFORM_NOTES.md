@@ -1449,6 +1449,16 @@ Read against the installed Next 16.2.7 source. Standing rules for anything that 
   deployment ask, a ~0.2s render and the slowest live read's 0.5s fit well inside
   it. One more ~50 KB request per open; nothing more on the 30s tick. Its clock is
   `Date.now()`, since `performance.now()` stops while a phone sleeps.
+- **And while Live is offered, between windows too** (7 Nov 2026; Craig: *"Live tab still buggy, shows outdated info
+  on opening"*). A gameweek runs Saturday to Monday and its windows close between match days, where an open drew the
+  reads from before the reader left (Fantrax's totals from before the evening's settlement) until the 300s idle tick.
+  `settleAfter` now asks again whenever the shell offers Live (`liveOffered`, the layout's `offerLive`). One more
+  request per open on a gameweek's quiet hours.
+- **A tab fetched ahead is held 30s, not five minutes** (7 Nov 2026). `AutoRefresh` warms the rail's tabs with a full
+  `router.prefetch`, which Next keeps for `staleTimes.static`, 300s unset (`build/define-env.js`), and a fresh entry
+  is never fetched again: every warm after the first was a no-op, so a tap on Live drew a render up to five minutes
+  old. The two paragraphs above saying a tap draws a reading 5s newer were true only of the first warm. `static: 30`
+  matches `dynamic` and the server's revalidate; `scripts/revalidate.test.ts` holds both.
 - **A nested `unstable_cache` bypasses its own cache**
   (`unstable-cache.js:144`, "when we are nested inside of other unstable_cache's
   we should bypass cache"). `readLeague` read `footballNow` inside itself, so
