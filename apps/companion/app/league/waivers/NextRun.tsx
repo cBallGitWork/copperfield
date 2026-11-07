@@ -1,6 +1,6 @@
 "use client";
 
-import { londonDayAndTime, londonMoment, nextRun, timeLeft } from "@epl/core";
+import { londonDayAndTime, londonMoment, nextRun, timeLeft, PART_JOIN } from "@epl/core";
 import { LABEL } from "../../desk";
 import { runsAfter } from "./banner";
 import { useMinute } from "./useMinute";
@@ -20,7 +20,7 @@ export default function NextRun({ runs, now }: { runs: readonly string[]; now: s
         <span>{londonMoment(next.at)}</span>
         <span className="numeric text-accent">in {timeLeft(next.left)}</span>
       </p>
-      {after.length === 0 ? null : <p className="text-sm text-muted">Then {after.map(londonDayAndTime).join(" · ")}</p>}
+      {after.length === 0 ? null : <p className="text-sm text-muted">Then {after.map(londonDayAndTime).join(PART_JOIN)}</p>}
     </div>
   );
 }

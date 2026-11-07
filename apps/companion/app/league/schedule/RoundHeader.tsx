@@ -1,7 +1,7 @@
 import type { ScheduleRound } from "./schedule";
 import RoundHead, { type RoundStep } from "../../components/shell/RoundHead";
 import LiveMark from "../../components/shell/LiveMark";
-import { londonDayAndDate, londonTime } from "@epl/core";
+import { londonDayAndDate, londonTime, PART_JOIN } from "@epl/core";
 
 // A round's line (`RoundHead`): which gameweek, when lineups lock until it starts, and where the football is. With no roster
 // period it gives the first kickoff and says so: a kickoff is not a deadline.
@@ -21,7 +21,7 @@ export default function RoundHeader({ round, step }: { round: ScheduleRound; ste
             ) : (
               <span className="numeric font-normal normal-case">
                 {" "}
-                {londonDayAndDate(at)} · {londonTime(at)}
+                {londonDayAndDate(at)}{PART_JOIN}{londonTime(at)}
               </span>
             )}
           </span>

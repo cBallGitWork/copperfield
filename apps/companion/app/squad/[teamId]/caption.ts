@@ -1,4 +1,4 @@
-import { DASH, type SquadDetailLine } from "@epl/core";
+import { DASH, type SquadDetailLine, PART_JOIN } from "@epl/core";
 
 // The line over a read-only eleven on the grass.
 
@@ -8,5 +8,5 @@ export function sheetCaption(rows: readonly SquadDetailLine[], gameweek: number 
   const scores = rows.flatMap((line) => line.players.flatMap((p) => (typeof p.points === "number" ? [p.points] : [])));
   // To the hundredth, so a fractional scoring rule cannot print floating-point dust.
   const total = Math.round(scores.reduce((sum, points) => sum + points, 0) * 100) / 100;
-  return `Gameweek ${gameweek} · ${scores.length === 0 ? DASH : total}`;
+  return `Gameweek ${gameweek}${PART_JOIN}${scores.length === 0 ? DASH : total}`;
 }

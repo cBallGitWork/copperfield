@@ -5,6 +5,7 @@ import {
   londonDayAndDate,
   londonMoment,
   ordinal,
+  PART_JOIN,
 } from "@epl/core";
 import TabEmpty from "../../../components/league/TabEmpty";
 import ButtonLink from "../../../components/shell/ButtonLink";
@@ -60,7 +61,7 @@ export default async function ClubSquadPage({
     next === undefined
       ? null
       : `v ${next.club.shortName}` +
-        (next.fixture.kickoff === null ? "" : ` · ${londonDayAndDate(next.fixture.kickoff)}`);
+        (next.fixture.kickoff === null ? "" : `${PART_JOIN}${londonDayAndDate(next.fixture.kickoff)}`);
 
   // xMins for the club's next match week, not the round in view.
   const gameweek = next?.fixture.gameweek ?? null;

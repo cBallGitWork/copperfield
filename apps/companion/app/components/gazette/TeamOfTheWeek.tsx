@@ -1,4 +1,4 @@
-import { DASH, type Pick, type TeamOfTheWeek as Eleven } from "@epl/core";
+import { DASH, type Pick, type TeamOfTheWeek as Eleven, PART_JOIN } from "@epl/core";
 import Column from "./Column";
 import { STANDING_CAPS } from "./heads";
 
@@ -52,7 +52,7 @@ function Man({ pick, mine, fielded }: { pick: Pick; mine: boolean; fielded: bool
             {pick.playerName}
           </span>{" "}
           <span className="text-faint">
-            {!fielded || pick.started ? pick.ownerName : `${pick.ownerName} · benched`}
+            {!fielded || pick.started ? pick.ownerName : `${pick.ownerName}${PART_JOIN}benched`}
           </span>
         </span>
         <span className="numeric shrink-0 font-semibold text-ink">{pick.points ?? DASH}</span>

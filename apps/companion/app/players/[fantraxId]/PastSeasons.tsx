@@ -2,7 +2,7 @@ import type { Club, PastSeason } from "@epl/core";
 import Section from "../../components/shell/Section";
 import Board from "../../components/league/Board";
 import { ROW_NAME } from "@/app/desk";
-import { seasonKey, thousands } from "@epl/core";
+import { seasonKey, thousands, PART_JOIN } from "@epl/core";
 import Absent from "@/app/components/shell/Absent";
 import { seasonClubCode } from "./seasonClub";
 
@@ -32,7 +32,7 @@ export default function PastSeasons({
 
   return (
     // No provenance line (Craig, 4 Sep 2026).
-    <Section title={rows.length === 1 ? `Season · ${rows[0].season}` : "Seasons"}>
+    <Section title={rows.length === 1 ? `Season${PART_JOIN}${rows[0].season}` : "Seasons"}>
       <Board
         fit
         rows={rows}

@@ -1,4 +1,4 @@
-import { clubStats, leagueTable, ordinal, DASH } from "@epl/core";
+import { clubStats, leagueTable, ordinal, DASH, PART_JOIN } from "@epl/core";
 import type { Club, ClubRecord, ClubStats, TableRow } from "@epl/core";
 import { LABEL, QUIET_FIGURE, TONE } from "@/app/desk";
 import type { Match } from "./match";
@@ -52,7 +52,7 @@ function SideBlock({
     <div className={`flex flex-col gap-1 ${align === "end" ? "items-end text-right" : ""}`}>
       <span className={LABEL}>
         {where}
-        {place === null ? "" : ` · ${ordinal(place)}`}
+        {place === null ? "" : `${PART_JOIN}${ordinal(place)}`}
       </span>
 
       {/* Dashes, never nought, for a club with no finished match at this end. */}

@@ -1,3 +1,4 @@
+import { PART_JOIN } from "@epl/core";
 import type { PlManMatch } from "@epl/core";
 import { minuteMark } from "./minuteMark";
 
@@ -24,7 +25,7 @@ export default function SubNote({
     <span
       className={`numeric ml-auto shrink-0 whitespace-nowrap pl-2 text-xs font-bold text-mid lg:text-sm ${className}`}
     >
-      {parts.join(" · ")}
+      {parts.join(PART_JOIN)}
     </span>
   );
 }

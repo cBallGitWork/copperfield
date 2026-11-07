@@ -1,3 +1,4 @@
+import { PART_JOIN } from "@epl/core";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
@@ -30,7 +31,7 @@ export async function shareCard(
   story: Pick<PublishedStory, "headline" | "edition" | "image" | "reporter">,
 ): Promise<ImageResponse> {
   const [display, picture] = await Promise.all([local("app/fonts/fraunces/card-800.ttf"), pictureOf(story)]);
-  const byline = [story.reporter ? `By ${story.reporter}` : null, story.edition].filter(Boolean).join(" · ");
+  const byline = [story.reporter ? `By ${story.reporter}` : null, story.edition].filter(Boolean).join(PART_JOIN);
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", background: STOCK.paper, color: STOCK.ink }}>

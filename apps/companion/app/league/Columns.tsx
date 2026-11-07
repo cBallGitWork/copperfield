@@ -1,4 +1,4 @@
-import { openingGameweek, ordinal, spelled, type FormGame, type PeriodGameweeks, type SortKey, type StandingsRow } from "@epl/core";
+import { openingGameweek, ordinal, spelled, type FormGame, type PeriodGameweeks, type SortKey, type StandingsRow, PART_JOIN } from "@epl/core";
 import { sortHref } from "./sort";
 import TeamName from "@/app/components/league/TeamName";
 import { StandingsName, type FormMark, type StandingsColumn, type StandingsLine } from "@/app/components/league/StandingsTable";
@@ -77,5 +77,5 @@ export function leagueLine(
 /** A result's title: its gameweek and score, or the score alone where the calendar cannot place its period. */
 function titleOf(game: FormGame, gameweek: number | undefined): string {
   const score = `${game.pointsFor}${SCORE_RULE}${game.pointsAgainst}`;
-  return gameweek === undefined ? score : `Gameweek ${gameweek} · ${score}`;
+  return gameweek === undefined ? score : `Gameweek ${gameweek}${PART_JOIN}${score}`;
 }

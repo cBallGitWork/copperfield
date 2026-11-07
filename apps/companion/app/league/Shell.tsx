@@ -1,4 +1,4 @@
-import { LEAGUE_NAME } from "@epl/core";
+import { LEAGUE_NAME, PART_JOIN } from "@epl/core";
 import PageHeader from "../components/shell/PageHeader";
 import SectionShell from "../components/shell/SectionShell";
 import SectionNav from "./SectionNav";
@@ -41,7 +41,7 @@ export default function LeagueShell({
       // The waiver banner under the tabs; Waivers says it already.
       nav={<SectionNav current={current} />}
       banner={current === "transfers" ? <WaiverBanner /> : null}
-      caption={sub === undefined ? named : <>{named} · {sub}</>}
+      caption={sub === undefined ? named : <>{named}{PART_JOIN}{sub}</>}
       captionOnPhone={current === "matchups"}
       rows={rows ?? Math.max(teams ?? 0, PANEL_FLOOR)}
       flush={flush}

@@ -1,3 +1,4 @@
+import { PART_JOIN } from "../format";
 import { clubById, fixturesInOrder, involves, kickoffOrder } from "./selectors";
 import type { Club, Fixture, FootballSnapshot } from "./types";
 
@@ -98,5 +99,5 @@ export function fixtureLabel(opposition: readonly Opposition[] | undefined): str
   if (opposition === undefined || opposition.length === 0) return null;
   return opposition
     .map((match) => `${match.club.shortName} ${venueMark(match.home)}`)
-    .join(" · ");
+    .join(PART_JOIN);
 }

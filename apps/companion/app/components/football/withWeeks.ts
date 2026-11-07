@@ -1,3 +1,4 @@
+import { PART_JOIN } from "@epl/core";
 import { createElement, type ReactElement } from "react";
 import { ReturnWeeks } from "./FitnessNote";
 
@@ -13,4 +14,4 @@ export const withWeeks = (element: ReactElement, weeks: Record<number, number> =
 
 /** A note's markup as `FitnessNote` prints it: the return in figures, "Knee · <numeric>GW10</numeric>". */
 export const noted = (word: string, back: string | null = null) =>
-  back === null ? word : `${word} · <span class="numeric">${back}</span>`;
+  back === null ? word : `${word}${PART_JOIN}<span class="numeric">${back}</span>`;

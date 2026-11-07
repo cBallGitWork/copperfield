@@ -3,6 +3,9 @@
 /** Absence, never a nought: a nought is a claim (DESIGN §7). */
 export const DASH = "—";
 
+/** Between two short facts set on one line ("Knee · GW10"); the desk's reskin replaces it in this one place. */
+export const PART_JOIN = " · ";
+
 /** The noun for a count: `plural(1, "goal")` is "goal", `plural(2, "goal")` "goals". */
 export function plural(n: number, word: string, many = `${word}s`): string {
   return n === 1 ? word : many;

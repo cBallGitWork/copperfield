@@ -1,4 +1,4 @@
-import { fullFootballerName, goalGroups } from "@epl/core";
+import { fullFootballerName, goalGroups, PART_JOIN } from "@epl/core";
 import type { FootballPlayer, PlGoal, PlManMatch, SheetRow, SquadPlayerDetail } from "@epl/core";
 import type { Holders } from "../../holders";
 import { Goal, Man } from "./ScoreRows";
@@ -122,5 +122,5 @@ function marks(
   if (line.penaltiesMissed > 0) said.push("pen missed");
   if (line.redCards > 0) said.push(did?.sentOff == null ? "red" : minuteMark(did.sentOff, did.added?.sentOff));
   if (hurtAt !== undefined) said.push(minuteMark(hurtAt, hurtAdded));
-  return said.join(" · ");
+  return said.join(PART_JOIN);
 }

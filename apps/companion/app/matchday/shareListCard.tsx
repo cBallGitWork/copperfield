@@ -1,3 +1,4 @@
+import { DASH } from "@epl/core";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
@@ -76,7 +77,7 @@ export async function shareListCard(list: ShareList): Promise<ImageResponse> {
 
 /** Absence is the dash; a nought prints. */
 function figure(points: number | null): string {
-  return points === null ? "—" : String(points);
+  return points === null ? DASH : String(points);
 }
 
 /** CM's blue block: his place, or empty for a side not yet drawn. */

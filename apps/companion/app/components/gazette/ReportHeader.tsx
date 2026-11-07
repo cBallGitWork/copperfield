@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { crestUrl, londonDayAndDate, thousands, type StoryReport, type StoryReportSide } from "@epl/core";
+import { crestUrl, londonDayAndDate, thousands, type StoryReport, type StoryReportSide, PART_JOIN } from "@epl/core";
 import { STANDING_HEAD as SMALL } from "./heads";
 import { RULE } from "./rules";
 
@@ -33,7 +33,7 @@ export default function ReportHeader({ report, names }: { report: StoryReport; n
   const assists = (side: StoryReportSide) => side.assists.map((a) => a.replace(/ (\d+(?:\+\d+)?)$/u, " ($1')")).join(", ");
   return (
     <header className={`flex flex-col gap-3 border-y py-3 ${RULE}`}>
-      <p className={SMALL}>{report.kickoff === "" ? "Premier League" : `${londonDayAndDate(report.kickoff)} · Premier League`}</p>
+      <p className={SMALL}>{report.kickoff === "" ? "Premier League" : `${londonDayAndDate(report.kickoff)}${PART_JOIN}Premier League`}</p>
       <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
         <Club side={report.home} name={names(report.home.code)} align="start" />
         <div className="flex flex-col items-center gap-1 pt-1">
@@ -55,12 +55,12 @@ export default function ReportHeader({ report, names }: { report: StoryReport; n
           <span className={SMALL}>Assists </span>
           {[report.home.assists.length > 0 ? `${names(report.home.code)}: ${assists(report.home)}` : null, report.away.assists.length > 0 ? `${names(report.away.code)}: ${assists(report.away)}` : null]
             .filter(Boolean)
-            .join(" · ")}
+            .join(PART_JOIN)}
         </p>
       )}
       {report.venue === null && report.attendance === null ? null : (
         <p className="text-2xs text-muted">
-          {[report.venue, report.attendance === null ? null : `attendance ${thousands(report.attendance)}`].filter(Boolean).join(" · ")}
+          {[report.venue, report.attendance === null ? null : `attendance ${thousands(report.attendance)}`].filter(Boolean).join(PART_JOIN)}
         </p>
       )}
     </header>

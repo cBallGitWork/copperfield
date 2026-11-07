@@ -1,4 +1,4 @@
-import { seededIn } from "@epl/core";
+import { seededIn, PART_JOIN } from "@epl/core";
 import Nothing from "../../components/shell/Nothing";
 import FantraxSilent from "../../components/shell/FantraxSilent";
 import { beside, openGameweek } from "../../components/shell/gameweekStep";
@@ -101,5 +101,5 @@ async function cleanSheetsOwed(round: ScheduleRound): Promise<Map<string, number
 /** A cup seeded on this gameweek's points says so under its fixtures. */
 function seeding(gameweek: number) {
   const cup = seededIn(gameweek);
-  return cup === undefined ? undefined : `${cup.name} · Seeding`;
+  return cup === undefined ? undefined : `${cup.name}${PART_JOIN}Seeding`;
 }
