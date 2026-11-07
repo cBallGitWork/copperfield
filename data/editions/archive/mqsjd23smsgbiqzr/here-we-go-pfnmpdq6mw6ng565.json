@@ -1,0 +1,31 @@
+{
+  "slug": "here-we-go-pfnmpdq6mw6ng565",
+  "kind": "trade",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 11,
+  "gameweek": 11,
+  "filedAt": "2026-11-07T20:38:22.812Z",
+  "expiresAt": null,
+  "edition": "The Mercato Wire",
+  "byline": "Here We Go",
+  "headline": "Here we go! Declan Rice to its_ohi",
+  "deck": "its_ohi get Declan Rice from Truffles for Bruno Fernandes",
+  "body": "its_ohi land Declan Rice from Truffles, the Arsenal midfielder good for 48 points this season without a goal to his name. Truffles take Bruno Fernandes the other way, the Manchester United man sat on 34 points and three goals. A straight midfield swap, no further business attached.\n\nHere we go!",
+  "subjects": [
+    "trade:pfnmpdq6mw6ng565"
+  ],
+  "image": null,
+  "face": {
+    "code": 204480,
+    "name": "Declan Rice",
+    "clubId": 1,
+    "position": "M"
+  },
+  "ties": [],
+  "extras": {
+    "transfer": {
+      "teamId": "qgucu9dgmufwva1x",
+      "team": "its_ohi"
+    }
+  }
+}
