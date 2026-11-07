@@ -16,7 +16,7 @@ clear-cut findings are fixed below. The rest are Craig's calls.
 rules: the rail along the foot with Live in it, 44px tabs, a strip's labels on their short word (`Stats`) so none
 wraps, the table ending on `Pts` with short names and `Ag`/`Form` standing down, 44px rows where a row is tapped,
 your own team's bar off the phone so the list has the room, the squad's complaint and return under the name, and the
-opponent with his rank in 66px. Neither scrolls sideways; both lint clean.
+opponent as club and h/a in 66px. Neither scrolls sideways; both lint clean.
 
 ## What the reskin changes
 
@@ -54,7 +54,9 @@ token and DESIGN rows; nothing in the app changes until then.
 3. **The desk fills 1440**; the paper keeps its frame, and the name column is capped (360px on a table, 300 on a
    squad) so the figures stay near the names.
 4. **`◄ ►` only where a screen has a gameweek**: the Squad's rail has them, the season table's doesn't.
-5. **The opponent's rank is printed** beside his code, so colour never carries difficulty alone.
+5. **A fixture tile is the club and h/a, and nothing else** (Craig, 7 Nov 2026: *"Stop adding numbers to the
+   fixture tile, team and h/a"*). The difficulty is the tile's colour; its words, "difficulty 2 of 10", are the
+   tile's title for a screen reader.
 6. **A near-black team takes its second colour** for the bar and the index spine: The Raccoons' bar is white with
    black ink, CM's own competition plate (`cm9900/24.jpg`).
 7. **A banned man's xMins stays `0`**: a known figure, not an absence.
