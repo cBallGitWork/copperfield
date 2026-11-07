@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 10,
-    "exportedAt": "2026-11-07T18:16:05.948Z",
+    "exportedAt": "2026-11-07T22:57:25.112Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-07T18:16:05.948Z",
+  "fetchedAt": "2026-11-07T22:57:25.112Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "LEE": {
@@ -440,10 +440,6 @@
       ],
       "lineup": "confirmed",
       "absent": [
-        {
-          "code": 146426,
-          "status": "OUT"
-        },
         {
           "code": 101282,
           "status": "OUT"
