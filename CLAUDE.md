@@ -12,6 +12,9 @@ Fantrax lacks. The 27/28 platform has its own repo.
 - **`docs/rules/DESIGN.md` is binding for anything visible**: a printed paper at `/`, a
   Championship Manager 99/00 desk on League, Prem, Live, News and FPL, and a palette in which every
   colour is a slot with one meaning. It also lists what is deferred on purpose.
+- **A desk screen's new layout or look goes through `/design`** (`.claude/skills/design/SKILL.md`): a board, the
+  design lint, a review panel of four, then Craig's yes; the approved picture in `docs/design/approved/` binds it.
+  DESIGN §10 is the Never list.
 - `docs/rules/PRODUCT.md`: who this is for. Read it before a product decision.
 - `docs/plans/GAZETTA.md` is the paper's live plan; `docs/plans/ROADMAP.md` is the app's, now
   mostly a record. Mark an item in the commit that lands it.

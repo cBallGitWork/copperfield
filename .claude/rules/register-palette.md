@@ -73,6 +73,27 @@ capital.
 - Motion 150–250ms ease-out, and every animation has a reduced-motion
   alternative that keeps the *information*.
 
+## Approved pictures bind a screen's layout
+
+A screen with a folder in `docs/design/approved/` is built to its picture: open its README and `1440.png` with
+the Read tool before changing the screen. No folder: a fix keeps the layout as it is, and a new layout waits for a
+picture drawn through `/design` (`.claude/skills/design/SKILL.md`). Data not held yet is a placeholder in its real
+place and size, never a made-up figure.
+
+## Never: the tells
+
+`docs/rules/DESIGN.md` §10, copied here so it loads with the app's files; change both together.
+`tools/ui/designlint.mjs` fails what a script can see.
+
+1. Rows of stat tiles, a card for every section, small tracked capitals over big numbers.
+2. Pills, rounded corners and tinted badges; a chip is a square solid block, as CM's `Inj`.
+3. Gradient buttons, frosted glass, soft drop shadows, glow; depth is the 2px bevel.
+4. `·` strings, ★ typed as text, floating rows, one 16px gutter round everything.
+5. Telling a manager what he knows; a state is a word or a mark, never a sentence.
+6. Keys and legends.
+7. A source named on the screen, save a control that leaves the app with its `↗`.
+8. A landing page's furniture on the desk: hero bands, centred marketing lines, space as decoration.
+
 ## The Tailwind v4 trap
 
 **v4 drops a theme variable whose name never appears literally in scanned
