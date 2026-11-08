@@ -96,7 +96,8 @@ pickers as CM's grey dropdowns, the list with one `Inf` column, the fixture tile
 difficulty steps, GW points in the purple block, the eleven on CM's flat turf with grey name plates and their points
 or next fixture, the gameweek total in the caption (`32 pts`), and CM's foot bar to the teams either side.
 
-The kits are drawn as plain shirts on the board; the build keeps FPL's kit pictures.
+The kits are FPL's own pictures (`kits/`, fetched through CI on 8 Nov 2026, as `PlayerShirt` draws them), kept
+beside the board for drawing it only: © The Football Association Premier League, never shipped or served from here.
 
 The panel's findings taken: the minutes chips back, the bench strip under the pitch, the rail's real labels and no
 arrows (the picker steps the gameweek), the pickers in the served order, bench rows that dim only their words (a
