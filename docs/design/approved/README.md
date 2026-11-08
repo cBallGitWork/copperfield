@@ -33,3 +33,4 @@ Named after its route: `league` for `/league`, `squad` for `/squad/[teamId]`.
 - [`matchday`](matchday/README.md): `/matchday`, Live's Scores, desk (8 Nov 2026).
 - [`player`](player/README.md): `/players/[fantraxId]`, a player's Profile, desk (8 Nov 2026).
 - [`scoring`](scoring/README.md): `/scoring`, the league's scoring, desk (8 Nov 2026).
+- [`squad-fixtures`](squad-fixtures/README.md): `/squad/[teamId]/fixtures`, a squad's Fixtures, desk (8 Nov 2026).
