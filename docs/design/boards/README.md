@@ -1,7 +1,7 @@
 # Boards: the reskin proposal (7 Nov 2026)
 
-Proposals, not decisions. Nothing here binds a screen until Craig says yes and it moves to
-`docs/design/approved/` (`.claude/skills/design/SKILL.md`, step 7).
+**Approved 8 Nov 2026** (Craig: *"Yes"*): the four pictures moved to `docs/design/approved/league/` and
+`docs/design/approved/squad/`, where they bind. This file stays as the record of how they got there.
 
 Craig, 7 Nov 2026: *"propose a reskin that still honours CM 99"*. Two boards at 1440, drawn through the
 `/design` loop: both lint clean (`tools/ui/designlint.mjs`) and were reviewed by the four-agent panel, whose
@@ -9,8 +9,8 @@ clear-cut findings are fixed below. The rest are Craig's calls.
 
 | Board | Route | CM shots it borrows |
 |---|---|---|
-| [`LeagueTable.html`](LeagueTable.html), [`1440`](LeagueTable-1440.png); [`390`](LeagueTable-390.png) | `/league` | `cm9900/24.jpg` (the table, the caption plate, the Pts block) |
-| [`Squad.html`](Squad.html), [`1440`](Squad-1440.png); [`390`](Squad-390.png) | `/squad/me` | `cm9900/12.jpg` (the Inf column, the value block), `25.jpg` (the team's tabs) |
+| [`LeagueTable.html`](../approved/league/LeagueTable.html), [`1440`](../approved/league/1440.png); [`390`](../approved/league/390.png) | `/league` | `cm9900/24.jpg` (the table, the caption plate, the Pts block) |
+| [`Squad.html`](../approved/squad/Squad.html), [`1440`](../approved/squad/1440.png); [`390`](../approved/squad/390.png) | `/squad/me` | `cm9900/12.jpg` (the Inf column, the value block), `25.jpg` (the team's tabs) |
 
 **The phone** (Craig, 7 Nov 2026: *"make sure mobile is looking good"*). Both boards at 390 by DESIGN §2's phone
 rules: the rail along the foot with Live in it, 44px tabs, a strip's labels on their short word (`Stats`) so none
