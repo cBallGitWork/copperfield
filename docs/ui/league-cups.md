@@ -50,14 +50,22 @@ and the 8 Oct ruling that he settles ties by hand.
 - The rule is printed under the scoring table on `/scoring` (More › Scoring), as "Cup ties", from the same
   `CUP_TIE_STEPS` the decider walks.
 - `packages/core/src/league/cups/tieBreak.ts`: `tieTally`, `decideTie`, `coinToss`, `throughOn`, tested in
-  `tieBreak.test.ts`. **No tie calls it yet**: no cup tie has two teams until the draw is entered (below).
+  `tieBreak.test.ts`. **No tie calls it yet**: the counted men's categories are not read (below).
+
+## Scores and winners
+
+Craig, 8 Nov 2026: *"update the cup brackets"*. A tie's score is its two teams' totals for the gameweek, off the
+season's results keyed by the round's period (`cupStanding`, over core's `cupDraw`). The bracket prints each side's
+score in cyan once a ball is kicked in its gameweek; once the gameweek is over and the points part them, the loser
+greys and both the winner and the loser are carried into the ties that wait on them ("Winner M1" becomes the team).
+Live and Fixtures name a later round's sides from the same settled ties (`cupsDecided` into `roundTies`).
 
 ## What the draw still needs
 
-The GW9 seeds are in (above). Still missing:
-
-- **Cup results**: no read puts each side's GW points and counted men's categories against a tie, so
-  `decideTie` has no caller and Bracket, Fixtures and Live cannot print a winner or a "Through on" line.
+- **A level tie**: no read puts the counted men's categories against a tie, so `decideTie` still has no caller. A tie
+  level at full time keeps both sides in ink and its "Winner"/"Loser" slots stay placeholders until the commissioner
+  records its winner in `data/leagues/cup-tiebreaks.json` (`cupTieBreaks`); the winner then carries a muted `(tb)`.
+  GW10's M1 finished Cowthenbeef 48, its_ohi 48, the first.
 
 ## States
 

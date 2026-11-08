@@ -85,6 +85,7 @@ vi.mock("./sheetCodes", () => ({ roundCodes: r.fn.roundCodes }));
 vi.mock("./boards", () => ({ gameweekBoards: r.fn.gameweekBoards }));
 vi.mock("../lockAhead", () => ({ lockAhead: r.fn.lockAhead }));
 vi.mock("../round", () => ({ roundOf: async () => null }));
+vi.mock("../league/cups/standing", () => ({ cupsDecided: async () => ({}) }));
 vi.mock("../clock", () => ({ now: () => r.at }));
 vi.mock("../prem/places", () => ({ clubPlaces: () => new Map([[1, 3]]) }));
 vi.mock("./TopStats", () => ({ default: stub("topstats"), STATS_VIEW: "stats", TOP_STATS: "Top stats", statsHref: () => "/matchday?view=stats" }));

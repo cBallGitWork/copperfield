@@ -1,11 +1,11 @@
-import { CUPS, cupGroups, cupPlan } from "@epl/core";
+import { CUPS, cupGroups } from "@epl/core";
 import LeagueShell from "../Shell";
 import Nothing from "../../components/shell/Nothing";
 import FantraxSilent from "../../components/shell/FantraxSilent";
-import { getSchedule } from "../schedule/schedule";
-import { cupSeeds } from "../../cupSeeds";
+import { getSchedule, getSeasonResults } from "../schedule/schedule";
 import { cupHref } from "../SectionNav";
 import Bracket from "./Bracket";
+import { cupStanding } from "./standing";
 import Groups from "./Groups";
 import TabStrip from "../../components/shell/TabStrip";
 import { FootFrame } from "../../components/shell/FootFrame";
@@ -36,7 +36,8 @@ export default async function CupsPage({
   }
 
   const teams = read.info.teams.length;
-  const stages = cupPlan(cup, teams, cupSeeds(read.info.teams)[cup.id]);
+  const stages = cupStanding(cup, read.info.teams, read.rounds, await getSeasonResults());
+
 
   return (
     // The cup is picked from the foot, above the thumb rail: the top keeps Draft's own strip alone.

@@ -12,6 +12,7 @@ import { placings } from "../placings";
 import ScoreboardDown from "../ScoreboardDown";
 import { leagueFixturesHref } from "../SectionNav";
 import { wholeNumber } from "../../wholeNumber";
+import { cupsDecided } from "../cups/standing";
 import { fixtureTies, onTheCard, roundTies } from "./roundTies";
 import { LEAGUE_CAPTION, titled } from "../../titles";
 
@@ -52,7 +53,7 @@ export default async function FixturesPage({ searchParams }: { searchParams: Pro
   }
 
   const [{ points, refused }, owed] = await Promise.all([roundPoints(round), cleanSheetsOwed(round)]);
-  const ties = fixtureTies(roundTies(info, round), mine, owed);
+  const ties = fixtureTies(roundTies(info, round, await cupsDecided()), mine, owed);
   const anyOwed = [...owed.values()].some((each) => (each ?? 0) > 0);
 
   return (

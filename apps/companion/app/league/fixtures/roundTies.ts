@@ -1,4 +1,4 @@
-import { type CompetitionTie, type LeagueInfo, LEAGUE_COMPETITION, cupTies, leagueTies, periodPairings } from "@epl/core";
+import { type CompetitionTie, type CupsDecided, type LeagueInfo, LEAGUE_COMPETITION, cupTies, leagueTies, periodPairings } from "@epl/core";
 import { cupSeeds } from "../../cupSeeds";
 import { yoursFirst } from "../../mine";
 
@@ -6,11 +6,15 @@ import { yoursFirst } from "../../mine";
 
 type League = Pick<LeagueInfo, "matchups" | "teams">;
 
-/** Every tie in a gameweek: Fantrax's pairings for its period, and our cups. */
-export function roundTies(league: League, round: { gameweek: number; period: number }): CompetitionTie[] {
+/** Every tie in a gameweek: Fantrax's pairings for its period, and our cups, a later round's sides named by `decided`. */
+export function roundTies(
+  league: League,
+  round: { gameweek: number; period: number },
+  decided: CupsDecided = {},
+): CompetitionTie[] {
   return [
     ...leagueTies(periodPairings(league.matchups, league.teams, round.period)),
-    ...cupTies(league.teams.length, round.gameweek, cupSeeds(league.teams)),
+    ...cupTies(league.teams.length, round.gameweek, cupSeeds(league.teams), decided),
   ];
 }
 

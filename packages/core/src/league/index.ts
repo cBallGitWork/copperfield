@@ -72,12 +72,14 @@ export { leads, trails } from "./scoreline";
 export type { HeadToHead, LeagueSeason, PeriodPairing, PoolPlayer } from "./selectors";
 
 export { LEAGUE_COMPETITION, cupTies, groupTies, leagueTies, seededIn } from "./competitions";
-export type { CompetitionTie, CupSeeds, TieSide } from "./competitions";
+export type { CompetitionTie, CupSeeds, CupsDecided, TieSide } from "./competitions";
 export { CUPS } from "./cups/declared";
 export type { Cup, GroupStage } from "./cups/declared";
 export { groupTable } from "./cups/groupTable";
 export { cupGroups, cupPlan } from "./cups/plan";
-export type { CupStage } from "./cups/plan";
+export type { CupStage, CupFixture, CupDecided } from "./cups/plan";
+export { cupDraw } from "./cups/progress";
+export type { CupScore, CupScoreOf, ScoredFixture, ScoredStage } from "./cups/progress";
 export { CUP_TIE_STEPS } from "./cups/tieBreak";
 
 export { FantraxError } from "./fantrax/errors";

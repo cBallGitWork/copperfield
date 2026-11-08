@@ -1,5 +1,5 @@
 import { CUPS, type Cup } from "./cups/declared";
-import { cupPlan } from "./cups/plan";
+import { cupPlan, type CupDecided } from "./cups/plan";
 import type { PeriodPairing } from "./selectors";
 import type { LeagueTeam } from "./types";
 
@@ -49,9 +49,12 @@ export type CupSeeds = Readonly<Record<string, readonly LeagueTeam[]>>;
 
 /** The cup ties in one gameweek for a league of `teams`. A side no seed names is a placeholder ("Seed 7", "A1",
  *  "Winner M5"). */
-export function cupTies(teams: number, gameweek: number, seeds: CupSeeds = {}): CompetitionTie[] {
+/** Each cup's ties already settled, by cup id (`cupDraw`); a later round names their winners and losers. */
+export type CupsDecided = Readonly<Record<string, CupDecided>>;
+
+export function cupTies(teams: number, gameweek: number, seeds: CupSeeds = {}, decided: CupsDecided = {}): CompetitionTie[] {
   return CUPS.flatMap((cup) =>
-    cupPlan(cup, teams, seeds[cup.id])
+    cupPlan(cup, teams, seeds[cup.id], decided[cup.id])
       .filter((stage) => stage.gameweek === gameweek)
       .flatMap((stage) =>
         stage.fixtures.map((fixture) => ({
