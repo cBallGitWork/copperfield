@@ -1,0 +1,173 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Board: Squad at 390, pitch (reskin, redrawn 8 Nov 2026)</title>
+<style>
+@font-face { font-family: Oxanium; src: url(../../../apps/companion/app/fonts/oxanium/latin.woff2) format("woff2"); font-weight: 400 800; }
+@font-face { font-family: Jost; src: url(../../../apps/companion/app/fonts/jost/latin.woff2) format("woff2"); font-weight: 400 700; }
+@font-face { font-family: "Archivo Narrow"; src: url(../../../apps/companion/app/fonts/archivo-narrow/latin.woff2) format("woff2"); font-weight: 400 700; }
+:root {
+  /* Copied from apps/companion/app/tokens.css, 7 Nov 2026. */
+  --color-bg: oklch(0.190 0.045 265); --color-surface: oklch(0.245 0.012 80);
+  --color-ink: oklch(0.97 0.008 80); --color-muted: oklch(0.76 0.022 80); --color-faint: oklch(0.65 0.022 80);
+  --color-accent: oklch(0.88 0.16 95); --color-info: oklch(0.82 0.13 210);
+  --color-chrome: oklch(0.45 0.13 264); --color-index: oklch(0.40 0.16 266); --color-face: oklch(0.72 0.02 265);
+  --color-bad: oklch(0.66 0.17 25); --color-up: oklch(0.78 0.17 148); --color-mid: oklch(0.79 0.14 85);
+  --color-doubt-out: oklch(0.66 0.19 25); --color-doubt-major: oklch(0.72 0.17 55); --color-doubt-slight: oklch(0.79 0.14 85);
+  --color-ease-2: oklch(0.833 0.165 132.4); --color-ease-4: oklch(0.751 0.148 92); --color-ease-6: oklch(0.653 0.16 55.7);
+  --color-ease-8: oklch(0.534 0.178 31.6); --color-ease-1: oklch(0.87 0.19 150); --color-ease-9: oklch(0.467 0.161 27.3);
+  --color-cream: oklch(0.94 0.02 75);
+  /* PROPOSED, not yet tokens (Craig's calls): CM's indigo tab strip, and its purple block for the column a table is for. */
+  --color-tab: oklch(0.30 0.14 280);
+  --color-for: oklch(0.36 0.15 315);
+  --font-chrome: Oxanium, sans-serif; --font-sans: Jost, sans-serif; --font-display: "Archivo Narrow", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 1440px; min-height: 900px; font-family: var(--font-sans); color: var(--color-ink); background: var(--color-bg); }
+.ground { position: fixed; inset: 0; background: url(../../../apps/companion/public/ground/venues/wing-eating.jpg) center / cover; filter: brightness(0.55); z-index: -1; }
+.desk { display: grid; grid-template-columns: 130px 1fr; width: 1200px; min-height: 900px; margin: 0 auto; box-shadow: 0 0 0 2px black; }
+
+/* The rail: CM's sidebar, top to bottom (cm9900/24.jpg, 12.jpg). */
+.rail { background: oklch(0.16 0.05 265); border-right: 2px solid black; display: flex; flex-direction: column; gap: 4px; padding: 4px; font-family: var(--font-chrome); }
+.rail > * { text-align: center; }
+.rail a, .rail .continue, .rail .manager, .rail .date { --face: oklch(0.24 0.08 266); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 60%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); }
+.rail .date { --face: var(--color-index); color: var(--color-accent); padding: 8px 4px; font-weight: 700; font-size: 14px; line-height: 18px; }
+.arrows { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.arrows span { --face: var(--color-chrome); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); padding: 6px 0; color: var(--color-ink); font-size: 14px; }
+.continue { padding: 12px 6px; font-size: 15px; font-weight: 600; }
+.manager { padding: 10px 6px; color: var(--color-accent); font-size: 15px; font-weight: 600; }
+.rail a { display: block; padding: 14px 6px; font-size: 15px; font-weight: 600; color: var(--color-ink); text-decoration: none; }
+.rail a[aria-current] { color: var(--color-accent); border-color: var(--color-accent); }
+
+.main { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.bevel { border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); }
+.titlebar { --face: var(--color-chrome); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 96px; display: grid; place-items: center; font-family: var(--font-chrome); font-weight: 700; font-size: 45px;
+  text-shadow: 0.06em 0.06em 0.07em rgb(0 0 0 / 0.45); }
+.tabs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
+.tab { --face: var(--color-tab); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 56px; display: grid; place-items: center; font-family: var(--font-chrome); font-weight: 600; font-size: 16px; }
+.tab[aria-current] { color: var(--color-accent); border-color: var(--color-accent); }
+.panel { background: color-mix(in srgb, var(--color-surface) 80%, transparent); border: 2px solid oklch(0.12 0.01 80); }
+.caption { margin: 0 0 6px; background: oklch(0.40 0.03 265 / 0.55); text-align: center; color: var(--color-accent); font-family: var(--font-chrome); font-weight: 600; font-size: 21px; padding: 8px 0; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th { height: 24px; padding: 0 1px; }
+th span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  display: block; height: 22px; line-height: 18px; color: var(--color-bg); font-family: var(--font-chrome); font-size: 13px; font-weight: 600; text-align: center; }
+th span.sorted { border-color: var(--dark) var(--light) var(--light) var(--dark); }
+td { height: 28px; border-bottom: 1px solid var(--color-bg); font-size: 16px; }
+td.fig { font-family: var(--font-display); font-variant-numeric: tabular-nums; text-align: center; font-size: 16px; }
+td.name { padding-left: 10px; font-weight: 600; font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mine td { background: oklch(0.255 0.012 80); }
+.mine td.name { color: var(--color-accent); box-shadow: inset 4px 0 0 var(--color-accent); }
+.you { display: inline-block; margin-left: 10px; padding: 0 6px; background: var(--color-bg); color: var(--color-accent); font-family: var(--font-chrome); font-size: 12px; line-height: 18px; vertical-align: 2px; }
+tr.cut td { height: 20px; border-bottom: 0; padding: 0; }
+tr.cut td div { border-top: 2px dashed oklch(0.530 0.207 22); display: flex; justify-content: flex-end; }
+tr.cut td span { margin-top: -10px; padding: 0 8px; background: oklch(0.245 0.012 80); color: oklch(0.72 0.15 22); font-size: 14px; line-height: 18px; }
+td.cm-index { width: 64px; text-align: center; font-family: var(--font-chrome); font-weight: 800; font-size: 15px; }
+.cm-index { background-color: var(--cm-index-face, var(--color-index));
+  background-image: linear-gradient(180deg, color-mix(in oklab, white 22%, var(--cm-index-face, var(--color-index))), var(--cm-index-face, var(--color-index)) 55%, color-mix(in oklab, black 45%, var(--cm-index-face, var(--color-index))));
+  background-attachment: fixed; text-shadow: 0.04em 0.05em 0.05em rgb(0 0 0 / 0.55); box-shadow: inset -1px 0 0 var(--color-bg); }
+td.for { width: 72px; padding: 0 0 0 2px; }
+td.for b { display: block; background: var(--color-for); font-family: var(--font-display); font-variant-numeric: tabular-nums; text-align: center; font-size: 17px; line-height: 27px; color: var(--color-ink); }
+tr.greyed td.for b { background: color-mix(in oklch, var(--color-for), oklch(0.245 0.012 80) 55%); color: var(--color-muted); }
+tr.greyed td.opp { filter: saturate(0.45) brightness(0.8); }
+.up { color: var(--color-up); } .bad { color: var(--color-bad); } .quiet { color: var(--color-muted); } .info { color: var(--color-info); }
+.form span { display: inline-block; width: 18px; font-weight: 700; }
+.foot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: auto; }
+.foot span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 48px; display: grid; place-items: center; color: var(--color-bg); font-family: var(--font-chrome); font-weight: 700; font-size: 20px; }
+.foot { grid-template-columns: 1fr 1fr; gap: 4px; }
+.foot span.off { color: color-mix(in oklch, var(--color-face), black 30%); }
+
+body { width: 390px; min-height: 844px; }
+.phone { display: flex; flex-direction: column; min-height: 844px; padding: 0 0 calc(56px + 34px); }
+.status { height: 47px; }
+.lock { --face: var(--color-index); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 60%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); margin: 0 6px 6px; padding: 6px 10px; display: flex; justify-content: space-between;
+  font-family: var(--font-chrome); font-weight: 600; font-size: 14px; color: var(--color-ink); }
+.lock b { color: var(--color-accent); font-weight: 700; }
+.titlebar { min-height: 56px; font-size: 24px; margin: 0 6px; }
+.tabs { margin: 6px 6px 0; }
+.tab { min-height: 44px; font-size: 13px; padding: 0 2px; }
+.panel { margin: 6px 6px 0; background: color-mix(in srgb, var(--color-surface) 80%, transparent); }
+.caption { font-size: 16px; padding: 4px 0; margin: 0 0 4px; border: 0; background: oklch(0.40 0.03 265 / 0.55); }
+th span { font-size: 11px; height: 20px; line-height: 16px; }
+td { height: 44px; } td.name { font-size: 15px; padding-left: 8px; } td.fig { font-size: 15px; }
+td.cm-index { font-size: 13px; }
+td.for b { line-height: 43px; font-size: 16px; }
+/* The thumb rail: the desk rail laid along the foot, a glyph over each word (DESIGN §2). */
+.thumb { position: fixed; left: 0; right: 0; bottom: 0; height: calc(56px + 34px); padding-bottom: 34px; background: var(--color-bg);
+  border-top: 1px solid black; display: grid; grid-template-columns: repeat(6, 1fr); font-family: var(--font-chrome); }
+.thumb a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--color-ink); text-decoration: none; font-size: 12px; font-weight: 600; }
+.thumb a[aria-current] { color: var(--color-accent); box-shadow: inset 0 3px 0 var(--color-accent); }
+.thumb svg { width: 24px; height: 24px; }
+
+:root { --color-fdr-1: oklch(0.84 0.20 152); --color-fdr-2: oklch(0.78 0.16 158); --color-fdr-3: oklch(0.80 0.02 265); --color-fdr-4: oklch(0.66 0.20 22); --color-fdr-5: oklch(0.50 0.18 18); }
+@font-face { font-family: Jost; src: url(../../../apps/companion/app/fonts/jost/latin-ext.woff2) format("woff2"); font-weight: 400 700; unicode-range: U+0100-02BA, U+1E00-1EFF; }
+@font-face { font-family: Oxanium; src: url(../../../apps/companion/app/fonts/oxanium/latin-ext.woff2) format("woff2"); font-weight: 400 800; unicode-range: U+0100-02BA, U+1E00-1EFF; }
+:root { --color-pitch-turf: oklch(0.335 0.085 148); --color-pitch-mow: oklch(0.315 0.080 148); --color-pitch-line: oklch(0.62 0.055 148); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.titlebar.team { --face: #f4f4f2; background: var(--face); --light: #ffffff; --dark: #8a8d96; color: #111111; text-shadow: 0.04em 0.04em 0 rgb(0 0 0 / 0.18); }
+.pickers { display: flex; justify-content: flex-end; gap: 4px; }
+.pick { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); color: var(--color-bg); font-family: var(--font-chrome); font-weight: 600;
+  font-size: 14px; min-height: 36px; padding: 0 30px 0 12px; display: flex; align-items: center; position: relative; }
+.pick::after { content: ""; position: absolute; right: 11px; top: 15px; border: 5px solid transparent; border-top-color: currentColor; }
+.stage { display: grid; grid-template-columns: 1fr 440px; gap: 8px; }
+.squad { --cm-index-face: var(--color-index); }
+td.pos { width: 52px; font-size: 13px; }
+td.name { font-size: 17px; }
+img.crest { width: 20px; height: 20px; vertical-align: -4px; margin-right: 8px; }
+td.note { padding-left: 8px; font-size: 13px; white-space: nowrap; } td.note svg { vertical-align: -2px; margin-right: 6px; }
+td.oppcell { padding: 0; border-left: 1px solid var(--color-bg); }
+.opp { display: flex; height: 27px; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+td.for { width: 54px; } td.for b.none { background: transparent; color: var(--color-muted); }
+.order { display: inline-block; width: 14px; color: var(--color-muted); font-family: var(--font-display); font-weight: 400; }
+tr.greyed td.name { color: var(--color-muted); }
+tr.greyed td.for b { background: var(--color-for); color: var(--color-muted); }
+td.for b.none, tr.greyed td.for b.none { background: transparent; color: var(--color-muted); }
+tr.plate td { height: 26px; padding: 4px 0 2px; }
+tr.plate span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  display: inline-block; padding: 0 14px; color: var(--color-bg); font-family: var(--font-chrome); font-weight: 600; font-size: 12px; line-height: 16px; }
+.asof { padding: 6px 10px 8px; font-size: 11px; }
+/* The pitch: CM's flat turf, a stripe a line, the eleven in kits on name plates. */
+.pitchpanel { display: flex; flex-direction: column; }
+.pitchhead { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 6px 0; }
+.pitchhead .gw { color: var(--color-accent); font-family: var(--font-chrome); font-weight: 600; font-size: 18px; }
+.pitchhead .total { background: var(--color-for); color: var(--color-ink); font-family: var(--font-display); font-weight: 700; font-size: 18px; padding: 0 10px; line-height: 26px; }
+.pitch { flex: 1; margin: 0 8px 8px; border: 2px solid var(--color-pitch-line); display: grid; grid-template-rows: repeat(4, 1fr); position: relative;
+  }
+.marks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+.line { display: flex; justify-content: center; align-items: center; gap: 6px; background: var(--color-pitch-turf); }
+.line:nth-of-type(even) { background: var(--color-pitch-mow); }
+.card { width: 92px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 3; }
+.kit { width: 54px; height: 47px; }
+.card .plate { --face: var(--color-face); background: var(--face); width: 100%; text-align: center; color: var(--color-bg); font-family: var(--font-chrome);
+  font-weight: 700; font-size: 11px; line-height: 17px; border: 1px solid; border-color: color-mix(in oklch, var(--face), white 55%) color-mix(in oklch, var(--face), black 55%) color-mix(in oklch, var(--face), black 55%) color-mix(in oklch, var(--face), white 55%); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .pts { width: 100%; background: var(--color-for); text-align: center; font-family: var(--font-display); font-weight: 700; font-size: 14px; line-height: 20px; }
+.card .fx { width: 100%; text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 12px; line-height: 20px; }
+.card .flag { position: absolute; top: 0; left: 8px; }
+.card .chip { position: absolute; top: 0; right: 0; background: var(--color-bg); color: var(--color-mid); font-family: var(--font-display); font-weight: 700; font-size: 11px; line-height: 15px; padding: 0 3px; }
+.kit path { stroke: color-mix(in oklch, currentColor, white 40%); }
+.benchstrip { margin: 0 8px 8px; display: flex; align-items: center; gap: 6px; }
+.benchstrip .label { --face: var(--color-face); background: var(--face); color: var(--color-bg); font-family: var(--font-chrome); font-weight: 600; font-size: 12px; padding: 0 10px; line-height: 18px; align-self: flex-start; }
+.benchstrip .cards { flex: 1; display: flex; justify-content: center; gap: 6px; }
+.card.bench .plate { color: color-mix(in oklch, var(--color-bg), var(--color-face) 30%); }
+.card.bench .kit { opacity: 0.7; }
+
+.toggle { display: grid; grid-template-columns: 1fr 1fr auto; gap: 4px; margin: 6px 6px 0; }
+.toggle .tab { min-height: 40px; font-size: 13px; }
+.toggle .pick { min-height: 40px; font-size: 13px; }
+.teampick { margin: 6px 6px 0; } .teampick .pick { width: 100%; }
+td { height: 36px; } td.name { font-size: 14px; padding-left: 6px; overflow: hidden; }
+td.name .who { display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; }
+td.name .who svg { flex: none; } td.name .sub { display: block; font-weight: 400; font-size: 11px; line-height: 12px; color: var(--color-muted); }
+img.crest { width: 18px; height: 18px; margin: 0; flex: none; }
+td.pos { width: 40px; font-size: 11px; } td.for { width: 40px; } td.for b { line-height: 35px; font-size: 15px; }
+.opp { height: 35px; font-size: 12px; }
+.pitchpanel.phone { margin: 6px 6px 0; min-height: 560px; }
+.pitchpanel.phone .card { width: 78px; } .pitchpanel.phone .kit { width: 44px; height: 38px; }
+.pitchpanel.phone .card .plate { font-size: 10px; }
+
+</style></head><body><div class="ground"></div><div class="phone"><div class="status"></div><div class="lock" role="status"><span>GW11</span><span>locks <b>11:00</b></span></div><nav class="tabs" aria-label="The Raccoons"><span class="tab bevel" aria-current="page">Squad</span><span class="tab bevel">Transfers</span><span class="tab bevel">Match</span><span class="tab bevel">Fixtures</span><span class="tab bevel">Stats</span></nav><div class="teampick"><span class="pick">4th Raccoons</span></div><div class="toggle"><span class="tab bevel" aria-current="page">Pitch</span><span class="tab bevel">List</span><span class="pick">Gameweek 10</span></div><section class="panel pitchpanel phone" aria-label="The eleven"><div class="pitchhead"><span class="gw">Gameweek 10</span><span class="total">32 pts</span></div><div class="pitch" id="pitch"><svg class="marks" viewBox="0 0 68 105" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="var(--color-pitch-line)" stroke-width="0.5" vector-effect="non-scaling-stroke"><line x1="0" y1="52.5" x2="68" y2="52.5"/><circle cx="34" cy="52.5" r="9.15"/><rect x="13.84" y="0" width="40.32" height="16.5"/><rect x="13.84" y="88.5" width="40.32" height="16.5"/><rect x="24.84" y="0" width="18.32" height="5.5"/><rect x="24.84" y="99.5" width="18.32" height="5.5"/></svg><div class="line"><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#d71920" stroke="#111111" stroke-width="2"/></svg><span class="plate">Petrović</span><span class="fx" title="IPS (a), difficulty 2 of 5" style="background:var(--color-fdr-2);color:#08090b">IPS (a)</span></div></div><div class="line"><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#c8102e" stroke="#c8102e" stroke-width="2"/></svg><span class="plate">Kerkez</span><span class="fx" title="CRY (a), difficulty 4 of 5" style="background:var(--color-fdr-4);color:#ffffff">CRY (a)</span></div><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#034694" stroke="#034694" stroke-width="2"/></svg><span class="plate">Colwill</span><span class="fx" title="SUN (a), difficulty 2 of 5" style="background:var(--color-fdr-2);color:#08090b">SUN (a)</span></div><div class="card"><span class="chip">&#9650;45&#8242;</span><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#6cabdd" stroke="#6cabdd" stroke-width="2"/></svg><span class="plate">Matheus N.</span><span class="pts">2</span></div></div><div class="line"><div class="card"><span class="flag"><svg width="14" height="14" viewBox="0 0 16 16" role="img" aria-label="Slight doubt"><path d="M6 1h4v5h5v4h-5v5H6v-5H1V6h5z" fill="var(--color-doubt-slight)"/></svg></span><span class="chip">&#9660;72&#8242;</span><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#f4f4f4" stroke="#111111" stroke-width="2"/></svg><span class="plate">King</span><span class="pts">3</span></div><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#003399" stroke="#003399" stroke-width="2"/></svg><span class="plate">Dewsbury-Hall</span><span class="pts">7</span></div><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#003399" stroke="#003399" stroke-width="2"/></svg><span class="plate">Garner</span><span class="pts">3</span></div><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#034694" stroke="#034694" stroke-width="2"/></svg><span class="plate">Palmer</span><span class="fx" title="SUN (a), difficulty 2 of 5" style="background:var(--color-fdr-2);color:#08090b">SUN (a)</span></div></div><div class="line"><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#003399" stroke="#003399" stroke-width="2"/></svg><span class="plate">Barry</span><span class="pts">13</span></div><div class="card"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#6cabdd" stroke="#6cabdd" stroke-width="2"/></svg><span class="plate">Haaland</span><span class="pts">2</span></div><div class="card"><span class="chip">&#9660;65&#8242;</span><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#f4f4f4" stroke="#111111" stroke-width="2"/></svg><span class="plate">Gonzalo</span><span class="pts">2</span></div></div></div><div class="benchstrip"><span class="label">Bench</span><div class="cards"><div class="card bench"><span class="flag"><svg width="14" height="14" viewBox="0 0 16 16" role="img" aria-label="Slight doubt"><path d="M6 1h4v5h5v4h-5v5H6v-5H1V6h5z" fill="var(--color-doubt-slight)"/></svg></span><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#d71920" stroke="#111111" stroke-width="2"/></svg><span class="plate">Scott</span><span class="fx" title="IPS (a), difficulty 2 of 5" style="background:var(--color-fdr-2);color:#08090b">IPS (a)</span></div><div class="card bench"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#0057b8" stroke="#ffffff" stroke-width="2"/></svg><span class="plate">Hinshelwood</span><span class="fx" title="BRE (h), difficulty 3 of 5" style="background:var(--color-fdr-3);color:#08090b">BRE (h)</span></div><div class="card bench"><svg class="kit" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 4 L8 10 L2 22 L12 27 L14 22 L14 54 L50 54 L50 22 L52 27 L62 22 L56 10 L44 4 C42 9 37 12 32 12 C27 12 22 9 20 4 Z" fill="#f4f4f4" stroke="#132257" stroke-width="2"/></svg><span class="plate">Porro</span><span class="pts">6</span></div></div></div></section></div><nav class="thumb" aria-label="Sections"><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Read</span></a><a href="#" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3l-5 3 2 4 2-1v12h10V9l2 1 2-4-5-3c-1 2-2 3-4 3s-3-1-4-3z" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Team</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M8 8a5.5 5.5 0 000 8M16 8a5.5 5.5 0 010 8M5 5a9.5 9.5 0 000 14M19 5a9.5 9.5 0 010 14" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Live</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 01-10 0z M12 14v4 M8 20h8 M7 6H4v2a3 3 0 003 3 M17 6h3v2a3 3 0 01-3 3" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Draft</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7l4 3-1.5 5h-5L8 10z" fill="currentColor"/></svg><span>Prem</span></a><a href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10 M10 20V4 M16 20v-7 M22 20H2" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Data</span></a></nav></body></html>

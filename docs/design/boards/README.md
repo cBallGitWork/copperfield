@@ -81,3 +81,24 @@ gradients CM draws were drawn and then taken out: the design lint fails them (DE
 `docs/ui/league-table.md` still says there is no green form letter because `--color-up` is deferred; DESIGN §8
 closed that on 29 Aug 2026 and the boards follow DESIGN. Its line 27 lists `Pts Form`; the desk's order ends on
 `Pts`.
+
+## The Squad, redrawn with its pitch (8 Nov 2026)
+
+Craig, 8 Nov 2026: *"Need pitches"*. The approved Squad picture (`approved/squad/`) was drawn from a doc that said the
+page has no pitch; the page as served has one, so the board is redrawn around it: [`SquadPitch.html`](SquadPitch.html)
+([`1440`](SquadPitch-1440.png)), and the phone's two views, [List](SquadPitch-390-list.png) and
+[Pitch](SquadPitch-390-pitch.png). Shot from the served page first (`Shots` on `main`), so the board keeps what is
+there: the team and gameweek pickers, the Pitch/List toggle on a phone, the GW column, the bench order, the minutes
+chips on the kits, the xMins date, and the bench in a strip under your own pitch (`docs/ui/squad.md`, the planner).
+
+What the reskin brings to it: CM's frame and rail, the white bevelled plate for a near-black team, indigo tabs, the
+pickers as CM's grey dropdowns, the list with one `Inf` column, the fixture tile as club and h/a only on FPL's five
+difficulty steps, GW points in the purple block, the eleven on CM's flat turf with grey name plates and their points
+or next fixture, the gameweek total in the caption (`32 pts`), and CM's foot bar to the teams either side.
+
+The kits are drawn as plain shirts on the board; the build keeps FPL's kit pictures.
+
+The panel's findings taken: the minutes chips back, the bench strip under the pitch, the rail's real labels and no
+arrows (the picker steps the gameweek), the pickers in the served order, bench rows that dim only their words (a
+sub's points stay purple, never read as a loss), FPL's difficulty steps rather than the planner's ease, `I. Surname`
+on a phone, the total labelled. Lint clean on all three.
