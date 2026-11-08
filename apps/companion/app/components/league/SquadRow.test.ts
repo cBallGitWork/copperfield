@@ -55,8 +55,8 @@ describe("a squad row", () => {
   // The desk carries the mark and the note in an Inf column of their own (`cm9900/12.jpg`, the approved Squad picture).
   it("puts the mark and the note in the desk's Inf column", () => {
     const html = draw(doubt);
-    const inf = html.slice(html.indexOf('class="hidden shrink-0 lg:flex lg:w-32'));
-    expect(inf).toMatch(/^class="hidden shrink-0 lg:flex lg:w-32[^"]*"><svg role="img" aria-label="Doubtful"/);
+    const inf = html.slice(html.indexOf('class="hidden shrink-0 lg:flex lg:w-24'));
+    expect(inf).toMatch(/^class="hidden shrink-0 lg:flex lg:w-24[^"]*"><svg role="img" aria-label="Doubtful"/);
     expect(inf).toContain(`${noted("Back injury")}</span>`);
   });
 

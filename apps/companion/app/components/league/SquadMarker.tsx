@@ -42,6 +42,7 @@ export default function SquadMarker({
       show={show}
       eager={eager}
       started={started}
+      league
     />
   );
 }

@@ -16,10 +16,7 @@ import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
 import { MINOR_LABEL, QUIET_NOTE, ROW_NAME } from "@/app/desk";
 import { returnDate } from "./returnDate";
-import { fdrStep } from "../football/fdr";
-
-/** A fixture tile's ink as a colour, for `.cm-out`, which would otherwise grey it on a reserve's row (`desk.css`). */
-const TILE_INK: Record<string, string> = { "text-black/85": "rgb(0 0 0 / 0.85)", "text-cream": "var(--color-cream)" };
+import { fdrTile } from "../football/fdr";
 import type { AutoSubMark } from "./autoSubbed";
 
 // One man's row in a squad list: our position, his club's crest, his name, his fixture and his figure.
@@ -34,7 +31,7 @@ export const SQUAD_CREST = "w-6";
 /** The figure columns, butted: each is exactly its head plate's width. */
 export const SQUAD_FIGURES = "flex shrink-0 items-center";
 /** The desk's Inf column (`cm9900/12.jpg`): his mark, the word and his return; a phone keeps them under the name. */
-export const SQUAD_INF = "hidden shrink-0 lg:flex lg:w-32";
+export const SQUAD_INF = "hidden shrink-0 lg:flex lg:w-24";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
 export const SQUAD_POINTS = "w-9";
 
@@ -184,12 +181,12 @@ export default function SquadRow({
 
 /** A fixture as CM fills a cell: FPL's difficulty is the ground, the words the club and venue; its title says how hard. */
 function FixtureTile({ text, difficulty }: { text: string; difficulty: number | null }) {
-  const step = fdrStep(difficulty);
+  const tile = fdrTile(difficulty);
   return (
     <span
       title={difficulty === null ? text : `${text}, difficulty ${difficulty} of 5`}
-      className={`cm-chip numeric ${SQUAD_OPPONENT} flex shrink-0 items-center justify-center self-stretch truncate text-xs font-bold ${step.ink}`}
-      style={{ background: step.ground, ["--cm-chip-ink" as string]: TILE_INK[step.ink] ?? "var(--color-muted)" }}
+      className={`cm-chip numeric ${SQUAD_OPPONENT} flex shrink-0 items-center justify-center self-stretch truncate text-xs font-bold ${tile.className}`}
+      style={tile.style}
     >
       {text}
     </span>
