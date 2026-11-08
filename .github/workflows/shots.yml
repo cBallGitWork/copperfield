@@ -1,0 +1,61 @@
+name: Shots
+
+# Screenshots of a branch's screens at the desk's and the phone's width, for checking a build against its approved
+# picture (docs/design/approved/) where no one can open the app: a session whose network cannot reach the providers.
+# Run by hand. The app is built from `ref`, started against the real league, and shot by tools/ui/shot.mjs.
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch or commit to build"
+        required: true
+        default: main
+      routes:
+        description: "Routes to shoot, space-separated"
+        required: true
+        default: "/league"
+
+concurrency:
+  group: shots-${{ inputs.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  shots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ inputs.ref }}
+          persist-credentials: false
+
+      - uses: ./.github/actions/node
+
+      - run: npm run build
+
+      - name: Shoot every route at 1440 and 390
+        env:
+          ROUTES: ${{ inputs.routes }}
+        run: |
+          set -euo pipefail
+          export FANTRAX_LEAGUE_ID="$(jq -r '.leagues[] | select(.key == "real") | .leagueId' data/leagues/recorded.json)"
+          npm run start &
+          npm run smoke:wait
+          google-chrome --headless=new --disable-gpu --no-sandbox --remote-debugging-port=9261 \
+            --no-first-run --user-data-dir="$(mktemp -d)" about:blank &
+          for _ in $(seq 1 30); do curl -sf -o /dev/null http://localhost:9261/json/version && break; sleep 1; done
+          mkdir -p shots
+          for route in $ROUTES; do
+            name="$(echo "$route" | tr '/?=&' '____' | sed 's/^_//')"
+            node tools/ui/shot.mjs "$route" "shots/${name:-home}-1440.png" --width 1440 --height 900
+            node tools/ui/shot.mjs "$route" "shots/${name:-home}-390.png" --width 390 --height 844
+          done
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: shots
+          path: shots/
+          retention-days: 3
