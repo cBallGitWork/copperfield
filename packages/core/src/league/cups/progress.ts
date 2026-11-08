@@ -3,7 +3,8 @@ import { cupPlan, type CupDecided, type CupFixture, type CupStage } from "./plan
 import type { LeagueTeam } from "../types";
 
 // A cup's draw as it stands: each tie's score off its two teams' gameweek totals, and every tie decided on points
-// carried into the round that waits on it. A level tie waits for the tie-break (`decideTie`), whose counts are not read.
+// carried into the round that waits on it. A level tie waits for the tie-break (`decideTie`), whose counts are not read,
+// unless `broken` names who went through on it, as the commissioner settled it.
 
 /** A side's score: each team's total for the gameweek, null where there is none yet. */
 export type CupScoreOf = (gameweek: number, teamId: string) => number | null;
@@ -11,8 +12,10 @@ export type CupScoreOf = (gameweek: number, teamId: string) => number | null;
 export interface CupScore {
   home: number | null;
   away: number | null;
-  /** Set once the gameweek is over and the points part the two. */
+  /** Set once the gameweek is over and the points part the two, or a recorded tie-break settles a level tie. */
   through?: "home" | "away";
+  /** Through on the tie-break, level on points. */
+  tieBreak?: true;
 }
 
 export type ScoredFixture = CupFixture & { score?: CupScore };
@@ -25,7 +28,10 @@ export function cupDraw(
   seeds: readonly LeagueTeam[],
   scoreOf: CupScoreOf,
   gameweek: { started(gameweek: number): boolean; finished(gameweek: number): boolean },
+  /** A level tie's winner by its code, settled by its tie-break: never read for a tie the points decide. */
+  broken: ReadonlyMap<string, string> = new Map(),
 ): ScoredStage[] {
+  const scored = (fixture: CupFixture, at: number) => scoreFor(fixture, at, scoreOf, gameweek, broken);
   const decided = new Map<string, { winner: LeagueTeam; loser: LeagueTeam }>();
   let stages = cupPlan(cup, teams, seeds, decided);
   // Each pass can settle one more round, as its sides are named by the last; a bracket has fewer rounds than ties.
@@ -33,7 +39,7 @@ export function cupDraw(
     const before = decided.size;
     for (const stage of stages) {
       for (const fixture of stage.fixtures) {
-        const settled = settle(fixture, stage.gameweek, scoreOf, gameweek);
+        const settled = settle(fixture, scored(fixture, stage.gameweek));
         if (settled !== null && fixture.code !== null) decided.set(fixture.code, settled);
       }
     }
@@ -43,7 +49,7 @@ export function cupDraw(
   return stages.map((stage) => ({
     ...stage,
     fixtures: stage.fixtures.map((fixture) => {
-      const score = scoreFor(fixture, stage.gameweek, scoreOf, gameweek);
+      const score = scored(fixture, stage.gameweek);
       return score === null ? fixture : { ...fixture, score };
     }),
   }));
@@ -55,22 +61,22 @@ function scoreFor(
   at: number,
   scoreOf: CupScoreOf,
   gameweek: { started(gameweek: number): boolean; finished(gameweek: number): boolean },
+  broken: ReadonlyMap<string, string>,
 ): CupScore | null {
   const { homeTeam, awayTeam } = fixture;
   if (homeTeam === undefined || awayTeam === undefined || !gameweek.started(at)) return null;
   const home = scoreOf(at, homeTeam.teamId);
   const away = scoreOf(at, awayTeam.teamId);
-  const over = gameweek.finished(at) && home !== null && away !== null && home !== away;
-  return over ? { home, away, through: home > away ? "home" : "away" } : { home, away };
+  if (!gameweek.finished(at) || home === null || away === null) return { home, away };
+  if (home !== away) return { home, away, through: home > away ? "home" : "away" };
+  // Level on points: through only on the tie-break the commissioner recorded, and only to one of these two.
+  const winner = fixture.code === null ? undefined : broken.get(fixture.code);
+  if (winner === homeTeam.teamId) return { home, away, through: "home", tieBreak: true };
+  if (winner === awayTeam.teamId) return { home, away, through: "away", tieBreak: true };
+  return { home, away };
 }
 
-function settle(
-  fixture: CupFixture,
-  at: number,
-  scoreOf: CupScoreOf,
-  gameweek: { started(gameweek: number): boolean; finished(gameweek: number): boolean },
-): { winner: LeagueTeam; loser: LeagueTeam } | null {
-  const score = scoreFor(fixture, at, scoreOf, gameweek);
+function settle(fixture: CupFixture, score: CupScore | null): { winner: LeagueTeam; loser: LeagueTeam } | null {
   if (score?.through === undefined || fixture.homeTeam === undefined || fixture.awayTeam === undefined) return null;
   return score.through === "home"
     ? { winner: fixture.homeTeam, loser: fixture.awayTeam }

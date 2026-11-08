@@ -35,3 +35,18 @@ describe("a cup's draw as it stands", () => {
     expect(stages.every((stage) => stage.fixtures.every((fixture) => fixture.score === undefined))).toBe(true);
   });
 });
+
+// GW10's M1 finished Cowthenbeef 48, its_ohi 48: level, and the tie-break's counts are not read.
+describe("a level tie settled by its tie-break", () => {
+  it("goes through the side the commissioner recorded, and carries both on", () => {
+    const stages = cupDraw(infusr, 10, seeds, scoreOf, upTo(11), new Map([["M2", "t10"]]));
+    expect(stages[0]?.fixtures[1]?.score).toEqual({ home: 21, away: 21, through: "away", tieBreak: true });
+    expect(stages.flatMap((stage) => stage.fixtures).some((fixture) => fixture.away === "Team 10" && fixture.code === "M5")).toBe(true);
+  });
+
+  it("ignores a record for a tie the points decided, or naming a team not in it", () => {
+    const stages = cupDraw(infusr, 10, seeds, scoreOf, upTo(11), new Map([["M1", "t9"], ["M2", "t3"]]));
+    expect(stages[0]?.fixtures[0]?.score?.through).toBe("home");
+    expect(stages[0]?.fixtures[1]?.score?.through).toBeUndefined();
+  });
+});

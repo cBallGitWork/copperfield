@@ -42,7 +42,11 @@ function Side({ fixture, at }: { fixture: ScoredFixture; at: "home" | "away" }) 
   const out = score?.through !== undefined && score.through !== at;
   return (
     <span className={`flex items-baseline justify-between gap-2 ${out ? "text-muted" : ""}`}>
-      <span className={`${ROW_NAME} truncate ${score?.through === at ? "text-ink" : ""}`}>{fixture[at]}</span>
+      <span className={`${ROW_NAME} truncate ${score?.through === at ? "text-ink" : ""}`}>
+        {fixture[at]}
+        {/* Level on points and through on the tie-break: the word stays for a screen reader, the mark for the eye. */}
+        {score?.tieBreak && score.through === at ? <span title="Through on the tie-break" className="pl-1 text-2xs text-muted">(tb)</span> : null}
+      </span>
       {score === undefined ? null : (
         <span className={`numeric shrink-0 text-sm font-bold ${out ? "text-muted" : "text-info"}`}>{score[at] ?? DASH}</span>
       )}

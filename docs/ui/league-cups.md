@@ -63,7 +63,9 @@ Live and Fixtures name a later round's sides from the same settled ties (`cupsDe
 ## What the draw still needs
 
 - **A level tie**: no read puts the counted men's categories against a tie, so `decideTie` still has no caller. A tie
-  level at full time keeps both sides in ink and its "Winner"/"Loser" slots stay placeholders until it does.
+  level at full time keeps both sides in ink and its "Winner"/"Loser" slots stay placeholders until the commissioner
+  records its winner in `data/leagues/cup-tiebreaks.json` (`cupTieBreaks`); the winner then carries a muted `(tb)`.
+  GW10's M1 finished Cowthenbeef 48, its_ohi 48, the first.
 
 ## States
 

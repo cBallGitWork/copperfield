@@ -1,6 +1,7 @@
 import { CUPS, cupDraw, type Cup, type CupDecided, type CupsDecided, type LeagueTeam, type PeriodResult, type ScoredStage } from "@epl/core";
 import { getSchedule, getSeasonResults, type ScheduleRound } from "../schedule/schedule";
 import { cupSeeds } from "../../cupSeeds";
+import { cupTieBreaks } from "../../cupTieBreaks";
 
 // Each cup as it stands, off the schedule and the season's totals: the bracket draws it, and Live and Fixtures name
 // a later round's sides from it once the round before is settled (Craig, 8 Nov 2026: "update the cup brackets").
@@ -24,6 +25,7 @@ export function cupStanding(
       return at === undefined ? null : (totals.get(`${at.period}:${teamId}`) ?? null);
     },
     { started: (gameweek) => round(gameweek)?.started ?? false, finished: (gameweek) => round(gameweek)?.status === "finished" },
+    cupTieBreaks(cup.id),
   );
 }
 
