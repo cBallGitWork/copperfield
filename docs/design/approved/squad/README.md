@@ -1,46 +1,38 @@
-# `/squad/[teamId]`: a squad
+# `/squad/[teamId]`: a squad, with its pitch
 
-Route: `/squad/me` (The Raccoons), the Squad tab, at 1440 and 390.
+Route: `/squad/<teamId>`, the Squad tab, at 1440, and at 390 in both of its views (`?view=list`, `?view=pitch`).
 
-Approved by Craig, 8 Nov 2026: *"Yes"*, to the four reskin boards after the review panel and the fresh-eyes review
-(`docs/design/boards/README.md` holds both, and every call decided on the way).
+Approved by Craig, 8 Nov 2026: *"Build"*, after *"Need pitches"* and *"Where's my nice shirts?"*. It replaces the
+first Squad picture, which was drawn from a doc that said the page had no pitch. This one was drawn around the page
+as served (shot through the `Shots` workflow on 8 Nov), then through the four-reviewer panel.
 
-- [`1440.png`](1440.png), drawn from [`Squad.html`](Squad.html)
-- [`390.png`](390.png), drawn from [`Squad-390.html`](Squad-390.html)
-
-## Held: the picture and the page disagree (8 Nov 2026)
-
-**Not built yet.** The board was drawn from `docs/ui/squad.md`, which says the squad page is a list with no pitch on it
-(Craig, 31 Aug and 6 Oct 2026). The page as served on 8 Nov is not: shot on `feat/reskin-shell`, `/squad/<team>`
-draws the list beside a pitch of the eleven, a `GW` points column, and two drop-downs (team and gameweek). Building
-the picture would take the pitch off a page that has one, which is a product call the picture never showed Craig.
-So the Squad waits for him: keep the pitch and redraw the board around it, or take the pitch off as the picture does.
-The doc is also out of step with the page, whichever way it goes.
+- [`1440.png`](1440.png), drawn from [`SquadPitch.html`](SquadPitch.html)
+- [`390-list.png`](390-list.png) and [`390-pitch.png`](390-pitch.png), from their `SquadPitch-390-*.html`
+- `kits/`: FPL's own kit pictures, © The Football Association Premier League, kept to draw the board only
 
 ## What it borrows from CM
 
-`cm9900/12.jpg`: the `Inf` column beside the name, the value block (our purple FPts), the head plates.
-`cm9900/25.jpg`: the team's own tabs (Squad, Transfers, Next Match, Fixtures, Stats). `cm9900/10.jpg`: the grey
-`Back`/`Next` bar stepping to the next squad.
+`cm9900/12.jpg`: the `Inf` column, the head plates, the value block (our purple GW points). `cm9900/19.jpg`: the
+eleven on turf beside the list. `cm9900/25.jpg`: the team's own tabs. `cm9900/10.jpg`: the grey `Back`/`Next` bar.
+
+## Decided on the way (Craig, 8 Nov 2026: "Build", taking the recommendations)
+
+- **The phone's deadline plate stays**, though it crosses "it hogs the page" (16 to 21 Oct, the planner): the
+  approved pictures carry it, and it shows only while the lock is ahead.
+- **The fixture tile is coloured** by FPL's five difficulty steps (DESIGN §3's FDR row), club and h/a only, no number.
+- **The opponent is the next fixture**, as served, whichever gameweek the picker shows.
+- **The foot bar steps to the teams either side in the table** (desk).
+- **A near-black team**: its bar the team's second colour as a bevelled plate; its index spine the league's blue.
 
 ## Interaction notes
 
-- **Rail** (desk): as on `/league`, and here `◄ ►` step the gameweek the squad shows (`?gw=`, today's picker).
-- **Tab strip**: the team's five tabs, as today; `Next Match` is `Next` under a thumb.
-- **A player's row**: opens his card, as today.
-- **`FPts` head**: sorted, drawn pressed.
-- **Bench**: its own grey plate, the order 1 to 3 as Fantrax's auto-subs read it.
-- **Fixture tile**: the club and h/a only, its colour the difficulty; the words ("difficulty 2 of 10") are its
-  title for a screen reader (Craig, 7 Nov 2026: *"Stop adding numbers to the fixture tile, team and h/a"*).
-- **Foot bar** (desk): the teams either side in the table, `◄ Bru` and `Atletico ►`; none past the first or last.
-- **Phone**: the deadline plate at the top; your own team's title bar left off for the list's room (a rival's
-  keeps it, with its `←`); the complaint and return under the name.
+- **Team picker, gameweek picker**: as today (`?gw=`); the team picker first.
+- **Phone `Pitch` / `List`**: as today (`?view=`).
+- **A player** (row or card): opens his card, as today.
+- **`GW` head**: the column the sheet is for, purple; sorted as today.
+- **Bench**: its plate, Fantrax's order 1 to 3; on your own pitch the strip under the turf, as the planner has it.
+- **Foot bar** (desk): `◄ <team above>` and `<team below> ►` in the table; none past the first or last.
 
 ## Placeholders
 
-None: xMins, the doubt bands and returns, the fixtures and FPts are all read today.
-
-## A near-black team
-
-The bar takes the team's second colour as a bevelled plate, black ink on The Raccoons' white; the index spine takes
-the league's blue, since a white spine read as column heads.
+None: every figure is read today.

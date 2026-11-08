@@ -10,7 +10,7 @@ clear-cut findings are fixed below. The rest are Craig's calls.
 | Board | Route | CM shots it borrows |
 |---|---|---|
 | [`LeagueTable.html`](../approved/league/LeagueTable.html), [`1440`](../approved/league/1440.png); [`390`](../approved/league/390.png) | `/league` | `cm9900/24.jpg` (the table, the caption plate, the Pts block) |
-| [`Squad.html`](../approved/squad/Squad.html), [`1440`](../approved/squad/1440.png); [`390`](../approved/squad/390.png) | `/squad/me` | `cm9900/12.jpg` (the Inf column, the value block), `25.jpg` (the team's tabs) |
+| `Squad.html` (replaced on 8 Nov by the pitch board, below; in git history) | `/squad/me` | `cm9900/12.jpg` (the Inf column, the value block), `25.jpg` (the team's tabs) |
 
 **The phone** (Craig, 7 Nov 2026: *"make sure mobile is looking good"*). Both boards at 390 by DESIGN §2's phone
 rules: the rail along the foot with Live in it, 44px tabs, a strip's labels on their short word (`Stats`) so none
@@ -85,9 +85,9 @@ closed that on 29 Aug 2026 and the boards follow DESIGN. Its line 27 lists `Pts 
 ## The Squad, redrawn with its pitch (8 Nov 2026)
 
 Craig, 8 Nov 2026: *"Need pitches"*. The approved Squad picture (`approved/squad/`) was drawn from a doc that said the
-page has no pitch; the page as served has one, so the board is redrawn around it: [`SquadPitch.html`](SquadPitch.html)
-([`1440`](SquadPitch-1440.png)), and the phone's two views, [List](SquadPitch-390-list.png) and
-[Pitch](SquadPitch-390-pitch.png). Shot from the served page first (`Shots` on `main`), so the board keeps what is
+page has no pitch; the page as served has one, so the board is redrawn around it: [`SquadPitch.html`](../approved/squad/SquadPitch.html)
+([`1440`](../approved/squad/1440.png)), and the phone's two views, [List](../approved/squad/390-list.png) and
+[Pitch](../approved/squad/390-pitch.png). Shot from the served page first (`Shots` on `main`), so the board keeps what is
 there: the team and gameweek pickers, the Pitch/List toggle on a phone, the GW column, the bench order, the minutes
 chips on the kits, the xMins date, and the bench in a strip under your own pitch (`docs/ui/squad.md`, the planner).
 
@@ -96,7 +96,7 @@ pickers as CM's grey dropdowns, the list with one `Inf` column, the fixture tile
 difficulty steps, GW points in the purple block, the eleven on CM's flat turf with grey name plates and their points
 or next fixture, the gameweek total in the caption (`32 pts`), and CM's foot bar to the teams either side.
 
-The kits are FPL's own pictures (`kits/`, fetched through CI on 8 Nov 2026, as `PlayerShirt` draws them), kept
+The kits are FPL's own pictures (`../approved/squad/kits/`, fetched through CI on 8 Nov 2026, as `PlayerShirt` draws them), kept
 beside the board for drawing it only: © The Football Association Premier League, never shipped or served from here.
 
 The panel's findings taken: the minutes chips back, the bench strip under the pitch, the rail's real labels and no
