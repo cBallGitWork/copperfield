@@ -61,6 +61,11 @@ holds to 820px while the rail only exists from `lg`. So at the tightest width
 where both are on screen there is ~200px of slack, and the front page had been
 the one screen in the app with no way back into it.
 
+**The desk stands in CM's frame** (Craig, 8 Nov 2026, the approved reskin, `docs/design/approved/`): from `lg` the
+rail and the page sit together in one centred frame, `--desk-frame` (75rem, 1200px; the page frame plus the rail from
+`2xl`), ruled in black, with the ground either side, as CM's 800x600 stood on a screen. `<main>` inside it is 1070px
+wide below `2xl`, still past the front page's 820px two-column hold.
+
 The Paper is the front page's `.paper` scope. The Desk is the root `@theme` —
 it has no class of its own, because it is the default and giving the default a
 class costs thirty components a class name for nothing.
@@ -236,8 +241,8 @@ were blue.
 
 | Object | Class | How CM draws it | Ours |
 |---|---|---|---|
-| **Tab strip** — one of a subject's views | `cm-tab` | filled royal-blue plates, bevelled, current one pressed with a yellow label and border | `shell/TabStrip`, `league/GroupNav`; one at the top for the screen's own views, a sub-view's in `shell/FootFrame`'s docked foot (20 Oct 2026), on the main strip's word ladder so it never wraps; from `lg` a strip may carry `desk` plates a phone has no room for (League's Waivers and Squads, 22 Oct 2026) |
-| **Rail** — where you can go from anywhere | — / `cm-thumbrail` | the page's own navy, each entry in a thin outlined box | `shell/Rail` above `lg`, accent on the label AND the border; `shell/ThumbRail` along the foot below it, a glyph over each word, accent on both and a 32px edge on top |
+| **Tab strip** — one of a subject's views | `cm-tab` | filled indigo plates (`--color-tab`) under the royal-blue title bar, bevelled, in mixed case, current one pressed with a yellow label and border (the approved reskin, 8 Nov 2026) | `shell/TabStrip`, `league/GroupNav`; one at the top for the screen's own views, a sub-view's in `shell/FootFrame`'s docked foot (20 Oct 2026), on the main strip's word ladder so it never wraps; from `lg` a strip may carry `desk` plates a phone has no room for (League's Waivers and Squads, 22 Oct 2026) |
+| **Rail** — where you can go from anywhere | — / `cm-thumbrail` | a column of raised plates (`cm-rail-plate`, `--color-rail-plate`) on the page's navy, headed by the day, the gameweek and its lock, and your team (`shell/RailHead`; 8 Nov 2026) | `shell/Rail` above `lg`, accent on the label AND the border; `shell/ThumbRail` along the foot below it, a glyph over each word, accent on both and a 32px edge on top |
 | **Foot row** — related screens, across the bottom | — | ONE filled strip, flat, a light edge along the top and a rule between plates, current marked on the label alone | not the phone's nav since 23 Sep 2026: a bottom tab bar goes where you can go from anywhere, which is the rail's job |
 
 `cm9900/12.jpg` and `19.jpg` carry the strip and the rail together; `24.jpg` and
@@ -473,6 +478,7 @@ is more specific than a palette; it is the reason the token names in
 | Slot | Token | Means | On `--bg` |
 |---|---|---|---|
 | Ground | `--color-bg` `surface` `raised` `line` | depth, never meaning | — |
+| Chrome | `--color-chrome` `--color-tab` `--color-rail-plate` | the title bar's royal blue, the tab strip's indigo, a rail plate: chrome, never meaning | ink 13.1 on the tab |
 | Ink | `--color-ink` `muted` `faint` | how loud | 17.0 · 8.6 · 5.7 |
 | Yellow | `--color-accent` | **yours · selected · active · primary** | 13.1 |
 | Cyan | `--color-info` | **a derived reading** — ours rather than recorded; and a row's kind on a ledger: the competition on a team's Fixtures, the deal on its Transfers (Craig, 7 Oct 2026, over the accent); and the league's points where they are the reading a screen is for — a scoreline, and FPts wherever it prints — the player page, the Players board, the squad list (and its Proj) and Live's Top stats (Craig, 4 Sep and 21 Oct 2026) — never lit as a standout; FPts is the only cyan figure column on any board, DCP taking each board's standout lights like any figure (21 Oct 2026). There cyan says "the reading", not "ours": the FPts head says whose | 11.2 |

@@ -51,7 +51,7 @@ export default function PageHeader({
     >
       {/* Wraps rather than clips: a fantasy team's name is printed whole. */}
       <h1
-        className="cm-title min-w-0 flex-1 text-balance text-center font-chrome text-lg font-bold uppercase lg:text-3xl"
+        className="cm-title min-w-0 flex-1 text-balance text-center font-chrome text-lg font-bold lg:text-3xl"
         style={plate ? { color: plate.ink } : undefined}
       >
         {title}

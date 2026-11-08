@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dayAndDateOfDay, kickoffAt, londonDate, londonDayAndTime, londonDayMonth, londonDayOf, londonMoment, londonTime, londonWeekday, onLondonDay, wallClockInstant } from "./time";
+import { cmDate, dayAndDateOfDay, kickoffAt, londonDate, londonDayAndTime, londonDayMonth, londonDayOf, londonMoment, londonTime, londonWeekday, onLondonDay, wallClockInstant } from "./time";
 
 // A real kickoff: 14:00Z in October is 15:00 in London, which is the whole
 // reason this module exists rather than a call to `toLocaleString`.
@@ -87,5 +87,22 @@ describe("wallClockInstant", () => {
 
   it("leaves a UTC wall clock where it is", () => {
     expect(at(wallClockInstant(wall("2026-10-25T01:30:00Z"), "UTC"))).toBe("2026-10-25T01:30:00.000Z");
+  });
+});
+
+// CM 99/00's sidebar dates the day `12.9.99` (cm9900/24.jpg), with no leading noughts.
+describe("cmDate", () => {
+  it("prints the London day as day.month.yy", () => {
+    expect(cmDate("2026-11-07T12:00:00Z")).toBe("7.11.26");
+    expect(cmDate("2026-01-03T09:00:00Z")).toBe("3.1.26");
+  });
+
+  it("takes London's day, not UTC's, either side of midnight", () => {
+    // 23:30 UTC on 31 Aug is 00:30 on 1 Sep in London (BST).
+    expect(cmDate("2026-08-31T23:30:00Z")).toBe("1.9.26");
+  });
+
+  it("returns a non-date as it came", () => {
+    expect(cmDate("TBC")).toBe("TBC");
   });
 });
