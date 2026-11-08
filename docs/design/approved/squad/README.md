@@ -8,6 +8,15 @@ Approved by Craig, 8 Nov 2026: *"Yes"*, to the four reskin boards after the revi
 - [`1440.png`](1440.png), drawn from [`Squad.html`](Squad.html)
 - [`390.png`](390.png), drawn from [`Squad-390.html`](Squad-390.html)
 
+## Held: the picture and the page disagree (8 Nov 2026)
+
+**Not built yet.** The board was drawn from `docs/ui/squad.md`, which says the squad page is a list with no pitch on it
+(Craig, 31 Aug and 6 Oct 2026). The page as served on 8 Nov is not: shot on `feat/reskin-shell`, `/squad/<team>`
+draws the list beside a pitch of the eleven, a `GW` points column, and two drop-downs (team and gameweek). Building
+the picture would take the pitch off a page that has one, which is a product call the picture never showed Craig.
+So the Squad waits for him: keep the pitch and redraw the board around it, or take the pitch off as the picture does.
+The doc is also out of step with the page, whichever way it goes.
+
 ## What it borrows from CM
 
 `cm9900/12.jpg`: the `Inf` column beside the name, the value block (our purple FPts), the head plates.
