@@ -34,6 +34,16 @@ jobs:
 
       - uses: ./.github/actions/node
 
+      # Scratch only: FPL's kit pictures for a board, printed into the log.
+      - name: Kits
+        run: |
+          set -euo pipefail
+          for k in 91 91_1 14 8 43 54 11 36 6; do
+            curl -sf -A "Mozilla/5.0" -o "kit_$k.png" "https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_${k}-220.png"
+            echo "SHOT-BEGIN kit_$k.png"; base64 -w 120 "kit_$k.png"; echo "SHOT-END"
+          done
+          exit 0
+
       - run: npm run build
 
       - name: Shoot every route at 1440 and 390
