@@ -7,7 +7,7 @@ import BoardLink from "./BoardLink";
 import type { QueryOption } from "../components/shell/QuerySelect";
 import type { PlayersQuery } from "./query";
 import { leaguePositionLabel } from "../positions";
-import { SMALL_CAPS, TAB, heldPlate } from "@/app/desk";
+import { SMALL_WORD, TAB, heldPlate } from "@/app/desk";
 
 // The pieces `BoardBar` arranges: the stat-group strip, the position chips, the figure chip, the badge that counts
 // what is on, and the shapes they are drawn in. `BoardBar` decides where a control goes at a width; each here decides
@@ -53,7 +53,7 @@ export function Carried({
  *  this now"*): one recipe, the plates differing only in colour. Two pixels tighter a side under a thumb, so the
  *  status chips, Filter and the search share a 390 phone's row. Local to `players/`, where all its sites are. */
 const PLATE =
-  `flex shrink-0 items-center justify-center gap-1 whitespace-nowrap min-h-11 px-2 ${SMALL_CAPS} lg:min-h-9 lg:px-2.5`;
+  `flex shrink-0 items-center justify-center gap-1 whitespace-nowrap min-h-11 px-2 ${SMALL_WORD} lg:min-h-9 lg:px-2.5`;
 
 /** A plate you press, at rest: the `Filter` link, an unpressed `Chip` and the pick field's button. */
 export const PRESSABLE = `${heldPlate(false)} ${PLATE}`;

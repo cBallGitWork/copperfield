@@ -3,18 +3,18 @@
 
 /* ---- Labels and figures --------------------------------------------------- */
 
-/** The small-caps label look, with no ink and no layout: callers keep their own. */
-export const SMALL_CAPS = "text-2xs font-bold uppercase";
+/** A desk label, as CM sets one: bold mixed case, never small capitals (DESIGN §10.1). No ink, no layout. */
+export const SMALL_WORD = "text-2xs font-bold";
 
-/** The same look a step down, for a tag or a key set beside something larger. Ink and layout are the caller's. */
-export const MINOR_CAPS = "text-3xs font-bold uppercase";
+/** The same look a step down, for a tag set beside something larger. Ink and layout are the caller's. */
+export const MINOR_WORD = "text-3xs font-bold";
 
-/** `SMALL_CAPS` in furniture ink. For another ink compose from `SMALL_CAPS`: an appended
+/** `SMALL_WORD` in furniture ink. For another ink compose from `SMALL_WORD`: an appended
  *  `text-bad` loses to `text-faint` on stylesheet order, whatever the class order says. */
-export const LABEL = `${SMALL_CAPS} text-faint`;
+export const LABEL = `${SMALL_WORD} text-faint`;
 
-/** `MINOR_CAPS` in furniture ink: `LABEL` a step down. */
-export const MINOR_LABEL = `${MINOR_CAPS} text-faint`;
+/** `MINOR_WORD` in furniture ink: `LABEL` a step down. */
+export const MINOR_LABEL = `${MINOR_WORD} text-faint`;
 
 /** A name you scan a row for; truncation is the caller's. */
 export const ROW_NAME = "font-chrome text-sm font-bold lg:text-base";
@@ -27,6 +27,9 @@ export const FIGURE_CELL = `numeric px-1.5 text-center ${ROW_FIGURE}`;
 
 /** `FIGURE_CELL` a little tighter under a thumb, for a board of a dozen columns or more. */
 export const FIGURE_CELL_TIGHT = `numeric px-1 text-center lg:px-1.5 ${ROW_FIGURE}`;
+
+/** The column a table is for, as CM's value block: the league's points on a board (DESIGN §3, Purple). */
+export const FOR_BLOCK = "bg-for font-bold text-ink";
 
 /** A standings figure: `FIGURE_CELL`, bold. */
 export const FIGURE = `${FIGURE_CELL} font-bold`;
@@ -132,13 +135,14 @@ export const PITCH_CAPTION = "text-center font-chrome text-2xs font-bold text-ac
 
 /** CM's blue title row across a panel, naming the section under it. */
 export const SECTION_BAR =
-  "flex min-h-7 items-center justify-center bg-chrome px-3 font-chrome text-2xs font-bold uppercase text-ink lg:min-h-8 lg:text-xs";
+  "flex min-h-7 items-center justify-center bg-chrome px-3 font-chrome text-2xs font-bold text-ink lg:min-h-8 lg:text-xs";
 
-/** A section's head row: title left, aside right, ruled under. */
-export const SECTION_HEAD = "flex items-baseline justify-between gap-3 border-b border-line pb-1";
+/** A section's head: CM's caption band across the panel's top, the title centred in yellow, an aside at its right. */
+export const SECTION_HEAD =
+  "cm-caption -mx-2 -mt-2 grid min-h-8 grid-cols-[1fr_auto_1fr] items-center gap-2 px-2 lg:min-h-10";
 
 /** A map's caption bar on its club or team plate: what it maps left, its count right. The plate is the caller's. */
-export const MAP_CAPTION = `flex items-baseline justify-between gap-2 px-2 py-1 ${SMALL_CAPS}`;
+export const MAP_CAPTION = `flex items-baseline justify-between gap-2 px-2 py-1 ${SMALL_WORD}`;
 
 /** The 24px every plate is cut to, ground and padding the caller's: a table's column head, a block's or a card's strip. */
 export const PLATE_FRAME = "flex h-6 items-center";
@@ -149,13 +153,13 @@ export const HEAD_PLATE = `cm-bevel ${PLATE_FRAME} px-1.5`;
 export const HEAD_PLATE_CENTRE = `${HEAD_PLATE} justify-center`;
 
 /** A plate naming a group of columns or a section of a match board. */
-export const GROUP_PLATE = `${HEAD_PLATE_CENTRE} text-2xs font-bold uppercase`;
+export const GROUP_PLATE = `${HEAD_PLATE_CENTRE} text-2xs font-bold`;
 
 /** A plate captioning a block inside a panel: a cup round, a group, a side of a bracket. */
-export const BLOCK_PLATE = `${HEAD_PLATE} ${MINOR_CAPS}`;
+export const BLOCK_PLATE = `${HEAD_PLATE} ${MINOR_WORD}`;
 
-/** A gameweek's head over a run of fixtures: a table's 24px plate in its minor caps, unpadded so "GW10" fits an eighth of a phone. */
-export const GW_PLATE = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap ${MINOR_CAPS}`;
+/** A gameweek's head over a run of fixtures: a table's 24px plate in its minor word, unpadded so "GW10" fits an eighth of a phone. */
+export const GW_PLATE = `cm-bevel ${PLATE_FRAME} justify-center whitespace-nowrap ${MINOR_WORD}`;
 
 /* ---- Panels and controls -------------------------------------------------- */
 

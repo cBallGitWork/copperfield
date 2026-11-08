@@ -61,9 +61,8 @@ describe("the squad list at 390", () => {
     expect(both.indexOf("Thu 15 Oct")).toBeGreaterThan(both.indexOf(">Bench<"));
   });
 
-  it("heads the opponent Opp under a thumb and Opponent on the desk", () => {
-    expect(head?.[2]).toContain('<span class="lg:hidden">Opp</span>');
-    expect(head?.[2]).toContain('<span class="hidden lg:inline">Opponent</span>');
+  it("heads the opponent Opp at both widths, the word in its title (the approved Squad picture)", () => {
+    expect(head?.[2]).toContain('title="Opponent">Opp</span>');
   });
 
   it("draws each row's fixed columns as wide as their heads", () => {

@@ -478,7 +478,7 @@ is more specific than a palette; it is the reason the token names in
 | Slot | Token | Means | On `--bg` |
 |---|---|---|---|
 | Ground | `--color-bg` `surface` `raised` `line` | depth, never meaning | — |
-| Chrome | `--color-chrome` `--color-tab` `--color-rail-plate` | the title bar's royal blue, the tab strip's indigo, a rail plate: chrome, never meaning | ink 13.1 on the tab |
+| Chrome | `--color-chrome` `--color-tab` `--color-rail-plate` `--color-caption` | the title bar's royal blue, the tab strip's indigo, a rail plate, a section's caption band (8 Nov 2026, the whole-site pass): chrome, never meaning | ink 13.1 on the tab · accent 8.6 · muted 5.7 on the band over the panel |
 | Ink | `--color-ink` `muted` `faint` | how loud | 17.0 · 8.6 · 5.7 |
 | Yellow | `--color-accent` | **yours · selected · active · primary** | 13.1 |
 | Cyan | `--color-info` | **a derived reading** — ours rather than recorded; and a row's kind on a ledger: the competition on a team's Fixtures, the deal on its Transfers (Craig, 7 Oct 2026, over the accent); and the league's points where they are the reading a screen is for — a scoreline, and FPts wherever it prints — the player page, the Players board, the squad list (and its Proj) and Live's Top stats (Craig, 4 Sep and 21 Oct 2026) — never lit as a standout; FPts is the only cyan figure column on any board, DCP taking each board's standout lights like any figure (21 Oct 2026). There cyan says "the reading", not "ours": the FPts head says whose | 11.2 |

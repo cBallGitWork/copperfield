@@ -4,7 +4,7 @@ import Link from "@/app/components/shell/Link";
 import ScrollBoard from "./ScrollBoard";
 import type { Deal, DealSide } from "@epl/core";
 import { crestForShortName, fantraxInstant, inkOn, kindOf, londonDayAndDate, londonDayMonth, londonDayOf, londonWeekday, moverOf, movement, toFplClubCode, initialled, DASH } from "@epl/core";
-import { INDEX_SPINE, LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
+import { INDEX_SPINE, LABEL, PANEL_FLUSH, SMALL_WORD } from "@/app/desk";
 import TeamName from "./TeamName";
 import PlayerName from "../shell/PlayerName";
 import { positionsFromList, positionsLabel } from "../../positions";
@@ -59,7 +59,7 @@ export default function Ledger({
   const traded = rows.some((row) => row.partners.length > 0);
   return (
     <section className={PANEL_FLUSH}>
-      <div className={`cm-bevel hidden h-6 items-center gap-2 pr-1.5 ${SMALL_CAPS} lg:flex`}>
+      <div className={`cm-bevel hidden h-6 items-center gap-2 pr-1.5 ${SMALL_WORD} lg:flex`}>
         <span className="w-24 shrink-0 px-1.5">Date</span>
         {everyone ? <span className="w-32 shrink-0">Team</span> : null}
         <span className="w-24 shrink-0">Type</span>
@@ -73,7 +73,7 @@ export default function Ledger({
           {rows.map(({ deal, mover, instant, opens, in: arrived, out: left, partners }) => {
             const kind = (
               <span
-                className={`${SMALL_CAPS} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${everyone ? "ml-auto min-w-0 text-right lg:ml-0" : "min-w-0"}`}
+                className={`${SMALL_WORD} text-info lg:order-2 lg:w-24 lg:shrink-0 lg:text-left lg:text-sm ${everyone ? "ml-auto min-w-0 text-right lg:ml-0" : "min-w-0"}`}
               >
                 {kindOf(deal, arrived.length, left.length)}
               </span>
@@ -237,7 +237,7 @@ function TeamPlate({ teamId, name }: { teamId: string; name: string }) {
   const colours = teamColours(teamId);
   return (
     <span
-      className={`block truncate px-1.5 py-0.5 text-center lg:line-clamp-2 lg:whitespace-normal ${SMALL_CAPS}`}
+      className={`block truncate px-1.5 py-0.5 text-center lg:line-clamp-2 lg:whitespace-normal ${SMALL_WORD}`}
       style={{ background: colours.primary, color: inkOn(colours) }}
     >
       {/* A manager who has left the league still has an id on the row. The league's short name under a thumb, where

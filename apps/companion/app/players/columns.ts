@@ -65,8 +65,8 @@ export interface PoolColumn {
   stat?: string;
   /** The kind of figure, where it prints at fixed places rather than as it arrives. */
   places?: FigureKind;
-  /** Recorded, but printed in the reading cyan and never marked: his league points (Craig, 21 Oct 2026). */
-  cyan?: true;
+  /** His league points: the column the board is for, in the purple block and never marked (Craig, 8 Nov 2026). */
+  points?: true;
   /** The categories whose prices say which positions it is drawn for, where not `scores` and `also`. */
   pays?: readonly FantraxCategory[];
   /** The league category it counts: Players draws it only where getLeagueInfo says the league scores it. */
@@ -128,13 +128,13 @@ export const COLUMNS: PoolColumn[] = [
     label: "FPts",
     title: "Fantasy points, under this league's scoring",
     group: "scoring",
-    cyan: true,
+    points: true,
     rate: true,
     ascending: false,
     fantasy: true,
     value: (row) => row.stats?.points ?? null,
   },
-  // Second, in amber beside FPts' cyan so the model's minutes never read as the league's points (Craig, 24 Oct 2026).
+  // Second, in amber beside FPts so the model's minutes never read as the league's points (Craig, 24 Oct 2026).
   {
     key: "xmins",
     label: "xMins",

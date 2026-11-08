@@ -147,7 +147,7 @@ describe("a ledger grouped by day under a thumb", () => {
 
 describe("a name under a thumb", () => {
   const phone = (html: string) => html.match(/<span class="min-w-0 \[overflow-wrap:anywhere\] lg:hidden">(.*?)<\/span><span class="hidden/)?.[1] ?? "";
-  const TAG = 'text-2xs font-bold uppercase text-faint shrink-0';
+  const TAG = 'text-2xs font-bold text-faint shrink-0';
 
   // UI audit D-12 (21 Oct 2026): the one list name, I. Surname under a thumb and in full on a desk, as PlayerName.
   it("initials the forename under a thumb, wraps rather than cuts, and truncates the full name only on a desk", () => {

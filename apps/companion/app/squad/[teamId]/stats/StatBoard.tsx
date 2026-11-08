@@ -8,7 +8,6 @@ import { playerHref } from "../../../players/routes";
 import { positionsFromList } from "../../../positions";
 import type { DefConWords } from "../../../defconWords";
 import { SELECT } from "../../../components/shell/ButtonLink";
-import BoardKey from "../../../components/league/BoardKey";
 import Board from "../../../components/league/Board";
 import LeadFace, { LEAD_LINK } from "../../../components/league/LeadFace";
 import { notedOf } from "../../../components/football/FitnessMark";
@@ -146,7 +145,6 @@ export default function StatBoard({
         }))}
       />
 
-      <BoardKey entries={measures.map((measure) => ({ label: measure.head, title: measure.label }))} />
     </section>
   );
 }

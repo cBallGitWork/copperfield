@@ -4,7 +4,7 @@ import Link from "@/app/components/shell/Link";
 import type { Club, CupTie, Fixture, RunEntry, SeasonOrder } from "@epl/core";
 import { COMPETITION_NAME, cupName, kickoffAt, londonDayAndDate, londonTime, DASH } from "@epl/core";
 import { clubHref } from "../../routes";
-import { BOARD, DESK_ONLY, FIGURE, MINOR_CAPS, MINOR_LABEL, ROW_HOVER, ROW_NAME, TAP_ROW } from "@/app/desk";
+import { BOARD, DESK_ONLY, FIGURE, MINOR_WORD, MINOR_LABEL, ROW_HOVER, ROW_NAME, TAP_ROW } from "@/app/desk";
 import { IndexCell, ROW_LINK } from "../../../components/league/TableCells";
 import Absent from "@/app/components/shell/Absent";
 import ClubLabel from "@/app/components/football/ClubLabel";
@@ -112,7 +112,7 @@ function leagueCells(fixture: Fixture, club: Club, clubs: Map<number, Club>): Ce
 function cupCells(tie: CupTie, byCode: Map<number, Club>): Cells {
   const competition = cupName(tie.competition);
   const opponent = tie.opponentCode === null ? undefined : byCode.get(tie.opponentCode);
-  const marker = <span className={`${MINOR_CAPS} min-w-0 truncate text-faint lg:hidden`}>{competition ?? DASH}</span>;
+  const marker = <span className={`${MINOR_WORD} min-w-0 truncate text-faint lg:hidden`}>{competition ?? DASH}</span>;
   return {
     key: `cup-${tie.competition}-${tie.kickoff}-${tie.opponentCode ?? tie.opponentName}`,
     kickoff: tie.kickoff,

@@ -1,3 +1,4 @@
+import { FOR_BLOCK } from "@/app/desk";
 import Link from "@/app/components/shell/Link";
 import { crestForShortName, fixed, isDoubtful, toFplClubCode, DASH } from "@epl/core";
 import type { FootballPlayer } from "@epl/core";
@@ -100,5 +101,5 @@ export function figureCell(
   if (column.ink) return { value: printed, className: `font-bold ${column.ink(figure)}` };
   // Zero is a stat, and a quiet one; so is a rate under its floor.
   if (figure === 0 || underFloor(column, stats, rated)) return { value: printed, className: "text-faint" };
-  return { value: printed, className: column.cyan ? "text-info" : column.mark ? standoutInk(figure, cut, column.mark) : "" };
+  return { value: printed, className: column.points ? FOR_BLOCK : column.mark ? standoutInk(figure, cut, column.mark) : "" };
 }

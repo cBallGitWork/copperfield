@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { clubOptions } from "./BoardControls";
 
-vi.mock("@/app/desk", () => ({ SMALL_CAPS: "", heldPlate: () => "" }));
+vi.mock("@/app/desk", () => ({ SMALL_WORD: "", heldPlate: () => "" }));
 vi.mock("@/app/components/shell/Link", () => ({ default: () => null }));
 
 // The board filters on Fantrax's codes; the menu prints the codes every other screen prints (review N30).

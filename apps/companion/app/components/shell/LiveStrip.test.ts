@@ -5,7 +5,7 @@ import LiveStrip from "./LiveStrip";
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/league" }));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
-vi.mock("@/app/desk", () => ({ SMALL_CAPS: "" }));
+vi.mock("@/app/desk", () => ({ SMALL_WORD: "" }));
 
 /** The strip's two figures in order, each with whether it is dimmed. */
 function figures(yours: number | null, theirs: number | null): { text: string; dim: boolean }[] {

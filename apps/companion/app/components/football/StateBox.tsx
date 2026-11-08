@@ -1,6 +1,6 @@
 import { availabilityOf, noteBesideChance, PART_JOIN } from "@epl/core";
 import type { FootballPlayer } from "@epl/core";
-import { MINOR_CAPS } from "@/app/desk";
+import { MINOR_WORD } from "@/app/desk";
 
 // The box beside a name that says why he is not playing; silent for a fit man and one the bridge has not settled.
 
@@ -19,7 +19,7 @@ export default function StateBox({ player }: { player: FootballPlayer | null }) 
   return (
     <span
       title={detail || undefined}
-      className={`numeric shrink-0 px-1 ${MINOR_CAPS} leading-[1.5] ${
+      className={`numeric shrink-0 px-1 ${MINOR_WORD} leading-[1.5] ${
         availability.out ? "cm-state" : "cm-state-doubt"
       }`}
     >

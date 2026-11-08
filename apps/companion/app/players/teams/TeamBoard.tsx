@@ -8,8 +8,6 @@ import { POOL } from "../routes";
 import TabStrip from "../../components/shell/TabStrip";
 import { FootFrame } from "../../components/shell/FootFrame";
 import ScoutShell from "../Shell";
-import ColumnKey from "../ColumnKey";
-import { PRESSABLE } from "../BoardControls";
 import { TEAM_COLUMNS, TEAM_GROUPS, plateHref, sortHref, type TeamColumn, type teamsView } from "./columns";
 import type { TeamRow } from "./teamRows";
 
@@ -89,9 +87,6 @@ export function ClubsBoards({ view, rows }: { view: ReturnType<typeof teamsView>
   return (
     <FootFrame foot={plates}>
       <ScoutShell current="teams">
-        <div className="flex justify-end lg:hidden">
-          <ColumnKey entries={view.columns.map((column) => ({ label: column.head, title: column.title }))} className={`${PRESSABLE} min-w-11`} />
-        </div>
         <div className="lg:hidden">
           <TeamBoard rows={rows} columns={view.columns} grouped={false} sort={sort} descending={descending} />
         </div>

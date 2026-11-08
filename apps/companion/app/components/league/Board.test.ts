@@ -32,10 +32,11 @@ describe("the one board", () => {
     expect(row).toEqual(expect.arrayContaining(["h-6", "lg:h-7"]));
   });
 
-  // The head was 28 over rows of 19: one 24px plate in 9px minor caps now, so a narrow board does not scroll.
-  it("heads its figures on the 24px plate in minor caps", () => {
+  // The head was 28 over rows of 19: one 24px plate in 9px words now, so a narrow board does not scroll; mixed case
+  // since the reskin (8 Nov 2026), a step up at the desk.
+  it("heads its figures on the 24px plate in mixed case", () => {
     const html = render({});
-    expect(html).toMatch(/<tr class="text-3xs font-bold uppercase">/);
+    expect(html).toMatch(/<tr class="text-3xs font-bold lg:text-2xs">/);
     expect(html).toMatch(/<div class="cm-bevel flex h-6 items-center whitespace-nowrap justify-center px-1\.5">G<\/div>/);
     expect(html.match(/<thead>[\s\S]*<\/thead>/)?.[0]).not.toContain("h-7");
   });

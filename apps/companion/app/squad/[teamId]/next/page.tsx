@@ -8,7 +8,7 @@ import { getLeagueSquads, readableOr404, teamDisplay } from "../../../squads";
 import { planningRound } from "../../../round";
 import { leagueTable } from "../../../standings";
 import Link from "@/app/components/shell/Link";
-import { LABEL, PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
+import { LABEL, PANEL_FLUSH, SMALL_WORD } from "@/app/desk";
 import { matchupHref } from "@/app/league/routes";
 import { teamColours } from "@/app/teamColours";
 import { placings } from "../../../league/placings";
@@ -131,7 +131,7 @@ function Fixture({
     <section className={PANEL_FLUSH}>
       {/* The gameweek on an ordinary strip of its own (Craig, 2 Sep 2026); `cm-tab`, as the title bar carries a masthead's height. */}
       <div className="cm-tab flex items-center justify-center px-2 py-1">
-        <span className={`numeric ${SMALL_CAPS} text-ink`}>Gameweek {gameweek}</span>
+        <span className={`numeric ${SMALL_WORD} text-ink`}>Gameweek {gameweek}</span>
       </div>
 
       {/* The whole plate opens the tie's head-to-head, never a dead box (19 Oct 2026). */}

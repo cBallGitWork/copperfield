@@ -2,9 +2,9 @@ import type { SquadDetailLine, SquadPlayerDetail } from "@epl/core";
 import type { AutoSubMark } from "./autoSubbed";
 import ScrollBoard from "./ScrollBoard";
 import SquadRow, { SQUAD_CREST, SQUAD_EDGE, SQUAD_FIGURES, SQUAD_GAP, SQUAD_INF, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
-import { MUTE, PLATE_START, headWord } from "./TableHeads";
+import { MUTE, PLATE_START } from "./TableHeads";
 import { FIGURE_HEADS, type SquadFigure } from "./squadFigure";
-import { MINOR_CAPS, PLATE_FRAME, QUIET_NOTE, SMALL_CAPS } from "@/app/desk";
+import { MINOR_WORD, PLATE_FRAME, QUIET_NOTE, SMALL_WORD } from "@/app/desk";
 
 // The squad as a list: one run of rows, each man's positions a column, since a heading cannot hold two. The caller
 // frames it (`PANEL_FLUSH`), so the position tiles meet the panel's edge as a spine on every branch.
@@ -67,7 +67,7 @@ export default function SquadRows({
       <div className="flex flex-col lg:min-w-max">
         {/* The house's head (`TableHeads`): bare over the tile, the crest and the name, butted plates over the figures.
             Under a thumb the figures take only their own width and the name the rest (Craig, 11 Oct 2026). */}
-        <div className={`flex items-center ${SQUAD_GAP} ${SQUAD_EDGE} ${MINOR_CAPS}`}>
+        <div className={`flex items-center ${SQUAD_GAP} ${SQUAD_EDGE} ${MINOR_WORD}`}>
           <span className="w-10 shrink-0">
             <span className={MUTE}>Pos</span>
           </span>
@@ -82,13 +82,12 @@ export default function SquadRows({
           </span>
           <span className={SQUAD_FIGURES}>
             {/* Who his CLUB plays this week — the football fixture, not ours. */}
-            <span className={`${FIGURE_HEAD} ${SQUAD_OPPONENT} shrink-0`}>
-              <span className="lg:hidden">Opp</span>
-              <span className="hidden lg:inline">Opponent</span>
+            <span className={`${FIGURE_HEAD} ${SQUAD_OPPONENT} shrink-0`} title="Opponent">
+              Opp
             </span>
             {xMins ? (
               <span className={`${FIGURE_HEAD} w-9 shrink-0`} title="Expected minutes this gameweek">
-                {headWord("xMins")}
+                xMins
               </span>
             ) : null}
             {scored ? (
@@ -104,7 +103,7 @@ export default function SquadRows({
         {bench.length === 0 ? null : (
           <>
             {/* The bench under a plate in the same list, as a board's tail (`Board`): no second box, no second head. */}
-            <p className={`${PLATE_START} ${SMALL_CAPS}`}>Bench</p>
+            <p className={`${PLATE_START} ${SMALL_WORD}`}>Bench</p>
             {rowsOf(bench, true)}
           </>
         )}

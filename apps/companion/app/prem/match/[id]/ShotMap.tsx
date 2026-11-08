@@ -7,7 +7,7 @@ import { PITCH_BOX, toBoxY } from "@/app/components/football/pitchBox";
 import { drawOrder } from "@/app/components/football/shotGeometry";
 import ShotMarks, { MarksKey } from "../../../components/football/ShotMarks";
 import { KeyPassKey, KeyPassLines, KeyPassOrigins, Pitch } from "../../../components/football/ShotPitch";
-import { BOARD, FIGURE_CELL, PINNED_ON_PHONE, ROW_RULE, SECTION_BAR, SMALL_CAPS, SORTED_CELL } from "@/app/desk";
+import { BOARD, FIGURE_CELL, PINNED_ON_PHONE, ROW_RULE, SECTION_BAR, SMALL_WORD, SORTED_CELL } from "@/app/desk";
 import { IndexCell } from "../../../components/league/TableCells";
 import {
   Head,
@@ -96,7 +96,7 @@ export default function ShotMap({
         {/* Pinned on a phone while the list scrolls under it (Craig, 19 Oct 2026); capped so the list keeps the screen. */}
         <div className={`flex min-w-0 flex-col gap-1 lg:col-start-1 ${PINNED_ON_PHONE}`}>
           {/* Each club's plate over the end it attacked. */}
-          <div className={`grid grid-cols-2 ${SMALL_CAPS}`}>
+          <div className={`grid grid-cols-2 ${SMALL_WORD}`}>
             <span
               className="flex justify-between px-2 py-1"
               style={{ background: home.colour, color: home.ink }}

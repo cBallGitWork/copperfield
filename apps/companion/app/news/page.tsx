@@ -13,7 +13,7 @@ import { readInbox } from "./inbox";
 import { ownerTag } from "./owner";
 import { NEWS, titled } from "../titles";
 import { MAIL } from "../components/shell/sections";
-import { SMALL_CAPS, MINOR_CAPS } from "@/app/desk";
+import { SMALL_WORD, MINOR_WORD } from "@/app/desk";
 
 // The manager's inbox, as CM files it (`docs/ui/reference/craig/02-news.jpg`): a dated list, the open letter beside it.
 // `?item=` picks the letter, so a headline is a link and the page stays a server component.
@@ -92,7 +92,7 @@ function Row({
       {/* The box that says OUT: filled when he will not play, outlined when he might (DESIGN §2). */}
       {item.mark === null ? null : (
         <span
-          className={`numeric shrink-0 self-center px-1 ${MINOR_CAPS} leading-[1.5] ${
+          className={`numeric shrink-0 self-center px-1 ${MINOR_WORD} leading-[1.5] ${
             item.mark.out ? "cm-state" : "cm-state-doubt"
           }`}
         >
@@ -101,7 +101,7 @@ function Row({
       )}
       {/* The open row's red ground decides this ink: `muted` is 3.79:1 on it. */}
       {who === null ? null : (
-        <span className={`flex shrink-0 items-center pr-1.5 ${SMALL_CAPS} ${open ? "text-ink" : "text-muted"}`}>
+        <span className={`flex shrink-0 items-center pr-1.5 ${SMALL_WORD} ${open ? "text-ink" : "text-muted"}`}>
           {who}
         </span>
       )}

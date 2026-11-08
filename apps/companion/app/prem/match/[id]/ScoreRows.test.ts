@@ -6,7 +6,7 @@ import { holdersOf } from "../../holders";
 import type { LeagueOpinion } from "../../leagueOpinions";
 import { Goal, Man } from "./ScoreRows";
 
-vi.mock("@/app/desk", () => ({ SMALL_CAPS: "" }));
+vi.mock("@/app/desk", () => ({ SMALL_WORD: "" }));
 vi.mock("../../../components/league/PlayerCardButton", () => ({
   MaybeCard: ({ className, children }: { className: string; children: ReactNode }) => createElement("span", { className }, children),
 }));
