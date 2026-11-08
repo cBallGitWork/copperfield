@@ -1,17 +1,18 @@
 import TabEmpty from "../../../components/league/TabEmpty";
-import { type CompetitionTie, leagueTies, periodPairings, seasonOrder } from "@epl/core";
+import { type CompetitionTie, seasonOrder } from "@epl/core";
 import TeamShell from "../Shell";
 import { leagueTeams } from "../team";
 import Season from "../../../league/schedule/Season";
 import { getSchedule, getSeasonResults, type ScheduleRound } from "../../../league/schedule/schedule";
 import { seasonRows } from "../../../league/schedule/teamSeason";
+import { roundTies } from "../../../league/fixtures/roundTies";
+import { cupsDecided } from "../../../league/cups/standing";
 import { PANEL } from "@/app/desk";
 import { UNAVAILABLE } from "../../../config";
 import { teamTitle } from "../title";
 
 // Every gameweek this side plays, the next first, then the rest to come, then the played, newest first: the only
-// view of one team's whole season.
-// Cup ties are not here: nobody is drawn into one yet, so no cup fixture can name this team.
+// view of one team's whole season, its cup ties among them once the draw names it (seeds, then settled ties).
 
 export const revalidate = 30;
 
@@ -37,8 +38,8 @@ export default async function FixturesPage({
 
   const { info } = read;
   // Finished gameweeks included, unlike the schedule screen, which hands them to Results.
-  const tiesIn = (at: ScheduleRound): CompetitionTie[] =>
-    leagueTies(periodPairings(info.matchups, info.teams, at.period));
+  const decided = await cupsDecided();
+  const tiesIn = (at: ScheduleRound): CompetitionTie[] => roundTies(info, at, decided);
 
   const rows = seasonRows(read.rounds, tiesIn, await getSeasonResults(), teamId);
 

@@ -54,19 +54,26 @@ describe("a team's season", () => {
     expect(cup).toMatch(/lg:hidden[^"]*"[^>]*>Tims INFUSR Energy Cup/);
     expect(league).not.toMatch(/lg:hidden[^"]*"[^>]*>League/);
     // The cyan column itself is the desk's alone.
-    expect(league).toMatch(/class="hidden [^"]*text-info lg:flex/);
+    expect(league).toMatch(/class="hidden [^"]*lg:flex[^"]*text-info/);
   });
 
   it("prints a gameweek to come as a faint dash, off the plate, still opening the matchup", () => {
     const [row] = items(draw({ toCome: [tie("a", 8)], played: [] }));
     expect(row).toMatch(/<a href="[^"]*gw=8&amp;vs=a" class="[^"]*min-h-9/);
-    expect(row).toMatch(/<span class="[^"]*h-6 w-12[^"]*text-faint[^"]*">—<\/span>/);
-    expect(row).not.toMatch(/cm-index[^"]*h-6 w-12[^"]*">—/);
+    expect(row).toMatch(/<span class="numeric text-faint">—<\/span>/);
+    expect(row).not.toMatch(/cm-index[^"]*">—/);
   });
 
-  it("prints a lowercase v", () => {
-    const [row] = items(draw({ toCome: [tie("a", 8)], played: [] }));
-    expect(row).toMatch(/<span class="[^"]*text-faint[^"]*">v<\/span>/);
-    expect(row).not.toMatch(/uppercase[^"]*">v</);
+  // The approved Fixtures picture (8 Nov 2026): the head strip carries Opponent, so no v before the name.
+  it("prints no v before the opponent, and heads every column once", () => {
+    const html = draw({ toCome: [tie("a", 8)], played: [] });
+    expect(items(html)[0]).not.toMatch(/">v<\/span>/);
+    for (const head of ["GW", "Date", "Opponent", "Competition", "Res", "Score"]) expect(html).toContain(`>${head}</span>`);
+  });
+
+  it("gives a played tie its result in its own column and the score in cyan", () => {
+    const [, row] = items(draw({ toCome: [], played: [tie("last", 7, FINISHED)] }));
+    expect(row).toMatch(/text-up text-sm">W</);
+    expect(row).toMatch(/text-info[^"]*">50<span[^>]*>:<\/span>40</);
   });
 });
