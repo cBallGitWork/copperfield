@@ -7,14 +7,17 @@ import { roundRobin } from "./roundRobin";
 import { scheduleRounds } from "./schedule";
 import type { LeagueTeam } from "../types";
 
-/** One cup match. `code` is how a later round names it ("M5"); a seeded side also carries its team. */
-interface CupFixture {
+/** One cup match. `code` is how a later round names it ("M5"); a side whose team is known also carries it. */
+export interface CupFixture {
   code: string | null;
   home: string;
   away: string;
   homeTeam?: LeagueTeam;
   awayTeam?: LeagueTeam;
 }
+
+/** A tie settled, by its code: who went through and who dropped to the losers' side. */
+export type CupDecided = ReadonlyMap<string, { winner: LeagueTeam; loser: LeagueTeam }>;
 
 export interface CupStage {
   name: string;
@@ -24,19 +27,19 @@ export interface CupStage {
   fixtures: CupFixture[];
 }
 
-/** A cup's whole calendar for a league of `teams`. `seeds` names a gameweek-seeded cup's entrants, best first; a side
- *  nobody names is a placeholder: "Seed 7", "A1", "2nd B", "Winner M5". */
-export function cupPlan(cup: Cup, teams: number, seeds: readonly LeagueTeam[] = []): CupStage[] {
+/** A cup's whole calendar for a league of `teams`. `seeds` names a gameweek-seeded cup's entrants, best first, and
+ *  `decided` the ties already settled; a side nobody names is a placeholder: "Seed 7", "A1", "2nd B", "Winner M5". */
+export function cupPlan(cup: Cup, teams: number, seeds: readonly LeagueTeam[] = [], decided: CupDecided = new Map()): CupStage[] {
   if (cup.seeding.from === "groups") {
     const groups = cupGroups(cup, teams);
     const seeds = groupQualifiers(
       groups.map((slots, group) => slots.map((_, place) => `${ordinal(place + 1)} ${letter(group)}`)),
       cup.seeding.stage.qualify,
     );
-    return [...groupStages(groups, cup.seeding.stage), ...knockoutStages(cup, seeds, [])];
+    return [...groupStages(groups, cup.seeding.stage), ...knockoutStages(cup, seeds, [], decided)];
   }
   const labels = Array.from({ length: teams }, (_, at) => seeds[at]?.name ?? `Seed ${at + 1}`);
-  return knockoutStages(cup, labels, seeds);
+  return knockoutStages(cup, labels, seeds, decided);
 }
 
 /** Each group's draw slots, "A1" to "A5": as even as the teams allow, the first groups taking any spare.
@@ -61,7 +64,7 @@ function groupStages(groups: readonly string[][], stage: GroupStage): CupStage[]
   }));
 }
 
-function knockoutStages(cup: Cup, seeds: readonly string[], teams: readonly LeagueTeam[]): CupStage[] {
+function knockoutStages(cup: Cup, seeds: readonly string[], teams: readonly LeagueTeam[], decided: CupDecided): CupStage[] {
   const double = cup.knockout.elimination === "double";
   const rounds = double ? doubleBracket(seeds.length) : seededBracket(seeds.length);
   const gameweeks = scheduleRounds(rounds, cup.knockout.finalGameweek);
@@ -72,10 +75,22 @@ function knockoutStages(cup: Cup, seeds: readonly string[], teams: readonly Leag
   const codes = new Map(played.flatMap((round) => round.ties).map((tie, at) => [tie.id, `M${at + 1}`]));
   const names = double ? doubleNames(rounds) : singleNames(rounds);
 
+  // A side's team: its seed's, or the winner or loser of a settled tie it waits on.
+  const teamOf = (side: BracketSide): LeagueTeam | undefined => {
+    if ("seed" in side) return teams[side.seed - 1];
+    const tie = decided.get(codes.get("winnerOf" in side ? side.winnerOf : side.loserOf) ?? "");
+    return tie === undefined ? undefined : "winnerOf" in side ? tie.winner : tie.loser;
+  };
   const label = (side: BracketSide) => {
+    const team = teamOf(side);
+    if (team !== undefined) return team.name;
     if ("seed" in side) return seeds[side.seed - 1] ?? `Seed ${side.seed}`;
     if ("winnerOf" in side) return `Winner ${codes.get(side.winnerOf) ?? ""}`;
     return `Loser ${codes.get(side.loserOf) ?? ""}`;
+  };
+  const sideTeam = (key: "homeTeam" | "awayTeam", side: BracketSide) => {
+    const team = teamOf(side);
+    return team ? { [key]: team } : {};
   };
 
   return played.map((round) => ({
@@ -86,15 +101,10 @@ function knockoutStages(cup: Cup, seeds: readonly string[], teams: readonly Leag
       code: codes.get(tie.id) ?? null,
       home: label(tie.home),
       away: label(tie.away),
-      ...sideTeam("homeTeam", tie.home, teams),
-      ...sideTeam("awayTeam", tie.away, teams),
+      ...sideTeam("homeTeam", tie.home),
+      ...sideTeam("awayTeam", tie.away),
     })),
   }));
-}
-
-function sideTeam(key: "homeTeam" | "awayTeam", side: BracketSide, teams: readonly LeagueTeam[]) {
-  const team = "seed" in side ? teams[side.seed - 1] : undefined;
-  return team ? { [key]: team } : {};
 }
 
 /** Within a gameweek the winners' round reads before the losers'. */

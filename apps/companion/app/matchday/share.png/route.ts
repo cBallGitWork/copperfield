@@ -2,6 +2,7 @@ import { roundState, type LiveTeamScore } from "@epl/core";
 import { now } from "../../clock";
 import { PAGE_REVALIDATE } from "../../config";
 import { liveNow } from "../../football";
+import { cupsDecided } from "../../league/cups/standing";
 import { roundTies } from "../../league/fixtures/roundTies";
 import { placings } from "../../league/placings";
 import { liveScores } from "../../scoreboard";
@@ -25,7 +26,7 @@ export async function GET(): Promise<Response> {
   // The same ties as Live's list: the league's pairings, then our cups.
   const ties =
     drafted?.info != null && period !== null
-      ? roundTies(drafted.info, { gameweek: snapshot.gameweek, period })
+      ? roundTies(drafted.info, { gameweek: snapshot.gameweek, period }, await cupsDecided())
       : [];
   const list = shareList({
     ties,
