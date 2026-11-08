@@ -1,8 +1,9 @@
 name: Bench order
 
 # Five minutes before each lineup lock, every bench its manager left unnumbered is numbered by total points with the
-# commissioner's session (`scripts/bench-order.ts`, Craig, 9 Oct 2026). GitHub's cron runs late, so it fires hourly
-# and a run waits only for a lock inside its window; any other run exits in a line. A numbered bench is left alone.
+# commissioner's session (`scripts/bench-order.ts`, Craig, 9 Oct 2026). GitHub's cron runs late and drops runs (only
+# two a day fired in early Nov, and GW10's lock on 6 Nov passed unwritten), so a run waits for any lock inside 330
+# minutes, and a run after a lock fails if that lock left a bench unnumbered. A numbered bench is left alone.
 
 on:
   schedule:
@@ -36,8 +37,8 @@ permissions:
 jobs:
   order:
     runs-on: ubuntu-latest
-    # Above the longest wait: the window less the five minutes, plus the setup.
-    timeout-minutes: 180
+    # Above the longest wait (the window less the five minutes, plus the setup), under the hosted runner's 360.
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -50,7 +51,7 @@ jobs:
         with:
           base: ${{ vars.WARM_BASE_URL }}
 
-      # The hourly cron leaves a 150-minute window: a run up to 90 minutes late still starts before the write.
+      # 330 minutes: one run in five and a half hours before a lock is enough, which GitHub's dropped runs still give.
       - name: Order the benches
         env:
           FANTRAX_LEAGUE_ID: ${{ steps.league.outputs.id }}
@@ -61,7 +62,7 @@ jobs:
         run: |
           args=()
           if [ "${{ github.event_name }}" = schedule ]; then
-            args=(--wait --within 150 --write)
+            args=(--wait --within 330 --write)
           else
             [ "$DRY_RUN" = true ] || args+=(--write)
             [ "$NOW" = true ] && args+=(--now)

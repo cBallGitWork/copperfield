@@ -942,8 +942,10 @@ Retired 1 Oct and deleted 9 Oct 2026 with the other weekly kinds; kept as the re
 - **So the order by points is ours to write** (Craig, 9 Oct: "if the bench is null, assign by Fantrax points"; "it's
   an automated script"). `npm run bench-order` (`scripts/bench-order.ts`) writes it with `setAutoSubsOrder` and the
   commissioner's session, once per deadline, five minutes before our computed lock (`BENCH_ORDER_LEAD_MINUTES`), from
-  an hourly workflow (`bench-order.yml`) whose run waits only for a lock within 150 minutes (`--within`), since
-  GitHub's cron runs up to an hour late; it moved off launchd on 9 Oct so it runs with the Mac off. It touches
+  an hourly workflow (`bench-order.yml`) whose run waits for a lock within 330 minutes (`--within`; 150 until 8 Nov
+  2026, when GW10's lock passed unwritten because GitHub dropped every run between 16:23 and 19:23 UTC, and its_ohi
+  had no auto-subs). A run within a day after a lock fails, opening the alert, if that lock left any bench
+  unnumbered. It moved off launchd on 9 Oct so it runs with the Mac off. It touches
   only a bench with no number on it: a manager's numbers, even on part of his bench, are left alone, so a second run
   reads its own write as numbered and sends nothing. A dry run unless `--write`. A reserve with no FPts reading goes
   last. It never writes at or after the lock (adminMode would override it) and re-reads the lock after its wait;
