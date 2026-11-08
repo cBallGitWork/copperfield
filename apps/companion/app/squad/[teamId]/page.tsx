@@ -16,7 +16,7 @@ import { identify } from "./team";
 import { squadView } from "./squadView";
 import { commissionerSession } from "./saving";
 import { teamTitle } from "./title";
-import { teamOptions } from "./teamOptions";
+import { tableNeighbours, teamOptions } from "./teamOptions";
 import { leagueTable } from "../../standings";
 
 // One manager's squad, laid out on a pitch. The screen the league opens on a
@@ -73,6 +73,7 @@ export default async function TeamPage({
     <TeamShell
       team={identify(team, slug)}
       current="squad"
+      neighbours={tableNeighbours(league, "unavailable" in table ? null : table, team.teamId)}
     >
       {planning !== null ? (
         <Above row={teams}>

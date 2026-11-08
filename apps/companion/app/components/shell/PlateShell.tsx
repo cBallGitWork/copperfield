@@ -11,6 +11,8 @@ import { PINNED_TOP } from "@/app/desk";
 
 export default function PlateShell({
   colours,
+  plate: given,
+  ownSpine = true,
   title,
   back,
   phoneBar = true,
@@ -19,6 +21,10 @@ export default function PlateShell({
 }: {
   /** Already resolved: a manager's come from `teamColours`, a club's and a player's from `clubColours`. */
   colours: ClubColours;
+  /** A plate already chosen (a team's, `teamPlate`), in place of the primary's. */
+  plate?: { background: string; ink: string };
+  /** Whether the tables inside run their index spine in the plate's colour, or keep the league's blue. */
+  ownSpine?: boolean;
   /** What goes on the bar, and nothing else. */
   title: string;
   /** Where the phone's back plate goes with no history; absent draws none. */
@@ -28,7 +34,7 @@ export default function PlateShell({
   tabs: ReactNode;
   children: ReactNode;
 }) {
-  const plate = plateOn(colours);
+  const plate = given ?? plateOn(colours);
   // No back plate on a bar a phone never draws: a hidden one would still lock, and claim the top's room.
   const header = <PageHeader title={title} plate={plate} back={phoneBar ? back : undefined} />;
 
@@ -38,10 +44,12 @@ export default function PlateShell({
     <div
       className={`cm-index-scoped flex flex-col gap-2 ${SCREEN_TALL}`}
       style={
-        {
-          "--cm-index": plate.background,
-          "--cm-index-ink": plate.ink,
-        } as CSSProperties
+        ownSpine
+          ? ({
+              "--cm-index": plate.background,
+              "--cm-index-ink": plate.ink,
+            } as CSSProperties)
+          : undefined
       }
     >
       {/* Off a phone's screen, never out of its outline: the bar holds the page's h1. */}

@@ -53,8 +53,8 @@ describe("the number on a head-to-head tile", () => {
   });
 
   // Craig, 19 Oct 2026: "just show who he is playing", not the club on his shirt.
-  it("is his fixture before it kicks off, whatever the table says", () => {
-    expect(band(rice(3, "upcoming"))).toEqual(["Rice", "v WHU (H)"]);
+  it("is his fixture before it kicks off, whatever the table says, club and venue as the list's tile has it", () => {
+    expect(band(rice(3, "upcoming"))).toEqual(["Rice", "WHU (H)"]);
   });
 
   // 19 Oct 2026: FPL's fixtures held from before kickoff while its reads were refused; Fantrax had credited him.
@@ -94,5 +94,29 @@ describe("a name plate on the grass", () => {
 
   it("keeps a single word on one line, cut if it must be", () => {
     expect(plate("Donnarumma")).not.toContain("pitch-name-breaks");
+  });
+});
+
+// The approved Squad picture: the league's score in the purple block, a fixture on FPL's difficulty.
+const line = (player: SquadPlayerDetail) => {
+  const spans = [...renderToStaticMarkup(createElement(SquadMarker, { player })).matchAll(/<span class="numeric ([^"]*)"( style="([^"]*)")?>/g)];
+  const last = spans.at(-1);
+  return { className: last?.[1] ?? "", style: last?.[3] ?? "" };
+};
+
+describe("the ground under a squad's name plate", () => {
+  it("is the purple block for a score", () => {
+    expect(line(rice(6, "live")).className).toContain("bg-for");
+  });
+
+  it("is his fixture's difficulty before kickoff", () => {
+    const { className, style } = line(rice(null, "upcoming"));
+    expect(className).toContain("cm-chip");
+    expect(style).toContain("var(--color-fdr-2)");
+  });
+
+  it("stays plain for a dash, which is neither a score nor a fixture", () => {
+    expect(line(rice(null, "finished")).className).not.toContain("bg-for");
+    expect(line({ ...rice(null, "upcoming"), opposition: [] }).className).not.toContain("cm-chip");
   });
 });

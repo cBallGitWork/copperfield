@@ -17,3 +17,12 @@ const UNRATED = { ground: "var(--color-raised)", ink: "text-muted" };
 export function fdrStep(difficulty: number | null): { ground: string; ink: string } {
   return (difficulty === null ? undefined : STEPS[difficulty]) ?? UNRATED;
 }
+
+/** A step's ink as a colour, for `.cm-chip`'s `--cm-chip-ink`, which `.cm-out` would otherwise grey (`desk.css`). */
+const CHIP_INK: Record<string, string> = { "text-black/85": "rgb(0 0 0 / 0.85)", "text-cream": "var(--color-cream)" };
+
+/** A fixture as a CM tile on its difficulty: the ink class, and the ground and chip ink as a style. */
+export function fdrTile(difficulty: number | null): { className: string; style: Record<string, string> } {
+  const step = fdrStep(difficulty);
+  return { className: step.ink, style: { background: step.ground, "--cm-chip-ink": CHIP_INK[step.ink] ?? "var(--color-muted)" } };
+}

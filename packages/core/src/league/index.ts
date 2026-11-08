@@ -183,7 +183,7 @@ export type { PlayerStatLine, RawPlayerStats } from "./fantrax/playerStats";
 export { PLAYER_CATEGORIES } from "./playerCategories";
 export { ordinal, printedPlaces } from "./ordinal";
 export { signed } from "./signed";
-export { coloursOf, type TeamColours } from "./teamColours";
+export { coloursOf, teamPlate, type TeamColours } from "./teamColours";
 export { rankBy } from "./categoryBoard";
 export type { CategoryLine } from "./fantrax/seasonStats";
 export {

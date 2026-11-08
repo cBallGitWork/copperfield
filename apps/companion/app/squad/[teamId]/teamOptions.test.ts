@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { teamOptions } from "./teamOptions";
+import { tableNeighbours, teamOptions } from "./teamOptions";
 
 const teams = [
   { teamId: "a", teamName: "Alpha" },
@@ -45,5 +45,28 @@ describe("teamOptions", () => {
       { teamId: "a", rank: 2 },
     ];
     expect(teamOptions(teams, table).map((option) => option.label)).toEqual(["1st Bravo", "2nd Alpha", "Charlie"]);
+  });
+});
+
+// CM's foot bar steps to the teams either side in the table (the approved Squad picture, 8 Nov 2026).
+describe("tableNeighbours", () => {
+  const teams = [
+    { teamId: "a", teamName: "Ayes" },
+    { teamId: "b", teamName: "Bees" },
+    { teamId: "c", teamName: "Cees" },
+  ];
+  const table = [
+    { teamId: "b", rank: 1 },
+    { teamId: "a", rank: 2 },
+    { teamId: "c", rank: 3 },
+  ];
+
+  it("names the team above and below in the table", () => {
+    expect(tableNeighbours(teams, table, "a")).toEqual({ above: { teamId: "b", teamName: "Bees" }, below: { teamId: "c", teamName: "Cees" } });
+  });
+
+  it("has none past the top or the bottom", () => {
+    expect(tableNeighbours(teams, table, "b").above).toBeNull();
+    expect(tableNeighbours(teams, table, "c").below).toBeNull();
   });
 });

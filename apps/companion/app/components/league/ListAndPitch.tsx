@@ -33,7 +33,7 @@ export default function ListAndPitch({
       <BothReadings view={view} list={list} pitch={pitch} />
     ) : (
       <section className={PANEL_FLUSH}>
-        <BothReadings view={view} list={list} pitch={<div className="p-2">{pitch}</div>} />
+        <BothReadings view={view} list={list} pitch={<div className="p-2">{pitch}</div>} listWide />
       </section>
     );
 

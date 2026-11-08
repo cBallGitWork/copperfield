@@ -79,9 +79,7 @@ export default function Sheet({
         // `pitch-squad`: the chrome this page keeps above a phone's filled pitch (`pitch.css`).
         <div className="pitch-squad">
           {/* A heading over the grass (Craig, 3 Sep 2026): the side as it stands, or a played week and its total. */}
-          <p className={`cm-title pb-1 ${PITCH_CAPTION}`}>
-            {sheetCaption(rows, show === "points" ? gameweek : null)}
-          </p>
+          <SheetCaption {...sheetCaption(rows, show === "points" ? gameweek : null)} />
           <TeamSheet
             rows={rows}
             // No bench on the grass: a reserve has no place in a formation.
@@ -98,5 +96,15 @@ export default function Sheet({
         </div>
       }
     />
+  );
+}
+
+/** The week in CM's yellow, and the eleven's total in the purple block (`--color-for`) beside it. */
+function SheetCaption({ title, total }: { title: string; total: string | null }) {
+  return (
+    <p className={`cm-title flex items-center justify-center gap-3 pb-1 ${PITCH_CAPTION}`}>
+      {title}
+      {total === null ? null : <span className="numeric bg-for px-2 text-ink [text-shadow:none]">{total}</span>}
+    </p>
   );
 }

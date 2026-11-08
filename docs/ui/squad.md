@@ -161,7 +161,7 @@ gameweeks already played) has no column at all rather than a column of dashes; t
 on the player card at the head of its Next row. The day is the export's (`XMINS_AS_OF`); undated, Friday's
 figure passed for Monday's.
 
-**FPts prints in the reading cyan** (Craig, 21 Oct 2026: *"put fpts in cyan too"*; DESIGN §3's Cyan row): the column
+~~**FPts prints in the reading cyan**~~ *Superseded 8 Nov 2026: the points column is CM's purple block (`--color-for`, DESIGN §3), the opponent a tile in FPL's difficulty, and the desk's mark and note an Inf column (`docs/design/approved/squad/`).* **FPts prints in the reading cyan** (Craig, 21 Oct 2026: *"put fpts in cyan too"*; DESIGN §3's Cyan row): the column
 was amber on every row, the standout slot lit for nobody in particular. "Proj" takes the same ink. Live's Top stats
 FPts list follows (`lists.figureInk`); its xG and xA lists keep the lone figure's amber. **DCP on the Stats board lost
 its cyan** the same day (`statViews.measureInk`): our DefCon points take the board's standout lights like any count,

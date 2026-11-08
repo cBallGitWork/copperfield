@@ -16,6 +16,7 @@ import { rowFixture } from "./rowFixture";
 import PlayerName from "../shell/PlayerName";
 import { MINOR_LABEL, QUIET_NOTE, ROW_NAME } from "@/app/desk";
 import { returnDate } from "./returnDate";
+import { fdrTile } from "../football/fdr";
 import type { AutoSubMark } from "./autoSubbed";
 
 // One man's row in a squad list: our position, his club's crest, his name, his fixture and his figure.
@@ -29,6 +30,8 @@ export const SQUAD_EDGE = "pr-1.5";
 export const SQUAD_CREST = "w-6";
 /** The figure columns, butted: each is exactly its head plate's width. */
 export const SQUAD_FIGURES = "flex shrink-0 items-center";
+/** The desk's Inf column (`cm9900/12.jpg`): his mark, the word and his return; a phone keeps them under the name. */
+export const SQUAD_INF = "hidden shrink-0 lg:flex lg:w-24";
 export const SQUAD_OPPONENT = "w-11 lg:w-[5.5rem]";
 export const SQUAD_POINTS = "w-9";
 
@@ -90,7 +93,9 @@ export default function SquadRow({
           <span className="flex min-w-0 max-w-full items-center gap-1.5">
             <span className={`min-w-0 truncate ${ROW_NAME}`}><PlayerName name={fullPlayerName(player.rostered)} /></span>
             {mark ? (
-              <StateMark availability={mark} />
+              <span className="lg:hidden">
+                <StateMark availability={mark} />
+              </span>
             ) : doubted ? (
               <span title="Might not start" className={`numeric shrink-0 ${MINOR_LABEL}`}>
                 <span aria-hidden>MNS</span>
@@ -98,10 +103,14 @@ export default function SquadRow({
               </span>
             ) : null}
           </span>
-          {mark ? <FitnessNote player={notedOf(footballer)} /> : null}
+          {mark ? (
+            <span className="lg:hidden">
+              <FitnessNote player={notedOf(footballer)} />
+            </span>
+          ) : null}
         </span>
-        {/* FPL's expected day under the name on a phone, beside it on a desk. */}
-        {back === null ? null : <span className={`${QUIET_NOTE} shrink-0 leading-tight`}>{back}</span>}
+        {/* FPL's expected day under the name on a phone; the desk's Inf column carries it. */}
+        {back === null ? null : <span className={`${QUIET_NOTE} shrink-0 leading-tight lg:hidden`}>{back}</span>}
         {autoSub === undefined ? null : (
           <span className="shrink-0 truncate text-2xs leading-tight text-info">
             {autoSub.on ? `Auto-sub for ${autoSub.with}` : `Auto-sub: ${autoSub.with} on`}
@@ -109,11 +118,23 @@ export default function SquadRow({
         )}
       </span>
 
-      <span className={SQUAD_FIGURES}>
-        {/* His fixture this week; his own club is not repeated beside it, or it reads as two unrelated clubs. */}
-        <span className={`numeric ${SQUAD_OPPONENT} shrink-0 truncate text-xs ${fixture.quiet ? "text-faint" : "text-muted"}`}>
-          {fixture.text}
-        </span>
+      {/* The desk's Inf column: his mark, then why and when he is back, in the quiet words. */}
+      <span className={`${SQUAD_INF} items-center gap-1.5`}>
+        {mark ? <StateMark availability={mark} /> : null}
+        {mark ? <FitnessNote player={notedOf(footballer)} /> : null}
+        {back === null ? null : <span className={`${QUIET_NOTE} truncate`}>{back}</span>}
+      </span>
+
+      {/* Stretched to the row, giving back `.cm-row`'s desk padding, so the tile and the points block meet the rules. */}
+      <span className={`${SQUAD_FIGURES} self-stretch lg:-my-0.5`}>
+        {/* His fixture this week as a tile in FPL's difficulty, club and venue only (Craig, 7 Nov 2026: no numbers). */}
+        {fixture.quiet ? (
+          <span className={`numeric ${SQUAD_OPPONENT} flex shrink-0 items-center justify-center text-xs text-faint`}>
+            {fixture.text}
+          </span>
+        ) : (
+          <FixtureTile text={fixture.text} difficulty={fixture.difficulty} />
+        )}
 
         {/* The model's xMins for the gameweek on screen, inked by risk (`minutesInk`); no run, no cell. */}
         {player.minutes.length === 0 ? null : (
@@ -124,9 +145,11 @@ export default function SquadRow({
 
         {/* The league's points in the reading cyan (DESIGN §3). Undefined is no table and drops the cell; null, a dash.
             A step above §6's row figure (DESIGN §6 records why). */}
-        {points === undefined ? null : (
-          <span className={`numeric ${SQUAD_POINTS} shrink-0 text-center text-base font-bold text-info lg:text-lg`}>
-            {points ?? DASH}
+        {points === undefined ? null : points === null ? (
+          <span className={`numeric ${SQUAD_POINTS} flex shrink-0 items-center justify-center text-base text-muted`}>{DASH}</span>
+        ) : (
+          <span className={`numeric ${SQUAD_POINTS} flex shrink-0 items-center justify-center self-stretch bg-for text-base font-bold text-ink lg:text-lg`}>
+            {points}
           </span>
         )}
       </span>
@@ -153,5 +176,19 @@ export default function SquadRow({
     </button>
   ) : (
     <div className={shell}>{inside}</div>
+  );
+}
+
+/** A fixture as CM fills a cell: FPL's difficulty is the ground, the words the club and venue; its title says how hard. */
+function FixtureTile({ text, difficulty }: { text: string; difficulty: number | null }) {
+  const tile = fdrTile(difficulty);
+  return (
+    <span
+      title={difficulty === null ? text : `${text}, difficulty ${difficulty} of 5`}
+      className={`cm-chip numeric ${SQUAD_OPPONENT} flex shrink-0 items-center justify-center self-stretch truncate text-xs font-bold ${tile.className}`}
+      style={tile.style}
+    >
+      {text}
+    </span>
   );
 }

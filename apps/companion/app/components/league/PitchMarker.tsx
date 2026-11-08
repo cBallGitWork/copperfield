@@ -13,6 +13,7 @@ import {
 import EmptySlot from "./EmptySlot";
 import PlayerImage from "./PlayerImage";
 import PlayerShirt from "./PlayerShirt";
+import { fdrTile } from "../football/fdr";
 import { NAME_SIZE, PITCH_BAND } from "./PitchRows";
 
 // One player on CM's pitch: his kit (or, where the caller asks, his face), his name on CM's bevelled plate, and a
@@ -41,6 +42,7 @@ export default function PitchMarker({
   face,
   eager,
   started = kickedOff(opposition),
+  league = false,
 }: {
   /** The footballer, or null for a slot with nobody behind it — read to tell the two apart and for his doubt. */
   player: FootballPlayer | null;
@@ -64,14 +66,18 @@ export default function PitchMarker({
   eager?: boolean;
   /** Whether his match is on, where the caller knows better than FPL's fixture status (`underway`). */
   started?: boolean;
+  /** Our league's squad: its points in the purple block, its fixture on FPL's difficulty (the approved Squad picture). */
+  league?: boolean;
 }) {
   // Nobody at all: no man AND no club. A named man the bootstrap lacks still has his club's kit.
   const nobody = player === null && club === undefined;
 
   // Who he plays until he has kicked off, never his own club (Craig, 19 Oct 2026); a blank is a dash.
   const against = fixtureLabel(opposition);
-  const fixture = against === null ? DASH : `v ${against}`;
-  const line = band ?? (show === "points" && started ? String(points ?? DASH) : fixture);
+  const fixture = against === null ? DASH : league ? against : `v ${against}`;
+  const scored = band === undefined && show === "points" && started;
+  const line = band ?? (scored ? String(points ?? DASH) : fixture);
+  const ground = lineGround(league && band === undefined, scored ? (points ?? null) : undefined, against, opposition);
 
   // How likely he is to miss (red out, orange major, yellow slight), as the card's wash and the plate's ground.
   const doubt = doubtBand(availabilityOf(player));
@@ -107,12 +113,29 @@ export default function PitchMarker({
       {line === "" ? null : (
         <span
           // A score or a fixture is read at arm's length; a caller's own word is a label and stays small.
-          className={`numeric ${band === undefined ? "text-xs" : "text-3xs"} ${PITCH_BAND}`}
-          style={{ background: "var(--color-bg)", color: "var(--color-cream)" }}
+          className={`numeric ${band === undefined ? "text-xs" : "text-3xs"} ${PITCH_BAND} ${ground.className}`}
+          style={ground.style}
         >
           <span className="w-full truncate">{line}</span>
         </span>
       )}
     </div>
   );
+}
+
+const PLAIN = { className: "", style: { background: "var(--color-bg)", color: "var(--color-cream)" } };
+
+/** The line's ground: plain, or on our league's squad the purple block for a score and the difficulty tile for a
+ *  fixture. `score` is undefined while he shows a fixture; a null score or a blank fixture stays plain. */
+function lineGround(
+  league: boolean,
+  score: number | null | undefined,
+  against: string | null,
+  opposition: Opposition[] | undefined,
+): { className: string; style: Record<string, string> } {
+  if (!league) return PLAIN;
+  if (score !== undefined) return score === null ? PLAIN : { className: "bg-for text-ink", style: {} };
+  if (against === null) return PLAIN;
+  const tile = fdrTile(opposition?.[0]?.difficulty ?? null);
+  return { className: `cm-chip ${tile.className}`, style: tile.style };
 }
