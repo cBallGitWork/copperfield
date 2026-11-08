@@ -33,6 +33,9 @@ export interface Options {
 /** A lock moved later while the run slept is waited for again, this many times at most. */
 const MAX_WAITS = 3;
 
+/** How long after a lock a later run still checks its benches were numbered: GitHub drops scheduled runs. */
+const MISSED_WITHIN_MS = 24 * 60 * MS_PER_MINUTE;
+
 /** The run's exit code: 1 when any read or write failed, or the lock passed before the write. */
 export async function benchOrderRun(deps: Deps, options: Options): Promise<number> {
   const next = await deps.next();
@@ -40,6 +43,35 @@ export async function benchOrderRun(deps: Deps, options: Options): Promise<numbe
     deps.log("No period ahead has a lock: nothing to order.");
     return 0;
   }
+  const { period } = next;
+  // A run GitHub dropped leaves the last lock unwritten and its teams without auto-subs (GW10, 6 Nov 2026): say so.
+  const missed = options.write && options.team === undefined ? await unwritten(deps, period - 1) : 0;
+  const result = await order(deps, options, next);
+  return missed > 0 ? 1 : result;
+}
+
+/** How many teams' benches the last lock behind the run left unnumbered, read only within a day of it. */
+async function unwritten(deps: Deps, period: number): Promise<number> {
+  if (period < 1) return 0;
+  const lock = await deps.lockOf(period);
+  const since = lock === null ? NaN : deps.now() - Date.parse(lock);
+  if (!(since >= 0 && since < MISSED_WITHIN_MS)) return 0;
+  const left: string[] = [];
+  for (const team of await deps.teams()) {
+    try {
+      if (teamPlan(await deps.roster(team.teamId, period), period).kind === "write") left.push(team.name);
+    } catch {
+      // A read that fails here is the current period's to report; this check only looks back.
+    }
+  }
+  if (left.length > 0) {
+    deps.log(`Period ${period} locked at ${lock} with ${left.length} bench${left.length === 1 ? "" : "es"} unnumbered: ${left.join(", ")}.`);
+  }
+  return left.length;
+}
+
+/** The current deadline's pass. */
+async function order(deps: Deps, options: Options, next: { period: number; lock: string | null }): Promise<number> {
   const { period } = next;
   let moment = momentOf(next.lock, deps.now(), options.within);
   for (let waits = 0; options.wait && moment.kind === "wait" && waits < MAX_WAITS; waits++) {

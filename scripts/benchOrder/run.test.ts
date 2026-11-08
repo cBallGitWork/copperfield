@@ -227,3 +227,34 @@ describe("benchOrderRun", () => {
     expect(second.writes).toEqual([]);
   });
 });
+
+// GW10, 6 Nov 2026: GitHub dropped every hourly run between 16:23 and 19:23, the 19:45 lock passed unwritten and its_ohi
+// had no auto-subs. The next run looked only at GW11 and exited green. A later run now checks the last lock behind it.
+describe("a lock that passed unwritten", () => {
+  const LAST = "2026-10-10T11:15:00.000Z";
+  const NEXT = "2026-10-17T11:15:00.000Z";
+  const after = (rosters: Record<string, ReturnType<typeof roster>>) =>
+    league("2026-10-10T13:00:00.000Z", rosters, {
+      next: async () => ({ period: 7, lock: NEXT }),
+      lockOf: async (period) => (period === 6 ? LAST : NEXT),
+      roster: async (teamId, period) => ({ ...rosters[teamId], displayedSelections: { displayedPeriod: String(period) } }),
+    });
+
+  it("fails the run, naming each bench left unnumbered, so the alert opens", async () => {
+    const { deps, lines, writes } = after({ ohi: roster(6, [["a", "3"], ["b", "9"]]), raccoons: roster(6, [["c", "1"]], { c: 1 }) });
+    expect(await benchOrderRun(deps, { write: true, wait: true, within: WITHIN })).toBe(1);
+    expect(lines.some((line) => /Period 6 locked at .* with 1 bench unnumbered: ohi/.test(line))).toBe(true);
+    expect(writes).toEqual([]);
+  });
+
+  it("stays green when every bench was numbered", async () => {
+    const { deps } = after({ raccoons: roster(6, [["c", "1"]], { c: 1 }) });
+    expect(await benchOrderRun(deps, { write: true, wait: true, within: WITHIN })).toBe(0);
+  });
+
+  it("looks back only a day, so an old miss alerts once its day is out", async () => {
+    const { deps } = after({ ohi: roster(6, [["a", "3"]]) });
+    deps.now = () => at("2026-10-11T12:00:00.000Z");
+    expect(await benchOrderRun(deps, { write: true, wait: true, within: WITHIN })).toBe(0);
+  });
+});
