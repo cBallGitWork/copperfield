@@ -24,6 +24,14 @@ on:
         description: Write now rather than in the last minutes (never after the lock)
         type: boolean
         default: false
+      period:
+        description: A Fantrax period already locked, to write late (with after_lock)
+        type: string
+        default: ""
+      after_lock:
+        description: Write that period after its lock, in adminMode (a run GitHub dropped)
+        type: boolean
+        default: false
 
 # An hourly firing queues behind a run already waiting for a lock instead of starting a second waiter.
 concurrency:
@@ -59,6 +67,8 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           TEAM: ${{ inputs.team }}
           NOW: ${{ inputs.now }}
+          PERIOD: ${{ inputs.period }}
+          AFTER_LOCK: ${{ inputs.after_lock }}
         run: |
           args=()
           if [ "${{ github.event_name }}" = schedule ]; then
@@ -67,6 +77,8 @@ jobs:
             [ "$DRY_RUN" = true ] || args+=(--write)
             [ "$NOW" = true ] && args+=(--now)
             [ -n "$TEAM" ] && args+=(--team "$TEAM")
+            [ -n "$PERIOD" ] && args+=(--period "$PERIOD")
+            [ "$AFTER_LOCK" = true ] && args+=(--after-lock)
           fi
           npx tsx scripts/bench-order.ts "${args[@]}"
 

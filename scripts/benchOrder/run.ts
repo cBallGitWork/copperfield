@@ -28,6 +28,8 @@ export interface Options {
   early?: boolean;
   /** Only this Fantrax team id, for a test by hand. */
   team?: string;
+  /** A period already locked, written by hand after its lock (adminMode): the miss GitHub's dropped runs left. */
+  late?: boolean;
 }
 
 /** A lock moved later while the run slept is waited for again, this many times at most. */
@@ -80,12 +82,15 @@ async function order(deps: Deps, options: Options, next: { period: number; lock:
     moment = momentOf(await deps.lockOf(period), deps.now(), options.within);
   }
 
-  // A lock gone or passed by now was read again after a wait: the write it was waiting for never went.
-  if (moment.kind === "no-lock" || moment.kind === "locked") {
+  // A lock gone or passed by now was read again after a wait: the write it was waiting for never went. A late run by hand
+  // writes a locked period on purpose.
+  if (moment.kind === "locked" && options.late) {
+    deps.log(`Period ${period} locked at ${moment.lock}: written late, by hand.`);
+  } else if (moment.kind === "no-lock" || moment.kind === "locked") {
     deps.log(moment.kind === "locked" ? `Period ${period} locked at ${moment.lock} before its benches were ordered.` : `Period ${period} has no lock now.`);
     return options.write ? 1 : 0;
   }
-  if (moment.kind !== "now") {
+  if (moment.kind !== "now" && moment.kind !== "locked") {
     deps.log(
       moment.kind === "not-due"
         ? `Period ${period} locks at ${moment.lock}, beyond the next ${options.within} minutes: a later run writes it.`
@@ -110,8 +115,8 @@ async function order(deps: Deps, options: Options, next: { period: number; lock:
       deps.log(`${team.name}: ${describe(plan, labelsOf(raw), options.write)}`);
       if (plan.kind === "unread") failed++;
       if (plan.kind !== "write" || !options.write) continue;
-      // adminMode overrides a lock, so the clock is read again before every write.
-      if (deps.now() >= lock) {
+      // adminMode overrides a lock, so the clock is read again before every write; only a late run means to.
+      if (!options.late && deps.now() >= lock) {
         failed++;
         deps.log(`  not written: period ${period} locked at ${moment.lock}`);
         continue;
