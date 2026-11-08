@@ -110,7 +110,7 @@ export default async function MatchdayPage({
       {/* The round and its state are the page's title (Craig, 5 Sep 2026: "gameweek 3 LIVE as the
           title"); the sub line carries "Full time" or "Final", never LIVE twice. */}
       <PageHeader
-        title={`${draftGameweek(snapshot.gameweek)}${state === "live" ? " LIVE" : ""}`}
+        title={`${draftGameweek(snapshot.gameweek)}${state === "live" ? " Live" : ""}`}
         sub={buildUp ?? (state === null || state === "live" ? undefined : <RoundWord state={state} />)}
         competition
       />

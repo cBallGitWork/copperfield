@@ -59,7 +59,7 @@ export default async function ScoringPage() {
               </td>
               {(line.same ? line.prices.slice(0, 1) : line.prices).map((cell, at) => (
                 // Below 375 the four slots' padding would push the board through the panel's right inset.
-                <td key={slots[at]} colSpan={line.same ? slots.length : 1} className={`${FIGURE} lg:text-base max-[374px]:px-0.5`}>
+                <td key={slots[at]} colSpan={line.same ? slots.length : 1} className={`${FIGURE} lg:text-lg max-[374px]:px-0.5`}>
                   {cell.map((band) => (
                     <span key={band} className={`block whitespace-nowrap ${priceInk(band)}`}>
                       {band}
