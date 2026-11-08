@@ -27,6 +27,9 @@
   /* CM's tab strip, indigo under the royal-blue title bar, so the subject and its views are two objects (Craig,
      8 Nov 2026, the approved reskin): ink 13.1:1, accent 10.0:1, muted 6.7:1. */
   --color-tab: oklch(0.30 0.14 280);
+  /* CM's purple value block (cm9900/24.jpg's Pts, 12.jpg's Value): the column a table is for (Craig, 8 Nov 2026).
+     Ink 10.8:1 on the face, 5.8:1 at the index ramp's lightest (computed 8 Nov 2026). */
+  --color-for: oklch(0.36 0.15 315);
   /* CM's rail plate, a step lighter than the ground it stands on. */
   --color-rail-plate: oklch(0.24 0.08 266);
   /* CM's index cell, one step deeper and more saturated than the chrome above it. */

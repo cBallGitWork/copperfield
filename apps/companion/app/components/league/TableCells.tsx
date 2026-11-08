@@ -1,5 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
-import { INDEX_SPINE, INDEX_WIDTH, MINOR_LABEL, TAP_ROW } from "@/app/desk";
+import { INDEX_SPINE, INDEX_WIDTH, TAP_ROW } from "@/app/desk";
+
+/** A cut's words: quiet ink, a size a phone reads, not the tracked capitals of a key. */
+const CUT_LABEL = "pr-2 text-2xs text-muted lg:text-xs";
 
 // The two cells a CM board's rows are built from, opposite `TableHeads`.
 // No crest-and-name cell: its callers differ in size, fallback and alignment.
@@ -32,10 +35,13 @@ export function IndexCell({
 /** The name cell's link on a board row: `TAP_ROW`'s 36 under a thumb and 28 on a desk. */
 export const ROW_LINK = `${TAP_ROW} gap-2 hover:underline`;
 
-/** The points in a block of their own, the way CM ends its table: the eye runs down the column to find them. */
+/** CM's purple value block as the index's ramp: the column a table is for (`--color-for`). */
+const FOR_BLOCK = { "--cm-index": "var(--color-for)" } as CSSProperties;
+
+/** The points in CM's purple block, the way CM ends its table: the eye runs down the column to find them. */
 export function PointsCell({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <IndexCell wide width="" className={className}>
+    <IndexCell wide width="" className={className} style={FOR_BLOCK}>
       {children}
     </IndexCell>
   );
@@ -46,10 +52,10 @@ export function CutRow({ span, label, tone }: { span: number; label: string; ton
   return (
     <tr aria-hidden>
       <td colSpan={span} className="p-0">
-        <span className={`flex items-center gap-2 py-0.5 ${MINOR_LABEL}`}>
-          <span className={`flex-1 border-t border-dashed ${tone}`} />
+        {/* The rule runs the width and the words end it, readable at arm's length (the approved picture, 8 Nov 2026). */}
+        <span className={`flex items-center gap-2 py-0.5 ${CUT_LABEL}`}>
+          <span className={`flex-1 border-t-2 border-dashed ${tone}`} />
           {label}
-          <span className={`flex-1 border-t border-dashed ${tone}`} />
         </span>
       </td>
     </tr>
