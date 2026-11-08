@@ -2,6 +2,8 @@ import { LEAGUE_NAME, PART_JOIN } from "@epl/core";
 import PageHeader from "../components/shell/PageHeader";
 import SectionShell from "../components/shell/SectionShell";
 import SectionNav from "./SectionNav";
+import { nextSection } from "./sections";
+import FootBar from "../components/shell/FootBar";
 import type { LeagueSection } from "./SectionNav";
 import { LEAGUE_CAPTION } from "../titles";
 import WaiverBanner from "./waivers/WaiverBanner";
@@ -35,6 +37,7 @@ export default function LeagueShell({
 }) {
   const named = title ?? LEAGUE_CAPTION[current];
   return (
+    <>
     <SectionShell
       // The competition's own name on its bar; the tabs under it name the page (`cm9900/24.jpg`).
       header={<PageHeader title={LEAGUE_NAME} competition />}
@@ -48,5 +51,8 @@ export default function LeagueShell({
     >
       {children}
     </SectionShell>
+    {/* CM's foot bar on the desk: Back, and the strip's next view. */}
+    <FootBar next={nextSection(current)} />
+    </>
   );
 }

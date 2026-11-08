@@ -96,7 +96,8 @@ export default function StandingsTable<K extends string>({
 
 /** A name as a table row prints it, cut short rather than wrapped. */
 export function StandingsName({ children }: { children: ReactNode }) {
-  return <span className={`min-w-0 truncate ${ROW_NAME}`}>{children}</span>;
+  // A step up on the desk, so a name outranks the figures beside it as CM's do (the approved picture, 8 Nov 2026).
+  return <span className={`min-w-0 truncate ${ROW_NAME} lg:text-lg`}>{children}</span>;
 }
 
 /** The width class a column shows at: stood down under a thumb unless it orders the table. */

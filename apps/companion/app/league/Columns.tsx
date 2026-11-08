@@ -7,7 +7,8 @@ import { SCORE_RULE } from "../components/shell/Scoreline";
 import { FORM_GAMES } from "../config";
 
 // The fantasy league's table, for the page and the head-to-head: its columns, and a Fantrax standing as a line.
-// A phone reads the short name, stands Ag and Form down unless one orders the table, and ends on Pts (Craig, 19 Oct 2026).
+// A phone reads the short name, stands Ag and Form down unless one orders the table, and ends on Pts (Craig, 19 Oct 2026);
+// the desk ends on Pts too, CM's purple block last (the approved picture, 8 Nov 2026).
 
 /** A football table's row (`cm9900/24.jpg`) plus form; the list is what `colSpan` counts, a hidden cell spanning zero. */
 export const COLUMNS: readonly StandingsColumn<SortKey>[] = [
@@ -19,8 +20,8 @@ export const COLUMNS: readonly StandingsColumn<SortKey>[] = [
   { key: "lost", kind: "figure", label: "L", title: "Lost", width: "w-7 lg:w-16" },
   { key: "for", kind: "figure", label: "For", title: "Fantasy points scored", width: "w-11 lg:w-24" },
   { key: "against", kind: "figure", label: "Ag", title: "Fantasy points conceded", width: "w-11 lg:w-24", deskOnly: true },
-  { key: "pts", kind: "points", label: "Pts", title: "League points", width: "w-10 lg:w-24" },
   { key: "form", kind: "form", label: "Form", title: `The last ${spelled(FORM_GAMES)} gameweeks, oldest first`, width: "w-14 lg:w-32", deskOnly: true },
+  { key: "pts", kind: "points", label: "Pts", title: "League points", width: "w-10 lg:w-24" },
 ];
 
 /** Where a head reorders the table: the league page, from either board. */

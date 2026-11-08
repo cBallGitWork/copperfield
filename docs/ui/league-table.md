@@ -201,7 +201,7 @@ it does not answer the question either. The form strip is what carries the trend
 instead.
 
 **Four lines mark the season's cuts** (Craig, 5 Oct 2026), each naming what the
-places above it reach: `£30 · picks semi opponent` under 1st, `Playoffs` under
+places above it reach: `£30, picks semi opponent` under 1st, `Playoffs` under
 3rd, `Play-in` under 5th and `Plate` under 8th. `tableLines` places the middle
 two either side of Fantrax's last semi place, so they move if `numPlayoffTeams`
 does; the prize, the play-in and the Plate are declared. A league with no

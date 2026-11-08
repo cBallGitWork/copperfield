@@ -54,4 +54,4 @@ export const CUPS: readonly Cup[] = [
 
 /** The table's lines that are the league's own: first place's prize, how many play for the last semi place (the last to
  *  qualify and the first below), and the Plate's last place, which the play-in's loser joins. */
-export const TABLE_RULES = { top: "£30 · picks semi opponent", playIn: 2, plateThrough: 8 } as const;
+export const TABLE_RULES = { top: "£30, picks semi opponent", playIn: 2, plateThrough: 8 } as const;
