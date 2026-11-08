@@ -49,7 +49,15 @@ describe("a squad row", () => {
     expect(html).toMatch(/class="cm-row flex min-h-9 /);
     // The name and mark never part; the note is their sibling in a line that wraps under a thumb and not on a desk.
     expect(html).toContain('<span class="flex min-w-0 flex-wrap items-center gap-x-1.5 lg:flex-nowrap"><span class="flex min-w-0 max-w-full items-center gap-1.5">');
-    expect(html).toContain(`</svg></span><span class="min-w-0 truncate leading-tight text-2xs text-faint shrink-[99]">${noted("Back injury")}</span></span>`);
+    expect(html).toContain(`</svg></span></span><span class="lg:hidden"><span class="min-w-0 truncate leading-tight text-2xs text-faint shrink-[99]">${noted("Back injury")}</span></span>`);
+  });
+
+  // The desk carries the mark and the note in an Inf column of their own (`cm9900/12.jpg`, the approved Squad picture).
+  it("puts the mark and the note in the desk's Inf column", () => {
+    const html = draw(doubt);
+    const inf = html.slice(html.indexOf('class="hidden shrink-0 lg:flex lg:w-32'));
+    expect(inf).toMatch(/^class="hidden shrink-0 lg:flex lg:w-32[^"]*"><svg role="img" aria-label="Doubtful"/);
+    expect(inf).toContain(`${noted("Back injury")}</span>`);
   });
 
   it("notes nothing for a fit man", () => {

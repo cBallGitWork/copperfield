@@ -1,7 +1,7 @@
 import type { SquadDetailLine, SquadPlayerDetail } from "@epl/core";
 import type { AutoSubMark } from "./autoSubbed";
 import ScrollBoard from "./ScrollBoard";
-import SquadRow, { SQUAD_CREST, SQUAD_EDGE, SQUAD_FIGURES, SQUAD_GAP, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
+import SquadRow, { SQUAD_CREST, SQUAD_EDGE, SQUAD_FIGURES, SQUAD_GAP, SQUAD_INF, SQUAD_OPPONENT, SQUAD_POINTS } from "./SquadRow";
 import { MUTE, PLATE_START, headWord } from "./TableHeads";
 import { FIGURE_HEADS, type SquadFigure } from "./squadFigure";
 import { MINOR_CAPS, PLATE_FRAME, QUIET_NOTE, SMALL_CAPS } from "@/app/desk";
@@ -75,6 +75,10 @@ export default function SquadRows({
           {/* A basis, not a min-width: the name is the elastic column, and without a floor it renders 0px wide. */}
           <span className={`${PLATE_FRAME} min-w-0 flex-[1_1_5rem]`}>
             <span className={MUTE}>Player</span>
+          </span>
+          {/* A wrapper, so the head plate's own `flex` never meets `hidden` on one element. */}
+          <span className={SQUAD_INF}>
+            <span className={`${FIGURE_HEAD} w-full`}>Inf</span>
           </span>
           <span className={SQUAD_FIGURES}>
             {/* Who his CLUB plays this week — the football fixture, not ours. */}

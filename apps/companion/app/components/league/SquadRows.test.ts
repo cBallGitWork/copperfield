@@ -140,10 +140,11 @@ describe("a squad row's status and minutes (Craig, 21 Oct 2026)", () => {
 });
 
 describe("the squad list's FPts", () => {
-  // Craig, 21 Oct 2026: "put fpts in cyan too": the league's points in the reading cyan, never lit, on every row.
-  it("prints his points in the reading cyan, not the standout amber", () => {
+  // The column a table is for in CM's purple block (Craig, 7 Nov 2026, the reskin's call 1), which replaced
+  // "put fpts in cyan too" (21 Oct); never the standout amber.
+  it("prints his points in the purple block, not the standout amber", () => {
     const cell = html.match(/<span class="([^"]*)">13<\/span>/)?.[1] ?? "";
-    expect(cell).toContain("text-info");
+    expect(cell).toContain("bg-for");
     expect(cell).not.toContain("text-mid");
   });
 });
