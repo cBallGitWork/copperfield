@@ -258,3 +258,18 @@ describe("a lock that passed unwritten", () => {
     expect(await benchOrderRun(deps, { write: true, wait: true, within: WITHIN })).toBe(0);
   });
 });
+
+// Craig, 8 Nov 2026: "10!!!" — GW10's benches written after its lock, by hand, in adminMode.
+describe("a late run by hand", () => {
+  it("writes a locked period's unnumbered benches and leaves the numbered alone", async () => {
+    const { deps, writes } = league("2026-10-11T09:00:00.000Z", { ohi: roster(6, [["a", "3"], ["b", "9"]]), raccoons: roster(6, [["c", "1"]], { c: 1 }) });
+    expect(await benchOrderRun(deps, { write: true, wait: false, within: Infinity, late: true })).toBe(0);
+    expect(writes).toEqual([{ teamId: "ohi", map: { b: 1, a: 2 } }]);
+  });
+
+  it("still refuses a locked period without it", async () => {
+    const { deps, writes } = league("2026-10-11T09:00:00.000Z", { ohi: roster(6, [["a", "3"]]) });
+    expect(await benchOrderRun(deps, { write: true, wait: false, within: Infinity })).toBe(1);
+    expect(writes).toEqual([]);
+  });
+});

@@ -18,7 +18,8 @@ import { benchOrderRun } from "./benchOrder/run";
 // The deadline's bench order (Craig, 9 Oct 2026): five minutes before the lock, every bench its manager left unnumbered
 // is numbered by total points with the commissioner's session. A dry run unless --write; --wait --within <minutes>
 // sleeps until the moment when the lock is that close. `.github/workflows/bench-order.yml` runs it hourly 07–19 UTC.
-// By hand: --team <fantraxTeamId> for one team, --now to write before the last minutes (never after the lock).
+// By hand: --team <fantraxTeamId> for one team, --now to write before the last minutes (never after the lock), and
+// --period <n> --after-lock to write a period already locked, the miss a dropped run left (GW10, 6 Nov 2026).
 
 async function calendar() {
   const [info, fixtures] = await Promise.all([fetchLeagueInfo(FANTRAX_LEAGUE_ID).then(mapLeagueInfo), fetchFixtures().then(mapFixtures)]);
@@ -46,12 +47,19 @@ async function main(): Promise<void> {
   if (wait && within === Infinity) throw new Error("--wait needs --within <minutes>");
   if (write && session === undefined) throw new Error("FANTRAX_COOKIE is not set: --write needs the commissioner's session");
 
+  const late = process.argv.includes("--after-lock");
+  const asked = flagValue("--period");
+  const named = asked === undefined ? undefined : Number(asked);
+  if (named !== undefined && !Number.isInteger(named)) throw new Error("--period needs a period number");
+  if (late && (named === undefined || wait)) throw new Error("--after-lock needs --period <n>, and never waits");
+
   const first = await calendar();
   process.exitCode = await benchOrderRun(
     {
       now: () => Date.now(),
       sleep: (ms) => sleep(ms),
       next: async () => {
+        if (named !== undefined) return { period: named, lock: first.lockOf(named) };
         const period = planningPeriod(first.info.rosterPeriods, first.kickoffs, new Date().toISOString());
         return period === null ? null : { period, lock: first.lockOf(period) };
       },
@@ -62,7 +70,7 @@ async function main(): Promise<void> {
         readBenchAnswer(await sendBenchOrder(FANTRAX_LEAGUE_ID, { teamId, period, order }, session ?? "")),
       log: (line) => console.log(line),
     },
-    { write, wait, within, early: process.argv.includes("--now"), team: flagValue("--team") },
+    { write, wait, within, early: process.argv.includes("--now"), team: flagValue("--team"), late },
   );
 }
 
