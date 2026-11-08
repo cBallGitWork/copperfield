@@ -1,23 +1,21 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import { headWord } from "./TableHeads";
+import { HeadRow } from "./TableHeads";
+import { GROUP_PLATE, MINOR_WORD, SECTION_BAR, SMALL_WORD } from "../../desk";
 
 // The app's `@/` alias is Next's, not vitest's.
 vi.mock("@/app/desk", () => import("../../desk"));
 vi.mock("@/app/components/shell/Link", () => ({ default: (props: object) => createElement("a", props) }));
 
-const markup = (label: string) => renderToStaticMarkup(createElement("span", null, headWord(label)));
-
-describe("headWord", () => {
-  it("keeps an expected figure's lower-case x out of the strip's capitals (UX review, 19 Oct 2026)", () => {
-    expect(markup("xG")).toBe('<span><span class="normal-case">xG</span></span>');
-    expect(markup("xMins")).toContain("normal-case");
+// DESIGN §10.1: small capitals are the paper's furniture, never the desk's (the reskin, Craig 8 Nov 2026).
+describe("a desk label", () => {
+  it("prints a table's heads as they are written, xMins and FPts alike", () => {
+    const html = renderToStaticMarkup(createElement("table", null, createElement("thead", null, createElement(HeadRow, null))));
+    expect(html).not.toContain("uppercase");
   });
 
-  it("leaves every other head to the capitals", () => {
-    expect(markup("SoT")).toBe("<span>SoT</span>");
-    // A tie switcher's tab, "v Raccoons", stays in the strip's capitals.
-    expect(markup("v Raccoons")).toBe("<span>v Raccoons</span>");
+  it("is never set in capitals by a recipe", () => {
+    for (const recipe of [SMALL_WORD, MINOR_WORD, GROUP_PLATE, SECTION_BAR]) expect(recipe).not.toContain("uppercase");
   });
 });

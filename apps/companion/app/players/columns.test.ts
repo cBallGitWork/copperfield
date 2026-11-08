@@ -211,14 +211,14 @@ describe("headedFor", () => {
   });
 });
 
-describe("FPts in the reading cyan", () => {
-  // Craig, 21 Oct 2026: "put fpts in cyan too", as on the Profile since #80; cyan is never lit.
+describe("FPts in the purple block", () => {
+  // Craig, 8 Nov 2026: the column the board is for, as on Squad; cyan until then (21 Oct). Never lit.
   const fpts = columnFor("fpts")!;
   const row = (points: number) => ({ stats: { points } }) as never;
 
-  it("prints his points cyan, never lit, and his nought quiet", () => {
+  it("prints his points in the purple block, never lit, and his nought quiet", () => {
     expect(fpts.mark).toBeUndefined();
-    expect(figureCell(fpts, row(49), {}, false, { good: 1, best: 2 }).className).toBe("text-info");
+    expect(figureCell(fpts, row(49), {}, false, { good: 1, best: 2 }).className).toBe("bg-for font-bold text-ink");
     expect(figureCell(fpts, row(0), {}, false, undefined).className).toBe("text-faint");
   });
 

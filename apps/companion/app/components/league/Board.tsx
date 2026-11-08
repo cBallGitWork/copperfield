@@ -17,7 +17,7 @@ import {
   READ_ROW,
   ROW_HEAD_CELL,
   ROW_RULE,
-  SMALL_CAPS,
+  SMALL_WORD,
   SORTED_CELL,
 } from "@/app/desk";
 
@@ -205,7 +205,7 @@ export default function Board<Row>({
           {tail === undefined || tail.rows.length === 0 ? null : (
             <>
               <tr>
-                <PlateHead scope="rowgroup" colSpan={span} className={SMALL_CAPS}>
+                <PlateHead scope="rowgroup" colSpan={span} className={SMALL_WORD}>
                   {tail.label}
                 </PlateHead>
               </tr>

@@ -14,7 +14,7 @@ import QuerySelect from "../components/shell/QuerySelect";
 import FilterSheet from "./FilterSheet";
 
 // Every control at the top of a Data board. Under a thumb two fixed lines: the search and Filter, then position and
-// who holds him (Craig, 16 Oct 2026), Adv Stats adding its Key beside Filter (its plates dock at the foot, `Plates`);
+// who holds him (Craig, 16 Oct 2026), Adv Stats's plates docking at the foot (`Plates`);
 // on a desk one row from `xl`, with Per 90. The rest is in the filters, URL state (`?panel=1`), so a filtered board can be
 // shared; while they are open a tap replaces the history entry, so one Back leaves them.
 
@@ -32,7 +32,6 @@ export default function BoardBar({
   rated,
   shown,
   offered,
-  glossary = null,
 }: {
   query: PlayersQuery;
   view: BoardView;
@@ -48,8 +47,6 @@ export default function BoardBar({
   shown: number;
   /** The columns Sort by offers (`offeredFor`): none the league does not score or the position chips hide. */
   offered: readonly PoolColumn[];
-  /** The board's key, beside Filter, where the board has one. */
-  glossary?: React.ReactNode;
 }) {
   const open = query.panel === "1";
   const route = view.route;
@@ -79,7 +76,6 @@ export default function BoardBar({
         )}
 
         <div className="ml-auto flex gap-1.5">
-          {glossary}
           <BoardLink query={query} change={FILTER} route={route} replace={open} aria-expanded={open} className={PRESSABLE}>
             Filter
             <Count sheet={held} wide={narrow} />

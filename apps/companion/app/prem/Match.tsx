@@ -2,7 +2,7 @@ import { type Club, type Fixture, kickoffAt, londonDayAndTime } from "@epl/core"
 import type { ReactNode } from "react";
 import ScoreRow from "../components/shell/ScoreRow";
 import { scoreSide } from "../components/football/scoreSide";
-import { SMALL_CAPS } from "@/app/desk";
+import { SMALL_WORD } from "@/app/desk";
 import { matchHref } from "./match/[id]/matchRoutes";
 import { clubHref } from "./routes";
 import { hasScore } from "./score";
@@ -47,7 +47,7 @@ export default function Match({
       pending={kickoffAt(fixture.kickoff, londonDayAndTime)}
       clock={
         fixture.status === "finished" ? (
-          <span className={`${SMALL_CAPS} text-faint`}>FT</span>
+          <span className={`${SMALL_WORD} text-faint`}>FT</span>
         ) : null
       }
       scoreHref={matchHref(fixture.id, "overview")}

@@ -4,7 +4,7 @@ import { PITCH_BOX } from "../../components/football/pitchBox";
 import type { PassMark } from "../../components/football/shotGeometry";
 import Marks, { MarksKey } from "../../components/football/ShotMarks";
 import { KeyPassKey, KeyPassLines, KeyPassOrigins, Pitch } from "../../components/football/ShotPitch";
-import { SMALL_CAPS } from "@/app/desk";
+import { SMALL_WORD } from "@/app/desk";
 
 // Both men on one pitch, each at his own end as the bar reads them: the left man is turned round, as the match
 // map turns the home side. Shots are his own; key passes are his teammates' shots, drawn from where his pass began.
@@ -43,7 +43,7 @@ export default function CompareMap({
 
   return (
     <figure className={`flex min-w-0 flex-col gap-1 ${className}`}>
-      <div className={`grid ${SMALL_CAPS} ${sides.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
+      <div className={`grid ${SMALL_WORD} ${sides.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
         {sides.map((side, index) => (
           <span
             key={side.side}

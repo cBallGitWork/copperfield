@@ -14,13 +14,9 @@ const strip = (label: string) =>
   );
 
 describe("TabStrip", () => {
-  it("prints Live's xG and xA tabs as xG and xA, not XG and XA (19 Oct 2026)", () => {
-    expect(strip("xG")).toContain('<span class="normal-case">xG</span>');
-    expect(strip("xA")).toContain('<span class="normal-case">xA</span>');
-  });
-
-  it("leaves a plain word to the strip's capitals", () => {
-    expect(strip("Points")).not.toContain("normal-case");
+  it("prints Live's xG and xA tabs as written, not XG and XA (19 Oct 2026), and no tab in capitals", () => {
+    expect(strip("xG")).toContain(">xG</a>");
+    expect(strip("xA")).not.toContain("uppercase");
   });
 });
 

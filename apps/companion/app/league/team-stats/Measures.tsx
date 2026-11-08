@@ -1,6 +1,6 @@
 import Link from "@/app/components/shell/Link";
 import { isMeasure, type Measure } from "@epl/core";
-import { SMALL_CAPS, heldPlate } from "@/app/desk";
+import { SMALL_WORD, heldPlate } from "@/app/desk";
 
 // Which figure every cell on the board holds: one grey toggle over the board (Craig, 11 Sep 2026: "at the top, allow a
 // toggle between fantasy points and actual raw values"). Grey, as DESIGN §2's pressable plate; the blue is navigation.
@@ -21,7 +21,7 @@ const VIEWS: readonly { by: View; label: string; title: string }[] = [
 ];
 
 /** The control floor at both widths (DESIGN §6). */
-const PLATE = `flex min-h-11 items-center px-3 ${SMALL_CAPS} lg:min-h-9`;
+const PLATE = `flex min-h-11 items-center px-3 ${SMALL_WORD} lg:min-h-9`;
 
 export default function Measures({
   view,

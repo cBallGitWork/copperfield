@@ -32,7 +32,7 @@ describe("a card's form and run", () => {
   });
 
   it("heads every week, past and to come, with the table's bevelled gameweek plate", () => {
-    expect(html.match(/class="cm-bevel flex h-6[^"]*text-3xs font-bold uppercase"[^>]*>GW\d+</g)).toHaveLength(6);
+    expect(html.match(/class="cm-bevel flex h-6[^"]*text-3xs font-bold"[^>]*>GW\d+</g)).toHaveLength(6);
   });
 
   // Craig, 23 Oct 2026: "the fixture for FORM should show the green red tile too like upcoming fixtures does".

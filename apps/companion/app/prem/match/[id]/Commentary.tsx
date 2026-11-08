@@ -2,7 +2,7 @@ import { bareMinute, proseSpans, saysInjury } from "@epl/core";
 import type { PlCommentaryLine } from "@epl/core";
 import EventIcon, { glyphFor } from "../../../components/football/EventIcon";
 import PlayerName from "../../../components/shell/PlayerName";
-import { INDEX_BLOCK, ROW_NAME, SMALL_CAPS } from "@/app/desk";
+import { INDEX_BLOCK, ROW_NAME, SMALL_WORD } from "@/app/desk";
 
 // Opta's commentary as rows, for the Overview's Match Report: the minute in CM's blue block, a mark, the sentence.
 
@@ -29,7 +29,7 @@ export default function Line({
         {bareMinute(line.minute)}&prime;
       </span>
       {/* Every row is marked; the glyph wears the row's tone, and a word stands beside it only where the sentence does not say it. */}
-      <span className={`flex shrink-0 items-center gap-1 ${SMALL_CAPS} ${tone}`}>
+      <span className={`flex shrink-0 items-center gap-1 ${SMALL_WORD} ${tone}`}>
         <EventIcon glyph={hurt ? "cross" : glyphFor(line.type)} />
         {word}
       </span>

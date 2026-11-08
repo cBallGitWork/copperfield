@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { clubIndex } from "../../../components/football/clubIndex";
 import type { Club, MatchStatRow } from "@epl/core";
-import { GROUP_PLATE, PANEL, SMALL_CAPS } from "@/app/desk";
+import { GROUP_PLATE, PANEL, SMALL_WORD } from "@/app/desk";
 
 // Championship Manager's Match Stats board (`cm9900/22.jpg`): each side's figure on its own plate, the label between.
 // A three-column grid rather than a table, because the label is the axis and the figures are its ends.
@@ -68,7 +68,7 @@ function Row({ row, home, away }: { row: MatchStatRow; home: CSSProperties; away
     <div className="grid grid-cols-[3.25rem_1fr_3.25rem] items-center gap-2">
       <Figure value={row.home} percent={row.percent} colour={home} />
       <span
-        className={`text-center ${SMALL_CAPS} lg:text-sm ${
+        className={`text-center ${SMALL_WORD} lg:text-sm ${
           LABEL_INK[row.key] ?? "text-ink"
         }`}
       >

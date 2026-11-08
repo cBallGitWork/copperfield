@@ -105,6 +105,11 @@ select.cm-bevel {
   text-shadow: 0.06em 0.06em 0.07em rgb(0 0 0 / 0.45);
 }
 
+/* CM's caption band: a panel's section named in yellow across its top (the approved pictures, 8 Nov 2026). */
+.cm-caption {
+  background: var(--color-caption);
+}
+
 /* A tab is 44px under a thumb; set on the plate so every strip's tabs agree. Its face is CM's indigo. */
 .cm-tab {
   --cm-face: var(--color-tab);

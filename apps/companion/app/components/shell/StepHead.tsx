@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "@/app/components/shell/Link";
-import { INDEX_WIDTH, SMALL_CAPS } from "@/app/desk";
+import { INDEX_WIDTH, SMALL_WORD } from "@/app/desk";
 
 // A plate naming where you are in a run (a gameweek, a match day), with CM's arrows either side under a thumb.
 // No ink colour or font family here: unlayered `.cm-bevel` sets both, and `--color-ink` on the plate would be 2.27:1.
@@ -35,7 +35,7 @@ export default function StepHead({
       <Arrow step={previous} back />
       {/* A title alone centres on its plate; one with something beside it reads from the left. */}
       <Heading
-        className={`cm-bevel flex h-11 min-w-0 flex-1 items-center ${children == null ? "justify-center" : "justify-between"} gap-3 px-1.5 lg:h-9 ${SMALL_CAPS}`}
+        className={`cm-bevel flex h-11 min-w-0 flex-1 items-center ${children == null ? "justify-center" : "justify-between"} gap-3 px-1.5 lg:h-9 ${SMALL_WORD}`}
       >
         <span className="shrink-0">{title}</span>
         {children}

@@ -32,6 +32,8 @@
   --color-for: oklch(0.36 0.15 315);
   /* CM's rail plate, a step lighter than the ground it stands on. */
   --color-rail-plate: oklch(0.24 0.08 266);
+  /* CM's caption band across a panel's top: chrome, translucent so the panel shows through. */
+  --color-caption: oklch(0.40 0.03 265 / 0.55);
   /* CM's index cell, one step deeper and more saturated than the chrome above it. */
   --color-index: oklch(0.40 0.16 266);
   /* The index block for a man on no roster: `--color-up`'s hue at the blue's depth (ink 4.8:1 at the ramp's top). */

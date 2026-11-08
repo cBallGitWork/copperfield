@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { BENCH_KIT, FAR_INSET, GAP_CLASS, cardBasis, rowBudget } from "./PitchRows";
-import { SMALL_CAPS } from "@/app/desk";
+import { SMALL_WORD } from "@/app/desk";
 
 // The men off the grass in a strip under it, at the card width of the men above; the caller draws each cell.
 
@@ -53,12 +53,12 @@ export default function BenchStrip<T>({
           <li key={keyOf(player)} className="flex min-w-0 shrink-0 flex-col [&>:last-child]:grow" style={{ flexBasis: basis }}>
             {instead?.(player) ? (
               // No number: he is not in the order, and the word says why.
-              <p className={`pb-0.5 text-center font-display leading-none ${SMALL_CAPS} text-info`}>{instead(player)}</p>
+              <p className={`pb-0.5 text-center font-display leading-none ${SMALL_WORD} text-info`}>{instead(player)}</p>
             ) : numbered || captionOf !== undefined ? (
               <p className="flex items-center justify-center gap-1 pb-0.5 leading-none">
                 {numbered ? <span className="cm-index numeric px-1 text-3xs">{at + 1}</span> : null}
                 {captionOf === undefined ? null : (
-                  <span className={`font-display ${SMALL_CAPS} text-ink`}>{captionOf(player)}</span>
+                  <span className={`font-display ${SMALL_WORD} text-ink`}>{captionOf(player)}</span>
                 )}
               </p>
             ) : null}

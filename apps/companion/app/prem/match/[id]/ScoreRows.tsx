@@ -7,7 +7,7 @@ import type { Holders } from "../../holders";
 import PlayerName from "../../../components/shell/PlayerName";
 import EventIcon from "../../../components/football/EventIcon";
 import type { EventGlyph } from "../../../components/football/EventIcon";
-import { SMALL_CAPS } from "@/app/desk";
+import { SMALL_WORD } from "@/app/desk";
 
 // One scorer's line and one other man's line on the scoresheet, set at CM's size (see `Scoresheet`).
 
@@ -62,7 +62,7 @@ export function Goal({
             // On its row's top edge, under the scorer; the rest of its 36px falls below, before the next goal.
             className="flex min-h-9 w-full items-baseline gap-1.5 pl-3 text-left lg:pl-4"
           >
-            <span className={`${SMALL_CAPS} shrink-0 text-faint`}>A</span>
+            <span className={`${SMALL_WORD} shrink-0 text-faint`}>A</span>
             <span className={`${NAME_BLOCK} font-chrome text-sm font-bold text-muted lg:text-xl`}>
               {paired ? <span className={ASSIST_FIGURE}>{minutes(his)}</span> : null}
               <span className={KEEPS_WIDTH}>
@@ -120,7 +120,7 @@ export function Man({
         <span className={`${KEEPS_WIDTH} ${NAME}`}>
           <PlayerName name={name} short={short} />
         </span>
-        {note === null ? null : <> <span className={`${SMALL_CAPS} shrink-0 text-bad lg:ml-1.5`}>{note}</span></>}{" "}
+        {note === null ? null : <> <span className={`${SMALL_WORD} shrink-0 text-bad lg:ml-1.5`}>{note}</span></>}{" "}
         <LeagueHolder code={code} holders={holders} className={`lg:ml-1.5 ${GIVES_WAY}`} />
       </span>
     </MaybeCard>

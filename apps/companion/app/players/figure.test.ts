@@ -84,7 +84,7 @@ describe("DCP takes the board's lights", () => {
     expect(cell(2).className).toBe("");
   });
 
-  it("leaves FPts the board's only cyan", () => {
-    expect(figures.filter((column) => figureCell(column, { stats: { points: 9 } } as never, { Min: 900 }, false, undefined).className === "text-info").map((column) => column.key)).toEqual(["fpts"]);
+  it("leaves FPts the board's only purple block", () => {
+    expect(figures.filter((column) => figureCell(column, { stats: { points: 9 } } as never, { Min: 900 }, false, undefined).className?.includes("bg-for")).map((column) => column.key)).toEqual(["fpts"]);
   });
 });

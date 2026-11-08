@@ -1,7 +1,7 @@
 import Link from "@/app/components/shell/Link";
 import { LEAGUE_COMPETITION, leads, londonDate, DASH, type SeasonOrder } from "@epl/core";
 import type { SeasonRow } from "./teamSeason";
-import { INDEX_BLOCK, INDEX_SPINE, MINOR_CAPS, MINOR_LABEL, ROW_NAME, SMALL_CAPS } from "@/app/desk";
+import { INDEX_BLOCK, INDEX_SPINE, MINOR_WORD, MINOR_LABEL, ROW_NAME, SMALL_WORD } from "@/app/desk";
 import { yoursEdge } from "@/app/mine";
 import { matchupHref } from "../routes";
 import { teamHref } from "@/app/squad/routes";
@@ -62,7 +62,7 @@ function SeasonLine({ row, teamId, current }: { row: SeasonRow; teamId: string; 
         <span className="flex min-w-0 flex-1 flex-col">
           <Opponent opponent={row.opponent} gameweek={row.round.gameweek} />
           {cup === null ? null : (
-            <span className={`${MINOR_CAPS} truncate text-info lg:hidden`}>
+            <span className={`${MINOR_WORD} truncate text-info lg:hidden`}>
               {cup.competition.name}
               {cup.round === null ? null : <span className="font-normal"> {cup.round}</span>}
             </span>
@@ -73,7 +73,7 @@ function SeasonLine({ row, teamId, current }: { row: SeasonRow; teamId: string; 
 
         {/* The competition in cyan (Craig, 7 Oct) on a desk; a phone names a cup under the opponent and leaves a
             league row bare (21 Oct), as the club's Fixtures do. A knockout's round sits under its name. */}
-        <span className={`hidden w-40 shrink-0 flex-col ${SMALL_CAPS} text-info lg:flex lg:text-sm`}>
+        <span className={`hidden w-40 shrink-0 flex-col ${SMALL_WORD} text-info lg:flex lg:text-sm`}>
           <span className="truncate">{row.tie.competition.name}</span>
           {row.tie.round === null ? null : <span className="truncate font-normal">{row.tie.round}</span>}
         </span>

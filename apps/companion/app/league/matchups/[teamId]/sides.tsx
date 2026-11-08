@@ -6,7 +6,7 @@ import Nothing from "../../../components/shell/Nothing";
 import SquadBoard from "../../../components/league/SquadBoard";
 import TeamSheet from "../../../components/league/TeamSheet";
 import { teamHref } from "@/app/squad/routes";
-import { PANEL_FLUSH, SMALL_CAPS } from "@/app/desk";
+import { PANEL_FLUSH, SMALL_WORD } from "@/app/desk";
 
 // The head-to-head's per-side pieces: why a side is withheld, and the squad list a side shows before kickoff. The
 // shared boards are `tabs.tsx`'s.
@@ -37,7 +37,7 @@ export function Withheld({
       <p className="max-w-xs text-sm text-muted">{because}</p>
       <Link
         href={teamHref(team.teamId)}
-        className={`flex min-h-11 items-center ${SMALL_CAPS} text-accent`}
+        className={`flex min-h-11 items-center ${SMALL_WORD} text-accent`}
       >
         See the squad
       </Link>

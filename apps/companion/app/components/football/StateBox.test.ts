@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { FootballPlayer } from "@epl/core";
 import StateBox from "./StateBox";
 
-vi.mock("@/app/desk", () => ({ MINOR_CAPS: "" }));
+vi.mock("@/app/desk", () => ({ MINOR_WORD: "" }));
 
 const doubt = (news: string, chanceOfPlaying: number | null) =>
   renderToStaticMarkup(createElement(StateBox, { player: { status: "d", news, chanceOfPlaying } as FootballPlayer }));

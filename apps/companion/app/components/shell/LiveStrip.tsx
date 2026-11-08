@@ -4,7 +4,7 @@ import Link from "@/app/components/shell/Link";
 import type { LiveTie } from "./liveTie";
 import { usePathname } from "next/navigation";
 import { DASH, trails } from "@epl/core";
-import { SMALL_CAPS } from "@/app/desk";
+import { SMALL_WORD } from "@/app/desk";
 import { LIVE, PAPER, owns } from "./sections";
 import LiveMark from "./LiveMark";
 
@@ -19,7 +19,7 @@ export default function LiveStrip({ ties }: { ties: readonly LiveTie[] }) {
   return (
     // Sticky and full-bleed: the shell's strip, not the page's.
     <div className="sticky top-0 z-40 hidden min-h-11 items-center justify-center gap-5 bg-league-deep px-[var(--page-gutter)] text-cream lg:flex">
-      <LiveMark className={`gap-1.5 ${SMALL_CAPS}`} />
+      <LiveMark className={`gap-1.5 ${SMALL_WORD}`} />
       {ties.map(({ yours, theirs, opponent, href }) => (
         <Link key={href} href={href} className="flex min-h-11 min-w-0 items-center gap-2.5">
           <span className="numeric flex items-baseline gap-1.5 text-base font-bold">

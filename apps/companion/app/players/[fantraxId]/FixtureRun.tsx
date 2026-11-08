@@ -53,13 +53,13 @@ export default function FixtureRun({
                 {/* A rearranged match can lose its round; it keeps its place in the run and says so. */}
                 {gw === null ? DASH : `GW${gw}`}
               </span>
-              {/* One 28px line, the venue a step down beside the club (Craig, 21 Oct 2026: "next up can be smaller"). */}
+              {/* One 28px line, club and venue as every fixture tile reads (`FUL (h)`, the approved player picture). */}
               <span
-                className={`numeric flex min-h-7 items-baseline justify-center gap-px px-0.5 pt-1.5 text-xs font-bold leading-none ${step.ink}`}
+                className={`numeric flex min-h-7 items-center justify-center gap-1 px-0.5 text-xs font-bold leading-none ${step.ink}`}
                 style={{ backgroundColor: step.ground }}
               >
                 <span className="truncate">{against.club.shortName}</span>
-                <span className="text-3xs font-normal opacity-80">{venueMark(against.home).replace(/[()]/g, "")}</span>
+                <span className="shrink-0">{venueMark(against.home)}</span>
               </span>
               {repeat || gw === null || flat !== null ? null : (
                 <span className={`numeric text-center font-bold text-info ${ROW_FIGURE}`} title={`Expected minutes, gameweek ${gw}`}>

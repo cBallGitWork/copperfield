@@ -1,18 +1,13 @@
 import type { ReactNode } from "react";
 import Link from "@/app/components/shell/Link";
-import { HEAD_CELL, MINOR_CAPS, PLATE_FRAME, heldPlate } from "@/app/desk";
+import { HEAD_CELL, MINOR_WORD, PLATE_FRAME, heldPlate } from "@/app/desk";
 
-// The one head strip every table in the app prints: `HeadRow`'s minor caps, 24px bevelled plates, a centred word over
+// The one head strip every table in the app prints: `HeadRow`'s mixed-case words, 24px bevelled plates, a centred word over
 // a figure and a bare cell over a name. The column LISTS stay with their tables; the mechanics live here.
 
-/** The head row; its cells inherit `MINOR_CAPS`, the 9px that keeps a narrow board from scrolling. */
+/** The head row; its cells inherit `MINOR_WORD`, the 9px that keeps a narrow board from scrolling, a step up at the desk. */
 export function HeadRow({ children }: { children: ReactNode }) {
-  return <tr className={MINOR_CAPS}>{children}</tr>;
-}
-
-/** A head's or tab's word in capitals, unless a lower-case prefix runs into a capital: `xG` is not `XG`. */
-export function headWord(label: ReactNode): ReactNode {
-  return typeof label === "string" && /^[a-z]+[A-Z]/.test(label) ?<span className="normal-case">{label}</span> : label;
+  return <tr className={`${MINOR_WORD} lg:text-2xs`}>{children}</tr>;
 }
 
 /** One head cell; `p-0` because the plate inside carries the padding. */
@@ -91,7 +86,7 @@ export function SortHead({
   const plate = `${FRAME} gap-0.5 ${compact ? COMPACT : "px-1.5"} ${JUSTIFY[align]} ${heldPlate(sorted !== undefined)}`;
   const face = (
     <>
-      {mute ? <span className={MUTE}>{label}</span> : headWord(label)}
+      {mute ? <span className={MUTE}>{label}</span> : label}
       {arrow && sorted !== undefined ? <SortArrow down={sorted === "descending"} /> : null}
     </>
   );
@@ -103,8 +98,7 @@ export function SortHead({
           {face}
         </Link>
       ) : (
-        // `uppercase` again: a button does not inherit the row's capitals, as a link does.
-        <button type="button" onClick={onSort} className={`w-full uppercase ${plate}`}>
+        <button type="button" onClick={onSort} className={`w-full ${plate}`}>
           {face}
         </button>
       )}
@@ -166,7 +160,7 @@ export function PlateHead({
   return (
     <th scope={scope} colSpan={colSpan} title={title} aria-sort={sorted} className={`${HEAD_CELL} ${className}`}>
       <div className={plate}>
-        {headWord(children)}
+        {children}
         {sorted === undefined ? null : <SortArrow down={sorted === "descending"} />}
       </div>
     </th>

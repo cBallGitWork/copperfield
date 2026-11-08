@@ -26,7 +26,6 @@ import { DEFCON_POINTS, XMINS, headedFor, namedDefCon, paidFor, ratedOn } from "
 import { defconPricing, poolPositions } from "../defcon";
 import { attributeStats } from "./attributeColumns";
 import { DAILY_COLUMNS, expectedStats, seasonStats } from "./seasonColumns";
-import ColumnKey from "./ColumnKey";
 import { offeredFor } from "./sortOptions";
 import { PRESSABLE, Plates } from "./BoardControls";
 import BoardLink from "./BoardLink";
@@ -124,7 +123,6 @@ export default async function PoolBoard({
   const rated = players ? null : ratedOn(drawn, isPer90(query, view));
   const columns = headedFor(drawn, rated);
   // Plain data, since the key is a client component: a column carries functions.
-  const heads = columns.filter((column) => column.key !== "name").map(({ label, title, means }) => ({ label, title, means }));
 
   // Cut over the first hundred rows the query chose, so a short page keeps its inks as Show N more pages in.
   const cuts = unlessSorted(
@@ -173,7 +171,6 @@ export default async function PoolBoard({
         rated={rated}
         shown={shown.length}
         offered={offeredFor(view, scored, info?.scoring ?? null, chosen(query.pos), sorted)}
-        glossary={<ColumnKey entries={heads} className={`${PRESSABLE} min-w-11`} />}
       />
 
       {/* A column headed FPts that silently became a projection would be the confident wrong answer (DESIGN §7). */}
