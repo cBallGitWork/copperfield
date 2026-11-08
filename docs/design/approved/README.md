@@ -29,3 +29,7 @@ Named after its route: `league` for `/league`, `squad` for `/squad/[teamId]`.
 
 - [`league`](league/README.md): `/league`, the table, desk and phone (8 Nov 2026).
 - [`squad`](squad/README.md): `/squad/[teamId]`, a squad's Squad tab, desk and phone (8 Nov 2026).
+- [`players`](players/README.md): `/players`, the pool board, desk (8 Nov 2026).
+- [`matchday`](matchday/README.md): `/matchday`, Live's Scores, desk (8 Nov 2026).
+- [`player`](player/README.md): `/players/[fantraxId]`, a player's Profile, desk (8 Nov 2026).
+- [`scoring`](scoring/README.md): `/scoring`, the league's scoring, desk (8 Nov 2026).

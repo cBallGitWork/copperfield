@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Board: Player (whole-site pass)</title>
+<style>
+@font-face { font-family: Oxanium; src: url(../../../../apps/companion/app/fonts/oxanium/latin.woff2) format("woff2"); font-weight: 400 800; }
+@font-face { font-family: Jost; src: url(../../../../apps/companion/app/fonts/jost/latin.woff2) format("woff2"); font-weight: 400 700; }
+@font-face { font-family: "Archivo Narrow"; src: url(../../../../apps/companion/app/fonts/archivo-narrow/latin.woff2) format("woff2"); font-weight: 400 700; }
+:root {
+  /* Copied from apps/companion/app/tokens.css, 7 Nov 2026. */
+  --color-bg: oklch(0.190 0.045 265); --color-surface: oklch(0.245 0.012 80);
+  --color-ink: oklch(0.97 0.008 80); --color-muted: oklch(0.76 0.022 80); --color-faint: oklch(0.65 0.022 80);
+  --color-accent: oklch(0.88 0.16 95); --color-info: oklch(0.82 0.13 210);
+  --color-chrome: oklch(0.45 0.13 264); --color-index: oklch(0.40 0.16 266); --color-face: oklch(0.72 0.02 265);
+  --color-bad: oklch(0.66 0.17 25); --color-up: oklch(0.78 0.17 148); --color-mid: oklch(0.79 0.14 85);
+  --color-doubt-out: oklch(0.66 0.19 25); --color-doubt-major: oklch(0.72 0.17 55); --color-doubt-slight: oklch(0.79 0.14 85);
+  --color-ease-2: oklch(0.833 0.165 132.4); --color-ease-4: oklch(0.751 0.148 92); --color-ease-6: oklch(0.653 0.16 55.7);
+  --color-ease-8: oklch(0.534 0.178 31.6); --color-ease-1: oklch(0.87 0.19 150); --color-ease-9: oklch(0.467 0.161 27.3);
+  --color-cream: oklch(0.94 0.02 75);
+  /* PROPOSED, not yet tokens (Craig's calls): CM's indigo tab strip, and its purple block for the column a table is for. */
+  --color-tab: oklch(0.30 0.14 280);
+  --color-for: oklch(0.36 0.15 315);
+  --font-chrome: Oxanium, sans-serif; --font-sans: Jost, sans-serif; --font-display: "Archivo Narrow", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 1440px; min-height: 900px; font-family: var(--font-sans); color: var(--color-ink); background: var(--color-bg); }
+.ground { position: fixed; inset: 0; background: url(../../../../apps/companion/public/ground/venues/cheese-shop.jpg) center / cover; filter: brightness(0.55); z-index: -1; }
+.desk { display: grid; grid-template-columns: 130px 1fr; width: 1200px; min-height: 900px; margin: 0 auto; box-shadow: 0 0 0 2px black; }
+
+/* The rail: CM's sidebar, top to bottom (cm9900/24.jpg, 12.jpg). */
+.rail { background: oklch(0.16 0.05 265); border-right: 2px solid black; display: flex; flex-direction: column; gap: 4px; padding: 4px; font-family: var(--font-chrome); }
+.rail > * { text-align: center; }
+.rail a, .rail .continue, .rail .manager, .rail .date { --face: oklch(0.24 0.08 266); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 60%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); }
+.rail .date { --face: var(--color-index); color: var(--color-accent); padding: 8px 4px; font-weight: 700; font-size: 14px; line-height: 18px; }
+.arrows { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.arrows span { --face: var(--color-chrome); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); padding: 6px 0; color: var(--color-ink); font-size: 14px; }
+.continue { padding: 12px 6px; font-size: 15px; font-weight: 600; }
+.manager { padding: 10px 6px; color: var(--color-accent); font-size: 15px; font-weight: 600; }
+.rail a { display: block; padding: 14px 6px; font-size: 15px; font-weight: 600; color: var(--color-ink); text-decoration: none; }
+.rail a[aria-current] { color: var(--color-accent); border-color: var(--color-accent); }
+
+.main { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.bevel { border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); }
+.titlebar { --face: var(--color-chrome); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 96px; display: grid; place-items: center; font-family: var(--font-chrome); font-weight: 700; font-size: 45px;
+  text-shadow: 0.06em 0.06em 0.07em rgb(0 0 0 / 0.45); }
+.tabs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
+.tab { --face: var(--color-tab); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 56px; display: grid; place-items: center; font-family: var(--font-chrome); font-weight: 600; font-size: 16px; }
+.tab[aria-current] { color: var(--color-accent); border-color: var(--color-accent); }
+.panel { background: color-mix(in srgb, var(--color-surface) 80%, transparent); border: 2px solid oklch(0.12 0.01 80); }
+.caption { margin: 0 0 6px; background: oklch(0.40 0.03 265 / 0.55); text-align: center; color: var(--color-accent); font-family: var(--font-chrome); font-weight: 600; font-size: 21px; padding: 8px 0; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th { height: 24px; padding: 0 1px; }
+th span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  display: block; height: 22px; line-height: 18px; color: var(--color-bg); font-family: var(--font-chrome); font-size: 13px; font-weight: 600; text-align: center; }
+th span.sorted { border-color: var(--dark) var(--light) var(--light) var(--dark); }
+td { height: 28px; border-bottom: 1px solid var(--color-bg); font-size: 16px; }
+td.fig { font-family: var(--font-display); font-variant-numeric: tabular-nums; text-align: center; font-size: 16px; }
+td.name { padding-left: 10px; font-weight: 600; font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mine td { background: oklch(0.255 0.012 80); }
+.mine td.name { color: var(--color-accent); box-shadow: inset 4px 0 0 var(--color-accent); }
+.you { display: inline-block; margin-left: 10px; padding: 0 6px; background: var(--color-bg); color: var(--color-accent); font-family: var(--font-chrome); font-size: 12px; line-height: 18px; vertical-align: 2px; }
+tr.cut td { height: 20px; border-bottom: 0; padding: 0; }
+tr.cut td div { border-top: 2px dashed oklch(0.530 0.207 22); display: flex; justify-content: flex-end; }
+tr.cut td span { margin-top: -10px; padding: 0 8px; background: oklch(0.245 0.012 80); color: oklch(0.72 0.15 22); font-size: 14px; line-height: 18px; }
+td.cm-index { width: 64px; text-align: center; font-family: var(--font-chrome); font-weight: 800; font-size: 15px; }
+.cm-index { background-color: var(--cm-index-face, var(--color-index));
+  background-image: linear-gradient(180deg, color-mix(in oklab, white 22%, var(--cm-index-face, var(--color-index))), var(--cm-index-face, var(--color-index)) 55%, color-mix(in oklab, black 45%, var(--cm-index-face, var(--color-index))));
+  background-attachment: fixed; text-shadow: 0.04em 0.05em 0.05em rgb(0 0 0 / 0.55); box-shadow: inset -1px 0 0 var(--color-bg); }
+td.for { width: 72px; padding: 0 0 0 2px; }
+td.for b { display: block; background: var(--color-for); font-family: var(--font-display); font-variant-numeric: tabular-nums; text-align: center; font-size: 17px; line-height: 27px; color: var(--color-ink); }
+tr.greyed td.for b { background: color-mix(in oklch, var(--color-for), oklch(0.245 0.012 80) 55%); color: var(--color-muted); }
+tr.greyed td.opp { filter: saturate(0.45) brightness(0.8); }
+.up { color: var(--color-up); } .bad { color: var(--color-bad); } .quiet { color: var(--color-muted); } .info { color: var(--color-info); }
+.form span { display: inline-block; width: 18px; font-weight: 700; }
+.foot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: auto; }
+.foot span { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  min-height: 48px; display: grid; place-items: center; color: var(--color-bg); font-family: var(--font-chrome); font-weight: 700; font-size: 20px; }
+.foot { grid-template-columns: 1fr 1fr; gap: 4px; }
+.foot span.off { color: color-mix(in oklch, var(--color-face), black 30%); }
+:root { --color-fdr-1: oklch(0.84 0.20 152); --color-fdr-2: oklch(0.78 0.16 158); --color-fdr-3: oklch(0.80 0.02 265); --color-fdr-4: oklch(0.66 0.20 22); --color-fdr-5: oklch(0.50 0.18 18);
+  --color-index-free: oklch(0.39 0.11 148); --color-peak: oklch(0.74 0.17 55); --color-raised: oklch(0.255 0.012 80); --color-live: oklch(0.62 0.22 25); --color-league: oklch(0.530 0.207 22); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.rail .plate { --face: oklch(0.24 0.08 266); background: var(--face); --light: color-mix(in oklch, var(--face), white 40%); --dark: color-mix(in oklch, var(--face), black 60%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); padding: 10px 6px; font-size: 15px; font-weight: 600; }
+.rail .plate.team { color: var(--color-accent); }
+.crest { width: 20px; height: 20px; object-fit: contain; vertical-align: -4px; margin-right: 8px; }
+.free { --cm-index-face: var(--color-index-free); }
+td.for b.none { background: transparent; color: var(--color-muted); }
+.chips { display: flex; gap: 4px; align-items: center; padding: 8px 8px 6px; }
+.btn { --face: var(--color-face); background: var(--face); --light: color-mix(in oklch, var(--face), white 55%); --dark: color-mix(in oklch, var(--face), black 55%);
+  border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); color: var(--color-bg); font-family: var(--font-chrome); font-weight: 700; font-size: 14px; min-height: 36px; padding: 0 12px; display: inline-flex; align-items: center; }
+.btn.on { border-color: var(--dark) var(--light) var(--light) var(--dark); background: color-mix(in oklch, var(--face), black 12%); }
+.btn.on::after { content: "\2713"; margin-left: 6px; }
+.find { min-height: 36px; width: 210px; background: var(--color-bg); border: 2px solid; border-color: oklch(0.12 0.01 80) oklch(0.40 0.012 80) oklch(0.40 0.012 80) oklch(0.12 0.01 80); color: var(--color-muted); padding: 0 10px; display: inline-flex; align-items: center; font-size: 16px; }
+.spacer { flex: 1; }
+.owner { color: var(--color-muted); font-weight: 400; font-size: 14px; margin-left: 6px; }
+.main > .foot { margin-top: 0; }
+.mine-row .nm { color: var(--color-accent); } .mine-row { background: var(--color-raised); }
+td.fig.peak { color: var(--color-peak); font-weight: 700; } td.fig.hi { color: var(--color-accent); }
+.titlebar.club { --face: oklch(0.75 0.10 235); color: #111; text-shadow: 0.04em 0.04em 0 rgb(0 0 0 / 0.18); }
+.lead { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 8px; }
+.lead h2 { font-family: var(--font-chrome); font-size: 20px; } .lead .for { display: flex; align-items: stretch; }
+.season { display: grid; grid-template-columns: auto 64px; align-items: stretch; border: 2px solid oklch(0.12 0.01 80); }
+.season span { padding: 0 10px; display: grid; place-items: center; color: var(--color-muted); font-size: 15px; background: var(--color-bg); }
+.season b { background: var(--color-for); display: grid; place-items: center; font-family: var(--font-display); font-size: 22px; }
+.sect { padding: 0 8px 8px; } .sect .caption { margin: 0 -8px 8px; font-size: 18px; padding: 6px 0; display: flex; justify-content: center; }
+.next table th span { font-size: 13px; } .next td { border: 0; padding: 2px 2px; height: auto; }
+.ez { display: block; text-align: center; font-family: var(--font-chrome); font-weight: 700; font-size: 15px; line-height: 30px; }
+.xm { display: flex; gap: 8px; align-items: baseline; padding: 6px 2px 0; font-size: 15px; color: var(--color-muted); } .xm b { color: var(--color-info); font-family: var(--font-display); font-size: 18px; }
+.prof { display: grid; grid-template-columns: 200px 1fr; gap: 8px; }
+.photo { position: relative; background: oklch(0.75 0.10 235 / 0.35); border: 2px solid oklch(0.12 0.01 80); display: grid; place-items: center; color: var(--color-muted); font-size: 14px; min-height: 270px; }
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; } .sect .caption .fine { position: absolute; right: 10px; top: 9px; } .sect .caption { position: relative; }
+table.attr td { height: 28px; font-size: 17px; border-bottom: 1px solid oklch(0.40 0.012 80 / 0.6); }
+table.attr td.fig { text-align: right; width: 54px; font-size: 16px; }
+.sp { display: grid; grid-template-columns: repeat(3, 1fr); } .sp div { display: flex; justify-content: space-between; padding: 4px 12px; border-right: 1px solid var(--color-bg); font-size: 16px; }
+.sp div:last-child { border-right: 0; } .sp b { color: var(--color-accent); font-family: var(--font-display); }
+.news { font-size: 17px; line-height: 24px; padding: 2px 4px 6px; }
+.fine { color: var(--color-muted); font-size: 13px; margin-left: auto; font-weight: 400; font-family: var(--font-sans); } 
+</style></head><body><div class="ground"></div><div class="desk"><nav class="rail" aria-label="Sections">
+<div class="date">Sunday<br>8.11.26</div><div class="plate">GW10</div><div class="plate team">The Raccoons</div>
+<a href="#">Read</a><a href="#">Team</a><a href="#">Live</a><a href="#">Draft</a><a href="#">Prem</a><a href="#" aria-current>Data</a><a href="#">FPL</a></nav>
+<main class="main">
+<h1 class="titlebar bevel club">Erling Haaland (Raccoons)</h1>
+<nav class="tabs" aria-label="Player"><span class="tab bevel" aria-current="page">Profile</span><span class="tab bevel">Data</span><span class="tab bevel">News</span><span class="tab bevel">Compare</span></nav>
+<section class="panel lead"><h2>Born 21.7.00 (Age 26). Norway.</h2>
+<span class="btn">Trade &#8599;</span></section>
+<section class="panel sect next"><h2 class="caption">Next up</h2>
+<table><thead><tr><th scope="col"><span class="bevel">GW11</span></th><th scope="col"><span class="bevel">GW12</span></th><th scope="col"><span class="bevel">GW13</span></th><th scope="col"><span class="bevel">GW14</span></th><th scope="col"><span class="bevel">GW15</span></th><th scope="col"><span class="bevel">GW16</span></th><th scope="col"><span class="bevel">GW17</span></th><th scope="col"><span class="bevel">GW18</span></th></tr></thead><tbody><tr><td><span class="ez" style="background:oklch(0.80 0.16 115);color:#08090b">FUL (h)</span></td><td><span class="ez" style="background:oklch(0.40 0.14 25);color:var(--color-cream)">ARS (a)</span></td><td><span class="ez" style="background:oklch(0.534 0.178 31.6);color:var(--color-cream)">LEE (h)</span></td><td><span class="ez" style="background:oklch(0.60 0.17 45);color:#08090b">BRE (a)</span></td><td><span class="ez" style="background:oklch(0.60 0.17 45);color:#08090b">CHE (h)</span></td><td><span class="ez" style="background:oklch(0.87 0.19 150);color:#08090b">HUL (h)</span></td><td><span class="ez" style="background:oklch(0.72 0.15 75);color:#08090b">NEW (a)</span></td><td><span class="ez" style="background:oklch(0.751 0.148 92);color:#08090b">EVE (a)</span></td></tr></tbody></table>
+<div class="xm">xMins <b>89</b><span class="fine">as of Fri 6 Nov</span></div></section>
+<div class="prof"><div class="photo"><img src="../../../../apps/companion/public/crests/t43.png" alt="" style="position:absolute;top:6px;left:6px;width:22px"><span>photograph</span></div>
+<section class="panel sect"><h2 class="caption">Attributes<span class="fine">25/26, against outfielders</span></h2><div class="cols"><table class="attr"><tr><td>Acceleration</td><td class="fig hi">15</td></tr><tr><td>Aggression</td><td class="fig quiet">6</td></tr><tr><td>Anticipation</td><td class="fig peak">18</td></tr><tr><td>Consistency</td><td class="fig peak">16</td></tr><tr><td>Creativity</td><td class="fig quiet">10</td></tr><tr><td>Crossing</td><td class="fig quiet">6</td></tr><tr><td>Dribbling</td><td class="fig quiet">10</td></tr><tr><td>Finishing</td><td class="fig peak">20</td></tr></table><table class="attr"><tr><td>Heading</td><td class="fig peak">16</td></tr><tr><td>Influence</td><td class="fig peak">20</td></tr><tr><td>Long Shots</td><td class="fig hi">11</td></tr><tr><td>Marking</td><td class="fig quiet">5</td></tr><tr><td>Off The Ball</td><td class="fig peak">20</td></tr><tr><td>Pace</td><td class="fig peak">19</td></tr><tr><td>Passing</td><td class="fig quiet">1</td></tr><tr><td>Penalty Taking</td><td class="fig hi">13</td></tr></table><table class="attr"><tr><td>Set Pieces</td><td class="fig quiet">—</td></tr><tr><td>Stamina</td><td class="fig quiet">8</td></tr><tr><td>Tackling</td><td class="fig quiet">2</td></tr><tr><td>Teamwork</td><td class="fig quiet">6</td></tr><tr><td>Work Rate</td><td class="fig quiet">1</td></tr><tr><td>Preferred Foot</td><td class="fig hi">Left</td></tr></table></div></section></div>
+<section class="panel sect"><h2 class="caption">Set pieces at Man City</h2>
+<div class="sp"><div>Penalties <b>1st</b></div><div>Direct free kicks <span class="quiet">—</span></div><div>Corners <span class="quiet">—</span></div></div></section>
+<section class="panel sect"><h2 class="caption">News<span class="fine">Thu 5 Nov, 20:30</span></h2>
+<p class="news">Haaland scored one goal to go with three shots (three on goal) in Wednesday's 3-2 victory over RB Leipzig.</p>
+<p class="news">Haaland would play a major part in City securing three points Wednesday, as the forward scored in the 78th minute to win the match.</p></section>
+</main></div></body></html>
