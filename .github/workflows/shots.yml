@@ -54,6 +54,19 @@ jobs:
             node tools/ui/shot.mjs "$route" "shots/${name:-home}-390.png" --width 390 --height 844
           done
 
+      # Each shot also goes into this log as text: a session that can read run logs but not artifact storage
+      # (`gh api .../actions/jobs/<id>/logs`) decodes it between the SHOT markers.
+      - name: Print the shots
+        run: |
+          set -euo pipefail
+          for png in shots/*.png; do
+            jpg="${png%.png}.jpg"
+            convert "$png" -resize 50% -quality 70 "$jpg"
+            echo "SHOT-BEGIN $(basename "$jpg")"
+            base64 -w 120 "$jpg"
+            echo "SHOT-END"
+          done
+
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: shots
