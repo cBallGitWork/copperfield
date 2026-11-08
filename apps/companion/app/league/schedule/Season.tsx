@@ -43,9 +43,10 @@ export default function Season({
     // CM's visible scroll bar on a desk; a phone scrolls the page, or the list's foot sits under the rail.
     <div className="flex flex-col gap-1">
       {/* One head strip over every column, as CM's (`cm9900/24.jpg`); a phone's rows say themselves. */}
-      <div aria-hidden className={`hidden items-center gap-2 pr-1.5 lg:flex ${SMALL_WORD}`}>
+      {/* Its right padding is the row's 6px plus CM's 16px scroll bar (`.cm-scroll`), so each plate sits over its column. */}
+      <div aria-hidden className={`hidden items-center gap-2 pr-[1.375rem] lg:flex ${SMALL_WORD}`}>
         <span className={`${HEAD_PLATE_CENTRE} ${GW}`}>GW</span>
-        <span className={`${HEAD_PLATE} ${DATE}`}>Date</span>
+        <span className={`${HEAD_PLATE} w-28 shrink-0`}>Date</span>
         <span className={`${HEAD_PLATE} min-w-0 flex-1`}>Opponent</span>
         <span className={`${HEAD_PLATE} ${COMPETITION}`}>Competition</span>
         <span className={`${HEAD_PLATE_CENTRE} ${RESULT}`}>Res</span>
