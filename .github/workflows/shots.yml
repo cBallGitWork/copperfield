@@ -54,6 +54,36 @@ jobs:
             node tools/ui/shot.mjs "$route" "shots/${name:-home}-390.png" --width 390 --height 844
           done
 
+      # Each shot also goes into this log as text: a session that can read run logs but not artifact storage
+      # (`gh api .../actions/jobs/<id>/logs`) decodes it between the SHOT markers. Chrome writes a 1x JPEG of each.
+      - name: Print the shots
+        env:
+          ROUTES: ${{ inputs.routes }}
+        run: |
+          set -euo pipefail
+          cat > /tmp/jpeg.mjs <<'JS'
+          import { writeFileSync } from "node:fs";
+          import { connect } from "./tools/ui/cdp.mjs";
+          const [route, out, width, height] = process.argv.slice(2);
+          const cdp = await connect();
+          await cdp.setViewport(Number(width), Number(height), 1);
+          await cdp.open(route);
+          const shot = await cdp.send("Page.captureScreenshot", { format: "jpeg", quality: 70 });
+          writeFileSync(out, Buffer.from(shot.data, "base64"));
+          cdp.close();
+          JS
+          cp /tmp/jpeg.mjs ./jpeg.mjs
+          for route in $ROUTES; do
+            name="$(echo "$route" | tr '/?=&' '____' | sed 's/^_//')"
+            for size in "1440 900" "390 844"; do
+              set -- $size
+              node jpeg.mjs "$route" "shots/${name:-home}-$1.jpg" "$1" "$2"
+              echo "SHOT-BEGIN ${name:-home}-$1.jpg"
+              base64 -w 120 "shots/${name:-home}-$1.jpg"
+              echo "SHOT-END"
+            done
+          done
+
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: shots
