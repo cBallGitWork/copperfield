@@ -27,4 +27,5 @@ Named after its route: `league` for `/league`, `squad` for `/squad/[teamId]`.
 
 ## Screens
 
-None yet. The reskin boards in `docs/design/boards/` are proposals until Craig says yes.
+- [`league`](league/README.md): `/league`, the table, desk and phone (8 Nov 2026).
+- [`squad`](squad/README.md): `/squad/[teamId]`, a squad's Squad tab, desk and phone (8 Nov 2026).
