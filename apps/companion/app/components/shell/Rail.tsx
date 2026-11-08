@@ -5,42 +5,19 @@ import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import ThumbRail from "./ThumbRail";
 import { CREDITS, sectionOwns, sectionsFor } from "./sections";
-import { SMALL_CAPS } from "@/app/desk";
 
 // Championship Manager's rail: down the side of a desk, and laid along the foot of a phone (`ThumbRail`).
 // It decides the section list once, from the gameweek; client only because `usePathname` says where you are.
 
-/** CM's back and forward arrows, desk only, in ink: the accent means yours or selected, and an arrow is neither.
- *  Forward is never greyed, because `history` cannot say whether there is anywhere forward. */
-function Steppers() {
-  return (
-    <div className="hidden border-b border-line lg:flex">
-      <button
-        type="button"
-        onClick={() => history.back()}
-        aria-label="Back"
-        className="flex min-h-11 flex-1 items-center justify-center border-r border-chrome text-sm text-ink hover:bg-surface"
-      >
-        <span aria-hidden>←</span>
-      </button>
-      <button
-        type="button"
-        onClick={() => history.forward()}
-        aria-label="Forward"
-        className="flex min-h-11 flex-1 items-center justify-center text-sm text-ink hover:bg-surface"
-      >
-        <span aria-hidden>→</span>
-      </button>
-    </div>
-  );
-}
-
 export default function Rail({
   matchday,
+  head,
   live,
   mail,
 }: {
   matchday: boolean;
+  /** CM's sidebar head over the sections (`RailHead`): a server node, since it reads the league and the session. */
+  head: ReactNode;
   /** Your live score or the match clock, for the Live tab: a server node, since the number comes off Fantrax. */
   live: ReactNode;
   /** The unread badge for the Read tab, which the layout hands its inbox read. */
@@ -58,10 +35,10 @@ export default function Rail({
       {/* The rail, from `lg`, on its own opaque ground: the fixed `PhotoGround` would run up behind the labels. */}
       <nav
         aria-label="Sections"
-        className="sticky top-0 z-50 hidden h-dvh w-[8.125rem] shrink-0 flex-col self-start overflow-y-auto border-r border-line bg-bg pl-[var(--safe-left)] lg:flex"
+        className="sticky top-0 z-50 hidden h-dvh w-[8.125rem] shrink-0 flex-col gap-1 self-start overflow-y-auto border-r-2 border-black bg-bg p-1 pl-[calc(var(--safe-left)+0.25rem)] lg:flex"
       >
-        <Steppers />
-        <ul className="flex flex-col">
+        {head}
+        <ul className="flex flex-col gap-1">
           {sections.map((section) => {
             const here = sectionOwns(section, pathname);
             return (
@@ -71,11 +48,7 @@ export default function Rail({
                   aria-current={here ? "page" : undefined}
                   // No letterspacing: the rail's labels have no room to spare.
                   // A tapped section is marked as the one you are on while its page is on the way (`Pending`, in every `Link`).
-                  className={`flex min-h-14 items-center justify-center border px-1 text-center font-chrome ${SMALL_CAPS} hover:bg-surface ${
-                    here
-                      ? "border-accent border-l-2 text-accent"
-                      : "border-chrome text-ink has-[>[data-pending]]:border-l-2 has-[>[data-pending]]:border-accent has-[>[data-pending]]:text-accent"
-                  }`}
+                  className="cm-rail-plate flex min-h-12 items-center justify-center"
                 >
                   {section.label}
                 </Link>

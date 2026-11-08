@@ -15,6 +15,7 @@ import PhotoGround from "./components/football/PhotoGround";
 import { ReturnWeeks } from "./components/football/FitnessNote";
 import { intelReturnWeeks } from "./intel";
 import PullToRefresh from "./components/shell/PullToRefresh";
+import RailHead from "./components/shell/RailHead";
 import Rail from "./components/shell/Rail";
 import ReplayStrip from "./components/shell/ReplayStrip";
 import UnreadBadge from "./components/shell/UnreadBadge";
@@ -99,8 +100,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           Skip to content
         </a>
+        <div className="desk-frame flex min-h-dvh w-full">
         <Rail
           matchday={matchday}
+          head={
+            <Suspense fallback={null}>
+              <RailHead open={calendar.open} />
+            </Suspense>
+          }
           live={
             <Suspense fallback={<Glyph name="live" />}>
               <LiveFigure tie={tie} />
@@ -136,6 +143,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {/* Every row's fitness note reads the squads export's return weeks from here. */}
             <ReturnWeeks weeks={intelReturnWeeks} open={calendar.open} starts={calendar.starts}>{children}</ReturnWeeks>
           </main>
+        </div>
         </div>
         {/* Page views by route, cookieless; it sends only on a Vercel deployment with Web Analytics on. */}
         <Analytics />

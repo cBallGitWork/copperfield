@@ -29,12 +29,24 @@
 /* How wide the page may get; `<main>` reads it. */
 :root {
   --page-frame: 72rem;
+  /* CM's frame on a desk: the rail and the page together, centred, the ground either side (approved 8 Nov 2026). */
+  --desk-frame: 75rem;
 }
 
 /* From `2xl` the frame grows to 96rem and no further; the type steps up at the same breakpoint in `tokens.css`. */
 @media (min-width: 96rem) {
   :root {
     --page-frame: 96rem;
+    --desk-frame: calc(var(--page-frame) + 8.125rem);
+  }
+}
+
+/* The desk's frame: a black rule round it, as CM's 800x600 stood on the screen. */
+@media (min-width: 64rem) {
+  .desk-frame {
+    margin-inline: auto;
+    max-width: var(--desk-frame);
+    box-shadow: 0 0 0 2px black;
   }
 }
 

@@ -107,6 +107,14 @@ export function londonTime(iso: string): string {
   return readable(iso, TIME);
 }
 
+/** `7.11.26`: the day as CM 99/00's sidebar dates it (`cm9900/24.jpg`), in London, no leading noughts. */
+export function cmDate(iso: string): string {
+  const at = instantOf(iso);
+  if (at === null) return iso;
+  const part = (type: string) => DAY_KEY.formatToParts(at).find((p) => p.type === type)?.value ?? "";
+  return `${Number(part("day"))}.${Number(part("month"))}.${part("year").slice(2)}`;
+}
+
 /** `Sat 10 Oct, 15:00`: an instant to the minute, as a letter or a "last updated" line dates it. */
 export function londonMoment(iso: string): string {
   return `${londonDayAndDate(iso)}, ${londonTime(iso)}`;

@@ -121,7 +121,7 @@ export const PINNED_TOP = "max-lg:sticky max-lg:top-[var(--safe-top)] max-lg:z-[
 
 /** One plate of a tab strip. Size and padding stay the caller's. */
 export const TAB =
-  "cm-tab flex flex-1 items-center justify-center font-bold uppercase lg:text-sm";
+  "cm-tab flex flex-1 items-center justify-center font-bold lg:text-sm";
 
 /** A name across a colour plate's bar (a side of a scoreline, a club on the match bar): the title's shadow, cut short
  *  rather than wrapped. Size is the caller's, and so is ink, which the plate's colour decides. */

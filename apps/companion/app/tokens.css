@@ -24,6 +24,11 @@
   /* Chrome only: the royal-blue title bar and the bars that frame a panel; never a figure, a name or a state. */
   --color-chrome: oklch(0.45 0.13 264);
 
+  /* CM's tab strip, indigo under the royal-blue title bar, so the subject and its views are two objects (Craig,
+     8 Nov 2026, the approved reskin): ink 13.1:1, accent 10.0:1, muted 6.7:1. */
+  --color-tab: oklch(0.30 0.14 280);
+  /* CM's rail plate, a step lighter than the ground it stands on. */
+  --color-rail-plate: oklch(0.24 0.08 266);
   /* CM's index cell, one step deeper and more saturated than the chrome above it. */
   --color-index: oklch(0.40 0.16 266);
   /* The index block for a man on no roster: `--color-up`'s hue at the blue's depth (ink 4.8:1 at the ramp's top). */
