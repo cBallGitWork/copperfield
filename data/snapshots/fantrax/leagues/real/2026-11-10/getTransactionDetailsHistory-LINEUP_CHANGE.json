@@ -3,7 +3,7 @@
     "totalNumPages": 2,
     "pageNumber": 1,
     "maxResultsPerPage": 100,
-    "totalNumResults": 174
+    "totalNumResults": 175
   },
   "filterSettings": {
     "positionOrGroup": "ALL",
@@ -250,6 +250,130 @@
     "rows": [
       {
         "scorer": {
+          "teamName": "Tottenham Hotspur",
+          "urlName": "pedro-porro",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Tottenham_Hotspur.png",
+          "scorerId": "05n07",
+          "upcomingEventStatusId": "2",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "703"
+          ],
+          "defaultPosId": "703",
+          "posShortNames": "D",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 7, 11:50 AM: Porro recorded four crosses (one...",
+              "typeId": "9"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "703"
+          ],
+          "teamId": "110160",
+          "name": "Pedro Porro",
+          "teamShortName": "TOT",
+          "shortName": "P. Porro"
+        },
+        "executed": true,
+        "numInGroup": 2,
+        "txSetId": "b2l9fnyhmwaj4xvf",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "The Raccoons",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "l5kunst8msgbirdf"
+          },
+          {
+            "align": "LEFT",
+            "content": "Reserve",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "to"
+          },
+          {
+            "align": "LEFT",
+            "content": "Tue Nov 10, 2026, 5:10AM",
+            "rowspan": 2,
+            "key": "date"
+          },
+          {
+            "content": "11",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Brighton",
+          "urlName": "jack-hinshelwood",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
+          "scorerId": "067ys",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702"
+          ],
+          "defaultPosId": "702",
+          "posShortNames": "M",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Nov 9, 5:51 AM: Hinshelwood registered one shot (zero...",
+              "typeId": "9"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702"
+          ],
+          "teamId": "110240",
+          "name": "Jack Hinshelwood",
+          "teamShortName": "BHA",
+          "shortName": "J. Hinshelwood"
+        },
+        "executed": true,
+        "txSetId": "b2l9fnyhmwaj4xvf",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "The Raccoons",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "l5kunst8msgbirdf"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Reserve",
+            "key": "to"
+          },
+          {
+            "content": "11",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
           "teamName": "Brighton",
           "urlName": "ferdi-kadioglu",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
@@ -278,6 +402,7 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5cyskt8dmw9r550t",
         "deleted": false,
@@ -346,6 +471,7 @@
           "shortName": "Bruno Fernandes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "5cyskt8dmw9r550t",
         "deleted": false,
         "cells": [
@@ -392,11 +518,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -411,7 +537,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "lblh9qgomw8xhx5v",
         "deleted": false,
@@ -480,7 +605,6 @@
           "shortName": "B. Kamara"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "lblh9qgomw8xhx5v",
         "deleted": false,
         "cells": [
@@ -524,7 +648,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 7:47 AM: Munoz has joined Spain's national team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -539,6 +663,7 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "88x9u3t3mw8c3u9w",
         "deleted": false,
@@ -578,7 +703,6 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -589,12 +713,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Lewis-Potter generated one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -609,6 +729,7 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "88x9u3t3mw8c3u9w",
         "deleted": false,
         "cells": [
@@ -672,7 +793,6 @@
           "shortName": "T. George"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s4abf28gmw8anuem",
         "deleted": false,
@@ -741,7 +861,6 @@
           "shortName": "Mateus Fernandes"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "s4abf28gmw8anuem",
         "deleted": false,
         "cells": [
@@ -788,7 +907,7 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 9, 9:12 AM: Hill generated one shot (zero on goal)...",
+              "tooltip": "Nov 10, 5:40 AM: Hill has received his first senior...",
               "typeId": "14"
             }
           ],
@@ -803,6 +922,7 @@
           "shortName": "J. Hill"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "8dtxg6vamw8a6it1",
         "deleted": false,
@@ -865,7 +985,7 @@
             },
             {
               "tooltip": "Nov 9, 4:14 AM: Belloumi (hamstring) has withdrawn from...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -880,6 +1000,7 @@
           "shortName": "M. Belloumi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8dtxg6vamw8a6it1",
         "deleted": false,
         "cells": [
@@ -936,7 +1057,6 @@
           "shortName": "E. Buendia"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mvpqttxomw8a6iso",
         "deleted": false,
@@ -1008,7 +1128,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mvpqttxomw8a6iso",
         "deleted": false,
         "cells": [
@@ -1056,7 +1175,7 @@
             },
             {
               "tooltip": "Nov 9, 5:36 AM: King (groin) has recovered from the...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1070,6 +1189,7 @@
           "shortName": "J. King"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
@@ -1119,7 +1239,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:51 AM: Hinshelwood registered one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1133,6 +1253,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
         "cells": [
@@ -1194,6 +1315,7 @@
           "shortName": "J. Garner"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
         "cells": [
@@ -1250,6 +1372,7 @@
           "shortName": "A. Scott"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
         "cells": [
@@ -1310,7 +1433,6 @@
           "shortName": "J. Mateta"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rec3ihjcmw86fmk9",
         "deleted": false,
@@ -1366,8 +1488,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 8, 6:49 PM: Xhaka's injury that forced him off...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 5:23 AM: Xhaka (calf) has withdrawn from...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -1381,7 +1503,6 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "rec3ihjcmw86fmk9",
         "deleted": false,
         "cells": [
@@ -1443,6 +1564,7 @@
           "shortName": "L. Delap"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "hk22nedumw86fmjz",
         "deleted": false,
@@ -1509,6 +1631,7 @@
           "shortName": "B. White"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "hk22nedumw86fmjz",
         "deleted": false,
         "cells": [
@@ -1570,7 +1693,6 @@
           "shortName": "A. Robertson"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ksfsywo6mw68q8a5",
         "deleted": false,
@@ -1610,7 +1732,6 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -1621,12 +1742,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Lewis-Potter generated one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1641,7 +1758,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "ksfsywo6mw68q8a5",
         "deleted": false,
         "cells": [
@@ -1703,6 +1819,7 @@
           "shortName": "A. Kinsky"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3j8ns0d8mw5c0xpb",
         "deleted": false,
@@ -1771,6 +1888,7 @@
           "shortName": "D. Raya"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "3j8ns0d8mw5c0xpb",
         "deleted": false,
         "cells": [
@@ -1834,7 +1952,6 @@
           "shortName": "T. George"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "ayyl6nmfmw59px4y",
         "deleted": false,
@@ -1903,6 +2020,7 @@
           "shortName": "I. Maatsen"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9nafkzb6mw4zd2h9",
         "deleted": false,
@@ -1971,6 +2089,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9nafkzb6mw4zd2h9",
         "deleted": false,
         "cells": [
@@ -2032,7 +2151,6 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ynxomqyumw4zcaj0",
         "deleted": false,
@@ -2087,7 +2205,7 @@
             },
             {
               "tooltip": "Nov 8, 7:52 PM: Robinson registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2101,7 +2219,6 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "ynxomqyumw4zcaj0",
         "deleted": false,
         "cells": [
@@ -2158,6 +2275,7 @@
           "shortName": "Matheus Nunes"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g35ctvqbmw43s5g0",
         "deleted": false,
@@ -2226,6 +2344,7 @@
           "shortName": "P. Porro"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g35ctvqbmw43s5g0",
         "deleted": false,
         "cells": [
@@ -2289,7 +2408,6 @@
           "shortName": "C. Tzolis"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "zkrpyz7zmw3ydbmy",
         "deleted": false,
@@ -2360,7 +2478,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "zkrpyz7zmw3ydbmy",
         "deleted": false,
         "cells": [
@@ -2422,6 +2539,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
@@ -2490,6 +2608,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
         "cells": [
@@ -2553,6 +2672,7 @@
           "shortName": "C. Tzolis"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
         "cells": [
@@ -2614,6 +2734,7 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
         "cells": [
@@ -2670,7 +2791,6 @@
           "shortName": "Matheus Nunes"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "y8glykhqmw3wuofh",
         "deleted": false,
@@ -2742,7 +2862,6 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "y8glykhqmw3wuofh",
         "deleted": false,
         "cells": [
@@ -2804,6 +2923,7 @@
           "shortName": "W. Osula"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1lwbf4yqmw3wui4g",
         "deleted": false,
@@ -2846,7 +2966,6 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -2857,12 +2976,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:49 AM: Ouattara generated one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2877,6 +2992,7 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "1lwbf4yqmw3wui4g",
         "deleted": false,
         "cells": [
@@ -2938,7 +3054,6 @@
           "shortName": "B. Kamara"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6u3kfctgmw3umv9l",
         "deleted": false,
@@ -3007,7 +3122,6 @@
           "shortName": "J. Rudoni"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "6u3kfctgmw3umv9l",
         "deleted": false,
         "cells": [
@@ -3069,6 +3183,7 @@
           "shortName": "J. Rudoni"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "pcll0rqrmw2kpbpd",
         "deleted": false,
@@ -3108,7 +3223,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -3118,12 +3232,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3137,6 +3247,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "pcll0rqrmw2kpbpd",
         "deleted": false,
         "cells": [
@@ -3197,7 +3308,6 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cc6puaovmw2fe3sp",
         "deleted": false,
@@ -3270,7 +3380,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cc6puaovmw2fe3sp",
         "deleted": false,
         "cells": [
@@ -3334,6 +3443,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qbu4shcdmw2fdndb",
         "deleted": false,
@@ -3402,6 +3512,7 @@
           "shortName": "Mateus Fernandes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qbu4shcdmw2fdndb",
         "deleted": false,
         "cells": [
@@ -3463,7 +3574,6 @@
           "shortName": "N. Williams"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "p87yapg6mw25rv6v",
         "deleted": false,
@@ -3503,7 +3613,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -3513,12 +3622,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3532,7 +3637,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "p87yapg6mw25rv6v",
         "deleted": false,
         "cells": [
@@ -3565,7 +3669,6 @@
           "urlName": "charalampos-kostoulas",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06xzd",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -3575,12 +3678,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:50 AM: Kostoulas generated three shots (two on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3594,6 +3693,7 @@
           "shortName": "C. Kostoulas"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v7cp71esmw03qytl",
         "deleted": false,
@@ -3648,7 +3748,7 @@
             },
             {
               "tooltip": "Nov 9, 1:41 AM: Caicedo recorded two clearancesand four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3662,6 +3762,7 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "v7cp71esmw03qytl",
         "deleted": false,
         "cells": [
@@ -3723,7 +3824,6 @@
           "shortName": "B. Barcola"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "tzhpjucjmvzx6oev",
         "deleted": false,
@@ -3788,7 +3888,7 @@
             },
             {
               "tooltip": "Nov 9, 6:51 AM: Guehi has withdrawn from England's...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3802,7 +3902,6 @@
           "shortName": "M. Guehi"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "tzhpjucjmvzx6oev",
         "deleted": false,
         "cells": [
@@ -3862,6 +3961,7 @@
           "shortName": "B. White"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "t7kesdghmvzsziay",
         "deleted": false,
@@ -3930,6 +4030,7 @@
           "shortName": "J. Justin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "t7kesdghmvzsziay",
         "deleted": false,
         "cells": [
@@ -3991,7 +4092,6 @@
           "shortName": "J. Tarkowski"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "zfi47lmkmvzszayv",
         "deleted": false,
@@ -4060,7 +4160,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "zfi47lmkmvzszayv",
         "deleted": false,
         "cells": [
@@ -4122,6 +4221,7 @@
           "shortName": "B. Barcola"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 6,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
@@ -4161,7 +4261,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -4171,12 +4270,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4190,6 +4285,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -4251,6 +4347,7 @@
           "shortName": "S. Ajayi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -4313,6 +4410,7 @@
           "shortName": "M. Tel"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -4356,7 +4454,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 7:47 AM: Munoz has joined Spain's national team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4371,6 +4469,7 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -4432,6 +4531,7 @@
           "shortName": "A. Robertson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -4478,11 +4578,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -4497,7 +4597,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "hzqv6uq1mvwl1dr7",
         "deleted": false,
@@ -4537,7 +4636,6 @@
           "urlName": "yasin-ayari",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "068yc",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -4547,12 +4645,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:50 AM: Ayari had four shots (two on goal) in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4566,7 +4660,6 @@
           "shortName": "Y. Ayari"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "hzqv6uq1mvwl1dr7",
         "deleted": false,
         "cells": [
@@ -4612,8 +4705,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 8, 6:49 PM: Xhaka's injury that forced him off...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 5:23 AM: Xhaka (calf) has withdrawn from...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -4627,6 +4720,7 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rc4uzid1mvw9kq4e",
         "deleted": false,
@@ -4690,6 +4784,7 @@
           "shortName": "Y. Wissa"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rc4uzid1mvw9kq4e",
         "deleted": false,
         "cells": [
@@ -4753,7 +4848,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mj0goy5smvvjpigq",
         "deleted": false,
@@ -4817,7 +4911,6 @@
           "shortName": "B. White"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mj0goy5smvvjpigq",
         "deleted": false,
         "cells": [
@@ -4881,6 +4974,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "0h3jlrdqmvvgqepz",
         "deleted": false,
@@ -4944,7 +5038,6 @@
           "shortName": "D. Ndoye"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0315eie4mvvaymz9",
         "deleted": false,
@@ -5013,7 +5106,6 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "0315eie4mvvaymz9",
         "deleted": false,
         "cells": [
@@ -5075,6 +5167,7 @@
           "shortName": "B. Barcola"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
@@ -5114,7 +5207,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -5124,12 +5216,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5143,6 +5231,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
         "cells": [
@@ -5199,6 +5288,7 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
         "cells": [
@@ -5260,6 +5350,7 @@
           "shortName": "A. Robertson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
         "cells": [
@@ -5320,7 +5411,6 @@
           "shortName": "M. Lacroix"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5j1hw3y2mvv766mo",
         "deleted": false,
@@ -5389,7 +5479,6 @@
           "shortName": "I. Maatsen"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5j1hw3y2mvv766mo",
         "deleted": false,
         "cells": [
@@ -5433,7 +5522,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -5448,6 +5537,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ysed2moqmvuw153u",
         "deleted": false,
@@ -5519,6 +5609,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ysed2moqmvuw153u",
         "deleted": false,
         "cells": [
@@ -5551,7 +5642,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -5561,12 +5651,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5580,7 +5666,6 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5f9bo4yamvuw153l",
         "deleted": false,
@@ -5647,7 +5732,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5f9bo4yamvuw153l",
         "deleted": false,
         "cells": [
@@ -5709,6 +5793,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "i3pbo3f7mvuw153h",
         "deleted": false,
@@ -5777,6 +5862,7 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "i3pbo3f7mvuw153h",
         "deleted": false,
         "cells": [
@@ -5837,7 +5923,6 @@
           "shortName": "Joao Pedro"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s4x7ayz6mvuw153b",
         "deleted": false,
@@ -5911,7 +5996,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "s4x7ayz6mvuw153b",
         "deleted": false,
         "cells": [
@@ -5973,6 +6057,7 @@
           "shortName": "Bruno Fernandes"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "nr0p7f9zmvuw1530",
         "deleted": false,
@@ -6034,7 +6119,7 @@
             },
             {
               "tooltip": "Nov 9, 2:44 AM: Rayan had one shot (zero on goal) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6049,6 +6134,7 @@
           "shortName": "Rayan"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nr0p7f9zmvuw1530",
         "deleted": false,
         "cells": [
@@ -6113,7 +6199,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "c0p32oramvuw152w",
         "deleted": false,
@@ -6180,7 +6265,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "c0p32oramvuw152w",
         "deleted": false,
         "cells": [
@@ -6227,11 +6311,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -6246,6 +6330,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ylc65mw5mvul2sy6",
         "deleted": false,
@@ -6285,7 +6370,6 @@
           "urlName": "yasin-ayari",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "068yc",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -6295,12 +6379,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:50 AM: Ayari had four shots (two on goal) in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6314,6 +6394,7 @@
           "shortName": "Y. Ayari"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ylc65mw5mvul2sy6",
         "deleted": false,
         "cells": [
@@ -6375,7 +6456,6 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "e7phmdlbmvul28rp",
         "deleted": false,
@@ -6415,7 +6495,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -6425,12 +6504,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6444,7 +6519,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "e7phmdlbmvul28rp",
         "deleted": false,
         "cells": [
@@ -6477,7 +6551,6 @@
           "urlName": "luka-vuskovic",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06v0y",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -6487,12 +6560,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Vuskovic recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6506,6 +6575,7 @@
           "shortName": "L. Vuskovic"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s4peghq9mvtygqhw",
         "deleted": false,
@@ -6578,6 +6648,7 @@
           "shortName": "A. Stach"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "s4peghq9mvtygqhw",
         "deleted": false,
         "cells": [
@@ -6610,7 +6681,6 @@
           "urlName": "luka-vuskovic",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06v0y",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -6620,12 +6690,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Vuskovic recorded one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6639,7 +6705,6 @@
           "shortName": "L. Vuskovic"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1e3g05qqmvty8mnz",
         "deleted": false,
@@ -6712,7 +6777,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "1e3g05qqmvty8mnz",
         "deleted": false,
         "cells": [
@@ -6760,7 +6824,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6774,6 +6838,7 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wt5mn187mvttfk0c",
         "deleted": false,
@@ -6842,6 +6907,7 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wt5mn187mvttfk0c",
         "deleted": false,
         "cells": [
@@ -6904,7 +6970,6 @@
           "shortName": "M. Tel"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "98znkv85mvtcaxn2",
         "deleted": false,
@@ -6976,6 +7041,7 @@
           "shortName": "D. Raya"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 3,
         "txSetId": "8kyuh5s8mvtc7mf4",
         "deleted": false,
@@ -7044,6 +7110,7 @@
           "shortName": "A. Kinsky"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8kyuh5s8mvtc7mf4",
         "deleted": false,
         "cells": [
@@ -7105,6 +7172,7 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8kyuh5s8mvtc7mf4",
         "deleted": false,
         "cells": [
@@ -7166,7 +7234,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
@@ -7222,7 +7289,7 @@
             },
             {
               "tooltip": "Nov 9, 2:44 AM: Rayan had one shot (zero on goal) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7237,7 +7304,6 @@
           "shortName": "Rayan"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
         "cells": [
@@ -7294,7 +7360,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
         "cells": [
@@ -7356,7 +7421,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
         "cells": [
@@ -7404,7 +7468,7 @@
             },
             {
               "tooltip": "Nov 9, 1:54 AM: Antonio Silva had one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7418,6 +7482,7 @@
           "shortName": "Antonio Silva"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "k3lb9j3imvsm7i7m",
         "deleted": false,
@@ -7486,6 +7551,7 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "k3lb9j3imvsm7i7m",
         "deleted": false,
         "cells": [
@@ -7548,7 +7614,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "k2m5ikucmvsdcdvm",
         "deleted": false,
@@ -7612,7 +7677,6 @@
           "shortName": "E. Eze"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k2m5ikucmvsdcdvm",
         "deleted": false,
         "cells": [
@@ -7674,6 +7738,7 @@
           "shortName": "W. Osula"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v7yhv83bmvsd9a4h",
         "deleted": false,
@@ -7737,6 +7802,7 @@
           "shortName": "E. Eze"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "v7yhv83bmvsd9a4h",
         "deleted": false,
         "cells": [
@@ -7800,7 +7866,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
@@ -7871,7 +7936,6 @@
           "shortName": "C. Tzolis"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
         "cells": [
@@ -7922,7 +7986,7 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 12:35 PM: Brobbey has been ruled out of the...",
+              "tooltip": "Nov 10, 5:26 AM: Brobbey (muscle) has withdrawn from the...",
               "typeId": "14"
             }
           ],
@@ -7937,7 +8001,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
         "cells": [
@@ -7999,7 +8062,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
         "cells": [
@@ -8061,6 +8123,7 @@
           "shortName": "R. Araujo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7x1bfezemvrkck06",
         "deleted": false,
@@ -8124,6 +8187,7 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7x1bfezemvrkck06",
         "deleted": false,
         "cells": [
@@ -8187,7 +8251,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3oibtsewmvprp0hp",
         "deleted": false,
@@ -8242,7 +8305,7 @@
             },
             {
               "tooltip": "Nov 9, 1:25 AM: Kluivert had two shots (one on goal),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8256,7 +8319,6 @@
           "shortName": "J. Kluivert"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3oibtsewmvprp0hp",
         "deleted": false,
         "cells": [
@@ -8307,6 +8369,7 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
@@ -8375,6 +8438,7 @@
           "shortName": "G. García"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
         "cells": [
@@ -8436,6 +8500,7 @@
           "shortName": "P. Porro"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
         "cells": [
@@ -8497,6 +8562,7 @@
           "shortName": "T. Barry"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
         "cells": [
@@ -8529,7 +8595,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -8539,12 +8604,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8558,7 +8619,6 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
@@ -8622,7 +8682,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
         "cells": [
@@ -8684,7 +8743,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
         "cells": [
@@ -8750,7 +8808,6 @@
           "shortName": "H. Maguire"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
         "cells": [
@@ -8811,6 +8868,7 @@
           "shortName": "Emiliano Martinez"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "giuylpvomvo7ase0",
         "deleted": false,
@@ -8882,7 +8940,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "j83tn700mvl65ech",
         "deleted": false,
@@ -8946,7 +9003,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "j83tn700mvl65ech",
         "deleted": false,
         "cells": [
@@ -9012,6 +9068,7 @@
           "shortName": "A. Stach"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "a2p0gbhmmvl3bs7q",
         "deleted": false,
@@ -9062,7 +9119,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 7:47 AM: Munoz has joined Spain's national team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9077,6 +9134,7 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "a2p0gbhmmvl3bs7q",
         "deleted": false,
         "cells": [
@@ -9142,7 +9200,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0d10w63cmvl3bgci",
         "deleted": false,
@@ -9193,7 +9250,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 7:47 AM: Munoz has joined Spain's national team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9208,7 +9265,6 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "0d10w63cmvl3bgci",
         "deleted": false,
         "cells": [
@@ -9269,6 +9325,7 @@
           "shortName": "J. Mateta"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "higmztrhmvl27m4q",
         "deleted": false,
@@ -9332,6 +9389,7 @@
           "shortName": "Y. Wissa"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "higmztrhmvl27m4q",
         "deleted": false,
         "cells": [
@@ -9397,7 +9455,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "iww3btlsmvl1xm4f",
         "deleted": false,
@@ -9468,7 +9525,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "iww3btlsmvl1xm4f",
         "deleted": false,
         "cells": [
@@ -9516,7 +9572,7 @@
             },
             {
               "tooltip": "Nov 9, 1:43 AM: Mukiele registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9530,6 +9586,7 @@
           "shortName": "N. Mukiele"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "be2h794umvksb1cu",
         "deleted": false,
@@ -9569,7 +9626,6 @@
           "urlName": "kevin-schade",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "067zv",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -9580,12 +9636,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Schade registered one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9600,6 +9652,7 @@
           "shortName": "K. Schade"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "be2h794umvksb1cu",
         "deleted": false,
         "cells": [
@@ -9646,7 +9699,7 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 9, 9:12 AM: Hill generated one shot (zero on goal)...",
+              "tooltip": "Nov 10, 5:40 AM: Hill has received his first senior...",
               "typeId": "14"
             }
           ],
@@ -9661,7 +9714,6 @@
           "shortName": "J. Hill"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3eikl55mmvks92hl",
         "deleted": false,
@@ -9730,7 +9782,6 @@
           "shortName": "A. Isak"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3eikl55mmvks92hl",
         "deleted": false,
         "cells": [
@@ -9794,6 +9845,7 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rwryjsq3mvk1qjwd",
         "deleted": false,
@@ -9863,6 +9915,7 @@
           "shortName": "B. Saka"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rwryjsq3mvk1qjwd",
         "deleted": false,
         "cells": [
@@ -9924,7 +9977,6 @@
           "shortName": "J. Pickford"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "jxthboycmvk1pk19",
         "deleted": false,
@@ -9988,6 +10040,7 @@
           "shortName": "E. Eze"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ez7wak3jmvjxlaln",
         "deleted": false,
@@ -10037,7 +10090,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:51 AM: Hinshelwood registered one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10051,6 +10104,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ez7wak3jmvjxlaln",
         "deleted": false,
         "cells": [
@@ -10097,12 +10151,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Hamstring - Late fitness test (Game-time decision) - Expected return Nov 21",
+              "tooltip": "Hamstring - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 7, 10:36 AM: Gudmundsson was replaced at halftime of...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 5:29 AM: Gudmundsson (hamstring) is expected to...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10116,7 +10170,6 @@
           "shortName": "G. Gudmundsson"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "vk4h99wjmvjsp9bf",
         "deleted": false,
@@ -10185,7 +10238,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "vk4h99wjmvjsp9bf",
         "deleted": false,
         "cells": [
@@ -10233,7 +10285,7 @@
             },
             {
               "tooltip": "Nov 8, 7:52 PM: Robinson registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10247,6 +10299,7 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "07isxbdhmvjsorb0",
         "deleted": false,
@@ -10300,12 +10353,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Hamstring - Late fitness test (Game-time decision) - Expected return Nov 21",
+              "tooltip": "Hamstring - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 7, 10:36 AM: Gudmundsson was replaced at halftime of...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 5:29 AM: Gudmundsson (hamstring) is expected to...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10319,6 +10372,7 @@
           "shortName": "G. Gudmundsson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "07isxbdhmvjsorb0",
         "deleted": false,
         "cells": [
@@ -10380,7 +10434,6 @@
           "shortName": "R. Cherki"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
@@ -10451,7 +10504,6 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
         "cells": [
@@ -10499,7 +10551,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10513,7 +10565,6 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
         "cells": [
@@ -10577,7 +10628,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
         "cells": [
@@ -10620,7 +10670,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:51 AM: Hinshelwood registered one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10634,6 +10684,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "060z39sumvihl5f9",
         "deleted": false,
@@ -10702,7 +10753,6 @@
           "shortName": "J. Strand Larsen"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "g2lubim3mvibczxh",
         "deleted": false,
@@ -10775,7 +10825,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "g2lubim3mvibczxh",
         "deleted": false,
         "cells": [
@@ -10837,7 +10886,6 @@
           "shortName": "P. Porro"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "g2lubim3mvibczxh",
         "deleted": false,
         "cells": [
@@ -10899,6 +10947,7 @@
           "shortName": "M. Gibbs-White"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "4xc4c7rlmviafgpz",
         "deleted": false,
@@ -10967,6 +11016,7 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "4xc4c7rlmviafgpz",
         "deleted": false,
         "cells": [
@@ -11028,7 +11078,6 @@
           "shortName": "J. Tarkowski"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ozl406y5mvh3vsws",
         "deleted": false,
@@ -11097,7 +11146,6 @@
           "shortName": "J. Justin"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "ozl406y5mvh3vsws",
         "deleted": false,
         "cells": [
@@ -11154,6 +11202,7 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xphkitytmvgvn4gi",
         "deleted": false,
@@ -11193,7 +11242,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -11203,12 +11251,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11222,6 +11266,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "xphkitytmvgvn4gi",
         "deleted": false,
         "cells": [
@@ -11283,7 +11328,6 @@
           "shortName": "W. Osula"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xwtrlxbamvgfx27p",
         "deleted": false,
@@ -11353,7 +11397,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "xwtrlxbamvgfx27p",
         "deleted": false,
         "cells": [
@@ -11401,7 +11444,7 @@
             },
             {
               "tooltip": "Nov 9, 2:27 AM: Enciso recorded four shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11415,6 +11458,7 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "juxk249jmvfvdqam",
         "deleted": false,
@@ -11486,6 +11530,7 @@
           "shortName": "M. Gibbs-White"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "juxk249jmvfvdqam",
         "deleted": false,
         "cells": [
@@ -11548,7 +11593,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5gz0yvu6mvfvdqaf",
         "deleted": false,
@@ -11620,7 +11664,6 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5gz0yvu6mvfvdqaf",
         "deleted": false,
         "cells": [
@@ -11668,7 +11711,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11682,6 +11725,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "c7ym71eumvfvdqab",
         "deleted": false,
@@ -11753,6 +11797,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "c7ym71eumvfvdqab",
         "deleted": false,
         "cells": [
@@ -11816,7 +11861,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cim7040omvfvdqa8",
         "deleted": false,
@@ -11869,7 +11913,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:48 AM: Sangare registered two tackles (two...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11883,7 +11927,6 @@
           "shortName": "M. Sangaré"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cim7040omvfvdqa8",
         "deleted": false,
         "cells": [
@@ -11945,6 +11988,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9vrl1qdfmvfvdqa3",
         "deleted": false,
@@ -12016,6 +12060,7 @@
           "shortName": "R. Cherki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9vrl1qdfmvfvdqa3",
         "deleted": false,
         "cells": [
@@ -12077,7 +12122,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mn4kwoedmvfvdq9s",
         "deleted": false,
@@ -12138,7 +12182,7 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 12:35 PM: Brobbey has been ruled out of the...",
+              "tooltip": "Nov 10, 5:26 AM: Brobbey (muscle) has withdrawn from the...",
               "typeId": "14"
             }
           ],
@@ -12153,7 +12197,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mn4kwoedmvfvdq9s",
         "deleted": false,
         "cells": [
@@ -12212,6 +12255,7 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "q9lk4zyrmvfrn6uw",
         "deleted": false,
@@ -12280,6 +12324,7 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "q9lk4zyrmvfrn6uw",
         "deleted": false,
         "cells": [
@@ -12338,7 +12383,6 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "96mdck8umvfrmz3h",
         "deleted": false,
@@ -12408,7 +12452,6 @@
           "shortName": "A. Semenyo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "96mdck8umvfrmz3h",
         "deleted": false,
         "cells": [
@@ -12456,7 +12499,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12470,6 +12513,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "488tajtlmvfrbd34",
         "deleted": false,
@@ -12538,6 +12582,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "488tajtlmvfrbd34",
         "deleted": false,
         "cells": [
@@ -12598,7 +12643,6 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
@@ -12667,7 +12711,6 @@
           "shortName": "T. Barry"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -12729,7 +12772,6 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -12762,7 +12804,6 @@
           "urlName": "charalampos-kostoulas",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06xzd",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -12772,12 +12813,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:50 AM: Kostoulas generated three shots (two on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12791,7 +12828,6 @@
           "shortName": "C. Kostoulas"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -12842,6 +12878,7 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5r0sgmxqmvf5gci2",
         "deleted": false,
@@ -12913,6 +12950,7 @@
           "shortName": "J. van Hecke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "5r0sgmxqmvf5gci2",
         "deleted": false,
         "cells": [
@@ -12945,7 +12983,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -12955,12 +12992,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -12974,7 +13007,6 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v84hmuufmve0eko6",
         "deleted": false,
@@ -13038,7 +13070,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v84hmuufmve0eko6",
         "deleted": false,
         "cells": [
@@ -13100,6 +13131,7 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cjwy2x77mve0e2sc",
         "deleted": false,
@@ -13169,6 +13201,7 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "cjwy2x77mve0e2sc",
         "deleted": false,
         "cells": [
@@ -13230,7 +13263,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "i4d9mv5umve0du0o",
         "deleted": false,
@@ -13300,7 +13332,6 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "i4d9mv5umve0du0o",
         "deleted": false,
         "cells": [
@@ -13362,6 +13393,7 @@
           "shortName": "S. Ajayi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
@@ -13401,7 +13433,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -13411,12 +13442,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13430,6 +13457,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -13491,6 +13519,7 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -13523,7 +13552,6 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -13534,12 +13562,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Lewis-Potter generated one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13554,6 +13578,7 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -13615,7 +13640,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
@@ -13679,7 +13703,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -13741,7 +13764,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -13792,7 +13814,7 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 12:35 PM: Brobbey has been ruled out of the...",
+              "tooltip": "Nov 10, 5:26 AM: Brobbey (muscle) has withdrawn from the...",
               "typeId": "14"
             }
           ],
@@ -13807,7 +13829,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -13840,7 +13861,6 @@
           "urlName": "kevin-schade",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "067zv",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -13851,12 +13871,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Schade registered one shot (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13871,6 +13887,7 @@
           "shortName": "K. Schade"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "bd3183hlmvc9tekd",
         "deleted": false,
@@ -13924,7 +13941,7 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 9, 9:12 AM: Hill generated one shot (zero on goal)...",
+              "tooltip": "Nov 10, 5:40 AM: Hill has received his first senior...",
               "typeId": "14"
             }
           ],
@@ -13939,6 +13956,7 @@
           "shortName": "J. Hill"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bd3183hlmvc9tekd",
         "deleted": false,
         "cells": [
@@ -14000,7 +14018,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w8mzze3pmvbxjl6l",
         "deleted": false,
@@ -14069,7 +14086,6 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w8mzze3pmvbxjl6l",
         "deleted": false,
         "cells": [
@@ -14131,6 +14147,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g5dotpxumvbxgz56",
         "deleted": false,
@@ -14199,6 +14216,7 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g5dotpxumvbxgz56",
         "deleted": false,
         "cells": [
@@ -14260,7 +14278,6 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "dd2psngymvbiis5c",
         "deleted": false,
@@ -14315,7 +14332,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -14329,7 +14346,6 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "dd2psngymvbiis5c",
         "deleted": false,
         "cells": [
@@ -14362,7 +14378,6 @@
           "urlName": "yasin-ayari",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "068yc",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -14372,12 +14387,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:50 AM: Ayari had four shots (two on goal) in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -14391,6 +14402,7 @@
           "shortName": "Y. Ayari"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "85l4gjdzmvbg4k0w",
         "deleted": false,
@@ -14444,11 +14456,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -14463,6 +14475,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "85l4gjdzmvbg4k0w",
         "deleted": false,
         "cells": [
@@ -14495,7 +14508,6 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -14505,12 +14517,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Ajer registered one shot (zero on goal)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -14524,7 +14532,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "dzxt9dxmmvbg49e4",
         "deleted": false,
@@ -14597,7 +14604,6 @@
           "shortName": "B. Thomas"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "dzxt9dxmmvbg49e4",
         "deleted": false,
         "cells": [
@@ -14659,6 +14665,7 @@
           "shortName": "S. Tonali"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wrhlh1yvmvbfv77p",
         "deleted": false,
@@ -14712,11 +14719,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -14731,6 +14738,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wrhlh1yvmvbfv77p",
         "deleted": false,
         "cells": [
@@ -14792,7 +14800,6 @@
           "shortName": "L. Hall"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "feuu1kq8mvbfew24",
         "deleted": false,
@@ -14856,7 +14863,6 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "feuu1kq8mvbfew24",
         "deleted": false,
         "cells": [
@@ -14913,6 +14919,7 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "uh5r1qcymvbfelte",
         "deleted": false,
@@ -14981,6 +14988,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "uh5r1qcymvbfelte",
         "deleted": false,
         "cells": [
@@ -15023,7 +15031,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15037,7 +15045,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "76wdspo9mvbfbu6c",
         "deleted": false,
@@ -15077,7 +15084,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -15087,12 +15093,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15106,7 +15108,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "76wdspo9mvbfbu6c",
         "deleted": false,
         "cells": [
@@ -15149,7 +15150,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15163,6 +15164,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7m5ax9opmvbfblme",
         "deleted": false,
@@ -15202,7 +15204,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -15212,12 +15213,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15231,6 +15228,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7m5ax9opmvbfblme",
         "deleted": false,
         "cells": [
@@ -15274,7 +15272,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -15289,7 +15287,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7unpam5qmvbfb8bs",
         "deleted": false,
@@ -15343,11 +15340,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -15362,7 +15359,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "7unpam5qmvbfb8bs",
         "deleted": false,
         "cells": [
@@ -15409,11 +15405,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -15428,6 +15424,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7lb34yi6mvbfb026",
         "deleted": false,
@@ -15478,7 +15475,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -15493,6 +15490,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7lb34yi6mvbfb026",
         "deleted": false,
         "cells": [
@@ -15539,11 +15537,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -15558,7 +15556,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3d80e42mmvbf8un9",
         "deleted": false,
@@ -15609,7 +15606,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -15624,7 +15621,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3d80e42mmvbf8un9",
         "deleted": false,
         "cells": [
@@ -15667,7 +15663,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15681,6 +15677,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "n2g6xedumvbf8k8r",
         "deleted": false,
@@ -15720,7 +15717,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -15730,12 +15726,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15749,6 +15741,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "n2g6xedumvbf8k8r",
         "deleted": false,
         "cells": [
@@ -15791,7 +15784,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15805,7 +15798,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mvta3gmtmvbf8ays",
         "deleted": false,
@@ -15845,7 +15837,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -15855,12 +15846,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -15874,7 +15861,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mvta3gmtmvbf8ays",
         "deleted": false,
         "cells": [
@@ -15918,7 +15904,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -15933,6 +15919,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "eygbkc8mmvbf7wuy",
         "deleted": false,
@@ -15996,6 +15983,7 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "eygbkc8mmvbf7wuy",
         "deleted": false,
         "cells": [
@@ -16028,7 +16016,6 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -16038,12 +16025,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Ajer registered one shot (zero on goal)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16057,7 +16040,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "x13ryhibmvbf3zj3",
         "deleted": false,
@@ -16107,7 +16089,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16121,7 +16103,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "x13ryhibmvbf3zj3",
         "deleted": false,
         "cells": [
@@ -16154,7 +16135,6 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -16165,12 +16145,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:49 AM: Ouattara generated one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16185,6 +16161,7 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "5yn6slqumvbf3h68",
         "deleted": false,
@@ -16224,7 +16201,6 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -16234,12 +16210,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Ajer registered one shot (zero on goal)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16253,7 +16225,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
@@ -16293,7 +16264,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -16303,12 +16273,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16322,7 +16288,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
         "cells": [
@@ -16381,7 +16346,6 @@
           "shortName": "J. Anthony"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
         "cells": [
@@ -16443,6 +16407,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "pqeaeaxemvbf257d",
         "deleted": false,
@@ -16493,7 +16458,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -16508,7 +16473,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "8hyemwy5mvbf0q75",
         "deleted": false,
@@ -16574,6 +16538,7 @@
           "shortName": "J. Anthony"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0l65m5qymvbf07r3",
         "deleted": false,
@@ -16627,11 +16592,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -16646,6 +16611,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "0l65m5qymvbf07r3",
         "deleted": false,
         "cells": [
@@ -16678,7 +16644,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -16688,12 +16653,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16707,7 +16668,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
@@ -16747,7 +16707,6 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -16758,12 +16717,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:49 AM: Ouattara generated one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16778,7 +16733,6 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -16822,7 +16776,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -16837,7 +16791,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -16870,7 +16823,6 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -16880,12 +16832,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Ajer registered one shot (zero on goal)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16899,7 +16847,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -16942,7 +16889,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:49 AM: Diouf registered one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16956,6 +16903,7 @@
           "shortName": "El Hadji Malick Diouf"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "uvkpvibtmvbetn0k",
         "deleted": false,
@@ -17026,7 +16974,6 @@
           "shortName": "J. Doku"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w5xyb79fmvbet2lt",
         "deleted": false,
@@ -17095,7 +17042,6 @@
           "shortName": "N. Okafor"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w5xyb79fmvbet2lt",
         "deleted": false,
         "cells": [
@@ -17159,6 +17105,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "ie4nzztdmvb9l6g3",
         "deleted": false,
@@ -17227,7 +17174,6 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
@@ -17296,7 +17242,6 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -17360,7 +17305,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -17413,7 +17357,6 @@
           "shortName": "H. Wilson"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -17475,6 +17418,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 3,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
@@ -17538,6 +17482,7 @@
           "shortName": "P. Foden"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
         "cells": [
@@ -17586,7 +17531,7 @@
             },
             {
               "tooltip": "Nov 9, 1:47 AM: Tavernier recorded one shot (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -17601,6 +17546,7 @@
           "shortName": "M. Tavernier"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
         "cells": [
@@ -17646,8 +17592,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 8, 6:49 PM: Xhaka's injury that forced him off...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 5:23 AM: Xhaka (calf) has withdrawn from...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -17661,7 +17607,6 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "2tbyz9h9mvaz8806",
         "deleted": false,
@@ -17716,7 +17661,7 @@
             },
             {
               "tooltip": "Nov 9, 2:27 AM: Enciso recorded four shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -17730,7 +17675,6 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "2tbyz9h9mvaz8806",
         "deleted": false,
         "cells": [
@@ -17792,6 +17736,7 @@
           "shortName": "V. Mykolenko"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "bmnzuq4jmvay0qoh",
         "deleted": false,
@@ -17855,6 +17800,7 @@
           "shortName": "P. Foden"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bmnzuq4jmvay0qoh",
         "deleted": false,
         "cells": [
@@ -17916,7 +17862,6 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s7ttl08imvaxyrfa",
         "deleted": false,
@@ -17980,7 +17925,6 @@
           "shortName": "P. Foden"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "s7ttl08imvaxyrfa",
         "deleted": false,
         "cells": [
@@ -18028,7 +17972,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -18042,6 +17986,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "f77p6t3zmvaxyd9v",
         "deleted": false,
@@ -18110,6 +18055,7 @@
           "shortName": "V. Mykolenko"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "f77p6t3zmvaxyd9v",
         "deleted": false,
         "cells": [
@@ -18171,7 +18117,6 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
@@ -18211,7 +18156,6 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -18222,12 +18166,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Lewis-Potter generated one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -18242,7 +18182,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -18305,7 +18244,6 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -18362,7 +18300,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -18426,6 +18363,7 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "f21tai5smv9rhbgr",
         "deleted": false,
@@ -18493,7 +18431,6 @@
           "shortName": "B. Sesko"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
@@ -18564,7 +18501,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
         "cells": [
@@ -18628,7 +18564,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
         "cells": [
@@ -18690,6 +18625,7 @@
           "shortName": "J. Pickford"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "exan0e84mv9eqhif",
         "deleted": false,
@@ -18758,6 +18694,7 @@
           "shortName": "Z. Suzuki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "exan0e84mv9eqhif",
         "deleted": false,
         "cells": [
@@ -18818,7 +18755,6 @@
           "shortName": "B. Sesko"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "1bus2xcnmv8jrmwh",
         "deleted": false,
@@ -18889,6 +18825,7 @@
           "shortName": "R. Araujo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ld81du0ymv8irfht",
         "deleted": false,
@@ -18961,6 +18898,7 @@
           "shortName": "A. Stach"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ld81du0ymv8irfht",
         "deleted": false,
         "cells": [
@@ -19026,7 +18964,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "kool6l6dmv8ir100",
         "deleted": false,
@@ -19097,7 +19034,6 @@
           "shortName": "J. Doku"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kool6l6dmv8ir100",
         "deleted": false,
         "cells": [
@@ -19143,8 +19079,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 8, 6:49 PM: Xhaka's injury that forced him off...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 5:23 AM: Xhaka (calf) has withdrawn from...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -19158,6 +19094,7 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "cwxb8od0mv8i8byz",
         "deleted": false,
@@ -19218,7 +19155,6 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qtbw28ylmv8i79y8",
         "deleted": false,
@@ -19273,7 +19209,7 @@
             },
             {
               "tooltip": "Nov 9, 1:54 AM: Antonio Silva had one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -19287,7 +19223,6 @@
           "shortName": "Antonio Silva"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "qtbw28ylmv8i79y8",
         "deleted": false,
         "cells": [
@@ -19349,6 +19284,7 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
@@ -19419,6 +19355,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -19480,6 +19417,7 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -19543,6 +19481,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -19599,7 +19538,6 @@
           "shortName": "M. Lewis-Skelly"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 6,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
@@ -19668,7 +19606,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -19730,7 +19667,6 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -19794,7 +19730,6 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -19856,7 +19791,6 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -19920,7 +19854,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -19981,6 +19914,7 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rucjwi18mv7p6ll4",
         "deleted": false,
@@ -20049,6 +19983,7 @@
           "shortName": "N. Jackson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rucjwi18mv7p6ll4",
         "deleted": false,
         "cells": [
@@ -20110,7 +20045,6 @@
           "shortName": "Y. Pino"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wsa79iefmv5ukwq6",
         "deleted": false,
@@ -20167,11 +20101,11 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 22",
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 4:32 AM: Szoboszlai (knee) will undergo medical...",
+              "tooltip": "Nov 10, 4:48 AM: Szoboszlai will remain with Hungary's...",
               "typeId": "14"
             }
           ],
@@ -20186,7 +20120,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wsa79iefmv5ukwq6",
         "deleted": false,
         "cells": [
@@ -20248,6 +20181,7 @@
           "shortName": "T. Muharemovic"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qe8vjkkpmv5ukwq2",
         "deleted": false,
@@ -20319,6 +20253,7 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qe8vjkkpmv5ukwq2",
         "deleted": false,
         "cells": [
@@ -20361,7 +20296,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:48 AM: Sangare registered two tackles (two...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -20375,7 +20310,6 @@
           "shortName": "M. Sangaré"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xupwp1xwmv5r5tpk",
         "deleted": false,
@@ -20449,7 +20383,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "xupwp1xwmv5r5tpk",
         "deleted": false,
         "cells": [
@@ -20511,6 +20444,7 @@
           "shortName": "J. Jacquet"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g7zgvhzqmv4xeb8g",
         "deleted": false,
@@ -20550,7 +20484,6 @@
           "urlName": "vitaly-janelt",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05tre",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -20560,12 +20493,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Janelt recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -20579,6 +20508,7 @@
           "shortName": "V. Janelt"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g7zgvhzqmv4xeb8g",
         "deleted": false,
         "cells": [
@@ -20639,7 +20569,6 @@
           "shortName": "M. Rashford"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "b6ijmautmv4cd329",
         "deleted": false,
@@ -20710,7 +20639,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "b6ijmautmv4cd329",
         "deleted": false,
         "cells": [
@@ -20767,6 +20695,7 @@
           "shortName": "V. Gyökeres"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "gmq4dth1mv2b1y5d",
         "deleted": false,
@@ -20835,7 +20764,6 @@
           "shortName": "E. Ampadu"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "knan2kv0mv2b1ovf",
         "deleted": false,
@@ -20904,6 +20832,7 @@
           "shortName": "J. McGinn"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "a8bajkgamv29c7yn",
         "deleted": false,
@@ -20959,7 +20888,7 @@
             },
             {
               "tooltip": "Nov 9, 2:44 AM: Rayan had one shot (zero on goal) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -20974,6 +20903,7 @@
           "shortName": "Rayan"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "a8bajkgamv29c7yn",
         "deleted": false,
         "cells": [
@@ -21035,7 +20965,6 @@
           "shortName": "Omar Marmoush"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wl1l79lpmv292y88",
         "deleted": false,
@@ -21104,7 +21033,6 @@
           "shortName": "K. Havertz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wl1l79lpmv292y88",
         "deleted": false,
         "cells": [
@@ -21166,6 +21094,7 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ib6dj7cvmv28ue5v",
         "deleted": false,
@@ -21234,6 +21163,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ib6dj7cvmv28ue5v",
         "deleted": false,
         "cells": [
@@ -21281,7 +21211,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -21295,7 +21225,6 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "02m580ugmv28t6gz",
         "deleted": false,
@@ -21364,7 +21293,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "02m580ugmv28t6gz",
         "deleted": false,
         "cells": [
@@ -21428,6 +21356,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "883m4jkqmv28swv7",
         "deleted": false,
@@ -21482,7 +21411,7 @@
             },
             {
               "tooltip": "Nov 9, 1:41 AM: Caicedo recorded two clearancesand four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -21496,7 +21425,6 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gwxxfg5imv26rzng",
         "deleted": false,
@@ -21565,7 +21493,6 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gwxxfg5imv26rzng",
         "deleted": false,
         "cells": [
@@ -21627,6 +21554,7 @@
           "shortName": "M. Cash"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "62kz5nibmv240kcu",
         "deleted": false,
@@ -21680,8 +21608,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 7, 8:50 AM: Konsa (knee) is in the starting XI for...",
-              "typeId": "9"
+              "tooltip": "Knee - Late fitness test (Game-time decision) - Expected return Nov 15",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Nov 10, 5:42 AM: Konsa (knee) will miss England's...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -21695,6 +21627,7 @@
           "shortName": "E. Konsa"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "62kz5nibmv240kcu",
         "deleted": false,
         "cells": [
@@ -21742,7 +21675,7 @@
             },
             {
               "tooltip": "Nov 8, 7:52 PM: Robinson registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -21756,7 +21689,6 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "yhm9q5t0mv1gisrp",
         "deleted": false,
@@ -21825,7 +21757,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yhm9q5t0mv1gisrp",
         "deleted": false,
         "cells": [
@@ -21887,6 +21818,7 @@
           "shortName": "E. Ampadu"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7jl88646mv16ccri",
         "deleted": false,
@@ -21941,7 +21873,7 @@
             },
             {
               "tooltip": "Nov 9, 1:43 AM: Mukiele registered one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -21955,6 +21887,7 @@
           "shortName": "N. Mukiele"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7jl88646mv16ccri",
         "deleted": false,
         "cells": [
@@ -22007,7 +21940,7 @@
             },
             {
               "tooltip": "Nov 9, 4:14 AM: Belloumi (hamstring) has withdrawn from...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -22022,7 +21955,6 @@
           "shortName": "M. Belloumi"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m8vqk8rmmv168kx1",
         "deleted": false,
@@ -22091,7 +22023,6 @@
           "shortName": "A. Isak"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "m8vqk8rmmv168kx1",
         "deleted": false,
         "cells": [
@@ -22155,6 +22086,7 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v1lmk34omv14xm91",
         "deleted": false,
@@ -22225,6 +22157,7 @@
           "shortName": "O. Bobb"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "v1lmk34omv14xm91",
         "deleted": false,
         "cells": [
@@ -22272,7 +22205,7 @@
             },
             {
               "tooltip": "Nov 9, 1:25 AM: Kluivert had two shots (one on goal),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -22286,7 +22219,6 @@
           "shortName": "J. Kluivert"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
@@ -22357,7 +22289,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -22414,7 +22345,6 @@
           "shortName": "B. White"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -22476,7 +22406,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -22519,7 +22448,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -22533,6 +22462,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "jfyn3xk2muyktbqt",
         "deleted": false,
@@ -22600,6 +22530,7 @@
           "shortName": "M. Ruggeri"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "jfyn3xk2muyktbqt",
         "deleted": false,
         "cells": [
@@ -22632,7 +22563,6 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -22642,12 +22572,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:48 AM: Kayode registered two tackles (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -22661,7 +22587,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gbfgq91umuykl61b",
         "deleted": false,
@@ -22711,7 +22636,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -22725,7 +22650,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gbfgq91umuykl61b",
         "deleted": false,
         "cells": [
@@ -22787,6 +22711,7 @@
           "shortName": "Z. Flemming"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wafduhn2muykl02s",
         "deleted": false,
@@ -22855,6 +22780,7 @@
           "shortName": "K. Havertz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wafduhn2muykl02s",
         "deleted": false,
         "cells": [
@@ -22918,7 +22844,6 @@
           "shortName": "D. Maeda"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
@@ -22986,7 +22911,6 @@
           "shortName": "R. James"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -23047,7 +22971,6 @@
           "shortName": "L. Shaw"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -23080,7 +23003,6 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -23091,12 +23013,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Lewis-Potter generated one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -23111,7 +23029,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -23173,6 +23090,7 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 6,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
@@ -23236,6 +23154,7 @@
           "shortName": "E. Eze"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -23283,7 +23202,7 @@
             },
             {
               "tooltip": "Nov 8, 8:24 PM: Bassey recorded seven clearancesand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -23297,6 +23216,7 @@
           "shortName": "C. Bassey"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -23358,6 +23278,7 @@
           "shortName": "J. Justin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -23419,6 +23340,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -23482,6 +23404,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -23545,7 +23468,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "cl1v1pozmuvukopt",
         "deleted": false,
@@ -23598,7 +23520,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 4:09 AM: Emersonn registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -23612,6 +23534,7 @@
           "shortName": "Emersonn"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
@@ -23683,6 +23606,7 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -23725,7 +23649,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:51 AM: Hinshelwood registered one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -23739,6 +23663,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -23786,7 +23711,7 @@
             },
             {
               "tooltip": "Nov 9, 5:09 AM: Davis recorded an own goal, two crosses...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -23800,6 +23725,7 @@
           "shortName": "L. Davis"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -23861,7 +23787,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "uafn0mzxmuvsn8ip",
         "deleted": false,
@@ -23929,7 +23854,6 @@
           "shortName": "M. Rashford"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uafn0mzxmuvsn8ip",
         "deleted": false,
         "cells": [
@@ -23991,6 +23915,7 @@
           "shortName": "J. Jacquet"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6s56rcqhmuvrnrte",
         "deleted": false,
@@ -24059,6 +23984,7 @@
           "shortName": "D. Rice"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "6s56rcqhmuvrnrte",
         "deleted": false,
         "cells": [
@@ -24120,7 +24046,6 @@
           "shortName": "D. Rice"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m6er2gqumuvrndw7",
         "deleted": false,
@@ -24184,7 +24109,6 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "m6er2gqumuvrndw7",
         "deleted": false,
         "cells": [
@@ -24232,7 +24156,7 @@
             },
             {
               "tooltip": "Nov 9, 1:41 AM: Caicedo recorded two clearancesand four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -24246,6 +24170,7 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
@@ -24314,6 +24239,7 @@
           "shortName": "N. Jackson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -24375,6 +24301,7 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -24436,6 +24363,7 @@
           "shortName": "T. Barry"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -24478,7 +24406,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:51 AM: Hinshelwood registered one shot (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -24492,7 +24420,6 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mcwo6mv0muvri0z7",
         "deleted": false,
@@ -24566,7 +24493,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mcwo6mv0muvri0z7",
         "deleted": false,
         "cells": [
@@ -24623,6 +24549,7 @@
           "shortName": "D. Ndoye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 5,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
@@ -24691,6 +24618,7 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -24753,6 +24681,7 @@
           "shortName": "A. Semenyo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -24796,7 +24725,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:50 AM: Elanga generated two shots (zero on...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -24811,6 +24740,7 @@
           "shortName": "A. Elanga"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -24869,6 +24799,7 @@
           "shortName": "Y. Minteh"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -24930,7 +24861,6 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9vi1hf2smuvrfudv",
         "deleted": false,
@@ -24999,7 +24929,6 @@
           "shortName": "T. Muharemovic"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "9vi1hf2smuvrfudv",
         "deleted": false,
         "cells": [
@@ -25061,6 +24990,7 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
@@ -25128,6 +25058,7 @@
           "shortName": "W. Saliba"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -25189,6 +25120,7 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -25236,7 +25168,7 @@
             },
             {
               "tooltip": "Nov 9, 2:27 AM: Enciso recorded four shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -25250,6 +25182,7 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -25300,7 +25233,7 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 12:35 PM: Brobbey has been ruled out of the...",
+              "tooltip": "Nov 10, 5:26 AM: Brobbey (muscle) has withdrawn from the...",
               "typeId": "14"
             }
           ],
@@ -25315,7 +25248,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "me8uv0ksmuvqzjo9",
         "deleted": false,
@@ -25384,7 +25316,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "me8uv0ksmuvqzjo9",
         "deleted": false,
         "cells": [

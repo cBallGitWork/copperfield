@@ -255,7 +255,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -322,7 +322,7 @@
             },
             {
               "tooltip": "Nov 3, 4:45 AM: O'Brien recorded two shots (one on...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -374,7 +374,7 @@
             },
             {
               "tooltip": "Nov 3, 4:45 AM: Armstrong had one shot (zero on goal)...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -437,7 +437,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 4:09 AM: Emersonn registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -485,7 +485,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 4:09 AM: Emersonn registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -726,7 +726,7 @@
             },
             {
               "tooltip": "Nov 8, 7:52 PM: Robinson registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -897,7 +897,6 @@
           "urlName": "vitaly-janelt",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05tre",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -907,12 +906,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Janelt recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -965,7 +960,7 @@
             },
             {
               "tooltip": "Nov 9, 5:36 AM: King (groin) has recovered from the...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1017,7 +1012,6 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -1028,12 +1022,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:49 AM: Ouattara generated one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1204,10 +1194,6 @@
             {
               "tooltip": "Expected to play in upcoming/current game",
               "typeId": "32"
-            },
-            {
-              "tooltip": "Oct 11, 4:54 AM: Smith had one interception in...",
-              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -1323,7 +1309,7 @@
             },
             {
               "tooltip": "Nov 3, 4:45 AM: O'Brien recorded two shots (one on...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -1391,7 +1377,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1626,7 +1612,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:50 AM: Willock recorded two shots (zero on...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -1748,7 +1734,7 @@
             },
             {
               "tooltip": "Nov 9, 1:41 AM: Caicedo recorded two clearancesand four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1860,7 +1846,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 4:09 AM: Emersonn registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1898,7 +1884,6 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -1909,12 +1894,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:49 AM: Ouattara generated one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2102,7 +2083,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2259,7 +2240,6 @@
           "urlName": "vitaly-janelt",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05tre",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -2269,12 +2249,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Janelt recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2390,7 +2366,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2509,8 +2485,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 1, 8:51 AM: Lindelof generated one tackle (zero...",
-              "typeId": "8"
+              "tooltip": "Nov 10, 5:05 AM: Lindelof has extended his contract with...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -2578,7 +2554,7 @@
             },
             {
               "tooltip": "Nov 9, 5:36 AM: King (groin) has recovered from the...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2698,7 +2674,7 @@
             },
             {
               "tooltip": "Nov 8, 8:09 PM: Affengruber had two tackles (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2750,7 +2726,7 @@
             },
             {
               "tooltip": "Nov 9, 1:54 AM: Antonio Silva had one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2863,7 +2839,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:50 AM: Willock recorded two shots (zero on...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -3041,7 +3017,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -3499,7 +3475,6 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -3509,12 +3484,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Ajer registered one shot (zero on goal)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3689,7 +3660,7 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 12:35 PM: Brobbey has been ruled out of the...",
+              "tooltip": "Nov 10, 5:26 AM: Brobbey (muscle) has withdrawn from the...",
               "typeId": "14"
             }
           ],
@@ -3758,7 +3729,7 @@
             },
             {
               "tooltip": "Nov 8, 7:52 PM: Robinson registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4411,7 +4382,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 7:47 AM: Munoz has joined Spain's national team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4604,7 +4575,7 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 9, 12:35 PM: Brobbey has been ruled out of the...",
+              "tooltip": "Nov 10, 5:26 AM: Brobbey (muscle) has withdrawn from the...",
               "typeId": "14"
             }
           ],
@@ -4721,7 +4692,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 7:47 AM: Munoz has joined Spain's national team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4775,7 +4746,7 @@
             },
             {
               "tooltip": "Nov 9, 1:25 AM: Kluivert had two shots (one on goal),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4889,7 +4860,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 4:09 AM: Emersonn registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5010,7 +4981,7 @@
             },
             {
               "tooltip": "Nov 8, 7:52 PM: Robinson registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5077,7 +5048,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5774,7 +5745,7 @@
             },
             {
               "tooltip": "Nov 9, 1:54 AM: Antonio Silva had one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6131,7 +6102,7 @@
             },
             {
               "tooltip": "Nov 9, 1:42 AM: Roefs had four saves and secured a...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6539,7 +6510,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 7:47 AM: Munoz has joined Spain's national team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6770,7 +6741,7 @@
             },
             {
               "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6948,7 +6919,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6985,7 +6956,6 @@
           "urlName": "yasin-ayari",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "068yc",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -6995,12 +6965,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:50 AM: Ayari had four shots (two on goal) in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7168,7 +7134,6 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -7179,12 +7144,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:49 AM: Ouattara generated one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7222,7 +7183,6 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -7233,12 +7193,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:49 AM: Ouattara generated one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7302,7 +7258,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:49 AM: Diouf registered one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7469,7 +7425,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:48 AM: Sangare registered two tackles (two...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7589,7 +7545,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7652,7 +7608,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:50 AM: Elanga generated two shots (zero on...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -8151,7 +8107,6 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -8161,12 +8116,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Ajer registered one shot (zero on goal)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8229,7 +8180,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:52 AM: Botman recorded no stats in Monday's...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -8277,7 +8228,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:49 AM: Diouf registered one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8343,12 +8294,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Undisclosed - Late fitness test (Game-time decision) - Expected return Nov 21",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 7, 12:54 PM: Thiaw was substituted in the 85th...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 7:26 AM: Thiaw was spotted arriving at Germany's...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -8642,7 +8589,7 @@
             },
             {
               "tooltip": "Nov 9, 1:54 AM: Antonio Silva had one tackle (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8705,7 +8652,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:48 AM: Sangare registered two tackles (two...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8862,7 +8809,6 @@
           "urlName": "olivier-boscagli",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y26",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -8872,12 +8818,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9064,7 +9006,7 @@
             },
             {
               "tooltip": "Nov 9, 5:09 AM: Davis recorded an own goal, two crosses...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9352,12 +9294,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Hamstring - Late fitness test (Game-time decision) - Expected return Nov 21",
+              "tooltip": "Hamstring - Late fitness test (Game-time decision) - Expected return Nov 14",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 7, 10:36 AM: Gudmundsson was replaced at halftime of...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 5:29 AM: Gudmundsson (hamstring) is expected to...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -9425,7 +9367,7 @@
             },
             {
               "tooltip": "Nov 8, 8:24 PM: Bassey recorded seven clearancesand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9545,7 +9487,7 @@
             },
             {
               "tooltip": "Nov 8, 7:52 PM: Robinson registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9652,7 +9594,6 @@
           "urlName": "vitaly-janelt",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05tre",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -9662,12 +9603,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:47 AM: Janelt recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9715,7 +9652,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:52 AM: Botman recorded no stats in Monday's...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -9833,7 +9770,7 @@
             },
             {
               "tooltip": "Nov 8, 8:09 PM: Affengruber had two tackles (one won),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10135,7 +10072,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10299,7 +10236,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10533,12 +10470,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Undisclosed - Late fitness test (Game-time decision) - Expected return Nov 21",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 7, 12:54 PM: Thiaw was substituted in the 85th...",
-              "typeId": "9"
+              "tooltip": "Nov 10, 7:26 AM: Thiaw was spotted arriving at Germany's...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10601,7 +10534,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10773,7 +10706,7 @@
             },
             {
               "tooltip": "Nov 9, 1:38 AM: Chavarria generated two crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10963,7 +10896,7 @@
             },
             {
               "tooltip": "Nov 9, 1:25 AM: Kluivert had two shots (one on goal),...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11010,7 +10943,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 5:48 AM: Sangare registered two tackles (two...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11073,7 +11006,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 4:09 AM: Emersonn registered two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11240,7 +11173,7 @@
           "icons": [
             {
               "tooltip": "Nov 3, 4:47 AM: Maitland-Niles recorded no stats in...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -11591,7 +11524,7 @@
           "icons": [
             {
               "tooltip": "Nov 9, 1:38 AM: Palestra registered three crosses (one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,

@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-11-10T00:39:48.375Z",
+  "capturedAt": "2026-11-10T13:25:53.230Z",
   "leagueId": "w05aib75mtj36y1g",
   "reads": [
     {
@@ -30,7 +30,7 @@
     {
       "method": "getTransactionDetailsHistory-TRADE",
       "ok": true,
-      "bytes": 16254
+      "bytes": 16085
     },
     {
       "method": "getTransactionDetailsHistory-LINEUP_CHANGE",

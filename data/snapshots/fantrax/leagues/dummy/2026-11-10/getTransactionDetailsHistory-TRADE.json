@@ -506,7 +506,6 @@
           "urlName": "maxim-de-cuyper",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y9m",
-          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -516,12 +515,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
-            },
-            {
               "tooltip": "Nov 9, 5:50 AM: De Cuyper had three shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
