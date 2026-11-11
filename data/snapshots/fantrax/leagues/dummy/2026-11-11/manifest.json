@@ -1,0 +1,42 @@
+{
+  "capturedAt": "2026-11-11T12:38:38.575Z",
+  "leagueId": "w05aib75mtj36y1g",
+  "reads": [
+    {
+      "method": "getLeagueInfo",
+      "ok": true,
+      "bytes": 142942
+    },
+    {
+      "method": "getTeamRosters",
+      "ok": true,
+      "bytes": 30327
+    },
+    {
+      "method": "getStandings",
+      "ok": true,
+      "bytes": 1804
+    },
+    {
+      "method": "getDraftResults",
+      "ok": false,
+      "code": "RATE_LIMITED",
+      "message": "Fantrax getDraftResults: RATE_LIMITED — Too many requests - getDraftResults may be called at most once every 5 seconds per IP address."
+    },
+    {
+      "method": "getTransactionDetailsHistory-CLAIM_DROP",
+      "ok": true,
+      "bytes": 19290
+    },
+    {
+      "method": "getTransactionDetailsHistory-TRADE",
+      "ok": true,
+      "bytes": 17244
+    },
+    {
+      "method": "getTransactionDetailsHistory-LINEUP_CHANGE",
+      "ok": true,
+      "bytes": 9852
+    }
+  ]
+}
