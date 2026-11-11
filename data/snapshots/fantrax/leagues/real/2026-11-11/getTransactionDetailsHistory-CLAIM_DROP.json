@@ -2029,8 +2029,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 1, 8:50 AM: Maatsen recorded two shots (zero on...",
-              "typeId": "8"
+              "tooltip": "Nov 11, 10:06 AM: Maatsen has signed a new contract with...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -2810,7 +2810,7 @@
           "icons": [
             {
               "tooltip": "Nov 10, 3:42 PM: Minteh played eight minutes off the...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3214,7 +3214,7 @@
             },
             {
               "tooltip": "Nov 10, 3:36 PM: Robertson has started all but two...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3324,6 +3324,7 @@
           "urlName": "alex-scott",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Bournemouth.png",
           "scorerId": "06f8y",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -3332,6 +3333,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 8, 8:07 AM: Scott (thigh) has been named on...",
               "typeId": "9"
@@ -5173,6 +5178,7 @@
           "urlName": "alex-scott",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Bournemouth.png",
           "scorerId": "06f8y",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -5181,6 +5187,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 8, 8:07 AM: Scott (thigh) has been named on...",
               "typeId": "9"
@@ -5576,6 +5586,7 @@
           "urlName": "alex-scott",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Bournemouth.png",
           "scorerId": "06f8y",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -5584,6 +5595,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 8, 8:07 AM: Scott (thigh) has been named on...",
               "typeId": "9"
@@ -5943,7 +5958,7 @@
           "icons": [
             {
               "tooltip": "Nov 10, 3:42 PM: Minteh played eight minutes off the...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7705,7 +7720,7 @@
           "icons": [
             {
               "tooltip": "Nov 10, 12:15 PM: Kroupi was called up by France for the...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7770,7 +7785,7 @@
           "icons": [
             {
               "tooltip": "Nov 10, 3:42 PM: Minteh played eight minutes off the...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10019,8 +10034,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 6, 9:06 AM: Rashford (hip) remains sidelined ahead...",
-              "typeId": "9"
+              "tooltip": "Nov 11, 12:48 PM: Rashford (hip) visited a specialist in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10472,6 +10487,7 @@
           "urlName": "alex-scott",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Bournemouth.png",
           "scorerId": "06f8y",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -10480,6 +10496,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 8, 8:07 AM: Scott (thigh) has been named on...",
               "typeId": "9"
