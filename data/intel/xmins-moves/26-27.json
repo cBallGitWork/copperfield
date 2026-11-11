@@ -2,12 +2,12 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 11,
-    "exportedAt": "2026-11-10T08:39:14.296Z",
-    "rows": 15,
+    "exportedAt": "2026-11-11T08:04:36.551Z",
+    "rows": 16,
     "sources": [
       {
         "path": "data/intel/projections/26-27.json",
-        "mtime": "2026-11-10T08:24:04.501427+00:00"
+        "mtime": "2026-11-11T08:04:18.373556+00:00"
       }
     ]
   },
@@ -5489,6 +5489,38 @@
           "code": 549939,
           "before": 47,
           "after": 58
+        }
+      ]
+    },
+    {
+      "at": "2026-11-11T08:04:18.373Z",
+      "since": "2026-11-10T14:00:14.258Z",
+      "gameweek": 11,
+      "moves": [
+        {
+          "code": 97032,
+          "before": 90,
+          "after": 68
+        },
+        {
+          "code": 441264,
+          "before": 77,
+          "after": 58
+        },
+        {
+          "code": 577725,
+          "before": 59,
+          "after": 78
+        },
+        {
+          "code": 209289,
+          "before": 16,
+          "after": 5
+        },
+        {
+          "code": 437505,
+          "before": 25,
+          "after": 36
         }
       ]
     }
