@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 11,
-    "exportedAt": "2026-11-12T16:11:14.250Z",
+    "exportedAt": "2026-11-12T22:26:17.901Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-12T16:11:14.250Z",
+  "fetchedAt": "2026-11-12T22:26:17.901Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "MCI": {
@@ -75,10 +75,6 @@
       ],
       "lineup": "predicted",
       "absent": [
-        {
-          "code": 477424,
-          "status": "QUES"
-        },
         {
           "code": 209036,
           "status": "QUES"
@@ -569,11 +565,11 @@
           "prob": 0.9
         },
         {
-          "code": 173774,
+          "code": 522047,
           "prob": 0.9
         },
         {
-          "code": 522047,
+          "code": 214225,
           "prob": 0.9
         },
         {
@@ -636,11 +632,11 @@
           "prob": 0.9
         },
         {
-          "code": 184667,
+          "code": 244954,
           "prob": 0.9
         },
         {
-          "code": 244954,
+          "code": 184667,
           "prob": 0.9
         },
         {
@@ -674,6 +670,10 @@
       ],
       "lineup": "predicted",
       "absent": [
+        {
+          "code": 614071,
+          "status": "QUES"
+        },
         {
           "code": 214590,
           "status": "QUES"
@@ -719,11 +719,11 @@
           "prob": 0.9
         },
         {
-          "code": 696104,
+          "code": 577669,
           "prob": 0.9
         },
         {
-          "code": 577669,
+          "code": 696104,
           "prob": 0.9
         },
         {
@@ -849,11 +849,11 @@
           "prob": 0.9
         },
         {
-          "code": 575458,
+          "code": 575476,
           "prob": 0.9
         },
         {
-          "code": 575476,
+          "code": 575458,
           "prob": 0.9
         },
         {
@@ -932,11 +932,11 @@
           "prob": 0.9
         },
         {
-          "code": 465694,
+          "code": 636852,
           "prob": 0.9
         },
         {
-          "code": 636852,
+          "code": 465694,
           "prob": 0.9
         },
         {
@@ -1065,11 +1065,11 @@
           "prob": 0.9
         },
         {
-          "code": 606930,
+          "code": 108416,
           "prob": 0.9
         },
         {
-          "code": 108416,
+          "code": 606930,
           "prob": 0.9
         },
         {
