@@ -2,12 +2,12 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 11,
-    "exportedAt": "2026-11-11T08:04:36.551Z",
-    "rows": 16,
+    "exportedAt": "2026-11-13T12:31:07.288Z",
+    "rows": 17,
     "sources": [
       {
         "path": "data/intel/projections/26-27.json",
-        "mtime": "2026-11-11T08:04:18.373556+00:00"
+        "mtime": "2026-11-13T12:30:51.031617+00:00"
       }
     ]
   },
@@ -5521,6 +5521,63 @@
           "code": 437505,
           "before": 25,
           "after": 36
+        }
+      ]
+    },
+    {
+      "at": "2026-11-13T12:30:51.031Z",
+      "since": "2026-11-11T08:04:18.373Z",
+      "gameweek": 11,
+      "moves": [
+        {
+          "code": 218543,
+          "before": 82,
+          "after": 38
+        },
+        {
+          "code": 216055,
+          "before": 34,
+          "after": 68
+        },
+        {
+          "code": 469266,
+          "before": 31,
+          "after": 8
+        },
+        {
+          "code": 95658,
+          "before": 84,
+          "after": 63
+        },
+        {
+          "code": 552946,
+          "before": 19,
+          "after": 1
+        },
+        {
+          "code": 577016,
+          "before": 41,
+          "after": 59
+        },
+        {
+          "code": 614071,
+          "before": 72,
+          "after": 54
+        },
+        {
+          "code": 101282,
+          "before": 12,
+          "after": 28
+        },
+        {
+          "code": 171270,
+          "before": 16,
+          "after": 1
+        },
+        {
+          "code": 514356,
+          "before": 20,
+          "after": 9
         }
       ]
     }
