@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 11,
-    "exportedAt": "2026-11-13T15:39:59.285Z",
+    "exportedAt": "2026-11-14T01:43:13.429Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-13T15:39:59.285Z",
+  "fetchedAt": "2026-11-14T01:43:13.429Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "MCI": {
@@ -1364,6 +1364,10 @@
       ],
       "lineup": "predicted",
       "absent": [
+        {
+          "code": 596777,
+          "status": "QUES"
+        },
         {
           "code": 95658,
           "status": "QUES"
