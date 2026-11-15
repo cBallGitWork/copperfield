@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 11,
-    "exportedAt": "2026-11-14T23:20:16.167Z",
+    "exportedAt": "2026-11-15T14:16:48.739Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-14T23:20:16.167Z",
+  "fetchedAt": "2026-11-15T14:16:48.739Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "MCI": {
@@ -1287,6 +1287,10 @@
       "absent": [
         {
           "code": 97032,
+          "status": "QUES"
+        },
+        {
+          "code": 424876,
           "status": "QUES"
         },
         {
