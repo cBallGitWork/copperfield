@@ -30,7 +30,7 @@ export function readConfig(text) {
   try {
     config = JSON.parse(text);
   } catch (error) {
-    throw new Error(`${CONFIG_PATH} is not valid JSON (${error.message})`);
+    throw new Error(`${CONFIG_PATH} is not valid JSON (${error.message})`, { cause: error });
   }
   const { pack = "qa/regression-pack.csv", areas, specIds, spec = [] } = config ?? {};
   if (typeof pack !== "string" || !pack.endsWith(".csv")) throw new Error(`${CONFIG_PATH}: "pack" must be a .csv path`);
@@ -48,7 +48,7 @@ export function readConfig(text) {
 export function parseCsv(text) {
   const rows = [];
   let row = [], field = "", quoted = false, i = 0;
-  text = text.replace(/^﻿/, "").replace(/\r\n?/g, "\n");
+  text = text.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n");
   for (; i < text.length; i++) {
     const ch = text[i];
     if (quoted) {
