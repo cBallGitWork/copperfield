@@ -1,5 +1,5 @@
 {
-  "studio": "4faec666bf94a073fab419d5458cc56fcde0aa48",
+  "studio": "644b4ae95425dd429cca383d980c6f71fafe4dc3",
   "hash": "sha256",
   "files": {
     ".claude/agents/backend-engineer.md": "91e4e537a538219e77131c546bc610d38ee8c2678816ff674da169c8548ecff0",
@@ -22,7 +22,7 @@
     ".claude/hooks/tests/quick_check.sh": "3697b07bacd3d426ab44f38444e76b5e193899db388df011024b2134953d3dcb",
     ".claude/hooks/where.py": "52f1e76fbc899ee28c32c11a68e029780a6f4a7d86f07f0aeccb0fc3a8d29f5a",
     ".claude/skills/qa-panel/SKILL.md": "985193b0520879df5714291f0f2f6fc9c31e4aae8202cc4bfc3d1f932c722086",
-    ".claude/skills/regression-pack/SKILL.md": "e4162ad6d6564cc920d70e28fb669418dc145eb90f60bcd44f6c425756031c54",
+    ".claude/skills/regression-pack/SKILL.md": "1ed71b8fa2a8bb6b75d3a11859c9fe442778718091dafcd3ffc0bf2612d8d625",
     ".claude/skills/regression-pack/settings.example.json": "d5d0c36370aaf9aea49d84fd12968925eb784d2323814765b713baf7f78ce2c0",
     ".claude/skills/regression-pack/template.csv": "b305a37086d4161e36cc8f9b887f2cff988ac086c8851c3db53cee48395e696d",
     "scripts/qa-walk.mjs": "ab89ea7b7581bc3e176a6d2146e3abadf37a427364b26378646180db1fd767c8",

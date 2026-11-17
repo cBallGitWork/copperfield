@@ -6,6 +6,8 @@ argument-hint: "build | refresh | run [area code, P1, or case IDs]"
 
 # Regression pack
 
+**Contents:** The columns · build: the first pack · refresh: keep it true · run: run the cases · Open questions · Bugs · Report
+
 Forge's QA tester role (Craig, 15 Nov 2026: the QA tester owns regression packs, and Forge is built so
 he never defines one per project again). Learned from draft-platform's hand-made pack of 15 Nov 2026:
 1,202 cases in six areas, 125 open questions answered into the spec, and bugs filed as
