@@ -58,6 +58,10 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false,
 
+  // Next 16.4's build type-checks every file its tsconfig includes, and Vercel's build has no vitest, so the build reads
+  // one without the tests (17 Nov 2026); `npm run typecheck` still checks them against tsconfig.json.
+  typescript: { tsconfigPath: "tsconfig.build.json" },
+
   // Keep a visited page, and a tab AutoRefresh fetched ahead, on the phone for 30s, the server's own revalidate: unset,
   // `static` held a fetched-ahead Live for five minutes, and a fresh entry is never fetched again.
   experimental: {
