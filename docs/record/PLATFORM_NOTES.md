@@ -47,6 +47,16 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## The player section needs the commissioner's code — decided 17 Nov 2026
+
+Craig: "have to enter the code to get signed in to access that section … don't allow a log in on that page though".
+Crawlers walked every sort and filter of `/players` (Meta on 2 Nov; another under the 60-a-minute rate limit on 17 Nov),
+each an uncached render that asked FPL, which refuses Vercel with 403, so nothing cached: about 98% of a day's
+function errors. `proxy.ts` sends any `/players…` request without a valid team cookie to `/squad?next=<page>`; the code
+goes in there only, and `claimTeam` lands on `next` when it is inside the section (`playersGate.ts`). Every manager has
+a code. A deployment with no `SESSION_SECRET` gates nothing, so CI's smoke still walks the section; production's Health
+walk, which has no cookie, now meets Squad on those routes.
+
 ## Live turns to a gameweek two hours before its first kickoff, off the calendar — decided 30 Oct 2026
 
 Craig, 30 Oct: *"live tab change, activates 2 hours before kick off for first game of the gameweek"*. This replaces

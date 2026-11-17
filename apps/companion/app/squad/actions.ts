@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { SEASON_IN_SECONDS, TEAM_COOKIE, WRONG_CODE_DELAY_MS } from "../config";
 import { sign, teamForCode } from "../session";
 import { MY_TEAM, SQUAD } from "./routes";
+import { returnTo } from "../playersGate";
 
 // Signing in and out, neither of which touches Fantrax.
 
@@ -39,8 +40,8 @@ export async function claimTeam(_previous: Refused | null, form: FormData): Prom
   });
 
   revalidatePath("/", "layout");
-  // His own team, through the front door, so Team lights.
-  redirect(MY_TEAM);
+  // Back to the player page that sent him here, else his own team through the front door, so Team lights.
+  redirect(returnTo(form.get("next")) ?? MY_TEAM);
 }
 
 export async function forgetTeam(): Promise<void> {
