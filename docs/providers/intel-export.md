@@ -1,6 +1,6 @@
 # The intel export — the contract between the two repos
 
-`~/ai-carling-premiership` writes into `epl-draft-1/data/intel/`. Nothing in this
+`~/ai-carling-premiership` writes into `copperfield/data/intel/` (the Mac's main folder, `~/copperfield`). Nothing in this
 repo can make that data fresher; `npm run intel-check` exists only to say how old
 it is. **This file is the contract**, written here so the sister-repo session has
 something to build against rather than a conversation to reconstruct.

@@ -148,6 +148,6 @@ if [ "$mode" = "--print" ]; then
   exit 0
 fi
 
-/usr/bin/jq -n --arg ctx "Repo clock (epl-draft-1):
+/usr/bin/jq -n --arg ctx "Repo clock (copperfield):
 ${body}" '{hookSpecificOutput:{hookEventName:"SessionStart",additionalContext:$ctx}}'
 exit 0
