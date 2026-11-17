@@ -1,0 +1,6 @@
+{
+  "kitSkip": [
+    ".github/workflows/claude-build.yml",
+    ".github/claude-build/"
+  ]
+}
