@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { gated, returnTo, signInFor } from "./playersGate";
+import { closedAt, gated, returnTo, signInFor } from "./playersGate";
 
 describe("gated", () => {
   it("is the player section and everything under it", () => {
@@ -38,5 +38,19 @@ describe("returnTo", () => {
     expect(returnTo("/league")).toBeNull();
     expect(returnTo("")).toBeNull();
     expect(returnTo(null)).toBeNull();
+  });
+});
+
+describe("closedAt", () => {
+  it("is closed from midnight up to 7am London, in GMT", () => {
+    expect(closedAt(new Date("2026-11-17T00:00:00Z"))).toBe(true);
+    expect(closedAt(new Date("2026-11-17T06:59:00Z"))).toBe(true);
+    expect(closedAt(new Date("2026-11-17T07:00:00Z"))).toBe(false);
+    expect(closedAt(new Date("2026-11-17T23:59:00Z"))).toBe(false);
+  });
+
+  it("follows London's clock in summer time, not UTC", () => {
+    expect(closedAt(new Date("2026-07-01T23:30:00Z"))).toBe(true); // 00:30 BST
+    expect(closedAt(new Date("2026-07-01T06:30:00Z"))).toBe(false); // 07:30 BST
   });
 });

@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { TEAM_COOKIE } from "./app/config";
 import { START, openedCold } from "./app/landing";
-import { gated, signInFor } from "./app/playersGate";
+import { CLOSED_PAGE, closedAt, gated, signInFor } from "./app/playersGate";
 import { cookieTeamOf } from "./app/sessionCookie";
 
 /** The team a request's cookie was signed for, or null when it has none or a forged one. */
@@ -10,14 +10,18 @@ async function teamOf(request: NextRequest, secret: string): Promise<string | nu
   return raw ? cookieTeamOf(raw, secret) : null;
 }
 
-/** The player section sends a reader with no team to Squad's sign-in. A signed-in reader opening `/` from outside the
- *  site goes to `START`; everybody else gets the paper. `/?paper` is the paper for anybody, which is how an instrument
- *  shoots it signed in. A deployment with no secret, where nobody can sign in, gates nothing. */
+/** The player section is offline overnight, and otherwise sends a reader with no team to Squad's sign-in. A signed-in
+ *  reader opening `/` from outside the site goes to `START`; everybody else gets the paper. `/?paper` is the paper for
+ *  anybody, which is how an instrument shoots it signed in. A deployment with no secret, where nobody can sign in (CI's
+ *  smoke, a laptop), gates and closes nothing. */
 export async function proxy(request: NextRequest) {
   const secret = process.env.SESSION_SECRET;
   if (!secret) return NextResponse.next();
   const { pathname, search } = request.nextUrl;
   if (gated(pathname)) {
+    if (closedAt(new Date())) {
+      return new NextResponse(CLOSED_PAGE, { status: 503, headers: { "content-type": "text/html; charset=utf-8" } });
+    }
     if ((await teamOf(request, secret)) !== null) return NextResponse.next();
     return NextResponse.redirect(new URL(signInFor(`${pathname}${search}`), request.url));
   }

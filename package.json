@@ -26,6 +26,7 @@
     "bench-order": "tsx --env-file-if-exists=.env.local scripts/bench-order.ts",
     "bridge:check": "tsx scripts/bridge-check.ts",
     "team-codes": "tsx --env-file=apps/companion/.env.local scripts/team-codes.ts",
+    "health-cookie": "tsx --env-file=apps/companion/.env.local scripts/health-cookie.ts",
     "edition": "tsx --env-file-if-exists=.env.local scripts/write-edition.ts",
     "report:proof": "tsx --env-file-if-exists=.env.local scripts/report-proof.ts",
     "intel-check": "tsx scripts/intel-check.ts",
