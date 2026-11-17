@@ -39,6 +39,8 @@ jobs:
           FANTRAX_LEAGUE_ID: ${{ steps.league.outputs.id }}
           # A page every 2.5s, not 55 in a minute: the walk's bursts were FPL's biggest refusal bursts (11 Oct 2026).
           SMOKE_PACE_MS: "2500"
+          # Signed in, so the player section is walked, not its redirect to Squad (`npm run health-cookie`, 17 Nov 2026).
+          SMOKE_TEAM_COOKIE: ${{ secrets.HEALTH_TEAM_COOKIE }}
         run: npm run smoke
 
       - uses: ./.github/actions/alert

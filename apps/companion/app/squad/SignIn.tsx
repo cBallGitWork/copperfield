@@ -7,7 +7,7 @@ import { LABEL } from "@/app/desk";
 
 // One box: your code. A client component so a wrong code answers in place; the form posts before any JavaScript.
 
-export default function SignIn() {
+export default function SignIn({ next }: { next?: string }) {
   const [refused, submit, pending] = useActionState(claimTeam, null);
   const box = useRef<HTMLInputElement>(null);
 
@@ -18,6 +18,7 @@ export default function SignIn() {
 
   return (
     <form action={submit} className="cm-panel flex flex-col gap-3 p-4">
+      {next === undefined ? null : <input type="hidden" name="next" value={next} />}
       <label htmlFor="code" className={LABEL}>
         Code from the commissioner
       </label>

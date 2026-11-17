@@ -8,6 +8,7 @@ import {
   fetchTeamRosters,
   mapTeamRosters,
 } from "@epl/core";
+import { TEAM_COOKIE } from "../apps/companion/app/config";
 import { walkLeague, type WalkLeague } from "./smoke/league";
 import { serverError } from "./smoke/broken";
 import { launchScreenProblems } from "./smoke/installable";
@@ -21,6 +22,11 @@ const BASE = process.env.SMOKE_BASE ?? "http://localhost:3000";
 
 /** Milliseconds between pages: production's walk is paced so FPL never sees a burst from it (`health.yml`). */
 const PACE_MS = Number(process.env.SMOKE_PACE_MS || 0);
+
+/** A signed team cookie, so production's walk reads the player section a manager does (`HEALTH_TEAM_COOKIE`, printed by
+ *  `npm run health-cookie`); unset, every request goes signed out. */
+const COOKIE = process.env.SMOKE_TEAM_COOKIE || "";
+const INIT: RequestInit = { redirect: "follow", headers: COOKIE === "" ? {} : { cookie: `${TEAM_COOKIE}=${COOKIE}` } };
 
 /** What each league view says with no teams. One sentence per route, naming WHICH nothing it is, so
  *  silence, undrafted and a quiet week never collapse into one. Edit with the copy. */
@@ -106,7 +112,7 @@ async function main() {
     // Skipped, and SAID so: until the draft there is no team to check by.
     console.log("~ served league  no team is named yet, so this walk cannot verify it\n");
   } else {
-    const table = await fetch(`${BASE}/league`, { redirect: "follow" });
+    const table = await fetch(`${BASE}/league`, INIT);
     const body = await table.text();
     if (!body.includes(name)) {
       console.log(`✗ served league  expected "${name}" (${FANTRAX_LEAGUE_ID})`);
@@ -129,7 +135,7 @@ async function main() {
     let res: Response;
     let body: string;
     try {
-      res = await fetch(`${BASE}${path}`, { redirect: "follow" });
+      res = await fetch(`${BASE}${path}`, INIT);
       body = await res.text();
     } catch {
       // Ends the run with the one thing wrong: the server never came up.
@@ -191,7 +197,7 @@ async function main() {
 
   // A feed is no page: its status and content type are the whole check.
   for (const feed of FEEDS) {
-    const res = await fetch(`${BASE}${feed.path}`, { redirect: "follow" });
+    const res = await fetch(`${BASE}${feed.path}`, INIT);
     await res.body?.cancel();
     const problems = feedProblems(feed, res.status, res.headers.get("content-type"));
     if (problems.length > 0) failed++;

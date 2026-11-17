@@ -3,6 +3,7 @@ import SquadIndex from "./SquadIndex";
 import SectionNav from "../league/SectionNav";
 import { teamPick } from "./routes";
 import { MORE } from "../components/shell/sections";
+import { returnTo } from "../playersGate";
 import { SQUADS, titled } from "../titles";
 
 // Every squad, and the sign-in: reached from More, so its back plate goes there, and on the desk from League's strip,
@@ -16,14 +17,15 @@ export default async function SquadsPage({
   searchParams,
 }: {
   /** A squad's team picker submits here: `team` and the week it was showing. */
-  searchParams: Promise<{ team?: string; gw?: string }>;
+  searchParams: Promise<{ team?: string; gw?: string; next?: string }>;
 }) {
-  const { team, gw } = await searchParams;
+  const { team, gw, next } = await searchParams;
   const pick = teamPick(team, gw);
   if (pick !== null) redirect(pick);
   return (
     <SquadIndex
       back={MORE}
+      next={returnTo(next) ?? undefined}
       nav={
         <div className="max-lg:hidden">
           <SectionNav current="squads" />

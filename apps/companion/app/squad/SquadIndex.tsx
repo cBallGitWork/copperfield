@@ -23,11 +23,14 @@ import { SQUADS } from "../titles";
 export default async function SquadIndex({
   back,
   nav,
+  next,
 }: {
   /** Where the phone's back plate goes with no history; none at `/squad/me`, a tab of its own. */
   back?: string;
   /** A strip under the bar: the League's, on the desk, at `/squad`. */
   nav?: ReactNode;
+  /** The player page a refused reader asked for, landed on after signing in (`playersGate`). */
+  next?: string;
 }) {
   // The week a manager can still change: from Friday teatime that is next week, not the one in play.
   const [squads, table] = await Promise.all([getLeagueSquads(await planningRound()), leagueTable()]);
@@ -39,7 +42,7 @@ export default async function SquadIndex({
         <section className={PANEL}>
           <FantraxSilent code={squads.unavailable} page />
         </section>
-        <SignIn />
+        <SignIn next={next} />
       </div>
     );
   }
@@ -50,7 +53,7 @@ export default async function SquadIndex({
         <section className={PANEL}>
           <Nothing title="Nobody has a squad yet" code={squads.undrafted} page />
         </section>
-        <SignIn />
+        <SignIn next={next} />
       </div>
     );
   }
@@ -84,7 +87,7 @@ export default async function SquadIndex({
       {nav}
 
       {/* The sign-in follows the code, not the team on screen; signing out is offered only to a real code. */}
-      {holder ? null : <SignIn />}
+      {holder ? null : <SignIn next={next} />}
 
       <ul className={`${PANEL_FLUSH} cm-rows`}>
         {yours ? (
