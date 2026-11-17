@@ -5,7 +5,7 @@
 # 16:30 sweeps leave (Thursday's before Lawro at 20:00); zones every :00 and :30, any day, since a run with no new match is silent.
 # Each run executes origin/main's copy, so an update lands without reinstalling; a copy it cannot read is a banner.
 set -euo pipefail
-MAIN=${EPL_DRAFT:-$HOME/epl-draft-1}
+MAIN=${EPL_DRAFT:-$HOME/copperfield}
 AGENTS=$HOME/Library/LaunchAgents
 
 job() {

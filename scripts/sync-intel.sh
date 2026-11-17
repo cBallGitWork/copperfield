@@ -15,7 +15,7 @@ set -Eeuo pipefail
 
 MODE=${1:-}
 CATCH_UP=$([ "${2:-}" = catch-up ] && echo 1 || echo 0)
-MAIN=${EPL_DRAFT:-$HOME/epl-draft-1}
+MAIN=${EPL_DRAFT:-$HOME/copperfield}
 WT=${INTEL_WORKTREE:-$HOME/epl-draft-intel}
 SISTER=${SISTER_REPO:-$HOME/ai-carling-premiership}
 export FFS_SCRAPE_DIR=${FFS_SCRAPE_DIR:-$SISTER/data/raw/fantasy_football_scout/daily}
