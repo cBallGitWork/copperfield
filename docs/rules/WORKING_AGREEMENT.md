@@ -40,3 +40,20 @@ bot's: `scripts/ci/alert.sh` opens one issue per failing job and closes it when 
 
 **`@claude` on a PR** asks `.github/workflows/claude.yml` for a review. It answers only an owner,
 member or collaborator, and it reviews, never merges.
+
+## The crew — `.claude/`
+
+Moved out of CLAUDE.md on 17 Nov 2026, word for word.
+
+- **Hooks** deny `git add -A`, `git add .`, `git merge`, `git push --force*` and any commit or push
+  on `main`. They ask before `npm run capture` (pull first), a second build or server, cutting a
+  branch from another branch, and staging a file past 300 lines. A denial is the hook: do what it
+  names instead.
+- **`tools/ui/`** holds `.mjs` browser instruments over `cdp.mjs`. They talk to an
+  already-running headless Chrome on `CDP_PORT` (default 9261) and never launch one; auth is
+  `--team-cookie <file>` or `TEAM_COOKIE`.
+- **Skills**: `/verify` `/shoot` `/audit-ui` `/probe` `/refactor` `/deepen` (the architecture pass, on Craig's ask), and seven Craig starts: the runbooks
+  `/phase-gate` `/handover` `/swap-day` `/rehearsal-saturday`, and `/grill` (interview before
+  building, ends in the issue), `/wait-what` (say it again plainly), `/retro` (suggest fixes to
+  the surroundings before clearing the chat).
+- `.mcp.json` adds Playwright for exploration; deterministic audits stay in `tools/ui/`.
