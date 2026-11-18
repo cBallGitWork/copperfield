@@ -47,6 +47,19 @@ capture season-specific tradeoffs.
 - We are building the platform layer separately so the UI and football data can
   survive provider changes.
 
+## The firewall denies Meta's indexer and link fetcher on every page — decided 18 Nov 2026
+
+Craig, 18 Nov: "Block both". After the player gate (below) FPL's 403s fell about fourfold, but `/squad` still took
+about 2,500 requests a day against 8 Web Analytics page views, and `/` a request every 3–4 minutes. Vercel's request
+log named them: `meta-webindexer/1.1` on `/squad`, following the gate's redirect, and `facebookexternalhit/1.1` on `/`,
+both from the US. Neither user agent contains "bot", and the managed AI Bots rule only logs, so each was an uncached
+render asking FPL and Fantrax. The custom rule `Block Meta indexer and link fetcher` denies a user agent containing
+either name, on any path; every `/` request after it went live (13:17 UTC) answered 403, and the one checked, at
+13:42, was `facebookexternalhit` denied by this rule. The cost: a companion link
+pasted into Facebook or Messenger shows no preview card. The firewall is changed in the dashboard: the Vercel MCP
+connection reads it but is refused writes. The `Rate limit per visitor` rule's description says 60 a minute; its
+limit is 300.
+
 ## The player section needs the commissioner's code — decided 17 Nov 2026
 
 Craig: "have to enter the code to get signed in to access that section … don't allow a log in on that page though".
