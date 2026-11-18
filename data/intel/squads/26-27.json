@@ -2,12 +2,12 @@
  "manifest": {
   "season": "26-27",
   "gameweek": null,
-  "exportedAt": "2026-11-17T14:00:45.043298+00:00",
+  "exportedAt": "2026-11-18T08:00:45.565429+00:00",
   "rows": 671,
   "sources": [
    {
     "path": "data/derived/team_squad/season=26-27/team_squad.parquet",
-    "mtime": "2026-11-17T08:50:42.829237+00:00"
+    "mtime": "2026-11-18T08:00:38.720672+00:00"
    }
   ],
   "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/",
@@ -430,8 +430,8 @@
    ],
    "depthTier": 4,
    "squadNumber": 4,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 11
   },
   {
    "code": 499169,
@@ -682,7 +682,7 @@
    "depthTier": 0,
    "squadNumber": 2,
    "status": "suspended",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 214590,
@@ -1445,7 +1445,7 @@
    "depthTier": 2,
    "squadNumber": null,
    "status": "doubtful",
-   "expectedReturnGw": null
+   "expectedReturnGw": 11
   },
   {
    "code": 514254,
@@ -2415,8 +2415,8 @@
    ],
    "depthTier": 3,
    "squadNumber": 22,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 11
   },
   {
    "code": 440089,
@@ -2484,8 +2484,8 @@
    ],
    "depthTier": 3,
    "squadNumber": 2,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 11
   },
   {
    "code": 502500,
@@ -3428,7 +3428,7 @@
    "depthTier": 0,
    "squadNumber": 11,
    "status": "injured",
-   "expectedReturnGw": 11
+   "expectedReturnGw": null
   },
   {
    "code": 196100,
@@ -3516,7 +3516,7 @@
    "depthTier": 0,
    "squadNumber": 6,
    "status": "injured",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 226965,
@@ -5824,7 +5824,7 @@
    "depthTier": 0,
    "squadNumber": 36,
    "status": "injured",
-   "expectedReturnGw": 24
+   "expectedReturnGw": null
   },
   {
    "code": 469266,
@@ -6087,8 +6087,8 @@
    ],
    "depthTier": 2,
    "squadNumber": null,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 11
   },
   {
    "code": 608227,
@@ -9025,7 +9025,7 @@
    "depthTier": 2,
    "squadNumber": 13,
    "status": "doubtful",
-   "expectedReturnGw": null
+   "expectedReturnGw": 11
   },
   {
    "code": 606745,
@@ -9690,7 +9690,7 @@
    "depthTier": 1,
    "squadNumber": null,
    "status": "doubtful",
-   "expectedReturnGw": null
+   "expectedReturnGw": 11
   },
   {
    "code": 204822,
@@ -9780,8 +9780,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 7,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 11
   },
   {
    "code": 221389,

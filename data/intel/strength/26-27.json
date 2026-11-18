@@ -2,12 +2,12 @@
  "manifest": {
   "season": "26-27",
   "gameweek": null,
-  "exportedAt": "2026-11-17T14:00:46.300094+00:00",
+  "exportedAt": "2026-11-18T08:00:46.870373+00:00",
   "rows": 20,
   "sources": [
    {
     "path": "data/derived/team_strength/season=26-27/team_strength.parquet",
-    "mtime": "2026-11-13T12:30:41.213744+00:00"
+    "mtime": "2026-11-18T08:00:38.856213+00:00"
    }
   ],
   "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/"
@@ -129,12 +129,12 @@
    "code": 31,
    "shortName": "CRY",
    "attack": {
-    "home": 1.0211,
-    "away": 1.0125
+    "home": 1.0234,
+    "away": 1.0148
    },
    "defence": {
-    "home": 0.8504,
-    "away": 0.848
+    "home": 0.8539,
+    "away": 0.8514
    },
    "games": {
     "home": 5,
@@ -193,12 +193,12 @@
    "code": 40,
    "shortName": "IPS",
    "attack": {
-    "home": 0.7417,
-    "away": 0.751
+    "home": 0.744,
+    "away": 0.7533
    },
    "defence": {
-    "home": 0.8056,
-    "away": 0.7994
+    "home": 0.8084,
+    "away": 0.8021
    },
    "games": {
     "home": 5,
@@ -241,12 +241,12 @@
    "code": 43,
    "shortName": "MCI",
    "attack": {
-    "home": 1.3943,
-    "away": 1.3823
+    "home": 1.3897,
+    "away": 1.3777
    },
    "defence": {
-    "home": 1.0932,
-    "away": 1.112
+    "home": 1.0825,
+    "away": 1.1008
    },
    "games": {
     "home": 5,
