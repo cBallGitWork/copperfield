@@ -2,16 +2,16 @@
  "manifest": {
   "season": "26-27",
   "gameweek": 11,
-  "exportedAt": "2026-11-18T08:00:47.517410+00:00",
+  "exportedAt": "2026-11-20T18:09:36.893086+00:00",
   "rows": 20,
   "sources": [
    {
     "path": "data/derived/team_squad/season=26-27/team_squad.parquet",
-    "mtime": "2026-11-18T08:00:38.720672+00:00"
+    "mtime": "2026-11-20T12:38:44.531606+00:00"
    },
    {
     "path": "data/match_logs/player_match_log/season=26-27/player_match_log.parquet",
-    "mtime": "2026-11-17T08:50:59.158416+00:00"
+    "mtime": "2026-11-20T14:29:22.090767+00:00"
    },
    {
     "path": "data/match_logs/player_match_log/season=25-26/player_match_log.parquet",
@@ -1125,11 +1125,11 @@
      "holders": [
       {
        "code": 514356,
-       "share": 0.015
+       "share": 0.265
       },
       {
        "code": 486672,
-       "share": 1.0
+       "share": 0.75
       },
       {
        "code": 56979,
@@ -1263,7 +1263,7 @@
      "holders": [
       {
        "code": 461102,
-       "share": 0.5
+       "share": 0.75
       },
       {
        "code": 539142,
@@ -1271,7 +1271,7 @@
       },
       {
        "code": 566213,
-       "share": 0.5
+       "share": 0.25
       }
      ]
     },
@@ -1312,7 +1312,7 @@
      "holders": [
       {
        "code": 661888,
-       "share": 0.955
+       "share": 0.716
       },
       {
        "code": 226965,
@@ -1320,7 +1320,11 @@
       },
       {
        "code": 168144,
-       "share": 0.384
+       "share": 0.484
+      },
+      {
+       "code": 428580,
+       "share": 0.11
       }
      ]
     },
@@ -2346,11 +2350,11 @@
      "holders": [
       {
        "code": 243526,
-       "share": 0.548
+       "share": 0.731
       },
       {
        "code": 437497,
-       "share": 0.44
+       "share": 0.257
       }
      ]
     },
@@ -2402,16 +2406,16 @@
        "share": 0.293
       },
       {
-       "code": 466525,
-       "share": 0.126
-      },
-      {
        "code": 200617,
        "share": 0.162
       },
       {
        "code": 180135,
        "share": 0.427
+      },
+      {
+       "code": 427637,
+       "share": 0.06
       }
      ]
     },
@@ -2644,23 +2648,19 @@
      "holders": [
       {
        "code": 171314,
-       "share": 0.295
+       "share": 0.292
       },
       {
        "code": 209036,
-       "share": 0.545
-      },
-      {
-       "code": 616222,
-       "share": 0.016
+       "share": 0.606
       },
       {
        "code": 477424,
-       "share": 0.061
+       "share": 0.087
       },
       {
-       "code": 448514,
-       "share": 0.084
+       "code": 616222,
+       "share": 0.0
       }
      ]
     },
@@ -2671,15 +2671,15 @@
      "holders": [
       {
        "code": 171314,
-       "share": 0.702
+       "share": 0.705
       },
       {
        "code": 209036,
-       "share": 0.201
+       "share": 0.141
       },
       {
        "code": 578153,
-       "share": 0.097
+       "share": 0.154
       },
       {
        "code": 616222,
@@ -2694,11 +2694,11 @@
      "holders": [
       {
        "code": 477424,
-       "share": 0.689
+       "share": 0.663
       },
       {
        "code": 472769,
-       "share": 0.311
+       "share": 0.337
       }
      ]
     },
@@ -2846,11 +2846,11 @@
        "share": 0.853
       },
       {
-       "code": 95658,
+       "code": 606745,
        "share": 0.147
       },
       {
-       "code": 606745,
+       "code": 95658,
        "share": 0.0
       }
      ]
@@ -2862,23 +2862,15 @@
      "holders": [
       {
        "code": 95658,
-       "share": 0.603
+       "share": 0.75
       },
       {
        "code": 550864,
-       "share": 0.214
+       "share": 0.212
       },
       {
        "code": 209365,
-       "share": 0.093
-      },
-      {
-       "code": 230001,
-       "share": 0.042
-      },
-      {
-       "code": 221820,
-       "share": 0.025
+       "share": 0.038
       }
      ]
     },
@@ -2908,11 +2900,11 @@
      "holders": [
       {
        "code": 550864,
-       "share": 0.666
+       "share": 0.668
       },
       {
        "code": 230001,
-       "share": 0.334
+       "share": 0.332
       },
       {
        "code": 216051,
@@ -3278,7 +3270,7 @@
       },
       {
        "code": 159506,
-       "share": 0.253
+       "share": 0.26
       }
      ]
     },
@@ -3485,7 +3477,7 @@
      "holders": [
       {
        "code": 84450,
-       "share": 0.75
+       "share": 0.0
       },
       {
        "code": 577669,
@@ -3493,11 +3485,15 @@
       },
       {
        "code": 696104,
-       "share": 0.25
+       "share": 0.725
       },
       {
        "code": 547027,
        "share": 0.0
+      },
+      {
+       "code": 484420,
+       "share": 0.079
       }
      ]
     },
@@ -3535,11 +3531,11 @@
      "holders": [
       {
        "code": 484420,
-       "share": 1.0
+       "share": 0.921
       },
       {
        "code": 554197,
-       "share": 0.0
+       "share": 0.079
       },
       {
        "code": 547027,
@@ -3577,15 +3573,23 @@
      "holders": [
       {
        "code": 441264,
-       "share": 0.75
+       "share": 0.0
       },
       {
        "code": 437505,
-       "share": 0.207
+       "share": 0.73
       },
       {
        "code": 604211,
-       "share": 0.043
+       "share": 0.148
+      },
+      {
+       "code": 536661,
+       "share": 0.031
+      },
+      {
+       "code": 549912,
+       "share": 0.031
       }
      ]
     }
