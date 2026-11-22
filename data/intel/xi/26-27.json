@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 11,
-    "exportedAt": "2026-11-21T20:14:18.582Z",
+    "exportedAt": "2026-11-22T01:32:21.432Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-21T20:14:18.582Z",
+  "fetchedAt": "2026-11-22T01:32:21.432Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "MCI": {
@@ -77,7 +77,7 @@
       "absent": [
         {
           "code": 465351,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 437730,
@@ -143,11 +143,11 @@
       "lineup": "confirmed",
       "absent": [
         {
-          "code": 86873,
-          "status": "OUT"
+          "code": 209289,
+          "status": "QUES"
         },
         {
-          "code": 209289,
+          "code": 86873,
           "status": "OUT"
         }
       ]
@@ -210,14 +210,18 @@
       "absent": [
         {
           "code": 109646,
-          "status": "OUT"
-        },
-        {
-          "code": 510281,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 465920,
+          "status": "QUES"
+        },
+        {
+          "code": 432422,
+          "status": "QUES"
+        },
+        {
+          "code": 510281,
           "status": "OUT"
         },
         {
@@ -230,10 +234,6 @@
         },
         {
           "code": 511499,
-          "status": "OUT"
-        },
-        {
-          "code": 432422,
           "status": "OUT"
         }
       ]
@@ -297,7 +297,7 @@
       "absent": [
         {
           "code": 455084,
-          "status": "OUT"
+          "status": "QUES"
         }
       ]
     },
@@ -360,7 +360,15 @@
       "absent": [
         {
           "code": 210156,
-          "status": "OUT"
+          "status": "QUES"
+        },
+        {
+          "code": 241293,
+          "status": "QUES"
+        },
+        {
+          "code": 661888,
+          "status": "QUES"
         },
         {
           "code": 539142,
@@ -371,19 +379,11 @@
           "status": "OUT"
         },
         {
-          "code": 241293,
-          "status": "OUT"
-        },
-        {
           "code": 220583,
           "status": "OUT"
         },
         {
           "code": 176412,
-          "status": "OUT"
-        },
-        {
-          "code": 661888,
           "status": "OUT"
         }
       ]
@@ -446,11 +446,15 @@
       "lineup": "confirmed",
       "absent": [
         {
-          "code": 231747,
-          "status": "OUT"
+          "code": 242313,
+          "status": "QUES"
         },
         {
-          "code": 242313,
+          "code": 223723,
+          "status": "QUES"
+        },
+        {
+          "code": 231747,
           "status": "OUT"
         },
         {
@@ -459,10 +463,6 @@
         },
         {
           "code": 232185,
-          "status": "OUT"
-        },
-        {
-          "code": 223723,
           "status": "OUT"
         }
       ]
@@ -530,18 +530,18 @@
         },
         {
           "code": 463936,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 551210,
-          "status": "OUT"
-        },
-        {
-          "code": 225796,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 475168,
+          "status": "QUES"
+        },
+        {
+          "code": 225796,
           "status": "OUT"
         },
         {
@@ -665,11 +665,11 @@
       "lineup": "confirmed",
       "absent": [
         {
-          "code": 199796,
-          "status": "OUT"
+          "code": 184667,
+          "status": "QUES"
         },
         {
-          "code": 184667,
+          "code": 199796,
           "status": "OUT"
         },
         {
@@ -886,15 +886,15 @@
       "lineup": "confirmed",
       "absent": [
         {
-          "code": 250199,
-          "status": "OUT"
-        },
-        {
           "code": 209046,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 500151,
+          "status": "QUES"
+        },
+        {
+          "code": 250199,
           "status": "OUT"
         }
       ]
@@ -956,6 +956,10 @@
       ],
       "lineup": "confirmed",
       "absent": [
+        {
+          "code": 487838,
+          "status": "QUES"
+        },
         {
           "code": 180974,
           "status": "OUT"
@@ -1025,11 +1029,7 @@
       "absent": [
         {
           "code": 154561,
-          "status": "OUT"
-        },
-        {
-          "code": 616077,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 223340,
