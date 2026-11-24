@@ -247,6 +247,7 @@
           "urlName": "gianluigi-donnarumma",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_City.png",
           "scorerId": "070hs",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -255,6 +256,10 @@
           "posShortNames": "G",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 9, 2:56 PM: Donnarumma had two saves and allowed...",
               "typeId": "8"
@@ -312,6 +317,7 @@
           "urlName": "lukas-hornicek",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Newcastle_United.png",
           "scorerId": "0788g",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -320,6 +326,10 @@
           "posShortNames": "G",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 21, 9:15 PM: Hornicek had two saves and allowed two...",
               "typeId": "9"
@@ -370,6 +380,7 @@
           "urlName": "senne-lammens",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "070hl",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -379,8 +390,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
               "tooltip": "Nov 23, 6:36 AM: Lammens made seven saves and allowed...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -428,6 +443,7 @@
           "urlName": "zion-suzuki",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Aston_Villa.png",
           "scorerId": "078wl",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -436,6 +452,10 @@
           "posShortNames": "G",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 22, 5:51 PM: Suzuki had one save and allowed zero...",
               "typeId": "9"
@@ -486,6 +506,7 @@
           "urlName": "maxim-de-cuyper",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
           "scorerId": "06y9m",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -494,6 +515,10 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 23, 4:00 PM: De Cuyper recorded six crosses (two...",
               "typeId": "14"

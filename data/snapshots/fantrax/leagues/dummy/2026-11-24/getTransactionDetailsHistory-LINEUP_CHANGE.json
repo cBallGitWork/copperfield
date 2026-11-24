@@ -254,6 +254,7 @@
           "urlName": "dean-henderson",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Crystal_Palace.png",
           "scorerId": "03yww",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -262,6 +263,10 @@
           "posShortNames": "G",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 22, 3:31 AM: Henderson recorded four saves and...",
               "typeId": "9"
@@ -317,6 +322,7 @@
           "urlName": "merlin-rohl",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Everton.png",
           "scorerId": "070hi",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -326,8 +332,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 7, 11:52 AM: Rohl registered four crosses (zero...",
-              "typeId": "8"
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 24, 3:39 AM: Rohl generated one cross (zero...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -381,6 +391,7 @@
           "urlName": "anthony-elanga",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Newcastle_United.png",
           "scorerId": "05ogb",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -389,6 +400,10 @@
           "posShortNames": "F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 3, 4:50 AM: Elanga generated two shots (zero on...",
               "typeId": "8"

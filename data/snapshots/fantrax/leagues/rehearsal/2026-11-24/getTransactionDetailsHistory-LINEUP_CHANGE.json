@@ -254,6 +254,7 @@
           "urlName": "lewie-coyle",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Hull_City_3.png",
           "scorerId": "076dg",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -262,6 +263,10 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 1, 5:20 AM: Coyle generated one shot (zero on goal)...",
               "typeId": "8"
@@ -320,6 +325,7 @@
           "urlName": "vitalii-mykolenko",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Everton.png",
           "scorerId": "05ybq",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -329,8 +335,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 7, 11:45 AM: Mykolenko assisted once to go with one...",
-              "typeId": "8"
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 24, 3:38 AM: Mykolenko had three tackles (one won),...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -376,6 +386,7 @@
           "urlName": "vitalii-mykolenko",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Everton.png",
           "scorerId": "05ybq",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -385,8 +396,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 7, 11:45 AM: Mykolenko assisted once to go with one...",
-              "typeId": "8"
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 24, 3:38 AM: Mykolenko had three tackles (one won),...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -443,6 +458,7 @@
           "urlName": "lewie-coyle",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Hull_City_3.png",
           "scorerId": "076dg",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -451,6 +467,10 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 1, 5:20 AM: Coyle generated one shot (zero on goal)...",
               "typeId": "8"

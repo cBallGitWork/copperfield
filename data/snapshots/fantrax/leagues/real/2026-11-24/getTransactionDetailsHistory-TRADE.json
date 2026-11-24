@@ -247,6 +247,7 @@
           "urlName": "declan-rice",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Arsenal.png",
           "scorerId": "04agz",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -255,6 +256,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 2, 8:10 AM: Rice assisted once to go with three...",
               "typeId": "8"
@@ -312,6 +317,7 @@
           "urlName": "bruno-miguel-borges-fernandes",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05gcr",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -321,8 +327,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
               "tooltip": "Nov 23, 6:39 AM: Fernandes registered four shots (three...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -370,6 +380,7 @@
           "urlName": "mohammed-kudus",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Tottenham_Hotspur.png",
           "scorerId": "06fv8",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -379,6 +390,10 @@
           "posShortNames": "M,F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 23, 2:23 PM: Kudus registered two shots (zero on...",
               "typeId": "14"
@@ -438,6 +453,7 @@
           "urlName": "thierno-barry",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Everton.png",
           "scorerId": "06ybp",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -447,8 +463,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 7, 11:43 AM: Barry scored two goals and assisted...",
-              "typeId": "8"
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 24, 3:38 AM: Barry recorded one shot (one on goal)...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -497,6 +517,7 @@
           "urlName": "jeremy-doku",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_City.png",
           "scorerId": "06fup",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -506,6 +527,10 @@
           "posShortNames": "M,F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 21, 10:32 AM: Doku recorded one shot (one on goal),...",
               "typeId": "9"
@@ -564,6 +589,7 @@
           "urlName": "eberechi-eze",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Arsenal.png",
           "scorerId": "05nt6",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -572,6 +598,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
             {
               "tooltip": "Nov 21, 9:07 PM: Eze scored one goal to go with two...",
               "typeId": "9"
