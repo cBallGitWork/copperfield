@@ -255,12 +255,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Thigh - Out for next game - Expected return Nov 29",
+              "tooltip": "Thigh - Out for next game - Expected return Dec 2",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 19, 8:36 AM: Brobbey (muscular) will miss Saturday's...",
-              "typeId": "9"
+              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,

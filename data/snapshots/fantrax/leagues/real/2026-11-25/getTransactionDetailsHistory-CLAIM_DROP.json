@@ -442,7 +442,7 @@
             },
             {
               "tooltip": "Nov 24, 3:39 AM: Garner had three crosses (one accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -676,7 +676,7 @@
             },
             {
               "tooltip": "Nov 24, 3:38 AM: Armstrong registered one shot (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -794,8 +794,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 19, 8:39 AM: Xhaka (calf) is expected to remain...",
-              "typeId": "9"
+              "tooltip": "Nov 25, 9:07 AM: Xhaka (calf) will miss Thursday's...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -1200,7 +1200,7 @@
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1383,7 +1383,7 @@
             },
             {
               "tooltip": "Nov 24, 3:39 AM: George recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1625,7 +1625,7 @@
             },
             {
               "tooltip": "Nov 24, 3:39 AM: O'Brien had two tackles (one won), six...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1678,7 +1678,7 @@
             },
             {
               "tooltip": "Nov 24, 3:38 AM: Armstrong registered one shot (one on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1904,7 +1904,7 @@
             },
             {
               "tooltip": "Nov 24, 3:39 AM: George recorded one cross (zero...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2139,7 +2139,7 @@
             },
             {
               "tooltip": "Nov 24, 3:39 AM: Garner had three crosses (one accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2327,7 +2327,7 @@
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Ouattara recorded two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2564,7 +2564,7 @@
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Anthony assisted twice to go with one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2618,7 +2618,7 @@
             },
             {
               "tooltip": "Nov 24, 3:39 AM: O'Brien had two tackles (one won), six...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2977,8 +2977,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 21, 9:04 PM: Noni Madueke scored one goal to go with...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -3211,7 +3211,7 @@
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Ouattara recorded two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4472,8 +4472,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 21, 9:04 PM: Noni Madueke scored one goal to go with...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -4824,7 +4824,7 @@
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4991,12 +4991,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Thigh - Out for next game - Expected return Nov 29",
+              "tooltip": "Thigh - Out for next game - Expected return Dec 2",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 19, 8:36 AM: Brobbey (muscular) will miss Saturday's...",
-              "typeId": "9"
+              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -5772,7 +5772,7 @@
             },
             {
               "tooltip": "Nov 24, 3:40 AM: Grealish recorded one interception in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5824,8 +5824,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 22, 5:51 PM: Suzuki had one save and allowed zero...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -5887,12 +5887,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Thigh - Out for next game - Expected return Nov 29",
+              "tooltip": "Thigh - Out for next game - Expected return Dec 2",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 19, 8:36 AM: Brobbey (muscular) will miss Saturday's...",
-              "typeId": "9"
+              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -6652,8 +6652,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 21, 9:04 PM: Noni Madueke scored one goal to go with...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -7596,7 +7596,7 @@
             },
             {
               "tooltip": "Nov 24, 6:59 AM: Tonali has returned to team training...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8367,7 +8367,7 @@
             },
             {
               "tooltip": "Nov 24, 6:59 AM: Tonali has returned to team training...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8483,7 +8483,7 @@
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Ouattara recorded two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8538,7 +8538,7 @@
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Ouattara recorded two shots (zero on...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -8601,7 +8601,7 @@
           "icons": [
             {
               "tooltip": "Nov 24, 3:42 AM: Diouf had three crosses (one accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9302,8 +9302,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 21, 9:04 PM: Noni Madueke scored one goal to go with...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -9476,7 +9476,7 @@
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9585,7 +9585,7 @@
           "icons": [
             {
               "tooltip": "Nov 24, 3:42 AM: Diouf had three crosses (one accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9772,8 +9772,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 22, 5:51 PM: Suzuki had one save and allowed zero...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -9824,8 +9824,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 22, 5:51 PM: Suzuki had one save and allowed zero...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10182,8 +10182,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 9, 5:51 AM: Boscagli generated 12 crosses (four...",
-              "typeId": "8"
+              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 26",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is uncertain for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10249,7 +10253,7 @@
             },
             {
               "tooltip": "Nov 24, 10:05 AM: Shaw (undisclosed) has been included in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10615,7 +10619,7 @@
             },
             {
               "tooltip": "Nov 24, 3:39 AM: Garner had three crosses (one accurate)...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11330,7 +11334,7 @@
             },
             {
               "tooltip": "Nov 24, 6:40 AM: Rashford (hip) was absent from...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -11497,8 +11501,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 21, 9:04 PM: Noni Madueke scored one goal to go with...",
-              "typeId": "9"
+              "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -12791,7 +12795,7 @@
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Anthony assisted twice to go with one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
