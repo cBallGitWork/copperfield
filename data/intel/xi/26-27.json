@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 12,
-    "exportedAt": "2026-11-24T18:15:01.347Z",
+    "exportedAt": "2026-11-25T17:35:53.630Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-24T18:15:01.347Z",
+  "fetchedAt": "2026-11-25T17:35:53.630Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "NFO": {
@@ -80,11 +80,11 @@
           "status": "QUES"
         },
         {
-          "code": 500151,
-          "status": "QUES"
+          "code": 250199,
+          "status": "OUT"
         },
         {
-          "code": 250199,
+          "code": 500151,
           "status": "OUT"
         }
       ]
@@ -502,7 +502,7 @@
           "prob": 0.9
         },
         {
-          "code": 653481,
+          "code": 638987,
           "prob": 0.9
         },
         {
@@ -522,7 +522,7 @@
       "absent": [
         {
           "code": 199796,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 449871,
@@ -565,11 +565,11 @@
           "prob": 0.9
         },
         {
-          "code": 609873,
+          "code": 232928,
           "prob": 0.9
         },
         {
-          "code": 232928,
+          "code": 609873,
           "prob": 0.9
         },
         {
@@ -616,11 +616,11 @@
           "prob": 0.9
         },
         {
-          "code": 97032,
+          "code": 606702,
           "prob": 0.9
         },
         {
-          "code": 606702,
+          "code": 97032,
           "prob": 0.9
         },
         {
@@ -695,11 +695,11 @@
           "prob": 0.9
         },
         {
-          "code": 167512,
+          "code": 200834,
           "prob": 0.9
         },
         {
-          "code": 200834,
+          "code": 167512,
           "prob": 0.9
         },
         {
@@ -707,11 +707,11 @@
           "prob": 0.9
         },
         {
-          "code": 696104,
+          "code": 577669,
           "prob": 0.9
         },
         {
-          "code": 577669,
+          "code": 696104,
           "prob": 0.9
         },
         {
@@ -928,11 +928,11 @@
           "prob": 0.9
         },
         {
-          "code": 463981,
+          "code": 483067,
           "prob": 0.9
         },
         {
-          "code": 483067,
+          "code": 463981,
           "prob": 0.9
         },
         {
@@ -1177,11 +1177,11 @@
           "prob": 0.9
         },
         {
-          "code": 592984,
+          "code": 60307,
           "prob": 0.9
         },
         {
-          "code": 60307,
+          "code": 592984,
           "prob": 0.9
         },
         {
@@ -1204,6 +1204,10 @@
       "lineup": "predicted",
       "absent": [
         {
+          "code": 204120,
+          "status": "QUES"
+        },
+        {
           "code": 471551,
           "status": "QUES"
         },
@@ -1216,6 +1220,10 @@
           "status": "QUES"
         },
         {
+          "code": 608181,
+          "status": "QUES"
+        },
+        {
           "code": 451490,
           "status": "OUT"
         },
@@ -1225,10 +1233,6 @@
         },
         {
           "code": 451340,
-          "status": "OUT"
-        },
-        {
-          "code": 608181,
           "status": "OUT"
         },
         {
@@ -1323,7 +1327,7 @@
       },
       "starters": [
         {
-          "code": 154561,
+          "code": 109745,
           "prob": 0.9
         },
         {
@@ -1371,7 +1375,7 @@
       "absent": [
         {
           "code": 154561,
-          "status": "OUT"
+          "status": "QUES"
         },
         {
           "code": 223340,
@@ -1410,7 +1414,7 @@
           "prob": 0.9
         },
         {
-          "code": 472769,
+          "code": 477424,
           "prob": 0.9
         },
         {
@@ -1426,7 +1430,7 @@
           "prob": 0.9
         },
         {
-          "code": 448047,
+          "code": 209244,
           "prob": 0.9
         },
         {
@@ -1440,10 +1444,6 @@
       ],
       "lineup": "predicted",
       "absent": [
-        {
-          "code": 465351,
-          "status": "QUES"
-        },
         {
           "code": 437730,
           "status": "OUT"
