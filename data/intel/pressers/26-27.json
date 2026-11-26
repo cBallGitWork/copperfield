@@ -1,12 +1,12 @@
 {
   "manifest": {
     "season": "26-27",
-    "gameweek": 11,
-    "exportedAt": "2026-11-20T21:46:38.791Z",
-    "rows": 645,
+    "gameweek": 12,
+    "exportedAt": "2026-11-26T16:01:19.450Z",
+    "rows": 666,
     "sources": [
       {
-        "path": "2026-11-20/fpl-gameweek-11-team-news-fridays-live-injury-updates-4.html",
+        "path": "2026-11-26/fpl-gameweek-12-team-news-thursdays-live-injury-updates-2.html",
         "mtime": null
       }
     ]
@@ -143,7 +143,11 @@
     {"club":11,"manager":"David Moyes","at":"2026-11-20T13:30:00.000Z"},
     {"club":88,"manager":"Sergej Jakirovic","at":"2026-11-20T13:00:00.000Z"},
     {"club":54,"manager":null,"at":"2026-11-20T14:00:00.000Z"},
-    {"club":40,"manager":null,"at":"2026-11-20T14:00:00.000Z"}
+    {"club":40,"manager":null,"at":"2026-11-20T14:00:00.000Z"},
+    {"club":8,"manager":"Xabi Alonso","at":"2026-11-26T13:30:00.000Z"},
+    {"club":2,"manager":"Daniel Farke","at":"2026-11-26T13:30:00.000Z"},
+    {"club":94,"manager":"Keith Andrews","at":"2026-11-26T14:00:00.000Z"},
+    {"club":9,"manager":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"}
   ],
   "quotes": [
     {"club":8,"text":"In terms of injuries, and in terms of the squad, we are having the last training session tomorrow, so no one is ruled out for us for Friday. So, I prefer to be cautious and we will wait till tomorrow to take the final decision on every player.","said":"Xabi Alonso","about":"the Chelsea team news","at":"2026-09-17T12:30:00.000Z"},
@@ -379,7 +383,16 @@
     {"club":94,"text":"Fábio will have every chance of being involved on Monday, which is great news.","said":"Keith Andrews","at":"2026-11-20T13:30:00.000Z"},
     {"club":11,"text":"He’s back in training and back in around the team. Yes [he’s available for the match].","said":"David Moyes","about":"Jack Grealish","at":"2026-11-20T13:30:00.000Z"},
     {"club":11,"text":"Yeah, I believe [we have a fully fit squad]. We’ve not had anyone return back from international duty with any problems. We’ve got another few days to go before we get to game day so hopefully we won’t pick up any.","said":"David Moyes","at":"2026-11-20T13:30:00.000Z"},
-    {"club":88,"text":"Yes, they are completely fine. They made the sessions. We had 12 players in the building [with others away on international duty], but okay, we had two good sessions. Now, from today, we are finally all together, and everyone got back healthy, which is great news. Now it’s about fatigue, it’s about condition, and then we will see tomorrow. We will decide who will play against Brighton.","said":"Sergej Jakirovic","at":"2026-11-20T13:00:00.000Z"}
+    {"club":88,"text":"Yes, they are completely fine. They made the sessions. We had 12 players in the building [with others away on international duty], but okay, we had two good sessions. Now, from today, we are finally all together, and everyone got back healthy, which is great news. Now it’s about fatigue, it’s about condition, and then we will see tomorrow. We will decide who will play against Brighton.","said":"Sergej Jakirovic","at":"2026-11-20T13:00:00.000Z"},
+    {"club":8,"text":"It’s one less week than the last game, so we are closer to recovering, but not for this game.","said":"Xabi Alonso","about":"Maxence Lacroix","at":"2026-11-26T13:30:00.000Z"},
+    {"club":8,"text":"Yes, [he has trained this week]. He’s going to okay for tomorrow.","said":"Xabi Alonso","about":"Moises Caicedo","at":"2026-11-26T13:30:00.000Z"},
+    {"club":8,"text":"Yeah, he did really well. I think that the first half we were able to exploit his qualities. He’s so powerful, he creates problems to the defenders when he has so much space. He scored a very good strike, so it was great for him to have that feeling on his first game, and we need to keep going.","said":"Xabi Alonso","about":"Emmanuel Emegha","at":"2026-11-26T13:30:00.000Z"},
+    {"club":2,"text":"As it stands, everyone’s available [and] came through the last gameday and also through the week. No injuries to report.","said":"Daniel Farke","at":"2026-11-26T13:30:00.000Z"},
+    {"club":94,"text":"Yeah, that would certainly be the plan. We have a few games before then. They played 45 minutes the other night in the B-team game. They both played well and came through the game well. They’re building the fitness level that’s needed to come into the first-team space, but they’re training with us pretty consistently. They’ve been in and out to be ready for the B-team game. They’ll continue that over the next week or two and then hopefully they can gatecrash the first-team squad.","said":"Keith Andrews","about":"Antoni Milambo and Josh Dasilva, via the Brentford website","at":"2026-11-26T14:00:00.000Z"},
+    {"club":9,"text":"T’s got a significant injury in his ankle area. It’s a bit complicated, more complicated for me to explain to you guys. We don’t know the significance of it yet but he won’t be available for the weekend. I’d rather give you the details when I know them fully.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
+    {"club":9,"text":"With Haji, he’s working towards being fit, so he’s going to be a few weeks away from being available for us. We’re hoping Caleb can be involved in this game; he got his injury on international duty, but we’ll have to see.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
+    {"club":9,"text":"Ephron’s trained today and hopefully will be in the squad. Wolfie has started training with us – in, out, in, out – but on the pitch with us, trained part of the session today. So, that will be probably a progression of a few weeks maybe to get properly up to match fitness where his injury has broken his pre-season. Josh Eccles, unfortunately, has had to have a small operation on his ankle, so he’ll be out for a period of time. Aurele is, hopefully, training with us, maybe partial, but progressing next week.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
+    {"club":9,"text":"He’s in a good level of fitness at this moment. We have to try and protect him to keep that level to be able to [continue his form]. A number 10 is not a number 10 of 20 years ago. It’s demanding, all the things we need from him, and he’s doing them.","said":"Frank Lampard","about":"Jack Rudoni","at":"2026-11-26T13:30:00.000Z"}
   ],
   "rows": [
     {"code":486672,"club":8,"tag":"injury_scare","condition":"calf","confidence":0.65,"said":"2026-09-17T12:30:00.000Z","manager":"Xabi Alonso"},
@@ -1026,6 +1039,27 @@
     {"code":608227,"club":88,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-20T13:00:00.000Z","manager":"Sergej Jakirovic"},
     {"code":76357,"club":54,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-11-20T14:00:00.000Z","manager":""},
     {"code":209289,"club":54,"tag":"ruled_out","condition":"hip","confidence":0.65,"said":"2026-11-20T14:00:00.000Z","manager":""},
-    {"code":86873,"club":54,"tag":"ruled_out","condition":"hip","confidence":0.65,"said":"2026-11-20T14:00:00.000Z","manager":""}
+    {"code":86873,"club":54,"tag":"ruled_out","condition":"hip","confidence":0.65,"said":"2026-11-20T14:00:00.000Z","manager":""},
+    {"code":475168,"club":8,"tag":"ruled_out","condition":"quad","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
+    {"code":551210,"club":8,"tag":"ruled_out","condition":"back","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
+    {"code":437499,"club":8,"tag":"ruled_out","condition":"hamstring","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
+    {"code":225796,"club":8,"tag":"ruled_out","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
+    {"code":463936,"club":8,"tag":"injury_scare","condition":"ankle","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
+    {"code":486672,"club":8,"tag":"available","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
+    {"code":565297,"club":2,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":472713,"club":94,"tag":"still_out","condition":"hamstring","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
+    {"code":432830,"club":94,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
+    {"code":593174,"club":94,"tag":"still_out","condition":"metatarsal","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
+    {"code":194010,"club":94,"tag":"still_out","condition":"hip and quad","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
+    {"code":543295,"club":94,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
+    {"code":183656,"club":94,"tag":"available","condition":"hamstring","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
+    {"code":502500,"club":94,"tag":"suspended","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
+    {"code":176412,"club":9,"tag":"still_out","condition":"quad","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
+    {"code":661888,"club":9,"tag":"injury_scare","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
+    {"code":439668,"club":9,"tag":"still_out","condition":"ankle","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
+    {"code":539142,"club":9,"tag":"still_out","condition":"calf","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
+    {"code":220583,"club":9,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
+    {"code":241293,"club":9,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
+    {"code":210156,"club":9,"tag":"ruled_out","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"}
   ]
 }

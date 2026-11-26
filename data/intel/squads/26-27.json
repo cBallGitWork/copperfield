@@ -2,12 +2,12 @@
  "manifest": {
   "season": "26-27",
   "gameweek": null,
-  "exportedAt": "2026-11-24T14:03:08.326542+00:00",
-  "rows": 671,
+  "exportedAt": "2026-11-26T16:00:17.842465+00:00",
+  "rows": 673,
   "sources": [
    {
     "path": "data/derived/team_squad/season=26-27/team_squad.parquet",
-    "mtime": "2026-11-24T08:15:46.640649+00:00"
+    "mtime": "2026-11-25T08:44:09.126937+00:00"
    }
   ],
   "fpl": "https://fantasy.premierleague.com/api/bootstrap-static/",
@@ -37,8 +37,8 @@
    "canCover": [],
    "depthTier": 1,
    "squadNumber": 1,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 184029,
@@ -696,10 +696,10 @@
     "RM",
     "RWB"
    ],
-   "depthTier": 0,
+   "depthTier": 1,
    "squadNumber": 29,
-   "status": "injured",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 215711,
@@ -717,7 +717,7 @@
    "depthTier": 0,
    "squadNumber": 31,
    "status": "left_club",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 226944,
@@ -764,7 +764,7 @@
     "RM",
     "RWB"
    ],
-   "depthTier": 1,
+   "depthTier": 2,
    "squadNumber": null,
    "status": "available",
    "expectedReturnGw": null
@@ -1289,10 +1289,10 @@
     "RM",
     "RWB"
    ],
-   "depthTier": 2,
+   "depthTier": 0,
    "squadNumber": null,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "suspended",
+   "expectedReturnGw": 13
   },
   {
    "code": 454490,
@@ -1358,7 +1358,7 @@
     "RM",
     "RWB"
    ],
-   "depthTier": 3,
+   "depthTier": 2,
    "squadNumber": 20,
    "status": "available",
    "expectedReturnGw": null
@@ -1394,7 +1394,7 @@
    "depthTier": 0,
    "squadNumber": 28,
    "status": "injured",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 489639,
@@ -1495,7 +1495,7 @@
     "LW",
     "RW"
    ],
-   "depthTier": 3,
+   "depthTier": 2,
    "squadNumber": 41,
    "status": "available",
    "expectedReturnGw": null
@@ -1678,9 +1678,9 @@
     "LW",
     "RW"
    ],
-   "depthTier": 2,
+   "depthTier": 0,
    "squadNumber": null,
-   "status": "available",
+   "status": "injured",
    "expectedReturnGw": null
   },
   {
@@ -2234,7 +2234,7 @@
    "depthTier": 0,
    "squadNumber": 4,
    "status": "injured",
-   "expectedReturnGw": 999
+   "expectedReturnGw": 12
   },
   {
    "code": 75115,
@@ -2381,8 +2381,8 @@
    ],
    "depthTier": 2,
    "squadNumber": null,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 249231,
@@ -2768,10 +2768,10 @@
    "line": "GK",
    "secondaryPositions": [],
    "canCover": [],
-   "depthTier": 0,
+   "depthTier": 1,
    "squadNumber": 26,
-   "status": "injured",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 180736,
@@ -2788,7 +2788,7 @@
    "depthTier": 0,
    "squadNumber": 14,
    "status": "left_club",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 215059,
@@ -3018,8 +3018,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 25,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 491007,
@@ -3078,7 +3078,7 @@
    "line": "GK",
    "secondaryPositions": [],
    "canCover": [],
-   "depthTier": 2,
+   "depthTier": 4,
    "squadNumber": null,
    "status": "available",
    "expectedReturnGw": null
@@ -3155,7 +3155,7 @@
    "line": "GK",
    "secondaryPositions": [],
    "canCover": [],
-   "depthTier": 1,
+   "depthTier": 2,
    "squadNumber": 39,
    "status": "available",
    "expectedReturnGw": null
@@ -3178,7 +3178,7 @@
    "depthTier": 0,
    "squadNumber": 4,
    "status": "injured",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 567119,
@@ -3428,7 +3428,7 @@
    "depthTier": 0,
    "squadNumber": 11,
    "status": "injured",
-   "expectedReturnGw": 12
+   "expectedReturnGw": null
   },
   {
    "code": 196100,
@@ -3480,8 +3480,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 9,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 218997,
@@ -3585,7 +3585,7 @@
    "depthTier": 2,
    "squadNumber": 10,
    "status": "doubtful",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 242893,
@@ -3621,8 +3621,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 38,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 436761,
@@ -3689,8 +3689,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 4,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 465390,
@@ -3941,7 +3941,7 @@
    "depthTier": 1,
    "squadNumber": null,
    "status": "doubtful",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 684268,
@@ -4188,8 +4188,8 @@
    ],
    "depthTier": 1,
    "squadNumber": null,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 244723,
@@ -4227,8 +4227,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 9,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 427623,
@@ -4260,7 +4260,7 @@
     "LW",
     "RW"
    ],
-   "depthTier": 3,
+   "depthTier": 2,
    "squadNumber": 7,
    "status": "available",
    "expectedReturnGw": null
@@ -4352,10 +4352,10 @@
     "LW",
     "RW"
    ],
-   "depthTier": 2,
+   "depthTier": 0,
    "squadNumber": 21,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "suspended",
+   "expectedReturnGw": 13
   },
   {
    "code": 489706,
@@ -4585,10 +4585,10 @@
     "LB",
     "RB"
    ],
-   "depthTier": 1,
+   "depthTier": 0,
    "squadNumber": 6,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "suspended",
+   "expectedReturnGw": 15
   },
   {
    "code": 106611,
@@ -4633,10 +4633,10 @@
     "LM",
     "ST"
    ],
-   "depthTier": 0,
+   "depthTier": 2,
    "squadNumber": 10,
-   "status": "injured",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 128295,
@@ -4811,7 +4811,7 @@
     "LB",
     "RB"
    ],
-   "depthTier": 2,
+   "depthTier": 1,
    "squadNumber": 32,
    "status": "available",
    "expectedReturnGw": null
@@ -4899,7 +4899,7 @@
     "LB",
     "RB"
    ],
-   "depthTier": 3,
+   "depthTier": 2,
    "squadNumber": 15,
    "status": "available",
    "expectedReturnGw": null
@@ -5426,6 +5426,19 @@
    "expectedReturnGw": null
   },
   {
+   "code": 605845,
+   "clubCode": "FUL",
+   "position": null,
+   "positionSource": "fpl_element_type",
+   "line": null,
+   "secondaryPositions": [],
+   "canCover": [],
+   "depthTier": 2,
+   "squadNumber": null,
+   "status": "available",
+   "expectedReturnGw": null
+  },
+  {
    "code": 616069,
    "clubCode": "FUL",
    "position": null,
@@ -5470,10 +5483,10 @@
     "CAM",
     "DM"
    ],
-   "depthTier": 0,
+   "depthTier": 2,
    "squadNumber": 25,
-   "status": "suspended",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 105666,
@@ -5634,7 +5647,7 @@
     "RW",
     "RWB"
    ],
-   "depthTier": 4,
+   "depthTier": 2,
    "squadNumber": 10,
    "status": "available",
    "expectedReturnGw": null
@@ -5804,10 +5817,10 @@
     "RW",
     "RWB"
    ],
-   "depthTier": 2,
+   "depthTier": 0,
    "squadNumber": 30,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "injured",
+   "expectedReturnGw": 15
   },
   {
    "code": 465525,
@@ -5824,7 +5837,7 @@
    "depthTier": 0,
    "squadNumber": 36,
    "status": "injured",
-   "expectedReturnGw": 24
+   "expectedReturnGw": null
   },
   {
    "code": 469266,
@@ -5884,10 +5897,10 @@
     "CAM",
     "DM"
    ],
-   "depthTier": 2,
+   "depthTier": 0,
    "squadNumber": 47,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "injured",
+   "expectedReturnGw": 12
   },
   {
    "code": 490161,
@@ -6452,7 +6465,7 @@
    "depthTier": 0,
    "squadNumber": 14,
    "status": "injured",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 232457,
@@ -6585,8 +6598,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 3,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 461587,
@@ -7438,8 +7451,8 @@
    ],
    "depthTier": 2,
    "squadNumber": 30,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 219168,
@@ -7513,8 +7526,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 18,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 424876,
@@ -7559,7 +7572,7 @@
    "depthTier": 3,
    "squadNumber": 38,
    "status": "doubtful",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 444884,
@@ -7793,7 +7806,7 @@
    "depthTier": 0,
    "squadNumber": 43,
    "status": "left_club",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 544877,
@@ -8016,7 +8029,7 @@
    ],
    "depthTier": 2,
    "squadNumber": 6,
-   "status": "doubtful",
+   "status": "available",
    "expectedReturnGw": null
   },
   {
@@ -8216,8 +8229,8 @@
    ],
    "depthTier": 2,
    "squadNumber": 27,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 466052,
@@ -8350,8 +8363,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 45,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 590039,
@@ -8515,8 +8528,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 5,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 106760,
@@ -8530,10 +8543,10 @@
     "LM",
     "LWB"
    ],
-   "depthTier": 0,
+   "depthTier": 2,
    "squadNumber": 23,
-   "status": "injured",
-   "expectedReturnGw": 11
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 141746,
@@ -8587,7 +8600,7 @@
    "depthTier": 0,
    "squadNumber": 10,
    "status": "injured",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 184341,
@@ -8652,10 +8665,10 @@
     "LB",
     "RB"
    ],
-   "depthTier": 0,
+   "depthTier": 2,
    "squadNumber": 6,
-   "status": "suspended",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 230001,
@@ -8669,7 +8682,7 @@
     "RM",
     "RWB"
    ],
-   "depthTier": 2,
+   "depthTier": 1,
    "squadNumber": 12,
    "status": "available",
    "expectedReturnGw": null
@@ -8908,7 +8921,7 @@
    "depthTier": 1,
    "squadNumber": 10,
    "status": "available",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 547676,
@@ -8935,10 +8948,10 @@
     "RM",
     "RWB"
    ],
-   "depthTier": 1,
+   "depthTier": 0,
    "squadNumber": 15,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "suspended",
+   "expectedReturnGw": 13
   },
   {
    "code": 576620,
@@ -8974,7 +8987,7 @@
    "depthTier": 4,
    "squadNumber": 7,
    "status": "available",
-   "expectedReturnGw": 11
+   "expectedReturnGw": null
   },
   {
    "code": 577974,
@@ -9022,10 +9035,10 @@
     "LM",
     "LWB"
    ],
-   "depthTier": 2,
+   "depthTier": 3,
    "squadNumber": 13,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 606745,
@@ -9039,10 +9052,10 @@
     "LB",
     "RB"
    ],
-   "depthTier": 2,
+   "depthTier": 3,
    "squadNumber": 26,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 78916,
@@ -9230,10 +9243,10 @@
     "DM",
     "LW"
    ],
-   "depthTier": 0,
+   "depthTier": 1,
    "squadNumber": 41,
-   "status": "suspended",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 441191,
@@ -9369,7 +9382,7 @@
    ],
    "depthTier": 1,
    "squadNumber": 20,
-   "status": "available",
+   "status": "doubtful",
    "expectedReturnGw": null
   },
   {
@@ -9689,8 +9702,8 @@
    ],
    "depthTier": 1,
    "squadNumber": null,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 204822,
@@ -9780,8 +9793,8 @@
    ],
    "depthTier": 1,
    "squadNumber": 7,
-   "status": "doubtful",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 221389,
@@ -10046,7 +10059,7 @@
    "depthTier": 0,
    "squadNumber": 2,
    "status": "injured",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 503301,
@@ -10219,10 +10232,10 @@
     "LB",
     "RB"
    ],
-   "depthTier": 3,
+   "depthTier": 0,
    "squadNumber": 4,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "intl",
+   "expectedReturnGw": 13
   },
   {
    "code": 167512,
@@ -10238,6 +10251,23 @@
    ],
    "depthTier": 2,
    "squadNumber": 13,
+   "status": "available",
+   "expectedReturnGw": null
+  },
+  {
+   "code": 171422,
+   "clubCode": "SUN",
+   "position": "CM",
+   "positionSource": "transfermarkt_position",
+   "line": "CM",
+   "secondaryPositions": [],
+   "canCover": [
+    "AM",
+    "CAM",
+    "DM"
+   ],
+   "depthTier": 1,
+   "squadNumber": null,
    "status": "available",
    "expectedReturnGw": null
   },
@@ -10272,10 +10302,10 @@
     "LB",
     "RB"
    ],
-   "depthTier": 0,
+   "depthTier": 3,
    "squadNumber": 15,
-   "status": "suspended",
-   "expectedReturnGw": 11
+   "status": "available",
+   "expectedReturnGw": null
   },
   {
    "code": 223827,
@@ -10491,7 +10521,7 @@
    "depthTier": 0,
    "squadNumber": 11,
    "status": "left_club",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 536661,
@@ -10705,7 +10735,7 @@
    "depthTier": 2,
    "squadNumber": 1,
    "status": "available",
-   "expectedReturnGw": 11
+   "expectedReturnGw": null
   },
   {
    "code": 109646,
@@ -11062,7 +11092,7 @@
    "depthTier": 0,
    "squadNumber": 29,
    "status": "left_club",
-   "expectedReturnGw": 11
+   "expectedReturnGw": 12
   },
   {
    "code": 485055,
@@ -11215,8 +11245,8 @@
    ],
    "depthTier": 2,
    "squadNumber": 33,
-   "status": "available",
-   "expectedReturnGw": null
+   "status": "doubtful",
+   "expectedReturnGw": 12
   },
   {
    "code": 511499,
