@@ -1,13 +1,13 @@
 {
   "manifest": {
     "season": "26-27",
-    "gameweek": 11,
-    "exportedAt": "2026-11-24T09:43:07.397Z",
-    "rows": 21,
+    "gameweek": 12,
+    "exportedAt": "2026-11-26T16:01:20.186Z",
+    "rows": 22,
     "sources": [
       {
         "path": "data/intel/projections/26-27.json",
-        "mtime": "2026-11-24T09:38:31.340921+00:00"
+        "mtime": "2026-11-26T16:00:19.874888+00:00"
       }
     ]
   },
@@ -6531,6 +6531,783 @@
           "code": 606930,
           "before": 76,
           "after": 65
+        }
+      ]
+    },
+    {
+      "at": "2026-11-26T16:00:19.874Z",
+      "since": "2026-11-24T14:03:10.521Z",
+      "gameweek": 12,
+      "moves": [
+        {
+          "code": 17761,
+          "before": 90,
+          "after": 0
+        },
+        {
+          "code": 84450,
+          "before": 80,
+          "after": 0
+        },
+        {
+          "code": 209365,
+          "before": 0,
+          "after": 78
+        },
+        {
+          "code": 441264,
+          "before": 78,
+          "after": 0
+        },
+        {
+          "code": 490094,
+          "before": 78,
+          "after": 0
+        },
+        {
+          "code": 550864,
+          "before": 76,
+          "after": 0
+        },
+        {
+          "code": 199796,
+          "before": 84,
+          "after": 15
+        },
+        {
+          "code": 566213,
+          "before": 12,
+          "after": 81
+        },
+        {
+          "code": 209244,
+          "before": 16,
+          "after": 82
+        },
+        {
+          "code": 245719,
+          "before": 1,
+          "after": 67
+        },
+        {
+          "code": 488024,
+          "before": 65,
+          "after": 0
+        },
+        {
+          "code": 437505,
+          "before": 24,
+          "after": 88
+        },
+        {
+          "code": 547719,
+          "before": 22,
+          "after": 84
+        },
+        {
+          "code": 535301,
+          "before": 59,
+          "after": 0
+        },
+        {
+          "code": 106611,
+          "before": 12,
+          "after": 67
+        },
+        {
+          "code": 462424,
+          "before": 6,
+          "after": 61
+        },
+        {
+          "code": 214225,
+          "before": 4,
+          "after": 58
+        },
+        {
+          "code": 493250,
+          "before": 76,
+          "after": 22
+        },
+        {
+          "code": 514356,
+          "before": 4,
+          "after": 58
+        },
+        {
+          "code": 696104,
+          "before": 15,
+          "after": 69
+        },
+        {
+          "code": 214590,
+          "before": 10,
+          "after": 63
+        },
+        {
+          "code": 440089,
+          "before": 35,
+          "after": 87
+        },
+        {
+          "code": 220237,
+          "before": 9,
+          "after": 60
+        },
+        {
+          "code": 578153,
+          "before": 36,
+          "after": 87
+        },
+        {
+          "code": 221466,
+          "before": 2,
+          "after": 52
+        },
+        {
+          "code": 661888,
+          "before": 70,
+          "after": 22
+        },
+        {
+          "code": 433154,
+          "before": 19,
+          "after": 65
+        },
+        {
+          "code": 204968,
+          "before": 12,
+          "after": 57
+        },
+        {
+          "code": 183015,
+          "before": 44,
+          "after": 0
+        },
+        {
+          "code": 167074,
+          "before": 8,
+          "after": 51
+        },
+        {
+          "code": 540324,
+          "before": 30,
+          "after": 73
+        },
+        {
+          "code": 231416,
+          "before": 74,
+          "after": 32
+        },
+        {
+          "code": 531442,
+          "before": 7,
+          "after": 49
+        },
+        {
+          "code": 232413,
+          "before": 13,
+          "after": 54
+        },
+        {
+          "code": 463067,
+          "before": 8,
+          "after": 49
+        },
+        {
+          "code": 475168,
+          "before": 41,
+          "after": 0
+        },
+        {
+          "code": 458249,
+          "before": 8,
+          "after": 47
+        },
+        {
+          "code": 75115,
+          "before": 33,
+          "after": 71
+        },
+        {
+          "code": 212314,
+          "before": 34,
+          "after": 72
+        },
+        {
+          "code": 109745,
+          "before": 0,
+          "after": 37
+        },
+        {
+          "code": 154561,
+          "before": 90,
+          "after": 53
+        },
+        {
+          "code": 532529,
+          "before": 16,
+          "after": 53
+        },
+        {
+          "code": 637238,
+          "before": 3,
+          "after": 40
+        },
+        {
+          "code": 166989,
+          "before": 22,
+          "after": 58
+        },
+        {
+          "code": 449434,
+          "before": 10,
+          "after": 46
+        },
+        {
+          "code": 152551,
+          "before": 50,
+          "after": 15
+        },
+        {
+          "code": 532605,
+          "before": 1,
+          "after": 36
+        },
+        {
+          "code": 158499,
+          "before": 23,
+          "after": 56
+        },
+        {
+          "code": 216055,
+          "before": 58,
+          "after": 25
+        },
+        {
+          "code": 498444,
+          "before": 66,
+          "after": 33
+        },
+        {
+          "code": 244042,
+          "before": 11,
+          "after": 43
+        },
+        {
+          "code": 508395,
+          "before": 69,
+          "after": 37
+        },
+        {
+          "code": 172780,
+          "before": 13,
+          "after": 44
+        },
+        {
+          "code": 448089,
+          "before": 32,
+          "after": 63
+        },
+        {
+          "code": 608227,
+          "before": 24,
+          "after": 55
+        },
+        {
+          "code": 243951,
+          "before": 2,
+          "after": 32
+        },
+        {
+          "code": 466525,
+          "before": 64,
+          "after": 34
+        },
+        {
+          "code": 431639,
+          "before": 17,
+          "after": 46
+        },
+        {
+          "code": 172850,
+          "before": 2,
+          "after": 30
+        },
+        {
+          "code": 596777,
+          "before": 6,
+          "after": 34
+        },
+        {
+          "code": 472769,
+          "before": 30,
+          "after": 57
+        },
+        {
+          "code": 611917,
+          "before": 6,
+          "after": 33
+        },
+        {
+          "code": 435997,
+          "before": 42,
+          "after": 68
+        },
+        {
+          "code": 462635,
+          "before": 26,
+          "after": 0
+        },
+        {
+          "code": 445122,
+          "before": 64,
+          "after": 88
+        },
+        {
+          "code": 503037,
+          "before": 6,
+          "after": 30
+        },
+        {
+          "code": 512462,
+          "before": 52,
+          "after": 76
+        },
+        {
+          "code": 551210,
+          "before": 24,
+          "after": 0
+        },
+        {
+          "code": 114243,
+          "before": 67,
+          "after": 44
+        },
+        {
+          "code": 176297,
+          "before": 23,
+          "after": 0
+        },
+        {
+          "code": 207283,
+          "before": 63,
+          "after": 40
+        },
+        {
+          "code": 533463,
+          "before": 66,
+          "after": 43
+        },
+        {
+          "code": 153133,
+          "before": 80,
+          "after": 58
+        },
+        {
+          "code": 482616,
+          "before": 75,
+          "after": 53
+        },
+        {
+          "code": 510281,
+          "before": 38,
+          "after": 16
+        },
+        {
+          "code": 513086,
+          "before": 9,
+          "after": 31
+        },
+        {
+          "code": 119471,
+          "before": 26,
+          "after": 5
+        },
+        {
+          "code": 171287,
+          "before": 3,
+          "after": 24
+        },
+        {
+          "code": 477424,
+          "before": 75,
+          "after": 54
+        },
+        {
+          "code": 501390,
+          "before": 0,
+          "after": 21
+        },
+        {
+          "code": 154566,
+          "before": 64,
+          "after": 44
+        },
+        {
+          "code": 219249,
+          "before": 0,
+          "after": 20
+        },
+        {
+          "code": 249231,
+          "before": 75,
+          "after": 55
+        },
+        {
+          "code": 441164,
+          "before": 64,
+          "after": 84
+        },
+        {
+          "code": 168144,
+          "before": 38,
+          "after": 57
+        },
+        {
+          "code": 216094,
+          "before": 5,
+          "after": 24
+        },
+        {
+          "code": 230730,
+          "before": 42,
+          "after": 23
+        },
+        {
+          "code": 451490,
+          "before": 19,
+          "after": 0
+        },
+        {
+          "code": 477555,
+          "before": 74,
+          "after": 55
+        },
+        {
+          "code": 485337,
+          "before": 1,
+          "after": 20
+        },
+        {
+          "code": 174594,
+          "before": 31,
+          "after": 13
+        },
+        {
+          "code": 438234,
+          "before": 78,
+          "after": 60
+        },
+        {
+          "code": 439509,
+          "before": 73,
+          "after": 55
+        },
+        {
+          "code": 465642,
+          "before": 69,
+          "after": 87
+        },
+        {
+          "code": 605972,
+          "before": 3,
+          "after": 21
+        },
+        {
+          "code": 101282,
+          "before": 38,
+          "after": 55
+        },
+        {
+          "code": 216646,
+          "before": 42,
+          "after": 25
+        },
+        {
+          "code": 222683,
+          "before": 69,
+          "after": 52
+        },
+        {
+          "code": 226965,
+          "before": 56,
+          "after": 73
+        },
+        {
+          "code": 248056,
+          "before": 73,
+          "after": 56
+        },
+        {
+          "code": 509416,
+          "before": 83,
+          "after": 66
+        },
+        {
+          "code": 517052,
+          "before": 81,
+          "after": 64
+        },
+        {
+          "code": 536661,
+          "before": 50,
+          "after": 33
+        },
+        {
+          "code": 613804,
+          "before": 26,
+          "after": 43
+        },
+        {
+          "code": 193278,
+          "before": 76,
+          "after": 60
+        },
+        {
+          "code": 248857,
+          "before": 72,
+          "after": 88
+        },
+        {
+          "code": 440993,
+          "before": 76,
+          "after": 60
+        },
+        {
+          "code": 543158,
+          "before": 2,
+          "after": 18
+        },
+        {
+          "code": 624773,
+          "before": 43,
+          "after": 27
+        },
+        {
+          "code": 627221,
+          "before": 21,
+          "after": 37
+        },
+        {
+          "code": 50175,
+          "before": 10,
+          "after": 25
+        },
+        {
+          "code": 122798,
+          "before": 79,
+          "after": 64
+        },
+        {
+          "code": 549940,
+          "before": 11,
+          "after": 26
+        },
+        {
+          "code": 554197,
+          "before": 2,
+          "after": 17
+        },
+        {
+          "code": 592031,
+          "before": 12,
+          "after": 27
+        },
+        {
+          "code": 647850,
+          "before": 75,
+          "after": 60
+        },
+        {
+          "code": 106760,
+          "before": 3,
+          "after": 17
+        },
+        {
+          "code": 119090,
+          "before": 51,
+          "after": 65
+        },
+        {
+          "code": 174874,
+          "before": 3,
+          "after": 17
+        },
+        {
+          "code": 176420,
+          "before": 20,
+          "after": 6
+        },
+        {
+          "code": 210462,
+          "before": 6,
+          "after": 20
+        },
+        {
+          "code": 232653,
+          "before": 29,
+          "after": 15
+        },
+        {
+          "code": 441266,
+          "before": 5,
+          "after": 19
+        },
+        {
+          "code": 547037,
+          "before": 0,
+          "after": 14
+        },
+        {
+          "code": 572584,
+          "before": 85,
+          "after": 71
+        },
+        {
+          "code": 636852,
+          "before": 44,
+          "after": 30
+        },
+        {
+          "code": 651426,
+          "before": 48,
+          "after": 62
+        },
+        {
+          "code": 108413,
+          "before": 2,
+          "after": 15
+        },
+        {
+          "code": 232787,
+          "before": 31,
+          "after": 44
+        },
+        {
+          "code": 243526,
+          "before": 79,
+          "after": 66
+        },
+        {
+          "code": 597462,
+          "before": 16,
+          "after": 29
+        },
+        {
+          "code": 607464,
+          "before": 81,
+          "after": 68
+        },
+        {
+          "code": 614071,
+          "before": 72,
+          "after": 59
+        },
+        {
+          "code": 616288,
+          "before": 3,
+          "after": 16
+        },
+        {
+          "code": 91651,
+          "before": 1,
+          "after": 13
+        },
+        {
+          "code": 95658,
+          "before": 76,
+          "after": 88
+        },
+        {
+          "code": 114283,
+          "before": 18,
+          "after": 30
+        },
+        {
+          "code": 167512,
+          "before": 70,
+          "after": 82
+        },
+        {
+          "code": 242313,
+          "before": 33,
+          "after": 21
+        },
+        {
+          "code": 444765,
+          "before": 82,
+          "after": 70
+        },
+        {
+          "code": 480457,
+          "before": 79,
+          "after": 67
+        },
+        {
+          "code": 200089,
+          "before": 60,
+          "after": 49
+        },
+        {
+          "code": 210156,
+          "before": 66,
+          "after": 55
+        },
+        {
+          "code": 214285,
+          "before": 2,
+          "after": 13
+        },
+        {
+          "code": 226182,
+          "before": 78,
+          "after": 67
+        },
+        {
+          "code": 244954,
+          "before": 73,
+          "after": 84
+        },
+        {
+          "code": 247412,
+          "before": 61,
+          "after": 72
+        },
+        {
+          "code": 444180,
+          "before": 34,
+          "after": 45
+        },
+        {
+          "code": 444463,
+          "before": 63,
+          "after": 74
+        },
+        {
+          "code": 490884,
+          "before": 37,
+          "after": 26
+        },
+        {
+          "code": 500040,
+          "before": 3,
+          "after": 14
+        },
+        {
+          "code": 538207,
+          "before": 72,
+          "after": 61
+        },
+        {
+          "code": 543968,
+          "before": 68,
+          "after": 57
+        },
+        {
+          "code": 549912,
+          "before": 34,
+          "after": 45
         }
       ]
     }
