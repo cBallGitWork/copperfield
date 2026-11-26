@@ -252,10 +252,6 @@
             {
               "tooltip": "Expected to play in upcoming/current game",
               "typeId": "32"
-            },
-            {
-              "tooltip": "Nov 22, 12:54 AM: Trafford registered two saves and...",
-              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -674,10 +670,6 @@
             {
               "tooltip": "Expected to play in upcoming/current game",
               "typeId": "32"
-            },
-            {
-              "tooltip": "Nov 22, 12:54 AM: Trafford registered two saves and...",
-              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -730,7 +722,7 @@
             },
             {
               "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -801,7 +793,7 @@
             },
             {
               "tooltip": "Nov 25, 3:48 AM: Raya (shoulder) remains uncertain for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,

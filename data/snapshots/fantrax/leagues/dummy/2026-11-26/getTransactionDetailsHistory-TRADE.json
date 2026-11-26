@@ -392,10 +392,6 @@
             {
               "tooltip": "Expected to play in upcoming/current game",
               "typeId": "32"
-            },
-            {
-              "tooltip": "Nov 23, 6:36 AM: Lammens made seven saves and allowed...",
-              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -458,7 +454,7 @@
             },
             {
               "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -591,7 +587,7 @@
             },
             {
               "tooltip": "Nov 19, 9:02 AM: Ballard (hamstring) remains sidelined...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,

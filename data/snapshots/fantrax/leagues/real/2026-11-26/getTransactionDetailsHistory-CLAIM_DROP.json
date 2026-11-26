@@ -603,8 +603,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Ankle - Late fitness test (Game-time decision) - Expected return Nov 28",
-              "typeId": "1"
+              "tooltip": "Ankle - Out for next game - Expected return Dec 1",
+              "typeId": "30"
             },
             {
               "tooltip": "Nov 21, 5:41 PM: Awoniyi suffered an ankle injury during...",
@@ -728,8 +728,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 9, 1:38 AM: Fofana recorded one shot (zero on goal)...",
-              "typeId": "8"
+              "tooltip": "Nov 26, 9:08 AM: Fofana has apologized following a...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -795,7 +795,7 @@
             },
             {
               "tooltip": "Nov 25, 9:07 AM: Xhaka (calf) will miss Thursday's...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2085,8 +2085,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 21, 6:10 AM: Lacroix (hamstring) has a realistic...",
-              "typeId": "9"
+              "tooltip": "Nov 26, 9:34 AM: Lacroix (hamstring) remains sidelined...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -2978,7 +2978,7 @@
             },
             {
               "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3032,6 +3032,7 @@
           "urlName": "moises-caicedo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Chelsea.png",
           "scorerId": "05rb8",
+          "upcomingEventStatusId": "2",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -3041,12 +3042,16 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
               "tooltip": "Back - Late fitness test (Game-time decision) - Expected return Nov 27",
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 21, 10:29 AM: Caicedo was forced off with a back...",
-              "typeId": "9"
+              "tooltip": "Nov 26, 9:06 AM: Caicedo (back) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -3998,6 +4003,10 @@
             {
               "tooltip": "Expected to play in upcoming/current game",
               "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 8, 8:09 PM: Affengruber had two tackles (one won),...",
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -4469,7 +4478,7 @@
             },
             {
               "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -4992,7 +5001,7 @@
             },
             {
               "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5825,7 +5834,7 @@
             },
             {
               "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5892,7 +5901,7 @@
             },
             {
               "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6657,7 +6666,7 @@
             },
             {
               "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9009,7 +9018,7 @@
           "icons": [
             {
               "tooltip": "Nov 19, 9:25 AM: Kroupi (foot) is ready for increased...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -9123,6 +9132,10 @@
             {
               "tooltip": "Expected to play in upcoming/current game",
               "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 7, 1:39 PM: Ajayi was withdrawn from Saturday's...",
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -9307,7 +9320,7 @@
             },
             {
               "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9777,7 +9790,7 @@
             },
             {
               "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9829,7 +9842,7 @@
             },
             {
               "tooltip": "Nov 24, 8:55 PM: Suzuki made one save and allowed one...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10191,7 +10204,7 @@
             },
             {
               "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10672,7 +10685,7 @@
             },
             {
               "tooltip": "Nov 19, 8:48 AM: Gudmundsson (hamstring) has recovered...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -11145,6 +11158,10 @@
             {
               "tooltip": "Expected to play in upcoming/current game",
               "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 8, 8:09 PM: Affengruber had two tackles (one won),...",
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -11498,7 +11515,7 @@
             },
             {
               "tooltip": "Nov 24, 9:13 PM: Noni Madueke assisted once to go with...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,

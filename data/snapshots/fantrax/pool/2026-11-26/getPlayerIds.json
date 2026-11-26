@@ -1901,6 +1901,12 @@
     "team": "IPS",
     "position": "F"
   },
+  "07869": {
+    "name": "Ogunnaike, Josh",
+    "fantraxId": "07869",
+    "team": "ARS",
+    "position": "D"
+  },
   "0784x": {
     "rotowireId": 29012,
     "name": "Maeda, Daizen",
@@ -2821,6 +2827,12 @@
     "fantraxId": "045c8",
     "team": "ARS",
     "position": "F"
+  },
+  "06ppi": {
+    "name": "Porter, Jack",
+    "fantraxId": "06ppi",
+    "team": "ARS",
+    "position": "G"
   },
   "04rzl": {
     "rotowireId": 26412,
