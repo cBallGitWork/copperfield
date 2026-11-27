@@ -2,8 +2,8 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 12,
-    "exportedAt": "2026-11-27T12:31:39.958Z",
-    "rows": 668,
+    "exportedAt": "2026-11-27T14:01:28.940Z",
+    "rows": 695,
     "sources": [
       {
         "path": "2026-11-27/fpl-gameweek-12-team-news-fridays-live-injury-updates-raya-latest.html",
@@ -149,7 +149,13 @@
     {"club":94,"manager":"Keith Andrews","at":"2026-11-26T14:00:00.000Z"},
     {"club":9,"manager":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
     {"club":1,"manager":null,"at":"2026-11-27T14:00:00.000Z"},
-    {"club":54,"manager":null,"at":"2026-11-27T14:00:00.000Z"}
+    {"club":14,"manager":null,"at":"2026-11-27T14:00:00.000Z"},
+    {"club":43,"manager":"Enzo Maresca","at":"2026-11-27T13:30:00.000Z"},
+    {"club":91,"manager":"Marco Rose","at":"2026-11-27T14:00:00.000Z"},
+    {"club":31,"manager":null,"at":"2026-11-27T14:00:00.000Z"},
+    {"club":54,"manager":null,"at":"2026-11-27T14:00:00.000Z"},
+    {"club":40,"manager":null,"at":"2026-11-27T14:00:00.000Z"},
+    {"club":88,"manager":"Sergej Jakirovic","at":"2026-11-27T13:00:00.000Z"}
   ],
   "quotes": [
     {"club":8,"text":"In terms of injuries, and in terms of the squad, we are having the last training session tomorrow, so no one is ruled out for us for Friday. So, I prefer to be cautious and we will wait till tomorrow to take the final decision on every player.","said":"Xabi Alonso","about":"the Chelsea team news","at":"2026-09-17T12:30:00.000Z"},
@@ -395,7 +401,11 @@
     {"club":9,"text":"T’s got a significant injury in his ankle area. It’s a bit complicated, more complicated for me to explain to you guys. We don’t know the significance of it yet but he won’t be available for the weekend. I’d rather give you the details when I know them fully.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
     {"club":9,"text":"With Haji, he’s working towards being fit, so he’s going to be a few weeks away from being available for us. We’re hoping Caleb can be involved in this game; he got his injury on international duty, but we’ll have to see.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
     {"club":9,"text":"Ephron’s trained today and hopefully will be in the squad. Wolfie has started training with us – in, out, in, out – but on the pitch with us, trained part of the session today. So, that will be probably a progression of a few weeks maybe to get properly up to match fitness where his injury has broken his pre-season. Josh Eccles, unfortunately, has had to have a small operation on his ankle, so he’ll be out for a period of time. Aurele is, hopefully, training with us, maybe partial, but progressing next week.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
-    {"club":9,"text":"He’s in a good level of fitness at this moment. We have to try and protect him to keep that level to be able to [continue his form]. A number 10 is not a number 10 of 20 years ago. It’s demanding, all the things we need from him, and he’s doing them.","said":"Frank Lampard","about":"Jack Rudoni","at":"2026-11-26T13:30:00.000Z"}
+    {"club":9,"text":"He’s in a good level of fitness at this moment. We have to try and protect him to keep that level to be able to [continue his form]. A number 10 is not a number 10 of 20 years ago. It’s demanding, all the things we need from him, and he’s doing them.","said":"Frank Lampard","about":"Jack Rudoni","at":"2026-11-26T13:30:00.000Z"},
+    {"club":43,"text":"No [new injuries]. We have good news: Antoine is quite close. It’s good news for us. He’s already on the pitch, he’s very close, hopefully can be next week. The rest, they are all okay.","said":"Enzo Maresca","at":"2026-11-27T13:30:00.000Z"},
+    {"club":88,"text":"We don’t have new injuries [except for Iroegbunam] but it’s a big blow for us. He had surgery on Tuesday, it went good. The recovery is about three months.","said":"Sergej Jakirovic","about":"Tim Iroegbunam","at":"2026-11-27T13:00:00.000Z"},
+    {"club":88,"text":"The good news for us is that Ansah is in training with us. Of course, he needs time, because he didn’t play for three months, but he looks good, what I saw till now.","said":"Sergej Jakirovic","at":"2026-11-27T13:00:00.000Z"},
+    {"club":88,"text":"In six days, we have three games, so every player is very important, and we have to do also rotation, so every player will get a chance to express himself.","said":"Sergej Jakirovic","at":"2026-11-27T13:00:00.000Z"}
   ],
   "rows": [
     {"code":486672,"club":8,"tag":"injury_scare","condition":"calf","confidence":0.65,"said":"2026-09-17T12:30:00.000Z","manager":"Xabi Alonso"},
@@ -1065,6 +1075,33 @@
     {"code":220583,"club":9,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
     {"code":241293,"club":9,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
     {"code":210156,"club":9,"tag":"ruled_out","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
-    {"code":86873,"club":54,"tag":"ruled_out","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""}
+    {"code":535301,"club":1,"tag":"still_out","condition":"hamstring","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":232112,"club":1,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":485711,"club":1,"tag":"still_out","condition":"calf","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":176297,"club":1,"tag":"available","condition":"hip","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":243298,"club":14,"tag":"ruled_out","condition":"muscle","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":551499,"club":14,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":492777,"club":14,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":647681,"club":14,"tag":"available","condition":"knee","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":510663,"club":14,"tag":"still_out","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":437730,"club":43,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-27T13:30:00.000Z","manager":"Enzo Maresca"},
+    {"code":614574,"club":91,"tag":"injury_scare","condition":"hamstring","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":"Marco Rose"},
+    {"code":436893,"club":91,"tag":"injury_scare","condition":"thigh","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":"Marco Rose"},
+    {"code":494928,"club":91,"tag":"injury_scare","condition":"ankle","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":"Marco Rose"},
+    {"code":232185,"club":31,"tag":"still_out","condition":"groin","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":515621,"club":31,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":223723,"club":31,"tag":"still_out","condition":"calf","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":488024,"club":31,"tag":"suspended","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":108413,"club":31,"tag":"suspended","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":231747,"club":31,"tag":"suspended","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":86873,"club":54,"tag":"ruled_out","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":455084,"club":40,"tag":"available","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""},
+    {"code":462635,"club":88,"tag":"still_out","condition":"quad","confidence":0.65,"said":"2026-11-27T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":169359,"club":88,"tag":"still_out","condition":"ankle","confidence":0.65,"said":"2026-11-27T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":465525,"club":88,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-27T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":445028,"club":88,"tag":"still_out","condition":"groin","confidence":0.65,"said":"2026-11-27T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":501902,"club":88,"tag":"available","condition":"groin","confidence":0.65,"said":"2026-11-27T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":626751,"club":88,"tag":"available","condition":"back","confidence":0.65,"said":"2026-11-27T13:00:00.000Z","manager":"Sergej Jakirovic"},
+    {"code":608227,"club":88,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-27T13:00:00.000Z","manager":"Sergej Jakirovic"}
   ]
 }
