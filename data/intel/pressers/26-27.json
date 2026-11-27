@@ -2,11 +2,11 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 12,
-    "exportedAt": "2026-11-26T16:01:19.450Z",
-    "rows": 666,
+    "exportedAt": "2026-11-27T12:31:39.958Z",
+    "rows": 668,
     "sources": [
       {
-        "path": "2026-11-26/fpl-gameweek-12-team-news-thursdays-live-injury-updates-2.html",
+        "path": "2026-11-27/fpl-gameweek-12-team-news-fridays-live-injury-updates-raya-latest.html",
         "mtime": null
       }
     ]
@@ -147,7 +147,9 @@
     {"club":8,"manager":"Xabi Alonso","at":"2026-11-26T13:30:00.000Z"},
     {"club":2,"manager":"Daniel Farke","at":"2026-11-26T13:30:00.000Z"},
     {"club":94,"manager":"Keith Andrews","at":"2026-11-26T14:00:00.000Z"},
-    {"club":9,"manager":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"}
+    {"club":9,"manager":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
+    {"club":1,"manager":null,"at":"2026-11-27T14:00:00.000Z"},
+    {"club":54,"manager":null,"at":"2026-11-27T14:00:00.000Z"}
   ],
   "quotes": [
     {"club":8,"text":"In terms of injuries, and in terms of the squad, we are having the last training session tomorrow, so no one is ruled out for us for Friday. So, I prefer to be cautious and we will wait till tomorrow to take the final decision on every player.","said":"Xabi Alonso","about":"the Chelsea team news","at":"2026-09-17T12:30:00.000Z"},
@@ -388,6 +390,7 @@
     {"club":8,"text":"Yes, [he has trained this week]. He’s going to okay for tomorrow.","said":"Xabi Alonso","about":"Moises Caicedo","at":"2026-11-26T13:30:00.000Z"},
     {"club":8,"text":"Yeah, he did really well. I think that the first half we were able to exploit his qualities. He’s so powerful, he creates problems to the defenders when he has so much space. He scored a very good strike, so it was great for him to have that feeling on his first game, and we need to keep going.","said":"Xabi Alonso","about":"Emmanuel Emegha","at":"2026-11-26T13:30:00.000Z"},
     {"club":2,"text":"As it stands, everyone’s available [and] came through the last gameday and also through the week. No injuries to report.","said":"Daniel Farke","at":"2026-11-26T13:30:00.000Z"},
+    {"club":2,"text":"Anton is, more or less like since the international break, at least since the second week in the international break, back in full team training. You see him growing. Of course, he was struggling for weeks with his broken toe and also with his broken finger and was suffering a little bit also in training. It’s getting better and better from day to day. It’s good. We need him back to his very best as soon as possible because Anton is a key player for us. But it’s also good that at the moment, we have all the other players available and they are delivering also really good performances. Anton has done a lot, so much for us, during the last season and the beginning of this season, but it’s what he can deliver right now, and also some others at the moment are in the spotlight. Anton has to keep grinding in training and try to win his position back. This how it works and it’s good to have this situation.","said":"Daniel Farke","at":"2026-11-26T13:30:00.000Z"},
     {"club":94,"text":"Yeah, that would certainly be the plan. We have a few games before then. They played 45 minutes the other night in the B-team game. They both played well and came through the game well. They’re building the fitness level that’s needed to come into the first-team space, but they’re training with us pretty consistently. They’ve been in and out to be ready for the B-team game. They’ll continue that over the next week or two and then hopefully they can gatecrash the first-team squad.","said":"Keith Andrews","about":"Antoni Milambo and Josh Dasilva, via the Brentford website","at":"2026-11-26T14:00:00.000Z"},
     {"club":9,"text":"T’s got a significant injury in his ankle area. It’s a bit complicated, more complicated for me to explain to you guys. We don’t know the significance of it yet but he won’t be available for the weekend. I’d rather give you the details when I know them fully.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
     {"club":9,"text":"With Haji, he’s working towards being fit, so he’s going to be a few weeks away from being available for us. We’re hoping Caleb can be involved in this game; he got his injury on international duty, but we’ll have to see.","said":"Frank Lampard","at":"2026-11-26T13:30:00.000Z"},
@@ -1047,6 +1050,7 @@
     {"code":463936,"club":8,"tag":"injury_scare","condition":"ankle","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
     {"code":486672,"club":8,"tag":"available","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Xabi Alonso"},
     {"code":565297,"club":2,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Daniel Farke"},
+    {"code":466525,"club":2,"tag":"injury_scare","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Daniel Farke"},
     {"code":472713,"club":94,"tag":"still_out","condition":"hamstring","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
     {"code":432830,"club":94,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
     {"code":593174,"club":94,"tag":"still_out","condition":"metatarsal","confidence":0.65,"said":"2026-11-26T14:00:00.000Z","manager":"Keith Andrews"},
@@ -1060,6 +1064,7 @@
     {"code":539142,"club":9,"tag":"still_out","condition":"calf","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
     {"code":220583,"club":9,"tag":"still_out","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
     {"code":241293,"club":9,"tag":"injury_scare","condition":"knee","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
-    {"code":210156,"club":9,"tag":"ruled_out","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"}
+    {"code":210156,"club":9,"tag":"ruled_out","confidence":0.65,"said":"2026-11-26T13:30:00.000Z","manager":"Frank Lampard"},
+    {"code":86873,"club":54,"tag":"ruled_out","confidence":0.65,"said":"2026-11-27T14:00:00.000Z","manager":""}
   ]
 }

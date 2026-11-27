@@ -2,12 +2,12 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 12,
-    "exportedAt": "2026-11-26T16:01:20.186Z",
-    "rows": 22,
+    "exportedAt": "2026-11-27T12:31:40.429Z",
+    "rows": 23,
     "sources": [
       {
         "path": "data/intel/projections/26-27.json",
-        "mtime": "2026-11-26T16:00:19.874888+00:00"
+        "mtime": "2026-11-27T12:30:55.926259+00:00"
       }
     ]
   },
@@ -7308,6 +7308,213 @@
           "code": 549912,
           "before": 34,
           "after": 45
+        }
+      ]
+    },
+    {
+      "at": "2026-11-27T12:30:55.926Z",
+      "since": "2026-11-26T16:00:19.874Z",
+      "gameweek": 12,
+      "moves": [
+        {
+          "code": 550864,
+          "before": 0,
+          "after": 67
+        },
+        {
+          "code": 462424,
+          "before": 61,
+          "after": 1
+        },
+        {
+          "code": 243298,
+          "before": 58,
+          "after": 0
+        },
+        {
+          "code": 210156,
+          "before": 55,
+          "after": 0
+        },
+        {
+          "code": 209365,
+          "before": 78,
+          "after": 31
+        },
+        {
+          "code": 245719,
+          "before": 67,
+          "after": 21
+        },
+        {
+          "code": 611922,
+          "before": 20,
+          "after": 56
+        },
+        {
+          "code": 230730,
+          "before": 23,
+          "after": 58
+        },
+        {
+          "code": 487053,
+          "before": 18,
+          "after": 47
+        },
+        {
+          "code": 56979,
+          "before": 89,
+          "after": 63
+        },
+        {
+          "code": 198869,
+          "before": 22,
+          "after": 47
+        },
+        {
+          "code": 458249,
+          "before": 47,
+          "after": 22
+        },
+        {
+          "code": 93605,
+          "before": 78,
+          "after": 54
+        },
+        {
+          "code": 180135,
+          "before": 26,
+          "after": 49
+        },
+        {
+          "code": 195546,
+          "before": 24,
+          "after": 47
+        },
+        {
+          "code": 242313,
+          "before": 21,
+          "after": 42
+        },
+        {
+          "code": 551466,
+          "before": 81,
+          "after": 61
+        },
+        {
+          "code": 441266,
+          "before": 19,
+          "after": 0
+        },
+        {
+          "code": 231416,
+          "before": 32,
+          "after": 50
+        },
+        {
+          "code": 209046,
+          "before": 0,
+          "after": 17
+        },
+        {
+          "code": 532605,
+          "before": 36,
+          "after": 19
+        },
+        {
+          "code": 168144,
+          "before": 57,
+          "after": 72
+        },
+        {
+          "code": 95658,
+          "before": 88,
+          "after": 74
+        },
+        {
+          "code": 108416,
+          "before": 79,
+          "after": 65
+        },
+        {
+          "code": 437505,
+          "before": 88,
+          "after": 74
+        },
+        {
+          "code": 242893,
+          "before": 54,
+          "after": 67
+        },
+        {
+          "code": 450063,
+          "before": 68,
+          "after": 55
+        },
+        {
+          "code": 500040,
+          "before": 14,
+          "after": 1
+        },
+        {
+          "code": 570794,
+          "before": 57,
+          "after": 70
+        },
+        {
+          "code": 101282,
+          "before": 55,
+          "after": 67
+        },
+        {
+          "code": 119090,
+          "before": 65,
+          "after": 53
+        },
+        {
+          "code": 216094,
+          "before": 24,
+          "after": 36
+        },
+        {
+          "code": 219249,
+          "before": 20,
+          "after": 8
+        },
+        {
+          "code": 456512,
+          "before": 52,
+          "after": 64
+        },
+        {
+          "code": 501390,
+          "before": 21,
+          "after": 9
+        },
+        {
+          "code": 503139,
+          "before": 68,
+          "after": 56
+        },
+        {
+          "code": 171287,
+          "before": 24,
+          "after": 35
+        },
+        {
+          "code": 244042,
+          "before": 43,
+          "after": 54
+        },
+        {
+          "code": 498444,
+          "before": 33,
+          "after": 44
+        },
+        {
+          "code": 513418,
+          "before": 79,
+          "after": 68
         }
       ]
     }
