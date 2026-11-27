@@ -3,7 +3,7 @@
     "totalNumPages": 2,
     "pageNumber": 1,
     "maxResultsPerPage": 100,
-    "totalNumResults": 113
+    "totalNumResults": 114
   },
   "filterSettings": {
     "positionOrGroup": "ALL",
@@ -236,6 +236,125 @@
     "rows": [
       {
         "scorer": {
+          "teamName": "Tottenham Hotspur",
+          "urlName": "luca-williams-barnett",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Tottenham_Hotspur.png",
+          "scorerId": "06qq9",
+          "upcomingEventStatusId": "2",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702"
+          ],
+          "defaultPosId": "702",
+          "posShortNames": "M",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 24, 11:31 AM: Williams-Barnett signed a new contract...",
+              "typeId": "9"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702"
+          ],
+          "teamId": "110160",
+          "name": "Luca Williams-Barnett",
+          "teamShortName": "TOT",
+          "shortName": "L. Williams-Barnett"
+        },
+        "resultCode": "EXECUTED",
+        "executed": true,
+        "result": {
+          "content": "Executed"
+        },
+        "claimType": "FA",
+        "numInGroup": 2,
+        "txSetId": "4uvhghn7mwz070op",
+        "feesUsed": false,
+        "transactionCode": "CLAIM",
+        "transactionType": "Claim",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "The Raccoons",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "rowspan": 2,
+            "key": "team",
+            "teamId": "l5kunst8msgbirdf"
+          },
+          {
+            "align": "LEFT",
+            "content": "Fri Nov 27, 2026, 8:14AM",
+            "rowspan": 2,
+            "key": "date"
+          },
+          {
+            "content": "12",
+            "key": "week"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Chelsea",
+          "urlName": "levi-colwill",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Chelsea.png",
+          "scorerId": "062p5",
+          "upcomingEventStatusId": "2",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "703"
+          ],
+          "defaultPosId": "703",
+          "posShortNames": "D",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 9, 1:37 AM: Colwill had one tackle (one won) and...",
+              "typeId": "8"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "703"
+          ],
+          "teamId": "110040",
+          "name": "Levi Colwill",
+          "teamShortName": "CHE",
+          "shortName": "L. Colwill"
+        },
+        "resultCode": "EXECUTED",
+        "executed": true,
+        "result": {
+          "content": "Executed"
+        },
+        "claimType": "",
+        "txSetId": "4uvhghn7mwz070op",
+        "feesUsed": false,
+        "transactionCode": "DROP",
+        "transactionType": "Drop",
+        "deleted": false,
+        "cells": [
+          {
+            "content": "12",
+            "key": "week"
+          }
+        ]
+      },
+      {
+        "scorer": {
           "teamName": "Crystal Palace",
           "urlName": "anan-khalaili",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Crystal_Palace.png",
@@ -274,6 +393,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gjkw2r8rmwxxwh0b",
         "feesUsed": false,
@@ -341,6 +461,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "gjkw2r8rmwxxwh0b",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -393,7 +514,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6tdorfdzmwwiq6as",
         "feesUsed": false,
@@ -442,7 +562,7 @@
             },
             {
               "tooltip": "Nov 26, 9:08 AM: Fofana has apologized following a...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -461,7 +581,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "6tdorfdzmwwiq6as",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -514,6 +633,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "zhwzyr1tmwsv75x2",
         "feesUsed": false,
@@ -576,6 +696,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "zhwzyr1tmwsv75x2",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -630,7 +751,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "lmyfmc6nmwwin19q",
         "feesUsed": false,
@@ -677,8 +797,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -697,7 +817,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "lmyfmc6nmwwin19q",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -752,6 +871,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "j6ca7h9kmwqnwze8",
         "feesUsed": false,
@@ -814,6 +934,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "j6ca7h9kmwqnwze8",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -866,7 +987,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "11gmayc2mwqc8ke5",
         "feesUsed": false,
@@ -934,7 +1054,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "11gmayc2mwqc8ke5",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -987,6 +1106,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "y7ap8gzjmwqc88dx",
         "feesUsed": false,
@@ -1054,6 +1174,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "y7ap8gzjmwqc88dx",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1106,7 +1227,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m0dkzyqwmworbemn",
         "feesUsed": false,
@@ -1169,7 +1289,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "m0dkzyqwmworbemn",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1202,7 +1321,7 @@
             },
             {
               "tooltip": "Nov 26, 9:50 AM: Awoniyi (ankle) has been ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1221,6 +1340,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "hu7xtweamwnfbptl",
         "feesUsed": false,
@@ -1288,6 +1408,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "hu7xtweamwnfbptl",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1321,7 +1442,7 @@
             },
             {
               "tooltip": "Nov 26, 9:08 AM: Fofana has apologized following a...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1340,7 +1461,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "u9llpmlxmwnfalil",
         "feesUsed": false,
@@ -1387,8 +1507,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:07 AM: Xhaka (calf) will miss Thursday's...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -1407,7 +1527,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "u9llpmlxmwnfalil",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1460,6 +1579,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ropkxqnnmwntjdg9",
         "feesUsed": false,
@@ -1527,6 +1647,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "ropkxqnnmwntjdg9",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1576,7 +1697,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "2uythrdcmwnkkq72",
         "feesUsed": false,
@@ -1639,7 +1759,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "2uythrdcmwnkkq72",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1692,6 +1811,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gqdrhkuxmwlpwfu8",
         "feesUsed": false,
@@ -1759,6 +1879,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "gqdrhkuxmwlpwfu8",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1811,7 +1932,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "hetzcixvmw9lg3ik",
         "feesUsed": false,
@@ -1874,7 +1994,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "hetzcixvmw9lg3ik",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -1927,6 +2046,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "vegq2io2mw9r6c2j",
         "feesUsed": false,
@@ -1996,6 +2116,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "vegq2io2mw9r6c2j",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2048,7 +2169,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "8c41zqgwmw8btj42",
         "feesUsed": false,
@@ -2097,7 +2217,7 @@
             },
             {
               "tooltip": "Nov 20, 9:19 AM: Tel (Achilles) will miss Saturday's...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -2117,7 +2237,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "8c41zqgwmw8btj42",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2170,6 +2289,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "blu9xp0rmw5dxacl",
         "feesUsed": false,
@@ -2237,6 +2357,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "blu9xp0rmw5dxacl",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2289,7 +2410,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "yoaszi8lmw5c53wu",
         "feesUsed": false,
@@ -2352,7 +2472,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "yoaszi8lmw5c53wu",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2400,6 +2519,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "tujzv23mmw5c382u",
         "feesUsed": false,
@@ -2462,6 +2582,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "tujzv23mmw5c382u",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2516,7 +2637,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qcj3eopcmw59ppmd",
         "feesUsed": false,
@@ -2579,7 +2699,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "qcj3eopcmw59ppmd",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2632,6 +2751,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "98vgx1jemw4zbs55",
         "feesUsed": false,
@@ -2679,7 +2799,7 @@
             },
             {
               "tooltip": "Nov 26, 9:34 AM: Lacroix (hamstring) remains sidelined...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -2698,6 +2818,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "98vgx1jemw4zbs55",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2750,7 +2871,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1tekvw5wmw43stfp",
         "feesUsed": false,
@@ -2818,7 +2938,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "1tekvw5wmw43stfp",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2871,6 +2990,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mx7w022fmw43pbaw",
         "feesUsed": false,
@@ -2940,6 +3060,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "mx7w022fmw43pbaw",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -2987,7 +3108,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "x3s5zcb4mw43g4oq",
         "feesUsed": false,
@@ -3055,7 +3175,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "x3s5zcb4mw43g4oq",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3108,6 +3227,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "r0if4352mw2hkn0b",
         "feesUsed": false,
@@ -3177,6 +3297,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "r0if4352mw2hkn0b",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3229,7 +3350,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3rlyruk9mvzotezz",
         "feesUsed": false,
@@ -3297,7 +3417,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "3rlyruk9mvzotezz",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3350,6 +3469,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "lgami8l0mw2cs4y3",
         "feesUsed": false,
@@ -3417,6 +3537,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "lgami8l0mw2cs4y3",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3469,7 +3590,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1lae0uckmvzosci1",
         "feesUsed": false,
@@ -3537,7 +3657,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "1lae0uckmvzosci1",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3592,6 +3711,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "j1dspm1qmw09x7b5",
         "feesUsed": false,
@@ -3644,7 +3764,7 @@
             },
             {
               "tooltip": "Nov 26, 9:06 AM: Caicedo (back) is available for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -3663,6 +3783,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "j1dspm1qmw09x7b5",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3712,7 +3833,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "uwt7eyyumw25rkff",
         "feesUsed": false,
@@ -3775,7 +3895,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "uwt7eyyumw25rkff",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3830,6 +3949,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "8rbwt4obmvve1464",
         "feesUsed": false,
@@ -3897,6 +4017,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "8rbwt4obmvve1464",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -3949,7 +4070,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "f8aah1cimvv75ts5",
         "feesUsed": false,
@@ -4017,7 +4137,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "f8aah1cimvv75ts5",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4070,6 +4189,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "fqelot9tmvttz0sg",
         "feesUsed": false,
@@ -4137,6 +4257,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "fqelot9tmvttz0sg",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4189,7 +4310,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "06wey7w7mvttgblo",
         "feesUsed": false,
@@ -4257,7 +4377,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "06wey7w7mvttgblo",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4310,6 +4429,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "fz14l4zvmvttfd7g",
         "feesUsed": false,
@@ -4378,6 +4498,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "fz14l4zvmvttfd7g",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4430,7 +4551,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "d0a8qh5tmvtd9to3",
         "feesUsed": false,
@@ -4498,7 +4618,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "d0a8qh5tmvtd9to3",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4551,6 +4670,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0cneji21mvtc77xe",
         "feesUsed": false,
@@ -4618,6 +4738,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "0cneji21mvtc77xe",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4670,7 +4791,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "zrud5pszmvsm78sz",
         "feesUsed": false,
@@ -4735,7 +4855,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "zrud5pszmvsm78sz",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4788,6 +4907,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "n3deh10tmvqufu32",
         "feesUsed": false,
@@ -4855,6 +4975,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "n3deh10tmvqufu32",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -4907,7 +5028,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9n2poti8mvr4yn4o",
         "feesUsed": false,
@@ -4972,7 +5092,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "9n2poti8mvr4yn4o",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5022,6 +5141,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w407exvimvru4jya",
         "feesUsed": false,
@@ -5091,6 +5211,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "w407exvimvru4jya",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5138,7 +5259,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "b86xcv0xmvoxd9po",
         "feesUsed": false,
@@ -5186,8 +5306,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 22, 10:30 AM: Maguire (back) is on the bench for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Maguire (undisclosed) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -5206,7 +5326,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "b86xcv0xmvoxd9po",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5254,6 +5373,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "p21og71nmvqu4afc",
         "feesUsed": false,
@@ -5321,6 +5441,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "p21og71nmvqu4afc",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5373,7 +5494,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w5o3xdoomvo7qh0r",
         "feesUsed": false,
@@ -5441,7 +5561,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "w5o3xdoomvo7qh0r",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5494,6 +5613,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "11rhm7ikmvrqzfsl",
         "feesUsed": false,
@@ -5561,6 +5681,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "11rhm7ikmvrqzfsl",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5592,8 +5713,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -5612,7 +5733,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m1z8raq8mvr3d7mi",
         "feesUsed": false,
@@ -5680,7 +5800,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "m1z8raq8mvr3d7mi",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5714,7 +5833,7 @@
             },
             {
               "tooltip": "Nov 20, 9:19 AM: Tel (Achilles) will miss Saturday's...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -5734,6 +5853,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1tm80lfdmvmq90ix",
         "feesUsed": false,
@@ -5801,6 +5921,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "1tm80lfdmvmq90ix",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5853,7 +5974,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "lhg4i2jmmvqu5ch3",
         "feesUsed": false,
@@ -5916,7 +6036,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "lhg4i2jmmvqu5ch3",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -5969,6 +6088,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gonm9u3hmvo7q7l2",
         "feesUsed": false,
@@ -6036,6 +6156,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "gonm9u3hmvo7q7l2",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6083,7 +6204,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "8j2s5f2hmvocexkm",
         "feesUsed": false,
@@ -6151,7 +6271,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "8j2s5f2hmvocexkm",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6204,6 +6323,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ifyhr3vgmvl9fb94",
         "feesUsed": false,
@@ -6271,6 +6391,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "ifyhr3vgmvl9fb94",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6303,8 +6424,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 PM: Munoz was forced off with a knee knock...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -6324,7 +6445,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "fh4ybmk5mvl8jc91",
         "feesUsed": false,
@@ -6394,7 +6514,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "fh4ybmk5mvl8jc91",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6447,6 +6566,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s5cr5nybmvl69ls0",
         "feesUsed": false,
@@ -6493,8 +6613,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -6513,6 +6633,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "s5cr5nybmvl69ls0",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6565,7 +6686,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mc1athqpmvl3qay0",
         "feesUsed": false,
@@ -6613,8 +6733,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 PM: Munoz was forced off with a knee knock...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -6634,7 +6754,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "mc1athqpmvl3qay0",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6687,6 +6806,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0kll8gqhmvk1p6vt",
         "feesUsed": false,
@@ -6754,6 +6874,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "0kll8gqhmvk1p6vt",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6801,7 +6922,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "2a627yh4mvjz7lv7",
         "feesUsed": false,
@@ -6869,7 +6989,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "2a627yh4mvjz7lv7",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -6922,6 +7041,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w1wnbl03mvjsnx3j",
         "feesUsed": false,
@@ -6989,6 +7109,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "w1wnbl03mvjsnx3j",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7041,7 +7162,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ku6i1zfimvitbn4d",
         "feesUsed": false,
@@ -7104,7 +7224,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "ku6i1zfimvitbn4d",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7157,6 +7276,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1uvt7g5mmvifnjv0",
         "feesUsed": false,
@@ -7224,6 +7344,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "1uvt7g5mmvifnjv0",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7278,7 +7399,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "pyroycssmvihv9be",
         "feesUsed": false,
@@ -7341,7 +7461,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "pyroycssmvihv9be",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7394,6 +7513,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "a98euprtmvihob97",
         "feesUsed": false,
@@ -7461,6 +7581,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "a98euprtmvihob97",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7508,7 +7629,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "it70ykm1mvi13ol7",
         "feesUsed": false,
@@ -7576,7 +7696,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "it70ykm1mvi13ol7",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7629,6 +7748,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "o7nw7we1mvgg3w4r",
         "feesUsed": false,
@@ -7696,6 +7816,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "o7nw7we1mvgg3w4r",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7748,7 +7869,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "afhqpx2mmvcl3nj3",
         "feesUsed": false,
@@ -7816,7 +7936,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "afhqpx2mmvcl3nj3",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7866,6 +7985,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "nhgtw4yfmvebe4gf",
         "feesUsed": false,
@@ -7928,6 +8048,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "nhgtw4yfmvebe4gf",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -7980,7 +8101,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9pd803upmvdw285v",
         "feesUsed": false,
@@ -8048,7 +8168,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "9pd803upmvdw285v",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8101,6 +8220,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "vbgm9yt8mvgfxvb8",
         "feesUsed": false,
@@ -8168,6 +8288,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "vbgm9yt8mvgfxvb8",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8220,7 +8341,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0iagsg2xmvfrnv1f",
         "feesUsed": false,
@@ -8288,7 +8408,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "0iagsg2xmvfrnv1f",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8341,6 +8460,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rja9bikdmvh3v4ll",
         "feesUsed": false,
@@ -8408,6 +8528,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "rja9bikdmvh3v4ll",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8440,8 +8561,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 PM: Munoz was forced off with a knee knock...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -8461,7 +8582,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9n7lnmr4mve2d4j3",
         "feesUsed": false,
@@ -8529,7 +8649,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "9n7lnmr4mve2d4j3",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8582,6 +8701,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xrmp74z9mvcl24ej",
         "feesUsed": false,
@@ -8644,6 +8764,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "xrmp74z9mvcl24ej",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8696,7 +8817,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6bsgny3dmvbiin2y",
         "feesUsed": false,
@@ -8761,7 +8881,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "6bsgny3dmvbiin2y",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8814,6 +8933,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ct6qif0gmvbg0udi",
         "feesUsed": false,
@@ -8876,6 +8996,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "ct6qif0gmvbg0udi",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -8928,7 +9049,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "8mmuth9lmvbfwj3r",
         "feesUsed": false,
@@ -8996,7 +9116,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "8mmuth9lmvbfwj3r",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9044,6 +9163,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "k4xegzd2mvbf7pvs",
         "feesUsed": false,
@@ -9113,6 +9233,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "k4xegzd2mvbf7pvs",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9167,7 +9288,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "tv071d9emvbevf47",
         "feesUsed": false,
@@ -9230,7 +9350,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "tv071d9emvbevf47",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9283,6 +9402,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5wkr7zq1mvbese9v",
         "feesUsed": false,
@@ -9345,6 +9465,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "5wkr7zq1mvbese9v",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9392,7 +9513,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "khj8xqrhmv9rgw5v",
         "feesUsed": false,
@@ -9459,7 +9579,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "khj8xqrhmv9rgw5v",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9512,6 +9631,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "q8d93x4jmvaxy6q2",
         "feesUsed": false,
@@ -9581,6 +9701,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "q8d93x4jmvaxy6q2",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9634,7 +9755,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "4sje1rofmvaxb2pj",
         "feesUsed": false,
@@ -9699,7 +9819,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "4sje1rofmvaxb2pj",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9752,6 +9871,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m3w26fntmvau2ok1",
         "feesUsed": false,
@@ -9818,6 +9938,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "m3w26fntmvau2ok1",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9867,7 +9988,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "19ahr1kzmva0ydb9",
         "feesUsed": false,
@@ -9937,7 +10057,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "19ahr1kzmva0ydb9",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -9990,6 +10109,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xgwjt9g7mv9ug86j",
         "feesUsed": false,
@@ -10056,6 +10176,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "xgwjt9g7mv9ug86j",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10108,7 +10229,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6vcln2eamv9uft2t",
         "feesUsed": false,
@@ -10171,7 +10291,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "6vcln2eamv9uft2t",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10219,6 +10338,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "h970brermv9uf55a",
         "feesUsed": false,
@@ -10286,6 +10406,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "h970brermv9uf55a",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10338,7 +10459,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "l0qbmie6mv9rbci9",
         "feesUsed": false,
@@ -10406,7 +10526,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "l0qbmie6mv9rbci9",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10459,6 +10578,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ny3lfbc3mv8jrmw2",
         "feesUsed": false,
@@ -10528,6 +10648,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "ny3lfbc3mv8jrmw2",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10580,7 +10701,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5j5857rymv8i73xn",
         "feesUsed": false,
@@ -10643,7 +10763,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "5j5857rymv8i73xn",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10696,6 +10815,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rhl57auymv6i1b4y",
         "feesUsed": false,
@@ -10763,6 +10883,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "rhl57auymv6i1b4y",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10799,8 +10920,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10819,7 +10940,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "o6q1xwplmv735129",
         "feesUsed": false,
@@ -10882,7 +11002,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "o6q1xwplmv735129",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -10935,6 +11054,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "c0g0uqd5mv6i0lsv",
         "feesUsed": false,
@@ -10982,12 +11102,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Ankle - Late fitness test (Game-time decision) - Expected return Nov 28",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 21, 3:08 PM: Davis is dealing with an ankle injury...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:40 AM: Davis (ankle) has recovered from his...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -11006,6 +11122,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "c0g0uqd5mv6i0lsv",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11058,7 +11175,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "bb8wop7dmv40h9x2",
         "feesUsed": false,
@@ -11128,7 +11244,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "bb8wop7dmv40h9x2",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11181,6 +11296,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "d246685wmv6hcxl6",
         "feesUsed": false,
@@ -11248,6 +11364,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "d246685wmv6hcxl6",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11300,7 +11417,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "lcsq4v2imv5kgbzb",
         "feesUsed": false,
@@ -11368,7 +11484,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "lcsq4v2imv5kgbzb",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11421,6 +11536,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9j6eci7kmv3ln7jw",
         "feesUsed": false,
@@ -11488,6 +11604,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "9j6eci7kmv3ln7jw",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11542,7 +11659,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "k1rbotgomv8atdaa",
         "feesUsed": false,
@@ -11610,7 +11726,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "k1rbotgomv8atdaa",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11658,6 +11773,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "amos0diemv5pxzeo",
         "feesUsed": false,
@@ -11704,8 +11820,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 6, 9:26 AM: Ruggeri (hamstring) remains sidelined...",
-              "typeId": "8"
+              "tooltip": "Nov 27, 9:24 AM: Ruggeri (hamstring) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -11724,6 +11840,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "amos0diemv5pxzeo",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11776,7 +11893,6 @@
           "content": "Executed"
         },
         "claimType": "WW",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "czgyob4gmv2jxbq4",
         "feesUsed": false,
@@ -11844,7 +11960,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "czgyob4gmv2jxbq4",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -11897,6 +12012,7 @@
           "content": "Executed"
         },
         "claimType": "WW",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "adm4nw0cmv4cdmcg",
         "feesUsed": false,
@@ -11939,12 +12055,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Hip - Out for next game - Expected return Dec 2",
+              "tooltip": "Hip - Out for next game - Expected return Dec 8",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 6:40 AM: Rashford (hip) was absent from...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:54 AM: Rashford (hip) has resumed on-field...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -11963,6 +12079,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "adm4nw0cmv4cdmcg",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12010,7 +12127,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "txcbu2lvmv28txh7",
         "feesUsed": false,
@@ -12078,7 +12194,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "txcbu2lvmv28txh7",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12133,6 +12248,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "b9e5vpfmmv28sk54",
         "feesUsed": false,
@@ -12200,6 +12316,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "b9e5vpfmmv28sk54",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12247,7 +12364,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "4wd5tsbfmv26injp",
         "feesUsed": false,
@@ -12315,7 +12431,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "4wd5tsbfmv26injp",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12368,6 +12483,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "lv5yjne8mv23zlgv",
         "feesUsed": false,
@@ -12430,6 +12546,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "lv5yjne8mv23zlgv",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12482,7 +12599,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "l2uv5gq8mv1e1qig",
         "feesUsed": false,
@@ -12545,7 +12661,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "l2uv5gq8mv1e1qig",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12593,6 +12708,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "imp4lvqzmv1dvndb",
         "feesUsed": false,
@@ -12660,6 +12776,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "imp4lvqzmv1dvndb",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12712,7 +12829,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "duwsewq6mv1bpcct",
         "feesUsed": false,
@@ -12780,7 +12896,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "duwsewq6mv1bpcct",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12835,6 +12950,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1u8uac2lmv14pwax",
         "feesUsed": false,
@@ -12902,6 +13018,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "1u8uac2lmv14pwax",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -12949,7 +13066,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1i1qusgdmv047usg",
         "feesUsed": false,
@@ -13012,7 +13128,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "1i1qusgdmv047usg",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -13044,8 +13159,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 6, 9:26 AM: Ruggeri (hamstring) remains sidelined...",
-              "typeId": "8"
+              "tooltip": "Nov 27, 9:24 AM: Ruggeri (hamstring) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -13064,6 +13179,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5sgkobkamuykiclt",
         "feesUsed": false,
@@ -13131,6 +13247,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "5sgkobkamuykiclt",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -13180,7 +13297,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "vsb6aesmmuykhrxy",
         "feesUsed": false,
@@ -13250,7 +13366,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "vsb6aesmmuykhrxy",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -13303,6 +13418,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "f2xv4fu8muykgqgj",
         "feesUsed": false,
@@ -13370,6 +13486,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "f2xv4fu8muykgqgj",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -13424,7 +13541,6 @@
           "content": "Executed"
         },
         "claimType": "FA",
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rgdjun8qmuyiai32",
         "feesUsed": false,
@@ -13487,7 +13603,6 @@
           "content": "Executed"
         },
         "claimType": "",
-        "disabled": true,
         "txSetId": "rgdjun8qmuyiai32",
         "feesUsed": false,
         "transactionCode": "DROP",
@@ -13535,6 +13650,7 @@
           "content": "Executed"
         },
         "claimType": "FA",
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w4p75wlpmuyhytci",
         "feesUsed": false,
@@ -13602,6 +13718,7 @@
           "content": "Executed"
         },
         "claimType": "",
+        "disabled": true,
         "txSetId": "w4p75wlpmuyhytci",
         "feesUsed": false,
         "transactionCode": "DROP",

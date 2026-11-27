@@ -310,7 +310,7 @@
       "rosterItems": [
         {
           "id": "067yv",
-          "position": "F",
+          "position": "M",
           "status": "ACTIVE"
         },
         {
@@ -326,12 +326,12 @@
         {
           "id": "0427d",
           "position": "D",
-          "status": "ACTIVE"
+          "status": "RESERVE"
         },
         {
           "id": "05r34",
           "position": "M",
-          "status": "RESERVE"
+          "status": "ACTIVE"
         },
         {
           "id": "05o8o",
@@ -345,7 +345,7 @@
         },
         {
           "id": "05ye7",
-          "position": "F",
+          "position": "M",
           "status": "ACTIVE"
         },
         {
@@ -466,6 +466,11 @@
           "status": "ACTIVE"
         },
         {
+          "id": "06qq9",
+          "position": "M",
+          "status": "ACTIVE"
+        },
+        {
           "id": "0666p",
           "position": "M",
           "status": "ACTIVE"
@@ -491,11 +496,6 @@
           "status": "RESERVE"
         },
         {
-          "id": "062p5",
-          "position": "D",
-          "status": "RESERVE"
-        },
-        {
           "id": "06fuw",
           "position": "G",
           "status": "ACTIVE"
@@ -513,7 +513,7 @@
         {
           "id": "067ys",
           "position": "M",
-          "status": "ACTIVE"
+          "status": "RESERVE"
         },
         {
           "id": "063zi",

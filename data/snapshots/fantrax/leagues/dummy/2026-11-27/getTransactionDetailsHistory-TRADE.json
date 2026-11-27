@@ -586,12 +586,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Hamstring - Out for next game - Expected return Dec 13",
+              "tooltip": "Hamstring - Out for next game - Expected return Dec 20",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 19, 9:02 AM: Ballard (hamstring) remains sidelined...",
-              "typeId": "8"
+              "tooltip": "Nov 27, 8:53 AM: Ballard (hamstring) has resumed running...",
+              "typeId": "14"
             }
           ],
           "rookie": false,

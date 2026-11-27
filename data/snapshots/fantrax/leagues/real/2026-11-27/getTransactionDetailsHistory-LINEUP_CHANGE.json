@@ -3,7 +3,7 @@
     "totalNumPages": 3,
     "pageNumber": 1,
     "maxResultsPerPage": 100,
-    "totalNumResults": 204
+    "totalNumResults": 207
   },
   "filterSettings": {
     "positionOrGroup": "ALL",
@@ -250,6 +250,394 @@
     "rows": [
       {
         "scorer": {
+          "teamName": "Brighton",
+          "urlName": "jack-hinshelwood",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brighton_and_Hove_Albion.png",
+          "scorerId": "067ys",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702"
+          ],
+          "defaultPosId": "702",
+          "posShortNames": "M",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Nov 9, 5:51 AM: Hinshelwood registered one shot (zero...",
+              "typeId": "8"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702"
+          ],
+          "teamId": "110240",
+          "name": "Jack Hinshelwood",
+          "teamShortName": "BHA",
+          "shortName": "J. Hinshelwood"
+        },
+        "executed": true,
+        "numInGroup": 2,
+        "txSetId": "qupptovemwz075z2",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "The Raccoons",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "l5kunst8msgbirdf"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Bench",
+            "key": "to"
+          },
+          {
+            "align": "LEFT",
+            "content": "Fri Nov 27, 2026, 8:14AM",
+            "rowspan": 2,
+            "key": "date"
+          },
+          {
+            "content": "12",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Tottenham Hotspur",
+          "urlName": "luca-williams-barnett",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Tottenham_Hotspur.png",
+          "scorerId": "06qq9",
+          "upcomingEventStatusId": "2",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702"
+          ],
+          "defaultPosId": "702",
+          "posShortNames": "M",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 24, 11:31 AM: Williams-Barnett signed a new contract...",
+              "typeId": "9"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702"
+          ],
+          "teamId": "110160",
+          "name": "Luca Williams-Barnett",
+          "teamShortName": "TOT",
+          "shortName": "L. Williams-Barnett"
+        },
+        "executed": true,
+        "txSetId": "qupptovemwz075z2",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "The Raccoons",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "l5kunst8msgbirdf"
+          },
+          {
+            "align": "LEFT",
+            "content": "Bench",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "to"
+          },
+          {
+            "content": "12",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Everton",
+          "urlName": "james-tarkowski",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Everton.png",
+          "scorerId": "0427d",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "703"
+          ],
+          "defaultPosId": "703",
+          "posShortNames": "D",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Suspended",
+              "typeId": "6"
+            },
+            {
+              "tooltip": "Nov 23, 3:49 PM: Tarkowski was sent off in the first...",
+              "typeId": "9"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "703"
+          ],
+          "teamId": "110050",
+          "name": "James Tarkowski",
+          "teamShortName": "EVE",
+          "shortName": "J. Tarkowski"
+        },
+        "executed": true,
+        "disabled": true,
+        "numInGroup": 2,
+        "txSetId": "1349zb5ymwz061vm",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "Hazza Maguazza's Redempshazza",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "ipnp5y4mmu9j7kop"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Bench",
+            "key": "to"
+          },
+          {
+            "align": "LEFT",
+            "content": "Fri Nov 27, 2026, 8:14AM",
+            "rowspan": 2,
+            "key": "date"
+          },
+          {
+            "content": "12",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Manchester United",
+          "urlName": "amad-diallo",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
+          "scorerId": "05r34",
+          "upcomingEventStatusId": "2",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702",
+            "701"
+          ],
+          "defaultPosId": "701",
+          "posShortNames": "M,F",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 3, 2:05 PM: Diallo (undisclosed) is in the starting...",
+              "typeId": "8"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702",
+            "701"
+          ],
+          "teamId": "110090",
+          "name": "Amad Diallo",
+          "teamShortName": "MUN",
+          "shortName": "A. Diallo"
+        },
+        "executed": true,
+        "disabled": true,
+        "txSetId": "1349zb5ymwz061vm",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "Hazza Maguazza's Redempshazza",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "ipnp5y4mmu9j7kop"
+          },
+          {
+            "align": "LEFT",
+            "content": "Bench",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "Active",
+            "key": "to"
+          },
+          {
+            "content": "12",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Fulham",
+          "urlName": "oscar-bobb",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Fulham.png",
+          "scorerId": "05ye7",
+          "upcomingEventStatusId": "2",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702",
+            "701"
+          ],
+          "defaultPosId": "702",
+          "posShortNames": "M,F",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Expected to play in upcoming/current game",
+              "typeId": "32"
+            },
+            {
+              "tooltip": "Nov 21, 10:26 AM: Bobb assisted once to go with one shot...",
+              "typeId": "9"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702",
+            "701"
+          ],
+          "teamId": "110063",
+          "name": "Oscar Bobb",
+          "teamShortName": "FUL",
+          "shortName": "O. Bobb"
+        },
+        "executed": true,
+        "numInGroup": 2,
+        "txSetId": "qvvg120wmwz04zsg",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "Hazza Maguazza's Redempshazza",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "ipnp5y4mmu9j7kop"
+          },
+          {
+            "align": "LEFT",
+            "content": "F",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "M",
+            "key": "to"
+          },
+          {
+            "align": "LEFT",
+            "content": "Fri Nov 27, 2026, 8:13AM",
+            "rowspan": 2,
+            "key": "date"
+          },
+          {
+            "content": "12",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
+          "teamName": "Liverpool",
+          "urlName": "cody-gakpo",
+          "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Liverpool.png",
+          "scorerId": "067yv",
+          "teamLogo": true,
+          "posIdsNoFlex": [
+            "702",
+            "701"
+          ],
+          "defaultPosId": "701",
+          "posShortNames": "M,F",
+          "team": false,
+          "icons": [
+            {
+              "tooltip": "Calf - Out for next game - Expected return Dec 12",
+              "typeId": "30"
+            },
+            {
+              "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
+              "typeId": "14"
+            }
+          ],
+          "rookie": false,
+          "minorsEligible": false,
+          "posIds": [
+            "702",
+            "701"
+          ],
+          "teamId": "110070",
+          "name": "Cody Gakpo",
+          "teamShortName": "LIV",
+          "shortName": "C. Gakpo"
+        },
+        "executed": true,
+        "txSetId": "qvvg120wmwz04zsg",
+        "deleted": false,
+        "cells": [
+          {
+            "align": "LEFT",
+            "content": "Hazza Maguazza's Redempshazza",
+            "leagueId": "mqsjd23smsgbiqzr",
+            "key": "team",
+            "teamId": "ipnp5y4mmu9j7kop"
+          },
+          {
+            "align": "LEFT",
+            "content": "F",
+            "key": "from"
+          },
+          {
+            "align": "LEFT",
+            "content": "M",
+            "key": "to"
+          },
+          {
+            "content": "12",
+            "key": "weekOrPeriod"
+          }
+        ]
+      },
+      {
+        "scorer": {
           "teamName": "Crystal Palace",
           "urlName": "anan-khalaili",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Crystal_Palace.png",
@@ -283,6 +671,7 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "izthpnawmwxxwmca",
         "deleted": false,
@@ -351,6 +740,7 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "izthpnawmwxxwmca",
         "deleted": false,
         "cells": [
@@ -412,7 +802,6 @@
           "shortName": "A. Khusanov"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "n1gagkiymwxxvekl",
         "deleted": false,
@@ -476,7 +865,6 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "n1gagkiymwxxvekl",
         "deleted": false,
         "cells": [
@@ -538,6 +926,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 3,
         "txSetId": "rky55utdmwxxv4c6",
         "deleted": false,
@@ -601,6 +990,7 @@
           "shortName": "R. Cherki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rky55utdmwxxv4c6",
         "deleted": false,
         "cells": [
@@ -664,6 +1054,7 @@
           "shortName": "R. Ngumoha"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rky55utdmwxxv4c6",
         "deleted": false,
         "cells": [
@@ -722,7 +1113,6 @@
           "shortName": "C. Tzolis"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "391fpdqomwxxunm3",
         "deleted": false,
@@ -793,7 +1183,6 @@
           "shortName": "R. Ngumoha"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "391fpdqomwxxunm3",
         "deleted": false,
         "cells": [
@@ -855,6 +1244,7 @@
           "shortName": "Emiliano Martinez"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "a5nhk3njmwxw8jf1",
         "deleted": false,
@@ -923,6 +1313,7 @@
           "shortName": "Z. Suzuki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "a5nhk3njmwxw8jf1",
         "deleted": false,
         "cells": [
@@ -984,7 +1375,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3boi2b34mwxw6869",
         "deleted": false,
@@ -1048,7 +1438,6 @@
           "shortName": "E. Buendia"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3boi2b34mwxw6869",
         "deleted": false,
         "cells": [
@@ -1105,6 +1494,7 @@
           "shortName": "C. Kostoulas"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "imszk94zmwxv1d9u",
         "deleted": false,
@@ -1174,7 +1564,6 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "pya4z2rpmwwc9jfj",
         "deleted": false,
@@ -1243,7 +1632,6 @@
           "shortName": "S. Tonali"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "pya4z2rpmwwc9jfj",
         "deleted": false,
         "cells": [
@@ -1305,6 +1693,7 @@
           "shortName": "S. Tonali"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "jqm7ehybmwty2uqx",
         "deleted": false,
@@ -1373,6 +1762,7 @@
           "shortName": "Jacob Murphy"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "jqm7ehybmwty2uqx",
         "deleted": false,
         "cells": [
@@ -1436,7 +1826,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w28vs62mmwty2uqu",
         "deleted": false,
@@ -1508,7 +1897,6 @@
           "shortName": "E. Fernandez"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w28vs62mmwty2uqu",
         "deleted": false,
         "cells": [
@@ -1570,6 +1958,7 @@
           "shortName": "J. Justin"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "aqhjkgpsmwty2uqr",
         "deleted": false,
@@ -1636,6 +2025,7 @@
           "shortName": "B. White"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "aqhjkgpsmwty2uqr",
         "deleted": false,
         "cells": [
@@ -1692,7 +2082,6 @@
           "shortName": "M. van de Ven"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "pmc9reohmwty2uqm",
         "deleted": false,
@@ -1764,7 +2153,6 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "pmc9reohmwty2uqm",
         "deleted": false,
         "cells": [
@@ -1826,6 +2214,7 @@
           "shortName": "S. Ajayi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "2vsg5a57mwtw66cg",
         "deleted": false,
@@ -1894,6 +2283,7 @@
           "shortName": "M. Guehi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "2vsg5a57mwtw66cg",
         "deleted": false,
         "cells": [
@@ -1955,7 +2345,6 @@
           "shortName": "Ruben Dias"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "n3jcmmffmwqeo3b6",
         "deleted": false,
@@ -2024,7 +2413,6 @@
           "shortName": "N. Mukiele"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "n3jcmmffmwqeo3b6",
         "deleted": false,
         "cells": [
@@ -2088,6 +2476,7 @@
           "shortName": "A. Iwobi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cmtbyf1zmwqennig",
         "deleted": false,
@@ -2158,6 +2547,7 @@
           "shortName": "M. Belloumi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "cmtbyf1zmwqennig",
         "deleted": false,
         "cells": [
@@ -2221,7 +2611,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6jaqdi8zmwqcfxvc",
         "deleted": false,
@@ -2290,7 +2679,6 @@
           "shortName": "E. Fernandez"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "6jaqdi8zmwqcfxvc",
         "deleted": false,
         "cells": [
@@ -2352,6 +2740,7 @@
           "shortName": "W. Osula"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "kxc6qqtqmwqc8zj9",
         "deleted": false,
@@ -2420,6 +2809,7 @@
           "shortName": "A. Khusanov"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "kxc6qqtqmwqc8zj9",
         "deleted": false,
         "cells": [
@@ -2476,7 +2866,6 @@
           "shortName": "R. Cherki"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "lwfxn0uhmwqc6zo2",
         "deleted": false,
@@ -2545,7 +2934,6 @@
           "shortName": "G. Gudmundsson"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "lwfxn0uhmwqc6zo2",
         "deleted": false,
         "cells": [
@@ -2609,7 +2997,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "lwfxn0uhmwqc6zo2",
         "deleted": false,
         "cells": [
@@ -2671,6 +3058,7 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "x6wucb5umwqc3l79",
         "deleted": false,
@@ -2737,6 +3125,7 @@
           "shortName": "Matheus Nunes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "x6wucb5umwqc3l79",
         "deleted": false,
         "cells": [
@@ -2798,7 +3187,6 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5dye1z8gmwqc33oj",
         "deleted": false,
@@ -2870,7 +3258,6 @@
           "shortName": "J. Rudoni"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5dye1z8gmwqc33oj",
         "deleted": false,
         "cells": [
@@ -2932,6 +3319,7 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ma3zij2bmwq6v7sx",
         "deleted": false,
@@ -3000,6 +3388,7 @@
           "shortName": "Alysson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ma3zij2bmwq6v7sx",
         "deleted": false,
         "cells": [
@@ -3061,7 +3450,6 @@
           "shortName": "I. Maatsen"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "zetkcd7mmwq0fwl7",
         "deleted": false,
@@ -3130,7 +3518,6 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "zetkcd7mmwq0fwl7",
         "deleted": false,
         "cells": [
@@ -3192,6 +3579,7 @@
           "shortName": "R. Araujo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "59nxljo8mwpkc110",
         "deleted": false,
@@ -3260,6 +3648,7 @@
           "shortName": "P. Dorgu"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "59nxljo8mwpkc110",
         "deleted": false,
         "cells": [
@@ -3321,7 +3710,6 @@
           "shortName": "A. Kinsky"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "d7x2bv53mwpjq1gg",
         "deleted": false,
@@ -3379,8 +3767,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 AM: Raya (shoulder) remains uncertain for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:09 AM: Raya (shoulder) has resumed training...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -3394,7 +3782,6 @@
           "shortName": "D. Raya"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "d7x2bv53mwpjq1gg",
         "deleted": false,
         "cells": [
@@ -3445,8 +3832,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 20, 6:21 PM: Cash (concussion) is set to miss the...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:23 AM: Cash (concussion) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -3460,6 +3847,7 @@
           "shortName": "M. Cash"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "jvwjppugmwp3h5gr",
         "deleted": false,
@@ -3528,6 +3916,7 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "jvwjppugmwp3h5gr",
         "deleted": false,
         "cells": [
@@ -3591,7 +3980,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "me9xuksfmwkfnfve",
         "deleted": false,
@@ -3655,7 +4043,6 @@
           "shortName": "B. White"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "me9xuksfmwkfnfve",
         "deleted": false,
         "cells": [
@@ -3717,6 +4104,7 @@
           "shortName": "T. Adams"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "oqy7fzbamwixdvhm",
         "deleted": false,
@@ -3785,6 +4173,7 @@
           "shortName": "R. Araujo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oqy7fzbamwixdvhm",
         "deleted": false,
         "cells": [
@@ -3831,8 +4220,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 23, 6:39 AM: Fernandes registered four shots (three...",
-              "typeId": "9"
+              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 28",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Nov 27, 8:49 AM: Fernandes (illness) will have his...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -3846,7 +4239,6 @@
           "shortName": "Bruno Fernandes"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "n68i1uokmwixciie",
         "deleted": false,
@@ -3915,7 +4307,6 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "n68i1uokmwixciie",
         "deleted": false,
         "cells": [
@@ -3977,6 +4368,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "ak9vr6pcmwb0mpqt",
         "deleted": false,
@@ -4045,6 +4437,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ak9vr6pcmwb0mpqt",
         "deleted": false,
         "cells": [
@@ -4106,6 +4499,7 @@
           "shortName": "G. Gudmundsson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ak9vr6pcmwb0mpqt",
         "deleted": false,
         "cells": [
@@ -4151,8 +4545,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -4166,6 +4560,7 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ak9vr6pcmwb0mpqt",
         "deleted": false,
         "cells": [
@@ -4227,7 +4622,6 @@
           "shortName": "P. Porro"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "b2l9fnyhmwaj4xvf",
         "deleted": false,
@@ -4291,7 +4685,6 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "b2l9fnyhmwaj4xvf",
         "deleted": false,
         "cells": [
@@ -4353,6 +4746,7 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5cyskt8dmw9r550t",
         "deleted": false,
@@ -4406,8 +4800,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 23, 6:39 AM: Fernandes registered four shots (three...",
-              "typeId": "9"
+              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 28",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Nov 27, 8:49 AM: Fernandes (illness) will have his...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -4421,6 +4819,7 @@
           "shortName": "Bruno Fernandes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "5cyskt8dmw9r550t",
         "deleted": false,
         "cells": [
@@ -4482,7 +4881,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "lblh9qgomw8xhx5v",
         "deleted": false,
@@ -4551,7 +4949,6 @@
           "shortName": "B. Kamara"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "lblh9qgomw8xhx5v",
         "deleted": false,
         "cells": [
@@ -4598,8 +4995,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 PM: Munoz was forced off with a knee knock...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -4614,6 +5011,7 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "88x9u3t3mw8c3u9w",
         "deleted": false,
@@ -4684,6 +5082,7 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "88x9u3t3mw8c3u9w",
         "deleted": false,
         "cells": [
@@ -4747,7 +5146,6 @@
           "shortName": "T. George"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s4abf28gmw8anuem",
         "deleted": false,
@@ -4816,7 +5214,6 @@
           "shortName": "Mateus Fernandes"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "s4abf28gmw8anuem",
         "deleted": false,
         "cells": [
@@ -4878,6 +5275,7 @@
           "shortName": "J. Hill"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "8dtxg6vamw8a6it1",
         "deleted": false,
@@ -4951,6 +5349,7 @@
           "shortName": "M. Belloumi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8dtxg6vamw8a6it1",
         "deleted": false,
         "cells": [
@@ -5007,7 +5406,6 @@
           "shortName": "E. Buendia"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mvpqttxomw8a6iso",
         "deleted": false,
@@ -5079,7 +5477,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mvpqttxomw8a6iso",
         "deleted": false,
         "cells": [
@@ -5141,6 +5538,7 @@
           "shortName": "J. King"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
@@ -5204,6 +5602,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
         "cells": [
@@ -5265,6 +5664,7 @@
           "shortName": "J. Garner"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
         "cells": [
@@ -5321,6 +5721,7 @@
           "shortName": "A. Scott"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g71moumimw87d68i",
         "deleted": false,
         "cells": [
@@ -5381,7 +5782,6 @@
           "shortName": "J. Mateta"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rec3ihjcmw86fmk9",
         "deleted": false,
@@ -5437,8 +5837,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:07 AM: Xhaka (calf) will miss Thursday's...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -5452,7 +5852,6 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "rec3ihjcmw86fmk9",
         "deleted": false,
         "cells": [
@@ -5514,6 +5913,7 @@
           "shortName": "L. Delap"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "hk22nedumw86fmjz",
         "deleted": false,
@@ -5580,6 +5980,7 @@
           "shortName": "B. White"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "hk22nedumw86fmjz",
         "deleted": false,
         "cells": [
@@ -5636,7 +6037,6 @@
           "shortName": "A. Robertson"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ksfsywo6mw68q8a5",
         "deleted": false,
@@ -5707,7 +6107,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "ksfsywo6mw68q8a5",
         "deleted": false,
         "cells": [
@@ -5769,6 +6168,7 @@
           "shortName": "A. Kinsky"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3j8ns0d8mw5c0xpb",
         "deleted": false,
@@ -5826,8 +6226,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 AM: Raya (shoulder) remains uncertain for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:09 AM: Raya (shoulder) has resumed training...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -5841,6 +6241,7 @@
           "shortName": "D. Raya"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "3j8ns0d8mw5c0xpb",
         "deleted": false,
         "cells": [
@@ -5904,7 +6305,6 @@
           "shortName": "T. George"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "ayyl6nmfmw59px4y",
         "deleted": false,
@@ -5973,6 +6373,7 @@
           "shortName": "I. Maatsen"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9nafkzb6mw4zd2h9",
         "deleted": false,
@@ -6041,6 +6442,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9nafkzb6mw4zd2h9",
         "deleted": false,
         "cells": [
@@ -6102,7 +6504,6 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ynxomqyumw4zcaj0",
         "deleted": false,
@@ -6171,7 +6572,6 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "ynxomqyumw4zcaj0",
         "deleted": false,
         "cells": [
@@ -6228,6 +6628,7 @@
           "shortName": "Matheus Nunes"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g35ctvqbmw43s5g0",
         "deleted": false,
@@ -6296,6 +6697,7 @@
           "shortName": "P. Porro"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g35ctvqbmw43s5g0",
         "deleted": false,
         "cells": [
@@ -6354,7 +6756,6 @@
           "shortName": "C. Tzolis"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "zkrpyz7zmw3ydbmy",
         "deleted": false,
@@ -6425,7 +6826,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "zkrpyz7zmw3ydbmy",
         "deleted": false,
         "cells": [
@@ -6487,6 +6887,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
@@ -6555,6 +6956,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
         "cells": [
@@ -6613,6 +7015,7 @@
           "shortName": "C. Tzolis"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
         "cells": [
@@ -6674,6 +7077,7 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ksmv66zqmw3ycutb",
         "deleted": false,
         "cells": [
@@ -6730,7 +7134,6 @@
           "shortName": "Matheus Nunes"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "y8glykhqmw3wuofh",
         "deleted": false,
@@ -6802,7 +7205,6 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "y8glykhqmw3wuofh",
         "deleted": false,
         "cells": [
@@ -6864,6 +7266,7 @@
           "shortName": "W. Osula"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1lwbf4yqmw3wui4g",
         "deleted": false,
@@ -6937,6 +7340,7 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "1lwbf4yqmw3wui4g",
         "deleted": false,
         "cells": [
@@ -6998,7 +7402,6 @@
           "shortName": "B. Kamara"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6u3kfctgmw3umv9l",
         "deleted": false,
@@ -7067,7 +7470,6 @@
           "shortName": "J. Rudoni"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "6u3kfctgmw3umv9l",
         "deleted": false,
         "cells": [
@@ -7129,6 +7531,7 @@
           "shortName": "J. Rudoni"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "pcll0rqrmw2kpbpd",
         "deleted": false,
@@ -7197,6 +7600,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "pcll0rqrmw2kpbpd",
         "deleted": false,
         "cells": [
@@ -7257,7 +7661,6 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cc6puaovmw2fe3sp",
         "deleted": false,
@@ -7321,7 +7724,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cc6puaovmw2fe3sp",
         "deleted": false,
         "cells": [
@@ -7385,6 +7787,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qbu4shcdmw2fdndb",
         "deleted": false,
@@ -7453,6 +7856,7 @@
           "shortName": "Mateus Fernandes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qbu4shcdmw2fdndb",
         "deleted": false,
         "cells": [
@@ -7514,7 +7918,6 @@
           "shortName": "N. Williams"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "p87yapg6mw25rv6v",
         "deleted": false,
@@ -7583,7 +7986,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "p87yapg6mw25rv6v",
         "deleted": false,
         "cells": [
@@ -7640,6 +8042,7 @@
           "shortName": "C. Kostoulas"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v7cp71esmw03qytl",
         "deleted": false,
@@ -7698,7 +8101,7 @@
             },
             {
               "tooltip": "Nov 26, 9:06 AM: Caicedo (back) is available for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -7712,6 +8115,7 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "v7cp71esmw03qytl",
         "deleted": false,
         "cells": [
@@ -7773,7 +8177,6 @@
           "shortName": "B. Barcola"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "tzhpjucjmvzx6oev",
         "deleted": false,
@@ -7848,7 +8251,6 @@
           "shortName": "M. Guehi"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "tzhpjucjmvzx6oev",
         "deleted": false,
         "cells": [
@@ -7908,6 +8310,7 @@
           "shortName": "B. White"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "t7kesdghmvzsziay",
         "deleted": false,
@@ -7976,6 +8379,7 @@
           "shortName": "J. Justin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "t7kesdghmvzsziay",
         "deleted": false,
         "cells": [
@@ -8036,7 +8440,6 @@
           "shortName": "J. Tarkowski"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "zfi47lmkmvzszayv",
         "deleted": false,
@@ -8105,7 +8508,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "zfi47lmkmvzszayv",
         "deleted": false,
         "cells": [
@@ -8167,6 +8569,7 @@
           "shortName": "B. Barcola"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 6,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
@@ -8224,8 +8627,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -8239,6 +8642,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -8300,6 +8704,7 @@
           "shortName": "S. Ajayi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -8347,7 +8752,7 @@
             },
             {
               "tooltip": "Nov 20, 9:19 AM: Tel (Achilles) will miss Saturday's...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -8362,6 +8767,7 @@
           "shortName": "M. Tel"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -8408,8 +8814,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 PM: Munoz was forced off with a knee knock...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -8424,6 +8830,7 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -8480,6 +8887,7 @@
           "shortName": "A. Robertson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9ynyyf6lmvxn1g8w",
         "deleted": false,
         "cells": [
@@ -8541,7 +8949,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "hzqv6uq1mvwl1dr7",
         "deleted": false,
@@ -8610,7 +9017,6 @@
           "shortName": "Y. Ayari"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "hzqv6uq1mvwl1dr7",
         "deleted": false,
         "cells": [
@@ -8656,8 +9062,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:07 AM: Xhaka (calf) will miss Thursday's...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -8671,6 +9077,7 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rc4uzid1mvw9kq4e",
         "deleted": false,
@@ -8734,6 +9141,7 @@
           "shortName": "Y. Wissa"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rc4uzid1mvw9kq4e",
         "deleted": false,
         "cells": [
@@ -8776,12 +9184,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Calf - Out for next game - Expected return Dec 2",
+              "tooltip": "Calf - Out for next game - Expected return Dec 12",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 12:39 PM: Gakpo (calf) won't play Wednesday...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -8796,7 +9204,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mj0goy5smvvjpigq",
         "deleted": false,
@@ -8860,7 +9267,6 @@
           "shortName": "B. White"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mj0goy5smvvjpigq",
         "deleted": false,
         "cells": [
@@ -8924,6 +9330,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "0h3jlrdqmvvgqepz",
         "deleted": false,
@@ -8987,7 +9394,6 @@
           "shortName": "D. Ndoye"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0315eie4mvvaymz9",
         "deleted": false,
@@ -9056,7 +9462,6 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "0315eie4mvvaymz9",
         "deleted": false,
         "cells": [
@@ -9118,6 +9523,7 @@
           "shortName": "B. Barcola"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
@@ -9175,8 +9581,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -9190,6 +9596,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
         "cells": [
@@ -9251,6 +9658,7 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
         "cells": [
@@ -9307,6 +9715,7 @@
           "shortName": "A. Robertson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8qfefyr4mvvaoyjp",
         "deleted": false,
         "cells": [
@@ -9353,7 +9762,7 @@
             },
             {
               "tooltip": "Nov 26, 9:34 AM: Lacroix (hamstring) remains sidelined...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9367,7 +9776,6 @@
           "shortName": "M. Lacroix"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5j1hw3y2mvv766mo",
         "deleted": false,
@@ -9436,7 +9844,6 @@
           "shortName": "I. Maatsen"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5j1hw3y2mvv766mo",
         "deleted": false,
         "cells": [
@@ -9495,6 +9902,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ysed2moqmvuw153u",
         "deleted": false,
@@ -9551,12 +9959,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Undisclosed - Late fitness test (Game-time decision) - Expected return Nov 29",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 21, 6:21 PM: Hall was replaced in the closing stages...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:33 AM: Hall (cramp) trained fully throughout...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -9570,6 +9974,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ysed2moqmvuw153u",
         "deleted": false,
         "cells": [
@@ -9620,8 +10025,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -9635,7 +10040,6 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5f9bo4yamvuw153l",
         "deleted": false,
@@ -9707,7 +10111,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5f9bo4yamvuw153l",
         "deleted": false,
         "cells": [
@@ -9769,6 +10172,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "i3pbo3f7mvuw153h",
         "deleted": false,
@@ -9841,6 +10245,7 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "i3pbo3f7mvuw153h",
         "deleted": false,
         "cells": [
@@ -9901,7 +10306,6 @@
           "shortName": "Joao Pedro"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s4x7ayz6mvuw153b",
         "deleted": false,
@@ -9975,7 +10379,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "s4x7ayz6mvuw153b",
         "deleted": false,
         "cells": [
@@ -10022,8 +10425,12 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 23, 6:39 AM: Fernandes registered four shots (three...",
-              "typeId": "9"
+              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 28",
+              "typeId": "1"
+            },
+            {
+              "tooltip": "Nov 27, 8:49 AM: Fernandes (illness) will have his...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10037,6 +10444,7 @@
           "shortName": "Bruno Fernandes"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "nr0p7f9zmvuw1530",
         "deleted": false,
@@ -10113,6 +10521,7 @@
           "shortName": "Rayan"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nr0p7f9zmvuw1530",
         "deleted": false,
         "cells": [
@@ -10166,8 +10575,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 20, 6:21 PM: Cash (concussion) is set to miss the...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:23 AM: Cash (concussion) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10181,7 +10590,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "c0p32oramvuw152w",
         "deleted": false,
@@ -10248,7 +10656,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "c0p32oramvuw152w",
         "deleted": false,
         "cells": [
@@ -10310,6 +10717,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ylc65mw5mvul2sy6",
         "deleted": false,
@@ -10378,6 +10786,7 @@
           "shortName": "Y. Ayari"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ylc65mw5mvul2sy6",
         "deleted": false,
         "cells": [
@@ -10439,7 +10848,6 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "e7phmdlbmvul28rp",
         "deleted": false,
@@ -10508,7 +10916,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "e7phmdlbmvul28rp",
         "deleted": false,
         "cells": [
@@ -10570,6 +10977,7 @@
           "shortName": "L. Vuskovic"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s4peghq9mvtygqhw",
         "deleted": false,
@@ -10633,6 +11041,7 @@
           "shortName": "A. Stach"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "s4peghq9mvtygqhw",
         "deleted": false,
         "cells": [
@@ -10694,7 +11103,6 @@
           "shortName": "L. Vuskovic"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "1e3g05qqmvty8mnz",
         "deleted": false,
@@ -10758,7 +11166,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "1e3g05qqmvty8mnz",
         "deleted": false,
         "cells": [
@@ -10820,6 +11227,7 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wt5mn187mvttfk0c",
         "deleted": false,
@@ -10888,6 +11296,7 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wt5mn187mvttfk0c",
         "deleted": false,
         "cells": [
@@ -10935,7 +11344,7 @@
             },
             {
               "tooltip": "Nov 20, 9:19 AM: Tel (Achilles) will miss Saturday's...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -10950,7 +11359,6 @@
           "shortName": "M. Tel"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "98znkv85mvtcaxn2",
         "deleted": false,
@@ -11011,8 +11419,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 AM: Raya (shoulder) remains uncertain for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:09 AM: Raya (shoulder) has resumed training...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -11026,6 +11434,7 @@
           "shortName": "D. Raya"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 3,
         "txSetId": "8kyuh5s8mvtc7mf4",
         "deleted": false,
@@ -11094,6 +11503,7 @@
           "shortName": "A. Kinsky"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8kyuh5s8mvtc7mf4",
         "deleted": false,
         "cells": [
@@ -11155,6 +11565,7 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8kyuh5s8mvtc7mf4",
         "deleted": false,
         "cells": [
@@ -11205,8 +11616,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 20, 6:21 PM: Cash (concussion) is set to miss the...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:23 AM: Cash (concussion) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -11220,7 +11631,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
@@ -11291,7 +11701,6 @@
           "shortName": "Rayan"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
         "cells": [
@@ -11348,7 +11757,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
         "cells": [
@@ -11410,7 +11818,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kopgv0tbmvtav05w",
         "deleted": false,
         "cells": [
@@ -11472,6 +11879,7 @@
           "shortName": "Antonio Silva"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "k3lb9j3imvsm7i7m",
         "deleted": false,
@@ -11540,6 +11948,7 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "k3lb9j3imvsm7i7m",
         "deleted": false,
         "cells": [
@@ -11602,7 +12011,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "k2m5ikucmvsdcdvm",
         "deleted": false,
@@ -11671,7 +12079,6 @@
           "shortName": "E. Eze"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k2m5ikucmvsdcdvm",
         "deleted": false,
         "cells": [
@@ -11733,6 +12140,7 @@
           "shortName": "W. Osula"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v7yhv83bmvsd9a4h",
         "deleted": false,
@@ -11801,6 +12209,7 @@
           "shortName": "E. Eze"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "v7yhv83bmvsd9a4h",
         "deleted": false,
         "cells": [
@@ -11864,7 +12273,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
@@ -11930,7 +12338,6 @@
           "shortName": "C. Tzolis"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
         "cells": [
@@ -11976,8 +12383,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -11991,7 +12398,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
         "cells": [
@@ -12053,7 +12459,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "diinerpnmvsd3p1n",
         "deleted": false,
         "cells": [
@@ -12115,6 +12520,7 @@
           "shortName": "R. Araujo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7x1bfezemvrkck06",
         "deleted": false,
@@ -12183,6 +12589,7 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7x1bfezemvrkck06",
         "deleted": false,
         "cells": [
@@ -12225,12 +12632,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Calf - Out for next game - Expected return Dec 2",
+              "tooltip": "Calf - Out for next game - Expected return Dec 12",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 12:39 PM: Gakpo (calf) won't play Wednesday...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -12245,7 +12652,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3oibtsewmvprp0hp",
         "deleted": false,
@@ -12314,7 +12720,6 @@
           "shortName": "J. Kluivert"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3oibtsewmvprp0hp",
         "deleted": false,
         "cells": [
@@ -12376,6 +12781,7 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
@@ -12439,6 +12845,7 @@
           "shortName": "G. García"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
         "cells": [
@@ -12500,6 +12907,7 @@
           "shortName": "P. Porro"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
         "cells": [
@@ -12561,6 +12969,7 @@
           "shortName": "T. Barry"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "brjjrj25mvozgq4i",
         "deleted": false,
         "cells": [
@@ -12611,8 +13020,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -12626,7 +13035,6 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
@@ -12695,7 +13103,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
         "cells": [
@@ -12757,7 +13164,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
         "cells": [
@@ -12804,8 +13210,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Nov 22, 10:30 AM: Maguire (back) is on the bench for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Maguire (undisclosed) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -12819,7 +13225,6 @@
           "shortName": "H. Maguire"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wm2tkd4imvoxbx7b",
         "deleted": false,
         "cells": [
@@ -12881,6 +13286,7 @@
           "shortName": "Emiliano Martinez"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "giuylpvomvo7ase0",
         "deleted": false,
@@ -12941,8 +13347,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 20, 6:21 PM: Cash (concussion) is set to miss the...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:23 AM: Cash (concussion) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -12956,7 +13362,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "j83tn700mvl65ech",
         "deleted": false,
@@ -13020,7 +13425,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "j83tn700mvl65ech",
         "deleted": false,
         "cells": [
@@ -13077,6 +13481,7 @@
           "shortName": "A. Stach"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "a2p0gbhmmvl3bs7q",
         "deleted": false,
@@ -13130,8 +13535,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 PM: Munoz was forced off with a knee knock...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -13146,6 +13551,7 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "a2p0gbhmmvl3bs7q",
         "deleted": false,
         "cells": [
@@ -13202,7 +13608,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0d10w63cmvl3bgci",
         "deleted": false,
@@ -13256,8 +13661,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 3:48 PM: Munoz was forced off with a knee knock...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -13272,7 +13677,6 @@
           "shortName": "V. Muñoz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "0d10w63cmvl3bgci",
         "deleted": false,
         "cells": [
@@ -13333,6 +13737,7 @@
           "shortName": "J. Mateta"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "higmztrhmvl27m4q",
         "deleted": false,
@@ -13396,6 +13801,7 @@
           "shortName": "Y. Wissa"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "higmztrhmvl27m4q",
         "deleted": false,
         "cells": [
@@ -13452,7 +13858,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "iww3btlsmvl1xm4f",
         "deleted": false,
@@ -13523,7 +13928,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "iww3btlsmvl1xm4f",
         "deleted": false,
         "cells": [
@@ -13585,6 +13989,7 @@
           "shortName": "N. Mukiele"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "be2h794umvksb1cu",
         "deleted": false,
@@ -13655,6 +14060,7 @@
           "shortName": "K. Schade"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "be2h794umvksb1cu",
         "deleted": false,
         "cells": [
@@ -13716,7 +14122,6 @@
           "shortName": "J. Hill"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3eikl55mmvks92hl",
         "deleted": false,
@@ -13785,7 +14190,6 @@
           "shortName": "A. Isak"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3eikl55mmvks92hl",
         "deleted": false,
         "cells": [
@@ -13828,12 +14232,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Calf - Out for next game - Expected return Dec 2",
+              "tooltip": "Calf - Out for next game - Expected return Dec 12",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 12:39 PM: Gakpo (calf) won't play Wednesday...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -13848,6 +14252,7 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rwryjsq3mvk1qjwd",
         "deleted": false,
@@ -13902,7 +14307,7 @@
             },
             {
               "tooltip": "Nov 20, 4:44 AM: Saka (quadriceps) is expected to remain...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -13917,6 +14322,7 @@
           "shortName": "B. Saka"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rwryjsq3mvk1qjwd",
         "deleted": false,
         "cells": [
@@ -13978,7 +14384,6 @@
           "shortName": "J. Pickford"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "jxthboycmvk1pk19",
         "deleted": false,
@@ -14047,6 +14452,7 @@
           "shortName": "E. Eze"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ez7wak3jmvjxlaln",
         "deleted": false,
@@ -14110,6 +14516,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ez7wak3jmvjxlaln",
         "deleted": false,
         "cells": [
@@ -14171,7 +14578,6 @@
           "shortName": "G. Gudmundsson"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "vk4h99wjmvjsp9bf",
         "deleted": false,
@@ -14240,7 +14646,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "vk4h99wjmvjsp9bf",
         "deleted": false,
         "cells": [
@@ -14302,6 +14707,7 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "07isxbdhmvjsorb0",
         "deleted": false,
@@ -14370,6 +14776,7 @@
           "shortName": "G. Gudmundsson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "07isxbdhmvjsorb0",
         "deleted": false,
         "cells": [
@@ -14426,7 +14833,6 @@
           "shortName": "R. Cherki"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
@@ -14497,7 +14903,6 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
         "cells": [
@@ -14559,7 +14964,6 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
         "cells": [
@@ -14623,7 +15027,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w0lejiq2mvjsjjmt",
         "deleted": false,
         "cells": [
@@ -14680,6 +15083,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "060z39sumvihl5f9",
         "deleted": false,
@@ -14748,7 +15152,6 @@
           "shortName": "J. Strand Larsen"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "g2lubim3mvibczxh",
         "deleted": false,
@@ -14821,7 +15224,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "g2lubim3mvibczxh",
         "deleted": false,
         "cells": [
@@ -14883,7 +15285,6 @@
           "shortName": "P. Porro"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "g2lubim3mvibczxh",
         "deleted": false,
         "cells": [
@@ -14945,6 +15346,7 @@
           "shortName": "M. Gibbs-White"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "4xc4c7rlmviafgpz",
         "deleted": false,
@@ -15013,6 +15415,7 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "4xc4c7rlmviafgpz",
         "deleted": false,
         "cells": [
@@ -15073,7 +15476,6 @@
           "shortName": "J. Tarkowski"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ozl406y5mvh3vsws",
         "deleted": false,
@@ -15142,7 +15544,6 @@
           "shortName": "J. Justin"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "ozl406y5mvh3vsws",
         "deleted": false,
         "cells": [
@@ -15204,6 +15605,7 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xphkitytmvgvn4gi",
         "deleted": false,
@@ -15261,8 +15663,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -15276,6 +15678,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "xphkitytmvgvn4gi",
         "deleted": false,
         "cells": [
@@ -15337,7 +15740,6 @@
           "shortName": "W. Osula"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xwtrlxbamvgfx27p",
         "deleted": false,
@@ -15407,7 +15809,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "xwtrlxbamvgfx27p",
         "deleted": false,
         "cells": [
@@ -15469,6 +15870,7 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "juxk249jmvfvdqam",
         "deleted": false,
@@ -15540,6 +15942,7 @@
           "shortName": "M. Gibbs-White"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "juxk249jmvfvdqam",
         "deleted": false,
         "cells": [
@@ -15602,7 +16005,6 @@
           "shortName": "Ismaila Sarr"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5gz0yvu6mvfvdqaf",
         "deleted": false,
@@ -15674,7 +16076,6 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "5gz0yvu6mvfvdqaf",
         "deleted": false,
         "cells": [
@@ -15736,6 +16137,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "c7ym71eumvfvdqab",
         "deleted": false,
@@ -15807,6 +16209,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "c7ym71eumvfvdqab",
         "deleted": false,
         "cells": [
@@ -15849,12 +16252,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Calf - Out for next game - Expected return Dec 2",
+              "tooltip": "Calf - Out for next game - Expected return Dec 12",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 12:39 PM: Gakpo (calf) won't play Wednesday...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -15869,7 +16272,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cim7040omvfvdqa8",
         "deleted": false,
@@ -15936,7 +16338,6 @@
           "shortName": "M. Sangaré"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cim7040omvfvdqa8",
         "deleted": false,
         "cells": [
@@ -15998,6 +16399,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9vrl1qdfmvfvdqa3",
         "deleted": false,
@@ -16064,6 +16466,7 @@
           "shortName": "R. Cherki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "9vrl1qdfmvfvdqa3",
         "deleted": false,
         "cells": [
@@ -16125,7 +16528,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mn4kwoedmvfvdq9s",
         "deleted": false,
@@ -16181,8 +16583,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -16196,7 +16598,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mn4kwoedmvfvdq9s",
         "deleted": false,
         "cells": [
@@ -16259,6 +16660,7 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "q9lk4zyrmvfrn6uw",
         "deleted": false,
@@ -16327,6 +16729,7 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "q9lk4zyrmvfrn6uw",
         "deleted": false,
         "cells": [
@@ -16389,7 +16792,6 @@
           "shortName": "E. Kroupi"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "96mdck8umvfrmz3h",
         "deleted": false,
@@ -16439,8 +16841,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Knee - Out for next game - Expected return Dec 19",
+              "tooltip": "Knee - Out for next game - Expected return Dec 5",
               "typeId": "30"
+            },
+            {
+              "tooltip": "Nov 27, 8:37 AM: Semenyo (knee) is nearing a return to...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -16455,7 +16861,6 @@
           "shortName": "A. Semenyo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "96mdck8umvfrmz3h",
         "deleted": false,
         "cells": [
@@ -16517,6 +16922,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "488tajtlmvfrbd34",
         "deleted": false,
@@ -16585,6 +16991,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "488tajtlmvfrbd34",
         "deleted": false,
         "cells": [
@@ -16645,7 +17052,6 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
@@ -16714,7 +17120,6 @@
           "shortName": "T. Barry"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -16776,7 +17181,6 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -16833,7 +17237,6 @@
           "shortName": "C. Kostoulas"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "epgpo8vhmvflz26a",
         "deleted": false,
         "cells": [
@@ -16895,6 +17298,7 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "5r0sgmxqmvf5gci2",
         "deleted": false,
@@ -16966,6 +17370,7 @@
           "shortName": "J. van Hecke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "5r0sgmxqmvf5gci2",
         "deleted": false,
         "cells": [
@@ -17016,8 +17421,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -17031,7 +17436,6 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v84hmuufmve0eko6",
         "deleted": false,
@@ -17100,7 +17504,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v84hmuufmve0eko6",
         "deleted": false,
         "cells": [
@@ -17162,6 +17565,7 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "cjwy2x77mve0e2sc",
         "deleted": false,
@@ -17232,6 +17636,7 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "cjwy2x77mve0e2sc",
         "deleted": false,
         "cells": [
@@ -17293,7 +17698,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "i4d9mv5umve0du0o",
         "deleted": false,
@@ -17364,7 +17768,6 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "i4d9mv5umve0du0o",
         "deleted": false,
         "cells": [
@@ -17426,6 +17829,7 @@
           "shortName": "S. Ajayi"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
@@ -17483,8 +17887,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 25, 9:28 AM: Boscagli (illness) is out for...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:21 AM: Boscagli (illness) is expected to be...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -17498,6 +17902,7 @@
           "shortName": "O. Boscagli"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -17559,6 +17964,7 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -17622,6 +18028,7 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "8yfe7fixmvcinnuj",
         "deleted": false,
         "cells": [
@@ -17683,7 +18090,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
@@ -17747,7 +18153,6 @@
           "shortName": "O. Aina"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -17798,8 +18203,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 20, 6:21 PM: Cash (concussion) is set to miss the...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:23 AM: Cash (concussion) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -17813,7 +18218,6 @@
           "shortName": "M. Cash"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -17859,8 +18263,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -17874,7 +18278,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uws06iljmvc9zak5",
         "deleted": false,
         "cells": [
@@ -17938,6 +18341,7 @@
           "shortName": "K. Schade"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "bd3183hlmvc9tekd",
         "deleted": false,
@@ -18006,6 +18410,7 @@
           "shortName": "J. Hill"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bd3183hlmvc9tekd",
         "deleted": false,
         "cells": [
@@ -18067,7 +18472,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w8mzze3pmvbxjl6l",
         "deleted": false,
@@ -18136,7 +18540,6 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w8mzze3pmvbxjl6l",
         "deleted": false,
         "cells": [
@@ -18198,6 +18601,7 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g5dotpxumvbxgz56",
         "deleted": false,
@@ -18266,6 +18670,7 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g5dotpxumvbxgz56",
         "deleted": false,
         "cells": [
@@ -18327,7 +18732,6 @@
           "shortName": "D. Munoz"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "dd2psngymvbiis5c",
         "deleted": false,
@@ -18396,7 +18800,6 @@
           "shortName": "L. Colwill"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "dd2psngymvbiis5c",
         "deleted": false,
         "cells": [
@@ -18458,6 +18861,7 @@
           "shortName": "Y. Ayari"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "85l4gjdzmvbg4k0w",
         "deleted": false,
@@ -18526,6 +18930,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "85l4gjdzmvbg4k0w",
         "deleted": false,
         "cells": [
@@ -18587,7 +18992,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "dzxt9dxmmvbg49e4",
         "deleted": false,
@@ -18656,7 +19060,6 @@
           "shortName": "B. Thomas"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "dzxt9dxmmvbg49e4",
         "deleted": false,
         "cells": [
@@ -18718,6 +19121,7 @@
           "shortName": "S. Tonali"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wrhlh1yvmvbfv77p",
         "deleted": false,
@@ -18786,6 +19190,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wrhlh1yvmvbfv77p",
         "deleted": false,
         "cells": [
@@ -18832,12 +19237,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Undisclosed - Late fitness test (Game-time decision) - Expected return Nov 29",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 21, 6:21 PM: Hall was replaced in the closing stages...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:33 AM: Hall (cramp) trained fully throughout...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -18851,7 +19252,6 @@
           "shortName": "L. Hall"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "feuu1kq8mvbfew24",
         "deleted": false,
@@ -18915,7 +19315,6 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "feuu1kq8mvbfew24",
         "deleted": false,
         "cells": [
@@ -18972,6 +19371,7 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "uh5r1qcymvbfelte",
         "deleted": false,
@@ -19025,12 +19425,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Undisclosed - Late fitness test (Game-time decision) - Expected return Nov 29",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 21, 6:21 PM: Hall was replaced in the closing stages...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:33 AM: Hall (cramp) trained fully throughout...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -19044,6 +19440,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "uh5r1qcymvbfelte",
         "deleted": false,
         "cells": [
@@ -19100,7 +19497,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "76wdspo9mvbfbu6c",
         "deleted": false,
@@ -19169,7 +19565,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "76wdspo9mvbfbu6c",
         "deleted": false,
         "cells": [
@@ -19226,6 +19621,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7m5ax9opmvbfblme",
         "deleted": false,
@@ -19294,6 +19690,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7m5ax9opmvbfblme",
         "deleted": false,
         "cells": [
@@ -19352,7 +19749,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7unpam5qmvbfb8bs",
         "deleted": false,
@@ -19421,7 +19817,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "7unpam5qmvbfb8bs",
         "deleted": false,
         "cells": [
@@ -19483,6 +19878,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7lb34yi6mvbfb026",
         "deleted": false,
@@ -19548,6 +19944,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7lb34yi6mvbfb026",
         "deleted": false,
         "cells": [
@@ -19609,7 +20006,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "3d80e42mmvbf8un9",
         "deleted": false,
@@ -19675,7 +20071,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "3d80e42mmvbf8un9",
         "deleted": false,
         "cells": [
@@ -19732,6 +20127,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "n2g6xedumvbf8k8r",
         "deleted": false,
@@ -19800,6 +20196,7 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "n2g6xedumvbf8k8r",
         "deleted": false,
         "cells": [
@@ -19856,7 +20253,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mvta3gmtmvbf8ays",
         "deleted": false,
@@ -19925,7 +20321,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mvta3gmtmvbf8ays",
         "deleted": false,
         "cells": [
@@ -19984,6 +20379,7 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "eygbkc8mmvbf7wuy",
         "deleted": false,
@@ -20047,6 +20443,7 @@
           "shortName": "R. Sessegnon"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "eygbkc8mmvbf7wuy",
         "deleted": false,
         "cells": [
@@ -20108,7 +20505,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "x13ryhibmvbf3zj3",
         "deleted": false,
@@ -20172,7 +20568,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "x13ryhibmvbf3zj3",
         "deleted": false,
         "cells": [
@@ -20236,6 +20631,7 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "5yn6slqumvbf3h68",
         "deleted": false,
@@ -20304,7 +20700,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
@@ -20373,7 +20768,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
         "cells": [
@@ -20437,7 +20831,6 @@
           "shortName": "J. Anthony"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "cccx1z01mvbf33v9",
         "deleted": false,
         "cells": [
@@ -20484,12 +20877,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Undisclosed - Late fitness test (Game-time decision) - Expected return Nov 29",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 21, 6:21 PM: Hall was replaced in the closing stages...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:33 AM: Hall (cramp) trained fully throughout...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -20503,6 +20892,7 @@
           "shortName": "L. Hall"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "pqeaeaxemvbf257d",
         "deleted": false,
@@ -20568,7 +20958,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "8hyemwy5mvbf0q75",
         "deleted": false,
@@ -20639,6 +21028,7 @@
           "shortName": "J. Anthony"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "0l65m5qymvbf07r3",
         "deleted": false,
@@ -20707,6 +21097,7 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "0l65m5qymvbf07r3",
         "deleted": false,
         "cells": [
@@ -20768,7 +21159,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
@@ -20839,7 +21229,6 @@
           "shortName": "D. Ouattara"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -20898,7 +21287,6 @@
           "shortName": "A. Maitland-Niles"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -20960,7 +21348,6 @@
           "shortName": "K. Ajer"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "v8xt1zz2mvbextir",
         "deleted": false,
         "cells": [
@@ -21017,6 +21404,7 @@
           "shortName": "El Hadji Malick Diouf"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "uvkpvibtmvbetn0k",
         "deleted": false,
@@ -21087,7 +21475,6 @@
           "shortName": "J. Doku"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "w5xyb79fmvbet2lt",
         "deleted": false,
@@ -21156,7 +21543,6 @@
           "shortName": "N. Okafor"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "w5xyb79fmvbet2lt",
         "deleted": false,
         "cells": [
@@ -21220,6 +21606,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "ie4nzztdmvb9l6g3",
         "deleted": false,
@@ -21288,7 +21675,6 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
@@ -21352,7 +21738,6 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -21416,7 +21801,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -21475,7 +21859,6 @@
           "shortName": "H. Wilson"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yp6x93whmvb9ie0x",
         "deleted": false,
         "cells": [
@@ -21537,6 +21920,7 @@
           "shortName": "J. Branthwaite"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 3,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
@@ -21605,6 +21989,7 @@
           "shortName": "P. Foden"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
         "cells": [
@@ -21668,6 +22053,7 @@
           "shortName": "M. Tavernier"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oql18b32mvb7ug91",
         "deleted": false,
         "cells": [
@@ -21713,8 +22099,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:07 AM: Xhaka (calf) will miss Thursday's...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -21728,7 +22114,6 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "2tbyz9h9mvaz8806",
         "deleted": false,
@@ -21797,7 +22182,6 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "2tbyz9h9mvaz8806",
         "deleted": false,
         "cells": [
@@ -21859,6 +22243,7 @@
           "shortName": "V. Mykolenko"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "bmnzuq4jmvay0qoh",
         "deleted": false,
@@ -21927,6 +22312,7 @@
           "shortName": "P. Foden"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bmnzuq4jmvay0qoh",
         "deleted": false,
         "cells": [
@@ -21988,7 +22374,6 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "s7ttl08imvaxyrfa",
         "deleted": false,
@@ -22057,7 +22442,6 @@
           "shortName": "P. Foden"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "s7ttl08imvaxyrfa",
         "deleted": false,
         "cells": [
@@ -22119,6 +22503,7 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "f77p6t3zmvaxyd9v",
         "deleted": false,
@@ -22187,6 +22572,7 @@
           "shortName": "V. Mykolenko"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "f77p6t3zmvaxyd9v",
         "deleted": false,
         "cells": [
@@ -22248,7 +22634,6 @@
           "shortName": "D. Solanke"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
@@ -22319,7 +22704,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -22383,7 +22767,6 @@
           "shortName": "J. Grealish"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -22445,7 +22828,6 @@
           "shortName": "N. O'Reilly"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gkr5zdqumvau3ou9",
         "deleted": false,
         "cells": [
@@ -22509,6 +22891,7 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "f21tai5smv9rhbgr",
         "deleted": false,
@@ -22576,7 +22959,6 @@
           "shortName": "B. Sesko"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 3,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
@@ -22647,7 +23029,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
         "cells": [
@@ -22690,12 +23071,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Calf - Out for next game - Expected return Dec 2",
+              "tooltip": "Calf - Out for next game - Expected return Dec 12",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 12:39 PM: Gakpo (calf) won't play Wednesday...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -22710,7 +23091,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "t9m0h76jmv9rdu3y",
         "deleted": false,
         "cells": [
@@ -22772,6 +23152,7 @@
           "shortName": "J. Pickford"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "exan0e84mv9eqhif",
         "deleted": false,
@@ -22840,6 +23221,7 @@
           "shortName": "Z. Suzuki"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "exan0e84mv9eqhif",
         "deleted": false,
         "cells": [
@@ -22900,7 +23282,6 @@
           "shortName": "B. Sesko"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "1bus2xcnmv8jrmwh",
         "deleted": false,
@@ -22971,6 +23352,7 @@
           "shortName": "R. Araujo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ld81du0ymv8irfht",
         "deleted": false,
@@ -23034,6 +23416,7 @@
           "shortName": "A. Stach"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ld81du0ymv8irfht",
         "deleted": false,
         "cells": [
@@ -23090,7 +23473,6 @@
           "shortName": "A. Stach"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "kool6l6dmv8ir100",
         "deleted": false,
@@ -23161,7 +23543,6 @@
           "shortName": "J. Doku"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "kool6l6dmv8ir100",
         "deleted": false,
         "cells": [
@@ -23207,8 +23588,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:07 AM: Xhaka (calf) will miss Thursday's...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -23222,6 +23603,7 @@
           "shortName": "G. Xhaka"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "cwxb8od0mv8i8byz",
         "deleted": false,
@@ -23293,7 +23675,6 @@
           "shortName": "A. Khalaili"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qtbw28ylmv8i79y8",
         "deleted": false,
@@ -23362,7 +23743,6 @@
           "shortName": "Antonio Silva"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "qtbw28ylmv8i79y8",
         "deleted": false,
         "cells": [
@@ -23419,6 +23799,7 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
@@ -23489,6 +23870,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -23550,6 +23932,7 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -23613,6 +23996,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qhdauejkmv8fvrht",
         "deleted": false,
         "cells": [
@@ -23669,7 +24053,6 @@
           "shortName": "M. Lewis-Skelly"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 6,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
@@ -23738,7 +24121,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -23800,7 +24182,6 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -23864,7 +24245,6 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -23921,7 +24301,6 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -23985,7 +24364,6 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "r0wcw65emv8fvdp2",
         "deleted": false,
         "cells": [
@@ -24046,6 +24424,7 @@
           "shortName": "Igor Thiago"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "rucjwi18mv7p6ll4",
         "deleted": false,
@@ -24114,6 +24493,7 @@
           "shortName": "N. Jackson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "rucjwi18mv7p6ll4",
         "deleted": false,
         "cells": [
@@ -24174,7 +24554,6 @@
           "shortName": "Y. Pino"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wsa79iefmv5ukwq6",
         "deleted": false,
@@ -24246,7 +24625,6 @@
           "shortName": "D. Szoboszlai"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wsa79iefmv5ukwq6",
         "deleted": false,
         "cells": [
@@ -24308,6 +24686,7 @@
           "shortName": "T. Muharemovic"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "qe8vjkkpmv5ukwq2",
         "deleted": false,
@@ -24379,6 +24758,7 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "qe8vjkkpmv5ukwq2",
         "deleted": false,
         "cells": [
@@ -24435,7 +24815,6 @@
           "shortName": "M. Sangaré"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "xupwp1xwmv5r5tpk",
         "deleted": false,
@@ -24509,7 +24888,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "xupwp1xwmv5r5tpk",
         "deleted": false,
         "cells": [
@@ -24571,6 +24949,7 @@
           "shortName": "J. Jacquet"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "g7zgvhzqmv4xeb8g",
         "deleted": false,
@@ -24639,6 +25018,7 @@
           "shortName": "V. Janelt"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "g7zgvhzqmv4xeb8g",
         "deleted": false,
         "cells": [
@@ -24680,12 +25060,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Hip - Out for next game - Expected return Dec 2",
+              "tooltip": "Hip - Out for next game - Expected return Dec 8",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 6:40 AM: Rashford (hip) was absent from...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:54 AM: Rashford (hip) has resumed on-field...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -24699,7 +25079,6 @@
           "shortName": "M. Rashford"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "b6ijmautmv4cd329",
         "deleted": false,
@@ -24770,7 +25149,6 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "b6ijmautmv4cd329",
         "deleted": false,
         "cells": [
@@ -24827,6 +25205,7 @@
           "shortName": "V. Gyökeres"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "gmq4dth1mv2b1y5d",
         "deleted": false,
@@ -24895,7 +25274,6 @@
           "shortName": "E. Ampadu"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "knan2kv0mv2b1ovf",
         "deleted": false,
@@ -24964,6 +25342,7 @@
           "shortName": "J. McGinn"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "a8bajkgamv29c7yn",
         "deleted": false,
@@ -25034,6 +25413,7 @@
           "shortName": "Rayan"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "a8bajkgamv29c7yn",
         "deleted": false,
         "cells": [
@@ -25090,7 +25470,6 @@
           "shortName": "Omar Marmoush"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wl1l79lpmv292y88",
         "deleted": false,
@@ -25159,7 +25538,6 @@
           "shortName": "K. Havertz"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "wl1l79lpmv292y88",
         "deleted": false,
         "cells": [
@@ -25221,6 +25599,7 @@
           "shortName": "Bruno Guimaraes"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "ib6dj7cvmv28ue5v",
         "deleted": false,
@@ -25289,6 +25668,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "ib6dj7cvmv28ue5v",
         "deleted": false,
         "cells": [
@@ -25350,7 +25730,6 @@
           "shortName": "P. Chavarría"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "02m580ugmv28t6gz",
         "deleted": false,
@@ -25419,7 +25798,6 @@
           "shortName": "Jurrien Timber"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "02m580ugmv28t6gz",
         "deleted": false,
         "cells": [
@@ -25483,6 +25861,7 @@
           "shortName": "N. Madueke"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 1,
         "txSetId": "883m4jkqmv28swv7",
         "deleted": false,
@@ -25541,7 +25920,7 @@
             },
             {
               "tooltip": "Nov 26, 9:06 AM: Caicedo (back) is available for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -25555,7 +25934,6 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gwxxfg5imv26rzng",
         "deleted": false,
@@ -25624,7 +26002,6 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gwxxfg5imv26rzng",
         "deleted": false,
         "cells": [
@@ -25675,8 +26052,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 20, 6:21 PM: Cash (concussion) is set to miss the...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:23 AM: Cash (concussion) is available for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -25690,6 +26067,7 @@
           "shortName": "M. Cash"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "62kz5nibmv240kcu",
         "deleted": false,
@@ -25758,6 +26136,7 @@
           "shortName": "E. Konsa"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "62kz5nibmv240kcu",
         "deleted": false,
         "cells": [
@@ -25819,7 +26198,6 @@
           "shortName": "Antonee Robinson"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "yhm9q5t0mv1gisrp",
         "deleted": false,
@@ -25888,7 +26266,6 @@
           "shortName": "A. Wharton"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "yhm9q5t0mv1gisrp",
         "deleted": false,
         "cells": [
@@ -25950,6 +26327,7 @@
           "shortName": "E. Ampadu"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "7jl88646mv16ccri",
         "deleted": false,
@@ -26018,6 +26396,7 @@
           "shortName": "N. Mukiele"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "7jl88646mv16ccri",
         "deleted": false,
         "cells": [
@@ -26081,7 +26460,6 @@
           "shortName": "M. Belloumi"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m8vqk8rmmv168kx1",
         "deleted": false,
@@ -26150,7 +26528,6 @@
           "shortName": "A. Isak"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "m8vqk8rmmv168kx1",
         "deleted": false,
         "cells": [
@@ -26214,6 +26591,7 @@
           "shortName": "A. Diallo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "v1lmk34omv14xm91",
         "deleted": false,
@@ -26284,6 +26662,7 @@
           "shortName": "O. Bobb"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "v1lmk34omv14xm91",
         "deleted": false,
         "cells": [
@@ -26345,7 +26724,6 @@
           "shortName": "J. Kluivert"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
@@ -26395,12 +26773,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Calf - Out for next game - Expected return Dec 2",
+              "tooltip": "Calf - Out for next game - Expected return Dec 12",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 12:39 PM: Gakpo (calf) won't play Wednesday...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -26415,7 +26793,6 @@
           "shortName": "C. Gakpo"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -26472,7 +26849,6 @@
           "shortName": "B. White"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -26534,7 +26910,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "k8ny1rbamv14nro9",
         "deleted": false,
         "cells": [
@@ -26591,6 +26966,7 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "jfyn3xk2muyktbqt",
         "deleted": false,
@@ -26643,8 +27019,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 6, 9:26 AM: Ruggeri (hamstring) remains sidelined...",
-              "typeId": "8"
+              "tooltip": "Nov 27, 9:24 AM: Ruggeri (hamstring) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -26658,6 +27034,7 @@
           "shortName": "M. Ruggeri"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "jfyn3xk2muyktbqt",
         "deleted": false,
         "cells": [
@@ -26719,7 +27096,6 @@
           "shortName": "M. Kayode"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "gbfgq91umuykl61b",
         "deleted": false,
@@ -26783,7 +27159,6 @@
           "shortName": "M. Palestra"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "gbfgq91umuykl61b",
         "deleted": false,
         "cells": [
@@ -26845,6 +27220,7 @@
           "shortName": "Z. Flemming"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "wafduhn2muykl02s",
         "deleted": false,
@@ -26913,6 +27289,7 @@
           "shortName": "K. Havertz"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "wafduhn2muykl02s",
         "deleted": false,
         "cells": [
@@ -26976,7 +27353,6 @@
           "shortName": "D. Maeda"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 4,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
@@ -27044,7 +27420,6 @@
           "shortName": "R. James"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -27101,7 +27476,6 @@
           "shortName": "L. Shaw"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -27165,7 +27539,6 @@
           "shortName": "K. Lewis-Potter"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "okj70gyamuwd48jc",
         "deleted": false,
         "cells": [
@@ -27222,6 +27595,7 @@
           "shortName": "M. Fernandez-Pardo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 6,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
@@ -27290,6 +27664,7 @@
           "shortName": "E. Eze"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -27351,6 +27726,7 @@
           "shortName": "C. Bassey"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -27412,6 +27788,7 @@
           "shortName": "J. Justin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -27473,6 +27850,7 @@
           "shortName": "D. Calvert-Lewin"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -27536,6 +27914,7 @@
           "shortName": "Iliman Ndiaye"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "bh3azbifmuw6lw58",
         "deleted": false,
         "cells": [
@@ -27599,7 +27978,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 1,
         "txSetId": "cl1v1pozmuvukopt",
         "deleted": false,
@@ -27666,6 +28044,7 @@
           "shortName": "Emersonn"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
@@ -27737,6 +28116,7 @@
           "shortName": "M. Kerkez"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -27793,6 +28173,7 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -27839,12 +28220,8 @@
               "typeId": "32"
             },
             {
-              "tooltip": "Ankle - Late fitness test (Game-time decision) - Expected return Nov 28",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 21, 3:08 PM: Davis is dealing with an ankle injury...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:40 AM: Davis (ankle) has recovered from his...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -27858,6 +28235,7 @@
           "shortName": "L. Davis"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "oczmukl5muvso45m",
         "deleted": false,
         "cells": [
@@ -27919,7 +28297,6 @@
           "shortName": "L. Delap"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "uafn0mzxmuvsn8ip",
         "deleted": false,
@@ -27968,12 +28345,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Hip - Out for next game - Expected return Dec 2",
+              "tooltip": "Hip - Out for next game - Expected return Dec 8",
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 24, 6:40 AM: Rashford (hip) was absent from...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 8:54 AM: Rashford (hip) has resumed on-field...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -27987,7 +28364,6 @@
           "shortName": "M. Rashford"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "uafn0mzxmuvsn8ip",
         "deleted": false,
         "cells": [
@@ -28049,6 +28425,7 @@
           "shortName": "J. Jacquet"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 2,
         "txSetId": "6s56rcqhmuvrnrte",
         "deleted": false,
@@ -28117,6 +28494,7 @@
           "shortName": "D. Rice"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "6s56rcqhmuvrnrte",
         "deleted": false,
         "cells": [
@@ -28178,7 +28556,6 @@
           "shortName": "D. Rice"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "m6er2gqumuvrndw7",
         "deleted": false,
@@ -28247,7 +28624,6 @@
           "shortName": "F. Kadioglu"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "m6er2gqumuvrndw7",
         "deleted": false,
         "cells": [
@@ -28299,7 +28675,7 @@
             },
             {
               "tooltip": "Nov 26, 9:06 AM: Caicedo (back) is available for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -28313,6 +28689,7 @@
           "shortName": "Moises Caicedo"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
@@ -28381,6 +28758,7 @@
           "shortName": "N. Jackson"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -28442,6 +28820,7 @@
           "shortName": "D. Kamada"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -28503,6 +28882,7 @@
           "shortName": "T. Barry"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "calqlwwhmuvrn10e",
         "deleted": false,
         "cells": [
@@ -28559,7 +28939,6 @@
           "shortName": "J. Hinshelwood"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "mcwo6mv0muvri0z7",
         "deleted": false,
@@ -28633,7 +29012,6 @@
           "shortName": "M. Kudus"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "mcwo6mv0muvri0z7",
         "deleted": false,
         "cells": [
@@ -28690,6 +29068,7 @@
           "shortName": "D. Ndoye"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 5,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
@@ -28758,6 +29137,7 @@
           "shortName": "K. Mainoo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -28800,8 +29180,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Knee - Out for next game - Expected return Dec 19",
+              "tooltip": "Knee - Out for next game - Expected return Dec 5",
               "typeId": "30"
+            },
+            {
+              "tooltip": "Nov 27, 8:37 AM: Semenyo (knee) is nearing a return to...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -28816,6 +29200,7 @@
           "shortName": "A. Semenyo"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -28879,6 +29264,7 @@
           "shortName": "A. Elanga"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -28937,6 +29323,7 @@
           "shortName": "Y. Minteh"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "b2y2pbkbmuvrhytp",
         "deleted": false,
         "cells": [
@@ -28998,7 +29385,6 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "9vi1hf2smuvrfudv",
         "deleted": false,
@@ -29067,7 +29453,6 @@
           "shortName": "T. Muharemovic"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "9vi1hf2smuvrfudv",
         "deleted": false,
         "cells": [
@@ -29129,6 +29514,7 @@
           "shortName": "A. Truffert"
         },
         "executed": true,
+        "disabled": true,
         "numInGroup": 4,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
@@ -29192,6 +29578,7 @@
           "shortName": "W. Saliba"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -29253,6 +29640,7 @@
           "shortName": "T. Castagne"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -29314,6 +29702,7 @@
           "shortName": "J. Enciso"
         },
         "executed": true,
+        "disabled": true,
         "txSetId": "nobhjhl6muvreuge",
         "deleted": false,
         "cells": [
@@ -29359,8 +29748,8 @@
               "typeId": "30"
             },
             {
-              "tooltip": "Nov 25, 9:04 AM: Brobbey (muscular) is progressing in...",
-              "typeId": "9"
+              "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -29374,7 +29763,6 @@
           "shortName": "B. Brobbey"
         },
         "executed": true,
-        "disabled": true,
         "numInGroup": 2,
         "txSetId": "me8uv0ksmuvqzjo9",
         "deleted": false,
@@ -29443,7 +29831,6 @@
           "shortName": "Y. Tielemans"
         },
         "executed": true,
-        "disabled": true,
         "txSetId": "me8uv0ksmuvqzjo9",
         "deleted": false,
         "cells": [

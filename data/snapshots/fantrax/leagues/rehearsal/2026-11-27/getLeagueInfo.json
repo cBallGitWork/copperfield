@@ -1081,12 +1081,12 @@
       "eligiblePos": "M",
       "status": "FA"
     },
-    "02ltw": {
-      "eligiblePos": "G",
-      "status": "FA"
-    },
     "05os8": {
       "eligiblePos": "D",
+      "status": "FA"
+    },
+    "02ltw": {
+      "eligiblePos": "G",
       "status": "FA"
     },
     "04lnu": {
@@ -1101,31 +1101,31 @@
       "eligiblePos": "D",
       "status": "FA"
     },
-    "06uzv": {
-      "eligiblePos": "M",
-      "status": "FA"
-    },
     "05os4": {
       "eligiblePos": "D",
       "status": "FA"
     },
-    "062x7": {
-      "eligiblePos": "D",
+    "06uzv": {
+      "eligiblePos": "M",
       "status": "FA"
     },
     "04mr4": {
       "eligiblePos": "G",
       "status": "FA"
     },
+    "062x7": {
+      "eligiblePos": "D",
+      "status": "FA"
+    },
     "06uzt": {
       "eligiblePos": "G",
       "status": "FA"
     },
-    "06uzo": {
+    "045c8": {
       "eligiblePos": "F",
       "status": "FA"
     },
-    "045c8": {
+    "06uzo": {
       "eligiblePos": "F",
       "status": "FA"
     },
@@ -1135,7 +1135,7 @@
     },
     "06ppi": {
       "eligiblePos": "G",
-      "status": "WW"
+      "status": "FA"
     },
     "06r2g": {
       "eligiblePos": "F",
@@ -1237,13 +1237,13 @@
       "eligiblePos": "M",
       "status": "FA"
     },
-    "05gcr": {
-      "eligiblePos": "M",
-      "status": "T"
-    },
     "06pry": {
       "eligiblePos": "D",
       "status": "FA"
+    },
+    "05gcr": {
+      "eligiblePos": "M",
+      "status": "T"
     },
     "03p9y": {
       "eligiblePos": "G",
@@ -1329,12 +1329,12 @@
       "eligiblePos": "D",
       "status": "FA"
     },
-    "061va": {
-      "eligiblePos": "M",
-      "status": "FA"
-    },
     "06zef": {
       "eligiblePos": "D",
+      "status": "FA"
+    },
+    "061va": {
+      "eligiblePos": "M",
       "status": "FA"
     },
     "05n09": {
@@ -1409,12 +1409,12 @@
       "eligiblePos": "F,M",
       "status": "FA"
     },
-    "0414o": {
-      "eligiblePos": "M",
-      "status": "FA"
-    },
     "03r93": {
       "eligiblePos": "D",
+      "status": "FA"
+    },
+    "0414o": {
+      "eligiblePos": "M",
       "status": "FA"
     },
     "04tzt": {
@@ -2963,7 +2963,7 @@
     },
     "07869": {
       "eligiblePos": "D",
-      "status": "WW"
+      "status": "FA"
     },
     "0784x": {
       "eligiblePos": "F",
