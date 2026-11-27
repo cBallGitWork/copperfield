@@ -2,7 +2,7 @@
   "manifest": {
     "season": "26-27",
     "gameweek": 12,
-    "exportedAt": "2026-11-27T01:54:26.517Z",
+    "exportedAt": "2026-11-27T17:38:41.103Z",
     "rows": 20,
     "sources": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "fetchedAt": "2026-11-27T01:54:26.517Z",
+  "fetchedAt": "2026-11-27T17:38:41.103Z",
   "source": "rotowire+ffscout",
   "clubs": {
     "NFO": {
@@ -230,6 +230,10 @@
       "lineup": "predicted",
       "absent": [
         {
+          "code": 141746,
+          "status": "QUES"
+        },
+        {
           "code": 535301,
           "status": "OUT"
         },
@@ -262,11 +266,11 @@
           "prob": 0.9
         },
         {
-          "code": 173774,
+          "code": 220627,
           "prob": 0.9
         },
         {
-          "code": 220627,
+          "code": 173774,
           "prob": 0.9
         },
         {
@@ -336,11 +340,11 @@
           "prob": 0.9
         },
         {
-          "code": 661888,
+          "code": 226965,
           "prob": 0.9
         },
         {
-          "code": 226965,
+          "code": 168144,
           "prob": 0.9
         },
         {
@@ -363,11 +367,11 @@
       "lineup": "predicted",
       "absent": [
         {
-          "code": 661888,
+          "code": 241293,
           "status": "QUES"
         },
         {
-          "code": 241293,
+          "code": 661888,
           "status": "QUES"
         },
         {
@@ -448,12 +452,7 @@
         }
       ],
       "lineup": "predicted",
-      "absent": [
-        {
-          "code": 455084,
-          "status": "QUES"
-        }
-      ]
+      "absent": []
     },
     "AVL": {
       "formation": "4-2-3-1",
@@ -486,11 +485,11 @@
           "prob": 0.9
         },
         {
-          "code": 119090,
+          "code": 226944,
           "prob": 0.9
         },
         {
-          "code": 226944,
+          "code": 119090,
           "prob": 0.9
         },
         {
@@ -608,11 +607,11 @@
           "prob": 0.9
         },
         {
-          "code": 606702,
+          "code": 97032,
           "prob": 0.9
         },
         {
-          "code": 97032,
+          "code": 606702,
           "prob": 0.9
         },
         {
@@ -782,11 +781,11 @@
           "prob": 0.9
         },
         {
-          "code": 469142,
+          "code": 221466,
           "prob": 0.9
         },
         {
-          "code": 221466,
+          "code": 469142,
           "prob": 0.9
         },
         {
@@ -825,11 +824,15 @@
           "status": "QUES"
         },
         {
-          "code": 465920,
+          "code": 570526,
           "status": "QUES"
         },
         {
           "code": 510281,
+          "status": "OUT"
+        },
+        {
+          "code": 465920,
           "status": "OUT"
         },
         {
@@ -904,11 +907,15 @@
       "lineup": "predicted",
       "absent": [
         {
-          "code": 209289,
-          "status": "QUES"
+          "code": 174874,
+          "status": "OUT"
         },
         {
           "code": 86873,
+          "status": "OUT"
+        },
+        {
+          "code": 209289,
           "status": "OUT"
         }
       ]
@@ -932,11 +939,11 @@
           "prob": 0.9
         },
         {
-          "code": 463981,
+          "code": 483067,
           "prob": 0.9
         },
         {
-          "code": 483067,
+          "code": 463981,
           "prob": 0.9
         },
         {
@@ -1003,11 +1010,11 @@
           "prob": 0.9
         },
         {
-          "code": 427623,
+          "code": 220362,
           "prob": 0.9
         },
         {
-          "code": 220362,
+          "code": 427623,
           "prob": 0.9
         },
         {
@@ -1042,10 +1049,6 @@
       "lineup": "predicted",
       "absent": [
         {
-          "code": 223723,
-          "status": "QUES"
-        },
-        {
           "code": 231747,
           "status": "OUT"
         },
@@ -1059,6 +1062,10 @@
         },
         {
           "code": 232185,
+          "status": "OUT"
+        },
+        {
+          "code": 223723,
           "status": "OUT"
         }
       ]
@@ -1121,15 +1128,15 @@
       "lineup": "predicted",
       "absent": [
         {
+          "code": 501902,
+          "status": "QUES"
+        },
+        {
           "code": 626751,
           "status": "OUT"
         },
         {
           "code": 462635,
-          "status": "OUT"
-        },
-        {
-          "code": 501902,
           "status": "OUT"
         },
         {
@@ -1146,6 +1153,10 @@
         },
         {
           "code": 169359,
+          "status": "OUT"
+        },
+        {
+          "code": 631000,
           "status": "OUT"
         }
       ]
@@ -1181,11 +1192,11 @@
           "prob": 0.9
         },
         {
-          "code": 592984,
+          "code": 60307,
           "prob": 0.9
         },
         {
-          "code": 60307,
+          "code": 592984,
           "prob": 0.9
         },
         {
@@ -1303,10 +1314,6 @@
       "lineup": "predicted",
       "absent": [
         {
-          "code": 487838,
-          "status": "QUES"
-        },
-        {
           "code": 180974,
           "status": "OUT"
         },
@@ -1335,11 +1342,11 @@
           "prob": 0.9
         },
         {
-          "code": 199798,
+          "code": 226597,
           "prob": 0.9
         },
         {
-          "code": 226597,
+          "code": 199798,
           "prob": 0.9
         },
         {
