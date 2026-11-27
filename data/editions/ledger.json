@@ -439,7 +439,13 @@
       "trade:pfnmpdq6mw6ng565",
       "match-report:gw10:2026-11-08",
       "draft-report:gw10:gameweek",
-      "bin-xi:gw10"
+      "bin-xi:gw10",
+      "match-report:gw11:2026-11-21",
+      "match-report:gw11:2026-11-22",
+      "match-report:gw11:2026-11-23",
+      "draft-report:gw11:gameweek",
+      "presser:gw12:2026-11-26",
+      "predictions:gw12"
     ],
     "threads": [
       {

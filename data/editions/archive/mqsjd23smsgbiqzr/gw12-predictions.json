@@ -1,0 +1,110 @@
+{
+  "slug": "gw12-predictions",
+  "kind": "predictions",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 12,
+  "gameweek": 12,
+  "filedAt": "2026-11-27T15:34:20.695Z",
+  "expiresAt": null,
+  "edition": "The Form Guide",
+  "byline": "",
+  "reporter": "Mark Lawrenson",
+  "headline": "Lawro's Predictions: GW12",
+  "deck": "Lawro backs its_ohi in the Milan Derby and Bayern Bru against Cowthenbeef, both times against the favourites.",
+  "body": "One from three last week. Nought from one on the gut, which was about what it deserved. Match of the Day had me on a Saturday night. A draft league has me on a Friday, before its lock.",
+  "subjects": [
+    "predictions:gw12"
+  ],
+  "image": null,
+  "face": null,
+  "ties": [
+    {
+      "homeTeamId": "0g0j5mkomuqqwsbu",
+      "awayTeamId": "qgucu9dgmufwva1x",
+      "line": "domeitalycoach are seventh and turn up when they feel like it. They call this the Milan Derby, which is a grand title for neighbours. domeitalycoach send Van Hecke to Sunderland and Smith to Fulham, and I wouldn't trust either on his travels.\n\nits_ohi lost to The Truffle Pigs last time, and second is only somewhere to fall from. its_ohi's Mitchell has Hull City at home. Hull City scoring? Hardly. its_ohi also send Suzuki to Ipswich Town, who frighten nobody.\n\nMitchell and Suzuki face two attacks with nothing in them, so I'm going against the favourites here.",
+      "callsTeamId": "qgucu9dgmufwva1x",
+      "instinct": "defence",
+      "score": {
+        "home": 34,
+        "away": 35
+      },
+      "face": {
+        "code": 469142,
+        "name": "Van Hecke",
+        "clubId": 19,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "7to6xosimu8hyyw5",
+      "awayTeamId": "uexqrijomu8l5asi",
+      "line": "Muharemović has Coventry City at home for If anyone can, Bannan can, and Coventry City barely cross halfway. It's the Tim Hortons Derby, and top of the table get the easy end. If anyone can, Bannan can have Jorgen Strand Larsen off the waiver list, a polite name for leftovers.\n\nGlengarryHearts went through AtleticoTimHortons like a dose of salts last week, and eighth is where that leaves them. AtleticoTimHortons have Trafford in goal for Leeds United, home to the same harmless Coventry City. De Cuyper has gone quiet for AtleticoTimHortons and Brighton & Hove Albion alike.\n\nI doubt Coventry City lay a glove on Muharemović, so it's If anyone can, Bannan can.",
+      "callsTeamId": "7to6xosimu8hyyw5",
+      "score": {
+        "home": 36,
+        "away": 33
+      },
+      "face": {
+        "code": 522047,
+        "name": "Muharemović",
+        "clubId": 13,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "l5kunst8msgbirdf",
+      "awayTeamId": "aekx2715mtzgcl3f",
+      "line": "Away at Ipswich Town is soft going, and The Truffle Pigs send N.Jackson there. Ipswich Town defend like a door left on the latch.\n\nThe Raccoons are the champions, and they've looked it once in a while. Haaland goes to Arsenal for The Raccoons after two quiet games, and that defence will hardly wake him. Barry has two goals and an assist for The Raccoons, and Everton aren't used to that.\n\nWith N.Jackson at Ipswich Town and Haaland up against Arsenal, I'll go with The Truffle Pigs.",
+      "callsTeamId": "aekx2715mtzgcl3f",
+      "score": {
+        "home": 39,
+        "away": 43
+      },
+      "face": {
+        "code": 517052,
+        "name": "N.Jackson",
+        "clubId": 2,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "ipnp5y4mmu9j7kop",
+      "awayTeamId": "syjkob6cmuobagfu",
+      "line": "I can't warm to Hazza Maguazza's Redempshazza after two defeats running, though Justin has Coventry City at home. Hazza Maguazza's Redempshazza have Gabriel at Arsenal against Manchester City, and I'll watch it through my fingers. It'll be a whole match of two sides frightened to lose.\n\nGlengarryHearts are ninth and beat AtleticoTimHortons last week, so naturally everybody thinks they've turned a corner. GlengarryHearts have Anderson in that one for Manchester City, and Barnes at Brighton & Hove Albion with Newcastle United.\n\nBrighton & Hove Albion against Newcastle United is where this gets decided, and Barnes puts GlengarryHearts over the line.",
+      "callsTeamId": "syjkob6cmuobagfu",
+      "score": {
+        "home": 29,
+        "away": 39
+      },
+      "face": {
+        "code": 220627,
+        "name": "Justin",
+        "clubId": 13,
+        "position": null
+      }
+    },
+    {
+      "homeTeamId": "7z8fy0pnmuogbtdw",
+      "awayTeamId": "kpj0z744muh1qwtd",
+      "line": "Cowthenbeef are the side everybody expects to win this, and I'm not having it. Calvert-Lewin has scored once and made one in his last two for Cowthenbeef. Leeds United forwards always go back to type, mind you.\n\nBayern Bru are bottom after four defeats running, and they've earned every one. Barcola and Munoz go to Everton with Liverpool, and Bayern Bru have them both.\n\nBayern Bru play the better football, with Barcola and Munoz passing Everton dizzy.",
+      "callsTeamId": "kpj0z744muh1qwtd",
+      "instinct": "liverpool",
+      "score": {
+        "home": 37,
+        "away": 38
+      },
+      "face": {
+        "code": 177815,
+        "name": "Calvert-Lewin",
+        "clubId": 13,
+        "position": null
+      }
+    }
+  ],
+  "extras": {
+    "record": {
+      "right": 12,
+      "called": 23
+    }
+  }
+}

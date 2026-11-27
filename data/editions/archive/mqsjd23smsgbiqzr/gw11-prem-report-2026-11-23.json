@@ -1,0 +1,269 @@
+{
+  "slug": "gw11-prem-report-2026-11-23",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 11,
+  "gameweek": 11,
+  "filedAt": "2026-11-27T15:34:20.695Z",
+  "expiresAt": null,
+  "edition": "Monday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Go forth and multiply",
+  "deck": "Brentford beat Everton 4-0",
+  "body": "",
+  "subjects": [
+    "match-report:gw11:2026-11-23"
+  ],
+  "image": null,
+  "face": null,
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645297,
+        "kickoff": "2026-11-23T20:00:00Z",
+        "home": {
+          "code": 94,
+          "score": 4,
+          "goals": [],
+          "assists": [],
+          "manager": "Keith Andrews",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Kelleher",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Kayode",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Ajer",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "van den Berg",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Lewis-Potter",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Yarmoliuk",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Janelt",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Ouattara",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Damsgaard",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Anthony",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Wilson",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Nunes",
+              "Carvalho",
+              "Valdimarsson",
+              "Schade",
+              "Jensen",
+              "Schuster",
+              "Sangaré",
+              "Fredrick",
+              "Diouf"
+            ]
+          },
+          "next": "Manchester United (a)"
+        },
+        "away": {
+          "code": 11,
+          "score": 0,
+          "goals": [],
+          "assists": [],
+          "manager": "David Moyes",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Pickford",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "O'Brien",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Tarkowski",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Branthwaite",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Mykolenko",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Armstrong",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Garner",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Röhl",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Dewsbury-Hall",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "George",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Barry",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Johnson",
+              "Grealish",
+              "Keane",
+              "Hackney",
+              "Nørgaard",
+              "Maitland-Niles",
+              "Alcaraz",
+              "Dibling",
+              "Travers"
+            ]
+          },
+          "next": "Liverpool (h)"
+        },
+        "halfTime": {
+          "home": 2,
+          "away": 0
+        },
+        "venue": "Gtech Community Stadium",
+        "attendance": 17168,
+        "referee": "Craig Pawson",
+        "standfirst": "Brentford beat Everton 4-0 to climb to sixth, a point above the Toffees in ninth.",
+        "account": "Brentford went in at the interval two goals to the good and scored twice more in the second half, keeping a clean sheet against Everton throughout.",
+        "sections": [],
+        "keyStats": [
+          {
+            "label": "Shots",
+            "value": "21 (7 on target) v 4 (2)"
+          }
+        ],
+        "star": null,
+        "rows": [],
+        "video": "GfdxJta1iao"
+      }
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "slug": "gw12-presser-2026-11-26",
+  "kind": "presser",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 12,
+  "gameweek": 12,
+  "filedAt": "2026-11-27T15:34:20.695Z",
+  "expiresAt": "2026-11-27T19:45:00.000Z",
+  "edition": "The Team Sheet",
+  "byline": "The Team Sheet",
+  "headline": "Thursday Pressers",
+  "deck": "João Pedro out for Chelsea with a quad injury",
+  "body": "João Pedro will not play for Chelsea, ruled out by Xabi Alonso with a quad injury.",
+  "subjects": [
+    "presser:gw12:2026-11-26"
+  ],
+  "image": null,
+  "face": {
+    "code": 475168,
+    "name": "João Pedro",
+    "clubId": 6,
+    "position": null
+  },
+  "ties": [],
+  "extras": {
+    "teamNews": [
+      {
+        "club": "Brentford",
+        "code": 94,
+        "line": "Igor Thiago serves a ban, while Antoni Milambo and Josh Dasilva are over their knee and hamstring problems and came through 45 minutes for the B team.",
+        "men": [
+          {
+            "name": "Antoni Milambo",
+            "status": "FIT",
+            "note": "back from a knee injury; 45 minutes for the B team, building fitness"
+          },
+          {
+            "name": "Josh Dasilva",
+            "status": "FIT",
+            "note": "back from a hamstring injury; 45 minutes for the B team, building fitness"
+          },
+          {
+            "name": "Igor Thiago",
+            "owner": "Truffles",
+            "status": "Suspended",
+            "note": ""
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Aaron Hickey"
+          },
+          {
+            "name": "Nathan Collins"
+          },
+          {
+            "name": "Kaye Furo"
+          },
+          {
+            "name": "Rico Henry"
+          }
+        ],
+        "quote": {
+          "text": "They played 45 minutes the other night in the B-team game. They both played well and came through the game well.",
+          "said": "Keith Andrews"
+        },
+        "fixture": {
+          "opponent": "Manchester United",
+          "home": false,
+          "kickoff": "2026-11-28T15:00:00Z"
+        }
+      },
+      {
+        "club": "Chelsea",
+        "code": 8,
+        "line": "Jorrel Hato, Maxence Lacroix and Reece James are all ruled out alongside João Pedro, but Moisés Caicedo has trained and returns to contention.",
+        "men": [
+          {
+            "name": "João Pedro",
+            "owner": "Beef",
+            "status": "OUT",
+            "note": "quad"
+          },
+          {
+            "name": "Jorrel Hato",
+            "status": "OUT",
+            "note": "back"
+          },
+          {
+            "name": "Maxence Lacroix",
+            "status": "OUT",
+            "note": "hamstring; closer to a return, not for this match"
+          },
+          {
+            "name": "Reece James",
+            "status": "OUT",
+            "note": "knee"
+          },
+          {
+            "name": "Moisés Caicedo",
+            "status": "FIT",
+            "note": "trained this week; expected to be okay"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Gittens"
+          }
+        ],
+        "quote": {
+          "text": "It’s one less week than the last game, so we are closer to recovering, but not for this game.",
+          "said": "Xabi Alonso"
+        },
+        "fixture": {
+          "opponent": "Nottingham Forest",
+          "home": false,
+          "kickoff": "2026-11-27T20:00:00Z"
+        }
+      },
+      {
+        "club": "Leeds United",
+        "code": 2,
+        "line": "Leeds United have a full squad, everyone through the last match and the week's training without a fresh injury.",
+        "stillOut": [
+          {
+            "name": "Mateo Joseph"
+          }
+        ],
+        "quote": {
+          "text": "As it stands, everyone’s available [and] came through the last gameday and also through the week. No injuries to report.",
+          "said": "Daniel Farke"
+        },
+        "fixture": {
+          "opponent": "Coventry City",
+          "home": true,
+          "kickoff": "2026-11-28T15:00:00Z"
+        }
+      },
+      {
+        "club": "Coventry City",
+        "code": 9,
+        "line": "Taiwo Awoniyi is ruled out for the weekend, the extent of his problem still to be established, and Haji Wright remains a few weeks short of a return.",
+        "men": [
+          {
+            "name": "Taiwo Awoniyi",
+            "owner": "Bannan",
+            "status": "OUT",
+            "note": "unavailable for the weekend; extent not yet known"
+          }
+        ],
+        "stillOut": [
+          {
+            "name": "Haji Wright"
+          },
+          {
+            "name": "Josh Eccles"
+          },
+          {
+            "name": "Aurèle Amenda"
+          },
+          {
+            "name": "Luke Woolfenden"
+          }
+        ],
+        "quote": {
+          "text": "With Haji, he’s working towards being fit, so he’s going to be a few weeks away from being available for us.",
+          "said": "Frank Lampard"
+        },
+        "fixture": {
+          "opponent": "Leeds United",
+          "home": false,
+          "kickoff": "2026-11-28T15:00:00Z"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "slug": "gw11-prem-report-2026-11-22",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 11,
+  "gameweek": 11,
+  "filedAt": "2026-11-27T15:34:20.695Z",
+  "expiresAt": null,
+  "edition": "Sunday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Hull's hull stays watertight all night",
+  "deck": "Hull City beat Brighton & Hove Albion 2-0",
+  "body": "",
+  "subjects": [
+    "match-report:gw11:2026-11-22"
+  ],
+  "image": null,
+  "face": null,
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645300,
+        "kickoff": "2026-11-22T14:00:00Z",
+        "home": {
+          "code": 88,
+          "score": 2,
+          "goals": [],
+          "assists": [],
+          "manager": "Sergej Jakirovic",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Tzolakis",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Coyle",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Ajayi",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Mendy",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Stroud",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Iroegbunam",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Slater",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Belloumi",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Crooks",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Cho",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "McBurnie",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Butland",
+              "Thomas",
+              "Egan",
+              "Gourna-Douath",
+              "Norton-Cuffy",
+              "Vaz",
+              "Giles",
+              "Herrington",
+              "Hjertø-Dahl"
+            ]
+          },
+          "next": "Crystal Palace (a)"
+        },
+        "away": {
+          "code": 36,
+          "score": 0,
+          "goals": [],
+          "assists": [],
+          "manager": "Fabian Hürzeler",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Verbruggen",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Costinha",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Vuskovic",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Dunk",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Boscagli",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Groß",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Andrés",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Gómez",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Ayari",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "De Cuyper",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Rutter",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Minteh",
+              "O'Riley",
+              "Kadıoğlu",
+              "Steele",
+              "Osman",
+              "Wieffer",
+              "Svoboda",
+              "Hinshelwood",
+              "Kostoulas"
+            ]
+          },
+          "next": "Newcastle United (h)"
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        },
+        "venue": "The MKM Stadium",
+        "attendance": 24461,
+        "referee": "Peter Bankes",
+        "standfirst": "Hull City beat Brighton & Hove Albion 2-0, with Brighton still second on 22 points.",
+        "account": "The sides went in goalless at half-time, and Hull scored both goals after the interval.",
+        "sections": [],
+        "keyStats": [
+          {
+            "label": "Shots",
+            "value": "11 (5 on target) v 15 (8)"
+          }
+        ],
+        "star": null,
+        "rows": [],
+        "video": "DZob2bQiP9Q"
+      },
+      {
+        "fixtureCode": 2645301,
+        "kickoff": "2026-11-22T16:30:00Z",
+        "home": {
+          "code": 14,
+          "score": 4,
+          "goals": [],
+          "assists": [],
+          "manager": "Andoni Iraola",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Becker",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Araujo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Jacquet",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "van Dijk",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Kerkez",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Szoboszlai",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Mac Allister",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Barcola",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Wirtz",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Ngumoha",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Isak",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Nyoni",
+              "McConnell",
+              "Koumas",
+              "Muñoz",
+              "Frimpong",
+              "Chiesa",
+              "Mamardashvili",
+              "Gomez",
+              "Tsimikas"
+            ]
+          },
+          "next": "Everton (a)"
+        },
+        "away": {
+          "code": 1,
+          "score": 0,
+          "goals": [],
+          "assists": [],
+          "manager": "Mauricio Pochettino",
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Lammens",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Dalot",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Yoro",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "de Ligt",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Martínez",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Tielemans",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Mainoo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Mbeumo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Fernandes",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Dorgu",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Cunha",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Heaven",
+              "Diallo",
+              "Santos",
+              "Heaton",
+              "Zirkzee",
+              "Mount",
+              "Mazraoui",
+              "Maguire",
+              "Lacey"
+            ]
+          },
+          "next": "Brentford (h)"
+        },
+        "halfTime": {
+          "home": 2,
+          "away": 0
+        },
+        "venue": "Anfield",
+        "attendance": 60343,
+        "referee": "Samuel Barrott",
+        "standfirst": "Manchester United, without a win in nine, lost 4-0 to Liverpool.",
+        "account": "Liverpool led 2-0 at half-time. Two more goals followed after the interval.",
+        "sections": [],
+        "keyStats": [
+          {
+            "label": "Shots",
+            "value": "28 (11 on target) v 10 (3)"
+          }
+        ],
+        "star": null,
+        "rows": [],
+        "video": "ArttthJA97s"
+      }
+    ]
+  }
+}

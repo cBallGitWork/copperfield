@@ -1,0 +1,1564 @@
+{
+  "slug": "gw11-draft-report",
+  "kind": "draft-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 11,
+  "gameweek": 11,
+  "filedAt": "2026-11-27T15:34:20.695Z",
+  "expiresAt": null,
+  "edition": "Monday Draft Report",
+  "byline": "The Dugout",
+  "headline": "Pigs post new low yet still climb",
+  "deck": "The Truffle Pigs beat its_ohi 41-38",
+  "body": "",
+  "subjects": [
+    "draft-report:gw11:gameweek"
+  ],
+  "image": null,
+  "face": {
+    "code": 116535,
+    "name": "Becker",
+    "clubId": 14,
+    "position": "G"
+  },
+  "ties": [],
+  "extras": {
+    "draft": {
+      "cutoff": "gameweek",
+      "gameweek": 11,
+      "matchups": [
+        {
+          "home": {
+            "teamId": "qgucu9dgmufwva1x",
+            "name": "its_ohi",
+            "score": 38,
+            "rankBefore": 1,
+            "rankAfter": 2,
+            "run": "WWWLW",
+            "returns": {
+              "goals": [
+                {
+                  "name": "McBurnie",
+                  "count": 2,
+                  "minutes": []
+                }
+              ],
+              "assists": [],
+              "cleanSheets": [
+                {
+                  "name": "Suzuki",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Ajer",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Suzuki",
+                "slot": "G",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Ajer",
+                "slot": "D",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Mitchell",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Konsa",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "McGinn",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Rayan",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Mac Allister",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Rice",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Tielemans",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "McBurnie",
+                "slot": "F",
+                "points": 10,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Cunha",
+                "slot": "F",
+                "points": 1,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Buendía",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Martinez",
+                "slot": "G",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Cash",
+                "slot": "D",
+                "points": null,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "away": {
+            "teamId": "aekx2715mtzgcl3f",
+            "name": "The Truffle Pigs",
+            "score": 41,
+            "rankBefore": 7,
+            "rankAfter": 4,
+            "run": "LLLWW",
+            "returns": {
+              "goals": [
+                {
+                  "name": "Madueke",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "assists": [],
+              "cleanSheets": [
+                {
+                  "name": "Becker",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Jacquet",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Araujo",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Becker",
+                "slot": "G",
+                "points": 8,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kadıoğlu",
+                "slot": "D",
+                "points": 0,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Vuskovic",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Jacquet",
+                "slot": "D",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Araujo",
+                "slot": "D",
+                "points": 7,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Madueke",
+                "slot": "M",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Fernandes",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Fernandes",
+                "slot": "M",
+                "points": 4,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kudus",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kostoulas",
+                "slot": "F",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Jackson",
+                "slot": "F",
+                "points": 2,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Dorgu",
+                "slot": "D",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Thiago",
+                "slot": "F",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Van de Ven",
+                "slot": "D",
+                "points": null,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "verdict": "The Truffle Pigs beat its_ohi 41-38",
+          "standfirst": "The Truffle Pigs began the gameweek seventh in the table, and its_ohi began it first.",
+          "paragraphs": [
+            "Hull City's Oli McBurnie was auto-subbed for its_ohi and was the best player on the pitch, with both goals in a 2-0 win against Brighton. The Truffle Pigs had three Brighton men in that match, and all three blanked.",
+            "Their answer came from Man Utd's 4-0 defeat at Liverpool. Liverpool's Alisson Becker was subbed on for The Truffle Pigs and was among the best on show, and his clean sheet was worth eight points. Liverpool's Ronald Araujo, another of theirs, also kept a clean sheet in that match.",
+            "Brentford's Kristoffer Ajer, signed by its_ohi this gameweek, was in a defence that conceded nothing to Everton. its_ohi slip to second, and The Truffle Pigs, on their lowest total of the season, rise to fourth with three wins in a row."
+          ],
+          "story": {
+            "kind": "upset",
+            "family": "upset",
+            "teamIds": [
+              "qgucu9dgmufwva1x",
+              "aekx2715mtzgcl3f"
+            ],
+            "cast": [
+              "04sjt",
+              "0477b"
+            ]
+          },
+          "face": {
+            "code": 169432,
+            "name": "McBurnie",
+            "clubId": 11,
+            "position": "F"
+          }
+        },
+        {
+          "home": {
+            "teamId": "kpj0z744muh1qwtd",
+            "name": "Bayern Bru",
+            "score": 52,
+            "rankBefore": 8,
+            "rankAfter": 10,
+            "run": "WWLLL",
+            "returns": {
+              "goals": [
+                {
+                  "name": "Lewis-Potter",
+                  "count": 2,
+                  "minutes": []
+                },
+                {
+                  "name": "Solanke",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "assists": [
+                {
+                  "name": "Ødegaard",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Barcola",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": [
+                {
+                  "name": "Tzolakis",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Boscagli",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Tzolakis",
+                "slot": "G",
+                "points": 9,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Robertson",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Guéhi",
+                "slot": "D",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Boscagli",
+                "slot": "D",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Neto",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Lewis-Potter",
+                "slot": "M",
+                "points": 13,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Ødegaard",
+                "slot": "M",
+                "points": 5,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Mbeumo",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Barcola",
+                "slot": "F",
+                "points": 5,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Solanke",
+                "slot": "F",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Alysson",
+                "slot": "F",
+                "points": 2,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "O'Reilly",
+                "slot": "D",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Munoz",
+                "slot": "F",
+                "points": 5,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Ajayi",
+                "slot": "D",
+                "points": 7,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "away": {
+            "teamId": "0g0j5mkomuqqwsbu",
+            "name": "domeitalycoach",
+            "score": 58,
+            "rankBefore": 9,
+            "rankAfter": 7,
+            "run": "LLWLD",
+            "returns": {
+              "goals": [
+                {
+                  "name": "Szoboszlai",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Wirtz",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "assists": [
+                {
+                  "name": "Rudoni",
+                  "count": 2,
+                  "minutes": []
+                },
+                {
+                  "name": "Wirtz",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Havertz",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": [
+                {
+                  "name": "Van Hecke",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Smith",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Donnarumma",
+                "slot": "G",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Hall",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Van Hecke",
+                "slot": "D",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Smith",
+                "slot": "D",
+                "points": 7,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Rudoni",
+                "slot": "M",
+                "points": 8,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Szoboszlai",
+                "slot": "M",
+                "points": 9,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Doku",
+                "slot": "M",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Wirtz",
+                "slot": "M",
+                "points": 12,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Ayari",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Havertz",
+                "slot": "F",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Estêvão",
+                "slot": "F",
+                "points": 2,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Castagne",
+                "slot": "D",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kayode",
+                "slot": "D",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kamara",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "verdict": "domeitalycoach beat Bayern Bru 58-52",
+          "standfirst": "Liverpool's Florian Wirtz came off the bench for domeitalycoach and was the best man in a 4-0 defeat of Man Utd, his goal and assist worth 12 points.",
+          "paragraphs": [
+            "Bayern Bru had Liverpool's Bradley Barcola in that game, and his lone assist could not live with Wirtz's haul.",
+            "Brentford's Keane Lewis-Potter did most for Bayern Bru from their bench, with two goals in 73 minutes of a home win against Everton, where nobody played better.",
+            "domeitalycoach's Jack Rudoni answered with two assists in Coventry City's 3-2 win against Crystal Palace. domeitalycoach climb from ninth to seventh with the season's highest total, and its_ohi come next. Bayern Bru have lost four in a row and are bottom of the pile."
+          ],
+          "story": {
+            "kind": "haul",
+            "family": "star",
+            "teamIds": [
+              "kpj0z744muh1qwtd",
+              "0g0j5mkomuqqwsbu"
+            ],
+            "cast": [
+              "06v21",
+              "062p3"
+            ]
+          },
+          "face": {
+            "code": 494595,
+            "name": "Wirtz",
+            "clubId": 14,
+            "position": "M"
+          }
+        },
+        {
+          "home": {
+            "teamId": "uexqrijomu8l5asi",
+            "name": "AtleticoTimHortons",
+            "score": 27,
+            "rankBefore": 6,
+            "rankAfter": 8,
+            "run": "WLLWD",
+            "returns": {
+              "goals": [],
+              "assists": [
+                {
+                  "name": "Tavernier",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": [
+                {
+                  "name": "Maatsen",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Trafford",
+                "slot": "G",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Branthwaite",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Mykolenko",
+                "slot": "D",
+                "points": 0,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Maatsen",
+                "slot": "D",
+                "points": 5,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Calafiori",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Foden",
+                "slot": "M",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "De Cuyper",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Murphy",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Gross",
+                "slot": "M",
+                "points": 4,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kroupi.Jr",
+                "slot": "F",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Tavernier",
+                "slot": "F",
+                "points": 6,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Robinson",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Semenyo",
+                "slot": "F",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Tonali",
+                "slot": "M",
+                "points": null,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "away": {
+            "teamId": "syjkob6cmuobagfu",
+            "name": "GlengarryHearts",
+            "score": 55,
+            "rankBefore": 10,
+            "rankAfter": 9,
+            "run": "LLWLL",
+            "returns": {
+              "goals": [
+                {
+                  "name": "Barnes",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Anderson",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "assists": [
+                {
+                  "name": "Ampadu",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Hill",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Isak",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": [
+                {
+                  "name": "Kelleher",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Hill",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Virgil",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Kelleher",
+                "slot": "G",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Ampadu",
+                "slot": "D",
+                "points": 5,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Hill",
+                "slot": "D",
+                "points": 9,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Rúben",
+                "slot": "D",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Virgil",
+                "slot": "D",
+                "points": 7,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Le Fée",
+                "slot": "M",
+                "points": 4,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Barnes",
+                "slot": "M",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Anderson",
+                "slot": "M",
+                "points": 8,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Schade",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Isak",
+                "slot": "F",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Iwobi",
+                "slot": "F",
+                "points": 1,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Belloumi",
+                "slot": "F",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Mukiele",
+                "slot": "D",
+                "points": 8,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Gyökeres",
+                "slot": "F",
+                "points": 0,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "verdict": "GlengarryHearts beat AtleticoTimHortons 55-27",
+          "standfirst": "GlengarryHearts' 28-point win is the biggest of the season.",
+          "paragraphs": [
+            "Bournemouth's James Hill and Marcus Tavernier, reserves on opposite sides here, had an assist apiece in a 2-0 win against Nott'm Forest.",
+            "Hill added a clean sheet and was the best player in that match, which gave GlengarryHearts the better of the pairing by nine points to 6.",
+            "AtleticoTimHortons had their poorest gameweek yet and slip from sixth to eighth. GlengarryHearts started the gameweek tenth, and all of that moves them a single place, to ninth."
+          ],
+          "story": {
+            "kind": "rout",
+            "family": "margin",
+            "teamIds": [
+              "uexqrijomu8l5asi",
+              "syjkob6cmuobagfu"
+            ],
+            "cast": [
+              "061vb",
+              "0639x"
+            ]
+          },
+          "face": {
+            "code": 463981,
+            "name": "Hill",
+            "clubId": 3,
+            "position": "D"
+          }
+        },
+        {
+          "home": {
+            "teamId": "7z8fy0pnmuogbtdw",
+            "name": "Cowthenbeef",
+            "score": 29,
+            "rankBefore": 3,
+            "rankAfter": 5,
+            "run": "WWLLW",
+            "returns": {
+              "goals": [
+                {
+                  "name": "Calvert-Lewin",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "assists": [
+                {
+                  "name": "Calvert-Lewin",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": [
+                {
+                  "name": "Silva",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Verbruggen",
+                "slot": "G",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Gudmundsson",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Muñoz",
+                "slot": "D",
+                "points": 0,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Silva",
+                "slot": "D",
+                "points": 7,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Timber",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Gomez",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Tzolis",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Ndiaye",
+                "slot": "M",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Manzambi",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Bruno G.",
+                "slot": "M",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Calvert-Lewin",
+                "slot": "F",
+                "points": 9,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Cherki",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "João Pedro",
+                "slot": "F",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Brobbey",
+                "slot": "F",
+                "points": null,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "away": {
+            "teamId": "7to6xosimu8hyyw5",
+            "name": "If anyone can, Bannan can",
+            "score": 37,
+            "rankBefore": 2,
+            "rankAfter": 1,
+            "run": "LWWWD",
+            "returns": {
+              "goals": [
+                {
+                  "name": "Awoniyi",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Evanilson",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "assists": [
+                {
+                  "name": "Rogers",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": [
+                {
+                  "name": "Kinsky",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Truffert",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Kinsky",
+                "slot": "G",
+                "points": 7,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Lindelöf",
+                "slot": "D",
+                "points": null,
+                "next": null,
+                "mark": "dnp"
+              },
+              {
+                "name": "Gvardiol",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Muharemović",
+                "slot": "D",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Truffert",
+                "slot": "D",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Fofana",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Enciso",
+                "slot": "M",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Rogers",
+                "slot": "M",
+                "points": 5,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Gibbs-White",
+                "slot": "M",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Awoniyi",
+                "slot": "F",
+                "points": 5,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Evanilson",
+                "slot": "F",
+                "points": 6,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Saliba",
+                "slot": "D",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Mateta",
+                "slot": "F",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Raya",
+                "slot": "G",
+                "points": 2,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "verdict": "If anyone can, Bannan can beat Cowthenbeef 37-29",
+          "standfirst": "The table now has If anyone can, Bannan can first and its_ohi second.",
+          "paragraphs": [
+            "Leeds's Dominic Calvert-Lewin came into the Cowthenbeef side from the bench, and his goal and assist in Leeds's win at Chelsea were worth nine points.",
+            "Cowthenbeef's three Arsenal men all blanked. Spurs's Antonín Kinsky, a reserve for If anyone can, Bannan can, was one of the best on the pitch, and Ipswich Town lost 2-0 without beating him. If anyone can, Bannan can's Taiwo Awoniyi, signed this gameweek, had a goal in the five-goal match between Coventry City and Crystal Palace.",
+            "Cowthenbeef slip from third to fifth after their fewest points yet this season, and the pressure mounts. If anyone can, Bannan can are five without defeat."
+          ],
+          "story": {
+            "kind": "top",
+            "family": "season",
+            "teamIds": [
+              "7z8fy0pnmuogbtdw",
+              "7to6xosimu8hyyw5"
+            ],
+            "cast": [
+              "06r6s",
+              "049tq"
+            ]
+          },
+          "face": {
+            "code": 485055,
+            "name": "Kinsky",
+            "clubId": 19,
+            "position": "G"
+          }
+        },
+        {
+          "home": {
+            "teamId": "ipnp5y4mmu9j7kop",
+            "name": "Hazza Maguazza's Redempshazza",
+            "score": 21,
+            "rankBefore": 4,
+            "rankAfter": 6,
+            "run": "LWWWL",
+            "returns": {
+              "goals": [
+                {
+                  "name": "Kluivert",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "assists": [
+                {
+                  "name": "Bogle",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": []
+            },
+            "eleven": [
+              {
+                "name": "Pickford",
+                "slot": "G",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Justin",
+                "slot": "D",
+                "points": 4,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Tarkowski",
+                "slot": "D",
+                "points": -2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Bogle",
+                "slot": "D",
+                "points": 4,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Gabriel",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Dunk",
+                "slot": "D",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Enzo",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kluivert",
+                "slot": "M",
+                "points": 8,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Sangaré",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Gakpo",
+                "slot": "F",
+                "points": null,
+                "next": null,
+                "mark": "dnp"
+              },
+              {
+                "name": "Delap",
+                "slot": "F",
+                "points": 1,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "White",
+                "slot": "D",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Saka",
+                "slot": "M",
+                "points": null,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Amad",
+                "slot": "M",
+                "points": null,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "away": {
+            "teamId": "l5kunst8msgbirdf",
+            "name": "The Raccoons",
+            "score": 39,
+            "rankBefore": 5,
+            "rankAfter": 3,
+            "run": "WLLWD",
+            "returns": {
+              "goals": [],
+              "assists": [
+                {
+                  "name": "Pedro Porro",
+                  "count": 1,
+                  "minutes": []
+                }
+              ],
+              "cleanSheets": [
+                {
+                  "name": "Petrović",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Kerkez",
+                  "count": 1,
+                  "minutes": []
+                },
+                {
+                  "name": "Pedro Porro",
+                  "count": 1,
+                  "minutes": []
+                }
+              ]
+            },
+            "eleven": [
+              {
+                "name": "Petrović",
+                "slot": "G",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Kerkez",
+                "slot": "D",
+                "points": 7,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Colwill",
+                "slot": "D",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Pedro Porro",
+                "slot": "D",
+                "points": 10,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Khusanov",
+                "slot": "D",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Mainoo",
+                "slot": "M",
+                "points": 4,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Dewsbury-Hall",
+                "slot": "M",
+                "points": 3,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Scott",
+                "slot": "M",
+                "points": 0,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Palmer",
+                "slot": "M",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Barry",
+                "slot": "F",
+                "points": 2,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Haaland",
+                "slot": "F",
+                "points": 2,
+                "next": null,
+                "mark": null
+              }
+            ],
+            "bench": [
+              {
+                "name": "Osula",
+                "slot": "F",
+                "points": 6,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Hinshelwood",
+                "slot": "M",
+                "points": 1,
+                "next": null,
+                "mark": null
+              },
+              {
+                "name": "Matheus N.",
+                "slot": "D",
+                "points": null,
+                "next": null,
+                "mark": null
+              }
+            ]
+          },
+          "verdict": "The Raccoons beat Hazza Maguazza's Redempshazza 39-21",
+          "standfirst": "Everton's Jordan Pickford and James Tarkowski both blanked for Hazza Maguazza's Redempshazza.",
+          "paragraphs": [
+            "Both came into the side automatically, and Everton conceded four at Brentford. Pickford played all 90 minutes for one point, and Tarkowski was one of the poorest on the pitch in 39 minutes for -2 points.",
+            "Đorđe Petrović kept a clean sheet for The Raccoons in Bournemouth's 2-0 win over Nott'm Forest, where Justin Kluivert scored.",
+            "Hazza Maguazza's Redempshazza sink to sixth on their lowest score of the season, and The Raccoons rise to third."
+          ],
+          "story": {
+            "kind": "club-mates",
+            "family": "people",
+            "teamIds": [
+              "ipnp5y4mmu9j7kop",
+              "l5kunst8msgbirdf"
+            ],
+            "cast": [
+              "032f9",
+              "0427d",
+              "05n07"
+            ]
+          },
+          "face": {
+            "code": 111234,
+            "name": "Pickford",
+            "clubId": 9,
+            "position": "G"
+          }
+        }
+      ]
+    }
+  }
+}
