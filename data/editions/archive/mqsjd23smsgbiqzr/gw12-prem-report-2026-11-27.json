@@ -1,0 +1,269 @@
+{
+  "slug": "gw12-prem-report-2026-11-27",
+  "kind": "match-report",
+  "leagueId": "mqsjd23smsgbiqzr",
+  "period": 12,
+  "gameweek": 12,
+  "filedAt": "2026-11-28T00:13:20.260Z",
+  "expiresAt": null,
+  "edition": "Friday Prem Report",
+  "byline": "The Back Page",
+  "headline": "Chelsea stumped in five-goal match",
+  "deck": "Nottingham Forest beat Chelsea 3-2",
+  "body": "",
+  "subjects": [
+    "match-report:gw12:2026-11-27"
+  ],
+  "image": null,
+  "face": null,
+  "ties": [],
+  "extras": {
+    "reports": [
+      {
+        "fixtureCode": 2645313,
+        "kickoff": "2026-11-27T20:00:00Z",
+        "home": {
+          "code": 17,
+          "score": 3,
+          "goals": [],
+          "assists": [],
+          "manager": null,
+          "lineup": {
+            "formation": "3-4-2-1",
+            "lines": [
+              [
+                {
+                  "name": "Sels",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Cunha",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Milenkovic",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Murillo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Muñoz",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "McAtee",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Schlager",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Williams",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Jesus",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Gibbs-White",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Delap",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Sangaré",
+              "Ndoye",
+              "Netz",
+              "Diomande",
+              "Hudson-Odoi",
+              "Kalimuendo",
+              "Yates",
+              "Victor",
+              "Wood"
+            ]
+          },
+          "next": "Hull City (a)"
+        },
+        "away": {
+          "code": 8,
+          "score": 2,
+          "goals": [],
+          "assists": [],
+          "manager": null,
+          "lineup": {
+            "formation": "4-2-3-1",
+            "lines": [
+              [
+                {
+                  "name": "Martínez",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Acheampong",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Fofana",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Caicedo",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Chavarría",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Lavia",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Henderson",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Neto",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Palmer",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                },
+                {
+                  "name": "Rogers",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ],
+              [
+                {
+                  "name": "Welbeck",
+                  "booked": false,
+                  "sentOff": false,
+                  "replacedBy": null,
+                  "mark": null
+                }
+              ]
+            ],
+            "unused": [
+              "Gusto",
+              "Barco",
+              "Quenda",
+              "Emegha",
+              "Penders",
+              "Palestra",
+              "Estêvão",
+              "Colwill",
+              "Nicoll-Jazuli"
+            ]
+          },
+          "next": "Crystal Palace (h)"
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 0
+        },
+        "venue": "The City Ground",
+        "attendance": 30851,
+        "referee": "Andy Madley",
+        "standfirst": "A 3-2 defeat away from home made it three in a row for Chelsea.",
+        "account": "Nottingham Forest held a 1-0 lead at the interval. Each side scored twice after the restart, and the home side kept their one-goal advantage to the final whistle.",
+        "sections": [],
+        "keyStats": [
+          {
+            "label": "Shots",
+            "value": "10 (7 on target) v 9 (3)"
+          }
+        ],
+        "star": null,
+        "rows": [],
+        "video": null
+      }
+    ]
+  }
+}
