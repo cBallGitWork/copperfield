@@ -240,7 +240,7 @@
           "urlName": "james-trafford",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "05oz3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -250,8 +250,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:54 AM: Trafford registered two saves and...",
@@ -662,7 +662,7 @@
           "urlName": "james-trafford",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "05oz3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "704"
@@ -672,8 +672,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:54 AM: Trafford registered two saves and...",

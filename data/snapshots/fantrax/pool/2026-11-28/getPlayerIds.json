@@ -720,6 +720,12 @@
     "team": "TOT",
     "position": "M"
   },
+  "07ay1": {
+    "name": "Cowan, Joe",
+    "fantraxId": "07ay1",
+    "team": "SUN",
+    "position": "G"
+  },
   "05ylj": {
     "rotowireId": 24214,
     "name": "Bruno Guimaraes",
@@ -1967,6 +1973,12 @@
     "fantraxId": "0784p",
     "team": "EVE",
     "position": "M"
+  },
+  "0784m": {
+    "name": "Walker-Smith, Charlie",
+    "fantraxId": "0784m",
+    "team": "CRY",
+    "position": "D"
   },
   "0784l": {
     "name": "Benetton, Lucca",

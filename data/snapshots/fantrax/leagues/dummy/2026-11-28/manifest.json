@@ -1,11 +1,11 @@
 {
-  "capturedAt": "2026-11-28T00:28:22.081Z",
+  "capturedAt": "2026-11-28T14:06:26.925Z",
   "leagueId": "w05aib75mtj36y1g",
   "reads": [
     {
       "method": "getLeagueInfo",
       "ok": true,
-      "bytes": 143149
+      "bytes": 143287
     },
     {
       "method": "getTeamRosters",
@@ -25,12 +25,12 @@
     {
       "method": "getTransactionDetailsHistory-CLAIM_DROP",
       "ok": true,
-      "bytes": 22760
+      "bytes": 22744
     },
     {
       "method": "getTransactionDetailsHistory-TRADE",
       "ok": true,
-      "bytes": 17275
+      "bytes": 17266
     },
     {
       "method": "getTransactionDetailsHistory-LINEUP_CHANGE",

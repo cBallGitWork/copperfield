@@ -1,11 +1,11 @@
 {
-  "capturedAt": "2026-11-28T00:28:22.081Z",
+  "capturedAt": "2026-11-28T14:06:26.925Z",
   "leagueId": "zbn1z3ukmsgb36sz",
   "reads": [
     {
       "method": "getLeagueInfo",
       "ok": true,
-      "bytes": 99208
+      "bytes": 99346
     },
     {
       "method": "getTeamRosters",
@@ -25,7 +25,7 @@
     {
       "method": "getTransactionDetailsHistory-CLAIM_DROP",
       "ok": true,
-      "bytes": 9620
+      "bytes": 9619
     },
     {
       "method": "getTransactionDetailsHistory-TRADE",

@@ -317,7 +317,7 @@
           "urlName": "bruno-miguel-borges-fernandes",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05gcr",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -327,15 +327,11 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
-              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 28",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 27, 8:49 AM: Fernandes (illness) will have his...",
+              "tooltip": "Nov 28, 8:47 AM: Fernandes (illness) is in the starting...",
               "typeId": "14"
             }
           ],

@@ -466,8 +466,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -964,7 +964,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -975,8 +975,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -1113,7 +1113,7 @@
             },
             {
               "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -1300,7 +1300,7 @@
             },
             {
               "tooltip": "Nov 21, 6:18 AM: Khusanov (undisclosed) is in the...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -1420,8 +1420,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -1732,8 +1732,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 12:30 AM: Martinez registered four saves and...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 3:54 AM: Martinez made four saves and allowed...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -1847,7 +1847,7 @@
           "urlName": "youri-tielemans",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "04yo7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -1857,8 +1857,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 25, 4:57 PM: Tielemans was sent off in stoppage time...",
@@ -2050,8 +2050,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 26, 11:52 AM: Kroupi (illness) has been left out of...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 3:50 AM: Kroupi (illness) remains a doubt for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -2297,7 +2297,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -2308,8 +2308,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -2433,7 +2433,7 @@
           "urlName": "james-justin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "0521z",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -2443,8 +2443,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:47 AM: Justin registered one cross (one...",
@@ -3082,7 +3082,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -3093,8 +3093,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -3298,7 +3298,7 @@
             },
             {
               "tooltip": "Nov 21, 6:18 AM: Khusanov (undisclosed) is in the...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -3408,7 +3408,7 @@
           "urlName": "gabriel-gudmundsson",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06yb7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -3418,8 +3418,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 19, 8:48 AM: Gudmundsson (hamstring) has recovered...",
@@ -3534,7 +3534,7 @@
           "urlName": "kobbie-mainoo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "0666p",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -3544,8 +3544,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 6:37 AM: Mainoo had one shot (zero on goal), one...",
@@ -3733,7 +3733,7 @@
           "urlName": "jack-rudoni",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Coventry_City.png",
           "scorerId": "076d3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -3743,8 +3743,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 3:34 AM: Rudoni assisted twice to go with one...",
@@ -4123,7 +4123,7 @@
           "urlName": "patrick-dorgu",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "06rlj",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -4133,8 +4133,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 6:39 AM: Dorgu had two crosses (zero accurate)...",
@@ -4391,7 +4391,7 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -4401,8 +4401,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
@@ -4452,7 +4452,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -4463,8 +4463,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -4709,7 +4709,7 @@
           "urlName": "bruno-miguel-borges-fernandes",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05gcr",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -4719,15 +4719,11 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
-              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 28",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 27, 8:49 AM: Fernandes (illness) will have his...",
+              "tooltip": "Nov 28, 8:47 AM: Fernandes (illness) is in the starting...",
               "typeId": "14"
             }
           ],
@@ -4844,7 +4840,7 @@
           "urlName": "dominic-calvert-lewin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "049tq",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -4854,8 +4850,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 26, 1:06 PM: Calvert-Lewin has signed a new...",
@@ -4921,8 +4917,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -4968,7 +4964,7 @@
           "urlName": "gabriel-gudmundsson",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06yb7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -4978,8 +4974,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 19, 8:48 AM: Gudmundsson (hamstring) has recovered...",
@@ -5043,7 +5039,7 @@
             },
             {
               "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5283,7 +5279,7 @@
           "urlName": "bruno-miguel-borges-fernandes",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05gcr",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -5293,15 +5289,11 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
-              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 28",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 27, 8:49 AM: Fernandes (illness) will have his...",
+              "tooltip": "Nov 28, 8:47 AM: Fernandes (illness) is in the starting...",
               "typeId": "14"
             }
           ],
@@ -5494,7 +5486,7 @@
             },
             {
               "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -5548,7 +5540,7 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -5559,8 +5551,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 5:32 PM: Lewis-Potter scored two goals to go...",
@@ -5945,7 +5937,7 @@
           "urlName": "youri-tielemans",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "04yo7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -5955,8 +5947,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 25, 4:57 PM: Tielemans was sent off in stoppage time...",
@@ -6333,7 +6325,7 @@
             },
             {
               "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -6566,7 +6558,7 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -6577,8 +6569,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 5:32 PM: Lewis-Potter scored two goals to go...",
@@ -7357,8 +7349,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -7411,7 +7403,7 @@
           "urlName": "dominic-calvert-lewin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "049tq",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -7421,8 +7413,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 26, 1:06 PM: Calvert-Lewin has signed a new...",
@@ -7791,7 +7783,7 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -7802,8 +7794,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Ouattara recorded two shots (zero on...",
@@ -7923,7 +7915,7 @@
           "urlName": "jack-rudoni",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Coventry_City.png",
           "scorerId": "076d3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -7933,8 +7925,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 3:34 AM: Rudoni assisted twice to go with one...",
@@ -7985,7 +7977,7 @@
           "urlName": "jack-rudoni",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Coventry_City.png",
           "scorerId": "076d3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -7995,8 +7987,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 3:34 AM: Rudoni assisted twice to go with one...",
@@ -8053,7 +8045,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -8063,8 +8055,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -8114,6 +8106,7 @@
           "urlName": "igor-thiago-nascimento-rodrigues",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06mn0",
+          "upcomingEventStatusId": "5",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -8122,6 +8115,10 @@
           "posShortNames": "F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Not starting in upcoming/current game",
+              "typeId": "15"
+            },
             {
               "tooltip": "Suspended",
               "typeId": "6"
@@ -8182,6 +8179,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -8191,8 +8189,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -8434,7 +8436,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -8444,8 +8446,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -8818,7 +8820,7 @@
           "urlName": "james-justin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "0521z",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -8828,8 +8830,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:47 AM: Justin registered one cross (one...",
@@ -9275,7 +9277,7 @@
             },
             {
               "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9523,7 +9525,7 @@
             },
             {
               "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -9647,7 +9649,7 @@
             },
             {
               "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -10687,8 +10689,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 26, 11:52 AM: Kroupi (illness) has been left out of...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 3:50 AM: Kroupi (illness) remains a doubt for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -10870,7 +10872,7 @@
           "urlName": "bruno-miguel-borges-fernandes",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05gcr",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -10880,15 +10882,11 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
-              "tooltip": "Illness - Late fitness test (Game-time decision) - Expected return Nov 28",
-              "typeId": "1"
-            },
-            {
-              "tooltip": "Nov 27, 8:49 AM: Fernandes (illness) will have his...",
+              "tooltip": "Nov 28, 8:47 AM: Fernandes (illness) is in the starting...",
               "typeId": "14"
             }
           ],
@@ -11345,7 +11343,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -11355,8 +11353,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -11475,6 +11473,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -11484,8 +11483,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -11600,6 +11603,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -11609,8 +11613,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -12242,7 +12250,7 @@
           "urlName": "youri-tielemans",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "04yo7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -12252,8 +12260,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 25, 4:57 PM: Tielemans was sent off in stoppage time...",
@@ -12838,7 +12846,7 @@
             },
             {
               "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13091,7 +13099,7 @@
             },
             {
               "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13651,7 +13659,7 @@
           "urlName": "harry-maguire",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "03gu4",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -13661,12 +13669,12 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 9:00 AM: Maguire (undisclosed) is available for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -13722,8 +13730,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 12:30 AM: Martinez registered four saves and...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 3:54 AM: Martinez made four saves and allowed...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -13909,6 +13917,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -13918,8 +13927,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -13987,7 +14000,7 @@
             },
             {
               "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -14034,6 +14047,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -14043,8 +14057,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -14113,7 +14131,7 @@
             },
             {
               "tooltip": "Nov 27, 8:34 AM: Munoz (knee) missed Friday's team...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -14284,6 +14302,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -14293,8 +14312,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -14480,7 +14503,7 @@
           "urlName": "kevin-schade",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "067zv",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -14491,8 +14514,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Schade registered two shots (zero on...",
@@ -14689,7 +14712,7 @@
             },
             {
               "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -14998,7 +15021,7 @@
           "urlName": "gabriel-gudmundsson",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06yb7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -15008,8 +15031,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 19, 8:48 AM: Gudmundsson (hamstring) has recovered...",
@@ -15197,7 +15220,7 @@
           "urlName": "gabriel-gudmundsson",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06yb7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -15207,8 +15230,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 19, 8:48 AM: Gudmundsson (hamstring) has recovered...",
@@ -15959,7 +15982,7 @@
           "urlName": "james-justin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "0521z",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -15969,8 +15992,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:47 AM: Justin registered one cross (one...",
@@ -16690,7 +16713,7 @@
             },
             {
               "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -16748,6 +16771,7 @@
           "urlName": "mamadou-sangare",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "07877",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -16756,6 +16780,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
+            },
             {
               "tooltip": "Nov 9, 5:48 AM: Sangare registered two tackles (two...",
               "typeId": "8"
@@ -16814,8 +16842,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -16927,7 +16955,7 @@
           "urlName": "youri-tielemans",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "04yo7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -16937,8 +16965,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 25, 4:57 PM: Tielemans was sent off in stoppage time...",
@@ -17013,7 +17041,7 @@
             },
             {
               "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -17074,8 +17102,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 26, 11:52 AM: Kroupi (illness) has been left out of...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 3:50 AM: Kroupi (illness) remains a doubt for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -17129,7 +17157,7 @@
           "urlName": "kobbie-mainoo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "0666p",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -17139,8 +17167,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 6:37 AM: Mainoo had one shot (zero on goal), one...",
@@ -17204,8 +17232,8 @@
               "typeId": "1"
             },
             {
-              "tooltip": "Nov 26, 11:52 AM: Kroupi (illness) has been left out of...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 3:50 AM: Kroupi (illness) remains a doubt for...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -17275,7 +17303,7 @@
             },
             {
               "tooltip": "Nov 27, 8:37 AM: Semenyo (knee) is nearing a return to...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -17447,6 +17475,7 @@
           "urlName": "igor-thiago-nascimento-rodrigues",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06mn0",
+          "upcomingEventStatusId": "5",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -17455,6 +17484,10 @@
           "posShortNames": "F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Not starting in upcoming/current game",
+              "typeId": "15"
+            },
             {
               "tooltip": "Suspended",
               "typeId": "6"
@@ -18421,7 +18454,7 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -18432,8 +18465,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 5:32 PM: Lewis-Potter scored two goals to go...",
@@ -18484,7 +18517,7 @@
           "urlName": "youri-tielemans",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "04yo7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -18494,8 +18527,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 25, 4:57 PM: Tielemans was sent off in stoppage time...",
@@ -18690,7 +18723,7 @@
             },
             {
               "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -18737,7 +18770,7 @@
           "urlName": "kevin-schade",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "067zv",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -18748,8 +18781,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Schade registered two shots (zero on...",
@@ -18946,8 +18979,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -19003,8 +19036,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -19127,8 +19160,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Nov 22, 5:03 AM: Munoz generated three crosses (two...",
-              "typeId": "9"
+              "tooltip": "Nov 28, 1:33 AM: Munoz assisted once to go with one...",
+              "typeId": "14"
             }
           ],
           "rookie": false,
@@ -19368,7 +19401,7 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -19378,8 +19411,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
@@ -19437,7 +19470,7 @@
           "urlName": "bobby-thomas",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Coventry_City.png",
           "scorerId": "05l2z",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -19447,8 +19480,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 3:35 AM: Thomas had 10 clearancesand two...",
@@ -19942,7 +19975,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -19952,8 +19985,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -20067,7 +20100,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -20077,8 +20110,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -20573,7 +20606,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -20583,8 +20616,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -20698,7 +20731,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -20708,8 +20741,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -20881,7 +20914,7 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -20891,8 +20924,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
@@ -21007,7 +21040,7 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -21018,8 +21051,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Ouattara recorded two shots (zero on...",
@@ -21077,7 +21110,7 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -21087,8 +21120,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
@@ -21146,7 +21179,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -21156,8 +21189,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -21208,7 +21241,7 @@
           "urlName": "jaidon-anthony",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "061vk",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -21219,8 +21252,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Anthony assisted twice to go with one...",
@@ -21406,7 +21439,7 @@
           "urlName": "jaidon-anthony",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "061vk",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -21417,8 +21450,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Anthony assisted twice to go with one...",
@@ -21537,7 +21570,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -21547,8 +21580,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -21606,7 +21639,7 @@
           "urlName": "dango-ouattara",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "068lx",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -21617,8 +21650,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Ouattara recorded two shots (zero on...",
@@ -21729,7 +21762,7 @@
           "urlName": "kristoffer-ajer",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05uel",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -21739,8 +21772,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:42 AM: Ajer registered one clearanceand one...",
@@ -21791,6 +21824,7 @@
           "urlName": "el-hadji-malick-diouf",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06ymu",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -21799,6 +21833,10 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
+            {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
             {
               "tooltip": "Nov 24, 3:42 AM: Diouf had three crosses (one accurate)...",
               "typeId": "9"
@@ -21925,7 +21963,7 @@
           "urlName": "noah-okafor",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "070cj",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -21935,8 +21973,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 21, 5:38 PM: Okafor scored two goals to go with...",
@@ -22247,6 +22285,7 @@
           "urlName": "harry-wilson",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "03rxs",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -22256,6 +22295,10 @@
           "posShortNames": "M,F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
             {
               "tooltip": "Nov 22, 12:37 AM: Wilson assisted once to go with one...",
               "typeId": "9"
@@ -22512,7 +22555,7 @@
             },
             {
               "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -22757,7 +22800,7 @@
           "urlName": "kobbie-mainoo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "0666p",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -22767,8 +22810,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 6:37 AM: Mainoo had one shot (zero on goal), one...",
@@ -23081,7 +23124,7 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -23092,8 +23135,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 5:32 PM: Lewis-Potter scored two goals to go...",
@@ -23271,7 +23314,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -23282,8 +23325,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -23341,6 +23384,7 @@
           "urlName": "benjamin-sesko",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "06zxy",
+          "upcomingEventStatusId": "5",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -23349,6 +23393,10 @@
           "posShortNames": "F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Not starting in upcoming/current game",
+              "typeId": "15"
+            },
             {
               "tooltip": "Lower leg - Out for next game - Expected return Jan 2",
               "typeId": "30"
@@ -23409,7 +23457,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -23420,8 +23468,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -23488,7 +23536,7 @@
             },
             {
               "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -23665,6 +23713,7 @@
           "urlName": "benjamin-sesko",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "06zxy",
+          "upcomingEventStatusId": "5",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -23673,6 +23722,10 @@
           "posShortNames": "F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Not starting in upcoming/current game",
+              "typeId": "15"
+            },
             {
               "tooltip": "Lower leg - Out for next game - Expected return Jan 2",
               "typeId": "30"
@@ -23803,6 +23856,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -23812,8 +23866,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -23859,6 +23917,7 @@
           "urlName": "anton-stach",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "06zbx",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -23868,8 +23927,12 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
+            {
               "tooltip": "Nov 21, 9:04 AM: Stach (foot) is on the bench for...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -24001,7 +24064,7 @@
             },
             {
               "tooltip": "Nov 27, 8:58 AM: Xhaka (calf) remains sidelined for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -24811,6 +24874,7 @@
           "urlName": "igor-thiago-nascimento-rodrigues",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06mn0",
+          "upcomingEventStatusId": "5",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -24819,6 +24883,10 @@
           "posShortNames": "F",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Not starting in upcoming/current game",
+              "typeId": "15"
+            },
             {
               "tooltip": "Suspended",
               "typeId": "6"
@@ -25072,7 +25140,7 @@
           "urlName": "tarik-muharemovic",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "0784y",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -25082,8 +25150,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 13, 11:35 AM: Muharemovic has yet to miss a start...",
@@ -25204,6 +25272,7 @@
           "urlName": "mamadou-sangare",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "07877",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -25212,6 +25281,10 @@
           "posShortNames": "M",
           "team": false,
           "icons": [
+            {
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
+            },
             {
               "tooltip": "Nov 9, 5:48 AM: Sangare registered two tackles (two...",
               "typeId": "8"
@@ -25403,7 +25476,7 @@
           "urlName": "vitaly-janelt",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "05tre",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -25413,8 +25486,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 5:37 PM: Janelt scored one goal to go with one...",
@@ -25464,6 +25537,7 @@
           "urlName": "marcus-rashford",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "03ybi",
+          "upcomingEventStatusId": "5",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -25473,12 +25547,16 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "Not starting in upcoming/current game",
+              "typeId": "15"
+            },
+            {
               "tooltip": "Hip - Out for next game - Expected return Dec 8",
               "typeId": "30"
             },
             {
               "tooltip": "Nov 27, 8:54 AM: Rashford (hip) has resumed on-field...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -25532,7 +25610,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -25543,8 +25621,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -25659,7 +25737,7 @@
           "urlName": "ethan-ampadu",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "04lav",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -25669,8 +25747,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:45 AM: Ampadu recorded two crosses (zero...",
@@ -26053,7 +26131,7 @@
           "urlName": "dominic-calvert-lewin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "049tq",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -26063,8 +26141,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 26, 1:06 PM: Calvert-Lewin has signed a new...",
@@ -26700,7 +26778,7 @@
           "urlName": "ethan-ampadu",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "04lav",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -26710,8 +26788,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:45 AM: Ampadu recorded two crosses (zero...",
@@ -26962,7 +27040,7 @@
           "urlName": "amad-diallo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "05r34",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -26973,8 +27051,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 27, 4:37 PM: Diallo assisted once to go with one...",
@@ -27179,7 +27257,7 @@
             },
             {
               "tooltip": "Nov 27, 8:36 AM: Gakpo (calf) remains ruled out for...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -27464,7 +27542,7 @@
           "urlName": "michael-kayode",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "06rgg",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -27474,8 +27552,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 24, 3:41 AM: Kayode had two shots (zero on goal) and...",
@@ -27804,7 +27882,7 @@
             },
             {
               "tooltip": "Nov 21, 6:12 AM: James (knee) could remain sidelined...",
-              "typeId": "9"
+              "typeId": "8"
             }
           ],
           "rookie": false,
@@ -27851,6 +27929,7 @@
           "urlName": "luke-shaw",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "02oq6",
+          "upcomingEventStatusId": "4",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -27859,6 +27938,10 @@
           "posShortNames": "D",
           "team": false,
           "icons": [
+            {
+              "tooltip": "On the bench, potential substitute",
+              "typeId": "34"
+            },
             {
               "tooltip": "Nov 25, 2:04 PM: Shaw (undisclosed) is on the bench for...",
               "typeId": "9"
@@ -27908,7 +27991,7 @@
           "urlName": "keane-lewis-potter",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Brentford.png",
           "scorerId": "062p3",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702",
@@ -27919,8 +28002,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 5:32 PM: Lewis-Potter scored two goals to go...",
@@ -28157,7 +28240,7 @@
           "urlName": "james-justin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "0521z",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -28167,8 +28250,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 22, 12:47 AM: Justin registered one cross (one...",
@@ -28218,7 +28301,7 @@
           "urlName": "dominic-calvert-lewin",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "049tq",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -28228,8 +28311,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 26, 1:06 PM: Calvert-Lewin has signed a new...",
@@ -28614,7 +28697,7 @@
             },
             {
               "tooltip": "Nov 27, 8:40 AM: Davis (ankle) has recovered from his...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -28724,6 +28807,7 @@
           "urlName": "marcus-rashford",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "03ybi",
+          "upcomingEventStatusId": "5",
           "teamLogo": true,
           "posIdsNoFlex": [
             "701"
@@ -28733,12 +28817,16 @@
           "team": false,
           "icons": [
             {
+              "tooltip": "Not starting in upcoming/current game",
+              "typeId": "15"
+            },
+            {
               "tooltip": "Hip - Out for next game - Expected return Dec 8",
               "typeId": "30"
             },
             {
               "tooltip": "Nov 27, 8:54 AM: Rashford (hip) has resumed on-field...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -29485,7 +29573,7 @@
           "urlName": "kobbie-mainoo",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "0666p",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -29495,8 +29583,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 23, 6:37 AM: Mainoo had one shot (zero on goal), one...",
@@ -29561,7 +29649,7 @@
             },
             {
               "tooltip": "Nov 27, 8:37 AM: Semenyo (knee) is nearing a return to...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -29798,7 +29886,7 @@
           "urlName": "tarik-muharemovic",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Leeds_United2.png",
           "scorerId": "0784y",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "703"
@@ -29808,8 +29896,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 13, 11:35 AM: Muharemovic has yet to miss a start...",
@@ -30120,7 +30208,7 @@
             },
             {
               "tooltip": "Nov 27, 9:00 AM: Brobbey (muscular) remains unavailable...",
-              "typeId": "14"
+              "typeId": "9"
             }
           ],
           "rookie": false,
@@ -30174,7 +30262,7 @@
           "urlName": "youri-tielemans",
           "headshotUrl": "https://fantraximg.com/assets/images/logos/sportsteam/epl/Manchester_United.png",
           "scorerId": "04yo7",
-          "upcomingEventStatusId": "2",
+          "upcomingEventStatusId": "1",
           "teamLogo": true,
           "posIdsNoFlex": [
             "702"
@@ -30184,8 +30272,8 @@
           "team": false,
           "icons": [
             {
-              "tooltip": "Expected to play in upcoming/current game",
-              "typeId": "32"
+              "tooltip": "Starting in upcoming/current game",
+              "typeId": "12"
             },
             {
               "tooltip": "Nov 25, 4:57 PM: Tielemans was sent off in stoppage time...",
